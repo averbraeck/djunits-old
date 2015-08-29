@@ -137,6 +137,7 @@
         <artifactId>wagon-maven-plugin</artifactId>
         <version>${wagon.maven.version}</version>
         <executions>
+        
           <execution>
             <id>upload-jacoco-dot-files</id>
             <phase>site-deploy</phase>
@@ -146,7 +147,7 @@
             <configuration>
               <fromDir>${basedir}/target/site/jacoco-ut</fromDir>
               <includes>.*, .resources/*</includes>
-              <url>sftp://djunits.org.org/home/web/djunits.org/docs/${djunits-version}/${project.artifactId}</url>
+              <url>sftp://djunits.org/home/web/djunits.org/docs/${djunits.version}/${project.artifactId}</url>
               <toDir>jacoco-ut</toDir>
               <serverId>djunits-deployment</serverId>
             </configuration>
@@ -166,6 +167,22 @@
               <serverId>djunits-deployment</serverId>
             </configuration>
           </execution>
+          
+          <execution>
+            <id>upload-last-site</id>
+            <phase>site-deploy</phase>
+            <goals>
+              <goal>upload</goal>
+            </goals>
+            <configuration>
+              <fromDir>${basedir}/target/site</fromDir>
+              <includes>**/**</includes>
+              <url>sftp://djunits.org/home/web/djunits.org</url>
+              <toDir>docs/last</toDir>
+              <serverId>djunits-deployment</serverId>
+            </configuration>
+          </execution>
+          
         </executions>
       </plugin>
 
@@ -230,8 +247,7 @@
           </execution>
         </executions>
         <configuration>
-          <argLine>-XX:MaxPermSize=4096m
-            -Xmx4096m</argLine>
+          <argLine>-XX:MaxPermSize=4096m -Xmx4096m</argLine>
         </configuration>
       </plugin>
 
@@ -393,8 +409,8 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${maven.checkstyle.version}</version>
         <configuration>
-          <configLocation>development/dsol-checks.xml</configLocation>
-          <suppressionsLocation>development/checkstyle_suppressions.xml</suppressionsLocation>
+          <configLocation>/src/main/resources/development/dsol-checks.xml</configLocation>
+          <suppressionsLocation>/src/main/resources/development/checkstyle_suppressions.xml</suppressionsLocation>
           <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
         </configuration>
         <reportSets>
@@ -532,29 +548,29 @@
 
   <!-- dependency versions for all projects -->
 
-    <dependencies>
+  <dependencies>
 
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${junit.version}</version>
-        <scope>test</scope>
-        <optional>true</optional>
-      </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+      <optional>true</optional>
+    </dependency>
 
-      <dependency>
-        <groupId>net.sourceforge.parallelcolt</groupId>
-        <artifactId>parallelcolt</artifactId>
-        <version>${parallelcolt.version}</version>
-      </dependency>
+    <dependency>
+      <groupId>net.sourceforge.parallelcolt</groupId>
+      <artifactId>parallelcolt</artifactId>
+      <version>${parallelcolt.version}</version>
+    </dependency>
 
-      <dependency>
-        <groupId>org.reflections</groupId>
-        <artifactId>reflections</artifactId>
-        <version>${reflections.version}</version>
-      </dependency>
+    <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>${reflections.version}</version>
+    </dependency>
 
-    </dependencies>
+  </dependencies>
 
   <!-- More Project Information -->
 
@@ -582,7 +598,7 @@
       <name>apache</name>
       <url>http://repo.maven.apache.org/maven2</url>
     </repository>
-    
+
   </repositories>
 
   <licenses>
@@ -653,7 +669,7 @@
     <site>
       <id>djunits-deployment</id>
       <name>djunits website</name>
-      <url>sftp://djunits.org/home/web/djunits.org/docs/${djunits-version}</url>
+      <url>sftp://djunits.org/home/web/djunits.org/docs/${djunits.version}</url>
     </site>
   </distributionManagement>
 
