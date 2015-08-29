@@ -16,10 +16,15 @@ import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.TimeUnit;
 
 /**
- * Easy access
+ * Easy access methods for the DoubleScalar. Instead of <br>
+ * <i>DoubleScalar.Rel&lt;LengthUnit&gt; margin = new DoubleScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
+ * we can now write <br>
+ * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
+ * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
+ * used are compatible.
  * <p>
- * Copyright (c) 2013-2014 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
  * initial version Aug 28, 2015 <br>

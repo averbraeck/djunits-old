@@ -15,7 +15,7 @@ import org.junit.Test;
 /**
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-07-28 17:11:47 +0200 (Tue, 28 Jul 2015) $, @version $Revision: 1165 $, by $Author: averbraeck $,
  * initial version Jun 4, 2014 <br>
