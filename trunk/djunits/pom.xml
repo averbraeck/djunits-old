@@ -2,9 +2,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>nl.tudelft</groupId>
+  <groupId>org.djunits</groupId>
   <artifactId>djunits</artifactId>
-  <version>${djunits.version}</version>
+  <version>1.00.01</version>
 
   <name>DJUNITS</name>
   <description>Delft Java Units</description>
@@ -12,7 +12,7 @@
 
   <organization>
     <name>Delft University of Technology</name>
-    <url>www.opentrafficsim.org</url>
+    <url>www.djunits.org</url>
   </organization>
 
   <inceptionYear>2015</inceptionYear>
@@ -23,10 +23,10 @@
 
     <sonar.scm.disabled>true</sonar.scm.disabled>
 
-    <djunits.version>1.00.01</djunits.version>
-    <junit.version>4.11</junit.version>
+    <djunits.version>${project.version}</djunits.version>
     <parallelcolt.version>0.10.1</parallelcolt.version>
     <reflections.version>0.9.9-RC1</reflections.version>
+    <junit.version>4.11</junit.version>
 
     <maven.compiler.version>3.1</maven.compiler.version>
     <maven.site.version>3.4</maven.site.version>
@@ -213,6 +213,7 @@
         <configuration>
           <links>
             <link>http://download.oracle.com/javase/7/docs/api/</link>
+            <link>http://simulation.tudelft.nl/parallelcolt/apidocs/</link>
           </links>
           <additionalJOption>-J-Xmx1024m</additionalJOption>
           <detectJavaApiLink>true</detectJavaApiLink>
