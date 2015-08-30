@@ -189,7 +189,7 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public final DoubleScalar.Abs<U> acos()
+        public DoubleScalar.Abs<U> acos()
         {
             return new DoubleScalar.Abs<U>(Math.acos(getInUnit()), getUnit());
         }

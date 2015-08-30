@@ -8,6 +8,7 @@ import org.djunits.value.Format;
 import org.djunits.value.Relative;
 import org.djunits.value.Scalar;
 import org.djunits.value.ValueUtil;
+import org.djunits.value.vfloat.FloatMathFunctions;
 
 /**
  * Immutable FloatScalar.
@@ -23,13 +24,10 @@ import org.djunits.value.ValueUtil;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this FloatScalar
  */
-public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
+public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implements FloatMathFunctions<FloatScalar<U>>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
-
-    /** The value, stored in the standard SI unit. */
-    private float valueSI;
 
     /**
      * Construct a new Immutable FloatScalar.
@@ -38,7 +36,6 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
     protected FloatScalar(final U unit)
     {
         super(unit);
-        // System.out.println("Created FloatScalar");
     }
 
     /**
@@ -49,6 +46,10 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
         /**  */
         private static final long serialVersionUID = 20150626L;
 
+        /** The value, stored in the standard SI unit. */
+        @SuppressWarnings("checkstyle:visibilitymodifier")
+        public final float si;
+
         /**
          * Construct a new Absolute Immutable FloatScalar.
          * @param value float; the value of the new Absolute Immutable FloatScalar
@@ -57,8 +58,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
         public Abs(final float value, final U unit)
         {
             super(unit);
-            // System.out.println("Created Abs");
-            initialize(value);
+            this.si = unit.equals(unit.getStandardUnit()) ? value : (float) expressAsSIUnit(value);
         }
 
         /**
@@ -68,33 +68,14 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
         public Abs(final FloatScalar.Abs<U> value)
         {
             super(value.getUnit());
-            // System.out.println("Created Abs");
-            initialize(value);
-        }
-
-        /**
-         * Construct a new Absolute Immutable FloatScalar from an existing Absolute MutableFloatScalar.
-         * @param value MutableFloatScalar.Abs&lt;U&gt;; the reference
-         */
-        public Abs(final MutableFloatScalar.Abs<U> value)
-        {
-            super(value.getUnit());
-            // System.out.println("Created Abs");
-            initialize(value);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final MutableFloatScalar.Abs<U> mutable()
-        {
-            return new MutableFloatScalar.Abs<U>(this);
+            this.si = value.si;
         }
 
         /** {@inheritDoc} */
         @Override
         public final int compareTo(final Abs<U> o)
         {
-            return new Float(getSI()).compareTo(o.getSI());
+            return new Float(this.si).compareTo(o.si);
         }
 
         /** {@inheritDoc} */
@@ -105,13 +86,22 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
         }
 
         /**
+         * Retrieve the value in the underlying SI unit.
+         * @return float
+         */
+        public final float getSI()
+        {
+            return this.si;
+        }
+
+        /**
          * Test if this FloatScalar.Abs&lt;U&gt; is less than a FloatScalar.Abs&lt;U&gt;.
          * @param o FloatScalar.Abs&lt;U&gt;; the right hand side operand of the comparison
          * @return boolean
          */
         public final boolean lt(final FloatScalar.Abs<U> o)
         {
-            return this.getSI() < o.getSI();
+            return this.si < o.si;
         }
 
         /**
@@ -121,7 +111,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
          */
         public final boolean le(final FloatScalar.Abs<U> o)
         {
-            return this.getSI() <= o.getSI();
+            return this.si <= o.si;
         }
 
         /**
@@ -131,7 +121,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
          */
         public final boolean gt(final FloatScalar.Abs<U> o)
         {
-            return this.getSI() > o.getSI();
+            return this.si > o.si;
         }
 
         /**
@@ -141,7 +131,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
          */
         public final boolean ge(final FloatScalar.Abs<U> o)
         {
-            return this.getSI() >= o.getSI();
+            return this.si >= o.si;
         }
 
         /**
@@ -151,7 +141,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
          */
         public final boolean eq(final FloatScalar.Abs<U> o)
         {
-            return this.getSI() == o.getSI();
+            return this.si == o.si;
         }
 
         /**
@@ -161,67 +151,255 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
          */
         public final boolean ne(final FloatScalar.Abs<U> o)
         {
-            return this.getSI() != o.getSI();
+            return this.si != o.si;
         }
 
         /**
-         * Test if this FloatScalar.Abs&lt;U&gt; is less than a MutableFloatScalar.Abs&lt;U&gt;.
-         * @param o MutableFloatScalar.Abs&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
+         * Increment the value by the supplied value and return the result.
+         * @param increment FloatScalar.Rel&lt;U&gt;; amount by which the value is incremented
+         * @return FloatScalar.Abs&lt;U&gt;
          */
-        public final boolean lt(final MutableFloatScalar.Abs<U> o)
+        public final FloatScalar.Abs<U> plus(final FloatScalar.Rel<U> increment)
         {
-            return this.getSI() < o.getSI();
+            return plus(this, increment);
         }
 
         /**
-         * Test if this FloatScalar.Abs&lt;U&gt; is less than or equal to a MutableFloatScalar.Abs&lt;U&gt;.
-         * @param o MutableFloatScalar.Abs&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
+         * Decrement the value by the supplied value and return the result.
+         * @param decrement FloatScalar.Rel&lt;U&gt;; amount by which the value is decremented
+         * @return FloatScalar.Abs&lt;U&gt;
          */
-        public final boolean le(final MutableFloatScalar.Abs<U> o)
+        public final FloatScalar.Abs<U> minus(final FloatScalar.Rel<U> decrement)
         {
-            return this.getSI() <= o.getSI();
+            return minus(this, decrement);
         }
 
-        /**
-         * Test if this FloatScalar.Abs&lt;U&gt; is greater than or equal to a MutableFloatScalar.Abs&lt;U&gt;.
-         * @param o MutableFloatScalar.Abs&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
-         */
-        public final boolean gt(final MutableFloatScalar.Abs<U> o)
+        /**********************************************************************************/
+        /********************************** MATH METHODS **********************************/
+        /**********************************************************************************/
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> abs()
         {
-            return this.getSI() > o.getSI();
+            return new FloatScalar.Abs<U>(Math.abs(getInUnit()), getUnit());
         }
 
-        /**
-         * Test if this FloatScalar.Abs&lt;U&gt; is greater than a MutableFloatScalar.Abs&lt;U&gt;.
-         * @param o MutableFloatScalar.Abs&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
-         */
-        public final boolean ge(final MutableFloatScalar.Abs<U> o)
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> acos()
         {
-            return this.getSI() >= o.getSI();
+            return new FloatScalar.Abs<U>((float) Math.acos(getInUnit()), getUnit());
         }
 
-        /**
-         * Test if this FloatScalar.Abs&lt;U&gt; is equal to a MutableFloatScalar.Abs&lt;U&gt;.
-         * @param o MutableFloatScalar.Abs&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
-         */
-        public final boolean eq(final MutableFloatScalar.Abs<U> o)
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> asin()
         {
-            return this.getSI() == o.getSI();
+            return new FloatScalar.Abs<U>((float) Math.asin(getInUnit()), getUnit());
         }
 
-        /**
-         * Test if this FloatScalar.Abs&lt;U&gt; is not equal to a MutableFloatScalar.Abs&lt;U&gt;.
-         * @param o MutableFloatScalar.Abs&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
-         */
-        public final boolean ne(final MutableFloatScalar.Abs<U> o)
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> atan()
         {
-            return this.getSI() != o.getSI();
+            return new FloatScalar.Abs<U>((float) Math.atan(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> cbrt()
+        {
+            return new FloatScalar.Abs<U>((float) Math.cbrt(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> ceil()
+        {
+            return new FloatScalar.Abs<U>((float) Math.ceil(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> cos()
+        {
+            return new FloatScalar.Abs<U>((float) Math.cos(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> cosh()
+        {
+            return new FloatScalar.Abs<U>((float) Math.cosh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> exp()
+        {
+            return new FloatScalar.Abs<U>((float) Math.exp(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> expm1()
+        {
+            return new FloatScalar.Abs<U>((float) Math.expm1(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> floor()
+        {
+            return new FloatScalar.Abs<U>((float) Math.floor(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> log()
+        {
+            return new FloatScalar.Abs<U>((float) Math.log(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> log10()
+        {
+            return new FloatScalar.Abs<U>((float) Math.log10(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> log1p()
+        {
+            return new FloatScalar.Abs<U>((float) Math.log1p(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> pow(final double x)
+        {
+            return new FloatScalar.Abs<U>((float) Math.pow(getSI(), x), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> rint()
+        {
+            return new FloatScalar.Abs<U>((float) Math.rint(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> round()
+        {
+            return new FloatScalar.Abs<U>(Math.round(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> signum()
+        {
+            return new FloatScalar.Abs<U>(Math.signum(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> sin()
+        {
+            return new FloatScalar.Abs<U>((float) Math.sin(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> sinh()
+        {
+            return new FloatScalar.Abs<U>((float) Math.sinh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> sqrt()
+        {
+            return new FloatScalar.Abs<U>((float) Math.sqrt(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> tan()
+        {
+            return new FloatScalar.Abs<U>((float) Math.tan(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> tanh()
+        {
+            return new FloatScalar.Abs<U>((float) Math.tanh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> toDegrees()
+        {
+            return new FloatScalar.Abs<U>((float) Math.toDegrees(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> toRadians()
+        {
+            return new FloatScalar.Abs<U>((float) Math.toRadians(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> inv()
+        {
+            return new FloatScalar.Abs<U>(1.0f / getInUnit(), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> multiplyBy(final float constant)
+        {
+            return new FloatScalar.Abs<U>(getInUnit() * constant, getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> divideBy(final float constant)
+        {
+            return new FloatScalar.Abs<U>(getInUnit() / constant, getUnit());
         }
 
     }
@@ -234,6 +412,10 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
         /**  */
         private static final long serialVersionUID = 20150626L;
 
+        /** The value, stored in the standard SI unit. */
+        @SuppressWarnings("checkstyle:visibilitymodifier")
+        public final float si;
+
         /**
          * Construct a new Relative Immutable FloatScalar.
          * @param value float; the value of the new Relative Immutable FloatScalar
@@ -242,8 +424,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
         public Rel(final float value, final U unit)
         {
             super(unit);
-            // System.out.println("Created Rel");
-            initialize(value);
+            this.si = (float) (unit.equals(unit.getStandardUnit()) ? value : expressAsSIUnit(value));
         }
 
         /**
@@ -253,33 +434,14 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
         public Rel(final FloatScalar.Rel<U> value)
         {
             super(value.getUnit());
-            // System.out.println("Created Rel");
-            initialize(value);
-        }
-
-        /**
-         * Construct a new Relative Immutable FloatScalar from an existing Relative MutableFloatScalar.
-         * @param value MutableFloatScalar.Rel&lt;U&gt;; the reference
-         */
-        public Rel(final MutableFloatScalar.Rel<U> value)
-        {
-            super(value.getUnit());
-            // System.out.println("Created Rel");
-            initialize(value);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final MutableFloatScalar.Rel<U> mutable()
-        {
-            return new MutableFloatScalar.Rel<U>(this);
+            this.si = value.si;
         }
 
         /** {@inheritDoc} */
         @Override
         public final int compareTo(final Rel<U> o)
         {
-            return new Float(getSI()).compareTo(o.getSI());
+            return new Float(this.si).compareTo(o.si);
         }
 
         /** {@inheritDoc} */
@@ -290,13 +452,22 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
         }
 
         /**
+         * Retrieve the value in the underlying SI unit.
+         * @return float
+         */
+        public final float getSI()
+        {
+            return this.si;
+        }
+
+        /**
          * Test if this FloatScalar.Rel&lt;U&gt; is less than a FloatScalar.Rel&lt;U&gt;.
          * @param o FloatScalar.Rel&lt;U&gt;; the right hand side operand of the comparison
          * @return boolean
          */
         public final boolean lt(final FloatScalar.Rel<U> o)
         {
-            return this.getSI() < o.getSI();
+            return this.si < o.si;
         }
 
         /**
@@ -306,7 +477,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
          */
         public final boolean le(final FloatScalar.Rel<U> o)
         {
-            return this.getSI() <= o.getSI();
+            return this.si <= o.si;
         }
 
         /**
@@ -316,7 +487,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
          */
         public final boolean gt(final FloatScalar.Rel<U> o)
         {
-            return this.getSI() > o.getSI();
+            return this.si > o.si;
         }
 
         /**
@@ -326,7 +497,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
          */
         public final boolean ge(final FloatScalar.Rel<U> o)
         {
-            return this.getSI() >= o.getSI();
+            return this.si >= o.si;
         }
 
         /**
@@ -336,7 +507,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
          */
         public final boolean eq(final FloatScalar.Rel<U> o)
         {
-            return this.getSI() == o.getSI();
+            return this.si == o.si;
         }
 
         /**
@@ -346,120 +517,264 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
          */
         public final boolean ne(final FloatScalar.Rel<U> o)
         {
-            return this.getSI() != o.getSI();
+            return this.si != o.si;
         }
 
         /**
-         * Test if this FloatScalar.Rel&lt;U&gt; is less than a MutableFloatScalar.Rel&lt;U&gt;.
-         * @param o MutableFloatScalar.Rel&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
+         * Increment the value by the supplied value and return the result.
+         * @param increment FloatScalar.Rel&lt;U&gt;; amount by which the value is incremented
+         * @return FloatScalar.Abs&lt;U&gt;
          */
-        public final boolean lt(final MutableFloatScalar.Rel<U> o)
+        public final FloatScalar.Rel<U> plus(final FloatScalar.Rel<U> increment)
         {
-            return this.getSI() < o.getSI();
+            return plus(this, increment);
         }
 
         /**
-         * Test if this FloatScalar.Rel&lt;U&gt; is less than or equal to a MutableFloatScalar.Rel&lt;U&gt;.
-         * @param o MutableFloatScalar.Rel&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
+         * Decrement the value by the supplied value and return the result.
+         * @param decrement FloatScalar.Rel&lt;U&gt;; amount by which the value is decremented
+         * @return FloatScalar.Rel&lt;U&gt;
          */
-        public final boolean le(final MutableFloatScalar.Rel<U> o)
+        public final FloatScalar.Rel<U> minus(final FloatScalar.Rel<U> decrement)
         {
-            return this.getSI() <= o.getSI();
+            return minus(this, decrement);
         }
 
-        /**
-         * Test if this FloatScalar.Rel&lt;U&gt; is greater than or equal to a MutableFloatScalar.Rel&lt;U&gt;.
-         * @param o MutableFloatScalar.Rel&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
-         */
-        public final boolean gt(final MutableFloatScalar.Rel<U> o)
+        /**********************************************************************************/
+        /********************************** MATH METHODS **********************************/
+        /**********************************************************************************/
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> abs()
         {
-            return this.getSI() > o.getSI();
+            return new FloatScalar.Rel<U>(Math.abs(getInUnit()), getUnit());
         }
 
-        /**
-         * Test if this FloatScalar.Rel&lt;U&gt; is greater than a MutableFloatScalar.Rel&lt;U&gt;.
-         * @param o MutableFloatScalar.Rel&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
-         */
-        public final boolean ge(final MutableFloatScalar.Rel<U> o)
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> acos()
         {
-            return this.getSI() >= o.getSI();
+            return new FloatScalar.Rel<U>((float) Math.acos(getInUnit()), getUnit());
         }
 
-        /**
-         * Test if this FloatScalar.Rel&lt;U&gt; is equal to a MutableFloatScalar.Rel&lt;U&gt;.
-         * @param o MutableFloatScalar.Rel&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
-         */
-        public final boolean eq(final MutableFloatScalar.Rel<U> o)
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> asin()
         {
-            return this.getSI() == o.getSI();
+            return new FloatScalar.Rel<U>((float) Math.asin(getInUnit()), getUnit());
         }
 
-        /**
-         * Test if this FloatScalar.Rel&lt;U&gt; is not equal to a MutableFloatScalar.Rel&lt;U&gt;.
-         * @param o MutableFloatScalar.Rel&lt;U&gt;; the right hand side operand of the comparison
-         * @return boolean
-         */
-        public final boolean ne(final MutableFloatScalar.Rel<U> o)
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> atan()
         {
-            return this.getSI() != o.getSI();
+            return new FloatScalar.Rel<U>((float) Math.atan(getInUnit()), getUnit());
         }
 
-    }
-
-    /**
-     * Create a mutable version of this FloatScalar. <br>
-     * The mutable version is created as a deep copy of this. Delayed copying is not worthwhile for a Scalar.
-     * @return MutableFloatScalar&lt;U&gt;
-     */
-    public abstract MutableFloatScalar<U> mutable();
-
-    /**
-     * Initialize the valueSI field (performing conversion to the SI standard unit if needed).
-     * @param value float; the value in the unit of this FloatScalar
-     */
-    protected final void initialize(final float value)
-    {
-        if (this.getUnit().equals(this.getUnit().getStandardUnit()))
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> cbrt()
         {
-            setValueSI(value);
+            return new FloatScalar.Rel<U>((float) Math.cbrt(getInUnit()), getUnit());
         }
-        else
-        {
-            setValueSI((float) expressAsSIUnit(value));
-        }
-    }
 
-    /**
-     * Initialize the valueSI field. As the provided value is already in the SI standard unit, conversion is never necessary.
-     * @param value FloatScalar&lt;U&gt;; the value to use for initialization
-     */
-    protected final void initialize(final FloatScalar<U> value)
-    {
-        setValueSI(value.getSI());
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> ceil()
+        {
+            return new FloatScalar.Rel<U>((float) Math.ceil(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> cos()
+        {
+            return new FloatScalar.Rel<U>((float) Math.cos(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> cosh()
+        {
+            return new FloatScalar.Rel<U>((float) Math.cosh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> exp()
+        {
+            return new FloatScalar.Rel<U>((float) Math.exp(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> expm1()
+        {
+            return new FloatScalar.Rel<U>((float) Math.expm1(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> floor()
+        {
+            return new FloatScalar.Rel<U>((float) Math.floor(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> log()
+        {
+            return new FloatScalar.Rel<U>((float) Math.log(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> log10()
+        {
+            return new FloatScalar.Rel<U>((float) Math.log10(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> log1p()
+        {
+            return new FloatScalar.Rel<U>((float) Math.log1p(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> pow(final double x)
+        {
+            return new FloatScalar.Rel<U>((float) Math.pow(getSI(), x), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> rint()
+        {
+            return new FloatScalar.Rel<U>((float) Math.rint(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> round()
+        {
+            return new FloatScalar.Rel<U>(Math.round(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> signum()
+        {
+            return new FloatScalar.Rel<U>(Math.signum(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> sin()
+        {
+            return new FloatScalar.Rel<U>((float) Math.sin(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> sinh()
+        {
+            return new FloatScalar.Rel<U>((float) Math.sinh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> sqrt()
+        {
+            return new FloatScalar.Rel<U>((float) Math.sqrt(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> tan()
+        {
+            return new FloatScalar.Rel<U>((float) Math.tan(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> tanh()
+        {
+            return new FloatScalar.Rel<U>((float) Math.tanh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> toDegrees()
+        {
+            return new FloatScalar.Rel<U>((float) Math.toDegrees(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> toRadians()
+        {
+            return new FloatScalar.Rel<U>((float) Math.toRadians(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> inv()
+        {
+            return new FloatScalar.Rel<U>(1.0f / getInUnit(), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> multiplyBy(final float constant)
+        {
+            return new FloatScalar.Rel<U>(getInUnit() * constant, getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> divideBy(final float constant)
+        {
+            return new FloatScalar.Rel<U>(getInUnit() / constant, getUnit());
+        }
+
     }
 
     /**
      * Retrieve the value in the underlying SI unit.
      * @return float
      */
-    public final float getSI()
-    {
-        return this.valueSI;
-    }
-
-    /**
-     * Set the value in the underlying SI unit.
-     * @param value float; the new value in the underlying SI unit
-     */
-    protected final void setValueSI(final float value)
-    {
-        this.valueSI = value;
-    }
+    public abstract float getSI();
 
     /**
      * Retrieve the value in the original unit.
@@ -552,41 +867,21 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
         StringBuffer buf = new StringBuffer();
         if (verbose)
         {
-            if (this instanceof MutableFloatScalar)
+            if (this instanceof FloatScalar.Abs)
             {
-                buf.append("Mutable   ");
-                if (this instanceof MutableFloatScalar.Abs)
-                {
-                    buf.append("Abs ");
-                }
-                else if (this instanceof MutableFloatScalar.Rel)
-                {
-                    buf.append("Rel ");
-                }
-                else
-                {
-                    buf.append("??? ");
-                }
+                buf.append("Abs ");
+            }
+            else if (this instanceof FloatScalar.Rel)
+            {
+                buf.append("Rel ");
             }
             else
             {
-                buf.append("Immutable ");
-                if (this instanceof FloatScalar.Abs)
-                {
-                    buf.append("Abs ");
-                }
-                else if (this instanceof FloatScalar.Rel)
-                {
-                    buf.append("Rel ");
-                }
-                else
-                {
-                    buf.append("??? ");
-                }
+                buf.append("??? ");
             }
         }
-        float f = (float) ValueUtil.expressAsUnit(getSI(), displayUnit);
-        buf.append(Format.format(f));
+        float d = (float) ValueUtil.expressAsUnit(getSI(), displayUnit);
+        buf.append(Format.format(d));
         if (withUnit)
         {
             buf.append(displayUnit.getAbbreviation());
@@ -600,7 +895,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + Float.floatToIntBits(this.valueSI);
+        result = prime * result + Float.floatToIntBits(this.getSI());
         return result;
     }
 
@@ -631,7 +926,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
         {
             return false;
         }
-        if (Float.floatToIntBits(this.valueSI) != Float.floatToIntBits(other.valueSI))
+        if (Float.floatToIntBits(this.getSI()) != Float.floatToIntBits(other.getSI()))
         {
             return false;
         }
@@ -648,14 +943,26 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
      * @param left FloatScalar.Abs&lt;U&gt;; the left argument
      * @param right FloatScalar.Rel&lt;U&gt;; the right argument
      * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatScalar.Abs&lt;U&gt;; the sum of the values as an Absolute value
+     * @return FloatScalar.Abs&lt;U&gt;; the sum of the values as an Absolute value
      */
-    public static <U extends Unit<U>> MutableFloatScalar.Abs<U> plus(final FloatScalar.Abs<U> left,
+    public static <U extends Unit<U>> FloatScalar.Abs<U> plus(final FloatScalar.Abs<U> left,
         final FloatScalar.Rel<U> right)
     {
-        MutableFloatScalar.Abs<U> result = new MutableFloatScalar.Abs<U>(left);
-        result.incrementByImpl(right);
-        return result;
+        return new FloatScalar.Abs<U>(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
+    }
+
+    /**
+     * Add an Absolute value to a Relative value. Return a new instance of the value. The unit of the return value will be the
+     * unit of the left argument.
+     * @param left FloatScalar.Abs&lt;U&gt;; the left argument
+     * @param right FloatScalar.Rel&lt;U&gt;; the right argument
+     * @param <U> Unit; the unit of the parameters and the result
+     * @return FloatScalar.Abs&lt;U&gt;; the sum of the values as an Absolute value
+     */
+    public static <U extends Unit<U>> FloatScalar.Abs<U> plus(final FloatScalar.Rel<U> left,
+        final FloatScalar.Abs<U> right)
+    {
+        return new FloatScalar.Abs<U>(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
     }
 
     /**
@@ -664,14 +971,12 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
      * @param left FloatScalar.Rel&lt;U&gt;; the left argument
      * @param right FloatScalar.Rel&lt;U&gt;; the right argument
      * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatScalar.Rel&lt;U&gt;; the sum of the values as a Relative value
+     * @return FloatScalar.Rel&lt;U&gt;; the sum of the values as a Relative value
      */
-    public static <U extends Unit<U>> MutableFloatScalar.Rel<U> plus(final FloatScalar.Rel<U> left,
+    public static <U extends Unit<U>> FloatScalar.Rel<U> plus(final FloatScalar.Rel<U> left,
         final FloatScalar.Rel<U> right)
     {
-        MutableFloatScalar.Rel<U> result = new MutableFloatScalar.Rel<U>(left);
-        result.incrementByImpl(right);
-        return result;
+        return new FloatScalar.Rel<U>(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
     }
 
     /**
@@ -680,14 +985,12 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
      * @param left FloatScalar.Abs&lt;U&gt;; the left value
      * @param right FloatScalar.Rel&lt;U&gt;; the right value
      * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatScalar.Abs&lt;U&gt;; the resulting value as an absolute value
+     * @return FloatScalar.Abs&lt;U&gt;; the resulting value as an absolute value
      */
-    public static <U extends Unit<U>> MutableFloatScalar.Abs<U> minus(final FloatScalar.Abs<U> left,
+    public static <U extends Unit<U>> FloatScalar.Abs<U> minus(final FloatScalar.Abs<U> left,
         final FloatScalar.Rel<U> right)
     {
-        MutableFloatScalar.Abs<U> result = new MutableFloatScalar.Abs<U>(left);
-        result.decrementByImpl(right);
-        return result;
+        return new FloatScalar.Abs<U>(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
     }
 
     /**
@@ -696,86 +999,82 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
      * @param left FloatScalar.Rel&lt;U&gt;; the left value
      * @param right FloatScalar.Rel&lt;U&gt;; the right value
      * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatScalar.Rel&lt;U&gt;; the resulting value as a relative value
+     * @return FloatScalar.Rel&lt;U&gt;; the resulting value as a relative value
      */
-    public static <U extends Unit<U>> MutableFloatScalar.Rel<U> minus(final FloatScalar.Rel<U> left,
+    public static <U extends Unit<U>> FloatScalar.Rel<U> minus(final FloatScalar.Rel<U> left,
         final FloatScalar.Rel<U> right)
     {
-        MutableFloatScalar.Rel<U> result = new MutableFloatScalar.Rel<U>(left);
-        result.decrementByImpl(right);
-        return result;
+        return new FloatScalar.Rel<U>(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
     }
 
     /**
      * Subtract two absolute values. Return a new instance of a relative value of the difference. The unit of the value will be
      * the unit of the first argument.
-     * @param valueAbs1 FloatScalar.Abs&lt;U&gt;; value 1
-     * @param valueAbs2 FloatScalar.Abs&lt;U&gt;; value 2
+     * @param left FloatScalar.Abs&lt;U&gt;; value 1
+     * @param right FloatScalar.Abs&lt;U&gt;; value 2
      * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatScalar.Rel&lt;U&gt;; the difference of the two absolute values as a relative value
+     * @return FloatScalar.Rel&lt;U&gt;; the difference of the two absolute values as a relative value
      */
-    public static <U extends Unit<U>> MutableFloatScalar.Rel<U> minus(final FloatScalar.Abs<U> valueAbs1,
-        final FloatScalar.Abs<U> valueAbs2)
+    public static <U extends Unit<U>> FloatScalar.Rel<U> minus(final FloatScalar.Abs<U> left,
+        final FloatScalar.Abs<U> right)
     {
-        MutableFloatScalar.Rel<U> result = new MutableFloatScalar.Rel<U>(valueAbs1.getInUnit(), valueAbs1.getUnit());
-        result.decrementBy(valueAbs2);
-        return result;
+        return new FloatScalar.Rel<U>(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
     }
 
     /**
      * Multiply two values; the result is a new instance with a different (existing or generated) SI unit.
      * @param left FloatScalar.Abs&lt;?&gt;; the left operand
      * @param right FloatScalar.Abs&lt;?&gt;; the right operand
-     * @return MutableFloatScalar.Abs&lt;SIUnit&gt;; the product of the two values
+     * @return FloatScalar.Abs&lt;SIUnit&gt;; the product of the two values
      */
-    public static MutableFloatScalar.Abs<SIUnit> multiply(final FloatScalar.Abs<?> left, final FloatScalar.Abs<?> right)
+    public static FloatScalar.Abs<SIUnit> multiply(final FloatScalar.Abs<?> left, final FloatScalar.Abs<?> right)
     {
         SIUnit targetUnit =
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
-        return new MutableFloatScalar.Abs<SIUnit>(left.getSI() * right.getSI(), targetUnit);
+        return new FloatScalar.Abs<SIUnit>(left.getSI() * right.getSI(), targetUnit);
     }
 
     /**
      * Multiply two values; the result is a new instance with a different (existing or generated) SI unit.
      * @param left FloatScalar.Rel&lt;?&gt;; the left operand
      * @param right FloatScalar.Rel&lt;?&gt;; the right operand
-     * @return MutableFloatScalar.Rel&lt;SIUnit&gt;; the product of the two values
+     * @return FloatScalar.Rel&lt;SIUnit&gt;; the product of the two values
      */
-    public static MutableFloatScalar.Rel<SIUnit> multiply(final FloatScalar.Rel<?> left, final FloatScalar.Rel<?> right)
+    public static FloatScalar.Rel<SIUnit> multiply(final FloatScalar.Rel<?> left, final FloatScalar.Rel<?> right)
     {
         SIUnit targetUnit =
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
-        return new MutableFloatScalar.Rel<SIUnit>(left.getSI() * right.getSI(), targetUnit);
+        return new FloatScalar.Rel<SIUnit>(left.getSI() * right.getSI(), targetUnit);
     }
 
     /**
      * Divide two values; the result is a new instance with a different (existing or generated) SI unit.
      * @param left FloatScalar.Abs&lt;?&gt;; the left operand
      * @param right FloatScalar.Abs&lt;?&gt;; the right operand
-     * @return MutableFloatScalar.Abs&lt;SIUnit&gt;; the ratio of the two values
+     * @return FloatScalar.Abs&lt;SIUnit&gt;; the ratio of the two values
      */
-    public static MutableFloatScalar.Abs<SIUnit> divide(final FloatScalar.Abs<?> left, final FloatScalar.Abs<?> right)
+    public static FloatScalar.Abs<SIUnit> divide(final FloatScalar.Abs<?> left, final FloatScalar.Abs<?> right)
     {
         SIUnit targetUnit =
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.divide(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
-        return new MutableFloatScalar.Abs<SIUnit>(left.getSI() / right.getSI(), targetUnit);
+        return new FloatScalar.Abs<SIUnit>(left.getSI() / right.getSI(), targetUnit);
     }
 
     /**
      * Divide two values; the result is a new instance with a different (existing or generated) SI unit.
      * @param left FloatScalar.Rel&lt;?&gt;; the left operand
      * @param right FloatScalar.Rel&lt;?&gt;; the right operand
-     * @return MutableFloatScalar.Rel&lt;SIUnit&gt;; the ratio of the two values
+     * @return FloatScalar.Rel&lt;SIUnit&gt;; the ratio of the two values
      */
-    public static MutableFloatScalar.Rel<SIUnit> divide(final FloatScalar.Rel<?> left, final FloatScalar.Rel<?> right)
+    public static FloatScalar.Rel<SIUnit> divide(final FloatScalar.Rel<?> left, final FloatScalar.Rel<?> right)
     {
         SIUnit targetUnit =
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.divide(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
-        return new MutableFloatScalar.Rel<SIUnit>(left.getSI() / right.getSI(), targetUnit);
+        return new FloatScalar.Rel<SIUnit>(left.getSI() / right.getSI(), targetUnit);
     }
 
     /**
@@ -784,14 +1083,13 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
      * @param one FloatScalar.Abs&lt;U&gt;; one reference (returned when ratio == 1)
      * @param ratio float; the ratio that determines where between (or outside) zero and one the result lies
      * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatScalar.Abs&lt;U&gt;
+     * @return FloatScalar.Abs&lt;U&gt;
      */
-    public static <U extends Unit<U>> MutableFloatScalar.Abs<U> interpolate(final FloatScalar.Abs<U> zero,
+    public static <U extends Unit<U>> FloatScalar.Abs<U> interpolate(final FloatScalar.Abs<U> zero,
         final FloatScalar.Abs<U> one, final float ratio)
     {
-        MutableFloatScalar.Abs<U> result = zero.mutable();
-        result.setSI(result.getSI() * (1 - ratio) + one.getSI() * ratio);
-        return result;
+        return new FloatScalar.Abs<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -800,14 +1098,13 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U>
      * @param one FloatScalar.Rel&lt;U&gt;; one reference (returned when ratio == 1)
      * @param ratio float; the ratio that determines where between (or outside) zero and one the result lies
      * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatScalar.Rel&lt;U&gt;
+     * @return FloatScalar.Rel&lt;U&gt;
      */
-    public static <U extends Unit<U>> MutableFloatScalar.Rel<U> interpolate(final FloatScalar.Rel<U> zero,
+    public static <U extends Unit<U>> FloatScalar.Rel<U> interpolate(final FloatScalar.Rel<U> zero,
         final FloatScalar.Rel<U> one, final float ratio)
     {
-        MutableFloatScalar.Rel<U> result = zero.mutable();
-        result.setSI(result.getSI() * (1 - ratio) + one.getSI() * ratio);
-        return result;
+        return new FloatScalar.Rel<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
 }

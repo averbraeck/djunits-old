@@ -51,9 +51,6 @@ public class MassUnit extends Unit<MassUnit>
     /** metric ton = 1000 kg. */
     public static final MassUnit TONNE;
 
-    /** electronvolt via E=mc^2. */
-    public static final MassUnit ELECTRONVOLT;
-
     /** dalton. */
     public static final MassUnit DALTON;
 
@@ -68,7 +65,6 @@ public class MassUnit extends Unit<MassUnit>
         TON_SHORT = new MassUnit("MassUnit.short_ton", "MassUnit.sh_tn", US_CUSTOMARY, POUND, 2000.0);
         TON_METRIC = new MassUnit("MassUnit.metric_ton", "MassUnit.t", SI_ACCEPTED, KILOGRAM, 1000.0);
         TONNE = new MassUnit("MassUnit.tonne_(mts)", "MassUnit.t_(mts)", MTS, KILOGRAM, 1000.0);
-        ELECTRONVOLT = new MassUnit("MassUnit.electronvolt", "MassUnit.eV", SI_ACCEPTED, KILOGRAM, 1.78266184539E-36);
         DALTON = new MassUnit("MassUnit.dalton", "MassUnit.Da", SI_ACCEPTED, KILOGRAM, 1.6605388628E-27);
     }
 
