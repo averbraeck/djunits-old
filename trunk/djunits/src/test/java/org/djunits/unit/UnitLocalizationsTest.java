@@ -47,7 +47,7 @@ public class UnitLocalizationsTest
             // System.out.println("Checking internationalization to " + localeName);
             DefaultLocale.setLocale(new Locale(localeName));
 
-            Reflections reflections = new Reflections("org.opentrafficsim.core.unit");
+            Reflections reflections = new Reflections("org.djunits.core.unit");
             Set<Class<? extends Unit>> classes = reflections.getSubTypesOf(Unit.class);
 
             for (Class c : classes)
