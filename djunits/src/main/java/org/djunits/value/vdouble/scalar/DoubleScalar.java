@@ -159,7 +159,7 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
          * @param increment DoubleScalar.Rel&lt;U&gt;; amount by which the value is incremented
          * @return DoubleScalar.Abs&lt;U&gt;
          */
-        public final DoubleScalar.Abs<U> incrementBy(final DoubleScalar.Rel<U> increment)
+        public final DoubleScalar.Abs<U> plus(final DoubleScalar.Rel<U> increment)
         {
             return plus(this, increment);
         }
@@ -169,7 +169,7 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
          * @param decrement DoubleScalar.Rel&lt;U&gt;; amount by which the value is decremented
          * @return DoubleScalar.Abs&lt;U&gt;
          */
-        public final DoubleScalar.Abs<U> decrementBy(final DoubleScalar.Rel<U> decrement)
+        public final DoubleScalar.Abs<U> minus(final DoubleScalar.Rel<U> decrement)
         {
             return minus(this, decrement);
         }
@@ -525,7 +525,7 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
          * @param increment DoubleScalar.Rel&lt;U&gt;; amount by which the value is incremented
          * @return DoubleScalar.Abs&lt;U&gt;
          */
-        public final DoubleScalar.Rel<U> incrementBy(final DoubleScalar.Rel<U> increment)
+        public final DoubleScalar.Rel<U> plus(final DoubleScalar.Rel<U> increment)
         {
             return plus(this, increment);
         }
@@ -535,7 +535,7 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
          * @param decrement DoubleScalar.Rel&lt;U&gt;; amount by which the value is decremented
          * @return DoubleScalar.Rel&lt;U&gt;
          */
-        public final DoubleScalar.Rel<U> decrementBy(final DoubleScalar.Rel<U> decrement)
+        public final DoubleScalar.Rel<U> minus(final DoubleScalar.Rel<U> decrement)
         {
             return minus(this, decrement);
         }
