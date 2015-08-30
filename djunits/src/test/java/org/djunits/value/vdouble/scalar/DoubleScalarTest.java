@@ -58,21 +58,6 @@ public class DoubleScalarTest
     }
 
     /**
-     * Test that the toString method returns something sensible.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void toStringMutableAbsTest()
-    {
-        TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
-        double value = 38.0;
-        DoubleScalar.Abs<TemperatureUnit> ds = new DoubleScalar.Abs<TemperatureUnit>(value, tempUnit);
-        String result = ds.toString(true, true);
-        assertTrue("toString result contains \"Abs \"", result.contains("Abs "));
-        assertTrue("toString result contains \"K\"", result.contains("K"));
-    }
-
-    /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
     @SuppressWarnings("static-method")
@@ -167,79 +152,6 @@ public class DoubleScalarTest
         assertFalse("NOT 123km == 122999m", base.eq(smaller));
         assertFalse("NOT 123km >= 123001m", base.ge(larger));
         assertFalse("NOT 123km <= 122999m", base.le(smaller));
-        DoubleScalar.Abs<LengthUnit> same2 = new DoubleScalar.Abs<LengthUnit>(123000, LengthUnit.METER);
-        DoubleScalar.Abs<LengthUnit> smaller2 = new DoubleScalar.Abs<LengthUnit>(122999, LengthUnit.METER);
-        DoubleScalar.Abs<LengthUnit> larger2 = new DoubleScalar.Abs<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertTrue("123km == 123000m", base.eq(same2));
-        assertFalse("NOT 123km != 123000m", base.ne(same2));
-        assertTrue("123km < 123001m", base.lt(larger2));
-        assertTrue("123km > 122999m", base.gt(smaller2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km != 123001m", base.ne(larger2));
-        assertFalse("NOT 123km == 123001m", base.eq(larger2));
-        assertTrue("123km != 122999m", base.ne(smaller2));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller2));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger2));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller2));
-    }
-
-    /**
-     * Test the relational operations
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void relOpMutableAbsTest()
-    {
-        DoubleScalar.Abs<LengthUnit> base = new DoubleScalar.Abs<LengthUnit>(123, LengthUnit.KILOMETER);
-        DoubleScalar.Abs<LengthUnit> same = new DoubleScalar.Abs<LengthUnit>(123000, LengthUnit.METER);
-        DoubleScalar.Abs<LengthUnit> smaller = new DoubleScalar.Abs<LengthUnit>(122999, LengthUnit.METER);
-        DoubleScalar.Abs<LengthUnit> larger = new DoubleScalar.Abs<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("123km < 123000m", base.lt(same));
-        assertTrue("123km <= 123000m", base.le(same));
-        assertTrue("123km >= 123000m", base.ge(same));
-        assertFalse("NOT 123km > 123000m", base.gt(same));
-        assertTrue("123km == 123000m", base.eq(same));
-        assertFalse("NOT 123km != 123000m", base.ne(same));
-        assertTrue("123km < 123001m", base.lt(larger));
-        assertTrue("123km > 122999m", base.gt(smaller));
-        assertTrue("123km >= 123000m", base.ge(same));
-        assertFalse("NOT 123km > 123000m", base.gt(same));
-        assertFalse("NOT 123km < 123000m", base.lt(same));
-        assertTrue("123km <= 123000m", base.le(same));
-        assertTrue("123km != 123001m", base.ne(larger));
-        assertFalse("NOT 123km == 123001m", base.eq(larger));
-        assertTrue("123km != 122999m", base.ne(smaller));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller));
-        DoubleScalar.Abs<LengthUnit> same2 = new DoubleScalar.Abs<LengthUnit>(123000, LengthUnit.METER);
-        DoubleScalar.Abs<LengthUnit> smaller2 = new DoubleScalar.Abs<LengthUnit>(122999, LengthUnit.METER);
-        DoubleScalar.Abs<LengthUnit> larger2 = new DoubleScalar.Abs<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertTrue("123km == 123000m", base.eq(same2));
-        assertFalse("NOT 123km != 123000m", base.ne(same2));
-        assertTrue("123km < 123001m", base.lt(larger2));
-        assertTrue("123km > 122999m", base.gt(smaller2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km != 123001m", base.ne(larger2));
-        assertFalse("NOT 123km == 123001m", base.eq(larger2));
-        assertTrue("123km != 122999m", base.ne(smaller2));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller2));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger2));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller2));
     }
 
     /**
@@ -575,21 +487,6 @@ public class DoubleScalarTest
     }
 
     /**
-     * Test that the toString method returns something sensible.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void toStringMutableRelTest()
-    {
-        TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
-        double value = 38.0;
-        DoubleScalar.Rel<TemperatureUnit> ds = new DoubleScalar.Rel<TemperatureUnit>(value, tempUnit);
-        String result = ds.toString(true, true);
-        assertTrue("toString result contains \"Rel \"", result.contains("Rel "));
-        assertTrue("toString result contains \"K\"", result.contains("K"));
-    }
-
-    /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
     @SuppressWarnings("static-method")
@@ -656,7 +553,7 @@ public class DoubleScalarTest
     }
 
     /**
-     * Test the relational operations
+     * Test the relational operations.
      */
     @SuppressWarnings("static-method")
     @Test
@@ -684,79 +581,6 @@ public class DoubleScalarTest
         assertFalse("NOT 123km == 122999m", base.eq(smaller));
         assertFalse("NOT 123km >= 123001m", base.ge(larger));
         assertFalse("NOT 123km <= 122999m", base.le(smaller));
-        DoubleScalar.Rel<LengthUnit> same2 = new DoubleScalar.Rel<LengthUnit>(123000, LengthUnit.METER);
-        DoubleScalar.Rel<LengthUnit> smaller2 = new DoubleScalar.Rel<LengthUnit>(122999, LengthUnit.METER);
-        DoubleScalar.Rel<LengthUnit> larger2 = new DoubleScalar.Rel<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertTrue("123km == 123000m", base.eq(same2));
-        assertFalse("NOT 123km != 123000m", base.ne(same2));
-        assertTrue("123km < 123001m", base.lt(larger2));
-        assertTrue("123km > 122999m", base.gt(smaller2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km != 123001m", base.ne(larger2));
-        assertFalse("NOT 123km == 123001m", base.eq(larger2));
-        assertTrue("123km != 122999m", base.ne(smaller2));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller2));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger2));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller2));
-    }
-
-    /**
-     * Test the relational operations
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void relOpMutableRelTest()
-    {
-        DoubleScalar.Rel<LengthUnit> base = new DoubleScalar.Rel<LengthUnit>(123, LengthUnit.KILOMETER);
-        DoubleScalar.Rel<LengthUnit> same = new DoubleScalar.Rel<LengthUnit>(123000, LengthUnit.METER);
-        DoubleScalar.Rel<LengthUnit> smaller = new DoubleScalar.Rel<LengthUnit>(122999, LengthUnit.METER);
-        DoubleScalar.Rel<LengthUnit> larger = new DoubleScalar.Rel<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("123km < 123000m", base.lt(same));
-        assertTrue("123km <= 123000m", base.le(same));
-        assertTrue("123km >= 123000m", base.ge(same));
-        assertFalse("NOT 123km > 123000m", base.gt(same));
-        assertTrue("123km == 123000m", base.eq(same));
-        assertFalse("NOT 123km != 123000m", base.ne(same));
-        assertTrue("123km < 123001m", base.lt(larger));
-        assertTrue("123km > 122999m", base.gt(smaller));
-        assertTrue("123km >= 123000m", base.ge(same));
-        assertFalse("NOT 123km > 123000m", base.gt(same));
-        assertFalse("NOT 123km < 123000m", base.lt(same));
-        assertTrue("123km <= 123000m", base.le(same));
-        assertTrue("123km != 123001m", base.ne(larger));
-        assertFalse("NOT 123km == 123001m", base.eq(larger));
-        assertTrue("123km != 122999m", base.ne(smaller));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller));
-        DoubleScalar.Rel<LengthUnit> same2 = new DoubleScalar.Rel<LengthUnit>(123000, LengthUnit.METER);
-        DoubleScalar.Rel<LengthUnit> smaller2 = new DoubleScalar.Rel<LengthUnit>(122999, LengthUnit.METER);
-        DoubleScalar.Rel<LengthUnit> larger2 = new DoubleScalar.Rel<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertTrue("123km == 123000m", base.eq(same2));
-        assertFalse("NOT 123km != 123000m", base.ne(same2));
-        assertTrue("123km < 123001m", base.lt(larger2));
-        assertTrue("123km > 122999m", base.gt(smaller2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km != 123001m", base.ne(larger2));
-        assertFalse("NOT 123km == 123001m", base.eq(larger2));
-        assertTrue("123km != 122999m", base.ne(smaller2));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller2));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger2));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller2));
     }
 
     /**

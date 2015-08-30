@@ -23,65 +23,6 @@ public interface UNITS
     // @formatter:off
     
     /****************************************************************************************************************/
-    /**************************************************** LENGTH ****************************************************/ 
-    /****************************************************************************************************************/
-
-    LengthUnit METER         = LengthUnit.METER;
-    LengthUnit CENTIMETER    = LengthUnit.CENTIMETER;
-    LengthUnit DECIMETER     = LengthUnit.DECIMETER;
-    LengthUnit DEKAMETER     = LengthUnit.DEKAMETER;
-    LengthUnit FOOT          = LengthUnit.FOOT;
-    LengthUnit HECTOMETER    = LengthUnit.HECTOMETER;
-    LengthUnit INCH          = LengthUnit.INCH;
-    LengthUnit KILOMETER     = LengthUnit.KILOMETER;
-    LengthUnit MILE          = LengthUnit.MILE;
-    LengthUnit MILLIMETER    = LengthUnit.MILLIMETER;
-    LengthUnit NAUTICAL_MILE = LengthUnit.NAUTICAL_MILE;
-    LengthUnit YARD          = LengthUnit.YARD;
-    LengthUnit M             = LengthUnit.METER;
-    LengthUnit CM            = LengthUnit.CENTIMETER;
-    LengthUnit DM            = LengthUnit.DECIMETER;
-    LengthUnit DAM           = LengthUnit.DEKAMETER;
-    LengthUnit FT            = LengthUnit.FOOT;
-    LengthUnit HM            = LengthUnit.HECTOMETER;
-    LengthUnit IN            = LengthUnit.INCH;
-    LengthUnit KM            = LengthUnit.KILOMETER;
-    LengthUnit MI            = LengthUnit.MILE;
-    LengthUnit MM            = LengthUnit.MILLIMETER;
-    LengthUnit NM            = LengthUnit.NAUTICAL_MILE;
-    LengthUnit YD            = LengthUnit.YARD;
-    
-    /****************************************************************************************************************/
-    /***************************************************** TIME *****************************************************/ 
-    /****************************************************************************************************************/
-
-    TimeUnit SECOND      = TimeUnit.SECOND;
-    TimeUnit DAY         = TimeUnit.DAY;
-    TimeUnit HOUR        = TimeUnit.HOUR;
-    TimeUnit MILLISECOND = TimeUnit.MILLISECOND;
-    TimeUnit MINUTE      = TimeUnit.MINUTE;
-    TimeUnit WEEK        = TimeUnit.WEEK;
-    TimeUnit S           = TimeUnit.SECOND;
-    TimeUnit HR          = TimeUnit.HOUR;
-    TimeUnit MS          = TimeUnit.MILLISECOND;
-    TimeUnit MIN         = TimeUnit.MINUTE;
-    TimeUnit WK          = TimeUnit.WEEK;
-    
-    /****************************************************************************************************************/
-    /***************************************************** SPEED ****************************************************/ 
-    /****************************************************************************************************************/
-
-    SpeedUnit METER_PER_SECOND = SpeedUnit.METER_PER_SECOND;
-    SpeedUnit FOOT_PER_SECOND  = SpeedUnit.FOOT_PER_SECOND;
-    SpeedUnit KM_PER_HOUR      = SpeedUnit.KM_PER_HOUR;
-    SpeedUnit KNOT             = SpeedUnit.KNOT;
-    SpeedUnit MILE_PER_HOUR    = SpeedUnit.MILE_PER_HOUR;
-    SpeedUnit MPS              = SpeedUnit.METER_PER_SECOND;
-    SpeedUnit FTPS             = SpeedUnit.FOOT_PER_SECOND;
-    SpeedUnit KMPH             = SpeedUnit.KM_PER_HOUR;
-    SpeedUnit MPH              = SpeedUnit.MILE_PER_HOUR;
-    
-    /****************************************************************************************************************/
     /************************************************** ACCELERATION ************************************************/ 
     /****************************************************************************************************************/
 
@@ -94,13 +35,6 @@ public interface UNITS
     AccelerationUnit MILE_PER_HOUR_2          = AccelerationUnit.MILE_PER_HOUR_2;
     AccelerationUnit MILE_PER_HOUR_PER_SECOND = AccelerationUnit.MILE_PER_HOUR_PER_SECOND;
     AccelerationUnit STANDARD_GRAVITY         = AccelerationUnit.STANDARD_GRAVITY;
-    AccelerationUnit MPS_2                    = AccelerationUnit.METER_PER_SECOND_2;
-    AccelerationUnit FTPS_2                   = AccelerationUnit.FOOT_PER_SECOND_2;
-    AccelerationUnit INPS_2                   = AccelerationUnit.INCH_PER_SECOND_2;
-    AccelerationUnit KMPH_2                   = AccelerationUnit.KM_PER_HOUR_2;
-    AccelerationUnit MPH_2                    = AccelerationUnit.MILE_PER_HOUR_2;
-    AccelerationUnit MPHPS                    = AccelerationUnit.MILE_PER_HOUR_PER_SECOND;
-    AccelerationUnit G                        = AccelerationUnit.STANDARD_GRAVITY;
         
     /****************************************************************************************************************/
     /************************************************** ANGLE_PLANE *************************************************/ 
@@ -146,6 +80,9 @@ public interface UNITS
     AreaUnit SQUARE_MILE          = AreaUnit.SQUARE_MILE;
     AreaUnit SQUARE_MILLIMETER    = AreaUnit.SQUARE_MILLIMETER;
     AreaUnit SQUARE_YARD          = AreaUnit.SQUARE_YARD;
+    AreaUnit ACRE                 = AreaUnit.ACRE;
+    AreaUnit ARE                  = AreaUnit.ARE;
+    AreaUnit HECTARE              = AreaUnit.HECTARE;
     AreaUnit M_2                  = AreaUnit.SQUARE_METER;
     AreaUnit CM_2                 = AreaUnit.SQUARE_CENTIMETER;
     AreaUnit FT_2                 = AreaUnit.SQUARE_FOOT;
@@ -153,9 +90,6 @@ public interface UNITS
     AreaUnit MI_2                 = AreaUnit.SQUARE_MILE;
     AreaUnit MM_2                 = AreaUnit.SQUARE_MILLIMETER;
     AreaUnit YD_2                 = AreaUnit.SQUARE_YARD;
-    AreaUnit ACRE                 = AreaUnit.ACRE;
-    AreaUnit ARE                  = AreaUnit.ARE;
-    AreaUnit HECTARE              = AreaUnit.HECTARE;
     
     /****************************************************************************************************************/
     /**************************************************** DENSITY ***************************************************/ 
@@ -239,5 +173,238 @@ public interface UNITS
     EnergyUnit TERA_ELECTRONVOLT  = EnergyUnit.TERA_ELECTRONVOLT;
     EnergyUnit TERAWATT_HOUR      = EnergyUnit.TERAWATT_HOUR;
     EnergyUnit WATT_HOUR          = EnergyUnit.WATT_HOUR;
+    
+    /****************************************************************************************************************/
+    /************************************************** FLOW_MASS ***************************************************/ 
+    /****************************************************************************************************************/
+
+    FlowMassUnit KILOGRAM_PER_SECOND = FlowMassUnit.KILOGRAM_PER_SECOND;
+    FlowMassUnit POUND_PER_SECOND    = FlowMassUnit.POUND_PER_SECOND;
+    
+    /****************************************************************************************************************/
+    /************************************************* FLOW_VOLUME **************************************************/ 
+    /****************************************************************************************************************/
+
+    FlowVolumeUnit CUBIC_FEET_PER_MINUTE  = FlowVolumeUnit.CUBIC_FEET_PER_MINUTE;
+    FlowVolumeUnit CUBIC_FEET_PER_SECOND  = FlowVolumeUnit.CUBIC_FEET_PER_SECOND;
+    FlowVolumeUnit CUBIC_INCH_PER_MINUTE  = FlowVolumeUnit.CUBIC_INCH_PER_MINUTE;
+    FlowVolumeUnit CUBIC_INCH_PER_SECOND  = FlowVolumeUnit.CUBIC_INCH_PER_SECOND;
+    FlowVolumeUnit CUBIC_METER_PER_DAY    = FlowVolumeUnit.CUBIC_METER_PER_DAY;
+    FlowVolumeUnit CUBIC_METER_PER_HOUR   = FlowVolumeUnit.CUBIC_METER_PER_HOUR;
+    FlowVolumeUnit CUBIC_METER_PER_MINUTE = FlowVolumeUnit.CUBIC_METER_PER_MINUTE;
+    FlowVolumeUnit CUBIC_METER_PER_SECOND = FlowVolumeUnit.CUBIC_METER_PER_SECOND;
+    FlowVolumeUnit GALLON_PER_DAY         = FlowVolumeUnit.GALLON_PER_DAY;
+    FlowVolumeUnit GALLON_PER_HOUR        = FlowVolumeUnit.GALLON_PER_HOUR;
+    FlowVolumeUnit GALLON_PER_MINUTE      = FlowVolumeUnit.GALLON_PER_MINUTE;
+    FlowVolumeUnit GALLON_PER_SECOND      = FlowVolumeUnit.GALLON_PER_SECOND;
+    FlowVolumeUnit LITER_PER_DAY          = FlowVolumeUnit.LITER_PER_DAY;
+    FlowVolumeUnit LITER_PER_HOUR         = FlowVolumeUnit.LITER_PER_HOUR;
+    FlowVolumeUnit LITER_PER_MINUTE       = FlowVolumeUnit.LITER_PER_MINUTE;
+    FlowVolumeUnit LITER_PER_SECOND       = FlowVolumeUnit.LITER_PER_SECOND;
+    
+    /****************************************************************************************************************/
+    /**************************************************** FORCE *****************************************************/ 
+    /****************************************************************************************************************/
+
+    ForceUnit DYNE           = ForceUnit.DYNE;
+    ForceUnit KILOGRAM_FORCE = ForceUnit.KILOGRAM_FORCE;
+    ForceUnit NEWTON         = ForceUnit.NEWTON;
+    ForceUnit OUNCE_FORCE    = ForceUnit.OUNCE_FORCE;
+    ForceUnit POUND_FORCE    = ForceUnit.POUND_FORCE;
+    ForceUnit STHENE         = ForceUnit.STHENE;
+    ForceUnit TON_FORCE      = ForceUnit.TON_FORCE;
+
+    /****************************************************************************************************************/
+    /************************************************** FREQUENCY ***************************************************/ 
+    /****************************************************************************************************************/
+
+    FrequencyUnit HERTZ           = FrequencyUnit.HERTZ;
+    FrequencyUnit TERAHERTZ       = FrequencyUnit.TERAHERTZ;
+    FrequencyUnit GIGAHERTZ       = FrequencyUnit.GIGAHERTZ;
+    FrequencyUnit KILOHERTZ       = FrequencyUnit.KILOHERTZ;
+    FrequencyUnit MEGAHERTZ       = FrequencyUnit.MEGAHERTZ;
+    FrequencyUnit PER_DAY         = FrequencyUnit.PER_DAY;
+    FrequencyUnit PER_HOUR        = FrequencyUnit.PER_HOUR;
+    FrequencyUnit PER_MILLISECOND = FrequencyUnit.PER_MILLISECOND;
+    FrequencyUnit PER_MINUTE      = FrequencyUnit.PER_MINUTE;
+    FrequencyUnit PER_SECOND      = FrequencyUnit.PER_SECOND;
+    FrequencyUnit PER_WEEK        = FrequencyUnit.PER_WEEK;
+    FrequencyUnit RPM             = FrequencyUnit.RPM;
+
+    /****************************************************************************************************************/
+    /**************************************************** LENGTH ****************************************************/ 
+    /****************************************************************************************************************/
+
+    LengthUnit METER         = LengthUnit.METER;
+    LengthUnit CENTIMETER    = LengthUnit.CENTIMETER;
+    LengthUnit DECIMETER     = LengthUnit.DECIMETER;
+    LengthUnit DEKAMETER     = LengthUnit.DEKAMETER;
+    LengthUnit FOOT          = LengthUnit.FOOT;
+    LengthUnit HECTOMETER    = LengthUnit.HECTOMETER;
+    LengthUnit INCH          = LengthUnit.INCH;
+    LengthUnit KILOMETER     = LengthUnit.KILOMETER;
+    LengthUnit MILE          = LengthUnit.MILE;
+    LengthUnit MILLIMETER    = LengthUnit.MILLIMETER;
+    LengthUnit NAUTICAL_MILE = LengthUnit.NAUTICAL_MILE;
+    LengthUnit YARD          = LengthUnit.YARD;
+    LengthUnit M             = LengthUnit.METER;
+    LengthUnit CM            = LengthUnit.CENTIMETER;
+    LengthUnit DM            = LengthUnit.DECIMETER;
+    LengthUnit DAM           = LengthUnit.DEKAMETER;
+    LengthUnit FT            = LengthUnit.FOOT;
+    LengthUnit HM            = LengthUnit.HECTOMETER;
+    LengthUnit IN            = LengthUnit.INCH;
+    LengthUnit KM            = LengthUnit.KILOMETER;
+    LengthUnit MI            = LengthUnit.MILE;
+    LengthUnit MM            = LengthUnit.MILLIMETER;
+    LengthUnit YD            = LengthUnit.YARD;
+    
+    /****************************************************************************************************************/
+    /************************************************ LINEAR_DENSITY ************************************************/ 
+    /****************************************************************************************************************/
+
+    LinearDensityUnit PER_METER         = LinearDensityUnit.PER_METER;
+    LinearDensityUnit PER_CENTIMETER    = LinearDensityUnit.PER_CENTIMETER;
+    LinearDensityUnit PER_DECIMETER     = LinearDensityUnit.PER_DECIMETER;
+    LinearDensityUnit PER_DEKAMETER     = LinearDensityUnit.PER_DEKAMETER;
+    LinearDensityUnit PER_FOOT          = LinearDensityUnit.PER_FOOT;
+    LinearDensityUnit PER_HECTOMETER    = LinearDensityUnit.PER_HECTOMETER;
+    LinearDensityUnit PER_INCH          = LinearDensityUnit.PER_INCH;
+    LinearDensityUnit PER_KILOMETER     = LinearDensityUnit.PER_KILOMETER;
+    LinearDensityUnit PER_MILE          = LinearDensityUnit.PER_MILE;
+    LinearDensityUnit PER_MILLIMETER    = LinearDensityUnit.PER_MILLIMETER;
+    LinearDensityUnit PER_NAUTICAL_MILE = LinearDensityUnit.PER_NAUTICAL_MILE;
+    LinearDensityUnit PER_YARD          = LinearDensityUnit.PER_YARD;
+
+    /****************************************************************************************************************/
+    /***************************************************** MASS *****************************************************/ 
+    /****************************************************************************************************************/
+
+    MassUnit KILOGRAM     = MassUnit.KILOGRAM;
+    MassUnit DALTON       = MassUnit.DALTON;
+    MassUnit GRAM         = MassUnit.GRAM;
+    MassUnit OUNCE        = MassUnit.OUNCE;
+    MassUnit POUND        = MassUnit.POUND;
+    MassUnit TON_LONG     = MassUnit.TON_LONG;
+    MassUnit TON_METRIC   = MassUnit.TON_METRIC;
+    MassUnit TON_SHORT    = MassUnit.TON_SHORT;
+    MassUnit TONNE        = MassUnit.TONNE;
+
+    /****************************************************************************************************************/
+    /**************************************************** POWER *****************************************************/ 
+    /****************************************************************************************************************/
+
+    PowerUnit WATT                        = PowerUnit.WATT;
+    PowerUnit KILOWATT                    = PowerUnit.KILOWATT;
+    PowerUnit MEGAWATT                    = PowerUnit.MEGAWATT;
+    PowerUnit GIGAWATT                    = PowerUnit.GIGAWATT;
+    PowerUnit ERG_PER_SECOND              = PowerUnit.ERG_PER_SECOND;
+    PowerUnit FOOT_POUND_FORCE_PER_HOUR   = PowerUnit.FOOT_POUND_FORCE_PER_HOUR;
+    PowerUnit FOOT_POUND_FORCE_PER_MINUTE = PowerUnit.FOOT_POUND_FORCE_PER_MINUTE;
+    PowerUnit FOOT_POUND_FORCE_PER_SECOND = PowerUnit.FOOT_POUND_FORCE_PER_SECOND;
+    PowerUnit HORSEPOWER_METRIC           = PowerUnit.HORSEPOWER_METRIC;
+    PowerUnit STHENE_METER_PER_SECOND     = PowerUnit.STHENE_METER_PER_SECOND;
+
+    /****************************************************************************************************************/
+    /************************************************** PRESSURE ****************************************************/ 
+    /****************************************************************************************************************/
+
+    PressureUnit PASCAL                = PressureUnit.PASCAL;
+    PressureUnit ATMOSPHERE_STANDARD   = PressureUnit.ATMOSPHERE_STANDARD;
+    PressureUnit ATMOSPHERE_TECHNICAL  = PressureUnit.ATMOSPHERE_TECHNICAL;
+    PressureUnit BAR                   = PressureUnit.BAR;
+    PressureUnit BARYE                 = PressureUnit.BARYE;
+    PressureUnit CENTIMETER_MERCURY    = PressureUnit.CENTIMETER_MERCURY;
+    PressureUnit FOOT_MERCURY          = PressureUnit.FOOT_MERCURY;
+    PressureUnit HECTOPASCAL           = PressureUnit.HECTOPASCAL;
+    PressureUnit INCH_MERCURY          = PressureUnit.INCH_MERCURY;
+    PressureUnit KGF_PER_SQUARE_MM     = PressureUnit.KGF_PER_SQUARE_MM;
+    PressureUnit KILOPASCAL            = PressureUnit.KILOPASCAL;
+    PressureUnit MILLIBAR              = PressureUnit.MILLIBAR;
+    PressureUnit MILLIMETER_MERCURY    = PressureUnit.MILLIMETER_MERCURY;
+    PressureUnit PIEZE                 = PressureUnit.PIEZE;
+    PressureUnit POUND_PER_SQUARE_FOOT = PressureUnit.POUND_PER_SQUARE_FOOT;
+    PressureUnit POUND_PER_SQUARE_INCH = PressureUnit.POUND_PER_SQUARE_INCH;
+    PressureUnit TORR                  = PressureUnit.TORR;
+
+    /****************************************************************************************************************/
+    /***************************************************** SPEED ****************************************************/ 
+    /****************************************************************************************************************/
+
+    SpeedUnit METER_PER_SECOND = SpeedUnit.METER_PER_SECOND;
+    SpeedUnit FOOT_PER_SECOND  = SpeedUnit.FOOT_PER_SECOND;
+    SpeedUnit KM_PER_HOUR      = SpeedUnit.KM_PER_HOUR;
+    SpeedUnit KNOT             = SpeedUnit.KNOT;
+    SpeedUnit MILE_PER_HOUR    = SpeedUnit.MILE_PER_HOUR;
+    SpeedUnit MPS              = SpeedUnit.METER_PER_SECOND;
+    SpeedUnit FTPS             = SpeedUnit.FOOT_PER_SECOND;
+    SpeedUnit KMPH             = SpeedUnit.KM_PER_HOUR;
+    SpeedUnit MIPH             = SpeedUnit.MILE_PER_HOUR;
+    
+    /****************************************************************************************************************/
+    /************************************************* TEMPERATURE **************************************************/ 
+    /****************************************************************************************************************/
+
+    TemperatureUnit KELVIN            = TemperatureUnit.KELVIN;
+    TemperatureUnit DEGREE_CELSIUS    = TemperatureUnit.DEGREE_CELSIUS;
+    TemperatureUnit DEGREE_FAHRENHEIT = TemperatureUnit.DEGREE_FAHRENHEIT;
+    TemperatureUnit DEGREE_RANKINE    = TemperatureUnit.DEGREE_RANKINE;
+    TemperatureUnit DEGREE_REAUMUR    = TemperatureUnit.DEGREE_REAUMUR;
+
+    /****************************************************************************************************************/
+    /***************************************************** TIME *****************************************************/ 
+    /****************************************************************************************************************/
+
+    TimeUnit SECOND      = TimeUnit.SECOND;
+    TimeUnit DAY         = TimeUnit.DAY;
+    TimeUnit HOUR        = TimeUnit.HOUR;
+    TimeUnit MILLISECOND = TimeUnit.MILLISECOND;
+    TimeUnit MINUTE      = TimeUnit.MINUTE;
+    TimeUnit WEEK        = TimeUnit.WEEK;
+    TimeUnit S           = TimeUnit.SECOND;
+    TimeUnit HR          = TimeUnit.HOUR;
+    TimeUnit MS          = TimeUnit.MILLISECOND;
+    TimeUnit MIN         = TimeUnit.MINUTE;
+    TimeUnit WK          = TimeUnit.WEEK;
+    
+    /****************************************************************************************************************/
+    /*************************************************** TORQUE *****************************************************/ 
+    /****************************************************************************************************************/
+
+    TorqueUnit NEWTON_METER         = TorqueUnit.NEWTON_METER;
+    TorqueUnit POUND_FOOT           = TorqueUnit.POUND_FOOT;
+    TorqueUnit POUND_INCH           = TorqueUnit.POUND_INCH;
+    TorqueUnit METER_KILOGRAM_FORCE = TorqueUnit.METER_KILOGRAM_FORCE;
+    
+    /****************************************************************************************************************/
+    /*************************************************** VOLUME *****************************************************/ 
+    /****************************************************************************************************************/
+ 
+    VolumeUnit CUBIC_METER       = VolumeUnit.CUBIC_METER;
+    VolumeUnit CUBIC_CENTIMETER  = VolumeUnit.CUBIC_CENTIMETER;
+    VolumeUnit CUBIC_FOOT        = VolumeUnit.CUBIC_FOOT;
+    VolumeUnit CUBIC_INCH        = VolumeUnit.CUBIC_INCH;
+    VolumeUnit CUBIC_MILE        = VolumeUnit.CUBIC_MILE;
+    VolumeUnit CUBIC_DECIMETER   = VolumeUnit.CUBIC_DECIMETER;
+    VolumeUnit CUBIC_YARD        = VolumeUnit.CUBIC_YARD;
+    VolumeUnit CUBIC_KM          = VolumeUnit.CUBIC_KM;
+    VolumeUnit LITER             = VolumeUnit.LITER;
+    VolumeUnit M_3               = VolumeUnit.CUBIC_METER;
+    VolumeUnit CM_3              = VolumeUnit.CUBIC_CENTIMETER;
+    VolumeUnit DM_3              = VolumeUnit.CUBIC_DECIMETER;
+    VolumeUnit FT_3              = VolumeUnit.CUBIC_FOOT;
+    VolumeUnit IN_3              = VolumeUnit.CUBIC_INCH;
+    VolumeUnit MI_3              = VolumeUnit.CUBIC_MILE;
+    VolumeUnit KM_3              = VolumeUnit.CUBIC_KM;
+    VolumeUnit YD_3              = VolumeUnit.CUBIC_YARD;
+    VolumeUnit GALLON_IMP        = VolumeUnit.GALLON_IMP;
+    VolumeUnit GALLON_US_FLUID   = VolumeUnit.GALLON_US_FLUID;
+    VolumeUnit OUNCE_IMP_FLUID   = VolumeUnit.OUNCE_IMP_FLUID;
+    VolumeUnit OUNCE_US_FLUID    = VolumeUnit.OUNCE_US_FLUID;
+    VolumeUnit PINT_IMP          = VolumeUnit.PINT_IMP;
+    VolumeUnit PINT_US_FLUID     = VolumeUnit.PINT_US_FLUID;
+    VolumeUnit QUART_IMP         = VolumeUnit.QUART_IMP;
+    VolumeUnit QUART_US_FLUID    = VolumeUnit.QUART_US_FLUID;
+    
 }
 

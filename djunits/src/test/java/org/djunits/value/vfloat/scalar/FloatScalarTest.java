@@ -53,25 +53,8 @@ public class FloatScalarTest
         float value = 38.0f;
         FloatScalar.Abs<TemperatureUnit> fs = new FloatScalar.Abs<TemperatureUnit>(value, tempUnit);
         String result = fs.toString(true, true);
-        assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
+        assertTrue("toString result contains \"Abs \"", result.contains("Abs "));
         assertTrue("toString result contains \"K\"", result.contains("K"));
-        assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
-    }
-
-    /**
-     * Test that the toString method returns something sensible.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void toStringMutableAbsTest()
-    {
-        TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
-        float value = 38.0f;
-        MutableFloatScalar.Abs<TemperatureUnit> fs = new MutableFloatScalar.Abs<TemperatureUnit>(value, tempUnit);
-        String result = fs.toString(true, true);
-        assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
-        assertTrue("toString result contains \"K\"", result.contains("K"));
-        assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
     }
 
     /**
@@ -89,15 +72,10 @@ public class FloatScalarTest
         assertEquals("Value in Fahrenheit", 100.4f, temperatureFS.getInUnit(TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
         float out = temperatureFS.getInUnit();
         assertEquals("Value should match", value, out, 0.001);
-        MutableFloatScalar.Abs<TemperatureUnit> mfs = new MutableFloatScalar.Abs<TemperatureUnit>(value, tempUnit);
+        FloatScalar.Abs<TemperatureUnit> mfs = new FloatScalar.Abs<TemperatureUnit>(value, tempUnit);
         checkContentsAndType(mfs, value, 0.001f, tempUnit, true);
-        mfs.setSI(73);
-        float safe = value;
-        value = -200; // Approximate Celsius equivalent of 73 Kelvin
-        checkContentsAndType(mfs, value, 1, tempUnit, true);
-        value = safe; // Restore
-        mfs.set(temperatureFS);
-        checkContentsAndType(mfs, value, 0.001f, tempUnit, true);
+        mfs = new FloatScalar.Abs<TemperatureUnit>(-200, tempUnit);
+        assertEquals("-200 Celsius roughly equivalent to 73 Kelvin", 73.0d, mfs.si, 1.0d);
         FloatScalar.Abs<TemperatureUnit> temperature2FS = new FloatScalar.Abs<TemperatureUnit>(temperatureFS);
         assertTrue("temperature2FS should be equal to temperatureFS", temperature2FS.equals(temperatureFS));
         assertTrue("Value is Absolute", temperatureFS.isAbsolute());
@@ -109,52 +87,12 @@ public class FloatScalarTest
         for (int i = -100; i <= 100; i++)
         {
             float v = i / 10.0f;
-            mfs.setSI(v);
+            mfs = new FloatScalar.Abs<TemperatureUnit>(v, TemperatureUnit.SI);
             assertEquals("intValue should round like Math.round", Math.round(v), mfs.intValue(), 0.0001);
             assertEquals("longValue should round like Math.round", Math.round(v), mfs.longValue(), 0.0001);
             assertEquals("floatValue should return the value", v, mfs.floatValue(), 0.0001);
             assertEquals("doubleValue should return the value", v, mfs.doubleValue(), 0.0001);
         }
-    }
-
-    /**
-     * Test conversion to mutable equivalent and back.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void toMutableAndBackAbsTest()
-    {
-        TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
-        float value = 38.0f;
-        float value2 = 38.0f;
-        value2 = 12345;
-        FloatScalar.Abs<TemperatureUnit> fs = new FloatScalar.Abs<TemperatureUnit>(value, tempUnit);
-        FloatScalar.Abs<TemperatureUnit> fsCopy = fs.copy();
-        MutableFloatScalar.Abs<TemperatureUnit> mfs = fs.mutable();
-        checkContentsAndType(fs, value, 0.001f, tempUnit, true);
-        checkContentsAndType(mfs, value, 0.001f, tempUnit, true);
-        checkContentsAndType(fsCopy, value, 0.001f, tempUnit, true);
-        MutableFloatScalar.Abs<TemperatureUnit> mfsCopy = mfs.copy();
-        checkContentsAndType(mfsCopy, value, 0.001f, tempUnit, true);
-        MutableFloatScalar.Abs<TemperatureUnit> mmfs = mfs.mutable();
-        checkContentsAndType(mmfs, value, 0.001f, tempUnit, true);
-        assertEquals("hashCode is independent on mutability", fs.hashCode(), mfs.hashCode());
-        // Modify mfs
-        mfs.setInUnit(12345, TemperatureUnit.DEGREE_CELSIUS);
-        checkContentsAndType(fs, value, 0.001f, tempUnit, true);
-        checkContentsAndType(mfs, value2, 0.01f, tempUnit, true);
-        checkContentsAndType(mfsCopy, value, 0.001f, tempUnit, true);
-        checkContentsAndType(mmfs, value, 0.001f, tempUnit, true);
-        FloatScalar.Abs<TemperatureUnit> ifs = mfs.immutable();
-        assertTrue("Different value extremely likely results in different hashCode", fs.hashCode() != mfs.hashCode());
-        // Restore value of mfs
-        mfs.setValueSI(fs.getSI());
-        checkContentsAndType(ifs, value2, 0.01f, tempUnit, true);
-        checkContentsAndType(mfs, value, 0.001f, tempUnit, true);
-        checkContentsAndType(mmfs, value, 0.001f, tempUnit, true);
-        mmfs.setSI(0);
-        checkContentsAndType(mfs, value, 0.001f, tempUnit, true);
-        assertEquals("value should be about -273", -273, mmfs.getInUnit(tempUnit), 0.2);
     }
 
     /**
@@ -212,79 +150,6 @@ public class FloatScalarTest
         assertFalse("NOT 123km == 122999m", base.eq(smaller));
         assertFalse("NOT 123km >= 123001m", base.ge(larger));
         assertFalse("NOT 123km <= 122999m", base.le(smaller));
-        MutableFloatScalar.Abs<LengthUnit> same2 = new MutableFloatScalar.Abs<LengthUnit>(123000, LengthUnit.METER);
-        MutableFloatScalar.Abs<LengthUnit> smaller2 = new MutableFloatScalar.Abs<LengthUnit>(122999, LengthUnit.METER);
-        MutableFloatScalar.Abs<LengthUnit> larger2 = new MutableFloatScalar.Abs<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertTrue("123km == 123000m", base.eq(same2));
-        assertFalse("NOT 123km != 123000m", base.ne(same2));
-        assertTrue("123km < 123001m", base.lt(larger2));
-        assertTrue("123km > 122999m", base.gt(smaller2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km != 123001m", base.ne(larger2));
-        assertFalse("NOT 123km == 123001m", base.eq(larger2));
-        assertTrue("123km != 122999m", base.ne(smaller2));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller2));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger2));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller2));
-    }
-
-    /**
-     * Test the relational operations
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void relOpMutableAbsTest()
-    {
-        MutableFloatScalar.Abs<LengthUnit> base = new MutableFloatScalar.Abs<LengthUnit>(123, LengthUnit.KILOMETER);
-        MutableFloatScalar.Abs<LengthUnit> same = new MutableFloatScalar.Abs<LengthUnit>(123000, LengthUnit.METER);
-        MutableFloatScalar.Abs<LengthUnit> smaller = new MutableFloatScalar.Abs<LengthUnit>(122999, LengthUnit.METER);
-        MutableFloatScalar.Abs<LengthUnit> larger = new MutableFloatScalar.Abs<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("123km < 123000m", base.lt(same));
-        assertTrue("123km <= 123000m", base.le(same));
-        assertTrue("123km >= 123000m", base.ge(same));
-        assertFalse("NOT 123km > 123000m", base.gt(same));
-        assertTrue("123km == 123000m", base.eq(same));
-        assertFalse("NOT 123km != 123000m", base.ne(same));
-        assertTrue("123km < 123001m", base.lt(larger));
-        assertTrue("123km > 122999m", base.gt(smaller));
-        assertTrue("123km >= 123000m", base.ge(same));
-        assertFalse("NOT 123km > 123000m", base.gt(same));
-        assertFalse("NOT 123km < 123000m", base.lt(same));
-        assertTrue("123km <= 123000m", base.le(same));
-        assertTrue("123km != 123001m", base.ne(larger));
-        assertFalse("NOT 123km == 123001m", base.eq(larger));
-        assertTrue("123km != 122999m", base.ne(smaller));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller));
-        FloatScalar.Abs<LengthUnit> same2 = new FloatScalar.Abs<LengthUnit>(123000, LengthUnit.METER);
-        FloatScalar.Abs<LengthUnit> smaller2 = new FloatScalar.Abs<LengthUnit>(122999, LengthUnit.METER);
-        FloatScalar.Abs<LengthUnit> larger2 = new FloatScalar.Abs<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertTrue("123km == 123000m", base.eq(same2));
-        assertFalse("NOT 123km != 123000m", base.ne(same2));
-        assertTrue("123km < 123001m", base.lt(larger2));
-        assertTrue("123km > 122999m", base.gt(smaller2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km != 123001m", base.ne(larger2));
-        assertFalse("NOT 123km == 123001m", base.eq(larger2));
-        assertTrue("123km != 122999m", base.ne(smaller2));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller2));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger2));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller2));
     }
 
     /**
@@ -298,10 +163,9 @@ public class FloatScalarTest
         for (float seedValue : seedValues)
         {
             float input = seedValue;
-            MutableFloatScalar.Abs<LengthUnit> fs;
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.abs();
-            MathTester.tester(input, "abs", fs, 0.001, new FloatToFloat()
+            FloatScalar.Abs<LengthUnit> fs;
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "abs", fs.abs(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -309,9 +173,8 @@ public class FloatScalarTest
                     return Math.abs(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.acos();
-            MathTester.tester(input, "acos", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "acos", fs.acos(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -319,9 +182,8 @@ public class FloatScalarTest
                     return (float) Math.acos(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.asin();
-            MathTester.tester(input, "asin", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "asin", fs.asin(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -329,9 +191,8 @@ public class FloatScalarTest
                     return (float) Math.asin(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.atan();
-            MathTester.tester(input, "atan", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "atan", fs.atan(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -339,9 +200,8 @@ public class FloatScalarTest
                     return (float) Math.atan(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.cbrt();
-            MathTester.tester(input, "cbrt", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "cbrt", fs.cbrt(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -349,9 +209,8 @@ public class FloatScalarTest
                     return (float) Math.cbrt(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.ceil();
-            MathTester.tester(input, "ceil", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "ceil", fs.ceil(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -359,9 +218,8 @@ public class FloatScalarTest
                     return (float) Math.ceil(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.cos();
-            MathTester.tester(input, "cos", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "cos", fs.cos(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -369,9 +227,8 @@ public class FloatScalarTest
                     return (float) Math.cos(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.cosh();
-            MathTester.tester(input, "cosh", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "cosh", fs.cosh(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -379,9 +236,8 @@ public class FloatScalarTest
                     return (float) Math.cosh(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.exp();
-            MathTester.tester(input, "exp", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "exp", fs.exp(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -389,9 +245,8 @@ public class FloatScalarTest
                     return (float) Math.exp(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.expm1();
-            MathTester.tester(input, "expm1", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "expm1", fs.expm1(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -399,9 +254,8 @@ public class FloatScalarTest
                     return (float) Math.expm1(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.floor();
-            MathTester.tester(input, "floor", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "floor", fs.floor(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -409,9 +263,8 @@ public class FloatScalarTest
                     return (float) Math.floor(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.log();
-            MathTester.tester(input, "log", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "log", fs.log(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -419,9 +272,8 @@ public class FloatScalarTest
                     return (float) Math.log(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.log10();
-            MathTester.tester(input, "log10", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "log10", fs.log10(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -429,9 +281,8 @@ public class FloatScalarTest
                     return (float) Math.log10(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.log1p();
-            MathTester.tester(input, "log1p", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "log1p", fs.log1p(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -442,9 +293,8 @@ public class FloatScalarTest
             for (int i = -10; i <= 10; i++)
             {
                 final float exponent = i * 0.5f;
-                fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-                fs.pow(exponent);
-                MathTester.tester(input, "pow(" + exponent + ")", fs, 0.001, new FloatToFloat()
+                fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+                MathTester.tester(input, "pow(" + exponent + ")", fs.pow(exponent), 0.001, new FloatToFloat()
                 {
                     @Override
                     public float function(final float f)
@@ -453,9 +303,8 @@ public class FloatScalarTest
                     }
                 });
             }
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.rint();
-            MathTester.tester(input, "rint", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "rint", fs.rint(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -463,9 +312,8 @@ public class FloatScalarTest
                     return (float) Math.rint(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.round();
-            MathTester.tester(input, "round", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "round", fs.round(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -473,9 +321,8 @@ public class FloatScalarTest
                     return Math.round(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.signum();
-            MathTester.tester(input, "signum", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "signum", fs.signum(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -483,9 +330,8 @@ public class FloatScalarTest
                     return Math.signum(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.sin();
-            MathTester.tester(input, "sin", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "sin", fs.sin(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -493,9 +339,8 @@ public class FloatScalarTest
                     return (float) Math.sin(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.sinh();
-            MathTester.tester(input, "sinh", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "sinh", fs.sinh(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -503,9 +348,8 @@ public class FloatScalarTest
                     return (float) Math.sinh(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.sqrt();
-            MathTester.tester(input, "sqrt", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "sqrt", fs.sqrt(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -513,9 +357,8 @@ public class FloatScalarTest
                     return (float) Math.sqrt(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.tan();
-            MathTester.tester(input, "tan", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "tan", fs.tan(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -523,9 +366,8 @@ public class FloatScalarTest
                     return (float) Math.tan(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.tanh();
-            MathTester.tester(input, "tanh", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "tanh", fs.tanh(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -533,9 +375,8 @@ public class FloatScalarTest
                     return (float) Math.tanh(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.toDegrees();
-            MathTester.tester(input, "toDegrees", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "toDegrees", fs.toDegrees(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -543,9 +384,8 @@ public class FloatScalarTest
                     return (float) Math.toDegrees(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.toRadians();
-            MathTester.tester(input, "toRadians", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "toRadians", fs.toRadians(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -553,9 +393,8 @@ public class FloatScalarTest
                     return (float) Math.toRadians(f);
                 }
             });
-            fs = new MutableFloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            fs.inv();
-            MathTester.tester(input, "inv", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "inv", fs.inv(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -577,7 +416,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Abs<LengthUnit> left = new FloatScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        MutableFloatScalar.Abs<?> result = FloatScalar.plus(left, right);
+        FloatScalar.Abs<?> result = FloatScalar.plus(left, right);
         assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(), result
             .getSI(), 0.001f);
     }
@@ -593,7 +432,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Abs<LengthUnit> left = new FloatScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        MutableFloatScalar.Abs<?> result = FloatScalar.minus(left, right);
+        FloatScalar.Abs<?> result = FloatScalar.minus(left, right);
         assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(), result
             .getSI(), 0.001f);
     }
@@ -609,7 +448,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Abs<LengthUnit> left = new FloatScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Abs<LengthUnit> right = new FloatScalar.Abs<LengthUnit>(rightValue, LengthUnit.MILE);
-        MutableFloatScalar.Abs<?> result = FloatScalar.multiply(left, right);
+        FloatScalar.Abs<?> result = FloatScalar.multiply(left, right);
         assertEquals("value of element should be SI multiply of contributing elements", left.getSI() * right.getSI(), result
             .getSI(), 0.001f);
     }
@@ -625,7 +464,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Abs<LengthUnit> left = new FloatScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Abs<LengthUnit> right = new FloatScalar.Abs<LengthUnit>(rightValue, LengthUnit.MILE);
-        MutableFloatScalar.Abs<?> result = FloatScalar.divide(left, right);
+        FloatScalar.Abs<?> result = FloatScalar.divide(left, right);
         assertEquals("value of element should be SI divide of contributing elements", left.getSI() / right.getSI(), result
             .getSI(), 0.001f);
     }
@@ -641,25 +480,8 @@ public class FloatScalarTest
         float value = 38.0f;
         FloatScalar.Rel<TemperatureUnit> fs = new FloatScalar.Rel<TemperatureUnit>(value, tempUnit);
         String result = fs.toString(true, true);
-        assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
+        assertTrue("toString result contains \"Rel \"", result.contains("Rel "));
         assertTrue("toString result contains \"K\"", result.contains("K"));
-        assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
-    }
-
-    /**
-     * Test that the toString method returns something sensible.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void toStringMutableRelTest()
-    {
-        TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
-        float value = 38.0f;
-        MutableFloatScalar.Rel<TemperatureUnit> fs = new MutableFloatScalar.Rel<TemperatureUnit>(value, tempUnit);
-        String result = fs.toString(true, true);
-        assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
-        assertTrue("toString result contains \"K\"", result.contains("K"));
-        assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
     }
 
     /**
@@ -677,15 +499,10 @@ public class FloatScalarTest
         assertEquals("Value in Fahrenheit", 100.4f, temperatureFS.getInUnit(TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
         float out = temperatureFS.getInUnit();
         assertEquals("Value should match", value, out, 0.001);
-        MutableFloatScalar.Rel<TemperatureUnit> mfs = new MutableFloatScalar.Rel<TemperatureUnit>(value, tempUnit);
+        FloatScalar.Rel<TemperatureUnit> mfs = new FloatScalar.Rel<TemperatureUnit>(value, tempUnit);
         checkContentsAndType(mfs, value, 0.001f, tempUnit, false);
-        mfs.setSI(73);
-        float safe = value;
-        value = -200; // Approximate Celsius equivalent of 73 Kelvin
-        checkContentsAndType(mfs, value, 1, tempUnit, false);
-        value = safe; // Restore
-        mfs.set(temperatureFS);
-        checkContentsAndType(mfs, value, 0.001f, tempUnit, false);
+        mfs = new FloatScalar.Rel<TemperatureUnit>(-200, tempUnit);
+        assertEquals("-200 Celsius roughly equivalent to 73 Kelvin", 73.0d, mfs.si, 1.0d);
         FloatScalar.Rel<TemperatureUnit> temperature2FS = new FloatScalar.Rel<TemperatureUnit>(temperatureFS);
         assertTrue("temperature2FS should be equal to temperatureFS", temperature2FS.equals(temperatureFS));
         assertTrue("Value is Relative", temperatureFS.isRelative());
@@ -697,52 +514,12 @@ public class FloatScalarTest
         for (int i = -100; i <= 100; i++)
         {
             float v = i / 10.0f;
-            mfs.setSI(v);
+            mfs = new FloatScalar.Rel<TemperatureUnit>(v, TemperatureUnit.SI);
             assertEquals("intValue should round like Math.round", Math.round(v), mfs.intValue(), 0.0001);
             assertEquals("longValue should round like Math.round", Math.round(v), mfs.longValue(), 0.0001);
             assertEquals("floatValue should return the value", v, mfs.floatValue(), 0.0001);
             assertEquals("doubleValue should return the value", v, mfs.doubleValue(), 0.0001);
         }
-    }
-
-    /**
-     * Test conversion to mutable equivalent and back.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void toMutableAndBackRelTest()
-    {
-        TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
-        float value = 38.0f;
-        float value2 = 38.0f;
-        value2 = 12345;
-        FloatScalar.Rel<TemperatureUnit> fs = new FloatScalar.Rel<TemperatureUnit>(value, tempUnit);
-        FloatScalar.Rel<TemperatureUnit> fsCopy = fs.copy();
-        MutableFloatScalar.Rel<TemperatureUnit> mfs = fs.mutable();
-        checkContentsAndType(fs, value, 0.001f, tempUnit, false);
-        checkContentsAndType(mfs, value, 0.001f, tempUnit, false);
-        checkContentsAndType(fsCopy, value, 0.001f, tempUnit, false);
-        MutableFloatScalar.Rel<TemperatureUnit> mfsCopy = mfs.copy();
-        checkContentsAndType(mfsCopy, value, 0.001f, tempUnit, false);
-        MutableFloatScalar.Rel<TemperatureUnit> mmfs = mfs.mutable();
-        checkContentsAndType(mmfs, value, 0.001f, tempUnit, false);
-        assertEquals("hashCode is independent on mutability", fs.hashCode(), mfs.hashCode());
-        // Modify mfs
-        mfs.setInUnit(12345, TemperatureUnit.DEGREE_CELSIUS);
-        checkContentsAndType(fs, value, 0.001f, tempUnit, false);
-        checkContentsAndType(mfs, value2, 0.01f, tempUnit, false);
-        checkContentsAndType(mfsCopy, value, 0.001f, tempUnit, false);
-        checkContentsAndType(mmfs, value, 0.001f, tempUnit, false);
-        FloatScalar.Rel<TemperatureUnit> ifs = mfs.immutable();
-        assertTrue("Different value extremely likely results in different hashCode", fs.hashCode() != mfs.hashCode());
-        // Restore value of mfs
-        mfs.setValueSI(fs.getSI());
-        checkContentsAndType(ifs, value2, 0.01f, tempUnit, false);
-        checkContentsAndType(mfs, value, 0.001f, tempUnit, false);
-        checkContentsAndType(mmfs, value, 0.001f, tempUnit, false);
-        mmfs.setSI(0);
-        checkContentsAndType(mfs, value, 0.001f, tempUnit, false);
-        assertEquals("value should be about -273", -273, mmfs.getInUnit(tempUnit), 0.2);
     }
 
     /**
@@ -772,7 +549,7 @@ public class FloatScalarTest
     }
 
     /**
-     * Test the relational operations
+     * Test the relational operations.
      */
     @SuppressWarnings("static-method")
     @Test
@@ -800,79 +577,6 @@ public class FloatScalarTest
         assertFalse("NOT 123km == 122999m", base.eq(smaller));
         assertFalse("NOT 123km >= 123001m", base.ge(larger));
         assertFalse("NOT 123km <= 122999m", base.le(smaller));
-        MutableFloatScalar.Rel<LengthUnit> same2 = new MutableFloatScalar.Rel<LengthUnit>(123000, LengthUnit.METER);
-        MutableFloatScalar.Rel<LengthUnit> smaller2 = new MutableFloatScalar.Rel<LengthUnit>(122999, LengthUnit.METER);
-        MutableFloatScalar.Rel<LengthUnit> larger2 = new MutableFloatScalar.Rel<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertTrue("123km == 123000m", base.eq(same2));
-        assertFalse("NOT 123km != 123000m", base.ne(same2));
-        assertTrue("123km < 123001m", base.lt(larger2));
-        assertTrue("123km > 122999m", base.gt(smaller2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km != 123001m", base.ne(larger2));
-        assertFalse("NOT 123km == 123001m", base.eq(larger2));
-        assertTrue("123km != 122999m", base.ne(smaller2));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller2));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger2));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller2));
-    }
-
-    /**
-     * Test the relational operations
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void relOpMutableRelTest()
-    {
-        MutableFloatScalar.Rel<LengthUnit> base = new MutableFloatScalar.Rel<LengthUnit>(123, LengthUnit.KILOMETER);
-        MutableFloatScalar.Rel<LengthUnit> same = new MutableFloatScalar.Rel<LengthUnit>(123000, LengthUnit.METER);
-        MutableFloatScalar.Rel<LengthUnit> smaller = new MutableFloatScalar.Rel<LengthUnit>(122999, LengthUnit.METER);
-        MutableFloatScalar.Rel<LengthUnit> larger = new MutableFloatScalar.Rel<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("123km < 123000m", base.lt(same));
-        assertTrue("123km <= 123000m", base.le(same));
-        assertTrue("123km >= 123000m", base.ge(same));
-        assertFalse("NOT 123km > 123000m", base.gt(same));
-        assertTrue("123km == 123000m", base.eq(same));
-        assertFalse("NOT 123km != 123000m", base.ne(same));
-        assertTrue("123km < 123001m", base.lt(larger));
-        assertTrue("123km > 122999m", base.gt(smaller));
-        assertTrue("123km >= 123000m", base.ge(same));
-        assertFalse("NOT 123km > 123000m", base.gt(same));
-        assertFalse("NOT 123km < 123000m", base.lt(same));
-        assertTrue("123km <= 123000m", base.le(same));
-        assertTrue("123km != 123001m", base.ne(larger));
-        assertFalse("NOT 123km == 123001m", base.eq(larger));
-        assertTrue("123km != 122999m", base.ne(smaller));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller));
-        FloatScalar.Rel<LengthUnit> same2 = new FloatScalar.Rel<LengthUnit>(123000, LengthUnit.METER);
-        FloatScalar.Rel<LengthUnit> smaller2 = new FloatScalar.Rel<LengthUnit>(122999, LengthUnit.METER);
-        FloatScalar.Rel<LengthUnit> larger2 = new FloatScalar.Rel<LengthUnit>(123001, LengthUnit.METER);
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertTrue("123km == 123000m", base.eq(same2));
-        assertFalse("NOT 123km != 123000m", base.ne(same2));
-        assertTrue("123km < 123001m", base.lt(larger2));
-        assertTrue("123km > 122999m", base.gt(smaller2));
-        assertTrue("123km >= 123000m", base.ge(same2));
-        assertFalse("NOT 123km > 123000m", base.gt(same2));
-        assertFalse("NOT 123km < 123000m", base.lt(same2));
-        assertTrue("123km <= 123000m", base.le(same2));
-        assertTrue("123km != 123001m", base.ne(larger2));
-        assertFalse("NOT 123km == 123001m", base.eq(larger2));
-        assertTrue("123km != 122999m", base.ne(smaller2));
-        assertFalse("NOT 123km == 122999m", base.eq(smaller2));
-        assertFalse("NOT 123km >= 123001m", base.ge(larger2));
-        assertFalse("NOT 123km <= 122999m", base.le(smaller2));
     }
 
     /**
@@ -886,10 +590,9 @@ public class FloatScalarTest
         for (float seedValue : seedValues)
         {
             float input = seedValue;
-            MutableFloatScalar.Rel<LengthUnit> fs;
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.abs();
-            MathTester.tester(input, "abs", fs, 0.001, new FloatToFloat()
+            FloatScalar.Rel<LengthUnit> fs;
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "abs", fs.abs(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -897,9 +600,8 @@ public class FloatScalarTest
                     return Math.abs(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.acos();
-            MathTester.tester(input, "acos", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "acos", fs.acos(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -907,9 +609,8 @@ public class FloatScalarTest
                     return (float) Math.acos(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.asin();
-            MathTester.tester(input, "asin", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "asin", fs.asin(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -917,9 +618,8 @@ public class FloatScalarTest
                     return (float) Math.asin(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.atan();
-            MathTester.tester(input, "atan", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "atan", fs.atan(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -927,9 +627,8 @@ public class FloatScalarTest
                     return (float) Math.atan(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.cbrt();
-            MathTester.tester(input, "cbrt", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "cbrt", fs.cbrt(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -937,9 +636,8 @@ public class FloatScalarTest
                     return (float) Math.cbrt(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.ceil();
-            MathTester.tester(input, "ceil", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "ceil", fs.ceil(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -947,9 +645,8 @@ public class FloatScalarTest
                     return (float) Math.ceil(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.cos();
-            MathTester.tester(input, "cos", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "cos", fs.cos(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -957,9 +654,8 @@ public class FloatScalarTest
                     return (float) Math.cos(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.cosh();
-            MathTester.tester(input, "cosh", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "cosh", fs.cosh(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -967,9 +663,8 @@ public class FloatScalarTest
                     return (float) Math.cosh(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.exp();
-            MathTester.tester(input, "exp", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "exp", fs.exp(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -977,9 +672,8 @@ public class FloatScalarTest
                     return (float) Math.exp(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.expm1();
-            MathTester.tester(input, "expm1", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "expm1", fs.expm1(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -987,9 +681,8 @@ public class FloatScalarTest
                     return (float) Math.expm1(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.floor();
-            MathTester.tester(input, "floor", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "floor", fs.floor(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -997,9 +690,8 @@ public class FloatScalarTest
                     return (float) Math.floor(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.log();
-            MathTester.tester(input, "log", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "log", fs.log(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1007,9 +699,8 @@ public class FloatScalarTest
                     return (float) Math.log(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.log10();
-            MathTester.tester(input, "log10", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "log10", fs.log10(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1017,9 +708,8 @@ public class FloatScalarTest
                     return (float) Math.log10(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.log1p();
-            MathTester.tester(input, "log1p", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "log1p", fs.log1p(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1030,9 +720,8 @@ public class FloatScalarTest
             for (int i = -10; i <= 10; i++)
             {
                 final float exponent = i * 0.5f;
-                fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-                fs.pow(exponent);
-                MathTester.tester(input, "pow(" + exponent + ")", fs, 0.001, new FloatToFloat()
+                fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+                MathTester.tester(input, "pow(" + exponent + ")", fs.pow(exponent), 0.001, new FloatToFloat()
                 {
                     @Override
                     public float function(final float f)
@@ -1041,9 +730,8 @@ public class FloatScalarTest
                     }
                 });
             }
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.rint();
-            MathTester.tester(input, "rint", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "rint", fs.rint(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1051,9 +739,8 @@ public class FloatScalarTest
                     return (float) Math.rint(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.round();
-            MathTester.tester(input, "round", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "round", fs.round(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1061,9 +748,8 @@ public class FloatScalarTest
                     return Math.round(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.signum();
-            MathTester.tester(input, "signum", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "signum", fs.signum(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1071,9 +757,8 @@ public class FloatScalarTest
                     return Math.signum(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.sin();
-            MathTester.tester(input, "sin", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "sin", fs.sin(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1081,9 +766,8 @@ public class FloatScalarTest
                     return (float) Math.sin(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.sinh();
-            MathTester.tester(input, "sinh", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "sinh", fs.sinh(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1091,9 +775,8 @@ public class FloatScalarTest
                     return (float) Math.sinh(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.sqrt();
-            MathTester.tester(input, "sqrt", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "sqrt", fs.sqrt(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1101,9 +784,8 @@ public class FloatScalarTest
                     return (float) Math.sqrt(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.tan();
-            MathTester.tester(input, "tan", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "tan", fs.tan(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1111,9 +793,8 @@ public class FloatScalarTest
                     return (float) Math.tan(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.tanh();
-            MathTester.tester(input, "tanh", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "tanh", fs.tanh(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1121,9 +802,8 @@ public class FloatScalarTest
                     return (float) Math.tanh(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.toDegrees();
-            MathTester.tester(input, "toDegrees", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "toDegrees", fs.toDegrees(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1131,9 +811,8 @@ public class FloatScalarTest
                     return (float) Math.toDegrees(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.toRadians();
-            MathTester.tester(input, "toRadians", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "toRadians", fs.toRadians(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1141,9 +820,8 @@ public class FloatScalarTest
                     return (float) Math.toRadians(f);
                 }
             });
-            fs = new MutableFloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            fs.inv();
-            MathTester.tester(input, "inv", fs, 0.001, new FloatToFloat()
+            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
+            MathTester.tester(input, "inv", fs.inv(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
@@ -1165,7 +843,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Rel<LengthUnit> left = new FloatScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        MutableFloatScalar.Rel<?> result = FloatScalar.plus(left, right);
+        FloatScalar.Rel<?> result = FloatScalar.plus(left, right);
         assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(), result
             .getSI(), 0.001f);
     }
@@ -1181,7 +859,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Rel<LengthUnit> left = new FloatScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        MutableFloatScalar.Rel<?> result = FloatScalar.minus(left, right);
+        FloatScalar.Rel<?> result = FloatScalar.minus(left, right);
         assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(), result
             .getSI(), 0.001f);
     }
@@ -1197,7 +875,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Rel<LengthUnit> left = new FloatScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        MutableFloatScalar.Rel<?> result = FloatScalar.multiply(left, right);
+        FloatScalar.Rel<?> result = FloatScalar.multiply(left, right);
         assertEquals("value of element should be SI multiply of contributing elements", left.getSI() * right.getSI(), result
             .getSI(), 0.001f);
     }
@@ -1213,7 +891,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Rel<LengthUnit> left = new FloatScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        MutableFloatScalar.Rel<?> result = FloatScalar.divide(left, right);
+        FloatScalar.Rel<?> result = FloatScalar.divide(left, right);
         assertEquals("value of element should be SI divide of contributing elements", left.getSI() / right.getSI(), result
             .getSI(), 0.001f);
     }

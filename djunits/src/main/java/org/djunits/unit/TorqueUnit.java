@@ -39,11 +39,11 @@ public class TorqueUnit extends Unit<TorqueUnit>
     /** meter kilogram-force. */
     public static final TorqueUnit METER_KILOGRAM_FORCE;
 
-    /** foot pound-force. */
-    public static final TorqueUnit FOOT_POUND_FORCE;
+    /** Pound foot. */
+    public static final TorqueUnit POUND_FOOT;
 
-    /** inch pound-force. */
-    public static final TorqueUnit INCH_POUND_FORCE;
+    /** Pound inch. */
+    public static final TorqueUnit POUND_INCH;
 
     static
     {
@@ -54,11 +54,11 @@ public class TorqueUnit extends Unit<TorqueUnit>
         METER_KILOGRAM_FORCE =
             new TorqueUnit(ForceUnit.KILOGRAM_FORCE, LengthUnit.METER, "TorqueUnit.meter_kilogram-force",
                 "TorqueUnit.m.kgf", OTHER);
-        FOOT_POUND_FORCE =
-            new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "TorqueUnit.foot_pound-force", "TorqueUnit.ft.lbf",
+        POUND_FOOT =
+            new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "TorqueUnit.pound-foot", "TorqueUnit.lbf.ft",
                 IMPERIAL);
-        INCH_POUND_FORCE =
-            new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "TorqueUnit.inch_pound-force", "TorqueUnit.in.lbf",
+        POUND_INCH =
+            new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "TorqueUnit.pound-inch", "TorqueUnit.lbf.in",
                 IMPERIAL);
     }
 
