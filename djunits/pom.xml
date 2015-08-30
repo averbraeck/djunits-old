@@ -169,7 +169,7 @@
           </execution>
           
           <execution>
-            <id>upload-last-site</id>
+            <id>upload-current-site</id>
             <phase>site-deploy</phase>
             <goals>
               <goal>upload</goal>
@@ -178,7 +178,7 @@
               <fromDir>${basedir}/target/site</fromDir>
               <includes>**/**</includes>
               <url>sftp://djunits.org/home/web/djunits.org</url>
-              <toDir>docs/last</toDir>
+              <toDir>docs/current</toDir>
               <serverId>djunits-deployment</serverId>
             </configuration>
           </execution>

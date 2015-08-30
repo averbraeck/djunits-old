@@ -14,7 +14,7 @@ import java.util.Locale;
  */
 public abstract class DefaultLocale
 {
-    /** The default locale to use in OpenTrafficSim. */
+    /** The default locale to use in djunits. */
     private static Locale locale;
 
     /**

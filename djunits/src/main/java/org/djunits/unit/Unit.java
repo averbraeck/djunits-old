@@ -62,7 +62,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     /** force all units to be loaded. */
     private static void initialize()
     {
-        Reflections reflections = new Reflections("org.opentrafficsim.core.unit");
+        Reflections reflections = new Reflections("org.djunits.unit");
         @SuppressWarnings("rawtypes")
         Set<Class<? extends Unit>> classes = reflections.getSubTypesOf(Unit.class);
 

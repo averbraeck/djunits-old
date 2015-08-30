@@ -30,7 +30,7 @@ public class DefinesSITest
     @Test
     public final void definesSI()
     {
-        Reflections reflections = new Reflections("org.opentrafficsim");
+        Reflections reflections = new Reflections("org.djunits");
         Set<Class<? extends Unit>> classes = reflections.getSubTypesOf(Unit.class);
         for (Class<? extends Unit> c : classes)
         {

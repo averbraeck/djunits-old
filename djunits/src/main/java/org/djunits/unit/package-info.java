@@ -6,10 +6,10 @@
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, 
  * Delft, the Netherlands. All rights reserved.
  * <p>
- * See for project information <a href="http://www.opentrafficsim.org/">
- * www.opentrafficsim.org</a>.
+ * See for project information <a href="http://djunits.org/">
+ * djunits.org</a>.
  * <p>
- * The OpenTrafficSim project is distributed under the following BSD-style license:
+ * The djunits project is distributed under the following BSD-style license:
  * <p>
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
