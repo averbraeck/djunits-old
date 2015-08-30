@@ -15,7 +15,6 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.unit.UNITS;
-import org.djunits.value.vdouble.DoubleMathFunctions;
 
 /**
  * Easy access methods for the DoubleScalar. Instead of <br>
