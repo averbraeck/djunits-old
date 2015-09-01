@@ -55,9 +55,12 @@ public interface DOUBLE_SCALAR extends UNITS
     /************************************************** ACCELERATION ************************************************/ 
     /****************************************************************************************************************/
 
-    abstract class Acceleration extends DoubleScalar<AccelerationUnit>
+    interface Acceleration
     {
-        protected Acceleration(final AccelerationUnit unit) { super(unit); }
+        public static Acceleration.Abs interpolate(final Acceleration.Abs zero, final Acceleration.Abs one, final double ratio)
+        { return new Acceleration.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Acceleration.Rel interpolate(final Acceleration.Rel zero, final Acceleration.Rel one, final double ratio)
+        { return new Acceleration.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
         
         public static class Rel extends DoubleScalar.Rel<AccelerationUnit>
         {
@@ -169,6 +172,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected AnglePlane(final AnglePlaneUnit unit) { super(unit); }
         
+        public static AnglePlane.Abs interpolate(final AnglePlane.Abs zero, final AnglePlane.Abs one, final double ratio)
+        { return new AnglePlane.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static AnglePlane.Rel interpolate(final AnglePlane.Rel zero, final AnglePlane.Rel one, final double ratio)
+        { return new AnglePlane.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<AnglePlaneUnit>
         {
             public Rel(final double value, final AnglePlaneUnit unit) { super(value, unit); }
@@ -277,6 +285,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected AngleSlope(final AngleSlopeUnit unit) { super(unit); }
         
+        public static AngleSlope.Abs interpolate(final AngleSlope.Abs zero, final AngleSlope.Abs one, final double ratio)
+        { return new AngleSlope.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static AngleSlope.Rel interpolate(final AngleSlope.Rel zero, final AngleSlope.Rel one, final double ratio)
+        { return new AngleSlope.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<AngleSlopeUnit>
         {
             public Rel(final double value, final AngleSlopeUnit unit) { super(value, unit); }
@@ -385,6 +398,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected AngleSolid(final AngleSolidUnit unit) { super(unit); }
         
+        public static AngleSolid.Abs interpolate(final AngleSolid.Abs zero, final AngleSolid.Abs one, final double ratio)
+        { return new AngleSolid.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static AngleSolid.Rel interpolate(final AngleSolid.Rel zero, final AngleSolid.Rel one, final double ratio)
+        { return new AngleSolid.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<AngleSolidUnit>
         {
             public Rel(final double value, final AngleSolidUnit unit) { super(value, unit); }
@@ -493,6 +511,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Area(final AreaUnit unit) { super(unit); }
         
+        public static Area.Abs interpolate(final Area.Abs zero, final Area.Abs one, final double ratio)
+        { return new Area.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Area.Rel interpolate(final Area.Rel zero, final Area.Rel one, final double ratio)
+        { return new Area.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<AreaUnit>
         {
             public Rel(final double value, final AreaUnit unit) { super(value, unit); }
@@ -608,6 +631,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Density(final DensityUnit unit) { super(unit); }
         
+        public static Density.Abs interpolate(final Density.Abs zero, final Density.Abs one, final double ratio)
+        { return new Density.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Density.Rel interpolate(final Density.Rel zero, final Density.Rel one, final double ratio)
+        { return new Density.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<DensityUnit>
         {
             public Rel(final double value, final DensityUnit unit) { super(value, unit); }
@@ -718,6 +746,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected ElectricalCharge(final ElectricalChargeUnit unit) { super(unit); }
         
+        public static ElectricalCharge.Abs interpolate(final ElectricalCharge.Abs zero, final ElectricalCharge.Abs one, final double ratio)
+        { return new ElectricalCharge.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static ElectricalCharge.Rel interpolate(final ElectricalCharge.Rel zero, final ElectricalCharge.Rel one, final double ratio)
+        { return new ElectricalCharge.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<ElectricalChargeUnit>
         {
             public Rel(final double value, final ElectricalChargeUnit unit) { super(value, unit); }
@@ -832,6 +865,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected ElectricalCurrent(final ElectricalCurrentUnit unit) { super(unit); }
         
+        public static ElectricalCurrent.Abs interpolate(final ElectricalCurrent.Abs zero, final ElectricalCurrent.Abs one, final double ratio)
+        { return new ElectricalCurrent.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static ElectricalCurrent.Rel interpolate(final ElectricalCurrent.Rel zero, final ElectricalCurrent.Rel one, final double ratio)
+        { return new ElectricalCurrent.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<ElectricalCurrentUnit>
         {
             public Rel(final double value, final ElectricalCurrentUnit unit) { super(value, unit); }
@@ -931,9 +969,9 @@ public interface DOUBLE_SCALAR extends UNITS
                 return getUnit().equals(v.getUnit()) ? new ElectricalCurrent.Abs(getInUnit() - v.getInUnit(), getUnit()) 
                     : new ElectricalCurrent.Abs(this.si - v.si, ElectricalCurrentUnit.SI); } 
 
-            public Power.Rel multiplyBy(final ElectricalPotential.Rel v) { return new Power.Rel(this.si * v.si, PowerUnit.SI); }
-            public ElectricalCharge.Rel multiplyBy(final Time.Rel v) { 
-                return new ElectricalCharge.Rel(this.si * v.si, ElectricalChargeUnit.SI); }
+            public Power.Abs multiplyBy(final ElectricalPotential.Abs v) { return new Power.Abs(this.si * v.si, PowerUnit.SI); }
+            public ElectricalCharge.Abs multiplyBy(final Time.Abs v) { 
+                return new ElectricalCharge.Abs(this.si * v.si, ElectricalChargeUnit.SI); }
             public Dimensionless.Abs divideBy(final ElectricalCurrent.Abs v) { return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI); }
         }
     }
@@ -946,6 +984,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected ElectricalPotential(final ElectricalPotentialUnit unit) { super(unit); }
         
+        public static ElectricalPotential.Abs interpolate(final ElectricalPotential.Abs zero, final ElectricalPotential.Abs one, final double ratio)
+        { return new ElectricalPotential.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static ElectricalPotential.Rel interpolate(final ElectricalPotential.Rel zero, final ElectricalPotential.Rel one, final double ratio)
+        { return new ElectricalPotential.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<ElectricalPotentialUnit>
         {
             public Rel(final double value, final ElectricalPotentialUnit unit) { super(value, unit); }
@@ -1060,6 +1103,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected ElectricalResistance(final ElectricalResistanceUnit unit) { super(unit); }
         
+        public static ElectricalResistance.Abs interpolate(final ElectricalResistance.Abs zero, final ElectricalResistance.Abs one, final double ratio)
+        { return new ElectricalResistance.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static ElectricalResistance.Rel interpolate(final ElectricalResistance.Rel zero, final ElectricalResistance.Rel one, final double ratio)
+        { return new ElectricalResistance.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<ElectricalResistanceUnit>
         {
             public Rel(final double value, final ElectricalResistanceUnit unit) { super(value, unit); }
@@ -1172,6 +1220,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Energy(final EnergyUnit unit) { super(unit); }
         
+        public static Energy.Abs interpolate(final Energy.Abs zero, final Energy.Abs one, final double ratio)
+        { return new Energy.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Energy.Rel interpolate(final Energy.Rel zero, final Energy.Rel one, final double ratio)
+        { return new Energy.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<EnergyUnit>
         {
             public Rel(final double value, final EnergyUnit unit) { super(value, unit); }
@@ -1288,6 +1341,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected FlowMass(final FlowMassUnit unit) { super(unit); }
         
+        public static FlowMass.Abs interpolate(final FlowMass.Abs zero, final FlowMass.Abs one, final double ratio)
+        { return new FlowMass.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static FlowMass.Rel interpolate(final FlowMass.Rel zero, final FlowMass.Rel one, final double ratio)
+        { return new FlowMass.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<FlowMassUnit>
         {
             public Rel(final double value, final FlowMassUnit unit) { super(value, unit); }
@@ -1400,6 +1458,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected FlowVolume(final FlowVolumeUnit unit) { super(unit); }
         
+        public static FlowVolume.Abs interpolate(final FlowVolume.Abs zero, final FlowVolume.Abs one, final double ratio)
+        { return new FlowVolume.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static FlowVolume.Rel interpolate(final FlowVolume.Rel zero, final FlowVolume.Rel one, final double ratio)
+        { return new FlowVolume.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<FlowVolumeUnit>
         {
             public Rel(final double value, final FlowVolumeUnit unit) { super(value, unit); }
@@ -1512,6 +1575,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Force(final ForceUnit unit) { super(unit); }
         
+        public static Force.Abs interpolate(final Force.Abs zero, final Force.Abs one, final double ratio)
+        { return new Force.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Force.Rel interpolate(final Force.Rel zero, final Force.Rel one, final double ratio)
+        { return new Force.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<ForceUnit>
         {
             public Rel(final double value, final ForceUnit unit) { super(value, unit); }
@@ -1630,6 +1698,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Frequency(final FrequencyUnit unit) { super(unit); }
         
+        public static Frequency.Abs interpolate(final Frequency.Abs zero, final Frequency.Abs one, final double ratio)
+        { return new Frequency.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Frequency.Rel interpolate(final Frequency.Rel zero, final Frequency.Rel one, final double ratio)
+        { return new Frequency.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<FrequencyUnit>
         {
             public Rel(final double value, final FrequencyUnit unit) { super(value, unit); }
@@ -1754,6 +1827,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Length(final LengthUnit unit) { super(unit); }
         
+        public static Length.Abs interpolate(final Length.Abs zero, final Length.Abs one, final double ratio)
+        { return new Length.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Length.Rel interpolate(final Length.Rel zero, final Length.Rel one, final double ratio)
+        { return new Length.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<LengthUnit>
         {
             public Rel(final double value, final LengthUnit unit) { super(value, unit); }
@@ -1873,6 +1951,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected LinearDensity(final LinearDensityUnit unit) { super(unit); }
         
+        public static LinearDensity.Abs interpolate(final LinearDensity.Abs zero, final LinearDensity.Abs one, final double ratio)
+        { return new LinearDensity.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static LinearDensity.Rel interpolate(final LinearDensity.Rel zero, final LinearDensity.Rel one, final double ratio)
+        { return new LinearDensity.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<LinearDensityUnit>
         {
             public Rel(final double value, final LinearDensityUnit unit) { super(value, unit); }
@@ -1985,6 +2068,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Mass(final MassUnit unit) { super(unit); }
         
+        public static Mass.Abs interpolate(final Mass.Abs zero, final Mass.Abs one, final double ratio)
+        { return new Mass.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Mass.Rel interpolate(final Mass.Rel zero, final Mass.Rel one, final double ratio)
+        { return new Mass.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<MassUnit>
         {
             public Rel(final double value, final MassUnit unit) { super(value, unit); }
@@ -2101,6 +2189,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Power(final PowerUnit unit) { super(unit); }
         
+        public static Power.Abs interpolate(final Power.Abs zero, final Power.Abs one, final double ratio)
+        { return new Power.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Power.Rel interpolate(final Power.Rel zero, final Power.Rel one, final double ratio)
+        { return new Power.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<PowerUnit>
         {
             public Rel(final double value, final PowerUnit unit) { super(value, unit); }
@@ -2223,6 +2316,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Pressure(final PressureUnit unit) { super(unit); }
         
+        public static Pressure.Abs interpolate(final Pressure.Abs zero, final Pressure.Abs one, final double ratio)
+        { return new Pressure.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Pressure.Rel interpolate(final Pressure.Rel zero, final Pressure.Rel one, final double ratio)
+        { return new Pressure.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<PressureUnit>
         {
             public Rel(final double value, final PressureUnit unit) { super(value, unit); }
@@ -2335,6 +2433,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Speed(final SpeedUnit unit) { super(unit); }
         
+        public static Speed.Abs interpolate(final Speed.Abs zero, final Speed.Abs one, final double ratio)
+        { return new Speed.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Speed.Rel interpolate(final Speed.Rel zero, final Speed.Rel one, final double ratio)
+        { return new Speed.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<SpeedUnit>
         {
             public Rel(final double value, final SpeedUnit unit) { super(value, unit); }
@@ -2457,6 +2560,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Temperature(final TemperatureUnit unit) { super(unit); }
         
+        public static Temperature.Abs interpolate(final Temperature.Abs zero, final Temperature.Abs one, final double ratio)
+        { return new Temperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Temperature.Rel interpolate(final Temperature.Rel zero, final Temperature.Rel one, final double ratio)
+        { return new Temperature.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<TemperatureUnit>
         {
             public Rel(final double value, final TemperatureUnit unit) { super(value, unit); }
@@ -2565,6 +2673,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Time(final TimeUnit unit) { super(unit); }
         
+        public static Time.Abs interpolate(final Time.Abs zero, final Time.Abs one, final double ratio)
+        { return new Time.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Time.Rel interpolate(final Time.Rel zero, final Time.Rel one, final double ratio)
+        { return new Time.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<TimeUnit>
         {
             public Rel(final double value, final TimeUnit unit) { super(value, unit); }
@@ -2689,6 +2802,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Torque(final TorqueUnit unit) { super(unit); }
         
+        public static Torque.Abs interpolate(final Torque.Abs zero, final Torque.Abs one, final double ratio)
+        { return new Torque.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Torque.Rel interpolate(final Torque.Rel zero, final Torque.Rel one, final double ratio)
+        { return new Torque.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<TorqueUnit>
         {
             public Rel(final double value, final TorqueUnit unit) { super(value, unit); }
@@ -2805,6 +2923,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Volume(final VolumeUnit unit) { super(unit); }
         
+        public static Volume.Abs interpolate(final Volume.Abs zero, final Volume.Abs one, final double ratio)
+        { return new Volume.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Volume.Rel interpolate(final Volume.Rel zero, final Volume.Rel one, final double ratio)
+        { return new Volume.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<VolumeUnit>
         {
             public Rel(final double value, final VolumeUnit unit) { super(value, unit); }
@@ -2923,6 +3046,11 @@ public interface DOUBLE_SCALAR extends UNITS
     {
         protected Dimensionless(final DimensionlessUnit unit) { super(unit); }
         
+        public static Dimensionless.Abs interpolate(final Dimensionless.Abs zero, final Dimensionless.Abs one, final double ratio)
+        { return new Dimensionless.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+        public static Dimensionless.Rel interpolate(final Dimensionless.Rel zero, final Dimensionless.Rel one, final double ratio)
+        { return new Dimensionless.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit()); }
+
         public static class Rel extends DoubleScalar.Rel<DimensionlessUnit>
         {
             public Rel(final double value, final DimensionlessUnit unit) { super(value, unit); }
