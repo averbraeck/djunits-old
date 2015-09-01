@@ -945,8 +945,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
      * @param <U> Unit; the unit of the parameters and the result
      * @return FloatScalar.Abs&lt;U&gt;; the sum of the values as an Absolute value
      */
-    public static <U extends Unit<U>> FloatScalar.Abs<U> plus(final FloatScalar.Abs<U> left,
-        final FloatScalar.Rel<U> right)
+    public static <U extends Unit<U>> FloatScalar.Abs<U> plus(final FloatScalar.Abs<U> left, final FloatScalar.Rel<U> right)
     {
         return new FloatScalar.Abs<U>(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -959,8 +958,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
      * @param <U> Unit; the unit of the parameters and the result
      * @return FloatScalar.Abs&lt;U&gt;; the sum of the values as an Absolute value
      */
-    public static <U extends Unit<U>> FloatScalar.Abs<U> plus(final FloatScalar.Rel<U> left,
-        final FloatScalar.Abs<U> right)
+    public static <U extends Unit<U>> FloatScalar.Abs<U> plus(final FloatScalar.Rel<U> left, final FloatScalar.Abs<U> right)
     {
         return new FloatScalar.Abs<U>(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -973,8 +971,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
      * @param <U> Unit; the unit of the parameters and the result
      * @return FloatScalar.Rel&lt;U&gt;; the sum of the values as a Relative value
      */
-    public static <U extends Unit<U>> FloatScalar.Rel<U> plus(final FloatScalar.Rel<U> left,
-        final FloatScalar.Rel<U> right)
+    public static <U extends Unit<U>> FloatScalar.Rel<U> plus(final FloatScalar.Rel<U> left, final FloatScalar.Rel<U> right)
     {
         return new FloatScalar.Rel<U>(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -987,8 +984,8 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
      * @param <U> Unit; the unit of the parameters and the result
      * @return FloatScalar.Abs&lt;U&gt;; the resulting value as an absolute value
      */
-    public static <U extends Unit<U>> FloatScalar.Abs<U> minus(final FloatScalar.Abs<U> left,
-        final FloatScalar.Rel<U> right)
+    public static <U extends Unit<U>> FloatScalar.Abs<U>
+        minus(final FloatScalar.Abs<U> left, final FloatScalar.Rel<U> right)
     {
         return new FloatScalar.Abs<U>(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -1001,8 +998,8 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
      * @param <U> Unit; the unit of the parameters and the result
      * @return FloatScalar.Rel&lt;U&gt;; the resulting value as a relative value
      */
-    public static <U extends Unit<U>> FloatScalar.Rel<U> minus(final FloatScalar.Rel<U> left,
-        final FloatScalar.Rel<U> right)
+    public static <U extends Unit<U>> FloatScalar.Rel<U>
+        minus(final FloatScalar.Rel<U> left, final FloatScalar.Rel<U> right)
     {
         return new FloatScalar.Rel<U>(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -1015,8 +1012,8 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
      * @param <U> Unit; the unit of the parameters and the result
      * @return FloatScalar.Rel&lt;U&gt;; the difference of the two absolute values as a relative value
      */
-    public static <U extends Unit<U>> FloatScalar.Rel<U> minus(final FloatScalar.Abs<U> left,
-        final FloatScalar.Abs<U> right)
+    public static <U extends Unit<U>> FloatScalar.Rel<U>
+        minus(final FloatScalar.Abs<U> left, final FloatScalar.Abs<U> right)
     {
         return new FloatScalar.Rel<U>(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -1088,8 +1085,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
     public static <U extends Unit<U>> FloatScalar.Abs<U> interpolate(final FloatScalar.Abs<U> zero,
         final FloatScalar.Abs<U> one, final float ratio)
     {
-        return new FloatScalar.Abs<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatScalar.Abs<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -1103,8 +1099,7 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
     public static <U extends Unit<U>> FloatScalar.Rel<U> interpolate(final FloatScalar.Rel<U> zero,
         final FloatScalar.Rel<U> one, final float ratio)
     {
-        return new FloatScalar.Rel<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatScalar.Rel<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
 }
