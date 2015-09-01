@@ -12,3 +12,4 @@
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 package org.djunits.value.vdouble.scalar;
+

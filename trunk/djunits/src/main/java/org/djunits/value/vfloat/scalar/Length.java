@@ -1,0 +1,722 @@
+package org.djunits.value.vfloat.scalar;
+
+import org.djunits.unit.AreaUnit;
+import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.EnergyUnit;
+import org.djunits.unit.LengthUnit;
+import org.djunits.unit.SpeedUnit;
+import org.djunits.unit.UNITS;
+import org.djunits.unit.VolumeUnit;
+
+/**
+ * Easy access methods for the Length FloatScalar. Instead of <br>
+ * <i>FloatScalar.Rel&lt;SomeUnit&gt; value = new FloatScalar.Rel&lt;SomeUnit&gt;(0.2, SomeUnit.UNIT);</i><br>
+ * we can now write <br>
+ * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass.Rel margin = new Mass.Rel(0.2, KILOGRAM);</i><br>
+ * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
+ * used are compatible.
+ * <p>
+ * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
+ * <p>
+ * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
+ * initial version Aug 28, 2015 <br>
+ * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ */
+public interface Length extends UNITS
+{
+    /**
+     * Easy access methods for the Length FloatScalar. Instead of <br>
+     * <i>FloatScalar.Rel&lt;LengthUnit&gt; margin = new FloatScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
+     * we can now write <br>
+     * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
+     * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
+     * unit used are compatible.
+     * <p>
+     * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+     * All rights reserved. <br>
+     * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+     * <p>
+     * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
+     * initial version Sep 1, 2015 <br>
+     * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+     */
+    public static class Rel extends FloatScalar.Rel<LengthUnit>
+    {
+        /** */
+        private static final long serialVersionUID = 20150901L;
+
+        /**
+         * Construct Length.Rel scalar.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final float value, final LengthUnit unit)
+        {
+            super(value, unit);
+        }
+
+        /**
+         * Construct Length.Rel scalar.
+         * @param value Scalar from which to construct this instance
+         */
+        public Rel(final FloatScalar.Rel<LengthUnit> value)
+        {
+            super(value);
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Length.Rel interpolate(final Length.Rel zero, final Length.Rel one, final float ratio)
+        {
+            return new Length.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel abs()
+        {
+            return new Length.Rel(Math.abs(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel acos()
+        {
+            return new Length.Rel((float) Math.acos(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel asin()
+        {
+            return new Length.Rel((float) Math.asin(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel atan()
+        {
+            return new Length.Rel((float) Math.atan(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel cbrt()
+        {
+            return new Length.Rel((float) Math.cbrt(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel ceil()
+        {
+            return new Length.Rel((float) Math.ceil(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel cos()
+        {
+            return new Length.Rel((float) Math.cos(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel cosh()
+        {
+            return new Length.Rel((float) Math.cosh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel exp()
+        {
+            return new Length.Rel((float) Math.exp(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel expm1()
+        {
+            return new Length.Rel((float) Math.expm1(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel floor()
+        {
+            return new Length.Rel((float) Math.floor(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel log()
+        {
+            return new Length.Rel((float) Math.log(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel log10()
+        {
+            return new Length.Rel((float) Math.log10(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel log1p()
+        {
+            return new Length.Rel((float) Math.log1p(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel rint()
+        {
+            return new Length.Rel((float) Math.rint(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel round()
+        {
+            return new Length.Rel(Math.round(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel signum()
+        {
+            return new Length.Rel(Math.signum(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel sin()
+        {
+            return new Length.Rel((float) Math.sin(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel sinh()
+        {
+            return new Length.Rel((float) Math.sinh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel sqrt()
+        {
+            return new Length.Rel((float) Math.sqrt(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel tan()
+        {
+            return new Length.Rel((float) Math.tan(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel tanh()
+        {
+            return new Length.Rel((float) Math.tanh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel inv()
+        {
+            return new Length.Rel(1.0f / getInUnit(), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel toDegrees()
+        {
+            return new Length.Rel((float) Math.toDegrees(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel toRadians()
+        {
+            return new Length.Rel((float) Math.toRadians(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel pow(final double x)
+        {
+            return new Length.Rel((float) Math.pow(getInUnit(), x), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel multiplyBy(final float factor)
+        {
+            return new Length.Rel(getInUnit() * factor, getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Rel divideBy(final float divisor)
+        {
+            return new Length.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Relative scalar plus Relative scalar = Relative scalar.
+         * @param v the value to add
+         * @return sum of this value and v as a new object
+         */
+        public final Length.Rel plus(final Length.Rel v)
+        {
+            return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Length.Rel(
+                this.si + v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Relative scalar minus Relative scalar = Relative scalar.
+         * @param v the value to subtract
+         * @return difference of this value and v as a new object
+         */
+        public final Length.Rel minus(final Length.Rel v)
+        {
+            return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Length.Rel(
+                this.si - v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Relative scalar plus Absolute scalar = Absolute scalar.
+         * @param v the value to add
+         * @return sum of this value and v as a new object
+         */
+        public final Length.Abs plus(final Length.Abs v)
+        {
+            return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Length.Abs(
+                this.si + v.si, LengthUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Dimensionless scalar as a division of Length and Length
+         */
+        public final Dimensionless.Rel divideBy(final Length.Rel v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Area scalar as a multiplication of Length and Length
+         */
+        public final Area.Rel multiplyBy(final Length.Rel v)
+        {
+            return new Area.Rel(this.si * v.si, AreaUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Area scalar as a division of Length and LinearDensity
+         */
+        public final Area.Rel divideBy(final LinearDensity.Rel v)
+        {
+            return new Area.Rel(this.si / v.si, AreaUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Volume scalar as a multiplication of Length and Area
+         */
+        public final Volume.Rel multiplyBy(final Area.Rel v)
+        {
+            return new Volume.Rel(this.si * v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Energy scalar as a multiplication of Length and Force
+         */
+        public final Energy.Rel multiplyBy(final Force.Rel v)
+        {
+            return new Energy.Rel(this.si * v.si, EnergyUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Speed scalar as a multiplication of Length and Frequency
+         */
+        public final Speed.Rel multiplyBy(final Frequency.Rel v)
+        {
+            return new Speed.Rel(this.si * v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Speed scalar as a division of Length and Time
+         */
+        public final Speed.Rel divideBy(final Time.Rel v)
+        {
+            return new Speed.Rel(this.si / v.si, SpeedUnit.SI);
+        }
+
+    }
+
+    /**
+     * Easy access methods for the Length FloatScalar. Instead of <br>
+     * <i>FloatScalar.Rel&lt;LengthUnit&gt; margin = new FloatScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
+     * we can now write <br>
+     * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
+     * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
+     * unit used are compatible.
+     * <p>
+     * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+     * All rights reserved. <br>
+     * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+     * <p>
+     * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
+     * initial version Sep 1, 2015 <br>
+     * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+     */
+    public static class Abs extends FloatScalar.Abs<LengthUnit>
+    {
+        /** */
+        private static final long serialVersionUID = 20150901L;
+
+        /**
+         * Construct Length.Abs scalar.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final float value, final LengthUnit unit)
+        {
+            super(value, unit);
+        }
+
+        /**
+         * Construct Length.Abs scalar.
+         * @param value Scalar from which to construct this instance
+         */
+        public Abs(final FloatScalar.Abs<LengthUnit> value)
+        {
+            super(value);
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Length.Abs interpolate(final Length.Abs zero, final Length.Abs one, final float ratio)
+        {
+            return new Length.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs abs()
+        {
+            return new Length.Abs(Math.abs(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs acos()
+        {
+            return new Length.Abs((float) Math.acos(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs asin()
+        {
+            return new Length.Abs((float) Math.asin(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs atan()
+        {
+            return new Length.Abs((float) Math.atan(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs cbrt()
+        {
+            return new Length.Abs((float) Math.cbrt(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs ceil()
+        {
+            return new Length.Abs((float) Math.ceil(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs cos()
+        {
+            return new Length.Abs((float) Math.cos(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs cosh()
+        {
+            return new Length.Abs((float) Math.cosh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs exp()
+        {
+            return new Length.Abs((float) Math.exp(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs expm1()
+        {
+            return new Length.Abs((float) Math.expm1(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs floor()
+        {
+            return new Length.Abs((float) Math.floor(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs log()
+        {
+            return new Length.Abs((float) Math.log(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs log10()
+        {
+            return new Length.Abs((float) Math.log10(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs log1p()
+        {
+            return new Length.Abs((float) Math.log1p(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs rint()
+        {
+            return new Length.Abs((float) Math.rint(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs round()
+        {
+            return new Length.Abs(Math.round(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs signum()
+        {
+            return new Length.Abs(Math.signum(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs sin()
+        {
+            return new Length.Abs((float) Math.sin(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs sinh()
+        {
+            return new Length.Abs((float) Math.sinh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs sqrt()
+        {
+            return new Length.Abs((float) Math.sqrt(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs tan()
+        {
+            return new Length.Abs((float) Math.tan(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs tanh()
+        {
+            return new Length.Abs((float) Math.tanh(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs inv()
+        {
+            return new Length.Abs(1.0f / getInUnit(), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs toDegrees()
+        {
+            return new Length.Abs((float) Math.toDegrees(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs toRadians()
+        {
+            return new Length.Abs((float) Math.toRadians(getInUnit()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs pow(final double x)
+        {
+            return new Length.Abs((float) Math.pow(getInUnit(), x), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs multiplyBy(final float factor)
+        {
+            return new Length.Abs(getInUnit() * factor, getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final Length.Abs divideBy(final float divisor)
+        {
+            return new Length.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Absolute scalar plus Relative scalar = Absolute scalar.
+         * @param v the value to add
+         * @return sum of this value and v as a new object
+         */
+        public final Length.Abs plus(final Length.Rel v)
+        {
+            return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Length.Abs(
+                this.si + v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Absolute scalar minus Absolute scalar = Relative scalar.
+         * @param v the value to subtract
+         * @return difference of this value and v as a new object
+         */
+        public final Length.Rel minus(final Length.Abs v)
+        {
+            return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Length.Rel(
+                this.si - v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Absolute scalar minus Relative scalar = Absolute scalar.
+         * @param v the value to subtract
+         * @return difference of this value and v as a new object
+         */
+        public final Length.Abs minus(final Length.Rel v)
+        {
+            return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Length.Abs(
+                this.si - v.si, LengthUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Dimensionless scalar as a division of Length and Length
+         */
+        public final Dimensionless.Abs divideBy(final Length.Abs v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Area scalar as a multiplication of Length and Length
+         */
+        public final Area.Abs multiplyBy(final Length.Abs v)
+        {
+            return new Area.Abs(this.si * v.si, AreaUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Area scalar as a division of Length and LinearDensity
+         */
+        public final Area.Abs divideBy(final LinearDensity.Abs v)
+        {
+            return new Area.Abs(this.si / v.si, AreaUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Volume scalar as a multiplication of Length and Area
+         */
+        public final Volume.Abs multiplyBy(final Area.Abs v)
+        {
+            return new Volume.Abs(this.si * v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Energy scalar as a multiplication of Length and Force
+         */
+        public final Energy.Abs multiplyBy(final Force.Abs v)
+        {
+            return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Speed scalar as a multiplication of Length and Frequency
+         */
+        public final Speed.Abs multiplyBy(final Frequency.Abs v)
+        {
+            return new Speed.Abs(this.si * v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * @param v Length scalar
+         * @return Speed scalar as a division of Length and Time
+         */
+        public final Speed.Abs divideBy(final Time.Abs v)
+        {
+            return new Speed.Abs(this.si / v.si, SpeedUnit.SI);
+        }
+
+    }
+}
