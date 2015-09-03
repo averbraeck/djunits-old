@@ -1,7 +1,6 @@
 package org.djunits.value.vfloat.scalar;
 
 import org.djunits.unit.*;
-import org.djunits.unit.UNITS;
 
 /**
  * Easy access methods for the %TYPE% FloatScalar. Instead of <br>
@@ -54,6 +53,16 @@ public interface %TYPE% extends UNITS
         }
 
         /**
+         * Construct %TYPE%.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final %TYPE%Unit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct %TYPE%.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -72,6 +81,18 @@ public interface %TYPE% extends UNITS
         public static %TYPE%.Rel interpolate(final %TYPE%.Rel zero, final %TYPE%.Rel one, final float ratio)
         {
             return new %TYPE%.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static %TYPE%.Rel interpolate(final %TYPE%.Rel zero, final %TYPE%.Rel one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -263,11 +284,31 @@ public interface %TYPE% extends UNITS
             return new %TYPE%.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative %type%
+         */
+        public final %TYPE%.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final %TYPE%.Rel divideBy(final float divisor)
         {
             return new %TYPE%.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative %type%
+         */
+        public final %TYPE%.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -302,6 +343,16 @@ public interface %TYPE% extends UNITS
             return getUnit().equals(v.getUnit()) ? new %TYPE%.Abs(getInUnit() + v.getInUnit(), getUnit())
                 : new %TYPE%.Abs(this.si + v.si, %TYPE%Unit.SI);
         }
+
+        /** 
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative %type% scalar.
+         */
+        public final %TYPE%.Abs toAbs()
+        {
+            return new %TYPE%.Abs(getInUnit(), getUnit());
+        }
+
 %FORMULAS%%TYPE%.Rel%
     }
 
@@ -338,6 +389,16 @@ public interface %TYPE% extends UNITS
         }
 
         /**
+         * Construct %TYPE%.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final %TYPE%Unit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct %TYPE%.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -356,6 +417,18 @@ public interface %TYPE% extends UNITS
         public static %TYPE%.Abs interpolate(final %TYPE%.Abs zero, final %TYPE%.Abs one, final float ratio)
         {
             return new %TYPE%.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static %TYPE%.Abs interpolate(final %TYPE%.Abs zero, final %TYPE%.Abs one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -547,11 +620,31 @@ public interface %TYPE% extends UNITS
             return new %TYPE%.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute %type%
+         */
+        public final %TYPE%.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final %TYPE%.Abs divideBy(final float divisor)
         {
             return new %TYPE%.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute %type%
+         */
+        public final %TYPE%.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -586,6 +679,16 @@ public interface %TYPE% extends UNITS
             return getUnit().equals(v.getUnit()) ? new %TYPE%.Abs(getInUnit() - v.getInUnit(), getUnit())
                 : new %TYPE%.Abs(this.si - v.si, %TYPE%Unit.SI);
         }
+
+        /** 
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute %type% scalar.
+         */
+        public final %TYPE%.Rel toRel()
+        {
+            return new %TYPE%.Rel(getInUnit(), getUnit());
+        }
+        
 %FORMULAS%%TYPE%.Abs%
     }
 }

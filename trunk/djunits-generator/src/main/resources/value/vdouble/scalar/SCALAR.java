@@ -302,6 +302,16 @@ public interface %TYPE% extends UNITS
             return getUnit().equals(v.getUnit()) ? new %TYPE%.Abs(getInUnit() + v.getInUnit(), getUnit())
                 : new %TYPE%.Abs(this.si + v.si, %TYPE%Unit.SI);
         }
+
+        /** 
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative %type% scalar.
+         */
+        public final %TYPE%.Abs toAbs()
+        {
+            return new %TYPE%.Abs(getInUnit(), getUnit());
+        }
+        
 %FORMULAS%%TYPE%.Rel%
     }
 
@@ -586,6 +596,16 @@ public interface %TYPE% extends UNITS
             return getUnit().equals(v.getUnit()) ? new %TYPE%.Abs(getInUnit() - v.getInUnit(), getUnit())
                 : new %TYPE%.Abs(this.si - v.si, %TYPE%Unit.SI);
         }
+
+        /** 
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute %type% scalar.
+         */
+        public final %TYPE%.Rel toRel()
+        {
+            return new %TYPE%.Rel(getInUnit(), getUnit());
+        }
+
 %FORMULAS%%TYPE%.Abs%
     }
 }

@@ -148,7 +148,7 @@ public class GenerateDJUNIT
                 return ret;
             }
             String type = ret.substring(pos, end);
-            String absrel = (type.endsWith(".Rel")) ? "Rel" : "Abs";
+            String absRel = (type.endsWith(".Rel")) ? "Rel" : "Abs";
             type = type.substring(0, type.length() - 4);
             if (!formulas.containsKey(type))
             {
@@ -165,13 +165,15 @@ public class GenerateDJUNIT
                 String param = f.split("=")[0].trim();
                 String result = f.split("=")[1].trim();
                 fStr += "        /**\n";
+                fStr += "         * Calculate the " + dm + " of " + type + " and " + param + ", which results in a ";
+                fStr += result + " scalar.\n";
                 fStr += "         * @param v " + type + " scalar\n";
                 fStr += "         * @return " + result + " scalar as a " + dm + " of " + type + " and " + param + "\n";
                 fStr += "         */\n";
-                fStr += "        public final " + result + "." + absrel + " " + method;
-                fStr += "(final " + param + "." + absrel + " v)\n";
+                fStr += "        public final " + result + "." + absRel + " " + method;
+                fStr += "(final " + param + "." + absRel + " v)\n";
                 fStr += "        {\n";
-                fStr += "            return new " + result + "." + absrel + "(this.si " + mdsign + " v.si, ";
+                fStr += "            return new " + result + "." + absRel + "(this.si " + mdsign + " v.si, ";
                 fStr += result + "Unit.SI);\n";
                 fStr += "        }\n\n";
             }
