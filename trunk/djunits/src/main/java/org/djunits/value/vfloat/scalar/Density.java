@@ -56,6 +56,16 @@ public interface Density extends UNITS
         }
 
         /**
+         * Construct Density.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final DensityUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Density.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -74,6 +84,18 @@ public interface Density extends UNITS
         public static Density.Rel interpolate(final Density.Rel zero, final Density.Rel one, final float ratio)
         {
             return new Density.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Density.Rel interpolate(final Density.Rel zero, final Density.Rel one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -265,11 +287,31 @@ public interface Density extends UNITS
             return new Density.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative density
+         */
+        public final Density.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Density.Rel divideBy(final float divisor)
         {
             return new Density.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative density
+         */
+        public final Density.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -306,6 +348,26 @@ public interface Density extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative density scalar.
+         */
+        public final Density.Abs toAbs()
+        {
+            return new Density.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Density and Density, which results in a Dimensionless scalar.
+         * @param v Density scalar
+         * @return Dimensionless scalar as a division of Density and Density
+         */
+        public final Dimensionless.Rel divideBy(final Density.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Density and Density, which results in a Dimensionless scalar.
          * @param v Density scalar
          * @return Dimensionless scalar as a division of Density and Density
          */
@@ -315,6 +377,17 @@ public interface Density extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
+         * @param v Density scalar
+         * @return Mass scalar as a multiplication of Density and Volume
+         */
+        public final Mass.Rel multiplyBy(final Volume.Abs v)
+        {
+            return new Mass.Rel(this.si * v.si, MassUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
          * @param v Density scalar
          * @return Mass scalar as a multiplication of Density and Volume
          */
@@ -358,6 +431,16 @@ public interface Density extends UNITS
         }
 
         /**
+         * Construct Density.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final DensityUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Density.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -376,6 +459,18 @@ public interface Density extends UNITS
         public static Density.Abs interpolate(final Density.Abs zero, final Density.Abs one, final float ratio)
         {
             return new Density.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Density.Abs interpolate(final Density.Abs zero, final Density.Abs one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -567,11 +662,31 @@ public interface Density extends UNITS
             return new Density.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute density
+         */
+        public final Density.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Density.Abs divideBy(final float divisor)
         {
             return new Density.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute density
+         */
+        public final Density.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -608,6 +723,16 @@ public interface Density extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute density scalar.
+         */
+        public final Density.Rel toRel()
+        {
+            return new Density.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Density and Density, which results in a Dimensionless scalar.
          * @param v Density scalar
          * @return Dimensionless scalar as a division of Density and Density
          */
@@ -617,10 +742,31 @@ public interface Density extends UNITS
         }
 
         /**
+         * Calculate the division of Density and Density, which results in a Dimensionless scalar.
+         * @param v Density scalar
+         * @return Dimensionless scalar as a division of Density and Density
+         */
+        public final Dimensionless.Abs divideBy(final Density.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
          * @param v Density scalar
          * @return Mass scalar as a multiplication of Density and Volume
          */
         public final Mass.Abs multiplyBy(final Volume.Abs v)
+        {
+            return new Mass.Abs(this.si * v.si, MassUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
+         * @param v Density scalar
+         * @return Mass scalar as a multiplication of Density and Volume
+         */
+        public final Mass.Abs multiplyBy(final Volume.Rel v)
         {
             return new Mass.Abs(this.si * v.si, MassUnit.SI);
         }

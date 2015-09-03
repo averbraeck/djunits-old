@@ -83,13 +83,6 @@ public interface UNITS
     AreaUnit ACRE                 = AreaUnit.ACRE;
     AreaUnit ARE                  = AreaUnit.ARE;
     AreaUnit HECTARE              = AreaUnit.HECTARE;
-    AreaUnit M_2                  = AreaUnit.SQUARE_METER;
-    AreaUnit CM_2                 = AreaUnit.SQUARE_CENTIMETER;
-    AreaUnit FT_2                 = AreaUnit.SQUARE_FOOT;
-    AreaUnit IN_2                 = AreaUnit.SQUARE_INCH;
-    AreaUnit MI_2                 = AreaUnit.SQUARE_MILE;
-    AreaUnit MM_2                 = AreaUnit.SQUARE_MILLIMETER;
-    AreaUnit YD_2                 = AreaUnit.SQUARE_YARD;
     
     /****************************************************************************************************************/
     /**************************************************** DENSITY ***************************************************/ 
@@ -247,17 +240,6 @@ public interface UNITS
     LengthUnit MILLIMETER    = LengthUnit.MILLIMETER;
     LengthUnit NAUTICAL_MILE = LengthUnit.NAUTICAL_MILE;
     LengthUnit YARD          = LengthUnit.YARD;
-    LengthUnit M             = LengthUnit.METER;
-    LengthUnit CM            = LengthUnit.CENTIMETER;
-    LengthUnit DM            = LengthUnit.DECIMETER;
-    LengthUnit DAM           = LengthUnit.DEKAMETER;
-    LengthUnit FT            = LengthUnit.FOOT;
-    LengthUnit HM            = LengthUnit.HECTOMETER;
-    LengthUnit IN            = LengthUnit.INCH;
-    LengthUnit KM            = LengthUnit.KILOMETER;
-    LengthUnit MI            = LengthUnit.MILE;
-    LengthUnit MM            = LengthUnit.MILLIMETER;
-    LengthUnit YD            = LengthUnit.YARD;
     
     /****************************************************************************************************************/
     /************************************************ LINEAR_DENSITY ************************************************/ 
@@ -336,10 +318,6 @@ public interface UNITS
     SpeedUnit KM_PER_HOUR      = SpeedUnit.KM_PER_HOUR;
     SpeedUnit KNOT             = SpeedUnit.KNOT;
     SpeedUnit MILE_PER_HOUR    = SpeedUnit.MILE_PER_HOUR;
-    SpeedUnit MPS              = SpeedUnit.METER_PER_SECOND;
-    SpeedUnit FTPS             = SpeedUnit.FOOT_PER_SECOND;
-    SpeedUnit KMPH             = SpeedUnit.KM_PER_HOUR;
-    SpeedUnit MIPH             = SpeedUnit.MILE_PER_HOUR;
     
     /****************************************************************************************************************/
     /************************************************* TEMPERATURE **************************************************/ 
@@ -361,11 +339,6 @@ public interface UNITS
     TimeUnit MILLISECOND = TimeUnit.MILLISECOND;
     TimeUnit MINUTE      = TimeUnit.MINUTE;
     TimeUnit WEEK        = TimeUnit.WEEK;
-    TimeUnit S           = TimeUnit.SECOND;
-    TimeUnit HR          = TimeUnit.HOUR;
-    TimeUnit MS          = TimeUnit.MILLISECOND;
-    TimeUnit MIN         = TimeUnit.MINUTE;
-    TimeUnit WK          = TimeUnit.WEEK;
     
     /****************************************************************************************************************/
     /*************************************************** TORQUE *****************************************************/ 
@@ -389,14 +362,6 @@ public interface UNITS
     VolumeUnit CUBIC_YARD        = VolumeUnit.CUBIC_YARD;
     VolumeUnit CUBIC_KM          = VolumeUnit.CUBIC_KM;
     VolumeUnit LITER             = VolumeUnit.LITER;
-    VolumeUnit M_3               = VolumeUnit.CUBIC_METER;
-    VolumeUnit CM_3              = VolumeUnit.CUBIC_CENTIMETER;
-    VolumeUnit DM_3              = VolumeUnit.CUBIC_DECIMETER;
-    VolumeUnit FT_3              = VolumeUnit.CUBIC_FOOT;
-    VolumeUnit IN_3              = VolumeUnit.CUBIC_INCH;
-    VolumeUnit MI_3              = VolumeUnit.CUBIC_MILE;
-    VolumeUnit KM_3              = VolumeUnit.CUBIC_KM;
-    VolumeUnit YD_3              = VolumeUnit.CUBIC_YARD;
     VolumeUnit GALLON_IMP        = VolumeUnit.GALLON_IMP;
     VolumeUnit GALLON_US_FLUID   = VolumeUnit.GALLON_US_FLUID;
     VolumeUnit OUNCE_IMP_FLUID   = VolumeUnit.OUNCE_IMP_FLUID;

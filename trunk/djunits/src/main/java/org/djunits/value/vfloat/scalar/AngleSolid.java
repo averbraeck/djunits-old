@@ -55,6 +55,16 @@ public interface AngleSolid extends UNITS
         }
 
         /**
+         * Construct AngleSolid.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final AngleSolidUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct AngleSolid.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -73,6 +83,18 @@ public interface AngleSolid extends UNITS
         public static AngleSolid.Rel interpolate(final AngleSolid.Rel zero, final AngleSolid.Rel one, final float ratio)
         {
             return new AngleSolid.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static AngleSolid.Rel interpolate(final AngleSolid.Rel zero, final AngleSolid.Rel one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -264,11 +286,31 @@ public interface AngleSolid extends UNITS
             return new AngleSolid.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative anglesolid
+         */
+        public final AngleSolid.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final AngleSolid.Rel divideBy(final float divisor)
         {
             return new AngleSolid.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative anglesolid
+         */
+        public final AngleSolid.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -305,6 +347,26 @@ public interface AngleSolid extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative anglesolid scalar.
+         */
+        public final AngleSolid.Abs toAbs()
+        {
+            return new AngleSolid.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
+         * @param v AngleSolid scalar
+         * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
+         */
+        public final Dimensionless.Rel divideBy(final AngleSolid.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
          * @param v AngleSolid scalar
          * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
          */
@@ -348,6 +410,16 @@ public interface AngleSolid extends UNITS
         }
 
         /**
+         * Construct AngleSolid.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final AngleSolidUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct AngleSolid.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -366,6 +438,18 @@ public interface AngleSolid extends UNITS
         public static AngleSolid.Abs interpolate(final AngleSolid.Abs zero, final AngleSolid.Abs one, final float ratio)
         {
             return new AngleSolid.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static AngleSolid.Abs interpolate(final AngleSolid.Abs zero, final AngleSolid.Abs one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -557,11 +641,31 @@ public interface AngleSolid extends UNITS
             return new AngleSolid.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute anglesolid
+         */
+        public final AngleSolid.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final AngleSolid.Abs divideBy(final float divisor)
         {
             return new AngleSolid.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute anglesolid
+         */
+        public final AngleSolid.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -598,10 +702,30 @@ public interface AngleSolid extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute anglesolid scalar.
+         */
+        public final AngleSolid.Rel toRel()
+        {
+            return new AngleSolid.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
          * @param v AngleSolid scalar
          * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
          */
         public final Dimensionless.Abs divideBy(final AngleSolid.Abs v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
+         * @param v AngleSolid scalar
+         * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
+         */
+        public final Dimensionless.Abs divideBy(final AngleSolid.Rel v)
         {
             return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
         }

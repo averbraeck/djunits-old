@@ -58,6 +58,16 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Construct FlowVolume.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final FlowVolumeUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct FlowVolume.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -76,6 +86,18 @@ public interface FlowVolume extends UNITS
         public static FlowVolume.Rel interpolate(final FlowVolume.Rel zero, final FlowVolume.Rel one, final float ratio)
         {
             return new FlowVolume.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static FlowVolume.Rel interpolate(final FlowVolume.Rel zero, final FlowVolume.Rel one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -267,11 +289,31 @@ public interface FlowVolume extends UNITS
             return new FlowVolume.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative flowvolume
+         */
+        public final FlowVolume.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final FlowVolume.Rel divideBy(final float divisor)
         {
             return new FlowVolume.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative flowvolume
+         */
+        public final FlowVolume.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -308,6 +350,26 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative flowvolume scalar.
+         */
+        public final FlowVolume.Abs toAbs()
+        {
+            return new FlowVolume.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of FlowVolume and FlowVolume, which results in a Dimensionless scalar.
+         * @param v FlowVolume scalar
+         * @return Dimensionless scalar as a division of FlowVolume and FlowVolume
+         */
+        public final Dimensionless.Rel divideBy(final FlowVolume.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of FlowVolume and FlowVolume, which results in a Dimensionless scalar.
          * @param v FlowVolume scalar
          * @return Dimensionless scalar as a division of FlowVolume and FlowVolume
          */
@@ -317,6 +379,17 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Calculate the multiplication of FlowVolume and Time, which results in a Volume scalar.
+         * @param v FlowVolume scalar
+         * @return Volume scalar as a multiplication of FlowVolume and Time
+         */
+        public final Volume.Rel multiplyBy(final Time.Abs v)
+        {
+            return new Volume.Rel(this.si * v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of FlowVolume and Time, which results in a Volume scalar.
          * @param v FlowVolume scalar
          * @return Volume scalar as a multiplication of FlowVolume and Time
          */
@@ -326,6 +399,17 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Calculate the division of FlowVolume and Frequency, which results in a Volume scalar.
+         * @param v FlowVolume scalar
+         * @return Volume scalar as a division of FlowVolume and Frequency
+         */
+        public final Volume.Rel divideBy(final Frequency.Abs v)
+        {
+            return new Volume.Rel(this.si / v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the division of FlowVolume and Frequency, which results in a Volume scalar.
          * @param v FlowVolume scalar
          * @return Volume scalar as a division of FlowVolume and Frequency
          */
@@ -335,6 +419,17 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Calculate the division of FlowVolume and Volume, which results in a Frequency scalar.
+         * @param v FlowVolume scalar
+         * @return Frequency scalar as a division of FlowVolume and Volume
+         */
+        public final Frequency.Rel divideBy(final Volume.Abs v)
+        {
+            return new Frequency.Rel(this.si / v.si, FrequencyUnit.SI);
+        }
+
+        /**
+         * Calculate the division of FlowVolume and Volume, which results in a Frequency scalar.
          * @param v FlowVolume scalar
          * @return Frequency scalar as a division of FlowVolume and Volume
          */
@@ -344,6 +439,17 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Calculate the division of FlowVolume and Area, which results in a Speed scalar.
+         * @param v FlowVolume scalar
+         * @return Speed scalar as a division of FlowVolume and Area
+         */
+        public final Speed.Rel divideBy(final Area.Abs v)
+        {
+            return new Speed.Rel(this.si / v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of FlowVolume and Area, which results in a Speed scalar.
          * @param v FlowVolume scalar
          * @return Speed scalar as a division of FlowVolume and Area
          */
@@ -387,6 +493,16 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Construct FlowVolume.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final FlowVolumeUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct FlowVolume.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -405,6 +521,18 @@ public interface FlowVolume extends UNITS
         public static FlowVolume.Abs interpolate(final FlowVolume.Abs zero, final FlowVolume.Abs one, final float ratio)
         {
             return new FlowVolume.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static FlowVolume.Abs interpolate(final FlowVolume.Abs zero, final FlowVolume.Abs one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -596,11 +724,31 @@ public interface FlowVolume extends UNITS
             return new FlowVolume.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute flowvolume
+         */
+        public final FlowVolume.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final FlowVolume.Abs divideBy(final float divisor)
         {
             return new FlowVolume.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute flowvolume
+         */
+        public final FlowVolume.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -637,6 +785,16 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute flowvolume scalar.
+         */
+        public final FlowVolume.Rel toRel()
+        {
+            return new FlowVolume.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of FlowVolume and FlowVolume, which results in a Dimensionless scalar.
          * @param v FlowVolume scalar
          * @return Dimensionless scalar as a division of FlowVolume and FlowVolume
          */
@@ -646,6 +804,17 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Calculate the division of FlowVolume and FlowVolume, which results in a Dimensionless scalar.
+         * @param v FlowVolume scalar
+         * @return Dimensionless scalar as a division of FlowVolume and FlowVolume
+         */
+        public final Dimensionless.Abs divideBy(final FlowVolume.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of FlowVolume and Time, which results in a Volume scalar.
          * @param v FlowVolume scalar
          * @return Volume scalar as a multiplication of FlowVolume and Time
          */
@@ -655,6 +824,17 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Calculate the multiplication of FlowVolume and Time, which results in a Volume scalar.
+         * @param v FlowVolume scalar
+         * @return Volume scalar as a multiplication of FlowVolume and Time
+         */
+        public final Volume.Abs multiplyBy(final Time.Rel v)
+        {
+            return new Volume.Abs(this.si * v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the division of FlowVolume and Frequency, which results in a Volume scalar.
          * @param v FlowVolume scalar
          * @return Volume scalar as a division of FlowVolume and Frequency
          */
@@ -664,6 +844,17 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Calculate the division of FlowVolume and Frequency, which results in a Volume scalar.
+         * @param v FlowVolume scalar
+         * @return Volume scalar as a division of FlowVolume and Frequency
+         */
+        public final Volume.Abs divideBy(final Frequency.Rel v)
+        {
+            return new Volume.Abs(this.si / v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the division of FlowVolume and Volume, which results in a Frequency scalar.
          * @param v FlowVolume scalar
          * @return Frequency scalar as a division of FlowVolume and Volume
          */
@@ -673,10 +864,31 @@ public interface FlowVolume extends UNITS
         }
 
         /**
+         * Calculate the division of FlowVolume and Volume, which results in a Frequency scalar.
+         * @param v FlowVolume scalar
+         * @return Frequency scalar as a division of FlowVolume and Volume
+         */
+        public final Frequency.Abs divideBy(final Volume.Rel v)
+        {
+            return new Frequency.Abs(this.si / v.si, FrequencyUnit.SI);
+        }
+
+        /**
+         * Calculate the division of FlowVolume and Area, which results in a Speed scalar.
          * @param v FlowVolume scalar
          * @return Speed scalar as a division of FlowVolume and Area
          */
         public final Speed.Abs divideBy(final Area.Abs v)
+        {
+            return new Speed.Abs(this.si / v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of FlowVolume and Area, which results in a Speed scalar.
+         * @param v FlowVolume scalar
+         * @return Speed scalar as a division of FlowVolume and Area
+         */
+        public final Speed.Abs divideBy(final Area.Rel v)
         {
             return new Speed.Abs(this.si / v.si, SpeedUnit.SI);
         }

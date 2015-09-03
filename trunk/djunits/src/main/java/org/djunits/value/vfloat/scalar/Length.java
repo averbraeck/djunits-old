@@ -59,6 +59,16 @@ public interface Length extends UNITS
         }
 
         /**
+         * Construct Length.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final LengthUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Length.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -77,6 +87,18 @@ public interface Length extends UNITS
         public static Length.Rel interpolate(final Length.Rel zero, final Length.Rel one, final float ratio)
         {
             return new Length.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Length.Rel interpolate(final Length.Rel zero, final Length.Rel one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -268,11 +290,31 @@ public interface Length extends UNITS
             return new Length.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative length
+         */
+        public final Length.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Length.Rel divideBy(final float divisor)
         {
             return new Length.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative length
+         */
+        public final Length.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -309,6 +351,26 @@ public interface Length extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative length scalar.
+         */
+        public final Length.Abs toAbs()
+        {
+            return new Length.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Length and Length, which results in a Dimensionless scalar.
+         * @param v Length scalar
+         * @return Dimensionless scalar as a division of Length and Length
+         */
+        public final Dimensionless.Rel divideBy(final Length.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Length and Length, which results in a Dimensionless scalar.
          * @param v Length scalar
          * @return Dimensionless scalar as a division of Length and Length
          */
@@ -318,6 +380,17 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Length and Length, which results in a Area scalar.
+         * @param v Length scalar
+         * @return Area scalar as a multiplication of Length and Length
+         */
+        public final Area.Rel multiplyBy(final Length.Abs v)
+        {
+            return new Area.Rel(this.si * v.si, AreaUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Length and Length, which results in a Area scalar.
          * @param v Length scalar
          * @return Area scalar as a multiplication of Length and Length
          */
@@ -327,6 +400,17 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the division of Length and LinearDensity, which results in a Area scalar.
+         * @param v Length scalar
+         * @return Area scalar as a division of Length and LinearDensity
+         */
+        public final Area.Rel divideBy(final LinearDensity.Abs v)
+        {
+            return new Area.Rel(this.si / v.si, AreaUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Length and LinearDensity, which results in a Area scalar.
          * @param v Length scalar
          * @return Area scalar as a division of Length and LinearDensity
          */
@@ -336,6 +420,17 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Length and Area, which results in a Volume scalar.
+         * @param v Length scalar
+         * @return Volume scalar as a multiplication of Length and Area
+         */
+        public final Volume.Rel multiplyBy(final Area.Abs v)
+        {
+            return new Volume.Rel(this.si * v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Length and Area, which results in a Volume scalar.
          * @param v Length scalar
          * @return Volume scalar as a multiplication of Length and Area
          */
@@ -345,6 +440,17 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Length and Force, which results in a Energy scalar.
+         * @param v Length scalar
+         * @return Energy scalar as a multiplication of Length and Force
+         */
+        public final Energy.Rel multiplyBy(final Force.Abs v)
+        {
+            return new Energy.Rel(this.si * v.si, EnergyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Length and Force, which results in a Energy scalar.
          * @param v Length scalar
          * @return Energy scalar as a multiplication of Length and Force
          */
@@ -354,6 +460,17 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
+         * @param v Length scalar
+         * @return Speed scalar as a multiplication of Length and Frequency
+         */
+        public final Speed.Rel multiplyBy(final Frequency.Abs v)
+        {
+            return new Speed.Rel(this.si * v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
          * @param v Length scalar
          * @return Speed scalar as a multiplication of Length and Frequency
          */
@@ -363,6 +480,17 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the division of Length and Time, which results in a Speed scalar.
+         * @param v Length scalar
+         * @return Speed scalar as a division of Length and Time
+         */
+        public final Speed.Rel divideBy(final Time.Abs v)
+        {
+            return new Speed.Rel(this.si / v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Length and Time, which results in a Speed scalar.
          * @param v Length scalar
          * @return Speed scalar as a division of Length and Time
          */
@@ -406,6 +534,16 @@ public interface Length extends UNITS
         }
 
         /**
+         * Construct Length.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final LengthUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Length.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -424,6 +562,18 @@ public interface Length extends UNITS
         public static Length.Abs interpolate(final Length.Abs zero, final Length.Abs one, final float ratio)
         {
             return new Length.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Length.Abs interpolate(final Length.Abs zero, final Length.Abs one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -615,11 +765,31 @@ public interface Length extends UNITS
             return new Length.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute length
+         */
+        public final Length.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Length.Abs divideBy(final float divisor)
         {
             return new Length.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute length
+         */
+        public final Length.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -656,6 +826,16 @@ public interface Length extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute length scalar.
+         */
+        public final Length.Rel toRel()
+        {
+            return new Length.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Length and Length, which results in a Dimensionless scalar.
          * @param v Length scalar
          * @return Dimensionless scalar as a division of Length and Length
          */
@@ -665,6 +845,17 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the division of Length and Length, which results in a Dimensionless scalar.
+         * @param v Length scalar
+         * @return Dimensionless scalar as a division of Length and Length
+         */
+        public final Dimensionless.Abs divideBy(final Length.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Length and Length, which results in a Area scalar.
          * @param v Length scalar
          * @return Area scalar as a multiplication of Length and Length
          */
@@ -674,6 +865,17 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Length and Length, which results in a Area scalar.
+         * @param v Length scalar
+         * @return Area scalar as a multiplication of Length and Length
+         */
+        public final Area.Abs multiplyBy(final Length.Rel v)
+        {
+            return new Area.Abs(this.si * v.si, AreaUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Length and LinearDensity, which results in a Area scalar.
          * @param v Length scalar
          * @return Area scalar as a division of Length and LinearDensity
          */
@@ -683,6 +885,17 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the division of Length and LinearDensity, which results in a Area scalar.
+         * @param v Length scalar
+         * @return Area scalar as a division of Length and LinearDensity
+         */
+        public final Area.Abs divideBy(final LinearDensity.Rel v)
+        {
+            return new Area.Abs(this.si / v.si, AreaUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Length and Area, which results in a Volume scalar.
          * @param v Length scalar
          * @return Volume scalar as a multiplication of Length and Area
          */
@@ -692,6 +905,17 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Length and Area, which results in a Volume scalar.
+         * @param v Length scalar
+         * @return Volume scalar as a multiplication of Length and Area
+         */
+        public final Volume.Abs multiplyBy(final Area.Rel v)
+        {
+            return new Volume.Abs(this.si * v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Length and Force, which results in a Energy scalar.
          * @param v Length scalar
          * @return Energy scalar as a multiplication of Length and Force
          */
@@ -701,6 +925,17 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Length and Force, which results in a Energy scalar.
+         * @param v Length scalar
+         * @return Energy scalar as a multiplication of Length and Force
+         */
+        public final Energy.Abs multiplyBy(final Force.Rel v)
+        {
+            return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
          * @param v Length scalar
          * @return Speed scalar as a multiplication of Length and Frequency
          */
@@ -710,10 +945,31 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
+         * @param v Length scalar
+         * @return Speed scalar as a multiplication of Length and Frequency
+         */
+        public final Speed.Abs multiplyBy(final Frequency.Rel v)
+        {
+            return new Speed.Abs(this.si * v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Length and Time, which results in a Speed scalar.
          * @param v Length scalar
          * @return Speed scalar as a division of Length and Time
          */
         public final Speed.Abs divideBy(final Time.Abs v)
+        {
+            return new Speed.Abs(this.si / v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Length and Time, which results in a Speed scalar.
+         * @param v Length scalar
+         * @return Speed scalar as a division of Length and Time
+         */
+        public final Speed.Abs divideBy(final Time.Rel v)
         {
             return new Speed.Abs(this.si / v.si, SpeedUnit.SI);
         }

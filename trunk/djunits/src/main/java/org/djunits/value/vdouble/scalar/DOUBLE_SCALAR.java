@@ -20,30 +20,30 @@ public interface DOUBLE_SCALAR extends UNITS
 {
     // @formatter:off
     
-    public abstract interface Acceleration extends org.djunits.value.vdouble.scalar.Acceleration { /* */} 
-    public abstract interface AnglePlane extends org.djunits.value.vdouble.scalar.AnglePlane { /* */} 
-    public abstract interface AngleSlope extends org.djunits.value.vdouble.scalar.AngleSlope { /* */} 
-    public abstract interface AngleSolid extends org.djunits.value.vdouble.scalar.AngleSolid { /* */} 
-    public abstract interface Area extends org.djunits.value.vdouble.scalar.Area { /* */} 
-    public abstract interface Density extends org.djunits.value.vdouble.scalar.Density { /* */} 
-    public abstract interface Dimensionless extends org.djunits.value.vdouble.scalar.Dimensionless { /* */} 
-    public abstract interface ElectricalCharge extends org.djunits.value.vdouble.scalar.ElectricalCharge { /* */} 
-    public abstract interface ElectricalCurrent extends org.djunits.value.vdouble.scalar.ElectricalCurrent { /* */} 
-    public abstract interface ElectricalPotential extends org.djunits.value.vdouble.scalar.ElectricalPotential { /* */} 
-    public abstract interface ElectricalResistance extends org.djunits.value.vdouble.scalar.ElectricalResistance { /* */} 
-    public abstract interface Energy extends org.djunits.value.vdouble.scalar.Energy { /* */} 
-    public abstract interface FlowMass extends org.djunits.value.vdouble.scalar.FlowMass { /* */} 
-    public abstract interface FlowVolume extends org.djunits.value.vdouble.scalar.FlowVolume { /* */} 
-    public abstract interface Force extends org.djunits.value.vdouble.scalar.Force { /* */} 
-    public abstract interface Frequency extends org.djunits.value.vdouble.scalar.Frequency { /* */} 
-    public abstract interface Length extends org.djunits.value.vdouble.scalar.Length { /* */} 
-    public abstract interface LinearDensity extends org.djunits.value.vdouble.scalar.LinearDensity { /* */} 
-    public abstract interface Mass extends org.djunits.value.vdouble.scalar.Mass { /* */} 
-    public abstract interface Power extends org.djunits.value.vdouble.scalar.Power { /* */} 
-    public abstract interface Pressure extends org.djunits.value.vdouble.scalar.Pressure { /* */} 
-    public abstract interface Speed extends org.djunits.value.vdouble.scalar.Speed { /* */} 
-    public abstract interface Temperature extends org.djunits.value.vdouble.scalar.Temperature { /* */} 
-    public abstract interface Time extends org.djunits.value.vdouble.scalar.Time { /* */} 
-    public abstract interface Torque extends org.djunits.value.vdouble.scalar.Torque { /* */} 
-    public abstract interface Volume extends org.djunits.value.vdouble.scalar.Volume { /* */}  
+    public interface Acceleration extends org.djunits.value.vdouble.scalar.Acceleration { /* */} 
+    public interface AnglePlane extends org.djunits.value.vdouble.scalar.AnglePlane { /* */} 
+    public interface AngleSlope extends org.djunits.value.vdouble.scalar.AngleSlope { /* */} 
+    public interface AngleSolid extends org.djunits.value.vdouble.scalar.AngleSolid { /* */} 
+    public interface Area extends org.djunits.value.vdouble.scalar.Area { /* */} 
+    public interface Density extends org.djunits.value.vdouble.scalar.Density { /* */} 
+    public interface Dimensionless extends org.djunits.value.vdouble.scalar.Dimensionless { /* */} 
+    public interface ElectricalCharge extends org.djunits.value.vdouble.scalar.ElectricalCharge { /* */} 
+    public interface ElectricalCurrent extends org.djunits.value.vdouble.scalar.ElectricalCurrent { /* */} 
+    public interface ElectricalPotential extends org.djunits.value.vdouble.scalar.ElectricalPotential { /* */} 
+    public interface ElectricalResistance extends org.djunits.value.vdouble.scalar.ElectricalResistance { /* */} 
+    public interface Energy extends org.djunits.value.vdouble.scalar.Energy { /* */} 
+    public interface FlowMass extends org.djunits.value.vdouble.scalar.FlowMass { /* */} 
+    public interface FlowVolume extends org.djunits.value.vdouble.scalar.FlowVolume { /* */} 
+    public interface Force extends org.djunits.value.vdouble.scalar.Force { /* */} 
+    public interface Frequency extends org.djunits.value.vdouble.scalar.Frequency { /* */} 
+    public interface Length extends org.djunits.value.vdouble.scalar.Length { /* */} 
+    public interface LinearDensity extends org.djunits.value.vdouble.scalar.LinearDensity { /* */} 
+    public interface Mass extends org.djunits.value.vdouble.scalar.Mass { /* */} 
+    public interface Power extends org.djunits.value.vdouble.scalar.Power { /* */} 
+    public interface Pressure extends org.djunits.value.vdouble.scalar.Pressure { /* */} 
+    public interface Speed extends org.djunits.value.vdouble.scalar.Speed { /* */} 
+    public interface Temperature extends org.djunits.value.vdouble.scalar.Temperature { /* */} 
+    public interface Time extends org.djunits.value.vdouble.scalar.Time { /* */} 
+    public interface Torque extends org.djunits.value.vdouble.scalar.Torque { /* */} 
+    public interface Volume extends org.djunits.value.vdouble.scalar.Volume { /* */}  
 }

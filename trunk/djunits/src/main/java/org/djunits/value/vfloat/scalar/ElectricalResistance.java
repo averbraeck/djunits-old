@@ -56,6 +56,16 @@ public interface ElectricalResistance extends UNITS
         }
 
         /**
+         * Construct ElectricalResistance.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final ElectricalResistanceUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct ElectricalResistance.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -76,6 +86,19 @@ public interface ElectricalResistance extends UNITS
         {
             return new ElectricalResistance.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static ElectricalResistance.Rel interpolate(final ElectricalResistance.Rel zero,
+            final ElectricalResistance.Rel one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -267,11 +290,31 @@ public interface ElectricalResistance extends UNITS
             return new ElectricalResistance.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative electricalresistance
+         */
+        public final ElectricalResistance.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final ElectricalResistance.Rel divideBy(final float divisor)
         {
             return new ElectricalResistance.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative electricalresistance
+         */
+        public final ElectricalResistance.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -308,6 +351,26 @@ public interface ElectricalResistance extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative electricalresistance scalar.
+         */
+        public final ElectricalResistance.Abs toAbs()
+        {
+            return new ElectricalResistance.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of ElectricalResistance and ElectricalResistance, which results in a Dimensionless scalar.
+         * @param v ElectricalResistance scalar
+         * @return Dimensionless scalar as a division of ElectricalResistance and ElectricalResistance
+         */
+        public final Dimensionless.Rel divideBy(final ElectricalResistance.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of ElectricalResistance and ElectricalResistance, which results in a Dimensionless scalar.
          * @param v ElectricalResistance scalar
          * @return Dimensionless scalar as a division of ElectricalResistance and ElectricalResistance
          */
@@ -317,6 +380,19 @@ public interface ElectricalResistance extends UNITS
         }
 
         /**
+         * Calculate the multiplication of ElectricalResistance and ElectricalCurrent, which results in a ElectricalPotential
+         * scalar.
+         * @param v ElectricalResistance scalar
+         * @return ElectricalPotential scalar as a multiplication of ElectricalResistance and ElectricalCurrent
+         */
+        public final ElectricalPotential.Rel multiplyBy(final ElectricalCurrent.Abs v)
+        {
+            return new ElectricalPotential.Rel(this.si * v.si, ElectricalPotentialUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of ElectricalResistance and ElectricalCurrent, which results in a ElectricalPotential
+         * scalar.
          * @param v ElectricalResistance scalar
          * @return ElectricalPotential scalar as a multiplication of ElectricalResistance and ElectricalCurrent
          */
@@ -360,6 +436,16 @@ public interface ElectricalResistance extends UNITS
         }
 
         /**
+         * Construct ElectricalResistance.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final ElectricalResistanceUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct ElectricalResistance.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -380,6 +466,19 @@ public interface ElectricalResistance extends UNITS
         {
             return new ElectricalResistance.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static ElectricalResistance.Abs interpolate(final ElectricalResistance.Abs zero,
+            final ElectricalResistance.Abs one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -571,11 +670,31 @@ public interface ElectricalResistance extends UNITS
             return new ElectricalResistance.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute electricalresistance
+         */
+        public final ElectricalResistance.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final ElectricalResistance.Abs divideBy(final float divisor)
         {
             return new ElectricalResistance.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute electricalresistance
+         */
+        public final ElectricalResistance.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -612,6 +731,16 @@ public interface ElectricalResistance extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute electricalresistance scalar.
+         */
+        public final ElectricalResistance.Rel toRel()
+        {
+            return new ElectricalResistance.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of ElectricalResistance and ElectricalResistance, which results in a Dimensionless scalar.
          * @param v ElectricalResistance scalar
          * @return Dimensionless scalar as a division of ElectricalResistance and ElectricalResistance
          */
@@ -621,10 +750,33 @@ public interface ElectricalResistance extends UNITS
         }
 
         /**
+         * Calculate the division of ElectricalResistance and ElectricalResistance, which results in a Dimensionless scalar.
+         * @param v ElectricalResistance scalar
+         * @return Dimensionless scalar as a division of ElectricalResistance and ElectricalResistance
+         */
+        public final Dimensionless.Abs divideBy(final ElectricalResistance.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of ElectricalResistance and ElectricalCurrent, which results in a ElectricalPotential
+         * scalar.
          * @param v ElectricalResistance scalar
          * @return ElectricalPotential scalar as a multiplication of ElectricalResistance and ElectricalCurrent
          */
         public final ElectricalPotential.Abs multiplyBy(final ElectricalCurrent.Abs v)
+        {
+            return new ElectricalPotential.Abs(this.si * v.si, ElectricalPotentialUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of ElectricalResistance and ElectricalCurrent, which results in a ElectricalPotential
+         * scalar.
+         * @param v ElectricalResistance scalar
+         * @return ElectricalPotential scalar as a multiplication of ElectricalResistance and ElectricalCurrent
+         */
+        public final ElectricalPotential.Abs multiplyBy(final ElectricalCurrent.Rel v)
         {
             return new ElectricalPotential.Abs(this.si * v.si, ElectricalPotentialUnit.SI);
         }

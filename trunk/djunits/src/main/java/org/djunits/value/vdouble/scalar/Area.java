@@ -309,6 +309,26 @@ public interface Area extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative area scalar.
+         */
+        public final Area.Abs toAbs()
+        {
+            return new Area.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Area and Area, which results in a Dimensionless scalar.
+         * @param v Area scalar
+         * @return Dimensionless scalar as a division of Area and Area
+         */
+        public final Dimensionless.Rel divideBy(final Area.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Area and Area, which results in a Dimensionless scalar.
          * @param v Area scalar
          * @return Dimensionless scalar as a division of Area and Area
          */
@@ -318,6 +338,17 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Area and Length, which results in a Volume scalar.
+         * @param v Area scalar
+         * @return Volume scalar as a multiplication of Area and Length
+         */
+        public final Volume.Rel multiplyBy(final Length.Abs v)
+        {
+            return new Volume.Rel(this.si * v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Area and Length, which results in a Volume scalar.
          * @param v Area scalar
          * @return Volume scalar as a multiplication of Area and Length
          */
@@ -327,6 +358,17 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the division of Area and LinearDensity, which results in a Volume scalar.
+         * @param v Area scalar
+         * @return Volume scalar as a division of Area and LinearDensity
+         */
+        public final Volume.Rel divideBy(final LinearDensity.Abs v)
+        {
+            return new Volume.Rel(this.si / v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Area and LinearDensity, which results in a Volume scalar.
          * @param v Area scalar
          * @return Volume scalar as a division of Area and LinearDensity
          */
@@ -336,6 +378,17 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the division of Area and Length, which results in a Length scalar.
+         * @param v Area scalar
+         * @return Length scalar as a division of Area and Length
+         */
+        public final Length.Rel divideBy(final Length.Abs v)
+        {
+            return new Length.Rel(this.si / v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Area and Length, which results in a Length scalar.
          * @param v Area scalar
          * @return Length scalar as a division of Area and Length
          */
@@ -345,6 +398,17 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Area and LinearDensity, which results in a Length scalar.
+         * @param v Area scalar
+         * @return Length scalar as a multiplication of Area and LinearDensity
+         */
+        public final Length.Rel multiplyBy(final LinearDensity.Abs v)
+        {
+            return new Length.Rel(this.si * v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Area and LinearDensity, which results in a Length scalar.
          * @param v Area scalar
          * @return Length scalar as a multiplication of Area and LinearDensity
          */
@@ -354,6 +418,17 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Area and Speed, which results in a FlowVolume scalar.
+         * @param v Area scalar
+         * @return FlowVolume scalar as a multiplication of Area and Speed
+         */
+        public final FlowVolume.Rel multiplyBy(final Speed.Abs v)
+        {
+            return new FlowVolume.Rel(this.si * v.si, FlowVolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Area and Speed, which results in a FlowVolume scalar.
          * @param v Area scalar
          * @return FlowVolume scalar as a multiplication of Area and Speed
          */
@@ -363,6 +438,17 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Area and Pressure, which results in a Force scalar.
+         * @param v Area scalar
+         * @return Force scalar as a multiplication of Area and Pressure
+         */
+        public final Force.Rel multiplyBy(final Pressure.Abs v)
+        {
+            return new Force.Rel(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Area and Pressure, which results in a Force scalar.
          * @param v Area scalar
          * @return Force scalar as a multiplication of Area and Pressure
          */
@@ -656,6 +742,16 @@ public interface Area extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute area scalar.
+         */
+        public final Area.Rel toRel()
+        {
+            return new Area.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Area and Area, which results in a Dimensionless scalar.
          * @param v Area scalar
          * @return Dimensionless scalar as a division of Area and Area
          */
@@ -665,6 +761,17 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the division of Area and Area, which results in a Dimensionless scalar.
+         * @param v Area scalar
+         * @return Dimensionless scalar as a division of Area and Area
+         */
+        public final Dimensionless.Abs divideBy(final Area.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Area and Length, which results in a Volume scalar.
          * @param v Area scalar
          * @return Volume scalar as a multiplication of Area and Length
          */
@@ -674,6 +781,17 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Area and Length, which results in a Volume scalar.
+         * @param v Area scalar
+         * @return Volume scalar as a multiplication of Area and Length
+         */
+        public final Volume.Abs multiplyBy(final Length.Rel v)
+        {
+            return new Volume.Abs(this.si * v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Area and LinearDensity, which results in a Volume scalar.
          * @param v Area scalar
          * @return Volume scalar as a division of Area and LinearDensity
          */
@@ -683,6 +801,17 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the division of Area and LinearDensity, which results in a Volume scalar.
+         * @param v Area scalar
+         * @return Volume scalar as a division of Area and LinearDensity
+         */
+        public final Volume.Abs divideBy(final LinearDensity.Rel v)
+        {
+            return new Volume.Abs(this.si / v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Area and Length, which results in a Length scalar.
          * @param v Area scalar
          * @return Length scalar as a division of Area and Length
          */
@@ -692,6 +821,17 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the division of Area and Length, which results in a Length scalar.
+         * @param v Area scalar
+         * @return Length scalar as a division of Area and Length
+         */
+        public final Length.Abs divideBy(final Length.Rel v)
+        {
+            return new Length.Abs(this.si / v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Area and LinearDensity, which results in a Length scalar.
          * @param v Area scalar
          * @return Length scalar as a multiplication of Area and LinearDensity
          */
@@ -701,6 +841,17 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Area and LinearDensity, which results in a Length scalar.
+         * @param v Area scalar
+         * @return Length scalar as a multiplication of Area and LinearDensity
+         */
+        public final Length.Abs multiplyBy(final LinearDensity.Rel v)
+        {
+            return new Length.Abs(this.si * v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Area and Speed, which results in a FlowVolume scalar.
          * @param v Area scalar
          * @return FlowVolume scalar as a multiplication of Area and Speed
          */
@@ -710,10 +861,31 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Area and Speed, which results in a FlowVolume scalar.
+         * @param v Area scalar
+         * @return FlowVolume scalar as a multiplication of Area and Speed
+         */
+        public final FlowVolume.Abs multiplyBy(final Speed.Rel v)
+        {
+            return new FlowVolume.Abs(this.si * v.si, FlowVolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Area and Pressure, which results in a Force scalar.
          * @param v Area scalar
          * @return Force scalar as a multiplication of Area and Pressure
          */
         public final Force.Abs multiplyBy(final Pressure.Abs v)
+        {
+            return new Force.Abs(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Area and Pressure, which results in a Force scalar.
+         * @param v Area scalar
+         * @return Force scalar as a multiplication of Area and Pressure
+         */
+        public final Force.Abs multiplyBy(final Pressure.Rel v)
         {
             return new Force.Abs(this.si * v.si, ForceUnit.SI);
         }

@@ -305,6 +305,26 @@ public interface AnglePlane extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative angleplane scalar.
+         */
+        public final AnglePlane.Abs toAbs()
+        {
+            return new AnglePlane.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of AnglePlane and AnglePlane, which results in a Dimensionless scalar.
+         * @param v AnglePlane scalar
+         * @return Dimensionless scalar as a division of AnglePlane and AnglePlane
+         */
+        public final Dimensionless.Rel divideBy(final AnglePlane.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of AnglePlane and AnglePlane, which results in a Dimensionless scalar.
          * @param v AnglePlane scalar
          * @return Dimensionless scalar as a division of AnglePlane and AnglePlane
          */
@@ -598,10 +618,30 @@ public interface AnglePlane extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute angleplane scalar.
+         */
+        public final AnglePlane.Rel toRel()
+        {
+            return new AnglePlane.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of AnglePlane and AnglePlane, which results in a Dimensionless scalar.
          * @param v AnglePlane scalar
          * @return Dimensionless scalar as a division of AnglePlane and AnglePlane
          */
         public final Dimensionless.Abs divideBy(final AnglePlane.Abs v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of AnglePlane and AnglePlane, which results in a Dimensionless scalar.
+         * @param v AnglePlane scalar
+         * @return Dimensionless scalar as a division of AnglePlane and AnglePlane
+         */
+        public final Dimensionless.Abs divideBy(final AnglePlane.Rel v)
         {
             return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
         }

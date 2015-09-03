@@ -305,6 +305,26 @@ public interface AngleSolid extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative anglesolid scalar.
+         */
+        public final AngleSolid.Abs toAbs()
+        {
+            return new AngleSolid.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
+         * @param v AngleSolid scalar
+         * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
+         */
+        public final Dimensionless.Rel divideBy(final AngleSolid.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
          * @param v AngleSolid scalar
          * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
          */
@@ -598,10 +618,30 @@ public interface AngleSolid extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute anglesolid scalar.
+         */
+        public final AngleSolid.Rel toRel()
+        {
+            return new AngleSolid.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
          * @param v AngleSolid scalar
          * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
          */
         public final Dimensionless.Abs divideBy(final AngleSolid.Abs v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
+         * @param v AngleSolid scalar
+         * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
+         */
+        public final Dimensionless.Abs divideBy(final AngleSolid.Rel v)
         {
             return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
         }
