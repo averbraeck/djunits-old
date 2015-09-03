@@ -361,16 +361,6 @@ public interface Temperature extends UNITS
          * @param v Temperature scalar
          * @return Dimensionless scalar as a division of Temperature and Temperature
          */
-        public final Dimensionless.Rel divideBy(final Temperature.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
-         * @param v Temperature scalar
-         * @return Dimensionless scalar as a division of Temperature and Temperature
-         */
         public final Dimensionless.Rel divideBy(final Temperature.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
@@ -718,16 +708,6 @@ public interface Temperature extends UNITS
          * @return Dimensionless scalar as a division of Temperature and Temperature
          */
         public final Dimensionless.Abs divideBy(final Temperature.Abs v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
-         * @param v Temperature scalar
-         * @return Dimensionless scalar as a division of Temperature and Temperature
-         */
-        public final Dimensionless.Abs divideBy(final Temperature.Rel v)
         {
             return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
         }

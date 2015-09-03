@@ -361,29 +361,9 @@ public interface Density extends UNITS
          * @param v Density scalar
          * @return Dimensionless scalar as a division of Density and Density
          */
-        public final Dimensionless.Rel divideBy(final Density.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Density and Density, which results in a Dimensionless scalar.
-         * @param v Density scalar
-         * @return Dimensionless scalar as a division of Density and Density
-         */
         public final Dimensionless.Rel divideBy(final Density.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
-         * @param v Density scalar
-         * @return Mass scalar as a multiplication of Density and Volume
-         */
-        public final Mass.Rel multiplyBy(final Volume.Abs v)
-        {
-            return new Mass.Rel(this.si * v.si, MassUnit.SI);
         }
 
         /**
@@ -742,31 +722,11 @@ public interface Density extends UNITS
         }
 
         /**
-         * Calculate the division of Density and Density, which results in a Dimensionless scalar.
-         * @param v Density scalar
-         * @return Dimensionless scalar as a division of Density and Density
-         */
-        public final Dimensionless.Abs divideBy(final Density.Rel v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
          * @param v Density scalar
          * @return Mass scalar as a multiplication of Density and Volume
          */
         public final Mass.Abs multiplyBy(final Volume.Abs v)
-        {
-            return new Mass.Abs(this.si * v.si, MassUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
-         * @param v Density scalar
-         * @return Mass scalar as a multiplication of Density and Volume
-         */
-        public final Mass.Abs multiplyBy(final Volume.Rel v)
         {
             return new Mass.Abs(this.si * v.si, MassUnit.SI);
         }

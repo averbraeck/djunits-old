@@ -363,29 +363,9 @@ public interface Frequency extends UNITS
          * @param v Frequency scalar
          * @return Dimensionless scalar as a division of Frequency and Frequency
          */
-        public final Dimensionless.Rel divideBy(final Frequency.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Frequency and Frequency, which results in a Dimensionless scalar.
-         * @param v Frequency scalar
-         * @return Dimensionless scalar as a division of Frequency and Frequency
-         */
         public final Dimensionless.Rel divideBy(final Frequency.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Frequency and Time, which results in a Dimensionless scalar.
-         * @param v Frequency scalar
-         * @return Dimensionless scalar as a multiplication of Frequency and Time
-         */
-        public final Dimensionless.Rel multiplyBy(final Time.Abs v)
-        {
-            return new Dimensionless.Rel(this.si * v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -403,16 +383,6 @@ public interface Frequency extends UNITS
          * @param v Frequency scalar
          * @return Speed scalar as a multiplication of Frequency and Length
          */
-        public final Speed.Rel multiplyBy(final Length.Abs v)
-        {
-            return new Speed.Rel(this.si * v.si, SpeedUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Frequency and Length, which results in a Speed scalar.
-         * @param v Frequency scalar
-         * @return Speed scalar as a multiplication of Frequency and Length
-         */
         public final Speed.Rel multiplyBy(final Length.Rel v)
         {
             return new Speed.Rel(this.si * v.si, SpeedUnit.SI);
@@ -423,29 +393,9 @@ public interface Frequency extends UNITS
          * @param v Frequency scalar
          * @return Acceleration scalar as a multiplication of Frequency and Speed
          */
-        public final Acceleration.Rel multiplyBy(final Speed.Abs v)
-        {
-            return new Acceleration.Rel(this.si * v.si, AccelerationUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Frequency and Speed, which results in a Acceleration scalar.
-         * @param v Frequency scalar
-         * @return Acceleration scalar as a multiplication of Frequency and Speed
-         */
         public final Acceleration.Rel multiplyBy(final Speed.Rel v)
         {
             return new Acceleration.Rel(this.si * v.si, AccelerationUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Frequency and Energy, which results in a Power scalar.
-         * @param v Frequency scalar
-         * @return Power scalar as a multiplication of Frequency and Energy
-         */
-        public final Power.Rel multiplyBy(final Energy.Abs v)
-        {
-            return new Power.Rel(this.si * v.si, PowerUnit.SI);
         }
 
         /**
@@ -804,31 +754,11 @@ public interface Frequency extends UNITS
         }
 
         /**
-         * Calculate the division of Frequency and Frequency, which results in a Dimensionless scalar.
-         * @param v Frequency scalar
-         * @return Dimensionless scalar as a division of Frequency and Frequency
-         */
-        public final Dimensionless.Abs divideBy(final Frequency.Rel v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of Frequency and Time, which results in a Dimensionless scalar.
          * @param v Frequency scalar
          * @return Dimensionless scalar as a multiplication of Frequency and Time
          */
         public final Dimensionless.Abs multiplyBy(final Time.Abs v)
-        {
-            return new Dimensionless.Abs(this.si * v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Frequency and Time, which results in a Dimensionless scalar.
-         * @param v Frequency scalar
-         * @return Dimensionless scalar as a multiplication of Frequency and Time
-         */
-        public final Dimensionless.Abs multiplyBy(final Time.Rel v)
         {
             return new Dimensionless.Abs(this.si * v.si, DimensionlessUnit.SI);
         }
@@ -844,16 +774,6 @@ public interface Frequency extends UNITS
         }
 
         /**
-         * Calculate the multiplication of Frequency and Length, which results in a Speed scalar.
-         * @param v Frequency scalar
-         * @return Speed scalar as a multiplication of Frequency and Length
-         */
-        public final Speed.Abs multiplyBy(final Length.Rel v)
-        {
-            return new Speed.Abs(this.si * v.si, SpeedUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of Frequency and Speed, which results in a Acceleration scalar.
          * @param v Frequency scalar
          * @return Acceleration scalar as a multiplication of Frequency and Speed
@@ -864,31 +784,11 @@ public interface Frequency extends UNITS
         }
 
         /**
-         * Calculate the multiplication of Frequency and Speed, which results in a Acceleration scalar.
-         * @param v Frequency scalar
-         * @return Acceleration scalar as a multiplication of Frequency and Speed
-         */
-        public final Acceleration.Abs multiplyBy(final Speed.Rel v)
-        {
-            return new Acceleration.Abs(this.si * v.si, AccelerationUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of Frequency and Energy, which results in a Power scalar.
          * @param v Frequency scalar
          * @return Power scalar as a multiplication of Frequency and Energy
          */
         public final Power.Abs multiplyBy(final Energy.Abs v)
-        {
-            return new Power.Abs(this.si * v.si, PowerUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Frequency and Energy, which results in a Power scalar.
-         * @param v Frequency scalar
-         * @return Power scalar as a multiplication of Frequency and Energy
-         */
-        public final Power.Abs multiplyBy(final Energy.Rel v)
         {
             return new Power.Abs(this.si * v.si, PowerUnit.SI);
         }

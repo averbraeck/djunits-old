@@ -360,16 +360,6 @@ public interface AnglePlane extends UNITS
          * @param v AnglePlane scalar
          * @return Dimensionless scalar as a division of AnglePlane and AnglePlane
          */
-        public final Dimensionless.Rel divideBy(final AnglePlane.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of AnglePlane and AnglePlane, which results in a Dimensionless scalar.
-         * @param v AnglePlane scalar
-         * @return Dimensionless scalar as a division of AnglePlane and AnglePlane
-         */
         public final Dimensionless.Rel divideBy(final AnglePlane.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
@@ -716,16 +706,6 @@ public interface AnglePlane extends UNITS
          * @return Dimensionless scalar as a division of AnglePlane and AnglePlane
          */
         public final Dimensionless.Abs divideBy(final AnglePlane.Abs v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of AnglePlane and AnglePlane, which results in a Dimensionless scalar.
-         * @param v AnglePlane scalar
-         * @return Dimensionless scalar as a division of AnglePlane and AnglePlane
-         */
-        public final Dimensionless.Abs divideBy(final AnglePlane.Rel v)
         {
             return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
         }

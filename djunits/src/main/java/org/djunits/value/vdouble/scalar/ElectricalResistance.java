@@ -321,30 +321,9 @@ public interface ElectricalResistance extends UNITS
          * @param v ElectricalResistance scalar
          * @return Dimensionless scalar as a division of ElectricalResistance and ElectricalResistance
          */
-        public final Dimensionless.Rel divideBy(final ElectricalResistance.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of ElectricalResistance and ElectricalResistance, which results in a Dimensionless scalar.
-         * @param v ElectricalResistance scalar
-         * @return Dimensionless scalar as a division of ElectricalResistance and ElectricalResistance
-         */
         public final Dimensionless.Rel divideBy(final ElectricalResistance.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of ElectricalResistance and ElectricalCurrent, which results in a ElectricalPotential
-         * scalar.
-         * @param v ElectricalResistance scalar
-         * @return ElectricalPotential scalar as a multiplication of ElectricalResistance and ElectricalCurrent
-         */
-        public final ElectricalPotential.Rel multiplyBy(final ElectricalCurrent.Abs v)
-        {
-            return new ElectricalPotential.Rel(this.si * v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -664,33 +643,12 @@ public interface ElectricalResistance extends UNITS
         }
 
         /**
-         * Calculate the division of ElectricalResistance and ElectricalResistance, which results in a Dimensionless scalar.
-         * @param v ElectricalResistance scalar
-         * @return Dimensionless scalar as a division of ElectricalResistance and ElectricalResistance
-         */
-        public final Dimensionless.Abs divideBy(final ElectricalResistance.Rel v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of ElectricalResistance and ElectricalCurrent, which results in a ElectricalPotential
          * scalar.
          * @param v ElectricalResistance scalar
          * @return ElectricalPotential scalar as a multiplication of ElectricalResistance and ElectricalCurrent
          */
         public final ElectricalPotential.Abs multiplyBy(final ElectricalCurrent.Abs v)
-        {
-            return new ElectricalPotential.Abs(this.si * v.si, ElectricalPotentialUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of ElectricalResistance and ElectricalCurrent, which results in a ElectricalPotential
-         * scalar.
-         * @param v ElectricalResistance scalar
-         * @return ElectricalPotential scalar as a multiplication of ElectricalResistance and ElectricalCurrent
-         */
-        public final ElectricalPotential.Abs multiplyBy(final ElectricalCurrent.Rel v)
         {
             return new ElectricalPotential.Abs(this.si * v.si, ElectricalPotentialUnit.SI);
         }

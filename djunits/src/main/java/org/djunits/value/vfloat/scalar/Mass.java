@@ -364,29 +364,9 @@ public interface Mass extends UNITS
          * @param v Mass scalar
          * @return Dimensionless scalar as a division of Mass and Mass
          */
-        public final Dimensionless.Rel divideBy(final Mass.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Mass and Mass, which results in a Dimensionless scalar.
-         * @param v Mass scalar
-         * @return Dimensionless scalar as a division of Mass and Mass
-         */
         public final Dimensionless.Rel divideBy(final Mass.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Mass and FlowMass, which results in a Time scalar.
-         * @param v Mass scalar
-         * @return Time scalar as a division of Mass and FlowMass
-         */
-        public final Time.Rel divideBy(final FlowMass.Abs v)
-        {
-            return new Time.Rel(this.si / v.si, TimeUnit.SI);
         }
 
         /**
@@ -404,29 +384,9 @@ public interface Mass extends UNITS
          * @param v Mass scalar
          * @return Force scalar as a multiplication of Mass and Acceleration
          */
-        public final Force.Rel multiplyBy(final Acceleration.Abs v)
-        {
-            return new Force.Rel(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Mass and Acceleration, which results in a Force scalar.
-         * @param v Mass scalar
-         * @return Force scalar as a multiplication of Mass and Acceleration
-         */
         public final Force.Rel multiplyBy(final Acceleration.Rel v)
         {
             return new Force.Rel(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Mass and Time, which results in a FlowMass scalar.
-         * @param v Mass scalar
-         * @return FlowMass scalar as a division of Mass and Time
-         */
-        public final FlowMass.Rel divideBy(final Time.Abs v)
-        {
-            return new FlowMass.Rel(this.si / v.si, FlowMassUnit.SI);
         }
 
         /**
@@ -444,29 +404,9 @@ public interface Mass extends UNITS
          * @param v Mass scalar
          * @return FlowMass scalar as a multiplication of Mass and Frequency
          */
-        public final FlowMass.Rel multiplyBy(final Frequency.Abs v)
-        {
-            return new FlowMass.Rel(this.si * v.si, FlowMassUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Mass and Frequency, which results in a FlowMass scalar.
-         * @param v Mass scalar
-         * @return FlowMass scalar as a multiplication of Mass and Frequency
-         */
         public final FlowMass.Rel multiplyBy(final Frequency.Rel v)
         {
             return new FlowMass.Rel(this.si * v.si, FlowMassUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Mass and Density, which results in a Volume scalar.
-         * @param v Mass scalar
-         * @return Volume scalar as a division of Mass and Density
-         */
-        public final Volume.Rel divideBy(final Density.Abs v)
-        {
-            return new Volume.Rel(this.si / v.si, VolumeUnit.SI);
         }
 
         /**
@@ -825,31 +765,11 @@ public interface Mass extends UNITS
         }
 
         /**
-         * Calculate the division of Mass and Mass, which results in a Dimensionless scalar.
-         * @param v Mass scalar
-         * @return Dimensionless scalar as a division of Mass and Mass
-         */
-        public final Dimensionless.Abs divideBy(final Mass.Rel v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
          * Calculate the division of Mass and FlowMass, which results in a Time scalar.
          * @param v Mass scalar
          * @return Time scalar as a division of Mass and FlowMass
          */
         public final Time.Abs divideBy(final FlowMass.Abs v)
-        {
-            return new Time.Abs(this.si / v.si, TimeUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Mass and FlowMass, which results in a Time scalar.
-         * @param v Mass scalar
-         * @return Time scalar as a division of Mass and FlowMass
-         */
-        public final Time.Abs divideBy(final FlowMass.Rel v)
         {
             return new Time.Abs(this.si / v.si, TimeUnit.SI);
         }
@@ -865,31 +785,11 @@ public interface Mass extends UNITS
         }
 
         /**
-         * Calculate the multiplication of Mass and Acceleration, which results in a Force scalar.
-         * @param v Mass scalar
-         * @return Force scalar as a multiplication of Mass and Acceleration
-         */
-        public final Force.Abs multiplyBy(final Acceleration.Rel v)
-        {
-            return new Force.Abs(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
          * Calculate the division of Mass and Time, which results in a FlowMass scalar.
          * @param v Mass scalar
          * @return FlowMass scalar as a division of Mass and Time
          */
         public final FlowMass.Abs divideBy(final Time.Abs v)
-        {
-            return new FlowMass.Abs(this.si / v.si, FlowMassUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Mass and Time, which results in a FlowMass scalar.
-         * @param v Mass scalar
-         * @return FlowMass scalar as a division of Mass and Time
-         */
-        public final FlowMass.Abs divideBy(final Time.Rel v)
         {
             return new FlowMass.Abs(this.si / v.si, FlowMassUnit.SI);
         }
@@ -905,31 +805,11 @@ public interface Mass extends UNITS
         }
 
         /**
-         * Calculate the multiplication of Mass and Frequency, which results in a FlowMass scalar.
-         * @param v Mass scalar
-         * @return FlowMass scalar as a multiplication of Mass and Frequency
-         */
-        public final FlowMass.Abs multiplyBy(final Frequency.Rel v)
-        {
-            return new FlowMass.Abs(this.si * v.si, FlowMassUnit.SI);
-        }
-
-        /**
          * Calculate the division of Mass and Density, which results in a Volume scalar.
          * @param v Mass scalar
          * @return Volume scalar as a division of Mass and Density
          */
         public final Volume.Abs divideBy(final Density.Abs v)
-        {
-            return new Volume.Abs(this.si / v.si, VolumeUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Mass and Density, which results in a Volume scalar.
-         * @param v Mass scalar
-         * @return Volume scalar as a division of Mass and Density
-         */
-        public final Volume.Abs divideBy(final Density.Rel v)
         {
             return new Volume.Abs(this.si / v.si, VolumeUnit.SI);
         }
