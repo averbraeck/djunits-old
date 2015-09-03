@@ -3,6 +3,7 @@
 *Mass=Force
 *Time=Speed
 /Frequency=Speed
+/Speed=Frequency
 
 %AnglePlane
 /AnglePlane=Dimensionless
@@ -17,6 +18,7 @@
 /Area=Dimensionless
 *Length=Volume
 /LinearDensity=Volume
+/Volume=LinearDensity
 /Length=Length
 *LinearDensity=Length
 *Speed=FlowVolume
@@ -41,6 +43,7 @@
 /ElectricalPotential=Dimensionless
 *ElectricalCurrent=Power
 /ElectricalCurrent=ElectricalResistance
+/ElectricalResistance=ElectricalCurrent
 
 %ElectricalResistance
 /ElectricalResistance=Dimensionless
@@ -52,6 +55,7 @@
 /Length=Force
 *LinearDensity=Force
 /Time=Power
+/Power=Time
 /Volume=Pressure
 *Frequency=Power
 
@@ -68,15 +72,20 @@
 /Frequency=Volume
 /Volume=Frequency
 /Area=Speed
+/Speed=Area
 
 %Force
 /Force=Dimensionless
 *Length=Energy
 /LinearDensity=Energy
+/Enerty=LinearDensity
 *Speed=Power
 /Mass=Acceleration
-/Area=Pressure
 /Acceleration=Mass
+/Area=Pressure
+/Pressure=Area
+/Acceleration=Mass
+/Mass=Acceleration
 
 %Frequency
 /Frequency=Dimensionless
@@ -89,10 +98,12 @@
 /Length=Dimensionless
 *Length=Area
 /LinearDensity=Area
+/Area=LinearDensity
 *Area=Volume
 *Force=Energy
 *Frequency=Speed
 /Time=Speed
+/Speed=Time
 
 %LinearDensity
 /LinearDensity=Dimensionless
@@ -103,17 +114,20 @@
 %Mass
 /Mass=Dimensionless
 /FlowMass=Time
-*Acceleration=Force
 /Time=FlowMass
+*Acceleration=Force
 *Frequency=FlowMass
 /Density=Volume
+/Volume=Density
 
 %Power
 /Power=Dimensionless
 *ElectricalCurrent=Power
 *Time=Energy
 /Frequency=Energy
+/Energy=Frequency
 /Speed=Force
+/Force=Speed
 /ElectricalPotential=ElectricalCurrent
 /ElectricalCurrent=ElectricalPotential
 
@@ -128,10 +142,11 @@
 *Force=Power
 *Frequency=Acceleration
 /Length=Frequency
+/Frequency=Length
 *LinearDensity=Frequency
 *Time=Length
-/Frequency=Length
 /Time=Acceleration
+/Acceleration=Time
 *FlowMass=Force
 
 %Temperature
@@ -153,8 +168,10 @@
 /Length=Force
 *LinearDensity=Force
 /Time=Power
+/Power=Time
 *Frequency=Power
 /Volume=Pressure
+/Pressure=Volume
 
 %Volume
 /Volume=Dimensionless
@@ -164,6 +181,7 @@
 /Area=Length
 *LinearDensity=Area
 /Time=FlowVolume
+/FlowVolume=Time
 
 %Dimensionless
 /Dimensionless=Dimensionless
