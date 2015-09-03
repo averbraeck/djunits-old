@@ -33,13 +33,13 @@ public class FloatScalarTest
      * @param expectAbsolute boolean; if true; fs should be Absolute; if false; fs should be Relative
      */
     private static void checkContentsAndType(final FloatScalar<?> fs, final float reference, final float precision,
-        final Unit<?> u, final boolean expectAbsolute)
+            final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("FloatScalar should not be null", null != fs);
         assertEquals("Value should match", reference, fs.getInUnit(), precision);
         assertEquals("Unit should be " + u.toString(), u, fs.getUnit());
-        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"), expectAbsolute ? fs.isAbsolute() : fs
-            .isRelative());
+        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"),
+                expectAbsolute ? fs.isAbsolute() : fs.isRelative());
     }
 
     /**
@@ -110,8 +110,7 @@ public class FloatScalarTest
         assertFalse("Not equal to some other kind of object; e.g. a String", fs.equals(new String("abc")));
         FloatScalar.Rel<LengthUnit> fsCounterPart = new FloatScalar.Rel<LengthUnit>(value, lengthUnit);
         assertFalse("Not equal if one Absolute and other Relative", fs.equals(fsCounterPart));
-        FloatScalar.Abs<TemperatureUnit> fsWrongBaseUnit =
-            new FloatScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+        FloatScalar.Abs<TemperatureUnit> fsWrongBaseUnit = new FloatScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", fs.getSI(), fsWrongBaseUnit.getSI(), 0.0001f);
         assertFalse("Not equals because the standard SI unit differs", fs.equals(fsWrongBaseUnit));
         FloatScalar.Abs<LengthUnit> fsCompatibleUnit = new FloatScalar.Abs<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
@@ -159,7 +158,7 @@ public class FloatScalarTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
+        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
         for (float seedValue : seedValues)
         {
             float input = seedValue;
@@ -417,8 +416,8 @@ public class FloatScalarTest
         FloatScalar.Abs<LengthUnit> left = new FloatScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
         FloatScalar.Abs<?> result = FloatScalar.plus(left, right);
-        assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(), result
-            .getSI(), 0.001f);
+        assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(),
+                result.getSI(), 0.001f);
     }
 
     /**
@@ -433,8 +432,8 @@ public class FloatScalarTest
         FloatScalar.Abs<LengthUnit> left = new FloatScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
         FloatScalar.Abs<?> result = FloatScalar.minus(left, right);
-        assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(), result
-            .getSI(), 0.001f);
+        assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(),
+                result.getSI(), 0.001f);
     }
 
     /**
@@ -449,8 +448,8 @@ public class FloatScalarTest
         FloatScalar.Abs<LengthUnit> left = new FloatScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Abs<LengthUnit> right = new FloatScalar.Abs<LengthUnit>(rightValue, LengthUnit.MILE);
         FloatScalar.Abs<?> result = FloatScalar.multiply(left, right);
-        assertEquals("value of element should be SI multiply of contributing elements", left.getSI() * right.getSI(), result
-            .getSI(), 0.001f);
+        assertEquals("value of element should be SI multiply of contributing elements", left.getSI() * right.getSI(),
+                result.getSI(), 0.001f);
     }
 
     /**
@@ -465,8 +464,8 @@ public class FloatScalarTest
         FloatScalar.Abs<LengthUnit> left = new FloatScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Abs<LengthUnit> right = new FloatScalar.Abs<LengthUnit>(rightValue, LengthUnit.MILE);
         FloatScalar.Abs<?> result = FloatScalar.divide(left, right);
-        assertEquals("value of element should be SI divide of contributing elements", left.getSI() / right.getSI(), result
-            .getSI(), 0.001f);
+        assertEquals("value of element should be SI divide of contributing elements", left.getSI() / right.getSI(),
+                result.getSI(), 0.001f);
     }
 
     /**
@@ -537,8 +536,7 @@ public class FloatScalarTest
         assertFalse("Not equal to some other kind of object; e.g. a String", fs.equals(new String("abc")));
         FloatScalar.Abs<LengthUnit> fsCounterPart = new FloatScalar.Abs<LengthUnit>(value, lengthUnit);
         assertFalse("Not equal if one Absolute and other Relative", fs.equals(fsCounterPart));
-        FloatScalar.Rel<TemperatureUnit> fsWrongBaseUnit =
-            new FloatScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+        FloatScalar.Rel<TemperatureUnit> fsWrongBaseUnit = new FloatScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", fs.getSI(), fsWrongBaseUnit.getSI(), 0.0001f);
         assertFalse("Not equals because the standard SI unit differs", fs.equals(fsWrongBaseUnit));
         FloatScalar.Rel<LengthUnit> fsCompatibleUnit = new FloatScalar.Rel<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
@@ -586,7 +584,7 @@ public class FloatScalarTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
+        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
         for (float seedValue : seedValues)
         {
             float input = seedValue;
@@ -844,8 +842,8 @@ public class FloatScalarTest
         FloatScalar.Rel<LengthUnit> left = new FloatScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
         FloatScalar.Rel<?> result = FloatScalar.plus(left, right);
-        assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(), result
-            .getSI(), 0.001f);
+        assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(),
+                result.getSI(), 0.001f);
     }
 
     /**
@@ -860,8 +858,8 @@ public class FloatScalarTest
         FloatScalar.Rel<LengthUnit> left = new FloatScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
         FloatScalar.Rel<?> result = FloatScalar.minus(left, right);
-        assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(), result
-            .getSI(), 0.001f);
+        assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(),
+                result.getSI(), 0.001f);
     }
 
     /**
@@ -876,8 +874,8 @@ public class FloatScalarTest
         FloatScalar.Rel<LengthUnit> left = new FloatScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
         FloatScalar.Rel<?> result = FloatScalar.multiply(left, right);
-        assertEquals("value of element should be SI multiply of contributing elements", left.getSI() * right.getSI(), result
-            .getSI(), 0.001f);
+        assertEquals("value of element should be SI multiply of contributing elements", left.getSI() * right.getSI(),
+                result.getSI(), 0.001f);
     }
 
     /**
@@ -892,8 +890,8 @@ public class FloatScalarTest
         FloatScalar.Rel<LengthUnit> left = new FloatScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
         FloatScalar.Rel<?> result = FloatScalar.divide(left, right);
-        assertEquals("value of element should be SI divide of contributing elements", left.getSI() / right.getSI(), result
-            .getSI(), 0.001f);
+        assertEquals("value of element should be SI divide of contributing elements", left.getSI() / right.getSI(),
+                result.getSI(), 0.001f);
     }
 
     /** */
@@ -918,13 +916,13 @@ public class FloatScalarTest
          * @param function FloatToFloat; encapsulated function that converts one inputValue to an outputValue
          */
         public static void tester(final float inputValue, final String operation, final FloatScalar<?> actualResult,
-            final double precision, final FloatToFloat function)
+                final double precision, final FloatToFloat function)
         {
             float expectedResult = function.function(inputValue);
             float got = actualResult.getSI();
             String description =
-                String.format("%s(%f->%f should be equal to %f with precision %f", operation, inputValue, expectedResult,
-                    got, precision);
+                    String.format("%s(%f->%f should be equal to %f with precision %f", operation, inputValue, expectedResult,
+                            got, precision);
             // System.out.println(description);
             assertEquals(description, expectedResult, got, precision);
         }

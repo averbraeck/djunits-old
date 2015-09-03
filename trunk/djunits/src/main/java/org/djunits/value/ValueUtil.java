@@ -52,7 +52,7 @@ public final class ValueUtil
         if (targetUnit instanceof OffsetUnit<?>)
         {
             return siValue / targetUnit.getConversionFactorToStandardUnit()
-                + ((OffsetUnit<?>) targetUnit).getOffsetToStandardUnit();
+                    + ((OffsetUnit<?>) targetUnit).getOffsetToStandardUnit();
         }
         return siValue / targetUnit.getConversionFactorToStandardUnit();
     }

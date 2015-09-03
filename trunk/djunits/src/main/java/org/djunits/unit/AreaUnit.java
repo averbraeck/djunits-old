@@ -83,11 +83,10 @@ public class AreaUnit extends Unit<AreaUnit>
      * @param abbreviationKey the key to the locale file for the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public AreaUnit(final LengthUnit lengthUnit, final String nameKey, final String abbreviationKey,
-        final UnitSystem unitSystem)
+    public AreaUnit(final LengthUnit lengthUnit, final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
     {
         super(nameKey, abbreviationKey, unitSystem, SQUARE_METER, lengthUnit.getConversionFactorToStandardUnit()
-            * lengthUnit.getConversionFactorToStandardUnit(), true);
+                * lengthUnit.getConversionFactorToStandardUnit(), true);
         this.lengthUnit = lengthUnit;
     }
 
@@ -100,7 +99,7 @@ public class AreaUnit extends Unit<AreaUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public AreaUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final AreaUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final AreaUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
         this.lengthUnit = referenceUnit.getLengthUnit();

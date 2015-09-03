@@ -50,10 +50,10 @@ public class SpeedUnit extends Unit<SpeedUnit>
         SI = new SpeedUnit(LengthUnit.METER, TimeUnit.SECOND, "SpeedUnit.meter_per_second", "SpeedUnit.m/s", SI_DERIVED);
         METER_PER_SECOND = SI;
         KM_PER_HOUR =
-            new SpeedUnit(LengthUnit.KILOMETER, TimeUnit.HOUR, "SpeedUnit.kilometer_per_hour", "SpeedUnit.km/h", SI_DERIVED);
+                new SpeedUnit(LengthUnit.KILOMETER, TimeUnit.HOUR, "SpeedUnit.kilometer_per_hour", "SpeedUnit.km/h", SI_DERIVED);
         MILE_PER_HOUR = new SpeedUnit(LengthUnit.MILE, TimeUnit.HOUR, "SpeedUnit.mile_per_hour", "SpeedUnit.mph", IMPERIAL);
         FOOT_PER_SECOND =
-            new SpeedUnit(LengthUnit.FOOT, TimeUnit.SECOND, "SpeedUnit.foot_per_second", "SpeedUnit.fps", IMPERIAL);
+                new SpeedUnit(LengthUnit.FOOT, TimeUnit.SECOND, "SpeedUnit.foot_per_second", "SpeedUnit.fps", IMPERIAL);
         KNOT = new SpeedUnit(LengthUnit.NAUTICAL_MILE, TimeUnit.HOUR, "SpeedUnit.knot", "SpeedUnit.kt", IMPERIAL);
     }
 
@@ -65,11 +65,11 @@ public class SpeedUnit extends Unit<SpeedUnit>
      * @param abbreviationKey the key to the locale file for the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public SpeedUnit(final LengthUnit lengthUnit, final TimeUnit timeUnit, final String nameKey,
-        final String abbreviationKey, final UnitSystem unitSystem)
+    public SpeedUnit(final LengthUnit lengthUnit, final TimeUnit timeUnit, final String nameKey, final String abbreviationKey,
+            final UnitSystem unitSystem)
     {
         super(nameKey, abbreviationKey, unitSystem, METER_PER_SECOND, lengthUnit.getConversionFactorToStandardUnit()
-            / timeUnit.getConversionFactorToStandardUnit(), true);
+                / timeUnit.getConversionFactorToStandardUnit(), true);
         this.lengthUnit = lengthUnit;
         this.timeUnit = timeUnit;
     }
@@ -83,7 +83,7 @@ public class SpeedUnit extends Unit<SpeedUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public SpeedUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final SpeedUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final SpeedUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
         this.lengthUnit = referenceUnit.getLengthUnit();

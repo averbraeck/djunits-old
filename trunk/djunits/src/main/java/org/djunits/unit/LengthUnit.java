@@ -97,7 +97,7 @@ public class LengthUnit extends Unit<LengthUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public LengthUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final LengthUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final LengthUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
     }

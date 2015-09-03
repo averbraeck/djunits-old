@@ -52,7 +52,7 @@ public class FloatVectorDenseTest
      * @param expectAbsolute boolean; if true; fv should be Absolute; if false; fv should be Relative
      */
     private static void checkContentsAndType(final FloatVector<?> fv, final float[] reference, final float precision,
-        final Unit<?> u, final boolean expectAbsolute)
+            final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("FloatVector should not be null", null != fv);
         for (int index = fv.size(); --index >= 0;)
@@ -67,8 +67,8 @@ public class FloatVectorDenseTest
             }
         }
         assertEquals("Unit should be " + u.toString(), u, fv.getUnit());
-        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"), expectAbsolute ? fv.isAbsolute() : fv
-            .isRelative());
+        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"),
+                expectAbsolute ? fv.isAbsolute() : fv.isRelative());
     }
 
     /**
@@ -107,7 +107,7 @@ public class FloatVectorDenseTest
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             float[] value = data(3, 38.0f);
             MutableFloatVector.Abs.Dense<TemperatureUnit> fv =
-                new MutableFloatVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
+                    new MutableFloatVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
             String result = fv.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -123,7 +123,7 @@ public class FloatVectorDenseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({"static-method", "unchecked"})
+    @SuppressWarnings({ "static-method", "unchecked" })
     @Test
     public final void basicsAbsTest()
     {
@@ -131,8 +131,7 @@ public class FloatVectorDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             float[] value = data(3, 38.0f);
-            FloatVector.Abs.Dense<TemperatureUnit> temperatureFV =
-                new FloatVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
+            FloatVector.Abs.Dense<TemperatureUnit> temperatureFV = new FloatVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(temperatureFV, value, 0.001f, tempUnit, true);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15f, temperatureFV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4f, temperatureFV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
@@ -142,7 +141,7 @@ public class FloatVectorDenseTest
                 assertEquals("Value should match", value[index], out[index], 0.001);
             }
             MutableFloatVector.Abs.Dense<TemperatureUnit> mfv =
-                new MutableFloatVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
+                    new MutableFloatVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(mfv, value, 0.001f, tempUnit, true);
             mfv.setSI(0, 73);
             float safe = value[0];
@@ -152,7 +151,7 @@ public class FloatVectorDenseTest
             mfv.set(0, temperatureFV.get(0));
             checkContentsAndType(mfv, value, 0.001f, tempUnit, true);
             FloatVector.Abs.Dense<TemperatureUnit> temperature2FV =
-                new FloatVector.Abs.Dense<TemperatureUnit>(temperatureFV.getVectorSI(), TemperatureUnit.KELVIN);
+                    new FloatVector.Abs.Dense<TemperatureUnit>(temperatureFV.getVectorSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2FV should be equal to temperatureFV", temperature2FV.equals(temperatureFV));
             assertTrue("Value is Absolute", temperatureFV.isAbsolute());
             assertFalse("Value is not Relative", temperatureFV.isRelative());
@@ -170,8 +169,7 @@ public class FloatVectorDenseTest
             }
             temperatureFV = new FloatVector.Abs.Dense<TemperatureUnit>(scalar);
             checkContentsAndType(temperatureFV, value, 0.001f, tempUnit, true);
-            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureFV
-                .cardinality());
+            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureFV.cardinality());
             float sum = 0;
             for (int index = 0; index < value.length; index++)
             {
@@ -247,8 +245,7 @@ public class FloatVectorDenseTest
         assertFalse("Not equal to some other kind of object; e.g. a String", fv.equals(new String("abc")));
         FloatScalar.Rel<LengthUnit> fvCounterPart = new FloatScalar.Rel<LengthUnit>(value, lengthUnit);
         assertFalse("Not equal if one Absolute and other Relative", fv.equals(fvCounterPart));
-        FloatScalar.Abs<TemperatureUnit> fvWrongBaseUnit =
-            new FloatScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+        FloatScalar.Abs<TemperatureUnit> fvWrongBaseUnit = new FloatScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", fv.getSI(), fvWrongBaseUnit.getSI(), 0.0001f);
         assertFalse("Not equals because the standard SI unit differs", fv.equals(fvWrongBaseUnit));
         FloatScalar.Abs<LengthUnit> fvCompatibleUnit = new FloatScalar.Abs<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
@@ -265,7 +262,7 @@ public class FloatVectorDenseTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
+        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
         for (float seedValue : seedValues)
         {
             float[] input = data(3, seedValue);
@@ -561,7 +558,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -587,7 +584,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -613,7 +610,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i) * right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -639,7 +636,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -665,7 +662,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -691,7 +688,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i) * right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -733,14 +730,14 @@ public class FloatVectorDenseTest
         {
             float[] leftIn = data(3, -12.34f);
             FloatVector.Abs.Dense<TemperatureUnit> left =
-                new FloatVector.Abs.Dense<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
+                    new FloatVector.Abs.Dense<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
             float[] right = data(3, -4.321f);
             MutableFloatVector.Abs.Dense<TemperatureUnit> result = FloatVector.times(left, right);
             assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
             for (int index = right.length; --index >= 0;)
             {
-                assertEquals("Content should match product of left and right", leftIn[index] * right[index], result
-                    .getSI(index), 0.001f);
+                assertEquals("Content should match product of left and right", leftIn[index] * right[index],
+                        result.getSI(index), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -785,7 +782,7 @@ public class FloatVectorDenseTest
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             float[] value = data(3, 38.0f);
             MutableFloatVector.Rel.Dense<TemperatureUnit> fv =
-                new MutableFloatVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
+                    new MutableFloatVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
             String result = fv.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -801,7 +798,7 @@ public class FloatVectorDenseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({"static-method", "unchecked"})
+    @SuppressWarnings({ "static-method", "unchecked" })
     @Test
     public final void basicsRelTest()
     {
@@ -809,8 +806,7 @@ public class FloatVectorDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             float[] value = data(3, 38.0f);
-            FloatVector.Rel.Dense<TemperatureUnit> temperatureFV =
-                new FloatVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
+            FloatVector.Rel.Dense<TemperatureUnit> temperatureFV = new FloatVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(temperatureFV, value, 0.001f, tempUnit, false);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15f, temperatureFV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4f, temperatureFV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
@@ -820,7 +816,7 @@ public class FloatVectorDenseTest
                 assertEquals("Value should match", value[index], out[index], 0.001);
             }
             MutableFloatVector.Rel.Dense<TemperatureUnit> mfv =
-                new MutableFloatVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
+                    new MutableFloatVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(mfv, value, 0.001f, tempUnit, false);
             mfv.setSI(0, 73);
             float safe = value[0];
@@ -830,7 +826,7 @@ public class FloatVectorDenseTest
             mfv.set(0, temperatureFV.get(0));
             checkContentsAndType(mfv, value, 0.001f, tempUnit, false);
             FloatVector.Rel.Dense<TemperatureUnit> temperature2FV =
-                new FloatVector.Rel.Dense<TemperatureUnit>(temperatureFV.getVectorSI(), TemperatureUnit.KELVIN);
+                    new FloatVector.Rel.Dense<TemperatureUnit>(temperatureFV.getVectorSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2FV should be equal to temperatureFV", temperature2FV.equals(temperatureFV));
             assertTrue("Value is Relative", temperatureFV.isRelative());
             assertFalse("Value is not Absolute", temperatureFV.isAbsolute());
@@ -848,8 +844,7 @@ public class FloatVectorDenseTest
             }
             temperatureFV = new FloatVector.Rel.Dense<TemperatureUnit>(scalar);
             checkContentsAndType(temperatureFV, value, 0.001f, tempUnit, false);
-            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureFV
-                .cardinality());
+            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureFV.cardinality());
             float sum = 0;
             for (int index = 0; index < value.length; index++)
             {
@@ -925,8 +920,7 @@ public class FloatVectorDenseTest
         assertFalse("Not equal to some other kind of object; e.g. a String", fv.equals(new String("abc")));
         FloatScalar.Abs<LengthUnit> fvCounterPart = new FloatScalar.Abs<LengthUnit>(value, lengthUnit);
         assertFalse("Not equal if one Absolute and other Relative", fv.equals(fvCounterPart));
-        FloatScalar.Rel<TemperatureUnit> fvWrongBaseUnit =
-            new FloatScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+        FloatScalar.Rel<TemperatureUnit> fvWrongBaseUnit = new FloatScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", fv.getSI(), fvWrongBaseUnit.getSI(), 0.0001f);
         assertFalse("Not equals because the standard SI unit differs", fv.equals(fvWrongBaseUnit));
         FloatScalar.Rel<LengthUnit> fvCompatibleUnit = new FloatScalar.Rel<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
@@ -943,7 +937,7 @@ public class FloatVectorDenseTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
+        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
         for (float seedValue : seedValues)
         {
             float[] input = data(3, seedValue);
@@ -1239,7 +1233,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -1265,7 +1259,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -1291,7 +1285,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i) * right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -1317,7 +1311,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -1343,7 +1337,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -1369,7 +1363,7 @@ public class FloatVectorDenseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i) * right.getSI(i),
-                    result.getSI(i), 0.001f);
+                        result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -1411,14 +1405,14 @@ public class FloatVectorDenseTest
         {
             float[] leftIn = data(3, -12.34f);
             FloatVector.Rel.Dense<TemperatureUnit> left =
-                new FloatVector.Rel.Dense<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
+                    new FloatVector.Rel.Dense<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
             float[] right = data(3, -4.321f);
             MutableFloatVector.Rel.Dense<TemperatureUnit> result = FloatVector.times(left, right);
             assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
             for (int index = right.length; --index >= 0;)
             {
-                assertEquals("Content should match product of left and right", leftIn[index] * right[index], result
-                    .getSI(index), 0.001f);
+                assertEquals("Content should match product of left and right", leftIn[index] * right[index],
+                        result.getSI(index), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -1449,7 +1443,7 @@ public class FloatVectorDenseTest
          * @param function FloatToFloat; encapsulated function that converts one inputValue to an outputValue
          */
         public static void tester(final float[] inputValues, final String operation, final FloatVector<?> actualResult,
-            final double precision, final FloatToFloat function)
+                final double precision, final FloatToFloat function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {
@@ -1464,8 +1458,8 @@ public class FloatVectorDenseTest
                     fail("Caught unexpected exception: " + ve.toString());
                 }
                 String description =
-                    String.format("%s(%f->%f should be equal to %f with precision %f", operation, inputValues[i],
-                        expectedResult, got, precision);
+                        String.format("%s(%f->%f should be equal to %f with precision %f", operation, inputValues[i],
+                                expectedResult, got, precision);
                 // System.out.println(description);
                 assertEquals(description, expectedResult, got, precision);
             }

@@ -325,7 +325,7 @@ public interface Length extends UNITS
         public final Length.Rel plus(final Length.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Length.Rel(
-                this.si + v.si, LengthUnit.SI);
+                    this.si + v.si, LengthUnit.SI);
         }
 
         /**
@@ -336,7 +336,7 @@ public interface Length extends UNITS
         public final Length.Rel minus(final Length.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Length.Rel(
-                this.si - v.si, LengthUnit.SI);
+                    this.si - v.si, LengthUnit.SI);
         }
 
         /**
@@ -347,7 +347,7 @@ public interface Length extends UNITS
         public final Length.Abs plus(final Length.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Length.Abs(
-                this.si + v.si, LengthUnit.SI);
+                    this.si + v.si, LengthUnit.SI);
         }
 
         /**
@@ -730,7 +730,7 @@ public interface Length extends UNITS
         public final Length.Abs plus(final Length.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Length.Abs(
-                this.si + v.si, LengthUnit.SI);
+                    this.si + v.si, LengthUnit.SI);
         }
 
         /**
@@ -741,7 +741,7 @@ public interface Length extends UNITS
         public final Length.Rel minus(final Length.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Length.Rel(
-                this.si - v.si, LengthUnit.SI);
+                    this.si - v.si, LengthUnit.SI);
         }
 
         /**
@@ -752,7 +752,7 @@ public interface Length extends UNITS
         public final Length.Abs minus(final Length.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Length.Abs(
-                this.si - v.si, LengthUnit.SI);
+                    this.si - v.si, LengthUnit.SI);
         }
 
         /**

@@ -88,7 +88,7 @@ public class MassUnit extends Unit<MassUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MassUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final MassUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final MassUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
     }

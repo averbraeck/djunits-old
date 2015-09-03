@@ -283,7 +283,7 @@ public interface Torque extends UNITS
         public final Torque.Rel plus(final Torque.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Torque.Rel(
-                this.si + v.si, TorqueUnit.SI);
+                    this.si + v.si, TorqueUnit.SI);
         }
 
         /**
@@ -294,7 +294,7 @@ public interface Torque extends UNITS
         public final Torque.Rel minus(final Torque.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Torque.Rel(
-                this.si - v.si, TorqueUnit.SI);
+                    this.si - v.si, TorqueUnit.SI);
         }
 
         /**
@@ -305,7 +305,7 @@ public interface Torque extends UNITS
         public final Torque.Abs plus(final Torque.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Torque.Abs(
-                this.si + v.si, TorqueUnit.SI);
+                    this.si + v.si, TorqueUnit.SI);
         }
 
         /**
@@ -646,7 +646,7 @@ public interface Torque extends UNITS
         public final Torque.Abs plus(final Torque.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Torque.Abs(
-                this.si + v.si, TorqueUnit.SI);
+                    this.si + v.si, TorqueUnit.SI);
         }
 
         /**
@@ -657,7 +657,7 @@ public interface Torque extends UNITS
         public final Torque.Rel minus(final Torque.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Torque.Rel(
-                this.si - v.si, TorqueUnit.SI);
+                    this.si - v.si, TorqueUnit.SI);
         }
 
         /**
@@ -668,7 +668,7 @@ public interface Torque extends UNITS
         public final Torque.Abs minus(final Torque.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Torque.Abs(
-                this.si - v.si, TorqueUnit.SI);
+                    this.si - v.si, TorqueUnit.SI);
         }
 
         /**

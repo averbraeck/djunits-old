@@ -73,7 +73,7 @@ public class TimeUnit extends Unit<TimeUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public TimeUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final TimeUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final TimeUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
     }

@@ -283,7 +283,7 @@ public interface Power extends UNITS
         public final Power.Rel plus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Power.Rel(
-                this.si + v.si, PowerUnit.SI);
+                    this.si + v.si, PowerUnit.SI);
         }
 
         /**
@@ -294,7 +294,7 @@ public interface Power extends UNITS
         public final Power.Rel minus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Power.Rel(
-                this.si - v.si, PowerUnit.SI);
+                    this.si - v.si, PowerUnit.SI);
         }
 
         /**
@@ -305,7 +305,7 @@ public interface Power extends UNITS
         public final Power.Abs plus(final Power.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Power.Abs(
-                this.si + v.si, PowerUnit.SI);
+                    this.si + v.si, PowerUnit.SI);
         }
 
         /**
@@ -646,7 +646,7 @@ public interface Power extends UNITS
         public final Power.Abs plus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Power.Abs(
-                this.si + v.si, PowerUnit.SI);
+                    this.si + v.si, PowerUnit.SI);
         }
 
         /**
@@ -657,7 +657,7 @@ public interface Power extends UNITS
         public final Power.Rel minus(final Power.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Power.Rel(
-                this.si - v.si, PowerUnit.SI);
+                    this.si - v.si, PowerUnit.SI);
         }
 
         /**
@@ -668,7 +668,7 @@ public interface Power extends UNITS
         public final Power.Abs minus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Power.Abs(
-                this.si - v.si, PowerUnit.SI);
+                    this.si - v.si, PowerUnit.SI);
         }
 
         /**
