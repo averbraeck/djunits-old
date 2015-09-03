@@ -58,6 +58,16 @@ public interface LinearDensity extends UNITS
         }
 
         /**
+         * Construct LinearDensity.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final LinearDensityUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct LinearDensity.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -78,6 +88,19 @@ public interface LinearDensity extends UNITS
         {
             return new LinearDensity.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static LinearDensity.Rel interpolate(final LinearDensity.Rel zero, final LinearDensity.Rel one,
+            final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -269,11 +292,31 @@ public interface LinearDensity extends UNITS
             return new LinearDensity.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative lineardensity
+         */
+        public final LinearDensity.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final LinearDensity.Rel divideBy(final float divisor)
         {
             return new LinearDensity.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative lineardensity
+         */
+        public final LinearDensity.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -310,6 +353,26 @@ public interface LinearDensity extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative lineardensity scalar.
+         */
+        public final LinearDensity.Abs toAbs()
+        {
+            return new LinearDensity.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
+         * @param v LinearDensity scalar
+         * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
+         */
+        public final Dimensionless.Rel divideBy(final LinearDensity.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
          * @param v LinearDensity scalar
          * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
          */
@@ -319,6 +382,17 @@ public interface LinearDensity extends UNITS
         }
 
         /**
+         * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
+         * @param v LinearDensity scalar
+         * @return Length scalar as a multiplication of LinearDensity and Area
+         */
+        public final Length.Rel multiplyBy(final Area.Abs v)
+        {
+            return new Length.Rel(this.si * v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
          * @param v LinearDensity scalar
          * @return Length scalar as a multiplication of LinearDensity and Area
          */
@@ -328,6 +402,17 @@ public interface LinearDensity extends UNITS
         }
 
         /**
+         * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
+         * @param v LinearDensity scalar
+         * @return Force scalar as a multiplication of LinearDensity and Energy
+         */
+        public final Force.Rel multiplyBy(final Energy.Abs v)
+        {
+            return new Force.Rel(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
          * @param v LinearDensity scalar
          * @return Force scalar as a multiplication of LinearDensity and Energy
          */
@@ -337,6 +422,17 @@ public interface LinearDensity extends UNITS
         }
 
         /**
+         * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
+         * @param v LinearDensity scalar
+         * @return Frequency scalar as a multiplication of LinearDensity and Speed
+         */
+        public final Frequency.Rel multiplyBy(final Speed.Abs v)
+        {
+            return new Frequency.Rel(this.si * v.si, FrequencyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
          * @param v LinearDensity scalar
          * @return Frequency scalar as a multiplication of LinearDensity and Speed
          */
@@ -380,6 +476,16 @@ public interface LinearDensity extends UNITS
         }
 
         /**
+         * Construct LinearDensity.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final LinearDensityUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct LinearDensity.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -400,6 +506,19 @@ public interface LinearDensity extends UNITS
         {
             return new LinearDensity.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static LinearDensity.Abs interpolate(final LinearDensity.Abs zero, final LinearDensity.Abs one,
+            final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -591,11 +710,31 @@ public interface LinearDensity extends UNITS
             return new LinearDensity.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute lineardensity
+         */
+        public final LinearDensity.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final LinearDensity.Abs divideBy(final float divisor)
         {
             return new LinearDensity.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute lineardensity
+         */
+        public final LinearDensity.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -632,6 +771,16 @@ public interface LinearDensity extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute lineardensity scalar.
+         */
+        public final LinearDensity.Rel toRel()
+        {
+            return new LinearDensity.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
          * @param v LinearDensity scalar
          * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
          */
@@ -641,6 +790,17 @@ public interface LinearDensity extends UNITS
         }
 
         /**
+         * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
+         * @param v LinearDensity scalar
+         * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
+         */
+        public final Dimensionless.Abs divideBy(final LinearDensity.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
          * @param v LinearDensity scalar
          * @return Length scalar as a multiplication of LinearDensity and Area
          */
@@ -650,6 +810,17 @@ public interface LinearDensity extends UNITS
         }
 
         /**
+         * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
+         * @param v LinearDensity scalar
+         * @return Length scalar as a multiplication of LinearDensity and Area
+         */
+        public final Length.Abs multiplyBy(final Area.Rel v)
+        {
+            return new Length.Abs(this.si * v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
          * @param v LinearDensity scalar
          * @return Force scalar as a multiplication of LinearDensity and Energy
          */
@@ -659,10 +830,31 @@ public interface LinearDensity extends UNITS
         }
 
         /**
+         * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
+         * @param v LinearDensity scalar
+         * @return Force scalar as a multiplication of LinearDensity and Energy
+         */
+        public final Force.Abs multiplyBy(final Energy.Rel v)
+        {
+            return new Force.Abs(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
          * @param v LinearDensity scalar
          * @return Frequency scalar as a multiplication of LinearDensity and Speed
          */
         public final Frequency.Abs multiplyBy(final Speed.Abs v)
+        {
+            return new Frequency.Abs(this.si * v.si, FrequencyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
+         * @param v LinearDensity scalar
+         * @return Frequency scalar as a multiplication of LinearDensity and Speed
+         */
+        public final Frequency.Abs multiplyBy(final Speed.Rel v)
         {
             return new Frequency.Abs(this.si * v.si, FrequencyUnit.SI);
         }

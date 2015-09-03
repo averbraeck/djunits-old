@@ -58,6 +58,16 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
+         * Construct ElectricalCurrent.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final ElectricalCurrentUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct ElectricalCurrent.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -78,6 +88,19 @@ public interface ElectricalCurrent extends UNITS
         {
             return new ElectricalCurrent.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static ElectricalCurrent.Rel interpolate(final ElectricalCurrent.Rel zero, final ElectricalCurrent.Rel one,
+            final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -269,11 +292,31 @@ public interface ElectricalCurrent extends UNITS
             return new ElectricalCurrent.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative electricalcurrent
+         */
+        public final ElectricalCurrent.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final ElectricalCurrent.Rel divideBy(final float divisor)
         {
             return new ElectricalCurrent.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative electricalcurrent
+         */
+        public final ElectricalCurrent.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -310,6 +353,26 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative electricalcurrent scalar.
+         */
+        public final ElectricalCurrent.Abs toAbs()
+        {
+            return new ElectricalCurrent.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of ElectricalCurrent and ElectricalCurrent, which results in a Dimensionless scalar.
+         * @param v ElectricalCurrent scalar
+         * @return Dimensionless scalar as a division of ElectricalCurrent and ElectricalCurrent
+         */
+        public final Dimensionless.Rel divideBy(final ElectricalCurrent.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of ElectricalCurrent and ElectricalCurrent, which results in a Dimensionless scalar.
          * @param v ElectricalCurrent scalar
          * @return Dimensionless scalar as a division of ElectricalCurrent and ElectricalCurrent
          */
@@ -319,6 +382,17 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
+         * Calculate the multiplication of ElectricalCurrent and ElectricalPotential, which results in a Power scalar.
+         * @param v ElectricalCurrent scalar
+         * @return Power scalar as a multiplication of ElectricalCurrent and ElectricalPotential
+         */
+        public final Power.Rel multiplyBy(final ElectricalPotential.Abs v)
+        {
+            return new Power.Rel(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of ElectricalCurrent and ElectricalPotential, which results in a Power scalar.
          * @param v ElectricalCurrent scalar
          * @return Power scalar as a multiplication of ElectricalCurrent and ElectricalPotential
          */
@@ -328,6 +402,17 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
+         * Calculate the multiplication of ElectricalCurrent and Time, which results in a ElectricalCharge scalar.
+         * @param v ElectricalCurrent scalar
+         * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Time
+         */
+        public final ElectricalCharge.Rel multiplyBy(final Time.Abs v)
+        {
+            return new ElectricalCharge.Rel(this.si * v.si, ElectricalChargeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of ElectricalCurrent and Time, which results in a ElectricalCharge scalar.
          * @param v ElectricalCurrent scalar
          * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Time
          */
@@ -337,6 +422,19 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
+         * Calculate the multiplication of ElectricalCurrent and ElectricalResistance, which results in a ElectricalPotential
+         * scalar.
+         * @param v ElectricalCurrent scalar
+         * @return ElectricalPotential scalar as a multiplication of ElectricalCurrent and ElectricalResistance
+         */
+        public final ElectricalPotential.Rel multiplyBy(final ElectricalResistance.Abs v)
+        {
+            return new ElectricalPotential.Rel(this.si * v.si, ElectricalPotentialUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of ElectricalCurrent and ElectricalResistance, which results in a ElectricalPotential
+         * scalar.
          * @param v ElectricalCurrent scalar
          * @return ElectricalPotential scalar as a multiplication of ElectricalCurrent and ElectricalResistance
          */
@@ -380,6 +478,16 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
+         * Construct ElectricalCurrent.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final ElectricalCurrentUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct ElectricalCurrent.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -400,6 +508,19 @@ public interface ElectricalCurrent extends UNITS
         {
             return new ElectricalCurrent.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static ElectricalCurrent.Abs interpolate(final ElectricalCurrent.Abs zero, final ElectricalCurrent.Abs one,
+            final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -591,11 +712,31 @@ public interface ElectricalCurrent extends UNITS
             return new ElectricalCurrent.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute electricalcurrent
+         */
+        public final ElectricalCurrent.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final ElectricalCurrent.Abs divideBy(final float divisor)
         {
             return new ElectricalCurrent.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute electricalcurrent
+         */
+        public final ElectricalCurrent.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -632,6 +773,16 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute electricalcurrent scalar.
+         */
+        public final ElectricalCurrent.Rel toRel()
+        {
+            return new ElectricalCurrent.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of ElectricalCurrent and ElectricalCurrent, which results in a Dimensionless scalar.
          * @param v ElectricalCurrent scalar
          * @return Dimensionless scalar as a division of ElectricalCurrent and ElectricalCurrent
          */
@@ -641,6 +792,17 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
+         * Calculate the division of ElectricalCurrent and ElectricalCurrent, which results in a Dimensionless scalar.
+         * @param v ElectricalCurrent scalar
+         * @return Dimensionless scalar as a division of ElectricalCurrent and ElectricalCurrent
+         */
+        public final Dimensionless.Abs divideBy(final ElectricalCurrent.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of ElectricalCurrent and ElectricalPotential, which results in a Power scalar.
          * @param v ElectricalCurrent scalar
          * @return Power scalar as a multiplication of ElectricalCurrent and ElectricalPotential
          */
@@ -650,6 +812,17 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
+         * Calculate the multiplication of ElectricalCurrent and ElectricalPotential, which results in a Power scalar.
+         * @param v ElectricalCurrent scalar
+         * @return Power scalar as a multiplication of ElectricalCurrent and ElectricalPotential
+         */
+        public final Power.Abs multiplyBy(final ElectricalPotential.Rel v)
+        {
+            return new Power.Abs(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of ElectricalCurrent and Time, which results in a ElectricalCharge scalar.
          * @param v ElectricalCurrent scalar
          * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Time
          */
@@ -659,10 +832,33 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
+         * Calculate the multiplication of ElectricalCurrent and Time, which results in a ElectricalCharge scalar.
+         * @param v ElectricalCurrent scalar
+         * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Time
+         */
+        public final ElectricalCharge.Abs multiplyBy(final Time.Rel v)
+        {
+            return new ElectricalCharge.Abs(this.si * v.si, ElectricalChargeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of ElectricalCurrent and ElectricalResistance, which results in a ElectricalPotential
+         * scalar.
          * @param v ElectricalCurrent scalar
          * @return ElectricalPotential scalar as a multiplication of ElectricalCurrent and ElectricalResistance
          */
         public final ElectricalPotential.Abs multiplyBy(final ElectricalResistance.Abs v)
+        {
+            return new ElectricalPotential.Abs(this.si * v.si, ElectricalPotentialUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of ElectricalCurrent and ElectricalResistance, which results in a ElectricalPotential
+         * scalar.
+         * @param v ElectricalCurrent scalar
+         * @return ElectricalPotential scalar as a multiplication of ElectricalCurrent and ElectricalResistance
+         */
+        public final ElectricalPotential.Abs multiplyBy(final ElectricalResistance.Rel v)
         {
             return new ElectricalPotential.Abs(this.si * v.si, ElectricalPotentialUnit.SI);
         }

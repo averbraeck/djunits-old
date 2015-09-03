@@ -57,6 +57,16 @@ public interface Pressure extends UNITS
         }
 
         /**
+         * Construct Pressure.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final PressureUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Pressure.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -75,6 +85,18 @@ public interface Pressure extends UNITS
         public static Pressure.Rel interpolate(final Pressure.Rel zero, final Pressure.Rel one, final float ratio)
         {
             return new Pressure.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Pressure.Rel interpolate(final Pressure.Rel zero, final Pressure.Rel one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -266,11 +288,31 @@ public interface Pressure extends UNITS
             return new Pressure.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative pressure
+         */
+        public final Pressure.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Pressure.Rel divideBy(final float divisor)
         {
             return new Pressure.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative pressure
+         */
+        public final Pressure.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -307,6 +349,26 @@ public interface Pressure extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative pressure scalar.
+         */
+        public final Pressure.Abs toAbs()
+        {
+            return new Pressure.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
+         * @param v Pressure scalar
+         * @return Dimensionless scalar as a division of Pressure and Pressure
+         */
+        public final Dimensionless.Rel divideBy(final Pressure.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
          * @param v Pressure scalar
          * @return Dimensionless scalar as a division of Pressure and Pressure
          */
@@ -316,6 +378,17 @@ public interface Pressure extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
+         * @param v Pressure scalar
+         * @return Force scalar as a multiplication of Pressure and Area
+         */
+        public final Force.Rel multiplyBy(final Area.Abs v)
+        {
+            return new Force.Rel(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
          * @param v Pressure scalar
          * @return Force scalar as a multiplication of Pressure and Area
          */
@@ -325,6 +398,17 @@ public interface Pressure extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
+         * @param v Pressure scalar
+         * @return Energy scalar as a multiplication of Pressure and Volume
+         */
+        public final Energy.Rel multiplyBy(final Volume.Abs v)
+        {
+            return new Energy.Rel(this.si * v.si, EnergyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
          * @param v Pressure scalar
          * @return Energy scalar as a multiplication of Pressure and Volume
          */
@@ -368,6 +452,16 @@ public interface Pressure extends UNITS
         }
 
         /**
+         * Construct Pressure.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final PressureUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Pressure.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -386,6 +480,18 @@ public interface Pressure extends UNITS
         public static Pressure.Abs interpolate(final Pressure.Abs zero, final Pressure.Abs one, final float ratio)
         {
             return new Pressure.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Pressure.Abs interpolate(final Pressure.Abs zero, final Pressure.Abs one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -577,11 +683,31 @@ public interface Pressure extends UNITS
             return new Pressure.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute pressure
+         */
+        public final Pressure.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Pressure.Abs divideBy(final float divisor)
         {
             return new Pressure.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute pressure
+         */
+        public final Pressure.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -618,6 +744,16 @@ public interface Pressure extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute pressure scalar.
+         */
+        public final Pressure.Rel toRel()
+        {
+            return new Pressure.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
          * @param v Pressure scalar
          * @return Dimensionless scalar as a division of Pressure and Pressure
          */
@@ -627,6 +763,17 @@ public interface Pressure extends UNITS
         }
 
         /**
+         * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
+         * @param v Pressure scalar
+         * @return Dimensionless scalar as a division of Pressure and Pressure
+         */
+        public final Dimensionless.Abs divideBy(final Pressure.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
          * @param v Pressure scalar
          * @return Force scalar as a multiplication of Pressure and Area
          */
@@ -636,10 +783,31 @@ public interface Pressure extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
+         * @param v Pressure scalar
+         * @return Force scalar as a multiplication of Pressure and Area
+         */
+        public final Force.Abs multiplyBy(final Area.Rel v)
+        {
+            return new Force.Abs(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
          * @param v Pressure scalar
          * @return Energy scalar as a multiplication of Pressure and Volume
          */
         public final Energy.Abs multiplyBy(final Volume.Abs v)
+        {
+            return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
+         * @param v Pressure scalar
+         * @return Energy scalar as a multiplication of Pressure and Volume
+         */
+        public final Energy.Abs multiplyBy(final Volume.Rel v)
         {
             return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
         }

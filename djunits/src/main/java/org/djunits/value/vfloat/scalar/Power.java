@@ -59,6 +59,16 @@ public interface Power extends UNITS
         }
 
         /**
+         * Construct Power.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final PowerUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Power.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -77,6 +87,18 @@ public interface Power extends UNITS
         public static Power.Rel interpolate(final Power.Rel zero, final Power.Rel one, final float ratio)
         {
             return new Power.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Power.Rel interpolate(final Power.Rel zero, final Power.Rel one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -268,11 +290,31 @@ public interface Power extends UNITS
             return new Power.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative power
+         */
+        public final Power.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Power.Rel divideBy(final float divisor)
         {
             return new Power.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative power
+         */
+        public final Power.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -309,6 +351,26 @@ public interface Power extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative power scalar.
+         */
+        public final Power.Abs toAbs()
+        {
+            return new Power.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Power and Power, which results in a Dimensionless scalar.
+         * @param v Power scalar
+         * @return Dimensionless scalar as a division of Power and Power
+         */
+        public final Dimensionless.Rel divideBy(final Power.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and Power, which results in a Dimensionless scalar.
          * @param v Power scalar
          * @return Dimensionless scalar as a division of Power and Power
          */
@@ -318,6 +380,17 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Power and ElectricalCurrent, which results in a Power scalar.
+         * @param v Power scalar
+         * @return Power scalar as a multiplication of Power and ElectricalCurrent
+         */
+        public final Power.Rel multiplyBy(final ElectricalCurrent.Abs v)
+        {
+            return new Power.Rel(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Power and ElectricalCurrent, which results in a Power scalar.
          * @param v Power scalar
          * @return Power scalar as a multiplication of Power and ElectricalCurrent
          */
@@ -327,6 +400,17 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Power and Time, which results in a Energy scalar.
+         * @param v Power scalar
+         * @return Energy scalar as a multiplication of Power and Time
+         */
+        public final Energy.Rel multiplyBy(final Time.Abs v)
+        {
+            return new Energy.Rel(this.si * v.si, EnergyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Power and Time, which results in a Energy scalar.
          * @param v Power scalar
          * @return Energy scalar as a multiplication of Power and Time
          */
@@ -336,6 +420,17 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the division of Power and Frequency, which results in a Energy scalar.
+         * @param v Power scalar
+         * @return Energy scalar as a division of Power and Frequency
+         */
+        public final Energy.Rel divideBy(final Frequency.Abs v)
+        {
+            return new Energy.Rel(this.si / v.si, EnergyUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and Frequency, which results in a Energy scalar.
          * @param v Power scalar
          * @return Energy scalar as a division of Power and Frequency
          */
@@ -345,6 +440,17 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the division of Power and Speed, which results in a Force scalar.
+         * @param v Power scalar
+         * @return Force scalar as a division of Power and Speed
+         */
+        public final Force.Rel divideBy(final Speed.Abs v)
+        {
+            return new Force.Rel(this.si / v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and Speed, which results in a Force scalar.
          * @param v Power scalar
          * @return Force scalar as a division of Power and Speed
          */
@@ -354,6 +460,17 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
+         * @param v Power scalar
+         * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
+         */
+        public final ElectricalCurrent.Rel divideBy(final ElectricalPotential.Abs v)
+        {
+            return new ElectricalCurrent.Rel(this.si / v.si, ElectricalCurrentUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
          * @param v Power scalar
          * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
          */
@@ -363,6 +480,17 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
+         * @param v Power scalar
+         * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
+         */
+        public final ElectricalPotential.Rel divideBy(final ElectricalCurrent.Abs v)
+        {
+            return new ElectricalPotential.Rel(this.si / v.si, ElectricalPotentialUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
          * @param v Power scalar
          * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
          */
@@ -406,6 +534,16 @@ public interface Power extends UNITS
         }
 
         /**
+         * Construct Power.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final PowerUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Power.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -424,6 +562,18 @@ public interface Power extends UNITS
         public static Power.Abs interpolate(final Power.Abs zero, final Power.Abs one, final float ratio)
         {
             return new Power.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Power.Abs interpolate(final Power.Abs zero, final Power.Abs one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -615,11 +765,31 @@ public interface Power extends UNITS
             return new Power.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute power
+         */
+        public final Power.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Power.Abs divideBy(final float divisor)
         {
             return new Power.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute power
+         */
+        public final Power.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -656,6 +826,16 @@ public interface Power extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute power scalar.
+         */
+        public final Power.Rel toRel()
+        {
+            return new Power.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Power and Power, which results in a Dimensionless scalar.
          * @param v Power scalar
          * @return Dimensionless scalar as a division of Power and Power
          */
@@ -665,6 +845,17 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the division of Power and Power, which results in a Dimensionless scalar.
+         * @param v Power scalar
+         * @return Dimensionless scalar as a division of Power and Power
+         */
+        public final Dimensionless.Abs divideBy(final Power.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Power and ElectricalCurrent, which results in a Power scalar.
          * @param v Power scalar
          * @return Power scalar as a multiplication of Power and ElectricalCurrent
          */
@@ -674,6 +865,17 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Power and ElectricalCurrent, which results in a Power scalar.
+         * @param v Power scalar
+         * @return Power scalar as a multiplication of Power and ElectricalCurrent
+         */
+        public final Power.Abs multiplyBy(final ElectricalCurrent.Rel v)
+        {
+            return new Power.Abs(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Power and Time, which results in a Energy scalar.
          * @param v Power scalar
          * @return Energy scalar as a multiplication of Power and Time
          */
@@ -683,6 +885,17 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Power and Time, which results in a Energy scalar.
+         * @param v Power scalar
+         * @return Energy scalar as a multiplication of Power and Time
+         */
+        public final Energy.Abs multiplyBy(final Time.Rel v)
+        {
+            return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and Frequency, which results in a Energy scalar.
          * @param v Power scalar
          * @return Energy scalar as a division of Power and Frequency
          */
@@ -692,6 +905,17 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the division of Power and Frequency, which results in a Energy scalar.
+         * @param v Power scalar
+         * @return Energy scalar as a division of Power and Frequency
+         */
+        public final Energy.Abs divideBy(final Frequency.Rel v)
+        {
+            return new Energy.Abs(this.si / v.si, EnergyUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and Speed, which results in a Force scalar.
          * @param v Power scalar
          * @return Force scalar as a division of Power and Speed
          */
@@ -701,6 +925,17 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the division of Power and Speed, which results in a Force scalar.
+         * @param v Power scalar
+         * @return Force scalar as a division of Power and Speed
+         */
+        public final Force.Abs divideBy(final Speed.Rel v)
+        {
+            return new Force.Abs(this.si / v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
          * @param v Power scalar
          * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
          */
@@ -710,10 +945,31 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
+         * @param v Power scalar
+         * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
+         */
+        public final ElectricalCurrent.Abs divideBy(final ElectricalPotential.Rel v)
+        {
+            return new ElectricalCurrent.Abs(this.si / v.si, ElectricalCurrentUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
          * @param v Power scalar
          * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
          */
         public final ElectricalPotential.Abs divideBy(final ElectricalCurrent.Abs v)
+        {
+            return new ElectricalPotential.Abs(this.si / v.si, ElectricalPotentialUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
+         * @param v Power scalar
+         * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
+         */
+        public final ElectricalPotential.Abs divideBy(final ElectricalCurrent.Rel v)
         {
             return new ElectricalPotential.Abs(this.si / v.si, ElectricalPotentialUnit.SI);
         }

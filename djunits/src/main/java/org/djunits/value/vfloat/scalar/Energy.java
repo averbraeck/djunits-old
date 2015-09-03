@@ -59,6 +59,16 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Construct Energy.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final EnergyUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Energy.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -77,6 +87,18 @@ public interface Energy extends UNITS
         public static Energy.Rel interpolate(final Energy.Rel zero, final Energy.Rel one, final float ratio)
         {
             return new Energy.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Energy.Rel interpolate(final Energy.Rel zero, final Energy.Rel one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -268,11 +290,31 @@ public interface Energy extends UNITS
             return new Energy.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative energy
+         */
+        public final Energy.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Energy.Rel divideBy(final float divisor)
         {
             return new Energy.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative energy
+         */
+        public final Energy.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -309,6 +351,26 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative energy scalar.
+         */
+        public final Energy.Abs toAbs()
+        {
+            return new Energy.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Energy and Energy, which results in a Dimensionless scalar.
+         * @param v Energy scalar
+         * @return Dimensionless scalar as a division of Energy and Energy
+         */
+        public final Dimensionless.Rel divideBy(final Energy.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Energy and Energy, which results in a Dimensionless scalar.
          * @param v Energy scalar
          * @return Dimensionless scalar as a division of Energy and Energy
          */
@@ -318,6 +380,17 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the division of Energy and Force, which results in a Length scalar.
+         * @param v Energy scalar
+         * @return Length scalar as a division of Energy and Force
+         */
+        public final Length.Rel divideBy(final Force.Abs v)
+        {
+            return new Length.Rel(this.si / v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Energy and Force, which results in a Length scalar.
          * @param v Energy scalar
          * @return Length scalar as a division of Energy and Force
          */
@@ -327,6 +400,17 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the division of Energy and Length, which results in a Force scalar.
+         * @param v Energy scalar
+         * @return Force scalar as a division of Energy and Length
+         */
+        public final Force.Rel divideBy(final Length.Abs v)
+        {
+            return new Force.Rel(this.si / v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Energy and Length, which results in a Force scalar.
          * @param v Energy scalar
          * @return Force scalar as a division of Energy and Length
          */
@@ -336,6 +420,17 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Energy and LinearDensity, which results in a Force scalar.
+         * @param v Energy scalar
+         * @return Force scalar as a multiplication of Energy and LinearDensity
+         */
+        public final Force.Rel multiplyBy(final LinearDensity.Abs v)
+        {
+            return new Force.Rel(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Energy and LinearDensity, which results in a Force scalar.
          * @param v Energy scalar
          * @return Force scalar as a multiplication of Energy and LinearDensity
          */
@@ -345,6 +440,17 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the division of Energy and Time, which results in a Power scalar.
+         * @param v Energy scalar
+         * @return Power scalar as a division of Energy and Time
+         */
+        public final Power.Rel divideBy(final Time.Abs v)
+        {
+            return new Power.Rel(this.si / v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Energy and Time, which results in a Power scalar.
          * @param v Energy scalar
          * @return Power scalar as a division of Energy and Time
          */
@@ -354,6 +460,17 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the division of Energy and Volume, which results in a Pressure scalar.
+         * @param v Energy scalar
+         * @return Pressure scalar as a division of Energy and Volume
+         */
+        public final Pressure.Rel divideBy(final Volume.Abs v)
+        {
+            return new Pressure.Rel(this.si / v.si, PressureUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Energy and Volume, which results in a Pressure scalar.
          * @param v Energy scalar
          * @return Pressure scalar as a division of Energy and Volume
          */
@@ -363,6 +480,17 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Energy and Frequency, which results in a Power scalar.
+         * @param v Energy scalar
+         * @return Power scalar as a multiplication of Energy and Frequency
+         */
+        public final Power.Rel multiplyBy(final Frequency.Abs v)
+        {
+            return new Power.Rel(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Energy and Frequency, which results in a Power scalar.
          * @param v Energy scalar
          * @return Power scalar as a multiplication of Energy and Frequency
          */
@@ -406,6 +534,16 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Construct Energy.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final EnergyUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Energy.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -424,6 +562,18 @@ public interface Energy extends UNITS
         public static Energy.Abs interpolate(final Energy.Abs zero, final Energy.Abs one, final float ratio)
         {
             return new Energy.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Energy.Abs interpolate(final Energy.Abs zero, final Energy.Abs one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -615,11 +765,31 @@ public interface Energy extends UNITS
             return new Energy.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute energy
+         */
+        public final Energy.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Energy.Abs divideBy(final float divisor)
         {
             return new Energy.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute energy
+         */
+        public final Energy.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -656,6 +826,16 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute energy scalar.
+         */
+        public final Energy.Rel toRel()
+        {
+            return new Energy.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Energy and Energy, which results in a Dimensionless scalar.
          * @param v Energy scalar
          * @return Dimensionless scalar as a division of Energy and Energy
          */
@@ -665,6 +845,17 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the division of Energy and Energy, which results in a Dimensionless scalar.
+         * @param v Energy scalar
+         * @return Dimensionless scalar as a division of Energy and Energy
+         */
+        public final Dimensionless.Abs divideBy(final Energy.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Energy and Force, which results in a Length scalar.
          * @param v Energy scalar
          * @return Length scalar as a division of Energy and Force
          */
@@ -674,6 +865,17 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the division of Energy and Force, which results in a Length scalar.
+         * @param v Energy scalar
+         * @return Length scalar as a division of Energy and Force
+         */
+        public final Length.Abs divideBy(final Force.Rel v)
+        {
+            return new Length.Abs(this.si / v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Energy and Length, which results in a Force scalar.
          * @param v Energy scalar
          * @return Force scalar as a division of Energy and Length
          */
@@ -683,6 +885,17 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the division of Energy and Length, which results in a Force scalar.
+         * @param v Energy scalar
+         * @return Force scalar as a division of Energy and Length
+         */
+        public final Force.Abs divideBy(final Length.Rel v)
+        {
+            return new Force.Abs(this.si / v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Energy and LinearDensity, which results in a Force scalar.
          * @param v Energy scalar
          * @return Force scalar as a multiplication of Energy and LinearDensity
          */
@@ -692,6 +905,17 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Energy and LinearDensity, which results in a Force scalar.
+         * @param v Energy scalar
+         * @return Force scalar as a multiplication of Energy and LinearDensity
+         */
+        public final Force.Abs multiplyBy(final LinearDensity.Rel v)
+        {
+            return new Force.Abs(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Energy and Time, which results in a Power scalar.
          * @param v Energy scalar
          * @return Power scalar as a division of Energy and Time
          */
@@ -701,6 +925,17 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the division of Energy and Time, which results in a Power scalar.
+         * @param v Energy scalar
+         * @return Power scalar as a division of Energy and Time
+         */
+        public final Power.Abs divideBy(final Time.Rel v)
+        {
+            return new Power.Abs(this.si / v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Energy and Volume, which results in a Pressure scalar.
          * @param v Energy scalar
          * @return Pressure scalar as a division of Energy and Volume
          */
@@ -710,10 +945,31 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the division of Energy and Volume, which results in a Pressure scalar.
+         * @param v Energy scalar
+         * @return Pressure scalar as a division of Energy and Volume
+         */
+        public final Pressure.Abs divideBy(final Volume.Rel v)
+        {
+            return new Pressure.Abs(this.si / v.si, PressureUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Energy and Frequency, which results in a Power scalar.
          * @param v Energy scalar
          * @return Power scalar as a multiplication of Energy and Frequency
          */
         public final Power.Abs multiplyBy(final Frequency.Abs v)
+        {
+            return new Power.Abs(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Energy and Frequency, which results in a Power scalar.
+         * @param v Energy scalar
+         * @return Power scalar as a multiplication of Energy and Frequency
+         */
+        public final Power.Abs multiplyBy(final Frequency.Rel v)
         {
             return new Power.Abs(this.si * v.si, PowerUnit.SI);
         }

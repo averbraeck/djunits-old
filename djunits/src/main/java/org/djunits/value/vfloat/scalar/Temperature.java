@@ -55,6 +55,16 @@ public interface Temperature extends UNITS
         }
 
         /**
+         * Construct Temperature.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final TemperatureUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Temperature.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -74,6 +84,18 @@ public interface Temperature extends UNITS
         {
             return new Temperature.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Temperature.Rel interpolate(final Temperature.Rel zero, final Temperature.Rel one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -265,11 +287,31 @@ public interface Temperature extends UNITS
             return new Temperature.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative temperature
+         */
+        public final Temperature.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Temperature.Rel divideBy(final float divisor)
         {
             return new Temperature.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative temperature
+         */
+        public final Temperature.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -306,6 +348,26 @@ public interface Temperature extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative temperature scalar.
+         */
+        public final Temperature.Abs toAbs()
+        {
+            return new Temperature.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
+         * @param v Temperature scalar
+         * @return Dimensionless scalar as a division of Temperature and Temperature
+         */
+        public final Dimensionless.Rel divideBy(final Temperature.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
          * @param v Temperature scalar
          * @return Dimensionless scalar as a division of Temperature and Temperature
          */
@@ -349,6 +411,16 @@ public interface Temperature extends UNITS
         }
 
         /**
+         * Construct Temperature.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final TemperatureUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Temperature.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -368,6 +440,18 @@ public interface Temperature extends UNITS
         {
             return new Temperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Temperature.Abs interpolate(final Temperature.Abs zero, final Temperature.Abs one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -559,11 +643,31 @@ public interface Temperature extends UNITS
             return new Temperature.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute temperature
+         */
+        public final Temperature.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Temperature.Abs divideBy(final float divisor)
         {
             return new Temperature.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute temperature
+         */
+        public final Temperature.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -600,10 +704,30 @@ public interface Temperature extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute temperature scalar.
+         */
+        public final Temperature.Rel toRel()
+        {
+            return new Temperature.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
          * @param v Temperature scalar
          * @return Dimensionless scalar as a division of Temperature and Temperature
          */
         public final Dimensionless.Abs divideBy(final Temperature.Abs v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
+         * @param v Temperature scalar
+         * @return Dimensionless scalar as a division of Temperature and Temperature
+         */
+        public final Dimensionless.Abs divideBy(final Temperature.Rel v)
         {
             return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
         }

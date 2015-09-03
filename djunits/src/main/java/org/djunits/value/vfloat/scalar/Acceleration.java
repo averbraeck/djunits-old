@@ -57,6 +57,16 @@ public interface Acceleration extends UNITS
         }
 
         /**
+         * Construct Acceleration.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final AccelerationUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Acceleration.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -77,6 +87,19 @@ public interface Acceleration extends UNITS
         {
             return new Acceleration.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Acceleration.Rel interpolate(final Acceleration.Rel zero, final Acceleration.Rel one,
+            final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -268,11 +291,31 @@ public interface Acceleration extends UNITS
             return new Acceleration.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative acceleration
+         */
+        public final Acceleration.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Acceleration.Rel divideBy(final float divisor)
         {
             return new Acceleration.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative acceleration
+         */
+        public final Acceleration.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -309,6 +352,26 @@ public interface Acceleration extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative acceleration scalar.
+         */
+        public final Acceleration.Abs toAbs()
+        {
+            return new Acceleration.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Acceleration and Acceleration, which results in a Dimensionless scalar.
+         * @param v Acceleration scalar
+         * @return Dimensionless scalar as a division of Acceleration and Acceleration
+         */
+        public final Dimensionless.Rel divideBy(final Acceleration.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Acceleration and Acceleration, which results in a Dimensionless scalar.
          * @param v Acceleration scalar
          * @return Dimensionless scalar as a division of Acceleration and Acceleration
          */
@@ -318,6 +381,17 @@ public interface Acceleration extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Acceleration and Mass, which results in a Force scalar.
+         * @param v Acceleration scalar
+         * @return Force scalar as a multiplication of Acceleration and Mass
+         */
+        public final Force.Rel multiplyBy(final Mass.Abs v)
+        {
+            return new Force.Rel(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Acceleration and Mass, which results in a Force scalar.
          * @param v Acceleration scalar
          * @return Force scalar as a multiplication of Acceleration and Mass
          */
@@ -327,6 +401,17 @@ public interface Acceleration extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Acceleration and Time, which results in a Speed scalar.
+         * @param v Acceleration scalar
+         * @return Speed scalar as a multiplication of Acceleration and Time
+         */
+        public final Speed.Rel multiplyBy(final Time.Abs v)
+        {
+            return new Speed.Rel(this.si * v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Acceleration and Time, which results in a Speed scalar.
          * @param v Acceleration scalar
          * @return Speed scalar as a multiplication of Acceleration and Time
          */
@@ -336,6 +421,17 @@ public interface Acceleration extends UNITS
         }
 
         /**
+         * Calculate the division of Acceleration and Frequency, which results in a Speed scalar.
+         * @param v Acceleration scalar
+         * @return Speed scalar as a division of Acceleration and Frequency
+         */
+        public final Speed.Rel divideBy(final Frequency.Abs v)
+        {
+            return new Speed.Rel(this.si / v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Acceleration and Frequency, which results in a Speed scalar.
          * @param v Acceleration scalar
          * @return Speed scalar as a division of Acceleration and Frequency
          */
@@ -379,6 +475,16 @@ public interface Acceleration extends UNITS
         }
 
         /**
+         * Construct Acceleration.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final AccelerationUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Acceleration.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -399,6 +505,19 @@ public interface Acceleration extends UNITS
         {
             return new Acceleration.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Acceleration.Abs interpolate(final Acceleration.Abs zero, final Acceleration.Abs one,
+            final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -590,11 +709,31 @@ public interface Acceleration extends UNITS
             return new Acceleration.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute acceleration
+         */
+        public final Acceleration.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Acceleration.Abs divideBy(final float divisor)
         {
             return new Acceleration.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute acceleration
+         */
+        public final Acceleration.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -631,6 +770,16 @@ public interface Acceleration extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute acceleration scalar.
+         */
+        public final Acceleration.Rel toRel()
+        {
+            return new Acceleration.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Acceleration and Acceleration, which results in a Dimensionless scalar.
          * @param v Acceleration scalar
          * @return Dimensionless scalar as a division of Acceleration and Acceleration
          */
@@ -640,6 +789,17 @@ public interface Acceleration extends UNITS
         }
 
         /**
+         * Calculate the division of Acceleration and Acceleration, which results in a Dimensionless scalar.
+         * @param v Acceleration scalar
+         * @return Dimensionless scalar as a division of Acceleration and Acceleration
+         */
+        public final Dimensionless.Abs divideBy(final Acceleration.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Acceleration and Mass, which results in a Force scalar.
          * @param v Acceleration scalar
          * @return Force scalar as a multiplication of Acceleration and Mass
          */
@@ -649,6 +809,17 @@ public interface Acceleration extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Acceleration and Mass, which results in a Force scalar.
+         * @param v Acceleration scalar
+         * @return Force scalar as a multiplication of Acceleration and Mass
+         */
+        public final Force.Abs multiplyBy(final Mass.Rel v)
+        {
+            return new Force.Abs(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Acceleration and Time, which results in a Speed scalar.
          * @param v Acceleration scalar
          * @return Speed scalar as a multiplication of Acceleration and Time
          */
@@ -658,10 +829,31 @@ public interface Acceleration extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Acceleration and Time, which results in a Speed scalar.
+         * @param v Acceleration scalar
+         * @return Speed scalar as a multiplication of Acceleration and Time
+         */
+        public final Speed.Abs multiplyBy(final Time.Rel v)
+        {
+            return new Speed.Abs(this.si * v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Acceleration and Frequency, which results in a Speed scalar.
          * @param v Acceleration scalar
          * @return Speed scalar as a division of Acceleration and Frequency
          */
         public final Speed.Abs divideBy(final Frequency.Abs v)
+        {
+            return new Speed.Abs(this.si / v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Acceleration and Frequency, which results in a Speed scalar.
+         * @param v Acceleration scalar
+         * @return Speed scalar as a division of Acceleration and Frequency
+         */
+        public final Speed.Abs divideBy(final Frequency.Rel v)
         {
             return new Speed.Abs(this.si / v.si, SpeedUnit.SI);
         }

@@ -59,6 +59,16 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Construct Torque.Rel scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Rel(final double value, final TorqueUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Torque.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -77,6 +87,18 @@ public interface Torque extends UNITS
         public static Torque.Rel interpolate(final Torque.Rel zero, final Torque.Rel one, final float ratio)
         {
             return new Torque.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Torque.Rel interpolate(final Torque.Rel zero, final Torque.Rel one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -268,11 +290,31 @@ public interface Torque extends UNITS
             return new Torque.Rel(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of a relative torque
+         */
+        public final Torque.Rel multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Torque.Rel divideBy(final float divisor)
         {
             return new Torque.Rel(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of a relative torque
+         */
+        public final Torque.Rel divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -309,6 +351,26 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative torque scalar.
+         */
+        public final Torque.Abs toAbs()
+        {
+            return new Torque.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Torque and Torque, which results in a Dimensionless scalar.
+         * @param v Torque scalar
+         * @return Dimensionless scalar as a division of Torque and Torque
+         */
+        public final Dimensionless.Rel divideBy(final Torque.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Torque, which results in a Dimensionless scalar.
          * @param v Torque scalar
          * @return Dimensionless scalar as a division of Torque and Torque
          */
@@ -318,6 +380,17 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the division of Torque and Force, which results in a Length scalar.
+         * @param v Torque scalar
+         * @return Length scalar as a division of Torque and Force
+         */
+        public final Length.Rel divideBy(final Force.Abs v)
+        {
+            return new Length.Rel(this.si / v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Force, which results in a Length scalar.
          * @param v Torque scalar
          * @return Length scalar as a division of Torque and Force
          */
@@ -327,6 +400,17 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the division of Torque and Length, which results in a Force scalar.
+         * @param v Torque scalar
+         * @return Force scalar as a division of Torque and Length
+         */
+        public final Force.Rel divideBy(final Length.Abs v)
+        {
+            return new Force.Rel(this.si / v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Length, which results in a Force scalar.
          * @param v Torque scalar
          * @return Force scalar as a division of Torque and Length
          */
@@ -336,6 +420,17 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Torque and LinearDensity, which results in a Force scalar.
+         * @param v Torque scalar
+         * @return Force scalar as a multiplication of Torque and LinearDensity
+         */
+        public final Force.Rel multiplyBy(final LinearDensity.Abs v)
+        {
+            return new Force.Rel(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Torque and LinearDensity, which results in a Force scalar.
          * @param v Torque scalar
          * @return Force scalar as a multiplication of Torque and LinearDensity
          */
@@ -345,6 +440,17 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the division of Torque and Time, which results in a Power scalar.
+         * @param v Torque scalar
+         * @return Power scalar as a division of Torque and Time
+         */
+        public final Power.Rel divideBy(final Time.Abs v)
+        {
+            return new Power.Rel(this.si / v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Time, which results in a Power scalar.
          * @param v Torque scalar
          * @return Power scalar as a division of Torque and Time
          */
@@ -354,6 +460,17 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Torque and Frequency, which results in a Power scalar.
+         * @param v Torque scalar
+         * @return Power scalar as a multiplication of Torque and Frequency
+         */
+        public final Power.Rel multiplyBy(final Frequency.Abs v)
+        {
+            return new Power.Rel(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Torque and Frequency, which results in a Power scalar.
          * @param v Torque scalar
          * @return Power scalar as a multiplication of Torque and Frequency
          */
@@ -363,6 +480,17 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the division of Torque and Volume, which results in a Pressure scalar.
+         * @param v Torque scalar
+         * @return Pressure scalar as a division of Torque and Volume
+         */
+        public final Pressure.Rel divideBy(final Volume.Abs v)
+        {
+            return new Pressure.Rel(this.si / v.si, PressureUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Volume, which results in a Pressure scalar.
          * @param v Torque scalar
          * @return Pressure scalar as a division of Torque and Volume
          */
@@ -406,6 +534,16 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Construct Torque.Abs scalar using a double value.
+         * @param value float value
+         * @param unit unit for the float value
+         */
+        public Abs(final double value, final TorqueUnit unit)
+        {
+            super((float) value, unit);
+        }
+
+        /**
          * Construct Torque.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
@@ -424,6 +562,18 @@ public interface Torque extends UNITS
         public static Torque.Abs interpolate(final Torque.Abs zero, final Torque.Abs one, final float ratio)
         {
             return new Torque.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        }
+
+        /**
+         * Interpolate between two values.
+         * @param zero the low value
+         * @param one the high value
+         * @param ratio the ratio between 0 and 1, inclusive
+         * @return a Scalar at the ratio between
+         */
+        public static Torque.Abs interpolate(final Torque.Abs zero, final Torque.Abs one, final double ratio)
+        {
+            return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
@@ -615,11 +765,31 @@ public interface Torque extends UNITS
             return new Torque.Abs(getInUnit() * factor, getUnit());
         }
 
+        /**
+         * Multiply scalar with a double factor.
+         * @param factor the factor to multiply with
+         * @return new instance of an absolute torque
+         */
+        public final Torque.Abs multiplyBy(final double factor)
+        {
+            return multiplyBy((float) factor);
+        }
+
         /** {@inheritDoc} */
         @Override
         public final Torque.Abs divideBy(final float divisor)
         {
             return new Torque.Abs(getInUnit() / divisor, getUnit());
+        }
+
+        /**
+         * Divide scalar by a double factor.
+         * @param factor the factor to divide by
+         * @return new instance of an absolute torque
+         */
+        public final Torque.Abs divideBy(final double factor)
+        {
+            return divideBy((float) factor);
         }
 
         /**
@@ -656,6 +826,16 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute torque scalar.
+         */
+        public final Torque.Rel toRel()
+        {
+            return new Torque.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Torque and Torque, which results in a Dimensionless scalar.
          * @param v Torque scalar
          * @return Dimensionless scalar as a division of Torque and Torque
          */
@@ -665,6 +845,17 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the division of Torque and Torque, which results in a Dimensionless scalar.
+         * @param v Torque scalar
+         * @return Dimensionless scalar as a division of Torque and Torque
+         */
+        public final Dimensionless.Abs divideBy(final Torque.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Force, which results in a Length scalar.
          * @param v Torque scalar
          * @return Length scalar as a division of Torque and Force
          */
@@ -674,6 +865,17 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the division of Torque and Force, which results in a Length scalar.
+         * @param v Torque scalar
+         * @return Length scalar as a division of Torque and Force
+         */
+        public final Length.Abs divideBy(final Force.Rel v)
+        {
+            return new Length.Abs(this.si / v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Length, which results in a Force scalar.
          * @param v Torque scalar
          * @return Force scalar as a division of Torque and Length
          */
@@ -683,6 +885,17 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the division of Torque and Length, which results in a Force scalar.
+         * @param v Torque scalar
+         * @return Force scalar as a division of Torque and Length
+         */
+        public final Force.Abs divideBy(final Length.Rel v)
+        {
+            return new Force.Abs(this.si / v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Torque and LinearDensity, which results in a Force scalar.
          * @param v Torque scalar
          * @return Force scalar as a multiplication of Torque and LinearDensity
          */
@@ -692,6 +905,17 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Torque and LinearDensity, which results in a Force scalar.
+         * @param v Torque scalar
+         * @return Force scalar as a multiplication of Torque and LinearDensity
+         */
+        public final Force.Abs multiplyBy(final LinearDensity.Rel v)
+        {
+            return new Force.Abs(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Time, which results in a Power scalar.
          * @param v Torque scalar
          * @return Power scalar as a division of Torque and Time
          */
@@ -701,6 +925,17 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the division of Torque and Time, which results in a Power scalar.
+         * @param v Torque scalar
+         * @return Power scalar as a division of Torque and Time
+         */
+        public final Power.Abs divideBy(final Time.Rel v)
+        {
+            return new Power.Abs(this.si / v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Torque and Frequency, which results in a Power scalar.
          * @param v Torque scalar
          * @return Power scalar as a multiplication of Torque and Frequency
          */
@@ -710,10 +945,31 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Torque and Frequency, which results in a Power scalar.
+         * @param v Torque scalar
+         * @return Power scalar as a multiplication of Torque and Frequency
+         */
+        public final Power.Abs multiplyBy(final Frequency.Rel v)
+        {
+            return new Power.Abs(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Volume, which results in a Pressure scalar.
          * @param v Torque scalar
          * @return Pressure scalar as a division of Torque and Volume
          */
         public final Pressure.Abs divideBy(final Volume.Abs v)
+        {
+            return new Pressure.Abs(this.si / v.si, PressureUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Volume, which results in a Pressure scalar.
+         * @param v Torque scalar
+         * @return Pressure scalar as a division of Torque and Volume
+         */
+        public final Pressure.Abs divideBy(final Volume.Rel v)
         {
             return new Pressure.Abs(this.si / v.si, PressureUnit.SI);
         }

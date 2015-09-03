@@ -311,6 +311,26 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative speed scalar.
+         */
+        public final Speed.Abs toAbs()
+        {
+            return new Speed.Abs(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Speed and Speed, which results in a Dimensionless scalar.
+         * @param v Speed scalar
+         * @return Dimensionless scalar as a division of Speed and Speed
+         */
+        public final Dimensionless.Rel divideBy(final Speed.Abs v)
+        {
+            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Speed and Speed, which results in a Dimensionless scalar.
          * @param v Speed scalar
          * @return Dimensionless scalar as a division of Speed and Speed
          */
@@ -320,6 +340,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Speed and Area, which results in a FlowVolume scalar.
+         * @param v Speed scalar
+         * @return FlowVolume scalar as a multiplication of Speed and Area
+         */
+        public final FlowVolume.Rel multiplyBy(final Area.Abs v)
+        {
+            return new FlowVolume.Rel(this.si * v.si, FlowVolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and Area, which results in a FlowVolume scalar.
          * @param v Speed scalar
          * @return FlowVolume scalar as a multiplication of Speed and Area
          */
@@ -329,6 +360,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Speed and Force, which results in a Power scalar.
+         * @param v Speed scalar
+         * @return Power scalar as a multiplication of Speed and Force
+         */
+        public final Power.Rel multiplyBy(final Force.Abs v)
+        {
+            return new Power.Rel(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and Force, which results in a Power scalar.
          * @param v Speed scalar
          * @return Power scalar as a multiplication of Speed and Force
          */
@@ -338,6 +380,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Speed and Frequency, which results in a Acceleration scalar.
+         * @param v Speed scalar
+         * @return Acceleration scalar as a multiplication of Speed and Frequency
+         */
+        public final Acceleration.Rel multiplyBy(final Frequency.Abs v)
+        {
+            return new Acceleration.Rel(this.si * v.si, AccelerationUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and Frequency, which results in a Acceleration scalar.
          * @param v Speed scalar
          * @return Acceleration scalar as a multiplication of Speed and Frequency
          */
@@ -347,6 +400,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the division of Speed and Length, which results in a Frequency scalar.
+         * @param v Speed scalar
+         * @return Frequency scalar as a division of Speed and Length
+         */
+        public final Frequency.Rel divideBy(final Length.Abs v)
+        {
+            return new Frequency.Rel(this.si / v.si, FrequencyUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Speed and Length, which results in a Frequency scalar.
          * @param v Speed scalar
          * @return Frequency scalar as a division of Speed and Length
          */
@@ -356,6 +420,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Speed and LinearDensity, which results in a Frequency scalar.
+         * @param v Speed scalar
+         * @return Frequency scalar as a multiplication of Speed and LinearDensity
+         */
+        public final Frequency.Rel multiplyBy(final LinearDensity.Abs v)
+        {
+            return new Frequency.Rel(this.si * v.si, FrequencyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and LinearDensity, which results in a Frequency scalar.
          * @param v Speed scalar
          * @return Frequency scalar as a multiplication of Speed and LinearDensity
          */
@@ -365,6 +440,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Speed and Time, which results in a Length scalar.
+         * @param v Speed scalar
+         * @return Length scalar as a multiplication of Speed and Time
+         */
+        public final Length.Rel multiplyBy(final Time.Abs v)
+        {
+            return new Length.Rel(this.si * v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and Time, which results in a Length scalar.
          * @param v Speed scalar
          * @return Length scalar as a multiplication of Speed and Time
          */
@@ -374,6 +460,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the division of Speed and Frequency, which results in a Length scalar.
+         * @param v Speed scalar
+         * @return Length scalar as a division of Speed and Frequency
+         */
+        public final Length.Rel divideBy(final Frequency.Abs v)
+        {
+            return new Length.Rel(this.si / v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Speed and Frequency, which results in a Length scalar.
          * @param v Speed scalar
          * @return Length scalar as a division of Speed and Frequency
          */
@@ -383,6 +480,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the division of Speed and Time, which results in a Acceleration scalar.
+         * @param v Speed scalar
+         * @return Acceleration scalar as a division of Speed and Time
+         */
+        public final Acceleration.Rel divideBy(final Time.Abs v)
+        {
+            return new Acceleration.Rel(this.si / v.si, AccelerationUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Speed and Time, which results in a Acceleration scalar.
          * @param v Speed scalar
          * @return Acceleration scalar as a division of Speed and Time
          */
@@ -392,6 +500,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Speed and FlowMass, which results in a Force scalar.
+         * @param v Speed scalar
+         * @return Force scalar as a multiplication of Speed and FlowMass
+         */
+        public final Force.Rel multiplyBy(final FlowMass.Abs v)
+        {
+            return new Force.Rel(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and FlowMass, which results in a Force scalar.
          * @param v Speed scalar
          * @return Force scalar as a multiplication of Speed and FlowMass
          */
@@ -685,6 +804,16 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute speed scalar.
+         */
+        public final Speed.Rel toRel()
+        {
+            return new Speed.Rel(getInUnit(), getUnit());
+        }
+
+        /**
+         * Calculate the division of Speed and Speed, which results in a Dimensionless scalar.
          * @param v Speed scalar
          * @return Dimensionless scalar as a division of Speed and Speed
          */
@@ -694,6 +823,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the division of Speed and Speed, which results in a Dimensionless scalar.
+         * @param v Speed scalar
+         * @return Dimensionless scalar as a division of Speed and Speed
+         */
+        public final Dimensionless.Abs divideBy(final Speed.Rel v)
+        {
+            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and Area, which results in a FlowVolume scalar.
          * @param v Speed scalar
          * @return FlowVolume scalar as a multiplication of Speed and Area
          */
@@ -703,6 +843,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Speed and Area, which results in a FlowVolume scalar.
+         * @param v Speed scalar
+         * @return FlowVolume scalar as a multiplication of Speed and Area
+         */
+        public final FlowVolume.Abs multiplyBy(final Area.Rel v)
+        {
+            return new FlowVolume.Abs(this.si * v.si, FlowVolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and Force, which results in a Power scalar.
          * @param v Speed scalar
          * @return Power scalar as a multiplication of Speed and Force
          */
@@ -712,6 +863,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Speed and Force, which results in a Power scalar.
+         * @param v Speed scalar
+         * @return Power scalar as a multiplication of Speed and Force
+         */
+        public final Power.Abs multiplyBy(final Force.Rel v)
+        {
+            return new Power.Abs(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and Frequency, which results in a Acceleration scalar.
          * @param v Speed scalar
          * @return Acceleration scalar as a multiplication of Speed and Frequency
          */
@@ -721,6 +883,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Speed and Frequency, which results in a Acceleration scalar.
+         * @param v Speed scalar
+         * @return Acceleration scalar as a multiplication of Speed and Frequency
+         */
+        public final Acceleration.Abs multiplyBy(final Frequency.Rel v)
+        {
+            return new Acceleration.Abs(this.si * v.si, AccelerationUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Speed and Length, which results in a Frequency scalar.
          * @param v Speed scalar
          * @return Frequency scalar as a division of Speed and Length
          */
@@ -730,6 +903,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the division of Speed and Length, which results in a Frequency scalar.
+         * @param v Speed scalar
+         * @return Frequency scalar as a division of Speed and Length
+         */
+        public final Frequency.Abs divideBy(final Length.Rel v)
+        {
+            return new Frequency.Abs(this.si / v.si, FrequencyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and LinearDensity, which results in a Frequency scalar.
          * @param v Speed scalar
          * @return Frequency scalar as a multiplication of Speed and LinearDensity
          */
@@ -739,6 +923,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Speed and LinearDensity, which results in a Frequency scalar.
+         * @param v Speed scalar
+         * @return Frequency scalar as a multiplication of Speed and LinearDensity
+         */
+        public final Frequency.Abs multiplyBy(final LinearDensity.Rel v)
+        {
+            return new Frequency.Abs(this.si * v.si, FrequencyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and Time, which results in a Length scalar.
          * @param v Speed scalar
          * @return Length scalar as a multiplication of Speed and Time
          */
@@ -748,6 +943,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Speed and Time, which results in a Length scalar.
+         * @param v Speed scalar
+         * @return Length scalar as a multiplication of Speed and Time
+         */
+        public final Length.Abs multiplyBy(final Time.Rel v)
+        {
+            return new Length.Abs(this.si * v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Speed and Frequency, which results in a Length scalar.
          * @param v Speed scalar
          * @return Length scalar as a division of Speed and Frequency
          */
@@ -757,6 +963,17 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the division of Speed and Frequency, which results in a Length scalar.
+         * @param v Speed scalar
+         * @return Length scalar as a division of Speed and Frequency
+         */
+        public final Length.Abs divideBy(final Frequency.Rel v)
+        {
+            return new Length.Abs(this.si / v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Speed and Time, which results in a Acceleration scalar.
          * @param v Speed scalar
          * @return Acceleration scalar as a division of Speed and Time
          */
@@ -766,10 +983,31 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the division of Speed and Time, which results in a Acceleration scalar.
+         * @param v Speed scalar
+         * @return Acceleration scalar as a division of Speed and Time
+         */
+        public final Acceleration.Abs divideBy(final Time.Rel v)
+        {
+            return new Acceleration.Abs(this.si / v.si, AccelerationUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and FlowMass, which results in a Force scalar.
          * @param v Speed scalar
          * @return Force scalar as a multiplication of Speed and FlowMass
          */
         public final Force.Abs multiplyBy(final FlowMass.Abs v)
+        {
+            return new Force.Abs(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Speed and FlowMass, which results in a Force scalar.
+         * @param v Speed scalar
+         * @return Force scalar as a multiplication of Speed and FlowMass
+         */
+        public final Force.Abs multiplyBy(final FlowMass.Rel v)
         {
             return new Force.Abs(this.si * v.si, ForceUnit.SI);
         }
