@@ -323,29 +323,9 @@ public interface Volume extends UNITS
          * @param v Volume scalar
          * @return Dimensionless scalar as a division of Volume and Volume
          */
-        public final Dimensionless.Rel divideBy(final Volume.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Volume and Volume, which results in a Dimensionless scalar.
-         * @param v Volume scalar
-         * @return Dimensionless scalar as a division of Volume and Volume
-         */
         public final Dimensionless.Rel divideBy(final Volume.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Volume and Density, which results in a Mass scalar.
-         * @param v Volume scalar
-         * @return Mass scalar as a multiplication of Volume and Density
-         */
-        public final Mass.Rel multiplyBy(final Density.Abs v)
-        {
-            return new Mass.Rel(this.si * v.si, MassUnit.SI);
         }
 
         /**
@@ -363,29 +343,9 @@ public interface Volume extends UNITS
          * @param v Volume scalar
          * @return Energy scalar as a multiplication of Volume and Pressure
          */
-        public final Energy.Rel multiplyBy(final Pressure.Abs v)
-        {
-            return new Energy.Rel(this.si * v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Volume and Pressure, which results in a Energy scalar.
-         * @param v Volume scalar
-         * @return Energy scalar as a multiplication of Volume and Pressure
-         */
         public final Energy.Rel multiplyBy(final Pressure.Rel v)
         {
             return new Energy.Rel(this.si * v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Volume and Length, which results in a Area scalar.
-         * @param v Volume scalar
-         * @return Area scalar as a division of Volume and Length
-         */
-        public final Area.Rel divideBy(final Length.Abs v)
-        {
-            return new Area.Rel(this.si / v.si, AreaUnit.SI);
         }
 
         /**
@@ -403,16 +363,6 @@ public interface Volume extends UNITS
          * @param v Volume scalar
          * @return Length scalar as a division of Volume and Area
          */
-        public final Length.Rel divideBy(final Area.Abs v)
-        {
-            return new Length.Rel(this.si / v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Volume and Area, which results in a Length scalar.
-         * @param v Volume scalar
-         * @return Length scalar as a division of Volume and Area
-         */
         public final Length.Rel divideBy(final Area.Rel v)
         {
             return new Length.Rel(this.si / v.si, LengthUnit.SI);
@@ -423,29 +373,9 @@ public interface Volume extends UNITS
          * @param v Volume scalar
          * @return Area scalar as a multiplication of Volume and LinearDensity
          */
-        public final Area.Rel multiplyBy(final LinearDensity.Abs v)
-        {
-            return new Area.Rel(this.si * v.si, AreaUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Volume and LinearDensity, which results in a Area scalar.
-         * @param v Volume scalar
-         * @return Area scalar as a multiplication of Volume and LinearDensity
-         */
         public final Area.Rel multiplyBy(final LinearDensity.Rel v)
         {
             return new Area.Rel(this.si * v.si, AreaUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Volume and Time, which results in a FlowVolume scalar.
-         * @param v Volume scalar
-         * @return FlowVolume scalar as a division of Volume and Time
-         */
-        public final FlowVolume.Rel divideBy(final Time.Abs v)
-        {
-            return new FlowVolume.Rel(this.si / v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -762,31 +692,11 @@ public interface Volume extends UNITS
         }
 
         /**
-         * Calculate the division of Volume and Volume, which results in a Dimensionless scalar.
-         * @param v Volume scalar
-         * @return Dimensionless scalar as a division of Volume and Volume
-         */
-        public final Dimensionless.Abs divideBy(final Volume.Rel v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of Volume and Density, which results in a Mass scalar.
          * @param v Volume scalar
          * @return Mass scalar as a multiplication of Volume and Density
          */
         public final Mass.Abs multiplyBy(final Density.Abs v)
-        {
-            return new Mass.Abs(this.si * v.si, MassUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Volume and Density, which results in a Mass scalar.
-         * @param v Volume scalar
-         * @return Mass scalar as a multiplication of Volume and Density
-         */
-        public final Mass.Abs multiplyBy(final Density.Rel v)
         {
             return new Mass.Abs(this.si * v.si, MassUnit.SI);
         }
@@ -802,31 +712,11 @@ public interface Volume extends UNITS
         }
 
         /**
-         * Calculate the multiplication of Volume and Pressure, which results in a Energy scalar.
-         * @param v Volume scalar
-         * @return Energy scalar as a multiplication of Volume and Pressure
-         */
-        public final Energy.Abs multiplyBy(final Pressure.Rel v)
-        {
-            return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
-        }
-
-        /**
          * Calculate the division of Volume and Length, which results in a Area scalar.
          * @param v Volume scalar
          * @return Area scalar as a division of Volume and Length
          */
         public final Area.Abs divideBy(final Length.Abs v)
-        {
-            return new Area.Abs(this.si / v.si, AreaUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Volume and Length, which results in a Area scalar.
-         * @param v Volume scalar
-         * @return Area scalar as a division of Volume and Length
-         */
-        public final Area.Abs divideBy(final Length.Rel v)
         {
             return new Area.Abs(this.si / v.si, AreaUnit.SI);
         }
@@ -842,16 +732,6 @@ public interface Volume extends UNITS
         }
 
         /**
-         * Calculate the division of Volume and Area, which results in a Length scalar.
-         * @param v Volume scalar
-         * @return Length scalar as a division of Volume and Area
-         */
-        public final Length.Abs divideBy(final Area.Rel v)
-        {
-            return new Length.Abs(this.si / v.si, LengthUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of Volume and LinearDensity, which results in a Area scalar.
          * @param v Volume scalar
          * @return Area scalar as a multiplication of Volume and LinearDensity
@@ -862,31 +742,11 @@ public interface Volume extends UNITS
         }
 
         /**
-         * Calculate the multiplication of Volume and LinearDensity, which results in a Area scalar.
-         * @param v Volume scalar
-         * @return Area scalar as a multiplication of Volume and LinearDensity
-         */
-        public final Area.Abs multiplyBy(final LinearDensity.Rel v)
-        {
-            return new Area.Abs(this.si * v.si, AreaUnit.SI);
-        }
-
-        /**
          * Calculate the division of Volume and Time, which results in a FlowVolume scalar.
          * @param v Volume scalar
          * @return FlowVolume scalar as a division of Volume and Time
          */
         public final FlowVolume.Abs divideBy(final Time.Abs v)
-        {
-            return new FlowVolume.Abs(this.si / v.si, FlowVolumeUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Volume and Time, which results in a FlowVolume scalar.
-         * @param v Volume scalar
-         * @return FlowVolume scalar as a division of Volume and Time
-         */
-        public final FlowVolume.Abs divideBy(final Time.Rel v)
         {
             return new FlowVolume.Abs(this.si / v.si, FlowVolumeUnit.SI);
         }

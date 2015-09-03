@@ -318,16 +318,6 @@ public interface AngleSolid extends UNITS
          * @param v AngleSolid scalar
          * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
          */
-        public final Dimensionless.Rel divideBy(final AngleSolid.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
-         * @param v AngleSolid scalar
-         * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
-         */
         public final Dimensionless.Rel divideBy(final AngleSolid.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
@@ -632,16 +622,6 @@ public interface AngleSolid extends UNITS
          * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
          */
         public final Dimensionless.Abs divideBy(final AngleSolid.Abs v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
-         * @param v AngleSolid scalar
-         * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
-         */
-        public final Dimensionless.Abs divideBy(final AngleSolid.Rel v)
         {
             return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
         }

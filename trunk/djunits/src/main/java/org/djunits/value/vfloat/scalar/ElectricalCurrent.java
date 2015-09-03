@@ -366,29 +366,9 @@ public interface ElectricalCurrent extends UNITS
          * @param v ElectricalCurrent scalar
          * @return Dimensionless scalar as a division of ElectricalCurrent and ElectricalCurrent
          */
-        public final Dimensionless.Rel divideBy(final ElectricalCurrent.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of ElectricalCurrent and ElectricalCurrent, which results in a Dimensionless scalar.
-         * @param v ElectricalCurrent scalar
-         * @return Dimensionless scalar as a division of ElectricalCurrent and ElectricalCurrent
-         */
         public final Dimensionless.Rel divideBy(final ElectricalCurrent.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of ElectricalCurrent and ElectricalPotential, which results in a Power scalar.
-         * @param v ElectricalCurrent scalar
-         * @return Power scalar as a multiplication of ElectricalCurrent and ElectricalPotential
-         */
-        public final Power.Rel multiplyBy(final ElectricalPotential.Abs v)
-        {
-            return new Power.Rel(this.si * v.si, PowerUnit.SI);
         }
 
         /**
@@ -406,30 +386,9 @@ public interface ElectricalCurrent extends UNITS
          * @param v ElectricalCurrent scalar
          * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Time
          */
-        public final ElectricalCharge.Rel multiplyBy(final Time.Abs v)
-        {
-            return new ElectricalCharge.Rel(this.si * v.si, ElectricalChargeUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of ElectricalCurrent and Time, which results in a ElectricalCharge scalar.
-         * @param v ElectricalCurrent scalar
-         * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Time
-         */
         public final ElectricalCharge.Rel multiplyBy(final Time.Rel v)
         {
             return new ElectricalCharge.Rel(this.si * v.si, ElectricalChargeUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of ElectricalCurrent and ElectricalResistance, which results in a ElectricalPotential
-         * scalar.
-         * @param v ElectricalCurrent scalar
-         * @return ElectricalPotential scalar as a multiplication of ElectricalCurrent and ElectricalResistance
-         */
-        public final ElectricalPotential.Rel multiplyBy(final ElectricalResistance.Abs v)
-        {
-            return new ElectricalPotential.Rel(this.si * v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -792,31 +751,11 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
-         * Calculate the division of ElectricalCurrent and ElectricalCurrent, which results in a Dimensionless scalar.
-         * @param v ElectricalCurrent scalar
-         * @return Dimensionless scalar as a division of ElectricalCurrent and ElectricalCurrent
-         */
-        public final Dimensionless.Abs divideBy(final ElectricalCurrent.Rel v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of ElectricalCurrent and ElectricalPotential, which results in a Power scalar.
          * @param v ElectricalCurrent scalar
          * @return Power scalar as a multiplication of ElectricalCurrent and ElectricalPotential
          */
         public final Power.Abs multiplyBy(final ElectricalPotential.Abs v)
-        {
-            return new Power.Abs(this.si * v.si, PowerUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of ElectricalCurrent and ElectricalPotential, which results in a Power scalar.
-         * @param v ElectricalCurrent scalar
-         * @return Power scalar as a multiplication of ElectricalCurrent and ElectricalPotential
-         */
-        public final Power.Abs multiplyBy(final ElectricalPotential.Rel v)
         {
             return new Power.Abs(this.si * v.si, PowerUnit.SI);
         }
@@ -832,33 +771,12 @@ public interface ElectricalCurrent extends UNITS
         }
 
         /**
-         * Calculate the multiplication of ElectricalCurrent and Time, which results in a ElectricalCharge scalar.
-         * @param v ElectricalCurrent scalar
-         * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Time
-         */
-        public final ElectricalCharge.Abs multiplyBy(final Time.Rel v)
-        {
-            return new ElectricalCharge.Abs(this.si * v.si, ElectricalChargeUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of ElectricalCurrent and ElectricalResistance, which results in a ElectricalPotential
          * scalar.
          * @param v ElectricalCurrent scalar
          * @return ElectricalPotential scalar as a multiplication of ElectricalCurrent and ElectricalResistance
          */
         public final ElectricalPotential.Abs multiplyBy(final ElectricalResistance.Abs v)
-        {
-            return new ElectricalPotential.Abs(this.si * v.si, ElectricalPotentialUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of ElectricalCurrent and ElectricalResistance, which results in a ElectricalPotential
-         * scalar.
-         * @param v ElectricalCurrent scalar
-         * @return ElectricalPotential scalar as a multiplication of ElectricalCurrent and ElectricalResistance
-         */
-        public final ElectricalPotential.Abs multiplyBy(final ElectricalResistance.Rel v)
         {
             return new ElectricalPotential.Abs(this.si * v.si, ElectricalPotentialUnit.SI);
         }

@@ -360,16 +360,6 @@ public interface AngleSlope extends UNITS
          * @param v AngleSlope scalar
          * @return Dimensionless scalar as a division of AngleSlope and AngleSlope
          */
-        public final Dimensionless.Rel divideBy(final AngleSlope.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of AngleSlope and AngleSlope, which results in a Dimensionless scalar.
-         * @param v AngleSlope scalar
-         * @return Dimensionless scalar as a division of AngleSlope and AngleSlope
-         */
         public final Dimensionless.Rel divideBy(final AngleSlope.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
@@ -716,16 +706,6 @@ public interface AngleSlope extends UNITS
          * @return Dimensionless scalar as a division of AngleSlope and AngleSlope
          */
         public final Dimensionless.Abs divideBy(final AngleSlope.Abs v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of AngleSlope and AngleSlope, which results in a Dimensionless scalar.
-         * @param v AngleSlope scalar
-         * @return Dimensionless scalar as a division of AngleSlope and AngleSlope
-         */
-        public final Dimensionless.Abs divideBy(final AngleSlope.Rel v)
         {
             return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
         }

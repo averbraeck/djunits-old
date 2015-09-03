@@ -366,29 +366,9 @@ public interface LinearDensity extends UNITS
          * @param v LinearDensity scalar
          * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
          */
-        public final Dimensionless.Rel divideBy(final LinearDensity.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
-         * @param v LinearDensity scalar
-         * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
-         */
         public final Dimensionless.Rel divideBy(final LinearDensity.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
-         * @param v LinearDensity scalar
-         * @return Length scalar as a multiplication of LinearDensity and Area
-         */
-        public final Length.Rel multiplyBy(final Area.Abs v)
-        {
-            return new Length.Rel(this.si * v.si, LengthUnit.SI);
         }
 
         /**
@@ -406,29 +386,9 @@ public interface LinearDensity extends UNITS
          * @param v LinearDensity scalar
          * @return Force scalar as a multiplication of LinearDensity and Energy
          */
-        public final Force.Rel multiplyBy(final Energy.Abs v)
-        {
-            return new Force.Rel(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
-         * @param v LinearDensity scalar
-         * @return Force scalar as a multiplication of LinearDensity and Energy
-         */
         public final Force.Rel multiplyBy(final Energy.Rel v)
         {
             return new Force.Rel(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
-         * @param v LinearDensity scalar
-         * @return Frequency scalar as a multiplication of LinearDensity and Speed
-         */
-        public final Frequency.Rel multiplyBy(final Speed.Abs v)
-        {
-            return new Frequency.Rel(this.si * v.si, FrequencyUnit.SI);
         }
 
         /**
@@ -790,31 +750,11 @@ public interface LinearDensity extends UNITS
         }
 
         /**
-         * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
-         * @param v LinearDensity scalar
-         * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
-         */
-        public final Dimensionless.Abs divideBy(final LinearDensity.Rel v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
          * @param v LinearDensity scalar
          * @return Length scalar as a multiplication of LinearDensity and Area
          */
         public final Length.Abs multiplyBy(final Area.Abs v)
-        {
-            return new Length.Abs(this.si * v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
-         * @param v LinearDensity scalar
-         * @return Length scalar as a multiplication of LinearDensity and Area
-         */
-        public final Length.Abs multiplyBy(final Area.Rel v)
         {
             return new Length.Abs(this.si * v.si, LengthUnit.SI);
         }
@@ -830,31 +770,11 @@ public interface LinearDensity extends UNITS
         }
 
         /**
-         * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
-         * @param v LinearDensity scalar
-         * @return Force scalar as a multiplication of LinearDensity and Energy
-         */
-        public final Force.Abs multiplyBy(final Energy.Rel v)
-        {
-            return new Force.Abs(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
          * @param v LinearDensity scalar
          * @return Frequency scalar as a multiplication of LinearDensity and Speed
          */
         public final Frequency.Abs multiplyBy(final Speed.Abs v)
-        {
-            return new Frequency.Abs(this.si * v.si, FrequencyUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
-         * @param v LinearDensity scalar
-         * @return Frequency scalar as a multiplication of LinearDensity and Speed
-         */
-        public final Frequency.Abs multiplyBy(final Speed.Rel v)
         {
             return new Frequency.Abs(this.si * v.si, FrequencyUnit.SI);
         }

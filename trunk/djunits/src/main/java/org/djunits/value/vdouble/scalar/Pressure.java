@@ -320,16 +320,6 @@ public interface Pressure extends UNITS
          * @param v Pressure scalar
          * @return Dimensionless scalar as a division of Pressure and Pressure
          */
-        public final Dimensionless.Rel divideBy(final Pressure.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
-         * @param v Pressure scalar
-         * @return Dimensionless scalar as a division of Pressure and Pressure
-         */
         public final Dimensionless.Rel divideBy(final Pressure.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
@@ -340,29 +330,9 @@ public interface Pressure extends UNITS
          * @param v Pressure scalar
          * @return Force scalar as a multiplication of Pressure and Area
          */
-        public final Force.Rel multiplyBy(final Area.Abs v)
-        {
-            return new Force.Rel(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
-         * @param v Pressure scalar
-         * @return Force scalar as a multiplication of Pressure and Area
-         */
         public final Force.Rel multiplyBy(final Area.Rel v)
         {
             return new Force.Rel(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
-         * @param v Pressure scalar
-         * @return Energy scalar as a multiplication of Pressure and Volume
-         */
-        public final Energy.Rel multiplyBy(final Volume.Abs v)
-        {
-            return new Energy.Rel(this.si * v.si, EnergyUnit.SI);
         }
 
         /**
@@ -679,16 +649,6 @@ public interface Pressure extends UNITS
         }
 
         /**
-         * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
-         * @param v Pressure scalar
-         * @return Dimensionless scalar as a division of Pressure and Pressure
-         */
-        public final Dimensionless.Abs divideBy(final Pressure.Rel v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
          * @param v Pressure scalar
          * @return Force scalar as a multiplication of Pressure and Area
@@ -699,31 +659,11 @@ public interface Pressure extends UNITS
         }
 
         /**
-         * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
-         * @param v Pressure scalar
-         * @return Force scalar as a multiplication of Pressure and Area
-         */
-        public final Force.Abs multiplyBy(final Area.Rel v)
-        {
-            return new Force.Abs(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
          * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
          * @param v Pressure scalar
          * @return Energy scalar as a multiplication of Pressure and Volume
          */
         public final Energy.Abs multiplyBy(final Volume.Abs v)
-        {
-            return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
-         * @param v Pressure scalar
-         * @return Energy scalar as a multiplication of Pressure and Volume
-         */
-        public final Energy.Abs multiplyBy(final Volume.Rel v)
         {
             return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
         }

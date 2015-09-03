@@ -365,16 +365,6 @@ public interface ElectricalCharge extends UNITS
          * @param v ElectricalCharge scalar
          * @return Dimensionless scalar as a division of ElectricalCharge and ElectricalCharge
          */
-        public final Dimensionless.Rel divideBy(final ElectricalCharge.Abs v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the division of ElectricalCharge and ElectricalCharge, which results in a Dimensionless scalar.
-         * @param v ElectricalCharge scalar
-         * @return Dimensionless scalar as a division of ElectricalCharge and ElectricalCharge
-         */
         public final Dimensionless.Rel divideBy(final ElectricalCharge.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
@@ -385,29 +375,9 @@ public interface ElectricalCharge extends UNITS
          * @param v ElectricalCharge scalar
          * @return ElectricalCurrent scalar as a division of ElectricalCharge and Time
          */
-        public final ElectricalCurrent.Rel divideBy(final Time.Abs v)
-        {
-            return new ElectricalCurrent.Rel(this.si / v.si, ElectricalCurrentUnit.SI);
-        }
-
-        /**
-         * Calculate the division of ElectricalCharge and Time, which results in a ElectricalCurrent scalar.
-         * @param v ElectricalCharge scalar
-         * @return ElectricalCurrent scalar as a division of ElectricalCharge and Time
-         */
         public final ElectricalCurrent.Rel divideBy(final Time.Rel v)
         {
             return new ElectricalCurrent.Rel(this.si / v.si, ElectricalCurrentUnit.SI);
-        }
-
-        /**
-         * Calculate the division of ElectricalCharge and ElectricalCurrent, which results in a Time scalar.
-         * @param v ElectricalCharge scalar
-         * @return Time scalar as a division of ElectricalCharge and ElectricalCurrent
-         */
-        public final Time.Rel divideBy(final ElectricalCurrent.Abs v)
-        {
-            return new Time.Rel(this.si / v.si, TimeUnit.SI);
         }
 
         /**
@@ -769,16 +739,6 @@ public interface ElectricalCharge extends UNITS
         }
 
         /**
-         * Calculate the division of ElectricalCharge and ElectricalCharge, which results in a Dimensionless scalar.
-         * @param v ElectricalCharge scalar
-         * @return Dimensionless scalar as a division of ElectricalCharge and ElectricalCharge
-         */
-        public final Dimensionless.Abs divideBy(final ElectricalCharge.Rel v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
          * Calculate the division of ElectricalCharge and Time, which results in a ElectricalCurrent scalar.
          * @param v ElectricalCharge scalar
          * @return ElectricalCurrent scalar as a division of ElectricalCharge and Time
@@ -789,31 +749,11 @@ public interface ElectricalCharge extends UNITS
         }
 
         /**
-         * Calculate the division of ElectricalCharge and Time, which results in a ElectricalCurrent scalar.
-         * @param v ElectricalCharge scalar
-         * @return ElectricalCurrent scalar as a division of ElectricalCharge and Time
-         */
-        public final ElectricalCurrent.Abs divideBy(final Time.Rel v)
-        {
-            return new ElectricalCurrent.Abs(this.si / v.si, ElectricalCurrentUnit.SI);
-        }
-
-        /**
          * Calculate the division of ElectricalCharge and ElectricalCurrent, which results in a Time scalar.
          * @param v ElectricalCharge scalar
          * @return Time scalar as a division of ElectricalCharge and ElectricalCurrent
          */
         public final Time.Abs divideBy(final ElectricalCurrent.Abs v)
-        {
-            return new Time.Abs(this.si / v.si, TimeUnit.SI);
-        }
-
-        /**
-         * Calculate the division of ElectricalCharge and ElectricalCurrent, which results in a Time scalar.
-         * @param v ElectricalCharge scalar
-         * @return Time scalar as a division of ElectricalCharge and ElectricalCurrent
-         */
-        public final Time.Abs divideBy(final ElectricalCurrent.Rel v)
         {
             return new Time.Abs(this.si / v.si, TimeUnit.SI);
         }
