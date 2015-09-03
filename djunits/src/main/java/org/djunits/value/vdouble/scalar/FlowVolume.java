@@ -282,7 +282,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Rel plus(final FlowVolume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new FlowVolume.Rel(this.si + v.si, FlowVolumeUnit.SI);
+                    : new FlowVolume.Rel(this.si + v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -293,7 +293,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Rel minus(final FlowVolume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new FlowVolume.Rel(this.si - v.si, FlowVolumeUnit.SI);
+                    : new FlowVolume.Rel(this.si - v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -304,7 +304,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Abs plus(final FlowVolume.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new FlowVolume.Abs(this.si + v.si, FlowVolumeUnit.SI);
+                    : new FlowVolume.Abs(this.si + v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -625,7 +625,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Abs plus(final FlowVolume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new FlowVolume.Abs(this.si + v.si, FlowVolumeUnit.SI);
+                    : new FlowVolume.Abs(this.si + v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -636,7 +636,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Rel minus(final FlowVolume.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new FlowVolume.Rel(this.si - v.si, FlowVolumeUnit.SI);
+                    : new FlowVolume.Rel(this.si - v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -647,7 +647,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Abs minus(final FlowVolume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new FlowVolume.Abs(this.si - v.si, FlowVolumeUnit.SI);
+                    : new FlowVolume.Abs(this.si - v.si, FlowVolumeUnit.SI);
         }
 
         /**

@@ -46,8 +46,8 @@ public abstract class OffsetUnit<U extends Unit<U>> extends Unit<U>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param offsetToStandardUnit the offset to add to convert to the standard (e.g., SI) unit
      */
-    public OffsetUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final U referenceUnit, final double conversionFactorToReferenceUnit, final double offsetToStandardUnit)
+    public OffsetUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem, final U referenceUnit,
+            final double conversionFactorToReferenceUnit, final double offsetToStandardUnit)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
         this.offsetToStandardUnit = offsetToStandardUnit;

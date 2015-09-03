@@ -52,7 +52,7 @@ public class DoubleVectorSparseTest
      * @param expectAbsolute boolean; if true; dv should be Absolute; if false; dv should be Relative
      */
     private static void checkContentsAndType(final DoubleVector<?> dv, final double[] reference, final double precision,
-        final Unit<?> u, final boolean expectAbsolute)
+            final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("DoubleVector should not be null", null != dv);
         for (int index = dv.size(); --index >= 0;)
@@ -67,8 +67,8 @@ public class DoubleVectorSparseTest
             }
         }
         assertEquals("Unit should be " + u.toString(), u, dv.getUnit());
-        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"), expectAbsolute ? dv.isAbsolute() : dv
-            .isRelative());
+        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"),
+                expectAbsolute ? dv.isAbsolute() : dv.isRelative());
     }
 
     /**
@@ -107,7 +107,7 @@ public class DoubleVectorSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
             MutableDoubleVector.Abs.Sparse<TemperatureUnit> dv =
-                new MutableDoubleVector.Abs.Sparse<TemperatureUnit>(value, tempUnit);
+                    new MutableDoubleVector.Abs.Sparse<TemperatureUnit>(value, tempUnit);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -123,7 +123,7 @@ public class DoubleVectorSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({"static-method", "unchecked"})
+    @SuppressWarnings({ "static-method", "unchecked" })
     @Test
     public final void basicsAbsTest()
     {
@@ -132,7 +132,7 @@ public class DoubleVectorSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[] value = data(3, 38.0);
             DoubleVector.Abs.Sparse<TemperatureUnit> temperatureDV =
-                new DoubleVector.Abs.Sparse<TemperatureUnit>(value, tempUnit);
+                    new DoubleVector.Abs.Sparse<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
@@ -142,7 +142,7 @@ public class DoubleVectorSparseTest
                 assertEquals("Value should match", value[index], out[index], 0.001);
             }
             MutableDoubleVector.Abs.Sparse<TemperatureUnit> mdv =
-                new MutableDoubleVector.Abs.Sparse<TemperatureUnit>(value, tempUnit);
+                    new MutableDoubleVector.Abs.Sparse<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
             mdv.setSI(0, 73);
             double safe = value[0];
@@ -152,7 +152,7 @@ public class DoubleVectorSparseTest
             mdv.set(0, temperatureDV.get(0));
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
             DoubleVector.Abs.Sparse<TemperatureUnit> temperature2DV =
-                new DoubleVector.Abs.Sparse<TemperatureUnit>(temperatureDV.getVectorSI(), TemperatureUnit.KELVIN);
+                    new DoubleVector.Abs.Sparse<TemperatureUnit>(temperatureDV.getVectorSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
             assertTrue("Value is Absolute", temperatureDV.isAbsolute());
             assertFalse("Value is not Relative", temperatureDV.isRelative());
@@ -170,8 +170,7 @@ public class DoubleVectorSparseTest
             }
             temperatureDV = new DoubleVector.Abs.Sparse<TemperatureUnit>(scalar);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
-            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV
-                .cardinality());
+            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV.cardinality());
             double sum = 0;
             for (int index = 0; index < value.length; index++)
             {
@@ -248,7 +247,7 @@ public class DoubleVectorSparseTest
         DoubleScalar.Rel<LengthUnit> dvCounterPart = new DoubleScalar.Rel<LengthUnit>(value, lengthUnit);
         assertFalse("Not equal if one Absolute and other Relative", dv.equals(dvCounterPart));
         DoubleScalar.Abs<TemperatureUnit> dvWrongBaseUnit =
-            new DoubleScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+                new DoubleScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dv.getSI(), dvWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dv.equals(dvWrongBaseUnit));
         DoubleScalar.Abs<LengthUnit> dvCompatibleUnit = new DoubleScalar.Abs<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
@@ -265,7 +264,7 @@ public class DoubleVectorSparseTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
+        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
         for (double seedValue : seedValues)
         {
             double[] input = data(3, seedValue);
@@ -561,7 +560,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -587,7 +586,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -613,7 +612,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i) * right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -639,7 +638,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -665,7 +664,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -691,7 +690,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i) * right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -733,14 +732,14 @@ public class DoubleVectorSparseTest
         {
             double[] leftIn = data(3, -12.34);
             DoubleVector.Abs.Sparse<TemperatureUnit> left =
-                new DoubleVector.Abs.Sparse<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
+                    new DoubleVector.Abs.Sparse<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
             double[] right = data(3, -4.321);
             MutableDoubleVector.Abs.Sparse<TemperatureUnit> result = DoubleVector.times(left, right);
             assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
             for (int index = right.length; --index >= 0;)
             {
-                assertEquals("Content should match product of left and right", leftIn[index] * right[index], result
-                    .getSI(index), 0.001);
+                assertEquals("Content should match product of left and right", leftIn[index] * right[index],
+                        result.getSI(index), 0.001);
             }
         }
         catch (ValueException ve)
@@ -785,7 +784,7 @@ public class DoubleVectorSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
             MutableDoubleVector.Rel.Sparse<TemperatureUnit> dv =
-                new MutableDoubleVector.Rel.Sparse<TemperatureUnit>(value, tempUnit);
+                    new MutableDoubleVector.Rel.Sparse<TemperatureUnit>(value, tempUnit);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -801,7 +800,7 @@ public class DoubleVectorSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({"static-method", "unchecked"})
+    @SuppressWarnings({ "static-method", "unchecked" })
     @Test
     public final void basicsRelTest()
     {
@@ -810,7 +809,7 @@ public class DoubleVectorSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[] value = data(3, 38.0);
             DoubleVector.Rel.Sparse<TemperatureUnit> temperatureDV =
-                new DoubleVector.Rel.Sparse<TemperatureUnit>(value, tempUnit);
+                    new DoubleVector.Rel.Sparse<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
@@ -820,7 +819,7 @@ public class DoubleVectorSparseTest
                 assertEquals("Value should match", value[index], out[index], 0.001);
             }
             MutableDoubleVector.Rel.Sparse<TemperatureUnit> mdv =
-                new MutableDoubleVector.Rel.Sparse<TemperatureUnit>(value, tempUnit);
+                    new MutableDoubleVector.Rel.Sparse<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
             mdv.setSI(0, 73);
             double safe = value[0];
@@ -830,7 +829,7 @@ public class DoubleVectorSparseTest
             mdv.set(0, temperatureDV.get(0));
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
             DoubleVector.Rel.Sparse<TemperatureUnit> temperature2DV =
-                new DoubleVector.Rel.Sparse<TemperatureUnit>(temperatureDV.getVectorSI(), TemperatureUnit.KELVIN);
+                    new DoubleVector.Rel.Sparse<TemperatureUnit>(temperatureDV.getVectorSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
             assertTrue("Value is Relative", temperatureDV.isRelative());
             assertFalse("Value is not Absolute", temperatureDV.isAbsolute());
@@ -848,8 +847,7 @@ public class DoubleVectorSparseTest
             }
             temperatureDV = new DoubleVector.Rel.Sparse<TemperatureUnit>(scalar);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
-            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV
-                .cardinality());
+            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV.cardinality());
             double sum = 0;
             for (int index = 0; index < value.length; index++)
             {
@@ -926,7 +924,7 @@ public class DoubleVectorSparseTest
         DoubleScalar.Abs<LengthUnit> dvCounterPart = new DoubleScalar.Abs<LengthUnit>(value, lengthUnit);
         assertFalse("Not equal if one Absolute and other Relative", dv.equals(dvCounterPart));
         DoubleScalar.Rel<TemperatureUnit> dvWrongBaseUnit =
-            new DoubleScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+                new DoubleScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dv.getSI(), dvWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dv.equals(dvWrongBaseUnit));
         DoubleScalar.Rel<LengthUnit> dvCompatibleUnit = new DoubleScalar.Rel<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
@@ -943,7 +941,7 @@ public class DoubleVectorSparseTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
+        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
         for (double seedValue : seedValues)
         {
             double[] input = data(3, seedValue);
@@ -1239,7 +1237,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1265,7 +1263,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1291,7 +1289,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i) * right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1317,7 +1315,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1343,7 +1341,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1369,7 +1367,7 @@ public class DoubleVectorSparseTest
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i) * right.getSI(i),
-                    result.getSI(i), 0.001);
+                        result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1411,14 +1409,14 @@ public class DoubleVectorSparseTest
         {
             double[] leftIn = data(3, -12.34);
             DoubleVector.Rel.Sparse<TemperatureUnit> left =
-                new DoubleVector.Rel.Sparse<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
+                    new DoubleVector.Rel.Sparse<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
             double[] right = data(3, -4.321);
             MutableDoubleVector.Rel.Sparse<TemperatureUnit> result = DoubleVector.times(left, right);
             assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
             for (int index = right.length; --index >= 0;)
             {
-                assertEquals("Content should match product of left and right", leftIn[index] * right[index], result
-                    .getSI(index), 0.001);
+                assertEquals("Content should match product of left and right", leftIn[index] * right[index],
+                        result.getSI(index), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1449,7 +1447,7 @@ public class DoubleVectorSparseTest
          * @param function DoubleToDouble; encapsulated function that converts one inputValue to an outputValue
          */
         public static void tester(final double[] inputValues, final String operation, final DoubleVector<?> actualResult,
-            final double precision, final DoubleToDouble function)
+                final double precision, final DoubleToDouble function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {
@@ -1464,8 +1462,8 @@ public class DoubleVectorSparseTest
                     fail("Caught unexpected exception: " + ve.toString());
                 }
                 String description =
-                    String.format("%s(%f->%f should be equal to %f with precision %f", operation, inputValues[i],
-                        expectedResult, got, precision);
+                        String.format("%s(%f->%f should be equal to %f with precision %f", operation, inputValues[i],
+                                expectedResult, got, precision);
                 // System.out.println(description);
                 assertEquals(description, expectedResult, got, precision);
             }

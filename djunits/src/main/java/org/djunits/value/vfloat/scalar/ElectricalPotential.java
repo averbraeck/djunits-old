@@ -83,10 +83,10 @@ public interface ElectricalPotential extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalPotential.Rel interpolate(final ElectricalPotential.Rel zero,
-            final ElectricalPotential.Rel one, final float ratio)
+                final ElectricalPotential.Rel one, final float ratio)
         {
-            return new ElectricalPotential.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new ElectricalPotential.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                    zero.getUnit());
         }
 
         /**
@@ -97,7 +97,7 @@ public interface ElectricalPotential extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalPotential.Rel interpolate(final ElectricalPotential.Rel zero,
-            final ElectricalPotential.Rel one, final double ratio)
+                final ElectricalPotential.Rel one, final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -326,7 +326,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Rel plus(final ElectricalPotential.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new ElectricalPotential.Rel(this.si + v.si, ElectricalPotentialUnit.SI);
+                    : new ElectricalPotential.Rel(this.si + v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -337,7 +337,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Rel minus(final ElectricalPotential.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new ElectricalPotential.Rel(this.si - v.si, ElectricalPotentialUnit.SI);
+                    : new ElectricalPotential.Rel(this.si - v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -348,7 +348,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Abs plus(final ElectricalPotential.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new ElectricalPotential.Abs(this.si + v.si, ElectricalPotentialUnit.SI);
+                    : new ElectricalPotential.Abs(this.si + v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -451,10 +451,10 @@ public interface ElectricalPotential extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalPotential.Abs interpolate(final ElectricalPotential.Abs zero,
-            final ElectricalPotential.Abs one, final float ratio)
+                final ElectricalPotential.Abs one, final float ratio)
         {
-            return new ElectricalPotential.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new ElectricalPotential.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                    zero.getUnit());
         }
 
         /**
@@ -465,7 +465,7 @@ public interface ElectricalPotential extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalPotential.Abs interpolate(final ElectricalPotential.Abs zero,
-            final ElectricalPotential.Abs one, final double ratio)
+                final ElectricalPotential.Abs one, final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -694,7 +694,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Abs plus(final ElectricalPotential.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new ElectricalPotential.Abs(this.si + v.si, ElectricalPotentialUnit.SI);
+                    : new ElectricalPotential.Abs(this.si + v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -705,7 +705,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Rel minus(final ElectricalPotential.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new ElectricalPotential.Rel(this.si - v.si, ElectricalPotentialUnit.SI);
+                    : new ElectricalPotential.Rel(this.si - v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -716,7 +716,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Abs minus(final ElectricalPotential.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new ElectricalPotential.Abs(this.si - v.si, ElectricalPotentialUnit.SI);
+                    : new ElectricalPotential.Abs(this.si - v.si, ElectricalPotentialUnit.SI);
         }
 
         /**

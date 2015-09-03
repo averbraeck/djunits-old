@@ -284,7 +284,7 @@ public interface Force extends UNITS
         public final Force.Rel plus(final Force.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Force.Rel(
-                this.si + v.si, ForceUnit.SI);
+                    this.si + v.si, ForceUnit.SI);
         }
 
         /**
@@ -295,7 +295,7 @@ public interface Force extends UNITS
         public final Force.Rel minus(final Force.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Force.Rel(
-                this.si - v.si, ForceUnit.SI);
+                    this.si - v.si, ForceUnit.SI);
         }
 
         /**
@@ -306,7 +306,7 @@ public interface Force extends UNITS
         public final Force.Abs plus(final Force.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Force.Abs(
-                this.si + v.si, ForceUnit.SI);
+                    this.si + v.si, ForceUnit.SI);
         }
 
         /**
@@ -647,7 +647,7 @@ public interface Force extends UNITS
         public final Force.Abs plus(final Force.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Force.Abs(
-                this.si + v.si, ForceUnit.SI);
+                    this.si + v.si, ForceUnit.SI);
         }
 
         /**
@@ -658,7 +658,7 @@ public interface Force extends UNITS
         public final Force.Rel minus(final Force.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Force.Rel(
-                this.si - v.si, ForceUnit.SI);
+                    this.si - v.si, ForceUnit.SI);
         }
 
         /**
@@ -669,7 +669,7 @@ public interface Force extends UNITS
         public final Force.Abs minus(final Force.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Force.Abs(
-                this.si - v.si, ForceUnit.SI);
+                    this.si - v.si, ForceUnit.SI);
         }
 
         /**

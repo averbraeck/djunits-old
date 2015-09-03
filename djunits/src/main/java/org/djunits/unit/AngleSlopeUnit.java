@@ -56,15 +56,14 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
         RADIAN = SI;
         DEGREE = new AngleSlopeUnit("AngleSlopeUnit.degree", "AngleSlopeUnit.deg", SI_ACCEPTED, RADIAN, Math.PI / 180.0);
         ARCMINUTE = new AngleSlopeUnit("AngleSlopeUnit.arcminute", "AngleSlopeUnit.arcmin", SI_ACCEPTED, DEGREE, 1.0 / 60.0);
-        ARCSECOND =
-            new AngleSlopeUnit("AngleSlopeUnit.arcsecond", "AngleSlopeUnit.arcsec", SI_ACCEPTED, DEGREE, 1.0 / 3600.0);
+        ARCSECOND = new AngleSlopeUnit("AngleSlopeUnit.arcsecond", "AngleSlopeUnit.arcsec", SI_ACCEPTED, DEGREE, 1.0 / 3600.0);
         GRAD = new AngleSlopeUnit("AngleSlopeUnit.gradian", "AngleSlopeUnit.grad", OTHER, RADIAN, 2.0 * Math.PI / 400.0);
         CENTESIMAL_ARCMINUTE =
-            new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcminute", "AngleSlopeUnit.centesimal_arcmin", OTHER, GRAD,
-                1.0 / 100.0);
+                new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcminute", "AngleSlopeUnit.centesimal_arcmin", OTHER, GRAD,
+                        1.0 / 100.0);
         CENTESIMAL_ARCSECOND =
-            new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcsecond", "AngleSlopeUnit.centesimal_arcsec", OTHER, GRAD,
-                1.0 / 10000.0);
+                new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcsecond", "AngleSlopeUnit.centesimal_arcsec", OTHER, GRAD,
+                        1.0 / 10000.0);
     }
 
     /**
@@ -87,7 +86,7 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public AngleSlopeUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final AngleSlopeUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final AngleSlopeUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
     }

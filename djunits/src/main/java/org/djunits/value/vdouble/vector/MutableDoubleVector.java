@@ -30,8 +30,8 @@ import cern.jet.math.tdouble.DoubleFunctions;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableDoubleVector
  */
-public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVector<U> implements
-    WriteDoubleVectorFunctions<U>, DoubleMathFunctions<MutableDoubleVector<U>>
+public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVector<U> implements WriteDoubleVectorFunctions<U>,
+        DoubleMathFunctions<MutableDoubleVector<U>>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -161,8 +161,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             public final MutableDoubleVector.Abs.Dense<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableDoubleVector.Abs.Dense<U> result =
-                    new MutableDoubleVector.Abs.Dense<U>(getVectorSI(), getUnit());
+                final MutableDoubleVector.Abs.Dense<U> result = new MutableDoubleVector.Abs.Dense<U>(getVectorSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -244,7 +243,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             {
                 setCopyOnWrite(true);
                 final MutableDoubleVector.Abs.Sparse<U> result =
-                    new MutableDoubleVector.Abs.Sparse<U>(getVectorSI(), getUnit());
+                        new MutableDoubleVector.Abs.Sparse<U>(getVectorSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -602,8 +601,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             public final MutableDoubleVector.Rel.Dense<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableDoubleVector.Rel.Dense<U> result =
-                    new MutableDoubleVector.Rel.Dense<U>(getVectorSI(), getUnit());
+                final MutableDoubleVector.Rel.Dense<U> result = new MutableDoubleVector.Rel.Dense<U>(getVectorSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -685,7 +683,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             {
                 setCopyOnWrite(true);
                 final MutableDoubleVector.Rel.Sparse<U> result =
-                    new MutableDoubleVector.Rel.Sparse<U>(getVectorSI(), getUnit());
+                        new MutableDoubleVector.Rel.Sparse<U>(getVectorSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }

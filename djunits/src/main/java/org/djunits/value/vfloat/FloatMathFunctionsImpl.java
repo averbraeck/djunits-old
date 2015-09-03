@@ -2,7 +2,6 @@ package org.djunits.value.vfloat;
 
 import cern.colt.function.tfloat.FloatFunction;
 
-
 /**
  * FloatFunction implementations of the standard Math functions.
  * <p>

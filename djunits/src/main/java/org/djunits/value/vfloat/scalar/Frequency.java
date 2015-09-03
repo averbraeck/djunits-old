@@ -324,7 +324,7 @@ public interface Frequency extends UNITS
         public final Frequency.Rel plus(final Frequency.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Frequency.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new Frequency.Rel(this.si + v.si, FrequencyUnit.SI);
+                    : new Frequency.Rel(this.si + v.si, FrequencyUnit.SI);
         }
 
         /**
@@ -335,7 +335,7 @@ public interface Frequency extends UNITS
         public final Frequency.Rel minus(final Frequency.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Frequency.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Frequency.Rel(this.si - v.si, FrequencyUnit.SI);
+                    : new Frequency.Rel(this.si - v.si, FrequencyUnit.SI);
         }
 
         /**
@@ -346,7 +346,7 @@ public interface Frequency extends UNITS
         public final Frequency.Abs plus(final Frequency.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Frequency.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Frequency.Abs(this.si + v.si, FrequencyUnit.SI);
+                    : new Frequency.Abs(this.si + v.si, FrequencyUnit.SI);
         }
 
         /**
@@ -709,7 +709,7 @@ public interface Frequency extends UNITS
         public final Frequency.Abs plus(final Frequency.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Frequency.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Frequency.Abs(this.si + v.si, FrequencyUnit.SI);
+                    : new Frequency.Abs(this.si + v.si, FrequencyUnit.SI);
         }
 
         /**
@@ -720,7 +720,7 @@ public interface Frequency extends UNITS
         public final Frequency.Rel minus(final Frequency.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Frequency.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Frequency.Rel(this.si - v.si, FrequencyUnit.SI);
+                    : new Frequency.Rel(this.si - v.si, FrequencyUnit.SI);
         }
 
         /**
@@ -731,7 +731,7 @@ public interface Frequency extends UNITS
         public final Frequency.Abs minus(final Frequency.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Frequency.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new Frequency.Abs(this.si - v.si, FrequencyUnit.SI);
+                    : new Frequency.Abs(this.si - v.si, FrequencyUnit.SI);
         }
 
         /**

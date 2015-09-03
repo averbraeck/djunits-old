@@ -45,16 +45,13 @@ public class TorqueUnitTest extends AbstractUnitTest<TorqueUnit>
     public final void conversions()
     {
         checkUnitRatioNameAndAbbreviation(TorqueUnit.NEWTON_METER, 1, 0.00000001, "Newton meter", "N.m");
-        checkUnitRatioNameAndAbbreviation(TorqueUnit.METER_KILOGRAM_FORCE, 9.80665, 0.000005, "meter kilogram-force",
-            "m.kgf");
-        checkUnitRatioNameAndAbbreviation(TorqueUnit.POUND_FOOT, 1.35581794833, 0.0000001, "pound-foot",
-            "lbf.ft");
+        checkUnitRatioNameAndAbbreviation(TorqueUnit.METER_KILOGRAM_FORCE, 9.80665, 0.000005, "meter kilogram-force", "m.kgf");
+        checkUnitRatioNameAndAbbreviation(TorqueUnit.POUND_FOOT, 1.35581794833, 0.0000001, "pound-foot", "lbf.ft");
         // Check two conversions between non-standard units
-        assertEquals("one FOOT POUND FORCE is 12 INCH_POUND_FORCE", 12, getMultiplicationFactorTo(
-            TorqueUnit.POUND_FOOT, TorqueUnit.POUND_INCH), 0.0001);
+        assertEquals("one FOOT POUND FORCE is 12 INCH_POUND_FORCE", 12,
+                getMultiplicationFactorTo(TorqueUnit.POUND_FOOT, TorqueUnit.POUND_INCH), 0.0001);
         // Check conversion factor to standard unit for all remaining acceleration units
-        checkUnitRatioNameAndAbbreviation(TorqueUnit.POUND_INCH, 0.112984829, 0.000000001, "pound-inch",
-            "lbf.in");
+        checkUnitRatioNameAndAbbreviation(TorqueUnit.POUND_INCH, 0.112984829, 0.000000001, "pound-inch", "lbf.in");
     }
 
 }

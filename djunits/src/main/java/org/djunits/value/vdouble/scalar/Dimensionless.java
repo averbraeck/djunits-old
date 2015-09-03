@@ -95,10 +95,9 @@ public interface Dimensionless extends UNITS
          * @return a Scalar at the ratio between
          */
         public static Dimensionless.Rel interpolate(final Dimensionless.Rel zero, final Dimensionless.Rel one,
-            final double ratio)
+                final double ratio)
         {
-            return new Dimensionless.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new Dimensionless.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
         }
 
         /** {@inheritDoc} */
@@ -305,7 +304,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Rel plus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new Dimensionless.Rel(this.si + v.si, DimensionlessUnit.SI);
+                    : new Dimensionless.Rel(this.si + v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -316,7 +315,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Rel minus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
+                    : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -327,7 +326,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Abs plus(final Dimensionless.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
+                    : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -701,10 +700,9 @@ public interface Dimensionless extends UNITS
          * @return a Scalar at the ratio between
          */
         public static Dimensionless.Abs interpolate(final Dimensionless.Abs zero, final Dimensionless.Abs one,
-            final double ratio)
+                final double ratio)
         {
-            return new Dimensionless.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new Dimensionless.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
         }
 
         /** {@inheritDoc} */
@@ -911,7 +909,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Abs plus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
+                    : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -922,7 +920,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Rel minus(final Dimensionless.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
+                    : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -933,7 +931,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Abs minus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new Dimensionless.Abs(this.si - v.si, DimensionlessUnit.SI);
+                    : new Dimensionless.Abs(this.si - v.si, DimensionlessUnit.SI);
         }
 
         /**

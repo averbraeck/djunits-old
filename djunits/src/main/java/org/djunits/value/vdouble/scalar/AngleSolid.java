@@ -279,7 +279,7 @@ public interface AngleSolid extends UNITS
         public final AngleSolid.Rel plus(final AngleSolid.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSolid.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new AngleSolid.Rel(this.si + v.si, AngleSolidUnit.SI);
+                    : new AngleSolid.Rel(this.si + v.si, AngleSolidUnit.SI);
         }
 
         /**
@@ -290,7 +290,7 @@ public interface AngleSolid extends UNITS
         public final AngleSolid.Rel minus(final AngleSolid.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSolid.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new AngleSolid.Rel(this.si - v.si, AngleSolidUnit.SI);
+                    : new AngleSolid.Rel(this.si - v.si, AngleSolidUnit.SI);
         }
 
         /**
@@ -301,7 +301,7 @@ public interface AngleSolid extends UNITS
         public final AngleSolid.Abs plus(final AngleSolid.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSolid.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new AngleSolid.Abs(this.si + v.si, AngleSolidUnit.SI);
+                    : new AngleSolid.Abs(this.si + v.si, AngleSolidUnit.SI);
         }
 
         /**
@@ -582,7 +582,7 @@ public interface AngleSolid extends UNITS
         public final AngleSolid.Abs plus(final AngleSolid.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSolid.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new AngleSolid.Abs(this.si + v.si, AngleSolidUnit.SI);
+                    : new AngleSolid.Abs(this.si + v.si, AngleSolidUnit.SI);
         }
 
         /**
@@ -593,7 +593,7 @@ public interface AngleSolid extends UNITS
         public final AngleSolid.Rel minus(final AngleSolid.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSolid.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new AngleSolid.Rel(this.si - v.si, AngleSolidUnit.SI);
+                    : new AngleSolid.Rel(this.si - v.si, AngleSolidUnit.SI);
         }
 
         /**
@@ -604,7 +604,7 @@ public interface AngleSolid extends UNITS
         public final AngleSolid.Abs minus(final AngleSolid.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSolid.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new AngleSolid.Abs(this.si - v.si, AngleSolidUnit.SI);
+                    : new AngleSolid.Abs(this.si - v.si, AngleSolidUnit.SI);
         }
 
         /**

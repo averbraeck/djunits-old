@@ -74,10 +74,10 @@ public interface ElectricalCurrent extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalCurrent.Rel interpolate(final ElectricalCurrent.Rel zero, final ElectricalCurrent.Rel one,
-            final double ratio)
+                final double ratio)
         {
-            return new ElectricalCurrent.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new ElectricalCurrent.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                    zero.getUnit());
         }
 
         /** {@inheritDoc} */
@@ -284,7 +284,7 @@ public interface ElectricalCurrent extends UNITS
         public final ElectricalCurrent.Rel plus(final ElectricalCurrent.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCurrent.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new ElectricalCurrent.Rel(this.si + v.si, ElectricalCurrentUnit.SI);
+                    : new ElectricalCurrent.Rel(this.si + v.si, ElectricalCurrentUnit.SI);
         }
 
         /**
@@ -295,7 +295,7 @@ public interface ElectricalCurrent extends UNITS
         public final ElectricalCurrent.Rel minus(final ElectricalCurrent.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCurrent.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new ElectricalCurrent.Rel(this.si - v.si, ElectricalCurrentUnit.SI);
+                    : new ElectricalCurrent.Rel(this.si - v.si, ElectricalCurrentUnit.SI);
         }
 
         /**
@@ -306,7 +306,7 @@ public interface ElectricalCurrent extends UNITS
         public final ElectricalCurrent.Abs plus(final ElectricalCurrent.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCurrent.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new ElectricalCurrent.Abs(this.si + v.si, ElectricalCurrentUnit.SI);
+                    : new ElectricalCurrent.Abs(this.si + v.si, ElectricalCurrentUnit.SI);
         }
 
         /**
@@ -410,10 +410,10 @@ public interface ElectricalCurrent extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalCurrent.Abs interpolate(final ElectricalCurrent.Abs zero, final ElectricalCurrent.Abs one,
-            final double ratio)
+                final double ratio)
         {
-            return new ElectricalCurrent.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new ElectricalCurrent.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                    zero.getUnit());
         }
 
         /** {@inheritDoc} */
@@ -620,7 +620,7 @@ public interface ElectricalCurrent extends UNITS
         public final ElectricalCurrent.Abs plus(final ElectricalCurrent.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCurrent.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new ElectricalCurrent.Abs(this.si + v.si, ElectricalCurrentUnit.SI);
+                    : new ElectricalCurrent.Abs(this.si + v.si, ElectricalCurrentUnit.SI);
         }
 
         /**
@@ -631,7 +631,7 @@ public interface ElectricalCurrent extends UNITS
         public final ElectricalCurrent.Rel minus(final ElectricalCurrent.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCurrent.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new ElectricalCurrent.Rel(this.si - v.si, ElectricalCurrentUnit.SI);
+                    : new ElectricalCurrent.Rel(this.si - v.si, ElectricalCurrentUnit.SI);
         }
 
         /**
@@ -642,7 +642,7 @@ public interface ElectricalCurrent extends UNITS
         public final ElectricalCurrent.Abs minus(final ElectricalCurrent.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCurrent.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new ElectricalCurrent.Abs(this.si - v.si, ElectricalCurrentUnit.SI);
+                    : new ElectricalCurrent.Abs(this.si - v.si, ElectricalCurrentUnit.SI);
         }
 
         /**

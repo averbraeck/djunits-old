@@ -44,13 +44,12 @@ public class TemperatureUnit extends OffsetUnit<TemperatureUnit>
     {
         SI = new TemperatureUnit("TemperatureUnit.kelvin", "TemperatureUnit.K", SI_BASE, 1.0, 0.0);
         KELVIN = SI;
-        DEGREE_CELSIUS =
-            new TemperatureUnit("TemperatureUnit.degree_Celsius", "TemperatureUnit.dgC", SI_DERIVED, 1.0, -273.15);
+        DEGREE_CELSIUS = new TemperatureUnit("TemperatureUnit.degree_Celsius", "TemperatureUnit.dgC", SI_DERIVED, 1.0, -273.15);
         DEGREE_FAHRENHEIT =
-            new TemperatureUnit("TemperatureUnit.degree_Fahrenheit", "TemperatureUnit.dgF", IMPERIAL, 5.0 / 9.0, -459.67);
+                new TemperatureUnit("TemperatureUnit.degree_Fahrenheit", "TemperatureUnit.dgF", IMPERIAL, 5.0 / 9.0, -459.67);
         DEGREE_RANKINE = new TemperatureUnit("TemperatureUnit.degree_Rankine", "TemperatureUnit.dgR", OTHER, 5.0 / 9.0, 0.0);
         DEGREE_REAUMUR =
-            new TemperatureUnit("TemperatureUnit.degree_Reaumur", "TemperatureUnit.dgRe", OTHER, 4.0 / 5.0, -273.15);
+                new TemperatureUnit("TemperatureUnit.degree_Reaumur", "TemperatureUnit.dgRe", OTHER, 4.0 / 5.0, -273.15);
     }
 
     /**
@@ -61,7 +60,7 @@ public class TemperatureUnit extends OffsetUnit<TemperatureUnit>
      * @param offsetToKelvin the offsetToKelvin to add to convert to the standard (e.g., SI) unit
      */
     public TemperatureUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final double conversionFactorToStandardUnit, final double offsetToKelvin)
+            final double conversionFactorToStandardUnit, final double offsetToKelvin)
     {
         super(nameKey, abbreviationKey, unitSystem, KELVIN, conversionFactorToStandardUnit, offsetToKelvin);
     }
@@ -75,7 +74,7 @@ public class TemperatureUnit extends OffsetUnit<TemperatureUnit>
      * @param offsetToKelvin the offsetToKelvin to add to convert to the standard (e.g., SI) unit
      */
     public TemperatureUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final TemperatureUnit referenceUnit, final double conversionFactorToReferenceUnit, final double offsetToKelvin)
+            final TemperatureUnit referenceUnit, final double conversionFactorToReferenceUnit, final double offsetToKelvin)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, offsetToKelvin);
     }

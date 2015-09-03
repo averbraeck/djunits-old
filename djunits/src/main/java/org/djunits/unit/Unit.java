@@ -48,7 +48,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
 
     /** static map of all defined coefficient strings, mapped to the existing units. */
     private static final Map<String, Map<Class<Unit<?>>, Unit<?>>> SI_UNITS =
-        new HashMap<String, Map<Class<Unit<?>>, Unit<?>>>();
+            new HashMap<String, Map<Class<Unit<?>>, Unit<?>>>();
 
     /** a static map of all defined units. */
     private static final Map<String, Set<Unit<?>>> UNITS = new HashMap<String, Set<Unit<?>>>();
@@ -169,7 +169,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      * @param safe Boolean; if true, a UnitException is silently ignored; if false a UnitException is an Error
      */
     public Unit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem, final U referenceUnit,
-        final double conversionFactorToReferenceUnit, final boolean safe)
+            final double conversionFactorToReferenceUnit, final boolean safe)
     {
         // as it can happen that this method is called for the standard unit (when it is still null) we have to catch
         // the null pointer for the reference unit here.
@@ -180,7 +180,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         else
         {
             this.conversionFactorToStandardUnit =
-                referenceUnit.getConversionFactorToStandardUnit() * conversionFactorToReferenceUnit;
+                    referenceUnit.getConversionFactorToStandardUnit() * conversionFactorToReferenceUnit;
         }
         this.nameKey = nameKey;
         this.abbreviationKey = abbreviationKey;
@@ -411,7 +411,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
             initialize();
         }
         if (SI_UNITS.containsKey(normalizedSICoefficientsString)
-            && SI_UNITS.get(normalizedSICoefficientsString).containsKey(SIUnit.class))
+                && SI_UNITS.get(normalizedSICoefficientsString).containsKey(SIUnit.class))
         {
             return (SIUnit) SI_UNITS.get(normalizedSICoefficientsString).get(SIUnit.class);
         }

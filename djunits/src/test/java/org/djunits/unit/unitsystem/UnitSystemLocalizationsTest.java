@@ -45,9 +45,8 @@ public class UnitSystemLocalizationsTest
             }
         }
         ArrayList<String> errors = new ArrayList<String>();
-        for (String localeName : AvailableLocalizations.availableLocalizations("localeunitsystem", this.getClass()
-            .getResource("").getPath()
-            + "../../../../../"))
+        for (String localeName : AvailableLocalizations.availableLocalizations("localeunitsystem",
+                this.getClass().getResource("").getPath() + "../../../../../"))
         {
             for (UnitSystem us : unitSystems)
             {

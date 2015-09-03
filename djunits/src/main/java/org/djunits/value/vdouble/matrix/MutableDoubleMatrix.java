@@ -30,8 +30,8 @@ import cern.jet.math.tdouble.DoubleFunctions;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableDoubleMatrix
  */
-public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatrix<U> implements
-    WriteDoubleMatrixFunctions<U>, DoubleMathFunctions<MutableDoubleMatrix<U>>
+public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatrix<U> implements WriteDoubleMatrixFunctions<U>,
+        DoubleMathFunctions<MutableDoubleMatrix<U>>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -164,8 +164,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public final MutableDoubleMatrix.Abs.Dense<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableDoubleMatrix.Abs.Dense<U> result =
-                    new MutableDoubleMatrix.Abs.Dense<U>(getMatrixSI(), getUnit());
+                final MutableDoubleMatrix.Abs.Dense<U> result = new MutableDoubleMatrix.Abs.Dense<U>(getMatrixSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -247,7 +246,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             {
                 setCopyOnWrite(true);
                 final MutableDoubleMatrix.Abs.Sparse<U> result =
-                    new MutableDoubleMatrix.Abs.Sparse<U>(getMatrixSI(), getUnit());
+                        new MutableDoubleMatrix.Abs.Sparse<U>(getMatrixSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -605,8 +604,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public final MutableDoubleMatrix.Rel.Dense<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableDoubleMatrix.Rel.Dense<U> result =
-                    new MutableDoubleMatrix.Rel.Dense<U>(getMatrixSI(), getUnit());
+                final MutableDoubleMatrix.Rel.Dense<U> result = new MutableDoubleMatrix.Rel.Dense<U>(getMatrixSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -688,7 +686,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             {
                 setCopyOnWrite(true);
                 final MutableDoubleMatrix.Rel.Sparse<U> result =
-                    new MutableDoubleMatrix.Rel.Sparse<U>(getMatrixSI(), getUnit());
+                        new MutableDoubleMatrix.Rel.Sparse<U>(getMatrixSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -1005,8 +1003,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
 
     /** {@inheritDoc} */
     @Override
-    public final void setInUnit(final int row, final int column, final double value, final U valueUnit)
-        throws ValueException
+    public final void setInUnit(final int row, final int column, final double value, final U valueUnit) throws ValueException
     {
         setSI(row, column, ValueUtil.expressAsSIUnit(value, valueUnit));
     }

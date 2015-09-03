@@ -48,18 +48,16 @@ public class TorqueUnit extends Unit<TorqueUnit>
     static
     {
         SI =
-            new TorqueUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "TorqueUnit.Newton_meter",
-                "TorqueUnit.N.m", SI_DERIVED);
+                new TorqueUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "TorqueUnit.Newton_meter",
+                        "TorqueUnit.N.m", SI_DERIVED);
         NEWTON_METER = SI;
         METER_KILOGRAM_FORCE =
-            new TorqueUnit(ForceUnit.KILOGRAM_FORCE, LengthUnit.METER, "TorqueUnit.meter_kilogram-force",
-                "TorqueUnit.m.kgf", OTHER);
+                new TorqueUnit(ForceUnit.KILOGRAM_FORCE, LengthUnit.METER, "TorqueUnit.meter_kilogram-force",
+                        "TorqueUnit.m.kgf", OTHER);
         POUND_FOOT =
-            new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "TorqueUnit.pound-foot", "TorqueUnit.lbf.ft",
-                IMPERIAL);
+                new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "TorqueUnit.pound-foot", "TorqueUnit.lbf.ft", IMPERIAL);
         POUND_INCH =
-            new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "TorqueUnit.pound-inch", "TorqueUnit.lbf.in",
-                IMPERIAL);
+                new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "TorqueUnit.pound-inch", "TorqueUnit.lbf.in", IMPERIAL);
     }
 
     /**
@@ -72,11 +70,11 @@ public class TorqueUnit extends Unit<TorqueUnit>
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
     public TorqueUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit, final String nameKey,
-        final String abbreviationKey, final UnitSystem unitSystem)
+            final String abbreviationKey, final UnitSystem unitSystem)
     {
         super(nameKey, abbreviationKey, unitSystem, NEWTON_METER, massUnit.getConversionFactorToStandardUnit()
-            * lengthUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
-            / (timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()), true);
+                * lengthUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
+                / (timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()), true);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.timeUnit = timeUnit;
@@ -91,10 +89,10 @@ public class TorqueUnit extends Unit<TorqueUnit>
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
     public TorqueUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String nameKey,
-        final String abbreviationKey, final UnitSystem unitSystem)
+            final String abbreviationKey, final UnitSystem unitSystem)
     {
         super(nameKey, abbreviationKey, unitSystem, NEWTON_METER, forceUnit.getConversionFactorToStandardUnit()
-            * lengthUnit.getConversionFactorToStandardUnit(), true);
+                * lengthUnit.getConversionFactorToStandardUnit(), true);
         this.massUnit = forceUnit.getMassUnit();
         this.lengthUnit = forceUnit.getLengthUnit();
         this.timeUnit = forceUnit.getTimeUnit();
@@ -109,7 +107,7 @@ public class TorqueUnit extends Unit<TorqueUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public TorqueUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final TorqueUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final TorqueUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
         this.massUnit = referenceUnit.getMassUnit();

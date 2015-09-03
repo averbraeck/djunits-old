@@ -38,11 +38,12 @@ public class FlowMassUnit extends Unit<FlowMassUnit>
     static
     {
         SI =
-            new FlowMassUnit(MassUnit.KILOGRAM, TimeUnit.SECOND, "FlowMassUnit.kilogram_per_second", "FlowMassUnit.kg/s",
-                SI_DERIVED);
+                new FlowMassUnit(MassUnit.KILOGRAM, TimeUnit.SECOND, "FlowMassUnit.kilogram_per_second", "FlowMassUnit.kg/s",
+                        SI_DERIVED);
         KILOGRAM_PER_SECOND = SI;
         POUND_PER_SECOND =
-            new FlowMassUnit(MassUnit.POUND, TimeUnit.SECOND, "FlowMassUnit.pound_per_second", "FlowMassUnit.lb/s", IMPERIAL);
+                new FlowMassUnit(MassUnit.POUND, TimeUnit.SECOND, "FlowMassUnit.pound_per_second", "FlowMassUnit.lb/s",
+                        IMPERIAL);
     }
 
     /**
@@ -53,11 +54,11 @@ public class FlowMassUnit extends Unit<FlowMassUnit>
      * @param abbreviationKey the key to the locale file for the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public FlowMassUnit(final MassUnit massUnit, final TimeUnit timeUnit, final String nameKey,
-        final String abbreviationKey, final UnitSystem unitSystem)
+    public FlowMassUnit(final MassUnit massUnit, final TimeUnit timeUnit, final String nameKey, final String abbreviationKey,
+            final UnitSystem unitSystem)
     {
         super(nameKey, abbreviationKey, unitSystem, KILOGRAM_PER_SECOND, massUnit.getConversionFactorToStandardUnit()
-            / timeUnit.getConversionFactorToStandardUnit(), true);
+                / timeUnit.getConversionFactorToStandardUnit(), true);
         this.massUnit = massUnit;
         this.timeUnit = timeUnit;
     }
@@ -71,7 +72,7 @@ public class FlowMassUnit extends Unit<FlowMassUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public FlowMassUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final FlowMassUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final FlowMassUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
         this.massUnit = referenceUnit.getMassUnit();

@@ -51,8 +51,8 @@ public class ElectricalResistanceUnitTest extends AbstractUnitTest<ElectricalRes
         checkUnitRatioNameAndAbbreviation(ElectricalResistanceUnit.MILLIOHM, 0.001, 0.00000000001, "milliohm", "m\u03A9");
         checkUnitRatioNameAndAbbreviation(ElectricalResistanceUnit.KILOOHM, 1000, 0.005, "kilo-ohm", "k\u03A9");
         // Check two conversions between non-standard units
-        assertEquals("one KILOOHM is 1000000 MILLIOHM", 1000000, getMultiplicationFactorTo(ElectricalResistanceUnit.KILOOHM,
-            ElectricalResistanceUnit.MILLIOHM), 0.0001);
+        assertEquals("one KILOOHM is 1000000 MILLIOHM", 1000000,
+                getMultiplicationFactorTo(ElectricalResistanceUnit.KILOOHM, ElectricalResistanceUnit.MILLIOHM), 0.0001);
     }
 
     /**
@@ -62,19 +62,19 @@ public class ElectricalResistanceUnitTest extends AbstractUnitTest<ElectricalRes
     public final void createElectricalResistanceUnit()
     {
         ElectricalResistanceUnit myERU =
-            new ElectricalResistanceUnit(UnitLocalizationsTest.DONOTCHECKPREFIX + "ElectricalResistanceUnit.GigaOhm",
-                UnitLocalizationsTest.DONOTCHECKPREFIX + "ElectricalResistanceUnit.GOhm", SI_DERIVED,
-                ElectricalResistanceUnit.OHM, 1e9);
+                new ElectricalResistanceUnit(UnitLocalizationsTest.DONOTCHECKPREFIX + "ElectricalResistanceUnit.GigaOhm",
+                        UnitLocalizationsTest.DONOTCHECKPREFIX + "ElectricalResistanceUnit.GOhm", SI_DERIVED,
+                        ElectricalResistanceUnit.OHM, 1e9);
         assertTrue("Can create a new ElectricalResistanceUnit", null != myERU);
         checkUnitRatioNameAndAbbreviation(myERU, 1e9, 0.1, "!GigaOhm!", "!GOhm!");
 
         ElectricalResistanceUnit abOhm =
-            new ElectricalResistanceUnit(ElectricalPotentialUnit.ABVOLT, ElectricalCurrentUnit.ABAMPERE,
-                UnitLocalizationsTest.DONOTCHECKPREFIX + "AbOhm", UnitLocalizationsTest.DONOTCHECKPREFIX + "AOhm",
-                UnitSystem.CGS);
+                new ElectricalResistanceUnit(ElectricalPotentialUnit.ABVOLT, ElectricalCurrentUnit.ABAMPERE,
+                        UnitLocalizationsTest.DONOTCHECKPREFIX + "AbOhm", UnitLocalizationsTest.DONOTCHECKPREFIX + "AOhm",
+                        UnitSystem.CGS);
         assertTrue("Can create Abohm unit", null != abOhm);
         checkUnitRatioNameAndAbbreviation(abOhm, 1e-9, 1e-12, "!" + UnitLocalizationsTest.DONOTCHECKPREFIX + "AbOhm!", "!"
-            + UnitLocalizationsTest.DONOTCHECKPREFIX + "AOhm!");
+                + UnitLocalizationsTest.DONOTCHECKPREFIX + "AOhm!");
     }
 
 }

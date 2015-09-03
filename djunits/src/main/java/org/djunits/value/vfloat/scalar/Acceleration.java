@@ -82,11 +82,9 @@ public interface Acceleration extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Acceleration.Rel
-            interpolate(final Acceleration.Rel zero, final Acceleration.Rel one, final float ratio)
+        public static Acceleration.Rel interpolate(final Acceleration.Rel zero, final Acceleration.Rel one, final float ratio)
         {
-            return new Acceleration.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new Acceleration.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
         }
 
         /**
@@ -96,8 +94,7 @@ public interface Acceleration extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Acceleration.Rel interpolate(final Acceleration.Rel zero, final Acceleration.Rel one,
-            final double ratio)
+        public static Acceleration.Rel interpolate(final Acceleration.Rel zero, final Acceleration.Rel one, final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -326,7 +323,7 @@ public interface Acceleration extends UNITS
         public final Acceleration.Rel plus(final Acceleration.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Acceleration.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new Acceleration.Rel(this.si + v.si, AccelerationUnit.SI);
+                    : new Acceleration.Rel(this.si + v.si, AccelerationUnit.SI);
         }
 
         /**
@@ -337,7 +334,7 @@ public interface Acceleration extends UNITS
         public final Acceleration.Rel minus(final Acceleration.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Acceleration.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Acceleration.Rel(this.si - v.si, AccelerationUnit.SI);
+                    : new Acceleration.Rel(this.si - v.si, AccelerationUnit.SI);
         }
 
         /**
@@ -348,7 +345,7 @@ public interface Acceleration extends UNITS
         public final Acceleration.Abs plus(final Acceleration.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Acceleration.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Acceleration.Abs(this.si + v.si, AccelerationUnit.SI);
+                    : new Acceleration.Abs(this.si + v.si, AccelerationUnit.SI);
         }
 
         /**
@@ -460,11 +457,9 @@ public interface Acceleration extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Acceleration.Abs
-            interpolate(final Acceleration.Abs zero, final Acceleration.Abs one, final float ratio)
+        public static Acceleration.Abs interpolate(final Acceleration.Abs zero, final Acceleration.Abs one, final float ratio)
         {
-            return new Acceleration.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new Acceleration.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
         }
 
         /**
@@ -474,8 +469,7 @@ public interface Acceleration extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Acceleration.Abs interpolate(final Acceleration.Abs zero, final Acceleration.Abs one,
-            final double ratio)
+        public static Acceleration.Abs interpolate(final Acceleration.Abs zero, final Acceleration.Abs one, final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -704,7 +698,7 @@ public interface Acceleration extends UNITS
         public final Acceleration.Abs plus(final Acceleration.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Acceleration.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Acceleration.Abs(this.si + v.si, AccelerationUnit.SI);
+                    : new Acceleration.Abs(this.si + v.si, AccelerationUnit.SI);
         }
 
         /**
@@ -715,7 +709,7 @@ public interface Acceleration extends UNITS
         public final Acceleration.Rel minus(final Acceleration.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Acceleration.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Acceleration.Rel(this.si - v.si, AccelerationUnit.SI);
+                    : new Acceleration.Rel(this.si - v.si, AccelerationUnit.SI);
         }
 
         /**
@@ -726,7 +720,7 @@ public interface Acceleration extends UNITS
         public final Acceleration.Abs minus(final Acceleration.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Acceleration.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new Acceleration.Abs(this.si - v.si, AccelerationUnit.SI);
+                    : new Acceleration.Abs(this.si - v.si, AccelerationUnit.SI);
         }
 
         /**

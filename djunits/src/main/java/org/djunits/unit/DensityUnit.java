@@ -37,12 +37,12 @@ public class DensityUnit extends Unit<DensityUnit>
     static
     {
         SI =
-            new DensityUnit(MassUnit.KILOGRAM, LengthUnit.METER, "DensityUnit.kilogram_per_cubic_meter",
-                "DensityUnit.kg/m^3", SI_DERIVED);
+                new DensityUnit(MassUnit.KILOGRAM, LengthUnit.METER, "DensityUnit.kilogram_per_cubic_meter",
+                        "DensityUnit.kg/m^3", SI_DERIVED);
         KG_PER_METER_3 = SI;
         GRAM_PER_CENTIMETER_3 =
-            new DensityUnit(MassUnit.GRAM, LengthUnit.CENTIMETER, "DensityUnit.gram_per_cubic_centimeter",
-                "DensityUnit.g/cm^3", SI_DERIVED);
+                new DensityUnit(MassUnit.GRAM, LengthUnit.CENTIMETER, "DensityUnit.gram_per_cubic_centimeter",
+                        "DensityUnit.g/cm^3", SI_DERIVED);
     }
 
     /**
@@ -54,10 +54,10 @@ public class DensityUnit extends Unit<DensityUnit>
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
     public DensityUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final String nameKey,
-        final String abbreviationKey, final UnitSystem unitSystem)
+            final String abbreviationKey, final UnitSystem unitSystem)
     {
         super(nameKey, abbreviationKey, unitSystem, KG_PER_METER_3, massUnit.getConversionFactorToStandardUnit()
-            / Math.pow(lengthUnit.getConversionFactorToStandardUnit(), 3.0), true);
+                / Math.pow(lengthUnit.getConversionFactorToStandardUnit(), 3.0), true);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
     }
@@ -70,7 +70,7 @@ public class DensityUnit extends Unit<DensityUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public DensityUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final DensityUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final DensityUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
         this.massUnit = referenceUnit.getMassUnit();

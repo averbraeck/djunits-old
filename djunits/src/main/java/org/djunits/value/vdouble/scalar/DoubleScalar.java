@@ -947,8 +947,7 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
      * @param <U> Unit; the unit of the parameters and the result
      * @return DoubleScalar.Abs&lt;U&gt;; the sum of the values as an Absolute value
      */
-    public static <U extends Unit<U>> DoubleScalar.Abs<U> plus(final DoubleScalar.Abs<U> left,
-        final DoubleScalar.Rel<U> right)
+    public static <U extends Unit<U>> DoubleScalar.Abs<U> plus(final DoubleScalar.Abs<U> left, final DoubleScalar.Rel<U> right)
     {
         return new DoubleScalar.Abs<U>(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -961,8 +960,7 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
      * @param <U> Unit; the unit of the parameters and the result
      * @return DoubleScalar.Abs&lt;U&gt;; the sum of the values as an Absolute value
      */
-    public static <U extends Unit<U>> DoubleScalar.Abs<U> plus(final DoubleScalar.Rel<U> left,
-        final DoubleScalar.Abs<U> right)
+    public static <U extends Unit<U>> DoubleScalar.Abs<U> plus(final DoubleScalar.Rel<U> left, final DoubleScalar.Abs<U> right)
     {
         return new DoubleScalar.Abs<U>(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -975,8 +973,7 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
      * @param <U> Unit; the unit of the parameters and the result
      * @return DoubleScalar.Rel&lt;U&gt;; the sum of the values as a Relative value
      */
-    public static <U extends Unit<U>> DoubleScalar.Rel<U> plus(final DoubleScalar.Rel<U> left,
-        final DoubleScalar.Rel<U> right)
+    public static <U extends Unit<U>> DoubleScalar.Rel<U> plus(final DoubleScalar.Rel<U> left, final DoubleScalar.Rel<U> right)
     {
         return new DoubleScalar.Rel<U>(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -989,8 +986,7 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
      * @param <U> Unit; the unit of the parameters and the result
      * @return DoubleScalar.Abs&lt;U&gt;; the resulting value as an absolute value
      */
-    public static <U extends Unit<U>> DoubleScalar.Abs<U> minus(final DoubleScalar.Abs<U> left,
-        final DoubleScalar.Rel<U> right)
+    public static <U extends Unit<U>> DoubleScalar.Abs<U> minus(final DoubleScalar.Abs<U> left, final DoubleScalar.Rel<U> right)
     {
         return new DoubleScalar.Abs<U>(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -1003,8 +999,7 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
      * @param <U> Unit; the unit of the parameters and the result
      * @return DoubleScalar.Rel&lt;U&gt;; the resulting value as a relative value
      */
-    public static <U extends Unit<U>> DoubleScalar.Rel<U> minus(final DoubleScalar.Rel<U> left,
-        final DoubleScalar.Rel<U> right)
+    public static <U extends Unit<U>> DoubleScalar.Rel<U> minus(final DoubleScalar.Rel<U> left, final DoubleScalar.Rel<U> right)
     {
         return new DoubleScalar.Rel<U>(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -1017,8 +1012,7 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
      * @param <U> Unit; the unit of the parameters and the result
      * @return DoubleScalar.Rel&lt;U&gt;; the difference of the two absolute values as a relative value
      */
-    public static <U extends Unit<U>> DoubleScalar.Rel<U> minus(final DoubleScalar.Abs<U> left,
-        final DoubleScalar.Abs<U> right)
+    public static <U extends Unit<U>> DoubleScalar.Rel<U> minus(final DoubleScalar.Abs<U> left, final DoubleScalar.Abs<U> right)
     {
         return new DoubleScalar.Rel<U>(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
     }
@@ -1032,8 +1026,8 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
     public static DoubleScalar.Abs<SIUnit> multiply(final DoubleScalar.Abs<?> left, final DoubleScalar.Abs<?> right)
     {
         SIUnit targetUnit =
-            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                right.getUnit().getSICoefficients()).toString());
+                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                        right.getUnit().getSICoefficients()).toString());
         return new DoubleScalar.Abs<SIUnit>(left.getSI() * right.getSI(), targetUnit);
     }
 
@@ -1046,8 +1040,8 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
     public static DoubleScalar.Rel<SIUnit> multiply(final DoubleScalar.Rel<?> left, final DoubleScalar.Rel<?> right)
     {
         SIUnit targetUnit =
-            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                right.getUnit().getSICoefficients()).toString());
+                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                        right.getUnit().getSICoefficients()).toString());
         return new DoubleScalar.Rel<SIUnit>(left.getSI() * right.getSI(), targetUnit);
     }
 
@@ -1060,8 +1054,8 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
     public static DoubleScalar.Abs<SIUnit> divide(final DoubleScalar.Abs<?> left, final DoubleScalar.Abs<?> right)
     {
         SIUnit targetUnit =
-            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.divide(left.getUnit().getSICoefficients(),
-                right.getUnit().getSICoefficients()).toString());
+                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.divide(left.getUnit().getSICoefficients(),
+                        right.getUnit().getSICoefficients()).toString());
         return new DoubleScalar.Abs<SIUnit>(left.getSI() / right.getSI(), targetUnit);
     }
 
@@ -1074,8 +1068,8 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
     public static DoubleScalar.Rel<SIUnit> divide(final DoubleScalar.Rel<?> left, final DoubleScalar.Rel<?> right)
     {
         SIUnit targetUnit =
-            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.divide(left.getUnit().getSICoefficients(),
-                right.getUnit().getSICoefficients()).toString());
+                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.divide(left.getUnit().getSICoefficients(),
+                        right.getUnit().getSICoefficients()).toString());
         return new DoubleScalar.Rel<SIUnit>(left.getSI() / right.getSI(), targetUnit);
     }
 
@@ -1088,10 +1082,9 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
      * @return DoubleScalar.Abs&lt;U&gt;
      */
     public static <U extends Unit<U>> DoubleScalar.Abs<U> interpolate(final DoubleScalar.Abs<U> zero,
-        final DoubleScalar.Abs<U> one, final double ratio)
+            final DoubleScalar.Abs<U> one, final double ratio)
     {
-        return new DoubleScalar.Abs<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new DoubleScalar.Abs<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -1103,10 +1096,9 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
      * @return DoubleScalar.Rel&lt;U&gt;
      */
     public static <U extends Unit<U>> DoubleScalar.Rel<U> interpolate(final DoubleScalar.Rel<U> zero,
-        final DoubleScalar.Rel<U> one, final double ratio)
+            final DoubleScalar.Rel<U> one, final double ratio)
     {
-        return new DoubleScalar.Rel<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new DoubleScalar.Rel<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
 }

@@ -50,10 +50,10 @@ public class LinearDensityUnitTest extends AbstractUnitTest<LinearDensityUnit>
         checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_KILOMETER, 0.001, 0.0000001, "per kilometer", "1/km");
         checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_MILLIMETER, 1000, 0.01, "per millimeter", "1/mm");
         // Check two conversions between non-standard units
-        assertEquals("one per millimeter is 1000000 per kilometer", 1000000, getMultiplicationFactorTo(
-            LinearDensityUnit.PER_MILLIMETER, LinearDensityUnit.PER_KILOMETER), 0.1);
-        assertEquals("one per kilometer is 0.000001 per millimeter", 0.000001, getMultiplicationFactorTo(
-            LinearDensityUnit.PER_KILOMETER, LinearDensityUnit.PER_MILLIMETER), 0.00000005);
+        assertEquals("one per millimeter is 1000000 per kilometer", 1000000,
+                getMultiplicationFactorTo(LinearDensityUnit.PER_MILLIMETER, LinearDensityUnit.PER_KILOMETER), 0.1);
+        assertEquals("one per kilometer is 0.000001 per millimeter", 0.000001,
+                getMultiplicationFactorTo(LinearDensityUnit.PER_KILOMETER, LinearDensityUnit.PER_MILLIMETER), 0.00000005);
     }
 
     /**
@@ -63,9 +63,9 @@ public class LinearDensityUnitTest extends AbstractUnitTest<LinearDensityUnit>
     public final void createLinearDensityUnit()
     {
         LinearDensityUnit muLDU =
-            new LinearDensityUnit(UnitLocalizationsTest.DONOTCHECKPREFIX + "LinearDensityUnit.PerInch",
-                UnitLocalizationsTest.DONOTCHECKPREFIX + "LinearDensityUnit.PI", OTHER, LinearDensityUnit.PER_METER,
-                2.54 / 100);
+                new LinearDensityUnit(UnitLocalizationsTest.DONOTCHECKPREFIX + "LinearDensityUnit.PerInch",
+                        UnitLocalizationsTest.DONOTCHECKPREFIX + "LinearDensityUnit.PI", OTHER, LinearDensityUnit.PER_METER,
+                        2.54 / 100);
         assertTrue("Can create a new LinearDensityUnit", null != muLDU);
         checkUnitRatioNameAndAbbreviation(muLDU, 0.0254, 0.000001, "!PerInch!", "!PI!");
     }

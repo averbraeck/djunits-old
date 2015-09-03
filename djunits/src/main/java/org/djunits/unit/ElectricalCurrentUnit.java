@@ -50,22 +50,22 @@ public class ElectricalCurrentUnit extends Unit<ElectricalCurrentUnit>
         SI = new ElectricalCurrentUnit("ElectricalCurrentUnit.ampere", "ElectricalCurrentUnit.A", SI_BASE);
         AMPERE = SI;
         NANOAMPERE =
-            new ElectricalCurrentUnit("ElectricalCurrentUnit.nanoampere", "ElectricalCurrentUnit.nA", SI_BASE, AMPERE,
-                1.0E-9);
+                new ElectricalCurrentUnit("ElectricalCurrentUnit.nanoampere", "ElectricalCurrentUnit.nA", SI_BASE, AMPERE,
+                        1.0E-9);
         MICROAMPERE =
-            new ElectricalCurrentUnit("ElectricalCurrentUnit.microampere", "ElectricalCurrentUnit.muA", SI_BASE, AMPERE,
-                1.0E-6);
+                new ElectricalCurrentUnit("ElectricalCurrentUnit.microampere", "ElectricalCurrentUnit.muA", SI_BASE, AMPERE,
+                        1.0E-6);
         MILLIAMPERE =
-            new ElectricalCurrentUnit("ElectricalCurrentUnit.milliampere", "ElectricalCurrentUnit.mA", SI_BASE, AMPERE,
-                0.001);
+                new ElectricalCurrentUnit("ElectricalCurrentUnit.milliampere", "ElectricalCurrentUnit.mA", SI_BASE, AMPERE,
+                        0.001);
         KILOAMPERE =
-            new ElectricalCurrentUnit("ElectricalCurrentUnit.kiloampere", "ElectricalCurrentUnit.kA", SI_BASE, AMPERE,
-                1000.0);
+                new ElectricalCurrentUnit("ElectricalCurrentUnit.kiloampere", "ElectricalCurrentUnit.kA", SI_BASE, AMPERE,
+                        1000.0);
         STATAMPERE =
-            new ElectricalCurrentUnit("ElectricalCurrentUnit.statampere", "ElectricalCurrentUnit.statA", CGS_ESU, AMPERE,
-                3.335641E-10);
+                new ElectricalCurrentUnit("ElectricalCurrentUnit.statampere", "ElectricalCurrentUnit.statA", CGS_ESU, AMPERE,
+                        3.335641E-10);
         ABAMPERE =
-            new ElectricalCurrentUnit("ElectricalCurrentUnit.abampere", "ElectricalCurrentUnit.abA", CGS_EMU, AMPERE, 10.0);
+                new ElectricalCurrentUnit("ElectricalCurrentUnit.abampere", "ElectricalCurrentUnit.abA", CGS_EMU, AMPERE, 10.0);
     }
 
     /**
@@ -86,7 +86,7 @@ public class ElectricalCurrentUnit extends Unit<ElectricalCurrentUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public ElectricalCurrentUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-        final ElectricalCurrentUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final ElectricalCurrentUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
     }
