@@ -23,6 +23,7 @@
 *LinearDensity=Length
 *Speed=FlowVolume
 *Pressure=Force
+*MoneyPerArea=Money
 
 %Density
 /Density=Dimensionless
@@ -58,6 +59,7 @@
 /Power=Time
 /Volume=Pressure
 *Frequency=Power
+*MoneyPerEnergy=Money
 
 %FlowMass
 /FlowMass=Dimensionless
@@ -78,14 +80,12 @@
 /Force=Dimensionless
 *Length=Energy
 /LinearDensity=Energy
-/Enerty=LinearDensity
+/Energy=LinearDensity
 *Speed=Power
 /Mass=Acceleration
 /Acceleration=Mass
 /Area=Pressure
 /Pressure=Area
-/Acceleration=Mass
-/Mass=Acceleration
 
 %Frequency
 /Frequency=Dimensionless
@@ -93,6 +93,7 @@
 *Length=Speed
 *Speed=Acceleration
 *Energy=Power
+*Money=MoneyPerTime
 
 %Length
 /Length=Dimensionless
@@ -104,12 +105,14 @@
 *Frequency=Speed
 /Time=Speed
 /Speed=Time
+*MoneyPerLength=Money
 
 %LinearDensity
 /LinearDensity=Dimensionless
 *Area=Length
 *Energy=Force
 *Speed=Frequency
+*Money=MoneyPerLength
 
 %Mass
 /Mass=Dimensionless
@@ -119,6 +122,44 @@
 *Frequency=FlowMass
 /Density=Volume
 /Volume=Density
+*MoneyPerMass=Money
+
+%Money
+/Money=Dimensionless
+/Area=MoneyPerArea
+/Energy=MoneyPerEnergy
+/Length=MoneyPerLength
+*LinearDensity=MoneyPerLength
+/Mass=MoneyPerMass
+/Time=MoneyPerTime
+*Frequency=MoneyPerTime
+/Volume=MoneyPerVolume
+
+%MoneyPerArea
+/MoneyPerArea=Dimensionless
+*Area=Money
+
+%MoneyPerEnergy
+/MoneyPerEnergy=Dimensionless
+*Energy=Money
+
+%MoneyPerLength
+/MoneyPerLength=Dimensionless
+*Length=Money
+/LinearDensity=Money
+
+%MoneyPerMass
+/MoneyPerMass=Dimensionless
+*Mass=Money
+
+%MoneyPerTime
+/MoneyPerTime=Dimensionless
+*Time=Money
+/Frequency=Money
+
+%MoneyPerVolume
+/MoneyPerVolume=Dimensionless
+*Volume=Money
 
 %Power
 /Power=Dimensionless
@@ -161,6 +202,7 @@
 *Acceleration=Speed
 *Power=Energy
 *Speed=Length
+*MoneyPerTime=Money
 
 %Torque
 /Torque=Dimensionless
@@ -182,6 +224,7 @@
 *LinearDensity=Area
 /Time=FlowVolume
 /FlowVolume=Time
+*MoneyPerVolume=Money
 
 %Dimensionless
 /Dimensionless=Dimensionless
@@ -204,6 +247,13 @@
 *Length=Length
 *LinearDensity=LinearDensity
 *Mass=Mass
+*Money=Money
+*MoneyPerArea=MoneyPerArea
+*MoneyPerEnergy=MoneyPerEnergy
+*MoneyPerLength=MoneyPerLength
+*MoneyPerMass=MoneyPerMass
+*MoneyPerTime=MoneyPerTime
+*MoneyPerVolume=MoneyPerVolume
 *Power=Power
 *Pressure=Pressure
 *Speed=Speed
