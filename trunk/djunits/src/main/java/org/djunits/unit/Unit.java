@@ -28,11 +28,23 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     /** */
     private static final long serialVersionUID = 20140607;
 
-    /** the key to the locale file for the long name of the unit. */
+    /** the key to the locale file for the long name of the unit, or null when it is a user-defined unit. */
     private final String nameKey;
 
-    /** the key to the locale file for the abbreviation of the unit. */
+    /** the key to the locale file for the abbreviation of the unit, or null when it is a user-defined unit. */
     private final String abbreviationKey;
+
+    /**
+     * the long name of the unit in case it does not exist in the locale file, e.g. when defining a run-time unit. The name will
+     * be null if the locale has to be used, i.e. for standard units.
+     */
+    private final String name;
+
+    /**
+     * the abbreviation of the unit in case it does not exist in the locale file, e.g. when defining a run-time unit. The
+     * abbreviation will be null if the locale has to be used, i.e. for standard units.
+     */
+    private final String abbreviation;
 
     /** the unit system, e.g. SI or Imperial. */
     private final UnitSystem unitSystem;
@@ -48,7 +60,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
 
     /** static map of all defined coefficient strings, mapped to the existing units. */
     private static final Map<String, Map<Class<Unit<?>>, Unit<?>>> SI_UNITS =
-            new HashMap<String, Map<Class<Unit<?>>, Unit<?>>>();
+        new HashMap<String, Map<Class<Unit<?>>, Unit<?>>>();
 
     /** a static map of all defined units. */
     private static final Map<String, Set<Unit<?>>> UNITS = new HashMap<String, Set<Unit<?>>>();
@@ -76,7 +88,6 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
             catch (Exception exception)
             {
                 // TODO professional logging of errors
-                // exception.printStackTrace();
                 System.err.println("Could not load class " + clazz.getCanonicalName());
             }
         }
@@ -84,35 +95,63 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * Build a standard unit.
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
+     * Build a standard unit. If the parameter standardUnit is true, it is a standard unit where name is the nameKey, and
+     * abbreviation is the abbreviationKey; if false, this unit is a user-defined unit where the localization files do not have
+     * an entry. If standardUnit is true, a UnitException is silently ignored; if standardUnit is false a UnitException is
+     * thrown as a RunTimeException.
+     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
+     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
+     *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
-     * @throws UnitException when unit cannot be added to the list of units
+     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    /*-
-    public Unit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem) throws UnitException
+    protected Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+        final boolean standardUnit)
     {
         this.conversionFactorToStandardUnit = 1.0;
-        this.nameKey = nameKey;
-        this.abbreviationKey = abbreviationKey;
+        if (standardUnit)
+        {
+            this.nameKey = nameOrNameKey;
+            this.abbreviationKey = abbreviationOrAbbreviationKey;
+            this.name = null;
+            this.abbreviation = null;
+        }
+        else
+        {
+            this.nameKey = null;
+            this.abbreviationKey = null;
+            this.name = nameOrNameKey;
+            this.abbreviation = abbreviationOrAbbreviationKey;
+        }
         this.unitSystem = unitSystem;
-        addUnit(this);
+        try
+        {
+            addUnit(this);
+        }
+        catch (UnitException ue)
+        {
+            if (!standardUnit)
+            {
+                throw new RuntimeException(ue);
+            }
+        }
     }
-     */
 
     /**
-     * Build a unit with a conversion factor to another unit.
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
+     * Build a unit with a conversion factor to another unit. If the parameter standardUnit is true, it is a standard unit where
+     * name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined unit where the
+     * localization files do not have an entry. If standardUnit is true, a UnitException is silently ignored; if standardUnit is
+     * false a UnitException is thrown as a RunTimeException.
+     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
+     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
+     *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @throws UnitException when unit cannot be added to the list of units
+     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    /*-
-    public Unit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem, final U referenceUnit,
-        final double conversionFactorToReferenceUnit) throws UnitException
+    protected Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+        final U referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         // as it can happen that this method is called for the standard unit (when it is still null) we have to catch
         // the null pointer for the reference unit here.
@@ -125,65 +164,20 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
             this.conversionFactorToStandardUnit =
                 referenceUnit.getConversionFactorToStandardUnit() * conversionFactorToReferenceUnit;
         }
-        this.nameKey = nameKey;
-        this.abbreviationKey = abbreviationKey;
-        this.unitSystem = unitSystem;
-        addUnit(this);
-    }
-     */
-
-    /**
-     * Build a standard unit.
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param safe Boolean; if true, a UnitException is silently ignored; if false a UnitException is an Error
-     */
-    public Unit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem, final boolean safe)
-    {
-        this.conversionFactorToStandardUnit = 1.0;
-        this.nameKey = nameKey;
-        this.abbreviationKey = abbreviationKey;
-        this.unitSystem = unitSystem;
-        try
+        if (standardUnit)
         {
-            addUnit(this);
-        }
-        catch (UnitException ue)
-        {
-            if (!safe)
-            {
-                throw new Error(ue);
-            }
-            // TODO complain wherever we can
-        }
-    }
-
-    /**
-     * Build a unit with a conversion factor to another unit.
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param safe Boolean; if true, a UnitException is silently ignored; if false a UnitException is an Error
-     */
-    public Unit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem, final U referenceUnit,
-            final double conversionFactorToReferenceUnit, final boolean safe)
-    {
-        // as it can happen that this method is called for the standard unit (when it is still null) we have to catch
-        // the null pointer for the reference unit here.
-        if (referenceUnit == null)
-        {
-            this.conversionFactorToStandardUnit = 1.0;
+            this.nameKey = nameOrNameKey;
+            this.abbreviationKey = abbreviationOrAbbreviationKey;
+            this.name = null;
+            this.abbreviation = null;
         }
         else
         {
-            this.conversionFactorToStandardUnit =
-                    referenceUnit.getConversionFactorToStandardUnit() * conversionFactorToReferenceUnit;
+            this.nameKey = null;
+            this.abbreviationKey = null;
+            this.name = nameOrNameKey;
+            this.abbreviation = abbreviationOrAbbreviationKey;
         }
-        this.nameKey = nameKey;
-        this.abbreviationKey = abbreviationKey;
         this.unitSystem = unitSystem;
         try
         {
@@ -191,11 +185,10 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         }
         catch (UnitException ue)
         {
-            if (!safe)
+            if (!standardUnit)
             {
-                throw new Error(ue);
+                throw new RuntimeException(ue);
             }
-            // TODO complain wherever we can
         }
     }
 
@@ -300,11 +293,16 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      */
     public final String getName()
     {
+        if (this.name != null)
+        {
+            return this.name;
+        }
         return localization.getString(this.nameKey);
     }
 
     /**
-     * @return name key, e.g. TimeUnit.MetersPerSecond
+     * This method returns the name key, or null in case the name is hard coded.
+     * @return name key, e.g. TimeUnit.MetersPerSecond, or null for a user-defined unit
      */
     public final String getNameKey()
     {
@@ -316,11 +314,16 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      */
     public final String getAbbreviation()
     {
+        if (this.abbreviation != null)
+        {
+            return this.abbreviation;
+        }
         return localization.getString(this.abbreviationKey);
     }
 
     /**
-     * @return abbreviation key, e.g. TimeUnit.m/s
+     * This method returns the abbreviation key, or null in case the abbreviation is hard coded.
+     * @return abbreviation key, e.g. TimeUnit.m/s, or null for a user-defined unit
      */
     public final String getAbbreviationKey()
     {
@@ -411,7 +414,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
             initialize();
         }
         if (SI_UNITS.containsKey(normalizedSICoefficientsString)
-                && SI_UNITS.get(normalizedSICoefficientsString).containsKey(SIUnit.class))
+            && SI_UNITS.get(normalizedSICoefficientsString).containsKey(SIUnit.class))
         {
             return (SIUnit) SI_UNITS.get(normalizedSICoefficientsString).get(SIUnit.class);
         }
@@ -424,6 +427,63 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     public final String toString()
     {
         return getAbbreviation();
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:designforextension")
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.abbreviation == null) ? 0 : this.abbreviation.hashCode());
+        result = prime * result + ((this.abbreviationKey == null) ? 0 : this.abbreviationKey.hashCode());
+        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime * result + ((this.nameKey == null) ? 0 : this.nameKey.hashCode());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces"})
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Unit<?> other = (Unit<?>) obj;
+        if (this.abbreviation == null)
+        {
+            if (other.abbreviation != null)
+                return false;
+        }
+        else if (!this.abbreviation.equals(other.abbreviation))
+            return false;
+        if (this.abbreviationKey == null)
+        {
+            if (other.abbreviationKey != null)
+                return false;
+        }
+        else if (!this.abbreviationKey.equals(other.abbreviationKey))
+            return false;
+        if (this.name == null)
+        {
+            if (other.name != null)
+                return false;
+        }
+        else if (!this.name.equals(other.name))
+            return false;
+        if (this.nameKey == null)
+        {
+            if (other.nameKey != null)
+                return false;
+        }
+        else if (!this.nameKey.equals(other.nameKey))
+            return false;
+        return true;
     }
 
 }

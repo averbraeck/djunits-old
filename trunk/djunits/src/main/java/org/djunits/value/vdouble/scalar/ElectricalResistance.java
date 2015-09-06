@@ -72,10 +72,10 @@ public interface ElectricalResistance extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalResistance.Rel interpolate(final ElectricalResistance.Rel zero,
-                final ElectricalResistance.Rel one, final double ratio)
+            final ElectricalResistance.Rel one, final double ratio)
         {
-            return new ElectricalResistance.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                    zero.getUnit());
+            return new ElectricalResistance.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /** {@inheritDoc} */
@@ -282,7 +282,7 @@ public interface ElectricalResistance extends UNITS
         public final ElectricalResistance.Rel plus(final ElectricalResistance.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalResistance.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new ElectricalResistance.Rel(this.si + v.si, ElectricalResistanceUnit.SI);
+                : new ElectricalResistance.Rel(this.si + v.si, ElectricalResistanceUnit.SI);
         }
 
         /**
@@ -293,7 +293,7 @@ public interface ElectricalResistance extends UNITS
         public final ElectricalResistance.Rel minus(final ElectricalResistance.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalResistance.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new ElectricalResistance.Rel(this.si - v.si, ElectricalResistanceUnit.SI);
+                : new ElectricalResistance.Rel(this.si - v.si, ElectricalResistanceUnit.SI);
         }
 
         /**
@@ -304,7 +304,7 @@ public interface ElectricalResistance extends UNITS
         public final ElectricalResistance.Abs plus(final ElectricalResistance.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalResistance.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new ElectricalResistance.Abs(this.si + v.si, ElectricalResistanceUnit.SI);
+                : new ElectricalResistance.Abs(this.si + v.si, ElectricalResistanceUnit.SI);
         }
 
         /**
@@ -388,10 +388,10 @@ public interface ElectricalResistance extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalResistance.Abs interpolate(final ElectricalResistance.Abs zero,
-                final ElectricalResistance.Abs one, final double ratio)
+            final ElectricalResistance.Abs one, final double ratio)
         {
-            return new ElectricalResistance.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                    zero.getUnit());
+            return new ElectricalResistance.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /** {@inheritDoc} */
@@ -598,7 +598,7 @@ public interface ElectricalResistance extends UNITS
         public final ElectricalResistance.Abs plus(final ElectricalResistance.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalResistance.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new ElectricalResistance.Abs(this.si + v.si, ElectricalResistanceUnit.SI);
+                : new ElectricalResistance.Abs(this.si + v.si, ElectricalResistanceUnit.SI);
         }
 
         /**
@@ -609,7 +609,7 @@ public interface ElectricalResistance extends UNITS
         public final ElectricalResistance.Rel minus(final ElectricalResistance.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalResistance.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new ElectricalResistance.Rel(this.si - v.si, ElectricalResistanceUnit.SI);
+                : new ElectricalResistance.Rel(this.si - v.si, ElectricalResistanceUnit.SI);
         }
 
         /**
@@ -620,7 +620,7 @@ public interface ElectricalResistance extends UNITS
         public final ElectricalResistance.Abs minus(final ElectricalResistance.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalResistance.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new ElectricalResistance.Abs(this.si - v.si, ElectricalResistanceUnit.SI);
+                : new ElectricalResistance.Abs(this.si - v.si, ElectricalResistanceUnit.SI);
         }
 
         /**

@@ -1,9 +1,11 @@
 package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.AccelerationUnit;
+import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.ForceUnit;
+import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
@@ -284,7 +286,7 @@ public interface Force extends UNITS
         public final Force.Rel plus(final Force.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Force.Rel(
-                    this.si + v.si, ForceUnit.SI);
+                this.si + v.si, ForceUnit.SI);
         }
 
         /**
@@ -295,7 +297,7 @@ public interface Force extends UNITS
         public final Force.Rel minus(final Force.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Force.Rel(
-                    this.si - v.si, ForceUnit.SI);
+                this.si - v.si, ForceUnit.SI);
         }
 
         /**
@@ -306,7 +308,7 @@ public interface Force extends UNITS
         public final Force.Abs plus(final Force.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Force.Abs(
-                    this.si + v.si, ForceUnit.SI);
+                this.si + v.si, ForceUnit.SI);
         }
 
         /**
@@ -349,6 +351,16 @@ public interface Force extends UNITS
         }
 
         /**
+         * Calculate the division of Force and Energy, which results in a LinearDensity scalar.
+         * @param v Force scalar
+         * @return LinearDensity scalar as a division of Force and Energy
+         */
+        public final LinearDensity.Rel divideBy(final Energy.Rel v)
+        {
+            return new LinearDensity.Rel(this.si / v.si, LinearDensityUnit.SI);
+        }
+
+        /**
          * Calculate the multiplication of Force and Speed, which results in a Power scalar.
          * @param v Force scalar
          * @return Power scalar as a multiplication of Force and Speed
@@ -369,6 +381,16 @@ public interface Force extends UNITS
         }
 
         /**
+         * Calculate the division of Force and Acceleration, which results in a Mass scalar.
+         * @param v Force scalar
+         * @return Mass scalar as a division of Force and Acceleration
+         */
+        public final Mass.Rel divideBy(final Acceleration.Rel v)
+        {
+            return new Mass.Rel(this.si / v.si, MassUnit.SI);
+        }
+
+        /**
          * Calculate the division of Force and Area, which results in a Pressure scalar.
          * @param v Force scalar
          * @return Pressure scalar as a division of Force and Area
@@ -379,13 +401,13 @@ public interface Force extends UNITS
         }
 
         /**
-         * Calculate the division of Force and Acceleration, which results in a Mass scalar.
+         * Calculate the division of Force and Pressure, which results in a Area scalar.
          * @param v Force scalar
-         * @return Mass scalar as a division of Force and Acceleration
+         * @return Area scalar as a division of Force and Pressure
          */
-        public final Mass.Rel divideBy(final Acceleration.Rel v)
+        public final Area.Rel divideBy(final Pressure.Rel v)
         {
-            return new Mass.Rel(this.si / v.si, MassUnit.SI);
+            return new Area.Rel(this.si / v.si, AreaUnit.SI);
         }
 
     }
@@ -647,7 +669,7 @@ public interface Force extends UNITS
         public final Force.Abs plus(final Force.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Force.Abs(
-                    this.si + v.si, ForceUnit.SI);
+                this.si + v.si, ForceUnit.SI);
         }
 
         /**
@@ -658,7 +680,7 @@ public interface Force extends UNITS
         public final Force.Rel minus(final Force.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Force.Rel(
-                    this.si - v.si, ForceUnit.SI);
+                this.si - v.si, ForceUnit.SI);
         }
 
         /**
@@ -669,7 +691,7 @@ public interface Force extends UNITS
         public final Force.Abs minus(final Force.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Force.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Force.Abs(
-                    this.si - v.si, ForceUnit.SI);
+                this.si - v.si, ForceUnit.SI);
         }
 
         /**
@@ -712,6 +734,16 @@ public interface Force extends UNITS
         }
 
         /**
+         * Calculate the division of Force and Energy, which results in a LinearDensity scalar.
+         * @param v Force scalar
+         * @return LinearDensity scalar as a division of Force and Energy
+         */
+        public final LinearDensity.Abs divideBy(final Energy.Abs v)
+        {
+            return new LinearDensity.Abs(this.si / v.si, LinearDensityUnit.SI);
+        }
+
+        /**
          * Calculate the multiplication of Force and Speed, which results in a Power scalar.
          * @param v Force scalar
          * @return Power scalar as a multiplication of Force and Speed
@@ -732,6 +764,16 @@ public interface Force extends UNITS
         }
 
         /**
+         * Calculate the division of Force and Acceleration, which results in a Mass scalar.
+         * @param v Force scalar
+         * @return Mass scalar as a division of Force and Acceleration
+         */
+        public final Mass.Abs divideBy(final Acceleration.Abs v)
+        {
+            return new Mass.Abs(this.si / v.si, MassUnit.SI);
+        }
+
+        /**
          * Calculate the division of Force and Area, which results in a Pressure scalar.
          * @param v Force scalar
          * @return Pressure scalar as a division of Force and Area
@@ -742,13 +784,13 @@ public interface Force extends UNITS
         }
 
         /**
-         * Calculate the division of Force and Acceleration, which results in a Mass scalar.
+         * Calculate the division of Force and Pressure, which results in a Area scalar.
          * @param v Force scalar
-         * @return Mass scalar as a division of Force and Acceleration
+         * @return Area scalar as a division of Force and Pressure
          */
-        public final Mass.Abs divideBy(final Acceleration.Abs v)
+        public final Area.Abs divideBy(final Pressure.Abs v)
         {
-            return new Mass.Abs(this.si / v.si, MassUnit.SI);
+            return new Area.Abs(this.si / v.si, AreaUnit.SI);
         }
 
     }

@@ -27,9 +27,6 @@ import org.reflections.Reflections;
  */
 public class UnitLocalizationsTest
 {
-    /** Prefix keys of units made during testing with this string. */
-    public static final String DONOTCHECKPREFIX = "~~~~DONOTCHECK";
-
     /**
      * Check that all defined units have all localizations.
      */
@@ -62,10 +59,6 @@ public class UnitLocalizationsTest
                     String abbreviationKey = u.getAbbreviationKey();
                     assertTrue("Abbreviation key must be non-null", null != abbreviationKey);
                     assertTrue("Abbreviation key must be non-empty", abbreviationKey.length() > 0);
-                    if (nameKey.startsWith(DONOTCHECKPREFIX))
-                    {
-                        continue;
-                    }
                     if (nameKey.equals("SIUnit.m2"))
                     {
                         continue; // FIXME: Vector and Matrix tests make these and then cause this test to fail
@@ -83,10 +76,6 @@ public class UnitLocalizationsTest
                         continue;
                     }
                     if (nameKey.equals("SIUnit.1/A"))
-                    {
-                        continue;
-                    }
-                    if (abbreviationKey.startsWith(DONOTCHECKPREFIX))
                     {
                         continue;
                     }

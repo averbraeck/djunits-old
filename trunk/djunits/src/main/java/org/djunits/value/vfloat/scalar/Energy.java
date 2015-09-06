@@ -4,8 +4,10 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.ForceUnit;
 import org.djunits.unit.LengthUnit;
+import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
+import org.djunits.unit.TimeUnit;
 import org.djunits.unit.UNITS;
 
 /**
@@ -325,7 +327,7 @@ public interface Energy extends UNITS
         public final Energy.Rel plus(final Energy.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Energy.Rel(
-                    this.si + v.si, EnergyUnit.SI);
+                this.si + v.si, EnergyUnit.SI);
         }
 
         /**
@@ -336,7 +338,7 @@ public interface Energy extends UNITS
         public final Energy.Rel minus(final Energy.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Energy.Rel(
-                    this.si - v.si, EnergyUnit.SI);
+                this.si - v.si, EnergyUnit.SI);
         }
 
         /**
@@ -347,7 +349,7 @@ public interface Energy extends UNITS
         public final Energy.Abs plus(final Energy.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Energy.Abs(
-                    this.si + v.si, EnergyUnit.SI);
+                this.si + v.si, EnergyUnit.SI);
         }
 
         /**
@@ -410,6 +412,16 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the division of Energy and Power, which results in a Time scalar.
+         * @param v Energy scalar
+         * @return Time scalar as a division of Energy and Power
+         */
+        public final Time.Rel divideBy(final Power.Rel v)
+        {
+            return new Time.Rel(this.si / v.si, TimeUnit.SI);
+        }
+
+        /**
          * Calculate the division of Energy and Volume, which results in a Pressure scalar.
          * @param v Energy scalar
          * @return Pressure scalar as a division of Energy and Volume
@@ -427,6 +439,16 @@ public interface Energy extends UNITS
         public final Power.Rel multiplyBy(final Frequency.Rel v)
         {
             return new Power.Rel(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Energy and MoneyPerEnergy, which results in a Money scalar.
+         * @param v Energy scalar
+         * @return Money scalar as a multiplication of Energy and MoneyPerEnergy
+         */
+        public final Money multiplyBy(final MoneyPerEnergy v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }
@@ -730,7 +752,7 @@ public interface Energy extends UNITS
         public final Energy.Abs plus(final Energy.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Energy.Abs(
-                    this.si + v.si, EnergyUnit.SI);
+                this.si + v.si, EnergyUnit.SI);
         }
 
         /**
@@ -741,7 +763,7 @@ public interface Energy extends UNITS
         public final Energy.Rel minus(final Energy.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Energy.Rel(
-                    this.si - v.si, EnergyUnit.SI);
+                this.si - v.si, EnergyUnit.SI);
         }
 
         /**
@@ -752,7 +774,7 @@ public interface Energy extends UNITS
         public final Energy.Abs minus(final Energy.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Energy.Abs(
-                    this.si - v.si, EnergyUnit.SI);
+                this.si - v.si, EnergyUnit.SI);
         }
 
         /**
@@ -815,6 +837,16 @@ public interface Energy extends UNITS
         }
 
         /**
+         * Calculate the division of Energy and Power, which results in a Time scalar.
+         * @param v Energy scalar
+         * @return Time scalar as a division of Energy and Power
+         */
+        public final Time.Abs divideBy(final Power.Abs v)
+        {
+            return new Time.Abs(this.si / v.si, TimeUnit.SI);
+        }
+
+        /**
          * Calculate the division of Energy and Volume, which results in a Pressure scalar.
          * @param v Energy scalar
          * @return Pressure scalar as a division of Energy and Volume
@@ -832,6 +864,16 @@ public interface Energy extends UNITS
         public final Power.Abs multiplyBy(final Frequency.Abs v)
         {
             return new Power.Abs(this.si * v.si, PowerUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Energy and MoneyPerEnergy, which results in a Money scalar.
+         * @param v Energy scalar
+         * @return Money scalar as a multiplication of Energy and MoneyPerEnergy
+         */
+        public final Money multiplyBy(final MoneyPerEnergy v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }

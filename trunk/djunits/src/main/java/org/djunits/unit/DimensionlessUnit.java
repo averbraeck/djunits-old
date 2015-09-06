@@ -14,7 +14,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * initial version Jun 5, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DimensionlessUnit extends Unit<DimensionlessUnit>
+public final class DimensionlessUnit extends Unit<DimensionlessUnit>
 {
     /** */
     private static final long serialVersionUID = 20150830L;
@@ -32,21 +32,21 @@ public class DimensionlessUnit extends Unit<DimensionlessUnit>
      * @param abbreviationKey the key to the locale file for the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public DimensionlessUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
+    private DimensionlessUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
     {
         super(nameKey, abbreviationKey, unitSystem, true);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final DimensionlessUnit getStandardUnit()
+    public DimensionlessUnit getStandardUnit()
     {
         return SI;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final String getSICoefficientsString()
+    public String getSICoefficientsString()
     {
         return "1";
     }

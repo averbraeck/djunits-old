@@ -31,7 +31,7 @@ import cern.jet.math.tfloat.FloatFunctions;
  * @param <U> Unit; the unit of this MutableFloatMatrix
  */
 public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<U> implements WriteFloatMatrixFunctions<U>,
-        FloatMathFunctions<MutableFloatMatrix<U>>
+    FloatMathFunctions<MutableFloatMatrix<U>>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -245,7 +245,8 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public final MutableFloatMatrix.Abs.Sparse<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatMatrix.Abs.Sparse<U> result = new MutableFloatMatrix.Abs.Sparse<U>(getMatrixSI(), getUnit());
+                final MutableFloatMatrix.Abs.Sparse<U> result =
+                    new MutableFloatMatrix.Abs.Sparse<U>(getMatrixSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -684,7 +685,8 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public final MutableFloatMatrix.Rel.Sparse<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatMatrix.Rel.Sparse<U> result = new MutableFloatMatrix.Rel.Sparse<U>(getMatrixSI(), getUnit());
+                final MutableFloatMatrix.Rel.Sparse<U> result =
+                    new MutableFloatMatrix.Rel.Sparse<U>(getMatrixSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }

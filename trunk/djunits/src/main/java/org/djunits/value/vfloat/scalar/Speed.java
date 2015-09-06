@@ -8,6 +8,7 @@ import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
+import org.djunits.unit.TimeUnit;
 import org.djunits.unit.UNITS;
 
 /**
@@ -327,7 +328,7 @@ public interface Speed extends UNITS
         public final Speed.Rel plus(final Speed.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Speed.Rel(
-                    this.si + v.si, SpeedUnit.SI);
+                this.si + v.si, SpeedUnit.SI);
         }
 
         /**
@@ -338,7 +339,7 @@ public interface Speed extends UNITS
         public final Speed.Rel minus(final Speed.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Speed.Rel(
-                    this.si - v.si, SpeedUnit.SI);
+                this.si - v.si, SpeedUnit.SI);
         }
 
         /**
@@ -349,7 +350,7 @@ public interface Speed extends UNITS
         public final Speed.Abs plus(final Speed.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Speed.Abs(
-                    this.si + v.si, SpeedUnit.SI);
+                this.si + v.si, SpeedUnit.SI);
         }
 
         /**
@@ -412,6 +413,16 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the division of Speed and Frequency, which results in a Length scalar.
+         * @param v Speed scalar
+         * @return Length scalar as a division of Speed and Frequency
+         */
+        public final Length.Rel divideBy(final Frequency.Rel v)
+        {
+            return new Length.Rel(this.si / v.si, LengthUnit.SI);
+        }
+
+        /**
          * Calculate the multiplication of Speed and LinearDensity, which results in a Frequency scalar.
          * @param v Speed scalar
          * @return Frequency scalar as a multiplication of Speed and LinearDensity
@@ -432,16 +443,6 @@ public interface Speed extends UNITS
         }
 
         /**
-         * Calculate the division of Speed and Frequency, which results in a Length scalar.
-         * @param v Speed scalar
-         * @return Length scalar as a division of Speed and Frequency
-         */
-        public final Length.Rel divideBy(final Frequency.Rel v)
-        {
-            return new Length.Rel(this.si / v.si, LengthUnit.SI);
-        }
-
-        /**
          * Calculate the division of Speed and Time, which results in a Acceleration scalar.
          * @param v Speed scalar
          * @return Acceleration scalar as a division of Speed and Time
@@ -449,6 +450,16 @@ public interface Speed extends UNITS
         public final Acceleration.Rel divideBy(final Time.Rel v)
         {
             return new Acceleration.Rel(this.si / v.si, AccelerationUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Speed and Acceleration, which results in a Time scalar.
+         * @param v Speed scalar
+         * @return Time scalar as a division of Speed and Acceleration
+         */
+        public final Time.Rel divideBy(final Acceleration.Rel v)
+        {
+            return new Time.Rel(this.si / v.si, TimeUnit.SI);
         }
 
         /**
@@ -762,7 +773,7 @@ public interface Speed extends UNITS
         public final Speed.Abs plus(final Speed.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Speed.Abs(
-                    this.si + v.si, SpeedUnit.SI);
+                this.si + v.si, SpeedUnit.SI);
         }
 
         /**
@@ -773,7 +784,7 @@ public interface Speed extends UNITS
         public final Speed.Rel minus(final Speed.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Speed.Rel(
-                    this.si - v.si, SpeedUnit.SI);
+                this.si - v.si, SpeedUnit.SI);
         }
 
         /**
@@ -784,7 +795,7 @@ public interface Speed extends UNITS
         public final Speed.Abs minus(final Speed.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Speed.Abs(
-                    this.si - v.si, SpeedUnit.SI);
+                this.si - v.si, SpeedUnit.SI);
         }
 
         /**
@@ -847,6 +858,16 @@ public interface Speed extends UNITS
         }
 
         /**
+         * Calculate the division of Speed and Frequency, which results in a Length scalar.
+         * @param v Speed scalar
+         * @return Length scalar as a division of Speed and Frequency
+         */
+        public final Length.Abs divideBy(final Frequency.Abs v)
+        {
+            return new Length.Abs(this.si / v.si, LengthUnit.SI);
+        }
+
+        /**
          * Calculate the multiplication of Speed and LinearDensity, which results in a Frequency scalar.
          * @param v Speed scalar
          * @return Frequency scalar as a multiplication of Speed and LinearDensity
@@ -867,16 +888,6 @@ public interface Speed extends UNITS
         }
 
         /**
-         * Calculate the division of Speed and Frequency, which results in a Length scalar.
-         * @param v Speed scalar
-         * @return Length scalar as a division of Speed and Frequency
-         */
-        public final Length.Abs divideBy(final Frequency.Abs v)
-        {
-            return new Length.Abs(this.si / v.si, LengthUnit.SI);
-        }
-
-        /**
          * Calculate the division of Speed and Time, which results in a Acceleration scalar.
          * @param v Speed scalar
          * @return Acceleration scalar as a division of Speed and Time
@@ -884,6 +895,16 @@ public interface Speed extends UNITS
         public final Acceleration.Abs divideBy(final Time.Abs v)
         {
             return new Acceleration.Abs(this.si / v.si, AccelerationUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Speed and Acceleration, which results in a Time scalar.
+         * @param v Speed scalar
+         * @return Time scalar as a division of Speed and Acceleration
+         */
+        public final Time.Abs divideBy(final Acceleration.Abs v)
+        {
+            return new Time.Abs(this.si / v.si, TimeUnit.SI);
         }
 
         /**

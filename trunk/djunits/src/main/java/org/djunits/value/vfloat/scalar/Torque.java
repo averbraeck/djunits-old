@@ -5,8 +5,10 @@ import org.djunits.unit.ForceUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
+import org.djunits.unit.TimeUnit;
 import org.djunits.unit.TorqueUnit;
 import org.djunits.unit.UNITS;
+import org.djunits.unit.VolumeUnit;
 
 /**
  * Easy access methods for the Torque FloatScalar. Instead of <br>
@@ -325,7 +327,7 @@ public interface Torque extends UNITS
         public final Torque.Rel plus(final Torque.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Torque.Rel(
-                    this.si + v.si, TorqueUnit.SI);
+                this.si + v.si, TorqueUnit.SI);
         }
 
         /**
@@ -336,7 +338,7 @@ public interface Torque extends UNITS
         public final Torque.Rel minus(final Torque.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Torque.Rel(
-                    this.si - v.si, TorqueUnit.SI);
+                this.si - v.si, TorqueUnit.SI);
         }
 
         /**
@@ -347,7 +349,7 @@ public interface Torque extends UNITS
         public final Torque.Abs plus(final Torque.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Torque.Abs(
-                    this.si + v.si, TorqueUnit.SI);
+                this.si + v.si, TorqueUnit.SI);
         }
 
         /**
@@ -410,6 +412,16 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the division of Torque and Power, which results in a Time scalar.
+         * @param v Torque scalar
+         * @return Time scalar as a division of Torque and Power
+         */
+        public final Time.Rel divideBy(final Power.Rel v)
+        {
+            return new Time.Rel(this.si / v.si, TimeUnit.SI);
+        }
+
+        /**
          * Calculate the multiplication of Torque and Frequency, which results in a Power scalar.
          * @param v Torque scalar
          * @return Power scalar as a multiplication of Torque and Frequency
@@ -427,6 +439,16 @@ public interface Torque extends UNITS
         public final Pressure.Rel divideBy(final Volume.Rel v)
         {
             return new Pressure.Rel(this.si / v.si, PressureUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Pressure, which results in a Volume scalar.
+         * @param v Torque scalar
+         * @return Volume scalar as a division of Torque and Pressure
+         */
+        public final Volume.Rel divideBy(final Pressure.Rel v)
+        {
+            return new Volume.Rel(this.si / v.si, VolumeUnit.SI);
         }
 
     }
@@ -730,7 +752,7 @@ public interface Torque extends UNITS
         public final Torque.Abs plus(final Torque.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Torque.Abs(
-                    this.si + v.si, TorqueUnit.SI);
+                this.si + v.si, TorqueUnit.SI);
         }
 
         /**
@@ -741,7 +763,7 @@ public interface Torque extends UNITS
         public final Torque.Rel minus(final Torque.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Torque.Rel(
-                    this.si - v.si, TorqueUnit.SI);
+                this.si - v.si, TorqueUnit.SI);
         }
 
         /**
@@ -752,7 +774,7 @@ public interface Torque extends UNITS
         public final Torque.Abs minus(final Torque.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Torque.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Torque.Abs(
-                    this.si - v.si, TorqueUnit.SI);
+                this.si - v.si, TorqueUnit.SI);
         }
 
         /**
@@ -815,6 +837,16 @@ public interface Torque extends UNITS
         }
 
         /**
+         * Calculate the division of Torque and Power, which results in a Time scalar.
+         * @param v Torque scalar
+         * @return Time scalar as a division of Torque and Power
+         */
+        public final Time.Abs divideBy(final Power.Abs v)
+        {
+            return new Time.Abs(this.si / v.si, TimeUnit.SI);
+        }
+
+        /**
          * Calculate the multiplication of Torque and Frequency, which results in a Power scalar.
          * @param v Torque scalar
          * @return Power scalar as a multiplication of Torque and Frequency
@@ -832,6 +864,16 @@ public interface Torque extends UNITS
         public final Pressure.Abs divideBy(final Volume.Abs v)
         {
             return new Pressure.Abs(this.si / v.si, PressureUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Pressure, which results in a Volume scalar.
+         * @param v Torque scalar
+         * @return Volume scalar as a division of Torque and Pressure
+         */
+        public final Volume.Abs divideBy(final Pressure.Abs v)
+        {
+            return new Volume.Abs(this.si / v.si, VolumeUnit.SI);
         }
 
     }

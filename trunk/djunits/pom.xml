@@ -4,7 +4,7 @@
 
   <groupId>org.djunits</groupId>
   <artifactId>djunits</artifactId>
-  <version>1.00.03</version>
+  <version>1.00.04</version>
 
   <name>DJUNITS</name>
   <description>Delft Java Units</description>
@@ -26,6 +26,7 @@
     <djunits.version>${project.version}</djunits.version>
     <parallelcolt.version>0.10.1</parallelcolt.version>
     <reflections.version>0.9.9-RC1</reflections.version>
+    <joda-money.version>0.10.0</joda-money.version>
     <junit.version>4.11</junit.version>
 
     <maven.compiler.version>3.1</maven.compiler.version>
@@ -137,7 +138,7 @@
         <artifactId>wagon-maven-plugin</artifactId>
         <version>${wagon.maven.version}</version>
         <executions>
-        
+
           <execution>
             <id>upload-jacoco-dot-files</id>
             <phase>site-deploy</phase>
@@ -167,7 +168,7 @@
               <serverId>djunits-deployment</serverId>
             </configuration>
           </execution>
-          
+
           <execution>
             <id>upload-current-site</id>
             <phase>site-deploy</phase>
@@ -182,7 +183,7 @@
               <serverId>djunits-deployment</serverId>
             </configuration>
           </execution>
-          
+
         </executions>
       </plugin>
 
@@ -571,6 +572,12 @@
       <version>${reflections.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.joda</groupId>
+      <artifactId>joda-money</artifactId>
+      <version>${joda-money.version}</version>
+    </dependency>
+    
   </dependencies>
 
   <!-- More Project Information -->

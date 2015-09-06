@@ -1,9 +1,11 @@
 package org.djunits.value.vfloat.scalar;
 
+import org.djunits.unit.DensityUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.FlowMassUnit;
 import org.djunits.unit.ForceUnit;
 import org.djunits.unit.MassUnit;
+import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.unit.UNITS;
 import org.djunits.unit.VolumeUnit;
@@ -324,8 +326,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Rel plus(final Mass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Rel(this.si
-                    + v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Rel(
+                this.si + v.si, MassUnit.SI);
         }
 
         /**
@@ -335,8 +337,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Rel minus(final Mass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Rel(this.si
-                    - v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Rel(
+                this.si - v.si, MassUnit.SI);
         }
 
         /**
@@ -346,8 +348,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Abs plus(final Mass.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Abs(this.si
-                    + v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Abs(
+                this.si + v.si, MassUnit.SI);
         }
 
         /**
@@ -380,16 +382,6 @@ public interface Mass extends UNITS
         }
 
         /**
-         * Calculate the multiplication of Mass and Acceleration, which results in a Force scalar.
-         * @param v Mass scalar
-         * @return Force scalar as a multiplication of Mass and Acceleration
-         */
-        public final Force.Rel multiplyBy(final Acceleration.Rel v)
-        {
-            return new Force.Rel(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
          * Calculate the division of Mass and Time, which results in a FlowMass scalar.
          * @param v Mass scalar
          * @return FlowMass scalar as a division of Mass and Time
@@ -397,6 +389,16 @@ public interface Mass extends UNITS
         public final FlowMass.Rel divideBy(final Time.Rel v)
         {
             return new FlowMass.Rel(this.si / v.si, FlowMassUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Mass and Acceleration, which results in a Force scalar.
+         * @param v Mass scalar
+         * @return Force scalar as a multiplication of Mass and Acceleration
+         */
+        public final Force.Rel multiplyBy(final Acceleration.Rel v)
+        {
+            return new Force.Rel(this.si * v.si, ForceUnit.SI);
         }
 
         /**
@@ -417,6 +419,26 @@ public interface Mass extends UNITS
         public final Volume.Rel divideBy(final Density.Rel v)
         {
             return new Volume.Rel(this.si / v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Mass and Volume, which results in a Density scalar.
+         * @param v Mass scalar
+         * @return Density scalar as a division of Mass and Volume
+         */
+        public final Density.Rel divideBy(final Volume.Rel v)
+        {
+            return new Density.Rel(this.si / v.si, DensityUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Mass and MoneyPerMass, which results in a Money scalar.
+         * @param v Mass scalar
+         * @return Money scalar as a multiplication of Mass and MoneyPerMass
+         */
+        public final Money multiplyBy(final MoneyPerMass v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }
@@ -719,8 +741,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Abs plus(final Mass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Abs(this.si
-                    + v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Abs(
+                this.si + v.si, MassUnit.SI);
         }
 
         /**
@@ -730,8 +752,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Rel minus(final Mass.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Rel(this.si
-                    - v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Rel(
+                this.si - v.si, MassUnit.SI);
         }
 
         /**
@@ -741,8 +763,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Abs minus(final Mass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Abs(this.si
-                    - v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Abs(
+                this.si - v.si, MassUnit.SI);
         }
 
         /**
@@ -775,16 +797,6 @@ public interface Mass extends UNITS
         }
 
         /**
-         * Calculate the multiplication of Mass and Acceleration, which results in a Force scalar.
-         * @param v Mass scalar
-         * @return Force scalar as a multiplication of Mass and Acceleration
-         */
-        public final Force.Abs multiplyBy(final Acceleration.Abs v)
-        {
-            return new Force.Abs(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
          * Calculate the division of Mass and Time, which results in a FlowMass scalar.
          * @param v Mass scalar
          * @return FlowMass scalar as a division of Mass and Time
@@ -792,6 +804,16 @@ public interface Mass extends UNITS
         public final FlowMass.Abs divideBy(final Time.Abs v)
         {
             return new FlowMass.Abs(this.si / v.si, FlowMassUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Mass and Acceleration, which results in a Force scalar.
+         * @param v Mass scalar
+         * @return Force scalar as a multiplication of Mass and Acceleration
+         */
+        public final Force.Abs multiplyBy(final Acceleration.Abs v)
+        {
+            return new Force.Abs(this.si * v.si, ForceUnit.SI);
         }
 
         /**
@@ -812,6 +834,26 @@ public interface Mass extends UNITS
         public final Volume.Abs divideBy(final Density.Abs v)
         {
             return new Volume.Abs(this.si / v.si, VolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Mass and Volume, which results in a Density scalar.
+         * @param v Mass scalar
+         * @return Density scalar as a division of Mass and Volume
+         */
+        public final Density.Abs divideBy(final Volume.Abs v)
+        {
+            return new Density.Abs(this.si / v.si, DensityUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Mass and MoneyPerMass, which results in a Money scalar.
+         * @param v Mass scalar
+         * @return Money scalar as a multiplication of Mass and MoneyPerMass
+         */
+        public final Money multiplyBy(final MoneyPerMass v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }

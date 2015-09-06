@@ -323,8 +323,8 @@ public interface FlowMass extends UNITS
          */
         public final FlowMass.Rel plus(final FlowMass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new FlowMass.Rel(getInUnit() + v.getInUnit(), getUnit()) : new FlowMass.Rel(
-                    this.si + v.si, FlowMassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new FlowMass.Rel(getInUnit() + v.getInUnit(), getUnit())
+                : new FlowMass.Rel(this.si + v.si, FlowMassUnit.SI);
         }
 
         /**
@@ -334,8 +334,8 @@ public interface FlowMass extends UNITS
          */
         public final FlowMass.Rel minus(final FlowMass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new FlowMass.Rel(getInUnit() - v.getInUnit(), getUnit()) : new FlowMass.Rel(
-                    this.si - v.si, FlowMassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new FlowMass.Rel(getInUnit() - v.getInUnit(), getUnit())
+                : new FlowMass.Rel(this.si - v.si, FlowMassUnit.SI);
         }
 
         /**
@@ -345,8 +345,8 @@ public interface FlowMass extends UNITS
          */
         public final FlowMass.Abs plus(final FlowMass.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new FlowMass.Abs(getInUnit() + v.getInUnit(), getUnit()) : new FlowMass.Abs(
-                    this.si + v.si, FlowMassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new FlowMass.Abs(getInUnit() + v.getInUnit(), getUnit())
+                : new FlowMass.Abs(this.si + v.si, FlowMassUnit.SI);
         }
 
         /**
@@ -708,8 +708,8 @@ public interface FlowMass extends UNITS
          */
         public final FlowMass.Abs plus(final FlowMass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new FlowMass.Abs(getInUnit() + v.getInUnit(), getUnit()) : new FlowMass.Abs(
-                    this.si + v.si, FlowMassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new FlowMass.Abs(getInUnit() + v.getInUnit(), getUnit())
+                : new FlowMass.Abs(this.si + v.si, FlowMassUnit.SI);
         }
 
         /**
@@ -719,8 +719,8 @@ public interface FlowMass extends UNITS
          */
         public final FlowMass.Rel minus(final FlowMass.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new FlowMass.Rel(getInUnit() - v.getInUnit(), getUnit()) : new FlowMass.Rel(
-                    this.si - v.si, FlowMassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new FlowMass.Rel(getInUnit() - v.getInUnit(), getUnit())
+                : new FlowMass.Rel(this.si - v.si, FlowMassUnit.SI);
         }
 
         /**
@@ -730,8 +730,8 @@ public interface FlowMass extends UNITS
          */
         public final FlowMass.Abs minus(final FlowMass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new FlowMass.Abs(getInUnit() - v.getInUnit(), getUnit()) : new FlowMass.Abs(
-                    this.si - v.si, FlowMassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new FlowMass.Abs(getInUnit() - v.getInUnit(), getUnit())
+                : new FlowMass.Abs(this.si - v.si, FlowMassUnit.SI);
         }
 
         /**

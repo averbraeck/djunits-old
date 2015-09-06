@@ -5,6 +5,7 @@ import org.djunits.unit.ElectricalChargeUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.MassUnit;
+import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.unit.UNITS;
@@ -284,8 +285,8 @@ public interface Time extends UNITS
          */
         public final Time.Rel plus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Time.Rel(this.si
-                    + v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Time.Rel(
+                this.si + v.si, TimeUnit.SI);
         }
 
         /**
@@ -295,8 +296,8 @@ public interface Time extends UNITS
          */
         public final Time.Rel minus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(this.si
-                    - v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(
+                this.si - v.si, TimeUnit.SI);
         }
 
         /**
@@ -306,8 +307,8 @@ public interface Time extends UNITS
          */
         public final Time.Abs plus(final Time.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(this.si
-                    + v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(
+                this.si + v.si, TimeUnit.SI);
         }
 
         /**
@@ -397,6 +398,16 @@ public interface Time extends UNITS
         public final Length.Rel multiplyBy(final Speed.Rel v)
         {
             return new Length.Rel(this.si * v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Time and MoneyPerTime, which results in a Money scalar.
+         * @param v Time scalar
+         * @return Money scalar as a multiplication of Time and MoneyPerTime
+         */
+        public final Money multiplyBy(final MoneyPerTime v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }
@@ -657,8 +668,8 @@ public interface Time extends UNITS
          */
         public final Time.Abs plus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(this.si
-                    + v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(
+                this.si + v.si, TimeUnit.SI);
         }
 
         /**
@@ -668,8 +679,8 @@ public interface Time extends UNITS
          */
         public final Time.Rel minus(final Time.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(this.si
-                    - v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(
+                this.si - v.si, TimeUnit.SI);
         }
 
         /**
@@ -679,8 +690,8 @@ public interface Time extends UNITS
          */
         public final Time.Abs minus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Time.Abs(this.si
-                    - v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Time.Abs(
+                this.si - v.si, TimeUnit.SI);
         }
 
         /**
@@ -770,6 +781,16 @@ public interface Time extends UNITS
         public final Length.Abs multiplyBy(final Speed.Abs v)
         {
             return new Length.Abs(this.si * v.si, LengthUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Time and MoneyPerTime, which results in a Money scalar.
+         * @param v Time scalar
+         * @return Money scalar as a multiplication of Time and MoneyPerTime
+         */
+        public final Money multiplyBy(final MoneyPerTime v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }

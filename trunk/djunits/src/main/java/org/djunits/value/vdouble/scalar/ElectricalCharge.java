@@ -73,10 +73,10 @@ public interface ElectricalCharge extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalCharge.Rel interpolate(final ElectricalCharge.Rel zero, final ElectricalCharge.Rel one,
-                final double ratio)
+            final double ratio)
         {
-            return new ElectricalCharge.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                    zero.getUnit());
+            return new ElectricalCharge.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /** {@inheritDoc} */
@@ -283,7 +283,7 @@ public interface ElectricalCharge extends UNITS
         public final ElectricalCharge.Rel plus(final ElectricalCharge.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCharge.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new ElectricalCharge.Rel(this.si + v.si, ElectricalChargeUnit.SI);
+                : new ElectricalCharge.Rel(this.si + v.si, ElectricalChargeUnit.SI);
         }
 
         /**
@@ -294,7 +294,7 @@ public interface ElectricalCharge extends UNITS
         public final ElectricalCharge.Rel minus(final ElectricalCharge.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCharge.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new ElectricalCharge.Rel(this.si - v.si, ElectricalChargeUnit.SI);
+                : new ElectricalCharge.Rel(this.si - v.si, ElectricalChargeUnit.SI);
         }
 
         /**
@@ -305,7 +305,7 @@ public interface ElectricalCharge extends UNITS
         public final ElectricalCharge.Abs plus(final ElectricalCharge.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCharge.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new ElectricalCharge.Abs(this.si + v.si, ElectricalChargeUnit.SI);
+                : new ElectricalCharge.Abs(this.si + v.si, ElectricalChargeUnit.SI);
         }
 
         /**
@@ -398,10 +398,10 @@ public interface ElectricalCharge extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalCharge.Abs interpolate(final ElectricalCharge.Abs zero, final ElectricalCharge.Abs one,
-                final double ratio)
+            final double ratio)
         {
-            return new ElectricalCharge.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                    zero.getUnit());
+            return new ElectricalCharge.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /** {@inheritDoc} */
@@ -608,7 +608,7 @@ public interface ElectricalCharge extends UNITS
         public final ElectricalCharge.Abs plus(final ElectricalCharge.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCharge.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new ElectricalCharge.Abs(this.si + v.si, ElectricalChargeUnit.SI);
+                : new ElectricalCharge.Abs(this.si + v.si, ElectricalChargeUnit.SI);
         }
 
         /**
@@ -619,7 +619,7 @@ public interface ElectricalCharge extends UNITS
         public final ElectricalCharge.Rel minus(final ElectricalCharge.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCharge.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new ElectricalCharge.Rel(this.si - v.si, ElectricalChargeUnit.SI);
+                : new ElectricalCharge.Rel(this.si - v.si, ElectricalChargeUnit.SI);
         }
 
         /**
@@ -630,7 +630,7 @@ public interface ElectricalCharge extends UNITS
         public final ElectricalCharge.Abs minus(final ElectricalCharge.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalCharge.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new ElectricalCharge.Abs(this.si - v.si, ElectricalChargeUnit.SI);
+                : new ElectricalCharge.Abs(this.si - v.si, ElectricalChargeUnit.SI);
         }
 
         /**

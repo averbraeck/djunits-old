@@ -4,7 +4,10 @@ import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.LengthUnit;
+import org.djunits.unit.LinearDensityUnit;
+import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.SpeedUnit;
+import org.djunits.unit.TimeUnit;
 import org.djunits.unit.UNITS;
 import org.djunits.unit.VolumeUnit;
 
@@ -283,7 +286,7 @@ public interface Length extends UNITS
         public final Length.Rel plus(final Length.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Length.Rel(
-                    this.si + v.si, LengthUnit.SI);
+                this.si + v.si, LengthUnit.SI);
         }
 
         /**
@@ -294,7 +297,7 @@ public interface Length extends UNITS
         public final Length.Rel minus(final Length.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Length.Rel(
-                    this.si - v.si, LengthUnit.SI);
+                this.si - v.si, LengthUnit.SI);
         }
 
         /**
@@ -305,7 +308,7 @@ public interface Length extends UNITS
         public final Length.Abs plus(final Length.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Length.Abs(
-                    this.si + v.si, LengthUnit.SI);
+                this.si + v.si, LengthUnit.SI);
         }
 
         /**
@@ -348,6 +351,16 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the division of Length and Area, which results in a LinearDensity scalar.
+         * @param v Length scalar
+         * @return LinearDensity scalar as a division of Length and Area
+         */
+        public final LinearDensity.Rel divideBy(final Area.Rel v)
+        {
+            return new LinearDensity.Rel(this.si / v.si, LinearDensityUnit.SI);
+        }
+
+        /**
          * Calculate the multiplication of Length and Area, which results in a Volume scalar.
          * @param v Length scalar
          * @return Volume scalar as a multiplication of Length and Area
@@ -385,6 +398,26 @@ public interface Length extends UNITS
         public final Speed.Rel divideBy(final Time.Rel v)
         {
             return new Speed.Rel(this.si / v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Length and Speed, which results in a Time scalar.
+         * @param v Length scalar
+         * @return Time scalar as a division of Length and Speed
+         */
+        public final Time.Rel divideBy(final Speed.Rel v)
+        {
+            return new Time.Rel(this.si / v.si, TimeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Length and MoneyPerLength, which results in a Money scalar.
+         * @param v Length scalar
+         * @return Money scalar as a multiplication of Length and MoneyPerLength
+         */
+        public final Money multiplyBy(final MoneyPerLength v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }
@@ -646,7 +679,7 @@ public interface Length extends UNITS
         public final Length.Abs plus(final Length.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Length.Abs(
-                    this.si + v.si, LengthUnit.SI);
+                this.si + v.si, LengthUnit.SI);
         }
 
         /**
@@ -657,7 +690,7 @@ public interface Length extends UNITS
         public final Length.Rel minus(final Length.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Length.Rel(
-                    this.si - v.si, LengthUnit.SI);
+                this.si - v.si, LengthUnit.SI);
         }
 
         /**
@@ -668,7 +701,7 @@ public interface Length extends UNITS
         public final Length.Abs minus(final Length.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Length.Abs(
-                    this.si - v.si, LengthUnit.SI);
+                this.si - v.si, LengthUnit.SI);
         }
 
         /**
@@ -711,6 +744,16 @@ public interface Length extends UNITS
         }
 
         /**
+         * Calculate the division of Length and Area, which results in a LinearDensity scalar.
+         * @param v Length scalar
+         * @return LinearDensity scalar as a division of Length and Area
+         */
+        public final LinearDensity.Abs divideBy(final Area.Abs v)
+        {
+            return new LinearDensity.Abs(this.si / v.si, LinearDensityUnit.SI);
+        }
+
+        /**
          * Calculate the multiplication of Length and Area, which results in a Volume scalar.
          * @param v Length scalar
          * @return Volume scalar as a multiplication of Length and Area
@@ -748,6 +791,26 @@ public interface Length extends UNITS
         public final Speed.Abs divideBy(final Time.Abs v)
         {
             return new Speed.Abs(this.si / v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Length and Speed, which results in a Time scalar.
+         * @param v Length scalar
+         * @return Time scalar as a division of Length and Speed
+         */
+        public final Time.Abs divideBy(final Speed.Abs v)
+        {
+            return new Time.Abs(this.si / v.si, TimeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Length and MoneyPerLength, which results in a Money scalar.
+         * @param v Length scalar
+         * @return Money scalar as a multiplication of Length and MoneyPerLength
+         */
+        public final Money multiplyBy(final MoneyPerLength v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }

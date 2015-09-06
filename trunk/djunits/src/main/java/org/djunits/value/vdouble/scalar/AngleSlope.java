@@ -279,7 +279,7 @@ public interface AngleSlope extends UNITS
         public final AngleSlope.Rel plus(final AngleSlope.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSlope.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new AngleSlope.Rel(this.si + v.si, AngleSlopeUnit.SI);
+                : new AngleSlope.Rel(this.si + v.si, AngleSlopeUnit.SI);
         }
 
         /**
@@ -290,7 +290,7 @@ public interface AngleSlope extends UNITS
         public final AngleSlope.Rel minus(final AngleSlope.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSlope.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new AngleSlope.Rel(this.si - v.si, AngleSlopeUnit.SI);
+                : new AngleSlope.Rel(this.si - v.si, AngleSlopeUnit.SI);
         }
 
         /**
@@ -301,7 +301,7 @@ public interface AngleSlope extends UNITS
         public final AngleSlope.Abs plus(final AngleSlope.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSlope.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new AngleSlope.Abs(this.si + v.si, AngleSlopeUnit.SI);
+                : new AngleSlope.Abs(this.si + v.si, AngleSlopeUnit.SI);
         }
 
         /**
@@ -582,7 +582,7 @@ public interface AngleSlope extends UNITS
         public final AngleSlope.Abs plus(final AngleSlope.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSlope.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new AngleSlope.Abs(this.si + v.si, AngleSlopeUnit.SI);
+                : new AngleSlope.Abs(this.si + v.si, AngleSlopeUnit.SI);
         }
 
         /**
@@ -593,7 +593,7 @@ public interface AngleSlope extends UNITS
         public final AngleSlope.Rel minus(final AngleSlope.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSlope.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new AngleSlope.Rel(this.si - v.si, AngleSlopeUnit.SI);
+                : new AngleSlope.Rel(this.si - v.si, AngleSlopeUnit.SI);
         }
 
         /**
@@ -604,7 +604,7 @@ public interface AngleSlope extends UNITS
         public final AngleSlope.Abs minus(final AngleSlope.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AngleSlope.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new AngleSlope.Abs(this.si - v.si, AngleSlopeUnit.SI);
+                : new AngleSlope.Abs(this.si - v.si, AngleSlopeUnit.SI);
         }
 
         /**

@@ -5,6 +5,7 @@ import org.djunits.unit.ForceUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
+import org.djunits.unit.MoneyPerLengthUnit;
 import org.djunits.unit.UNITS;
 
 /**
@@ -83,9 +84,11 @@ public interface LinearDensity extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static LinearDensity.Rel interpolate(final LinearDensity.Rel zero, final LinearDensity.Rel one, final float ratio)
+        public static LinearDensity.Rel interpolate(final LinearDensity.Rel zero, final LinearDensity.Rel one,
+            final float ratio)
         {
-            return new LinearDensity.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new LinearDensity.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -96,7 +99,7 @@ public interface LinearDensity extends UNITS
          * @return a Scalar at the ratio between
          */
         public static LinearDensity.Rel interpolate(final LinearDensity.Rel zero, final LinearDensity.Rel one,
-                final double ratio)
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -325,7 +328,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Rel plus(final LinearDensity.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new LinearDensity.Rel(this.si + v.si, LinearDensityUnit.SI);
+                : new LinearDensity.Rel(this.si + v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -336,7 +339,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Rel minus(final LinearDensity.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new LinearDensity.Rel(this.si - v.si, LinearDensityUnit.SI);
+                : new LinearDensity.Rel(this.si - v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -347,7 +350,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Abs plus(final LinearDensity.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new LinearDensity.Abs(this.si + v.si, LinearDensityUnit.SI);
+                : new LinearDensity.Abs(this.si + v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -397,6 +400,16 @@ public interface LinearDensity extends UNITS
         public final Frequency.Rel multiplyBy(final Speed.Rel v)
         {
             return new Frequency.Rel(this.si * v.si, FrequencyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of LinearDensity and Money, which results in a MoneyPerLength scalar.
+         * @param v LinearDensity scalar
+         * @return MoneyPerLength scalar as a multiplication of LinearDensity and Money
+         */
+        public final MoneyPerLength multiplyBy(final Money v)
+        {
+            return new MoneyPerLength(this.si * v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
         }
 
     }
@@ -459,9 +472,11 @@ public interface LinearDensity extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static LinearDensity.Abs interpolate(final LinearDensity.Abs zero, final LinearDensity.Abs one, final float ratio)
+        public static LinearDensity.Abs interpolate(final LinearDensity.Abs zero, final LinearDensity.Abs one,
+            final float ratio)
         {
-            return new LinearDensity.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new LinearDensity.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -472,7 +487,7 @@ public interface LinearDensity extends UNITS
          * @return a Scalar at the ratio between
          */
         public static LinearDensity.Abs interpolate(final LinearDensity.Abs zero, final LinearDensity.Abs one,
-                final double ratio)
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -701,7 +716,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Abs plus(final LinearDensity.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new LinearDensity.Abs(this.si + v.si, LinearDensityUnit.SI);
+                : new LinearDensity.Abs(this.si + v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -712,7 +727,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Rel minus(final LinearDensity.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new LinearDensity.Rel(this.si - v.si, LinearDensityUnit.SI);
+                : new LinearDensity.Rel(this.si - v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -723,7 +738,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Abs minus(final LinearDensity.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new LinearDensity.Abs(this.si - v.si, LinearDensityUnit.SI);
+                : new LinearDensity.Abs(this.si - v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -773,6 +788,16 @@ public interface LinearDensity extends UNITS
         public final Frequency.Abs multiplyBy(final Speed.Abs v)
         {
             return new Frequency.Abs(this.si * v.si, FrequencyUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of LinearDensity and Money, which results in a MoneyPerLength scalar.
+         * @param v LinearDensity scalar
+         * @return MoneyPerLength scalar as a multiplication of LinearDensity and Money
+         */
+        public final MoneyPerLength multiplyBy(final Money v)
+        {
+            return new MoneyPerLength(this.si * v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
         }
 
     }
