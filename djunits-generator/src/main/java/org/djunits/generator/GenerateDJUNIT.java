@@ -2,6 +2,7 @@ package org.djunits.generator;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,22 +27,31 @@ import java.util.Map;
  */
 public class GenerateDJUNIT
 {
-    /** The output folder of the writer -- this should correspond to the src/main/java/org/djunits folder. */
-    private static final String rootPath = "D:/java/opentrafficsim/workspace/djunits/src/main/java/org/djunits/";
+    /** The output folder of the writer -- will be written in Eclipse project-root/generated-code/org/djunits folder. */
+    private static final String generatedCodeRelativePath = "/generated-code/org/djunits/";
 
-    /** List of types. */
-    private static List<String> types = new ArrayList<>();
+    /**
+     * The calculated absolute output path (root of the executable or Jar file). In case of an Eclipse run, ../../ is added to
+     * the path to place the results in the root of the project, rather than in target/classes.
+     */
+    private static String absoluteRootPath;
+
+    /** List of Abs + Rel types. */
+    private static List<String> typesAbsRel = new ArrayList<>();
+
+    /** List of Rel types. */
+    private static List<String> typesRel = new ArrayList<>();
 
     /** Map of types to formulas. */
     private static Map<String, List<String>> formulas = new HashMap<>();
 
     /**
-     * Read the types from the file /TYPES.txt.
+     * Read the types from the file /TYPES_ABS_REL.txt.
      * @throws IOException
      */
-    private static void readTypes() throws IOException
+    private static void readAbsRelTypes() throws IOException
     {
-        URL typesURL = URLResource.getResource("/TYPES.txt");
+        URL typesURL = URLResource.getResource("/TYPES_ABS_REL.txt");
         FileReader fileReader = new FileReader(new File(typesURL.getPath()));
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = null;
@@ -49,7 +59,27 @@ public class GenerateDJUNIT
         {
             if (line.length() > 0)
             {
-                types.add(line);
+                typesAbsRel.add(line);
+            }
+        }
+        bufferedReader.close();
+    }
+
+    /**
+     * Read the types from the file /TYPES_REL.txt.
+     * @throws IOException
+     */
+    private static void readRelTypes() throws IOException
+    {
+        URL typesURL = URLResource.getResource("/TYPES_REL.txt");
+        FileReader fileReader = new FileReader(new File(typesURL.getPath()));
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String line = null;
+        while ((line = bufferedReader.readLine()) != null)
+        {
+            if (line.length() > 0)
+            {
+                typesRel.add(line);
             }
         }
         bufferedReader.close();
@@ -164,6 +194,7 @@ public class GenerateDJUNIT
                 f = f.substring(1, f.length());
                 String param = f.split("=")[0].trim();
                 String result = f.split("=")[1].trim();
+                String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
                 fStr += "        /**\n";
                 fStr += "         * Calculate the " + dm + " of " + type + " and " + param + ", which results in a ";
                 fStr += result + " scalar.\n";
@@ -174,23 +205,30 @@ public class GenerateDJUNIT
                 fStr += "(final " + param + "." + absRel + " v)\n";
                 fStr += "        {\n";
                 fStr += "            return new " + result + "." + absRel + "(this.si " + mdsign + " v.si, ";
-                fStr += result + "Unit.SI);\n";
+                fStr += result + "Unit" + siOrMoney + ");\n";
                 fStr += "        }\n\n";
             }
             ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 5, ret.length() - 1);
+        }
+        
+        // remove the ".Rel" for the purely relative units.
+        for (String relType : typesRel)
+        {
+            ret = ret.replaceAll(relType + "\\.Rel", relType);
+            ret = ret.replaceAll(relType + "\\.Abs", relType);
         }
         return ret;
     }
 
     /**
-     * Generate all classes in value.vdouble.scalar.
+     * Generate all Abs + Rel classes in value.vdouble.scalar.
      * @throws IOException
      * @throws URISyntaxException
      */
-    private static void generateDoubleScalar() throws IOException, URISyntaxException
+    private static void generateDoubleScalarAbsRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/scalar/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "SCALAR.java");
+        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_SCALAR_ABS_REL.java");
         URL insertURL = URLResource.getResource("/" + relativePath + "INSERT.java");
         boolean isInsert = (insertURL != null) && new File(insertURL.toURI()).exists();
         String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
@@ -200,11 +238,11 @@ public class GenerateDJUNIT
             insertJava = new String(Files.readAllBytes(Paths.get(insertURL.toURI())));
         }
 
-        for (String type : types)
+        for (String type : typesAbsRel)
         {
-            File outPath = new File(rootPath + relativePath);
+            File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
-            PrintWriter out = new PrintWriter(rootPath + relativePath + type + ".java");
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
             String java = new String(scalarJava);
             java = java.replaceAll("%TYPE%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
@@ -215,18 +253,45 @@ public class GenerateDJUNIT
             java = formulas(java, "DoubleScalar => " + type);
             out.print(java);
             out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
         }
     }
 
     /**
-     * Generate all classes in value.vfloat.scalar.
+     * Generate all Rel classes in value.vdouble.scalar.
      * @throws IOException
      * @throws URISyntaxException
      */
-    private static void generateFloatScalar() throws IOException, URISyntaxException
+    private static void generateDoubleScalarRel() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/scalar/";
+        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_SCALAR_REL.java");
+        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesRel)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%TYPE%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = formulas(java, "DoubleScalar => " + type);
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
+        }
+    }
+
+    /**
+     * Generate all Abs + Rel classes in value.vfloat.scalar.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateFloatScalarAbsRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/scalar/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "SCALAR.java");
+        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_SCALAR_ABS_REL.java");
         URL insertURL = URLResource.getResource("/" + relativePath + "INSERT.java");
         boolean isInsert = (insertURL != null) && new File(insertURL.toURI()).exists();
         String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
@@ -236,11 +301,11 @@ public class GenerateDJUNIT
             insertJava = new String(Files.readAllBytes(Paths.get(insertURL.toURI())));
         }
 
-        for (String type : types)
+        for (String type : typesAbsRel)
         {
-            File outPath = new File(rootPath + relativePath);
+            File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
-            PrintWriter out = new PrintWriter(rootPath + relativePath + type + ".java");
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
             String java = new String(scalarJava);
             java = java.replaceAll("%TYPE%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
@@ -251,7 +316,101 @@ public class GenerateDJUNIT
             java = formulas(java, "FloatScalar => " + type);
             out.print(java);
             out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
         }
+    }
+
+    /**
+     * Generate all Rel classes in value.vfloat.scalar.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateFloatScalarRel() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vfloat/scalar/";
+        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_SCALAR_REL.java");
+        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesRel)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%TYPE%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = formulas(java, "FloatScalar => " + type);
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
+        }
+    }
+
+    /**
+     * Determine calculated absolute output path (root of the executable or Jar file). In case of an Eclipse run, ../../ is
+     * added to the path to place the results in the root of the project, rather than in target/classes.<br>
+     * See https://weblogs.java.net/blog/kohsuke/archive/2007/04/how_to_convert.html and
+     * http://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file and
+     * http://stackoverflow.com/questions/3153337/get-current-working-directory-in-java
+     * @throws FileNotFoundException
+     */
+    private static void makeAndCleanAbsolutePath() throws FileNotFoundException
+    {
+        URL mainURL = URLResource.getResource("/");
+        String path;
+        try
+        {
+            path = mainURL.toURI().getPath();
+        }
+        catch (URISyntaxException exception)
+        {
+            path = mainURL.getPath();
+        }
+        if (path.endsWith("/target/classes/"))
+        {
+            path = path.substring(0, path.length() - "/target/classes/".length());
+        }
+        path += generatedCodeRelativePath;
+        if (!new File(path).exists())
+        {
+            new File(path).mkdirs();
+        }
+        else
+        {
+            System.out.println("about to delete: " + path);
+            // if (!deleteRecursive(new File(path)))
+            // {
+            // System.err.println("Could not empty directory " + path);
+            // System.exit(-1);
+            // }
+        }
+        absoluteRootPath = path;
+        System.out.println("writing into: " + path);
+    }
+
+    /**
+     * By default File#delete fails for non-empty directories, it works like "rm". We need something a little more brutual -
+     * this does the equivalent of "rm -r". From: http://stackoverflow.com/questions/779519/delete-files-recursively-in-java.
+     * Note: USE CAREFULLY.
+     * @param path Root File Path
+     * @return true iff the file and all sub files/directories have been removed
+     * @throws FileNotFoundException on error (e.g., locked file)
+     */
+    public static boolean deleteRecursive(File path) throws FileNotFoundException
+    {
+        if (!path.exists())
+        {
+            throw new FileNotFoundException(path.getAbsolutePath());
+        }
+        boolean ret = true;
+        if (path.isDirectory())
+        {
+            for (File f : path.listFiles())
+            {
+                ret = ret && deleteRecursive(f);
+            }
+        }
+        return ret && path.delete();
     }
 
     /**
@@ -261,10 +420,14 @@ public class GenerateDJUNIT
      */
     public static void main(String[] args) throws IOException, URISyntaxException
     {
-        readTypes();
+        makeAndCleanAbsolutePath();
+        readAbsRelTypes();
+        readRelTypes();
         readFormulas();
-        generateDoubleScalar();
-        generateFloatScalar();
+        generateDoubleScalarAbsRel();
+        generateDoubleScalarRel();
+        generateFloatScalarAbsRel();
+        generateFloatScalarRel();
     }
 
 }
