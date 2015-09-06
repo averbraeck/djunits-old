@@ -6,6 +6,8 @@ import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.FlowVolumeUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.MassUnit;
+import org.djunits.unit.MoneyUnit;
+import org.djunits.unit.TimeUnit;
 import org.djunits.unit.UNITS;
 import org.djunits.unit.VolumeUnit;
 
@@ -326,7 +328,7 @@ public interface Volume extends UNITS
         public final Volume.Rel plus(final Volume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Volume.Rel(
-                    this.si + v.si, VolumeUnit.SI);
+                this.si + v.si, VolumeUnit.SI);
         }
 
         /**
@@ -337,7 +339,7 @@ public interface Volume extends UNITS
         public final Volume.Rel minus(final Volume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Volume.Rel(
-                    this.si - v.si, VolumeUnit.SI);
+                this.si - v.si, VolumeUnit.SI);
         }
 
         /**
@@ -348,7 +350,7 @@ public interface Volume extends UNITS
         public final Volume.Abs plus(final Volume.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Volume.Abs(
-                    this.si + v.si, VolumeUnit.SI);
+                this.si + v.si, VolumeUnit.SI);
         }
 
         /**
@@ -428,6 +430,26 @@ public interface Volume extends UNITS
         public final FlowVolume.Rel divideBy(final Time.Rel v)
         {
             return new FlowVolume.Rel(this.si / v.si, FlowVolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Volume and FlowVolume, which results in a Time scalar.
+         * @param v Volume scalar
+         * @return Time scalar as a division of Volume and FlowVolume
+         */
+        public final Time.Rel divideBy(final FlowVolume.Rel v)
+        {
+            return new Time.Rel(this.si / v.si, TimeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Volume and MoneyPerVolume, which results in a Money scalar.
+         * @param v Volume scalar
+         * @return Money scalar as a multiplication of Volume and MoneyPerVolume
+         */
+        public final Money multiplyBy(final MoneyPerVolume v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }
@@ -731,7 +753,7 @@ public interface Volume extends UNITS
         public final Volume.Abs plus(final Volume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Volume.Abs(
-                    this.si + v.si, VolumeUnit.SI);
+                this.si + v.si, VolumeUnit.SI);
         }
 
         /**
@@ -742,7 +764,7 @@ public interface Volume extends UNITS
         public final Volume.Rel minus(final Volume.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Volume.Rel(
-                    this.si - v.si, VolumeUnit.SI);
+                this.si - v.si, VolumeUnit.SI);
         }
 
         /**
@@ -753,7 +775,7 @@ public interface Volume extends UNITS
         public final Volume.Abs minus(final Volume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Volume.Abs(
-                    this.si - v.si, VolumeUnit.SI);
+                this.si - v.si, VolumeUnit.SI);
         }
 
         /**
@@ -833,6 +855,26 @@ public interface Volume extends UNITS
         public final FlowVolume.Abs divideBy(final Time.Abs v)
         {
             return new FlowVolume.Abs(this.si / v.si, FlowVolumeUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Volume and FlowVolume, which results in a Time scalar.
+         * @param v Volume scalar
+         * @return Time scalar as a division of Volume and FlowVolume
+         */
+        public final Time.Abs divideBy(final FlowVolume.Abs v)
+        {
+            return new Time.Abs(this.si / v.si, TimeUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Volume and MoneyPerVolume, which results in a Money scalar.
+         * @param v Volume scalar
+         * @return Money scalar as a multiplication of Volume and MoneyPerVolume
+         */
+        public final Money multiplyBy(final MoneyPerVolume v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }

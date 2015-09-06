@@ -5,6 +5,8 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.FlowVolumeUnit;
 import org.djunits.unit.ForceUnit;
 import org.djunits.unit.LengthUnit;
+import org.djunits.unit.LinearDensityUnit;
+import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.UNITS;
 import org.djunits.unit.VolumeUnit;
 
@@ -324,8 +326,8 @@ public interface Area extends UNITS
          */
         public final Area.Rel plus(final Area.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Area.Rel(this.si
-                    + v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Area.Rel(
+                this.si + v.si, AreaUnit.SI);
         }
 
         /**
@@ -335,8 +337,8 @@ public interface Area extends UNITS
          */
         public final Area.Rel minus(final Area.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Area.Rel(this.si
-                    - v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Area.Rel(
+                this.si - v.si, AreaUnit.SI);
         }
 
         /**
@@ -346,8 +348,8 @@ public interface Area extends UNITS
          */
         public final Area.Abs plus(final Area.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Area.Abs(this.si
-                    + v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Area.Abs(
+                this.si + v.si, AreaUnit.SI);
         }
 
         /**
@@ -390,6 +392,16 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the division of Area and Volume, which results in a LinearDensity scalar.
+         * @param v Area scalar
+         * @return LinearDensity scalar as a division of Area and Volume
+         */
+        public final LinearDensity.Rel divideBy(final Volume.Rel v)
+        {
+            return new LinearDensity.Rel(this.si / v.si, LinearDensityUnit.SI);
+        }
+
+        /**
          * Calculate the division of Area and Length, which results in a Length scalar.
          * @param v Area scalar
          * @return Length scalar as a division of Area and Length
@@ -427,6 +439,16 @@ public interface Area extends UNITS
         public final Force.Rel multiplyBy(final Pressure.Rel v)
         {
             return new Force.Rel(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Area and MoneyPerArea, which results in a Money scalar.
+         * @param v Area scalar
+         * @return Money scalar as a multiplication of Area and MoneyPerArea
+         */
+        public final Money multiplyBy(final MoneyPerArea v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }
@@ -729,8 +751,8 @@ public interface Area extends UNITS
          */
         public final Area.Abs plus(final Area.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Area.Abs(this.si
-                    + v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Area.Abs(
+                this.si + v.si, AreaUnit.SI);
         }
 
         /**
@@ -740,8 +762,8 @@ public interface Area extends UNITS
          */
         public final Area.Rel minus(final Area.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Area.Rel(this.si
-                    - v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Area.Rel(
+                this.si - v.si, AreaUnit.SI);
         }
 
         /**
@@ -751,8 +773,8 @@ public interface Area extends UNITS
          */
         public final Area.Abs minus(final Area.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Area.Abs(this.si
-                    - v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Area.Abs(
+                this.si - v.si, AreaUnit.SI);
         }
 
         /**
@@ -795,6 +817,16 @@ public interface Area extends UNITS
         }
 
         /**
+         * Calculate the division of Area and Volume, which results in a LinearDensity scalar.
+         * @param v Area scalar
+         * @return LinearDensity scalar as a division of Area and Volume
+         */
+        public final LinearDensity.Abs divideBy(final Volume.Abs v)
+        {
+            return new LinearDensity.Abs(this.si / v.si, LinearDensityUnit.SI);
+        }
+
+        /**
          * Calculate the division of Area and Length, which results in a Length scalar.
          * @param v Area scalar
          * @return Length scalar as a division of Area and Length
@@ -832,6 +864,16 @@ public interface Area extends UNITS
         public final Force.Abs multiplyBy(final Pressure.Abs v)
         {
             return new Force.Abs(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Area and MoneyPerArea, which results in a Money scalar.
+         * @param v Area scalar
+         * @return Money scalar as a multiplication of Area and MoneyPerArea
+         */
+        public final Money multiplyBy(final MoneyPerArea v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }

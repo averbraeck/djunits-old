@@ -1,5 +1,6 @@
 package org.djunits.value.vfloat.scalar;
 
+import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.FlowVolumeUnit;
 import org.djunits.unit.FrequencyUnit;
@@ -324,7 +325,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Rel plus(final FlowVolume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new FlowVolume.Rel(this.si + v.si, FlowVolumeUnit.SI);
+                : new FlowVolume.Rel(this.si + v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -335,7 +336,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Rel minus(final FlowVolume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new FlowVolume.Rel(this.si - v.si, FlowVolumeUnit.SI);
+                : new FlowVolume.Rel(this.si - v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -346,7 +347,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Abs plus(final FlowVolume.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new FlowVolume.Abs(this.si + v.si, FlowVolumeUnit.SI);
+                : new FlowVolume.Abs(this.si + v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -406,6 +407,16 @@ public interface FlowVolume extends UNITS
         public final Speed.Rel divideBy(final Area.Rel v)
         {
             return new Speed.Rel(this.si / v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of FlowVolume and Speed, which results in a Area scalar.
+         * @param v FlowVolume scalar
+         * @return Area scalar as a division of FlowVolume and Speed
+         */
+        public final Area.Rel divideBy(final Speed.Rel v)
+        {
+            return new Area.Rel(this.si / v.si, AreaUnit.SI);
         }
 
     }
@@ -709,7 +720,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Abs plus(final FlowVolume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new FlowVolume.Abs(this.si + v.si, FlowVolumeUnit.SI);
+                : new FlowVolume.Abs(this.si + v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -720,7 +731,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Rel minus(final FlowVolume.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new FlowVolume.Rel(this.si - v.si, FlowVolumeUnit.SI);
+                : new FlowVolume.Rel(this.si - v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -731,7 +742,7 @@ public interface FlowVolume extends UNITS
         public final FlowVolume.Abs minus(final FlowVolume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new FlowVolume.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new FlowVolume.Abs(this.si - v.si, FlowVolumeUnit.SI);
+                : new FlowVolume.Abs(this.si - v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -791,6 +802,16 @@ public interface FlowVolume extends UNITS
         public final Speed.Abs divideBy(final Area.Abs v)
         {
             return new Speed.Abs(this.si / v.si, SpeedUnit.SI);
+        }
+
+        /**
+         * Calculate the division of FlowVolume and Speed, which results in a Area scalar.
+         * @param v FlowVolume scalar
+         * @return Area scalar as a division of FlowVolume and Speed
+         */
+        public final Area.Abs divideBy(final Speed.Abs v)
+        {
+            return new Area.Abs(this.si / v.si, AreaUnit.SI);
         }
 
     }

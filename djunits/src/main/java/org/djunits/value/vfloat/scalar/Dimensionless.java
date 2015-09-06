@@ -19,6 +19,13 @@ import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MassUnit;
+import org.djunits.unit.MoneyPerAreaUnit;
+import org.djunits.unit.MoneyPerEnergyUnit;
+import org.djunits.unit.MoneyPerLengthUnit;
+import org.djunits.unit.MoneyPerMassUnit;
+import org.djunits.unit.MoneyPerTimeUnit;
+import org.djunits.unit.MoneyPerVolumeUnit;
+import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
 import org.djunits.unit.SpeedUnit;
@@ -104,9 +111,11 @@ public interface Dimensionless extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Dimensionless.Rel interpolate(final Dimensionless.Rel zero, final Dimensionless.Rel one, final float ratio)
+        public static Dimensionless.Rel interpolate(final Dimensionless.Rel zero, final Dimensionless.Rel one,
+            final float ratio)
         {
-            return new Dimensionless.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new Dimensionless.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -117,7 +126,7 @@ public interface Dimensionless extends UNITS
          * @return a Scalar at the ratio between
          */
         public static Dimensionless.Rel interpolate(final Dimensionless.Rel zero, final Dimensionless.Rel one,
-                final double ratio)
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -346,7 +355,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Rel plus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new Dimensionless.Rel(this.si + v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Rel(this.si + v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -357,7 +366,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Rel minus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -368,7 +377,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Abs plus(final Dimensionless.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -582,6 +591,76 @@ public interface Dimensionless extends UNITS
         }
 
         /**
+         * Calculate the multiplication of Dimensionless and Money, which results in a Money scalar.
+         * @param v Dimensionless scalar
+         * @return Money scalar as a multiplication of Dimensionless and Money
+         */
+        public final Money multiplyBy(final Money v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerArea, which results in a MoneyPerArea scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerArea scalar as a multiplication of Dimensionless and MoneyPerArea
+         */
+        public final MoneyPerArea multiplyBy(final MoneyPerArea v)
+        {
+            return new MoneyPerArea(this.si * v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerEnergy, which results in a MoneyPerEnergy scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerEnergy scalar as a multiplication of Dimensionless and MoneyPerEnergy
+         */
+        public final MoneyPerEnergy multiplyBy(final MoneyPerEnergy v)
+        {
+            return new MoneyPerEnergy(this.si * v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerLength, which results in a MoneyPerLength scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerLength scalar as a multiplication of Dimensionless and MoneyPerLength
+         */
+        public final MoneyPerLength multiplyBy(final MoneyPerLength v)
+        {
+            return new MoneyPerLength(this.si * v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerMass, which results in a MoneyPerMass scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerMass scalar as a multiplication of Dimensionless and MoneyPerMass
+         */
+        public final MoneyPerMass multiplyBy(final MoneyPerMass v)
+        {
+            return new MoneyPerMass(this.si * v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerTime, which results in a MoneyPerTime scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerTime scalar as a multiplication of Dimensionless and MoneyPerTime
+         */
+        public final MoneyPerTime multiplyBy(final MoneyPerTime v)
+        {
+            return new MoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerVolume, which results in a MoneyPerVolume scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerVolume scalar as a multiplication of Dimensionless and MoneyPerVolume
+         */
+        public final MoneyPerVolume multiplyBy(final MoneyPerVolume v)
+        {
+            return new MoneyPerVolume(this.si * v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
+        }
+
+        /**
          * Calculate the multiplication of Dimensionless and Power, which results in a Power scalar.
          * @param v Dimensionless scalar
          * @return Power scalar as a multiplication of Dimensionless and Power
@@ -751,9 +830,11 @@ public interface Dimensionless extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Dimensionless.Abs interpolate(final Dimensionless.Abs zero, final Dimensionless.Abs one, final float ratio)
+        public static Dimensionless.Abs interpolate(final Dimensionless.Abs zero, final Dimensionless.Abs one,
+            final float ratio)
         {
-            return new Dimensionless.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new Dimensionless.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -764,7 +845,7 @@ public interface Dimensionless extends UNITS
          * @return a Scalar at the ratio between
          */
         public static Dimensionless.Abs interpolate(final Dimensionless.Abs zero, final Dimensionless.Abs one,
-                final double ratio)
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -993,7 +1074,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Abs plus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -1004,7 +1085,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Rel minus(final Dimensionless.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -1015,7 +1096,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Abs minus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new Dimensionless.Abs(this.si - v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Abs(this.si - v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -1226,6 +1307,76 @@ public interface Dimensionless extends UNITS
         public final Mass.Abs multiplyBy(final Mass.Abs v)
         {
             return new Mass.Abs(this.si * v.si, MassUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and Money, which results in a Money scalar.
+         * @param v Dimensionless scalar
+         * @return Money scalar as a multiplication of Dimensionless and Money
+         */
+        public final Money multiplyBy(final Money v)
+        {
+            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerArea, which results in a MoneyPerArea scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerArea scalar as a multiplication of Dimensionless and MoneyPerArea
+         */
+        public final MoneyPerArea multiplyBy(final MoneyPerArea v)
+        {
+            return new MoneyPerArea(this.si * v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerEnergy, which results in a MoneyPerEnergy scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerEnergy scalar as a multiplication of Dimensionless and MoneyPerEnergy
+         */
+        public final MoneyPerEnergy multiplyBy(final MoneyPerEnergy v)
+        {
+            return new MoneyPerEnergy(this.si * v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerLength, which results in a MoneyPerLength scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerLength scalar as a multiplication of Dimensionless and MoneyPerLength
+         */
+        public final MoneyPerLength multiplyBy(final MoneyPerLength v)
+        {
+            return new MoneyPerLength(this.si * v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerMass, which results in a MoneyPerMass scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerMass scalar as a multiplication of Dimensionless and MoneyPerMass
+         */
+        public final MoneyPerMass multiplyBy(final MoneyPerMass v)
+        {
+            return new MoneyPerMass(this.si * v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerTime, which results in a MoneyPerTime scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerTime scalar as a multiplication of Dimensionless and MoneyPerTime
+         */
+        public final MoneyPerTime multiplyBy(final MoneyPerTime v)
+        {
+            return new MoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+        }
+
+        /**
+         * Calculate the multiplication of Dimensionless and MoneyPerVolume, which results in a MoneyPerVolume scalar.
+         * @param v Dimensionless scalar
+         * @return MoneyPerVolume scalar as a multiplication of Dimensionless and MoneyPerVolume
+         */
+        public final MoneyPerVolume multiplyBy(final MoneyPerVolume v)
+        {
+            return new MoneyPerVolume(this.si * v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
         }
 
         /**

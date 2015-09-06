@@ -72,7 +72,8 @@ public interface Temperature extends UNITS
          */
         public static Temperature.Rel interpolate(final Temperature.Rel zero, final Temperature.Rel one, final double ratio)
         {
-            return new Temperature.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new Temperature.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /** {@inheritDoc} */
@@ -279,7 +280,7 @@ public interface Temperature extends UNITS
         public final Temperature.Rel plus(final Temperature.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new Temperature.Rel(this.si + v.si, TemperatureUnit.SI);
+                : new Temperature.Rel(this.si + v.si, TemperatureUnit.SI);
         }
 
         /**
@@ -290,7 +291,7 @@ public interface Temperature extends UNITS
         public final Temperature.Rel minus(final Temperature.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new Temperature.Rel(this.si - v.si, TemperatureUnit.SI);
+                : new Temperature.Rel(this.si - v.si, TemperatureUnit.SI);
         }
 
         /**
@@ -301,7 +302,7 @@ public interface Temperature extends UNITS
         public final Temperature.Abs plus(final Temperature.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new Temperature.Abs(this.si + v.si, TemperatureUnit.SI);
+                : new Temperature.Abs(this.si + v.si, TemperatureUnit.SI);
         }
 
         /**
@@ -375,7 +376,8 @@ public interface Temperature extends UNITS
          */
         public static Temperature.Abs interpolate(final Temperature.Abs zero, final Temperature.Abs one, final double ratio)
         {
-            return new Temperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new Temperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /** {@inheritDoc} */
@@ -582,7 +584,7 @@ public interface Temperature extends UNITS
         public final Temperature.Abs plus(final Temperature.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new Temperature.Abs(this.si + v.si, TemperatureUnit.SI);
+                : new Temperature.Abs(this.si + v.si, TemperatureUnit.SI);
         }
 
         /**
@@ -593,7 +595,7 @@ public interface Temperature extends UNITS
         public final Temperature.Rel minus(final Temperature.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new Temperature.Rel(this.si - v.si, TemperatureUnit.SI);
+                : new Temperature.Rel(this.si - v.si, TemperatureUnit.SI);
         }
 
         /**
@@ -604,7 +606,7 @@ public interface Temperature extends UNITS
         public final Temperature.Abs minus(final Temperature.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new Temperature.Abs(this.si - v.si, TemperatureUnit.SI);
+                : new Temperature.Abs(this.si - v.si, TemperatureUnit.SI);
         }
 
         /**

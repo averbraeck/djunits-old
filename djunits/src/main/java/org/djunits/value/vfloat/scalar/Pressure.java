@@ -322,8 +322,8 @@ public interface Pressure extends UNITS
          */
         public final Pressure.Rel plus(final Pressure.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Pressure.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Pressure.Rel(
-                    this.si + v.si, PressureUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Pressure.Rel(getInUnit() + v.getInUnit(), getUnit())
+                : new Pressure.Rel(this.si + v.si, PressureUnit.SI);
         }
 
         /**
@@ -333,8 +333,8 @@ public interface Pressure extends UNITS
          */
         public final Pressure.Rel minus(final Pressure.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Pressure.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Pressure.Rel(
-                    this.si - v.si, PressureUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Pressure.Rel(getInUnit() - v.getInUnit(), getUnit())
+                : new Pressure.Rel(this.si - v.si, PressureUnit.SI);
         }
 
         /**
@@ -344,8 +344,8 @@ public interface Pressure extends UNITS
          */
         public final Pressure.Abs plus(final Pressure.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Pressure.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Pressure.Abs(
-                    this.si + v.si, PressureUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Pressure.Abs(getInUnit() + v.getInUnit(), getUnit())
+                : new Pressure.Abs(this.si + v.si, PressureUnit.SI);
         }
 
         /**
@@ -687,8 +687,8 @@ public interface Pressure extends UNITS
          */
         public final Pressure.Abs plus(final Pressure.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Pressure.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Pressure.Abs(
-                    this.si + v.si, PressureUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Pressure.Abs(getInUnit() + v.getInUnit(), getUnit())
+                : new Pressure.Abs(this.si + v.si, PressureUnit.SI);
         }
 
         /**
@@ -698,8 +698,8 @@ public interface Pressure extends UNITS
          */
         public final Pressure.Rel minus(final Pressure.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Pressure.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Pressure.Rel(
-                    this.si - v.si, PressureUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Pressure.Rel(getInUnit() - v.getInUnit(), getUnit())
+                : new Pressure.Rel(this.si - v.si, PressureUnit.SI);
         }
 
         /**
@@ -709,8 +709,8 @@ public interface Pressure extends UNITS
          */
         public final Pressure.Abs minus(final Pressure.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Pressure.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Pressure.Abs(
-                    this.si - v.si, PressureUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Pressure.Abs(getInUnit() - v.getInUnit(), getUnit())
+                : new Pressure.Abs(this.si - v.si, PressureUnit.SI);
         }
 
         /**

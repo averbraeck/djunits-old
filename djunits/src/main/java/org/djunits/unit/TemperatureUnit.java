@@ -42,41 +42,83 @@ public class TemperatureUnit extends OffsetUnit<TemperatureUnit>
 
     static
     {
-        SI = new TemperatureUnit("TemperatureUnit.kelvin", "TemperatureUnit.K", SI_BASE, 1.0, 0.0);
+        SI = new TemperatureUnit("TemperatureUnit.kelvin", "TemperatureUnit.K", SI_BASE, 1.0, 0.0, true);
         KELVIN = SI;
-        DEGREE_CELSIUS = new TemperatureUnit("TemperatureUnit.degree_Celsius", "TemperatureUnit.dgC", SI_DERIVED, 1.0, -273.15);
+        DEGREE_CELSIUS =
+            new TemperatureUnit("TemperatureUnit.degree_Celsius", "TemperatureUnit.dgC", SI_DERIVED, 1.0, -273.15, true);
         DEGREE_FAHRENHEIT =
-                new TemperatureUnit("TemperatureUnit.degree_Fahrenheit", "TemperatureUnit.dgF", IMPERIAL, 5.0 / 9.0, -459.67);
-        DEGREE_RANKINE = new TemperatureUnit("TemperatureUnit.degree_Rankine", "TemperatureUnit.dgR", OTHER, 5.0 / 9.0, 0.0);
+            new TemperatureUnit("TemperatureUnit.degree_Fahrenheit", "TemperatureUnit.dgF", IMPERIAL, 5.0 / 9.0, -459.67,
+                true);
+        DEGREE_RANKINE =
+            new TemperatureUnit("TemperatureUnit.degree_Rankine", "TemperatureUnit.dgR", OTHER, 5.0 / 9.0, 0.0, true);
         DEGREE_REAUMUR =
-                new TemperatureUnit("TemperatureUnit.degree_Reaumur", "TemperatureUnit.dgRe", OTHER, 4.0 / 5.0, -273.15);
+            new TemperatureUnit("TemperatureUnit.degree_Reaumur", "TemperatureUnit.dgRe", OTHER, 4.0 / 5.0, -273.15, true);
     }
 
     /**
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
+     * Build a TemperatureUnit with a conversion factor and offset to Kelvin.
+     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
+     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
+     *            otherwise the abbreviation itself
+     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param conversionFactorToStandardUnit multiply by this number to convert to the standard unit
+     * @param offsetToKelvin the offsetToKelvin to add to convert to the standard (e.g., SI) unit
+     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     */
+    private TemperatureUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+        final UnitSystem unitSystem, final double conversionFactorToStandardUnit, final double offsetToKelvin,
+        final boolean standardUnit)
+    {
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, KELVIN, conversionFactorToStandardUnit,
+            offsetToKelvin, standardUnit);
+    }
+
+    /**
+     * Build a user-defined TemperatureUnit with a conversion factor and offset to Kelvin.
+     * @param name the long name of the unit
+     * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param conversionFactorToStandardUnit multiply by this number to convert to the standard unit
      * @param offsetToKelvin the offsetToKelvin to add to convert to the standard (e.g., SI) unit
      */
-    public TemperatureUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-            final double conversionFactorToStandardUnit, final double offsetToKelvin)
+    public TemperatureUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
+        final double conversionFactorToStandardUnit, final double offsetToKelvin)
     {
-        super(nameKey, abbreviationKey, unitSystem, KELVIN, conversionFactorToStandardUnit, offsetToKelvin);
+        this(name, abbreviation, unitSystem, KELVIN, conversionFactorToStandardUnit, offsetToKelvin, false);
     }
 
     /**
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
+     * Build a TemperatureUnit with a conversion factor and offset to another TemperatureUnit.
+     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
+     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
+     *            otherwise the abbreviation itself
+     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param referenceUnit the unit to convert to
+     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param offsetToKelvin the offsetToKelvin to add to convert to the standard (e.g., SI) unit
+     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     */
+    private TemperatureUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+        final UnitSystem unitSystem, final TemperatureUnit referenceUnit, final double conversionFactorToReferenceUnit,
+        final double offsetToKelvin, final boolean standardUnit)
+    {
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+            offsetToKelvin, standardUnit);
+    }
+
+    /**
+     * Build a user-defined TemperatureUnit with a conversion factor and offset to another TemperatureUnit.
+     * @param name the long name of the unit
+     * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param offsetToKelvin the offsetToKelvin to add to convert to the standard (e.g., SI) unit
      */
-    public TemperatureUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-            final TemperatureUnit referenceUnit, final double conversionFactorToReferenceUnit, final double offsetToKelvin)
+    public TemperatureUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
+        final TemperatureUnit referenceUnit, final double conversionFactorToReferenceUnit, final double offsetToKelvin)
     {
-        super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, offsetToKelvin);
+        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, offsetToKelvin, false);
     }
 
     /** {@inheritDoc} */

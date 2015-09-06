@@ -1,6 +1,7 @@
 package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.ElectricalCurrentUnit;
 import org.djunits.unit.ElectricalPotentialUnit;
 import org.djunits.unit.ElectricalResistanceUnit;
 import org.djunits.unit.PowerUnit;
@@ -73,10 +74,10 @@ public interface ElectricalPotential extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalPotential.Rel interpolate(final ElectricalPotential.Rel zero,
-                final ElectricalPotential.Rel one, final double ratio)
+            final ElectricalPotential.Rel one, final double ratio)
         {
-            return new ElectricalPotential.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                    zero.getUnit());
+            return new ElectricalPotential.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /** {@inheritDoc} */
@@ -283,7 +284,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Rel plus(final ElectricalPotential.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new ElectricalPotential.Rel(this.si + v.si, ElectricalPotentialUnit.SI);
+                : new ElectricalPotential.Rel(this.si + v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -294,7 +295,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Rel minus(final ElectricalPotential.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new ElectricalPotential.Rel(this.si - v.si, ElectricalPotentialUnit.SI);
+                : new ElectricalPotential.Rel(this.si - v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -305,7 +306,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Abs plus(final ElectricalPotential.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new ElectricalPotential.Abs(this.si + v.si, ElectricalPotentialUnit.SI);
+                : new ElectricalPotential.Abs(this.si + v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -345,6 +346,16 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalResistance.Rel divideBy(final ElectricalCurrent.Rel v)
         {
             return new ElectricalResistance.Rel(this.si / v.si, ElectricalResistanceUnit.SI);
+        }
+
+        /**
+         * Calculate the division of ElectricalPotential and ElectricalResistance, which results in a ElectricalCurrent scalar.
+         * @param v ElectricalPotential scalar
+         * @return ElectricalCurrent scalar as a division of ElectricalPotential and ElectricalResistance
+         */
+        public final ElectricalCurrent.Rel divideBy(final ElectricalResistance.Rel v)
+        {
+            return new ElectricalCurrent.Rel(this.si / v.si, ElectricalCurrentUnit.SI);
         }
 
     }
@@ -398,10 +409,10 @@ public interface ElectricalPotential extends UNITS
          * @return a Scalar at the ratio between
          */
         public static ElectricalPotential.Abs interpolate(final ElectricalPotential.Abs zero,
-                final ElectricalPotential.Abs one, final double ratio)
+            final ElectricalPotential.Abs one, final double ratio)
         {
-            return new ElectricalPotential.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                    zero.getUnit());
+            return new ElectricalPotential.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /** {@inheritDoc} */
@@ -608,7 +619,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Abs plus(final ElectricalPotential.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new ElectricalPotential.Abs(this.si + v.si, ElectricalPotentialUnit.SI);
+                : new ElectricalPotential.Abs(this.si + v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -619,7 +630,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Rel minus(final ElectricalPotential.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new ElectricalPotential.Rel(this.si - v.si, ElectricalPotentialUnit.SI);
+                : new ElectricalPotential.Rel(this.si - v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -630,7 +641,7 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalPotential.Abs minus(final ElectricalPotential.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new ElectricalPotential.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new ElectricalPotential.Abs(this.si - v.si, ElectricalPotentialUnit.SI);
+                : new ElectricalPotential.Abs(this.si - v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -670,6 +681,16 @@ public interface ElectricalPotential extends UNITS
         public final ElectricalResistance.Abs divideBy(final ElectricalCurrent.Abs v)
         {
             return new ElectricalResistance.Abs(this.si / v.si, ElectricalResistanceUnit.SI);
+        }
+
+        /**
+         * Calculate the division of ElectricalPotential and ElectricalResistance, which results in a ElectricalCurrent scalar.
+         * @param v ElectricalPotential scalar
+         * @return ElectricalCurrent scalar as a division of ElectricalPotential and ElectricalResistance
+         */
+        public final ElectricalCurrent.Abs divideBy(final ElectricalResistance.Abs v)
+        {
+            return new ElectricalCurrent.Abs(this.si / v.si, ElectricalCurrentUnit.SI);
         }
 
     }

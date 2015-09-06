@@ -5,7 +5,9 @@ import org.djunits.unit.ElectricalCurrentUnit;
 import org.djunits.unit.ElectricalPotentialUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.ForceUnit;
+import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.PowerUnit;
+import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.UNITS;
 
 /**
@@ -325,7 +327,7 @@ public interface Power extends UNITS
         public final Power.Rel plus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Power.Rel(
-                    this.si + v.si, PowerUnit.SI);
+                this.si + v.si, PowerUnit.SI);
         }
 
         /**
@@ -336,7 +338,7 @@ public interface Power extends UNITS
         public final Power.Rel minus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Power.Rel(
-                    this.si - v.si, PowerUnit.SI);
+                this.si - v.si, PowerUnit.SI);
         }
 
         /**
@@ -347,7 +349,7 @@ public interface Power extends UNITS
         public final Power.Abs plus(final Power.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Power.Abs(
-                    this.si + v.si, PowerUnit.SI);
+                this.si + v.si, PowerUnit.SI);
         }
 
         /**
@@ -400,6 +402,16 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the division of Power and Energy, which results in a Frequency scalar.
+         * @param v Power scalar
+         * @return Frequency scalar as a division of Power and Energy
+         */
+        public final Frequency.Rel divideBy(final Energy.Rel v)
+        {
+            return new Frequency.Rel(this.si / v.si, FrequencyUnit.SI);
+        }
+
+        /**
          * Calculate the division of Power and Speed, which results in a Force scalar.
          * @param v Power scalar
          * @return Force scalar as a division of Power and Speed
@@ -407,6 +419,16 @@ public interface Power extends UNITS
         public final Force.Rel divideBy(final Speed.Rel v)
         {
             return new Force.Rel(this.si / v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and Force, which results in a Speed scalar.
+         * @param v Power scalar
+         * @return Speed scalar as a division of Power and Force
+         */
+        public final Speed.Rel divideBy(final Force.Rel v)
+        {
+            return new Speed.Rel(this.si / v.si, SpeedUnit.SI);
         }
 
         /**
@@ -730,7 +752,7 @@ public interface Power extends UNITS
         public final Power.Abs plus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Power.Abs(
-                    this.si + v.si, PowerUnit.SI);
+                this.si + v.si, PowerUnit.SI);
         }
 
         /**
@@ -741,7 +763,7 @@ public interface Power extends UNITS
         public final Power.Rel minus(final Power.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Power.Rel(
-                    this.si - v.si, PowerUnit.SI);
+                this.si - v.si, PowerUnit.SI);
         }
 
         /**
@@ -752,7 +774,7 @@ public interface Power extends UNITS
         public final Power.Abs minus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Power.Abs(
-                    this.si - v.si, PowerUnit.SI);
+                this.si - v.si, PowerUnit.SI);
         }
 
         /**
@@ -805,6 +827,16 @@ public interface Power extends UNITS
         }
 
         /**
+         * Calculate the division of Power and Energy, which results in a Frequency scalar.
+         * @param v Power scalar
+         * @return Frequency scalar as a division of Power and Energy
+         */
+        public final Frequency.Abs divideBy(final Energy.Abs v)
+        {
+            return new Frequency.Abs(this.si / v.si, FrequencyUnit.SI);
+        }
+
+        /**
          * Calculate the division of Power and Speed, which results in a Force scalar.
          * @param v Power scalar
          * @return Force scalar as a division of Power and Speed
@@ -812,6 +844,16 @@ public interface Power extends UNITS
         public final Force.Abs divideBy(final Speed.Abs v)
         {
             return new Force.Abs(this.si / v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Power and Force, which results in a Speed scalar.
+         * @param v Power scalar
+         * @return Speed scalar as a division of Power and Force
+         */
+        public final Speed.Abs divideBy(final Force.Abs v)
+        {
+            return new Speed.Abs(this.si / v.si, SpeedUnit.SI);
         }
 
         /**

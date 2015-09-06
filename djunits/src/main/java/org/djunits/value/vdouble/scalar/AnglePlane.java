@@ -279,7 +279,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Rel plus(final AnglePlane.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new AnglePlane.Rel(this.si + v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Rel(this.si + v.si, AnglePlaneUnit.SI);
         }
 
         /**
@@ -290,7 +290,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Rel minus(final AnglePlane.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new AnglePlane.Rel(this.si - v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Rel(this.si - v.si, AnglePlaneUnit.SI);
         }
 
         /**
@@ -301,7 +301,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Abs plus(final AnglePlane.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new AnglePlane.Abs(this.si + v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Abs(this.si + v.si, AnglePlaneUnit.SI);
         }
 
         /**
@@ -582,7 +582,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Abs plus(final AnglePlane.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new AnglePlane.Abs(this.si + v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Abs(this.si + v.si, AnglePlaneUnit.SI);
         }
 
         /**
@@ -593,7 +593,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Rel minus(final AnglePlane.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new AnglePlane.Rel(this.si - v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Rel(this.si - v.si, AnglePlaneUnit.SI);
         }
 
         /**
@@ -604,7 +604,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Abs minus(final AnglePlane.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new AnglePlane.Abs(this.si - v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Abs(this.si - v.si, AnglePlaneUnit.SI);
         }
 
         /**

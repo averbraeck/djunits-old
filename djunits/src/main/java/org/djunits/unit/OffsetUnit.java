@@ -27,29 +27,36 @@ public abstract class OffsetUnit<U extends Unit<U>> extends Unit<U>
 
     /**
      * Build a standard unit.
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
+     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
+     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
+     *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    public OffsetUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
+    public OffsetUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+        final boolean standardUnit)
     {
-        super(nameKey, abbreviationKey, unitSystem, true);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
         this.offsetToStandardUnit = 0.0;
     }
 
     /**
      * Build an offset unit with a conversion factor and offset to another unit.
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
+     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
+     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
+     *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param offsetToStandardUnit the offset to add to convert to the standard (e.g., SI) unit
+     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    public OffsetUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem, final U referenceUnit,
-            final double conversionFactorToReferenceUnit, final double offsetToStandardUnit)
+    public OffsetUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+        final U referenceUnit, final double conversionFactorToReferenceUnit, final double offsetToStandardUnit,
+        final boolean standardUnit)
     {
-        super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+            standardUnit);
         this.offsetToStandardUnit = offsetToStandardUnit;
     }
 

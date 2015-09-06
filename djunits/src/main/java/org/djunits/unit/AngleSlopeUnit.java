@@ -54,16 +54,20 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
     {
         SI = new AngleSlopeUnit("AngleSlopeUnit.radian", "AngleSlopeUnit.rad", SI_DERIVED);
         RADIAN = SI;
-        DEGREE = new AngleSlopeUnit("AngleSlopeUnit.degree", "AngleSlopeUnit.deg", SI_ACCEPTED, RADIAN, Math.PI / 180.0);
-        ARCMINUTE = new AngleSlopeUnit("AngleSlopeUnit.arcminute", "AngleSlopeUnit.arcmin", SI_ACCEPTED, DEGREE, 1.0 / 60.0);
-        ARCSECOND = new AngleSlopeUnit("AngleSlopeUnit.arcsecond", "AngleSlopeUnit.arcsec", SI_ACCEPTED, DEGREE, 1.0 / 3600.0);
-        GRAD = new AngleSlopeUnit("AngleSlopeUnit.gradian", "AngleSlopeUnit.grad", OTHER, RADIAN, 2.0 * Math.PI / 400.0);
+        DEGREE =
+            new AngleSlopeUnit("AngleSlopeUnit.degree", "AngleSlopeUnit.deg", SI_ACCEPTED, RADIAN, Math.PI / 180.0, true);
+        ARCMINUTE =
+            new AngleSlopeUnit("AngleSlopeUnit.arcminute", "AngleSlopeUnit.arcmin", SI_ACCEPTED, DEGREE, 1.0 / 60.0, true);
+        ARCSECOND =
+            new AngleSlopeUnit("AngleSlopeUnit.arcsecond", "AngleSlopeUnit.arcsec", SI_ACCEPTED, DEGREE, 1.0 / 3600.0, true);
+        GRAD =
+            new AngleSlopeUnit("AngleSlopeUnit.gradian", "AngleSlopeUnit.grad", OTHER, RADIAN, 2.0 * Math.PI / 400.0, true);
         CENTESIMAL_ARCMINUTE =
-                new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcminute", "AngleSlopeUnit.centesimal_arcmin", OTHER, GRAD,
-                        1.0 / 100.0);
+            new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcminute", "AngleSlopeUnit.centesimal_arcmin", OTHER, GRAD,
+                1.0 / 100.0, true);
         CENTESIMAL_ARCSECOND =
-                new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcsecond", "AngleSlopeUnit.centesimal_arcsec", OTHER, GRAD,
-                        1.0 / 10000.0);
+            new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcsecond", "AngleSlopeUnit.centesimal_arcsec", OTHER, GRAD,
+                1.0 / 10000.0, true);
     }
 
     /**
@@ -72,23 +76,41 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
      * @param abbreviationKey the key to the locale file for the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public AngleSlopeUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
+    private AngleSlopeUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
     {
         super(nameKey, abbreviationKey, unitSystem, true);
     }
 
     /**
      * Build a unit by converting it from another unit.
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
+     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
+     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
+     *            otherwise the abbreviation itself
+     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param referenceUnit the unit to convert to
+     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     */
+    private AngleSlopeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+        final UnitSystem unitSystem, final AngleSlopeUnit referenceUnit, final double conversionFactorToReferenceUnit,
+        final boolean standardUnit)
+    {
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+            standardUnit);
+    }
+
+    /**
+     * Build a user-defined unit with a conversion factor to another unit.
+     * @param name the long name of the unit
+     * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
-    public AngleSlopeUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem,
-            final AngleSlopeUnit referenceUnit, final double conversionFactorToReferenceUnit)
+    public AngleSlopeUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
+        final AngleSlopeUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
-        super(nameKey, abbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit, true);
+        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }
 
     /** {@inheritDoc} */
