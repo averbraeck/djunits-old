@@ -1,8 +1,12 @@
 package org.djunits.unit;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -37,15 +41,31 @@ public class UnitLocalizationsTest
         final String head = "localeunit";
         Set<String> usedKeys = new HashSet<String>();
         ArrayList<String> errors = new ArrayList<String>();
-        List<String> localeNames =
-                AvailableLocalizations.availableLocalizations(head, this.getClass().getResource("").getPath() + "../../../../");
+        URL url = getResource("/");
+        String path = null;
+        try
+        {
+            path = url.toURI().getPath();
+        }
+        catch (URISyntaxException exception1)
+        {
+            exception1.printStackTrace();
+        }
+        // System.err.println("path is \"" + path + "\"");
+
+        List<String> localeNames = AvailableLocalizations.availableLocalizations(head, path);
         for (String localeName : localeNames)
         {
             // System.out.println("Checking internationalization to " + localeName);
             DefaultLocale.setLocale(new Locale(localeName));
 
-            Reflections reflections = new Reflections("org.djunits.core.unit");
+            // Reflections reflections = new Reflections("org.djunits.core.unit");
+            Reflections reflections = new Reflections("org.djunits.unit");
             Set<Class<? extends Unit>> classes = reflections.getSubTypesOf(Unit.class);
+            if (0 == classes.size())
+            {
+                fail("getSubTypesOf(Unit.class) returned empty set");
+            }
 
             for (Class c : classes)
             {
@@ -53,47 +73,27 @@ public class UnitLocalizationsTest
                 for (Object o : Unit.getUnits(c))
                 {
                     Unit<?> u = (Unit<?>) o;
-                    String nameKey = u.getNameKey();
-                    assertTrue("Name key must be non-null", null != nameKey);
-                    assertTrue("Name key must be non-empty", nameKey.length() > 0);
-                    String abbreviationKey = u.getAbbreviationKey();
-                    assertTrue("Abbreviation key must be non-null", null != abbreviationKey);
-                    assertTrue("Abbreviation key must be non-empty", abbreviationKey.length() > 0);
-                    if (nameKey.equals("SIUnit.m2"))
+                    if (u.isLocalizable())
                     {
-                        continue; // FIXME: Vector and Matrix tests make these and then cause this test to fail
-                    }
-                    if (nameKey.equals("SIUnit.kg.m2/s2"))
-                    {
-                        continue; // FIXME: Vector and Matrix tests make these and then cause this test to fail
-                    }
-                    if (nameKey.equals("SIUnit.s"))
-                    {
-                        continue; // FIXME: Scalar tests make these and then cause this test to fail
-                    }
-                    if (nameKey.equals("SIUnit.kg2.m4/s6/A2"))
-                    {
-                        continue;
-                    }
-                    if (nameKey.equals("SIUnit.1/A"))
-                    {
-                        continue;
-                    }
-                    usedKeys.add(nameKey);
-                    usedKeys.add(abbreviationKey);
-                    String name = u.getName();
-                    // assertFalse("Name may not begin AND end with an exclamation mark",
-                    // name.startsWith("!") && name.endsWith("!"));
-                    String abbreviation = u.getAbbreviation();
-                    // System.out.println("nameKey " + nameKey + "->" + name + " abbreviationKey " + abbreviationKey
-                    // + "->" + abbreviation);
-                    if (abbreviation.startsWith("!") && abbreviation.endsWith("!"))
-                    {
-                        errors.add(String.format("Missing translation for abbreviation %s to %s", abbreviationKey, localeName));
-                    }
-                    if (name.startsWith("!") && name.endsWith("!"))
-                    {
-                        errors.add(String.format("Missing translation for name %s to %s", nameKey, localeName));
+                        String nameKey = u.getNameKey();
+                        assertTrue("Name key must be non-null", null != nameKey);
+                        assertTrue("Name key must be non-empty", nameKey.length() > 0);
+                        String abbreviationKey = u.getAbbreviationKey();
+                        assertTrue("Abbreviation key must be non-null", null != abbreviationKey);
+                        assertTrue("Abbreviation key must be non-empty", abbreviationKey.length() > 0);
+                        usedKeys.add(nameKey);
+                        usedKeys.add(abbreviationKey);
+                        String name = u.getName();
+                        if (name.startsWith("!") && name.endsWith("!"))
+                        {
+                            errors.add(String.format("Missing translation for name %s to %s", nameKey, localeName));
+                        }
+                        String abbreviation = u.getAbbreviation();
+                        if (abbreviation.startsWith("!") && abbreviation.endsWith("!"))
+                        {
+                            errors.add(String.format("Missing translation for abbreviation %s to %s", abbreviationKey,
+                                    localeName));
+                        }
                     }
                 }
             }
@@ -106,11 +106,12 @@ public class UnitLocalizationsTest
             {
                 middlePart = "_" + localeName;
             }
-
-            String path = this.getClass().getResource("").getPath() + "../../../../" + head + middlePart + ".properties";
             try
             {
-                FileInputStream fileInput = new FileInputStream(path);
+                URL url2 = getResource("/");
+                String path2 = url2.toURI().getPath() + "/" + head + middlePart + ".properties";
+                // System.err.println("path is \"" + path2 + "\"");
+                FileInputStream fileInput = new FileInputStream(path2);
                 properties.load(fileInput);
                 fileInput.close();
             }
@@ -139,6 +140,54 @@ public class UnitLocalizationsTest
             System.err.println("UnitLocalizations error: " + s);
         }
         assertTrue("There should be no errors in UnitLocalizations", errors.isEmpty());
+    }
+
+    /**
+     * Figure out where the resources are.
+     * @param name String; path
+     * @return URL
+     */
+    public static URL getResource(final String name)
+    {
+        try
+        {
+            File file = new File(name);
+
+            if (name.startsWith("/"))
+            {
+                URL url = UnitLocalizationsTest.class.getResource(name);
+                if (url != null)
+                {
+                    return url;
+                }
+                url = Thread.currentThread().getContextClassLoader().getResource(name.substring(1));
+                if (url != null)
+                {
+                    return url;
+                }
+                if (file.exists())
+                {
+                    return new URL("file:" + name);
+                }
+            }
+            else if (name.startsWith("\\") || name.contains("\\")) // added the second part
+            {
+                if (file.exists())
+                {
+                    return new URL("file:" + name);
+                }
+            }
+            else if (file.exists())
+            {
+                return new URL("file:" + name);
+            }
+        }
+        catch (Exception exception)
+        {
+            exception = null;
+            // We neglect exceptions since we return null
+        }
+        return null;
     }
 
 }

@@ -4,10 +4,10 @@ import org.djunits.unit.SICoefficients;
 import org.djunits.unit.SIUnit;
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
-import org.djunits.value.Format;
 import org.djunits.value.Relative;
 import org.djunits.value.Scalar;
 import org.djunits.value.ValueUtil;
+import org.djunits.value.formatter.Format;
 import org.djunits.value.vdouble.DoubleMathFunctions;
 
 /**

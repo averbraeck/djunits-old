@@ -11,6 +11,13 @@ package org.djunits.value.formatter;
  */
 public class EngineeringFormatter
 {
+    /**
+     * This class shall never be instantiated.
+     */
+    private EngineeringFormatter()
+    {
+        // Prevent instantiation of this class
+    }
 
     /**
      * Switch to/from upper case E for exponent indicator. The default is to use upper case.
@@ -33,6 +40,16 @@ public class EngineeringFormatter
      * where the width of the zeros before the first non-zero digit starts to exceed the width of a E + exponent value string.
      */
     private final static double min = 0.0001;
+    
+    /**
+     * Format a double in Engineering format using <code>DEFAULTSIZE</code> room.
+     * @param val double; the value to format
+     * @return String; the formatted value
+     */
+    public static String format(final double val)
+    {
+        return format(val, Format.DEFAULTSIZE);
+    }
 
     /**
      * Format a double in Engineering format.
@@ -68,11 +85,13 @@ public class EngineeringFormatter
                 format = String.format(floatFormat, room, room - 2 + room - length);
                 result = String.format(format, val);
             }
+            /*-
             if (result.length() > room)
             {
                 format = String.format(floatFormat, room, room - 3 + room - length);
                 result = String.format(format, val);
             }
+            */
             return result;
         }
         // display in scientific notation using at least 2 digits for the exponent
