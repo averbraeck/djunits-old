@@ -9,7 +9,7 @@ package org.djunits.value.formatter;
  * @version $Revision$, $LastChangedDate$, by $Author$, initial version 11 sep. 2015 <br>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class EngineeringFormatter
+public final class EngineeringFormatter
 {
     /**
      * This class shall never be instantiated.
@@ -32,15 +32,15 @@ public class EngineeringFormatter
     private static String exponentFormat;
 
     /** Format constructor for mantissa-only notation. */
-    private static final String floatFormat = "%%%d.%df";
+    private static final String FLOATFORMAT = "%%%d.%df";
 
     /**
      * Minimum value to display in non-scientific / non-engineering notation. The value 0.0001 ensures that we switch to
      * mantissa + exponent notation around the point were we're about to lose precision due to underflow. This is the point
      * where the width of the zeros before the first non-zero digit starts to exceed the width of a E + exponent value string.
      */
-    private final static double min = 0.0001;
-    
+    private static final double EFORMATLIMIT = 0.0001;
+
     /**
      * Format a double in Engineering format using <code>DEFAULTSIZE</code> room.
      * @param val double; the value to format
@@ -62,11 +62,11 @@ public class EngineeringFormatter
     {
         if (room < 10)
         {
-            return format(val, 10);// This formatter needs at least 10 positions
+            return format(val, 10); // This formatter needs at least 10 positions
         }
         if (Double.isNaN(val) || 0d == val || Double.isInfinite(val))
         {
-            String format = String.format(floatFormat, room, room);
+            String format = String.format(FLOATFORMAT, room, room);
             return padd(String.format(format, val), room);
         }
         double absVal = Math.abs(val);
@@ -74,15 +74,15 @@ public class EngineeringFormatter
         // Floating point values should show at least one digit after the radix symbol (dot)
         // max is the maximum value to display in non-scientific / non-engineering notation
         double max = Math.pow(10, room - roomForSignAndFraction);
-        if (absVal < max - 0.5 && absVal > min)
+        if (absVal < max - 0.5 && absVal > EFORMATLIMIT)
         {
             // display as floating point number
-            String format = String.format(floatFormat, room, room - 2);
+            String format = String.format(FLOATFORMAT, room, room - 2);
             String result = String.format(format, val);
             int length = result.length();
             if (length > room)
             {
-                format = String.format(floatFormat, room, room - 2 + room - length);
+                format = String.format(FLOATFORMAT, room, room - 2 + room - length);
                 result = String.format(format, val);
             }
             /*-
@@ -91,7 +91,7 @@ public class EngineeringFormatter
                 format = String.format(floatFormat, room, room - 3 + room - length);
                 result = String.format(format, val);
             }
-            */
+             */
             return result;
         }
         // display in scientific notation using at least 2 digits for the exponent
@@ -177,7 +177,7 @@ public class EngineeringFormatter
     }
 
     /**
-     * Extend a String with spaces, or trim it to reach a specified length
+     * Extend a String with spaces, or trim it to reach a specified length.
      * @param in String; input string
      * @param width int; length of the result
      * @return String; the extended or trimmed input string

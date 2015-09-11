@@ -10,7 +10,7 @@ package org.djunits.value.formatter;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Formatter
+public final class Formatter
 {
     /**
      * This class shall never be instantiated.
