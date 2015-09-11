@@ -191,6 +191,15 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
             }
         }
     }
+    
+    /**
+     * Report if this unit support localization.
+     * @return boolean; true if this unit supports localization; false if it does not
+     */
+    public final boolean isLocalizable()
+    {
+        return this.nameKey != null;
+    }
 
     /**
      * Add a unit to the overview collection of existing units, and resolve the coefficients.
@@ -418,7 +427,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         {
             return (SIUnit) SI_UNITS.get(normalizedSICoefficientsString).get(SIUnit.class);
         }
-        SIUnit unit = new SIUnit("SIUnit." + normalizedSICoefficientsString);
+        SIUnit unit = new SIUnit("SIUnit." + normalizedSICoefficientsString, false);
         return unit;
     }
 

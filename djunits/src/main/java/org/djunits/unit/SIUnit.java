@@ -26,6 +26,17 @@ public class SIUnit extends Unit<SIUnit>
         super(siCoefficientString, siCoefficientString, UnitSystem.SI_DERIVED, true);
     }
 
+    /**
+     * Create an arbitrary SI unit based on a coefficient string, such as m3/cd2.
+     * @param siCoefficientString String; textual description of the unit.
+     * @param standardUnit boolean; if true; the new unit is standard and there should be localization info; if false;
+     *            localization will not be available
+     */
+    public SIUnit(final String siCoefficientString, final boolean standardUnit)
+    {
+        super(siCoefficientString, siCoefficientString, UnitSystem.SI_DERIVED, standardUnit);
+    }
+
     /** {@inheritDoc} */
     @Override
     public final SIUnit getStandardUnit()
@@ -37,6 +48,11 @@ public class SIUnit extends Unit<SIUnit>
     @Override
     public final String getSICoefficientsString()
     {
+        if (null == this.getAbbreviationKey())
+        {
+            return this.getAbbreviation().replace("SIUnit.", ""); // FIXME: this is horrible / PK
+            // We need a better way to determine if a unit is supposed to have localization information.
+        }
         return this.getAbbreviationKey().replace("SIUnit.", "");
     }
 

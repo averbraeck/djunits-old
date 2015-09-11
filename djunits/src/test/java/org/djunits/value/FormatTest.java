@@ -2,6 +2,8 @@ package org.djunits.value;
 
 import static org.junit.Assert.assertEquals;
 
+import org.djunits.value.formatter.Format;
+import org.djunits.value.formatter.Formatter;
 import org.junit.Test;
 
 /**
@@ -37,7 +39,7 @@ public class FormatTest
                     {
                         float value = (float) (baseValue * Math.pow(10, power));
                         // System.out.print("Trying " + width + ", " + precision + ",  " + value);
-                        String result = Format.format(value, width, precision);
+                        String result = Formatter.format(value, width, precision);
                         // System.out.println(": \"" + result + "\"");
                         assertEquals("Length of result should equal specified width", width, result.length());
                         double reverseValue = Double.parseDouble(result);
@@ -54,7 +56,7 @@ public class FormatTest
                     {
                         double value = baseValue * Math.pow(10, power);
                         // System.out.print("Trying " + width + ", " + precision + ",  " + value);
-                        String result = Format.format(value, width, precision);
+                        String result = Formatter.format(value, width, precision);
                         // System.out.println(": \"" + result + "\"");
                         assertEquals("Length of result should equal specified width", width, result.length());
                         double reverseValue = Double.parseDouble(result);

@@ -8,11 +8,11 @@ import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
 import org.djunits.value.AbstractValue;
 import org.djunits.value.DenseData;
-import org.djunits.value.Format;
 import org.djunits.value.Relative;
 import org.djunits.value.SparseData;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
+import org.djunits.value.formatter.Format;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.djunits.value.vfloat.vector.FloatVector;
 
