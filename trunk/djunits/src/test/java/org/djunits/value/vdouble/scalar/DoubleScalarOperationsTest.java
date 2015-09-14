@@ -164,8 +164,10 @@ public class DoubleScalarOperationsTest
         }
 
         // print what we just have done
-        System.out.println(scalarClassRel.getName() + ".multiplyBy(" + parameterClass.getName() + ") => "
-            + returnClass.getName() + " : " + scalarSI + " * " + paramSI + " => " + returnSI);
+        System.out.println(scalarClassRel.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "")
+            + ".multiplyBy(" + parameterClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ") => "
+            + returnClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + " : " + scalarSI + " * "
+            + paramSI + " => " + returnSI);
     }
 
     /**
