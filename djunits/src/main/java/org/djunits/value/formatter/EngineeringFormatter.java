@@ -29,7 +29,7 @@ public final class EngineeringFormatter
     }
 
     /** Format constructor for mantissa plus exponent notation. */
-    private static String exponentFormat;
+    private static String exponentFormat = "%%%d.%dE";
 
     /** Format constructor for mantissa-only notation. */
     private static final String FLOATFORMAT = "%%%d.%df";
