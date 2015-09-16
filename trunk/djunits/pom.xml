@@ -301,7 +301,7 @@
             plugin is executed. -->
           <execution>
             <id>pre-unit-test</id>
-            <phase>pre-integration-test</phase>
+            <!-- phase>pre-integration-test</phase -->
             <goals>
               <goal>prepare-agent</goal>
             </goals>
