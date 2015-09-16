@@ -163,7 +163,6 @@
 
 %Power
 /Power=Dimensionless
-*ElectricalCurrent=Power
 *Time=Energy
 /Frequency=Energy
 /Energy=Frequency
