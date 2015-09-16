@@ -177,7 +177,7 @@ public class MoneyPerEnergyUnit extends Unit<MoneyPerEnergyUnit>
     @Override
     public final String getSICoefficientsString()
     {
-        return "1/m2";
+        return "s2/kgm2";
     }
 
 }
