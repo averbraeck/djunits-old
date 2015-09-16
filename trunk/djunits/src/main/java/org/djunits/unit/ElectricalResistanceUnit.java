@@ -49,18 +49,19 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
     static
     {
         SI =
-            new ElectricalResistanceUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND,
-                "ElectricalResistanceUnit.ohm_(name)", "ElectricalResistanceUnit.ohm", SI_DERIVED, true);
+                new ElectricalResistanceUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE,
+                        TimeUnit.SECOND, "ElectricalResistanceUnit.ohm_(name)", "ElectricalResistanceUnit.ohm", SI_DERIVED,
+                        true);
         OHM = SI;
         MILLIOHM =
-            new ElectricalResistanceUnit("ElectricalResistanceUnit.milli_ohm", "ElectricalResistanceUnit.m_ohm", SI_DERIVED,
-                OHM, 0.001, true);
+                new ElectricalResistanceUnit("ElectricalResistanceUnit.milli_ohm", "ElectricalResistanceUnit.m_ohm",
+                        SI_DERIVED, OHM, 0.001, true);
         KILOOHM =
-            new ElectricalResistanceUnit("ElectricalResistanceUnit.kilo_ohm", "ElectricalResistanceUnit.k_ohm", SI_DERIVED,
-                OHM, 1000.0, true);
+                new ElectricalResistanceUnit("ElectricalResistanceUnit.kilo_ohm", "ElectricalResistanceUnit.k_ohm", SI_DERIVED,
+                        OHM, 1000.0, true);
         MEGAOHM =
-            new ElectricalResistanceUnit("ElectricalResistanceUnit.mega_ohm", "ElectricalResistanceUnit.M_ohm", SI_DERIVED,
-                OHM, 1E06, true);
+                new ElectricalResistanceUnit("ElectricalResistanceUnit.mega_ohm", "ElectricalResistanceUnit.M_ohm", SI_DERIVED,
+                        OHM, 1E06, true);
     }
 
     /**
@@ -77,15 +78,15 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
      */
     @SuppressWarnings("checkstyle:parameternumber")
     private ElectricalResistanceUnit(final MassUnit massUnit, final LengthUnit lengthUnit,
-        final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit, final String nameOrNameKey,
-        final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+            final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit, final String nameOrNameKey,
+            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, OHM, massUnit.getConversionFactorToStandardUnit()
-            * lengthUnit.getConversionFactorToStandardUnit()
-            * lengthUnit.getConversionFactorToStandardUnit()
-            / (electricalCurrentUnit.getConversionFactorToStandardUnit()
-                * electricalCurrentUnit.getConversionFactorToStandardUnit() * Math.pow(timeUnit
-                .getConversionFactorToStandardUnit(), 3.0)), standardUnit);
+                * lengthUnit.getConversionFactorToStandardUnit()
+                * lengthUnit.getConversionFactorToStandardUnit()
+                / (electricalCurrentUnit.getConversionFactorToStandardUnit()
+                        * electricalCurrentUnit.getConversionFactorToStandardUnit() * Math.pow(
+                        timeUnit.getConversionFactorToStandardUnit(), 3.0)), standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.electricalCurrentUnit = electricalCurrentUnit;
@@ -103,8 +104,8 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
     public ElectricalResistanceUnit(final MassUnit massUnit, final LengthUnit lengthUnit,
-        final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit, final String name,
-        final String abbreviation, final UnitSystem unitSystem)
+            final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit, final String name,
+            final String abbreviation, final UnitSystem unitSystem)
     {
         this(massUnit, lengthUnit, electricalCurrentUnit, timeUnit, name, abbreviation, unitSystem, false);
     }
@@ -120,12 +121,11 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private ElectricalResistanceUnit(final ElectricalPotentialUnit electricalPotentialUnit,
-        final ElectricalCurrentUnit electricalCurrentUnit, final String nameOrNameKey,
-        final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+            final ElectricalCurrentUnit electricalCurrentUnit, final String nameOrNameKey,
+            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, OHM, electricalPotentialUnit
-            .getConversionFactorToStandardUnit()
-            / electricalCurrentUnit.getConversionFactorToStandardUnit(), standardUnit);
+                .getConversionFactorToStandardUnit() / electricalCurrentUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = electricalPotentialUnit.getMassUnit();
         this.lengthUnit = electricalPotentialUnit.getLengthUnit();
         this.electricalCurrentUnit = electricalCurrentUnit;
@@ -142,8 +142,8 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
     public ElectricalResistanceUnit(final ElectricalPotentialUnit electricalPotentialUnit,
-        final ElectricalCurrentUnit electricalCurrentUnit, final String name, final String abbreviation,
-        final UnitSystem unitSystem)
+            final ElectricalCurrentUnit electricalCurrentUnit, final String name, final String abbreviation,
+            final UnitSystem unitSystem)
     {
         this(electricalPotentialUnit, electricalCurrentUnit, name, abbreviation, unitSystem, false);
     }
@@ -159,11 +159,11 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private ElectricalResistanceUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final ElectricalResistanceUnit referenceUnit,
-        final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final UnitSystem unitSystem, final ElectricalResistanceUnit referenceUnit,
+            final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+                standardUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
         this.electricalCurrentUnit = referenceUnit.getElectricalCurrentUnit();
@@ -179,7 +179,7 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public ElectricalResistanceUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-        final ElectricalResistanceUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final ElectricalResistanceUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }
@@ -227,7 +227,7 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
     @Override
     public final String getSICoefficientsString()
     {
-        return "kg.m2.s-3.A-2";
+        return "kgm2/s3A2";
     }
 
 }

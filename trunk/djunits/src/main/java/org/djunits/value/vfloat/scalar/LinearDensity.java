@@ -84,11 +84,9 @@ public interface LinearDensity extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static LinearDensity.Rel interpolate(final LinearDensity.Rel zero, final LinearDensity.Rel one,
-            final float ratio)
+        public static LinearDensity.Rel interpolate(final LinearDensity.Rel zero, final LinearDensity.Rel one, final float ratio)
         {
-            return new LinearDensity.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new LinearDensity.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
         }
 
         /**
@@ -99,7 +97,7 @@ public interface LinearDensity extends UNITS
          * @return a Scalar at the ratio between
          */
         public static LinearDensity.Rel interpolate(final LinearDensity.Rel zero, final LinearDensity.Rel one,
-            final double ratio)
+                final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -328,7 +326,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Rel plus(final LinearDensity.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new LinearDensity.Rel(this.si + v.si, LinearDensityUnit.SI);
+                    : new LinearDensity.Rel(this.si + v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -339,7 +337,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Rel minus(final LinearDensity.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new LinearDensity.Rel(this.si - v.si, LinearDensityUnit.SI);
+                    : new LinearDensity.Rel(this.si - v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -350,7 +348,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Abs plus(final LinearDensity.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new LinearDensity.Abs(this.si + v.si, LinearDensityUnit.SI);
+                    : new LinearDensity.Abs(this.si + v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -472,11 +470,9 @@ public interface LinearDensity extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static LinearDensity.Abs interpolate(final LinearDensity.Abs zero, final LinearDensity.Abs one,
-            final float ratio)
+        public static LinearDensity.Abs interpolate(final LinearDensity.Abs zero, final LinearDensity.Abs one, final float ratio)
         {
-            return new LinearDensity.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new LinearDensity.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
         }
 
         /**
@@ -487,7 +483,7 @@ public interface LinearDensity extends UNITS
          * @return a Scalar at the ratio between
          */
         public static LinearDensity.Abs interpolate(final LinearDensity.Abs zero, final LinearDensity.Abs one,
-            final double ratio)
+                final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -716,7 +712,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Abs plus(final LinearDensity.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new LinearDensity.Abs(this.si + v.si, LinearDensityUnit.SI);
+                    : new LinearDensity.Abs(this.si + v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -727,7 +723,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Rel minus(final LinearDensity.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new LinearDensity.Rel(this.si - v.si, LinearDensityUnit.SI);
+                    : new LinearDensity.Rel(this.si - v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -738,7 +734,7 @@ public interface LinearDensity extends UNITS
         public final LinearDensity.Abs minus(final LinearDensity.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new LinearDensity.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new LinearDensity.Abs(this.si - v.si, LinearDensityUnit.SI);
+                    : new LinearDensity.Abs(this.si - v.si, LinearDensityUnit.SI);
         }
 
         /**

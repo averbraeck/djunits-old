@@ -303,8 +303,8 @@ public class MoneyPerLength extends FloatScalar.Rel<MoneyPerLengthUnit> implemen
      */
     public final MoneyPerLength plus(final MoneyPerLength v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerLength(getInUnit() + v.getInUnit(), getUnit())
-            : new MoneyPerLength(this.si + v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerLength(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerLength(
+                this.si + v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
     }
 
     /**
@@ -314,8 +314,8 @@ public class MoneyPerLength extends FloatScalar.Rel<MoneyPerLengthUnit> implemen
      */
     public final MoneyPerLength minus(final MoneyPerLength v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerLength(getInUnit() - v.getInUnit(), getUnit())
-            : new MoneyPerLength(this.si - v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerLength(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerLength(
+                this.si - v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
     }
 
     /**

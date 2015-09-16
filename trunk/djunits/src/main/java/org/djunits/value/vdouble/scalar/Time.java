@@ -285,8 +285,8 @@ public interface Time extends UNITS
          */
         public final Time.Rel plus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Time.Rel(
-                this.si + v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Time.Rel(this.si
+                    + v.si, TimeUnit.SI);
         }
 
         /**
@@ -296,8 +296,8 @@ public interface Time extends UNITS
          */
         public final Time.Rel minus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(
-                this.si - v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(this.si
+                    - v.si, TimeUnit.SI);
         }
 
         /**
@@ -307,8 +307,8 @@ public interface Time extends UNITS
          */
         public final Time.Abs plus(final Time.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(
-                this.si + v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(this.si
+                    + v.si, TimeUnit.SI);
         }
 
         /**
@@ -668,8 +668,8 @@ public interface Time extends UNITS
          */
         public final Time.Abs plus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(
-                this.si + v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(this.si
+                    + v.si, TimeUnit.SI);
         }
 
         /**
@@ -679,8 +679,8 @@ public interface Time extends UNITS
          */
         public final Time.Rel minus(final Time.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(
-                this.si - v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(this.si
+                    - v.si, TimeUnit.SI);
         }
 
         /**
@@ -690,8 +690,8 @@ public interface Time extends UNITS
          */
         public final Time.Abs minus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Time.Abs(
-                this.si - v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Time.Abs(this.si
+                    - v.si, TimeUnit.SI);
         }
 
         /**

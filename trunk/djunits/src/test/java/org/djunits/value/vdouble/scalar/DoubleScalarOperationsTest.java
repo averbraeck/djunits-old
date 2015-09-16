@@ -1,7 +1,10 @@
 package org.djunits.value.vdouble.scalar;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.djunits.unit.Unit;
@@ -9,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
+ * Find all multiplyBy and divideBy operations and prove the type correctness.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -28,7 +32,7 @@ public class DoubleScalarOperationsTest
     public final void doubleScalarOperationsTest()
     {
         Class<?> ds = DOUBLE_SCALAR.class;
-        // get an array of the DOUBLE_SCALAR$Length classes
+        // get an array of the DOUBLE_SCALAR$* classes
         for (Class<?> dsClass : ds.getClasses())
         {
             // get the interfaces such as org.djunits.value.vdouble.scalar.Area
@@ -50,10 +54,13 @@ public class DoubleScalarOperationsTest
                     if (method.getName().equals("multiplyBy"))
                     {
                         // note: filter out the method that multiplies by a constant...
-                        testMultiplyMethodRel(scalarClassRel, method);
+                        testMultiplyOrDivideMethodRel(scalarClassRel, method, true);
+                    }
+                    else if (method.getName().equals("divideBy"))
+                    {
+                        testMultiplyOrDivideMethodRel(scalarClassRel, method, false);
                     }
                 }
-
             }
         }
     }
@@ -62,8 +69,9 @@ public class DoubleScalarOperationsTest
      * Test a multiplication method for a Rel scalar. Note: filter out the method that multiplies by a constant...
      * @param scalarClassRel the Rel class for the multiplication, e.g. Length.Rel
      * @param method the method 'multiplyBy' for that class
+     * @param multiply boolean; if true; test a multiplyBy method; if false; test a divideBy method
      */
-    private void testMultiplyMethodRel(final Class<?> scalarClassRel, final Method method)
+    private void testMultiplyOrDivideMethodRel(final Class<?> scalarClassRel, final Method method, boolean multiply)
     {
         Class<?> relativeClass = null;
         try
@@ -78,7 +86,7 @@ public class DoubleScalarOperationsTest
         if (parTypes.length != 1)
         {
             Assert.fail("DoubleScalar class " + scalarClassRel.getName() + ".multiplyBy() has " + parTypes.length
-                + " parameters, <> 1");
+                    + " parameters, <> 1");
         }
         Class<?> parameterClass = parTypes[0];
         if (parameterClass.toString().equals("double"))
@@ -89,85 +97,147 @@ public class DoubleScalarOperationsTest
         if (!relativeClass.isAssignableFrom(parameterClass))
         {
             Assert.fail("DoubleScalar class " + scalarClassRel.getName()
-                + ".multiplyBy() has parameter with non-relative class: " + relativeClass.getName());
+                    + ".multiplyBy() has parameter with non-relative class: " + relativeClass.getName());
         }
 
         Class<?> returnClass = method.getReturnType();
         if (!relativeClass.isAssignableFrom(returnClass))
         {
             Assert.fail("DoubleScalar class " + scalarClassRel.getName()
-                + ".multiplyBy() has return type with non-relative class: " + returnClass.getName());
+                    + ".multiplyBy() has return type with non-relative class: " + returnClass.getName());
         }
 
-        // get the unit classes
-        Class<?> unitScalarClassRel = getUnitClass(scalarClassRel);
-        Class<?> unitParamClassRel = getUnitClass(parameterClass);
-        Class<?> unitReturnClassRel = getUnitClass(returnClass);
-
-        String scalarSI = "NONE";
-        String paramSI = "NONE";
-        String returnSI = "NONE";
-
-        // get the SI units of the unit classes, calling class, parameter type and return type
+        // get the SI coefficients of the unit classes, scalar type, parameter type and return type
+        String scalarSI = getCoefficients(getUnitClass(scalarClassRel));
+        String paramSI = getCoefficients(getUnitClass(parameterClass));
+        String returnSI = getCoefficients(getUnitClass(returnClass));
+        // print what we just have found
+        // System.out.println(scalarClassRel.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + "."
+        // + (multiply ? "multiplyBy" : "divideBy") + "("
+        // + parameterClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ") => "
+        // + returnClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ": " + scalarSI
+        // + (multiply ? " * " : " : ") + paramSI + " => " + returnSI);
         try
         {
-            if (unitScalarClassRel.getName().contains("Money"))
+            Constructor<?> constructor = scalarClassRel.getConstructor(double.class, getUnitClass(scalarClassRel));
+            DoubleScalar.Rel<?> left =
+                    (DoubleScalar.Rel<?>) constructor.newInstance(123d, getSIUnitInstance(getUnitClass(scalarClassRel)));
+            // System.out.println("constructed left: " + left);
+            constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
+            DoubleScalar.Rel<?> right =
+                    (DoubleScalar.Rel<?>) constructor.newInstance(456d, getSIUnitInstance(getUnitClass(parameterClass)));
+            // System.out.println("constructed right: " + right);
+            DoubleScalar.Rel<?> result = multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
+            // System.out.println("result is " + result);
+            String resultCoefficients = result.getUnit().getSICoefficientsString();
+            /*-
+            System.out.println("Comparing result coefficients (\"" + resultCoefficients + "\") to returnSI (\"" + returnSI
+                    + "\")");
+            if (0 != resultCoefficients.compareTo(returnSI))
             {
-                scalarSI = "1";
+                Class<?> c = getUnitClass(returnClass);
+                String j = getCoefficients(c);
+                Unit<?> u = result.getUnit();
+                String k = u.getSICoefficientsString();
+                System.out.println("j is " + j + ", k is " + k);
+                if (multiply)
+                {
+                    DoubleScalar.multiply(left, right);
+                }
+                else
+                {
+                    DoubleScalar.divide(left, right);
+                }
             }
-            else
-            {
-                Field si = unitScalarClassRel.getField("SI");
-                scalarSI = ((Unit<?>) si.get(unitScalarClassRel)).getSICoefficientsString();
-            }
+            */
+            assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
+            double expectedValue = multiply ? 123d * 456 : 123d / 456;
+            assertEquals("Result of operation", expectedValue, result.getSI(), 0.01);
         }
-        catch (SecurityException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException exception)
+        catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+                | IllegalArgumentException | InvocationTargetException exception)
         {
-            Assert.fail("DoubleScalar class " + scalarClassRel.getName()
-                + ".multiplyBy() has no field SI or no getSICoefficientsString() method");
+            exception.printStackTrace();
         }
+    }
 
+    /**
+     * Obtain the SI coefficient string of a DJUNITS class.
+     * @param clas Class&lt;?&gt;; the DJUNITS class
+     * @return String
+     */
+    private String getCoefficients(Class<?> clas)
+    {
+        if (clas.getName().contains("Money"))
+        {
+            try
+            {
+                // Just get the first one...
+                Field[] fields = clas.getFields();
+                if (0 == fields.length)
+                {
+                    return "1"; // Problem. No static instances of this class available
+                }
+                Field unitField = fields[0]; // Simply get the first one
+                return ((Unit<?>) unitField.get(clas)).getSICoefficientsString();
+            }
+            catch (SecurityException | IllegalArgumentException | IllegalAccessException exception)
+            {
+                exception.printStackTrace();
+            }
+            return "1";
+        }
         try
         {
-            if (unitParamClassRel.getName().contains("Money"))
-            {
-                paramSI = "1";
-            }
-            else
-            {
-                Field si = unitParamClassRel.getField("SI");
-                paramSI = ((Unit<?>) si.get(unitParamClassRel)).getSICoefficientsString();
-            }
+            Field si = clas.getField("SI");
+            Unit<?> u = ((Unit<?>) si.get(clas));
+            String r = u.getSICoefficientsString();
+            return r;
+            // return ((Unit<?>) si.get(clas)).getSICoefficientsString();
         }
-        catch (SecurityException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException exception)
+        catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException exception)
         {
-            Assert.fail("DoubleScalar class " + parameterClass.getName()
-                + ".multiplyBy() has no field SI or no getSICoefficientsString() method");
+            exception.printStackTrace();
+            return "ERROR";
         }
+    }
 
+    /**
+     * Obtain the SI coefficient string of a DJUNITS class.
+     * @param clas Class&lt;?&gt;; the DJUNITS class
+     * @return String
+     */
+    private Unit<?> getSIUnitInstance(Class<?> clas)
+    {
+        if (clas.getName().contains("Money"))
+        {
+            try
+            {
+                // Just get the first one...
+                Field[] fields = clas.getFields();
+                if (0 == fields.length)
+                {
+                    return null; // Problem. No static instances of this class available
+                }
+                Field unitField = fields[0]; // Simply get the first one
+                return ((Unit<?>) unitField.get(clas));
+            }
+            catch (SecurityException | IllegalArgumentException | IllegalAccessException exception)
+            {
+                exception.printStackTrace();
+            }
+            return null;
+        }
         try
         {
-            if (unitReturnClassRel.getName().contains("Money"))
-            {
-                returnSI = "1";
-            }
-            else
-            {
-                Field si = unitReturnClassRel.getField("SI");
-                returnSI = ((Unit<?>) si.get(unitReturnClassRel)).getSICoefficientsString();
-            }
+            Field si = clas.getField("SI");
+            return ((Unit<?>) si.get(clas));
         }
-        catch (SecurityException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException exception)
+        catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException exception)
         {
-            Assert.fail("DoubleScalar class " + returnClass.getName()
-                + ".multiplyBy() has no field SI or no getSICoefficientsString() method");
+            exception.printStackTrace();
+            return null;
         }
-
-        // print what we just have done
-        System.out.println(scalarClassRel.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "")
-            + ".multiplyBy(" + parameterClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ") => "
-            + returnClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + " : " + scalarSI + " * "
-            + paramSI + " => " + returnSI);
     }
 
     /**

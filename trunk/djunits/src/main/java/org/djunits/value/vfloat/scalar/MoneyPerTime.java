@@ -304,7 +304,7 @@ public class MoneyPerTime extends FloatScalar.Rel<MoneyPerTimeUnit> implements U
     public final MoneyPerTime plus(final MoneyPerTime v)
     {
         return getUnit().equals(v.getUnit()) ? new MoneyPerTime(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerTime(
-            this.si + v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+                this.si + v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
     }
 
     /**
@@ -315,7 +315,7 @@ public class MoneyPerTime extends FloatScalar.Rel<MoneyPerTimeUnit> implements U
     public final MoneyPerTime minus(final MoneyPerTime v)
     {
         return getUnit().equals(v.getUnit()) ? new MoneyPerTime(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerTime(
-            this.si - v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+                this.si - v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
     }
 
     /**

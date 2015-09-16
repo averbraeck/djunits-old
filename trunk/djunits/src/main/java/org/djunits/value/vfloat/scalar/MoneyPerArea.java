@@ -304,7 +304,7 @@ public class MoneyPerArea extends FloatScalar.Rel<MoneyPerAreaUnit> implements U
     public final MoneyPerArea plus(final MoneyPerArea v)
     {
         return getUnit().equals(v.getUnit()) ? new MoneyPerArea(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerArea(
-            this.si + v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
+                this.si + v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
     }
 
     /**
@@ -315,7 +315,7 @@ public class MoneyPerArea extends FloatScalar.Rel<MoneyPerAreaUnit> implements U
     public final MoneyPerArea minus(final MoneyPerArea v)
     {
         return getUnit().equals(v.getUnit()) ? new MoneyPerArea(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerArea(
-            this.si - v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
+                this.si - v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
     }
 
     /**

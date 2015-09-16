@@ -284,8 +284,8 @@ public interface Area extends UNITS
          */
         public final Area.Rel plus(final Area.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Area.Rel(
-                this.si + v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Area.Rel(this.si
+                    + v.si, AreaUnit.SI);
         }
 
         /**
@@ -295,8 +295,8 @@ public interface Area extends UNITS
          */
         public final Area.Rel minus(final Area.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Area.Rel(
-                this.si - v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Area.Rel(this.si
+                    - v.si, AreaUnit.SI);
         }
 
         /**
@@ -306,8 +306,8 @@ public interface Area extends UNITS
          */
         public final Area.Abs plus(final Area.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Area.Abs(
-                this.si + v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Area.Abs(this.si
+                    + v.si, AreaUnit.SI);
         }
 
         /**
@@ -667,8 +667,8 @@ public interface Area extends UNITS
          */
         public final Area.Abs plus(final Area.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Area.Abs(
-                this.si + v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Area.Abs(this.si
+                    + v.si, AreaUnit.SI);
         }
 
         /**
@@ -678,8 +678,8 @@ public interface Area extends UNITS
          */
         public final Area.Rel minus(final Area.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Area.Rel(
-                this.si - v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Area.Rel(this.si
+                    - v.si, AreaUnit.SI);
         }
 
         /**
@@ -689,8 +689,8 @@ public interface Area extends UNITS
          */
         public final Area.Abs minus(final Area.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Area.Abs(
-                this.si - v.si, AreaUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Area.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Area.Abs(this.si
+                    - v.si, AreaUnit.SI);
         }
 
         /**

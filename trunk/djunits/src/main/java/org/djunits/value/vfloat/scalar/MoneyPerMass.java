@@ -304,7 +304,7 @@ public class MoneyPerMass extends FloatScalar.Rel<MoneyPerMassUnit> implements U
     public final MoneyPerMass plus(final MoneyPerMass v)
     {
         return getUnit().equals(v.getUnit()) ? new MoneyPerMass(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerMass(
-            this.si + v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
+                this.si + v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
     }
 
     /**
@@ -315,7 +315,7 @@ public class MoneyPerMass extends FloatScalar.Rel<MoneyPerMassUnit> implements U
     public final MoneyPerMass minus(final MoneyPerMass v)
     {
         return getUnit().equals(v.getUnit()) ? new MoneyPerMass(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerMass(
-            this.si - v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
+                this.si - v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
     }
 
     /**

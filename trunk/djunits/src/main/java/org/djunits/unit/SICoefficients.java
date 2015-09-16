@@ -40,19 +40,10 @@ public class SICoefficients
     protected static String enumMapToString(final EnumMap<SI, Integer> map)
     {
         StringBuffer result = new StringBuffer();
-        boolean first = true;
         for (SI si : map.keySet())
         {
             if (map.get(si) > 0)
             {
-                if (first)
-                {
-                    first = false;
-                }
-                else
-                {
-                    result.append(".");
-                }
                 result.append(si.name());
                 if (map.get(si) != 1)
                 {
@@ -66,11 +57,17 @@ public class SICoefficients
             result.append("1");
         }
 
+        boolean first = true;
         for (SI si : map.keySet())
         {
             if (map.get(si) < 0)
             {
-                result.append("/" + si.name());
+                if (first)
+                {
+                    result.append("/");
+                    first = false;
+                }
+                result.append(si.name());
                 if (map.get(si) != -1)
                 {
                     result.append(-map.get(si));
@@ -144,9 +141,9 @@ public class SICoefficients
         {
             cs = cs.substring(1); // remove the leading "1"
         }
+        int factor = 1;
         while (cs.length() > 0)
         {
-            int factor = 1;
             if (cs.startsWith("/"))
             {
                 cs = cs.substring(1);
@@ -157,8 +154,10 @@ public class SICoefficients
                 factor = -1;
             }
             boolean parsedPowerString = false;
+            int factor2 = 1;
             for (SI si : SI.values())
             {
+                factor2 = 1;
                 String name = si.name();
                 if (!cs.startsWith(name))
                 {
@@ -178,7 +177,7 @@ public class SICoefficients
                 int digitsSeen = 0;
                 if (cs.substring(endPos).startsWith("-"))
                 {
-                    factor *= -1;
+                    factor2 = -1;
                     endPos++;
                 }
                 while (cs.length() > endPos)
@@ -204,7 +203,7 @@ public class SICoefficients
                 {
                     oldValue = 0;
                 }
-                coefficients.put(si, oldValue + value * factor);
+                coefficients.put(si, oldValue + value * factor * factor2);
                 parsedPowerString = true;
                 cs = cs.substring(endPos);
                 break;

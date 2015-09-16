@@ -15,7 +15,7 @@ import org.djunits.unit.UNITS;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-@SuppressWarnings({"checkstyle:javadoctype", "checkstyle:leftcurly", "checkstyle:rightcurly", "javadoc"})
+@SuppressWarnings({ "checkstyle:javadoctype", "checkstyle:leftcurly", "checkstyle:rightcurly", "javadoc" })
 public interface FLOAT_SCALAR extends UNITS
 {
     // @formatter:off

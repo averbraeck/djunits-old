@@ -69,7 +69,7 @@ public class MoneyUnit extends Unit<MoneyUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyUnit(final CurrencyUnit currencyUnit, final String nameOrNameKey, final String abbreviationKey,
-        final boolean standardUnit)
+            final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationKey, UnitSystem.OTHER, standardUnit);
         this.currencyUnit = currencyUnit;
@@ -96,7 +96,7 @@ public class MoneyUnit extends Unit<MoneyUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyUnit(final CurrencyUnit currencyUnit, final String nameOrNameKey, final String abbreviationKey,
-        final MoneyUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final MoneyUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationKey, UnitSystem.OTHER, referenceUnit, conversionFactorToReferenceUnit, standardUnit);
         this.currencyUnit = currencyUnit;
@@ -111,7 +111,7 @@ public class MoneyUnit extends Unit<MoneyUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MoneyUnit(final CurrencyUnit currencyUnit, final String name, final String abbreviation,
-        final MoneyUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final MoneyUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(currencyUnit, name, abbreviation, referenceUnit, conversionFactorToReferenceUnit, false);
     }

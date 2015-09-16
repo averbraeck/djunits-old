@@ -45,7 +45,7 @@ public class UnitTest
                                 PowerUnit.WATT.getSICoefficients()).toString()).toString());
         assertEquals(
                 "ABVOLT * KILOVOLT is expressed in kg2.m4/s6/A2",
-                "[!kg2.m4/s6/A2!]",
+                "[!kg2m4/s6A2!]",
                 Unit.lookupOrCreateUnitWithSICoefficients(
                         SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
                                 ElectricalPotentialUnit.KILOVOLT.getSICoefficients()).toString()).toString());

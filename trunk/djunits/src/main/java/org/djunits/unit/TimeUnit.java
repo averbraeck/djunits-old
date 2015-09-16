@@ -75,10 +75,10 @@ public class TimeUnit extends Unit<TimeUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private TimeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-        final TimeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final TimeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+                standardUnit);
     }
 
     /**
@@ -90,7 +90,7 @@ public class TimeUnit extends Unit<TimeUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public TimeUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final TimeUnit referenceUnit,
-        final double conversionFactorToReferenceUnit)
+            final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

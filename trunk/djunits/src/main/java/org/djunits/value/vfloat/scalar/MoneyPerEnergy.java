@@ -303,8 +303,8 @@ public class MoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> implemen
      */
     public final MoneyPerEnergy plus(final MoneyPerEnergy v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerEnergy(getInUnit() + v.getInUnit(), getUnit())
-            : new MoneyPerEnergy(this.si + v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerEnergy(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerEnergy(
+                this.si + v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
     }
 
     /**
@@ -314,8 +314,8 @@ public class MoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> implemen
      */
     public final MoneyPerEnergy minus(final MoneyPerEnergy v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerEnergy(getInUnit() - v.getInUnit(), getUnit())
-            : new MoneyPerEnergy(this.si - v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerEnergy(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerEnergy(
+                this.si - v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
     }
 
     /**

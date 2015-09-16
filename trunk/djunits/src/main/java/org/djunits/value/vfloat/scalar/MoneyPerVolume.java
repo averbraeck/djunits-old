@@ -303,8 +303,8 @@ public class MoneyPerVolume extends FloatScalar.Rel<MoneyPerVolumeUnit> implemen
      */
     public final MoneyPerVolume plus(final MoneyPerVolume v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerVolume(getInUnit() + v.getInUnit(), getUnit())
-            : new MoneyPerVolume(this.si + v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerVolume(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerVolume(
+                this.si + v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
     }
 
     /**
@@ -314,8 +314,8 @@ public class MoneyPerVolume extends FloatScalar.Rel<MoneyPerVolumeUnit> implemen
      */
     public final MoneyPerVolume minus(final MoneyPerVolume v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerVolume(getInUnit() - v.getInUnit(), getUnit())
-            : new MoneyPerVolume(this.si - v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerVolume(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerVolume(
+                this.si - v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
     }
 
     /**
