@@ -327,7 +327,7 @@ public interface Energy extends UNITS
         public final Energy.Rel plus(final Energy.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Energy.Rel(
-                this.si + v.si, EnergyUnit.SI);
+                    this.si + v.si, EnergyUnit.SI);
         }
 
         /**
@@ -338,7 +338,7 @@ public interface Energy extends UNITS
         public final Energy.Rel minus(final Energy.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Energy.Rel(
-                this.si - v.si, EnergyUnit.SI);
+                    this.si - v.si, EnergyUnit.SI);
         }
 
         /**
@@ -349,7 +349,7 @@ public interface Energy extends UNITS
         public final Energy.Abs plus(final Energy.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Energy.Abs(
-                this.si + v.si, EnergyUnit.SI);
+                    this.si + v.si, EnergyUnit.SI);
         }
 
         /**
@@ -752,7 +752,7 @@ public interface Energy extends UNITS
         public final Energy.Abs plus(final Energy.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Energy.Abs(
-                this.si + v.si, EnergyUnit.SI);
+                    this.si + v.si, EnergyUnit.SI);
         }
 
         /**
@@ -763,7 +763,7 @@ public interface Energy extends UNITS
         public final Energy.Rel minus(final Energy.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Energy.Rel(
-                this.si - v.si, EnergyUnit.SI);
+                    this.si - v.si, EnergyUnit.SI);
         }
 
         /**
@@ -774,7 +774,7 @@ public interface Energy extends UNITS
         public final Energy.Abs minus(final Energy.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Energy.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Energy.Abs(
-                this.si - v.si, EnergyUnit.SI);
+                    this.si - v.si, EnergyUnit.SI);
         }
 
         /**

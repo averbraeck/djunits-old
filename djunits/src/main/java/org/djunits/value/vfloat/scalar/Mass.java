@@ -326,8 +326,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Rel plus(final Mass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Rel(
-                this.si + v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Rel(this.si
+                    + v.si, MassUnit.SI);
         }
 
         /**
@@ -337,8 +337,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Rel minus(final Mass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Rel(
-                this.si - v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Rel(this.si
+                    - v.si, MassUnit.SI);
         }
 
         /**
@@ -348,8 +348,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Abs plus(final Mass.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Abs(
-                this.si + v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Abs(this.si
+                    + v.si, MassUnit.SI);
         }
 
         /**
@@ -741,8 +741,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Abs plus(final Mass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Abs(
-                this.si + v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Mass.Abs(this.si
+                    + v.si, MassUnit.SI);
         }
 
         /**
@@ -752,8 +752,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Rel minus(final Mass.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Rel(
-                this.si - v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Rel(this.si
+                    - v.si, MassUnit.SI);
         }
 
         /**
@@ -763,8 +763,8 @@ public interface Mass extends UNITS
          */
         public final Mass.Abs minus(final Mass.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Abs(
-                this.si - v.si, MassUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Mass.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Mass.Abs(this.si
+                    - v.si, MassUnit.SI);
         }
 
         /**

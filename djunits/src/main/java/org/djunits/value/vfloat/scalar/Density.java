@@ -321,8 +321,8 @@ public interface Density extends UNITS
          */
         public final Density.Rel plus(final Density.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Density.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new Density.Rel(this.si + v.si, DensityUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Density.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Density.Rel(
+                    this.si + v.si, DensityUnit.SI);
         }
 
         /**
@@ -332,8 +332,8 @@ public interface Density extends UNITS
          */
         public final Density.Rel minus(final Density.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Density.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Density.Rel(this.si - v.si, DensityUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Density.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Density.Rel(
+                    this.si - v.si, DensityUnit.SI);
         }
 
         /**
@@ -343,8 +343,8 @@ public interface Density extends UNITS
          */
         public final Density.Abs plus(final Density.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Density.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Density.Abs(this.si + v.si, DensityUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Density.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Density.Abs(
+                    this.si + v.si, DensityUnit.SI);
         }
 
         /**
@@ -676,8 +676,8 @@ public interface Density extends UNITS
          */
         public final Density.Abs plus(final Density.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Density.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Density.Abs(this.si + v.si, DensityUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Density.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Density.Abs(
+                    this.si + v.si, DensityUnit.SI);
         }
 
         /**
@@ -687,8 +687,8 @@ public interface Density extends UNITS
          */
         public final Density.Rel minus(final Density.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Density.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Density.Rel(this.si - v.si, DensityUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Density.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Density.Rel(
+                    this.si - v.si, DensityUnit.SI);
         }
 
         /**
@@ -698,8 +698,8 @@ public interface Density extends UNITS
          */
         public final Density.Abs minus(final Density.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Density.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new Density.Abs(this.si - v.si, DensityUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Density.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Density.Abs(
+                    this.si - v.si, DensityUnit.SI);
         }
 
         /**

@@ -41,12 +41,12 @@ public class MoneyPerVolumeUnit extends Unit<MoneyPerVolumeUnit>
     static
     {
         EUR_PER_CUBIC_METER =
-            new MoneyPerVolumeUnit(MoneyUnit.EUR, VolumeUnit.CUBIC_METER, "EUR per cubic meter", "\u20AC/m^3", false);
+                new MoneyPerVolumeUnit(MoneyUnit.EUR, VolumeUnit.CUBIC_METER, "EUR per cubic meter", "\u20AC/m^3", false);
         EUR_PER_LITER = new MoneyPerVolumeUnit(MoneyUnit.EUR, VolumeUnit.LITER, "EUR per liter", "\u20AC/l", false);
         USD_PER_GALLON_US_FLUID =
-            new MoneyPerVolumeUnit(MoneyUnit.USD, VolumeUnit.GALLON_US_FLUID, "USD per gallon (US)", "US$/gallon", false);
+                new MoneyPerVolumeUnit(MoneyUnit.USD, VolumeUnit.GALLON_US_FLUID, "USD per gallon (US)", "US$/gallon", false);
         USD_PER_OUNCE_US_FLUID =
-            new MoneyPerVolumeUnit(MoneyUnit.USD, VolumeUnit.OUNCE_US_FLUID, "USD per ounce (US)", "US$/ounce", false);
+                new MoneyPerVolumeUnit(MoneyUnit.USD, VolumeUnit.OUNCE_US_FLUID, "USD per ounce (US)", "US$/ounce", false);
         standardMoneyPerVolumeUnit = EUR_PER_CUBIC_METER;
     }
 
@@ -60,11 +60,10 @@ public class MoneyPerVolumeUnit extends Unit<MoneyPerVolumeUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerVolumeUnit(final MoneyUnit moneyUnit, final VolumeUnit volumeUnit, final String nameOrNameKey,
-        final String abbreviationOrAbbreviationKey, final boolean standardUnit)
+            final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerVolumeUnit, moneyUnit
-            .getConversionFactorToStandardUnit()
-            / volumeUnit.getConversionFactorToStandardUnit(), standardUnit);
+                .getConversionFactorToStandardUnit() / volumeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.volumeUnit = volumeUnit;
     }
@@ -77,7 +76,7 @@ public class MoneyPerVolumeUnit extends Unit<MoneyPerVolumeUnit>
      * @param abbreviation the key to the locale file for the abbreviation of the unit
      */
     public MoneyPerVolumeUnit(final MoneyUnit moneyUnit, final VolumeUnit volumeUnit, final String name,
-        final String abbreviation)
+            final String abbreviation)
     {
         this(moneyUnit, volumeUnit, name, abbreviation, false);
     }
@@ -92,10 +91,10 @@ public class MoneyPerVolumeUnit extends Unit<MoneyPerVolumeUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerVolumeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final MoneyPerVolumeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final MoneyPerVolumeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit,
-            conversionFactorToReferenceUnit, standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, conversionFactorToReferenceUnit,
+                standardUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.volumeUnit = referenceUnit.getVolumeUnit();
     }
@@ -108,7 +107,7 @@ public class MoneyPerVolumeUnit extends Unit<MoneyPerVolumeUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MoneyPerVolumeUnit(final String name, final String abbreviation, final MoneyPerVolumeUnit referenceUnit,
-        final double conversionFactorToReferenceUnit)
+            final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, referenceUnit, conversionFactorToReferenceUnit, false);
     }
@@ -138,8 +137,8 @@ public class MoneyPerVolumeUnit extends Unit<MoneyPerVolumeUnit>
         try
         {
             standardMoneyPerVolumeUnit =
-                new MoneyPerVolumeUnit(standardMoneyUnit, VolumeUnit.CUBIC_METER, standardMoneyUnit.getName()
-                    + " per cubic meter", standardMoneyUnit.getAbbreviation() + "/m^3");
+                    new MoneyPerVolumeUnit(standardMoneyUnit, VolumeUnit.CUBIC_METER, standardMoneyUnit.getName()
+                            + " per cubic meter", standardMoneyUnit.getAbbreviation() + "/m^3");
         }
         catch (Exception e)
         {

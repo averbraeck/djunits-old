@@ -267,7 +267,7 @@ public class Money extends DoubleScalar.Rel<MoneyUnit> implements UNITS, Relativ
     public final Money plus(final Money v)
     {
         return getUnit().equals(v.getUnit()) ? new Money(getInUnit() + v.getInUnit(), getUnit()) : new Money(this.si + v.si,
-            MoneyUnit.getStandardMoneyUnit());
+                MoneyUnit.getStandardMoneyUnit());
     }
 
     /**
@@ -278,7 +278,7 @@ public class Money extends DoubleScalar.Rel<MoneyUnit> implements UNITS, Relativ
     public final Money minus(final Money v)
     {
         return getUnit().equals(v.getUnit()) ? new Money(getInUnit() - v.getInUnit(), getUnit()) : new Money(this.si - v.si,
-            MoneyUnit.getStandardMoneyUnit());
+                MoneyUnit.getStandardMoneyUnit());
     }
 
     /**

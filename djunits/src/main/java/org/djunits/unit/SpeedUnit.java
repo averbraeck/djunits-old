@@ -47,16 +47,15 @@ public class SpeedUnit extends Unit<SpeedUnit>
 
     static
     {
-        SI =
-            new SpeedUnit(LengthUnit.METER, TimeUnit.SECOND, "SpeedUnit.meter_per_second", "SpeedUnit.m/s", SI_DERIVED, true);
+        SI = new SpeedUnit(LengthUnit.METER, TimeUnit.SECOND, "SpeedUnit.meter_per_second", "SpeedUnit.m/s", SI_DERIVED, true);
         METER_PER_SECOND = SI;
         KM_PER_HOUR =
-            new SpeedUnit(LengthUnit.KILOMETER, TimeUnit.HOUR, "SpeedUnit.kilometer_per_hour", "SpeedUnit.km/h", SI_DERIVED,
-                true);
+                new SpeedUnit(LengthUnit.KILOMETER, TimeUnit.HOUR, "SpeedUnit.kilometer_per_hour", "SpeedUnit.km/h",
+                        SI_DERIVED, true);
         MILE_PER_HOUR =
-            new SpeedUnit(LengthUnit.MILE, TimeUnit.HOUR, "SpeedUnit.mile_per_hour", "SpeedUnit.mph", IMPERIAL, true);
+                new SpeedUnit(LengthUnit.MILE, TimeUnit.HOUR, "SpeedUnit.mile_per_hour", "SpeedUnit.mph", IMPERIAL, true);
         FOOT_PER_SECOND =
-            new SpeedUnit(LengthUnit.FOOT, TimeUnit.SECOND, "SpeedUnit.foot_per_second", "SpeedUnit.fps", IMPERIAL, true);
+                new SpeedUnit(LengthUnit.FOOT, TimeUnit.SECOND, "SpeedUnit.foot_per_second", "SpeedUnit.fps", IMPERIAL, true);
         KNOT = new SpeedUnit(LengthUnit.NAUTICAL_MILE, TimeUnit.HOUR, "SpeedUnit.knot", "SpeedUnit.kt", IMPERIAL, true);
     }
 
@@ -71,11 +70,10 @@ public class SpeedUnit extends Unit<SpeedUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private SpeedUnit(final LengthUnit lengthUnit, final TimeUnit timeUnit, final String nameOrNameKey,
-        final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, METER_PER_SECOND, lengthUnit
-            .getConversionFactorToStandardUnit()
-            / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+                .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.lengthUnit = lengthUnit;
         this.timeUnit = timeUnit;
     }
@@ -89,7 +87,7 @@ public class SpeedUnit extends Unit<SpeedUnit>
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
     public SpeedUnit(final LengthUnit lengthUnit, final TimeUnit timeUnit, final String name, final String abbreviation,
-        final UnitSystem unitSystem)
+            final UnitSystem unitSystem)
     {
         this(lengthUnit, timeUnit, name, abbreviation, unitSystem, false);
     }
@@ -105,10 +103,10 @@ public class SpeedUnit extends Unit<SpeedUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private SpeedUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-        final SpeedUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final SpeedUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+                standardUnit);
         this.lengthUnit = referenceUnit.getLengthUnit();
         this.timeUnit = referenceUnit.getTimeUnit();
     }
@@ -121,8 +119,8 @@ public class SpeedUnit extends Unit<SpeedUnit>
      * @param referenceUnit the unit to convert to
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
-    public SpeedUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-        final SpeedUnit referenceUnit, final double conversionFactorToReferenceUnit)
+    public SpeedUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final SpeedUnit referenceUnit,
+            final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

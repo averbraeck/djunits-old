@@ -54,20 +54,18 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
     {
         SI = new AngleSlopeUnit("AngleSlopeUnit.radian", "AngleSlopeUnit.rad", SI_DERIVED);
         RADIAN = SI;
-        DEGREE =
-            new AngleSlopeUnit("AngleSlopeUnit.degree", "AngleSlopeUnit.deg", SI_ACCEPTED, RADIAN, Math.PI / 180.0, true);
+        DEGREE = new AngleSlopeUnit("AngleSlopeUnit.degree", "AngleSlopeUnit.deg", SI_ACCEPTED, RADIAN, Math.PI / 180.0, true);
         ARCMINUTE =
-            new AngleSlopeUnit("AngleSlopeUnit.arcminute", "AngleSlopeUnit.arcmin", SI_ACCEPTED, DEGREE, 1.0 / 60.0, true);
+                new AngleSlopeUnit("AngleSlopeUnit.arcminute", "AngleSlopeUnit.arcmin", SI_ACCEPTED, DEGREE, 1.0 / 60.0, true);
         ARCSECOND =
-            new AngleSlopeUnit("AngleSlopeUnit.arcsecond", "AngleSlopeUnit.arcsec", SI_ACCEPTED, DEGREE, 1.0 / 3600.0, true);
-        GRAD =
-            new AngleSlopeUnit("AngleSlopeUnit.gradian", "AngleSlopeUnit.grad", OTHER, RADIAN, 2.0 * Math.PI / 400.0, true);
+                new AngleSlopeUnit("AngleSlopeUnit.arcsecond", "AngleSlopeUnit.arcsec", SI_ACCEPTED, DEGREE, 1.0 / 3600.0, true);
+        GRAD = new AngleSlopeUnit("AngleSlopeUnit.gradian", "AngleSlopeUnit.grad", OTHER, RADIAN, 2.0 * Math.PI / 400.0, true);
         CENTESIMAL_ARCMINUTE =
-            new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcminute", "AngleSlopeUnit.centesimal_arcmin", OTHER, GRAD,
-                1.0 / 100.0, true);
+                new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcminute", "AngleSlopeUnit.centesimal_arcmin", OTHER, GRAD,
+                        1.0 / 100.0, true);
         CENTESIMAL_ARCSECOND =
-            new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcsecond", "AngleSlopeUnit.centesimal_arcsec", OTHER, GRAD,
-                1.0 / 10000.0, true);
+                new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcsecond", "AngleSlopeUnit.centesimal_arcsec", OTHER, GRAD,
+                        1.0 / 10000.0, true);
     }
 
     /**
@@ -91,12 +89,11 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private AngleSlopeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final AngleSlopeUnit referenceUnit, final double conversionFactorToReferenceUnit,
-        final boolean standardUnit)
+    private AngleSlopeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final AngleSlopeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+                standardUnit);
     }
 
     /**
@@ -108,7 +105,7 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public AngleSlopeUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-        final AngleSlopeUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final AngleSlopeUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }
@@ -124,7 +121,7 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
     @Override
     public final String getSICoefficientsString()
     {
-        return "";
+        return "1";
     }
 
 }

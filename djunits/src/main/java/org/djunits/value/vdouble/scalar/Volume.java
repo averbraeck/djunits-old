@@ -286,7 +286,7 @@ public interface Volume extends UNITS
         public final Volume.Rel plus(final Volume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Volume.Rel(
-                this.si + v.si, VolumeUnit.SI);
+                    this.si + v.si, VolumeUnit.SI);
         }
 
         /**
@@ -297,7 +297,7 @@ public interface Volume extends UNITS
         public final Volume.Rel minus(final Volume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Volume.Rel(
-                this.si - v.si, VolumeUnit.SI);
+                    this.si - v.si, VolumeUnit.SI);
         }
 
         /**
@@ -308,7 +308,7 @@ public interface Volume extends UNITS
         public final Volume.Abs plus(final Volume.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Volume.Abs(
-                this.si + v.si, VolumeUnit.SI);
+                    this.si + v.si, VolumeUnit.SI);
         }
 
         /**
@@ -669,7 +669,7 @@ public interface Volume extends UNITS
         public final Volume.Abs plus(final Volume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Volume.Abs(
-                this.si + v.si, VolumeUnit.SI);
+                    this.si + v.si, VolumeUnit.SI);
         }
 
         /**
@@ -680,7 +680,7 @@ public interface Volume extends UNITS
         public final Volume.Rel minus(final Volume.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Volume.Rel(
-                this.si - v.si, VolumeUnit.SI);
+                    this.si - v.si, VolumeUnit.SI);
         }
 
         /**
@@ -691,7 +691,7 @@ public interface Volume extends UNITS
         public final Volume.Abs minus(final Volume.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Volume.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Volume.Abs(
-                this.si - v.si, VolumeUnit.SI);
+                    this.si - v.si, VolumeUnit.SI);
         }
 
         /**

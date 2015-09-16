@@ -262,7 +262,7 @@ public class MoneyPerTime extends DoubleScalar.Rel<MoneyPerTimeUnit> implements 
     public final MoneyPerTime plus(final MoneyPerTime v)
     {
         return getUnit().equals(v.getUnit()) ? new MoneyPerTime(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerTime(
-            this.si + v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+                this.si + v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
     }
 
     /**
@@ -273,7 +273,7 @@ public class MoneyPerTime extends DoubleScalar.Rel<MoneyPerTimeUnit> implements 
     public final MoneyPerTime minus(final MoneyPerTime v)
     {
         return getUnit().equals(v.getUnit()) ? new MoneyPerTime(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerTime(
-            this.si - v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+                this.si - v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
     }
 
     /**

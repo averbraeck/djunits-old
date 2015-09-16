@@ -34,7 +34,7 @@ public abstract class OffsetUnit<U extends Unit<U>> extends Unit<U>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     public OffsetUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-        final boolean standardUnit)
+            final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
         this.offsetToStandardUnit = 0.0;
@@ -52,11 +52,11 @@ public abstract class OffsetUnit<U extends Unit<U>> extends Unit<U>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     public OffsetUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-        final U referenceUnit, final double conversionFactorToReferenceUnit, final double offsetToStandardUnit,
-        final boolean standardUnit)
+            final U referenceUnit, final double conversionFactorToReferenceUnit, final double offsetToStandardUnit,
+            final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+                standardUnit);
         this.offsetToStandardUnit = offsetToStandardUnit;
     }
 

@@ -286,7 +286,7 @@ public interface Speed extends UNITS
         public final Speed.Rel plus(final Speed.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Speed.Rel(
-                this.si + v.si, SpeedUnit.SI);
+                    this.si + v.si, SpeedUnit.SI);
         }
 
         /**
@@ -297,7 +297,7 @@ public interface Speed extends UNITS
         public final Speed.Rel minus(final Speed.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Speed.Rel(
-                this.si - v.si, SpeedUnit.SI);
+                    this.si - v.si, SpeedUnit.SI);
         }
 
         /**
@@ -308,7 +308,7 @@ public interface Speed extends UNITS
         public final Speed.Abs plus(final Speed.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Speed.Abs(
-                this.si + v.si, SpeedUnit.SI);
+                    this.si + v.si, SpeedUnit.SI);
         }
 
         /**
@@ -689,7 +689,7 @@ public interface Speed extends UNITS
         public final Speed.Abs plus(final Speed.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Speed.Abs(
-                this.si + v.si, SpeedUnit.SI);
+                    this.si + v.si, SpeedUnit.SI);
         }
 
         /**
@@ -700,7 +700,7 @@ public interface Speed extends UNITS
         public final Speed.Rel minus(final Speed.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Speed.Rel(
-                this.si - v.si, SpeedUnit.SI);
+                    this.si - v.si, SpeedUnit.SI);
         }
 
         /**
@@ -711,7 +711,7 @@ public interface Speed extends UNITS
         public final Speed.Abs minus(final Speed.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Speed.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Speed.Abs(
-                this.si - v.si, SpeedUnit.SI);
+                    this.si - v.si, SpeedUnit.SI);
         }
 
         /**

@@ -48,11 +48,11 @@ public class SICoefficientsTest
     {
         parseString("", "1");
         parseString("1", "1");
-        parseString("kgm/s2", "kg.m/s2");
-        parseString("kg-2m^3/s2/A", "m3/kg2/s2/A");
+        parseString("kgm/s2", "kgm/s2");
+        parseString("kg-2m^3/s2/A", "m3/kg2s2A");
         parseString("s-2", "1/s2");
         parseString("cd/mol^2", "cd/mol2");
-        parseString("Kmmol3/AsKcd4", "m.s.K2.cd4.mol3/A");
+        parseString("Kmmol3/AsKcd4", "mmol3/sAcd4");
         parseString("m", "m");
         parseString("mol", "mol");
         parseString("OIhFUSAIFAHsufasfs", null);
@@ -102,13 +102,13 @@ public class SICoefficientsTest
     public final void multiply()
     {
         multiplyTest("1", "1", "1");
-        multiplyTest("A", "K", "A.K");
+        multiplyTest("A", "K", "AK");
         multiplyTest("A-1", "A", "1");
         multiplyTest("A-2", "/A^2", "1/A4");
-        multiplyTest("Kmmol3/AsKcd4", "1", "m.s.K2.cd4.mol3/A");
-        multiplyTest("1", "Kmmol3/AsKcd4", "m.s.K2.cd4.mol3/A");
-        multiplyTest("Kmmol3", "/AsKcd4", "m.s.K2.cd4.mol3/A");
-        multiplyTest("kgm/s2", "m", "kg.m2/s2");
+        multiplyTest("Kmmol3/AsKcd4", "1", "mmol3/sAcd4");
+        multiplyTest("1", "Kmmol3/AsKcd4", "mmol3/sAcd4");
+        multiplyTest("Kmmol3", "/AsKcd4", "mmol3/sAcd4");
+        multiplyTest("kgm/s2", "m", "kgm2/s2");
     }
 
     /**
@@ -143,7 +143,7 @@ public class SICoefficientsTest
         divideTest("1", "1", "1");
         divideTest("A", "1", "A");
         divideTest("1", "A", "1/A");
-        divideTest("A-1K2", "As2", "K2/s2/A2");
+        divideTest("A-1K2", "As2", "K2/s2A2");
         divideTest("s10", "/s10", "s20");
         divideTest("s-10", "/s10", "1");
     }

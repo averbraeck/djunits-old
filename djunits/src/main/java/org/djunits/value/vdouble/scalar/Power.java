@@ -285,7 +285,7 @@ public interface Power extends UNITS
         public final Power.Rel plus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Power.Rel(
-                this.si + v.si, PowerUnit.SI);
+                    this.si + v.si, PowerUnit.SI);
         }
 
         /**
@@ -296,7 +296,7 @@ public interface Power extends UNITS
         public final Power.Rel minus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Power.Rel(
-                this.si - v.si, PowerUnit.SI);
+                    this.si - v.si, PowerUnit.SI);
         }
 
         /**
@@ -307,7 +307,7 @@ public interface Power extends UNITS
         public final Power.Abs plus(final Power.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Power.Abs(
-                this.si + v.si, PowerUnit.SI);
+                    this.si + v.si, PowerUnit.SI);
         }
 
         /**
@@ -327,16 +327,6 @@ public interface Power extends UNITS
         public final Dimensionless.Rel divideBy(final Power.Rel v)
         {
             return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Power and ElectricalCurrent, which results in a Power scalar.
-         * @param v Power scalar
-         * @return Power scalar as a multiplication of Power and ElectricalCurrent
-         */
-        public final Power.Rel multiplyBy(final ElectricalCurrent.Rel v)
-        {
-            return new Power.Rel(this.si * v.si, PowerUnit.SI);
         }
 
         /**
@@ -668,7 +658,7 @@ public interface Power extends UNITS
         public final Power.Abs plus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Power.Abs(
-                this.si + v.si, PowerUnit.SI);
+                    this.si + v.si, PowerUnit.SI);
         }
 
         /**
@@ -679,7 +669,7 @@ public interface Power extends UNITS
         public final Power.Rel minus(final Power.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Power.Rel(
-                this.si - v.si, PowerUnit.SI);
+                    this.si - v.si, PowerUnit.SI);
         }
 
         /**
@@ -690,7 +680,7 @@ public interface Power extends UNITS
         public final Power.Abs minus(final Power.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Power.Abs(
-                this.si - v.si, PowerUnit.SI);
+                    this.si - v.si, PowerUnit.SI);
         }
 
         /**
@@ -710,16 +700,6 @@ public interface Power extends UNITS
         public final Dimensionless.Abs divideBy(final Power.Abs v)
         {
             return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Power and ElectricalCurrent, which results in a Power scalar.
-         * @param v Power scalar
-         * @return Power scalar as a multiplication of Power and ElectricalCurrent
-         */
-        public final Power.Abs multiplyBy(final ElectricalCurrent.Abs v)
-        {
-            return new Power.Abs(this.si * v.si, PowerUnit.SI);
         }
 
         /**

@@ -57,11 +57,10 @@ public class MoneyPerTimeUnit extends Unit<MoneyPerTimeUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerTimeUnit(final MoneyUnit moneyUnit, final TimeUnit timeUnit, final String nameOrNameKey,
-        final String abbreviationOrAbbreviationKey, final boolean standardUnit)
+            final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerTimeUnit, moneyUnit
-            .getConversionFactorToStandardUnit()
-            / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+                .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.timeUnit = timeUnit;
     }
@@ -88,10 +87,10 @@ public class MoneyPerTimeUnit extends Unit<MoneyPerTimeUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerTimeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final MoneyPerTimeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final MoneyPerTimeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit,
-            conversionFactorToReferenceUnit, standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, conversionFactorToReferenceUnit,
+                standardUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.timeUnit = referenceUnit.getTimeUnit();
     }
@@ -104,7 +103,7 @@ public class MoneyPerTimeUnit extends Unit<MoneyPerTimeUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MoneyPerTimeUnit(final String name, final String abbreviation, final MoneyPerTimeUnit referenceUnit,
-        final double conversionFactorToReferenceUnit)
+            final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, referenceUnit, conversionFactorToReferenceUnit, false);
     }
@@ -134,8 +133,8 @@ public class MoneyPerTimeUnit extends Unit<MoneyPerTimeUnit>
         try
         {
             standardMoneyPerTimeUnit =
-                new MoneyPerTimeUnit(standardMoneyUnit, TimeUnit.HOUR, standardMoneyUnit.getName() + " per hour",
-                    standardMoneyUnit.getAbbreviation() + "/h");
+                    new MoneyPerTimeUnit(standardMoneyUnit, TimeUnit.HOUR, standardMoneyUnit.getName() + " per hour",
+                            standardMoneyUnit.getAbbreviation() + "/h");
         }
         catch (Exception e)
         {
