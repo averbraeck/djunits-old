@@ -2,6 +2,8 @@ package org.djunits.value;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Locale;
+
 import org.djunits.value.formatter.Format;
 import org.djunits.value.formatter.Formatter;
 import org.junit.Test;
@@ -24,6 +26,7 @@ public class FormatTest
     @Test
     public final void format()
     {
+        Locale.setDefault(Locale.US);
         double[] baseValues = { 1, (float) (1 / 3d) };
         for (int width = 8; width <= 20; width++)
         {

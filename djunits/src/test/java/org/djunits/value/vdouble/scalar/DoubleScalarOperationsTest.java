@@ -109,14 +109,14 @@ public class DoubleScalarOperationsTest
 
         // get the SI coefficients of the unit classes, scalar type, parameter type and return type
         String returnSI = getCoefficients(getUnitClass(returnClass));
-        // String scalarSI = getCoefficients(getUnitClass(scalarClassRel));
-        // String paramSI = getCoefficients(getUnitClass(parameterClass));
+        String scalarSI = getCoefficients(getUnitClass(scalarClassRel));
+        String paramSI = getCoefficients(getUnitClass(parameterClass));
         // print what we just have found
-        // System.out.println(scalarClassRel.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + "."
-        // + (multiply ? "multiplyBy" : "divideBy") + "("
-        // + parameterClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ") => "
-        // + returnClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ": " + scalarSI
-        // + (multiply ? " * " : " : ") + paramSI + " => " + returnSI);
+        System.out.println(scalarClassRel.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + "."
+                + (multiply ? "multiplyBy" : "divideBy") + "("
+                + parameterClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ") => "
+                + returnClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ": " + scalarSI
+                + (multiply ? " * " : " : ") + paramSI + " => " + returnSI);
         try
         {
             Constructor<?> constructor = scalarClassRel.getConstructor(double.class, getUnitClass(scalarClassRel));
@@ -149,7 +149,7 @@ public class DoubleScalarOperationsTest
                     DoubleScalar.divide(left, right);
                 }
             }
-            */
+             */
             assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
             double expectedValue = multiply ? 123d * 456 : 123d / 456;
             assertEquals("Result of operation", expectedValue, result.getSI(), 0.01);
