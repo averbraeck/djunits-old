@@ -108,9 +108,9 @@ public class DoubleScalarOperationsTest
         }
 
         // get the SI coefficients of the unit classes, scalar type, parameter type and return type
-        String scalarSI = getCoefficients(getUnitClass(scalarClassRel));
-        String paramSI = getCoefficients(getUnitClass(parameterClass));
         String returnSI = getCoefficients(getUnitClass(returnClass));
+        // String scalarSI = getCoefficients(getUnitClass(scalarClassRel));
+        // String paramSI = getCoefficients(getUnitClass(parameterClass));
         // print what we just have found
         // System.out.println(scalarClassRel.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + "."
         // + (multiply ? "multiplyBy" : "divideBy") + "("
