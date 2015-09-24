@@ -2,6 +2,8 @@ package org.djunits.value.formatter;
 
 import static org.junit.Assert.fail;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -18,6 +20,37 @@ import org.junit.Test;
  */
 public class EngineeringFormatterTest
 {
+    
+    /**
+     * See if we can increase the code coverage to include the private constructor. <br>
+     * TODO should be in a unit test of Format; not this one.
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException
+     */
+    @Test
+    public void formatConstructorTest() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
+    {
+        Constructor<?>[] cons = Format.class.getDeclaredConstructors();
+        cons[0].setAccessible(true);
+        cons[0].newInstance((Object[]) null);
+    }
+
+    /**
+     * See if we can increase the code coverage to include the private constructor.
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException
+     */
+    @Test
+    public void constructorTest() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
+    {
+        Constructor<?>[] cons = EngineeringFormatter.class.getDeclaredConstructors();
+        cons[0].setAccessible(true);
+        cons[0].newInstance((Object[]) null);
+    }
 
     /**
      * Run ulpTest with both values of the parameter.
