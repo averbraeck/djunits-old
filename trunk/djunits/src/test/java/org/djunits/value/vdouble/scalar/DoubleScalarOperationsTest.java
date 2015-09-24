@@ -26,10 +26,16 @@ public class DoubleScalarOperationsTest
 {
     /**
      * Test constructor on the interfaces that DOUBLE_SCALAR extends.
+     * @throws InvocationTargetException 
+     * @throws IllegalArgumentException 
+     * @throws IllegalAccessException 
+     * @throws InstantiationException 
+     * @throws SecurityException 
+     * @throws NoSuchMethodException 
      */
     @SuppressWarnings("static-method")
     @Test
-    public final void doubleScalarOperationsTest()
+    public final void doubleScalarOperationsTest() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
         Class<?> ds = DOUBLE_SCALAR.class;
         // get an array of the DOUBLE_SCALAR$* classes
@@ -61,6 +67,7 @@ public class DoubleScalarOperationsTest
                         testMultiplyOrDivideMethodRel(scalarClassRel, method, false);
                     }
                 }
+                textUnaryMethods(scalarClassRel);
             }
         }
     }
@@ -117,6 +124,7 @@ public class DoubleScalarOperationsTest
                 + parameterClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ") => "
                 + returnClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ": " + scalarSI
                 + (multiply ? " * " : " : ") + paramSI + " => " + returnSI);
+        
         try
         {
             Constructor<?> constructor = scalarClassRel.getConstructor(double.class, getUnitClass(scalarClassRel));
@@ -127,32 +135,26 @@ public class DoubleScalarOperationsTest
             DoubleScalar.Rel<?> right =
                     (DoubleScalar.Rel<?>) constructor.newInstance(456d, getSIUnitInstance(getUnitClass(parameterClass)));
             // System.out.println("constructed right: " + right);
+            double expectedValue = multiply ? 123d * 456 : 123d / 456;
+
+            if (multiply)
+            {
+                Method multiplyMethod = scalarClassRel.getDeclaredMethod("multiplyBy", new Class[]{parameterClass});
+                Object result = multiplyMethod.invoke(left, right);
+                double resultSI = ((DoubleScalar.Rel<?>) result).si;
+                assertEquals("Result of operation", expectedValue, resultSI, 0.01);
+            }
+            else
+            {
+                Method divideMethod = scalarClassRel.getDeclaredMethod("divideBy", new Class[]{parameterClass});
+                Object result = divideMethod.invoke(left, right);
+                double resultSI = ((DoubleScalar.Rel<?>) result).si;
+                assertEquals("Result of operation", expectedValue, resultSI, 0.01);
+            }
             DoubleScalar.Rel<?> result = multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
             // System.out.println("result is " + result);
             String resultCoefficients = result.getUnit().getSICoefficientsString();
-            /*-
-            System.out.println("Comparing result coefficients (\"" + resultCoefficients + "\") to returnSI (\"" + returnSI
-                    + "\")");
-            if (0 != resultCoefficients.compareTo(returnSI))
-            {
-                Class<?> c = getUnitClass(returnClass);
-                String j = getCoefficients(c);
-                Unit<?> u = result.getUnit();
-                String k = u.getSICoefficientsString();
-                System.out.println("j is " + j + ", k is " + k);
-                if (multiply)
-                {
-                    DoubleScalar.multiply(left, right);
-                }
-                else
-                {
-                    DoubleScalar.divide(left, right);
-                }
-            }
-             */
             assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
-            double expectedValue = multiply ? 123d * 456 : 123d / 456;
-            assertEquals("Result of operation", expectedValue, result.getSI(), 0.01);
         }
         catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
                 | IllegalArgumentException | InvocationTargetException exception)
@@ -259,4 +261,33 @@ public class DoubleScalarOperationsTest
         Assert.fail("Could not find constructor with one unit for Scalar class " + scalarClass.getName());
         return null;
     }
+    
+    /**
+     * 
+     * @param scalarClassRel
+     * @throws NoSuchMethodException
+     * @throws SecurityException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException
+     */
+    private void textUnaryMethods(final Class<?> scalarClassRel) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
+    {
+        Constructor<?> constructor = scalarClassRel.getConstructor(double.class, getUnitClass(scalarClassRel));
+        DoubleScalar.Rel<?> left =
+                (DoubleScalar.Rel<?>) constructor.newInstance(123d, getSIUnitInstance(getUnitClass(scalarClassRel)));
+        
+        Method asin = scalarClassRel.getDeclaredMethod("asin", new Class[]{});
+        Object result = asin.invoke(left);
+        double resultSI = ((DoubleScalar.Rel<?>) result).si;
+        assertEquals("Result of operation", Math.asin(123), resultSI, 0.01);
+        
+        Method acos = scalarClassRel.getDeclaredMethod("acos", new Class[]{});
+        result = acos.invoke(left);
+        resultSI = ((DoubleScalar.Rel<?>) result).si;
+        assertEquals("Result of operation", Math.acos(123), resultSI, 0.01);
+        
+    }
+    
 }
