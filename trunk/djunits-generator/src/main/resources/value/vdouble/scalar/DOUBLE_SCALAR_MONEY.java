@@ -259,7 +259,7 @@ public class %TYPE% extends DoubleScalar.Rel<%TYPE%Unit> implements Relative
     public final %TYPE% plus(final %TYPE% v)
     {
         return getUnit().equals(v.getUnit()) ? new %TYPE%(getInUnit() + v.getInUnit(), getUnit()) : new %TYPE%(this.si
-            + v.si, %TYPE%Unit.SI);
+            + v.si, %TYPE%Unit.getStandard%TYPE%Unit());
     }
 
     /**
@@ -270,7 +270,7 @@ public class %TYPE% extends DoubleScalar.Rel<%TYPE%Unit> implements Relative
     public final %TYPE% minus(final %TYPE% v)
     {
         return getUnit().equals(v.getUnit()) ? new %TYPE%(getInUnit() - v.getInUnit(), getUnit()) : new %TYPE%(this.si
-            - v.si, %TYPE%Unit.SI);
+            - v.si, %TYPE%Unit.getStandard%TYPE%Unit());
     }
     
 %FORMULAS%%TYPE%.Rel%

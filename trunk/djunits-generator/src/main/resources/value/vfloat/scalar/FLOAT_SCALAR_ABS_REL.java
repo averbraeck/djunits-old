@@ -18,7 +18,7 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface %TYPE% extends UNITS
+public interface %TYPE%
 {
     /**
      * Easy access methods for the %TYPE% FloatScalar. Instead of <br>
@@ -611,40 +611,6 @@ public interface %TYPE% extends UNITS
         public final %TYPE%.Abs pow(final double x)
         {
             return new %TYPE%.Abs((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final %TYPE%.Abs multiplyBy(final float factor)
-        {
-            return new %TYPE%.Abs(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of an absolute %type%
-         */
-        public final %TYPE%.Abs multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final %TYPE%.Abs divideBy(final float divisor)
-        {
-            return new %TYPE%.Abs(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of an absolute %type%
-         */
-        public final %TYPE%.Abs divideBy(final double factor)
-        {
-            return divideBy((float) factor);
         }
 
         /**

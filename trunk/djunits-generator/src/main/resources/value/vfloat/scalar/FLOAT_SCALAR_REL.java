@@ -19,7 +19,7 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class %TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements UNITS, Relative
+public class %TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements Relative
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -301,7 +301,7 @@ public class %TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements UNITS, Relati
     public final %TYPE% plus(final %TYPE% v)
     {
         return getUnit().equals(v.getUnit()) ? new %TYPE%(getInUnit() + v.getInUnit(), getUnit()) : new %TYPE%(this.si
-            + v.si, %TYPE%Unit.getStandard%TYPE%Unit());
+            + v.si, %TYPE%Unit.SI);
     }
 
     /**
@@ -312,7 +312,7 @@ public class %TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements UNITS, Relati
     public final %TYPE% minus(final %TYPE% v)
     {
         return getUnit().equals(v.getUnit()) ? new %TYPE%(getInUnit() - v.getInUnit(), getUnit()) : new %TYPE%(this.si
-            - v.si, %TYPE%Unit.getStandard%TYPE%Unit());
+            - v.si, %TYPE%Unit.SI);
     }
 
 %FORMULAS%%TYPE%.Rel%
