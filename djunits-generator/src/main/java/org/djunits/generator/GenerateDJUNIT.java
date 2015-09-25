@@ -42,6 +42,9 @@ public class GenerateDJUNIT
     /** List of Rel types. */
     private static List<String> typesRel = new ArrayList<>();
 
+    /** List of Money types. */
+    private static List<String> typesMoney = new ArrayList<>();
+
     /** Map of types to formulas. */
     private static Map<String, List<String>> formulas = new HashMap<>();
 
@@ -80,6 +83,26 @@ public class GenerateDJUNIT
             if (line.length() > 0)
             {
                 typesRel.add(line);
+            }
+        }
+        bufferedReader.close();
+    }
+
+    /**
+     * Read the types from the file /TYPES_MONEY.txt.
+     * @throws IOException
+     */
+    private static void readMoneyTypes() throws IOException
+    {
+        URL typesURL = URLResource.getResource("/TYPES_MONEY.txt");
+        FileReader fileReader = new FileReader(new File(typesURL.getPath()));
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String line = null;
+        while ((line = bufferedReader.readLine()) != null)
+        {
+            if (line.length() > 0)
+            {
+                typesMoney.add(line);
             }
         }
         bufferedReader.close();
@@ -145,7 +168,8 @@ public class GenerateDJUNIT
             String insString = "";
             if (i1 == -1)
             {
-                System.out.println("Warning: %INSERT% token " + insToken + " not found in insert-file for type " + type);
+                System.out
+                    .println("Warning: %INSERT% token " + insToken + " not found in insert-file for type " + type);
             }
             else
             {
@@ -178,7 +202,8 @@ public class GenerateDJUNIT
                 return ret;
             }
             String type = ret.substring(pos, end);
-            String absRel = (type.endsWith(".Rel")) ? "Rel" : "Abs";
+            boolean isAbs = type.endsWith(".Abs");
+            String absRel = isAbs ? "Abs" : "Rel";
             type = type.substring(0, type.length() - 4);
             if (!formulas.containsKey(type))
             {
@@ -194,28 +219,38 @@ public class GenerateDJUNIT
                 f = f.substring(1, f.length());
                 String param = f.split("=")[0].trim();
                 String result = f.split("=")[1].trim();
-                String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
-                fStr += "        /**\n";
-                fStr += "         * Calculate the " + dm + " of " + type + " and " + param + ", which results in a ";
-                fStr += result + " scalar.\n";
-                fStr += "         * @param v " + type + " scalar\n";
-                fStr += "         * @return " + result + " scalar as a " + dm + " of " + type + " and " + param + "\n";
-                fStr += "         */\n";
-                fStr += "        public final " + result + "." + absRel + " " + method;
-                fStr += "(final " + param + "." + absRel + " v)\n";
-                fStr += "        {\n";
-                fStr += "            return new " + result + "." + absRel + "(this.si " + mdsign + " v.si, ";
-                fStr += result + "Unit" + siOrMoney + ");\n";
-                fStr += "        }\n\n";
+                if (!isAbs)
+                {
+                    String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
+                    fStr += "        /**\n";
+                    fStr +=
+                        "         * Calculate the " + dm + " of " + type + " and " + param + ", which results in a ";
+                    fStr += result + " scalar.\n";
+                    fStr += "         * @param v " + type + " scalar\n";
+                    fStr +=
+                        "         * @return " + result + " scalar as a " + dm + " of " + type + " and " + param + "\n";
+                    fStr += "         */\n";
+                    fStr += "        public final " + result + "." + absRel + " " + method;
+                    fStr += "(final " + param + "." + absRel + " v)\n";
+                    fStr += "        {\n";
+                    fStr += "            return new " + result + "." + absRel + "(this.si " + mdsign + " v.si, ";
+                    fStr += result + "Unit" + siOrMoney + ");\n";
+                    fStr += "        }\n\n";
+                }
             }
             ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 5, ret.length() - 1);
         }
-        
-        // remove the ".Rel" for the purely relative units.
+
+        // remove the ".Abs" and ".Rel" for the purely relative units and money units.
         for (String relType : typesRel)
         {
             ret = ret.replaceAll(relType + "\\.Rel", relType);
             ret = ret.replaceAll(relType + "\\.Abs", relType);
+        }
+        for (String moneyType : typesMoney)
+        {
+            ret = ret.replaceAll(moneyType + "\\.Rel", moneyType);
+            ret = ret.replaceAll(moneyType + "\\.Abs", moneyType);
         }
         return ret;
     }
@@ -284,6 +319,32 @@ public class GenerateDJUNIT
     }
 
     /**
+     * Generate all Money classes in value.vdouble.scalar.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateDoubleScalarMoney() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/scalar/";
+        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_SCALAR_MONEY.java");
+        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesMoney)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%TYPE%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = formulas(java, "DoubleScalar => " + type);
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
+        }
+    }
+
+    /**
      * Generate all Abs + Rel classes in value.vfloat.scalar.
      * @throws IOException
      * @throws URISyntaxException
@@ -332,6 +393,32 @@ public class GenerateDJUNIT
         String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
 
         for (String type : typesRel)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%TYPE%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = formulas(java, "FloatScalar => " + type);
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
+        }
+    }
+
+    /**
+     * Generate all Money classes in value.vfloat.scalar.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateFloatScalarMoney() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vfloat/scalar/";
+        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_SCALAR_MONEY.java");
+        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesMoney)
         {
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
@@ -423,11 +510,14 @@ public class GenerateDJUNIT
         makeAndCleanAbsolutePath();
         readAbsRelTypes();
         readRelTypes();
+        readMoneyTypes();
         readFormulas();
         generateDoubleScalarAbsRel();
         generateDoubleScalarRel();
+        generateDoubleScalarMoney();
         generateFloatScalarAbsRel();
         generateFloatScalarRel();
+        generateFloatScalarMoney();
     }
 
 }

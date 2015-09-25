@@ -19,7 +19,7 @@ import org.djunits.unit.UNITS;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface %TYPE% extends UNITS
+public interface %TYPE%
 {
     /**
      * Easy access methods for the %TYPE% DoubleScalar. Instead of <br>
@@ -548,20 +548,6 @@ public interface %TYPE% extends UNITS
         public final %TYPE%.Abs pow(final double x)
         {
             return new %TYPE%.Abs(Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final %TYPE%.Abs multiplyBy(final double factor)
-        {
-            return new %TYPE%.Abs(getInUnit() * factor, getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final %TYPE%.Abs divideBy(final double divisor)
-        {
-            return new %TYPE%.Abs(getInUnit() / divisor, getUnit());
         }
 
         /**
