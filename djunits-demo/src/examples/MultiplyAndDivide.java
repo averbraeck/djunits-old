@@ -23,7 +23,7 @@ public class MultiplyAndDivide implements DOUBLE_SCALAR
     public static void main(final String[] args)
     {
         Locale.setDefault(Locale.US); // Ensure that floating point values are printed using a dot (".")
-        Speed.Abs speed = new Speed.Abs(50, KM_PER_HOUR);
+        Speed speed = new Speed(50, KM_PER_HOUR);
         Time.Rel duration = new Time.Rel(0.5, HOUR);
         System.out.println("speed is " + speed); // prints 50.000km/h
         System.out.println("duration is " + duration); // prints 0.500h
@@ -32,7 +32,7 @@ public class MultiplyAndDivide implements DOUBLE_SCALAR
         Length.Rel finish = new Length.Rel(100, KILOMETER);
         Time.Rel timeToFinish = finish.divideBy(speed.toRel());
         System.out.println("at speed " + speed + " it will take " + timeToFinish + " to travel " + finish);
-        Speed.Rel requiredSpeed = finish.divideBy(duration);
+        Speed requiredSpeed = finish.divideBy(duration);
         System.out.println("speed required to reach finish at " + finish + " in " + duration + " is "
                 + requiredSpeed.toString(KM_PER_HOUR));
     }
