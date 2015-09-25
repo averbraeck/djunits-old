@@ -84,31 +84,35 @@ public class VolumeUnit extends Unit<VolumeUnit>
         SI = new VolumeUnit(LengthUnit.METER, "VolumeUnit.cubic_meter", "VolumeUnit.m^3", SI_DERIVED, true);
         CUBIC_METER = SI;
         CUBIC_DECIMETER =
-                new VolumeUnit(LengthUnit.DECIMETER, "VolumeUnit.cubic_decimeter", "VolumeUnit.dm^3", SI_DERIVED, true);
+            new VolumeUnit(LengthUnit.DECIMETER, "VolumeUnit.cubic_decimeter", "VolumeUnit.dm^3", SI_DERIVED, true);
         LITER = new VolumeUnit("VolumeUnit.liter", "VolumeUnit.L", SI_ACCEPTED, CUBIC_DECIMETER, 1.0, true);
         CUBIC_CENTIMETER =
-                new VolumeUnit(LengthUnit.CENTIMETER, "VolumeUnit.cubic_centimeter", "VolumeUnit.cm^3", SI_DERIVED, true);
-        CUBIC_KM = new VolumeUnit(LengthUnit.KILOMETER, "VolumeUnit.cubic_kilometer", "VolumeUnit.km^3", SI_DERIVED, true);
+            new VolumeUnit(LengthUnit.CENTIMETER, "VolumeUnit.cubic_centimeter", "VolumeUnit.cm^3", SI_DERIVED, true);
+        CUBIC_KM =
+            new VolumeUnit(LengthUnit.KILOMETER, "VolumeUnit.cubic_kilometer", "VolumeUnit.km^3", SI_DERIVED, true);
         CUBIC_MILE = new VolumeUnit(LengthUnit.MILE, "VolumeUnit.cubic_mile", "VolumeUnit.mi^3", IMPERIAL, true);
         CUBIC_FOOT = new VolumeUnit(LengthUnit.FOOT, "VolumeUnit.cubic_foot", "VolumeUnit.ft^3", IMPERIAL, true);
         CUBIC_INCH = new VolumeUnit(LengthUnit.INCH, "VolumeUnit.cubic_inch", "VolumeUnit.in^3", IMPERIAL, true);
         CUBIC_YARD = new VolumeUnit(LengthUnit.YARD, "VolumeUnit.cubic_yard", "VolumeUnit.yd^3", IMPERIAL, true);
-        GALLON_US_FLUID = new VolumeUnit("VolumeUnit.gallon_(US)", "VolumeUnit.gal(US)", US_CUSTOMARY, CUBIC_INCH, 231.0, true);
+        GALLON_US_FLUID =
+            new VolumeUnit("VolumeUnit.gallon_(US)", "VolumeUnit.gal(US)", US_CUSTOMARY, CUBIC_INCH, 231.0, true);
         GALLON_IMP = new VolumeUnit("VolumeUnit.gallon_(imp)", "VolumeUnit.gal(imp)", IMPERIAL, LITER, 4.5409, true);
         OUNCE_US_FLUID =
-                new VolumeUnit("VolumeUnit.ounce_(fluid_US)", "VolumeUnit.US_fl_oz", US_CUSTOMARY, GALLON_US_FLUID,
-                        1.0 / 128.0, true);
+            new VolumeUnit("VolumeUnit.ounce_(fluid_US)", "VolumeUnit.US_fl_oz", US_CUSTOMARY, GALLON_US_FLUID,
+                1.0 / 128.0, true);
         OUNCE_IMP_FLUID =
-                new VolumeUnit("VolumeUnit.ounce_(fluid_imperial)", "VolumeUnit.fl_oz_(imp)", IMPERIAL, GALLON_IMP,
-                        1.0 / 160.0, true);
+            new VolumeUnit("VolumeUnit.ounce_(fluid_imperial)", "VolumeUnit.fl_oz_(imp)", IMPERIAL, GALLON_IMP,
+                1.0 / 160.0, true);
         PINT_US_FLUID =
-                new VolumeUnit("VolumeUnit.pint_(US_fluid)", "VolumeUnit.pt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID, 1.0 / 8.0,
-                        true);
-        PINT_IMP = new VolumeUnit("VolumeUnit.pint_(imperial)", "VolumeUnit.pt_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 8.0, true);
+            new VolumeUnit("VolumeUnit.pint_(US_fluid)", "VolumeUnit.pt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID,
+                1.0 / 8.0, true);
+        PINT_IMP =
+            new VolumeUnit("VolumeUnit.pint_(imperial)", "VolumeUnit.pt_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 8.0, true);
         QUART_US_FLUID =
-                new VolumeUnit("VolumeUnit.quart_(US_fluid)", "VolumeUnit.qt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID, 1.0 / 4.0,
-                        true);
-        QUART_IMP = new VolumeUnit("VolumeUnit.quart_(imperial)", "VolumeUnit.qt_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 4.0, true);
+            new VolumeUnit("VolumeUnit.quart_(US_fluid)", "VolumeUnit.qt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID,
+                1.0 / 4.0, true);
+        QUART_IMP =
+            new VolumeUnit("VolumeUnit.quart_(imperial)", "VolumeUnit.qt_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 4.0, true);
     }
 
     /**
@@ -120,11 +124,11 @@ public class VolumeUnit extends Unit<VolumeUnit>
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private VolumeUnit(final LengthUnit lengthUnit, final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final UnitSystem unitSystem, final boolean standardUnit)
+    private VolumeUnit(final LengthUnit lengthUnit, final String nameOrNameKey,
+        final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, CUBIC_METER, Math.pow(
-                lengthUnit.getConversionFactorToStandardUnit(), 3), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, CUBIC_METER, Math.pow(lengthUnit
+            .getConversionFactorToStandardUnit(), 3), standardUnit);
         this.lengthUnit = lengthUnit;
     }
 
@@ -135,7 +139,8 @@ public class VolumeUnit extends Unit<VolumeUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public VolumeUnit(final LengthUnit lengthUnit, final String name, final String abbreviation, final UnitSystem unitSystem)
+    public VolumeUnit(final LengthUnit lengthUnit, final String name, final String abbreviation,
+        final UnitSystem unitSystem)
     {
         this(lengthUnit, name, abbreviation, unitSystem, false);
     }
@@ -150,11 +155,12 @@ public class VolumeUnit extends Unit<VolumeUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private VolumeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final VolumeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+    private VolumeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+        final UnitSystem unitSystem, final VolumeUnit referenceUnit, final double conversionFactorToReferenceUnit,
+        final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-                standardUnit);
+            standardUnit);
         this.lengthUnit = referenceUnit.getLengthUnit();
     }
 
@@ -167,7 +173,7 @@ public class VolumeUnit extends Unit<VolumeUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public VolumeUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final VolumeUnit referenceUnit, final double conversionFactorToReferenceUnit)
+        final VolumeUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

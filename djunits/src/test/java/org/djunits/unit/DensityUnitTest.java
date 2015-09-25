@@ -46,7 +46,8 @@ public class DensityUnitTest extends AbstractUnitTest<DensityUnit>
     @Test
     public final void conversions()
     {
-        checkUnitRatioNameAndAbbreviation(DensityUnit.KG_PER_METER_3, 1, 0.00000001, "kilogram per cubic meter", "kg/m^3");
+        checkUnitRatioNameAndAbbreviation(DensityUnit.KG_PER_METER_3, 1, 0.00000001, "kilogram per cubic meter",
+            "kg/m^3");
         checkUnitRatioNameAndAbbreviation(DensityUnit.GRAM_PER_CENTIMETER_3, 1000, 0.0001, "gram per cubic centimeter",
             "g/cm^3");
         // Check two conversions between two units

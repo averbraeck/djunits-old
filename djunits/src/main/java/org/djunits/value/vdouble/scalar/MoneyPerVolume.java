@@ -3,7 +3,6 @@ package org.djunits.value.vdouble.scalar;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.MoneyPerVolumeUnit;
 import org.djunits.unit.MoneyUnit;
-import org.djunits.unit.UNITS;
 import org.djunits.value.Relative;
 
 /**
@@ -22,7 +21,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerVolume extends DoubleScalar.Rel<MoneyPerVolumeUnit> implements UNITS, Relative
+public class MoneyPerVolume extends DoubleScalar.Rel<MoneyPerVolumeUnit> implements Relative
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -55,7 +54,8 @@ public class MoneyPerVolume extends DoubleScalar.Rel<MoneyPerVolumeUnit> impleme
      */
     public static MoneyPerVolume interpolate(final MoneyPerVolume zero, final MoneyPerVolume one, final double ratio)
     {
-        return new MoneyPerVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new MoneyPerVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /** {@inheritDoc} */
@@ -261,8 +261,8 @@ public class MoneyPerVolume extends DoubleScalar.Rel<MoneyPerVolumeUnit> impleme
      */
     public final MoneyPerVolume plus(final MoneyPerVolume v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerVolume(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerVolume(
-                this.si + v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerVolume(getInUnit() + v.getInUnit(), getUnit())
+            : new MoneyPerVolume(this.si + v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
     }
 
     /**
@@ -272,8 +272,8 @@ public class MoneyPerVolume extends DoubleScalar.Rel<MoneyPerVolumeUnit> impleme
      */
     public final MoneyPerVolume minus(final MoneyPerVolume v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerVolume(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerVolume(
-                this.si - v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerVolume(getInUnit() - v.getInUnit(), getUnit())
+            : new MoneyPerVolume(this.si - v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
     }
 
     /**
@@ -291,7 +291,7 @@ public class MoneyPerVolume extends DoubleScalar.Rel<MoneyPerVolumeUnit> impleme
      * @param v MoneyPerVolume scalar
      * @return Money scalar as a multiplication of MoneyPerVolume and Volume
      */
-    public final Money multiplyBy(final Volume.Rel v)
+    public final Money multiplyBy(final Volume v)
     {
         return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
     }

@@ -3,7 +3,6 @@ package org.djunits.value.vdouble.scalar;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.MoneyPerAreaUnit;
 import org.djunits.unit.MoneyUnit;
-import org.djunits.unit.UNITS;
 import org.djunits.value.Relative;
 
 /**
@@ -22,7 +21,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerArea extends DoubleScalar.Rel<MoneyPerAreaUnit> implements UNITS, Relative
+public class MoneyPerArea extends DoubleScalar.Rel<MoneyPerAreaUnit> implements Relative
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -261,8 +260,8 @@ public class MoneyPerArea extends DoubleScalar.Rel<MoneyPerAreaUnit> implements 
      */
     public final MoneyPerArea plus(final MoneyPerArea v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerArea(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerArea(
-                this.si + v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerArea(getInUnit() + v.getInUnit(), getUnit())
+            : new MoneyPerArea(this.si + v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
     }
 
     /**
@@ -272,8 +271,8 @@ public class MoneyPerArea extends DoubleScalar.Rel<MoneyPerAreaUnit> implements 
      */
     public final MoneyPerArea minus(final MoneyPerArea v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerArea(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerArea(
-                this.si - v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerArea(getInUnit() - v.getInUnit(), getUnit())
+            : new MoneyPerArea(this.si - v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
     }
 
     /**
@@ -291,7 +290,7 @@ public class MoneyPerArea extends DoubleScalar.Rel<MoneyPerAreaUnit> implements 
      * @param v MoneyPerArea scalar
      * @return Money scalar as a multiplication of MoneyPerArea and Area
      */
-    public final Money multiplyBy(final Area.Rel v)
+    public final Money multiplyBy(final Area v)
     {
         return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
     }

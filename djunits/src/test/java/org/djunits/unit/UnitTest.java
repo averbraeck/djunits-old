@@ -23,32 +23,21 @@ public class UnitTest
     @Test
     public final void lookupUnitWithSICoefficients()
     {
-        assertEquals("ABVOLT is expressed in Volt", "[V]",
-                Unit.lookupUnitWithSICoefficients(ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString()).toString());
-        assertEquals(
-                "ABVOLT / STATAMPERE is expressed in Ohm",
-                "[\u03A9]",
-                Unit.lookupUnitWithSICoefficients(
-                        SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString()).toString());
-        assertEquals(
-                "ABVOLT * STATAMPERE is expressed in Watt",
-                "[W]",
-                Unit.lookupUnitWithSICoefficients(
-                        SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString()).toString());
-        assertEquals(
-                "ABVOLT / Watt is expressed in Ohm",
-                "[!1/A!]",
-                Unit.lookupOrCreateUnitWithSICoefficients(
-                        SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                                PowerUnit.WATT.getSICoefficients()).toString()).toString());
-        assertEquals(
-                "ABVOLT * KILOVOLT is expressed in kg2.m4/s6/A2",
-                "[!kg2m4/s6A2!]",
-                Unit.lookupOrCreateUnitWithSICoefficients(
-                        SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                                ElectricalPotentialUnit.KILOVOLT.getSICoefficients()).toString()).toString());
+        assertEquals("ABVOLT is expressed in Volt", "[V]", Unit.lookupUnitWithSICoefficients(
+            ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString()).toString());
+        assertEquals("ABVOLT / STATAMPERE is expressed in Ohm", "[\u03A9]", Unit.lookupUnitWithSICoefficients(
+            SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString()).toString());
+        assertEquals("ABVOLT * STATAMPERE is expressed in Watt", "[W]", Unit.lookupUnitWithSICoefficients(
+            SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString()).toString());
+        assertEquals("ABVOLT / Watt is expressed in Ohm", "[!1/A!]", Unit.lookupOrCreateUnitWithSICoefficients(
+            SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                PowerUnit.WATT.getSICoefficients()).toString()).toString());
+        assertEquals("ABVOLT * KILOVOLT is expressed in kg2.m4/s6/A2", "[!kg2m4/s6A2!]", Unit
+            .lookupOrCreateUnitWithSICoefficients(
+                SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                    ElectricalPotentialUnit.KILOVOLT.getSICoefficients()).toString()).toString());
     }
 
     /**
@@ -59,17 +48,10 @@ public class UnitTest
     public final void getAllUnitsOfType()
     {
         Unit<?>[] baseUnits =
-                { MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND, TemperatureUnit.KELVIN, /*
-                                                                                                                               * LuminousIntencity
-                                                                                                                               * .
-                                                                                                                               * CANDELA
-                                                                                                                               * ,
-                                                                                                                               * ?
-                                                                                                                               * ?
-                                                                                                                               * ?
-                                                                                                                               * .
-                                                                                                                               * mol
-                                                                                                                               */};
+            {MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND,
+                TemperatureUnit.KELVIN, /*
+                                         * LuminousIntencity . CANDELA , ? ? ? . mol
+                                         */};
         for (Unit<?> u : baseUnits)
         {
             for (Object unitObject : u.getAllUnitsOfThisType())

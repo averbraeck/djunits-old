@@ -34,7 +34,7 @@ public class UnitLocalizationsTest
     /**
      * Check that all defined units have all localizations.
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @Test
     public final void checkDefinedUnits()
     {
@@ -92,7 +92,7 @@ public class UnitLocalizationsTest
                         if (abbreviation.startsWith("!") && abbreviation.endsWith("!"))
                         {
                             errors.add(String.format("Missing translation for abbreviation %s to %s", abbreviationKey,
-                                    localeName));
+                                localeName));
                         }
                     }
                 }

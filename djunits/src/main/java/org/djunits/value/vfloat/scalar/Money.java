@@ -8,7 +8,6 @@ import org.djunits.unit.MoneyPerMassUnit;
 import org.djunits.unit.MoneyPerTimeUnit;
 import org.djunits.unit.MoneyPerVolumeUnit;
 import org.djunits.unit.MoneyUnit;
-import org.djunits.unit.UNITS;
 import org.djunits.value.Relative;
 
 /**
@@ -27,7 +26,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Money extends FloatScalar.Rel<MoneyUnit> implements UNITS, Relative
+public class Money extends FloatScalar.Rel<MoneyUnit> implements Relative
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -308,8 +307,8 @@ public class Money extends FloatScalar.Rel<MoneyUnit> implements UNITS, Relative
      */
     public final Money plus(final Money v)
     {
-        return getUnit().equals(v.getUnit()) ? new Money(getInUnit() + v.getInUnit(), getUnit()) : new Money(this.si + v.si,
-                MoneyUnit.getStandardMoneyUnit());
+        return getUnit().equals(v.getUnit()) ? new Money(getInUnit() + v.getInUnit(), getUnit()) : new Money(this.si
+            + v.si, MoneyUnit.getStandardMoneyUnit());
     }
 
     /**
@@ -319,8 +318,8 @@ public class Money extends FloatScalar.Rel<MoneyUnit> implements UNITS, Relative
      */
     public final Money minus(final Money v)
     {
-        return getUnit().equals(v.getUnit()) ? new Money(getInUnit() - v.getInUnit(), getUnit()) : new Money(this.si - v.si,
-                MoneyUnit.getStandardMoneyUnit());
+        return getUnit().equals(v.getUnit()) ? new Money(getInUnit() - v.getInUnit(), getUnit()) : new Money(this.si
+            - v.si, MoneyUnit.getStandardMoneyUnit());
     }
 
     /**
@@ -338,7 +337,7 @@ public class Money extends FloatScalar.Rel<MoneyUnit> implements UNITS, Relative
      * @param v Money scalar
      * @return MoneyPerArea scalar as a division of Money and Area
      */
-    public final MoneyPerArea divideBy(final Area.Rel v)
+    public final MoneyPerArea divideBy(final Area v)
     {
         return new MoneyPerArea(this.si / v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
     }
@@ -348,7 +347,7 @@ public class Money extends FloatScalar.Rel<MoneyUnit> implements UNITS, Relative
      * @param v Money scalar
      * @return MoneyPerEnergy scalar as a division of Money and Energy
      */
-    public final MoneyPerEnergy divideBy(final Energy.Rel v)
+    public final MoneyPerEnergy divideBy(final Energy v)
     {
         return new MoneyPerEnergy(this.si / v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
     }
@@ -368,7 +367,7 @@ public class Money extends FloatScalar.Rel<MoneyUnit> implements UNITS, Relative
      * @param v Money scalar
      * @return MoneyPerLength scalar as a multiplication of Money and LinearDensity
      */
-    public final MoneyPerLength multiplyBy(final LinearDensity.Rel v)
+    public final MoneyPerLength multiplyBy(final LinearDensity v)
     {
         return new MoneyPerLength(this.si * v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
     }
@@ -378,7 +377,7 @@ public class Money extends FloatScalar.Rel<MoneyUnit> implements UNITS, Relative
      * @param v Money scalar
      * @return MoneyPerMass scalar as a division of Money and Mass
      */
-    public final MoneyPerMass divideBy(final Mass.Rel v)
+    public final MoneyPerMass divideBy(final Mass v)
     {
         return new MoneyPerMass(this.si / v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
     }
@@ -398,7 +397,7 @@ public class Money extends FloatScalar.Rel<MoneyUnit> implements UNITS, Relative
      * @param v Money scalar
      * @return MoneyPerTime scalar as a multiplication of Money and Frequency
      */
-    public final MoneyPerTime multiplyBy(final Frequency.Rel v)
+    public final MoneyPerTime multiplyBy(final Frequency v)
     {
         return new MoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
     }
@@ -408,7 +407,7 @@ public class Money extends FloatScalar.Rel<MoneyUnit> implements UNITS, Relative
      * @param v Money scalar
      * @return MoneyPerVolume scalar as a division of Money and Volume
      */
-    public final MoneyPerVolume divideBy(final Volume.Rel v)
+    public final MoneyPerVolume divideBy(final Volume v)
     {
         return new MoneyPerVolume(this.si / v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
     }

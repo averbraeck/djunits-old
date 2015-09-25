@@ -9,13 +9,13 @@ import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
-import org.djunits.unit.UNITS;
+import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the Force FloatScalar. Instead of <br>
- * <i>FloatScalar.Rel&lt;SomeUnit&gt; value = new FloatScalar.Rel&lt;SomeUnit&gt;(0.2, SomeUnit.UNIT);</i><br>
+ * Easy access methods for the Force FloatScalar, which is relative by definition. An example is Money. Instead of <br>
+ * <i>FloatScalar.Rel&lt;MoneyUnit&gt; price = new FloatScalar.Rel&lt;MoneyUnit&gt;(100.0, MoneyUnit.EUR);</i><br>
  * we can now write <br>
- * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass.Rel margin = new Mass.Rel(0.2, KILOGRAM);</i><br>
+ * <i>Money price = new Money(100.0, EUR);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
@@ -23,859 +23,394 @@ import org.djunits.unit.UNITS;
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Aug 28, 2015 <br>
+ * initial version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface Force extends UNITS
+public class Force extends FloatScalar.Rel<ForceUnit> implements Relative
 {
+    /** */
+    private static final long serialVersionUID = 20150905L;
+
     /**
-     * Easy access methods for the Force FloatScalar. Instead of <br>
-     * <i>FloatScalar.Rel&lt;LengthUnit&gt; margin = new FloatScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
-     * we can now write <br>
-     * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
-     * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
-     * unit used are compatible.
-     * <p>
-     * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
-     * All rights reserved. <br>
-     * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
-     * <p>
-     * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
-     * initial version Sep 1, 2015 <br>
-     * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
-     * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+     * Construct Force scalar.
+     * @param value float value
+     * @param unit unit for the float value
      */
-    public static class Rel extends FloatScalar.Rel<ForceUnit>
+    public Force(final float value, final ForceUnit unit)
     {
-        /** */
-        private static final long serialVersionUID = 20150901L;
-
-        /**
-         * Construct Force.Rel scalar.
-         * @param value float value
-         * @param unit unit for the float value
-         */
-        public Rel(final float value, final ForceUnit unit)
-        {
-            super(value, unit);
-        }
-
-        /**
-         * Construct Force.Rel scalar using a double value.
-         * @param value float value
-         * @param unit unit for the float value
-         */
-        public Rel(final double value, final ForceUnit unit)
-        {
-            super((float) value, unit);
-        }
-
-        /**
-         * Construct Force.Rel scalar.
-         * @param value Scalar from which to construct this instance
-         */
-        public Rel(final FloatScalar.Rel<ForceUnit> value)
-        {
-            super(value);
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static Force.Rel interpolate(final Force.Rel zero, final Force.Rel one, final float ratio)
-        {
-            return new Force.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static Force.Rel interpolate(final Force.Rel zero, final Force.Rel one, final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel abs()
-        {
-            return new Force.Rel(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel acos()
-        {
-            return new Force.Rel((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel asin()
-        {
-            return new Force.Rel((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel atan()
-        {
-            return new Force.Rel((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel cbrt()
-        {
-            return new Force.Rel((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel ceil()
-        {
-            return new Force.Rel((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel cos()
-        {
-            return new Force.Rel((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel cosh()
-        {
-            return new Force.Rel((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel exp()
-        {
-            return new Force.Rel((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel expm1()
-        {
-            return new Force.Rel((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel floor()
-        {
-            return new Force.Rel((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel log()
-        {
-            return new Force.Rel((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel log10()
-        {
-            return new Force.Rel((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel log1p()
-        {
-            return new Force.Rel((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel rint()
-        {
-            return new Force.Rel((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel round()
-        {
-            return new Force.Rel(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel signum()
-        {
-            return new Force.Rel(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel sin()
-        {
-            return new Force.Rel((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel sinh()
-        {
-            return new Force.Rel((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel sqrt()
-        {
-            return new Force.Rel((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel tan()
-        {
-            return new Force.Rel((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel tanh()
-        {
-            return new Force.Rel((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel inv()
-        {
-            return new Force.Rel(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel toDegrees()
-        {
-            return new Force.Rel((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel toRadians()
-        {
-            return new Force.Rel((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel pow(final double x)
-        {
-            return new Force.Rel((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel multiplyBy(final float factor)
-        {
-            return new Force.Rel(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of a relative force
-         */
-        public final Force.Rel multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Rel divideBy(final float divisor)
-        {
-            return new Force.Rel(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of a relative force
-         */
-        public final Force.Rel divideBy(final double factor)
-        {
-            return divideBy((float) factor);
-        }
-
-        /**
-         * Relative scalar plus Relative scalar = Relative scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Force.Rel plus(final Force.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Force.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Force.Rel(
-                    this.si + v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Relative scalar minus Relative scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Force.Rel minus(final Force.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Force.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Force.Rel(
-                    this.si - v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Relative scalar plus Absolute scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Force.Abs plus(final Force.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Force.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Force.Abs(
-                    this.si + v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
-         * @return an absolute version of this relative force scalar.
-         */
-        public final Force.Abs toAbs()
-        {
-            return new Force.Abs(getInUnit(), getUnit());
-        }
-
-        /**
-         * Calculate the division of Force and Force, which results in a Dimensionless scalar.
-         * @param v Force scalar
-         * @return Dimensionless scalar as a division of Force and Force
-         */
-        public final Dimensionless.Rel divideBy(final Force.Rel v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Force and Length, which results in a Energy scalar.
-         * @param v Force scalar
-         * @return Energy scalar as a multiplication of Force and Length
-         */
-        public final Energy.Rel multiplyBy(final Length.Rel v)
-        {
-            return new Energy.Rel(this.si * v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and LinearDensity, which results in a Energy scalar.
-         * @param v Force scalar
-         * @return Energy scalar as a division of Force and LinearDensity
-         */
-        public final Energy.Rel divideBy(final LinearDensity.Rel v)
-        {
-            return new Energy.Rel(this.si / v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and Energy, which results in a LinearDensity scalar.
-         * @param v Force scalar
-         * @return LinearDensity scalar as a division of Force and Energy
-         */
-        public final LinearDensity.Rel divideBy(final Energy.Rel v)
-        {
-            return new LinearDensity.Rel(this.si / v.si, LinearDensityUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Force and Speed, which results in a Power scalar.
-         * @param v Force scalar
-         * @return Power scalar as a multiplication of Force and Speed
-         */
-        public final Power.Rel multiplyBy(final Speed.Rel v)
-        {
-            return new Power.Rel(this.si * v.si, PowerUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and Mass, which results in a Acceleration scalar.
-         * @param v Force scalar
-         * @return Acceleration scalar as a division of Force and Mass
-         */
-        public final Acceleration.Rel divideBy(final Mass.Rel v)
-        {
-            return new Acceleration.Rel(this.si / v.si, AccelerationUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and Acceleration, which results in a Mass scalar.
-         * @param v Force scalar
-         * @return Mass scalar as a division of Force and Acceleration
-         */
-        public final Mass.Rel divideBy(final Acceleration.Rel v)
-        {
-            return new Mass.Rel(this.si / v.si, MassUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and Area, which results in a Pressure scalar.
-         * @param v Force scalar
-         * @return Pressure scalar as a division of Force and Area
-         */
-        public final Pressure.Rel divideBy(final Area.Rel v)
-        {
-            return new Pressure.Rel(this.si / v.si, PressureUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and Pressure, which results in a Area scalar.
-         * @param v Force scalar
-         * @return Area scalar as a division of Force and Pressure
-         */
-        public final Area.Rel divideBy(final Pressure.Rel v)
-        {
-            return new Area.Rel(this.si / v.si, AreaUnit.SI);
-        }
-
+        super(value, unit);
     }
 
     /**
-     * Easy access methods for the Force FloatScalar. Instead of <br>
-     * <i>FloatScalar.Rel&lt;LengthUnit&gt; margin = new FloatScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
-     * we can now write <br>
-     * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
-     * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
-     * unit used are compatible.
-     * <p>
-     * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
-     * All rights reserved. <br>
-     * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
-     * <p>
-     * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
-     * initial version Sep 1, 2015 <br>
-     * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
-     * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+     * Construct Force scalar using a double value.
+     * @param value double value
+     * @param unit unit for the value
      */
-    public static class Abs extends FloatScalar.Abs<ForceUnit>
+    public Force(final double value, final ForceUnit unit)
     {
-        /** */
-        private static final long serialVersionUID = 20150901L;
-
-        /**
-         * Construct Force.Abs scalar.
-         * @param value float value
-         * @param unit unit for the float value
-         */
-        public Abs(final float value, final ForceUnit unit)
-        {
-            super(value, unit);
-        }
-
-        /**
-         * Construct Force.Abs scalar using a double value.
-         * @param value float value
-         * @param unit unit for the float value
-         */
-        public Abs(final double value, final ForceUnit unit)
-        {
-            super((float) value, unit);
-        }
-
-        /**
-         * Construct Force.Abs scalar.
-         * @param value Scalar from which to construct this instance
-         */
-        public Abs(final FloatScalar.Abs<ForceUnit> value)
-        {
-            super(value);
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static Force.Abs interpolate(final Force.Abs zero, final Force.Abs one, final float ratio)
-        {
-            return new Force.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static Force.Abs interpolate(final Force.Abs zero, final Force.Abs one, final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs abs()
-        {
-            return new Force.Abs(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs acos()
-        {
-            return new Force.Abs((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs asin()
-        {
-            return new Force.Abs((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs atan()
-        {
-            return new Force.Abs((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs cbrt()
-        {
-            return new Force.Abs((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs ceil()
-        {
-            return new Force.Abs((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs cos()
-        {
-            return new Force.Abs((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs cosh()
-        {
-            return new Force.Abs((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs exp()
-        {
-            return new Force.Abs((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs expm1()
-        {
-            return new Force.Abs((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs floor()
-        {
-            return new Force.Abs((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs log()
-        {
-            return new Force.Abs((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs log10()
-        {
-            return new Force.Abs((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs log1p()
-        {
-            return new Force.Abs((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs rint()
-        {
-            return new Force.Abs((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs round()
-        {
-            return new Force.Abs(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs signum()
-        {
-            return new Force.Abs(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs sin()
-        {
-            return new Force.Abs((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs sinh()
-        {
-            return new Force.Abs((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs sqrt()
-        {
-            return new Force.Abs((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs tan()
-        {
-            return new Force.Abs((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs tanh()
-        {
-            return new Force.Abs((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs inv()
-        {
-            return new Force.Abs(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs toDegrees()
-        {
-            return new Force.Abs((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs toRadians()
-        {
-            return new Force.Abs((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs pow(final double x)
-        {
-            return new Force.Abs((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs multiplyBy(final float factor)
-        {
-            return new Force.Abs(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of an absolute force
-         */
-        public final Force.Abs multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Force.Abs divideBy(final float divisor)
-        {
-            return new Force.Abs(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of an absolute force
-         */
-        public final Force.Abs divideBy(final double factor)
-        {
-            return divideBy((float) factor);
-        }
-
-        /**
-         * Absolute scalar plus Relative scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Force.Abs plus(final Force.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Force.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Force.Abs(
-                    this.si + v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Absolute scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Force.Rel minus(final Force.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Force.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Force.Rel(
-                    this.si - v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Relative scalar = Absolute scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Force.Abs minus(final Force.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Force.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Force.Abs(
-                    this.si - v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute force scalar.
-         */
-        public final Force.Rel toRel()
-        {
-            return new Force.Rel(getInUnit(), getUnit());
-        }
-
-        /**
-         * Calculate the division of Force and Force, which results in a Dimensionless scalar.
-         * @param v Force scalar
-         * @return Dimensionless scalar as a division of Force and Force
-         */
-        public final Dimensionless.Abs divideBy(final Force.Abs v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Force and Length, which results in a Energy scalar.
-         * @param v Force scalar
-         * @return Energy scalar as a multiplication of Force and Length
-         */
-        public final Energy.Abs multiplyBy(final Length.Abs v)
-        {
-            return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and LinearDensity, which results in a Energy scalar.
-         * @param v Force scalar
-         * @return Energy scalar as a division of Force and LinearDensity
-         */
-        public final Energy.Abs divideBy(final LinearDensity.Abs v)
-        {
-            return new Energy.Abs(this.si / v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and Energy, which results in a LinearDensity scalar.
-         * @param v Force scalar
-         * @return LinearDensity scalar as a division of Force and Energy
-         */
-        public final LinearDensity.Abs divideBy(final Energy.Abs v)
-        {
-            return new LinearDensity.Abs(this.si / v.si, LinearDensityUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Force and Speed, which results in a Power scalar.
-         * @param v Force scalar
-         * @return Power scalar as a multiplication of Force and Speed
-         */
-        public final Power.Abs multiplyBy(final Speed.Abs v)
-        {
-            return new Power.Abs(this.si * v.si, PowerUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and Mass, which results in a Acceleration scalar.
-         * @param v Force scalar
-         * @return Acceleration scalar as a division of Force and Mass
-         */
-        public final Acceleration.Abs divideBy(final Mass.Abs v)
-        {
-            return new Acceleration.Abs(this.si / v.si, AccelerationUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and Acceleration, which results in a Mass scalar.
-         * @param v Force scalar
-         * @return Mass scalar as a division of Force and Acceleration
-         */
-        public final Mass.Abs divideBy(final Acceleration.Abs v)
-        {
-            return new Mass.Abs(this.si / v.si, MassUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and Area, which results in a Pressure scalar.
-         * @param v Force scalar
-         * @return Pressure scalar as a division of Force and Area
-         */
-        public final Pressure.Abs divideBy(final Area.Abs v)
-        {
-            return new Pressure.Abs(this.si / v.si, PressureUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Force and Pressure, which results in a Area scalar.
-         * @param v Force scalar
-         * @return Area scalar as a division of Force and Pressure
-         */
-        public final Area.Abs divideBy(final Pressure.Abs v)
-        {
-            return new Area.Abs(this.si / v.si, AreaUnit.SI);
-        }
-
+        super((float) value, unit);
     }
+
+    /**
+     * Construct Force scalar.
+     * @param value Scalar from which to construct this instance
+     */
+    public Force(final FloatScalar.Rel<ForceUnit> value)
+    {
+        super(value);
+    }
+
+    /**
+     * Interpolate between two values.
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
+     * @return a Scalar at the ratio between
+     */
+    public static Force interpolate(final Force zero, final Force one, final float ratio)
+    {
+        return new Force(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
+     * Interpolate between two values.
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
+     * @return a Scalar at the ratio between
+     */
+    public static Force interpolate(final Force zero, final Force one, final double ratio)
+    {
+        return interpolate(zero, one, (float) ratio);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force abs()
+    {
+        return new Force(Math.abs(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force acos()
+    {
+        return new Force((float) Math.acos(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force asin()
+    {
+        return new Force((float) Math.asin(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force atan()
+    {
+        return new Force((float) Math.atan(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force cbrt()
+    {
+        return new Force((float) Math.cbrt(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force ceil()
+    {
+        return new Force((float) Math.ceil(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force cos()
+    {
+        return new Force((float) Math.cos(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force cosh()
+    {
+        return new Force((float) Math.cosh(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force exp()
+    {
+        return new Force((float) Math.exp(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force expm1()
+    {
+        return new Force((float) Math.expm1(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force floor()
+    {
+        return new Force((float) Math.floor(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force log()
+    {
+        return new Force((float) Math.log(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force log10()
+    {
+        return new Force((float) Math.log10(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force log1p()
+    {
+        return new Force((float) Math.log1p(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force rint()
+    {
+        return new Force((float) Math.rint(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force round()
+    {
+        return new Force(Math.round(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force signum()
+    {
+        return new Force(Math.signum(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force sin()
+    {
+        return new Force((float) Math.sin(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force sinh()
+    {
+        return new Force((float) Math.sinh(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force sqrt()
+    {
+        return new Force((float) Math.sqrt(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force tan()
+    {
+        return new Force((float) Math.tan(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force tanh()
+    {
+        return new Force((float) Math.tanh(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force inv()
+    {
+        return new Force(1.0f / getInUnit(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force toDegrees()
+    {
+        return new Force((float) Math.toDegrees(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force toRadians()
+    {
+        return new Force((float) Math.toRadians(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force pow(final double x)
+    {
+        return new Force((float) Math.pow(getInUnit(), x), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force multiplyBy(final float factor)
+    {
+        return new Force(getInUnit() * factor, getUnit());
+    }
+
+    /**
+     * Multiply scalar with a double factor.
+     * @param factor the factor to multiply with
+     * @return new instance of a relative force
+     */
+    public final Force multiplyBy(final double factor)
+    {
+        return multiplyBy((float) factor);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Force divideBy(final float divisor)
+    {
+        return new Force(getInUnit() / divisor, getUnit());
+    }
+
+    /**
+     * Divide scalar by a double factor.
+     * @param factor the factor to divide by
+     * @return new instance of a relative force
+     */
+    public final Force divideBy(final double factor)
+    {
+        return divideBy((float) factor);
+    }
+
+    /**
+     * Relative scalar plus Relative scalar = Relative scalar.
+     * @param v the value to add
+     * @return sum of this value and v as a new object
+     */
+    public final Force plus(final Force v)
+    {
+        return getUnit().equals(v.getUnit()) ? new Force(getInUnit() + v.getInUnit(), getUnit()) : new Force(this.si
+            + v.si, ForceUnit.SI);
+    }
+
+    /**
+     * Relative scalar minus Relative scalar = Relative scalar.
+     * @param v the value to subtract
+     * @return difference of this value and v as a new object
+     */
+    public final Force minus(final Force v)
+    {
+        return getUnit().equals(v.getUnit()) ? new Force(getInUnit() - v.getInUnit(), getUnit()) : new Force(this.si
+            - v.si, ForceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Force and Force, which results in a Dimensionless scalar.
+     * @param v Force scalar
+     * @return Dimensionless scalar as a division of Force and Force
+     */
+    public final Dimensionless.Rel divideBy(final Force v)
+    {
+        return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Force and Length, which results in a Energy scalar.
+     * @param v Force scalar
+     * @return Energy scalar as a multiplication of Force and Length
+     */
+    public final Energy multiplyBy(final Length.Rel v)
+    {
+        return new Energy(this.si * v.si, EnergyUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Force and LinearDensity, which results in a Energy scalar.
+     * @param v Force scalar
+     * @return Energy scalar as a division of Force and LinearDensity
+     */
+    public final Energy divideBy(final LinearDensity v)
+    {
+        return new Energy(this.si / v.si, EnergyUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Force and Energy, which results in a LinearDensity scalar.
+     * @param v Force scalar
+     * @return LinearDensity scalar as a division of Force and Energy
+     */
+    public final LinearDensity divideBy(final Energy v)
+    {
+        return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Force and Speed, which results in a Power scalar.
+     * @param v Force scalar
+     * @return Power scalar as a multiplication of Force and Speed
+     */
+    public final Power multiplyBy(final Speed v)
+    {
+        return new Power(this.si * v.si, PowerUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Force and Mass, which results in a Acceleration scalar.
+     * @param v Force scalar
+     * @return Acceleration scalar as a division of Force and Mass
+     */
+    public final Acceleration divideBy(final Mass v)
+    {
+        return new Acceleration(this.si / v.si, AccelerationUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Force and Acceleration, which results in a Mass scalar.
+     * @param v Force scalar
+     * @return Mass scalar as a division of Force and Acceleration
+     */
+    public final Mass divideBy(final Acceleration v)
+    {
+        return new Mass(this.si / v.si, MassUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Force and Area, which results in a Pressure scalar.
+     * @param v Force scalar
+     * @return Pressure scalar as a division of Force and Area
+     */
+    public final Pressure divideBy(final Area v)
+    {
+        return new Pressure(this.si / v.si, PressureUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Force and Pressure, which results in a Area scalar.
+     * @param v Force scalar
+     * @return Area scalar as a division of Force and Pressure
+     */
+    public final Area divideBy(final Pressure v)
+    {
+        return new Area(this.si / v.si, AreaUnit.SI);
+    }
+
 }

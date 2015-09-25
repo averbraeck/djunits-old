@@ -45,8 +45,9 @@ public class UnitSystemLocalizationsTest
             }
         }
         ArrayList<String> errors = new ArrayList<String>();
-        for (String localeName : AvailableLocalizations.availableLocalizations("localeunitsystem",
-                this.getClass().getResource("").getPath() + "../../../../../"))
+        for (String localeName : AvailableLocalizations.availableLocalizations("localeunitsystem", this.getClass()
+            .getResource("").getPath()
+            + "../../../../../"))
         {
             for (UnitSystem us : unitSystems)
             {
@@ -60,7 +61,8 @@ public class UnitSystemLocalizationsTest
                 String abbreviation = us.getAbbreviation();
                 if (abbreviation.startsWith("!") && abbreviation.endsWith("!"))
                 {
-                    errors.add(String.format("Missing translation for abbreviation %s to %s", abbreviationKey, localeName));
+                    errors.add(String.format("Missing translation for abbreviation %s to %s", abbreviationKey,
+                        localeName));
                 }
                 if (name.startsWith("!") && name.endsWith("!"))
                 {

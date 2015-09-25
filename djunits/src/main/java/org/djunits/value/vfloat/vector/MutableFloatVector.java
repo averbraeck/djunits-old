@@ -30,8 +30,8 @@ import cern.jet.math.tfloat.FloatFunctions;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableFloatVector
  */
-public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<U> implements WriteFloatVectorFunctions<U>,
-        FloatMathFunctions<MutableFloatVector<U>>
+public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<U> implements
+    WriteFloatVectorFunctions<U>, FloatMathFunctions<MutableFloatVector<U>>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -161,7 +161,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             public final MutableFloatVector.Abs.Dense<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatVector.Abs.Dense<U> result = new MutableFloatVector.Abs.Dense<U>(getVectorSI(), getUnit());
+                final MutableFloatVector.Abs.Dense<U> result =
+                    new MutableFloatVector.Abs.Dense<U>(getVectorSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -242,7 +243,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             public final MutableFloatVector.Abs.Sparse<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatVector.Abs.Sparse<U> result = new MutableFloatVector.Abs.Sparse<U>(getVectorSI(), getUnit());
+                final MutableFloatVector.Abs.Sparse<U> result =
+                    new MutableFloatVector.Abs.Sparse<U>(getVectorSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -600,7 +602,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             public final MutableFloatVector.Rel.Dense<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatVector.Rel.Dense<U> result = new MutableFloatVector.Rel.Dense<U>(getVectorSI(), getUnit());
+                final MutableFloatVector.Rel.Dense<U> result =
+                    new MutableFloatVector.Rel.Dense<U>(getVectorSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -681,7 +684,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             public final MutableFloatVector.Rel.Sparse<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatVector.Rel.Sparse<U> result = new MutableFloatVector.Rel.Sparse<U>(getVectorSI(), getUnit());
+                final MutableFloatVector.Rel.Sparse<U> result =
+                    new MutableFloatVector.Rel.Sparse<U>(getVectorSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }

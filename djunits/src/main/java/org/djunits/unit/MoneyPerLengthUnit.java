@@ -42,7 +42,7 @@ public class MoneyPerLengthUnit extends Unit<MoneyPerLengthUnit>
     {
         EUR_PER_METER = new MoneyPerLengthUnit(MoneyUnit.EUR, LengthUnit.METER, "EUR per meter", "\u20AC/m", false);
         EUR_PER_KILOMETER =
-                new MoneyPerLengthUnit(MoneyUnit.EUR, LengthUnit.KILOMETER, "EUR per kilometer", "\u20AC/km", false);
+            new MoneyPerLengthUnit(MoneyUnit.EUR, LengthUnit.KILOMETER, "EUR per kilometer", "\u20AC/km", false);
         USD_PER_MILE = new MoneyPerLengthUnit(MoneyUnit.USD, LengthUnit.MILE, "USD per mile", "US$/mi", false);
         USD_PER_FOOT = new MoneyPerLengthUnit(MoneyUnit.USD, LengthUnit.FOOT, "USD per foot", "US$/ft", false);
         standardMoneyPerLengthUnit = EUR_PER_METER;
@@ -58,10 +58,11 @@ public class MoneyPerLengthUnit extends Unit<MoneyPerLengthUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerLengthUnit(final MoneyUnit moneyUnit, final LengthUnit lengthUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final boolean standardUnit)
+        final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerLengthUnit, moneyUnit
-                .getConversionFactorToStandardUnit() / lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit()
+            / lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.lengthUnit = lengthUnit;
     }
@@ -74,7 +75,7 @@ public class MoneyPerLengthUnit extends Unit<MoneyPerLengthUnit>
      * @param abbreviation the key to the locale file for the abbreviation of the unit
      */
     public MoneyPerLengthUnit(final MoneyUnit moneyUnit, final LengthUnit lengthUnit, final String name,
-            final String abbreviation)
+        final String abbreviation)
     {
         this(moneyUnit, lengthUnit, name, abbreviation, false);
     }
@@ -89,10 +90,10 @@ public class MoneyPerLengthUnit extends Unit<MoneyPerLengthUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerLengthUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final MoneyPerLengthUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+        final MoneyPerLengthUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, conversionFactorToReferenceUnit,
-                standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit,
+            conversionFactorToReferenceUnit, standardUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
     }
@@ -105,7 +106,7 @@ public class MoneyPerLengthUnit extends Unit<MoneyPerLengthUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MoneyPerLengthUnit(final String name, final String abbreviation, final MoneyPerLengthUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+        final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, referenceUnit, conversionFactorToReferenceUnit, false);
     }
@@ -135,8 +136,8 @@ public class MoneyPerLengthUnit extends Unit<MoneyPerLengthUnit>
         try
         {
             standardMoneyPerLengthUnit =
-                    new MoneyPerLengthUnit(standardMoneyUnit, LengthUnit.METER, standardMoneyUnit.getName() + " per meter",
-                            standardMoneyUnit.getAbbreviation() + "/m");
+                new MoneyPerLengthUnit(standardMoneyUnit, LengthUnit.METER, standardMoneyUnit.getName() + " per meter",
+                    standardMoneyUnit.getAbbreviation() + "/m");
         }
         catch (Exception e)
         {

@@ -20,7 +20,7 @@ import org.junit.Test;
  */
 public class EngineeringFormatterTest
 {
-    
+
     /**
      * See if we can increase the code coverage to include the private constructor. <br>
      * TODO should be in a unit test of Format; not this one.
@@ -30,7 +30,8 @@ public class EngineeringFormatterTest
      * @throws InvocationTargetException
      */
     @Test
-    public void formatConstructorTest() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
+    public void formatConstructorTest() throws InstantiationException, IllegalAccessException,
+        IllegalArgumentException, InvocationTargetException
     {
         Constructor<?>[] cons = Format.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
@@ -45,7 +46,8 @@ public class EngineeringFormatterTest
      * @throws InvocationTargetException
      */
     @Test
-    public void constructorTest() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
+    public void constructorTest() throws InstantiationException, IllegalAccessException, IllegalArgumentException,
+        InvocationTargetException
     {
         Constructor<?>[] cons = EngineeringFormatter.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
@@ -86,9 +88,9 @@ public class EngineeringFormatterTest
         values.add(Double.MAX_VALUE);
         values.add(Double.POSITIVE_INFINITY);
         int[] powers =
-                { -100, -99, 98, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 99, 100,
-                        101, 102 };
-        double[] bases = { 1.0 / 3, 2.0 / 3, 1 };
+            {-100, -99, 98, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 99,
+                100, 101, 102};
+        double[] bases = {1.0 / 3, 2.0 / 3, 1};
         for (int power : powers)
         {
             for (double base : bases)
@@ -135,9 +137,9 @@ public class EngineeringFormatterTest
         {
             double d = 5.0 / 9 * Math.pow(10, exp);
             System.out.print(String.format("%30.30s: ", d));
-            for (int sign : new int[] { 1, -1 })
+            for (int sign : new int[]{1, -1})
             {
-                for (int digits : new int[] { 10, 12, 14, 24 })
+                for (int digits : new int[]{10, 12, 14, 24})
                 {
                     System.out.print("   |" + convertAndVerify(d * sign, digits) + "|");
                 }
@@ -157,8 +159,8 @@ public class EngineeringFormatterTest
         String plain = convertAndVerify(d, width);
         String minusULP = Double.isFinite(d) ? convertAndVerify(d - Math.ulp(d), width) : plain;
         String plusULP = Double.isFinite(d) ? convertAndVerify(d + Math.ulp(d), width) : plain;
-        System.out.print(String.format(" %s|%s|   |%s|   |%s|%s ", minusULP.equals(plain) || 0 == d ? "   " : "***", minusULP,
-                plain, plusULP, plusULP.equals(plain) || 0 == d ? "   " : "***"));
+        System.out.print(String.format(" %s|%s|   |%s|   |%s|%s ", minusULP.equals(plain) || 0 == d ? "   " : "***",
+            minusULP, plain, plusULP, plusULP.equals(plain) || 0 == d ? "   " : "***"));
     }
 
     /**
@@ -229,12 +231,12 @@ public class EngineeringFormatterTest
         if (parsedValue < value - margin)
         {
             System.err.println("Too small: " + text + " -> " + parsedValue + " << " + value + " margin is " + margin
-                    + " error is " + (parsedValue - value));
+                + " error is " + (parsedValue - value));
         }
         if (parsedValue > value + margin)
         {
             System.err.println("Too big: " + text + " -> " + parsedValue + " >> " + value + " margin is " + margin
-                    + " error is " + (parsedValue - value));
+                + " error is " + (parsedValue - value));
         }
     }
 

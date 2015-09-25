@@ -3,7 +3,6 @@ package org.djunits.value.vdouble.scalar;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.MoneyPerMassUnit;
 import org.djunits.unit.MoneyUnit;
-import org.djunits.unit.UNITS;
 import org.djunits.value.Relative;
 
 /**
@@ -22,7 +21,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerMass extends DoubleScalar.Rel<MoneyPerMassUnit> implements UNITS, Relative
+public class MoneyPerMass extends DoubleScalar.Rel<MoneyPerMassUnit> implements Relative
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -261,8 +260,8 @@ public class MoneyPerMass extends DoubleScalar.Rel<MoneyPerMassUnit> implements 
      */
     public final MoneyPerMass plus(final MoneyPerMass v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerMass(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerMass(
-                this.si + v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerMass(getInUnit() + v.getInUnit(), getUnit())
+            : new MoneyPerMass(this.si + v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
     }
 
     /**
@@ -272,8 +271,8 @@ public class MoneyPerMass extends DoubleScalar.Rel<MoneyPerMassUnit> implements 
      */
     public final MoneyPerMass minus(final MoneyPerMass v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerMass(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerMass(
-                this.si - v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerMass(getInUnit() - v.getInUnit(), getUnit())
+            : new MoneyPerMass(this.si - v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
     }
 
     /**
@@ -291,7 +290,7 @@ public class MoneyPerMass extends DoubleScalar.Rel<MoneyPerMassUnit> implements 
      * @param v MoneyPerMass scalar
      * @return Money scalar as a multiplication of MoneyPerMass and Mass
      */
-    public final Money multiplyBy(final Mass.Rel v)
+    public final Money multiplyBy(final Mass v)
     {
         return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
     }

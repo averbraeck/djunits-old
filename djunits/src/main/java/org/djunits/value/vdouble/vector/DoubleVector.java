@@ -34,7 +34,7 @@ import cern.colt.matrix.tdouble.impl.SparseDoubleMatrix1D;
  * @param <U> Unit; the unit of this DoubleVector
  */
 public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> implements Serializable,
-        ReadOnlyDoubleVectorFunctions<U>
+    ReadOnlyDoubleVectorFunctions<U>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -726,11 +726,13 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @return DoubleScalar&lt;U&gt;[]; the provided array
      * @throws ValueException when the array has length equal to 0
      */
-    protected static <U extends Unit<U>> DoubleScalar<U>[] checkNonEmpty(final DoubleScalar<U>[] dsArray) throws ValueException
+    protected static <U extends Unit<U>> DoubleScalar<U>[] checkNonEmpty(final DoubleScalar<U>[] dsArray)
+        throws ValueException
     {
         if (0 == dsArray.length)
         {
-            throw new ValueException("Cannot create a DoubleVector or MutableDoubleVector from an empty array of DoubleScalar");
+            throw new ValueException(
+                "Cannot create a DoubleVector or MutableDoubleVector from an empty array of DoubleScalar");
         }
         return dsArray;
     }
@@ -793,7 +795,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Abs.Dense<U> plus(final DoubleVector.Abs.Dense<U> left,
-            final DoubleVector.Rel<U> right) throws ValueException
+        final DoubleVector.Rel<U> right) throws ValueException
     {
         return (MutableDoubleVector.Abs.Dense<U>) left.mutable().incrementBy(right);
     }
@@ -807,7 +809,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Abs.Dense<U> plus(final DoubleVector.Abs.Sparse<U> left,
-            final DoubleVector.Rel.Dense<U> right) throws ValueException
+        final DoubleVector.Rel.Dense<U> right) throws ValueException
     {
         return (MutableDoubleVector.Abs.Dense<U>) sparseToDense(left).incrementBy(right);
     }
@@ -821,7 +823,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Abs.Sparse<U> plus(final DoubleVector.Abs.Sparse<U> left,
-            final DoubleVector.Rel.Sparse<U> right) throws ValueException
+        final DoubleVector.Rel.Sparse<U> right) throws ValueException
     {
         return (MutableDoubleVector.Abs.Sparse<U>) left.mutable().incrementBy(right);
     }
@@ -835,7 +837,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Rel.Dense<U> plus(final DoubleVector.Rel.Dense<U> left,
-            final DoubleVector.Rel<U> right) throws ValueException
+        final DoubleVector.Rel<U> right) throws ValueException
     {
         return (MutableDoubleVector.Rel.Dense<U>) left.mutable().incrementBy(right);
     }
@@ -849,7 +851,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Rel.Dense<U> plus(final DoubleVector.Rel.Sparse<U> left,
-            final DoubleVector.Rel.Dense<U> right) throws ValueException
+        final DoubleVector.Rel.Dense<U> right) throws ValueException
     {
         return (MutableDoubleVector.Rel.Dense<U>) sparseToDense(left).incrementBy(right);
     }
@@ -863,7 +865,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Rel.Sparse<U> plus(final DoubleVector.Rel.Sparse<U> left,
-            final DoubleVector.Rel.Sparse<U> right) throws ValueException
+        final DoubleVector.Rel.Sparse<U> right) throws ValueException
     {
         return (MutableDoubleVector.Rel.Sparse<U>) left.mutable().incrementBy(right);
     }
@@ -877,10 +879,10 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Rel.Dense<U> minus(final DoubleVector.Abs.Dense<U> left,
-            final DoubleVector.Abs<U> right) throws ValueException
+        final DoubleVector.Abs<U> right) throws ValueException
     {
-        return (MutableDoubleVector.Rel.Dense<U>) new MutableDoubleVector.Rel.Dense<U>(left.deepCopyOfData(), left.getUnit())
-                .decrementBy(right);
+        return (MutableDoubleVector.Rel.Dense<U>) new MutableDoubleVector.Rel.Dense<U>(left.deepCopyOfData(), left
+            .getUnit()).decrementBy(right);
     }
 
     /**
@@ -892,10 +894,10 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Rel.Sparse<U> minus(final DoubleVector.Abs.Sparse<U> left,
-            final DoubleVector.Abs.Sparse<U> right) throws ValueException
+        final DoubleVector.Abs.Sparse<U> right) throws ValueException
     {
-        return (MutableDoubleVector.Rel.Sparse<U>) new MutableDoubleVector.Rel.Sparse<U>(left.deepCopyOfData(), left.getUnit())
-                .decrementBy(right);
+        return (MutableDoubleVector.Rel.Sparse<U>) new MutableDoubleVector.Rel.Sparse<U>(left.deepCopyOfData(), left
+            .getUnit()).decrementBy(right);
     }
 
     /**
@@ -907,10 +909,10 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Rel.Dense<U> minus(final DoubleVector.Abs.Sparse<U> left,
-            final DoubleVector.Abs.Dense<U> right) throws ValueException
+        final DoubleVector.Abs.Dense<U> right) throws ValueException
     {
-        return (MutableDoubleVector.Rel.Dense<U>) new MutableDoubleVector.Rel.Dense<U>(left.deepCopyOfData(), left.getUnit())
-                .decrementBy(right);
+        return (MutableDoubleVector.Rel.Dense<U>) new MutableDoubleVector.Rel.Dense<U>(left.deepCopyOfData(), left
+            .getUnit()).decrementBy(right);
     }
 
     /**
@@ -922,7 +924,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Abs.Dense<U> minus(final DoubleVector.Abs.Dense<U> left,
-            final DoubleVector.Rel<U> right) throws ValueException
+        final DoubleVector.Rel<U> right) throws ValueException
     {
         return (MutableDoubleVector.Abs.Dense<U>) left.mutable().decrementBy(right);
     }
@@ -936,7 +938,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Abs.Dense<U> minus(final DoubleVector.Abs.Sparse<U> left,
-            final DoubleVector.Rel.Dense<U> right) throws ValueException
+        final DoubleVector.Rel.Dense<U> right) throws ValueException
     {
         return (MutableDoubleVector.Abs.Dense<U>) sparseToDense(left).decrementBy(right);
     }
@@ -950,7 +952,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Abs.Sparse<U> minus(final DoubleVector.Abs.Sparse<U> left,
-            final DoubleVector.Rel.Sparse<U> right) throws ValueException
+        final DoubleVector.Rel.Sparse<U> right) throws ValueException
     {
         return (MutableDoubleVector.Abs.Sparse<U>) left.mutable().decrementBy(right);
     }
@@ -964,7 +966,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Rel.Dense<U> minus(final DoubleVector.Rel.Dense<U> left,
-            final DoubleVector.Rel<U> right) throws ValueException
+        final DoubleVector.Rel<U> right) throws ValueException
     {
         return (MutableDoubleVector.Rel.Dense<U>) left.mutable().decrementBy(right);
     }
@@ -978,7 +980,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Rel.Dense<U> minus(final DoubleVector.Rel.Sparse<U> left,
-            final DoubleVector.Rel.Dense<U> right) throws ValueException
+        final DoubleVector.Rel.Dense<U> right) throws ValueException
     {
         return (MutableDoubleVector.Rel.Dense<U>) sparseToDense(left).decrementBy(right);
     }
@@ -992,7 +994,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Rel.Sparse<U> minus(final DoubleVector.Rel.Sparse<U> left,
-            final DoubleVector.Rel.Sparse<U> right) throws ValueException
+        final DoubleVector.Rel.Sparse<U> right) throws ValueException
     {
         return (MutableDoubleVector.Rel.Sparse<U>) left.mutable().decrementBy(right);
     }
@@ -1006,13 +1008,13 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static MutableDoubleVector.Abs.Dense<SIUnit> times(final DoubleVector.Abs.Dense<?> left,
-            final DoubleVector.Abs.Dense<?> right) throws ValueException
+        final DoubleVector.Abs.Dense<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
         MutableDoubleVector.Abs.Dense<SIUnit> work =
-                new MutableDoubleVector.Abs.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableDoubleVector.Abs.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1025,13 +1027,13 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static MutableDoubleVector.Abs.Sparse<SIUnit> times(final DoubleVector.Abs.Dense<?> left,
-            final DoubleVector.Abs.Sparse<?> right) throws ValueException
+        final DoubleVector.Abs.Sparse<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
         MutableDoubleVector.Abs.Sparse<SIUnit> work =
-                new MutableDoubleVector.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableDoubleVector.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1044,13 +1046,13 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static MutableDoubleVector.Abs.Sparse<SIUnit> times(final DoubleVector.Abs.Sparse<?> left,
-            final DoubleVector.Abs<?> right) throws ValueException
+        final DoubleVector.Abs<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
         MutableDoubleVector.Abs.Sparse<SIUnit> work =
-                new MutableDoubleVector.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableDoubleVector.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1063,13 +1065,13 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static MutableDoubleVector.Rel.Dense<SIUnit> times(final DoubleVector.Rel.Dense<?> left,
-            final DoubleVector.Rel.Dense<?> right) throws ValueException
+        final DoubleVector.Rel.Dense<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
         MutableDoubleVector.Rel.Dense<SIUnit> work =
-                new MutableDoubleVector.Rel.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableDoubleVector.Rel.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1082,13 +1084,13 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static MutableDoubleVector.Rel.Sparse<SIUnit> times(final DoubleVector.Rel.Dense<?> left,
-            final DoubleVector.Rel.Sparse<?> right) throws ValueException
+        final DoubleVector.Rel.Sparse<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
         MutableDoubleVector.Rel.Sparse<SIUnit> work =
-                new MutableDoubleVector.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableDoubleVector.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1101,13 +1103,13 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the vectors do not have the same size
      */
     public static MutableDoubleVector.Rel.Sparse<SIUnit> times(final DoubleVector.Rel.Sparse<?> left,
-            final DoubleVector.Rel<?> right) throws ValueException
+        final DoubleVector.Rel<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
         MutableDoubleVector.Rel.Sparse<SIUnit> work =
-                new MutableDoubleVector.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableDoubleVector.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1122,7 +1124,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the DoubleVector and the array do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Abs.Dense<U> times(final DoubleVector.Abs.Dense<U> left,
-            final double[] right) throws ValueException
+        final double[] right) throws ValueException
     {
         return (MutableDoubleVector.Abs.Dense<U>) left.mutable().scaleValueByValue(right);
     }
@@ -1137,7 +1139,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the DoubleVector and the array do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Abs.Sparse<U> times(final DoubleVector.Abs.Sparse<U> left,
-            final double[] right) throws ValueException
+        final double[] right) throws ValueException
     {
         return (MutableDoubleVector.Abs.Sparse<U>) left.mutable().scaleValueByValue(right);
     }
@@ -1152,7 +1154,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the DoubleVector and the array do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Rel.Dense<U> times(final DoubleVector.Rel.Dense<U> left,
-            final double[] right) throws ValueException
+        final double[] right) throws ValueException
     {
         return (MutableDoubleVector.Rel.Dense<U>) left.mutable().scaleValueByValue(right);
     }
@@ -1167,7 +1169,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @throws ValueException when the DoubleVector and the array do not have the same size
      */
     public static <U extends Unit<U>> MutableDoubleVector.Rel.Sparse<U> times(final DoubleVector.Rel.Sparse<U> left,
-            final double[] right) throws ValueException
+        final double[] right) throws ValueException
     {
         return (MutableDoubleVector.Rel.Sparse<U>) left.mutable().scaleValueByValue(right);
     }
@@ -1190,7 +1192,8 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @param <U> Unit; the unit of the parameter and the result
      * @return MutableDoubleVector.Abs.Sparse&lt;U&gt;
      */
-    public static <U extends Unit<U>> MutableDoubleVector.Abs.Sparse<U> denseToSparse(final DoubleVector.Abs.Dense<U> in)
+    public static <U extends Unit<U>> MutableDoubleVector.Abs.Sparse<U>
+        denseToSparse(final DoubleVector.Abs.Dense<U> in)
     {
         return new MutableDoubleVector.Abs.Sparse<U>(makeSparse(in.getVectorSI()), in.getUnit());
     }
@@ -1201,7 +1204,8 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @param <U> Unit; the unit of the parameter and the result
      * @return MutableDoubleVector.Rel.Sparse&lt;U&gt;
      */
-    public static <U extends Unit<U>> MutableDoubleVector.Rel.Sparse<U> denseToSparse(final DoubleVector.Rel.Dense<U> in)
+    public static <U extends Unit<U>> MutableDoubleVector.Rel.Sparse<U>
+        denseToSparse(final DoubleVector.Rel.Dense<U> in)
     {
         return new MutableDoubleVector.Rel.Sparse<U>(makeSparse(in.getVectorSI()), in.getUnit());
     }
@@ -1224,7 +1228,8 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @param <U> Unit; the unit of the parameter and the result
      * @return MutableDoubleVector.Abs.Dense&lt;U&gt;
      */
-    public static <U extends Unit<U>> MutableDoubleVector.Abs.Dense<U> sparseToDense(final DoubleVector.Abs.Sparse<U> in)
+    public static <U extends Unit<U>> MutableDoubleVector.Abs.Dense<U>
+        sparseToDense(final DoubleVector.Abs.Sparse<U> in)
     {
         return new MutableDoubleVector.Abs.Dense<U>(makeDense(in.getVectorSI()), in.getUnit());
     }
@@ -1235,7 +1240,8 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @param <U> Unit; the unit of the parameter and the result
      * @return MutableDoubleVector.Rel.Dense&lt;U&gt;
      */
-    public static <U extends Unit<U>> MutableDoubleVector.Rel.Dense<U> sparseToDense(final DoubleVector.Rel.Sparse<U> in)
+    public static <U extends Unit<U>> MutableDoubleVector.Rel.Dense<U>
+        sparseToDense(final DoubleVector.Rel.Sparse<U> in)
     {
         return new MutableDoubleVector.Rel.Dense<U>(makeDense(in.getVectorSI()), in.getUnit());
     }
@@ -1249,8 +1255,9 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @return MutableDoubleVector.Abs.Dense&lt;U&gt;
      * @throws ValueException when zero and one do not have the same size
      */
-    public static <U extends Unit<U>> MutableDoubleVector.Abs.Dense<U> interpolate(final DoubleVector.Abs.Dense<U> zero,
-            final DoubleVector.Abs.Dense<U> one, final double ratio) throws ValueException
+    public static <U extends Unit<U>> MutableDoubleVector.Abs.Dense<U> interpolate(
+        final DoubleVector.Abs.Dense<U> zero, final DoubleVector.Abs.Dense<U> one, final double ratio)
+        throws ValueException
     {
         MutableDoubleVector.Abs.Dense<U> result = zero.mutable();
         for (int index = result.size(); --index >= 0;)
@@ -1269,8 +1276,9 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @return MutableDoubleVector.Rel.Dense&lt;U&gt;
      * @throws ValueException when zero and one do not have the same size
      */
-    public static <U extends Unit<U>> MutableDoubleVector.Rel.Dense<U> interpolate(final DoubleVector.Rel.Dense<U> zero,
-            final DoubleVector.Rel.Dense<U> one, final double ratio) throws ValueException
+    public static <U extends Unit<U>> MutableDoubleVector.Rel.Dense<U> interpolate(
+        final DoubleVector.Rel.Dense<U> zero, final DoubleVector.Rel.Dense<U> one, final double ratio)
+        throws ValueException
     {
         MutableDoubleVector.Rel.Dense<U> result = zero.mutable();
         for (int index = result.size(); --index >= 0;)
@@ -1289,8 +1297,9 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @return MutableDoubleVector.Abs.Sparse&lt;U&gt;
      * @throws ValueException when zero and one do not have the same size
      */
-    public static <U extends Unit<U>> MutableDoubleVector.Abs.Sparse<U> interpolate(final DoubleVector.Abs.Sparse<U> zero,
-            final DoubleVector.Abs.Sparse<U> one, final double ratio) throws ValueException
+    public static <U extends Unit<U>> MutableDoubleVector.Abs.Sparse<U> interpolate(
+        final DoubleVector.Abs.Sparse<U> zero, final DoubleVector.Abs.Sparse<U> one, final double ratio)
+        throws ValueException
     {
         MutableDoubleVector.Abs.Sparse<U> result = zero.mutable();
         for (int index = result.size(); --index >= 0;)
@@ -1309,8 +1318,9 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @return MutableDoubleVector.Rel.Sparse&lt;U&gt;
      * @throws ValueException when zero and one do not have the same size
      */
-    public static <U extends Unit<U>> MutableDoubleVector.Rel.Sparse<U> interpolate(final DoubleVector.Rel.Sparse<U> zero,
-            final DoubleVector.Rel.Sparse<U> one, final double ratio) throws ValueException
+    public static <U extends Unit<U>> MutableDoubleVector.Rel.Sparse<U> interpolate(
+        final DoubleVector.Rel.Sparse<U> zero, final DoubleVector.Rel.Sparse<U> one, final double ratio)
+        throws ValueException
     {
         MutableDoubleVector.Rel.Sparse<U> result = zero.mutable();
         for (int index = result.size(); --index >= 0;)

@@ -8,13 +8,13 @@ import org.djunits.unit.ForceUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
-import org.djunits.unit.UNITS;
+import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the Power FloatScalar. Instead of <br>
- * <i>FloatScalar.Rel&lt;SomeUnit&gt; value = new FloatScalar.Rel&lt;SomeUnit&gt;(0.2, SomeUnit.UNIT);</i><br>
+ * Easy access methods for the Power FloatScalar, which is relative by definition. An example is Money. Instead of <br>
+ * <i>FloatScalar.Rel&lt;MoneyUnit&gt; price = new FloatScalar.Rel&lt;MoneyUnit&gt;(100.0, MoneyUnit.EUR);</i><br>
  * we can now write <br>
- * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass.Rel margin = new Mass.Rel(0.2, KILOGRAM);</i><br>
+ * <i>Money price = new Money(100.0, EUR);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
@@ -22,839 +22,384 @@ import org.djunits.unit.UNITS;
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Aug 28, 2015 <br>
+ * initial version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface Power extends UNITS
+public class Power extends FloatScalar.Rel<PowerUnit> implements Relative
 {
+    /** */
+    private static final long serialVersionUID = 20150905L;
+
     /**
-     * Easy access methods for the Power FloatScalar. Instead of <br>
-     * <i>FloatScalar.Rel&lt;LengthUnit&gt; margin = new FloatScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
-     * we can now write <br>
-     * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
-     * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
-     * unit used are compatible.
-     * <p>
-     * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
-     * All rights reserved. <br>
-     * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
-     * <p>
-     * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
-     * initial version Sep 1, 2015 <br>
-     * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
-     * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+     * Construct Power scalar.
+     * @param value float value
+     * @param unit unit for the float value
      */
-    public static class Rel extends FloatScalar.Rel<PowerUnit>
+    public Power(final float value, final PowerUnit unit)
     {
-        /** */
-        private static final long serialVersionUID = 20150901L;
-
-        /**
-         * Construct Power.Rel scalar.
-         * @param value float value
-         * @param unit unit for the float value
-         */
-        public Rel(final float value, final PowerUnit unit)
-        {
-            super(value, unit);
-        }
-
-        /**
-         * Construct Power.Rel scalar using a double value.
-         * @param value float value
-         * @param unit unit for the float value
-         */
-        public Rel(final double value, final PowerUnit unit)
-        {
-            super((float) value, unit);
-        }
-
-        /**
-         * Construct Power.Rel scalar.
-         * @param value Scalar from which to construct this instance
-         */
-        public Rel(final FloatScalar.Rel<PowerUnit> value)
-        {
-            super(value);
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static Power.Rel interpolate(final Power.Rel zero, final Power.Rel one, final float ratio)
-        {
-            return new Power.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static Power.Rel interpolate(final Power.Rel zero, final Power.Rel one, final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel abs()
-        {
-            return new Power.Rel(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel acos()
-        {
-            return new Power.Rel((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel asin()
-        {
-            return new Power.Rel((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel atan()
-        {
-            return new Power.Rel((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel cbrt()
-        {
-            return new Power.Rel((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel ceil()
-        {
-            return new Power.Rel((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel cos()
-        {
-            return new Power.Rel((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel cosh()
-        {
-            return new Power.Rel((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel exp()
-        {
-            return new Power.Rel((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel expm1()
-        {
-            return new Power.Rel((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel floor()
-        {
-            return new Power.Rel((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel log()
-        {
-            return new Power.Rel((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel log10()
-        {
-            return new Power.Rel((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel log1p()
-        {
-            return new Power.Rel((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel rint()
-        {
-            return new Power.Rel((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel round()
-        {
-            return new Power.Rel(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel signum()
-        {
-            return new Power.Rel(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel sin()
-        {
-            return new Power.Rel((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel sinh()
-        {
-            return new Power.Rel((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel sqrt()
-        {
-            return new Power.Rel((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel tan()
-        {
-            return new Power.Rel((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel tanh()
-        {
-            return new Power.Rel((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel inv()
-        {
-            return new Power.Rel(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel toDegrees()
-        {
-            return new Power.Rel((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel toRadians()
-        {
-            return new Power.Rel((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel pow(final double x)
-        {
-            return new Power.Rel((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel multiplyBy(final float factor)
-        {
-            return new Power.Rel(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of a relative power
-         */
-        public final Power.Rel multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Rel divideBy(final float divisor)
-        {
-            return new Power.Rel(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of a relative power
-         */
-        public final Power.Rel divideBy(final double factor)
-        {
-            return divideBy((float) factor);
-        }
-
-        /**
-         * Relative scalar plus Relative scalar = Relative scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Power.Rel plus(final Power.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Power.Rel(
-                    this.si + v.si, PowerUnit.SI);
-        }
-
-        /**
-         * Relative scalar minus Relative scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Power.Rel minus(final Power.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Power.Rel(
-                    this.si - v.si, PowerUnit.SI);
-        }
-
-        /**
-         * Relative scalar plus Absolute scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Power.Abs plus(final Power.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Power.Abs(
-                    this.si + v.si, PowerUnit.SI);
-        }
-
-        /**
-         * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
-         * @return an absolute version of this relative power scalar.
-         */
-        public final Power.Abs toAbs()
-        {
-            return new Power.Abs(getInUnit(), getUnit());
-        }
-
-        /**
-         * Calculate the division of Power and Power, which results in a Dimensionless scalar.
-         * @param v Power scalar
-         * @return Dimensionless scalar as a division of Power and Power
-         */
-        public final Dimensionless.Rel divideBy(final Power.Rel v)
-        {
-            return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Power and Time, which results in a Energy scalar.
-         * @param v Power scalar
-         * @return Energy scalar as a multiplication of Power and Time
-         */
-        public final Energy.Rel multiplyBy(final Time.Rel v)
-        {
-            return new Energy.Rel(this.si * v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and Frequency, which results in a Energy scalar.
-         * @param v Power scalar
-         * @return Energy scalar as a division of Power and Frequency
-         */
-        public final Energy.Rel divideBy(final Frequency.Rel v)
-        {
-            return new Energy.Rel(this.si / v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and Energy, which results in a Frequency scalar.
-         * @param v Power scalar
-         * @return Frequency scalar as a division of Power and Energy
-         */
-        public final Frequency.Rel divideBy(final Energy.Rel v)
-        {
-            return new Frequency.Rel(this.si / v.si, FrequencyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and Speed, which results in a Force scalar.
-         * @param v Power scalar
-         * @return Force scalar as a division of Power and Speed
-         */
-        public final Force.Rel divideBy(final Speed.Rel v)
-        {
-            return new Force.Rel(this.si / v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and Force, which results in a Speed scalar.
-         * @param v Power scalar
-         * @return Speed scalar as a division of Power and Force
-         */
-        public final Speed.Rel divideBy(final Force.Rel v)
-        {
-            return new Speed.Rel(this.si / v.si, SpeedUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
-         * @param v Power scalar
-         * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
-         */
-        public final ElectricalCurrent.Rel divideBy(final ElectricalPotential.Rel v)
-        {
-            return new ElectricalCurrent.Rel(this.si / v.si, ElectricalCurrentUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
-         * @param v Power scalar
-         * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
-         */
-        public final ElectricalPotential.Rel divideBy(final ElectricalCurrent.Rel v)
-        {
-            return new ElectricalPotential.Rel(this.si / v.si, ElectricalPotentialUnit.SI);
-        }
-
+        super(value, unit);
     }
 
     /**
-     * Easy access methods for the Power FloatScalar. Instead of <br>
-     * <i>FloatScalar.Rel&lt;LengthUnit&gt; margin = new FloatScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
-     * we can now write <br>
-     * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
-     * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
-     * unit used are compatible.
-     * <p>
-     * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
-     * All rights reserved. <br>
-     * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
-     * <p>
-     * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
-     * initial version Sep 1, 2015 <br>
-     * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
-     * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+     * Construct Power scalar using a double value.
+     * @param value double value
+     * @param unit unit for the value
      */
-    public static class Abs extends FloatScalar.Abs<PowerUnit>
+    public Power(final double value, final PowerUnit unit)
     {
-        /** */
-        private static final long serialVersionUID = 20150901L;
-
-        /**
-         * Construct Power.Abs scalar.
-         * @param value float value
-         * @param unit unit for the float value
-         */
-        public Abs(final float value, final PowerUnit unit)
-        {
-            super(value, unit);
-        }
-
-        /**
-         * Construct Power.Abs scalar using a double value.
-         * @param value float value
-         * @param unit unit for the float value
-         */
-        public Abs(final double value, final PowerUnit unit)
-        {
-            super((float) value, unit);
-        }
-
-        /**
-         * Construct Power.Abs scalar.
-         * @param value Scalar from which to construct this instance
-         */
-        public Abs(final FloatScalar.Abs<PowerUnit> value)
-        {
-            super(value);
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static Power.Abs interpolate(final Power.Abs zero, final Power.Abs one, final float ratio)
-        {
-            return new Power.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static Power.Abs interpolate(final Power.Abs zero, final Power.Abs one, final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs abs()
-        {
-            return new Power.Abs(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs acos()
-        {
-            return new Power.Abs((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs asin()
-        {
-            return new Power.Abs((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs atan()
-        {
-            return new Power.Abs((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs cbrt()
-        {
-            return new Power.Abs((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs ceil()
-        {
-            return new Power.Abs((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs cos()
-        {
-            return new Power.Abs((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs cosh()
-        {
-            return new Power.Abs((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs exp()
-        {
-            return new Power.Abs((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs expm1()
-        {
-            return new Power.Abs((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs floor()
-        {
-            return new Power.Abs((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs log()
-        {
-            return new Power.Abs((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs log10()
-        {
-            return new Power.Abs((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs log1p()
-        {
-            return new Power.Abs((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs rint()
-        {
-            return new Power.Abs((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs round()
-        {
-            return new Power.Abs(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs signum()
-        {
-            return new Power.Abs(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs sin()
-        {
-            return new Power.Abs((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs sinh()
-        {
-            return new Power.Abs((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs sqrt()
-        {
-            return new Power.Abs((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs tan()
-        {
-            return new Power.Abs((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs tanh()
-        {
-            return new Power.Abs((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs inv()
-        {
-            return new Power.Abs(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs toDegrees()
-        {
-            return new Power.Abs((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs toRadians()
-        {
-            return new Power.Abs((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs pow(final double x)
-        {
-            return new Power.Abs((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs multiplyBy(final float factor)
-        {
-            return new Power.Abs(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of an absolute power
-         */
-        public final Power.Abs multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Power.Abs divideBy(final float divisor)
-        {
-            return new Power.Abs(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of an absolute power
-         */
-        public final Power.Abs divideBy(final double factor)
-        {
-            return divideBy((float) factor);
-        }
-
-        /**
-         * Absolute scalar plus Relative scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Power.Abs plus(final Power.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Power.Abs(
-                    this.si + v.si, PowerUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Absolute scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Power.Rel minus(final Power.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Power.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Power.Rel(
-                    this.si - v.si, PowerUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Relative scalar = Absolute scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Power.Abs minus(final Power.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Power.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Power.Abs(
-                    this.si - v.si, PowerUnit.SI);
-        }
-
-        /**
-         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute power scalar.
-         */
-        public final Power.Rel toRel()
-        {
-            return new Power.Rel(getInUnit(), getUnit());
-        }
-
-        /**
-         * Calculate the division of Power and Power, which results in a Dimensionless scalar.
-         * @param v Power scalar
-         * @return Dimensionless scalar as a division of Power and Power
-         */
-        public final Dimensionless.Abs divideBy(final Power.Abs v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Power and Time, which results in a Energy scalar.
-         * @param v Power scalar
-         * @return Energy scalar as a multiplication of Power and Time
-         */
-        public final Energy.Abs multiplyBy(final Time.Abs v)
-        {
-            return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and Frequency, which results in a Energy scalar.
-         * @param v Power scalar
-         * @return Energy scalar as a division of Power and Frequency
-         */
-        public final Energy.Abs divideBy(final Frequency.Abs v)
-        {
-            return new Energy.Abs(this.si / v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and Energy, which results in a Frequency scalar.
-         * @param v Power scalar
-         * @return Frequency scalar as a division of Power and Energy
-         */
-        public final Frequency.Abs divideBy(final Energy.Abs v)
-        {
-            return new Frequency.Abs(this.si / v.si, FrequencyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and Speed, which results in a Force scalar.
-         * @param v Power scalar
-         * @return Force scalar as a division of Power and Speed
-         */
-        public final Force.Abs divideBy(final Speed.Abs v)
-        {
-            return new Force.Abs(this.si / v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and Force, which results in a Speed scalar.
-         * @param v Power scalar
-         * @return Speed scalar as a division of Power and Force
-         */
-        public final Speed.Abs divideBy(final Force.Abs v)
-        {
-            return new Speed.Abs(this.si / v.si, SpeedUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
-         * @param v Power scalar
-         * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
-         */
-        public final ElectricalCurrent.Abs divideBy(final ElectricalPotential.Abs v)
-        {
-            return new ElectricalCurrent.Abs(this.si / v.si, ElectricalCurrentUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
-         * @param v Power scalar
-         * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
-         */
-        public final ElectricalPotential.Abs divideBy(final ElectricalCurrent.Abs v)
-        {
-            return new ElectricalPotential.Abs(this.si / v.si, ElectricalPotentialUnit.SI);
-        }
-
+        super((float) value, unit);
     }
+
+    /**
+     * Construct Power scalar.
+     * @param value Scalar from which to construct this instance
+     */
+    public Power(final FloatScalar.Rel<PowerUnit> value)
+    {
+        super(value);
+    }
+
+    /**
+     * Interpolate between two values.
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
+     * @return a Scalar at the ratio between
+     */
+    public static Power interpolate(final Power zero, final Power one, final float ratio)
+    {
+        return new Power(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
+     * Interpolate between two values.
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
+     * @return a Scalar at the ratio between
+     */
+    public static Power interpolate(final Power zero, final Power one, final double ratio)
+    {
+        return interpolate(zero, one, (float) ratio);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power abs()
+    {
+        return new Power(Math.abs(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power acos()
+    {
+        return new Power((float) Math.acos(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power asin()
+    {
+        return new Power((float) Math.asin(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power atan()
+    {
+        return new Power((float) Math.atan(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power cbrt()
+    {
+        return new Power((float) Math.cbrt(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power ceil()
+    {
+        return new Power((float) Math.ceil(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power cos()
+    {
+        return new Power((float) Math.cos(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power cosh()
+    {
+        return new Power((float) Math.cosh(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power exp()
+    {
+        return new Power((float) Math.exp(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power expm1()
+    {
+        return new Power((float) Math.expm1(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power floor()
+    {
+        return new Power((float) Math.floor(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power log()
+    {
+        return new Power((float) Math.log(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power log10()
+    {
+        return new Power((float) Math.log10(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power log1p()
+    {
+        return new Power((float) Math.log1p(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power rint()
+    {
+        return new Power((float) Math.rint(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power round()
+    {
+        return new Power(Math.round(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power signum()
+    {
+        return new Power(Math.signum(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power sin()
+    {
+        return new Power((float) Math.sin(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power sinh()
+    {
+        return new Power((float) Math.sinh(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power sqrt()
+    {
+        return new Power((float) Math.sqrt(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power tan()
+    {
+        return new Power((float) Math.tan(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power tanh()
+    {
+        return new Power((float) Math.tanh(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power inv()
+    {
+        return new Power(1.0f / getInUnit(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power toDegrees()
+    {
+        return new Power((float) Math.toDegrees(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power toRadians()
+    {
+        return new Power((float) Math.toRadians(getInUnit()), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power pow(final double x)
+    {
+        return new Power((float) Math.pow(getInUnit(), x), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power multiplyBy(final float factor)
+    {
+        return new Power(getInUnit() * factor, getUnit());
+    }
+
+    /**
+     * Multiply scalar with a double factor.
+     * @param factor the factor to multiply with
+     * @return new instance of a relative power
+     */
+    public final Power multiplyBy(final double factor)
+    {
+        return multiplyBy((float) factor);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Power divideBy(final float divisor)
+    {
+        return new Power(getInUnit() / divisor, getUnit());
+    }
+
+    /**
+     * Divide scalar by a double factor.
+     * @param factor the factor to divide by
+     * @return new instance of a relative power
+     */
+    public final Power divideBy(final double factor)
+    {
+        return divideBy((float) factor);
+    }
+
+    /**
+     * Relative scalar plus Relative scalar = Relative scalar.
+     * @param v the value to add
+     * @return sum of this value and v as a new object
+     */
+    public final Power plus(final Power v)
+    {
+        return getUnit().equals(v.getUnit()) ? new Power(getInUnit() + v.getInUnit(), getUnit()) : new Power(this.si
+            + v.si, PowerUnit.SI);
+    }
+
+    /**
+     * Relative scalar minus Relative scalar = Relative scalar.
+     * @param v the value to subtract
+     * @return difference of this value and v as a new object
+     */
+    public final Power minus(final Power v)
+    {
+        return getUnit().equals(v.getUnit()) ? new Power(getInUnit() - v.getInUnit(), getUnit()) : new Power(this.si
+            - v.si, PowerUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Power and Power, which results in a Dimensionless scalar.
+     * @param v Power scalar
+     * @return Dimensionless scalar as a division of Power and Power
+     */
+    public final Dimensionless.Rel divideBy(final Power v)
+    {
+        return new Dimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Power and Time, which results in a Energy scalar.
+     * @param v Power scalar
+     * @return Energy scalar as a multiplication of Power and Time
+     */
+    public final Energy multiplyBy(final Time.Rel v)
+    {
+        return new Energy(this.si * v.si, EnergyUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Power and Frequency, which results in a Energy scalar.
+     * @param v Power scalar
+     * @return Energy scalar as a division of Power and Frequency
+     */
+    public final Energy divideBy(final Frequency v)
+    {
+        return new Energy(this.si / v.si, EnergyUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Power and Energy, which results in a Frequency scalar.
+     * @param v Power scalar
+     * @return Frequency scalar as a division of Power and Energy
+     */
+    public final Frequency divideBy(final Energy v)
+    {
+        return new Frequency(this.si / v.si, FrequencyUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Power and Speed, which results in a Force scalar.
+     * @param v Power scalar
+     * @return Force scalar as a division of Power and Speed
+     */
+    public final Force divideBy(final Speed v)
+    {
+        return new Force(this.si / v.si, ForceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Power and Force, which results in a Speed scalar.
+     * @param v Power scalar
+     * @return Speed scalar as a division of Power and Force
+     */
+    public final Speed divideBy(final Force v)
+    {
+        return new Speed(this.si / v.si, SpeedUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
+     * @param v Power scalar
+     * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
+     */
+    public final ElectricalCurrent divideBy(final ElectricalPotential v)
+    {
+        return new ElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
+     * @param v Power scalar
+     * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
+     */
+    public final ElectricalPotential divideBy(final ElectricalCurrent v)
+    {
+        return new ElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
+    }
+
 }

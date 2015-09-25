@@ -62,33 +62,33 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
     static
     {
         SI =
-                new ElectricalChargeUnit(ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND, "ElectricalChargeUnit.coulomb",
-                        "ElectricalChargeUnit.C", SI_DERIVED, true);
+            new ElectricalChargeUnit(ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND, "ElectricalChargeUnit.coulomb",
+                "ElectricalChargeUnit.C", SI_DERIVED, true);
         COULOMB = SI;
         MILLIAMPERE_HOUR =
-                new ElectricalChargeUnit(ElectricalCurrentUnit.MILLIAMPERE, TimeUnit.HOUR,
-                        "ElectricalChargeUnit.milliampere_hour", "ElectricalChargeUnit.mAh", SI_DERIVED, true);
+            new ElectricalChargeUnit(ElectricalCurrentUnit.MILLIAMPERE, TimeUnit.HOUR,
+                "ElectricalChargeUnit.milliampere_hour", "ElectricalChargeUnit.mAh", SI_DERIVED, true);
         FARADAY =
-                new ElectricalChargeUnit("ElectricalChargeUnit.faraday", "ElectricalChargeUnit.F", OTHER, COULOMB, 96485.3383,
-                        true);
+            new ElectricalChargeUnit("ElectricalChargeUnit.faraday", "ElectricalChargeUnit.F", OTHER, COULOMB,
+                96485.3383, true);
         ATOMIC_UNIT =
-                new ElectricalChargeUnit("ElectricalChargeUnit.atomic_unit_of_charge", "ElectricalChargeUnit.e", SI_ACCEPTED,
-                        COULOMB, 1.6021765314E-19, true);
+            new ElectricalChargeUnit("ElectricalChargeUnit.atomic_unit_of_charge", "ElectricalChargeUnit.e",
+                SI_ACCEPTED, COULOMB, 1.6021765314E-19, true);
         STATCOULOMB =
-                new ElectricalChargeUnit("ElectricalChargeUnit.statcoulomb", "ElectricalChargeUnit.statC", CGS_ESU, COULOMB,
-                        3.335641E-10, true);
+            new ElectricalChargeUnit("ElectricalChargeUnit.statcoulomb", "ElectricalChargeUnit.statC", CGS_ESU,
+                COULOMB, 3.335641E-10, true);
         FRANKLIN =
-                new ElectricalChargeUnit("ElectricalChargeUnit.franklin", "ElectricalChargeUnit.Fr", CGS_ESU, STATCOULOMB, 1.0,
-                        true);
+            new ElectricalChargeUnit("ElectricalChargeUnit.franklin", "ElectricalChargeUnit.Fr", CGS_ESU, STATCOULOMB,
+                1.0, true);
         ESU =
-                new ElectricalChargeUnit("ElectricalChargeUnit.electrostatic_unit", "ElectricalChargeUnit.esu", CGS_ESU,
-                        STATCOULOMB, 1.0, true);
+            new ElectricalChargeUnit("ElectricalChargeUnit.electrostatic_unit", "ElectricalChargeUnit.esu", CGS_ESU,
+                STATCOULOMB, 1.0, true);
         ABCOULOMB =
-                new ElectricalChargeUnit("ElectricalChargeUnit.abcoulomb", "ElectricalChargeUnit.abC", CGS_EMU, COULOMB, 10.0,
-                        true);
+            new ElectricalChargeUnit("ElectricalChargeUnit.abcoulomb", "ElectricalChargeUnit.abC", CGS_EMU, COULOMB,
+                10.0, true);
         EMU =
-                new ElectricalChargeUnit("ElectricalChargeUnit.electromagnetic_unit", "ElectricalChargeUnit.emu", CGS_EMU,
-                        ABCOULOMB, 1.0, true);
+            new ElectricalChargeUnit("ElectricalChargeUnit.electromagnetic_unit", "ElectricalChargeUnit.emu", CGS_EMU,
+                ABCOULOMB, 1.0, true);
     }
 
     /**
@@ -102,11 +102,12 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private ElectricalChargeUnit(final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit,
-            final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final boolean standardUnit)
+        final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+        final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, COULOMB, electricalCurrentUnit
-                .getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit()
+            * timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.electricalCurrentUnit = electricalCurrentUnit;
         this.timeUnit = timeUnit;
     }
@@ -119,8 +120,8 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public ElectricalChargeUnit(final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit, final String name,
-            final String abbreviation, final UnitSystem unitSystem)
+    public ElectricalChargeUnit(final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit,
+        final String name, final String abbreviation, final UnitSystem unitSystem)
     {
         this(electricalCurrentUnit, timeUnit, name, abbreviation, unitSystem, false);
     }
@@ -136,11 +137,11 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private ElectricalChargeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final UnitSystem unitSystem, final ElectricalChargeUnit referenceUnit,
-            final double conversionFactorToReferenceUnit, final boolean standardUnit)
+        final UnitSystem unitSystem, final ElectricalChargeUnit referenceUnit,
+        final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-                standardUnit);
+            standardUnit);
         this.electricalCurrentUnit = referenceUnit.getElectricalCurrentUnit();
         this.timeUnit = referenceUnit.getTimeUnit();
     }
@@ -154,7 +155,7 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public ElectricalChargeUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final ElectricalChargeUnit referenceUnit, final double conversionFactorToReferenceUnit)
+        final ElectricalChargeUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

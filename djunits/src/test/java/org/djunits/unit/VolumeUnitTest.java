@@ -55,7 +55,8 @@ public class VolumeUnitTest extends AbstractUnitTest<VolumeUnit>
         assertEquals("one CUBIC YARD is 1.83426465e-10 CUBIC MILE", 1.83426465e-10, getMultiplicationFactorTo(
             VolumeUnit.CUBIC_YARD, VolumeUnit.CUBIC_MILE), 0.0000000001);
         // Check conversion factor to standard unit for all remaining time units
-        checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_CENTIMETER, 0.000001, 0.000000000001, "cubic centimeter", "cm^3");
+        checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_CENTIMETER, 0.000001, 0.000000000001, "cubic centimeter",
+            "cm^3");
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_KM, 1e9, 1, "cubic kilometer", "km^3");
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_MILE, 4.16818183e9, 1000, "cubic mile", "mi^3");
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_FOOT, 0.0283168, 0.0000001, "cubic foot", "ft^3");
@@ -64,11 +65,13 @@ public class VolumeUnitTest extends AbstractUnitTest<VolumeUnit>
         checkUnitRatioNameAndAbbreviation(VolumeUnit.GALLON_US_FLUID, 0.0037854, 0.0000001, "gallon (US)", "gal(US)");
         checkUnitRatioNameAndAbbreviation(VolumeUnit.OUNCE_US_FLUID, 0.000029574, 0.000000001, "ounce (fluid US)",
             "US fl oz");
-// TODO   checkUnitRatioNameAndAbbreviation(VolumeUnit.OUNCE_IMP_FLUID, .00002841306, 0.00000000001, "horsepower (metric)", "hp(M)");
-// TODO   checkUnitRatioNameAndAbbreviation(VolumeUnit.PINT_US_FLUID, 0.000473176473, 0.0000000000001, "pt(US fl)", "hp(M)");
-// TODO   checkUnitRatioNameAndAbbreviation(VolumeUnit.PINT_IMP, 735.49875, 0.00001, "horsepower (metric)", "hp(M)");
-// TODO   checkUnitRatioNameAndAbbreviation(VolumeUnit.QUART_US_FLUID, 0.000946353, 0.0000000001, "qt(US fl)", "hp(M)");
-// TODO   checkUnitRatioNameAndAbbreviation(VolumeUnit.QUART_IMP, 0.00113652, 0.000005, "quart (imperial)", "qt (imp)");
+        // TODO checkUnitRatioNameAndAbbreviation(VolumeUnit.OUNCE_IMP_FLUID, .00002841306, 0.00000000001,
+        // "horsepower (metric)", "hp(M)");
+        // TODO checkUnitRatioNameAndAbbreviation(VolumeUnit.PINT_US_FLUID, 0.000473176473, 0.0000000000001, "pt(US fl)",
+        // "hp(M)");
+        // TODO checkUnitRatioNameAndAbbreviation(VolumeUnit.PINT_IMP, 735.49875, 0.00001, "horsepower (metric)", "hp(M)");
+        // TODO checkUnitRatioNameAndAbbreviation(VolumeUnit.QUART_US_FLUID, 0.000946353, 0.0000000001, "qt(US fl)", "hp(M)");
+        // TODO checkUnitRatioNameAndAbbreviation(VolumeUnit.QUART_IMP, 0.00113652, 0.000005, "quart (imperial)", "qt (imp)");
     }
 
     /**

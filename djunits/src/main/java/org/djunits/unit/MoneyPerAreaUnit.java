@@ -41,11 +41,11 @@ public class MoneyPerAreaUnit extends Unit<MoneyPerAreaUnit>
     static
     {
         EUR_PER_SQUARE_METER =
-                new MoneyPerAreaUnit(MoneyUnit.EUR, AreaUnit.SQUARE_METER, "EUR per square meter", "\u20AC/m^2", false);
+            new MoneyPerAreaUnit(MoneyUnit.EUR, AreaUnit.SQUARE_METER, "EUR per square meter", "\u20AC/m^2", false);
         EUR_PER_HECTARE = new MoneyPerAreaUnit(MoneyUnit.EUR, AreaUnit.HECTARE, "EUR per hectare", "\u20AC/ha", false);
         USD_PER_ACRE = new MoneyPerAreaUnit(MoneyUnit.USD, AreaUnit.ACRE, "USD per acre", "US$/acre", false);
         USD_PER_SQUARE_FOOT =
-                new MoneyPerAreaUnit(MoneyUnit.USD, AreaUnit.SQUARE_FOOT, "USD per square foot", "US$/ft^2", false);
+            new MoneyPerAreaUnit(MoneyUnit.USD, AreaUnit.SQUARE_FOOT, "USD per square foot", "US$/ft^2", false);
         standardMoneyPerAreaUnit = EUR_PER_SQUARE_METER;
     }
 
@@ -59,10 +59,11 @@ public class MoneyPerAreaUnit extends Unit<MoneyPerAreaUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerAreaUnit(final MoneyUnit moneyUnit, final AreaUnit areaUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final boolean standardUnit)
+        final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerAreaUnit, moneyUnit
-                .getConversionFactorToStandardUnit() / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit()
+            / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.areaUnit = areaUnit;
     }
@@ -74,7 +75,8 @@ public class MoneyPerAreaUnit extends Unit<MoneyPerAreaUnit>
      * @param name the key to the locale file for the long name of the unit
      * @param abbreviation the key to the locale file for the abbreviation of the unit
      */
-    public MoneyPerAreaUnit(final MoneyUnit moneyUnit, final AreaUnit areaUnit, final String name, final String abbreviation)
+    public MoneyPerAreaUnit(final MoneyUnit moneyUnit, final AreaUnit areaUnit, final String name,
+        final String abbreviation)
     {
         this(moneyUnit, areaUnit, name, abbreviation, false);
     }
@@ -89,10 +91,10 @@ public class MoneyPerAreaUnit extends Unit<MoneyPerAreaUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerAreaUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final MoneyPerAreaUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+        final MoneyPerAreaUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, conversionFactorToReferenceUnit,
-                standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit,
+            conversionFactorToReferenceUnit, standardUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.areaUnit = referenceUnit.getAreaUnit();
     }
@@ -105,7 +107,7 @@ public class MoneyPerAreaUnit extends Unit<MoneyPerAreaUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MoneyPerAreaUnit(final String name, final String abbreviation, final MoneyPerAreaUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+        final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, referenceUnit, conversionFactorToReferenceUnit, false);
     }
@@ -135,8 +137,8 @@ public class MoneyPerAreaUnit extends Unit<MoneyPerAreaUnit>
         try
         {
             standardMoneyPerAreaUnit =
-                    new MoneyPerAreaUnit(standardMoneyUnit, AreaUnit.SQUARE_METER, standardMoneyUnit.getName()
-                            + " per square meter", standardMoneyUnit.getAbbreviation() + "/m^2");
+                new MoneyPerAreaUnit(standardMoneyUnit, AreaUnit.SQUARE_METER, standardMoneyUnit.getName()
+                    + " per square meter", standardMoneyUnit.getAbbreviation() + "/m^2");
         }
         catch (Exception e)
         {

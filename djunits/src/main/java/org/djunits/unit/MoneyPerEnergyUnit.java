@@ -47,16 +47,18 @@ public class MoneyPerEnergyUnit extends Unit<MoneyPerEnergyUnit>
     static
     {
         EUR_PER_KILOWATTHOUR =
-                new MoneyPerEnergyUnit(MoneyUnit.EUR, EnergyUnit.KILOWATT_HOUR, "EUR per kilowatthour", "\u20AC/kWh", false);
+            new MoneyPerEnergyUnit(MoneyUnit.EUR, EnergyUnit.KILOWATT_HOUR, "EUR per kilowatthour", "\u20AC/kWh", false);
         EUR_PER_MEGAWATTHOUR =
-                new MoneyPerEnergyUnit(MoneyUnit.EUR, EnergyUnit.MEGAWATT_HOUR, "EUR per megawatthour", "\u20AC/MWh", false);
+            new MoneyPerEnergyUnit(MoneyUnit.EUR, EnergyUnit.MEGAWATT_HOUR, "EUR per megawatthour", "\u20AC/MWh", false);
         EUR_PER_MEGAJOULE =
-                new MoneyPerEnergyUnit(MoneyUnit.EUR, EnergyUnit.MEGAJOULE, "EUR per megajoule", "\u20AC/MJ", false);
+            new MoneyPerEnergyUnit(MoneyUnit.EUR, EnergyUnit.MEGAJOULE, "EUR per megajoule", "\u20AC/MJ", false);
         USD_PER_KILOWATTHOUR =
-                new MoneyPerEnergyUnit(MoneyUnit.USD, EnergyUnit.KILOWATT_HOUR, "USD per kilowatthour", "US$/kWh", false);
+            new MoneyPerEnergyUnit(MoneyUnit.USD, EnergyUnit.KILOWATT_HOUR, "USD per kilowatthour", "US$/kWh", false);
         USD_PER_MEGAWATTHOUR =
-                new MoneyPerEnergyUnit(MoneyUnit.USD, EnergyUnit.MEGAWATT_HOUR, "USD per megawatthour", "US$/MWh", false);
-        USD_PER_MEGAJOULE = new MoneyPerEnergyUnit(MoneyUnit.USD, EnergyUnit.MEGAJOULE, "USD per megajoule", "US$/MJ", false);
+            new MoneyPerEnergyUnit(MoneyUnit.USD, EnergyUnit.MEGAWATT_HOUR, "USD per megawatthour", "US$/MWh", false);
+        USD_PER_MEGAJOULE =
+            new MoneyPerEnergyUnit(MoneyUnit.USD, EnergyUnit.MEGAJOULE, "USD per megajoule", "US$/MJ", false);
+        standardMoneyPerEnergyUnit = EUR_PER_KILOWATTHOUR;
     }
 
     /**
@@ -69,10 +71,11 @@ public class MoneyPerEnergyUnit extends Unit<MoneyPerEnergyUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerEnergyUnit(final MoneyUnit moneyUnit, final EnergyUnit energyUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final boolean standardUnit)
+        final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerEnergyUnit, moneyUnit
-                .getConversionFactorToStandardUnit() / energyUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit()
+            / energyUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.energyUnit = energyUnit;
     }
@@ -85,7 +88,7 @@ public class MoneyPerEnergyUnit extends Unit<MoneyPerEnergyUnit>
      * @param abbreviation the key to the locale file for the abbreviation of the unit
      */
     public MoneyPerEnergyUnit(final MoneyUnit moneyUnit, final EnergyUnit energyUnit, final String name,
-            final String abbreviation)
+        final String abbreviation)
     {
         this(moneyUnit, energyUnit, name, abbreviation, false);
     }
@@ -100,10 +103,10 @@ public class MoneyPerEnergyUnit extends Unit<MoneyPerEnergyUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerEnergyUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final MoneyPerEnergyUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+        final MoneyPerEnergyUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, conversionFactorToReferenceUnit,
-                standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit,
+            conversionFactorToReferenceUnit, standardUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.energyUnit = referenceUnit.getEnergyUnit();
     }
@@ -116,7 +119,7 @@ public class MoneyPerEnergyUnit extends Unit<MoneyPerEnergyUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MoneyPerEnergyUnit(final String name, final String abbreviation, final MoneyPerEnergyUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+        final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, referenceUnit, conversionFactorToReferenceUnit, false);
     }
@@ -146,8 +149,8 @@ public class MoneyPerEnergyUnit extends Unit<MoneyPerEnergyUnit>
         try
         {
             standardMoneyPerEnergyUnit =
-                    new MoneyPerEnergyUnit(standardMoneyUnit, EnergyUnit.KILOWATT_HOUR, standardMoneyUnit.getName()
-                            + " per kilowatthour", standardMoneyUnit.getAbbreviation() + "/kWh");
+                new MoneyPerEnergyUnit(standardMoneyUnit, EnergyUnit.KILOWATT_HOUR, standardMoneyUnit.getName()
+                    + " per kilowatthour", standardMoneyUnit.getAbbreviation() + "/kWh");
         }
         catch (Exception e)
         {

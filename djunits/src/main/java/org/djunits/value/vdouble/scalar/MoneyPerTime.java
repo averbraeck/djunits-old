@@ -3,7 +3,6 @@ package org.djunits.value.vdouble.scalar;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.MoneyPerTimeUnit;
 import org.djunits.unit.MoneyUnit;
-import org.djunits.unit.UNITS;
 import org.djunits.value.Relative;
 
 /**
@@ -22,7 +21,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerTime extends DoubleScalar.Rel<MoneyPerTimeUnit> implements UNITS, Relative
+public class MoneyPerTime extends DoubleScalar.Rel<MoneyPerTimeUnit> implements Relative
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -261,8 +260,8 @@ public class MoneyPerTime extends DoubleScalar.Rel<MoneyPerTimeUnit> implements 
      */
     public final MoneyPerTime plus(final MoneyPerTime v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerTime(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerTime(
-                this.si + v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerTime(getInUnit() + v.getInUnit(), getUnit())
+            : new MoneyPerTime(this.si + v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
     }
 
     /**
@@ -272,8 +271,8 @@ public class MoneyPerTime extends DoubleScalar.Rel<MoneyPerTimeUnit> implements 
      */
     public final MoneyPerTime minus(final MoneyPerTime v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerTime(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerTime(
-                this.si - v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerTime(getInUnit() - v.getInUnit(), getUnit())
+            : new MoneyPerTime(this.si - v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
     }
 
     /**
@@ -301,7 +300,7 @@ public class MoneyPerTime extends DoubleScalar.Rel<MoneyPerTimeUnit> implements 
      * @param v MoneyPerTime scalar
      * @return Money scalar as a division of MoneyPerTime and Frequency
      */
-    public final Money divideBy(final Frequency.Rel v)
+    public final Money divideBy(final Frequency v)
     {
         return new Money(this.si / v.si, MoneyUnit.getStandardMoneyUnit());
     }
