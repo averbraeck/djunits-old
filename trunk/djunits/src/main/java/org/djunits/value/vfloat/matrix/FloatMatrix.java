@@ -40,7 +40,7 @@ import cern.colt.matrix.tfloat.impl.SparseFloatMatrix2D;
  * @param <U> Unit; the unit of this FloatMatrix
  */
 public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> implements Serializable,
-        ReadOnlyFloatMatrixFunctions<U>
+    ReadOnlyFloatMatrixFunctions<U>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -707,8 +707,8 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         }
         if (rows() != other.rows() || columns() != other.columns())
         {
-            throw new ValueException("The matrices have different sizes: " + rows() + "x" + columns() + " != " + other.rows()
-                    + "x" + other.columns());
+            throw new ValueException("The matrices have different sizes: " + rows() + "x" + columns() + " != "
+                + other.rows() + "x" + other.columns());
         }
     }
 
@@ -722,8 +722,8 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         final int otherColumns = 0 == other.length ? 0 : other[0].length;
         if (rows() != other.length || columns() != otherColumns)
         {
-            throw new ValueException("The matrix and the array have different sizes: " + rows() + "x" + columns() + " != "
-                    + other.length + "x" + otherColumns);
+            throw new ValueException("The matrix and the array have different sizes: " + rows() + "x" + columns()
+                + " != " + other.length + "x" + otherColumns);
         }
         ensureRectangular(other);
     }
@@ -786,8 +786,8 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     {
         if (row < 0 || row >= rows() || column < 0 || column >= columns())
         {
-            throw new ValueException("index out of range (valid range is 0.." + (rows() - 1) + ", 0.." + (columns() - 1)
-                    + ", got " + row + ", " + column + ")");
+            throw new ValueException("index out of range (valid range is 0.." + (rows() - 1) + ", 0.."
+                + (columns() - 1) + ", got " + row + ", " + column + ")");
         }
     }
 
@@ -830,11 +830,12 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the array has zero entries
      */
     protected static <U extends Unit<U>> FloatScalar<U>[][] checkNonEmpty(final FloatScalar<U>[][] fsArray)
-            throws ValueException
+        throws ValueException
     {
         if (0 == fsArray.length || 0 == fsArray[0].length)
         {
-            throw new ValueException("Cannot create a FloatMatrix or MutableFloatMatrix from an empty array of FloatScalar");
+            throw new ValueException(
+                "Cannot create a FloatMatrix or MutableFloatMatrix from an empty array of FloatScalar");
         }
         return fsArray;
     }
@@ -851,8 +852,8 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     {
         // TODO is this correct? Should lookup matrix algebra to find out unit for x when solving A*x = b ?
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.divide(b.getUnit().getSICoefficients(),
-                        A.getUnit().getSICoefficients()).toString());
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.divide(b.getUnit().getSICoefficients(),
+                A.getUnit().getSICoefficients()).toString());
 
         // TODO should the algorithm throw an exception when rows/columns do not match when solving A*x = b ?
         FloatMatrix2D A2D = A.getMatrixSI();
@@ -931,7 +932,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Abs.Dense<U> plus(final FloatMatrix.Abs.Dense<U> left,
-            final FloatMatrix.Rel<U> right) throws ValueException
+        final FloatMatrix.Rel<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Abs.Dense<U>) left.mutable().incrementBy(right);
     }
@@ -945,7 +946,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Abs.Dense<U> plus(final FloatMatrix.Abs.Sparse<U> left,
-            final FloatMatrix.Rel.Dense<U> right) throws ValueException
+        final FloatMatrix.Rel.Dense<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Abs.Dense<U>) sparseToDense(left).incrementBy(right);
     }
@@ -959,7 +960,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Abs.Sparse<U> plus(final FloatMatrix.Abs.Sparse<U> left,
-            final FloatMatrix.Rel.Sparse<U> right) throws ValueException
+        final FloatMatrix.Rel.Sparse<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Abs.Sparse<U>) left.mutable().incrementBy(right);
     }
@@ -973,7 +974,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Dense<U> plus(final FloatMatrix.Rel.Dense<U> left,
-            final FloatMatrix.Rel<U> right) throws ValueException
+        final FloatMatrix.Rel<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Rel.Dense<U>) left.mutable().incrementBy(right);
     }
@@ -987,7 +988,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Dense<U> plus(final FloatMatrix.Rel.Sparse<U> left,
-            final FloatMatrix.Rel.Dense<U> right) throws ValueException
+        final FloatMatrix.Rel.Dense<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Rel.Dense<U>) sparseToDense(left).incrementBy(right);
     }
@@ -1001,7 +1002,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Sparse<U> plus(final FloatMatrix.Rel.Sparse<U> left,
-            final FloatMatrix.Rel.Sparse<U> right) throws ValueException
+        final FloatMatrix.Rel.Sparse<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Rel.Sparse<U>) left.mutable().incrementBy(right);
     }
@@ -1015,10 +1016,10 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Dense<U> minus(final FloatMatrix.Abs.Dense<U> left,
-            final FloatMatrix.Abs<U> right) throws ValueException
+        final FloatMatrix.Abs<U> right) throws ValueException
     {
-        return (MutableFloatMatrix.Rel.Dense<U>) new MutableFloatMatrix.Rel.Dense<U>(left.deepCopyOfData(), left.getUnit())
-                .decrementBy(right);
+        return (MutableFloatMatrix.Rel.Dense<U>) new MutableFloatMatrix.Rel.Dense<U>(left.deepCopyOfData(), left
+            .getUnit()).decrementBy(right);
     }
 
     /**
@@ -1030,10 +1031,10 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Sparse<U> minus(final FloatMatrix.Abs.Sparse<U> left,
-            final FloatMatrix.Abs.Sparse<U> right) throws ValueException
+        final FloatMatrix.Abs.Sparse<U> right) throws ValueException
     {
-        return (MutableFloatMatrix.Rel.Sparse<U>) new MutableFloatMatrix.Rel.Sparse<U>(left.deepCopyOfData(), left.getUnit())
-                .decrementBy(right);
+        return (MutableFloatMatrix.Rel.Sparse<U>) new MutableFloatMatrix.Rel.Sparse<U>(left.deepCopyOfData(), left
+            .getUnit()).decrementBy(right);
     }
 
     /**
@@ -1045,10 +1046,10 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Dense<U> minus(final FloatMatrix.Abs.Sparse<U> left,
-            final FloatMatrix.Abs.Dense<U> right) throws ValueException
+        final FloatMatrix.Abs.Dense<U> right) throws ValueException
     {
-        return (MutableFloatMatrix.Rel.Dense<U>) new MutableFloatMatrix.Rel.Dense<U>(left.deepCopyOfData(), left.getUnit())
-                .decrementBy(right);
+        return (MutableFloatMatrix.Rel.Dense<U>) new MutableFloatMatrix.Rel.Dense<U>(left.deepCopyOfData(), left
+            .getUnit()).decrementBy(right);
     }
 
     /**
@@ -1060,7 +1061,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Abs.Dense<U> minus(final FloatMatrix.Abs.Dense<U> left,
-            final FloatMatrix.Rel<U> right) throws ValueException
+        final FloatMatrix.Rel<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Abs.Dense<U>) left.mutable().decrementBy(right);
     }
@@ -1074,7 +1075,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Abs.Dense<U> minus(final FloatMatrix.Abs.Sparse<U> left,
-            final FloatMatrix.Rel.Dense<U> right) throws ValueException
+        final FloatMatrix.Rel.Dense<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Abs.Dense<U>) sparseToDense(left).decrementBy(right);
     }
@@ -1088,7 +1089,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Abs.Sparse<U> minus(final FloatMatrix.Abs.Sparse<U> left,
-            final FloatMatrix.Rel.Sparse<U> right) throws ValueException
+        final FloatMatrix.Rel.Sparse<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Abs.Sparse<U>) left.mutable().decrementBy(right);
     }
@@ -1102,7 +1103,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Dense<U> minus(final FloatMatrix.Rel.Dense<U> left,
-            final FloatMatrix.Rel<U> right) throws ValueException
+        final FloatMatrix.Rel<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Rel.Dense<U>) left.mutable().decrementBy(right);
     }
@@ -1116,7 +1117,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Dense<U> minus(final FloatMatrix.Rel.Sparse<U> left,
-            final FloatMatrix.Rel.Dense<U> right) throws ValueException
+        final FloatMatrix.Rel.Dense<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Rel.Dense<U>) sparseToDense(left).decrementBy(right);
     }
@@ -1130,7 +1131,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Sparse<U> minus(final FloatMatrix.Rel.Sparse<U> left,
-            final FloatMatrix.Rel.Sparse<U> right) throws ValueException
+        final FloatMatrix.Rel.Sparse<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Rel.Sparse<U>) left.mutable().decrementBy(right);
     }
@@ -1144,12 +1145,13 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static MutableFloatMatrix.Abs.Dense<SIUnit> times(final FloatMatrix.Abs.Dense<?> left,
-            final FloatMatrix.Abs.Dense<?> right) throws ValueException
+        final FloatMatrix.Abs.Dense<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
-        MutableFloatMatrix.Abs.Dense<SIUnit> work = new MutableFloatMatrix.Abs.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
+        MutableFloatMatrix.Abs.Dense<SIUnit> work =
+            new MutableFloatMatrix.Abs.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1162,13 +1164,13 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static MutableFloatMatrix.Abs.Sparse<SIUnit> times(final FloatMatrix.Abs.Dense<?> left,
-            final FloatMatrix.Abs.Sparse<?> right) throws ValueException
+        final FloatMatrix.Abs.Sparse<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
         MutableFloatMatrix.Abs.Sparse<SIUnit> work =
-                new MutableFloatMatrix.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatMatrix.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1181,13 +1183,13 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static MutableFloatMatrix.Abs.Sparse<SIUnit> times(final FloatMatrix.Abs.Sparse<?> left,
-            final FloatMatrix.Abs<?> right) throws ValueException
+        final FloatMatrix.Abs<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
         MutableFloatMatrix.Abs.Sparse<SIUnit> work =
-                new MutableFloatMatrix.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatMatrix.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1200,12 +1202,13 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static MutableFloatMatrix.Rel.Dense<SIUnit> times(final FloatMatrix.Rel.Dense<?> left,
-            final FloatMatrix.Rel.Dense<?> right) throws ValueException
+        final FloatMatrix.Rel.Dense<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
-        MutableFloatMatrix.Rel.Dense<SIUnit> work = new MutableFloatMatrix.Rel.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
+        MutableFloatMatrix.Rel.Dense<SIUnit> work =
+            new MutableFloatMatrix.Rel.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1218,13 +1221,13 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static MutableFloatMatrix.Rel.Sparse<SIUnit> times(final FloatMatrix.Rel.Dense<?> left,
-            final FloatMatrix.Rel.Sparse<?> right) throws ValueException
+        final FloatMatrix.Rel.Sparse<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
         MutableFloatMatrix.Rel.Sparse<SIUnit> work =
-                new MutableFloatMatrix.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatMatrix.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1237,13 +1240,13 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the matrices do not have the same size
      */
     public static MutableFloatMatrix.Rel.Sparse<SIUnit> times(final FloatMatrix.Rel.Sparse<?> left,
-            final FloatMatrix.Rel<?> right) throws ValueException
+        final FloatMatrix.Rel<?> right) throws ValueException
     {
         SIUnit targetUnit =
-                Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                        right.getUnit().getSICoefficients()).toString());
+            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
+                right.getUnit().getSICoefficients()).toString());
         MutableFloatMatrix.Rel.Sparse<SIUnit> work =
-                new MutableFloatMatrix.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatMatrix.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1258,7 +1261,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the FloatMatrix and the array do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Abs.Dense<U> times(final FloatMatrix.Abs.Dense<U> left,
-            final float[][] right) throws ValueException
+        final float[][] right) throws ValueException
     {
         return (MutableFloatMatrix.Abs.Dense<U>) left.mutable().scaleValueByValue(right);
     }
@@ -1273,7 +1276,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the FloatMatrix and the array do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Abs.Sparse<U> times(final FloatMatrix.Abs.Sparse<U> left,
-            final float[][] right) throws ValueException
+        final float[][] right) throws ValueException
     {
         return (MutableFloatMatrix.Abs.Sparse<U>) left.mutable().scaleValueByValue(right);
     }
@@ -1288,7 +1291,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the FloatMatrix and the array do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Dense<U> times(final FloatMatrix.Rel.Dense<U> left,
-            final float[][] right) throws ValueException
+        final float[][] right) throws ValueException
     {
         return (MutableFloatMatrix.Rel.Dense<U>) left.mutable().scaleValueByValue(right);
     }
@@ -1303,7 +1306,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the FloatMatrix and the array do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Sparse<U> times(final FloatMatrix.Rel.Sparse<U> left,
-            final float[][] right) throws ValueException
+        final float[][] right) throws ValueException
     {
         return (MutableFloatMatrix.Rel.Sparse<U>) left.mutable().scaleValueByValue(right);
     }
@@ -1386,7 +1389,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when zero and one do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Abs.Dense<U> interpolate(final FloatMatrix.Abs.Dense<U> zero,
-            final FloatMatrix.Abs.Dense<U> one, final float ratio) throws ValueException
+        final FloatMatrix.Abs.Dense<U> one, final float ratio) throws ValueException
     {
         MutableFloatMatrix.Abs.Dense<U> result = zero.mutable();
         for (int row = result.rows(); --row >= 0;)
@@ -1409,7 +1412,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when zero and one do not have the same size
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Dense<U> interpolate(final FloatMatrix.Rel.Dense<U> zero,
-            final FloatMatrix.Rel.Dense<U> one, final float ratio) throws ValueException
+        final FloatMatrix.Rel.Dense<U> one, final float ratio) throws ValueException
     {
         MutableFloatMatrix.Rel.Dense<U> result = zero.mutable();
         for (int row = result.rows(); --row >= 0;)
@@ -1431,8 +1434,9 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @return MutableFloatMatrix.Abs.Sparse&lt;U&gt;
      * @throws ValueException when zero and one do not have the same size
      */
-    public static <U extends Unit<U>> MutableFloatMatrix.Abs.Sparse<U> interpolate(final FloatMatrix.Abs.Sparse<U> zero,
-            final FloatMatrix.Abs.Sparse<U> one, final float ratio) throws ValueException
+    public static <U extends Unit<U>> MutableFloatMatrix.Abs.Sparse<U> interpolate(
+        final FloatMatrix.Abs.Sparse<U> zero, final FloatMatrix.Abs.Sparse<U> one, final float ratio)
+        throws ValueException
     {
         MutableFloatMatrix.Abs.Sparse<U> result = zero.mutable();
         for (int row = result.rows(); --row >= 0;)
@@ -1454,8 +1458,9 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @return MutableFloatMatrix.Rel.Sparse&lt;U&gt;
      * @throws ValueException when zero and one do not have the same size
      */
-    public static <U extends Unit<U>> MutableFloatMatrix.Rel.Sparse<U> interpolate(final FloatMatrix.Rel.Sparse<U> zero,
-            final FloatMatrix.Rel.Sparse<U> one, final float ratio) throws ValueException
+    public static <U extends Unit<U>> MutableFloatMatrix.Rel.Sparse<U> interpolate(
+        final FloatMatrix.Rel.Sparse<U> zero, final FloatMatrix.Rel.Sparse<U> one, final float ratio)
+        throws ValueException
     {
         MutableFloatMatrix.Rel.Sparse<U> result = zero.mutable();
         for (int row = result.rows(); --row >= 0;)

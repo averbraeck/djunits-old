@@ -3,7 +3,6 @@ package org.djunits.value.vdouble.scalar;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.MoneyPerLengthUnit;
 import org.djunits.unit.MoneyUnit;
-import org.djunits.unit.UNITS;
 import org.djunits.value.Relative;
 
 /**
@@ -22,7 +21,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerLength extends DoubleScalar.Rel<MoneyPerLengthUnit> implements UNITS, Relative
+public class MoneyPerLength extends DoubleScalar.Rel<MoneyPerLengthUnit> implements Relative
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -55,7 +54,8 @@ public class MoneyPerLength extends DoubleScalar.Rel<MoneyPerLengthUnit> impleme
      */
     public static MoneyPerLength interpolate(final MoneyPerLength zero, final MoneyPerLength one, final double ratio)
     {
-        return new MoneyPerLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new MoneyPerLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /** {@inheritDoc} */
@@ -261,8 +261,8 @@ public class MoneyPerLength extends DoubleScalar.Rel<MoneyPerLengthUnit> impleme
      */
     public final MoneyPerLength plus(final MoneyPerLength v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerLength(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerLength(
-                this.si + v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerLength(getInUnit() + v.getInUnit(), getUnit())
+            : new MoneyPerLength(this.si + v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
     }
 
     /**
@@ -272,8 +272,8 @@ public class MoneyPerLength extends DoubleScalar.Rel<MoneyPerLengthUnit> impleme
      */
     public final MoneyPerLength minus(final MoneyPerLength v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerLength(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerLength(
-                this.si - v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerLength(getInUnit() - v.getInUnit(), getUnit())
+            : new MoneyPerLength(this.si - v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
     }
 
     /**
@@ -301,7 +301,7 @@ public class MoneyPerLength extends DoubleScalar.Rel<MoneyPerLengthUnit> impleme
      * @param v MoneyPerLength scalar
      * @return Money scalar as a division of MoneyPerLength and LinearDensity
      */
-    public final Money divideBy(final LinearDensity.Rel v)
+    public final Money divideBy(final LinearDensity v)
     {
         return new Money(this.si / v.si, MoneyUnit.getStandardMoneyUnit());
     }

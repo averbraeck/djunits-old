@@ -51,8 +51,8 @@ public class ForceUnitTest extends AbstractUnitTest<ForceUnit>
         // Check two conversions between non-standard units
         assertEquals("one DYNE is about 1.019716e-6 KILOGRAM FORCE", 1.01971621e-6, getMultiplicationFactorTo(
             ForceUnit.DYNE, ForceUnit.KILOGRAM_FORCE), 0.00000000001);
-        assertEquals("one KILOGRAM FORCE is about 980665 DYNE", 980665, getMultiplicationFactorTo(ForceUnit.KILOGRAM_FORCE,
-            ForceUnit.DYNE), 0.5);
+        assertEquals("one KILOGRAM FORCE is about 980665 DYNE", 980665, getMultiplicationFactorTo(
+            ForceUnit.KILOGRAM_FORCE, ForceUnit.DYNE), 0.5);
     }
 
     /**

@@ -35,7 +35,8 @@ public class DoubleMatrixSparseTest
      * @param startValue double; seed value
      * @return double[][]
      */
-    private static double[][] data(final int rows, final int columns, final boolean nonRectangular, final double startValue)
+    private static double[][] data(final int rows, final int columns, final boolean nonRectangular,
+        final double startValue)
     {
         double[][] result = new double[rows][];
         final int badRowIndex = nonRectangular ? rows - 1 : -1;
@@ -58,8 +59,8 @@ public class DoubleMatrixSparseTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; dm should be Absolute; if false; dm should be Relative
      */
-    private static void checkContentsAndType(final DoubleMatrix<?> dm, final double[][] reference, final double precision,
-            final Unit<?> u, final boolean expectAbsolute)
+    private static void checkContentsAndType(final DoubleMatrix<?> dm, final double[][] reference,
+        final double precision, final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("DoubleMatrix should not be null", null != dm);
         for (int row = dm.rows(); --row >= 0;)
@@ -77,8 +78,8 @@ public class DoubleMatrixSparseTest
             }
         }
         assertEquals("Unit should be " + u.toString(), u, dm.getUnit());
-        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"),
-                expectAbsolute ? dm.isAbsolute() : dm.isRelative());
+        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"), expectAbsolute ? dm.isAbsolute() : dm
+            .isRelative());
     }
 
     /**
@@ -117,7 +118,7 @@ public class DoubleMatrixSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[][] value = data(3, 5, false, 38.0);
             MutableDoubleMatrix.Abs.Sparse<TemperatureUnit> dm =
-                    new MutableDoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
+                new MutableDoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -133,7 +134,7 @@ public class DoubleMatrixSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsAbsTest()
     {
@@ -142,10 +143,11 @@ public class DoubleMatrixSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[][] value = data(3, 5, false, 38.0);
             DoubleMatrix.Abs.Sparse<TemperatureUnit> temperatureDM =
-                    new DoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
+                new DoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, true);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDM.getSI(0, 0), 0.05);
-            assertEquals("Value in Fahrenheit", 100.4, temperatureDM.getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
+            assertEquals("Value in Fahrenheit", 100.4,
+                temperatureDM.getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
             double[][] out = temperatureDM.getValuesInUnit();
             for (int row = 0; row < value.length; row++)
             {
@@ -155,7 +157,7 @@ public class DoubleMatrixSparseTest
                 }
             }
             MutableDoubleMatrix.Abs.Sparse<TemperatureUnit> mdm =
-                    new MutableDoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
+                new MutableDoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
             mdm.setSI(0, 0, 73);
             double safe = value[0][0];
@@ -165,7 +167,7 @@ public class DoubleMatrixSparseTest
             mdm.set(0, 0, temperatureDM.get(0, 0));
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
             DoubleMatrix.Abs.Sparse<TemperatureUnit> temperature2DM =
-                    new DoubleMatrix.Abs.Sparse<TemperatureUnit>(temperatureDM.getMatrixSI(), TemperatureUnit.KELVIN);
+                new DoubleMatrix.Abs.Sparse<TemperatureUnit>(temperatureDM.getMatrixSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
             assertTrue("Value is Absolute", temperatureDM.isAbsolute());
             assertFalse("Value is not Relative", temperatureDM.isRelative());
@@ -186,13 +188,13 @@ public class DoubleMatrixSparseTest
                 for (int column = 0; column < value[row].length; column++)
                 {
                     scalar[row][column] =
-                            new DoubleScalar.Abs<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
+                        new DoubleScalar.Abs<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
                 }
             }
             temperatureDM = new DoubleMatrix.Abs.Sparse<TemperatureUnit>(scalar);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, true);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
-                    temperatureDM.cardinality());
+                temperatureDM.cardinality());
             double sum = 0;
             for (int row = 0; row < value.length; row++)
             {
@@ -241,7 +243,8 @@ public class DoubleMatrixSparseTest
             checkContentsAndType(mdmCopy, value, 0.001, tempUnit, true);
             checkContentsAndType(mmdm, value, 0.001, tempUnit, true);
             DoubleMatrix.Abs<TemperatureUnit> idm = mdm.immutable();
-            assertTrue("Different value extremely likely results in different hashCode", dm.hashCode() != mdm.hashCode());
+            assertTrue("Different value extremely likely results in different hashCode", dm.hashCode() != mdm
+                .hashCode());
             // Restore value of mdm
             mdm.setSI(0, 0, dm.getSI(0, 0));
             checkContentsAndType(idm, value2, 0.01, tempUnit, true);
@@ -273,13 +276,15 @@ public class DoubleMatrixSparseTest
         DoubleScalar.Rel<LengthUnit> dmCounterPart = new DoubleScalar.Rel<LengthUnit>(value, lengthUnit);
         assertFalse("Not equal if one Absolute and other Relative", dm.equals(dmCounterPart));
         DoubleScalar.Abs<TemperatureUnit> dmWrongBaseUnit =
-                new DoubleScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+            new DoubleScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dm.getSI(), dmWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dm.equals(dmWrongBaseUnit));
-        DoubleScalar.Abs<LengthUnit> dmCompatibleUnit = new DoubleScalar.Abs<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
+        DoubleScalar.Abs<LengthUnit> dmCompatibleUnit =
+            new DoubleScalar.Abs<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
         assertFalse("Units are different", dm.getUnit().equals(dmCompatibleUnit.getUnit()));
         assertTrue("equals returns true", dm.equals(dmCompatibleUnit));
-        DoubleScalar.Abs<LengthUnit> dmDifferentValue = new DoubleScalar.Abs<LengthUnit>(123.456, LengthUnit.MILLIMETER);
+        DoubleScalar.Abs<LengthUnit> dmDifferentValue =
+            new DoubleScalar.Abs<LengthUnit>(123.456, LengthUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", dm.equals(dmDifferentValue));
     }
 
@@ -290,7 +295,7 @@ public class DoubleMatrixSparseTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double[][] input = data(3, 5, false, seedValue);
@@ -580,15 +585,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left = new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Dense<LengthUnit> right = new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Abs.Sparse<LengthUnit> left =
+                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Dense<LengthUnit> right =
+                new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Abs.Dense<?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI plus of contributing elements",
-                            left.getSI(i, j) + right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI plus of contributing elements", left.getSI(i, j)
+                        + right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -609,15 +616,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left = new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Dense<LengthUnit> right = new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Abs.Sparse<LengthUnit> left =
+                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Dense<LengthUnit> right =
+                new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Abs.Dense<?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI minus of contributing elements",
-                            left.getSI(i, j) - right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI minus of contributing elements", left.getSI(i, j)
+                        - right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -638,15 +647,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left = new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Abs.Dense<LengthUnit> right = new DoubleMatrix.Abs.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Abs.Sparse<LengthUnit> left =
+                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Abs.Dense<LengthUnit> right =
+                new DoubleMatrix.Abs.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Abs.Sparse<?> result = DoubleMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI times of contributing elements",
-                            left.getSI(i, j) * right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI times of contributing elements", left.getSI(i, j)
+                        * right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -667,15 +678,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left = new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Sparse<LengthUnit> right = new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Abs.Sparse<LengthUnit> left =
+                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Sparse<LengthUnit> right =
+                new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Abs.Sparse<?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI plus of contributing elements",
-                            left.getSI(i, j) + right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI plus of contributing elements", left.getSI(i, j)
+                        + right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -696,15 +709,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left = new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Sparse<LengthUnit> right = new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Abs.Sparse<LengthUnit> left =
+                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Sparse<LengthUnit> right =
+                new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Abs.Sparse<?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI minus of contributing elements",
-                            left.getSI(i, j) - right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI minus of contributing elements", left.getSI(i, j)
+                        - right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -725,15 +740,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left = new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Abs.Sparse<LengthUnit> right = new DoubleMatrix.Abs.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Abs.Sparse<LengthUnit> left =
+                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Abs.Sparse<LengthUnit> right =
+                new DoubleMatrix.Abs.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Abs.Sparse<?> result = DoubleMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI times of contributing elements",
-                            left.getSI(i, j) * right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI times of contributing elements", left.getSI(i, j)
+                        * right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -854,9 +871,9 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] values = { { 1, 2, 3 }, { 3, 5, 7 }, { 5, 10, 0 } };
+            double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             DoubleMatrix.Abs.Sparse<TemperatureUnit> matrix =
-                    new DoubleMatrix.Abs.Sparse<TemperatureUnit>(values, TemperatureUnit.KELVIN);
+                new DoubleMatrix.Abs.Sparse<TemperatureUnit>(values, TemperatureUnit.KELVIN);
             assertEquals("Determinant should be 15", 15, matrix.det(), 0.001);
         }
         catch (ValueException ve)
@@ -881,7 +898,7 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftIn = data(3, 5, false, -12.34);
             DoubleMatrix.Abs.Sparse<TemperatureUnit> left =
-                    new DoubleMatrix.Abs.Sparse<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
+                new DoubleMatrix.Abs.Sparse<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
             double[][] right = data(3, 5, false, -4.321);
             MutableDoubleMatrix.Abs.Sparse<TemperatureUnit> result = DoubleMatrix.times(left, right);
             assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
@@ -889,8 +906,8 @@ public class DoubleMatrixSparseTest
             {
                 for (int column = right[row].length; --column >= 0;)
                 {
-                    assertEquals("Content should match product of left and right", leftIn[row][column] * right[row][column],
-                            result.getSI(row, column), 0.001);
+                    assertEquals("Content should match product of left and right", leftIn[row][column]
+                        * right[row][column], result.getSI(row, column), 0.001);
                 }
             }
         }
@@ -936,7 +953,7 @@ public class DoubleMatrixSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[][] value = data(3, 5, false, 38.0);
             MutableDoubleMatrix.Rel.Sparse<TemperatureUnit> dm =
-                    new MutableDoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
+                new MutableDoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -952,7 +969,7 @@ public class DoubleMatrixSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsRelTest()
     {
@@ -961,10 +978,11 @@ public class DoubleMatrixSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[][] value = data(3, 5, false, 38.0);
             DoubleMatrix.Rel.Sparse<TemperatureUnit> temperatureDM =
-                    new DoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
+                new DoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDM.getSI(0, 0), 0.05);
-            assertEquals("Value in Fahrenheit", 100.4, temperatureDM.getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
+            assertEquals("Value in Fahrenheit", 100.4,
+                temperatureDM.getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
             double[][] out = temperatureDM.getValuesInUnit();
             for (int row = 0; row < value.length; row++)
             {
@@ -974,7 +992,7 @@ public class DoubleMatrixSparseTest
                 }
             }
             MutableDoubleMatrix.Rel.Sparse<TemperatureUnit> mdm =
-                    new MutableDoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
+                new MutableDoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
             mdm.setSI(0, 0, 73);
             double safe = value[0][0];
@@ -984,7 +1002,7 @@ public class DoubleMatrixSparseTest
             mdm.set(0, 0, temperatureDM.get(0, 0));
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
             DoubleMatrix.Rel.Sparse<TemperatureUnit> temperature2DM =
-                    new DoubleMatrix.Rel.Sparse<TemperatureUnit>(temperatureDM.getMatrixSI(), TemperatureUnit.KELVIN);
+                new DoubleMatrix.Rel.Sparse<TemperatureUnit>(temperatureDM.getMatrixSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
             assertTrue("Value is Relative", temperatureDM.isRelative());
             assertFalse("Value is not Absolute", temperatureDM.isAbsolute());
@@ -1005,13 +1023,13 @@ public class DoubleMatrixSparseTest
                 for (int column = 0; column < value[row].length; column++)
                 {
                     scalar[row][column] =
-                            new DoubleScalar.Rel<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
+                        new DoubleScalar.Rel<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
                 }
             }
             temperatureDM = new DoubleMatrix.Rel.Sparse<TemperatureUnit>(scalar);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
-                    temperatureDM.cardinality());
+                temperatureDM.cardinality());
             double sum = 0;
             for (int row = 0; row < value.length; row++)
             {
@@ -1060,7 +1078,8 @@ public class DoubleMatrixSparseTest
             checkContentsAndType(mdmCopy, value, 0.001, tempUnit, false);
             checkContentsAndType(mmdm, value, 0.001, tempUnit, false);
             DoubleMatrix.Rel<TemperatureUnit> idm = mdm.immutable();
-            assertTrue("Different value extremely likely results in different hashCode", dm.hashCode() != mdm.hashCode());
+            assertTrue("Different value extremely likely results in different hashCode", dm.hashCode() != mdm
+                .hashCode());
             // Restore value of mdm
             mdm.setSI(0, 0, dm.getSI(0, 0));
             checkContentsAndType(idm, value2, 0.01, tempUnit, false);
@@ -1092,13 +1111,15 @@ public class DoubleMatrixSparseTest
         DoubleScalar.Abs<LengthUnit> dmCounterPart = new DoubleScalar.Abs<LengthUnit>(value, lengthUnit);
         assertFalse("Not equal if one Absolute and other Relative", dm.equals(dmCounterPart));
         DoubleScalar.Rel<TemperatureUnit> dmWrongBaseUnit =
-                new DoubleScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+            new DoubleScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dm.getSI(), dmWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dm.equals(dmWrongBaseUnit));
-        DoubleScalar.Rel<LengthUnit> dmCompatibleUnit = new DoubleScalar.Rel<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
+        DoubleScalar.Rel<LengthUnit> dmCompatibleUnit =
+            new DoubleScalar.Rel<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
         assertFalse("Units are different", dm.getUnit().equals(dmCompatibleUnit.getUnit()));
         assertTrue("equals returns true", dm.equals(dmCompatibleUnit));
-        DoubleScalar.Rel<LengthUnit> dmDifferentValue = new DoubleScalar.Rel<LengthUnit>(123.456, LengthUnit.MILLIMETER);
+        DoubleScalar.Rel<LengthUnit> dmDifferentValue =
+            new DoubleScalar.Rel<LengthUnit>(123.456, LengthUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", dm.equals(dmDifferentValue));
     }
 
@@ -1109,7 +1130,7 @@ public class DoubleMatrixSparseTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double[][] input = data(3, 5, false, seedValue);
@@ -1399,15 +1420,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left = new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Dense<LengthUnit> right = new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Sparse<LengthUnit> left =
+                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Dense<LengthUnit> right =
+                new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Rel.Dense<?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI plus of contributing elements",
-                            left.getSI(i, j) + right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI plus of contributing elements", left.getSI(i, j)
+                        + right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1428,15 +1451,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left = new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Dense<LengthUnit> right = new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Sparse<LengthUnit> left =
+                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Dense<LengthUnit> right =
+                new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Rel.Dense<?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI minus of contributing elements",
-                            left.getSI(i, j) - right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI minus of contributing elements", left.getSI(i, j)
+                        - right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1457,15 +1482,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left = new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Dense<LengthUnit> right = new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Sparse<LengthUnit> left =
+                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Dense<LengthUnit> right =
+                new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Rel.Sparse<?> result = DoubleMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI times of contributing elements",
-                            left.getSI(i, j) * right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI times of contributing elements", left.getSI(i, j)
+                        * right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1486,15 +1513,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left = new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Sparse<LengthUnit> right = new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Sparse<LengthUnit> left =
+                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Sparse<LengthUnit> right =
+                new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Rel.Sparse<?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI plus of contributing elements",
-                            left.getSI(i, j) + right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI plus of contributing elements", left.getSI(i, j)
+                        + right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1515,15 +1544,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left = new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Sparse<LengthUnit> right = new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Sparse<LengthUnit> left =
+                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Sparse<LengthUnit> right =
+                new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Rel.Sparse<?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI minus of contributing elements",
-                            left.getSI(i, j) - right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI minus of contributing elements", left.getSI(i, j)
+                        - right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1544,15 +1575,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left = new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Sparse<LengthUnit> right = new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Sparse<LengthUnit> left =
+                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
+            DoubleMatrix.Rel.Sparse<LengthUnit> right =
+                new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
             MutableDoubleMatrix.Rel.Sparse<?> result = DoubleMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
-                    assertEquals("value of element should be SI times of contributing elements",
-                            left.getSI(i, j) * right.getSI(i, j), result.getSI(i, j), 0.001);
+                    assertEquals("value of element should be SI times of contributing elements", left.getSI(i, j)
+                        * right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1673,9 +1706,9 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] values = { { 1, 2, 3 }, { 3, 5, 7 }, { 5, 10, 0 } };
+            double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             DoubleMatrix.Rel.Sparse<TemperatureUnit> matrix =
-                    new DoubleMatrix.Rel.Sparse<TemperatureUnit>(values, TemperatureUnit.KELVIN);
+                new DoubleMatrix.Rel.Sparse<TemperatureUnit>(values, TemperatureUnit.KELVIN);
             assertEquals("Determinant should be 15", 15, matrix.det(), 0.001);
         }
         catch (ValueException ve)
@@ -1700,7 +1733,7 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftIn = data(3, 5, false, -12.34);
             DoubleMatrix.Rel.Sparse<TemperatureUnit> left =
-                    new DoubleMatrix.Rel.Sparse<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
+                new DoubleMatrix.Rel.Sparse<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
             double[][] right = data(3, 5, false, -4.321);
             MutableDoubleMatrix.Rel.Sparse<TemperatureUnit> result = DoubleMatrix.times(left, right);
             assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
@@ -1708,8 +1741,8 @@ public class DoubleMatrixSparseTest
             {
                 for (int column = right[row].length; --column >= 0;)
                 {
-                    assertEquals("Content should match product of left and right", leftIn[row][column] * right[row][column],
-                            result.getSI(row, column), 0.001);
+                    assertEquals("Content should match product of left and right", leftIn[row][column]
+                        * right[row][column], result.getSI(row, column), 0.001);
                 }
             }
         }
@@ -1740,8 +1773,8 @@ public class DoubleMatrixSparseTest
          * @param precision double; expected accuracy
          * @param function DoubleToDouble; encapsulated function that converts one inputValue to an outputValue
          */
-        public static void tester(final double[][] inputValues, final String operation, final DoubleMatrix<?> actualResult,
-                final double precision, final DoubleToDouble function)
+        public static void tester(final double[][] inputValues, final String operation,
+            final DoubleMatrix<?> actualResult, final double precision, final DoubleToDouble function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {
@@ -1758,8 +1791,8 @@ public class DoubleMatrixSparseTest
                         fail("Caught unexpected exception: " + ve.toString());
                     }
                     String description =
-                            String.format("%s(%f->%f should be equal to %f with precision %f", operation, inputValues[i][j],
-                                    expectedResult, got, precision);
+                        String.format("%s(%f->%f should be equal to %f with precision %f", operation,
+                            inputValues[i][j], expectedResult, got, precision);
                     // System.out.println(description);
                     assertEquals(description, expectedResult, got, precision);
                 }

@@ -60,8 +60,8 @@ public class TemperatureUnitTest extends AbstractOffsetUnitTest<TemperatureUnit>
             TemperatureUnit.DEGREE_FAHRENHEIT, TemperatureUnit.DEGREE_CELSIUS), 0.0001);
         checkUnitRatioOffsetNameAndAbbreviation(TemperatureUnit.DEGREE_RANKINE, 5. / 9., 0, 0.0001, "degree Rankine",
             "\u00B0R");
-        checkUnitRatioOffsetNameAndAbbreviation(TemperatureUnit.DEGREE_REAUMUR, 0.8, -273.15, 0.000001, "degree Reaumur",
-            "\u00B0R\u00E9");
+        checkUnitRatioOffsetNameAndAbbreviation(TemperatureUnit.DEGREE_REAUMUR, 0.8, -273.15, 0.000001,
+            "degree Reaumur", "\u00B0R\u00E9");
     }
 
     /**

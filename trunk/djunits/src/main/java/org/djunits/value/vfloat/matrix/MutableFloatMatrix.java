@@ -30,8 +30,8 @@ import cern.jet.math.tfloat.FloatFunctions;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableFloatMatrix
  */
-public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<U> implements WriteFloatMatrixFunctions<U>,
-        FloatMathFunctions<MutableFloatMatrix<U>>
+public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<U> implements
+    WriteFloatMatrixFunctions<U>, FloatMathFunctions<MutableFloatMatrix<U>>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -164,7 +164,8 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public final MutableFloatMatrix.Abs.Dense<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatMatrix.Abs.Dense<U> result = new MutableFloatMatrix.Abs.Dense<U>(getMatrixSI(), getUnit());
+                final MutableFloatMatrix.Abs.Dense<U> result =
+                    new MutableFloatMatrix.Abs.Dense<U>(getMatrixSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -245,7 +246,8 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public final MutableFloatMatrix.Abs.Sparse<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatMatrix.Abs.Sparse<U> result = new MutableFloatMatrix.Abs.Sparse<U>(getMatrixSI(), getUnit());
+                final MutableFloatMatrix.Abs.Sparse<U> result =
+                    new MutableFloatMatrix.Abs.Sparse<U>(getMatrixSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -603,7 +605,8 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public final MutableFloatMatrix.Rel.Dense<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatMatrix.Rel.Dense<U> result = new MutableFloatMatrix.Rel.Dense<U>(getMatrixSI(), getUnit());
+                final MutableFloatMatrix.Rel.Dense<U> result =
+                    new MutableFloatMatrix.Rel.Dense<U>(getMatrixSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -684,7 +687,8 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public final MutableFloatMatrix.Rel.Sparse<U> mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatMatrix.Rel.Sparse<U> result = new MutableFloatMatrix.Rel.Sparse<U>(getMatrixSI(), getUnit());
+                final MutableFloatMatrix.Rel.Sparse<U> result =
+                    new MutableFloatMatrix.Rel.Sparse<U>(getMatrixSI(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -1001,7 +1005,8 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
 
     /** {@inheritDoc} */
     @Override
-    public final void setInUnit(final int row, final int column, final float value, final U valueUnit) throws ValueException
+    public final void setInUnit(final int row, final int column, final float value, final U valueUnit)
+        throws ValueException
     {
         setSI(row, column, (float) ValueUtil.expressAsSIUnit(value, valueUnit));
     }

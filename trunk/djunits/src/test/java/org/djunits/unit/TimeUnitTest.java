@@ -51,7 +51,8 @@ public class TimeUnitTest extends AbstractUnitTest<TimeUnit>
         checkUnitRatioNameAndAbbreviation(TimeUnit.DAY, 86400, 0.001, "day", "d");
         // Check two conversions between non-standard units
         assertEquals("one DAY is 24 HOUR", 24, getMultiplicationFactorTo(TimeUnit.DAY, TimeUnit.HOUR), 0.0001);
-        assertEquals("one HOUR is about 0.0417 DAY", 0.0417, getMultiplicationFactorTo(TimeUnit.HOUR, TimeUnit.DAY), 0.0001);
+        assertEquals("one HOUR is about 0.0417 DAY", 0.0417, getMultiplicationFactorTo(TimeUnit.HOUR, TimeUnit.DAY),
+            0.0001);
         // Check conversion factor to standard unit for all remaining time units
         checkUnitRatioNameAndAbbreviation(TimeUnit.MILLISECOND, 0.001, 0.00000001, "millisecond", "ms");
         checkUnitRatioNameAndAbbreviation(TimeUnit.MINUTE, 60, 0.000001, "minute", "m");

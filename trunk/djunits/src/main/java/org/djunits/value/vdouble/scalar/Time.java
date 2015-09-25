@@ -8,14 +8,13 @@ import org.djunits.unit.MassUnit;
 import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.TimeUnit;
-import org.djunits.unit.UNITS;
 import org.djunits.unit.VolumeUnit;
 
 /**
  * Easy access methods for the Time DoubleScalar. Instead of <br>
  * <i>DoubleScalar.Rel&lt;SomeUnit&gt; value = new DoubleScalar.Rel&lt;SomeUnit&gt;(0.2, SomeUnit.UNIT);</i><br>
  * we can now write <br>
- * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass.Rel margin = new Mass.Rel(0.2, KILOGRAM);</i><br>
+ * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass margin = new Mass(0.2, KILOGRAM);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
@@ -27,7 +26,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface Time extends UNITS
+public interface Time
 {
     /**
      * Easy access methods for the Time DoubleScalar. Instead of <br>
@@ -285,8 +284,8 @@ public interface Time extends UNITS
          */
         public final Time.Rel plus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Time.Rel(this.si
-                    + v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Time.Rel(
+                this.si + v.si, TimeUnit.SI);
         }
 
         /**
@@ -296,8 +295,8 @@ public interface Time extends UNITS
          */
         public final Time.Rel minus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(this.si
-                    - v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(
+                this.si - v.si, TimeUnit.SI);
         }
 
         /**
@@ -307,8 +306,8 @@ public interface Time extends UNITS
          */
         public final Time.Abs plus(final Time.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(this.si
-                    + v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(
+                this.si + v.si, TimeUnit.SI);
         }
 
         /**
@@ -335,7 +334,7 @@ public interface Time extends UNITS
          * @param v Time scalar
          * @return Dimensionless scalar as a multiplication of Time and Frequency
          */
-        public final Dimensionless.Rel multiplyBy(final Frequency.Rel v)
+        public final Dimensionless.Rel multiplyBy(final Frequency v)
         {
             return new Dimensionless.Rel(this.si * v.si, DimensionlessUnit.SI);
         }
@@ -345,9 +344,9 @@ public interface Time extends UNITS
          * @param v Time scalar
          * @return ElectricalCharge scalar as a multiplication of Time and ElectricalCurrent
          */
-        public final ElectricalCharge.Rel multiplyBy(final ElectricalCurrent.Rel v)
+        public final ElectricalCharge multiplyBy(final ElectricalCurrent v)
         {
-            return new ElectricalCharge.Rel(this.si * v.si, ElectricalChargeUnit.SI);
+            return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
         }
 
         /**
@@ -355,9 +354,9 @@ public interface Time extends UNITS
          * @param v Time scalar
          * @return Mass scalar as a multiplication of Time and FlowMass
          */
-        public final Mass.Rel multiplyBy(final FlowMass.Rel v)
+        public final Mass multiplyBy(final FlowMass v)
         {
-            return new Mass.Rel(this.si * v.si, MassUnit.SI);
+            return new Mass(this.si * v.si, MassUnit.SI);
         }
 
         /**
@@ -365,9 +364,9 @@ public interface Time extends UNITS
          * @param v Time scalar
          * @return Volume scalar as a multiplication of Time and FlowVolume
          */
-        public final Volume.Rel multiplyBy(final FlowVolume.Rel v)
+        public final Volume multiplyBy(final FlowVolume v)
         {
-            return new Volume.Rel(this.si * v.si, VolumeUnit.SI);
+            return new Volume(this.si * v.si, VolumeUnit.SI);
         }
 
         /**
@@ -375,9 +374,9 @@ public interface Time extends UNITS
          * @param v Time scalar
          * @return Speed scalar as a multiplication of Time and Acceleration
          */
-        public final Speed.Rel multiplyBy(final Acceleration.Rel v)
+        public final Speed multiplyBy(final Acceleration v)
         {
-            return new Speed.Rel(this.si * v.si, SpeedUnit.SI);
+            return new Speed(this.si * v.si, SpeedUnit.SI);
         }
 
         /**
@@ -385,9 +384,9 @@ public interface Time extends UNITS
          * @param v Time scalar
          * @return Energy scalar as a multiplication of Time and Power
          */
-        public final Energy.Rel multiplyBy(final Power.Rel v)
+        public final Energy multiplyBy(final Power v)
         {
-            return new Energy.Rel(this.si * v.si, EnergyUnit.SI);
+            return new Energy(this.si * v.si, EnergyUnit.SI);
         }
 
         /**
@@ -395,7 +394,7 @@ public interface Time extends UNITS
          * @param v Time scalar
          * @return Length scalar as a multiplication of Time and Speed
          */
-        public final Length.Rel multiplyBy(final Speed.Rel v)
+        public final Length.Rel multiplyBy(final Speed v)
         {
             return new Length.Rel(this.si * v.si, LengthUnit.SI);
         }
@@ -647,20 +646,6 @@ public interface Time extends UNITS
             return new Time.Abs(Math.pow(getInUnit(), x), getUnit());
         }
 
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs multiplyBy(final double factor)
-        {
-            return new Time.Abs(getInUnit() * factor, getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs divideBy(final double divisor)
-        {
-            return new Time.Abs(getInUnit() / divisor, getUnit());
-        }
-
         /**
          * Absolute scalar plus Relative scalar = Absolute scalar.
          * @param v the value to add
@@ -668,8 +653,8 @@ public interface Time extends UNITS
          */
         public final Time.Abs plus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(this.si
-                    + v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(
+                this.si + v.si, TimeUnit.SI);
         }
 
         /**
@@ -679,8 +664,8 @@ public interface Time extends UNITS
          */
         public final Time.Rel minus(final Time.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(this.si
-                    - v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(
+                this.si - v.si, TimeUnit.SI);
         }
 
         /**
@@ -690,8 +675,8 @@ public interface Time extends UNITS
          */
         public final Time.Abs minus(final Time.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Time.Abs(this.si
-                    - v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Time.Abs(
+                this.si - v.si, TimeUnit.SI);
         }
 
         /**
@@ -701,96 +686,6 @@ public interface Time extends UNITS
         public final Time.Rel toRel()
         {
             return new Time.Rel(getInUnit(), getUnit());
-        }
-
-        /**
-         * Calculate the division of Time and Time, which results in a Dimensionless scalar.
-         * @param v Time scalar
-         * @return Dimensionless scalar as a division of Time and Time
-         */
-        public final Dimensionless.Abs divideBy(final Time.Abs v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Time and Frequency, which results in a Dimensionless scalar.
-         * @param v Time scalar
-         * @return Dimensionless scalar as a multiplication of Time and Frequency
-         */
-        public final Dimensionless.Abs multiplyBy(final Frequency.Abs v)
-        {
-            return new Dimensionless.Abs(this.si * v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Time and ElectricalCurrent, which results in a ElectricalCharge scalar.
-         * @param v Time scalar
-         * @return ElectricalCharge scalar as a multiplication of Time and ElectricalCurrent
-         */
-        public final ElectricalCharge.Abs multiplyBy(final ElectricalCurrent.Abs v)
-        {
-            return new ElectricalCharge.Abs(this.si * v.si, ElectricalChargeUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Time and FlowMass, which results in a Mass scalar.
-         * @param v Time scalar
-         * @return Mass scalar as a multiplication of Time and FlowMass
-         */
-        public final Mass.Abs multiplyBy(final FlowMass.Abs v)
-        {
-            return new Mass.Abs(this.si * v.si, MassUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Time and FlowVolume, which results in a Volume scalar.
-         * @param v Time scalar
-         * @return Volume scalar as a multiplication of Time and FlowVolume
-         */
-        public final Volume.Abs multiplyBy(final FlowVolume.Abs v)
-        {
-            return new Volume.Abs(this.si * v.si, VolumeUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Time and Acceleration, which results in a Speed scalar.
-         * @param v Time scalar
-         * @return Speed scalar as a multiplication of Time and Acceleration
-         */
-        public final Speed.Abs multiplyBy(final Acceleration.Abs v)
-        {
-            return new Speed.Abs(this.si * v.si, SpeedUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Time and Power, which results in a Energy scalar.
-         * @param v Time scalar
-         * @return Energy scalar as a multiplication of Time and Power
-         */
-        public final Energy.Abs multiplyBy(final Power.Abs v)
-        {
-            return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Time and Speed, which results in a Length scalar.
-         * @param v Time scalar
-         * @return Length scalar as a multiplication of Time and Speed
-         */
-        public final Length.Abs multiplyBy(final Speed.Abs v)
-        {
-            return new Length.Abs(this.si * v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Time and MoneyPerTime, which results in a Money scalar.
-         * @param v Time scalar
-         * @return Money scalar as a multiplication of Time and MoneyPerTime
-         */
-        public final Money multiplyBy(final MoneyPerTime v)
-        {
-            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
     }

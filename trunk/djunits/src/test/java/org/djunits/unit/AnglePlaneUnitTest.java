@@ -59,7 +59,8 @@ public class AnglePlaneUnitTest extends AbstractUnitTest<AnglePlaneUnit>
         // Check conversion factor to standard unit for all remaining time units
         checkUnitRatioNameAndAbbreviation(AnglePlaneUnit.CENTESIMAL_ARCMINUTE, 0.00015708, 0.0000001,
             "centesimal arcminute", "\'");
-        checkUnitRatioNameAndAbbreviation(AnglePlaneUnit.CENTESIMAL_ARCSECOND, 1.57079e-6, 0.1, "centesimal arcsecond", "\"");
+        checkUnitRatioNameAndAbbreviation(AnglePlaneUnit.CENTESIMAL_ARCSECOND, 1.57079e-6, 0.1, "centesimal arcsecond",
+            "\"");
     }
 
     /**

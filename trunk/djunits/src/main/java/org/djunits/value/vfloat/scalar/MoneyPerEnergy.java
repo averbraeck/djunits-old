@@ -3,7 +3,6 @@ package org.djunits.value.vfloat.scalar;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.MoneyPerEnergyUnit;
 import org.djunits.unit.MoneyUnit;
-import org.djunits.unit.UNITS;
 import org.djunits.value.Relative;
 
 /**
@@ -22,7 +21,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> implements UNITS, Relative
+public class MoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> implements Relative
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -65,7 +64,8 @@ public class MoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> implemen
      */
     public static MoneyPerEnergy interpolate(final MoneyPerEnergy zero, final MoneyPerEnergy one, final float ratio)
     {
-        return new MoneyPerEnergy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new MoneyPerEnergy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -303,8 +303,8 @@ public class MoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> implemen
      */
     public final MoneyPerEnergy plus(final MoneyPerEnergy v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerEnergy(getInUnit() + v.getInUnit(), getUnit()) : new MoneyPerEnergy(
-                this.si + v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerEnergy(getInUnit() + v.getInUnit(), getUnit())
+            : new MoneyPerEnergy(this.si + v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
     }
 
     /**
@@ -314,8 +314,8 @@ public class MoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> implemen
      */
     public final MoneyPerEnergy minus(final MoneyPerEnergy v)
     {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerEnergy(getInUnit() - v.getInUnit(), getUnit()) : new MoneyPerEnergy(
-                this.si - v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
+        return getUnit().equals(v.getUnit()) ? new MoneyPerEnergy(getInUnit() - v.getInUnit(), getUnit())
+            : new MoneyPerEnergy(this.si - v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
     }
 
     /**
@@ -333,7 +333,7 @@ public class MoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> implemen
      * @param v MoneyPerEnergy scalar
      * @return Money scalar as a multiplication of MoneyPerEnergy and Energy
      */
-    public final Money multiplyBy(final Energy.Rel v)
+    public final Money multiplyBy(final Energy v)
     {
         return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
     }

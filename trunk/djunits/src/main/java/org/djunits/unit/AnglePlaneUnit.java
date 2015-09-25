@@ -52,18 +52,24 @@ public class AnglePlaneUnit extends Unit<AnglePlaneUnit>
     {
         SI = new AnglePlaneUnit("AnglePlaneUnit.radian", "AnglePlaneUnit.rad", SI_DERIVED);
         RADIAN = SI;
-        DEGREE = new AnglePlaneUnit("AnglePlaneUnit.degree", "AnglePlaneUnit.deg", SI_ACCEPTED, RADIAN, Math.PI / 180.0, true);
+        DEGREE =
+            new AnglePlaneUnit("AnglePlaneUnit.degree", "AnglePlaneUnit.deg", SI_ACCEPTED, RADIAN, Math.PI / 180.0,
+                true);
         ARCMINUTE =
-                new AnglePlaneUnit("AnglePlaneUnit.arcminute", "AnglePlaneUnit.arcmin", SI_ACCEPTED, DEGREE, 1.0 / 60.0, true);
+            new AnglePlaneUnit("AnglePlaneUnit.arcminute", "AnglePlaneUnit.arcmin", SI_ACCEPTED, DEGREE, 1.0 / 60.0,
+                true);
         ARCSECOND =
-                new AnglePlaneUnit("AnglePlaneUnit.arcsecond", "AnglePlaneUnit.arcsec", SI_ACCEPTED, DEGREE, 1.0 / 3600.0, true);
-        GRAD = new AnglePlaneUnit("AnglePlaneUnit.gradian", "AnglePlaneUnit.grad", OTHER, RADIAN, 2.0 * Math.PI / 400.0, true);
+            new AnglePlaneUnit("AnglePlaneUnit.arcsecond", "AnglePlaneUnit.arcsec", SI_ACCEPTED, DEGREE, 1.0 / 3600.0,
+                true);
+        GRAD =
+            new AnglePlaneUnit("AnglePlaneUnit.gradian", "AnglePlaneUnit.grad", OTHER, RADIAN, 2.0 * Math.PI / 400.0,
+                true);
         CENTESIMAL_ARCMINUTE =
-                new AnglePlaneUnit("AnglePlaneUnit.centesimal_arcminute", "AnglePlaneUnit.centesimal_arcmin", OTHER, GRAD,
-                        1.0 / 100.0, true);
+            new AnglePlaneUnit("AnglePlaneUnit.centesimal_arcminute", "AnglePlaneUnit.centesimal_arcmin", OTHER, GRAD,
+                1.0 / 100.0, true);
         CENTESIMAL_ARCSECOND =
-                new AnglePlaneUnit("AnglePlaneUnit.centesimal_arcsecond", "AnglePlaneUnit.centesimal_arcsec", OTHER, GRAD,
-                        1.0 / 10000.0, true);
+            new AnglePlaneUnit("AnglePlaneUnit.centesimal_arcsecond", "AnglePlaneUnit.centesimal_arcsec", OTHER, GRAD,
+                1.0 / 10000.0, true);
     }
 
     /**
@@ -87,11 +93,12 @@ public class AnglePlaneUnit extends Unit<AnglePlaneUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private AnglePlaneUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final AnglePlaneUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+    private AnglePlaneUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+        final UnitSystem unitSystem, final AnglePlaneUnit referenceUnit, final double conversionFactorToReferenceUnit,
+        final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-                standardUnit);
+            standardUnit);
     }
 
     /**
@@ -103,7 +110,7 @@ public class AnglePlaneUnit extends Unit<AnglePlaneUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public AnglePlaneUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final AnglePlaneUnit referenceUnit, final double conversionFactorToReferenceUnit)
+        final AnglePlaneUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

@@ -2,13 +2,12 @@ package org.djunits.value.vfloat.scalar;
 
 import org.djunits.unit.AnglePlaneUnit;
 import org.djunits.unit.DimensionlessUnit;
-import org.djunits.unit.UNITS;
 
 /**
  * Easy access methods for the AnglePlane FloatScalar. Instead of <br>
  * <i>FloatScalar.Rel&lt;SomeUnit&gt; value = new FloatScalar.Rel&lt;SomeUnit&gt;(0.2, SomeUnit.UNIT);</i><br>
  * we can now write <br>
- * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass.Rel margin = new Mass.Rel(0.2, KILOGRAM);</i><br>
+ * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass margin = new Mass(0.2, KILOGRAM);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
@@ -20,7 +19,7 @@ import org.djunits.unit.UNITS;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface AnglePlane extends UNITS
+public interface AnglePlane
 {
     /**
      * Easy access methods for the AnglePlane FloatScalar. Instead of <br>
@@ -80,9 +79,11 @@ public interface AnglePlane extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static AnglePlane.Rel interpolate(final AnglePlane.Rel zero, final AnglePlane.Rel one, final float ratio)
+        public static AnglePlane.Rel
+            interpolate(final AnglePlane.Rel zero, final AnglePlane.Rel one, final float ratio)
         {
-            return new AnglePlane.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new AnglePlane.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -92,7 +93,8 @@ public interface AnglePlane extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static AnglePlane.Rel interpolate(final AnglePlane.Rel zero, final AnglePlane.Rel one, final double ratio)
+        public static AnglePlane.Rel
+            interpolate(final AnglePlane.Rel zero, final AnglePlane.Rel one, final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -321,7 +323,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Rel plus(final AnglePlane.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new AnglePlane.Rel(this.si + v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Rel(this.si + v.si, AnglePlaneUnit.SI);
         }
 
         /**
@@ -332,7 +334,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Rel minus(final AnglePlane.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new AnglePlane.Rel(this.si - v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Rel(this.si - v.si, AnglePlaneUnit.SI);
         }
 
         /**
@@ -343,7 +345,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Abs plus(final AnglePlane.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new AnglePlane.Abs(this.si + v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Abs(this.si + v.si, AnglePlaneUnit.SI);
         }
 
         /**
@@ -425,9 +427,11 @@ public interface AnglePlane extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static AnglePlane.Abs interpolate(final AnglePlane.Abs zero, final AnglePlane.Abs one, final float ratio)
+        public static AnglePlane.Abs
+            interpolate(final AnglePlane.Abs zero, final AnglePlane.Abs one, final float ratio)
         {
-            return new AnglePlane.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new AnglePlane.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -437,7 +441,8 @@ public interface AnglePlane extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static AnglePlane.Abs interpolate(final AnglePlane.Abs zero, final AnglePlane.Abs one, final double ratio)
+        public static AnglePlane.Abs
+            interpolate(final AnglePlane.Abs zero, final AnglePlane.Abs one, final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -624,40 +629,6 @@ public interface AnglePlane extends UNITS
             return new AnglePlane.Abs((float) Math.pow(getInUnit(), x), getUnit());
         }
 
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs multiplyBy(final float factor)
-        {
-            return new AnglePlane.Abs(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of an absolute angleplane
-         */
-        public final AnglePlane.Abs multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs divideBy(final float divisor)
-        {
-            return new AnglePlane.Abs(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of an absolute angleplane
-         */
-        public final AnglePlane.Abs divideBy(final double factor)
-        {
-            return divideBy((float) factor);
-        }
-
         /**
          * Absolute scalar plus Relative scalar = Absolute scalar.
          * @param v the value to add
@@ -666,7 +637,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Abs plus(final AnglePlane.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new AnglePlane.Abs(this.si + v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Abs(this.si + v.si, AnglePlaneUnit.SI);
         }
 
         /**
@@ -677,7 +648,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Rel minus(final AnglePlane.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new AnglePlane.Rel(this.si - v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Rel(this.si - v.si, AnglePlaneUnit.SI);
         }
 
         /**
@@ -688,7 +659,7 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Abs minus(final AnglePlane.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new AnglePlane.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new AnglePlane.Abs(this.si - v.si, AnglePlaneUnit.SI);
+                : new AnglePlane.Abs(this.si - v.si, AnglePlaneUnit.SI);
         }
 
         /**
@@ -698,16 +669,6 @@ public interface AnglePlane extends UNITS
         public final AnglePlane.Rel toRel()
         {
             return new AnglePlane.Rel(getInUnit(), getUnit());
-        }
-
-        /**
-         * Calculate the division of AnglePlane and AnglePlane, which results in a Dimensionless scalar.
-         * @param v AnglePlane scalar
-         * @return Dimensionless scalar as a division of AnglePlane and AnglePlane
-         */
-        public final Dimensionless.Abs divideBy(final AnglePlane.Abs v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
         }
 
     }

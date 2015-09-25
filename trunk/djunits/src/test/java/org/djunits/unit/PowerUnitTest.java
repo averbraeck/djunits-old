@@ -53,7 +53,8 @@ public class PowerUnitTest extends AbstractUnitTest<PowerUnit>
             "foot pound-force per minute", "ft.lbf/min");
         // Check two conversions between non-standard units
         assertEquals("one FOOT POUND FORCE PER HOUR is about 0.0166667 FOOT POUND FORCE PER MINUTE", 0.01666667,
-            getMultiplicationFactorTo(PowerUnit.FOOT_POUND_FORCE_PER_HOUR, PowerUnit.FOOT_POUND_FORCE_PER_MINUTE), 0.0000001);
+            getMultiplicationFactorTo(PowerUnit.FOOT_POUND_FORCE_PER_HOUR, PowerUnit.FOOT_POUND_FORCE_PER_MINUTE),
+            0.0000001);
         assertEquals("one FOOT POUND FORCE PER MINUTE is 60 FOOT POUND FORCE PER HOUR", 60, getMultiplicationFactorTo(
             PowerUnit.FOOT_POUND_FORCE_PER_MINUTE, PowerUnit.FOOT_POUND_FORCE_PER_HOUR), 0.000001);
         // Check conversion factor to standard unit for all remaining time units
@@ -62,7 +63,8 @@ public class PowerUnitTest extends AbstractUnitTest<PowerUnit>
         checkUnitRatioNameAndAbbreviation(PowerUnit.GIGAWATT, 1e9, 1e3, "gigawatt", "GW");
         checkUnitRatioNameAndAbbreviation(PowerUnit.FOOT_POUND_FORCE_PER_SECOND, 1.3558179, 0.000001,
             "foot pound-force per second", "ft.lbf/s");
-        checkUnitRatioNameAndAbbreviation(PowerUnit.HORSEPOWER_METRIC, 735.49875, 0.00001, "horsepower (metric)", "hp(M)");
+        checkUnitRatioNameAndAbbreviation(PowerUnit.HORSEPOWER_METRIC, 735.49875, 0.00001, "horsepower (metric)",
+            "hp(M)");
     }
 
     /**

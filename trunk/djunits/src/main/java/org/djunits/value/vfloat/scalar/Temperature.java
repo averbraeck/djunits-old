@@ -2,13 +2,12 @@ package org.djunits.value.vfloat.scalar;
 
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.TemperatureUnit;
-import org.djunits.unit.UNITS;
 
 /**
  * Easy access methods for the Temperature FloatScalar. Instead of <br>
  * <i>FloatScalar.Rel&lt;SomeUnit&gt; value = new FloatScalar.Rel&lt;SomeUnit&gt;(0.2, SomeUnit.UNIT);</i><br>
  * we can now write <br>
- * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass.Rel margin = new Mass.Rel(0.2, KILOGRAM);</i><br>
+ * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass margin = new Mass(0.2, KILOGRAM);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
@@ -20,7 +19,7 @@ import org.djunits.unit.UNITS;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface Temperature extends UNITS
+public interface Temperature
 {
     /**
      * Easy access methods for the Temperature FloatScalar. Instead of <br>
@@ -80,9 +79,11 @@ public interface Temperature extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Temperature.Rel interpolate(final Temperature.Rel zero, final Temperature.Rel one, final float ratio)
+        public static Temperature.Rel interpolate(final Temperature.Rel zero, final Temperature.Rel one,
+            final float ratio)
         {
-            return new Temperature.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new Temperature.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -92,7 +93,8 @@ public interface Temperature extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Temperature.Rel interpolate(final Temperature.Rel zero, final Temperature.Rel one, final double ratio)
+        public static Temperature.Rel interpolate(final Temperature.Rel zero, final Temperature.Rel one,
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -321,7 +323,7 @@ public interface Temperature extends UNITS
         public final Temperature.Rel plus(final Temperature.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new Temperature.Rel(this.si + v.si, TemperatureUnit.SI);
+                : new Temperature.Rel(this.si + v.si, TemperatureUnit.SI);
         }
 
         /**
@@ -332,7 +334,7 @@ public interface Temperature extends UNITS
         public final Temperature.Rel minus(final Temperature.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new Temperature.Rel(this.si - v.si, TemperatureUnit.SI);
+                : new Temperature.Rel(this.si - v.si, TemperatureUnit.SI);
         }
 
         /**
@@ -343,7 +345,7 @@ public interface Temperature extends UNITS
         public final Temperature.Abs plus(final Temperature.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new Temperature.Abs(this.si + v.si, TemperatureUnit.SI);
+                : new Temperature.Abs(this.si + v.si, TemperatureUnit.SI);
         }
 
         /**
@@ -425,9 +427,11 @@ public interface Temperature extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Temperature.Abs interpolate(final Temperature.Abs zero, final Temperature.Abs one, final float ratio)
+        public static Temperature.Abs interpolate(final Temperature.Abs zero, final Temperature.Abs one,
+            final float ratio)
         {
-            return new Temperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new Temperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -437,7 +441,8 @@ public interface Temperature extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Temperature.Abs interpolate(final Temperature.Abs zero, final Temperature.Abs one, final double ratio)
+        public static Temperature.Abs interpolate(final Temperature.Abs zero, final Temperature.Abs one,
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -624,40 +629,6 @@ public interface Temperature extends UNITS
             return new Temperature.Abs((float) Math.pow(getInUnit(), x), getUnit());
         }
 
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs multiplyBy(final float factor)
-        {
-            return new Temperature.Abs(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of an absolute temperature
-         */
-        public final Temperature.Abs multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs divideBy(final float divisor)
-        {
-            return new Temperature.Abs(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of an absolute temperature
-         */
-        public final Temperature.Abs divideBy(final double factor)
-        {
-            return divideBy((float) factor);
-        }
-
         /**
          * Absolute scalar plus Relative scalar = Absolute scalar.
          * @param v the value to add
@@ -666,7 +637,7 @@ public interface Temperature extends UNITS
         public final Temperature.Abs plus(final Temperature.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new Temperature.Abs(this.si + v.si, TemperatureUnit.SI);
+                : new Temperature.Abs(this.si + v.si, TemperatureUnit.SI);
         }
 
         /**
@@ -677,7 +648,7 @@ public interface Temperature extends UNITS
         public final Temperature.Rel minus(final Temperature.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new Temperature.Rel(this.si - v.si, TemperatureUnit.SI);
+                : new Temperature.Rel(this.si - v.si, TemperatureUnit.SI);
         }
 
         /**
@@ -688,7 +659,7 @@ public interface Temperature extends UNITS
         public final Temperature.Abs minus(final Temperature.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Temperature.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new Temperature.Abs(this.si - v.si, TemperatureUnit.SI);
+                : new Temperature.Abs(this.si - v.si, TemperatureUnit.SI);
         }
 
         /**
@@ -698,16 +669,6 @@ public interface Temperature extends UNITS
         public final Temperature.Rel toRel()
         {
             return new Temperature.Rel(getInUnit(), getUnit());
-        }
-
-        /**
-         * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
-         * @param v Temperature scalar
-         * @return Dimensionless scalar as a division of Temperature and Temperature
-         */
-        public final Dimensionless.Abs divideBy(final Temperature.Abs v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
         }
 
     }

@@ -43,13 +43,15 @@ public class MoneyPerMassUnit extends Unit<MoneyPerMassUnit>
 
     static
     {
-        EUR_PER_KILOGRAM = new MoneyPerMassUnit(MoneyUnit.EUR, MassUnit.KILOGRAM, "EUR per kilogram", "\u20AC/kg", false);
+        EUR_PER_KILOGRAM =
+            new MoneyPerMassUnit(MoneyUnit.EUR, MassUnit.KILOGRAM, "EUR per kilogram", "\u20AC/kg", false);
         EUR_PER_METRIC_TON =
-                new MoneyPerMassUnit(MoneyUnit.EUR, MassUnit.TON_METRIC, "EUR per metric ton", "\u20AC/ton(metric)", false);
+            new MoneyPerMassUnit(MoneyUnit.EUR, MassUnit.TON_METRIC, "EUR per metric ton", "\u20AC/ton(metric)", false);
         USD_PER_POUND = new MoneyPerMassUnit(MoneyUnit.USD, MassUnit.POUND, "USD per pound", "US$/lb", false);
-        USD_PER_LONG_TON = new MoneyPerMassUnit(MoneyUnit.USD, MassUnit.TON_LONG, "USD per long ton", "US$/ton(long)", false);
+        USD_PER_LONG_TON =
+            new MoneyPerMassUnit(MoneyUnit.USD, MassUnit.TON_LONG, "USD per long ton", "US$/ton(long)", false);
         USD_PER_SHORT_TON =
-                new MoneyPerMassUnit(MoneyUnit.USD, MassUnit.TON_SHORT, "USD per short ton", "US$/ton(short)", false);
+            new MoneyPerMassUnit(MoneyUnit.USD, MassUnit.TON_SHORT, "USD per short ton", "US$/ton(short)", false);
         standardMoneyPerMassUnit = EUR_PER_KILOGRAM;
     }
 
@@ -63,10 +65,11 @@ public class MoneyPerMassUnit extends Unit<MoneyPerMassUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerMassUnit(final MoneyUnit moneyUnit, final MassUnit massUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final boolean standardUnit)
+        final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerMassUnit, moneyUnit
-                .getConversionFactorToStandardUnit() / massUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit()
+            / massUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.massUnit = massUnit;
     }
@@ -78,7 +81,8 @@ public class MoneyPerMassUnit extends Unit<MoneyPerMassUnit>
      * @param name the key to the locale file for the long name of the unit
      * @param abbreviation the key to the locale file for the abbreviation of the unit
      */
-    public MoneyPerMassUnit(final MoneyUnit moneyUnit, final MassUnit massUnit, final String name, final String abbreviation)
+    public MoneyPerMassUnit(final MoneyUnit moneyUnit, final MassUnit massUnit, final String name,
+        final String abbreviation)
     {
         this(moneyUnit, massUnit, name, abbreviation, false);
     }
@@ -93,10 +97,10 @@ public class MoneyPerMassUnit extends Unit<MoneyPerMassUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerMassUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final MoneyPerMassUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+        final MoneyPerMassUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, conversionFactorToReferenceUnit,
-                standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit,
+            conversionFactorToReferenceUnit, standardUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.massUnit = referenceUnit.getMassUnit();
     }
@@ -109,7 +113,7 @@ public class MoneyPerMassUnit extends Unit<MoneyPerMassUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MoneyPerMassUnit(final String name, final String abbreviation, final MoneyPerMassUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+        final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, referenceUnit, conversionFactorToReferenceUnit, false);
     }
@@ -139,8 +143,8 @@ public class MoneyPerMassUnit extends Unit<MoneyPerMassUnit>
         try
         {
             standardMoneyPerMassUnit =
-                    new MoneyPerMassUnit(standardMoneyUnit, MassUnit.KILOGRAM, standardMoneyUnit.getName() + " per kilogram",
-                            standardMoneyUnit.getAbbreviation() + "/kg");
+                new MoneyPerMassUnit(standardMoneyUnit, MassUnit.KILOGRAM, standardMoneyUnit.getName()
+                    + " per kilogram", standardMoneyUnit.getAbbreviation() + "/kg");
         }
         catch (Exception e)
         {

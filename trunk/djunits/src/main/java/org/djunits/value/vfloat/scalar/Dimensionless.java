@@ -32,14 +32,13 @@ import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.unit.TorqueUnit;
-import org.djunits.unit.UNITS;
 import org.djunits.unit.VolumeUnit;
 
 /**
  * Easy access methods for the Dimensionless FloatScalar. Instead of <br>
  * <i>FloatScalar.Rel&lt;SomeUnit&gt; value = new FloatScalar.Rel&lt;SomeUnit&gt;(0.2, SomeUnit.UNIT);</i><br>
  * we can now write <br>
- * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass.Rel margin = new Mass.Rel(0.2, KILOGRAM);</i><br>
+ * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass margin = new Mass(0.2, KILOGRAM);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
@@ -51,7 +50,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface Dimensionless extends UNITS
+public interface Dimensionless
 {
     /**
      * Easy access methods for the Dimensionless FloatScalar. Instead of <br>
@@ -111,9 +110,11 @@ public interface Dimensionless extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Dimensionless.Rel interpolate(final Dimensionless.Rel zero, final Dimensionless.Rel one, final float ratio)
+        public static Dimensionless.Rel interpolate(final Dimensionless.Rel zero, final Dimensionless.Rel one,
+            final float ratio)
         {
-            return new Dimensionless.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new Dimensionless.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -124,7 +125,7 @@ public interface Dimensionless extends UNITS
          * @return a Scalar at the ratio between
          */
         public static Dimensionless.Rel interpolate(final Dimensionless.Rel zero, final Dimensionless.Rel one,
-                final double ratio)
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -353,7 +354,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Rel plus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() + v.getInUnit(), getUnit())
-                    : new Dimensionless.Rel(this.si + v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Rel(this.si + v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -364,7 +365,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Rel minus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -375,7 +376,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Abs plus(final Dimensionless.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -402,9 +403,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Acceleration scalar as a multiplication of Dimensionless and Acceleration
          */
-        public final Acceleration.Rel multiplyBy(final Acceleration.Rel v)
+        public final Acceleration multiplyBy(final Acceleration v)
         {
-            return new Acceleration.Rel(this.si * v.si, AccelerationUnit.SI);
+            return new Acceleration(this.si * v.si, AccelerationUnit.SI);
         }
 
         /**
@@ -422,9 +423,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return AngleSlope scalar as a multiplication of Dimensionless and AngleSlope
          */
-        public final AngleSlope.Rel multiplyBy(final AngleSlope.Rel v)
+        public final AngleSlope multiplyBy(final AngleSlope v)
         {
-            return new AngleSlope.Rel(this.si * v.si, AngleSlopeUnit.SI);
+            return new AngleSlope(this.si * v.si, AngleSlopeUnit.SI);
         }
 
         /**
@@ -432,9 +433,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return AngleSolid scalar as a multiplication of Dimensionless and AngleSolid
          */
-        public final AngleSolid.Rel multiplyBy(final AngleSolid.Rel v)
+        public final AngleSolid multiplyBy(final AngleSolid v)
         {
-            return new AngleSolid.Rel(this.si * v.si, AngleSolidUnit.SI);
+            return new AngleSolid(this.si * v.si, AngleSolidUnit.SI);
         }
 
         /**
@@ -442,9 +443,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Area scalar as a multiplication of Dimensionless and Area
          */
-        public final Area.Rel multiplyBy(final Area.Rel v)
+        public final Area multiplyBy(final Area v)
         {
-            return new Area.Rel(this.si * v.si, AreaUnit.SI);
+            return new Area(this.si * v.si, AreaUnit.SI);
         }
 
         /**
@@ -452,9 +453,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Density scalar as a multiplication of Dimensionless and Density
          */
-        public final Density.Rel multiplyBy(final Density.Rel v)
+        public final Density multiplyBy(final Density v)
         {
-            return new Density.Rel(this.si * v.si, DensityUnit.SI);
+            return new Density(this.si * v.si, DensityUnit.SI);
         }
 
         /**
@@ -472,9 +473,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return ElectricalCharge scalar as a multiplication of Dimensionless and ElectricalCharge
          */
-        public final ElectricalCharge.Rel multiplyBy(final ElectricalCharge.Rel v)
+        public final ElectricalCharge multiplyBy(final ElectricalCharge v)
         {
-            return new ElectricalCharge.Rel(this.si * v.si, ElectricalChargeUnit.SI);
+            return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
         }
 
         /**
@@ -482,9 +483,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return ElectricalCurrent scalar as a multiplication of Dimensionless and ElectricalCurrent
          */
-        public final ElectricalCurrent.Rel multiplyBy(final ElectricalCurrent.Rel v)
+        public final ElectricalCurrent multiplyBy(final ElectricalCurrent v)
         {
-            return new ElectricalCurrent.Rel(this.si * v.si, ElectricalCurrentUnit.SI);
+            return new ElectricalCurrent(this.si * v.si, ElectricalCurrentUnit.SI);
         }
 
         /**
@@ -492,9 +493,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return ElectricalPotential scalar as a multiplication of Dimensionless and ElectricalPotential
          */
-        public final ElectricalPotential.Rel multiplyBy(final ElectricalPotential.Rel v)
+        public final ElectricalPotential multiplyBy(final ElectricalPotential v)
         {
-            return new ElectricalPotential.Rel(this.si * v.si, ElectricalPotentialUnit.SI);
+            return new ElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
         }
 
         /**
@@ -503,9 +504,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return ElectricalResistance scalar as a multiplication of Dimensionless and ElectricalResistance
          */
-        public final ElectricalResistance.Rel multiplyBy(final ElectricalResistance.Rel v)
+        public final ElectricalResistance multiplyBy(final ElectricalResistance v)
         {
-            return new ElectricalResistance.Rel(this.si * v.si, ElectricalResistanceUnit.SI);
+            return new ElectricalResistance(this.si * v.si, ElectricalResistanceUnit.SI);
         }
 
         /**
@@ -513,9 +514,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Energy scalar as a multiplication of Dimensionless and Energy
          */
-        public final Energy.Rel multiplyBy(final Energy.Rel v)
+        public final Energy multiplyBy(final Energy v)
         {
-            return new Energy.Rel(this.si * v.si, EnergyUnit.SI);
+            return new Energy(this.si * v.si, EnergyUnit.SI);
         }
 
         /**
@@ -523,9 +524,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return FlowMass scalar as a multiplication of Dimensionless and FlowMass
          */
-        public final FlowMass.Rel multiplyBy(final FlowMass.Rel v)
+        public final FlowMass multiplyBy(final FlowMass v)
         {
-            return new FlowMass.Rel(this.si * v.si, FlowMassUnit.SI);
+            return new FlowMass(this.si * v.si, FlowMassUnit.SI);
         }
 
         /**
@@ -533,9 +534,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return FlowVolume scalar as a multiplication of Dimensionless and FlowVolume
          */
-        public final FlowVolume.Rel multiplyBy(final FlowVolume.Rel v)
+        public final FlowVolume multiplyBy(final FlowVolume v)
         {
-            return new FlowVolume.Rel(this.si * v.si, FlowVolumeUnit.SI);
+            return new FlowVolume(this.si * v.si, FlowVolumeUnit.SI);
         }
 
         /**
@@ -543,9 +544,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Force scalar as a multiplication of Dimensionless and Force
          */
-        public final Force.Rel multiplyBy(final Force.Rel v)
+        public final Force multiplyBy(final Force v)
         {
-            return new Force.Rel(this.si * v.si, ForceUnit.SI);
+            return new Force(this.si * v.si, ForceUnit.SI);
         }
 
         /**
@@ -553,9 +554,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Frequency scalar as a multiplication of Dimensionless and Frequency
          */
-        public final Frequency.Rel multiplyBy(final Frequency.Rel v)
+        public final Frequency multiplyBy(final Frequency v)
         {
-            return new Frequency.Rel(this.si * v.si, FrequencyUnit.SI);
+            return new Frequency(this.si * v.si, FrequencyUnit.SI);
         }
 
         /**
@@ -573,9 +574,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return LinearDensity scalar as a multiplication of Dimensionless and LinearDensity
          */
-        public final LinearDensity.Rel multiplyBy(final LinearDensity.Rel v)
+        public final LinearDensity multiplyBy(final LinearDensity v)
         {
-            return new LinearDensity.Rel(this.si * v.si, LinearDensityUnit.SI);
+            return new LinearDensity(this.si * v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -583,9 +584,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Mass scalar as a multiplication of Dimensionless and Mass
          */
-        public final Mass.Rel multiplyBy(final Mass.Rel v)
+        public final Mass multiplyBy(final Mass v)
         {
-            return new Mass.Rel(this.si * v.si, MassUnit.SI);
+            return new Mass(this.si * v.si, MassUnit.SI);
         }
 
         /**
@@ -663,9 +664,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Power scalar as a multiplication of Dimensionless and Power
          */
-        public final Power.Rel multiplyBy(final Power.Rel v)
+        public final Power multiplyBy(final Power v)
         {
-            return new Power.Rel(this.si * v.si, PowerUnit.SI);
+            return new Power(this.si * v.si, PowerUnit.SI);
         }
 
         /**
@@ -673,9 +674,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Pressure scalar as a multiplication of Dimensionless and Pressure
          */
-        public final Pressure.Rel multiplyBy(final Pressure.Rel v)
+        public final Pressure multiplyBy(final Pressure v)
         {
-            return new Pressure.Rel(this.si * v.si, PressureUnit.SI);
+            return new Pressure(this.si * v.si, PressureUnit.SI);
         }
 
         /**
@@ -683,9 +684,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Speed scalar as a multiplication of Dimensionless and Speed
          */
-        public final Speed.Rel multiplyBy(final Speed.Rel v)
+        public final Speed multiplyBy(final Speed v)
         {
-            return new Speed.Rel(this.si * v.si, SpeedUnit.SI);
+            return new Speed(this.si * v.si, SpeedUnit.SI);
         }
 
         /**
@@ -713,9 +714,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Torque scalar as a multiplication of Dimensionless and Torque
          */
-        public final Torque.Rel multiplyBy(final Torque.Rel v)
+        public final Torque multiplyBy(final Torque v)
         {
-            return new Torque.Rel(this.si * v.si, TorqueUnit.SI);
+            return new Torque(this.si * v.si, TorqueUnit.SI);
         }
 
         /**
@@ -723,9 +724,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Volume scalar as a multiplication of Dimensionless and Volume
          */
-        public final Volume.Rel multiplyBy(final Volume.Rel v)
+        public final Volume multiplyBy(final Volume v)
         {
-            return new Volume.Rel(this.si * v.si, VolumeUnit.SI);
+            return new Volume(this.si * v.si, VolumeUnit.SI);
         }
 
         /**
@@ -733,9 +734,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return LinearDensity scalar as a division of Dimensionless and Length
          */
-        public final LinearDensity.Rel divideBy(final Length.Rel v)
+        public final LinearDensity divideBy(final Length.Rel v)
         {
-            return new LinearDensity.Rel(this.si / v.si, LinearDensityUnit.SI);
+            return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
         }
 
         /**
@@ -743,7 +744,7 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Length scalar as a division of Dimensionless and LinearDensity
          */
-        public final Length.Rel divideBy(final LinearDensity.Rel v)
+        public final Length.Rel divideBy(final LinearDensity v)
         {
             return new Length.Rel(this.si / v.si, LengthUnit.SI);
         }
@@ -753,9 +754,9 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Frequency scalar as a division of Dimensionless and Time
          */
-        public final Frequency.Rel divideBy(final Time.Rel v)
+        public final Frequency divideBy(final Time.Rel v)
         {
-            return new Frequency.Rel(this.si / v.si, FrequencyUnit.SI);
+            return new Frequency(this.si / v.si, FrequencyUnit.SI);
         }
 
         /**
@@ -763,7 +764,7 @@ public interface Dimensionless extends UNITS
          * @param v Dimensionless scalar
          * @return Time scalar as a division of Dimensionless and Frequency
          */
-        public final Time.Rel divideBy(final Frequency.Rel v)
+        public final Time.Rel divideBy(final Frequency v)
         {
             return new Time.Rel(this.si / v.si, TimeUnit.SI);
         }
@@ -828,9 +829,11 @@ public interface Dimensionless extends UNITS
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Dimensionless.Abs interpolate(final Dimensionless.Abs zero, final Dimensionless.Abs one, final float ratio)
+        public static Dimensionless.Abs interpolate(final Dimensionless.Abs zero, final Dimensionless.Abs one,
+            final float ratio)
         {
-            return new Dimensionless.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new Dimensionless.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -841,7 +844,7 @@ public interface Dimensionless extends UNITS
          * @return a Scalar at the ratio between
          */
         public static Dimensionless.Abs interpolate(final Dimensionless.Abs zero, final Dimensionless.Abs one,
-                final double ratio)
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -1028,40 +1031,6 @@ public interface Dimensionless extends UNITS
             return new Dimensionless.Abs((float) Math.pow(getInUnit(), x), getUnit());
         }
 
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs multiplyBy(final float factor)
-        {
-            return new Dimensionless.Abs(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of an absolute dimensionless
-         */
-        public final Dimensionless.Abs multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs divideBy(final float divisor)
-        {
-            return new Dimensionless.Abs(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of an absolute dimensionless
-         */
-        public final Dimensionless.Abs divideBy(final double factor)
-        {
-            return divideBy((float) factor);
-        }
-
         /**
          * Absolute scalar plus Relative scalar = Absolute scalar.
          * @param v the value to add
@@ -1070,7 +1039,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Abs plus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() + v.getInUnit(), getUnit())
-                    : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -1081,7 +1050,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Rel minus(final Dimensionless.Abs v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() - v.getInUnit(), getUnit())
-                    : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -1092,7 +1061,7 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Abs minus(final Dimensionless.Rel v)
         {
             return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() - v.getInUnit(), getUnit())
-                    : new Dimensionless.Abs(this.si - v.si, DimensionlessUnit.SI);
+                : new Dimensionless.Abs(this.si - v.si, DimensionlessUnit.SI);
         }
 
         /**
@@ -1102,387 +1071,6 @@ public interface Dimensionless extends UNITS
         public final Dimensionless.Rel toRel()
         {
             return new Dimensionless.Rel(getInUnit(), getUnit());
-        }
-
-        /**
-         * Calculate the division of Dimensionless and Dimensionless, which results in a Dimensionless scalar.
-         * @param v Dimensionless scalar
-         * @return Dimensionless scalar as a division of Dimensionless and Dimensionless
-         */
-        public final Dimensionless.Abs divideBy(final Dimensionless.Abs v)
-        {
-            return new Dimensionless.Abs(this.si / v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Acceleration, which results in a Acceleration scalar.
-         * @param v Dimensionless scalar
-         * @return Acceleration scalar as a multiplication of Dimensionless and Acceleration
-         */
-        public final Acceleration.Abs multiplyBy(final Acceleration.Abs v)
-        {
-            return new Acceleration.Abs(this.si * v.si, AccelerationUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and AnglePlane, which results in a AnglePlane scalar.
-         * @param v Dimensionless scalar
-         * @return AnglePlane scalar as a multiplication of Dimensionless and AnglePlane
-         */
-        public final AnglePlane.Abs multiplyBy(final AnglePlane.Abs v)
-        {
-            return new AnglePlane.Abs(this.si * v.si, AnglePlaneUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and AngleSlope, which results in a AngleSlope scalar.
-         * @param v Dimensionless scalar
-         * @return AngleSlope scalar as a multiplication of Dimensionless and AngleSlope
-         */
-        public final AngleSlope.Abs multiplyBy(final AngleSlope.Abs v)
-        {
-            return new AngleSlope.Abs(this.si * v.si, AngleSlopeUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and AngleSolid, which results in a AngleSolid scalar.
-         * @param v Dimensionless scalar
-         * @return AngleSolid scalar as a multiplication of Dimensionless and AngleSolid
-         */
-        public final AngleSolid.Abs multiplyBy(final AngleSolid.Abs v)
-        {
-            return new AngleSolid.Abs(this.si * v.si, AngleSolidUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Area, which results in a Area scalar.
-         * @param v Dimensionless scalar
-         * @return Area scalar as a multiplication of Dimensionless and Area
-         */
-        public final Area.Abs multiplyBy(final Area.Abs v)
-        {
-            return new Area.Abs(this.si * v.si, AreaUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Density, which results in a Density scalar.
-         * @param v Dimensionless scalar
-         * @return Density scalar as a multiplication of Dimensionless and Density
-         */
-        public final Density.Abs multiplyBy(final Density.Abs v)
-        {
-            return new Density.Abs(this.si * v.si, DensityUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Dimensionless, which results in a Dimensionless scalar.
-         * @param v Dimensionless scalar
-         * @return Dimensionless scalar as a multiplication of Dimensionless and Dimensionless
-         */
-        public final Dimensionless.Abs multiplyBy(final Dimensionless.Abs v)
-        {
-            return new Dimensionless.Abs(this.si * v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and ElectricalCharge, which results in a ElectricalCharge scalar.
-         * @param v Dimensionless scalar
-         * @return ElectricalCharge scalar as a multiplication of Dimensionless and ElectricalCharge
-         */
-        public final ElectricalCharge.Abs multiplyBy(final ElectricalCharge.Abs v)
-        {
-            return new ElectricalCharge.Abs(this.si * v.si, ElectricalChargeUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and ElectricalCurrent, which results in a ElectricalCurrent scalar.
-         * @param v Dimensionless scalar
-         * @return ElectricalCurrent scalar as a multiplication of Dimensionless and ElectricalCurrent
-         */
-        public final ElectricalCurrent.Abs multiplyBy(final ElectricalCurrent.Abs v)
-        {
-            return new ElectricalCurrent.Abs(this.si * v.si, ElectricalCurrentUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and ElectricalPotential, which results in a ElectricalPotential scalar.
-         * @param v Dimensionless scalar
-         * @return ElectricalPotential scalar as a multiplication of Dimensionless and ElectricalPotential
-         */
-        public final ElectricalPotential.Abs multiplyBy(final ElectricalPotential.Abs v)
-        {
-            return new ElectricalPotential.Abs(this.si * v.si, ElectricalPotentialUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and ElectricalResistance, which results in a ElectricalResistance
-         * scalar.
-         * @param v Dimensionless scalar
-         * @return ElectricalResistance scalar as a multiplication of Dimensionless and ElectricalResistance
-         */
-        public final ElectricalResistance.Abs multiplyBy(final ElectricalResistance.Abs v)
-        {
-            return new ElectricalResistance.Abs(this.si * v.si, ElectricalResistanceUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Energy, which results in a Energy scalar.
-         * @param v Dimensionless scalar
-         * @return Energy scalar as a multiplication of Dimensionless and Energy
-         */
-        public final Energy.Abs multiplyBy(final Energy.Abs v)
-        {
-            return new Energy.Abs(this.si * v.si, EnergyUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and FlowMass, which results in a FlowMass scalar.
-         * @param v Dimensionless scalar
-         * @return FlowMass scalar as a multiplication of Dimensionless and FlowMass
-         */
-        public final FlowMass.Abs multiplyBy(final FlowMass.Abs v)
-        {
-            return new FlowMass.Abs(this.si * v.si, FlowMassUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and FlowVolume, which results in a FlowVolume scalar.
-         * @param v Dimensionless scalar
-         * @return FlowVolume scalar as a multiplication of Dimensionless and FlowVolume
-         */
-        public final FlowVolume.Abs multiplyBy(final FlowVolume.Abs v)
-        {
-            return new FlowVolume.Abs(this.si * v.si, FlowVolumeUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Force, which results in a Force scalar.
-         * @param v Dimensionless scalar
-         * @return Force scalar as a multiplication of Dimensionless and Force
-         */
-        public final Force.Abs multiplyBy(final Force.Abs v)
-        {
-            return new Force.Abs(this.si * v.si, ForceUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Frequency, which results in a Frequency scalar.
-         * @param v Dimensionless scalar
-         * @return Frequency scalar as a multiplication of Dimensionless and Frequency
-         */
-        public final Frequency.Abs multiplyBy(final Frequency.Abs v)
-        {
-            return new Frequency.Abs(this.si * v.si, FrequencyUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Length, which results in a Length scalar.
-         * @param v Dimensionless scalar
-         * @return Length scalar as a multiplication of Dimensionless and Length
-         */
-        public final Length.Abs multiplyBy(final Length.Abs v)
-        {
-            return new Length.Abs(this.si * v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and LinearDensity, which results in a LinearDensity scalar.
-         * @param v Dimensionless scalar
-         * @return LinearDensity scalar as a multiplication of Dimensionless and LinearDensity
-         */
-        public final LinearDensity.Abs multiplyBy(final LinearDensity.Abs v)
-        {
-            return new LinearDensity.Abs(this.si * v.si, LinearDensityUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Mass, which results in a Mass scalar.
-         * @param v Dimensionless scalar
-         * @return Mass scalar as a multiplication of Dimensionless and Mass
-         */
-        public final Mass.Abs multiplyBy(final Mass.Abs v)
-        {
-            return new Mass.Abs(this.si * v.si, MassUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Money, which results in a Money scalar.
-         * @param v Dimensionless scalar
-         * @return Money scalar as a multiplication of Dimensionless and Money
-         */
-        public final Money multiplyBy(final Money v)
-        {
-            return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and MoneyPerArea, which results in a MoneyPerArea scalar.
-         * @param v Dimensionless scalar
-         * @return MoneyPerArea scalar as a multiplication of Dimensionless and MoneyPerArea
-         */
-        public final MoneyPerArea multiplyBy(final MoneyPerArea v)
-        {
-            return new MoneyPerArea(this.si * v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and MoneyPerEnergy, which results in a MoneyPerEnergy scalar.
-         * @param v Dimensionless scalar
-         * @return MoneyPerEnergy scalar as a multiplication of Dimensionless and MoneyPerEnergy
-         */
-        public final MoneyPerEnergy multiplyBy(final MoneyPerEnergy v)
-        {
-            return new MoneyPerEnergy(this.si * v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and MoneyPerLength, which results in a MoneyPerLength scalar.
-         * @param v Dimensionless scalar
-         * @return MoneyPerLength scalar as a multiplication of Dimensionless and MoneyPerLength
-         */
-        public final MoneyPerLength multiplyBy(final MoneyPerLength v)
-        {
-            return new MoneyPerLength(this.si * v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and MoneyPerMass, which results in a MoneyPerMass scalar.
-         * @param v Dimensionless scalar
-         * @return MoneyPerMass scalar as a multiplication of Dimensionless and MoneyPerMass
-         */
-        public final MoneyPerMass multiplyBy(final MoneyPerMass v)
-        {
-            return new MoneyPerMass(this.si * v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and MoneyPerTime, which results in a MoneyPerTime scalar.
-         * @param v Dimensionless scalar
-         * @return MoneyPerTime scalar as a multiplication of Dimensionless and MoneyPerTime
-         */
-        public final MoneyPerTime multiplyBy(final MoneyPerTime v)
-        {
-            return new MoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and MoneyPerVolume, which results in a MoneyPerVolume scalar.
-         * @param v Dimensionless scalar
-         * @return MoneyPerVolume scalar as a multiplication of Dimensionless and MoneyPerVolume
-         */
-        public final MoneyPerVolume multiplyBy(final MoneyPerVolume v)
-        {
-            return new MoneyPerVolume(this.si * v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Power, which results in a Power scalar.
-         * @param v Dimensionless scalar
-         * @return Power scalar as a multiplication of Dimensionless and Power
-         */
-        public final Power.Abs multiplyBy(final Power.Abs v)
-        {
-            return new Power.Abs(this.si * v.si, PowerUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Pressure, which results in a Pressure scalar.
-         * @param v Dimensionless scalar
-         * @return Pressure scalar as a multiplication of Dimensionless and Pressure
-         */
-        public final Pressure.Abs multiplyBy(final Pressure.Abs v)
-        {
-            return new Pressure.Abs(this.si * v.si, PressureUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Speed, which results in a Speed scalar.
-         * @param v Dimensionless scalar
-         * @return Speed scalar as a multiplication of Dimensionless and Speed
-         */
-        public final Speed.Abs multiplyBy(final Speed.Abs v)
-        {
-            return new Speed.Abs(this.si * v.si, SpeedUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Temperature, which results in a Temperature scalar.
-         * @param v Dimensionless scalar
-         * @return Temperature scalar as a multiplication of Dimensionless and Temperature
-         */
-        public final Temperature.Abs multiplyBy(final Temperature.Abs v)
-        {
-            return new Temperature.Abs(this.si * v.si, TemperatureUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Time, which results in a Time scalar.
-         * @param v Dimensionless scalar
-         * @return Time scalar as a multiplication of Dimensionless and Time
-         */
-        public final Time.Abs multiplyBy(final Time.Abs v)
-        {
-            return new Time.Abs(this.si * v.si, TimeUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Torque, which results in a Torque scalar.
-         * @param v Dimensionless scalar
-         * @return Torque scalar as a multiplication of Dimensionless and Torque
-         */
-        public final Torque.Abs multiplyBy(final Torque.Abs v)
-        {
-            return new Torque.Abs(this.si * v.si, TorqueUnit.SI);
-        }
-
-        /**
-         * Calculate the multiplication of Dimensionless and Volume, which results in a Volume scalar.
-         * @param v Dimensionless scalar
-         * @return Volume scalar as a multiplication of Dimensionless and Volume
-         */
-        public final Volume.Abs multiplyBy(final Volume.Abs v)
-        {
-            return new Volume.Abs(this.si * v.si, VolumeUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Dimensionless and Length, which results in a LinearDensity scalar.
-         * @param v Dimensionless scalar
-         * @return LinearDensity scalar as a division of Dimensionless and Length
-         */
-        public final LinearDensity.Abs divideBy(final Length.Abs v)
-        {
-            return new LinearDensity.Abs(this.si / v.si, LinearDensityUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Dimensionless and LinearDensity, which results in a Length scalar.
-         * @param v Dimensionless scalar
-         * @return Length scalar as a division of Dimensionless and LinearDensity
-         */
-        public final Length.Abs divideBy(final LinearDensity.Abs v)
-        {
-            return new Length.Abs(this.si / v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Dimensionless and Time, which results in a Frequency scalar.
-         * @param v Dimensionless scalar
-         * @return Frequency scalar as a division of Dimensionless and Time
-         */
-        public final Frequency.Abs divideBy(final Time.Abs v)
-        {
-            return new Frequency.Abs(this.si / v.si, FrequencyUnit.SI);
-        }
-
-        /**
-         * Calculate the division of Dimensionless and Frequency, which results in a Time scalar.
-         * @param v Dimensionless scalar
-         * @return Time scalar as a division of Dimensionless and Frequency
-         */
-        public final Time.Abs divideBy(final Frequency.Abs v)
-        {
-            return new Time.Abs(this.si / v.si, TimeUnit.SI);
         }
 
     }

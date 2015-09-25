@@ -36,7 +36,8 @@ public class SICoefficientsTest
             return;
         }
         assertTrue("input \"" + inputString + "\" should not have been parseable", null != expectedResult);
-        assertEquals("input \"" + inputString + "\" did not yield the expected result", expectedResult, result.toString());
+        assertEquals("input \"" + inputString + "\" did not yield the expected result", expectedResult, result
+            .toString());
     }
 
     /**
@@ -86,7 +87,7 @@ public class SICoefficientsTest
             SICoefficients right = new SICoefficients(SICoefficients.parse(rightString));
             SICoefficients product = SICoefficients.multiply(left, right);
             assertEquals("input \"" + leftString + "\" times " + rightString + " did not yield the expected result",
-                    expectedResult, product.toString());
+                expectedResult, product.toString());
         }
         catch (UnitException exception)
         {
@@ -125,7 +126,7 @@ public class SICoefficientsTest
             SICoefficients right = new SICoefficients(SICoefficients.parse(rightString));
             SICoefficients quotient = SICoefficients.divide(left, right);
             assertEquals("input \"" + leftString + "\" times " + rightString + " did not yield the expected result",
-                    expectedResult, quotient.toString());
+                expectedResult, quotient.toString());
         }
         catch (UnitException exception)
         {
