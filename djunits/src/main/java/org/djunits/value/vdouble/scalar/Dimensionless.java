@@ -380,9 +380,9 @@ public interface Dimensionless
          * @param v Dimensionless scalar
          * @return AngleSlope scalar as a multiplication of Dimensionless and AngleSlope
          */
-        public final AngleSlope multiplyBy(final AngleSlope v)
+        public final AngleSlope.Rel multiplyBy(final AngleSlope.Rel v)
         {
-            return new AngleSlope(this.si * v.si, AngleSlopeUnit.SI);
+            return new AngleSlope.Rel(this.si * v.si, AngleSlopeUnit.SI);
         }
 
         /**
