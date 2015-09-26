@@ -1,4 +1,5 @@
 AnglePlane
+AngleSlope
 Dimensionless
 Length
 Temperature
