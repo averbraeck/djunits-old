@@ -1,5 +1,4 @@
 Acceleration
-AngleSlope
 AngleSolid
 Area
 Density
