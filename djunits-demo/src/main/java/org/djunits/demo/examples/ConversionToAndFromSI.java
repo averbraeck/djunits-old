@@ -1,8 +1,9 @@
-package examples;
+package org.djunits.demo.examples;
 
 import java.util.Locale;
 
-import org.djunits.value.vdouble.scalar.DOUBLE_SCALAR;
+import org.djunits.unit.UNITS;
+import org.djunits.value.vdouble.scalar.Length;
 
 /**
  * This Java code demonstrates conversions between related unit using DJUNITS.
@@ -15,8 +16,14 @@ import org.djunits.value.vdouble.scalar.DOUBLE_SCALAR;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ConversionToAndFromSI implements DOUBLE_SCALAR
+public final class ConversionToAndFromSI implements UNITS
 {
+    /** */
+    private ConversionToAndFromSI()
+    {
+        // utility constructor.
+    }
+    
     /**
      * Create some scalar values to demonstrate conversion from and to related units.
      * @param args String[]; the command line arguments; not used
