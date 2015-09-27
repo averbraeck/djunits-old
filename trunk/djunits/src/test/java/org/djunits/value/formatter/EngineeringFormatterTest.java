@@ -22,23 +22,6 @@ public class EngineeringFormatterTest
 {
 
     /**
-     * See if we can increase the code coverage to include the private constructor. <br>
-     * TODO should be in a unit test of Format; not this one.
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
-     */
-    @Test
-    public void formatConstructorTest() throws InstantiationException, IllegalAccessException,
-        IllegalArgumentException, InvocationTargetException
-    {
-        Constructor<?>[] cons = Format.class.getDeclaredConstructors();
-        cons[0].setAccessible(true);
-        cons[0].newInstance((Object[]) null);
-    }
-
-    /**
      * See if we can increase the code coverage to include the private constructor.
      * @throws InstantiationException
      * @throws IllegalAccessException
