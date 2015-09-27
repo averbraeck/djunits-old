@@ -3,39 +3,27 @@
 
   <publishDate position="left" format="dd-MM-yyyy hh:mm" />
 
-  <skin>
-    <groupId>org.apache.maven.skins</groupId>
-    <artifactId>maven-stylus-skin</artifactId>
-    <version>1.5</version>
-  </skin>
-
-  <bannerLeft>
-    <name>${artifactId} ${version}</name>
-  </bannerLeft>
-
   <bannerRight>
     <name>${artifactId} ${version}</name>
   </bannerRight>
 
   <body>
 
-    <menu name="Modules">
+    <menu name="MODULES">
       <item name="djunits" href="http://djunits.org/docs/${version}/index.html" />
       <item name="djunits-demo" href="http://djunits.org/docs/${version}/djunits-demo/index.html" />
       <item name="djunits-generator" href="http://djunits.org/docs/${version}/djunits-generator/index.html" />
     </menu>
-      
-    <menu name="DOCUMENTATION" />
-    
-    <menu name="Project Information">
+
+    <menu name="PROJECT INFO">
       <item name="About" href="index.html" />
       <item name="Project Summary" href="project-summary.html" />
       <item name="Dependencies" href="dependencies.html" />
       <item name="Project Team" href="team-list.html" />
       <item name="Project License" href="license.html" />
     </menu>
-      
-    <menu name="Project Reports">
+
+    <menu name="PROJECT REPORTS">
       <item name="Reports" href="project-reports.html" />
       <item name="JavaDocs" href="apidocs/index.html" target="_blank" />
       <item name="Source Xref" href="xref/index.html" target="_blank" />
@@ -53,7 +41,7 @@
       <item name="JDepend" href="jdepend-report.html" />
     </menu>
       
-    <menu name="Related">
+    <menu name="RELATED">
       <item name="OpenTrafficSim" href="http://opentrafficsim.org" target="_blank" />
       <item name="DSOL" href="http://simulation.tudelft.nl/dsol/3.0/dsol-core/index.html" target="_blank" />
       <item name="DJUNITS manual" href="http://djunits.org" target="_blank" />
