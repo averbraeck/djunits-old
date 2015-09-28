@@ -23,21 +23,36 @@ public class UnitTest
     @Test
     public final void lookupUnitWithSICoefficients()
     {
-        assertEquals("ABVOLT is expressed in Volt", "[V]", Unit.lookupUnitWithSICoefficients(
-            ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString()).toString());
-        assertEquals("ABVOLT / STATAMPERE is expressed in Ohm", "[\u03A9]", Unit.lookupUnitWithSICoefficients(
-            SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString()).toString());
-        assertEquals("ABVOLT * STATAMPERE is expressed in Watt", "[W]", Unit.lookupUnitWithSICoefficients(
-            SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString()).toString());
-        assertEquals("ABVOLT / Watt is expressed in Ohm", "[!1/A!]", Unit.lookupOrCreateUnitWithSICoefficients(
-            SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                PowerUnit.WATT.getSICoefficients()).toString()).toString());
-        assertEquals("ABVOLT * KILOVOLT is expressed in kg2.m4/s6/A2", "[!kg2m4/s6A2!]", Unit
-            .lookupOrCreateUnitWithSICoefficients(
-                SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                    ElectricalPotentialUnit.KILOVOLT.getSICoefficients()).toString()).toString());
+        System.out.println(Unit.lookupUnitWithSICoefficients(ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString())
+                .toString());
+        System.out.println(ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString());
+        System.out.println(ElectricalPotentialUnit.VOLT.getSICoefficients().toString());
+        assertTrue(
+                "ABVOLT is expressed in Volt",
+                Unit.lookupUnitWithSICoefficients(ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString()).contains(
+                        ElectricalPotentialUnit.VOLT));
+        assertTrue(
+                "ABVOLT / STATAMPERE is expressed in Ohm",
+                Unit.lookupUnitWithSICoefficients(
+                        SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString()).contains(
+                        ElectricalResistanceUnit.OHM));
+        assertTrue(
+                "ABVOLT * STATAMPERE is expressed in Watt",
+                Unit.lookupUnitWithSICoefficients(
+                        SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString()).contains(PowerUnit.WATT));
+        assertTrue(
+                "ABVOLT / Watt is expressed in 1/A",
+                Unit.lookupOrCreateUnitWithSICoefficients(
+                        SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                                PowerUnit.WATT.getSICoefficients()).toString()).toString().contains("1/A"));
+        assertTrue(
+                "ABVOLT * KILOVOLT is expressed in kg2.m4/s6/A2",
+                Unit.lookupOrCreateUnitWithSICoefficients(
+                        SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                                ElectricalPotentialUnit.KILOVOLT.getSICoefficients()).toString()).toString()
+                        .contains("kg2m4/s6A2"));
     }
 
     /**

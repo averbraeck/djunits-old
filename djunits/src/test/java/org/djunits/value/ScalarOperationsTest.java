@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.djunits.unit.Unit;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.junit.Assert;
@@ -47,11 +48,15 @@ public class ScalarOperationsTest
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
+     * @throws ClassNotFoundException
+     * @throws IllegalArgumentException
+     * @throws SecurityException
      */
     @SuppressWarnings("static-method")
     @Test
     public final void scalarOperationsTest() throws NoSuchMethodException, InstantiationException, IllegalAccessException,
-            InvocationTargetException, NoSuchFieldException
+            InvocationTargetException, NoSuchFieldException, SecurityException, IllegalArgumentException,
+            ClassNotFoundException
     {
         doubleOrFloatScalarOperationsTest(true); // Double precision versions
         doubleOrFloatScalarOperationsTest(false); // Float versions
@@ -65,9 +70,13 @@ public class ScalarOperationsTest
      * @throws IllegalAccessException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
      * @throws NoSuchMethodException on class or method resolving error
+     * @throws ClassNotFoundException
+     * @throws IllegalArgumentException
+     * @throws SecurityException
      */
     private void doubleOrFloatScalarOperationsTest(final boolean doubleType) throws NoSuchMethodException,
-            InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchFieldException
+            InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchFieldException, SecurityException,
+            IllegalArgumentException, ClassNotFoundException
     {
         final String upperType = doubleType ? "Double" : "Float";
         final String type = upperType.toLowerCase();
@@ -134,14 +143,15 @@ public class ScalarOperationsTest
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
      * @throws SecurityException
      * @throws NoSuchMethodException
-     * @throws NoSuchFieldException 
-     * @throws InvocationTargetException 
-     * @throws IllegalArgumentException 
-     * @throws IllegalAccessException 
-     * @throws InstantiationException 
+     * @throws NoSuchFieldException
+     * @throws InvocationTargetException
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
      */
     private void testAbsRelConversion(final Class<?> scalarClassAbsRel, boolean isAbs, boolean doubleType)
-            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException
+            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException, NoSuchFieldException
     {
         double inValue = 1.23456;
         Constructor<?> constructor =
@@ -232,7 +242,7 @@ public class ScalarOperationsTest
                     + " parameters, <> 1");
         }
         Class<?> parameterClass = parTypes[0];
-        if (parameterClass.toString().equals("double"))
+        if (parameterClass.toString().equals("double") || parameterClass.toString().equals("float"))
         {
             // not interested in multiplying a scalar with a double.
             return;
@@ -241,9 +251,8 @@ public class ScalarOperationsTest
         {
             System.out.println("abs=" + abs + ", method=" + scalarClass.getName() + "." + method.getName() + " param="
                     + parameterClass.getName());
-            return;
-            // Assert.fail("DoubleScalar class " + scalarClass.getName() + "." + method.getName() + "() has parameter with non-"
-            // + relativeOrAbsoluteClass + " class: " + relativeOrAbsoluteClass.getName());
+            Assert.fail("DoubleScalar class " + scalarClass.getName() + "." + method.getName() + "() has parameter with non-"
+                    + relativeOrAbsoluteClass + " class: " + relativeOrAbsoluteClass.getName());
         }
 
         Class<?> returnClass = method.getReturnType();
@@ -648,6 +657,35 @@ public class ScalarOperationsTest
         assertEquals("Result of operation", Math.pow(value, Math.PI),
                 verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
 
+        Object compatibleRight = null;
+        if (!scalarClass.getName().contains("Money") && !scalarClass.getName().contains("Dimensionless")
+                && !scalarClass.getName().contains("Temperature"))
+        {
+            // Construct a new unit to test mixed unit plus and minus
+            Class<?> unitClass = getUnitClass(scalarClass);
+            UnitSystem unitSystem = UnitSystem.SI_DERIVED;
+            Unit<?> referenceUnit;
+            // Call the getUnit method of left
+            Method getUnitMethod = scalarClass.getMethod("getUnit");
+            referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
+            Constructor<?> unitConstructor =
+                    unitClass.getConstructor(String.class, String.class, UnitSystem.class, unitClass, double.class);
+            Object newUnit = unitConstructor.newInstance("7fullName", "7abbr", unitSystem, referenceUnit, 7d);
+            System.out.println("new unit prints like " + newUnit);
+            if (doubleType)
+            {
+                compatibleRight =
+                        abs ? (DoubleScalar.Abs<?>) constructor.newInstance(value, newUnit) : (DoubleScalar.Rel<?>) constructor
+                                .newInstance(value, newUnit);
+            }
+            else
+            {
+                compatibleRight =
+                        abs ? (FloatScalar.Abs<?>) constructor.newInstance((float) value, newUnit)
+                                : (FloatScalar.Rel<?>) constructor.newInstance((float) value, newUnit);
+            }
+            System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
+        }
         if (!abs)
         {
             Method multiplyBy = scalarClass.getDeclaredMethod("multiplyBy", new Class[] { double.class });
@@ -663,12 +701,23 @@ public class ScalarOperationsTest
             Method plus = scalarClass.getDeclaredMethod("plus", new Class[] { scalarClass });
             result = plus.invoke(left, left);
             assertEquals("Result of operation", value + value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
-        }
 
+            if (null != compatibleRight)
+            {
+                result = plus.invoke(left, compatibleRight);
+                assertEquals("Result of mixed operation", 8 * value,
+                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
+            }
+        }
         Method minus = scalarClass.getDeclaredMethod("minus", new Class[] { scalarClass });
         result = minus.invoke(left, left);
         assertEquals("Result of operation", 0, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result), 0.01);
-
+        if (null != compatibleRight)
+        {
+            result = minus.invoke(left, compatibleRight);
+            assertEquals("Result of mixed operation", -6 * value, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result),
+                    0.01);
+        }
     }
 
     /**
