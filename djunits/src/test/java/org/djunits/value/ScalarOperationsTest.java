@@ -188,10 +188,11 @@ public class ScalarOperationsTest
      * @throws InstantiationException on class or method resolving error
      * @throws NoSuchMethodException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
+     * @throws ClassNotFoundException
      */
     private void testMethods(final Class<?> scalarClassAbsRel, final boolean isAbs, final boolean doubleType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
-            NoSuchFieldException
+            NoSuchFieldException, ClassNotFoundException
     {
         for (Method method : scalarClassAbsRel.getDeclaredMethods())
         {
@@ -499,10 +500,11 @@ public class ScalarOperationsTest
      * @throws IllegalAccessException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
+     * @throws ClassNotFoundException
      */
     private void testUnaryMethods(final Class<?> scalarClass, final boolean abs, final boolean doubleType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
-            NoSuchFieldException
+            NoSuchFieldException, ClassNotFoundException
     {
         double value = 1.23456;
         Constructor<?> constructor =
@@ -684,7 +686,7 @@ public class ScalarOperationsTest
                         abs ? (FloatScalar.Abs<?>) constructor.newInstance((float) value, newUnit)
                                 : (FloatScalar.Rel<?>) constructor.newInstance((float) value, newUnit);
             }
-            System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
+            // System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
         }
         if (!abs)
         {
@@ -707,16 +709,91 @@ public class ScalarOperationsTest
                 result = plus.invoke(left, compatibleRight);
                 assertEquals("Result of mixed operation", 8 * value,
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
+                // Swap the operands
+                System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
+                        + left.getClass().getName());
+                plus = scalarClass.getDeclaredMethod("plus", new Class[] { compatibleRight.getClass() });
+                result = plus.invoke(compatibleRight, left);
+                assertEquals("Result of mixed operation", 8 * value,
+                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
+                if (scalarClass.getName().contains("$Rel"))
+                {
+                    // Make an Absolute for one operand
+                    String absScalarClassName = scalarClass.getName().replace("$Rel", "$Abs");
+                    Class<?> absScalarClass = Class.forName(absScalarClassName);
+                    Constructor<?> absScalarConstructor =
+                            absScalarClass
+                                    .getConstructor(doubleType ? double.class : float.class, getUnitClass(absScalarClass));
+                    Object absOperand = null;
+                    System.out.println("unit is " + getUnitClass(absScalarClass));
+                    if (doubleType)
+                    {
+                        absOperand = absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
+                    }
+                    else
+                    {
+                        absOperand =
+                                absScalarConstructor
+                                        .newInstance((float) value, getSIUnitInstance(getUnitClass(absScalarClass)));
+                    }
+                    // abs plus rel yields abs
+                    plus = absScalarClass.getDeclaredMethod("plus", scalarClass);
+                    result = plus.invoke(absOperand, left);
+                    assertEquals("Result of mixed abs + rel", 2 * value,
+                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result), 0.01);
+                    Method toAbs = compatibleRight.getClass().getDeclaredMethod("toAbs");
+                    Object absCompatible = toAbs.invoke(compatibleRight);
+                    result = plus.invoke(absCompatible, left);
+                    assertEquals("Result of mixed compatible abs + rel", 8 * value,
+                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result), 0.01);
+                    // rel plus abs yields abs
+                    plus = scalarClass.getDeclaredMethod("plus", absScalarClass);
+                    result = plus.invoke(left, absOperand);
+                    assertEquals("Result of mixed rel + abs", 2 * value,
+                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result), 0.01);
+                    result = plus.invoke(left, absCompatible);
+                    assertEquals("Result of mixed rel + compatible abs", 8 * value,
+                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result), 0.01);
+                }
             }
         }
         Method minus = scalarClass.getDeclaredMethod("minus", new Class[] { scalarClass });
         result = minus.invoke(left, left);
-        assertEquals("Result of operation", 0, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result), 0.01);
+        assertEquals("Result of minus", 0, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result), 0.01);
         if (null != compatibleRight)
         {
             result = minus.invoke(left, compatibleRight);
-            assertEquals("Result of mixed operation", -6 * value, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result),
-                    0.01);
+            assertEquals("Result of minus with compatible arg", -6 * value,
+                    verifyAbsRelPrecisionAndExtractSI(false, doubleType, result), 0.01);
+        }
+        if (scalarClass.getName().contains("$Rel") || scalarClass.getName().contains("$Abs"))
+        {
+            // Make an Absolute for one operand
+            String absScalarClassName = scalarClass.getName().replace("$Rel", "$Abs");
+            Class<?> absScalarClass = Class.forName(absScalarClassName);
+            Constructor<?> absScalarConstructor =
+                    absScalarClass.getConstructor(doubleType ? double.class : float.class, getUnitClass(absScalarClass));
+            Object absOperand = null;
+            System.out.println("unit is " + getUnitClass(absScalarClass));
+            if (doubleType)
+            {
+                absOperand = absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
+            }
+            else
+            {
+                absOperand = absScalarConstructor.newInstance((float) value, getSIUnitInstance(getUnitClass(absScalarClass)));
+            }
+            minus = absScalarClass.getDeclaredMethod("minus", scalarClass);
+            result = minus.invoke(absOperand, left);
+            assertEquals("Result of abs or rel minus rel", 0, verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result), 0.01);
+            if (null != compatibleRight && scalarClass.getName().contains("$Rel"))
+            {
+                Method toAbs = compatibleRight.getClass().getDeclaredMethod("toAbs");
+                Object absCompatible = toAbs.invoke(compatibleRight);
+                result = minus.invoke(absCompatible, left);
+                assertEquals("Result of compatible abs or rel minus rel", 6 * value,
+                        verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result), 0.01);
+            }
         }
     }
 
