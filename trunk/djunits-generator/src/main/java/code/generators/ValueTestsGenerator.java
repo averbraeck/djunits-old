@@ -10,7 +10,7 @@ import java.util.Date;
  * reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
- * $LastChangedDate: 2015-07-26 01:01:13 +0200 (Sun, 26 Jul 2015) $, @version $Revision: 1155 $, by $Author: pknoppers
+ * $LastChangedDate$, @version $Revision$, by $Author: pknoppers
  * $, initial version 6 okt. 2014 <br>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
