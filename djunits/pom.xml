@@ -25,9 +25,10 @@
 
     <djunits.version>${project.version}</djunits.version>
     <parallelcolt.version>0.10.1</parallelcolt.version>
-    <reflections.version>0.9.9-RC1</reflections.version>
+    <reflections.version>0.9.10</reflections.version>
     <joda-money.version>0.10.0</joda-money.version>
     <junit.version>4.11</junit.version>
+    <ojalgo.version>38.2</ojalgo.version>
 
     <maven.compiler.version>3.1</maven.compiler.version>
     <maven.site.version>3.4</maven.site.version>
@@ -579,7 +580,13 @@
       <artifactId>joda-money</artifactId>
       <version>${joda-money.version}</version>
     </dependency>
-    
+
+    <dependency>
+      <groupId>org.ojalgo</groupId>
+      <artifactId>ojalgo</artifactId>
+      <version>${ojalgo.version}</version>
+    </dependency>
+
   </dependencies>
 
   <!-- More Project Information -->
