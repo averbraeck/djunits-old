@@ -658,3 +658,4 @@ public interface Float%Type%
 %FORMULAS%%Type%.Abs%
     }
 }
+

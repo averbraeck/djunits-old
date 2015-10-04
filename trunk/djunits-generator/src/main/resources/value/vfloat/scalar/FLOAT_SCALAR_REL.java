@@ -318,3 +318,4 @@ public class Float%Type% extends FloatScalar.Rel<%Type%Unit> implements Relative
 %FORMULAS%%Type%.Rel%
 }
 
+

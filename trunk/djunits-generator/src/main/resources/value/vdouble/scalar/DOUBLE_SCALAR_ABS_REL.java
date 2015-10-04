@@ -595,3 +595,4 @@ public interface %Type%
 %FORMULAS%%Type%.Abs%
     }
 }
+
