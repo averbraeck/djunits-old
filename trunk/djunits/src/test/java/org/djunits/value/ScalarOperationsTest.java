@@ -81,8 +81,9 @@ public class ScalarOperationsTest
         final String upperType = doubleType ? "Double" : "Float";
         final String type = upperType.toLowerCase();
         // get the interfaces such as org.djunits.value.vdouble.scalar.Time
-        for (String scalarClassName : CLASSNAMES_ABSREL)
+        for (String scalarName : CLASSNAMES_ABSREL)
         {
+            String scalarClassName = doubleType ? scalarName : "Float" + scalarName;
             for (String subClassName : new String[] { "$Rel", "$Abs" })
             {
                 boolean isAbs = subClassName.contains("Abs");
@@ -104,8 +105,9 @@ public class ScalarOperationsTest
         }
 
         // get the interfaces such as org.djunits.value.vXXXX.scalar.Area
-        for (String scalarClassName : CLASSNAMES_REL)
+        for (String scalarName : CLASSNAMES_REL)
         {
+            String scalarClassName = doubleType ? scalarName : "Float" + scalarName;
             Class<?> scalarClassRel = null;
             try
             {
@@ -120,8 +122,9 @@ public class ScalarOperationsTest
         }
 
         // get the interfaces such as org.djunits.value.vXXXX.scalar.MoneyPerArea
-        for (String scalarClassName : CLASSNAMES_MONEY)
+        for (String scalarName : CLASSNAMES_MONEY)
         {
+            String scalarClassName = doubleType ? scalarName : "Float" + scalarName;
             Class<?> scalarClassMoney = null;
             try
             {

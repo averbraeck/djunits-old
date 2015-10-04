@@ -11,18 +11,18 @@ import org.djunits.unit.VolumeUnit;
 import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the Torque DoubleScalar, which is relative by definition. An example is Money. Instead of <br>
- * <i>DoubleScalar.Rel&lt;MoneyUnit&gt; price = new DoubleScalar.Rel&lt;MoneyUnit&gt;(100.0, MoneyUnit.EUR);</i><br>
+ * Easy access methods for the Torque DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * <i>DoubleScalar.Rel&lt;TorqueUnit&gt; value = new DoubleScalar.Rel&lt;TorqueUnit&gt;(100.0, TorqueUnit.SI);</i><br>
  * we can now write <br>
- * <i>Money price = new Money(100.0, EUR);</i><br>
+ * <i>Torque value = new Torque(100.0, TorqueUnit.SI);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
