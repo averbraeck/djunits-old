@@ -9,7 +9,7 @@ import org.djunits.value.Relative;
  * Easy access methods for the MoneyPerMass DoubleScalar, which is relative by definition. An example is Money. Instead of <br>
  * <i>DoubleScalar.Rel&lt;MoneyUnit&gt; price = new DoubleScalar.Rel&lt;MoneyUnit&gt;(100.0, MoneyUnit.EUR);</i><br>
  * we can now write <br>
- * <i>Money price = new Money(100.0, EUR);</i><br>
+ * <i>Money price = new Money(100.0, MoneyUnit.EUR);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>

@@ -152,14 +152,16 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
 
             /** {@inheritDoc} */
             @Override
-            public final DoubleVector.Abs.Dense<U> copy()
+            @SuppressWarnings("designforextension")
+            public DoubleVector.Abs.Dense<U> copy()
             {
                 return this; // Immutable...
             }
 
             /** {@inheritDoc} */
             @Override
-            protected final DoubleVectorDataDense getData()
+            @SuppressWarnings("designforextension")
+            protected DoubleVectorDataDense getData()
             {
                 return (DoubleVectorDataDense) this.data;
             }
@@ -238,14 +240,16 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
 
             /** {@inheritDoc} */
             @Override
-            public final MutableDoubleVector.Abs.Sparse<U> mutable()
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Abs.Sparse<U> mutable()
             {
                 return new MutableDoubleVector.Abs.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
             @Override
-            public final DoubleVector.Abs.Sparse<U> copy()
+            @SuppressWarnings("designforextension")
+            public DoubleVector.Abs.Sparse<U> copy()
             {
                 return this; // Immutable...
             }
@@ -262,7 +266,8 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
 
         /** {@inheritDoc} */
         @Override
-        public final DoubleScalar.Abs<U> get(final int index) throws ValueException
+        @SuppressWarnings("designforextension")
+        public DoubleScalar.Abs<U> get(final int index) throws ValueException
         {
             return new DoubleScalar.Abs<U>(getInUnit(index, getUnit()), getUnit());
         }
@@ -358,14 +363,16 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
 
             /** {@inheritDoc} */
             @Override
-            public final MutableDoubleVector.Rel.Dense<U> mutable()
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Rel.Dense<U> mutable()
             {
                 return new MutableDoubleVector.Rel.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
             @Override
-            public final DoubleVector.Rel.Dense<U> copy()
+            @SuppressWarnings("designforextension")
+            public DoubleVector.Rel.Dense<U> copy()
             {
                 return this; // Immutable...
             }
@@ -451,14 +458,16 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
 
             /** {@inheritDoc} */
             @Override
-            public final MutableDoubleVector.Rel.Sparse<U> mutable()
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Rel.Sparse<U> mutable()
             {
                 return new MutableDoubleVector.Rel.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
             @Override
-            public final DoubleVector.Rel.Sparse<U> copy()
+            @SuppressWarnings("designforextension")
+            public DoubleVector.Rel.Sparse<U> copy()
             {
                 return this; // Immutable...
             }
@@ -475,7 +484,8 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
 
         /** {@inheritDoc} */
         @Override
-        public final DoubleScalar.Rel<U> get(final int index) throws ValueException
+        @SuppressWarnings("designforextension")
+        public DoubleScalar.Rel<U> get(final int index) throws ValueException
         {
             return new DoubleScalar.Rel<U>(getInUnit(index, getUnit()), getUnit());
         }

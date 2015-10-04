@@ -14,8 +14,8 @@ import org.djunits.unit.DimensionlessUnit;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Aug 28, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Aug 28, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -23,9 +23,10 @@ public interface AngleSlope
 {
     /**
      * Easy access methods for the AngleSlope DoubleScalar. Instead of <br>
-     * <i>DoubleScalar.Rel&lt;LengthUnit&gt; margin = new DoubleScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
+     * <i>DoubleScalar.Rel&lt;AngleSlopeUnit&gt; value = new DoubleScalar.Rel&lt;AngleSlopeUnit&gt;(100.0,
+     * AngleSlopeUnit.SI);</i><br>
      * we can now write <br>
-     * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
+     * <i>AngleSlope.Rel value = new AngleSlope.Rel(100.0, AngleSlopeUnit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
      * unit used are compatible.
      * <p>
@@ -328,9 +329,10 @@ public interface AngleSlope
 
     /**
      * Easy access methods for the AngleSlope DoubleScalar. Instead of <br>
-     * <i>DoubleScalar.Rel&lt;LengthUnit&gt; margin = new DoubleScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
+     * <i>DoubleScalar.Abs&lt;AngleSlopeUnit&gt; value = new DoubleScalar.Abs&lt;AngleSlopeUnit&gt;(100.0,
+     * AngleSlopeUnit.SI);</i><br>
      * we can now write <br>
-     * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
+     * <i>AngleSlope.Abs value = new AngleSlope.Abs(100.0, AngleSlopeUnit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
      * unit used are compatible.
      * <p>
