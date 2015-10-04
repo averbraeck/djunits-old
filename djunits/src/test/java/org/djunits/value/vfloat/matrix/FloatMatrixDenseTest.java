@@ -167,7 +167,7 @@ public class FloatMatrixDenseTest
             mfm.set(0, 0, temperatureFM.get(0, 0));
             checkContentsAndType(mfm, value, 0.001f, tempUnit, true);
             FloatMatrix.Abs.Dense<TemperatureUnit> temperature2FM =
-                new FloatMatrix.Abs.Dense<TemperatureUnit>(temperatureFM.getMatrixSI(), TemperatureUnit.KELVIN);
+                new FloatMatrix.Abs.Dense<TemperatureUnit>(temperatureFM.getValuesSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2FM should be equal to temperatureFM", temperature2FM.equals(temperatureFM));
             assertTrue("Value is Absolute", temperatureFM.isAbsolute());
             assertFalse("Value is not Relative", temperatureFM.isRelative());
@@ -822,7 +822,7 @@ public class FloatMatrixDenseTest
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
-            matrix.det();
+            matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -866,7 +866,7 @@ public class FloatMatrixDenseTest
             float[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             FloatMatrix.Abs.Dense<TemperatureUnit> matrix =
                 new FloatMatrix.Abs.Dense<TemperatureUnit>(values, TemperatureUnit.KELVIN);
-            assertEquals("Determinant should be 15", 15, matrix.det(), 0.001);
+            assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
         catch (ValueException ve)
         {
@@ -994,7 +994,7 @@ public class FloatMatrixDenseTest
             mfm.set(0, 0, temperatureFM.get(0, 0));
             checkContentsAndType(mfm, value, 0.001f, tempUnit, false);
             FloatMatrix.Rel.Dense<TemperatureUnit> temperature2FM =
-                new FloatMatrix.Rel.Dense<TemperatureUnit>(temperatureFM.getMatrixSI(), TemperatureUnit.KELVIN);
+                new FloatMatrix.Rel.Dense<TemperatureUnit>(temperatureFM.getValuesSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2FM should be equal to temperatureFM", temperature2FM.equals(temperatureFM));
             assertTrue("Value is Relative", temperatureFM.isRelative());
             assertFalse("Value is not Absolute", temperatureFM.isAbsolute());
@@ -1649,7 +1649,7 @@ public class FloatMatrixDenseTest
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
-            matrix.det();
+            matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1693,7 +1693,7 @@ public class FloatMatrixDenseTest
             float[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             FloatMatrix.Rel.Dense<TemperatureUnit> matrix =
                 new FloatMatrix.Rel.Dense<TemperatureUnit>(values, TemperatureUnit.KELVIN);
-            assertEquals("Determinant should be 15", 15, matrix.det(), 0.001);
+            assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
         catch (ValueException ve)
         {

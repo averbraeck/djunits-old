@@ -14,16 +14,9 @@ import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
 import org.djunits.value.formatter.Format;
 import org.djunits.value.vfloat.scalar.FloatScalar;
-import org.djunits.value.vfloat.vector.FloatVector;
-
-import cern.colt.matrix.tfloat.FloatMatrix1D;
-import cern.colt.matrix.tfloat.FloatMatrix2D;
-import cern.colt.matrix.tfloat.algo.DenseFloatAlgebra;
-import cern.colt.matrix.tfloat.algo.SparseFloatAlgebra;
-import cern.colt.matrix.tfloat.impl.DenseFloatMatrix1D;
-import cern.colt.matrix.tfloat.impl.DenseFloatMatrix2D;
-import cern.colt.matrix.tfloat.impl.SparseFloatMatrix1D;
-import cern.colt.matrix.tfloat.impl.SparseFloatMatrix2D;
+import org.ojalgo.access.Access2D.Factory;
+import org.ojalgo.matrix.BasicMatrix;
+import org.ojalgo.matrix.PrimitiveMatrix;
 
 /**
  * Immutable FloatMatrix.
@@ -33,8 +26,8 @@ import cern.colt.matrix.tfloat.impl.SparseFloatMatrix2D;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this FloatMatrix
@@ -43,13 +36,16 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     ReadOnlyFloatMatrixFunctions<U>
 {
     /**  */
-    private static final long serialVersionUID = 20150626L;
+    private static final long serialVersionUID = 20151003L;
+
+    /** The stored data as an object, can be sparse or dense. */
+    @SuppressWarnings("checkstyle:visibilitymodifier")
+    protected FloatMatrixData data;
 
     /**
-     * The internal storage for the matrix; internally the values are stored in standard SI unit; storage can be dense or
-     * sparse.
+     * @return the data, as Dense or Sparse data.
      */
-    private FloatMatrix2D matrixSI;
+    protected abstract FloatMatrixData getData();
 
     /**
      * Construct a new Immutable FloatMatrix.
@@ -58,16 +54,19 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     protected FloatMatrix(final U unit)
     {
         super(unit);
-        // System.out.println("Created FloatMatrix");
     }
 
+    /** ============================================================================================ */
+    /** ================================= ABSOLUTE IMPLEMENTATION ================================== */
+    /** ============================================================================================ */
+
     /**
-     * @param <U> Unit
+     * @param <U> Unit the unit for which this Vector will be created
      */
     public abstract static class Abs<U extends Unit<U>> extends FloatMatrix<U> implements Absolute
     {
         /**  */
-        private static final long serialVersionUID = 20150626L;
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Absolute Immutable FloatMatrix.
@@ -76,16 +75,16 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         protected Abs(final U unit)
         {
             super(unit);
-            // System.out.println("Created Abs");
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE DENSE implementation of FloatMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Dense<U extends Unit<U>> extends Abs<U> implements DenseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Absolute Dense Immutable FloatMatrix.
@@ -96,8 +95,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             public Dense(final float[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
@@ -109,52 +107,50 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             public Dense(final FloatScalar.Abs<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix2D; the values of the entries in the new Absolute Dense Immutable FloatMatrix
-             * @param unit U; the unit of the new Absolute Dense Immutable FloatMatrix
+             * Construct a new Absolute Dense Immutable FloatMatrix.
+             * @param data an internal data object
+             * @param unit the unit
              */
-            protected Dense(final FloatMatrix2D values, final U unit)
+            Dense(final FloatMatrixDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
             @Override
             public final MutableFloatMatrix.Abs.Dense<U> mutable()
             {
-                return new MutableFloatMatrix.Abs.Dense<U>(getMatrixSI(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new DenseFloatMatrix2D(rows, columns);
+                return new MutableFloatMatrix.Abs.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
             @Override
             public final FloatMatrix.Abs.Dense<U> copy()
             {
-                return this; // That was easy...
+                return this; // Immutable...
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatMatrixDataDense getData()
+            {
+                return (FloatMatrixDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE SPARSE implementation of FloatMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Sparse<U extends Unit<U>> extends Abs<U> implements SparseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Absolute Sparse Immutable FloatMatrix.
@@ -165,8 +161,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             public Sparse(final float[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
@@ -178,44 +173,43 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             public Sparse(final FloatScalar.Abs<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
              * For package internal use only.
-             * @param values FloatMatrix2D; the values of the entries in the new Absolute Sparse Immutable FloatMatrix
+             * @param data an internal data object
              * @param unit U; the unit of the new Absolute Sparse Immutable FloatMatrix
              */
-            protected Sparse(final FloatMatrix2D values, final U unit)
+            protected Sparse(final FloatMatrixDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
             @Override
             public final MutableFloatMatrix.Abs.Sparse<U> mutable()
             {
-                return new MutableFloatMatrix.Abs.Sparse<U>(getMatrixSI(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new SparseFloatMatrix2D(rows, columns);
+                return new MutableFloatMatrix.Abs.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
             @Override
             public final FloatMatrix.Abs.Sparse<U> copy()
             {
-                return this; // That was easy...
+                return this; // Immutable...
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatMatrixDataSparse getData()
+            {
+                return (FloatMatrixDataSparse) this.data;
+            }
         }
+
+        /** ================================= ABS GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
@@ -226,13 +220,17 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
 
     }
 
+    /** ============================================================================================ */
+    /** ================================= RELATIVE IMPLEMENTATION ================================== */
+    /** ============================================================================================ */
+
     /**
-     * @param <U> Unit
+     * @param <U> Unit the unit for which this Vector will be created
      */
     public abstract static class Rel<U extends Unit<U>> extends FloatMatrix<U> implements Relative
     {
         /**  */
-        private static final long serialVersionUID = 20150626L;
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Relative Immutable FloatMatrix.
@@ -241,16 +239,16 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         protected Rel(final U unit)
         {
             super(unit);
-            // System.out.println("Created Rel");
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE DENSE implementation of FloatMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Dense<U extends Unit<U>> extends Rel<U> implements DenseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Relative Dense Immutable FloatMatrix.
@@ -261,8 +259,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             public Dense(final float[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
@@ -274,52 +271,50 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             public Dense(final FloatScalar.Rel<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix2D; the values of the entries in the new Relative Dense Immutable FloatMatrix
-             * @param unit U; the unit of the new Relative Dense Immutable FloatMatrix
+             * Construct a new Relative Dense Immutable FloatMatrix.
+             * @param data an internal data object
+             * @param unit the unit
              */
-            protected Dense(final FloatMatrix2D values, final U unit)
+            Dense(final FloatMatrixDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
             @Override
             public final MutableFloatMatrix.Rel.Dense<U> mutable()
             {
-                return new MutableFloatMatrix.Rel.Dense<U>(getMatrixSI(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new DenseFloatMatrix2D(rows, columns);
+                return new MutableFloatMatrix.Rel.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
             @Override
             public final FloatMatrix.Rel.Dense<U> copy()
             {
-                return this; // That was easy...
+                return this; // Immutable...
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatMatrixDataDense getData()
+            {
+                return (FloatMatrixDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE SPARSE implementation of FloatMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Sparse<U extends Unit<U>> extends Rel<U> implements SparseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Relative Sparse Immutable FloatMatrix.
@@ -330,8 +325,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             public Sparse(final float[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
@@ -343,44 +337,43 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             public Sparse(final FloatScalar.Rel<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
              * For package internal use only.
-             * @param values FloatMatrix2D; the values of the entries in the new Relative Sparse Immutable FloatMatrix
+             * @param data an internal data object
              * @param unit U; the unit of the new Relative Sparse Immutable FloatMatrix
              */
-            protected Sparse(final FloatMatrix2D values, final U unit)
+            protected Sparse(final FloatMatrixDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
             @Override
             public final MutableFloatMatrix.Rel.Sparse<U> mutable()
             {
-                return new MutableFloatMatrix.Rel.Sparse<U>(getMatrixSI(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new SparseFloatMatrix2D(rows, columns);
+                return new MutableFloatMatrix.Rel.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
             @Override
             public final FloatMatrix.Rel.Sparse<U> copy()
             {
-                return this; // That was easy...
+                return this; // Immutable...
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatMatrixDataSparse getData()
+            {
+                return (FloatMatrixDataSparse) this.data;
+            }
         }
+
+        /** ================================= REL GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
@@ -391,22 +384,179 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
 
     }
 
+    /** ============================================================================================ */
+    /** ============================= STATIC CONSTRUCTOR HELP METHODS ============================== */
+    /** ============================================================================================ */
+
     /**
-     * Retrieve the internal data.
-     * @return FloatMatrix2D; the data in the internal format
+     * Check that a provided array can be used to create some descendant of a FloatMatrix.
+     * @param dsArray FloatScalar&lt;U&gt;[][]; the provided array
+     * @param <U> Unit; the unit of the FloatScalar array
+     * @return FloatScalar&lt;U&gt;[][]; the provided array
+     * @throws ValueException when the array has zero entries
      */
-    protected final FloatMatrix2D getMatrixSI()
+    protected static <U extends Unit<U>> FloatScalar<U>[][] checkNonEmpty(final FloatScalar<U>[][] dsArray)
+        throws ValueException
     {
-        return this.matrixSI;
+        if (dsArray == null || 0 == dsArray.length || 0 == dsArray[0].length)
+        {
+            throw new ValueException(
+                "Cannot create a FloatMatrix or MutableFloatMatrix from a null array or an empty array of FloatScalar");
+        }
+        return dsArray;
     }
 
     /**
-     * Make a deep copy of the data (used ONLY in the MutableFloatMatrix sub class).
+     * Check that a 2D array of float is not null and rectangular; i.e. all rows have the same length.
+     * @param values float[][]; the 2D array to check
+     * @throws ValueException when not all rows have the same length
      */
-    protected final void deepCopyData()
+    private static void ensureRectangular(final float[][] values) throws ValueException
     {
-        this.matrixSI = getMatrixSI().copy(); // makes a deep copy, using multithreading
+        if (null == values)
+        {
+            throw new ValueException("values is null");
+        }
+        if (values.length > 0 && null == values[0])
+        {
+            throw new ValueException("Row 0 is null");
+        }
+        for (int row = values.length; --row >= 1;)
+        {
+            if (null == values[row] || values[0].length != values[row].length)
+            {
+                throw new ValueException("Lengths of rows are not all the same");
+            }
+        }
     }
+
+    /**
+     * Check that a 2D array of FloatScalar&lt;?&gt; is rectangular; i.e. all rows have the same length and is non empty.
+     * @param values FloatScalar&lt;?&gt;[][]; the 2D array to check
+     * @throws ValueException when values is not rectangular, or contains no data
+     */
+    private static void ensureRectangularAndNonEmpty(final FloatScalar<?>[][] values) throws ValueException
+    {
+        if (null == values)
+        {
+            throw new ValueException("values is null");
+        }
+        if (0 == values.length || 0 == values[0].length)
+        {
+            throw new ValueException("Cannot determine unit for FloatMatrix from an empty array of FloatScalar");
+        }
+        for (int row = values.length; --row >= 1;)
+        {
+            if (values[0].length != values[row].length)
+            {
+                throw new ValueException("Lengths of rows are not all the same");
+            }
+        }
+    }
+
+    /**
+     * Import the values and convert them into the SI standard unit.
+     * @param values float[][]; an array of values
+     * @return FloatMatrixDataDense internal data
+     * @throws ValueException when values is null, or not rectangular
+     */
+    protected final FloatMatrixDataDense initializeDense(final float[][] values) throws ValueException
+    {
+        ensureRectangular(values);
+        if (getUnit().equals(getUnit().getStandardUnit()))
+        {
+            return new FloatMatrixDataDense(values);
+        }
+        int rows = values.length;
+        int cols = values[0].length;
+        float[] vectorSI = new float[rows * cols];
+        for (int r = 0; r < rows; r++)
+        {
+            float[] row = values[r];
+            for (int c = 0; c < row.length; c++)
+            {
+                vectorSI[r * cols + c] = (float) expressAsSIUnit(values[r][c]);
+            }
+        }
+        return new FloatMatrixDataDense(vectorSI, rows, cols);
+    }
+
+    /**
+     * Construct the matrix and store the values in the standard SI unit.
+     * @param values FloatScalar&lt;U&gt;[][]; a 2D array of values
+     * @return FloatMatrixDataDense internal data
+     * @throws ValueException when values is null, empty, or is not rectangular
+     */
+    protected final FloatMatrixDataDense initializeDense(final FloatScalar<U>[][] values) throws ValueException
+    {
+        ensureRectangularAndNonEmpty(values);
+        int rows = values.length;
+        int cols = values[0].length;
+        float[] vectorSI = new float[rows * cols];
+        for (int r = 0; r < rows; r++)
+        {
+            FloatScalar<U>[] row = values[r];
+            for (int c = 0; c < row.length; c++)
+            {
+                vectorSI[r * cols + c] = values[r][c].getSI();
+            }
+        }
+        return new FloatMatrixDataDense(vectorSI, rows, cols);
+    }
+
+    /**
+     * Import the values and convert them into the SI standard unit.
+     * @param values float[][]; an array of values
+     * @return FloatMatrixDataSparse internal data
+     * @throws ValueException when values is null, or not rectangular
+     */
+    protected final FloatMatrixDataSparse initializeSparse(final float[][] values) throws ValueException
+    {
+        ensureRectangular(values);
+        if (getUnit().equals(getUnit().getStandardUnit()))
+        {
+            return new FloatMatrixDataSparse(values);
+        }
+        int rows = values.length;
+        int cols = values[0].length;
+        float[][] matrixSI = new float[rows][cols];
+        for (int r = 0; r < rows; r++)
+        {
+            float[] row = values[r];
+            for (int c = 0; c < row.length; c++)
+            {
+                matrixSI[r][c] = (float) expressAsSIUnit(values[r][c]);
+            }
+        }
+        return new FloatMatrixDataSparse(matrixSI);
+    }
+
+    /**
+     * Construct the matrix and store the values in the standard SI unit.
+     * @param values FloatScalar&lt;U&gt;[][]; a 2D array of values
+     * @return FloatMatrixDataSparse internal data
+     * @throws ValueException when values is null, empty, or is not rectangular
+     */
+    protected final FloatMatrixDataSparse initializeSparse(final FloatScalar<U>[][] values) throws ValueException
+    {
+        ensureRectangularAndNonEmpty(values);
+        int rows = values.length;
+        int cols = values[0].length;
+        float[][] matrixSI = new float[rows][cols];
+        for (int r = 0; r < rows; r++)
+        {
+            FloatScalar<U>[] row = values[r];
+            for (int c = 0; c < row.length; c++)
+            {
+                matrixSI[r][c] = values[r][c].getSI();
+            }
+        }
+        return new FloatMatrixDataSparse(matrixSI);
+    }
+
+    /** ============================================================================================ */
+    /** ================================== GENERIC MATRIX METHODS ================================== */
+    /** ============================================================================================ */
 
     /**
      * Create a mutable version of this FloatMatrix. <br>
@@ -417,73 +567,12 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     public abstract MutableFloatMatrix<U> mutable();
 
     /**
-     * Import the values and convert them into the SI standard unit.
-     * @param values float[][]; an array of values
-     * @throws ValueException when values is null, or not rectangular
-     */
-    protected final void initialize(final float[][] values) throws ValueException
-    {
-        ensureRectangular(values);
-        this.matrixSI = createMatrix2D(values.length, 0 == values.length ? 0 : values[0].length);
-        if (getUnit().equals(getUnit().getStandardUnit()))
-        {
-            this.matrixSI.assign(values);
-        }
-        else
-        {
-            for (int row = values.length; --row >= 0;)
-            {
-                for (int column = values[row].length; --column >= 0;)
-                {
-                    safeSet(row, column, (float) expressAsSIUnit(values[row][column]));
-                }
-            }
-        }
-    }
-
-    /**
-     * Import the values from an existing FloatMatrix2D. This makes a shallow copy.
-     * @param values FloatMatrix2D; the values
-     */
-    protected final void initialize(final FloatMatrix2D values)
-    {
-        this.matrixSI = values;
-    }
-
-    /**
-     * Construct the matrix and store the values in the standard SI unit.
-     * @param values FloatScalar&lt;U&gt;[][]; a 2D array of values
-     * @throws ValueException when values is null, empty, or is not rectangular
-     */
-    protected final void initialize(final FloatScalar<U>[][] values) throws ValueException
-    {
-        ensureRectangularAndNonEmpty(values);
-        this.matrixSI = createMatrix2D(values.length, values[0].length);
-        for (int row = values.length; --row >= 0;)
-        {
-            for (int column = values[row].length; --column >= 0;)
-            {
-                safeSet(row, column, values[row][column].getSI());
-            }
-        }
-    }
-
-    /**
-     * Create storage for the data. <br>
-     * This method must be implemented by each leaf class.
-     * @param rows int; the number of rows in the matrix
-     * @param columns int; the number of columns in the matrix
-     * @return FloatMatrix2D; an instance of the right type of FloatMatrix2D (absolute/relative, dense/sparse, etc.)
-     */
-    protected abstract FloatMatrix2D createMatrix2D(final int rows, final int columns);
-
-    /**
      * Create a float[][] array filled with the values in the standard SI unit.
      * @return float[][]; array of values in the standard SI unit
      */
     public final float[][] getValuesSI()
     {
-        return this.matrixSI.toArray(); // this makes a deep copy
+        return this.data.getDenseMatrixSI();
     }
 
     /**
@@ -502,7 +591,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      */
     public final float[][] getValuesInUnit(final U targetUnit)
     {
-        float[][] values = this.matrixSI.toArray();
+        float[][] values = getValuesSI();
         for (int row = rows(); --row >= 0;)
         {
             for (int column = columns(); --column >= 0;)
@@ -517,14 +606,14 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     @Override
     public final int rows()
     {
-        return this.matrixSI.rows();
+        return this.data.rows();
     }
 
     /** {@inheritDoc} */
     @Override
     public final int columns()
     {
-        return this.matrixSI.columns();
+        return this.data.cols();
     }
 
     /** {@inheritDoc} */
@@ -532,7 +621,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     public final float getSI(final int row, final int column) throws ValueException
     {
         checkIndex(row, column);
-        return safeGet(row, column);
+        return this.data.getSI(row, column);
     }
 
     /** {@inheritDoc} */
@@ -547,46 +636,6 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     public final float getInUnit(final int row, final int column, final U targetUnit) throws ValueException
     {
         return (float) ValueUtil.expressAsUnit(getSI(row, column), targetUnit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final float zSum()
-    {
-        return this.matrixSI.zSum();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int cardinality()
-    {
-        return this.matrixSI.cardinality();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final float det() throws ValueException
-    {
-        try
-        {
-            if (this instanceof SparseData)
-            {
-                return new SparseFloatAlgebra().det(getMatrixSI());
-            }
-            if (this instanceof DenseData)
-            {
-                return new DenseFloatAlgebra().det(getMatrixSI());
-            }
-            throw new ValueException("FloatMatrix.det -- matrix implements neither Sparse nor Dense");
-        }
-        catch (IllegalArgumentException exception)
-        {
-            if (!exception.getMessage().startsWith("Matrix must be square"))
-            {
-                exception.printStackTrace();
-            }
-            throw new ValueException(exception.getMessage()); // probably Matrix must be square
-        }
     }
 
     /** {@inheritDoc} */
@@ -683,8 +732,8 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             buf.append("\r\n\t");
             for (int column = 0; column < columns(); column++)
             {
-                float f = (float) ValueUtil.expressAsUnit(safeGet(row, column), displayUnit);
-                buf.append(" " + Format.format(f));
+                float d = (float) ValueUtil.expressAsUnit(safeGet(row, column), displayUnit);
+                buf.append(" " + Format.format(d));
             }
         }
         if (withUnit)
@@ -729,54 +778,6 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     }
 
     /**
-     * Check that a 2D array of float is not null and rectangular; i.e. all rows have the same length.
-     * @param values float[][]; the 2D array to check
-     * @throws ValueException when not all rows have the same length
-     */
-    private static void ensureRectangular(final float[][] values) throws ValueException
-    {
-        if (null == values)
-        {
-            throw new ValueException("values is null");
-        }
-        if (values.length > 0 && null == values[0])
-        {
-            throw new ValueException("Row 0 is null");
-        }
-        for (int row = values.length; --row >= 1;)
-        {
-            if (null == values[row] || values[0].length != values[row].length)
-            {
-                throw new ValueException("Lengths of rows are not all the same");
-            }
-        }
-    }
-
-    /**
-     * Check that a 2D array of FloatScalar&lt;?&gt; is rectangular; i.e. all rows have the same length and is non empty.
-     * @param values FloatScalar&lt;?&gt;[][]; the 2D array to check
-     * @throws ValueException when values is not rectangular, or contains no data
-     */
-    private static void ensureRectangularAndNonEmpty(final FloatScalar<?>[][] values) throws ValueException
-    {
-        if (null == values)
-        {
-            throw new ValueException("values is null");
-        }
-        if (0 == values.length || 0 == values[0].length)
-        {
-            throw new ValueException("Cannot determine unit for FloatMatrix from an empty array of FloatScalar");
-        }
-        for (int row = values.length; --row >= 1;)
-        {
-            if (values[0].length != values[row].length)
-            {
-                throw new ValueException("Lengths of rows are not all the same");
-            }
-        }
-    }
-
-    /**
      * Check that provided row and column indices are valid.
      * @param row int; the row value to check
      * @param column int; the column value to check
@@ -799,7 +800,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      */
     protected final float safeGet(final int row, final int column)
     {
-        return this.matrixSI.getQuick(row, column);
+        return this.data.getSI(row, column);
     }
 
     /**
@@ -810,117 +811,109 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      */
     protected final void safeSet(final int row, final int column, final float valueSI)
     {
-        this.matrixSI.setQuick(row, column, valueSI);
+        this.data.setSI(row, column, valueSI);
     }
 
-    /**
-     * Create a deep copy of the data.
-     * @return FloatMatrix2D; deep copy of the data
-     */
-    protected final FloatMatrix2D deepCopyOfData()
+    /** {@inheritDoc} */
+    @Override
+    public final float zSum()
     {
-        return this.matrixSI.copy();
+        return this.data.zSum();
     }
 
-    /**
-     * Check that a provided array can be used to create some descendant of a FloatMatrix.
-     * @param fsArray FloatScalar&lt;U&gt;[][]; the provided array
-     * @param <U> Unit; the unit of the FloatScalar array
-     * @return FloatScalar&lt;U&gt;[][]; the provided array
-     * @throws ValueException when the array has zero entries
-     */
-    protected static <U extends Unit<U>> FloatScalar<U>[][] checkNonEmpty(final FloatScalar<U>[][] fsArray)
-        throws ValueException
+    /** {@inheritDoc} */
+    @Override
+    public final int cardinality()
     {
-        if (0 == fsArray.length || 0 == fsArray[0].length)
+        return this.data.cardinality();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final float determinant() throws ValueException
+    {
+        try
         {
-            throw new ValueException(
-                "Cannot create a FloatMatrix or MutableFloatMatrix from an empty array of FloatScalar");
+            final Factory<PrimitiveMatrix> matrixFactory = PrimitiveMatrix.FACTORY;
+            final BasicMatrix m = matrixFactory.rows(this.data.getDenseDoubleMatrixSI());
+            return (float) m.getDeterminant().doubleValue();
         }
-        return fsArray;
+        catch (IllegalArgumentException exception)
+        {
+            throw new ValueException(exception); // probably Matrix must be square
+        }
     }
 
     /**
-     * Solve x for A*x = b. According to Colt: x; a new independent matrix; solution if A is square, least squares solution if
-     * A.rows() &gt; A.columns(), underdetermined system solution if A.rows() &lt; A.columns().
+     * Solve x for A*x = b.
      * @param A FloatMatrix&lt;?&gt;; matrix A in A*x = b
      * @param b FloatVector&lt;?&gt;; vector b in A*x = b
      * @return FloatVector&lt;SIUnit&gt;; vector x in A*x = b
      * @throws ValueException when matrix A is neither Sparse nor Dense
      */
-    public static FloatVector<SIUnit> solve(final FloatMatrix<?> A, final FloatVector<?> b) throws ValueException
-    {
-        // TODO is this correct? Should lookup matrix algebra to find out unit for x when solving A*x = b ?
-        SIUnit targetUnit =
-            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.divide(b.getUnit().getSICoefficients(),
-                A.getUnit().getSICoefficients()).toString());
+    /*-
+     public static FloatVector<SIUnit> solve(final FloatMatrix<?> A, final FloatVector<?> b) throws ValueException
+     {
+     // TODO is this correct? Should lookup matrix algebra to find out unit for x when solving A*x = b ?
+     SIUnit targetUnit =
+     Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.divide(b.getUnit().getSICoefficients(),
+     A.getUnit().getSICoefficients()).toString());
 
-        // TODO should the algorithm throw an exception when rows/columns do not match when solving A*x = b ?
-        FloatMatrix2D A2D = A.getMatrixSI();
-        if (A instanceof SparseData)
-        {
-            SparseFloatMatrix1D b1D = new SparseFloatMatrix1D(b.getValuesSI());
-            FloatMatrix1D x1D = new SparseFloatAlgebra().solve(A2D, b1D);
-            FloatVector.Abs.Sparse<SIUnit> x = new FloatVector.Abs.Sparse<SIUnit>(x1D.toArray(), targetUnit);
-            return x;
-        }
-        if (A instanceof DenseData)
-        {
-            DenseFloatMatrix1D b1D = new DenseFloatMatrix1D(b.getValuesSI());
-            FloatMatrix1D x1D = new DenseFloatAlgebra().solve(A2D, b1D);
-            FloatVector.Abs.Dense<SIUnit> x = new FloatVector.Abs.Dense<SIUnit>(x1D.toArray(), targetUnit);
-            return x;
-        }
-        throw new ValueException("FloatMatrix.det -- matrix implements neither Sparse nor Dense");
-    }
+     // TODO should the algorithm throw an exception when rows/columns do not match when solving A*x = b ?
+     FloatMatrix2D A2D = A.getMatrixSI();
+     if (A instanceof SparseData)
+     {
+     SparseFloatMatrix1D b1D = new SparseFloatMatrix1D(b.getValuesSI());
+     FloatMatrix1D x1D = new SparseFloatAlgebra().solve(A2D, b1D);
+     FloatVector.Abs.Sparse<SIUnit> x = new FloatVector.Abs.Sparse<SIUnit>(x1D.toArray(), targetUnit);
+     return x;
+     }
+     if (A instanceof DenseData)
+     {
+     DenseFloatMatrix1D b1D = new DenseFloatMatrix1D(b.getValuesSI());
+     FloatMatrix1D x1D = new DenseFloatAlgebra().solve(A2D, b1D);
+     FloatVector.Abs.Dense<SIUnit> x = new FloatVector.Abs.Dense<SIUnit>(x1D.toArray(), targetUnit);
+     return x;
+     }
+     throw new ValueException("FloatMatrix.det -- matrix implements neither Sparse nor Dense");
+     }
+     */
 
     /** {@inheritDoc} */
     @Override
-    public final int hashCode()
+    @SuppressWarnings("checkstyle:designforextension")
+    public int hashCode()
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + this.matrixSI.hashCode();
+        result = prime * result + ((this.data == null) ? 0 : this.data.hashCode());
         return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean equals(final Object obj)
+    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    public boolean equals(final Object obj)
     {
         if (this == obj)
-        {
             return true;
-        }
         if (obj == null)
-        {
             return false;
-        }
-        if (!(obj instanceof FloatMatrix))
-        {
+        if (getClass() != obj.getClass())
             return false;
-        }
         FloatMatrix<?> other = (FloatMatrix<?>) obj;
-        // unequal if not both Absolute or both Relative
-        if (this.isAbsolute() != other.isAbsolute() || this.isRelative() != other.isRelative())
+        if (this.data == null)
         {
-            return false;
+            if (other.data != null)
+                return false;
         }
-        // unequal if the standard SI units differ
-        if (!this.getUnit().getStandardUnit().equals(other.getUnit().getStandardUnit()))
-        {
+        else if (!this.data.equals(other.data))
             return false;
-        }
-        // Colt's equals also tests the size of the matrix
-        if (!getMatrixSI().equals(other.getMatrixSI()))
-        {
-            return false;
-        }
         return true;
     }
 
     /**********************************************************************************/
-    /********************************* STATIC METHODS *********************************/
+    /*************************** STATIC CALCULATION METHODS ***************************/
     /**********************************************************************************/
 
     /**
@@ -1005,51 +998,6 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         final FloatMatrix.Rel.Sparse<U> right) throws ValueException
     {
         return (MutableFloatMatrix.Rel.Sparse<U>) left.mutable().incrementBy(right);
-    }
-
-    /**
-     * Subtract two FloatMatrices value by value and store the result in a new MutableFloatMatrix.Rel.Dense&lt;U&gt;.
-     * @param left FloatMatrix.Abs.Dense&lt;U&gt;; the left operand
-     * @param right FloatMatrix.Abs&lt;U&gt;; the right operand
-     * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatMatrix.Rel.Dense&lt;U&gt;
-     * @throws ValueException when the matrices do not have the same size
-     */
-    public static <U extends Unit<U>> MutableFloatMatrix.Rel.Dense<U> minus(final FloatMatrix.Abs.Dense<U> left,
-        final FloatMatrix.Abs<U> right) throws ValueException
-    {
-        return (MutableFloatMatrix.Rel.Dense<U>) new MutableFloatMatrix.Rel.Dense<U>(left.deepCopyOfData(), left
-            .getUnit()).decrementBy(right);
-    }
-
-    /**
-     * Subtract two FloatMatrices value by value and store the result in a new MutableFloatMatrix.Rel.Sparse&lt;U&gt;.
-     * @param left FloatMatrix.Abs.Sparse&lt;U&gt;; the left operand
-     * @param right FloatMatrix.Abs.Sparse&lt;U&gt;; the right operand
-     * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatMatrix.Rel.Sparse&lt;U&gt;
-     * @throws ValueException when the matrices do not have the same size
-     */
-    public static <U extends Unit<U>> MutableFloatMatrix.Rel.Sparse<U> minus(final FloatMatrix.Abs.Sparse<U> left,
-        final FloatMatrix.Abs.Sparse<U> right) throws ValueException
-    {
-        return (MutableFloatMatrix.Rel.Sparse<U>) new MutableFloatMatrix.Rel.Sparse<U>(left.deepCopyOfData(), left
-            .getUnit()).decrementBy(right);
-    }
-
-    /**
-     * Subtract two FloatMatrices value by value and store the result in a new MutableFloatMatrix.Rel.Dense&lt;U&gt;.
-     * @param left FloatMatrix.Abs.Sparse&lt;U&gt;; the left operand
-     * @param right FloatMatrix.Abs.Dense&lt;U&gt;; the right operand
-     * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatMatrix.Rel.Dense&lt;U&gt;
-     * @throws ValueException when the matrices do not have the same size
-     */
-    public static <U extends Unit<U>> MutableFloatMatrix.Rel.Dense<U> minus(final FloatMatrix.Abs.Sparse<U> left,
-        final FloatMatrix.Abs.Dense<U> right) throws ValueException
-    {
-        return (MutableFloatMatrix.Rel.Dense<U>) new MutableFloatMatrix.Rel.Dense<U>(left.deepCopyOfData(), left
-            .getUnit()).decrementBy(right);
     }
 
     /**
@@ -1151,7 +1099,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
         MutableFloatMatrix.Abs.Dense<SIUnit> work =
-            new MutableFloatMatrix.Abs.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatMatrix.Abs.Dense<SIUnit>(left.getData().copy(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1170,7 +1118,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
         MutableFloatMatrix.Abs.Sparse<SIUnit> work =
-            new MutableFloatMatrix.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatMatrix.Abs.Sparse<SIUnit>(left.getData().copy().toSparse(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1189,7 +1137,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
         MutableFloatMatrix.Abs.Sparse<SIUnit> work =
-            new MutableFloatMatrix.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatMatrix.Abs.Sparse<SIUnit>(left.getData().copy(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1208,7 +1156,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
         MutableFloatMatrix.Rel.Dense<SIUnit> work =
-            new MutableFloatMatrix.Rel.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatMatrix.Rel.Dense<SIUnit>(left.getData().copy(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1227,7 +1175,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
         MutableFloatMatrix.Rel.Sparse<SIUnit> work =
-            new MutableFloatMatrix.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatMatrix.Rel.Sparse<SIUnit>(left.getData().copy().toSparse(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1246,7 +1194,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
         MutableFloatMatrix.Rel.Sparse<SIUnit> work =
-            new MutableFloatMatrix.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatMatrix.Rel.Sparse<SIUnit>(left.getData().copy(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1312,18 +1260,6 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     }
 
     /**
-     * Make the Sparse equivalent of a DenseFloatMatrix2D.
-     * @param dense FloatMatrix2D; the Dense FloatMatrix2D
-     * @return SparseFloatMatrix2D
-     */
-    private static SparseFloatMatrix2D makeSparse(final FloatMatrix2D dense)
-    {
-        SparseFloatMatrix2D result = new SparseFloatMatrix2D(dense.rows(), dense.columns());
-        result.assign(dense);
-        return result;
-    }
-
-    /**
      * Create a Sparse version of a Dense FloatMatrix.
      * @param in FloatMatrix.Abs.Dense&lt;U&gt;; the Dense FloatMatrix
      * @param <U> Unit; the unit of the parameter and the result
@@ -1331,7 +1267,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Abs.Sparse<U> denseToSparse(final FloatMatrix.Abs.Dense<U> in)
     {
-        return new MutableFloatMatrix.Abs.Sparse<U>(makeSparse(in.getMatrixSI()), in.getUnit());
+        return new MutableFloatMatrix.Abs.Sparse<U>(in.getData().toSparse(), in.getUnit());
     }
 
     /**
@@ -1342,19 +1278,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Sparse<U> denseToSparse(final FloatMatrix.Rel.Dense<U> in)
     {
-        return new MutableFloatMatrix.Rel.Sparse<U>(makeSparse(in.getMatrixSI()), in.getUnit());
-    }
-
-    /**
-     * Make the Dense equivalent of a SparseFloatMatrix2D.
-     * @param sparse FloatMatrix2D; the Sparse FloatMatrix2D
-     * @return DenseFloatMatrix2D
-     */
-    private static DenseFloatMatrix2D makeDense(final FloatMatrix2D sparse)
-    {
-        DenseFloatMatrix2D result = new DenseFloatMatrix2D(sparse.rows(), sparse.columns());
-        result.assign(sparse);
-        return result;
+        return new MutableFloatMatrix.Rel.Sparse<U>(in.getData().toSparse(), in.getUnit());
     }
 
     /**
@@ -1365,7 +1289,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Abs.Dense<U> sparseToDense(final FloatMatrix.Abs.Sparse<U> in)
     {
-        return new MutableFloatMatrix.Abs.Dense<U>(makeDense(in.getMatrixSI()), in.getUnit());
+        return new MutableFloatMatrix.Abs.Dense<U>(in.getData().toDense(), in.getUnit());
     }
 
     /**
@@ -1376,7 +1300,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      */
     public static <U extends Unit<U>> MutableFloatMatrix.Rel.Dense<U> sparseToDense(final FloatMatrix.Rel.Sparse<U> in)
     {
-        return new MutableFloatMatrix.Rel.Dense<U>(makeDense(in.getMatrixSI()), in.getUnit());
+        return new MutableFloatMatrix.Rel.Dense<U>(in.getData().toDense(), in.getUnit());
     }
 
     /**

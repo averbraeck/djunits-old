@@ -90,6 +90,6 @@ public interface ReadOnlyDoubleMatrixFunctions<U extends Unit<U>>
      * @return double; the determinant of the matrix
      * @throws ValueException when matrix is neither sparse, nor dense, or not square
      */
-    double det() throws ValueException;
+    double determinant() throws ValueException;
 
 }

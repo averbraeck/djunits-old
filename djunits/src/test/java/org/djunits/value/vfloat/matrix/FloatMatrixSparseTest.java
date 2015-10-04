@@ -167,7 +167,7 @@ public class FloatMatrixSparseTest
             mfm.set(0, 0, temperatureFM.get(0, 0));
             checkContentsAndType(mfm, value, 0.001f, tempUnit, true);
             FloatMatrix.Abs.Sparse<TemperatureUnit> temperature2FM =
-                new FloatMatrix.Abs.Sparse<TemperatureUnit>(temperatureFM.getMatrixSI(), TemperatureUnit.KELVIN);
+                new FloatMatrix.Abs.Sparse<TemperatureUnit>(temperatureFM.getValuesSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2FM should be equal to temperatureFM", temperature2FM.equals(temperatureFM));
             assertTrue("Value is Absolute", temperatureFM.isAbsolute());
             assertFalse("Value is not Relative", temperatureFM.isRelative());
@@ -828,7 +828,7 @@ public class FloatMatrixSparseTest
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
-            matrix.det();
+            matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -872,7 +872,7 @@ public class FloatMatrixSparseTest
             float[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             FloatMatrix.Abs.Sparse<TemperatureUnit> matrix =
                 new FloatMatrix.Abs.Sparse<TemperatureUnit>(values, TemperatureUnit.KELVIN);
-            assertEquals("Determinant should be 15", 15, matrix.det(), 0.001);
+            assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
         catch (ValueException ve)
         {
@@ -1000,7 +1000,7 @@ public class FloatMatrixSparseTest
             mfm.set(0, 0, temperatureFM.get(0, 0));
             checkContentsAndType(mfm, value, 0.001f, tempUnit, false);
             FloatMatrix.Rel.Sparse<TemperatureUnit> temperature2FM =
-                new FloatMatrix.Rel.Sparse<TemperatureUnit>(temperatureFM.getMatrixSI(), TemperatureUnit.KELVIN);
+                new FloatMatrix.Rel.Sparse<TemperatureUnit>(temperatureFM.getValuesSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2FM should be equal to temperatureFM", temperature2FM.equals(temperatureFM));
             assertTrue("Value is Relative", temperatureFM.isRelative());
             assertFalse("Value is not Absolute", temperatureFM.isAbsolute());
@@ -1661,7 +1661,7 @@ public class FloatMatrixSparseTest
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
-            matrix.det();
+            matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1705,7 +1705,7 @@ public class FloatMatrixSparseTest
             float[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             FloatMatrix.Rel.Sparse<TemperatureUnit> matrix =
                 new FloatMatrix.Rel.Sparse<TemperatureUnit>(values, TemperatureUnit.KELVIN);
-            assertEquals("Determinant should be 15", 15, matrix.det(), 0.001);
+            assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
         catch (ValueException ve)
         {

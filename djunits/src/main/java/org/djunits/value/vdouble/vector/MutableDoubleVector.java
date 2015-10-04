@@ -1,5 +1,8 @@
 package org.djunits.value.vdouble.vector;
 
+import java.util.List;
+import java.util.SortedMap;
+
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
 import org.djunits.value.DenseData;
@@ -7,14 +10,10 @@ import org.djunits.value.Relative;
 import org.djunits.value.SparseData;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
+import org.djunits.value.vdouble.DoubleFunction;
 import org.djunits.value.vdouble.DoubleMathFunctions;
 import org.djunits.value.vdouble.DoubleMathFunctionsImpl;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
-
-import cern.colt.matrix.tdouble.DoubleMatrix1D;
-import cern.colt.matrix.tdouble.impl.DenseDoubleMatrix1D;
-import cern.colt.matrix.tdouble.impl.SparseDoubleMatrix1D;
-import cern.jet.math.tdouble.DoubleFunctions;
 
 /**
  * MutableDoubleVector.
@@ -25,7 +24,7 @@ import cern.jet.math.tdouble.DoubleFunctions;
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
+ * initial version 30 Oct, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableDoubleVector
@@ -34,7 +33,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
     WriteDoubleVectorFunctions<U>, DoubleMathFunctions<MutableDoubleVector<U>>
 {
     /**  */
-    private static final long serialVersionUID = 20150626L;
+    private static final long serialVersionUID = 20151003L;
 
     /**
      * Construct a new MutableDoubleVector.
@@ -43,7 +42,6 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
     protected MutableDoubleVector(final U unit)
     {
         super(unit);
-        // System.out.println("Created MutableDoubleVector");
     }
 
     /** If set, any modification of the data must be preceded by replacing the data with a local copy. */
@@ -67,29 +65,17 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         this.copyOnWrite = copyOnWrite;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final void normalize() throws ValueException
-    {
-        double sum = zSum();
-        if (0 == sum)
-        {
-            throw new ValueException("zSum is 0; cannot normalize");
-        }
-        checkCopyOnWrite();
-        for (int i = 0; i < size(); i++)
-        {
-            safeSet(i, safeGet(i) / sum);
-        }
-    }
+    /** ============================================================================================ */
+    /** ================================= ABSOLUTE IMPLEMENTATION ================================== */
+    /** ============================================================================================ */
 
     /**
-     * @param <U> Unit
+     * @param <U> Unit the unit for which this Vector will be created
      */
     public abstract static class Abs<U extends Unit<U>> extends MutableDoubleVector<U> implements Absolute
     {
         /**  */
-        private static final long serialVersionUID = 20150626L;
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Absolute MutableDoubleVector.
@@ -98,54 +84,73 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         protected Abs(final U unit)
         {
             super(unit);
-            // System.out.println("Created Abs");
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE DENSE implementation of MutableDoubleVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Dense<U extends Unit<U>> extends Abs<U> implements DenseData
         {
-            /**  */
-            private static final long serialVersionUID = 20150626L;
+            /** */
+            private static final long serialVersionUID = 20151003L;
 
             /**
-             * Construct a new Absolute Dense MutableDoubleVector.
-             * @param values double[]; the initial values of the entries in the new Absolute Dense MutableDoubleVector
+             * Construct a new Absolute Dense Mutable DoubleVector.
+             * @param values double[]; the values of the entries in the new Absolute Dense Mutable DoubleVector
              * @param unit U; the unit of the new Absolute Dense MutableDoubleVector
              * @throws ValueException when values is null
              */
             public Dense(final double[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * Construct a new Absolute Dense MutableDoubleVector.
-             * @param values DoubleScalar.Abs&lt;U&gt;[]; the initial values of the entries in the new Absolute Dense
+             * Construct a new Absolute Dense Mutable DoubleVector.
+             * @param values List; the values of the entries in the new Absolute Dense Mutable DoubleVector
+             * @param unit U; the unit of the new Absolute Dense Mutable DoubleVector
+             * @throws ValueException when values is null
+             */
+            public Dense(final List<Double> values, final U unit) throws ValueException
+            {
+                super(unit);
+                this.data = initializeDense(values);
+            }
+
+            /**
+             * Construct a new Absolute Dense Mutable DoubleVector.
+             * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Dense
              *            MutableDoubleVector
              * @throws ValueException when values has zero entries
              */
             public Dense(final DoubleScalar.Abs<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values DoubleMatrix1D; the initial values of the entries in the new Absolute Dense MutableDoubleVector
-             * @param unit U; the unit of the new Absolute Dense MutableDoubleVector
+             * Construct a new Absolute Dense Mutable DoubleVector.
+             * @param values List; the values of the entries in the new Absolute Dense Mutable DoubleVector
+             * @throws ValueException when values has zero entries
              */
-            protected Dense(final DoubleMatrix1D values, final U unit)
+            public Dense(final List<DoubleScalar.Abs<U>> values) throws ValueException
+            {
+                super(checkNonEmptyLA(values).get(0).getUnit());
+                this.data = initializeDenseLA(values);
+            }
+
+            /**
+             * Construct a new Absolute Dense Mutable DoubleVector.
+             * @param data an internal data object
+             * @param unit the unit
+             */
+            Dense(final DoubleVectorDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -153,7 +158,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             public final DoubleVector.Abs.Dense<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new DoubleVector.Abs.Dense<U>(getVectorSI(), getUnit());
+                return new DoubleVector.Abs.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -162,16 +167,9 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             {
                 setCopyOnWrite(true);
                 final MutableDoubleVector.Abs.Dense<U> result =
-                    new MutableDoubleVector.Abs.Dense<U>(getVectorSI(), getUnit());
+                    new MutableDoubleVector.Abs.Dense<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleMatrix1D createMatrix1D(final int size)
-            {
-                return new DenseDoubleMatrix1D(size);
             }
 
             /** {@inheritDoc} */
@@ -181,53 +179,83 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final DoubleVectorDataDense getData()
+            {
+                return (DoubleVectorDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE SPARSE implementation of MutableDoubleVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Sparse<U extends Unit<U>> extends Abs<U> implements SparseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
-             * Construct a new Absolute Sparse MutableDoubleVector.
-             * @param values double[]; the initial values of the entries in the new Absolute Sparse MutableDoubleVector
-             * @param unit U; the unit of the new Absolute Sparse MutableDoubleVector
+             * Construct a new Absolute Sparse Mutable DoubleVector.
+             * @param values Map; the map of indexes to values of the Absolute Sparse Mutable DoubleVector
+             * @param unit U; the unit of the new Absolute Sparse Mutable DoubleVector
+             * @param length the size of the vector
+             * @throws ValueException when values is null
+             */
+            public Sparse(final SortedMap<Integer, Double> values, final U unit, final int length)
+                throws ValueException
+            {
+                super(unit);
+                this.data = initializeSparse(values, length);
+            }
+
+            /**
+             * Construct a new Absolute Sparse Mutable DoubleVector.
+             * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable
+             *            DoubleVector
+             * @param length the size of the vector
+             * @throws ValueException when values has zero entries
+             */
+            public Sparse(final SortedMap<Integer, DoubleScalar.Abs<U>> values, final int length) throws ValueException
+            {
+                super(checkNonEmptyMA(values).get(0).getUnit());
+                initializeSparseMA(values, length);
+            }
+
+            /**
+             * Construct a new Absolute Sparse Mutable DoubleVector.
+             * @param values double[]; the values of the entries in the new Absolute Sparse Mutable DoubleVector
+             * @param unit U; the unit of the new Absolute Sparse Mutable DoubleVector
              * @throws ValueException when values is null
              */
             public Sparse(final double[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
-             * Construct a new Absolute Sparse MutableDoubleVector.
-             * @param values DoubleScalar.Abs&lt;U&gt;[]; the initial values of the entries in the new Absolute Sparse
-             *            MutableDoubleVector
+             * Construct a new Absolute Sparse Mutable DoubleVector.
+             * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable
+             *            DoubleVector
              * @throws ValueException when values has zero entries
              */
             public Sparse(final DoubleScalar.Abs<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
-             * For package internal use only.
-             * @param values DoubleMatrix1D; the initial values of the entries in the new Absolute Sparse MutableDoubleVector
-             * @param unit U; the unit of the new Absolute Sparse MutableDoubleVector
+             * Construct a new Absolute Sparse Mutable DoubleVector, package method.
+             * @param data the sparse data (internal structure)
+             * @param unit U; the unit of the new Absolute Sparse Mutable DoubleVector
              */
-            protected Sparse(final DoubleMatrix1D values, final U unit)
+            Sparse(final DoubleVectorDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -235,7 +263,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             public final DoubleVector.Abs.Sparse<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new DoubleVector.Abs.Sparse<U>(getVectorSI(), getUnit());
+                return new DoubleVector.Abs.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -244,16 +272,9 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             {
                 setCopyOnWrite(true);
                 final MutableDoubleVector.Abs.Sparse<U> result =
-                    new MutableDoubleVector.Abs.Sparse<U>(getVectorSI(), getUnit());
+                    new MutableDoubleVector.Abs.Sparse<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleMatrix1D createMatrix1D(final int size)
-            {
-                return new SparseDoubleMatrix1D(size);
             }
 
             /** {@inheritDoc} */
@@ -263,7 +284,15 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final DoubleVectorDataSparse getData()
+            {
+                return (DoubleVectorDataSparse) this.data;
+            }
         }
+
+        /** ================================= ABS GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
@@ -302,7 +331,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> abs()
         {
-            assign(DoubleFunctions.abs);
+            assign(DoubleMathFunctionsImpl.ABS);
             return this;
         }
 
@@ -310,7 +339,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> acos()
         {
-            assign(DoubleFunctions.acos);
+            assign(DoubleMathFunctionsImpl.ACOS);
             return this;
         }
 
@@ -318,7 +347,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> asin()
         {
-            assign(DoubleFunctions.asin);
+            assign(DoubleMathFunctionsImpl.ASIN);
             return this;
         }
 
@@ -326,7 +355,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> atan()
         {
-            assign(DoubleFunctions.atan);
+            assign(DoubleMathFunctionsImpl.ATAN);
             return this;
         }
 
@@ -334,7 +363,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> cbrt()
         {
-            assign(DoubleMathFunctionsImpl.cbrt);
+            assign(DoubleMathFunctionsImpl.CBRT);
             return this;
         }
 
@@ -342,7 +371,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> ceil()
         {
-            assign(DoubleFunctions.ceil);
+            assign(DoubleMathFunctionsImpl.CEIL);
             return this;
         }
 
@@ -350,7 +379,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> cos()
         {
-            assign(DoubleFunctions.cos);
+            assign(DoubleMathFunctionsImpl.COS);
             return this;
         }
 
@@ -358,7 +387,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> cosh()
         {
-            assign(DoubleMathFunctionsImpl.cosh);
+            assign(DoubleMathFunctionsImpl.COSH);
             return this;
         }
 
@@ -366,7 +395,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> exp()
         {
-            assign(DoubleFunctions.exp);
+            assign(DoubleMathFunctionsImpl.EXP);
             return this;
         }
 
@@ -374,7 +403,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> expm1()
         {
-            assign(DoubleMathFunctionsImpl.expm1);
+            assign(DoubleMathFunctionsImpl.EXPM1);
             return this;
         }
 
@@ -382,7 +411,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> floor()
         {
-            assign(DoubleFunctions.floor);
+            assign(DoubleMathFunctionsImpl.FLOOR);
             return this;
         }
 
@@ -390,7 +419,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> log()
         {
-            assign(DoubleFunctions.log);
+            assign(DoubleMathFunctionsImpl.LOG);
             return this;
         }
 
@@ -398,7 +427,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> log10()
         {
-            assign(DoubleMathFunctionsImpl.log10);
+            assign(DoubleMathFunctionsImpl.LOG10);
             return this;
         }
 
@@ -406,7 +435,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> log1p()
         {
-            assign(DoubleMathFunctionsImpl.log1p);
+            assign(DoubleMathFunctionsImpl.LOG1P);
             return this;
         }
 
@@ -414,7 +443,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> pow(final double x)
         {
-            assign(DoubleFunctions.pow(x));
+            assign(DoubleMathFunctionsImpl.POW(x));
             return this;
         }
 
@@ -422,7 +451,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> rint()
         {
-            assign(DoubleFunctions.rint);
+            assign(DoubleMathFunctionsImpl.RINT);
             return this;
         }
 
@@ -430,7 +459,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> round()
         {
-            assign(DoubleMathFunctionsImpl.round);
+            assign(DoubleMathFunctionsImpl.ROUND);
             return this;
         }
 
@@ -438,7 +467,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> signum()
         {
-            assign(DoubleMathFunctionsImpl.signum);
+            assign(DoubleMathFunctionsImpl.SIGNUM);
             return this;
         }
 
@@ -446,7 +475,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> sin()
         {
-            assign(DoubleFunctions.sin);
+            assign(DoubleMathFunctionsImpl.SIN);
             return this;
         }
 
@@ -454,7 +483,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> sinh()
         {
-            assign(DoubleMathFunctionsImpl.sinh);
+            assign(DoubleMathFunctionsImpl.SINH);
             return this;
         }
 
@@ -462,7 +491,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> sqrt()
         {
-            assign(DoubleFunctions.sqrt);
+            assign(DoubleMathFunctionsImpl.SQRT);
             return this;
         }
 
@@ -470,7 +499,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> tan()
         {
-            assign(DoubleFunctions.tan);
+            assign(DoubleMathFunctionsImpl.TAN);
             return this;
         }
 
@@ -478,7 +507,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> tanh()
         {
-            assign(DoubleMathFunctionsImpl.tanh);
+            assign(DoubleMathFunctionsImpl.TANH);
             return this;
         }
 
@@ -486,7 +515,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> toDegrees()
         {
-            assign(DoubleMathFunctionsImpl.toDegrees);
+            assign(DoubleMathFunctionsImpl.TO_DEGREES);
             return this;
         }
 
@@ -494,7 +523,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> toRadians()
         {
-            assign(DoubleMathFunctionsImpl.toRadians);
+            assign(DoubleMathFunctionsImpl.TO_RADIANS);
             return this;
         }
 
@@ -502,7 +531,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> inv()
         {
-            assign(DoubleFunctions.inv);
+            assign(DoubleMathFunctionsImpl.INV);
             return this;
         }
 
@@ -510,7 +539,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> multiplyBy(final double constant)
         {
-            assign(DoubleFunctions.mult(constant));
+            assign(DoubleMathFunctionsImpl.MULT(constant));
             return this;
         }
 
@@ -518,19 +547,23 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Abs<U> divideBy(final double constant)
         {
-            assign(DoubleFunctions.div(constant));
+            assign(DoubleMathFunctionsImpl.DIV(constant));
             return this;
         }
 
     }
 
+    /** ============================================================================================ */
+    /** ================================= RELATIVE IMPLEMENTATION ================================== */
+    /** ============================================================================================ */
+
     /**
-     * @param <U> Unit
+     * @param <U> Unit the unit for which this Vector will be created
      */
     public abstract static class Rel<U extends Unit<U>> extends MutableDoubleVector<U> implements Relative
     {
         /**  */
-        private static final long serialVersionUID = 20150626L;
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Relative MutableDoubleVector.
@@ -539,54 +572,73 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         protected Rel(final U unit)
         {
             super(unit);
-            // System.out.println("Created Rel");
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE DENSE implementation of MutableDoubleVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Dense<U extends Unit<U>> extends Rel<U> implements DenseData
         {
-            /**  */
-            private static final long serialVersionUID = 20150626L;
+            /** */
+            private static final long serialVersionUID = 20151003L;
 
             /**
-             * Construct a new Relative Dense MutableDoubleVector.
-             * @param values double[]; the initial values of the entries in the new Relative Dense MutableDoubleVector
+             * Construct a new Relative Dense Mutable DoubleVector.
+             * @param values double[]; the values of the entries in the new Relative Dense Mutable DoubleVector
              * @param unit U; the unit of the new Relative Dense MutableDoubleVector
              * @throws ValueException when values is null
              */
             public Dense(final double[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * Construct a new Relative Dense MutableDoubleVector.
-             * @param values DoubleScalar.Rel&lt;U&gt;[]; the initial values of the entries in the new Relative Dense
+             * Construct a new Relative Dense Mutable DoubleVector.
+             * @param values List; the values of the entries in the new Relative Dense Mutable DoubleVector
+             * @param unit U; the unit of the new Relative Dense Mutable DoubleVector
+             * @throws ValueException when values is null
+             */
+            public Dense(final List<Double> values, final U unit) throws ValueException
+            {
+                super(unit);
+                this.data = initializeDense(values);
+            }
+
+            /**
+             * Construct a new Relative Dense Mutable DoubleVector.
+             * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Dense
              *            MutableDoubleVector
              * @throws ValueException when values has zero entries
              */
             public Dense(final DoubleScalar.Rel<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values DoubleMatrix1D; the initial values of the entries in the new Relative Dense MutableDoubleVector
-             * @param unit U; the unit of the new Relative Dense MutableDoubleVector
+             * Construct a new Relative Dense Mutable DoubleVector.
+             * @param values List; the values of the entries in the new Relative Dense Mutable DoubleVector
+             * @throws ValueException when values has zero entries
              */
-            protected Dense(final DoubleMatrix1D values, final U unit)
+            public Dense(final List<DoubleScalar.Rel<U>> values) throws ValueException
+            {
+                super(checkNonEmptyLR(values).get(0).getUnit());
+                this.data = initializeDenseLR(values);
+            }
+
+            /**
+             * Construct a new Relative Dense Mutable DoubleVector.
+             * @param data an internal data object
+             * @param unit the unit
+             */
+            Dense(final DoubleVectorDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -594,7 +646,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             public final DoubleVector.Rel.Dense<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new DoubleVector.Rel.Dense<U>(getVectorSI(), getUnit());
+                return new DoubleVector.Rel.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -603,16 +655,9 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             {
                 setCopyOnWrite(true);
                 final MutableDoubleVector.Rel.Dense<U> result =
-                    new MutableDoubleVector.Rel.Dense<U>(getVectorSI(), getUnit());
+                    new MutableDoubleVector.Rel.Dense<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleMatrix1D createMatrix1D(final int size)
-            {
-                return new DenseDoubleMatrix1D(size);
             }
 
             /** {@inheritDoc} */
@@ -622,53 +667,83 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final DoubleVectorDataDense getData()
+            {
+                return (DoubleVectorDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE SPARSE implementation of MutableDoubleVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Sparse<U extends Unit<U>> extends Rel<U> implements SparseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
-             * Construct a new Relative Sparse MutableDoubleVector.
-             * @param values double[]; the initial values of the entries in the new Relative Sparse MutableDoubleVector
-             * @param unit U; the unit of the new Relative Sparse MutableDoubleVector
+             * Construct a new Relative Sparse Mutable DoubleVector.
+             * @param values Map; the map of indexes to values of the Relative Sparse Mutable DoubleVector
+             * @param unit U; the unit of the new Relative Sparse Mutable DoubleVector
+             * @param length the size of the vector
+             * @throws ValueException when values is null
+             */
+            public Sparse(final SortedMap<Integer, Double> values, final U unit, final int length)
+                throws ValueException
+            {
+                super(unit);
+                this.data = initializeSparse(values, length);
+            }
+
+            /**
+             * Construct a new Relative Sparse Mutable DoubleVector.
+             * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
+             *            DoubleVector
+             * @param length the size of the vector
+             * @throws ValueException when values has zero entries
+             */
+            public Sparse(final SortedMap<Integer, DoubleScalar.Rel<U>> values, final int length) throws ValueException
+            {
+                super(checkNonEmptyMR(values).get(0).getUnit());
+                this.data = initializeSparseMR(values, length);
+            }
+
+            /**
+             * Construct a new Relative Sparse Mutable DoubleVector.
+             * @param values double[]; the values of the entries in the new Relative Sparse Mutable DoubleVector
+             * @param unit U; the unit of the new Relative Sparse Mutable DoubleVector
              * @throws ValueException when values is null
              */
             public Sparse(final double[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
-             * Construct a new Relative Sparse MutableDoubleVector.
-             * @param values DoubleScalar.Rel&lt;U&gt;[]; the initial values of the entries in the new Relative Sparse
-             *            MutableDoubleVector
+             * Construct a new Relative Sparse Mutable DoubleVector.
+             * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
+             *            DoubleVector
              * @throws ValueException when values has zero entries
              */
-            public Sparse(final DoubleScalar.Rel<U>[] values) throws ValueException
+            public Sparse(final DoubleScalar.Abs<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
-             * For package internal use only.
-             * @param values DoubleMatrix1D; the initial values of the entries in the new Relative Sparse MutableDoubleVector
-             * @param unit U; the unit of the new Relative Sparse MutableDoubleVector
+             * Construct a new Relative Sparse Mutable DoubleVector, package method.
+             * @param data the sparse data (internal structure)
+             * @param unit U; the unit of the new Relative Sparse Mutable DoubleVector
              */
-            protected Sparse(final DoubleMatrix1D values, final U unit)
+            Sparse(final DoubleVectorDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -676,7 +751,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             public final DoubleVector.Rel.Sparse<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new DoubleVector.Rel.Sparse<U>(getVectorSI(), getUnit());
+                return new DoubleVector.Rel.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -685,16 +760,9 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             {
                 setCopyOnWrite(true);
                 final MutableDoubleVector.Rel.Sparse<U> result =
-                    new MutableDoubleVector.Rel.Sparse<U>(getVectorSI(), getUnit());
+                    new MutableDoubleVector.Rel.Sparse<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleMatrix1D createMatrix1D(final int size)
-            {
-                return new SparseDoubleMatrix1D(size);
             }
 
             /** {@inheritDoc} */
@@ -704,7 +772,15 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final DoubleVectorDataSparse getData()
+            {
+                return (DoubleVectorDataSparse) this.data;
+            }
         }
+
+        /** ================================= REL GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
@@ -743,7 +819,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> abs()
         {
-            assign(DoubleFunctions.abs);
+            assign(DoubleMathFunctionsImpl.ABS);
             return this;
         }
 
@@ -751,7 +827,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> acos()
         {
-            assign(DoubleFunctions.acos);
+            assign(DoubleMathFunctionsImpl.ACOS);
             return this;
         }
 
@@ -759,7 +835,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> asin()
         {
-            assign(DoubleFunctions.asin);
+            assign(DoubleMathFunctionsImpl.ASIN);
             return this;
         }
 
@@ -767,7 +843,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> atan()
         {
-            assign(DoubleFunctions.atan);
+            assign(DoubleMathFunctionsImpl.ATAN);
             return this;
         }
 
@@ -775,7 +851,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> cbrt()
         {
-            assign(DoubleMathFunctionsImpl.cbrt);
+            assign(DoubleMathFunctionsImpl.CBRT);
             return this;
         }
 
@@ -783,7 +859,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> ceil()
         {
-            assign(DoubleFunctions.ceil);
+            assign(DoubleMathFunctionsImpl.CEIL);
             return this;
         }
 
@@ -791,7 +867,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> cos()
         {
-            assign(DoubleFunctions.cos);
+            assign(DoubleMathFunctionsImpl.COS);
             return this;
         }
 
@@ -799,7 +875,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> cosh()
         {
-            assign(DoubleMathFunctionsImpl.cosh);
+            assign(DoubleMathFunctionsImpl.COSH);
             return this;
         }
 
@@ -807,7 +883,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> exp()
         {
-            assign(DoubleFunctions.exp);
+            assign(DoubleMathFunctionsImpl.EXP);
             return this;
         }
 
@@ -815,7 +891,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> expm1()
         {
-            assign(DoubleMathFunctionsImpl.expm1);
+            assign(DoubleMathFunctionsImpl.EXPM1);
             return this;
         }
 
@@ -823,7 +899,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> floor()
         {
-            assign(DoubleFunctions.floor);
+            assign(DoubleMathFunctionsImpl.FLOOR);
             return this;
         }
 
@@ -831,7 +907,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> log()
         {
-            assign(DoubleFunctions.log);
+            assign(DoubleMathFunctionsImpl.LOG);
             return this;
         }
 
@@ -839,7 +915,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> log10()
         {
-            assign(DoubleMathFunctionsImpl.log10);
+            assign(DoubleMathFunctionsImpl.LOG10);
             return this;
         }
 
@@ -847,7 +923,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> log1p()
         {
-            assign(DoubleMathFunctionsImpl.log1p);
+            assign(DoubleMathFunctionsImpl.LOG1P);
             return this;
         }
 
@@ -855,7 +931,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> pow(final double x)
         {
-            assign(DoubleFunctions.pow(x));
+            assign(DoubleMathFunctionsImpl.POW(x));
             return this;
         }
 
@@ -863,7 +939,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> rint()
         {
-            assign(DoubleFunctions.rint);
+            assign(DoubleMathFunctionsImpl.RINT);
             return this;
         }
 
@@ -871,7 +947,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> round()
         {
-            assign(DoubleMathFunctionsImpl.round);
+            assign(DoubleMathFunctionsImpl.ROUND);
             return this;
         }
 
@@ -879,7 +955,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> signum()
         {
-            assign(DoubleMathFunctionsImpl.signum);
+            assign(DoubleMathFunctionsImpl.SIGNUM);
             return this;
         }
 
@@ -887,7 +963,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> sin()
         {
-            assign(DoubleFunctions.sin);
+            assign(DoubleMathFunctionsImpl.SIN);
             return this;
         }
 
@@ -895,7 +971,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> sinh()
         {
-            assign(DoubleMathFunctionsImpl.sinh);
+            assign(DoubleMathFunctionsImpl.SINH);
             return this;
         }
 
@@ -903,7 +979,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> sqrt()
         {
-            assign(DoubleFunctions.sqrt);
+            assign(DoubleMathFunctionsImpl.SQRT);
             return this;
         }
 
@@ -911,7 +987,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> tan()
         {
-            assign(DoubleFunctions.tan);
+            assign(DoubleMathFunctionsImpl.TAN);
             return this;
         }
 
@@ -919,7 +995,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> tanh()
         {
-            assign(DoubleMathFunctionsImpl.tanh);
+            assign(DoubleMathFunctionsImpl.TANH);
             return this;
         }
 
@@ -927,7 +1003,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> toDegrees()
         {
-            assign(DoubleMathFunctionsImpl.toDegrees);
+            assign(DoubleMathFunctionsImpl.TO_DEGREES);
             return this;
         }
 
@@ -935,7 +1011,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> toRadians()
         {
-            assign(DoubleMathFunctionsImpl.toRadians);
+            assign(DoubleMathFunctionsImpl.TO_RADIANS);
             return this;
         }
 
@@ -943,7 +1019,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> inv()
         {
-            assign(DoubleFunctions.inv);
+            assign(DoubleMathFunctionsImpl.INV);
             return this;
         }
 
@@ -951,7 +1027,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> multiplyBy(final double constant)
         {
-            assign(DoubleFunctions.mult(constant));
+            assign(DoubleMathFunctionsImpl.MULT(constant));
             return this;
         }
 
@@ -959,14 +1035,13 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @Override
         public final MutableDoubleVector.Rel<U> divideBy(final double constant)
         {
-            assign(DoubleFunctions.div(constant));
+            assign(DoubleMathFunctionsImpl.DIV(constant));
             return this;
         }
-
     }
 
     /**
-     * Make (immutable) DoubleVector equivalent for any type of MutableDoubleVector.
+     * Make (immutable) DoubleVectorNew equivalent for any type of MutableDoubleVector.
      * @return DoubleVector&lt;U&gt;; immutable version of this DoubleVector
      */
     public abstract DoubleVector<U> immutable();
@@ -978,8 +1053,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
     {
         if (isCopyOnWrite())
         {
-            // System.out.println("copyOnWrite is set: Copying data");
-            deepCopyData();
+            this.data = this.data.copy();
             setCopyOnWrite(false);
         }
     }
@@ -1008,13 +1082,24 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
     }
 
     /**
-     * Execute a function on a cell by cell basis.
-     * @param d cern.colt.function.tdouble.DoubleFunction; the function to apply
+     * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
+     * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a dense
+     * dataset if necessary.
+     * @param doubleFunction the function to apply
      */
-    public final void assign(final cern.colt.function.tdouble.DoubleFunction d)
+    public final void assign(final DoubleFunction doubleFunction)
     {
         checkCopyOnWrite();
-        getVectorSI().assign(d);
+        if (this.data instanceof DoubleVectorDataDense)
+        {
+            ((DoubleVectorDataDense) this.data).assign(doubleFunction);
+        }
+        else
+        {
+            DoubleVectorDataDense dvdd = ((DoubleVectorDataSparse) this.data).toDense();
+            dvdd.assign(doubleFunction);
+            this.data = dvdd.toSparse();
+        }
     }
 
     /**********************************************************************************/
@@ -1083,18 +1168,6 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         return decrementValueByValue(rel);
     }
 
-    // FIXME It makes no sense to subtract an Absolute from a Relative
-    /**
-     * Decrement the values in this Relative MutableDoubleVector by the corresponding values in an Absolute DoubleVector.
-     * @param abs DoubleVector.Abs&lt;U&gt;; the Absolute DoubleVector
-     * @return MutableDoubleVector.Rel&lt;U&gt;; this modified Relative MutableDoubleVector
-     * @throws ValueException when the vectors do not have the same size
-     */
-    protected final MutableDoubleVector.Rel<U> decrementBy(final DoubleVector.Abs<U> abs) throws ValueException
-    {
-        return (MutableDoubleVector.Rel<U>) decrementValueByValue(abs);
-    }
-
     /**
      * Scale the values in this MutableDoubleVector by the corresponding values in a DoubleVector.
      * @param factor DoubleVector&lt;?&gt;; contains the values by which to scale the corresponding values in this
@@ -1124,6 +1197,23 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             safeSet(index, safeGet(index) * factor[index]);
         }
         return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void normalize() throws ValueException
+    {
+        double sum = zSum();
+        if (0 == sum)
+        {
+            throw new ValueException("zSum is 0; cannot normalize");
+        }
+        checkCopyOnWrite();
+        for (int i = 0; i < size(); i++)
+        {
+            // TODO parallel divide by factor
+            safeSet(i, safeGet(i) / sum);
+        }
     }
 
     /**

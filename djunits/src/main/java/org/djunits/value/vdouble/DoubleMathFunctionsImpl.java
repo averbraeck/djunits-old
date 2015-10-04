@@ -1,7 +1,5 @@
 package org.djunits.value.vdouble;
 
-import cern.colt.function.tdouble.DoubleFunction;
-
 /**
  * DoubleFunction implementations of the standard Math functions.
  * <p>
@@ -26,9 +24,57 @@ public final class DoubleMathFunctionsImpl
     }
 
     /**
+     * Function that returns <tt>Math.abs(a)</tt>.
+     */
+    public static final DoubleFunction ABS = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.abs(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.acos(a)</tt>.
+     */
+    public static final DoubleFunction ACOS = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.acos(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.asin(a)</tt>.
+     */
+    public static final DoubleFunction ASIN = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.asin(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.atan(a)</tt>.
+     */
+    public static final DoubleFunction ATAN = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.atan(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.cbrt(a)</tt>.
      */
-    public static final DoubleFunction cbrt = new DoubleFunction()
+    public static final DoubleFunction CBRT = new DoubleFunction()
     {
         @Override
         public double apply(final double a)
@@ -38,9 +84,33 @@ public final class DoubleMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.ceil(a)</tt>.
+     */
+    public static final DoubleFunction CEIL = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.ceil(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.cos(a)</tt>.
+     */
+    public static final DoubleFunction COS = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.cos(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.cosh(a)</tt>.
      */
-    public static final DoubleFunction cosh = new DoubleFunction()
+    public static final DoubleFunction COSH = new DoubleFunction()
     {
         @Override
         public double apply(final double a)
@@ -50,9 +120,21 @@ public final class DoubleMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.exp(a)</tt>.
+     */
+    public static final DoubleFunction EXP = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.exp(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.expm1(a)</tt>.
      */
-    public static final DoubleFunction expm1 = new DoubleFunction()
+    public static final DoubleFunction EXPM1 = new DoubleFunction()
     {
         @Override
         public double apply(final double a)
@@ -62,9 +144,33 @@ public final class DoubleMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.floor(a)</tt>.
+     */
+    public static final DoubleFunction FLOOR = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.floor(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.log(a)</tt>.
+     */
+    public static final DoubleFunction LOG = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.log(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.log10(a)</tt>.
      */
-    public static final DoubleFunction log10 = new DoubleFunction()
+    public static final DoubleFunction LOG10 = new DoubleFunction()
     {
         @Override
         public double apply(final double a)
@@ -76,7 +182,7 @@ public final class DoubleMathFunctionsImpl
     /**
      * Function that returns <tt>Math.log1p(a)</tt>.
      */
-    public static final DoubleFunction log1p = new DoubleFunction()
+    public static final DoubleFunction LOG1P = new DoubleFunction()
     {
         @Override
         public double apply(final double a)
@@ -86,9 +192,39 @@ public final class DoubleMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.pow(a, b)</tt>.
+     * @param b power parameter
+     * @return power function
+     */
+    @SuppressWarnings("checkstyle:methodname")
+    public static DoubleFunction POW(final double b)
+    {
+        return new DoubleFunction()
+        {
+            @Override
+            public double apply(final double a)
+            {
+                return Math.pow(a, b);
+            }
+        };
+    }
+
+    /**
+     * Function that returns <tt>Math.rint(a)</tt>.
+     */
+    public static final DoubleFunction RINT = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.rint(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.round(a)</tt>.
      */
-    public static final DoubleFunction round = new DoubleFunction()
+    public static final DoubleFunction ROUND = new DoubleFunction()
     {
         @Override
         public double apply(final double a)
@@ -100,7 +236,7 @@ public final class DoubleMathFunctionsImpl
     /**
      * Function that returns <tt>Math.signum(a)</tt>.
      */
-    public static final DoubleFunction signum = new DoubleFunction()
+    public static final DoubleFunction SIGNUM = new DoubleFunction()
     {
         @Override
         public double apply(final double a)
@@ -110,9 +246,21 @@ public final class DoubleMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.sin(a)</tt>.
+     */
+    public static final DoubleFunction SIN = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.sin(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.sinh(a)</tt>.
      */
-    public static final DoubleFunction sinh = new DoubleFunction()
+    public static final DoubleFunction SINH = new DoubleFunction()
     {
         @Override
         public double apply(final double a)
@@ -122,9 +270,33 @@ public final class DoubleMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.sqrt(a)</tt>.
+     */
+    public static final DoubleFunction SQRT = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.sqrt(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.tan(a)</tt>.
+     */
+    public static final DoubleFunction TAN = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return Math.tan(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.tanh(a)</tt>.
      */
-    public static final DoubleFunction tanh = new DoubleFunction()
+    public static final DoubleFunction TANH = new DoubleFunction()
     {
         @Override
         public double apply(final double a)
@@ -136,7 +308,7 @@ public final class DoubleMathFunctionsImpl
     /**
      * Function that returns <tt>Math.toDegrees(a)</tt>.
      */
-    public static final DoubleFunction toDegrees = new DoubleFunction()
+    public static final DoubleFunction TO_DEGREES = new DoubleFunction()
     {
         @Override
         public double apply(final double a)
@@ -148,7 +320,7 @@ public final class DoubleMathFunctionsImpl
     /**
      * Function that returns <tt>Math.toRadians(a)</tt>.
      */
-    public static final DoubleFunction toRadians = new DoubleFunction()
+    public static final DoubleFunction TO_RADIANS = new DoubleFunction()
     {
         @Override
         public double apply(final double a)
@@ -156,5 +328,53 @@ public final class DoubleMathFunctionsImpl
             return Math.toRadians(a);
         }
     };
+
+    /**
+     * Function that returns <tt>1/a</tt>.
+     */
+    public static final DoubleFunction INV = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return 1 / a;
+        }
+    };
+
+    /**
+     * Function that returns <tt>a * b</tt>.
+     * @param b power parameter
+     * @return power function
+     */
+    @SuppressWarnings("checkstyle:methodname")
+    public static DoubleFunction MULT(final double b)
+    {
+        return new DoubleFunction()
+        {
+            @Override
+            public double apply(final double a)
+            {
+                return a * b;
+            }
+        };
+    }
+
+    /**
+     * Function that returns <tt>a / b</tt>.
+     * @param b power parameter
+     * @return power function
+     */
+    @SuppressWarnings("checkstyle:methodname")
+    public static DoubleFunction DIV(final double b)
+    {
+        return new DoubleFunction()
+        {
+            @Override
+            public double apply(final double a)
+            {
+                return a / b;
+            }
+        };
+    }
 
 }

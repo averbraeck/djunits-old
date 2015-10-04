@@ -1,6 +1,10 @@
 package org.djunits.value.vfloat.vector;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.SortedMap;
 
 import org.djunits.unit.SICoefficients;
 import org.djunits.unit.SIUnit;
@@ -15,10 +19,6 @@ import org.djunits.value.ValueUtil;
 import org.djunits.value.formatter.Format;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 
-import cern.colt.matrix.tfloat.FloatMatrix1D;
-import cern.colt.matrix.tfloat.impl.DenseFloatMatrix1D;
-import cern.colt.matrix.tfloat.impl.SparseFloatMatrix1D;
-
 /**
  * Immutable FloatVector.
  * <p>
@@ -27,8 +27,8 @@ import cern.colt.matrix.tfloat.impl.SparseFloatMatrix1D;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this FloatVector
@@ -36,32 +36,38 @@ import cern.colt.matrix.tfloat.impl.SparseFloatMatrix1D;
 public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> implements Serializable,
     ReadOnlyFloatVectorFunctions<U>
 {
-    /**  */
-    private static final long serialVersionUID = 20150626L;
+    /** */
+    private static final long serialVersionUID = 20151003L;
+
+    /** The stored data as an object, can be sparse or dense. */
+    @SuppressWarnings("checkstyle:visibilitymodifier")
+    protected FloatVectorData data;
 
     /**
-     * The internal storage for the vector; internally the values are stored in standard SI unit; storage can be dense or
-     * sparse.
+     * @return the data, as Dense or Sparse data.
      */
-    private FloatMatrix1D vectorSI;
+    protected abstract FloatVectorData getData();
 
     /**
-     * Construct a new Immutable FloatVector.
-     * @param unit U; the unit of the new FloatVector
+     * Construct a new Absolute Immutable FloatVector.
+     * @param unit U; the unit of the new Absolute Immutable FloatVector
      */
     protected FloatVector(final U unit)
     {
         super(unit);
-        // System.out.println("Created FloatVector");
     }
 
+    /** ============================================================================================ */
+    /** ================================= ABSOLUTE IMPLEMENTATION ================================== */
+    /** ============================================================================================ */
+
     /**
-     * @param <U> Unit
+     * @param <U> Unit the unit for which this Vector will be created
      */
     public abstract static class Abs<U extends Unit<U>> extends FloatVector<U> implements Absolute
     {
-        /**  */
-        private static final long serialVersionUID = 20150626L;
+        /** */
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Absolute Immutable FloatVector.
@@ -70,16 +76,16 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
         protected Abs(final U unit)
         {
             super(unit);
-            // System.out.println("Created Abs");
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE DENSE implementation of FloatVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Dense<U extends Unit<U>> extends Abs<U> implements DenseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Absolute Dense Immutable FloatVector.
@@ -90,8 +96,19 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
             public Dense(final float[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
+            }
+
+            /**
+             * Construct a new Absolute Dense Immutable FloatVector.
+             * @param values List; the values of the entries in the new Absolute Dense Immutable FloatVector
+             * @param unit U; the unit of the new Absolute Dense Immutable FloatVector
+             * @throws ValueException when values is null
+             */
+            public Dense(final List<Float> values, final U unit) throws ValueException
+            {
+                super(unit);
+                this.data = initializeDense(values);
             }
 
             /**
@@ -103,52 +120,87 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
             public Dense(final FloatScalar.Abs<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix1D; the values of the entries in the new Absolute Dense Immutable FloatVector
-             * @param unit U; the unit of the new Absolute Dense Immutable FloatVector
+             * Construct a new Absolute Dense Immutable FloatVector.
+             * @param values List; the values of the entries in the new Absolute Dense Immutable FloatVector
+             * @throws ValueException when values has zero entries
              */
-            protected Dense(final FloatMatrix1D values, final U unit)
+            public Dense(final List<FloatScalar.Abs<U>> values) throws ValueException
+            {
+                super(checkNonEmptyLA(values).get(0).getUnit());
+                this.data = initializeDenseLA(values);
+            }
+
+            /**
+             * Construct a new Absolute Dense Immutable FloatVector.
+             * @param data an internal data object
+             * @param unit the unit
+             */
+            Dense(final FloatVectorDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
             @Override
             public final MutableFloatVector.Abs.Dense<U> mutable()
             {
-                return new MutableFloatVector.Abs.Dense<U>(getVectorSI(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix1D createMatrix1D(final int size)
-            {
-                return new DenseFloatMatrix1D(size);
+                return new MutableFloatVector.Abs.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
             @Override
             public final FloatVector.Abs.Dense<U> copy()
             {
-                return this; // That was easy...
+                return this; // Immutable...
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatVectorDataDense getData()
+            {
+                return (FloatVectorDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE SPARSE implementation of FloatVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Sparse<U extends Unit<U>> extends Abs<U> implements SparseData
         {
             /**  */
             private static final long serialVersionUID = 20150626L;
+
+            /**
+             * Construct a new Absolute Sparse Immutable FloatVector.
+             * @param values Map; the map of indexes to values of the Absolute Sparse Immutable FloatVector
+             * @param unit U; the unit of the new Absolute Sparse Immutable FloatVector
+             * @param length the size of the vector
+             * @throws ValueException when values is null
+             */
+            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
+            {
+                super(unit);
+                this.data = initializeSparse(values, length);
+            }
+
+            /**
+             * Construct a new Absolute Sparse Immutable FloatVector.
+             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Immutable
+             *            FloatVector
+             * @param length the size of the vector
+             * @throws ValueException when values has zero entries
+             */
+            public Sparse(final SortedMap<Integer, FloatScalar.Abs<U>> values, final int length) throws ValueException
+            {
+                super(checkNonEmptyMA(values).get(0).getUnit());
+                this.data = initializeSparseMA(values, length);
+            }
 
             /**
              * Construct a new Absolute Sparse Immutable FloatVector.
@@ -159,8 +211,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
             public Sparse(final float[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
@@ -172,44 +223,43 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
             public Sparse(final FloatScalar.Abs<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix1D; the values of the entries in the new Absolute Sparse Immutable FloatVector
+             * Construct a new Absolute Sparse Immutable FloatVector, package method.
+             * @param data the sparse data (internal structure)
              * @param unit U; the unit of the new Absolute Sparse Immutable FloatVector
              */
-            protected Sparse(final FloatMatrix1D values, final U unit)
+            Sparse(final FloatVectorDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
             @Override
             public final MutableFloatVector.Abs.Sparse<U> mutable()
             {
-                return new MutableFloatVector.Abs.Sparse<U>(getVectorSI(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix1D createMatrix1D(final int size)
-            {
-                return new SparseFloatMatrix1D(size);
+                return new MutableFloatVector.Abs.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
             @Override
             public final FloatVector.Abs.Sparse<U> copy()
             {
-                return this; // That was easy...
+                return this; // Immutable...
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatVectorDataSparse getData()
+            {
+                return (FloatVectorDataSparse) this.data;
+            }
         }
+
+        /** ================================= ABS GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
@@ -217,16 +267,19 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
         {
             return new FloatScalar.Abs<U>(getInUnit(index, getUnit()), getUnit());
         }
-
     }
 
+    /** ============================================================================================ */
+    /** ================================= RELATIVE IMPLEMENTATION ================================== */
+    /** ============================================================================================ */
+
     /**
-     * @param <U> Unit
+     * @param <U> Unit the unit for which this Vector will be created
      */
     public abstract static class Rel<U extends Unit<U>> extends FloatVector<U> implements Relative
     {
-        /**  */
-        private static final long serialVersionUID = 20150626L;
+        /** */
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Relative Immutable FloatVector.
@@ -235,16 +288,16 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
         protected Rel(final U unit)
         {
             super(unit);
-            // System.out.println("Created Rel");
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE DENSE implementation of FloatVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Dense<U extends Unit<U>> extends Rel<U> implements DenseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Relative Dense Immutable FloatVector.
@@ -255,8 +308,19 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
             public Dense(final float[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
+            }
+
+            /**
+             * Construct a new Relative Dense Immutable FloatVector.
+             * @param values List; the values of the entries in the new Relative Dense Immutable FloatVector
+             * @param unit U; the unit of the new Relative Dense Immutable FloatVector
+             * @throws ValueException when values is null
+             */
+            public Dense(final List<Float> values, final U unit) throws ValueException
+            {
+                super(unit);
+                this.data = initializeDense(values);
             }
 
             /**
@@ -268,52 +332,87 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
             public Dense(final FloatScalar.Rel<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix1D; the values of the entries in the new Relative Dense Immutable FloatVector
-             * @param unit U; the unit of the new Relative Dense Immutable FloatVector
+             * Construct a new Relative Dense Immutable FloatVector.
+             * @param values List; the values of the entries in the new Relative Dense Immutable FloatVector
+             * @throws ValueException when values has zero entries
              */
-            protected Dense(final FloatMatrix1D values, final U unit)
+            public Dense(final List<FloatScalar.Rel<U>> values) throws ValueException
+            {
+                super(checkNonEmptyLR(values).get(0).getUnit());
+                this.data = initializeDenseLR(values);
+            }
+
+            /**
+             * Construct a new Relative Dense Immutable FloatVector.
+             * @param data an internal data object
+             * @param unit the unit
+             */
+            Dense(final FloatVectorDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
             @Override
             public final MutableFloatVector.Rel.Dense<U> mutable()
             {
-                return new MutableFloatVector.Rel.Dense<U>(getVectorSI(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix1D createMatrix1D(final int size)
-            {
-                return new DenseFloatMatrix1D(size);
+                return new MutableFloatVector.Rel.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
             @Override
             public final FloatVector.Rel.Dense<U> copy()
             {
-                return this; // That was easy...
+                return this; // Immutable...
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatVectorDataDense getData()
+            {
+                return (FloatVectorDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE SPARSE implementation of FloatVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Sparse<U extends Unit<U>> extends Rel<U> implements SparseData
         {
             /**  */
             private static final long serialVersionUID = 20150626L;
+
+            /**
+             * Construct a new Relative Sparse Immutable FloatVector.
+             * @param values Map; the map of indexes to values of the Relative Sparse Immutable FloatVector
+             * @param unit U; the unit of the new Relative Sparse Immutable FloatVector
+             * @param length the size of the vector
+             * @throws ValueException when values is null
+             */
+            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
+            {
+                super(unit);
+                this.data = initializeSparse(values, length);
+            }
+
+            /**
+             * Construct a new Relative Sparse Immutable FloatVector.
+             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Immutable
+             *            FloatVector
+             * @param length the size of the vector
+             * @throws ValueException when values has zero entries
+             */
+            public Sparse(final SortedMap<Integer, FloatScalar.Rel<U>> values, final int length) throws ValueException
+            {
+                super(checkNonEmptyMR(values).get(0).getUnit());
+                this.data = initializeSparseMR(values, length);
+            }
 
             /**
              * Construct a new Relative Sparse Immutable FloatVector.
@@ -324,57 +423,55 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
             public Sparse(final float[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
              * Construct a new Relative Sparse Immutable FloatVector.
-             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Immutable
+             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Relative Sparse Immutable
              *            FloatVector
              * @throws ValueException when values has zero entries
              */
             public Sparse(final FloatScalar.Rel<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix1D; the values of the entries in the new Relative Sparse Immutable FloatVector
-             * @param unit U; the unit of the new Relative Sparse Immutable FloatVector
+             * Construct a new Relative Sparse Immutable FloatVector, package method.
+             * @param data the sparse data (internal structure)
+             * @param unit U; the unit of the new Absolute Sparse Immutable FloatVector
              */
-            protected Sparse(final FloatMatrix1D values, final U unit)
+            Sparse(final FloatVectorDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
             @Override
             public final MutableFloatVector.Rel.Sparse<U> mutable()
             {
-                return new MutableFloatVector.Rel.Sparse<U>(getVectorSI(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix1D createMatrix1D(final int size)
-            {
-                return new SparseFloatMatrix1D(size);
+                return new MutableFloatVector.Rel.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
             @Override
             public final FloatVector.Rel.Sparse<U> copy()
             {
-                return this; // That was easy...
+                return this; // Immutable...
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatVectorDataSparse getData()
+            {
+                return (FloatVectorDataSparse) this.data;
+            }
         }
+
+        /** ================================= REL GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
@@ -382,25 +479,307 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
         {
             return new FloatScalar.Rel<U>(getInUnit(index, getUnit()), getUnit());
         }
+    }
 
+    /** ============================================================================================ */
+    /** ============================= STATIC CONSTRUCTOR HELP METHODS ============================== */
+    /** ============================================================================================ */
+
+    /**
+     * Check that a provided array can be used to create some descendant of a FloatVector.
+     * @param dsArray FloatScalar&lt;U&gt;[]; the provided array
+     * @param <U> Unit; the unit of the FloatScalar array
+     * @return FloatScalar&lt;U&gt;[]; the provided array
+     * @throws ValueException when the array has length equal to 0
+     */
+    static <U extends Unit<U>> FloatScalar.Abs<U>[] checkNonEmpty(final FloatScalar.Abs<U>[] dsArray)
+        throws ValueException
+    {
+        if (0 == dsArray.length)
+        {
+            throw new ValueException(
+                "Cannot create a FloatVector or MutableFloatVector from an empty array of FloatScalar");
+        }
+        return dsArray;
     }
 
     /**
-     * Retrieve the internal data.
-     * @return FloatMatrix1D; the data in the internal format
+     * Check that a provided List can be used to create some descendant of a FloatVector.
+     * @param dsList the provided list
+     * @param <U> Unit; the unit of the FloatScalar list
+     * @return List the provided list
+     * @throws ValueException when the list has size equal to 0
      */
-    protected final FloatMatrix1D getVectorSI()
+    static <U extends Unit<U>> List<FloatScalar.Abs<U>> checkNonEmptyLA(final List<FloatScalar.Abs<U>> dsList)
+        throws ValueException
     {
-        return this.vectorSI;
+        if (0 == dsList.size())
+        {
+            throw new ValueException(
+                "Cannot create a FloatVector or MutableFloatVector from an empty List of FloatScalar");
+        }
+        return dsList;
     }
 
     /**
-     * Make a deep copy of the data (used ONLY in the MutableFloatVector sub class).
+     * Check that a provided Map can be used to create some descendant of a FloatVector.
+     * @param dsMap the provided map
+     * @param <U> Unit; the unit of the FloatScalar list
+     * @return List the provided list
+     * @throws ValueException when the list has size equal to 0
      */
-    protected final void deepCopyData()
+    static <U extends Unit<U>> SortedMap<Integer, FloatScalar.Abs<U>> checkNonEmptyMA(
+        final SortedMap<Integer, FloatScalar.Abs<U>> dsMap) throws ValueException
     {
-        this.vectorSI = getVectorSI().copy(); // makes a deep copy, using multithreading
+        if (0 == dsMap.size())
+        {
+            throw new ValueException(
+                "Cannot create a FloatVector or MutableFloatVector from an empty List of FloatScalar");
+        }
+        return dsMap;
     }
+
+    /**
+     * Check that a provided array can be used to create some descendant of a FloatVector.
+     * @param dsArray FloatScalar&lt;U&gt;[]; the provided array
+     * @param <U> Unit; the unit of the FloatScalar array
+     * @return FloatScalar&lt;U&gt;[]; the provided array
+     * @throws ValueException when the array has length equal to 0
+     */
+    static <U extends Unit<U>> FloatScalar.Rel<U>[] checkNonEmpty(final FloatScalar.Rel<U>[] dsArray)
+        throws ValueException
+    {
+        if (0 == dsArray.length)
+        {
+            throw new ValueException(
+                "Cannot create a FloatVector or MutableFloatVector from an empty array of FloatScalar");
+        }
+        return dsArray;
+    }
+
+    /**
+     * Check that a provided List can be used to create some descendant of a FloatVector.
+     * @param dsList the provided list
+     * @param <U> Unit; the unit of the FloatScalar list
+     * @return List the provided list
+     * @throws ValueException when the list has size equal to 0
+     */
+    static <U extends Unit<U>> List<FloatScalar.Rel<U>> checkNonEmptyLR(final List<FloatScalar.Rel<U>> dsList)
+        throws ValueException
+    {
+        if (0 == dsList.size())
+        {
+            throw new ValueException(
+                "Cannot create a FloatVector or MutableFloatVector from an empty List of FloatScalar");
+        }
+        return dsList;
+    }
+
+    /**
+     * Check that a provided Map can be used to create some descendant of a FloatVector.
+     * @param dsMap the provided map
+     * @param <U> Unit; the unit of the FloatScalar list
+     * @return List the provided list
+     * @throws ValueException when the list has size equal to 0
+     */
+    static <U extends Unit<U>> Map<Integer, FloatScalar.Rel<U>> checkNonEmptyMR(
+        final Map<Integer, FloatScalar.Rel<U>> dsMap) throws ValueException
+    {
+        if (0 == dsMap.size())
+        {
+            throw new ValueException(
+                "Cannot create a FloatVector or MutableFloatVector from an empty List of FloatScalar");
+        }
+        return dsMap;
+    }
+
+    /**
+     * Initialize a dense vector.
+     * @param values the values to store in the vector
+     * @return the dense vector
+     * @throws ValueException when no values are present
+     */
+    final FloatVectorDataDense initializeDense(final float[] values) throws ValueException
+    {
+        if (null == values)
+        {
+            throw new ValueException("values is null");
+        }
+        float[] vectorSI = new float[values.length];
+        if (getUnit().equals(getUnit().getStandardUnit()))
+        {
+            System.arraycopy(values, 0, vectorSI, 0, values.length);
+        }
+        else
+        {
+            // TODO optimize for linear scale: multiply by factor
+            for (int index = values.length; --index >= 0;)
+            {
+                vectorSI[index] = (float) expressAsSIUnit(values[index]);
+            }
+        }
+        return new FloatVectorDataDense(vectorSI);
+    }
+
+    /**
+     * Initialize a dense vector.
+     * @param values the values to store in the vector
+     * @return the dense vector
+     * @throws ValueException when no values are present
+     */
+    final FloatVectorDataDense initializeDense(final List<Float> values) throws ValueException
+    {
+        if (null == values)
+        {
+            throw new ValueException("values is null");
+        }
+        float[] vectorSI = new float[values.size()];
+        if (getUnit().equals(getUnit().getStandardUnit()))
+        {
+            for (int index = 0; index < values.size(); index++)
+            {
+                vectorSI[index] = values.get(index);
+            }
+        }
+        else
+        {
+            for (int index = values.size(); --index >= 0;)
+            {
+                // TODO optimize for linear scale: multiply by factor
+                vectorSI[index] = (float) expressAsSIUnit(values.get(index));
+            }
+        }
+        return new FloatVectorDataDense(vectorSI);
+    }
+
+    /**
+     * Initialize a dense vector.
+     * @param values the values to store in the vector
+     * @return the dense vector
+     * @throws ValueException when no values are present
+     */
+    final FloatVectorDataDense initializeDense(final FloatScalar<U>[] values) throws ValueException
+    {
+        if (null == values)
+        {
+            throw new ValueException("values is null");
+        }
+        float[] vectorSI = new float[values.length];
+        for (int index = 0; index < values.length; index++)
+        {
+            vectorSI[index] = values[index].getSI();
+        }
+        return new FloatVectorDataDense(vectorSI);
+    }
+
+    /**
+     * Initialize a dense vector.
+     * @param values the values to store in the vector
+     * @return the dense vector
+     * @throws ValueException when no values are present
+     */
+    final FloatVectorDataDense initializeDenseLA(final List<FloatScalar.Abs<U>> values) throws ValueException
+    {
+        if (null == values)
+        {
+            throw new ValueException("values is null");
+        }
+        float[] vectorSI = new float[values.size()];
+        for (int index = 0; index < values.size(); index++)
+        {
+            vectorSI[index] = values.get(index).getSI();
+        }
+        return new FloatVectorDataDense(vectorSI);
+    }
+
+    /**
+     * Initialize a dense vector.
+     * @param values the values to store in the vector
+     * @return the dense vector
+     * @throws ValueException when no values are present
+     */
+    final FloatVectorDataDense initializeDenseLR(final List<FloatScalar.Rel<U>> values) throws ValueException
+    {
+        if (null == values)
+        {
+            throw new ValueException("values is null");
+        }
+        float[] vectorSI = new float[values.size()];
+        for (int index = 0; index < values.size(); index++)
+        {
+            vectorSI[index] = values.get(index).getSI();
+        }
+        return new FloatVectorDataDense(vectorSI);
+    }
+
+    /**
+     * Import the values from a sparse map of integers and values.
+     * @param values Map&lt;Integer, Float&gt;; the values
+     * @param length the size of the vector
+     * @return the sparse vector
+     */
+    protected final FloatVectorDataSparse initializeSparse(final SortedMap<Integer, Float> values, final int length)
+    {
+        boolean isSI = getUnit().equals(getUnit().getStandardUnit());
+        float[] vectorSI = new float[values.size()];
+        int[] indices = new int[values.size()];
+        int index = 0;
+        for (Entry<Integer, Float> entry : values.entrySet())
+        {
+            vectorSI[index] = isSI ? entry.getValue() : (float) expressAsSIUnit(entry.getValue());
+            indices[index] = entry.getKey();
+            index++;
+        }
+        return new FloatVectorDataSparse(vectorSI, indices, length);
+    }
+
+    /**
+     * Import the values from a sparse map of integers and values.
+     * @param values Map&lt;Integer, Float&gt;; the values
+     * @param length the size of the vector
+     * @return the sparse vector
+     */
+    protected final FloatVectorDataSparse initializeSparseMA(final SortedMap<Integer, FloatScalar.Abs<U>> values,
+        final int length)
+    {
+        boolean isSI = getUnit().equals(getUnit().getStandardUnit());
+        float[] vectorSI = new float[values.size()];
+        int[] indices = new int[values.size()];
+        int index = 0;
+        for (Entry<Integer, FloatScalar.Abs<U>> entry : values.entrySet())
+        {
+            vectorSI[index] = isSI ? entry.getValue().si : (float) expressAsSIUnit(entry.getValue().si);
+            indices[index] = entry.getKey();
+            index++;
+        }
+        return new FloatVectorDataSparse(vectorSI, indices, length);
+    }
+
+    /**
+     * Import the values from a sparse map of integers and values.
+     * @param values Map&lt;Integer, Float&gt;; the values
+     * @param length the size of the vector
+     * @return the sparse vector
+     */
+    protected final FloatVectorDataSparse initializeSparseMR(final SortedMap<Integer, FloatScalar.Rel<U>> values,
+        final int length)
+    {
+        boolean isSI = getUnit().equals(getUnit().getStandardUnit());
+        float[] vectorSI = new float[values.size()];
+        int[] indices = new int[values.size()];
+        int index = 0;
+        for (Entry<Integer, FloatScalar.Rel<U>> entry : values.entrySet())
+        {
+            vectorSI[index] = isSI ? entry.getValue().si : (float) expressAsSIUnit(entry.getValue().si);
+            indices[index] = entry.getKey();
+            index++;
+        }
+        return new FloatVectorDataSparse(vectorSI, indices, length);
+    }
+
+    /** ============================================================================================ */
+    /** ================================== GENERIC VECTOR METHODS ================================== */
+    /** ============================================================================================ */
 
     /**
      * Create a mutable version of this FloatVector. <br>
@@ -411,72 +790,12 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
     public abstract MutableFloatVector<U> mutable();
 
     /**
-     * Import the values and convert them into the SI standard unit.
-     * @param values float[]; an array of values
-     * @throws ValueException when values is null
-     */
-    protected final void initialize(final float[] values) throws ValueException
-    {
-        if (null == values)
-        {
-            throw new ValueException("values is null");
-        }
-        this.vectorSI = createMatrix1D(values.length);
-        if (getUnit().equals(getUnit().getStandardUnit()))
-        {
-            this.vectorSI.assign(values);
-        }
-        else
-        {
-            for (int index = values.length; --index >= 0;)
-            {
-                safeSet(index, (float) expressAsSIUnit(values[index]));
-            }
-        }
-    }
-
-    /**
-     * Import the values from an existing FloatMatrix1D. This makes a shallow copy.
-     * @param values FloatMatrix1D; the values
-     */
-    protected final void initialize(final FloatMatrix1D values)
-    {
-        this.vectorSI = values;
-    }
-
-    /**
-     * Construct the vector and store the values in the standard SI unit.
-     * @param values FloatScalar&lt;U&gt;[]; an array of values
-     * @throws ValueException when values is null, or empty
-     */
-    protected final void initialize(final FloatScalar<U>[] values) throws ValueException
-    {
-        if (null == values)
-        {
-            throw new ValueException("values is null");
-        }
-        this.vectorSI = createMatrix1D(values.length);
-        for (int index = 0; index < values.length; index++)
-        {
-            safeSet(index, values[index].getSI());
-        }
-    }
-
-    /**
-     * Create storage for the data. <br>
-     * This method must be implemented by each leaf class.
-     * @param size int; the number of cells in the vector
-     * @return FloatMatrix1D; an instance of the right type of FloatMatrix1D (absolute/relative, dense/sparse, etc.)
-     */
-    protected abstract FloatMatrix1D createMatrix1D(final int size);
-
-    /**
      * Create a float[] array filled with the values in the standard SI unit.
      * @return float[]; array of values in the standard SI unit
      */
     public final float[] getValuesSI()
     {
-        return this.vectorSI.toArray(); // this makes a deep copy
+        return this.data.getDenseVectorSI();
     }
 
     /**
@@ -495,7 +814,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
      */
     public final float[] getValuesInUnit(final U targetUnit)
     {
-        float[] values = this.vectorSI.toArray();
+        float[] values = getValuesSI();
         for (int i = values.length; --i >= 0;)
         {
             values[i] = (float) ValueUtil.expressAsUnit(values[i], targetUnit);
@@ -507,7 +826,20 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
     @Override
     public final int size()
     {
-        return (int) this.vectorSI.size();
+        return this.data.size();
+    }
+
+    /**
+     * Check that a provided index is valid.
+     * @param index int; the value to check
+     * @throws ValueException when index is invalid
+     */
+    protected final void checkIndex(final int index) throws ValueException
+    {
+        if (index < 0 || index >= size())
+        {
+            throw new ValueException("index out of range (valid range is 0.." + (size() - 1) + ", got " + index + ")");
+        }
     }
 
     /** {@inheritDoc} */
@@ -515,7 +847,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
     public final float getSI(final int index) throws ValueException
     {
         checkIndex(index);
-        return safeGet(index);
+        return this.data.getSI(index);
     }
 
     /** {@inheritDoc} */
@@ -536,14 +868,14 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
     @Override
     public final float zSum()
     {
-        return this.vectorSI.zSum();
+        return this.data.zSum();
     }
 
     /** {@inheritDoc} */
     @Override
     public final int cardinality()
     {
-        return this.vectorSI.cardinality();
+        return this.data.cardinality();
     }
 
     /** {@inheritDoc} */
@@ -635,14 +967,16 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
                 }
             }
         }
+        buf.append("[");
         for (int i = 0; i < size(); i++)
         {
-            float f = (float) ValueUtil.expressAsUnit(safeGet(i), displayUnit);
-            buf.append(" " + Format.format(f));
+            float d = (float) ValueUtil.expressAsUnit(safeGet(i), displayUnit);
+            buf.append(" " + Format.format(d));
         }
+        buf.append("]");
         if (withUnit)
         {
-            buf.append(displayUnit.getAbbreviation());
+            buf.append(" " + displayUnit.getAbbreviation());
         }
         return buf.toString();
     }
@@ -678,26 +1012,13 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
     }
 
     /**
-     * Check that a provided index is valid.
-     * @param index int; the value to check
-     * @throws ValueException when index is invalid
-     */
-    protected final void checkIndex(final int index) throws ValueException
-    {
-        if (index < 0 || index >= size())
-        {
-            throw new ValueException("index out of range (valid range is 0.." + (size() - 1) + ", got " + index + ")");
-        }
-    }
-
-    /**
      * Retrieve a value in vectorSI without checking validity of the index.
      * @param index int; the index
      * @return float; the value stored at that index
      */
     protected final float safeGet(final int index)
     {
-        return this.vectorSI.getQuick(index);
+        return this.data.getSI(index);
     }
 
     /**
@@ -707,83 +1028,44 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
      */
     protected final void safeSet(final int index, final float valueSI)
     {
-        this.vectorSI.setQuick(index, valueSI);
-    }
-
-    /**
-     * Create a deep copy of the data.
-     * @return FloatMatrix1D; deep copy of the data
-     */
-    protected final FloatMatrix1D deepCopyOfData()
-    {
-        return this.vectorSI.copy();
-    }
-
-    /**
-     * Check that a provided array can be used to create some descendant of a FloatVector.
-     * @param fsArray FloatScalar&lt;U&gt;[]; the provided array
-     * @param <U> Unit; the unit of the FloatScalar array
-     * @return FloatScalar&lt;U&gt;[]; the provided array
-     * @throws ValueException when the array has length equal to 0
-     */
-    protected static <U extends Unit<U>> FloatScalar<U>[] checkNonEmpty(final FloatScalar<U>[] fsArray)
-        throws ValueException
-    {
-        if (0 == fsArray.length)
-        {
-            throw new ValueException(
-                "Cannot create a FloatVector or MutableFloatVector from an empty array of FloatScalar");
-        }
-        return fsArray;
+        this.data.setSI(index, valueSI);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final int hashCode()
+    @SuppressWarnings("checkstyle:designforextension")
+    public int hashCode()
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + this.vectorSI.hashCode();
+        result = prime * result + ((this.data == null) ? 0 : this.data.hashCode());
         return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean equals(final Object obj)
+    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    public boolean equals(final Object obj)
     {
         if (this == obj)
-        {
             return true;
-        }
         if (obj == null)
-        {
             return false;
-        }
-        if (!(obj instanceof FloatVector))
-        {
+        if (getClass() != obj.getClass())
             return false;
-        }
         FloatVector<?> other = (FloatVector<?>) obj;
-        // unequal if not both Absolute or both Relative
-        if (this.isAbsolute() != other.isAbsolute() || this.isRelative() != other.isRelative())
+        if (this.data == null)
         {
-            return false;
+            if (other.data != null)
+                return false;
         }
-        // unequal if the standard SI units differ
-        if (!this.getUnit().getStandardUnit().equals(other.getUnit().getStandardUnit()))
-        {
+        else if (!this.data.equals(other.data))
             return false;
-        }
-        // Colt's equals also tests the size of the vector
-        if (!getVectorSI().equals(other.getVectorSI()))
-        {
-            return false;
-        }
         return true;
     }
 
     /**********************************************************************************/
-    /********************************* STATIC METHODS *********************************/
+    /*************************** STATIC CALCULATION METHODS ***************************/
     /**********************************************************************************/
 
     /**
@@ -871,51 +1153,6 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
     }
 
     /**
-     * Subtract two FloatVectors value by value and store the result in a new MutableFloatVector.Rel.Dense&lt;U&gt;.
-     * @param left FloatVector.Abs.Dense&lt;U&gt;; the left operand
-     * @param right FloatVector.Abs&lt;U&gt;; the right operand
-     * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatVector.Rel.Dense&lt;U&gt;
-     * @throws ValueException when the vectors do not have the same size
-     */
-    public static <U extends Unit<U>> MutableFloatVector.Rel.Dense<U> minus(final FloatVector.Abs.Dense<U> left,
-        final FloatVector.Abs<U> right) throws ValueException
-    {
-        return (MutableFloatVector.Rel.Dense<U>) new MutableFloatVector.Rel.Dense<U>(left.deepCopyOfData(), left
-            .getUnit()).decrementBy(right);
-    }
-
-    /**
-     * Subtract two FloatVectors value by value and store the result in a new MutableFloatVector.Rel.Sparse&lt;U&gt;.
-     * @param left FloatVector.Abs.Sparse&lt;U&gt;; the left operand
-     * @param right FloatVector.Abs.Sparse&lt;U&gt;; the right operand
-     * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatVector.Rel.Sparse&lt;U&gt;
-     * @throws ValueException when the vectors do not have the same size
-     */
-    public static <U extends Unit<U>> MutableFloatVector.Rel.Sparse<U> minus(final FloatVector.Abs.Sparse<U> left,
-        final FloatVector.Abs.Sparse<U> right) throws ValueException
-    {
-        return (MutableFloatVector.Rel.Sparse<U>) new MutableFloatVector.Rel.Sparse<U>(left.deepCopyOfData(), left
-            .getUnit()).decrementBy(right);
-    }
-
-    /**
-     * Subtract two FloatVectors value by value and store the result in a new MutableFloatVector.Rel.Dense&lt;U&gt;.
-     * @param left FloatVector.Abs.Sparse&lt;U&gt;; the left operand
-     * @param right FloatVector.Abs.Dense&lt;U&gt;; the right operand
-     * @param <U> Unit; the unit of the parameters and the result
-     * @return MutableFloatVector.Rel.Dense&lt;U&gt;
-     * @throws ValueException when the vectors do not have the same size
-     */
-    public static <U extends Unit<U>> MutableFloatVector.Rel.Dense<U> minus(final FloatVector.Abs.Sparse<U> left,
-        final FloatVector.Abs.Dense<U> right) throws ValueException
-    {
-        return (MutableFloatVector.Rel.Dense<U>) new MutableFloatVector.Rel.Dense<U>(left.deepCopyOfData(), left
-            .getUnit()).decrementBy(right);
-    }
-
-    /**
      * Subtract two FloatVectors value by value and store the result in a new MutableFloatVector.Abs.Dense&lt;U&gt;.
      * @param left FloatVector.Abs.Dense&lt;U&gt;; the left operand
      * @param right FloatVector.Rel&lt;U&gt;; the right operand
@@ -999,64 +1236,6 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
         return (MutableFloatVector.Rel.Sparse<U>) left.mutable().decrementBy(right);
     }
 
-    // TODO Decide if you ever need multiply an Absolute with anything
-    /**
-     * Multiply two FloatVectors value by value and store the result in a new MutableFloatVector.Abs.Dense&lt;SIUnit&gt;.
-     * @param left FloatVector.Abs.Dense&lt;?&gt;; the left operand
-     * @param right FloatVector.Abs.Dense&lt;?&gt;; the right operand
-     * @return MutableFloatVector.Abs.Dense&lt;SIUnit&gt;
-     * @throws ValueException when the vectors do not have the same size
-     */
-    public static MutableFloatVector.Abs.Dense<SIUnit> times(final FloatVector.Abs.Dense<?> left,
-        final FloatVector.Abs.Dense<?> right) throws ValueException
-    {
-        SIUnit targetUnit =
-            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                right.getUnit().getSICoefficients()).toString());
-        MutableFloatVector.Abs.Dense<SIUnit> work =
-            new MutableFloatVector.Abs.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
-        work.scaleValueByValue(right);
-        return work;
-    }
-
-    /**
-     * Multiply two FloatVectors value by value and store the result in a new MutableFloatVector.Abs.Sparse&lt;SIUnit&gt;.
-     * @param left FloatVector.Abs.Dense&lt;?&gt;; the left operand
-     * @param right FloatVector.Abs.Sparse&lt;?&gt;; the right operand
-     * @return MutableFloatVector.Abs.Sparse&lt;SIUnit&gt;
-     * @throws ValueException when the vectors do not have the same size
-     */
-    public static MutableFloatVector.Abs.Sparse<SIUnit> times(final FloatVector.Abs.Dense<?> left,
-        final FloatVector.Abs.Sparse<?> right) throws ValueException
-    {
-        SIUnit targetUnit =
-            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                right.getUnit().getSICoefficients()).toString());
-        MutableFloatVector.Abs.Sparse<SIUnit> work =
-            new MutableFloatVector.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
-        work.scaleValueByValue(right);
-        return work;
-    }
-
-    /**
-     * Multiply two FloatVectors value by value and store the result in a new MutableFloatVector.Abs.Sparse&lt;SIUnit&gt;.
-     * @param left FloatVector.Abs.Sparse&lt;?&gt;; the left operand
-     * @param right FloatVector.Abs&lt;?&gt;; the right operand
-     * @return MutableFloatVector.Abs.Sparse&lt;SIUnit&gt;
-     * @throws ValueException when the vectors do not have the same size
-     */
-    public static MutableFloatVector.Abs.Sparse<SIUnit> times(final FloatVector.Abs.Sparse<?> left,
-        final FloatVector.Abs<?> right) throws ValueException
-    {
-        SIUnit targetUnit =
-            Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
-                right.getUnit().getSICoefficients()).toString());
-        MutableFloatVector.Abs.Sparse<SIUnit> work =
-            new MutableFloatVector.Abs.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
-        work.scaleValueByValue(right);
-        return work;
-    }
-
     /**
      * Multiply two FloatVectors value by value and store the result in a new MutableFloatVector.Rel.Dense&lt;SIUnit&gt;.
      * @param left FloatVector.Rel.Dense&lt;?&gt;; the left operand
@@ -1071,7 +1250,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
         MutableFloatVector.Rel.Dense<SIUnit> work =
-            new MutableFloatVector.Rel.Dense<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatVector.Rel.Dense<SIUnit>(left.getData().copy(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1090,7 +1269,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
         MutableFloatVector.Rel.Sparse<SIUnit> work =
-            new MutableFloatVector.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatVector.Rel.Sparse<SIUnit>(left.getData().toSparse().copy(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1109,7 +1288,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
             Unit.lookupOrCreateSIUnitWithSICoefficients(SICoefficients.multiply(left.getUnit().getSICoefficients(),
                 right.getUnit().getSICoefficients()).toString());
         MutableFloatVector.Rel.Sparse<SIUnit> work =
-            new MutableFloatVector.Rel.Sparse<SIUnit>(left.deepCopyOfData(), targetUnit);
+            new MutableFloatVector.Rel.Sparse<SIUnit>(left.getData().copy(), targetUnit);
         work.scaleValueByValue(right);
         return work;
     }
@@ -1175,18 +1354,6 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
     }
 
     /**
-     * Make the Sparse equivalent of a DenseFloatMatrix1D.
-     * @param dense FloatMatrix1D; the Dense FloatMatrix1D
-     * @return SparseFloatMatrix1D
-     */
-    private static SparseFloatMatrix1D makeSparse(final FloatMatrix1D dense)
-    {
-        SparseFloatMatrix1D result = new SparseFloatMatrix1D((int) dense.size());
-        result.assign(dense);
-        return result;
-    }
-
-    /**
      * Create a Sparse version of a Dense FloatVector.
      * @param in FloatVector.Abs.Dense&lt;U&gt;; the Dense FloatVector
      * @param <U> Unit; the unit of the parameter and the result
@@ -1194,7 +1361,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
      */
     public static <U extends Unit<U>> MutableFloatVector.Abs.Sparse<U> denseToSparse(final FloatVector.Abs.Dense<U> in)
     {
-        return new MutableFloatVector.Abs.Sparse<U>(makeSparse(in.getVectorSI()), in.getUnit());
+        return new MutableFloatVector.Abs.Sparse<U>(in.getData().toSparse(), in.getUnit());
     }
 
     /**
@@ -1205,19 +1372,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
      */
     public static <U extends Unit<U>> MutableFloatVector.Rel.Sparse<U> denseToSparse(final FloatVector.Rel.Dense<U> in)
     {
-        return new MutableFloatVector.Rel.Sparse<U>(makeSparse(in.getVectorSI()), in.getUnit());
-    }
-
-    /**
-     * Make the Dense equivalent of a SparseFloatMatrix1D.
-     * @param sparse FloatMatrix1D; the Sparse FloatMatrix1D
-     * @return DenseFloatMatrix1D
-     */
-    private static DenseFloatMatrix1D makeDense(final FloatMatrix1D sparse)
-    {
-        DenseFloatMatrix1D result = new DenseFloatMatrix1D((int) sparse.size());
-        result.assign(sparse);
-        return result;
+        return new MutableFloatVector.Rel.Sparse<U>(in.getData().toSparse(), in.getUnit());
     }
 
     /**
@@ -1228,7 +1383,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
      */
     public static <U extends Unit<U>> MutableFloatVector.Abs.Dense<U> sparseToDense(final FloatVector.Abs.Sparse<U> in)
     {
-        return new MutableFloatVector.Abs.Dense<U>(makeDense(in.getVectorSI()), in.getUnit());
+        return new MutableFloatVector.Abs.Dense<U>(in.getData().toDense(), in.getUnit());
     }
 
     /**
@@ -1239,7 +1394,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
      */
     public static <U extends Unit<U>> MutableFloatVector.Rel.Dense<U> sparseToDense(final FloatVector.Rel.Sparse<U> in)
     {
-        return new MutableFloatVector.Rel.Dense<U>(makeDense(in.getVectorSI()), in.getUnit());
+        return new MutableFloatVector.Rel.Dense<U>(in.getData().toDense(), in.getUnit());
     }
 
     /**

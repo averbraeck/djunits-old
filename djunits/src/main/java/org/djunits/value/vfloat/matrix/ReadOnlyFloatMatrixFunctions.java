@@ -90,6 +90,6 @@ public interface ReadOnlyFloatMatrixFunctions<U extends Unit<U>>
      * @return float; the determinant of the matrix
      * @throws ValueException when matrix is neither sparse, nor dense, or not square
      */
-    float det() throws ValueException;
+    float determinant() throws ValueException;
 
 }

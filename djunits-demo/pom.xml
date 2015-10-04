@@ -4,7 +4,7 @@
 
   <groupId>org.djunits</groupId>
   <artifactId>djunits-demo</artifactId>
-  <version>1.01.01</version>
+  <version>1.02.01</version>
 
   <name>Demos for DJUNITS classes</name>
   <description>Demos for DJUNITS classes</description>

@@ -7,14 +7,10 @@ import org.djunits.value.Relative;
 import org.djunits.value.SparseData;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
+import org.djunits.value.vfloat.FloatFunction;
 import org.djunits.value.vfloat.FloatMathFunctions;
 import org.djunits.value.vfloat.FloatMathFunctionsImpl;
 import org.djunits.value.vfloat.scalar.FloatScalar;
-
-import cern.colt.matrix.tfloat.FloatMatrix2D;
-import cern.colt.matrix.tfloat.impl.DenseFloatMatrix2D;
-import cern.colt.matrix.tfloat.impl.SparseFloatMatrix2D;
-import cern.jet.math.tfloat.FloatFunctions;
 
 /**
  * MutableFloatMatrix.
@@ -24,8 +20,8 @@ import cern.jet.math.tfloat.FloatFunctions;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableFloatMatrix
@@ -34,7 +30,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
     WriteFloatMatrixFunctions<U>, FloatMathFunctions<MutableFloatMatrix<U>>
 {
     /**  */
-    private static final long serialVersionUID = 20150626L;
+    private static final long serialVersionUID = 20151003L;
 
     /**
      * Construct a new MutableFloatMatrix.
@@ -43,7 +39,6 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
     protected MutableFloatMatrix(final U unit)
     {
         super(unit);
-        // System.out.println("Created MutableFloatMatrix");
     }
 
     /** If set, any modification of the data must be preceded by replacing the data with a local copy. */
@@ -67,32 +62,17 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         this.copyOnWrite = copyOnWrite;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final void normalize() throws ValueException
-    {
-        float sum = zSum();
-        if (0 == sum)
-        {
-            throw new ValueException("zSum is 0; cannot normalize");
-        }
-        checkCopyOnWrite();
-        for (int row = rows(); --row >= 0;)
-        {
-            for (int column = columns(); --column >= 0;)
-            {
-                safeSet(row, column, safeGet(row, column) / sum);
-            }
-        }
-    }
+    /** ============================================================================================ */
+    /** ================================= ABSOLUTE IMPLEMENTATION ================================== */
+    /** ============================================================================================ */
 
     /**
-     * @param <U> Unit
+     * @param <U> Unit the unit for which this Matrix will be created
      */
     public abstract static class Abs<U extends Unit<U>> extends MutableFloatMatrix<U> implements Absolute
     {
         /**  */
-        private static final long serialVersionUID = 20150626L;
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Absolute MutableFloatMatrix.
@@ -101,16 +81,16 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         protected Abs(final U unit)
         {
             super(unit);
-            // System.out.println("Created Abs");
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE DENSE implementation of MutableFloatMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Dense<U extends Unit<U>> extends Abs<U> implements DenseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Absolute Dense MutableFloatMatrix.
@@ -121,8 +101,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public Dense(final float[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
@@ -134,21 +113,18 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public Dense(final FloatScalar.Abs<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix2D; the initial values of the entries in the new Absolute Dense MutableFloatMatrix
-             * @param unit U; the unit of the new Absolute Dense MutableFloatMatrix
+             * Construct a new Absolute Dense Mutable FloatMatrix.
+             * @param data an internal data object
+             * @param unit the unit
              */
-            protected Dense(final FloatMatrix2D values, final U unit)
+            Dense(final FloatMatrixDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -156,7 +132,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public final FloatMatrix.Abs.Dense<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new FloatMatrix.Abs.Dense<U>(getMatrixSI(), getUnit());
+                return new FloatMatrix.Abs.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -165,16 +141,9 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             {
                 setCopyOnWrite(true);
                 final MutableFloatMatrix.Abs.Dense<U> result =
-                    new MutableFloatMatrix.Abs.Dense<U>(getMatrixSI(), getUnit());
+                    new MutableFloatMatrix.Abs.Dense<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new DenseFloatMatrix2D(rows, columns);
             }
 
             /** {@inheritDoc} */
@@ -184,15 +153,22 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatMatrixDataDense getData()
+            {
+                return (FloatMatrixDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE SPARSE implementation of MutableFloatMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Sparse<U extends Unit<U>> extends Abs<U> implements SparseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Absolute Sparse MutableFloatMatrix.
@@ -203,8 +179,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public Sparse(final float[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
@@ -216,21 +191,18 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public Sparse(final FloatScalar.Abs<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix2D; the initial values of the entries in the new Absolute Sparse MutableFloatMatrix
-             * @param unit U; the unit of the new Absolute Sparse MutableFloatMatrix
+             * Construct a new Absolute Sparse Mutable FloatMatrix.
+             * @param data an internal data object
+             * @param unit the unit
              */
-            protected Sparse(final FloatMatrix2D values, final U unit)
+            Sparse(final FloatMatrixDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -238,7 +210,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public final FloatMatrix.Abs.Sparse<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new FloatMatrix.Abs.Sparse<U>(getMatrixSI(), getUnit());
+                return new FloatMatrix.Abs.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -247,16 +219,9 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             {
                 setCopyOnWrite(true);
                 final MutableFloatMatrix.Abs.Sparse<U> result =
-                    new MutableFloatMatrix.Abs.Sparse<U>(getMatrixSI(), getUnit());
+                    new MutableFloatMatrix.Abs.Sparse<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new SparseFloatMatrix2D(rows, columns);
             }
 
             /** {@inheritDoc} */
@@ -266,6 +231,12 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatMatrixDataSparse getData()
+            {
+                return (FloatMatrixDataSparse) this.data;
+            }
         }
 
         /** {@inheritDoc} */
@@ -305,7 +276,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> abs()
         {
-            assign(FloatFunctions.abs);
+            assign(FloatMathFunctionsImpl.ABS);
             return this;
         }
 
@@ -313,7 +284,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> acos()
         {
-            assign(FloatFunctions.acos);
+            assign(FloatMathFunctionsImpl.ACOS);
             return this;
         }
 
@@ -321,7 +292,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> asin()
         {
-            assign(FloatFunctions.asin);
+            assign(FloatMathFunctionsImpl.ASIN);
             return this;
         }
 
@@ -329,7 +300,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> atan()
         {
-            assign(FloatFunctions.atan);
+            assign(FloatMathFunctionsImpl.ATAN);
             return this;
         }
 
@@ -337,7 +308,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> cbrt()
         {
-            assign(FloatMathFunctionsImpl.cbrt);
+            assign(FloatMathFunctionsImpl.CBRT);
             return this;
         }
 
@@ -345,7 +316,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> ceil()
         {
-            assign(FloatFunctions.ceil);
+            assign(FloatMathFunctionsImpl.CEIL);
             return this;
         }
 
@@ -353,7 +324,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> cos()
         {
-            assign(FloatFunctions.cos);
+            assign(FloatMathFunctionsImpl.COS);
             return this;
         }
 
@@ -361,7 +332,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> cosh()
         {
-            assign(FloatMathFunctionsImpl.cosh);
+            assign(FloatMathFunctionsImpl.COSH);
             return this;
         }
 
@@ -369,7 +340,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> exp()
         {
-            assign(FloatFunctions.exp);
+            assign(FloatMathFunctionsImpl.EXP);
             return this;
         }
 
@@ -377,7 +348,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> expm1()
         {
-            assign(FloatMathFunctionsImpl.expm1);
+            assign(FloatMathFunctionsImpl.EXPM1);
             return this;
         }
 
@@ -385,7 +356,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> floor()
         {
-            assign(FloatFunctions.floor);
+            assign(FloatMathFunctionsImpl.FLOOR);
             return this;
         }
 
@@ -393,7 +364,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> log()
         {
-            assign(FloatFunctions.log);
+            assign(FloatMathFunctionsImpl.LOG);
             return this;
         }
 
@@ -401,7 +372,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> log10()
         {
-            assign(FloatMathFunctionsImpl.log10);
+            assign(FloatMathFunctionsImpl.LOG10);
             return this;
         }
 
@@ -409,7 +380,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> log1p()
         {
-            assign(FloatMathFunctionsImpl.log1p);
+            assign(FloatMathFunctionsImpl.LOG1P);
             return this;
         }
 
@@ -417,7 +388,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> pow(final double x)
         {
-            assign(FloatFunctions.pow((float) x));
+            assign(FloatMathFunctionsImpl.POW((float) x));
             return this;
         }
 
@@ -425,7 +396,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> rint()
         {
-            assign(FloatFunctions.rint);
+            assign(FloatMathFunctionsImpl.RINT);
             return this;
         }
 
@@ -433,7 +404,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> round()
         {
-            assign(FloatMathFunctionsImpl.round);
+            assign(FloatMathFunctionsImpl.ROUND);
             return this;
         }
 
@@ -441,7 +412,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> signum()
         {
-            assign(FloatMathFunctionsImpl.signum);
+            assign(FloatMathFunctionsImpl.SIGNUM);
             return this;
         }
 
@@ -449,7 +420,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> sin()
         {
-            assign(FloatFunctions.sin);
+            assign(FloatMathFunctionsImpl.SIN);
             return this;
         }
 
@@ -457,7 +428,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> sinh()
         {
-            assign(FloatMathFunctionsImpl.sinh);
+            assign(FloatMathFunctionsImpl.SINH);
             return this;
         }
 
@@ -465,7 +436,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> sqrt()
         {
-            assign(FloatFunctions.sqrt);
+            assign(FloatMathFunctionsImpl.SQRT);
             return this;
         }
 
@@ -473,7 +444,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> tan()
         {
-            assign(FloatFunctions.tan);
+            assign(FloatMathFunctionsImpl.TAN);
             return this;
         }
 
@@ -481,7 +452,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> tanh()
         {
-            assign(FloatMathFunctionsImpl.tanh);
+            assign(FloatMathFunctionsImpl.TANH);
             return this;
         }
 
@@ -489,7 +460,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> toDegrees()
         {
-            assign(FloatMathFunctionsImpl.toDegrees);
+            assign(FloatMathFunctionsImpl.TO_DEGREES);
             return this;
         }
 
@@ -497,7 +468,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> toRadians()
         {
-            assign(FloatMathFunctionsImpl.toRadians);
+            assign(FloatMathFunctionsImpl.TO_RADIANS);
             return this;
         }
 
@@ -505,7 +476,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> inv()
         {
-            assign(FloatFunctions.inv);
+            assign(FloatMathFunctionsImpl.INV);
             return this;
         }
 
@@ -513,7 +484,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> multiplyBy(final float constant)
         {
-            assign(FloatFunctions.mult(constant));
+            assign(FloatMathFunctionsImpl.MULT(constant));
             return this;
         }
 
@@ -521,7 +492,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Abs<U> divideBy(final float constant)
         {
-            assign(FloatFunctions.div(constant));
+            assign(FloatMathFunctionsImpl.DIV(constant));
             return this;
         }
 
@@ -533,7 +504,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
     public abstract static class Rel<U extends Unit<U>> extends MutableFloatMatrix<U> implements Relative
     {
         /**  */
-        private static final long serialVersionUID = 20150626L;
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Relative MutableFloatMatrix.
@@ -542,16 +513,16 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         protected Rel(final U unit)
         {
             super(unit);
-            // System.out.println("Created Rel");
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE DENSE implementation of MutableFloatMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Dense<U extends Unit<U>> extends Rel<U> implements DenseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Relative Dense MutableFloatMatrix.
@@ -562,8 +533,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public Dense(final float[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
@@ -575,21 +545,18 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public Dense(final FloatScalar.Rel<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix2D; the initial values of the entries in the new Relative Dense MutableFloatMatrix
-             * @param unit U; the unit of the new Relative Dense MutableFloatMatrix
+             * Construct a new Relative Dense Mutable FloatMatrix.
+             * @param data an internal data object
+             * @param unit the unit
              */
-            protected Dense(final FloatMatrix2D values, final U unit)
+            Dense(final FloatMatrixDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -597,7 +564,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public final FloatMatrix.Rel.Dense<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new FloatMatrix.Rel.Dense<U>(getMatrixSI(), getUnit());
+                return new FloatMatrix.Rel.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -606,16 +573,9 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             {
                 setCopyOnWrite(true);
                 final MutableFloatMatrix.Rel.Dense<U> result =
-                    new MutableFloatMatrix.Rel.Dense<U>(getMatrixSI(), getUnit());
+                    new MutableFloatMatrix.Rel.Dense<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new DenseFloatMatrix2D(rows, columns);
             }
 
             /** {@inheritDoc} */
@@ -625,15 +585,22 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatMatrixDataDense getData()
+            {
+                return (FloatMatrixDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE SPARSE implementation of MutableFloatMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Sparse<U extends Unit<U>> extends Rel<U> implements SparseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Relative Sparse MutableFloatMatrix.
@@ -644,8 +611,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public Sparse(final float[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
@@ -657,21 +623,18 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public Sparse(final FloatScalar.Rel<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix2D; the initial values of the entries in the new Relative Sparse MutableFloatMatrix
-             * @param unit U; the unit of the new Relative Sparse MutableFloatMatrix
+             * Construct a new Relative Sparse Mutable FloatMatrix.
+             * @param data an internal data object
+             * @param unit the unit
              */
-            protected Sparse(final FloatMatrix2D values, final U unit)
+            Sparse(final FloatMatrixDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -679,7 +642,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             public final FloatMatrix.Rel.Sparse<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new FloatMatrix.Rel.Sparse<U>(getMatrixSI(), getUnit());
+                return new FloatMatrix.Rel.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -688,16 +651,9 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             {
                 setCopyOnWrite(true);
                 final MutableFloatMatrix.Rel.Sparse<U> result =
-                    new MutableFloatMatrix.Rel.Sparse<U>(getMatrixSI(), getUnit());
+                    new MutableFloatMatrix.Rel.Sparse<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new SparseFloatMatrix2D(rows, columns);
             }
 
             /** {@inheritDoc} */
@@ -707,6 +663,12 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatMatrixDataSparse getData()
+            {
+                return (FloatMatrixDataSparse) this.data;
+            }
         }
 
         /** {@inheritDoc} */
@@ -746,7 +708,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> abs()
         {
-            assign(FloatFunctions.abs);
+            assign(FloatMathFunctionsImpl.ABS);
             return this;
         }
 
@@ -754,7 +716,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> acos()
         {
-            assign(FloatFunctions.acos);
+            assign(FloatMathFunctionsImpl.ACOS);
             return this;
         }
 
@@ -762,7 +724,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> asin()
         {
-            assign(FloatFunctions.asin);
+            assign(FloatMathFunctionsImpl.ASIN);
             return this;
         }
 
@@ -770,7 +732,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> atan()
         {
-            assign(FloatFunctions.atan);
+            assign(FloatMathFunctionsImpl.ATAN);
             return this;
         }
 
@@ -778,7 +740,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> cbrt()
         {
-            assign(FloatMathFunctionsImpl.cbrt);
+            assign(FloatMathFunctionsImpl.CBRT);
             return this;
         }
 
@@ -786,7 +748,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> ceil()
         {
-            assign(FloatFunctions.ceil);
+            assign(FloatMathFunctionsImpl.CEIL);
             return this;
         }
 
@@ -794,7 +756,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> cos()
         {
-            assign(FloatFunctions.cos);
+            assign(FloatMathFunctionsImpl.COS);
             return this;
         }
 
@@ -802,7 +764,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> cosh()
         {
-            assign(FloatMathFunctionsImpl.cosh);
+            assign(FloatMathFunctionsImpl.COSH);
             return this;
         }
 
@@ -810,7 +772,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> exp()
         {
-            assign(FloatFunctions.exp);
+            assign(FloatMathFunctionsImpl.EXP);
             return this;
         }
 
@@ -818,7 +780,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> expm1()
         {
-            assign(FloatMathFunctionsImpl.expm1);
+            assign(FloatMathFunctionsImpl.EXPM1);
             return this;
         }
 
@@ -826,7 +788,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> floor()
         {
-            assign(FloatFunctions.floor);
+            assign(FloatMathFunctionsImpl.FLOOR);
             return this;
         }
 
@@ -834,7 +796,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> log()
         {
-            assign(FloatFunctions.log);
+            assign(FloatMathFunctionsImpl.LOG);
             return this;
         }
 
@@ -842,7 +804,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> log10()
         {
-            assign(FloatMathFunctionsImpl.log10);
+            assign(FloatMathFunctionsImpl.LOG10);
             return this;
         }
 
@@ -850,7 +812,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> log1p()
         {
-            assign(FloatMathFunctionsImpl.log1p);
+            assign(FloatMathFunctionsImpl.LOG1P);
             return this;
         }
 
@@ -858,7 +820,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> pow(final double x)
         {
-            assign(FloatFunctions.pow((float) x));
+            assign(FloatMathFunctionsImpl.POW((float) x));
             return this;
         }
 
@@ -866,7 +828,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> rint()
         {
-            assign(FloatFunctions.rint);
+            assign(FloatMathFunctionsImpl.RINT);
             return this;
         }
 
@@ -874,7 +836,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> round()
         {
-            assign(FloatMathFunctionsImpl.round);
+            assign(FloatMathFunctionsImpl.ROUND);
             return this;
         }
 
@@ -882,7 +844,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> signum()
         {
-            assign(FloatMathFunctionsImpl.signum);
+            assign(FloatMathFunctionsImpl.SIGNUM);
             return this;
         }
 
@@ -890,7 +852,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> sin()
         {
-            assign(FloatFunctions.sin);
+            assign(FloatMathFunctionsImpl.SIN);
             return this;
         }
 
@@ -898,7 +860,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> sinh()
         {
-            assign(FloatMathFunctionsImpl.sinh);
+            assign(FloatMathFunctionsImpl.SINH);
             return this;
         }
 
@@ -906,7 +868,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> sqrt()
         {
-            assign(FloatFunctions.sqrt);
+            assign(FloatMathFunctionsImpl.SQRT);
             return this;
         }
 
@@ -914,7 +876,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> tan()
         {
-            assign(FloatFunctions.tan);
+            assign(FloatMathFunctionsImpl.TAN);
             return this;
         }
 
@@ -922,7 +884,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> tanh()
         {
-            assign(FloatMathFunctionsImpl.tanh);
+            assign(FloatMathFunctionsImpl.TANH);
             return this;
         }
 
@@ -930,7 +892,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> toDegrees()
         {
-            assign(FloatMathFunctionsImpl.toDegrees);
+            assign(FloatMathFunctionsImpl.TO_DEGREES);
             return this;
         }
 
@@ -938,7 +900,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> toRadians()
         {
-            assign(FloatMathFunctionsImpl.toRadians);
+            assign(FloatMathFunctionsImpl.TO_RADIANS);
             return this;
         }
 
@@ -946,7 +908,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> inv()
         {
-            assign(FloatFunctions.inv);
+            assign(FloatMathFunctionsImpl.INV);
             return this;
         }
 
@@ -954,7 +916,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> multiplyBy(final float constant)
         {
-            assign(FloatFunctions.mult(constant));
+            assign(FloatMathFunctionsImpl.MULT(constant));
             return this;
         }
 
@@ -962,7 +924,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @Override
         public final MutableFloatMatrix.Rel<U> divideBy(final float constant)
         {
-            assign(FloatFunctions.div(constant));
+            assign(FloatMathFunctionsImpl.DIV(constant));
             return this;
         }
 
@@ -981,8 +943,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
     {
         if (isCopyOnWrite())
         {
-            // System.out.println("copyOnWrite is set: Copying data");
-            deepCopyData();
+            this.data = this.data.copy();
             setCopyOnWrite(false);
         }
     }
@@ -1012,13 +973,24 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
     }
 
     /**
-     * Execute a function on a cell by cell basis.
-     * @param f cern.colt.function.tfloat.FloatFunction; the function to apply
+     * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
+     * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a dense
+     * dataset if necessary.
+     * @param floatFunction the function to apply
      */
-    public final void assign(final cern.colt.function.tfloat.FloatFunction f)
+    public final void assign(final FloatFunction floatFunction)
     {
         checkCopyOnWrite();
-        getMatrixSI().assign(f);
+        if (this.data instanceof FloatMatrixDataDense)
+        {
+            ((FloatMatrixDataDense) this.data).assign(floatFunction);
+        }
+        else
+        {
+            FloatMatrixDataDense dvmd = ((FloatMatrixDataSparse) this.data).toDense();
+            dvmd.assign(floatFunction);
+            this.data = dvmd.toSparse();
+        }
     }
 
     /**********************************************************************************/
@@ -1093,18 +1065,6 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         return decrementValueByValue(rel);
     }
 
-    // FIXME It makes no sense to subtract an Absolute from a Relative
-    /**
-     * Decrement the values in this Relative MutableFloatMatrix by the corresponding values in an Absolute FloatMatrix.
-     * @param abs FloatMatrix.Abs&lt;U&gt;; the Absolute FloatMatrix
-     * @return MutableFloatMatrix.Rel&lt;U&gt;; this modified Relative MutableFloatMatrix
-     * @throws ValueException when the matrices do not have the same size
-     */
-    protected final MutableFloatMatrix.Rel<U> decrementBy(final FloatMatrix.Abs<U> abs) throws ValueException
-    {
-        return (MutableFloatMatrix.Rel<U>) decrementValueByValue(abs);
-    }
-
     /**
      * Scale the values in this MutableFloatMatrix by the corresponding values in a FloatMatrix.
      * @param factor FloatMatrix&lt;?&gt;; contains the values by which to scale the corresponding values in this
@@ -1140,6 +1100,26 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
             }
         }
         return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void normalize() throws ValueException
+    {
+        float sum = zSum();
+        if (0 == sum)
+        {
+            throw new ValueException("zSum is 0; cannot normalize");
+        }
+        checkCopyOnWrite();
+        for (int row = rows(); --row >= 0;)
+        {
+            for (int column = columns(); --column >= 0;)
+            {
+                // TODO parallel divide by factor
+                safeSet(row, column, safeGet(row, column) / sum);
+            }
+        }
     }
 
     /**

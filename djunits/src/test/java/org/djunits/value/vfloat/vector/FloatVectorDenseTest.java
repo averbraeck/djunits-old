@@ -153,7 +153,7 @@ public class FloatVectorDenseTest
             mfv.set(0, temperatureFV.get(0));
             checkContentsAndType(mfv, value, 0.001f, tempUnit, true);
             FloatVector.Abs.Dense<TemperatureUnit> temperature2FV =
-                new FloatVector.Abs.Dense<TemperatureUnit>(temperatureFV.getVectorSI(), TemperatureUnit.KELVIN);
+                new FloatVector.Abs.Dense<TemperatureUnit>(temperatureFV.getValuesSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2FV should be equal to temperatureFV", temperature2FV.equals(temperatureFV));
             assertTrue("Value is Absolute", temperatureFV.isAbsolute());
             assertFalse("Value is not Relative", temperatureFV.isRelative());
@@ -601,33 +601,6 @@ public class FloatVectorDenseTest
     }
 
     /**
-     * Test times(FloatVectorAbs.Dense, FloatVectorAbs.Dense).
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void binarytimesOfAbsDenseAndAbsDenseTest()
-    {
-        try
-        {
-            float[] leftValue = data(3, 123.4f);
-            float[] rightValue = data(3, 234.5f);
-            FloatVector.Abs.Dense<LengthUnit> left = new FloatVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Abs.Dense<LengthUnit> right =
-                new FloatVector.Abs.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Abs.Dense<?> result = FloatVector.times(left, right);
-            for (int i = 0; i < leftValue.length; i++)
-            {
-                assertEquals("value of element should be SI times of contributing elements", left.getSI(i)
-                    * right.getSI(i), result.getSI(i), 0.001f);
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected ValueException: " + ve.toString());
-        }
-    }
-
-    /**
      * Test plus(FloatVectorAbs.Dense, FloatVectorRel.Sparse).
      */
     @SuppressWarnings("static-method")
@@ -673,33 +646,6 @@ public class FloatVectorDenseTest
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
                     - right.getSI(i), result.getSI(i), 0.001f);
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected ValueException: " + ve.toString());
-        }
-    }
-
-    /**
-     * Test times(FloatVectorAbs.Dense, FloatVectorAbs.Sparse).
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void binarytimesOfAbsDenseAndAbsSparseTest()
-    {
-        try
-        {
-            float[] leftValue = data(3, 123.4f);
-            float[] rightValue = data(3, 234.5f);
-            FloatVector.Abs.Dense<LengthUnit> left = new FloatVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Abs.Sparse<LengthUnit> right =
-                new FloatVector.Abs.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Abs.Sparse<?> result = FloatVector.times(left, right);
-            for (int i = 0; i < leftValue.length; i++)
-            {
-                assertEquals("value of element should be SI times of contributing elements", left.getSI(i)
-                    * right.getSI(i), result.getSI(i), 0.001f);
             }
         }
         catch (ValueException ve)
@@ -839,7 +785,7 @@ public class FloatVectorDenseTest
             mfv.set(0, temperatureFV.get(0));
             checkContentsAndType(mfv, value, 0.001f, tempUnit, false);
             FloatVector.Rel.Dense<TemperatureUnit> temperature2FV =
-                new FloatVector.Rel.Dense<TemperatureUnit>(temperatureFV.getVectorSI(), TemperatureUnit.KELVIN);
+                new FloatVector.Rel.Dense<TemperatureUnit>(temperatureFV.getValuesSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2FV should be equal to temperatureFV", temperature2FV.equals(temperatureFV));
             assertTrue("Value is Relative", temperatureFV.isRelative());
             assertFalse("Value is not Absolute", temperatureFV.isAbsolute());

@@ -167,7 +167,7 @@ public class DoubleMatrixDenseTest
             mdm.set(0, 0, temperatureDM.get(0, 0));
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
             DoubleMatrix.Abs.Dense<TemperatureUnit> temperature2DM =
-                new DoubleMatrix.Abs.Dense<TemperatureUnit>(temperatureDM.getMatrixSI(), TemperatureUnit.KELVIN);
+                new DoubleMatrix.Abs.Dense<TemperatureUnit>(temperatureDM.getValuesSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
             assertTrue("Value is Absolute", temperatureDM.isAbsolute());
             assertFalse("Value is not Relative", temperatureDM.isRelative());
@@ -830,7 +830,7 @@ public class DoubleMatrixDenseTest
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
-            matrix.det();
+            matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -874,7 +874,7 @@ public class DoubleMatrixDenseTest
             double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             DoubleMatrix.Abs.Dense<TemperatureUnit> matrix =
                 new DoubleMatrix.Abs.Dense<TemperatureUnit>(values, TemperatureUnit.KELVIN);
-            assertEquals("Determinant should be 15", 15, matrix.det(), 0.001);
+            assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
         catch (ValueException ve)
         {
@@ -1002,7 +1002,7 @@ public class DoubleMatrixDenseTest
             mdm.set(0, 0, temperatureDM.get(0, 0));
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
             DoubleMatrix.Rel.Dense<TemperatureUnit> temperature2DM =
-                new DoubleMatrix.Rel.Dense<TemperatureUnit>(temperatureDM.getMatrixSI(), TemperatureUnit.KELVIN);
+                new DoubleMatrix.Rel.Dense<TemperatureUnit>(temperatureDM.getValuesSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
             assertTrue("Value is Relative", temperatureDM.isRelative());
             assertFalse("Value is not Absolute", temperatureDM.isAbsolute());
@@ -1665,7 +1665,7 @@ public class DoubleMatrixDenseTest
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
-            matrix.det();
+            matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1709,7 +1709,7 @@ public class DoubleMatrixDenseTest
             double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             DoubleMatrix.Rel.Dense<TemperatureUnit> matrix =
                 new DoubleMatrix.Rel.Dense<TemperatureUnit>(values, TemperatureUnit.KELVIN);
-            assertEquals("Determinant should be 15", 15, matrix.det(), 0.001);
+            assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
         catch (ValueException ve)
         {
