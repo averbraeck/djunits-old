@@ -4,10 +4,10 @@ import org.djunits.value.Relative;
 import org.djunits.unit.*;
 
 /**
- * Easy access methods for the %TYPE% DoubleScalar, which is relative by definition. An example is Money. Instead of <br>
- * <i>DoubleScalar.Rel&lt;MoneyUnit&gt; price = new DoubleScalar.Rel&lt;MoneyUnit&gt;(100.0, MoneyUnit.EUR);</i><br>
+ * Easy access methods for the %TYPE% DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * <i>DoubleScalar.Rel&lt;%TYPE%Unit&gt; value = new DoubleScalar.Rel&lt;%TYPE%Unit&gt;(100.0, %TYPE%Unit.SI);</i><br>
  * we can now write <br>
- * <i>Money price = new Money(100.0, EUR);</i><br>
+ * <i>%TYPE% value = new %TYPE%(100.0, %TYPE%Unit.SI);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>

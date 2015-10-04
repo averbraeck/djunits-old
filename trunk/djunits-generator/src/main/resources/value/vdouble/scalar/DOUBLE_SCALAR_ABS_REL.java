@@ -23,9 +23,9 @@ public interface %TYPE%
 {
     /**
      * Easy access methods for the %TYPE% DoubleScalar. Instead of <br>
-     * <i>DoubleScalar.Rel&lt;LengthUnit&gt; margin = new DoubleScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
+     * <i>DoubleScalar.Rel&lt;%TYPE%Unit&gt; value = new DoubleScalar.Rel&lt;%TYPE%Unit&gt;(100.0, %TYPE%Unit.SI);</i><br>
      * we can now write <br>
-     * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
+     * <i>%TYPE%.Rel value = new %TYPE%.Rel(100.0, %TYPE%Unit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
      * unit used are compatible.
      * <p>
@@ -317,9 +317,9 @@ public interface %TYPE%
 
     /**
      * Easy access methods for the %TYPE% DoubleScalar. Instead of <br>
-     * <i>DoubleScalar.Rel&lt;LengthUnit&gt; margin = new DoubleScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
+     * <i>DoubleScalar.Abs&lt;%TYPE%Unit&gt; value = new DoubleScalar.Abs&lt;%TYPE%Unit&gt;(100.0, %TYPE%Unit.SI);</i><br>
      * we can now write <br>
-     * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
+     * <i>%TYPE%.Abs value = new %TYPE%.Abs(100.0, %TYPE%Unit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
      * unit used are compatible.
      * <p>
