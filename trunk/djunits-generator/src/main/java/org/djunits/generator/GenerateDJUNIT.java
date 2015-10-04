@@ -287,8 +287,9 @@ public class GenerateDJUNIT
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
             String java = new String(scalarJava);
-            java = java.replaceAll("%TYPE%", type);
+            java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
             if (isInsert)
             {
                 java = insert(java, insertJava, "DoubleScalar => " + type);
@@ -317,8 +318,9 @@ public class GenerateDJUNIT
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
             String java = new String(scalarJava);
-            java = java.replaceAll("%TYPE%", type);
+            java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = formulas(java, "DoubleScalar => " + type, "");
             out.print(java);
             out.close();
@@ -343,8 +345,9 @@ public class GenerateDJUNIT
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
             String java = new String(scalarJava);
-            java = java.replaceAll("%TYPE%", type);
+            java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = formulas(java, "DoubleScalar => " + type, "");
             out.print(java);
             out.close();
@@ -377,8 +380,9 @@ public class GenerateDJUNIT
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + ".java");
             String java = new String(scalarJava);
-            java = java.replaceAll("%TYPE%", type);
+            java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
             if (isInsert)
             {
                 java = insert(java, insertJava, "FloatScalar => " + type);
@@ -408,8 +412,9 @@ public class GenerateDJUNIT
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + ".java");
             String java = new String(scalarJava);
-            java = java.replaceAll("%TYPE%", type);
+            java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = formulas(java, "FloatScalar => " + type, "Float");
             out.print(java);
             out.close();
@@ -435,8 +440,9 @@ public class GenerateDJUNIT
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + ".java");
             String java = new String(scalarJava);
-            java = java.replaceAll("%TYPE%", type);
+            java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = formulas(java, "FloatScalar => " + type, "Float");
             out.print(java);
             out.close();

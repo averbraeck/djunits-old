@@ -4,10 +4,10 @@ import org.djunits.value.Relative;
 import org.djunits.unit.*;
 
 /**
- * Easy access methods for the %TYPE% DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
- * <i>DoubleScalar.Rel&lt;%TYPE%Unit&gt; value = new DoubleScalar.Rel&lt;%TYPE%Unit&gt;(100.0, %TYPE%Unit.SI);</i><br>
+ * Easy access methods for the %Type% DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * <i>DoubleScalar.Rel&lt;%Type%Unit&gt; value = new DoubleScalar.Rel&lt;%Type%Unit&gt;(100.0, %Type%Unit.SI);</i><br>
  * we can now write <br>
- * <i>%TYPE% value = new %TYPE%(100.0, %TYPE%Unit.SI);</i><br>
+ * <i>%Type% value = new %Type%(100.0, %Type%Unit.SI);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
@@ -19,26 +19,26 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class %TYPE% extends DoubleScalar.Rel<%TYPE%Unit> implements Relative
+public class %Type% extends DoubleScalar.Rel<%Type%Unit> implements Relative
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
     /**
-     * Construct %TYPE% scalar.
+     * Construct %Type% scalar.
      * @param value double value
      * @param unit unit for the double value
      */
-    public %TYPE%(final double value, final %TYPE%Unit unit)
+    public %Type%(final double value, final %Type%Unit unit)
     {
         super(value, unit);
     }
 
     /**
-     * Construct %TYPE% scalar.
+     * Construct %Type% scalar.
      * @param value Scalar from which to construct this instance
      */
-    public %TYPE%(final DoubleScalar.Rel<%TYPE%Unit> value)
+    public %Type%(final DoubleScalar.Rel<%Type%Unit> value)
     {
         super(value);
     }
@@ -50,205 +50,205 @@ public class %TYPE% extends DoubleScalar.Rel<%TYPE%Unit> implements Relative
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static %TYPE% interpolate(final %TYPE% zero, final %TYPE% one, final double ratio)
+    public static %Type% interpolate(final %Type% zero, final %Type% one, final double ratio)
     {
-        return new %TYPE%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new %Type%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% abs()
+    public final %Type% abs()
     {
-        return new %TYPE%(Math.abs(getInUnit()), getUnit());
+        return new %Type%(Math.abs(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% acos()
+    public final %Type% acos()
     {
-        return new %TYPE%(Math.acos(getInUnit()), getUnit());
+        return new %Type%(Math.acos(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% asin()
+    public final %Type% asin()
     {
-        return new %TYPE%(Math.asin(getInUnit()), getUnit());
+        return new %Type%(Math.asin(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% atan()
+    public final %Type% atan()
     {
-        return new %TYPE%(Math.atan(getInUnit()), getUnit());
+        return new %Type%(Math.atan(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% cbrt()
+    public final %Type% cbrt()
     {
-        return new %TYPE%(Math.cbrt(getInUnit()), getUnit());
+        return new %Type%(Math.cbrt(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% ceil()
+    public final %Type% ceil()
     {
-        return new %TYPE%(Math.ceil(getInUnit()), getUnit());
+        return new %Type%(Math.ceil(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% cos()
+    public final %Type% cos()
     {
-        return new %TYPE%(Math.cos(getInUnit()), getUnit());
+        return new %Type%(Math.cos(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% cosh()
+    public final %Type% cosh()
     {
-        return new %TYPE%(Math.cosh(getInUnit()), getUnit());
+        return new %Type%(Math.cosh(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% exp()
+    public final %Type% exp()
     {
-        return new %TYPE%(Math.exp(getInUnit()), getUnit());
+        return new %Type%(Math.exp(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% expm1()
+    public final %Type% expm1()
     {
-        return new %TYPE%(Math.expm1(getInUnit()), getUnit());
+        return new %Type%(Math.expm1(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% floor()
+    public final %Type% floor()
     {
-        return new %TYPE%(Math.floor(getInUnit()), getUnit());
+        return new %Type%(Math.floor(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% log()
+    public final %Type% log()
     {
-        return new %TYPE%(Math.log(getInUnit()), getUnit());
+        return new %Type%(Math.log(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% log10()
+    public final %Type% log10()
     {
-        return new %TYPE%(Math.log10(getInUnit()), getUnit());
+        return new %Type%(Math.log10(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% log1p()
+    public final %Type% log1p()
     {
-        return new %TYPE%(Math.log1p(getInUnit()), getUnit());
+        return new %Type%(Math.log1p(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% rint()
+    public final %Type% rint()
     {
-        return new %TYPE%(Math.rint(getInUnit()), getUnit());
+        return new %Type%(Math.rint(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% round()
+    public final %Type% round()
     {
-        return new %TYPE%(Math.round(getInUnit()), getUnit());
+        return new %Type%(Math.round(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% signum()
+    public final %Type% signum()
     {
-        return new %TYPE%(Math.signum(getInUnit()), getUnit());
+        return new %Type%(Math.signum(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% sin()
+    public final %Type% sin()
     {
-        return new %TYPE%(Math.sin(getInUnit()), getUnit());
+        return new %Type%(Math.sin(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% sinh()
+    public final %Type% sinh()
     {
-        return new %TYPE%(Math.sinh(getInUnit()), getUnit());
+        return new %Type%(Math.sinh(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% sqrt()
+    public final %Type% sqrt()
     {
-        return new %TYPE%(Math.sqrt(getInUnit()), getUnit());
+        return new %Type%(Math.sqrt(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% tan()
+    public final %Type% tan()
     {
-        return new %TYPE%(Math.tan(getInUnit()), getUnit());
+        return new %Type%(Math.tan(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% tanh()
+    public final %Type% tanh()
     {
-        return new %TYPE%(Math.tanh(getInUnit()), getUnit());
+        return new %Type%(Math.tanh(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% inv()
+    public final %Type% inv()
     {
-        return new %TYPE%(1.0 / getInUnit(), getUnit());
+        return new %Type%(1.0 / getInUnit(), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% toDegrees()
+    public final %Type% toDegrees()
     {
-        return new %TYPE%(Math.toDegrees(getInUnit()), getUnit());
+        return new %Type%(Math.toDegrees(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% toRadians()
+    public final %Type% toRadians()
     {
-        return new %TYPE%(Math.toRadians(getInUnit()), getUnit());
+        return new %Type%(Math.toRadians(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% pow(final double x)
+    public final %Type% pow(final double x)
     {
-        return new %TYPE%(Math.pow(getInUnit(), x), getUnit());
+        return new %Type%(Math.pow(getInUnit(), x), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% multiplyBy(final double factor)
+    public final %Type% multiplyBy(final double factor)
     {
-        return new %TYPE%(getInUnit() * factor, getUnit());
+        return new %Type%(getInUnit() * factor, getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% divideBy(final double divisor)
+    public final %Type% divideBy(final double divisor)
     {
-        return new %TYPE%(getInUnit() / divisor, getUnit());
+        return new %Type%(getInUnit() / divisor, getUnit());
     }
 
     /**
@@ -256,10 +256,10 @@ public class %TYPE% extends DoubleScalar.Rel<%TYPE%Unit> implements Relative
      * @param v the value to add
      * @return sum of this value and v as a new object
      */
-    public final %TYPE% plus(final %TYPE% v)
+    public final %Type% plus(final %Type% v)
     {
-        return getUnit().equals(v.getUnit()) ? new %TYPE%(getInUnit() + v.getInUnit(), getUnit()) : new %TYPE%(this.si
-            + v.si, %TYPE%Unit.SI);
+        return getUnit().equals(v.getUnit()) ? new %Type%(getInUnit() + v.getInUnit(), getUnit()) : new %Type%(this.si
+            + v.si, %Type%Unit.SI);
     }
 
     /**
@@ -267,12 +267,12 @@ public class %TYPE% extends DoubleScalar.Rel<%TYPE%Unit> implements Relative
      * @param v the value to subtract
      * @return difference of this value and v as a new object
      */
-    public final %TYPE% minus(final %TYPE% v)
+    public final %Type% minus(final %Type% v)
     {
-        return getUnit().equals(v.getUnit()) ? new %TYPE%(getInUnit() - v.getInUnit(), getUnit()) : new %TYPE%(this.si
-            - v.si, %TYPE%Unit.SI);
+        return getUnit().equals(v.getUnit()) ? new %Type%(getInUnit() - v.getInUnit(), getUnit()) : new %Type%(this.si
+            - v.si, %Type%Unit.SI);
     }
     
-%FORMULAS%%TYPE%.Rel%
+%FORMULAS%%Type%.Rel%
 }
 
