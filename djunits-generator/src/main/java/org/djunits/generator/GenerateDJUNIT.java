@@ -20,8 +20,8 @@ import java.util.Map;
  * Copyright (c) 2013-2014 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 1, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 1, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -186,9 +186,10 @@ public class GenerateDJUNIT
      * Insert formulas based on FORMULAS.txt into the %FORMULAS% marker within the Java file.
      * @param java the java file
      * @param errorType the type for error messaging
+     * @param prefix e.g., Float for Float types, or blank for Double types
      * @return the file with replacements
      */
-    private static String formulas(String java, String errorType)
+    private static String formulas(String java, String errorType, String prefix)
     {
         String ret = java;
         while (ret.contains("%FORMULAS%"))
@@ -205,6 +206,7 @@ public class GenerateDJUNIT
             boolean isAbs = type.endsWith(".Abs");
             String absRel = isAbs ? "Abs" : "Rel";
             type = type.substring(0, type.length() - 4);
+            String pType = prefix + type;
             if (!formulas.containsKey(type))
             {
                 System.err.println("Formulas in FORMULAS.txt does not contain entry for type " + errorType);
@@ -219,26 +221,32 @@ public class GenerateDJUNIT
                 f = f.substring(1, f.length());
                 String param = f.split("=")[0].trim();
                 String result = f.split("=")[1].trim();
+                String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
                 if (!isAbs)
                 {
-                    String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
+                    String pParam = prefix + param;
+                    String pResult = prefix + result;
+
                     fStr += "        /**\n";
                     fStr +=
-                        "         * Calculate the " + dm + " of " + type + " and " + param + ", which results in a ";
-                    fStr += result + " scalar.\n";
-                    fStr += "         * @param v " + type + " scalar\n";
+                        "         * Calculate the " + dm + " of " + pType + " and " + pParam + ", which results in a ";
+                    fStr += pResult + " scalar.\n";
+                    fStr += "         * @param v " + pType + " scalar\n";
                     fStr +=
-                        "         * @return " + result + " scalar as a " + dm + " of " + type + " and " + param + "\n";
+                        "         * @return " + pResult + " scalar as a " + dm + " of " + pType + " and " + pParam
+                            + "\n";
                     fStr += "         */\n";
-                    fStr += "        public final " + result + "." + absRel + " " + method;
-                    fStr += "(final " + param + "." + absRel + " v)\n";
+                    fStr += "        public final " + pResult + "." + absRel + " " + method;
+                    fStr += "(final " + pParam + "." + absRel + " v)\n";
                     fStr += "        {\n";
-                    fStr += "            return new " + result + "." + absRel + "(this.si " + mdsign + " v.si, ";
+                    fStr += "            return new " + pResult + "." + absRel + "(this.si " + mdsign + " v.si, ";
                     fStr += result + "Unit" + siOrMoney + ");\n";
                     fStr += "        }\n\n";
                 }
             }
-            ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 5, ret.length() - 1);
+            ret =
+                ret.substring(0, pos - 1) + fStr
+                    + ret.substring(pos + type.length() + 5, ret.length() - 1);
         }
 
         // remove the ".Abs" and ".Rel" for the purely relative units and money units.
@@ -285,7 +293,7 @@ public class GenerateDJUNIT
             {
                 java = insert(java, insertJava, "DoubleScalar => " + type);
             }
-            java = formulas(java, "DoubleScalar => " + type);
+            java = formulas(java, "DoubleScalar => " + type, "");
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
@@ -311,7 +319,7 @@ public class GenerateDJUNIT
             String java = new String(scalarJava);
             java = java.replaceAll("%TYPE%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
-            java = formulas(java, "DoubleScalar => " + type);
+            java = formulas(java, "DoubleScalar => " + type, "");
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
@@ -337,7 +345,7 @@ public class GenerateDJUNIT
             String java = new String(scalarJava);
             java = java.replaceAll("%TYPE%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
-            java = formulas(java, "DoubleScalar => " + type);
+            java = formulas(java, "DoubleScalar => " + type, "");
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
@@ -364,9 +372,10 @@ public class GenerateDJUNIT
 
         for (String type : typesAbsRel)
         {
+            String fType = "Float" + type;
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + ".java");
             String java = new String(scalarJava);
             java = java.replaceAll("%TYPE%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
@@ -374,10 +383,10 @@ public class GenerateDJUNIT
             {
                 java = insert(java, insertJava, "FloatScalar => " + type);
             }
-            java = formulas(java, "FloatScalar => " + type);
+            java = formulas(java, "FloatScalar => " + type, "Float");
             out.print(java);
             out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
+            System.out.println("built: " + absoluteRootPath + relativePath + fType + ".java");
         }
     }
 
@@ -394,16 +403,17 @@ public class GenerateDJUNIT
 
         for (String type : typesRel)
         {
+            String fType = "Float" + type;
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + ".java");
             String java = new String(scalarJava);
             java = java.replaceAll("%TYPE%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
-            java = formulas(java, "FloatScalar => " + type);
+            java = formulas(java, "FloatScalar => " + type, "Float");
             out.print(java);
             out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
+            System.out.println("built: " + absoluteRootPath + relativePath + fType + ".java");
         }
     }
 
@@ -420,16 +430,17 @@ public class GenerateDJUNIT
 
         for (String type : typesMoney)
         {
+            String fType = "Float" + type;
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + ".java");
             String java = new String(scalarJava);
             java = java.replaceAll("%TYPE%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
-            java = formulas(java, "FloatScalar => " + type);
+            java = formulas(java, "FloatScalar => " + type, "Float");
             out.print(java);
             out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
+            System.out.println("built: " + absoluteRootPath + relativePath + fType + ".java");
         }
     }
 

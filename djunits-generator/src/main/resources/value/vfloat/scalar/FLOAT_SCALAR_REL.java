@@ -4,10 +4,10 @@ import org.djunits.value.Relative;
 import org.djunits.unit.*;
 
 /**
- * Easy access methods for the %TYPE% FloatScalar, which is relative by definition. An example is Money. Instead of <br>
- * <i>FloatScalar.Rel&lt;MoneyUnit&gt; price = new FloatScalar.Rel&lt;MoneyUnit&gt;(100.0, MoneyUnit.EUR);</i><br>
+ * Easy access methods for the %TYPE% FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * <i>FloatScalar.Rel&lt;%TYPE%Unit&gt; value = new FloatScalar.Rel&lt;%TYPE%Unit&gt;(100.0, %TYPE%Unit.SI);</i><br>
  * we can now write <br>
- * <i>Money price = new Money(100.0, EUR);</i><br>
+ * <i>Float%TYPE% value = new Float%TYPE%(100.0, %TYPE%Unit.SI);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
@@ -19,36 +19,36 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class %TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements Relative
+public class Float%TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements Relative
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
     /**
-     * Construct %TYPE% scalar.
+     * Construct Float%TYPE% scalar.
      * @param value float value
      * @param unit unit for the float value
      */
-    public %TYPE%(final float value, final %TYPE%Unit unit)
+    public Float%TYPE%(final float value, final %TYPE%Unit unit)
     {
         super(value, unit);
     }
 
     /**
-     * Construct %TYPE% scalar using a double value.
+     * Construct Float%TYPE% scalar using a double value.
      * @param value double value
      * @param unit unit for the value
      */
-    public %TYPE%(final double value, final %TYPE%Unit unit)
+    public Float%TYPE%(final double value, final %TYPE%Unit unit)
     {
         super((float) value, unit);
     }
 
     /**
-     * Construct %TYPE% scalar.
+     * Construct Float%TYPE% scalar.
      * @param value Scalar from which to construct this instance
      */
-    public %TYPE%(final FloatScalar.Rel<%TYPE%Unit> value)
+    public Float%TYPE%(final FloatScalar.Rel<%TYPE%Unit> value)
     {
         super(value);
     }
@@ -60,9 +60,9 @@ public class %TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements Relative
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static %TYPE% interpolate(final %TYPE% zero, final %TYPE% one, final float ratio)
+    public static Float%TYPE% interpolate(final Float%TYPE% zero, final Float%TYPE% one, final float ratio)
     {
-        return new %TYPE%.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Float%TYPE%.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -72,198 +72,198 @@ public class %TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements Relative
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static %TYPE% interpolate(final %TYPE%.Rel zero, final %TYPE%.Rel one, final double ratio)
+    public static Float%TYPE% interpolate(final Float%TYPE%.Rel zero, final Float%TYPE%.Rel one, final double ratio)
     {
         return interpolate(zero, one, (float) ratio);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% abs()
+    public final Float%TYPE% abs()
     {
-        return new %TYPE%(Math.abs(getInUnit()), getUnit());
+        return new Float%TYPE%(Math.abs(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% acos()
+    public final Float%TYPE% acos()
     {
-        return new %TYPE%((float) Math.acos(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.acos(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% asin()
+    public final Float%TYPE% asin()
     {
-        return new %TYPE%((float) Math.asin(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.asin(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% atan()
+    public final Float%TYPE% atan()
     {
-        return new %TYPE%((float) Math.atan(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.atan(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% cbrt()
+    public final Float%TYPE% cbrt()
     {
-        return new %TYPE%((float) Math.cbrt(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.cbrt(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% ceil()
+    public final Float%TYPE% ceil()
     {
-        return new %TYPE%((float) Math.ceil(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.ceil(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% cos()
+    public final Float%TYPE% cos()
     {
-        return new %TYPE%((float) Math.cos(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.cos(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% cosh()
+    public final Float%TYPE% cosh()
     {
-        return new %TYPE%((float) Math.cosh(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.cosh(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% exp()
+    public final Float%TYPE% exp()
     {
-        return new %TYPE%((float) Math.exp(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.exp(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% expm1()
+    public final Float%TYPE% expm1()
     {
-        return new %TYPE%((float) Math.expm1(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.expm1(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% floor()
+    public final Float%TYPE% floor()
     {
-        return new %TYPE%((float) Math.floor(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.floor(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% log()
+    public final Float%TYPE% log()
     {
-        return new %TYPE%((float) Math.log(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.log(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% log10()
+    public final Float%TYPE% log10()
     {
-        return new %TYPE%((float) Math.log10(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.log10(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% log1p()
+    public final Float%TYPE% log1p()
     {
-        return new %TYPE%((float) Math.log1p(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.log1p(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% rint()
+    public final Float%TYPE% rint()
     {
-        return new %TYPE%((float) Math.rint(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.rint(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% round()
+    public final Float%TYPE% round()
     {
-        return new %TYPE%(Math.round(getInUnit()), getUnit());
+        return new Float%TYPE%(Math.round(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% signum()
+    public final Float%TYPE% signum()
     {
-        return new %TYPE%(Math.signum(getInUnit()), getUnit());
+        return new Float%TYPE%(Math.signum(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% sin()
+    public final Float%TYPE% sin()
     {
-        return new %TYPE%((float) Math.sin(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.sin(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% sinh()
+    public final Float%TYPE% sinh()
     {
-        return new %TYPE%((float) Math.sinh(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.sinh(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% sqrt()
+    public final Float%TYPE% sqrt()
     {
-        return new %TYPE%((float) Math.sqrt(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.sqrt(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% tan()
+    public final Float%TYPE% tan()
     {
-        return new %TYPE%((float) Math.tan(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.tan(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% tanh()
+    public final Float%TYPE% tanh()
     {
-        return new %TYPE%((float) Math.tanh(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.tanh(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% inv()
+    public final Float%TYPE% inv()
     {
-        return new %TYPE%(1.0f / getInUnit(), getUnit());
+        return new Float%TYPE%(1.0f / getInUnit(), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% toDegrees()
+    public final Float%TYPE% toDegrees()
     {
-        return new %TYPE%((float) Math.toDegrees(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.toDegrees(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% toRadians()
+    public final Float%TYPE% toRadians()
     {
-        return new %TYPE%((float) Math.toRadians(getInUnit()), getUnit());
+        return new Float%TYPE%((float) Math.toRadians(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% pow(final double x)
+    public final Float%TYPE% pow(final double x)
     {
-        return new %TYPE%((float) Math.pow(getInUnit(), x), getUnit());
+        return new Float%TYPE%((float) Math.pow(getInUnit(), x), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% multiplyBy(final float factor)
+    public final Float%TYPE% multiplyBy(final float factor)
     {
-        return new %TYPE%(getInUnit() * factor, getUnit());
+        return new Float%TYPE%(getInUnit() * factor, getUnit());
     }
 
     /**
@@ -271,16 +271,16 @@ public class %TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements Relative
      * @param factor the factor to multiply with
      * @return new instance of a relative %type%
      */
-    public final %TYPE% multiplyBy(final double factor)
+    public final Float%TYPE% multiplyBy(final double factor)
     {
         return multiplyBy((float) factor);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TYPE% divideBy(final float divisor)
+    public final Float%TYPE% divideBy(final float divisor)
     {
-        return new %TYPE%(getInUnit() / divisor, getUnit());
+        return new Float%TYPE%(getInUnit() / divisor, getUnit());
     }
 
     /**
@@ -288,7 +288,7 @@ public class %TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements Relative
      * @param factor the factor to divide by
      * @return new instance of a relative %type%
      */
-    public final %TYPE% divideBy(final double factor)
+    public final Float%TYPE% divideBy(final double factor)
     {
         return divideBy((float) factor);
     }
@@ -298,9 +298,9 @@ public class %TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements Relative
      * @param v the value to add
      * @return sum of this value and v as a new object
      */
-    public final %TYPE% plus(final %TYPE% v)
+    public final Float%TYPE% plus(final Float%TYPE% v)
     {
-        return getUnit().equals(v.getUnit()) ? new %TYPE%(getInUnit() + v.getInUnit(), getUnit()) : new %TYPE%(this.si
+        return getUnit().equals(v.getUnit()) ? new Float%TYPE%(getInUnit() + v.getInUnit(), getUnit()) : new Float%TYPE%(this.si
             + v.si, %TYPE%Unit.SI);
     }
 
@@ -309,9 +309,9 @@ public class %TYPE% extends FloatScalar.Rel<%TYPE%Unit> implements Relative
      * @param v the value to subtract
      * @return difference of this value and v as a new object
      */
-    public final %TYPE% minus(final %TYPE% v)
+    public final Float%TYPE% minus(final Float%TYPE% v)
     {
-        return getUnit().equals(v.getUnit()) ? new %TYPE%(getInUnit() - v.getInUnit(), getUnit()) : new %TYPE%(this.si
+        return getUnit().equals(v.getUnit()) ? new Float%TYPE%(getInUnit() - v.getInUnit(), getUnit()) : new Float%TYPE%(this.si
             - v.si, %TYPE%Unit.SI);
     }
 
