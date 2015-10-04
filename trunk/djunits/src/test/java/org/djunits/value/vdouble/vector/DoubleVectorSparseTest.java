@@ -153,7 +153,7 @@ public class DoubleVectorSparseTest
             mdv.set(0, temperatureDV.get(0));
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
             DoubleVector.Abs.Sparse<TemperatureUnit> temperature2DV =
-                new DoubleVector.Abs.Sparse<TemperatureUnit>(temperatureDV.getVectorSI(), TemperatureUnit.KELVIN);
+                new DoubleVector.Abs.Sparse<TemperatureUnit>(temperatureDV.getValuesSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
             assertTrue("Value is Absolute", temperatureDV.isAbsolute());
             assertFalse("Value is not Relative", temperatureDV.isRelative());
@@ -605,34 +605,6 @@ public class DoubleVectorSparseTest
     }
 
     /**
-     * Test times(DoubleVectorAbs.Sparse, DoubleVectorAbs.Dense).
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void binarytimesOfAbsSparseAndAbsDenseTest()
-    {
-        try
-        {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
-            DoubleVector.Abs.Sparse<LengthUnit> left =
-                new DoubleVector.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Abs.Dense<LengthUnit> right =
-                new DoubleVector.Abs.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Abs.Sparse<?> result = DoubleVector.times(left, right);
-            for (int i = 0; i < leftValue.length; i++)
-            {
-                assertEquals("value of element should be SI times of contributing elements", left.getSI(i)
-                    * right.getSI(i), result.getSI(i), 0.001);
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected ValueException: " + ve.toString());
-        }
-    }
-
-    /**
      * Test plus(DoubleVectorAbs.Sparse, DoubleVectorRel.Sparse).
      */
     @SuppressWarnings("static-method")
@@ -680,34 +652,6 @@ public class DoubleVectorSparseTest
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
                     - right.getSI(i), result.getSI(i), 0.001);
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected ValueException: " + ve.toString());
-        }
-    }
-
-    /**
-     * Test times(DoubleVectorAbs.Sparse, DoubleVectorAbs.Sparse).
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void binarytimesOfAbsSparseAndAbsSparseTest()
-    {
-        try
-        {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
-            DoubleVector.Abs.Sparse<LengthUnit> left =
-                new DoubleVector.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Abs.Sparse<LengthUnit> right =
-                new DoubleVector.Abs.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Abs.Sparse<?> result = DoubleVector.times(left, right);
-            for (int i = 0; i < leftValue.length; i++)
-            {
-                assertEquals("value of element should be SI times of contributing elements", left.getSI(i)
-                    * right.getSI(i), result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -847,7 +791,7 @@ public class DoubleVectorSparseTest
             mdv.set(0, temperatureDV.get(0));
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
             DoubleVector.Rel.Sparse<TemperatureUnit> temperature2DV =
-                new DoubleVector.Rel.Sparse<TemperatureUnit>(temperatureDV.getVectorSI(), TemperatureUnit.KELVIN);
+                new DoubleVector.Rel.Sparse<TemperatureUnit>(temperatureDV.getValuesSI(), TemperatureUnit.KELVIN);
             assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
             assertTrue("Value is Relative", temperatureDV.isRelative());
             assertFalse("Value is not Absolute", temperatureDV.isAbsolute());

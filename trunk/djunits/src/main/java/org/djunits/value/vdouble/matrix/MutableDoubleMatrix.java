@@ -7,14 +7,10 @@ import org.djunits.value.Relative;
 import org.djunits.value.SparseData;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
+import org.djunits.value.vdouble.DoubleFunction;
 import org.djunits.value.vdouble.DoubleMathFunctions;
 import org.djunits.value.vdouble.DoubleMathFunctionsImpl;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
-
-import cern.colt.matrix.tdouble.DoubleMatrix2D;
-import cern.colt.matrix.tdouble.impl.DenseDoubleMatrix2D;
-import cern.colt.matrix.tdouble.impl.SparseDoubleMatrix2D;
-import cern.jet.math.tdouble.DoubleFunctions;
 
 /**
  * MutableDoubleMatrix.
@@ -24,8 +20,8 @@ import cern.jet.math.tdouble.DoubleFunctions;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableDoubleMatrix
@@ -34,7 +30,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
     WriteDoubleMatrixFunctions<U>, DoubleMathFunctions<MutableDoubleMatrix<U>>
 {
     /**  */
-    private static final long serialVersionUID = 20150626L;
+    private static final long serialVersionUID = 20151003L;
 
     /**
      * Construct a new MutableDoubleMatrix.
@@ -43,7 +39,6 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
     protected MutableDoubleMatrix(final U unit)
     {
         super(unit);
-        // System.out.println("Created MutableDoubleMatrix");
     }
 
     /** If set, any modification of the data must be preceded by replacing the data with a local copy. */
@@ -67,32 +62,17 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         this.copyOnWrite = copyOnWrite;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final void normalize() throws ValueException
-    {
-        double sum = zSum();
-        if (0 == sum)
-        {
-            throw new ValueException("zSum is 0; cannot normalize");
-        }
-        checkCopyOnWrite();
-        for (int row = rows(); --row >= 0;)
-        {
-            for (int column = columns(); --column >= 0;)
-            {
-                safeSet(row, column, safeGet(row, column) / sum);
-            }
-        }
-    }
+    /** ============================================================================================ */
+    /** ================================= ABSOLUTE IMPLEMENTATION ================================== */
+    /** ============================================================================================ */
 
     /**
-     * @param <U> Unit
+     * @param <U> Unit the unit for which this Matrix will be created
      */
     public abstract static class Abs<U extends Unit<U>> extends MutableDoubleMatrix<U> implements Absolute
     {
         /**  */
-        private static final long serialVersionUID = 20150626L;
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Absolute MutableDoubleMatrix.
@@ -101,16 +81,16 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         protected Abs(final U unit)
         {
             super(unit);
-            // System.out.println("Created Abs");
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE DENSE implementation of MutableDoubleMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Dense<U extends Unit<U>> extends Abs<U> implements DenseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Absolute Dense MutableDoubleMatrix.
@@ -121,8 +101,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public Dense(final double[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
@@ -134,21 +113,18 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public Dense(final DoubleScalar.Abs<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values DoubleMatrix2D; the initial values of the entries in the new Absolute Dense MutableDoubleMatrix
-             * @param unit U; the unit of the new Absolute Dense MutableDoubleMatrix
+             * Construct a new Absolute Dense Mutable DoubleMatrix.
+             * @param data an internal data object
+             * @param unit the unit
              */
-            protected Dense(final DoubleMatrix2D values, final U unit)
+            Dense(final DoubleMatrixDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -156,7 +132,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public final DoubleMatrix.Abs.Dense<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new DoubleMatrix.Abs.Dense<U>(getMatrixSI(), getUnit());
+                return new DoubleMatrix.Abs.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -165,16 +141,9 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             {
                 setCopyOnWrite(true);
                 final MutableDoubleMatrix.Abs.Dense<U> result =
-                    new MutableDoubleMatrix.Abs.Dense<U>(getMatrixSI(), getUnit());
+                    new MutableDoubleMatrix.Abs.Dense<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new DenseDoubleMatrix2D(rows, columns);
             }
 
             /** {@inheritDoc} */
@@ -184,15 +153,22 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final DoubleMatrixDataDense getData()
+            {
+                return (DoubleMatrixDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE SPARSE implementation of MutableDoubleMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Sparse<U extends Unit<U>> extends Abs<U> implements SparseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Absolute Sparse MutableDoubleMatrix.
@@ -203,8 +179,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public Sparse(final double[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
@@ -216,21 +191,18 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public Sparse(final DoubleScalar.Abs<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values DoubleMatrix2D; the initial values of the entries in the new Absolute Sparse MutableDoubleMatrix
-             * @param unit U; the unit of the new Absolute Sparse MutableDoubleMatrix
+             * Construct a new Absolute Sparse Mutable DoubleMatrix.
+             * @param data an internal data object
+             * @param unit the unit
              */
-            protected Sparse(final DoubleMatrix2D values, final U unit)
+            Sparse(final DoubleMatrixDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -238,7 +210,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public final DoubleMatrix.Abs.Sparse<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new DoubleMatrix.Abs.Sparse<U>(getMatrixSI(), getUnit());
+                return new DoubleMatrix.Abs.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -247,16 +219,9 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             {
                 setCopyOnWrite(true);
                 final MutableDoubleMatrix.Abs.Sparse<U> result =
-                    new MutableDoubleMatrix.Abs.Sparse<U>(getMatrixSI(), getUnit());
+                    new MutableDoubleMatrix.Abs.Sparse<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new SparseDoubleMatrix2D(rows, columns);
             }
 
             /** {@inheritDoc} */
@@ -266,6 +231,12 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final DoubleMatrixDataSparse getData()
+            {
+                return (DoubleMatrixDataSparse) this.data;
+            }
         }
 
         /** {@inheritDoc} */
@@ -305,7 +276,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> abs()
         {
-            assign(DoubleFunctions.abs);
+            assign(DoubleMathFunctionsImpl.ABS);
             return this;
         }
 
@@ -313,7 +284,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> acos()
         {
-            assign(DoubleFunctions.acos);
+            assign(DoubleMathFunctionsImpl.ACOS);
             return this;
         }
 
@@ -321,7 +292,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> asin()
         {
-            assign(DoubleFunctions.asin);
+            assign(DoubleMathFunctionsImpl.ASIN);
             return this;
         }
 
@@ -329,7 +300,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> atan()
         {
-            assign(DoubleFunctions.atan);
+            assign(DoubleMathFunctionsImpl.ATAN);
             return this;
         }
 
@@ -337,7 +308,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> cbrt()
         {
-            assign(DoubleMathFunctionsImpl.cbrt);
+            assign(DoubleMathFunctionsImpl.CBRT);
             return this;
         }
 
@@ -345,7 +316,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> ceil()
         {
-            assign(DoubleFunctions.ceil);
+            assign(DoubleMathFunctionsImpl.CEIL);
             return this;
         }
 
@@ -353,7 +324,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> cos()
         {
-            assign(DoubleFunctions.cos);
+            assign(DoubleMathFunctionsImpl.COS);
             return this;
         }
 
@@ -361,7 +332,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> cosh()
         {
-            assign(DoubleMathFunctionsImpl.cosh);
+            assign(DoubleMathFunctionsImpl.COSH);
             return this;
         }
 
@@ -369,7 +340,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> exp()
         {
-            assign(DoubleFunctions.exp);
+            assign(DoubleMathFunctionsImpl.EXP);
             return this;
         }
 
@@ -377,7 +348,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> expm1()
         {
-            assign(DoubleMathFunctionsImpl.expm1);
+            assign(DoubleMathFunctionsImpl.EXPM1);
             return this;
         }
 
@@ -385,7 +356,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> floor()
         {
-            assign(DoubleFunctions.floor);
+            assign(DoubleMathFunctionsImpl.FLOOR);
             return this;
         }
 
@@ -393,7 +364,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> log()
         {
-            assign(DoubleFunctions.log);
+            assign(DoubleMathFunctionsImpl.LOG);
             return this;
         }
 
@@ -401,7 +372,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> log10()
         {
-            assign(DoubleMathFunctionsImpl.log10);
+            assign(DoubleMathFunctionsImpl.LOG10);
             return this;
         }
 
@@ -409,7 +380,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> log1p()
         {
-            assign(DoubleMathFunctionsImpl.log1p);
+            assign(DoubleMathFunctionsImpl.LOG1P);
             return this;
         }
 
@@ -417,7 +388,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> pow(final double x)
         {
-            assign(DoubleFunctions.pow(x));
+            assign(DoubleMathFunctionsImpl.POW(x));
             return this;
         }
 
@@ -425,7 +396,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> rint()
         {
-            assign(DoubleFunctions.rint);
+            assign(DoubleMathFunctionsImpl.RINT);
             return this;
         }
 
@@ -433,7 +404,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> round()
         {
-            assign(DoubleMathFunctionsImpl.round);
+            assign(DoubleMathFunctionsImpl.ROUND);
             return this;
         }
 
@@ -441,7 +412,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> signum()
         {
-            assign(DoubleMathFunctionsImpl.signum);
+            assign(DoubleMathFunctionsImpl.SIGNUM);
             return this;
         }
 
@@ -449,7 +420,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> sin()
         {
-            assign(DoubleFunctions.sin);
+            assign(DoubleMathFunctionsImpl.SIN);
             return this;
         }
 
@@ -457,7 +428,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> sinh()
         {
-            assign(DoubleMathFunctionsImpl.sinh);
+            assign(DoubleMathFunctionsImpl.SINH);
             return this;
         }
 
@@ -465,7 +436,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> sqrt()
         {
-            assign(DoubleFunctions.sqrt);
+            assign(DoubleMathFunctionsImpl.SQRT);
             return this;
         }
 
@@ -473,7 +444,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> tan()
         {
-            assign(DoubleFunctions.tan);
+            assign(DoubleMathFunctionsImpl.TAN);
             return this;
         }
 
@@ -481,7 +452,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> tanh()
         {
-            assign(DoubleMathFunctionsImpl.tanh);
+            assign(DoubleMathFunctionsImpl.TANH);
             return this;
         }
 
@@ -489,7 +460,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> toDegrees()
         {
-            assign(DoubleMathFunctionsImpl.toDegrees);
+            assign(DoubleMathFunctionsImpl.TO_DEGREES);
             return this;
         }
 
@@ -497,7 +468,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> toRadians()
         {
-            assign(DoubleMathFunctionsImpl.toRadians);
+            assign(DoubleMathFunctionsImpl.TO_RADIANS);
             return this;
         }
 
@@ -505,7 +476,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> inv()
         {
-            assign(DoubleFunctions.inv);
+            assign(DoubleMathFunctionsImpl.INV);
             return this;
         }
 
@@ -513,7 +484,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> multiplyBy(final double constant)
         {
-            assign(DoubleFunctions.mult(constant));
+            assign(DoubleMathFunctionsImpl.MULT(constant));
             return this;
         }
 
@@ -521,7 +492,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Abs<U> divideBy(final double constant)
         {
-            assign(DoubleFunctions.div(constant));
+            assign(DoubleMathFunctionsImpl.DIV(constant));
             return this;
         }
 
@@ -533,7 +504,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
     public abstract static class Rel<U extends Unit<U>> extends MutableDoubleMatrix<U> implements Relative
     {
         /**  */
-        private static final long serialVersionUID = 20150626L;
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Relative MutableDoubleMatrix.
@@ -542,16 +513,16 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         protected Rel(final U unit)
         {
             super(unit);
-            // System.out.println("Created Rel");
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE DENSE implementation of MutableDoubleMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Dense<U extends Unit<U>> extends Rel<U> implements DenseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Relative Dense MutableDoubleMatrix.
@@ -562,8 +533,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public Dense(final double[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
@@ -575,21 +545,18 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public Dense(final DoubleScalar.Rel<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values DoubleMatrix2D; the initial values of the entries in the new Relative Dense MutableDoubleMatrix
-             * @param unit U; the unit of the new Relative Dense MutableDoubleMatrix
+             * Construct a new Relative Dense Mutable DoubleMatrix.
+             * @param data an internal data object
+             * @param unit the unit
              */
-            protected Dense(final DoubleMatrix2D values, final U unit)
+            Dense(final DoubleMatrixDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -597,7 +564,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public final DoubleMatrix.Rel.Dense<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new DoubleMatrix.Rel.Dense<U>(getMatrixSI(), getUnit());
+                return new DoubleMatrix.Rel.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -606,16 +573,9 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             {
                 setCopyOnWrite(true);
                 final MutableDoubleMatrix.Rel.Dense<U> result =
-                    new MutableDoubleMatrix.Rel.Dense<U>(getMatrixSI(), getUnit());
+                    new MutableDoubleMatrix.Rel.Dense<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new DenseDoubleMatrix2D(rows, columns);
             }
 
             /** {@inheritDoc} */
@@ -625,15 +585,22 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final DoubleMatrixDataDense getData()
+            {
+                return (DoubleMatrixDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE SPARSE implementation of MutableDoubleMatrix.
+         * @param <U> Unit the unit for which this Matrix will be created
          */
         public static class Sparse<U extends Unit<U>> extends Rel<U> implements SparseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
              * Construct a new Relative Sparse MutableDoubleMatrix.
@@ -644,8 +611,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public Sparse(final double[][] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
@@ -657,21 +623,18 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public Sparse(final DoubleScalar.Rel<U>[][] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0][0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeSparse(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values DoubleMatrix2D; the initial values of the entries in the new Relative Sparse MutableDoubleMatrix
-             * @param unit U; the unit of the new Relative Sparse MutableDoubleMatrix
+             * Construct a new Relative Sparse Mutable DoubleMatrix.
+             * @param data an internal data object
+             * @param unit the unit
              */
-            protected Sparse(final DoubleMatrix2D values, final U unit)
+            Sparse(final DoubleMatrixDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -679,7 +642,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             public final DoubleMatrix.Rel.Sparse<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new DoubleMatrix.Rel.Sparse<U>(getMatrixSI(), getUnit());
+                return new DoubleMatrix.Rel.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -688,16 +651,9 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             {
                 setCopyOnWrite(true);
                 final MutableDoubleMatrix.Rel.Sparse<U> result =
-                    new MutableDoubleMatrix.Rel.Sparse<U>(getMatrixSI(), getUnit());
+                    new MutableDoubleMatrix.Rel.Sparse<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleMatrix2D createMatrix2D(final int rows, final int columns)
-            {
-                return new SparseDoubleMatrix2D(rows, columns);
             }
 
             /** {@inheritDoc} */
@@ -707,6 +663,12 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final DoubleMatrixDataSparse getData()
+            {
+                return (DoubleMatrixDataSparse) this.data;
+            }
         }
 
         /** {@inheritDoc} */
@@ -746,7 +708,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> abs()
         {
-            assign(DoubleFunctions.abs);
+            assign(DoubleMathFunctionsImpl.ABS);
             return this;
         }
 
@@ -754,7 +716,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> acos()
         {
-            assign(DoubleFunctions.acos);
+            assign(DoubleMathFunctionsImpl.ACOS);
             return this;
         }
 
@@ -762,7 +724,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> asin()
         {
-            assign(DoubleFunctions.asin);
+            assign(DoubleMathFunctionsImpl.ASIN);
             return this;
         }
 
@@ -770,7 +732,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> atan()
         {
-            assign(DoubleFunctions.atan);
+            assign(DoubleMathFunctionsImpl.ATAN);
             return this;
         }
 
@@ -778,7 +740,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> cbrt()
         {
-            assign(DoubleMathFunctionsImpl.cbrt);
+            assign(DoubleMathFunctionsImpl.CBRT);
             return this;
         }
 
@@ -786,7 +748,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> ceil()
         {
-            assign(DoubleFunctions.ceil);
+            assign(DoubleMathFunctionsImpl.CEIL);
             return this;
         }
 
@@ -794,7 +756,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> cos()
         {
-            assign(DoubleFunctions.cos);
+            assign(DoubleMathFunctionsImpl.COS);
             return this;
         }
 
@@ -802,7 +764,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> cosh()
         {
-            assign(DoubleMathFunctionsImpl.cosh);
+            assign(DoubleMathFunctionsImpl.COSH);
             return this;
         }
 
@@ -810,7 +772,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> exp()
         {
-            assign(DoubleFunctions.exp);
+            assign(DoubleMathFunctionsImpl.EXP);
             return this;
         }
 
@@ -818,7 +780,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> expm1()
         {
-            assign(DoubleMathFunctionsImpl.expm1);
+            assign(DoubleMathFunctionsImpl.EXPM1);
             return this;
         }
 
@@ -826,7 +788,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> floor()
         {
-            assign(DoubleFunctions.floor);
+            assign(DoubleMathFunctionsImpl.FLOOR);
             return this;
         }
 
@@ -834,7 +796,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> log()
         {
-            assign(DoubleFunctions.log);
+            assign(DoubleMathFunctionsImpl.LOG);
             return this;
         }
 
@@ -842,7 +804,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> log10()
         {
-            assign(DoubleMathFunctionsImpl.log10);
+            assign(DoubleMathFunctionsImpl.LOG10);
             return this;
         }
 
@@ -850,7 +812,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> log1p()
         {
-            assign(DoubleMathFunctionsImpl.log1p);
+            assign(DoubleMathFunctionsImpl.LOG1P);
             return this;
         }
 
@@ -858,7 +820,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> pow(final double x)
         {
-            assign(DoubleFunctions.pow(x));
+            assign(DoubleMathFunctionsImpl.POW(x));
             return this;
         }
 
@@ -866,7 +828,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> rint()
         {
-            assign(DoubleFunctions.rint);
+            assign(DoubleMathFunctionsImpl.RINT);
             return this;
         }
 
@@ -874,7 +836,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> round()
         {
-            assign(DoubleMathFunctionsImpl.round);
+            assign(DoubleMathFunctionsImpl.ROUND);
             return this;
         }
 
@@ -882,7 +844,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> signum()
         {
-            assign(DoubleMathFunctionsImpl.signum);
+            assign(DoubleMathFunctionsImpl.SIGNUM);
             return this;
         }
 
@@ -890,7 +852,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> sin()
         {
-            assign(DoubleFunctions.sin);
+            assign(DoubleMathFunctionsImpl.SIN);
             return this;
         }
 
@@ -898,7 +860,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> sinh()
         {
-            assign(DoubleMathFunctionsImpl.sinh);
+            assign(DoubleMathFunctionsImpl.SINH);
             return this;
         }
 
@@ -906,7 +868,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> sqrt()
         {
-            assign(DoubleFunctions.sqrt);
+            assign(DoubleMathFunctionsImpl.SQRT);
             return this;
         }
 
@@ -914,7 +876,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> tan()
         {
-            assign(DoubleFunctions.tan);
+            assign(DoubleMathFunctionsImpl.TAN);
             return this;
         }
 
@@ -922,7 +884,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> tanh()
         {
-            assign(DoubleMathFunctionsImpl.tanh);
+            assign(DoubleMathFunctionsImpl.TANH);
             return this;
         }
 
@@ -930,7 +892,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> toDegrees()
         {
-            assign(DoubleMathFunctionsImpl.toDegrees);
+            assign(DoubleMathFunctionsImpl.TO_DEGREES);
             return this;
         }
 
@@ -938,7 +900,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> toRadians()
         {
-            assign(DoubleMathFunctionsImpl.toRadians);
+            assign(DoubleMathFunctionsImpl.TO_RADIANS);
             return this;
         }
 
@@ -946,7 +908,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> inv()
         {
-            assign(DoubleFunctions.inv);
+            assign(DoubleMathFunctionsImpl.INV);
             return this;
         }
 
@@ -954,7 +916,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> multiplyBy(final double constant)
         {
-            assign(DoubleFunctions.mult(constant));
+            assign(DoubleMathFunctionsImpl.MULT(constant));
             return this;
         }
 
@@ -962,7 +924,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @Override
         public final MutableDoubleMatrix.Rel<U> divideBy(final double constant)
         {
-            assign(DoubleFunctions.div(constant));
+            assign(DoubleMathFunctionsImpl.DIV(constant));
             return this;
         }
 
@@ -981,8 +943,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
     {
         if (isCopyOnWrite())
         {
-            // System.out.println("copyOnWrite is set: Copying data");
-            deepCopyData();
+            this.data = this.data.copy();
             setCopyOnWrite(false);
         }
     }
@@ -1012,13 +973,24 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
     }
 
     /**
-     * Execute a function on a cell by cell basis.
-     * @param d cern.colt.function.tdouble.DoubleFunction; the function to apply
+     * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
+     * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a dense
+     * dataset if necessary.
+     * @param doubleFunction the function to apply
      */
-    public final void assign(final cern.colt.function.tdouble.DoubleFunction d)
+    public final void assign(final DoubleFunction doubleFunction)
     {
         checkCopyOnWrite();
-        getMatrixSI().assign(d);
+        if (this.data instanceof DoubleMatrixDataDense)
+        {
+            ((DoubleMatrixDataDense) this.data).assign(doubleFunction);
+        }
+        else
+        {
+            DoubleMatrixDataDense dvmd = ((DoubleMatrixDataSparse) this.data).toDense();
+            dvmd.assign(doubleFunction);
+            this.data = dvmd.toSparse();
+        }
     }
 
     /**********************************************************************************/
@@ -1093,18 +1065,6 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         return decrementValueByValue(rel);
     }
 
-    // FIXME It makes no sense to subtract an Absolute from a Relative
-    /**
-     * Decrement the values in this Relative MutableDoubleMatrix by the corresponding values in an Absolute DoubleMatrix.
-     * @param abs DoubleMatrix.Abs&lt;U&gt;; the Absolute DoubleMatrix
-     * @return MutableDoubleMatrix.Rel&lt;U&gt;; this modified Relative MutableDoubleMatrix
-     * @throws ValueException when the matrices do not have the same size
-     */
-    protected final MutableDoubleMatrix.Rel<U> decrementBy(final DoubleMatrix.Abs<U> abs) throws ValueException
-    {
-        return (MutableDoubleMatrix.Rel<U>) decrementValueByValue(abs);
-    }
-
     /**
      * Scale the values in this MutableDoubleMatrix by the corresponding values in a DoubleMatrix.
      * @param factor DoubleMatrix&lt;?&gt;; contains the values by which to scale the corresponding values in this
@@ -1140,6 +1100,26 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
             }
         }
         return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void normalize() throws ValueException
+    {
+        double sum = zSum();
+        if (0 == sum)
+        {
+            throw new ValueException("zSum is 0; cannot normalize");
+        }
+        checkCopyOnWrite();
+        for (int row = rows(); --row >= 0;)
+        {
+            for (int column = columns(); --column >= 0;)
+            {
+                // TODO parallel divide by factor
+                safeSet(row, column, safeGet(row, column) / sum);
+            }
+        }
     }
 
     /**

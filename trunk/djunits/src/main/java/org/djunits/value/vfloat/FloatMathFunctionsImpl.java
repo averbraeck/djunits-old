@@ -1,7 +1,5 @@
 package org.djunits.value.vfloat;
 
-import cern.colt.function.tfloat.FloatFunction;
-
 /**
  * FloatFunction implementations of the standard Math functions.
  * <p>
@@ -10,8 +8,8 @@ import cern.colt.function.tfloat.FloatFunction;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -26,9 +24,57 @@ public final class FloatMathFunctionsImpl
     }
 
     /**
+     * Function that returns <tt>Math.abs(a)</tt>.
+     */
+    public static final FloatFunction ABS = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return Math.abs(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.acos(a)</tt>.
+     */
+    public static final FloatFunction ACOS = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.acos(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.asin(a)</tt>.
+     */
+    public static final FloatFunction ASIN = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.asin(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.atan(a)</tt>.
+     */
+    public static final FloatFunction ATAN = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.atan(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.cbrt(a)</tt>.
      */
-    public static final FloatFunction cbrt = new FloatFunction()
+    public static final FloatFunction CBRT = new FloatFunction()
     {
         @Override
         public float apply(final float a)
@@ -38,9 +84,33 @@ public final class FloatMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.ceil(a)</tt>.
+     */
+    public static final FloatFunction CEIL = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.ceil(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.cos(a)</tt>.
+     */
+    public static final FloatFunction COS = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.cos(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.cosh(a)</tt>.
      */
-    public static final FloatFunction cosh = new FloatFunction()
+    public static final FloatFunction COSH = new FloatFunction()
     {
         @Override
         public float apply(final float a)
@@ -50,9 +120,21 @@ public final class FloatMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.exp(a)</tt>.
+     */
+    public static final FloatFunction EXP = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.exp(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.expm1(a)</tt>.
      */
-    public static final FloatFunction expm1 = new FloatFunction()
+    public static final FloatFunction EXPM1 = new FloatFunction()
     {
         @Override
         public float apply(final float a)
@@ -62,9 +144,33 @@ public final class FloatMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.floor(a)</tt>.
+     */
+    public static final FloatFunction FLOOR = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.floor(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.log(a)</tt>.
+     */
+    public static final FloatFunction LOG = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.log(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.log10(a)</tt>.
      */
-    public static final FloatFunction log10 = new FloatFunction()
+    public static final FloatFunction LOG10 = new FloatFunction()
     {
         @Override
         public float apply(final float a)
@@ -76,7 +182,7 @@ public final class FloatMathFunctionsImpl
     /**
      * Function that returns <tt>Math.log1p(a)</tt>.
      */
-    public static final FloatFunction log1p = new FloatFunction()
+    public static final FloatFunction LOG1P = new FloatFunction()
     {
         @Override
         public float apply(final float a)
@@ -86,9 +192,39 @@ public final class FloatMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.pow(a, b)</tt>.
+     * @param b power parameter
+     * @return power function
+     */
+    @SuppressWarnings("checkstyle:methodname")
+    public static FloatFunction POW(final float b)
+    {
+        return new FloatFunction()
+        {
+            @Override
+            public float apply(final float a)
+            {
+                return (float) Math.pow(a, b);
+            }
+        };
+    }
+
+    /**
+     * Function that returns <tt>Math.rint(a)</tt>.
+     */
+    public static final FloatFunction RINT = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.rint(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.round(a)</tt>.
      */
-    public static final FloatFunction round = new FloatFunction()
+    public static final FloatFunction ROUND = new FloatFunction()
     {
         @Override
         public float apply(final float a)
@@ -100,7 +236,7 @@ public final class FloatMathFunctionsImpl
     /**
      * Function that returns <tt>Math.signum(a)</tt>.
      */
-    public static final FloatFunction signum = new FloatFunction()
+    public static final FloatFunction SIGNUM = new FloatFunction()
     {
         @Override
         public float apply(final float a)
@@ -110,9 +246,21 @@ public final class FloatMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.sin(a)</tt>.
+     */
+    public static final FloatFunction SIN = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.sin(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.sinh(a)</tt>.
      */
-    public static final FloatFunction sinh = new FloatFunction()
+    public static final FloatFunction SINH = new FloatFunction()
     {
         @Override
         public float apply(final float a)
@@ -122,9 +270,33 @@ public final class FloatMathFunctionsImpl
     };
 
     /**
+     * Function that returns <tt>Math.sqrt(a)</tt>.
+     */
+    public static final FloatFunction SQRT = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.sqrt(a);
+        }
+    };
+
+    /**
+     * Function that returns <tt>Math.tan(a)</tt>.
+     */
+    public static final FloatFunction TAN = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return (float) Math.tan(a);
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.tanh(a)</tt>.
      */
-    public static final FloatFunction tanh = new FloatFunction()
+    public static final FloatFunction TANH = new FloatFunction()
     {
         @Override
         public float apply(final float a)
@@ -136,7 +308,7 @@ public final class FloatMathFunctionsImpl
     /**
      * Function that returns <tt>Math.toDegrees(a)</tt>.
      */
-    public static final FloatFunction toDegrees = new FloatFunction()
+    public static final FloatFunction TO_DEGREES = new FloatFunction()
     {
         @Override
         public float apply(final float a)
@@ -148,7 +320,7 @@ public final class FloatMathFunctionsImpl
     /**
      * Function that returns <tt>Math.toRadians(a)</tt>.
      */
-    public static final FloatFunction toRadians = new FloatFunction()
+    public static final FloatFunction TO_RADIANS = new FloatFunction()
     {
         @Override
         public float apply(final float a)
@@ -156,5 +328,53 @@ public final class FloatMathFunctionsImpl
             return (float) Math.toRadians(a);
         }
     };
+
+    /**
+     * Function that returns <tt>1/a</tt>.
+     */
+    public static final FloatFunction INV = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return 1 / a;
+        }
+    };
+
+    /**
+     * Function that returns <tt>a * b</tt>.
+     * @param b power parameter
+     * @return power function
+     */
+    @SuppressWarnings("checkstyle:methodname")
+    public static FloatFunction MULT(final float b)
+    {
+        return new FloatFunction()
+        {
+            @Override
+            public float apply(final float a)
+            {
+                return a * b;
+            }
+        };
+    }
+
+    /**
+     * Function that returns <tt>a / b</tt>.
+     * @param b power parameter
+     * @return power function
+     */
+    @SuppressWarnings("checkstyle:methodname")
+    public static FloatFunction DIV(final float b)
+    {
+        return new FloatFunction()
+        {
+            @Override
+            public float apply(final float a)
+            {
+                return a / b;
+            }
+        };
+    }
 
 }

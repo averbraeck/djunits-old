@@ -1,5 +1,8 @@
 package org.djunits.value.vfloat.vector;
 
+import java.util.List;
+import java.util.SortedMap;
+
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
 import org.djunits.value.DenseData;
@@ -7,14 +10,10 @@ import org.djunits.value.Relative;
 import org.djunits.value.SparseData;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
+import org.djunits.value.vfloat.FloatFunction;
 import org.djunits.value.vfloat.FloatMathFunctions;
 import org.djunits.value.vfloat.FloatMathFunctionsImpl;
 import org.djunits.value.vfloat.scalar.FloatScalar;
-
-import cern.colt.matrix.tfloat.FloatMatrix1D;
-import cern.colt.matrix.tfloat.impl.DenseFloatMatrix1D;
-import cern.colt.matrix.tfloat.impl.SparseFloatMatrix1D;
-import cern.jet.math.tfloat.FloatFunctions;
 
 /**
  * MutableFloatVector.
@@ -24,8 +23,8 @@ import cern.jet.math.tfloat.FloatFunctions;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableFloatVector
@@ -34,7 +33,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
     WriteFloatVectorFunctions<U>, FloatMathFunctions<MutableFloatVector<U>>
 {
     /**  */
-    private static final long serialVersionUID = 20150626L;
+    private static final long serialVersionUID = 20151003L;
 
     /**
      * Construct a new MutableFloatVector.
@@ -43,7 +42,6 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
     protected MutableFloatVector(final U unit)
     {
         super(unit);
-        // System.out.println("Created MutableFloatVector");
     }
 
     /** If set, any modification of the data must be preceded by replacing the data with a local copy. */
@@ -67,29 +65,17 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         this.copyOnWrite = copyOnWrite;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final void normalize() throws ValueException
-    {
-        float sum = zSum();
-        if (0 == sum)
-        {
-            throw new ValueException("zSum is 0; cannot normalize");
-        }
-        checkCopyOnWrite();
-        for (int i = 0; i < size(); i++)
-        {
-            safeSet(i, safeGet(i) / sum);
-        }
-    }
+    /** ============================================================================================ */
+    /** ================================= ABSOLUTE IMPLEMENTATION ================================== */
+    /** ============================================================================================ */
 
     /**
-     * @param <U> Unit
+     * @param <U> Unit the unit for which this Vector will be created
      */
     public abstract static class Abs<U extends Unit<U>> extends MutableFloatVector<U> implements Absolute
     {
         /**  */
-        private static final long serialVersionUID = 20150626L;
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Absolute MutableFloatVector.
@@ -98,54 +84,72 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         protected Abs(final U unit)
         {
             super(unit);
-            // System.out.println("Created Abs");
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE DENSE implementation of MutableFloatVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Dense<U extends Unit<U>> extends Abs<U> implements DenseData
         {
-            /**  */
-            private static final long serialVersionUID = 20150626L;
+            /** */
+            private static final long serialVersionUID = 20151003L;
 
             /**
-             * Construct a new Absolute Dense MutableFloatVector.
-             * @param values float[]; the initial values of the entries in the new Absolute Dense MutableFloatVector
+             * Construct a new Absolute Dense Mutable FloatVector.
+             * @param values float[]; the values of the entries in the new Absolute Dense Mutable FloatVector
              * @param unit U; the unit of the new Absolute Dense MutableFloatVector
              * @throws ValueException when values is null
              */
             public Dense(final float[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * Construct a new Absolute Dense MutableFloatVector.
-             * @param values FloatScalar.Abs&lt;U&gt;[]; the initial values of the entries in the new Absolute Dense
-             *            MutableFloatVector
+             * Construct a new Absolute Dense Mutable FloatVector.
+             * @param values List; the values of the entries in the new Absolute Dense Mutable FloatVector
+             * @param unit U; the unit of the new Absolute Dense Mutable FloatVector
+             * @throws ValueException when values is null
+             */
+            public Dense(final List<Float> values, final U unit) throws ValueException
+            {
+                super(unit);
+                this.data = initializeDense(values);
+            }
+
+            /**
+             * Construct a new Absolute Dense Mutable FloatVector.
+             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Dense MutableFloatVector
              * @throws ValueException when values has zero entries
              */
             public Dense(final FloatScalar.Abs<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix1D; the initial values of the entries in the new Absolute Dense MutableFloatVector
-             * @param unit U; the unit of the new Absolute Dense MutableFloatVector
+             * Construct a new Absolute Dense Mutable FloatVector.
+             * @param values List; the values of the entries in the new Absolute Dense Mutable FloatVector
+             * @throws ValueException when values has zero entries
              */
-            protected Dense(final FloatMatrix1D values, final U unit)
+            public Dense(final List<FloatScalar.Abs<U>> values) throws ValueException
+            {
+                super(checkNonEmptyLA(values).get(0).getUnit());
+                this.data = initializeDenseLA(values);
+            }
+
+            /**
+             * Construct a new Absolute Dense Mutable FloatVector.
+             * @param data an internal data object
+             * @param unit the unit
+             */
+            Dense(final FloatVectorDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -153,7 +157,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             public final FloatVector.Abs.Dense<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new FloatVector.Abs.Dense<U>(getVectorSI(), getUnit());
+                return new FloatVector.Abs.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -162,16 +166,9 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             {
                 setCopyOnWrite(true);
                 final MutableFloatVector.Abs.Dense<U> result =
-                    new MutableFloatVector.Abs.Dense<U>(getVectorSI(), getUnit());
+                    new MutableFloatVector.Abs.Dense<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix1D createMatrix1D(final int size)
-            {
-                return new DenseFloatMatrix1D(size);
             }
 
             /** {@inheritDoc} */
@@ -181,53 +178,82 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatVectorDataDense getData()
+            {
+                return (FloatVectorDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * ABSOLUTE SPARSE implementation of MutableFloatVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Sparse<U extends Unit<U>> extends Abs<U> implements SparseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
-             * Construct a new Absolute Sparse MutableFloatVector.
-             * @param values float[]; the initial values of the entries in the new Absolute Sparse MutableFloatVector
-             * @param unit U; the unit of the new Absolute Sparse MutableFloatVector
+             * Construct a new Absolute Sparse Mutable FloatVector.
+             * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatVector
+             * @param unit U; the unit of the new Absolute Sparse Mutable FloatVector
+             * @param length the size of the vector
+             * @throws ValueException when values is null
+             */
+            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
+            {
+                super(unit);
+                this.data = initializeSparse(values, length);
+            }
+
+            /**
+             * Construct a new Absolute Sparse Mutable FloatVector.
+             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable
+             *            FloatVector
+             * @param length the size of the vector
+             * @throws ValueException when values has zero entries
+             */
+            public Sparse(final SortedMap<Integer, FloatScalar.Abs<U>> values, final int length) throws ValueException
+            {
+                super(checkNonEmptyMA(values).get(0).getUnit());
+                initializeSparseMA(values, length);
+            }
+
+            /**
+             * Construct a new Absolute Sparse Mutable FloatVector.
+             * @param values float[]; the values of the entries in the new Absolute Sparse Mutable FloatVector
+             * @param unit U; the unit of the new Absolute Sparse Mutable FloatVector
              * @throws ValueException when values is null
              */
             public Sparse(final float[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
-             * Construct a new Absolute Sparse MutableFloatVector.
-             * @param values FloatScalar.Abs&lt;U&gt;[]; the initial values of the entries in the new Absolute Sparse
-             *            MutableFloatVector
+             * Construct a new Absolute Sparse Mutable FloatVector.
+             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable
+             *            FloatVector
              * @throws ValueException when values has zero entries
              */
             public Sparse(final FloatScalar.Abs<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix1D; the initial values of the entries in the new Absolute Sparse MutableFloatVector
-             * @param unit U; the unit of the new Absolute Sparse MutableFloatVector
+             * Construct a new Absolute Sparse Mutable FloatVector, package method.
+             * @param data the sparse data (internal structure)
+             * @param unit U; the unit of the new Absolute Sparse Mutable FloatVector
              */
-            protected Sparse(final FloatMatrix1D values, final U unit)
+            Sparse(final FloatVectorDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -235,7 +261,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             public final FloatVector.Abs.Sparse<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new FloatVector.Abs.Sparse<U>(getVectorSI(), getUnit());
+                return new FloatVector.Abs.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -244,16 +270,9 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             {
                 setCopyOnWrite(true);
                 final MutableFloatVector.Abs.Sparse<U> result =
-                    new MutableFloatVector.Abs.Sparse<U>(getVectorSI(), getUnit());
+                    new MutableFloatVector.Abs.Sparse<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix1D createMatrix1D(final int size)
-            {
-                return new SparseFloatMatrix1D(size);
             }
 
             /** {@inheritDoc} */
@@ -263,7 +282,15 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatVectorDataSparse getData()
+            {
+                return (FloatVectorDataSparse) this.data;
+            }
         }
+
+        /** ================================= ABS GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
@@ -302,7 +329,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> abs()
         {
-            assign(FloatFunctions.abs);
+            assign(FloatMathFunctionsImpl.ABS);
             return this;
         }
 
@@ -310,7 +337,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> acos()
         {
-            assign(FloatFunctions.acos);
+            assign(FloatMathFunctionsImpl.ACOS);
             return this;
         }
 
@@ -318,7 +345,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> asin()
         {
-            assign(FloatFunctions.asin);
+            assign(FloatMathFunctionsImpl.ASIN);
             return this;
         }
 
@@ -326,7 +353,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> atan()
         {
-            assign(FloatFunctions.atan);
+            assign(FloatMathFunctionsImpl.ATAN);
             return this;
         }
 
@@ -334,7 +361,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> cbrt()
         {
-            assign(FloatMathFunctionsImpl.cbrt);
+            assign(FloatMathFunctionsImpl.CBRT);
             return this;
         }
 
@@ -342,7 +369,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> ceil()
         {
-            assign(FloatFunctions.ceil);
+            assign(FloatMathFunctionsImpl.CEIL);
             return this;
         }
 
@@ -350,7 +377,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> cos()
         {
-            assign(FloatFunctions.cos);
+            assign(FloatMathFunctionsImpl.COS);
             return this;
         }
 
@@ -358,7 +385,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> cosh()
         {
-            assign(FloatMathFunctionsImpl.cosh);
+            assign(FloatMathFunctionsImpl.COSH);
             return this;
         }
 
@@ -366,7 +393,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> exp()
         {
-            assign(FloatFunctions.exp);
+            assign(FloatMathFunctionsImpl.EXP);
             return this;
         }
 
@@ -374,7 +401,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> expm1()
         {
-            assign(FloatMathFunctionsImpl.expm1);
+            assign(FloatMathFunctionsImpl.EXPM1);
             return this;
         }
 
@@ -382,7 +409,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> floor()
         {
-            assign(FloatFunctions.floor);
+            assign(FloatMathFunctionsImpl.FLOOR);
             return this;
         }
 
@@ -390,7 +417,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> log()
         {
-            assign(FloatFunctions.log);
+            assign(FloatMathFunctionsImpl.LOG);
             return this;
         }
 
@@ -398,7 +425,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> log10()
         {
-            assign(FloatMathFunctionsImpl.log10);
+            assign(FloatMathFunctionsImpl.LOG10);
             return this;
         }
 
@@ -406,7 +433,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> log1p()
         {
-            assign(FloatMathFunctionsImpl.log1p);
+            assign(FloatMathFunctionsImpl.LOG1P);
             return this;
         }
 
@@ -414,7 +441,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> pow(final double x)
         {
-            assign(FloatFunctions.pow((float) x));
+            assign(FloatMathFunctionsImpl.POW((float) x));
             return this;
         }
 
@@ -422,7 +449,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> rint()
         {
-            assign(FloatFunctions.rint);
+            assign(FloatMathFunctionsImpl.RINT);
             return this;
         }
 
@@ -430,7 +457,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> round()
         {
-            assign(FloatMathFunctionsImpl.round);
+            assign(FloatMathFunctionsImpl.ROUND);
             return this;
         }
 
@@ -438,7 +465,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> signum()
         {
-            assign(FloatMathFunctionsImpl.signum);
+            assign(FloatMathFunctionsImpl.SIGNUM);
             return this;
         }
 
@@ -446,7 +473,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> sin()
         {
-            assign(FloatFunctions.sin);
+            assign(FloatMathFunctionsImpl.SIN);
             return this;
         }
 
@@ -454,7 +481,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> sinh()
         {
-            assign(FloatMathFunctionsImpl.sinh);
+            assign(FloatMathFunctionsImpl.SINH);
             return this;
         }
 
@@ -462,7 +489,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> sqrt()
         {
-            assign(FloatFunctions.sqrt);
+            assign(FloatMathFunctionsImpl.SQRT);
             return this;
         }
 
@@ -470,7 +497,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> tan()
         {
-            assign(FloatFunctions.tan);
+            assign(FloatMathFunctionsImpl.TAN);
             return this;
         }
 
@@ -478,7 +505,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> tanh()
         {
-            assign(FloatMathFunctionsImpl.tanh);
+            assign(FloatMathFunctionsImpl.TANH);
             return this;
         }
 
@@ -486,7 +513,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> toDegrees()
         {
-            assign(FloatMathFunctionsImpl.toDegrees);
+            assign(FloatMathFunctionsImpl.TO_DEGREES);
             return this;
         }
 
@@ -494,7 +521,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> toRadians()
         {
-            assign(FloatMathFunctionsImpl.toRadians);
+            assign(FloatMathFunctionsImpl.TO_RADIANS);
             return this;
         }
 
@@ -502,7 +529,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> inv()
         {
-            assign(FloatFunctions.inv);
+            assign(FloatMathFunctionsImpl.INV);
             return this;
         }
 
@@ -510,7 +537,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> multiplyBy(final float constant)
         {
-            assign(FloatFunctions.mult(constant));
+            assign(FloatMathFunctionsImpl.MULT(constant));
             return this;
         }
 
@@ -518,19 +545,23 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Abs<U> divideBy(final float constant)
         {
-            assign(FloatFunctions.div(constant));
+            assign(FloatMathFunctionsImpl.DIV(constant));
             return this;
         }
 
     }
 
+    /** ============================================================================================ */
+    /** ================================= RELATIVE IMPLEMENTATION ================================== */
+    /** ============================================================================================ */
+
     /**
-     * @param <U> Unit
+     * @param <U> Unit the unit for which this Vector will be created
      */
     public abstract static class Rel<U extends Unit<U>> extends MutableFloatVector<U> implements Relative
     {
         /**  */
-        private static final long serialVersionUID = 20150626L;
+        private static final long serialVersionUID = 20151003L;
 
         /**
          * Construct a new Relative MutableFloatVector.
@@ -539,54 +570,72 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         protected Rel(final U unit)
         {
             super(unit);
-            // System.out.println("Created Rel");
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE DENSE implementation of MutableFloatVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Dense<U extends Unit<U>> extends Rel<U> implements DenseData
         {
-            /**  */
-            private static final long serialVersionUID = 20150626L;
+            /** */
+            private static final long serialVersionUID = 20151003L;
 
             /**
-             * Construct a new Relative Dense MutableFloatVector.
-             * @param values float[]; the initial values of the entries in the new Relative Dense MutableFloatVector
+             * Construct a new Relative Dense Mutable FloatVector.
+             * @param values float[]; the values of the entries in the new Relative Dense Mutable FloatVector
              * @param unit U; the unit of the new Relative Dense MutableFloatVector
              * @throws ValueException when values is null
              */
             public Dense(final float[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * Construct a new Relative Dense MutableFloatVector.
-             * @param values FloatScalar.Rel&lt;U&gt;[]; the initial values of the entries in the new Relative Dense
-             *            MutableFloatVector
+             * Construct a new Relative Dense Mutable FloatVector.
+             * @param values List; the values of the entries in the new Relative Dense Mutable FloatVector
+             * @param unit U; the unit of the new Relative Dense Mutable FloatVector
+             * @throws ValueException when values is null
+             */
+            public Dense(final List<Float> values, final U unit) throws ValueException
+            {
+                super(unit);
+                this.data = initializeDense(values);
+            }
+
+            /**
+             * Construct a new Relative Dense Mutable FloatVector.
+             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Dense MutableFloatVector
              * @throws ValueException when values has zero entries
              */
             public Dense(final FloatScalar.Rel<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Dense");
-                initialize(values);
+                this.data = initializeDense(values);
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix1D; the initial values of the entries in the new Relative Dense MutableFloatVector
-             * @param unit U; the unit of the new Relative Dense MutableFloatVector
+             * Construct a new Relative Dense Mutable FloatVector.
+             * @param values List; the values of the entries in the new Relative Dense Mutable FloatVector
+             * @throws ValueException when values has zero entries
              */
-            protected Dense(final FloatMatrix1D values, final U unit)
+            public Dense(final List<FloatScalar.Rel<U>> values) throws ValueException
+            {
+                super(checkNonEmptyLR(values).get(0).getUnit());
+                this.data = initializeDenseLR(values);
+            }
+
+            /**
+             * Construct a new Relative Dense Mutable FloatVector.
+             * @param data an internal data object
+             * @param unit the unit
+             */
+            Dense(final FloatVectorDataDense data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Dense");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -594,7 +643,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             public final FloatVector.Rel.Dense<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new FloatVector.Rel.Dense<U>(getVectorSI(), getUnit());
+                return new FloatVector.Rel.Dense<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -603,16 +652,9 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             {
                 setCopyOnWrite(true);
                 final MutableFloatVector.Rel.Dense<U> result =
-                    new MutableFloatVector.Rel.Dense<U>(getVectorSI(), getUnit());
+                    new MutableFloatVector.Rel.Dense<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix1D createMatrix1D(final int size)
-            {
-                return new DenseFloatMatrix1D(size);
             }
 
             /** {@inheritDoc} */
@@ -622,53 +664,82 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatVectorDataDense getData()
+            {
+                return (FloatVectorDataDense) this.data;
+            }
         }
 
         /**
-         * @param <U> Unit
+         * RELATIVE SPARSE implementation of MutableFloatVector.
+         * @param <U> Unit the unit for which this Vector will be created
          */
         public static class Sparse<U extends Unit<U>> extends Rel<U> implements SparseData
         {
             /**  */
-            private static final long serialVersionUID = 20150626L;
+            private static final long serialVersionUID = 20151003L;
 
             /**
-             * Construct a new Relative Sparse MutableFloatVector.
-             * @param values float[]; the initial values of the entries in the new Relative Sparse MutableFloatVector
-             * @param unit U; the unit of the new Relative Sparse MutableFloatVector
+             * Construct a new Relative Sparse Mutable FloatVector.
+             * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatVector
+             * @param unit U; the unit of the new Relative Sparse Mutable FloatVector
+             * @param length the size of the vector
+             * @throws ValueException when values is null
+             */
+            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
+            {
+                super(unit);
+                this.data = initializeSparse(values, length);
+            }
+
+            /**
+             * Construct a new Relative Sparse Mutable FloatVector.
+             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
+             *            FloatVector
+             * @param length the size of the vector
+             * @throws ValueException when values has zero entries
+             */
+            public Sparse(final SortedMap<Integer, FloatScalar.Rel<U>> values, final int length) throws ValueException
+            {
+                super(checkNonEmptyMR(values).get(0).getUnit());
+                this.data = initializeSparseMR(values, length);
+            }
+
+            /**
+             * Construct a new Relative Sparse Mutable FloatVector.
+             * @param values float[]; the values of the entries in the new Relative Sparse Mutable FloatVector
+             * @param unit U; the unit of the new Relative Sparse Mutable FloatVector
              * @throws ValueException when values is null
              */
             public Sparse(final float[] values, final U unit) throws ValueException
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
-             * Construct a new Relative Sparse MutableFloatVector.
-             * @param values FloatScalar.Rel&lt;U&gt;[]; the initial values of the entries in the new Relative Sparse
-             *            MutableFloatVector
+             * Construct a new Relative Sparse Mutable FloatVector.
+             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
+             *            FloatVector
              * @throws ValueException when values has zero entries
              */
-            public Sparse(final FloatScalar.Rel<U>[] values) throws ValueException
+            public Sparse(final FloatScalar.Abs<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
-                // System.out.println("Created Sparse");
-                initialize(values);
+                this.data = initializeDense(values).toSparse();
             }
 
             /**
-             * For package internal use only.
-             * @param values FloatMatrix1D; the initial values of the entries in the new Relative Sparse MutableFloatVector
-             * @param unit U; the unit of the new Relative Sparse MutableFloatVector
+             * Construct a new Relative Sparse Mutable FloatVector, package method.
+             * @param data the sparse data (internal structure)
+             * @param unit U; the unit of the new Relative Sparse Mutable FloatVector
              */
-            protected Sparse(final FloatMatrix1D values, final U unit)
+            Sparse(final FloatVectorDataSparse data, final U unit)
             {
                 super(unit);
-                // System.out.println("Created Sparse");
-                setCopyOnWrite(true);
-                initialize(values); // shallow copy
+                this.data = data.copy();
             }
 
             /** {@inheritDoc} */
@@ -676,7 +747,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             public final FloatVector.Rel.Sparse<U> immutable()
             {
                 setCopyOnWrite(true);
-                return new FloatVector.Rel.Sparse<U>(getVectorSI(), getUnit());
+                return new FloatVector.Rel.Sparse<U>(getData(), getUnit());
             }
 
             /** {@inheritDoc} */
@@ -685,16 +756,9 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             {
                 setCopyOnWrite(true);
                 final MutableFloatVector.Rel.Sparse<U> result =
-                    new MutableFloatVector.Rel.Sparse<U>(getVectorSI(), getUnit());
+                    new MutableFloatVector.Rel.Sparse<U>(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatMatrix1D createMatrix1D(final int size)
-            {
-                return new SparseFloatMatrix1D(size);
             }
 
             /** {@inheritDoc} */
@@ -704,7 +768,15 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
                 return mutable();
             }
 
+            /** {@inheritDoc} */
+            @Override
+            protected final FloatVectorDataSparse getData()
+            {
+                return (FloatVectorDataSparse) this.data;
+            }
         }
+
+        /** ================================= REL GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
@@ -743,7 +815,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> abs()
         {
-            assign(FloatFunctions.abs);
+            assign(FloatMathFunctionsImpl.ABS);
             return this;
         }
 
@@ -751,7 +823,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> acos()
         {
-            assign(FloatFunctions.acos);
+            assign(FloatMathFunctionsImpl.ACOS);
             return this;
         }
 
@@ -759,7 +831,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> asin()
         {
-            assign(FloatFunctions.asin);
+            assign(FloatMathFunctionsImpl.ASIN);
             return this;
         }
 
@@ -767,7 +839,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> atan()
         {
-            assign(FloatFunctions.atan);
+            assign(FloatMathFunctionsImpl.ATAN);
             return this;
         }
 
@@ -775,7 +847,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> cbrt()
         {
-            assign(FloatMathFunctionsImpl.cbrt);
+            assign(FloatMathFunctionsImpl.CBRT);
             return this;
         }
 
@@ -783,7 +855,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> ceil()
         {
-            assign(FloatFunctions.ceil);
+            assign(FloatMathFunctionsImpl.CEIL);
             return this;
         }
 
@@ -791,7 +863,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> cos()
         {
-            assign(FloatFunctions.cos);
+            assign(FloatMathFunctionsImpl.COS);
             return this;
         }
 
@@ -799,7 +871,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> cosh()
         {
-            assign(FloatMathFunctionsImpl.cosh);
+            assign(FloatMathFunctionsImpl.COSH);
             return this;
         }
 
@@ -807,7 +879,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> exp()
         {
-            assign(FloatFunctions.exp);
+            assign(FloatMathFunctionsImpl.EXP);
             return this;
         }
 
@@ -815,7 +887,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> expm1()
         {
-            assign(FloatMathFunctionsImpl.expm1);
+            assign(FloatMathFunctionsImpl.EXPM1);
             return this;
         }
 
@@ -823,7 +895,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> floor()
         {
-            assign(FloatFunctions.floor);
+            assign(FloatMathFunctionsImpl.FLOOR);
             return this;
         }
 
@@ -831,7 +903,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> log()
         {
-            assign(FloatFunctions.log);
+            assign(FloatMathFunctionsImpl.LOG);
             return this;
         }
 
@@ -839,7 +911,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> log10()
         {
-            assign(FloatMathFunctionsImpl.log10);
+            assign(FloatMathFunctionsImpl.LOG10);
             return this;
         }
 
@@ -847,7 +919,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> log1p()
         {
-            assign(FloatMathFunctionsImpl.log1p);
+            assign(FloatMathFunctionsImpl.LOG1P);
             return this;
         }
 
@@ -855,7 +927,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> pow(final double x)
         {
-            assign(FloatFunctions.pow((float) x));
+            assign(FloatMathFunctionsImpl.POW((float) x));
             return this;
         }
 
@@ -863,7 +935,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> rint()
         {
-            assign(FloatFunctions.rint);
+            assign(FloatMathFunctionsImpl.RINT);
             return this;
         }
 
@@ -871,7 +943,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> round()
         {
-            assign(FloatMathFunctionsImpl.round);
+            assign(FloatMathFunctionsImpl.ROUND);
             return this;
         }
 
@@ -879,7 +951,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> signum()
         {
-            assign(FloatMathFunctionsImpl.signum);
+            assign(FloatMathFunctionsImpl.SIGNUM);
             return this;
         }
 
@@ -887,7 +959,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> sin()
         {
-            assign(FloatFunctions.sin);
+            assign(FloatMathFunctionsImpl.SIN);
             return this;
         }
 
@@ -895,7 +967,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> sinh()
         {
-            assign(FloatMathFunctionsImpl.sinh);
+            assign(FloatMathFunctionsImpl.SINH);
             return this;
         }
 
@@ -903,7 +975,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> sqrt()
         {
-            assign(FloatFunctions.sqrt);
+            assign(FloatMathFunctionsImpl.SQRT);
             return this;
         }
 
@@ -911,7 +983,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> tan()
         {
-            assign(FloatFunctions.tan);
+            assign(FloatMathFunctionsImpl.TAN);
             return this;
         }
 
@@ -919,7 +991,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> tanh()
         {
-            assign(FloatMathFunctionsImpl.tanh);
+            assign(FloatMathFunctionsImpl.TANH);
             return this;
         }
 
@@ -927,7 +999,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> toDegrees()
         {
-            assign(FloatMathFunctionsImpl.toDegrees);
+            assign(FloatMathFunctionsImpl.TO_DEGREES);
             return this;
         }
 
@@ -935,7 +1007,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> toRadians()
         {
-            assign(FloatMathFunctionsImpl.toRadians);
+            assign(FloatMathFunctionsImpl.TO_RADIANS);
             return this;
         }
 
@@ -943,7 +1015,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> inv()
         {
-            assign(FloatFunctions.inv);
+            assign(FloatMathFunctionsImpl.INV);
             return this;
         }
 
@@ -951,7 +1023,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> multiplyBy(final float constant)
         {
-            assign(FloatFunctions.mult(constant));
+            assign(FloatMathFunctionsImpl.MULT(constant));
             return this;
         }
 
@@ -959,14 +1031,13 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @Override
         public final MutableFloatVector.Rel<U> divideBy(final float constant)
         {
-            assign(FloatFunctions.div(constant));
+            assign(FloatMathFunctionsImpl.DIV(constant));
             return this;
         }
-
     }
 
     /**
-     * Make (immutable) FloatVector equivalent for any type of MutableFloatVector.
+     * Make (immutable) FloatVectorNew equivalent for any type of MutableFloatVector.
      * @return FloatVector&lt;U&gt;; immutable version of this FloatVector
      */
     public abstract FloatVector<U> immutable();
@@ -978,8 +1049,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
     {
         if (isCopyOnWrite())
         {
-            // System.out.println("copyOnWrite is set: Copying data");
-            deepCopyData();
+            this.data = this.data.copy();
             setCopyOnWrite(false);
         }
     }
@@ -1008,13 +1078,24 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
     }
 
     /**
-     * Execute a function on a cell by cell basis.
-     * @param f cern.colt.function.tfloat.FloatFunction; the function to apply
+     * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
+     * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a dense
+     * dataset if necessary.
+     * @param floatFunction the function to apply
      */
-    public final void assign(final cern.colt.function.tfloat.FloatFunction f)
+    public final void assign(final FloatFunction floatFunction)
     {
         checkCopyOnWrite();
-        getVectorSI().assign(f);
+        if (this.data instanceof FloatVectorDataDense)
+        {
+            ((FloatVectorDataDense) this.data).assign(floatFunction);
+        }
+        else
+        {
+            FloatVectorDataDense dvdd = ((FloatVectorDataSparse) this.data).toDense();
+            dvdd.assign(floatFunction);
+            this.data = dvdd.toSparse();
+        }
     }
 
     /**********************************************************************************/
@@ -1083,18 +1164,6 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         return decrementValueByValue(rel);
     }
 
-    // FIXME It makes no sense to subtract an Absolute from a Relative
-    /**
-     * Decrement the values in this Relative MutableFloatVector by the corresponding values in an Absolute FloatVector.
-     * @param abs FloatVector.Abs&lt;U&gt;; the Absolute FloatVector
-     * @return MutableFloatVector.Rel&lt;U&gt;; this modified Relative MutableFloatVector
-     * @throws ValueException when the vectors do not have the same size
-     */
-    protected final MutableFloatVector.Rel<U> decrementBy(final FloatVector.Abs<U> abs) throws ValueException
-    {
-        return (MutableFloatVector.Rel<U>) decrementValueByValue(abs);
-    }
-
     /**
      * Scale the values in this MutableFloatVector by the corresponding values in a FloatVector.
      * @param factor FloatVector&lt;?&gt;; contains the values by which to scale the corresponding values in this
@@ -1124,6 +1193,23 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             safeSet(index, safeGet(index) * factor[index]);
         }
         return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void normalize() throws ValueException
+    {
+        float sum = zSum();
+        if (0 == sum)
+        {
+            throw new ValueException("zSum is 0; cannot normalize");
+        }
+        checkCopyOnWrite();
+        for (int i = 0; i < size(); i++)
+        {
+            // TODO parallel divide by factor
+            safeSet(i, safeGet(i) / sum);
+        }
     }
 
     /**

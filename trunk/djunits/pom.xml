@@ -4,7 +4,7 @@
 
   <groupId>org.djunits</groupId>
   <artifactId>djunits</artifactId>
-  <version>1.01.01</version>
+  <version>1.02.01</version>
 
   <name>DJUNITS</name>
   <description>Delft Java UNIT System</description>
@@ -24,7 +24,6 @@
     <sonar.scm.disabled>true</sonar.scm.disabled>
 
     <djunits.version>${project.version}</djunits.version>
-    <parallelcolt.version>0.10.1</parallelcolt.version>
     <reflections.version>0.9.10</reflections.version>
     <joda-money.version>0.10.0</joda-money.version>
     <junit.version>4.11</junit.version>
@@ -561,12 +560,6 @@
       <version>${junit.version}</version>
       <scope>test</scope>
       <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>net.sourceforge.parallelcolt</groupId>
-      <artifactId>parallelcolt</artifactId>
-      <version>${parallelcolt.version}</version>
     </dependency>
 
     <dependency>
