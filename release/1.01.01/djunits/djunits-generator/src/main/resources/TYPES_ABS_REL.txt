@@ -1,6 +1,0 @@
-AnglePlane
-AngleSlope
-Dimensionless
-Length
-Temperature
-Time
