@@ -3,7 +3,7 @@ package org.djunits.value.vfloat.scalar;
 import org.djunits.unit.*;
 
 /**
- * Easy access methods for the %TYPE% FloatScalar. Instead of <br>
+ * Easy access methods for the %Type% FloatScalar. Instead of <br>
  * <i>FloatScalar.Rel&lt;SomeUnit&gt; value = new FloatScalar.Rel&lt;SomeUnit&gt;(0.2, SomeUnit.UNIT);</i><br>
  * we can now write <br>
  * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass.Rel margin = new Mass.Rel(0.2, KILOGRAM);</i><br>
@@ -18,13 +18,13 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface Float%TYPE%
+public interface Float%Type%
 {
     /**
-     * Easy access methods for the %TYPE% FloatScalar. Instead of <br>
-     * <i>FloatScalar.Rel&lt;%TYPE%Unit&gt; value = new FloatScalar.Rel&lt;%TYPE%Unit&gt;(100.0, %TYPE%Unit.SI);</i><br>
+     * Easy access methods for the %Type% FloatScalar. Instead of <br>
+     * <i>FloatScalar.Rel&lt;%Type%Unit&gt; value = new FloatScalar.Rel&lt;%Type%Unit&gt;(100.0, %Type%Unit.SI);</i><br>
      * we can now write <br>
-     * <i>Float%TYPE%.Rel value = new Float%TYPE%.Rel(100.0, %TYPE%Unit.SI);</i><br>
+     * <i>Float%Type%.Rel value = new Float%Type%.Rel(100.0, %Type%Unit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
      * unit used are compatible.
      * <p>
@@ -37,36 +37,36 @@ public interface Float%TYPE%
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Rel extends FloatScalar.Rel<%TYPE%Unit>
+    public static class Rel extends FloatScalar.Rel<%Type%Unit>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
 
         /**
-         * Construct Float%TYPE%.Rel scalar.
+         * Construct Float%Type%.Rel scalar.
          * @param value float value
          * @param unit unit for the float value
          */
-        public Rel(final float value, final %TYPE%Unit unit)
+        public Rel(final float value, final %Type%Unit unit)
         {
             super(value, unit);
         }
 
         /**
-         * Construct Float%TYPE%.Rel scalar using a double value.
+         * Construct Float%Type%.Rel scalar using a double value.
          * @param value float value
          * @param unit unit for the float value
          */
-        public Rel(final double value, final %TYPE%Unit unit)
+        public Rel(final double value, final %Type%Unit unit)
         {
             super((float) value, unit);
         }
 
         /**
-         * Construct Float%TYPE%.Rel scalar.
+         * Construct Float%Type%.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Rel(final FloatScalar.Rel<%TYPE%Unit> value)
+        public Rel(final FloatScalar.Rel<%Type%Unit> value)
         {
             super(value);
         }
@@ -78,9 +78,9 @@ public interface Float%TYPE%
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Float%TYPE%.Rel interpolate(final Float%TYPE%.Rel zero, final Float%TYPE%.Rel one, final float ratio)
+        public static Float%Type%.Rel interpolate(final Float%Type%.Rel zero, final Float%Type%.Rel one, final float ratio)
         {
-            return new Float%TYPE%.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new Float%Type%.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
         }
 
         /**
@@ -90,198 +90,198 @@ public interface Float%TYPE%
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Float%TYPE%.Rel interpolate(final Float%TYPE%.Rel zero, final Float%TYPE%.Rel one, final double ratio)
+        public static Float%Type%.Rel interpolate(final Float%Type%.Rel zero, final Float%Type%.Rel one, final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel abs()
+        public final Float%Type%.Rel abs()
         {
-            return new Float%TYPE%.Rel(Math.abs(getInUnit()), getUnit());
+            return new Float%Type%.Rel(Math.abs(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel acos()
+        public final Float%Type%.Rel acos()
         {
-            return new Float%TYPE%.Rel((float) Math.acos(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.acos(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel asin()
+        public final Float%Type%.Rel asin()
         {
-            return new Float%TYPE%.Rel((float) Math.asin(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.asin(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel atan()
+        public final Float%Type%.Rel atan()
         {
-            return new Float%TYPE%.Rel((float) Math.atan(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.atan(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel cbrt()
+        public final Float%Type%.Rel cbrt()
         {
-            return new Float%TYPE%.Rel((float) Math.cbrt(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.cbrt(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel ceil()
+        public final Float%Type%.Rel ceil()
         {
-            return new Float%TYPE%.Rel((float) Math.ceil(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.ceil(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel cos()
+        public final Float%Type%.Rel cos()
         {
-            return new Float%TYPE%.Rel((float) Math.cos(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.cos(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel cosh()
+        public final Float%Type%.Rel cosh()
         {
-            return new Float%TYPE%.Rel((float) Math.cosh(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.cosh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel exp()
+        public final Float%Type%.Rel exp()
         {
-            return new Float%TYPE%.Rel((float) Math.exp(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.exp(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel expm1()
+        public final Float%Type%.Rel expm1()
         {
-            return new Float%TYPE%.Rel((float) Math.expm1(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.expm1(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel floor()
+        public final Float%Type%.Rel floor()
         {
-            return new Float%TYPE%.Rel((float) Math.floor(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.floor(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel log()
+        public final Float%Type%.Rel log()
         {
-            return new Float%TYPE%.Rel((float) Math.log(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.log(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel log10()
+        public final Float%Type%.Rel log10()
         {
-            return new Float%TYPE%.Rel((float) Math.log10(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.log10(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel log1p()
+        public final Float%Type%.Rel log1p()
         {
-            return new Float%TYPE%.Rel((float) Math.log1p(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.log1p(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel rint()
+        public final Float%Type%.Rel rint()
         {
-            return new Float%TYPE%.Rel((float) Math.rint(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.rint(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel round()
+        public final Float%Type%.Rel round()
         {
-            return new Float%TYPE%.Rel(Math.round(getInUnit()), getUnit());
+            return new Float%Type%.Rel(Math.round(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel signum()
+        public final Float%Type%.Rel signum()
         {
-            return new Float%TYPE%.Rel(Math.signum(getInUnit()), getUnit());
+            return new Float%Type%.Rel(Math.signum(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel sin()
+        public final Float%Type%.Rel sin()
         {
-            return new Float%TYPE%.Rel((float) Math.sin(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.sin(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel sinh()
+        public final Float%Type%.Rel sinh()
         {
-            return new Float%TYPE%.Rel((float) Math.sinh(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.sinh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel sqrt()
+        public final Float%Type%.Rel sqrt()
         {
-            return new Float%TYPE%.Rel((float) Math.sqrt(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.sqrt(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel tan()
+        public final Float%Type%.Rel tan()
         {
-            return new Float%TYPE%.Rel((float) Math.tan(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.tan(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel tanh()
+        public final Float%Type%.Rel tanh()
         {
-            return new Float%TYPE%.Rel((float) Math.tanh(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.tanh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel inv()
+        public final Float%Type%.Rel inv()
         {
-            return new Float%TYPE%.Rel(1.0f / getInUnit(), getUnit());
+            return new Float%Type%.Rel(1.0f / getInUnit(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel toDegrees()
+        public final Float%Type%.Rel toDegrees()
         {
-            return new Float%TYPE%.Rel((float) Math.toDegrees(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.toDegrees(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel toRadians()
+        public final Float%Type%.Rel toRadians()
         {
-            return new Float%TYPE%.Rel((float) Math.toRadians(getInUnit()), getUnit());
+            return new Float%Type%.Rel((float) Math.toRadians(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel pow(final double x)
+        public final Float%Type%.Rel pow(final double x)
         {
-            return new Float%TYPE%.Rel((float) Math.pow(getInUnit(), x), getUnit());
+            return new Float%Type%.Rel((float) Math.pow(getInUnit(), x), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel multiplyBy(final float factor)
+        public final Float%Type%.Rel multiplyBy(final float factor)
         {
-            return new Float%TYPE%.Rel(getInUnit() * factor, getUnit());
+            return new Float%Type%.Rel(getInUnit() * factor, getUnit());
         }
 
         /**
@@ -289,16 +289,16 @@ public interface Float%TYPE%
          * @param factor the factor to multiply with
          * @return new instance of a relative %type%
          */
-        public final Float%TYPE%.Rel multiplyBy(final double factor)
+        public final Float%Type%.Rel multiplyBy(final double factor)
         {
             return multiplyBy((float) factor);
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Rel divideBy(final float divisor)
+        public final Float%Type%.Rel divideBy(final float divisor)
         {
-            return new Float%TYPE%.Rel(getInUnit() / divisor, getUnit());
+            return new Float%Type%.Rel(getInUnit() / divisor, getUnit());
         }
 
         /**
@@ -306,7 +306,7 @@ public interface Float%TYPE%
          * @param factor the factor to divide by
          * @return new instance of a relative %type%
          */
-        public final Float%TYPE%.Rel divideBy(final double factor)
+        public final Float%Type%.Rel divideBy(final double factor)
         {
             return divideBy((float) factor);
         }
@@ -316,10 +316,10 @@ public interface Float%TYPE%
          * @param v the value to add
          * @return sum of this value and v as a new object
          */
-        public final Float%TYPE%.Rel plus(final Float%TYPE%.Rel v)
+        public final Float%Type%.Rel plus(final Float%Type%.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Float%TYPE%.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new Float%TYPE%.Rel(this.si + v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new Float%Type%.Rel(getInUnit() + v.getInUnit(), getUnit())
+                : new Float%Type%.Rel(this.si + v.si, %Type%Unit.SI);
         }
 
         /**
@@ -327,10 +327,10 @@ public interface Float%TYPE%
          * @param v the value to subtract
          * @return difference of this value and v as a new object
          */
-        public final Float%TYPE%.Rel minus(final Float%TYPE%.Rel v)
+        public final Float%Type%.Rel minus(final Float%Type%.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Float%TYPE%.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Float%TYPE%.Rel(this.si - v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new Float%Type%.Rel(getInUnit() - v.getInUnit(), getUnit())
+                : new Float%Type%.Rel(this.si - v.si, %Type%Unit.SI);
         }
 
         /**
@@ -338,29 +338,29 @@ public interface Float%TYPE%
          * @param v the value to add
          * @return sum of this value and v as a new object
          */
-        public final Float%TYPE%.Abs plus(final Float%TYPE%.Abs v)
+        public final Float%Type%.Abs plus(final Float%Type%.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Float%TYPE%.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Float%TYPE%.Abs(this.si + v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new Float%Type%.Abs(getInUnit() + v.getInUnit(), getUnit())
+                : new Float%Type%.Abs(this.si + v.si, %Type%Unit.SI);
         }
 
         /** 
          * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
          * @return an absolute version of this relative %type% scalar.
          */
-        public final Float%TYPE%.Abs toAbs()
+        public final Float%Type%.Abs toAbs()
         {
-            return new Float%TYPE%.Abs(getInUnit(), getUnit());
+            return new Float%Type%.Abs(getInUnit(), getUnit());
         }
 
-%FORMULAS%%TYPE%.Rel%
+%FORMULAS%%Type%.Rel%
     }
 
     /**
-     * Easy access methods for the %TYPE% FloatScalar. Instead of <br>
-     * <i>FloatScalar.Abs&lt;%TYPE%Unit&gt; value = new FloatScalar.Abs&lt;%TYPE%Unit&gt;(100.0, %TYPE%Unit.SI);</i><br>
+     * Easy access methods for the %Type% FloatScalar. Instead of <br>
+     * <i>FloatScalar.Abs&lt;%Type%Unit&gt; value = new FloatScalar.Abs&lt;%Type%Unit&gt;(100.0, %Type%Unit.SI);</i><br>
      * we can now write <br>
-     * <i>Float%TYPE%.Abs value = new Float%TYPE%.Abs(100.0, %TYPE%Unit.SI);</i><br>
+     * <i>Float%Type%.Abs value = new Float%Type%.Abs(100.0, %Type%Unit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
      * unit used are compatible.
      * <p>
@@ -373,36 +373,36 @@ public interface Float%TYPE%
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Abs extends FloatScalar.Abs<%TYPE%Unit>
+    public static class Abs extends FloatScalar.Abs<%Type%Unit>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
 
         /**
-         * Construct Float%TYPE%.Abs scalar.
+         * Construct Float%Type%.Abs scalar.
          * @param value float value
          * @param unit unit for the float value
          */
-        public Abs(final float value, final %TYPE%Unit unit)
+        public Abs(final float value, final %Type%Unit unit)
         {
             super(value, unit);
         }
 
         /**
-         * Construct Float%TYPE%.Abs scalar using a double value.
+         * Construct Float%Type%.Abs scalar using a double value.
          * @param value float value
          * @param unit unit for the float value
          */
-        public Abs(final double value, final %TYPE%Unit unit)
+        public Abs(final double value, final %Type%Unit unit)
         {
             super((float) value, unit);
         }
 
         /**
-         * Construct Float%TYPE%.Abs scalar.
+         * Construct Float%Type%.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Abs(final FloatScalar.Abs<%TYPE%Unit> value)
+        public Abs(final FloatScalar.Abs<%Type%Unit> value)
         {
             super(value);
         }
@@ -414,9 +414,9 @@ public interface Float%TYPE%
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Float%TYPE%.Abs interpolate(final Float%TYPE%.Abs zero, final Float%TYPE%.Abs one, final float ratio)
+        public static Float%Type%.Abs interpolate(final Float%Type%.Abs zero, final Float%Type%.Abs one, final float ratio)
         {
-            return new Float%TYPE%.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new Float%Type%.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
         }
 
         /**
@@ -426,191 +426,191 @@ public interface Float%TYPE%
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static Float%TYPE%.Abs interpolate(final Float%TYPE%.Abs zero, final Float%TYPE%.Abs one, final double ratio)
+        public static Float%Type%.Abs interpolate(final Float%Type%.Abs zero, final Float%Type%.Abs one, final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs abs()
+        public final Float%Type%.Abs abs()
         {
-            return new Float%TYPE%.Abs(Math.abs(getInUnit()), getUnit());
+            return new Float%Type%.Abs(Math.abs(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs acos()
+        public final Float%Type%.Abs acos()
         {
-            return new Float%TYPE%.Abs((float) Math.acos(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.acos(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs asin()
+        public final Float%Type%.Abs asin()
         {
-            return new Float%TYPE%.Abs((float) Math.asin(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.asin(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs atan()
+        public final Float%Type%.Abs atan()
         {
-            return new Float%TYPE%.Abs((float) Math.atan(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.atan(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs cbrt()
+        public final Float%Type%.Abs cbrt()
         {
-            return new Float%TYPE%.Abs((float) Math.cbrt(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.cbrt(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs ceil()
+        public final Float%Type%.Abs ceil()
         {
-            return new Float%TYPE%.Abs((float) Math.ceil(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.ceil(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs cos()
+        public final Float%Type%.Abs cos()
         {
-            return new Float%TYPE%.Abs((float) Math.cos(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.cos(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs cosh()
+        public final Float%Type%.Abs cosh()
         {
-            return new Float%TYPE%.Abs((float) Math.cosh(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.cosh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs exp()
+        public final Float%Type%.Abs exp()
         {
-            return new Float%TYPE%.Abs((float) Math.exp(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.exp(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs expm1()
+        public final Float%Type%.Abs expm1()
         {
-            return new Float%TYPE%.Abs((float) Math.expm1(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.expm1(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs floor()
+        public final Float%Type%.Abs floor()
         {
-            return new Float%TYPE%.Abs((float) Math.floor(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.floor(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs log()
+        public final Float%Type%.Abs log()
         {
-            return new Float%TYPE%.Abs((float) Math.log(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.log(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs log10()
+        public final Float%Type%.Abs log10()
         {
-            return new Float%TYPE%.Abs((float) Math.log10(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.log10(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs log1p()
+        public final Float%Type%.Abs log1p()
         {
-            return new Float%TYPE%.Abs((float) Math.log1p(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.log1p(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs rint()
+        public final Float%Type%.Abs rint()
         {
-            return new Float%TYPE%.Abs((float) Math.rint(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.rint(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs round()
+        public final Float%Type%.Abs round()
         {
-            return new Float%TYPE%.Abs(Math.round(getInUnit()), getUnit());
+            return new Float%Type%.Abs(Math.round(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs signum()
+        public final Float%Type%.Abs signum()
         {
-            return new Float%TYPE%.Abs(Math.signum(getInUnit()), getUnit());
+            return new Float%Type%.Abs(Math.signum(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs sin()
+        public final Float%Type%.Abs sin()
         {
-            return new Float%TYPE%.Abs((float) Math.sin(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.sin(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs sinh()
+        public final Float%Type%.Abs sinh()
         {
-            return new Float%TYPE%.Abs((float) Math.sinh(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.sinh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs sqrt()
+        public final Float%Type%.Abs sqrt()
         {
-            return new Float%TYPE%.Abs((float) Math.sqrt(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.sqrt(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs tan()
+        public final Float%Type%.Abs tan()
         {
-            return new Float%TYPE%.Abs((float) Math.tan(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.tan(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs tanh()
+        public final Float%Type%.Abs tanh()
         {
-            return new Float%TYPE%.Abs((float) Math.tanh(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.tanh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs inv()
+        public final Float%Type%.Abs inv()
         {
-            return new Float%TYPE%.Abs(1.0f / getInUnit(), getUnit());
+            return new Float%Type%.Abs(1.0f / getInUnit(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs toDegrees()
+        public final Float%Type%.Abs toDegrees()
         {
-            return new Float%TYPE%.Abs((float) Math.toDegrees(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.toDegrees(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs toRadians()
+        public final Float%Type%.Abs toRadians()
         {
-            return new Float%TYPE%.Abs((float) Math.toRadians(getInUnit()), getUnit());
+            return new Float%Type%.Abs((float) Math.toRadians(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final Float%TYPE%.Abs pow(final double x)
+        public final Float%Type%.Abs pow(final double x)
         {
-            return new Float%TYPE%.Abs((float) Math.pow(getInUnit(), x), getUnit());
+            return new Float%Type%.Abs((float) Math.pow(getInUnit(), x), getUnit());
         }
 
         /**
@@ -618,10 +618,10 @@ public interface Float%TYPE%
          * @param v the value to add
          * @return sum of this value and v as a new object
          */
-        public final Float%TYPE%.Abs plus(final Float%TYPE%.Rel v)
+        public final Float%Type%.Abs plus(final Float%Type%.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Float%TYPE%.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Float%TYPE%.Abs(this.si + v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new Float%Type%.Abs(getInUnit() + v.getInUnit(), getUnit())
+                : new Float%Type%.Abs(this.si + v.si, %Type%Unit.SI);
         }
 
         /**
@@ -629,10 +629,10 @@ public interface Float%TYPE%
          * @param v the value to subtract
          * @return difference of this value and v as a new object
          */
-        public final Float%TYPE%.Rel minus(final Float%TYPE%.Abs v)
+        public final Float%Type%.Rel minus(final Float%Type%.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Float%TYPE%.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Float%TYPE%.Rel(this.si - v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new Float%Type%.Rel(getInUnit() - v.getInUnit(), getUnit())
+                : new Float%Type%.Rel(this.si - v.si, %Type%Unit.SI);
         }
 
         /**
@@ -640,21 +640,21 @@ public interface Float%TYPE%
          * @param v the value to subtract
          * @return difference of this value and v as a new object
          */
-        public final Float%TYPE%.Abs minus(final Float%TYPE%.Rel v)
+        public final Float%Type%.Abs minus(final Float%Type%.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new Float%TYPE%.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new Float%TYPE%.Abs(this.si - v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new Float%Type%.Abs(getInUnit() - v.getInUnit(), getUnit())
+                : new Float%Type%.Abs(this.si - v.si, %Type%Unit.SI);
         }
 
         /** 
          * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
          * @return a relative version of this absolute %type% scalar.
          */
-        public final Float%TYPE%.Rel toRel()
+        public final Float%Type%.Rel toRel()
         {
-            return new Float%TYPE%.Rel(getInUnit(), getUnit());
+            return new Float%Type%.Rel(getInUnit(), getUnit());
         }
         
-%FORMULAS%%TYPE%.Abs%
+%FORMULAS%%Type%.Abs%
     }
 }

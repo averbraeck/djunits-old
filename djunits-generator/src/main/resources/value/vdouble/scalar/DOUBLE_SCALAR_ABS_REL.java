@@ -4,7 +4,7 @@ import org.djunits.unit.*;
 import org.djunits.unit.UNITS;
 
 /**
- * Easy access methods for the %TYPE% DoubleScalar. Instead of <br>
+ * Easy access methods for the %Type% DoubleScalar. Instead of <br>
  * <i>DoubleScalar.Rel&lt;SomeUnit&gt; value = new DoubleScalar.Rel&lt;SomeUnit&gt;(0.2, SomeUnit.UNIT);</i><br>
  * we can now write <br>
  * <i>Some.Rel margin = new Some.Rel(0.2, UNIT);</i>, e.g., <i>Mass.Rel margin = new Mass.Rel(0.2, KILOGRAM);</i><br>
@@ -19,13 +19,13 @@ import org.djunits.unit.UNITS;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface %TYPE%
+public interface %Type%
 {
     /**
-     * Easy access methods for the %TYPE% DoubleScalar. Instead of <br>
-     * <i>DoubleScalar.Rel&lt;%TYPE%Unit&gt; value = new DoubleScalar.Rel&lt;%TYPE%Unit&gt;(100.0, %TYPE%Unit.SI);</i><br>
+     * Easy access methods for the %Type% DoubleScalar. Instead of <br>
+     * <i>DoubleScalar.Rel&lt;%Type%Unit&gt; value = new DoubleScalar.Rel&lt;%Type%Unit&gt;(100.0, %Type%Unit.SI);</i><br>
      * we can now write <br>
-     * <i>%TYPE%.Rel value = new %TYPE%.Rel(100.0, %TYPE%Unit.SI);</i><br>
+     * <i>%Type%.Rel value = new %Type%.Rel(100.0, %Type%Unit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
      * unit used are compatible.
      * <p>
@@ -38,26 +38,26 @@ public interface %TYPE%
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Rel extends DoubleScalar.Rel<%TYPE%Unit>
+    public static class Rel extends DoubleScalar.Rel<%Type%Unit>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
 
         /**
-         * Construct %TYPE%.Rel scalar.
+         * Construct %Type%.Rel scalar.
          * @param value double value
          * @param unit unit for the double value
          */
-        public Rel(final double value, final %TYPE%Unit unit)
+        public Rel(final double value, final %Type%Unit unit)
         {
             super(value, unit);
         }
 
         /**
-         * Construct %TYPE%.Rel scalar.
+         * Construct %Type%.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Rel(final DoubleScalar.Rel<%TYPE%Unit> value)
+        public Rel(final DoubleScalar.Rel<%Type%Unit> value)
         {
             super(value);
         }
@@ -69,205 +69,205 @@ public interface %TYPE%
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static %TYPE%.Rel interpolate(final %TYPE%.Rel zero, final %TYPE%.Rel one, final double ratio)
+        public static %Type%.Rel interpolate(final %Type%.Rel zero, final %Type%.Rel one, final double ratio)
         {
-            return new %TYPE%.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new %Type%.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel abs()
+        public final %Type%.Rel abs()
         {
-            return new %TYPE%.Rel(Math.abs(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.abs(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel acos()
+        public final %Type%.Rel acos()
         {
-            return new %TYPE%.Rel(Math.acos(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.acos(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel asin()
+        public final %Type%.Rel asin()
         {
-            return new %TYPE%.Rel(Math.asin(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.asin(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel atan()
+        public final %Type%.Rel atan()
         {
-            return new %TYPE%.Rel(Math.atan(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.atan(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel cbrt()
+        public final %Type%.Rel cbrt()
         {
-            return new %TYPE%.Rel(Math.cbrt(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.cbrt(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel ceil()
+        public final %Type%.Rel ceil()
         {
-            return new %TYPE%.Rel(Math.ceil(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.ceil(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel cos()
+        public final %Type%.Rel cos()
         {
-            return new %TYPE%.Rel(Math.cos(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.cos(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel cosh()
+        public final %Type%.Rel cosh()
         {
-            return new %TYPE%.Rel(Math.cosh(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.cosh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel exp()
+        public final %Type%.Rel exp()
         {
-            return new %TYPE%.Rel(Math.exp(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.exp(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel expm1()
+        public final %Type%.Rel expm1()
         {
-            return new %TYPE%.Rel(Math.expm1(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.expm1(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel floor()
+        public final %Type%.Rel floor()
         {
-            return new %TYPE%.Rel(Math.floor(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.floor(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel log()
+        public final %Type%.Rel log()
         {
-            return new %TYPE%.Rel(Math.log(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.log(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel log10()
+        public final %Type%.Rel log10()
         {
-            return new %TYPE%.Rel(Math.log10(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.log10(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel log1p()
+        public final %Type%.Rel log1p()
         {
-            return new %TYPE%.Rel(Math.log1p(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.log1p(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel rint()
+        public final %Type%.Rel rint()
         {
-            return new %TYPE%.Rel(Math.rint(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.rint(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel round()
+        public final %Type%.Rel round()
         {
-            return new %TYPE%.Rel(Math.round(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.round(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel signum()
+        public final %Type%.Rel signum()
         {
-            return new %TYPE%.Rel(Math.signum(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.signum(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel sin()
+        public final %Type%.Rel sin()
         {
-            return new %TYPE%.Rel(Math.sin(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.sin(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel sinh()
+        public final %Type%.Rel sinh()
         {
-            return new %TYPE%.Rel(Math.sinh(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.sinh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel sqrt()
+        public final %Type%.Rel sqrt()
         {
-            return new %TYPE%.Rel(Math.sqrt(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.sqrt(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel tan()
+        public final %Type%.Rel tan()
         {
-            return new %TYPE%.Rel(Math.tan(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.tan(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel tanh()
+        public final %Type%.Rel tanh()
         {
-            return new %TYPE%.Rel(Math.tanh(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.tanh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel inv()
+        public final %Type%.Rel inv()
         {
-            return new %TYPE%.Rel(1.0 / getInUnit(), getUnit());
+            return new %Type%.Rel(1.0 / getInUnit(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel toDegrees()
+        public final %Type%.Rel toDegrees()
         {
-            return new %TYPE%.Rel(Math.toDegrees(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.toDegrees(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel toRadians()
+        public final %Type%.Rel toRadians()
         {
-            return new %TYPE%.Rel(Math.toRadians(getInUnit()), getUnit());
+            return new %Type%.Rel(Math.toRadians(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel pow(final double x)
+        public final %Type%.Rel pow(final double x)
         {
-            return new %TYPE%.Rel(Math.pow(getInUnit(), x), getUnit());
+            return new %Type%.Rel(Math.pow(getInUnit(), x), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel multiplyBy(final double factor)
+        public final %Type%.Rel multiplyBy(final double factor)
         {
-            return new %TYPE%.Rel(getInUnit() * factor, getUnit());
+            return new %Type%.Rel(getInUnit() * factor, getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Rel divideBy(final double divisor)
+        public final %Type%.Rel divideBy(final double divisor)
         {
-            return new %TYPE%.Rel(getInUnit() / divisor, getUnit());
+            return new %Type%.Rel(getInUnit() / divisor, getUnit());
         }
 
         /**
@@ -275,10 +275,10 @@ public interface %TYPE%
          * @param v the value to add
          * @return sum of this value and v as a new object
          */
-        public final %TYPE%.Rel plus(final %TYPE%.Rel v)
+        public final %Type%.Rel plus(final %Type%.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new %TYPE%.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new %TYPE%.Rel(this.si + v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new %Type%.Rel(getInUnit() + v.getInUnit(), getUnit())
+                : new %Type%.Rel(this.si + v.si, %Type%Unit.SI);
         }
 
         /**
@@ -286,10 +286,10 @@ public interface %TYPE%
          * @param v the value to subtract
          * @return difference of this value and v as a new object
          */
-        public final %TYPE%.Rel minus(final %TYPE%.Rel v)
+        public final %Type%.Rel minus(final %Type%.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new %TYPE%.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new %TYPE%.Rel(this.si - v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new %Type%.Rel(getInUnit() - v.getInUnit(), getUnit())
+                : new %Type%.Rel(this.si - v.si, %Type%Unit.SI);
         }
 
         /**
@@ -297,29 +297,29 @@ public interface %TYPE%
          * @param v the value to add
          * @return sum of this value and v as a new object
          */
-        public final %TYPE%.Abs plus(final %TYPE%.Abs v)
+        public final %Type%.Abs plus(final %Type%.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new %TYPE%.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new %TYPE%.Abs(this.si + v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new %Type%.Abs(getInUnit() + v.getInUnit(), getUnit())
+                : new %Type%.Abs(this.si + v.si, %Type%Unit.SI);
         }
 
         /** 
          * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
          * @return an absolute version of this relative %type% scalar.
          */
-        public final %TYPE%.Abs toAbs()
+        public final %Type%.Abs toAbs()
         {
-            return new %TYPE%.Abs(getInUnit(), getUnit());
+            return new %Type%.Abs(getInUnit(), getUnit());
         }
         
-%FORMULAS%%TYPE%.Rel%
+%FORMULAS%%Type%.Rel%
     }
 
     /**
-     * Easy access methods for the %TYPE% DoubleScalar. Instead of <br>
-     * <i>DoubleScalar.Abs&lt;%TYPE%Unit&gt; value = new DoubleScalar.Abs&lt;%TYPE%Unit&gt;(100.0, %TYPE%Unit.SI);</i><br>
+     * Easy access methods for the %Type% DoubleScalar. Instead of <br>
+     * <i>DoubleScalar.Abs&lt;%Type%Unit&gt; value = new DoubleScalar.Abs&lt;%Type%Unit&gt;(100.0, %Type%Unit.SI);</i><br>
      * we can now write <br>
-     * <i>%TYPE%.Abs value = new %TYPE%.Abs(100.0, %TYPE%Unit.SI);</i><br>
+     * <i>%Type%.Abs value = new %Type%.Abs(100.0, %Type%Unit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
      * unit used are compatible.
      * <p>
@@ -332,26 +332,26 @@ public interface %TYPE%
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Abs extends DoubleScalar.Abs<%TYPE%Unit>
+    public static class Abs extends DoubleScalar.Abs<%Type%Unit>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
 
         /**
-         * Construct %TYPE%.Abs scalar.
+         * Construct %Type%.Abs scalar.
          * @param value double value
          * @param unit unit for the double value
          */
-        public Abs(final double value, final %TYPE%Unit unit)
+        public Abs(final double value, final %Type%Unit unit)
         {
             super(value, unit);
         }
 
         /**
-         * Construct %TYPE%.Abs scalar.
+         * Construct %Type%.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Abs(final DoubleScalar.Abs<%TYPE%Unit> value)
+        public Abs(final DoubleScalar.Abs<%Type%Unit> value)
         {
             super(value);
         }
@@ -363,191 +363,191 @@ public interface %TYPE%
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static %TYPE%.Abs interpolate(final %TYPE%.Abs zero, final %TYPE%.Abs one, final double ratio)
+        public static %Type%.Abs interpolate(final %Type%.Abs zero, final %Type%.Abs one, final double ratio)
         {
-            return new %TYPE%.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new %Type%.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs abs()
+        public final %Type%.Abs abs()
         {
-            return new %TYPE%.Abs(Math.abs(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.abs(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs acos()
+        public final %Type%.Abs acos()
         {
-            return new %TYPE%.Abs(Math.acos(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.acos(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs asin()
+        public final %Type%.Abs asin()
         {
-            return new %TYPE%.Abs(Math.asin(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.asin(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs atan()
+        public final %Type%.Abs atan()
         {
-            return new %TYPE%.Abs(Math.atan(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.atan(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs cbrt()
+        public final %Type%.Abs cbrt()
         {
-            return new %TYPE%.Abs(Math.cbrt(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.cbrt(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs ceil()
+        public final %Type%.Abs ceil()
         {
-            return new %TYPE%.Abs(Math.ceil(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.ceil(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs cos()
+        public final %Type%.Abs cos()
         {
-            return new %TYPE%.Abs(Math.cos(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.cos(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs cosh()
+        public final %Type%.Abs cosh()
         {
-            return new %TYPE%.Abs(Math.cosh(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.cosh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs exp()
+        public final %Type%.Abs exp()
         {
-            return new %TYPE%.Abs(Math.exp(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.exp(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs expm1()
+        public final %Type%.Abs expm1()
         {
-            return new %TYPE%.Abs(Math.expm1(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.expm1(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs floor()
+        public final %Type%.Abs floor()
         {
-            return new %TYPE%.Abs(Math.floor(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.floor(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs log()
+        public final %Type%.Abs log()
         {
-            return new %TYPE%.Abs(Math.log(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.log(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs log10()
+        public final %Type%.Abs log10()
         {
-            return new %TYPE%.Abs(Math.log10(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.log10(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs log1p()
+        public final %Type%.Abs log1p()
         {
-            return new %TYPE%.Abs(Math.log1p(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.log1p(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs rint()
+        public final %Type%.Abs rint()
         {
-            return new %TYPE%.Abs(Math.rint(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.rint(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs round()
+        public final %Type%.Abs round()
         {
-            return new %TYPE%.Abs(Math.round(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.round(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs signum()
+        public final %Type%.Abs signum()
         {
-            return new %TYPE%.Abs(Math.signum(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.signum(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs sin()
+        public final %Type%.Abs sin()
         {
-            return new %TYPE%.Abs(Math.sin(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.sin(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs sinh()
+        public final %Type%.Abs sinh()
         {
-            return new %TYPE%.Abs(Math.sinh(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.sinh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs sqrt()
+        public final %Type%.Abs sqrt()
         {
-            return new %TYPE%.Abs(Math.sqrt(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.sqrt(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs tan()
+        public final %Type%.Abs tan()
         {
-            return new %TYPE%.Abs(Math.tan(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.tan(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs tanh()
+        public final %Type%.Abs tanh()
         {
-            return new %TYPE%.Abs(Math.tanh(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.tanh(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs inv()
+        public final %Type%.Abs inv()
         {
-            return new %TYPE%.Abs(1.0 / getInUnit(), getUnit());
+            return new %Type%.Abs(1.0 / getInUnit(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs toDegrees()
+        public final %Type%.Abs toDegrees()
         {
-            return new %TYPE%.Abs(Math.toDegrees(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.toDegrees(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs toRadians()
+        public final %Type%.Abs toRadians()
         {
-            return new %TYPE%.Abs(Math.toRadians(getInUnit()), getUnit());
+            return new %Type%.Abs(Math.toRadians(getInUnit()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final %TYPE%.Abs pow(final double x)
+        public final %Type%.Abs pow(final double x)
         {
-            return new %TYPE%.Abs(Math.pow(getInUnit(), x), getUnit());
+            return new %Type%.Abs(Math.pow(getInUnit(), x), getUnit());
         }
 
         /**
@@ -555,10 +555,10 @@ public interface %TYPE%
          * @param v the value to add
          * @return sum of this value and v as a new object
          */
-        public final %TYPE%.Abs plus(final %TYPE%.Rel v)
+        public final %Type%.Abs plus(final %Type%.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new %TYPE%.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new %TYPE%.Abs(this.si + v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new %Type%.Abs(getInUnit() + v.getInUnit(), getUnit())
+                : new %Type%.Abs(this.si + v.si, %Type%Unit.SI);
         }
 
         /**
@@ -566,10 +566,10 @@ public interface %TYPE%
          * @param v the value to subtract
          * @return difference of this value and v as a new object
          */
-        public final %TYPE%.Rel minus(final %TYPE%.Abs v)
+        public final %Type%.Rel minus(final %Type%.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new %TYPE%.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new %TYPE%.Rel(this.si - v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new %Type%.Rel(getInUnit() - v.getInUnit(), getUnit())
+                : new %Type%.Rel(this.si - v.si, %Type%Unit.SI);
         }
 
         /**
@@ -577,21 +577,21 @@ public interface %TYPE%
          * @param v the value to subtract
          * @return difference of this value and v as a new object
          */
-        public final %TYPE%.Abs minus(final %TYPE%.Rel v)
+        public final %Type%.Abs minus(final %Type%.Rel v)
         {
-            return getUnit().equals(v.getUnit()) ? new %TYPE%.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new %TYPE%.Abs(this.si - v.si, %TYPE%Unit.SI);
+            return getUnit().equals(v.getUnit()) ? new %Type%.Abs(getInUnit() - v.getInUnit(), getUnit())
+                : new %Type%.Abs(this.si - v.si, %Type%Unit.SI);
         }
 
         /** 
          * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
          * @return a relative version of this absolute %type% scalar.
          */
-        public final %TYPE%.Rel toRel()
+        public final %Type%.Rel toRel()
         {
-            return new %TYPE%.Rel(getInUnit(), getUnit());
+            return new %Type%.Rel(getInUnit(), getUnit());
         }
 
-%FORMULAS%%TYPE%.Abs%
+%FORMULAS%%Type%.Abs%
     }
 }
