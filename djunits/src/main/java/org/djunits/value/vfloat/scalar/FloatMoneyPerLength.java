@@ -16,8 +16,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -62,9 +62,11 @@ public class FloatMoneyPerLength extends FloatScalar.Rel<MoneyPerLengthUnit> imp
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerLength interpolate(final FloatMoneyPerLength zero, final FloatMoneyPerLength one, final float ratio)
+    public static FloatMoneyPerLength interpolate(final FloatMoneyPerLength zero, final FloatMoneyPerLength one,
+        final float ratio)
     {
-        return new FloatMoneyPerLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatMoneyPerLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -74,7 +76,8 @@ public class FloatMoneyPerLength extends FloatScalar.Rel<MoneyPerLengthUnit> imp
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerLength interpolate(final FloatMoneyPerLength zero, final FloatMoneyPerLength one, final double ratio)
+    public static FloatMoneyPerLength interpolate(final FloatMoneyPerLength zero, final FloatMoneyPerLength one,
+        final double ratio)
     {
         return interpolate(zero, one, (float) ratio);
     }
@@ -302,8 +305,8 @@ public class FloatMoneyPerLength extends FloatScalar.Rel<MoneyPerLengthUnit> imp
      */
     public final FloatMoneyPerLength plus(final FloatMoneyPerLength v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerLength(getInUnit() + v.getInUnit(), getUnit()) : new FloatMoneyPerLength(this.si
-            + v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerLength(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatMoneyPerLength(this.si + v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
     }
 
     /**
@@ -313,39 +316,38 @@ public class FloatMoneyPerLength extends FloatScalar.Rel<MoneyPerLengthUnit> imp
      */
     public final FloatMoneyPerLength minus(final FloatMoneyPerLength v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerLength(getInUnit() - v.getInUnit(), getUnit()) : new FloatMoneyPerLength(this.si
-            - v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerLength(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatMoneyPerLength(this.si - v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
     }
-        /**
-         * Calculate the division of FloatMoneyPerLength and FloatMoneyPerLength, which results in a FloatDimensionless scalar.
-         * @param v FloatMoneyPerLength scalar
-         * @return FloatDimensionless scalar as a division of FloatMoneyPerLength and FloatMoneyPerLength
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatMoneyPerLength v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatMoneyPerLength and FloatLength, which results in a FloatMoney scalar.
-         * @param v FloatMoneyPerLength scalar
-         * @return FloatMoney scalar as a multiplication of FloatMoneyPerLength and FloatLength
-         */
-        public final FloatMoney multiplyBy(final FloatLength.Rel v)
-        {
-            return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
-        }
+    /**
+     * Calculate the division of FloatMoneyPerLength and FloatMoneyPerLength, which results in a FloatDimensionless scalar.
+     * @param v FloatMoneyPerLength scalar
+     * @return FloatDimensionless scalar as a division of FloatMoneyPerLength and FloatMoneyPerLength
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatMoneyPerLength v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatMoneyPerLength and FloatLinearDensity, which results in a FloatMoney scalar.
-         * @param v FloatMoneyPerLength scalar
-         * @return FloatMoney scalar as a division of FloatMoneyPerLength and FloatLinearDensity
-         */
-        public final FloatMoney divideBy(final FloatLinearDensity v)
-        {
-            return new FloatMoney(this.si / v.si, MoneyUnit.getStandardMoneyUnit());
-        }
+    /**
+     * Calculate the multiplication of FloatMoneyPerLength and FloatLength, which results in a FloatMoney scalar.
+     * @param v FloatMoneyPerLength scalar
+     * @return FloatMoney scalar as a multiplication of FloatMoneyPerLength and FloatLength
+     */
+    public final FloatMoney multiplyBy(final FloatLength.Rel v)
+    {
+        return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
+    }
 
+    /**
+     * Calculate the division of FloatMoneyPerLength and FloatLinearDensity, which results in a FloatMoney scalar.
+     * @param v FloatMoneyPerLength scalar
+     * @return FloatMoney scalar as a division of FloatMoneyPerLength and FloatLinearDensity
+     */
+    public final FloatMoney divideBy(final FloatLinearDensity v)
+    {
+        return new FloatMoney(this.si / v.si, MoneyUnit.getStandardMoneyUnit());
+    }
 
 }
-

@@ -19,8 +19,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -67,7 +67,8 @@ public class FloatFrequency extends FloatScalar.Rel<FrequencyUnit> implements Re
      */
     public static FloatFrequency interpolate(final FloatFrequency zero, final FloatFrequency one, final float ratio)
     {
-        return new FloatFrequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatFrequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -305,8 +306,8 @@ public class FloatFrequency extends FloatScalar.Rel<FrequencyUnit> implements Re
      */
     public final FloatFrequency plus(final FloatFrequency v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatFrequency(getInUnit() + v.getInUnit(), getUnit()) : new FloatFrequency(this.si
-            + v.si, FrequencyUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatFrequency(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatFrequency(this.si + v.si, FrequencyUnit.SI);
     }
 
     /**
@@ -316,69 +317,68 @@ public class FloatFrequency extends FloatScalar.Rel<FrequencyUnit> implements Re
      */
     public final FloatFrequency minus(final FloatFrequency v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatFrequency(getInUnit() - v.getInUnit(), getUnit()) : new FloatFrequency(this.si
-            - v.si, FrequencyUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatFrequency(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatFrequency(this.si - v.si, FrequencyUnit.SI);
     }
-        /**
-         * Calculate the division of FloatFrequency and FloatFrequency, which results in a FloatDimensionless scalar.
-         * @param v FloatFrequency scalar
-         * @return FloatDimensionless scalar as a division of FloatFrequency and FloatFrequency
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatFrequency v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatFrequency and FloatTime, which results in a FloatDimensionless scalar.
-         * @param v FloatFrequency scalar
-         * @return FloatDimensionless scalar as a multiplication of FloatFrequency and FloatTime
-         */
-        public final FloatDimensionless.Rel multiplyBy(final FloatTime.Rel v)
-        {
-            return new FloatDimensionless.Rel(this.si * v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatFrequency and FloatFrequency, which results in a FloatDimensionless scalar.
+     * @param v FloatFrequency scalar
+     * @return FloatDimensionless scalar as a division of FloatFrequency and FloatFrequency
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatFrequency v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatFrequency and FloatLength, which results in a FloatSpeed scalar.
-         * @param v FloatFrequency scalar
-         * @return FloatSpeed scalar as a multiplication of FloatFrequency and FloatLength
-         */
-        public final FloatSpeed multiplyBy(final FloatLength.Rel v)
-        {
-            return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatFrequency and FloatTime, which results in a FloatDimensionless scalar.
+     * @param v FloatFrequency scalar
+     * @return FloatDimensionless scalar as a multiplication of FloatFrequency and FloatTime
+     */
+    public final FloatDimensionless.Rel multiplyBy(final FloatTime.Rel v)
+    {
+        return new FloatDimensionless.Rel(this.si * v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatFrequency and FloatSpeed, which results in a FloatAcceleration scalar.
-         * @param v FloatFrequency scalar
-         * @return FloatAcceleration scalar as a multiplication of FloatFrequency and FloatSpeed
-         */
-        public final FloatAcceleration multiplyBy(final FloatSpeed v)
-        {
-            return new FloatAcceleration(this.si * v.si, AccelerationUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatFrequency and FloatLength, which results in a FloatSpeed scalar.
+     * @param v FloatFrequency scalar
+     * @return FloatSpeed scalar as a multiplication of FloatFrequency and FloatLength
+     */
+    public final FloatSpeed multiplyBy(final FloatLength.Rel v)
+    {
+        return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatFrequency and FloatEnergy, which results in a FloatPower scalar.
-         * @param v FloatFrequency scalar
-         * @return FloatPower scalar as a multiplication of FloatFrequency and FloatEnergy
-         */
-        public final FloatPower multiplyBy(final FloatEnergy v)
-        {
-            return new FloatPower(this.si * v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatFrequency and FloatSpeed, which results in a FloatAcceleration scalar.
+     * @param v FloatFrequency scalar
+     * @return FloatAcceleration scalar as a multiplication of FloatFrequency and FloatSpeed
+     */
+    public final FloatAcceleration multiplyBy(final FloatSpeed v)
+    {
+        return new FloatAcceleration(this.si * v.si, AccelerationUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatFrequency and FloatMoney, which results in a FloatMoneyPerTime scalar.
-         * @param v FloatFrequency scalar
-         * @return FloatMoneyPerTime scalar as a multiplication of FloatFrequency and FloatMoney
-         */
-        public final FloatMoneyPerTime multiplyBy(final FloatMoney v)
-        {
-            return new FloatMoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
-        }
+    /**
+     * Calculate the multiplication of FloatFrequency and FloatEnergy, which results in a FloatPower scalar.
+     * @param v FloatFrequency scalar
+     * @return FloatPower scalar as a multiplication of FloatFrequency and FloatEnergy
+     */
+    public final FloatPower multiplyBy(final FloatEnergy v)
+    {
+        return new FloatPower(this.si * v.si, PowerUnit.SI);
+    }
 
+    /**
+     * Calculate the multiplication of FloatFrequency and FloatMoney, which results in a FloatMoneyPerTime scalar.
+     * @param v FloatFrequency scalar
+     * @return FloatMoneyPerTime scalar as a multiplication of FloatFrequency and FloatMoney
+     */
+    public final FloatMoneyPerTime multiplyBy(final FloatMoney v)
+    {
+        return new FloatMoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+    }
 
 }
-

@@ -15,8 +15,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -63,7 +63,8 @@ public class FloatAngleSolid extends FloatScalar.Rel<AngleSolidUnit> implements 
      */
     public static FloatAngleSolid interpolate(final FloatAngleSolid zero, final FloatAngleSolid one, final float ratio)
     {
-        return new FloatAngleSolid(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatAngleSolid(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -73,7 +74,8 @@ public class FloatAngleSolid extends FloatScalar.Rel<AngleSolidUnit> implements 
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatAngleSolid interpolate(final FloatAngleSolid zero, final FloatAngleSolid one, final double ratio)
+    public static FloatAngleSolid
+        interpolate(final FloatAngleSolid zero, final FloatAngleSolid one, final double ratio)
     {
         return interpolate(zero, one, (float) ratio);
     }
@@ -301,8 +303,8 @@ public class FloatAngleSolid extends FloatScalar.Rel<AngleSolidUnit> implements 
      */
     public final FloatAngleSolid plus(final FloatAngleSolid v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatAngleSolid(getInUnit() + v.getInUnit(), getUnit()) : new FloatAngleSolid(this.si
-            + v.si, AngleSolidUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatAngleSolid(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatAngleSolid(this.si + v.si, AngleSolidUnit.SI);
     }
 
     /**
@@ -312,19 +314,18 @@ public class FloatAngleSolid extends FloatScalar.Rel<AngleSolidUnit> implements 
      */
     public final FloatAngleSolid minus(final FloatAngleSolid v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatAngleSolid(getInUnit() - v.getInUnit(), getUnit()) : new FloatAngleSolid(this.si
-            - v.si, AngleSolidUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatAngleSolid(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatAngleSolid(this.si - v.si, AngleSolidUnit.SI);
     }
-        /**
-         * Calculate the division of FloatAngleSolid and FloatAngleSolid, which results in a FloatDimensionless scalar.
-         * @param v FloatAngleSolid scalar
-         * @return FloatDimensionless scalar as a division of FloatAngleSolid and FloatAngleSolid
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatAngleSolid v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
+    /**
+     * Calculate the division of FloatAngleSolid and FloatAngleSolid, which results in a FloatDimensionless scalar.
+     * @param v FloatAngleSolid scalar
+     * @return FloatDimensionless scalar as a division of FloatAngleSolid and FloatAngleSolid
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatAngleSolid v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
 }
-

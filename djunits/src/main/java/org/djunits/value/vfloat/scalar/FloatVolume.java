@@ -22,8 +22,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -308,8 +308,8 @@ public class FloatVolume extends FloatScalar.Rel<VolumeUnit> implements Relative
      */
     public final FloatVolume plus(final FloatVolume v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatVolume(getInUnit() + v.getInUnit(), getUnit()) : new FloatVolume(this.si
-            + v.si, VolumeUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatVolume(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatVolume(this.si + v.si, VolumeUnit.SI);
     }
 
     /**
@@ -319,99 +319,98 @@ public class FloatVolume extends FloatScalar.Rel<VolumeUnit> implements Relative
      */
     public final FloatVolume minus(final FloatVolume v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatVolume(getInUnit() - v.getInUnit(), getUnit()) : new FloatVolume(this.si
-            - v.si, VolumeUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatVolume(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatVolume(this.si - v.si, VolumeUnit.SI);
     }
-        /**
-         * Calculate the division of FloatVolume and FloatVolume, which results in a FloatDimensionless scalar.
-         * @param v FloatVolume scalar
-         * @return FloatDimensionless scalar as a division of FloatVolume and FloatVolume
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatVolume v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatVolume and FloatDensity, which results in a FloatMass scalar.
-         * @param v FloatVolume scalar
-         * @return FloatMass scalar as a multiplication of FloatVolume and FloatDensity
-         */
-        public final FloatMass multiplyBy(final FloatDensity v)
-        {
-            return new FloatMass(this.si * v.si, MassUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatVolume and FloatVolume, which results in a FloatDimensionless scalar.
+     * @param v FloatVolume scalar
+     * @return FloatDimensionless scalar as a division of FloatVolume and FloatVolume
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatVolume v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatVolume and FloatPressure, which results in a FloatEnergy scalar.
-         * @param v FloatVolume scalar
-         * @return FloatEnergy scalar as a multiplication of FloatVolume and FloatPressure
-         */
-        public final FloatEnergy multiplyBy(final FloatPressure v)
-        {
-            return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatVolume and FloatDensity, which results in a FloatMass scalar.
+     * @param v FloatVolume scalar
+     * @return FloatMass scalar as a multiplication of FloatVolume and FloatDensity
+     */
+    public final FloatMass multiplyBy(final FloatDensity v)
+    {
+        return new FloatMass(this.si * v.si, MassUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatVolume and FloatLength, which results in a FloatArea scalar.
-         * @param v FloatVolume scalar
-         * @return FloatArea scalar as a division of FloatVolume and FloatLength
-         */
-        public final FloatArea divideBy(final FloatLength.Rel v)
-        {
-            return new FloatArea(this.si / v.si, AreaUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatVolume and FloatPressure, which results in a FloatEnergy scalar.
+     * @param v FloatVolume scalar
+     * @return FloatEnergy scalar as a multiplication of FloatVolume and FloatPressure
+     */
+    public final FloatEnergy multiplyBy(final FloatPressure v)
+    {
+        return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatVolume and FloatArea, which results in a FloatLength scalar.
-         * @param v FloatVolume scalar
-         * @return FloatLength scalar as a division of FloatVolume and FloatArea
-         */
-        public final FloatLength.Rel divideBy(final FloatArea v)
-        {
-            return new FloatLength.Rel(this.si / v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatVolume and FloatLength, which results in a FloatArea scalar.
+     * @param v FloatVolume scalar
+     * @return FloatArea scalar as a division of FloatVolume and FloatLength
+     */
+    public final FloatArea divideBy(final FloatLength.Rel v)
+    {
+        return new FloatArea(this.si / v.si, AreaUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatVolume and FloatLinearDensity, which results in a FloatArea scalar.
-         * @param v FloatVolume scalar
-         * @return FloatArea scalar as a multiplication of FloatVolume and FloatLinearDensity
-         */
-        public final FloatArea multiplyBy(final FloatLinearDensity v)
-        {
-            return new FloatArea(this.si * v.si, AreaUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatVolume and FloatArea, which results in a FloatLength scalar.
+     * @param v FloatVolume scalar
+     * @return FloatLength scalar as a division of FloatVolume and FloatArea
+     */
+    public final FloatLength.Rel divideBy(final FloatArea v)
+    {
+        return new FloatLength.Rel(this.si / v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatVolume and FloatTime, which results in a FloatFlowVolume scalar.
-         * @param v FloatVolume scalar
-         * @return FloatFlowVolume scalar as a division of FloatVolume and FloatTime
-         */
-        public final FloatFlowVolume divideBy(final FloatTime.Rel v)
-        {
-            return new FloatFlowVolume(this.si / v.si, FlowVolumeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatVolume and FloatLinearDensity, which results in a FloatArea scalar.
+     * @param v FloatVolume scalar
+     * @return FloatArea scalar as a multiplication of FloatVolume and FloatLinearDensity
+     */
+    public final FloatArea multiplyBy(final FloatLinearDensity v)
+    {
+        return new FloatArea(this.si * v.si, AreaUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatVolume and FloatFlowVolume, which results in a FloatTime scalar.
-         * @param v FloatVolume scalar
-         * @return FloatTime scalar as a division of FloatVolume and FloatFlowVolume
-         */
-        public final FloatTime.Rel divideBy(final FloatFlowVolume v)
-        {
-            return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatVolume and FloatTime, which results in a FloatFlowVolume scalar.
+     * @param v FloatVolume scalar
+     * @return FloatFlowVolume scalar as a division of FloatVolume and FloatTime
+     */
+    public final FloatFlowVolume divideBy(final FloatTime.Rel v)
+    {
+        return new FloatFlowVolume(this.si / v.si, FlowVolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatVolume and FloatMoneyPerVolume, which results in a FloatMoney scalar.
-         * @param v FloatVolume scalar
-         * @return FloatMoney scalar as a multiplication of FloatVolume and FloatMoneyPerVolume
-         */
-        public final FloatMoney multiplyBy(final FloatMoneyPerVolume v)
-        {
-            return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
-        }
+    /**
+     * Calculate the division of FloatVolume and FloatFlowVolume, which results in a FloatTime scalar.
+     * @param v FloatVolume scalar
+     * @return FloatTime scalar as a division of FloatVolume and FloatFlowVolume
+     */
+    public final FloatTime.Rel divideBy(final FloatFlowVolume v)
+    {
+        return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
+    }
 
+    /**
+     * Calculate the multiplication of FloatVolume and FloatMoneyPerVolume, which results in a FloatMoney scalar.
+     * @param v FloatVolume scalar
+     * @return FloatMoney scalar as a multiplication of FloatVolume and FloatMoneyPerVolume
+     */
+    public final FloatMoney multiplyBy(final FloatMoneyPerVolume v)
+    {
+        return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
+    }
 
 }
-

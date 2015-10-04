@@ -16,8 +16,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -62,9 +62,11 @@ public class FloatMoneyPerMass extends FloatScalar.Rel<MoneyPerMassUnit> impleme
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerMass interpolate(final FloatMoneyPerMass zero, final FloatMoneyPerMass one, final float ratio)
+    public static FloatMoneyPerMass interpolate(final FloatMoneyPerMass zero, final FloatMoneyPerMass one,
+        final float ratio)
     {
-        return new FloatMoneyPerMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatMoneyPerMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -74,7 +76,8 @@ public class FloatMoneyPerMass extends FloatScalar.Rel<MoneyPerMassUnit> impleme
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerMass interpolate(final FloatMoneyPerMass zero, final FloatMoneyPerMass one, final double ratio)
+    public static FloatMoneyPerMass interpolate(final FloatMoneyPerMass zero, final FloatMoneyPerMass one,
+        final double ratio)
     {
         return interpolate(zero, one, (float) ratio);
     }
@@ -302,8 +305,8 @@ public class FloatMoneyPerMass extends FloatScalar.Rel<MoneyPerMassUnit> impleme
      */
     public final FloatMoneyPerMass plus(final FloatMoneyPerMass v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerMass(getInUnit() + v.getInUnit(), getUnit()) : new FloatMoneyPerMass(this.si
-            + v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerMass(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatMoneyPerMass(this.si + v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
     }
 
     /**
@@ -313,29 +316,28 @@ public class FloatMoneyPerMass extends FloatScalar.Rel<MoneyPerMassUnit> impleme
      */
     public final FloatMoneyPerMass minus(final FloatMoneyPerMass v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerMass(getInUnit() - v.getInUnit(), getUnit()) : new FloatMoneyPerMass(this.si
-            - v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerMass(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatMoneyPerMass(this.si - v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
     }
-        /**
-         * Calculate the division of FloatMoneyPerMass and FloatMoneyPerMass, which results in a FloatDimensionless scalar.
-         * @param v FloatMoneyPerMass scalar
-         * @return FloatDimensionless scalar as a division of FloatMoneyPerMass and FloatMoneyPerMass
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatMoneyPerMass v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatMoneyPerMass and FloatMass, which results in a FloatMoney scalar.
-         * @param v FloatMoneyPerMass scalar
-         * @return FloatMoney scalar as a multiplication of FloatMoneyPerMass and FloatMass
-         */
-        public final FloatMoney multiplyBy(final FloatMass v)
-        {
-            return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
-        }
+    /**
+     * Calculate the division of FloatMoneyPerMass and FloatMoneyPerMass, which results in a FloatDimensionless scalar.
+     * @param v FloatMoneyPerMass scalar
+     * @return FloatDimensionless scalar as a division of FloatMoneyPerMass and FloatMoneyPerMass
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatMoneyPerMass v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
+    /**
+     * Calculate the multiplication of FloatMoneyPerMass and FloatMass, which results in a FloatMoney scalar.
+     * @param v FloatMoneyPerMass scalar
+     * @return FloatMoney scalar as a multiplication of FloatMoneyPerMass and FloatMass
+     */
+    public final FloatMoney multiplyBy(final FloatMass v)
+    {
+        return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
+    }
 
 }
-

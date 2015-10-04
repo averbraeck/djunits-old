@@ -14,8 +14,8 @@ import org.djunits.unit.DimensionlessUnit;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Aug 28, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Aug 28, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -79,9 +79,11 @@ public interface FloatAnglePlane
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatAnglePlane.Rel interpolate(final FloatAnglePlane.Rel zero, final FloatAnglePlane.Rel one, final float ratio)
+        public static FloatAnglePlane.Rel interpolate(final FloatAnglePlane.Rel zero, final FloatAnglePlane.Rel one,
+            final float ratio)
         {
-            return new FloatAnglePlane.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new FloatAnglePlane.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -91,7 +93,8 @@ public interface FloatAnglePlane
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatAnglePlane.Rel interpolate(final FloatAnglePlane.Rel zero, final FloatAnglePlane.Rel one, final double ratio)
+        public static FloatAnglePlane.Rel interpolate(final FloatAnglePlane.Rel zero, final FloatAnglePlane.Rel one,
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -345,7 +348,7 @@ public interface FloatAnglePlane
                 : new FloatAnglePlane.Abs(this.si + v.si, AnglePlaneUnit.SI);
         }
 
-        /** 
+        /**
          * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
          * @return an absolute version of this relative angleplane scalar.
          */
@@ -353,7 +356,8 @@ public interface FloatAnglePlane
         {
             return new FloatAnglePlane.Abs(getInUnit(), getUnit());
         }
-        /**
+
+        /**
          * Calculate the division of FloatAnglePlane and FloatAnglePlane, which results in a FloatDimensionless scalar.
          * @param v FloatAnglePlane scalar
          * @return FloatDimensionless scalar as a division of FloatAnglePlane and FloatAnglePlane
@@ -362,7 +366,6 @@ public interface FloatAnglePlane
         {
             return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
         }
-
 
     }
 
@@ -424,9 +427,11 @@ public interface FloatAnglePlane
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatAnglePlane.Abs interpolate(final FloatAnglePlane.Abs zero, final FloatAnglePlane.Abs one, final float ratio)
+        public static FloatAnglePlane.Abs interpolate(final FloatAnglePlane.Abs zero, final FloatAnglePlane.Abs one,
+            final float ratio)
         {
-            return new FloatAnglePlane.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new FloatAnglePlane.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -436,7 +441,8 @@ public interface FloatAnglePlane
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatAnglePlane.Abs interpolate(final FloatAnglePlane.Abs zero, final FloatAnglePlane.Abs one, final double ratio)
+        public static FloatAnglePlane.Abs interpolate(final FloatAnglePlane.Abs zero, final FloatAnglePlane.Abs one,
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -656,7 +662,7 @@ public interface FloatAnglePlane
                 : new FloatAnglePlane.Abs(this.si - v.si, AnglePlaneUnit.SI);
         }
 
-        /** 
+        /**
          * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
          * @return a relative version of this absolute angleplane scalar.
          */
@@ -664,6 +670,6 @@ public interface FloatAnglePlane
         {
             return new FloatAnglePlane.Rel(getInUnit(), getUnit());
         }
-        
+
     }
 }

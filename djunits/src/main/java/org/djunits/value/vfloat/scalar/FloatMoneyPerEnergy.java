@@ -16,8 +16,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -62,9 +62,11 @@ public class FloatMoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> imp
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerEnergy interpolate(final FloatMoneyPerEnergy zero, final FloatMoneyPerEnergy one, final float ratio)
+    public static FloatMoneyPerEnergy interpolate(final FloatMoneyPerEnergy zero, final FloatMoneyPerEnergy one,
+        final float ratio)
     {
-        return new FloatMoneyPerEnergy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatMoneyPerEnergy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -74,7 +76,8 @@ public class FloatMoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> imp
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerEnergy interpolate(final FloatMoneyPerEnergy zero, final FloatMoneyPerEnergy one, final double ratio)
+    public static FloatMoneyPerEnergy interpolate(final FloatMoneyPerEnergy zero, final FloatMoneyPerEnergy one,
+        final double ratio)
     {
         return interpolate(zero, one, (float) ratio);
     }
@@ -302,8 +305,8 @@ public class FloatMoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> imp
      */
     public final FloatMoneyPerEnergy plus(final FloatMoneyPerEnergy v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerEnergy(getInUnit() + v.getInUnit(), getUnit()) : new FloatMoneyPerEnergy(this.si
-            + v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerEnergy(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatMoneyPerEnergy(this.si + v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
     }
 
     /**
@@ -313,29 +316,28 @@ public class FloatMoneyPerEnergy extends FloatScalar.Rel<MoneyPerEnergyUnit> imp
      */
     public final FloatMoneyPerEnergy minus(final FloatMoneyPerEnergy v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerEnergy(getInUnit() - v.getInUnit(), getUnit()) : new FloatMoneyPerEnergy(this.si
-            - v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerEnergy(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatMoneyPerEnergy(this.si - v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
     }
-        /**
-         * Calculate the division of FloatMoneyPerEnergy and FloatMoneyPerEnergy, which results in a FloatDimensionless scalar.
-         * @param v FloatMoneyPerEnergy scalar
-         * @return FloatDimensionless scalar as a division of FloatMoneyPerEnergy and FloatMoneyPerEnergy
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatMoneyPerEnergy v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatMoneyPerEnergy and FloatEnergy, which results in a FloatMoney scalar.
-         * @param v FloatMoneyPerEnergy scalar
-         * @return FloatMoney scalar as a multiplication of FloatMoneyPerEnergy and FloatEnergy
-         */
-        public final FloatMoney multiplyBy(final FloatEnergy v)
-        {
-            return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
-        }
+    /**
+     * Calculate the division of FloatMoneyPerEnergy and FloatMoneyPerEnergy, which results in a FloatDimensionless scalar.
+     * @param v FloatMoneyPerEnergy scalar
+     * @return FloatDimensionless scalar as a division of FloatMoneyPerEnergy and FloatMoneyPerEnergy
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatMoneyPerEnergy v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
+    /**
+     * Calculate the multiplication of FloatMoneyPerEnergy and FloatEnergy, which results in a FloatMoney scalar.
+     * @param v FloatMoneyPerEnergy scalar
+     * @return FloatMoney scalar as a multiplication of FloatMoneyPerEnergy and FloatEnergy
+     */
+    public final FloatMoney multiplyBy(final FloatEnergy v)
+    {
+        return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
+    }
 
 }
-

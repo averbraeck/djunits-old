@@ -21,8 +21,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -307,8 +307,8 @@ public class FloatMoney extends FloatScalar.Rel<MoneyUnit> implements Relative
      */
     public final FloatMoney plus(final FloatMoney v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoney(getInUnit() + v.getInUnit(), getUnit()) : new FloatMoney(this.si
-            + v.si, MoneyUnit.getStandardMoneyUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoney(getInUnit() + v.getInUnit(), getUnit()) : new FloatMoney(
+            this.si + v.si, MoneyUnit.getStandardMoneyUnit());
     }
 
     /**
@@ -318,99 +318,98 @@ public class FloatMoney extends FloatScalar.Rel<MoneyUnit> implements Relative
      */
     public final FloatMoney minus(final FloatMoney v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoney(getInUnit() - v.getInUnit(), getUnit()) : new FloatMoney(this.si
-            - v.si, MoneyUnit.getStandardMoneyUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoney(getInUnit() - v.getInUnit(), getUnit()) : new FloatMoney(
+            this.si - v.si, MoneyUnit.getStandardMoneyUnit());
     }
-        /**
-         * Calculate the division of FloatMoney and FloatMoney, which results in a FloatDimensionless scalar.
-         * @param v FloatMoney scalar
-         * @return FloatDimensionless scalar as a division of FloatMoney and FloatMoney
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatMoney v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the division of FloatMoney and FloatArea, which results in a FloatMoneyPerArea scalar.
-         * @param v FloatMoney scalar
-         * @return FloatMoneyPerArea scalar as a division of FloatMoney and FloatArea
-         */
-        public final FloatMoneyPerArea divideBy(final FloatArea v)
-        {
-            return new FloatMoneyPerArea(this.si / v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
-        }
+    /**
+     * Calculate the division of FloatMoney and FloatMoney, which results in a FloatDimensionless scalar.
+     * @param v FloatMoney scalar
+     * @return FloatDimensionless scalar as a division of FloatMoney and FloatMoney
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatMoney v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatMoney and FloatEnergy, which results in a FloatMoneyPerEnergy scalar.
-         * @param v FloatMoney scalar
-         * @return FloatMoneyPerEnergy scalar as a division of FloatMoney and FloatEnergy
-         */
-        public final FloatMoneyPerEnergy divideBy(final FloatEnergy v)
-        {
-            return new FloatMoneyPerEnergy(this.si / v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
-        }
+    /**
+     * Calculate the division of FloatMoney and FloatArea, which results in a FloatMoneyPerArea scalar.
+     * @param v FloatMoney scalar
+     * @return FloatMoneyPerArea scalar as a division of FloatMoney and FloatArea
+     */
+    public final FloatMoneyPerArea divideBy(final FloatArea v)
+    {
+        return new FloatMoneyPerArea(this.si / v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
+    }
 
-        /**
-         * Calculate the division of FloatMoney and FloatLength, which results in a FloatMoneyPerLength scalar.
-         * @param v FloatMoney scalar
-         * @return FloatMoneyPerLength scalar as a division of FloatMoney and FloatLength
-         */
-        public final FloatMoneyPerLength divideBy(final FloatLength.Rel v)
-        {
-            return new FloatMoneyPerLength(this.si / v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
-        }
+    /**
+     * Calculate the division of FloatMoney and FloatEnergy, which results in a FloatMoneyPerEnergy scalar.
+     * @param v FloatMoney scalar
+     * @return FloatMoneyPerEnergy scalar as a division of FloatMoney and FloatEnergy
+     */
+    public final FloatMoneyPerEnergy divideBy(final FloatEnergy v)
+    {
+        return new FloatMoneyPerEnergy(this.si / v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
+    }
 
-        /**
-         * Calculate the multiplication of FloatMoney and FloatLinearDensity, which results in a FloatMoneyPerLength scalar.
-         * @param v FloatMoney scalar
-         * @return FloatMoneyPerLength scalar as a multiplication of FloatMoney and FloatLinearDensity
-         */
-        public final FloatMoneyPerLength multiplyBy(final FloatLinearDensity v)
-        {
-            return new FloatMoneyPerLength(this.si * v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
-        }
+    /**
+     * Calculate the division of FloatMoney and FloatLength, which results in a FloatMoneyPerLength scalar.
+     * @param v FloatMoney scalar
+     * @return FloatMoneyPerLength scalar as a division of FloatMoney and FloatLength
+     */
+    public final FloatMoneyPerLength divideBy(final FloatLength.Rel v)
+    {
+        return new FloatMoneyPerLength(this.si / v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
+    }
 
-        /**
-         * Calculate the division of FloatMoney and FloatMass, which results in a FloatMoneyPerMass scalar.
-         * @param v FloatMoney scalar
-         * @return FloatMoneyPerMass scalar as a division of FloatMoney and FloatMass
-         */
-        public final FloatMoneyPerMass divideBy(final FloatMass v)
-        {
-            return new FloatMoneyPerMass(this.si / v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
-        }
+    /**
+     * Calculate the multiplication of FloatMoney and FloatLinearDensity, which results in a FloatMoneyPerLength scalar.
+     * @param v FloatMoney scalar
+     * @return FloatMoneyPerLength scalar as a multiplication of FloatMoney and FloatLinearDensity
+     */
+    public final FloatMoneyPerLength multiplyBy(final FloatLinearDensity v)
+    {
+        return new FloatMoneyPerLength(this.si * v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
+    }
 
-        /**
-         * Calculate the division of FloatMoney and FloatTime, which results in a FloatMoneyPerTime scalar.
-         * @param v FloatMoney scalar
-         * @return FloatMoneyPerTime scalar as a division of FloatMoney and FloatTime
-         */
-        public final FloatMoneyPerTime divideBy(final FloatTime.Rel v)
-        {
-            return new FloatMoneyPerTime(this.si / v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
-        }
+    /**
+     * Calculate the division of FloatMoney and FloatMass, which results in a FloatMoneyPerMass scalar.
+     * @param v FloatMoney scalar
+     * @return FloatMoneyPerMass scalar as a division of FloatMoney and FloatMass
+     */
+    public final FloatMoneyPerMass divideBy(final FloatMass v)
+    {
+        return new FloatMoneyPerMass(this.si / v.si, MoneyPerMassUnit.getStandardMoneyPerMassUnit());
+    }
 
-        /**
-         * Calculate the multiplication of FloatMoney and FloatFrequency, which results in a FloatMoneyPerTime scalar.
-         * @param v FloatMoney scalar
-         * @return FloatMoneyPerTime scalar as a multiplication of FloatMoney and FloatFrequency
-         */
-        public final FloatMoneyPerTime multiplyBy(final FloatFrequency v)
-        {
-            return new FloatMoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
-        }
+    /**
+     * Calculate the division of FloatMoney and FloatTime, which results in a FloatMoneyPerTime scalar.
+     * @param v FloatMoney scalar
+     * @return FloatMoneyPerTime scalar as a division of FloatMoney and FloatTime
+     */
+    public final FloatMoneyPerTime divideBy(final FloatTime.Rel v)
+    {
+        return new FloatMoneyPerTime(this.si / v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+    }
 
-        /**
-         * Calculate the division of FloatMoney and FloatVolume, which results in a FloatMoneyPerVolume scalar.
-         * @param v FloatMoney scalar
-         * @return FloatMoneyPerVolume scalar as a division of FloatMoney and FloatVolume
-         */
-        public final FloatMoneyPerVolume divideBy(final FloatVolume v)
-        {
-            return new FloatMoneyPerVolume(this.si / v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
-        }
+    /**
+     * Calculate the multiplication of FloatMoney and FloatFrequency, which results in a FloatMoneyPerTime scalar.
+     * @param v FloatMoney scalar
+     * @return FloatMoneyPerTime scalar as a multiplication of FloatMoney and FloatFrequency
+     */
+    public final FloatMoneyPerTime multiplyBy(final FloatFrequency v)
+    {
+        return new FloatMoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+    }
 
+    /**
+     * Calculate the division of FloatMoney and FloatVolume, which results in a FloatMoneyPerVolume scalar.
+     * @param v FloatMoney scalar
+     * @return FloatMoneyPerVolume scalar as a division of FloatMoney and FloatVolume
+     */
+    public final FloatMoneyPerVolume divideBy(final FloatVolume v)
+    {
+        return new FloatMoneyPerVolume(this.si / v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
+    }
 
 }
-

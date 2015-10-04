@@ -16,8 +16,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -62,9 +62,11 @@ public class FloatMoneyPerArea extends FloatScalar.Rel<MoneyPerAreaUnit> impleme
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerArea interpolate(final FloatMoneyPerArea zero, final FloatMoneyPerArea one, final float ratio)
+    public static FloatMoneyPerArea interpolate(final FloatMoneyPerArea zero, final FloatMoneyPerArea one,
+        final float ratio)
     {
-        return new FloatMoneyPerArea(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatMoneyPerArea(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -74,7 +76,8 @@ public class FloatMoneyPerArea extends FloatScalar.Rel<MoneyPerAreaUnit> impleme
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerArea interpolate(final FloatMoneyPerArea zero, final FloatMoneyPerArea one, final double ratio)
+    public static FloatMoneyPerArea interpolate(final FloatMoneyPerArea zero, final FloatMoneyPerArea one,
+        final double ratio)
     {
         return interpolate(zero, one, (float) ratio);
     }
@@ -302,8 +305,8 @@ public class FloatMoneyPerArea extends FloatScalar.Rel<MoneyPerAreaUnit> impleme
      */
     public final FloatMoneyPerArea plus(final FloatMoneyPerArea v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerArea(getInUnit() + v.getInUnit(), getUnit()) : new FloatMoneyPerArea(this.si
-            + v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerArea(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatMoneyPerArea(this.si + v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
     }
 
     /**
@@ -313,29 +316,28 @@ public class FloatMoneyPerArea extends FloatScalar.Rel<MoneyPerAreaUnit> impleme
      */
     public final FloatMoneyPerArea minus(final FloatMoneyPerArea v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerArea(getInUnit() - v.getInUnit(), getUnit()) : new FloatMoneyPerArea(this.si
-            - v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerArea(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatMoneyPerArea(this.si - v.si, MoneyPerAreaUnit.getStandardMoneyPerAreaUnit());
     }
-        /**
-         * Calculate the division of FloatMoneyPerArea and FloatMoneyPerArea, which results in a FloatDimensionless scalar.
-         * @param v FloatMoneyPerArea scalar
-         * @return FloatDimensionless scalar as a division of FloatMoneyPerArea and FloatMoneyPerArea
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatMoneyPerArea v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatMoneyPerArea and FloatArea, which results in a FloatMoney scalar.
-         * @param v FloatMoneyPerArea scalar
-         * @return FloatMoney scalar as a multiplication of FloatMoneyPerArea and FloatArea
-         */
-        public final FloatMoney multiplyBy(final FloatArea v)
-        {
-            return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
-        }
+    /**
+     * Calculate the division of FloatMoneyPerArea and FloatMoneyPerArea, which results in a FloatDimensionless scalar.
+     * @param v FloatMoneyPerArea scalar
+     * @return FloatDimensionless scalar as a division of FloatMoneyPerArea and FloatMoneyPerArea
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatMoneyPerArea v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
+    /**
+     * Calculate the multiplication of FloatMoneyPerArea and FloatArea, which results in a FloatMoney scalar.
+     * @param v FloatMoneyPerArea scalar
+     * @return FloatMoney scalar as a multiplication of FloatMoneyPerArea and FloatArea
+     */
+    public final FloatMoney multiplyBy(final FloatArea v)
+    {
+        return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
+    }
 
 }
-
