@@ -25,7 +25,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     /**
      * Create a vector with sparse data.
      * @param matrixSI the data to store
-     * @param indices the index values of the Vector, with <tt>index = row <<< 32 + col</tt>
+     * @param indices the index values of the Vector, with <tt>index = row * cols + col</tt>
      * @param length the length of the vector (padded with 0 after highest index in indices)
      * @param rows the number of rows
      * @param cols the number of columns
