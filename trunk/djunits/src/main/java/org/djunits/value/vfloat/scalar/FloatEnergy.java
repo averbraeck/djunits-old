@@ -21,8 +21,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -307,8 +307,8 @@ public class FloatEnergy extends FloatScalar.Rel<EnergyUnit> implements Relative
      */
     public final FloatEnergy plus(final FloatEnergy v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatEnergy(getInUnit() + v.getInUnit(), getUnit()) : new FloatEnergy(this.si
-            + v.si, EnergyUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatEnergy(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatEnergy(this.si + v.si, EnergyUnit.SI);
     }
 
     /**
@@ -318,99 +318,98 @@ public class FloatEnergy extends FloatScalar.Rel<EnergyUnit> implements Relative
      */
     public final FloatEnergy minus(final FloatEnergy v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatEnergy(getInUnit() - v.getInUnit(), getUnit()) : new FloatEnergy(this.si
-            - v.si, EnergyUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatEnergy(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatEnergy(this.si - v.si, EnergyUnit.SI);
     }
-        /**
-         * Calculate the division of FloatEnergy and FloatEnergy, which results in a FloatDimensionless scalar.
-         * @param v FloatEnergy scalar
-         * @return FloatDimensionless scalar as a division of FloatEnergy and FloatEnergy
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatEnergy v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the division of FloatEnergy and FloatForce, which results in a FloatLength scalar.
-         * @param v FloatEnergy scalar
-         * @return FloatLength scalar as a division of FloatEnergy and FloatForce
-         */
-        public final FloatLength.Rel divideBy(final FloatForce v)
-        {
-            return new FloatLength.Rel(this.si / v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatEnergy and FloatEnergy, which results in a FloatDimensionless scalar.
+     * @param v FloatEnergy scalar
+     * @return FloatDimensionless scalar as a division of FloatEnergy and FloatEnergy
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatEnergy v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatEnergy and FloatLength, which results in a FloatForce scalar.
-         * @param v FloatEnergy scalar
-         * @return FloatForce scalar as a division of FloatEnergy and FloatLength
-         */
-        public final FloatForce divideBy(final FloatLength.Rel v)
-        {
-            return new FloatForce(this.si / v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatEnergy and FloatForce, which results in a FloatLength scalar.
+     * @param v FloatEnergy scalar
+     * @return FloatLength scalar as a division of FloatEnergy and FloatForce
+     */
+    public final FloatLength.Rel divideBy(final FloatForce v)
+    {
+        return new FloatLength.Rel(this.si / v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatEnergy and FloatLinearDensity, which results in a FloatForce scalar.
-         * @param v FloatEnergy scalar
-         * @return FloatForce scalar as a multiplication of FloatEnergy and FloatLinearDensity
-         */
-        public final FloatForce multiplyBy(final FloatLinearDensity v)
-        {
-            return new FloatForce(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatEnergy and FloatLength, which results in a FloatForce scalar.
+     * @param v FloatEnergy scalar
+     * @return FloatForce scalar as a division of FloatEnergy and FloatLength
+     */
+    public final FloatForce divideBy(final FloatLength.Rel v)
+    {
+        return new FloatForce(this.si / v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatEnergy and FloatTime, which results in a FloatPower scalar.
-         * @param v FloatEnergy scalar
-         * @return FloatPower scalar as a division of FloatEnergy and FloatTime
-         */
-        public final FloatPower divideBy(final FloatTime.Rel v)
-        {
-            return new FloatPower(this.si / v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatEnergy and FloatLinearDensity, which results in a FloatForce scalar.
+     * @param v FloatEnergy scalar
+     * @return FloatForce scalar as a multiplication of FloatEnergy and FloatLinearDensity
+     */
+    public final FloatForce multiplyBy(final FloatLinearDensity v)
+    {
+        return new FloatForce(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatEnergy and FloatPower, which results in a FloatTime scalar.
-         * @param v FloatEnergy scalar
-         * @return FloatTime scalar as a division of FloatEnergy and FloatPower
-         */
-        public final FloatTime.Rel divideBy(final FloatPower v)
-        {
-            return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatEnergy and FloatTime, which results in a FloatPower scalar.
+     * @param v FloatEnergy scalar
+     * @return FloatPower scalar as a division of FloatEnergy and FloatTime
+     */
+    public final FloatPower divideBy(final FloatTime.Rel v)
+    {
+        return new FloatPower(this.si / v.si, PowerUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatEnergy and FloatVolume, which results in a FloatPressure scalar.
-         * @param v FloatEnergy scalar
-         * @return FloatPressure scalar as a division of FloatEnergy and FloatVolume
-         */
-        public final FloatPressure divideBy(final FloatVolume v)
-        {
-            return new FloatPressure(this.si / v.si, PressureUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatEnergy and FloatPower, which results in a FloatTime scalar.
+     * @param v FloatEnergy scalar
+     * @return FloatTime scalar as a division of FloatEnergy and FloatPower
+     */
+    public final FloatTime.Rel divideBy(final FloatPower v)
+    {
+        return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatEnergy and FloatFrequency, which results in a FloatPower scalar.
-         * @param v FloatEnergy scalar
-         * @return FloatPower scalar as a multiplication of FloatEnergy and FloatFrequency
-         */
-        public final FloatPower multiplyBy(final FloatFrequency v)
-        {
-            return new FloatPower(this.si * v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatEnergy and FloatVolume, which results in a FloatPressure scalar.
+     * @param v FloatEnergy scalar
+     * @return FloatPressure scalar as a division of FloatEnergy and FloatVolume
+     */
+    public final FloatPressure divideBy(final FloatVolume v)
+    {
+        return new FloatPressure(this.si / v.si, PressureUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatEnergy and FloatMoneyPerEnergy, which results in a FloatMoney scalar.
-         * @param v FloatEnergy scalar
-         * @return FloatMoney scalar as a multiplication of FloatEnergy and FloatMoneyPerEnergy
-         */
-        public final FloatMoney multiplyBy(final FloatMoneyPerEnergy v)
-        {
-            return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
-        }
+    /**
+     * Calculate the multiplication of FloatEnergy and FloatFrequency, which results in a FloatPower scalar.
+     * @param v FloatEnergy scalar
+     * @return FloatPower scalar as a multiplication of FloatEnergy and FloatFrequency
+     */
+    public final FloatPower multiplyBy(final FloatFrequency v)
+    {
+        return new FloatPower(this.si * v.si, PowerUnit.SI);
+    }
 
+    /**
+     * Calculate the multiplication of FloatEnergy and FloatMoneyPerEnergy, which results in a FloatMoney scalar.
+     * @param v FloatEnergy scalar
+     * @return FloatMoney scalar as a multiplication of FloatEnergy and FloatMoneyPerEnergy
+     */
+    public final FloatMoney multiplyBy(final FloatMoneyPerEnergy v)
+    {
+        return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
+    }
 
 }
-

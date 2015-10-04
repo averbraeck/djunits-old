@@ -21,8 +21,8 @@ import org.djunits.unit.VolumeUnit;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Aug 28, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Aug 28, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -88,7 +88,8 @@ public interface FloatTime
          */
         public static FloatTime.Rel interpolate(final FloatTime.Rel zero, final FloatTime.Rel one, final float ratio)
         {
-            return new FloatTime.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new FloatTime.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -352,7 +353,7 @@ public interface FloatTime
                 : new FloatTime.Abs(this.si + v.si, TimeUnit.SI);
         }
 
-        /** 
+        /**
          * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
          * @return an absolute version of this relative time scalar.
          */
@@ -360,7 +361,8 @@ public interface FloatTime
         {
             return new FloatTime.Abs(getInUnit(), getUnit());
         }
-        /**
+
+        /**
          * Calculate the division of FloatTime and FloatTime, which results in a FloatDimensionless scalar.
          * @param v FloatTime scalar
          * @return FloatDimensionless scalar as a division of FloatTime and FloatTime
@@ -381,7 +383,8 @@ public interface FloatTime
         }
 
         /**
-         * Calculate the multiplication of FloatTime and FloatElectricalCurrent, which results in a FloatElectricalCharge scalar.
+         * Calculate the multiplication of FloatTime and FloatElectricalCurrent, which results in a FloatElectricalCharge
+         * scalar.
          * @param v FloatTime scalar
          * @return FloatElectricalCharge scalar as a multiplication of FloatTime and FloatElectricalCurrent
          */
@@ -450,7 +453,6 @@ public interface FloatTime
             return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
-
     }
 
     /**
@@ -513,7 +515,8 @@ public interface FloatTime
          */
         public static FloatTime.Abs interpolate(final FloatTime.Abs zero, final FloatTime.Abs one, final float ratio)
         {
-            return new FloatTime.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new FloatTime.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -743,7 +746,7 @@ public interface FloatTime
                 : new FloatTime.Abs(this.si - v.si, TimeUnit.SI);
         }
 
-        /** 
+        /**
          * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
          * @return a relative version of this absolute time scalar.
          */
@@ -751,6 +754,6 @@ public interface FloatTime
         {
             return new FloatTime.Rel(getInUnit(), getUnit());
         }
-        
+
     }
 }

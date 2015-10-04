@@ -45,8 +45,8 @@ import org.djunits.unit.VolumeUnit;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Aug 28, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Aug 28, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -54,7 +54,8 @@ public interface FloatDimensionless
 {
     /**
      * Easy access methods for the Dimensionless FloatScalar. Instead of <br>
-     * <i>FloatScalar.Rel&lt;DimensionlessUnit&gt; value = new FloatScalar.Rel&lt;DimensionlessUnit&gt;(100.0, DimensionlessUnit.SI);</i><br>
+     * <i>FloatScalar.Rel&lt;DimensionlessUnit&gt; value = new FloatScalar.Rel&lt;DimensionlessUnit&gt;(100.0,
+     * DimensionlessUnit.SI);</i><br>
      * we can now write <br>
      * <i>FloatDimensionless.Rel value = new FloatDimensionless.Rel(100.0, DimensionlessUnit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
@@ -110,9 +111,11 @@ public interface FloatDimensionless
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatDimensionless.Rel interpolate(final FloatDimensionless.Rel zero, final FloatDimensionless.Rel one, final float ratio)
+        public static FloatDimensionless.Rel interpolate(final FloatDimensionless.Rel zero,
+            final FloatDimensionless.Rel one, final float ratio)
         {
-            return new FloatDimensionless.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new FloatDimensionless.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
         /**
@@ -122,7 +125,8 @@ public interface FloatDimensionless
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatDimensionless.Rel interpolate(final FloatDimensionless.Rel zero, final FloatDimensionless.Rel one, final double ratio)
+        public static FloatDimensionless.Rel interpolate(final FloatDimensionless.Rel zero,
+            final FloatDimensionless.Rel one, final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -376,7 +380,7 @@ public interface FloatDimensionless
                 : new FloatDimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
         }
 
-        /** 
+        /**
          * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
          * @return an absolute version of this relative dimensionless scalar.
          */
@@ -384,7 +388,8 @@ public interface FloatDimensionless
         {
             return new FloatDimensionless.Abs(getInUnit(), getUnit());
         }
-        /**
+
+        /**
          * Calculate the division of FloatDimensionless and FloatDimensionless, which results in a FloatDimensionless scalar.
          * @param v FloatDimensionless scalar
          * @return FloatDimensionless scalar as a division of FloatDimensionless and FloatDimensionless
@@ -395,7 +400,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatAcceleration, which results in a FloatAcceleration scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatAcceleration, which results in a FloatAcceleration
+         * scalar.
          * @param v FloatDimensionless scalar
          * @return FloatAcceleration scalar as a multiplication of FloatDimensionless and FloatAcceleration
          */
@@ -455,7 +461,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatDimensionless, which results in a FloatDimensionless scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatDimensionless, which results in a FloatDimensionless
+         * scalar.
          * @param v FloatDimensionless scalar
          * @return FloatDimensionless scalar as a multiplication of FloatDimensionless and FloatDimensionless
          */
@@ -465,7 +472,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatElectricalCharge, which results in a FloatElectricalCharge scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatElectricalCharge, which results in a
+         * FloatElectricalCharge scalar.
          * @param v FloatDimensionless scalar
          * @return FloatElectricalCharge scalar as a multiplication of FloatDimensionless and FloatElectricalCharge
          */
@@ -475,7 +483,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatElectricalCurrent, which results in a FloatElectricalCurrent scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatElectricalCurrent, which results in a
+         * FloatElectricalCurrent scalar.
          * @param v FloatDimensionless scalar
          * @return FloatElectricalCurrent scalar as a multiplication of FloatDimensionless and FloatElectricalCurrent
          */
@@ -485,7 +494,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatElectricalPotential, which results in a FloatElectricalPotential scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatElectricalPotential, which results in a
+         * FloatElectricalPotential scalar.
          * @param v FloatDimensionless scalar
          * @return FloatElectricalPotential scalar as a multiplication of FloatDimensionless and FloatElectricalPotential
          */
@@ -495,7 +505,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatElectricalResistance, which results in a FloatElectricalResistance scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatElectricalResistance, which results in a
+         * FloatElectricalResistance scalar.
          * @param v FloatDimensionless scalar
          * @return FloatElectricalResistance scalar as a multiplication of FloatDimensionless and FloatElectricalResistance
          */
@@ -565,7 +576,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatLinearDensity, which results in a FloatLinearDensity scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatLinearDensity, which results in a FloatLinearDensity
+         * scalar.
          * @param v FloatDimensionless scalar
          * @return FloatLinearDensity scalar as a multiplication of FloatDimensionless and FloatLinearDensity
          */
@@ -595,7 +607,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerArea, which results in a FloatMoneyPerArea scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerArea, which results in a FloatMoneyPerArea
+         * scalar.
          * @param v FloatDimensionless scalar
          * @return FloatMoneyPerArea scalar as a multiplication of FloatDimensionless and FloatMoneyPerArea
          */
@@ -605,7 +618,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerEnergy, which results in a FloatMoneyPerEnergy scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerEnergy, which results in a FloatMoneyPerEnergy
+         * scalar.
          * @param v FloatDimensionless scalar
          * @return FloatMoneyPerEnergy scalar as a multiplication of FloatDimensionless and FloatMoneyPerEnergy
          */
@@ -615,7 +629,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerLength, which results in a FloatMoneyPerLength scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerLength, which results in a FloatMoneyPerLength
+         * scalar.
          * @param v FloatDimensionless scalar
          * @return FloatMoneyPerLength scalar as a multiplication of FloatDimensionless and FloatMoneyPerLength
          */
@@ -625,7 +640,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerMass, which results in a FloatMoneyPerMass scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerMass, which results in a FloatMoneyPerMass
+         * scalar.
          * @param v FloatDimensionless scalar
          * @return FloatMoneyPerMass scalar as a multiplication of FloatDimensionless and FloatMoneyPerMass
          */
@@ -635,7 +651,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerTime, which results in a FloatMoneyPerTime scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerTime, which results in a FloatMoneyPerTime
+         * scalar.
          * @param v FloatDimensionless scalar
          * @return FloatMoneyPerTime scalar as a multiplication of FloatDimensionless and FloatMoneyPerTime
          */
@@ -645,7 +662,8 @@ public interface FloatDimensionless
         }
 
         /**
-         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerVolume, which results in a FloatMoneyPerVolume scalar.
+         * Calculate the multiplication of FloatDimensionless and FloatMoneyPerVolume, which results in a FloatMoneyPerVolume
+         * scalar.
          * @param v FloatDimensionless scalar
          * @return FloatMoneyPerVolume scalar as a multiplication of FloatDimensionless and FloatMoneyPerVolume
          */
@@ -764,12 +782,12 @@ public interface FloatDimensionless
             return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
         }
 
-
     }
 
     /**
      * Easy access methods for the Dimensionless FloatScalar. Instead of <br>
-     * <i>FloatScalar.Abs&lt;DimensionlessUnit&gt; value = new FloatScalar.Abs&lt;DimensionlessUnit&gt;(100.0, DimensionlessUnit.SI);</i><br>
+     * <i>FloatScalar.Abs&lt;DimensionlessUnit&gt; value = new FloatScalar.Abs&lt;DimensionlessUnit&gt;(100.0,
+     * DimensionlessUnit.SI);</i><br>
      * we can now write <br>
      * <i>FloatDimensionless.Abs value = new FloatDimensionless.Abs(100.0, DimensionlessUnit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
@@ -825,9 +843,11 @@ public interface FloatDimensionless
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatDimensionless.Abs interpolate(final FloatDimensionless.Abs zero, final FloatDimensionless.Abs one, final float ratio)
+        public static FloatDimensionless.Abs interpolate(final FloatDimensionless.Abs zero,
+            final FloatDimensionless.Abs one, final float ratio)
         {
-            return new FloatDimensionless.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new FloatDimensionless.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
         /**
@@ -837,7 +857,8 @@ public interface FloatDimensionless
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatDimensionless.Abs interpolate(final FloatDimensionless.Abs zero, final FloatDimensionless.Abs one, final double ratio)
+        public static FloatDimensionless.Abs interpolate(final FloatDimensionless.Abs zero,
+            final FloatDimensionless.Abs one, final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -1057,7 +1078,7 @@ public interface FloatDimensionless
                 : new FloatDimensionless.Abs(this.si - v.si, DimensionlessUnit.SI);
         }
 
-        /** 
+        /**
          * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
          * @return a relative version of this absolute dimensionless scalar.
          */
@@ -1065,6 +1086,6 @@ public interface FloatDimensionless
         {
             return new FloatDimensionless.Rel(getInUnit(), getUnit());
         }
-        
+
     }
 }

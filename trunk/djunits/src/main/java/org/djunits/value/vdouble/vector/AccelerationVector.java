@@ -78,12 +78,12 @@ public interface AccelerationVector
             super(values);
         }
 
-//        /** {@inheritDoc} */
-//        @Override
-//        public final MutableAccelerationVector.Dense mutable()
-//        {
-//            return new MutableAccelerationVector.Dense(getData(), getUnit());
-//        }
+        // /** {@inheritDoc} */
+        // @Override
+        // public final MutableAccelerationVector.Dense mutable()
+        // {
+        // return new MutableAccelerationVector.Dense(getData(), getUnit());
+        // }
 
         /** {@inheritDoc} */
         @Override
@@ -156,12 +156,12 @@ public interface AccelerationVector
             super(values);
         }
 
-//        /** {@inheritDoc} */
-//        @Override
-//        public final MutableAccelerationVector.Sparse mutable()
-//        {
-//            return new MutableAccelerationVector.Sparse(getData(), getUnit());
-//        }
+        // /** {@inheritDoc} */
+        // @Override
+        // public final MutableAccelerationVector.Sparse mutable()
+        // {
+        // return new MutableAccelerationVector.Sparse(getData(), getUnit());
+        // }
 
         /** {@inheritDoc} */
         @Override

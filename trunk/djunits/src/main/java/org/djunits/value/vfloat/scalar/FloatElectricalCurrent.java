@@ -9,7 +9,8 @@ import org.djunits.value.Relative;
 
 /**
  * Easy access methods for the ElectricalCurrent FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
- * <i>FloatScalar.Rel&lt;ElectricalCurrentUnit&gt; value = new FloatScalar.Rel&lt;ElectricalCurrentUnit&gt;(100.0, ElectricalCurrentUnit.SI);</i><br>
+ * <i>FloatScalar.Rel&lt;ElectricalCurrentUnit&gt; value = new FloatScalar.Rel&lt;ElectricalCurrentUnit&gt;(100.0,
+ * ElectricalCurrentUnit.SI);</i><br>
  * we can now write <br>
  * <i>FloatElectricalCurrent value = new FloatElectricalCurrent(100.0, ElectricalCurrentUnit.SI);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
@@ -18,8 +19,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -64,9 +65,11 @@ public class FloatElectricalCurrent extends FloatScalar.Rel<ElectricalCurrentUni
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatElectricalCurrent interpolate(final FloatElectricalCurrent zero, final FloatElectricalCurrent one, final float ratio)
+    public static FloatElectricalCurrent interpolate(final FloatElectricalCurrent zero,
+        final FloatElectricalCurrent one, final float ratio)
     {
-        return new FloatElectricalCurrent(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatElectricalCurrent(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -76,7 +79,8 @@ public class FloatElectricalCurrent extends FloatScalar.Rel<ElectricalCurrentUni
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatElectricalCurrent interpolate(final FloatElectricalCurrent zero, final FloatElectricalCurrent one, final double ratio)
+    public static FloatElectricalCurrent interpolate(final FloatElectricalCurrent zero,
+        final FloatElectricalCurrent one, final double ratio)
     {
         return interpolate(zero, one, (float) ratio);
     }
@@ -304,8 +308,8 @@ public class FloatElectricalCurrent extends FloatScalar.Rel<ElectricalCurrentUni
      */
     public final FloatElectricalCurrent plus(final FloatElectricalCurrent v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatElectricalCurrent(getInUnit() + v.getInUnit(), getUnit()) : new FloatElectricalCurrent(this.si
-            + v.si, ElectricalCurrentUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatElectricalCurrent(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatElectricalCurrent(this.si + v.si, ElectricalCurrentUnit.SI);
     }
 
     /**
@@ -315,49 +319,51 @@ public class FloatElectricalCurrent extends FloatScalar.Rel<ElectricalCurrentUni
      */
     public final FloatElectricalCurrent minus(final FloatElectricalCurrent v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatElectricalCurrent(getInUnit() - v.getInUnit(), getUnit()) : new FloatElectricalCurrent(this.si
-            - v.si, ElectricalCurrentUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatElectricalCurrent(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatElectricalCurrent(this.si - v.si, ElectricalCurrentUnit.SI);
     }
-        /**
-         * Calculate the division of FloatElectricalCurrent and FloatElectricalCurrent, which results in a FloatDimensionless scalar.
-         * @param v FloatElectricalCurrent scalar
-         * @return FloatDimensionless scalar as a division of FloatElectricalCurrent and FloatElectricalCurrent
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatElectricalCurrent v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatElectricalCurrent and FloatElectricalPotential, which results in a FloatPower scalar.
-         * @param v FloatElectricalCurrent scalar
-         * @return FloatPower scalar as a multiplication of FloatElectricalCurrent and FloatElectricalPotential
-         */
-        public final FloatPower multiplyBy(final FloatElectricalPotential v)
-        {
-            return new FloatPower(this.si * v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatElectricalCurrent and FloatElectricalCurrent, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatElectricalCurrent scalar
+     * @return FloatDimensionless scalar as a division of FloatElectricalCurrent and FloatElectricalCurrent
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatElectricalCurrent v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatElectricalCurrent and FloatTime, which results in a FloatElectricalCharge scalar.
-         * @param v FloatElectricalCurrent scalar
-         * @return FloatElectricalCharge scalar as a multiplication of FloatElectricalCurrent and FloatTime
-         */
-        public final FloatElectricalCharge multiplyBy(final FloatTime.Rel v)
-        {
-            return new FloatElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatElectricalCurrent and FloatElectricalPotential, which results in a FloatPower
+     * scalar.
+     * @param v FloatElectricalCurrent scalar
+     * @return FloatPower scalar as a multiplication of FloatElectricalCurrent and FloatElectricalPotential
+     */
+    public final FloatPower multiplyBy(final FloatElectricalPotential v)
+    {
+        return new FloatPower(this.si * v.si, PowerUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatElectricalCurrent and FloatElectricalResistance, which results in a FloatElectricalPotential scalar.
-         * @param v FloatElectricalCurrent scalar
-         * @return FloatElectricalPotential scalar as a multiplication of FloatElectricalCurrent and FloatElectricalResistance
-         */
-        public final FloatElectricalPotential multiplyBy(final FloatElectricalResistance v)
-        {
-            return new FloatElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatElectricalCurrent and FloatTime, which results in a FloatElectricalCharge scalar.
+     * @param v FloatElectricalCurrent scalar
+     * @return FloatElectricalCharge scalar as a multiplication of FloatElectricalCurrent and FloatTime
+     */
+    public final FloatElectricalCharge multiplyBy(final FloatTime.Rel v)
+    {
+        return new FloatElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
+    }
 
+    /**
+     * Calculate the multiplication of FloatElectricalCurrent and FloatElectricalResistance, which results in a
+     * FloatElectricalPotential scalar.
+     * @param v FloatElectricalCurrent scalar
+     * @return FloatElectricalPotential scalar as a multiplication of FloatElectricalCurrent and FloatElectricalResistance
+     */
+    public final FloatElectricalPotential multiplyBy(final FloatElectricalResistance v)
+    {
+        return new FloatElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
+    }
 
 }
-

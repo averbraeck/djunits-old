@@ -16,8 +16,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -62,9 +62,11 @@ public class FloatMoneyPerVolume extends FloatScalar.Rel<MoneyPerVolumeUnit> imp
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerVolume interpolate(final FloatMoneyPerVolume zero, final FloatMoneyPerVolume one, final float ratio)
+    public static FloatMoneyPerVolume interpolate(final FloatMoneyPerVolume zero, final FloatMoneyPerVolume one,
+        final float ratio)
     {
-        return new FloatMoneyPerVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatMoneyPerVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -74,7 +76,8 @@ public class FloatMoneyPerVolume extends FloatScalar.Rel<MoneyPerVolumeUnit> imp
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerVolume interpolate(final FloatMoneyPerVolume zero, final FloatMoneyPerVolume one, final double ratio)
+    public static FloatMoneyPerVolume interpolate(final FloatMoneyPerVolume zero, final FloatMoneyPerVolume one,
+        final double ratio)
     {
         return interpolate(zero, one, (float) ratio);
     }
@@ -302,8 +305,8 @@ public class FloatMoneyPerVolume extends FloatScalar.Rel<MoneyPerVolumeUnit> imp
      */
     public final FloatMoneyPerVolume plus(final FloatMoneyPerVolume v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerVolume(getInUnit() + v.getInUnit(), getUnit()) : new FloatMoneyPerVolume(this.si
-            + v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerVolume(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatMoneyPerVolume(this.si + v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
     }
 
     /**
@@ -313,29 +316,28 @@ public class FloatMoneyPerVolume extends FloatScalar.Rel<MoneyPerVolumeUnit> imp
      */
     public final FloatMoneyPerVolume minus(final FloatMoneyPerVolume v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerVolume(getInUnit() - v.getInUnit(), getUnit()) : new FloatMoneyPerVolume(this.si
-            - v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerVolume(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatMoneyPerVolume(this.si - v.si, MoneyPerVolumeUnit.getStandardMoneyPerVolumeUnit());
     }
-        /**
-         * Calculate the division of FloatMoneyPerVolume and FloatMoneyPerVolume, which results in a FloatDimensionless scalar.
-         * @param v FloatMoneyPerVolume scalar
-         * @return FloatDimensionless scalar as a division of FloatMoneyPerVolume and FloatMoneyPerVolume
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatMoneyPerVolume v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatMoneyPerVolume and FloatVolume, which results in a FloatMoney scalar.
-         * @param v FloatMoneyPerVolume scalar
-         * @return FloatMoney scalar as a multiplication of FloatMoneyPerVolume and FloatVolume
-         */
-        public final FloatMoney multiplyBy(final FloatVolume v)
-        {
-            return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
-        }
+    /**
+     * Calculate the division of FloatMoneyPerVolume and FloatMoneyPerVolume, which results in a FloatDimensionless scalar.
+     * @param v FloatMoneyPerVolume scalar
+     * @return FloatDimensionless scalar as a division of FloatMoneyPerVolume and FloatMoneyPerVolume
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatMoneyPerVolume v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
+    /**
+     * Calculate the multiplication of FloatMoneyPerVolume and FloatVolume, which results in a FloatMoney scalar.
+     * @param v FloatMoneyPerVolume scalar
+     * @return FloatMoney scalar as a multiplication of FloatMoneyPerVolume and FloatVolume
+     */
+    public final FloatMoney multiplyBy(final FloatVolume v)
+    {
+        return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
+    }
 
 }
-

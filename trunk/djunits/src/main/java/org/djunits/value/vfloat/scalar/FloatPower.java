@@ -21,8 +21,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -307,8 +307,8 @@ public class FloatPower extends FloatScalar.Rel<PowerUnit> implements Relative
      */
     public final FloatPower plus(final FloatPower v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatPower(getInUnit() + v.getInUnit(), getUnit()) : new FloatPower(this.si
-            + v.si, PowerUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatPower(getInUnit() + v.getInUnit(), getUnit()) : new FloatPower(
+            this.si + v.si, PowerUnit.SI);
     }
 
     /**
@@ -318,89 +318,88 @@ public class FloatPower extends FloatScalar.Rel<PowerUnit> implements Relative
      */
     public final FloatPower minus(final FloatPower v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatPower(getInUnit() - v.getInUnit(), getUnit()) : new FloatPower(this.si
-            - v.si, PowerUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatPower(getInUnit() - v.getInUnit(), getUnit()) : new FloatPower(
+            this.si - v.si, PowerUnit.SI);
     }
-        /**
-         * Calculate the division of FloatPower and FloatPower, which results in a FloatDimensionless scalar.
-         * @param v FloatPower scalar
-         * @return FloatDimensionless scalar as a division of FloatPower and FloatPower
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatPower v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatPower and FloatTime, which results in a FloatEnergy scalar.
-         * @param v FloatPower scalar
-         * @return FloatEnergy scalar as a multiplication of FloatPower and FloatTime
-         */
-        public final FloatEnergy multiplyBy(final FloatTime.Rel v)
-        {
-            return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatPower and FloatPower, which results in a FloatDimensionless scalar.
+     * @param v FloatPower scalar
+     * @return FloatDimensionless scalar as a division of FloatPower and FloatPower
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatPower v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatPower and FloatFrequency, which results in a FloatEnergy scalar.
-         * @param v FloatPower scalar
-         * @return FloatEnergy scalar as a division of FloatPower and FloatFrequency
-         */
-        public final FloatEnergy divideBy(final FloatFrequency v)
-        {
-            return new FloatEnergy(this.si / v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatPower and FloatTime, which results in a FloatEnergy scalar.
+     * @param v FloatPower scalar
+     * @return FloatEnergy scalar as a multiplication of FloatPower and FloatTime
+     */
+    public final FloatEnergy multiplyBy(final FloatTime.Rel v)
+    {
+        return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatPower and FloatEnergy, which results in a FloatFrequency scalar.
-         * @param v FloatPower scalar
-         * @return FloatFrequency scalar as a division of FloatPower and FloatEnergy
-         */
-        public final FloatFrequency divideBy(final FloatEnergy v)
-        {
-            return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatPower and FloatFrequency, which results in a FloatEnergy scalar.
+     * @param v FloatPower scalar
+     * @return FloatEnergy scalar as a division of FloatPower and FloatFrequency
+     */
+    public final FloatEnergy divideBy(final FloatFrequency v)
+    {
+        return new FloatEnergy(this.si / v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatPower and FloatSpeed, which results in a FloatForce scalar.
-         * @param v FloatPower scalar
-         * @return FloatForce scalar as a division of FloatPower and FloatSpeed
-         */
-        public final FloatForce divideBy(final FloatSpeed v)
-        {
-            return new FloatForce(this.si / v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatPower and FloatEnergy, which results in a FloatFrequency scalar.
+     * @param v FloatPower scalar
+     * @return FloatFrequency scalar as a division of FloatPower and FloatEnergy
+     */
+    public final FloatFrequency divideBy(final FloatEnergy v)
+    {
+        return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatPower and FloatForce, which results in a FloatSpeed scalar.
-         * @param v FloatPower scalar
-         * @return FloatSpeed scalar as a division of FloatPower and FloatForce
-         */
-        public final FloatSpeed divideBy(final FloatForce v)
-        {
-            return new FloatSpeed(this.si / v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatPower and FloatSpeed, which results in a FloatForce scalar.
+     * @param v FloatPower scalar
+     * @return FloatForce scalar as a division of FloatPower and FloatSpeed
+     */
+    public final FloatForce divideBy(final FloatSpeed v)
+    {
+        return new FloatForce(this.si / v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatPower and FloatElectricalPotential, which results in a FloatElectricalCurrent scalar.
-         * @param v FloatPower scalar
-         * @return FloatElectricalCurrent scalar as a division of FloatPower and FloatElectricalPotential
-         */
-        public final FloatElectricalCurrent divideBy(final FloatElectricalPotential v)
-        {
-            return new FloatElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatPower and FloatForce, which results in a FloatSpeed scalar.
+     * @param v FloatPower scalar
+     * @return FloatSpeed scalar as a division of FloatPower and FloatForce
+     */
+    public final FloatSpeed divideBy(final FloatForce v)
+    {
+        return new FloatSpeed(this.si / v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatPower and FloatElectricalCurrent, which results in a FloatElectricalPotential scalar.
-         * @param v FloatPower scalar
-         * @return FloatElectricalPotential scalar as a division of FloatPower and FloatElectricalCurrent
-         */
-        public final FloatElectricalPotential divideBy(final FloatElectricalCurrent v)
-        {
-            return new FloatElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatPower and FloatElectricalPotential, which results in a FloatElectricalCurrent scalar.
+     * @param v FloatPower scalar
+     * @return FloatElectricalCurrent scalar as a division of FloatPower and FloatElectricalPotential
+     */
+    public final FloatElectricalCurrent divideBy(final FloatElectricalPotential v)
+    {
+        return new FloatElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
+    }
 
+    /**
+     * Calculate the division of FloatPower and FloatElectricalCurrent, which results in a FloatElectricalPotential scalar.
+     * @param v FloatPower scalar
+     * @return FloatElectricalPotential scalar as a division of FloatPower and FloatElectricalCurrent
+     */
+    public final FloatElectricalPotential divideBy(final FloatElectricalCurrent v)
+    {
+        return new FloatElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
+    }
 
 }
-

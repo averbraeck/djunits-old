@@ -101,7 +101,7 @@ abstract class DoubleVectorData
             return false;
         return true;
     }
-    
+
     /**
      * - Assigns the result of a function to each cell; <tt>x[i] = function(x[i])</tt>. (Iterates downwards from
      * <tt>[size()-1]</tt> to <tt>[0]</tt>).
@@ -150,6 +150,5 @@ abstract class DoubleVectorData
         return this;
     }
      */
-    
-    
+
 }

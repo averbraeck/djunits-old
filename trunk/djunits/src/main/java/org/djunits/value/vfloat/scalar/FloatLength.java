@@ -21,8 +21,8 @@ import org.djunits.unit.VolumeUnit;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Aug 28, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Aug 28, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -86,9 +86,11 @@ public interface FloatLength
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatLength.Rel interpolate(final FloatLength.Rel zero, final FloatLength.Rel one, final float ratio)
+        public static FloatLength.Rel interpolate(final FloatLength.Rel zero, final FloatLength.Rel one,
+            final float ratio)
         {
-            return new FloatLength.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new FloatLength.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -98,7 +100,8 @@ public interface FloatLength
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatLength.Rel interpolate(final FloatLength.Rel zero, final FloatLength.Rel one, final double ratio)
+        public static FloatLength.Rel interpolate(final FloatLength.Rel zero, final FloatLength.Rel one,
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -352,7 +355,7 @@ public interface FloatLength
                 : new FloatLength.Abs(this.si + v.si, LengthUnit.SI);
         }
 
-        /** 
+        /**
          * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
          * @return an absolute version of this relative length scalar.
          */
@@ -360,7 +363,8 @@ public interface FloatLength
         {
             return new FloatLength.Abs(getInUnit(), getUnit());
         }
-        /**
+
+        /**
          * Calculate the division of FloatLength and FloatLength, which results in a FloatDimensionless scalar.
          * @param v FloatLength scalar
          * @return FloatDimensionless scalar as a division of FloatLength and FloatLength
@@ -460,7 +464,6 @@ public interface FloatLength
             return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
         }
 
-
     }
 
     /**
@@ -521,9 +524,11 @@ public interface FloatLength
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatLength.Abs interpolate(final FloatLength.Abs zero, final FloatLength.Abs one, final float ratio)
+        public static FloatLength.Abs interpolate(final FloatLength.Abs zero, final FloatLength.Abs one,
+            final float ratio)
         {
-            return new FloatLength.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new FloatLength.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+                .getUnit());
         }
 
         /**
@@ -533,7 +538,8 @@ public interface FloatLength
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatLength.Abs interpolate(final FloatLength.Abs zero, final FloatLength.Abs one, final double ratio)
+        public static FloatLength.Abs interpolate(final FloatLength.Abs zero, final FloatLength.Abs one,
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -753,7 +759,7 @@ public interface FloatLength
                 : new FloatLength.Abs(this.si - v.si, LengthUnit.SI);
         }
 
-        /** 
+        /**
          * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
          * @return a relative version of this absolute length scalar.
          */
@@ -761,6 +767,6 @@ public interface FloatLength
         {
             return new FloatLength.Rel(getInUnit(), getUnit());
         }
-        
+
     }
 }

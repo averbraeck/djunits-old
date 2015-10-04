@@ -14,8 +14,8 @@ import org.djunits.unit.TemperatureUnit;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Aug 28, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Aug 28, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -23,7 +23,8 @@ public interface FloatTemperature
 {
     /**
      * Easy access methods for the Temperature FloatScalar. Instead of <br>
-     * <i>FloatScalar.Rel&lt;TemperatureUnit&gt; value = new FloatScalar.Rel&lt;TemperatureUnit&gt;(100.0, TemperatureUnit.SI);</i><br>
+     * <i>FloatScalar.Rel&lt;TemperatureUnit&gt; value = new FloatScalar.Rel&lt;TemperatureUnit&gt;(100.0,
+     * TemperatureUnit.SI);</i><br>
      * we can now write <br>
      * <i>FloatTemperature.Rel value = new FloatTemperature.Rel(100.0, TemperatureUnit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
@@ -79,9 +80,11 @@ public interface FloatTemperature
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatTemperature.Rel interpolate(final FloatTemperature.Rel zero, final FloatTemperature.Rel one, final float ratio)
+        public static FloatTemperature.Rel interpolate(final FloatTemperature.Rel zero, final FloatTemperature.Rel one,
+            final float ratio)
         {
-            return new FloatTemperature.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new FloatTemperature.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
         /**
@@ -91,7 +94,8 @@ public interface FloatTemperature
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatTemperature.Rel interpolate(final FloatTemperature.Rel zero, final FloatTemperature.Rel one, final double ratio)
+        public static FloatTemperature.Rel interpolate(final FloatTemperature.Rel zero, final FloatTemperature.Rel one,
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -345,7 +349,7 @@ public interface FloatTemperature
                 : new FloatTemperature.Abs(this.si + v.si, TemperatureUnit.SI);
         }
 
-        /** 
+        /**
          * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
          * @return an absolute version of this relative temperature scalar.
          */
@@ -353,7 +357,8 @@ public interface FloatTemperature
         {
             return new FloatTemperature.Abs(getInUnit(), getUnit());
         }
-        /**
+
+        /**
          * Calculate the division of FloatTemperature and FloatTemperature, which results in a FloatDimensionless scalar.
          * @param v FloatTemperature scalar
          * @return FloatDimensionless scalar as a division of FloatTemperature and FloatTemperature
@@ -363,12 +368,12 @@ public interface FloatTemperature
             return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
         }
 
-
     }
 
     /**
      * Easy access methods for the Temperature FloatScalar. Instead of <br>
-     * <i>FloatScalar.Abs&lt;TemperatureUnit&gt; value = new FloatScalar.Abs&lt;TemperatureUnit&gt;(100.0, TemperatureUnit.SI);</i><br>
+     * <i>FloatScalar.Abs&lt;TemperatureUnit&gt; value = new FloatScalar.Abs&lt;TemperatureUnit&gt;(100.0,
+     * TemperatureUnit.SI);</i><br>
      * we can now write <br>
      * <i>FloatTemperature.Abs value = new FloatTemperature.Abs(100.0, TemperatureUnit.SI);</i><br>
      * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
@@ -424,9 +429,11 @@ public interface FloatTemperature
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatTemperature.Abs interpolate(final FloatTemperature.Abs zero, final FloatTemperature.Abs one, final float ratio)
+        public static FloatTemperature.Abs interpolate(final FloatTemperature.Abs zero, final FloatTemperature.Abs one,
+            final float ratio)
         {
-            return new FloatTemperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+            return new FloatTemperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
         /**
@@ -436,7 +443,8 @@ public interface FloatTemperature
          * @param ratio the ratio between 0 and 1, inclusive
          * @return a Scalar at the ratio between
          */
-        public static FloatTemperature.Abs interpolate(final FloatTemperature.Abs zero, final FloatTemperature.Abs one, final double ratio)
+        public static FloatTemperature.Abs interpolate(final FloatTemperature.Abs zero, final FloatTemperature.Abs one,
+            final double ratio)
         {
             return interpolate(zero, one, (float) ratio);
         }
@@ -656,7 +664,7 @@ public interface FloatTemperature
                 : new FloatTemperature.Abs(this.si - v.si, TemperatureUnit.SI);
         }
 
-        /** 
+        /**
          * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
          * @return a relative version of this absolute temperature scalar.
          */
@@ -664,6 +672,6 @@ public interface FloatTemperature
         {
             return new FloatTemperature.Rel(getInUnit(), getUnit());
         }
-        
+
     }
 }

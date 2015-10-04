@@ -10,7 +10,8 @@ import org.djunits.value.Relative;
 
 /**
  * Easy access methods for the LinearDensity FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
- * <i>FloatScalar.Rel&lt;LinearDensityUnit&gt; value = new FloatScalar.Rel&lt;LinearDensityUnit&gt;(100.0, LinearDensityUnit.SI);</i><br>
+ * <i>FloatScalar.Rel&lt;LinearDensityUnit&gt; value = new FloatScalar.Rel&lt;LinearDensityUnit&gt;(100.0,
+ * LinearDensityUnit.SI);</i><br>
  * we can now write <br>
  * <i>FloatLinearDensity value = new FloatLinearDensity(100.0, LinearDensityUnit.SI);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
@@ -19,8 +20,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -65,9 +66,11 @@ public class FloatLinearDensity extends FloatScalar.Rel<LinearDensityUnit> imple
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatLinearDensity interpolate(final FloatLinearDensity zero, final FloatLinearDensity one, final float ratio)
+    public static FloatLinearDensity interpolate(final FloatLinearDensity zero, final FloatLinearDensity one,
+        final float ratio)
     {
-        return new FloatLinearDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatLinearDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -77,7 +80,8 @@ public class FloatLinearDensity extends FloatScalar.Rel<LinearDensityUnit> imple
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatLinearDensity interpolate(final FloatLinearDensity zero, final FloatLinearDensity one, final double ratio)
+    public static FloatLinearDensity interpolate(final FloatLinearDensity zero, final FloatLinearDensity one,
+        final double ratio)
     {
         return interpolate(zero, one, (float) ratio);
     }
@@ -305,8 +309,8 @@ public class FloatLinearDensity extends FloatScalar.Rel<LinearDensityUnit> imple
      */
     public final FloatLinearDensity plus(final FloatLinearDensity v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatLinearDensity(getInUnit() + v.getInUnit(), getUnit()) : new FloatLinearDensity(this.si
-            + v.si, LinearDensityUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatLinearDensity(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatLinearDensity(this.si + v.si, LinearDensityUnit.SI);
     }
 
     /**
@@ -316,59 +320,58 @@ public class FloatLinearDensity extends FloatScalar.Rel<LinearDensityUnit> imple
      */
     public final FloatLinearDensity minus(final FloatLinearDensity v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatLinearDensity(getInUnit() - v.getInUnit(), getUnit()) : new FloatLinearDensity(this.si
-            - v.si, LinearDensityUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatLinearDensity(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatLinearDensity(this.si - v.si, LinearDensityUnit.SI);
     }
-        /**
-         * Calculate the division of FloatLinearDensity and FloatLinearDensity, which results in a FloatDimensionless scalar.
-         * @param v FloatLinearDensity scalar
-         * @return FloatDimensionless scalar as a division of FloatLinearDensity and FloatLinearDensity
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatLinearDensity v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatLinearDensity and FloatArea, which results in a FloatLength scalar.
-         * @param v FloatLinearDensity scalar
-         * @return FloatLength scalar as a multiplication of FloatLinearDensity and FloatArea
-         */
-        public final FloatLength.Rel multiplyBy(final FloatArea v)
-        {
-            return new FloatLength.Rel(this.si * v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatLinearDensity and FloatLinearDensity, which results in a FloatDimensionless scalar.
+     * @param v FloatLinearDensity scalar
+     * @return FloatDimensionless scalar as a division of FloatLinearDensity and FloatLinearDensity
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatLinearDensity v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatLinearDensity and FloatEnergy, which results in a FloatForce scalar.
-         * @param v FloatLinearDensity scalar
-         * @return FloatForce scalar as a multiplication of FloatLinearDensity and FloatEnergy
-         */
-        public final FloatForce multiplyBy(final FloatEnergy v)
-        {
-            return new FloatForce(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatLinearDensity and FloatArea, which results in a FloatLength scalar.
+     * @param v FloatLinearDensity scalar
+     * @return FloatLength scalar as a multiplication of FloatLinearDensity and FloatArea
+     */
+    public final FloatLength.Rel multiplyBy(final FloatArea v)
+    {
+        return new FloatLength.Rel(this.si * v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatLinearDensity and FloatSpeed, which results in a FloatFrequency scalar.
-         * @param v FloatLinearDensity scalar
-         * @return FloatFrequency scalar as a multiplication of FloatLinearDensity and FloatSpeed
-         */
-        public final FloatFrequency multiplyBy(final FloatSpeed v)
-        {
-            return new FloatFrequency(this.si * v.si, FrequencyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatLinearDensity and FloatEnergy, which results in a FloatForce scalar.
+     * @param v FloatLinearDensity scalar
+     * @return FloatForce scalar as a multiplication of FloatLinearDensity and FloatEnergy
+     */
+    public final FloatForce multiplyBy(final FloatEnergy v)
+    {
+        return new FloatForce(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatLinearDensity and FloatMoney, which results in a FloatMoneyPerLength scalar.
-         * @param v FloatLinearDensity scalar
-         * @return FloatMoneyPerLength scalar as a multiplication of FloatLinearDensity and FloatMoney
-         */
-        public final FloatMoneyPerLength multiplyBy(final FloatMoney v)
-        {
-            return new FloatMoneyPerLength(this.si * v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
-        }
+    /**
+     * Calculate the multiplication of FloatLinearDensity and FloatSpeed, which results in a FloatFrequency scalar.
+     * @param v FloatLinearDensity scalar
+     * @return FloatFrequency scalar as a multiplication of FloatLinearDensity and FloatSpeed
+     */
+    public final FloatFrequency multiplyBy(final FloatSpeed v)
+    {
+        return new FloatFrequency(this.si * v.si, FrequencyUnit.SI);
+    }
 
+    /**
+     * Calculate the multiplication of FloatLinearDensity and FloatMoney, which results in a FloatMoneyPerLength scalar.
+     * @param v FloatLinearDensity scalar
+     * @return FloatMoneyPerLength scalar as a multiplication of FloatLinearDensity and FloatMoney
+     */
+    public final FloatMoneyPerLength multiplyBy(final FloatMoney v)
+    {
+        return new FloatMoneyPerLength(this.si * v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
+    }
 
 }
-

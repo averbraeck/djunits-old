@@ -16,8 +16,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -62,9 +62,11 @@ public class FloatMoneyPerTime extends FloatScalar.Rel<MoneyPerTimeUnit> impleme
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerTime interpolate(final FloatMoneyPerTime zero, final FloatMoneyPerTime one, final float ratio)
+    public static FloatMoneyPerTime interpolate(final FloatMoneyPerTime zero, final FloatMoneyPerTime one,
+        final float ratio)
     {
-        return new FloatMoneyPerTime(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatMoneyPerTime(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
+            .getUnit());
     }
 
     /**
@@ -74,7 +76,8 @@ public class FloatMoneyPerTime extends FloatScalar.Rel<MoneyPerTimeUnit> impleme
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerTime interpolate(final FloatMoneyPerTime zero, final FloatMoneyPerTime one, final double ratio)
+    public static FloatMoneyPerTime interpolate(final FloatMoneyPerTime zero, final FloatMoneyPerTime one,
+        final double ratio)
     {
         return interpolate(zero, one, (float) ratio);
     }
@@ -302,8 +305,8 @@ public class FloatMoneyPerTime extends FloatScalar.Rel<MoneyPerTimeUnit> impleme
      */
     public final FloatMoneyPerTime plus(final FloatMoneyPerTime v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerTime(getInUnit() + v.getInUnit(), getUnit()) : new FloatMoneyPerTime(this.si
-            + v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerTime(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatMoneyPerTime(this.si + v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
     }
 
     /**
@@ -313,39 +316,38 @@ public class FloatMoneyPerTime extends FloatScalar.Rel<MoneyPerTimeUnit> impleme
      */
     public final FloatMoneyPerTime minus(final FloatMoneyPerTime v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerTime(getInUnit() - v.getInUnit(), getUnit()) : new FloatMoneyPerTime(this.si
-            - v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+        return getUnit().equals(v.getUnit()) ? new FloatMoneyPerTime(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatMoneyPerTime(this.si - v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
     }
-        /**
-         * Calculate the division of FloatMoneyPerTime and FloatMoneyPerTime, which results in a FloatDimensionless scalar.
-         * @param v FloatMoneyPerTime scalar
-         * @return FloatDimensionless scalar as a division of FloatMoneyPerTime and FloatMoneyPerTime
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatMoneyPerTime v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatMoneyPerTime and FloatTime, which results in a FloatMoney scalar.
-         * @param v FloatMoneyPerTime scalar
-         * @return FloatMoney scalar as a multiplication of FloatMoneyPerTime and FloatTime
-         */
-        public final FloatMoney multiplyBy(final FloatTime.Rel v)
-        {
-            return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
-        }
+    /**
+     * Calculate the division of FloatMoneyPerTime and FloatMoneyPerTime, which results in a FloatDimensionless scalar.
+     * @param v FloatMoneyPerTime scalar
+     * @return FloatDimensionless scalar as a division of FloatMoneyPerTime and FloatMoneyPerTime
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatMoneyPerTime v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatMoneyPerTime and FloatFrequency, which results in a FloatMoney scalar.
-         * @param v FloatMoneyPerTime scalar
-         * @return FloatMoney scalar as a division of FloatMoneyPerTime and FloatFrequency
-         */
-        public final FloatMoney divideBy(final FloatFrequency v)
-        {
-            return new FloatMoney(this.si / v.si, MoneyUnit.getStandardMoneyUnit());
-        }
+    /**
+     * Calculate the multiplication of FloatMoneyPerTime and FloatTime, which results in a FloatMoney scalar.
+     * @param v FloatMoneyPerTime scalar
+     * @return FloatMoney scalar as a multiplication of FloatMoneyPerTime and FloatTime
+     */
+    public final FloatMoney multiplyBy(final FloatTime.Rel v)
+    {
+        return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
+    }
 
+    /**
+     * Calculate the division of FloatMoneyPerTime and FloatFrequency, which results in a FloatMoney scalar.
+     * @param v FloatMoneyPerTime scalar
+     * @return FloatMoney scalar as a division of FloatMoneyPerTime and FloatFrequency
+     */
+    public final FloatMoney divideBy(final FloatFrequency v)
+    {
+        return new FloatMoney(this.si / v.si, MoneyUnit.getStandardMoneyUnit());
+    }
 
 }
-

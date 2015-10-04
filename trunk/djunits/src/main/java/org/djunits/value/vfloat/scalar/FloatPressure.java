@@ -17,8 +17,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -303,8 +303,8 @@ public class FloatPressure extends FloatScalar.Rel<PressureUnit> implements Rela
      */
     public final FloatPressure plus(final FloatPressure v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatPressure(getInUnit() + v.getInUnit(), getUnit()) : new FloatPressure(this.si
-            + v.si, PressureUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatPressure(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatPressure(this.si + v.si, PressureUnit.SI);
     }
 
     /**
@@ -314,39 +314,38 @@ public class FloatPressure extends FloatScalar.Rel<PressureUnit> implements Rela
      */
     public final FloatPressure minus(final FloatPressure v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatPressure(getInUnit() - v.getInUnit(), getUnit()) : new FloatPressure(this.si
-            - v.si, PressureUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatPressure(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatPressure(this.si - v.si, PressureUnit.SI);
     }
-        /**
-         * Calculate the division of FloatPressure and FloatPressure, which results in a FloatDimensionless scalar.
-         * @param v FloatPressure scalar
-         * @return FloatDimensionless scalar as a division of FloatPressure and FloatPressure
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatPressure v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the multiplication of FloatPressure and FloatArea, which results in a FloatForce scalar.
-         * @param v FloatPressure scalar
-         * @return FloatForce scalar as a multiplication of FloatPressure and FloatArea
-         */
-        public final FloatForce multiplyBy(final FloatArea v)
-        {
-            return new FloatForce(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatPressure and FloatPressure, which results in a FloatDimensionless scalar.
+     * @param v FloatPressure scalar
+     * @return FloatDimensionless scalar as a division of FloatPressure and FloatPressure
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatPressure v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatPressure and FloatVolume, which results in a FloatEnergy scalar.
-         * @param v FloatPressure scalar
-         * @return FloatEnergy scalar as a multiplication of FloatPressure and FloatVolume
-         */
-        public final FloatEnergy multiplyBy(final FloatVolume v)
-        {
-            return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatPressure and FloatArea, which results in a FloatForce scalar.
+     * @param v FloatPressure scalar
+     * @return FloatForce scalar as a multiplication of FloatPressure and FloatArea
+     */
+    public final FloatForce multiplyBy(final FloatArea v)
+    {
+        return new FloatForce(this.si * v.si, ForceUnit.SI);
+    }
 
+    /**
+     * Calculate the multiplication of FloatPressure and FloatVolume, which results in a FloatEnergy scalar.
+     * @param v FloatPressure scalar
+     * @return FloatEnergy scalar as a multiplication of FloatPressure and FloatVolume
+     */
+    public final FloatEnergy multiplyBy(final FloatVolume v)
+    {
+        return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
+    }
 
 }
-

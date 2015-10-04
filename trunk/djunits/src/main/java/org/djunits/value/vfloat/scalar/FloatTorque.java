@@ -21,8 +21,8 @@ import org.djunits.value.Relative;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -307,8 +307,8 @@ public class FloatTorque extends FloatScalar.Rel<TorqueUnit> implements Relative
      */
     public final FloatTorque plus(final FloatTorque v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatTorque(getInUnit() + v.getInUnit(), getUnit()) : new FloatTorque(this.si
-            + v.si, TorqueUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatTorque(getInUnit() + v.getInUnit(), getUnit())
+            : new FloatTorque(this.si + v.si, TorqueUnit.SI);
     }
 
     /**
@@ -318,99 +318,98 @@ public class FloatTorque extends FloatScalar.Rel<TorqueUnit> implements Relative
      */
     public final FloatTorque minus(final FloatTorque v)
     {
-        return getUnit().equals(v.getUnit()) ? new FloatTorque(getInUnit() - v.getInUnit(), getUnit()) : new FloatTorque(this.si
-            - v.si, TorqueUnit.SI);
+        return getUnit().equals(v.getUnit()) ? new FloatTorque(getInUnit() - v.getInUnit(), getUnit())
+            : new FloatTorque(this.si - v.si, TorqueUnit.SI);
     }
-        /**
-         * Calculate the division of FloatTorque and FloatTorque, which results in a FloatDimensionless scalar.
-         * @param v FloatTorque scalar
-         * @return FloatDimensionless scalar as a division of FloatTorque and FloatTorque
-         */
-        public final FloatDimensionless.Rel divideBy(final FloatTorque v)
-        {
-            return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
-        }
 
-        /**
-         * Calculate the division of FloatTorque and FloatForce, which results in a FloatLength scalar.
-         * @param v FloatTorque scalar
-         * @return FloatLength scalar as a division of FloatTorque and FloatForce
-         */
-        public final FloatLength.Rel divideBy(final FloatForce v)
-        {
-            return new FloatLength.Rel(this.si / v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatTorque and FloatTorque, which results in a FloatDimensionless scalar.
+     * @param v FloatTorque scalar
+     * @return FloatDimensionless scalar as a division of FloatTorque and FloatTorque
+     */
+    public final FloatDimensionless.Rel divideBy(final FloatTorque v)
+    {
+        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatTorque and FloatLength, which results in a FloatForce scalar.
-         * @param v FloatTorque scalar
-         * @return FloatForce scalar as a division of FloatTorque and FloatLength
-         */
-        public final FloatForce divideBy(final FloatLength.Rel v)
-        {
-            return new FloatForce(this.si / v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatTorque and FloatForce, which results in a FloatLength scalar.
+     * @param v FloatTorque scalar
+     * @return FloatLength scalar as a division of FloatTorque and FloatForce
+     */
+    public final FloatLength.Rel divideBy(final FloatForce v)
+    {
+        return new FloatLength.Rel(this.si / v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatTorque and FloatLinearDensity, which results in a FloatForce scalar.
-         * @param v FloatTorque scalar
-         * @return FloatForce scalar as a multiplication of FloatTorque and FloatLinearDensity
-         */
-        public final FloatForce multiplyBy(final FloatLinearDensity v)
-        {
-            return new FloatForce(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatTorque and FloatLength, which results in a FloatForce scalar.
+     * @param v FloatTorque scalar
+     * @return FloatForce scalar as a division of FloatTorque and FloatLength
+     */
+    public final FloatForce divideBy(final FloatLength.Rel v)
+    {
+        return new FloatForce(this.si / v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatTorque and FloatTime, which results in a FloatPower scalar.
-         * @param v FloatTorque scalar
-         * @return FloatPower scalar as a division of FloatTorque and FloatTime
-         */
-        public final FloatPower divideBy(final FloatTime.Rel v)
-        {
-            return new FloatPower(this.si / v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatTorque and FloatLinearDensity, which results in a FloatForce scalar.
+     * @param v FloatTorque scalar
+     * @return FloatForce scalar as a multiplication of FloatTorque and FloatLinearDensity
+     */
+    public final FloatForce multiplyBy(final FloatLinearDensity v)
+    {
+        return new FloatForce(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatTorque and FloatPower, which results in a FloatTime scalar.
-         * @param v FloatTorque scalar
-         * @return FloatTime scalar as a division of FloatTorque and FloatPower
-         */
-        public final FloatTime.Rel divideBy(final FloatPower v)
-        {
-            return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatTorque and FloatTime, which results in a FloatPower scalar.
+     * @param v FloatTorque scalar
+     * @return FloatPower scalar as a division of FloatTorque and FloatTime
+     */
+    public final FloatPower divideBy(final FloatTime.Rel v)
+    {
+        return new FloatPower(this.si / v.si, PowerUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatTorque and FloatFrequency, which results in a FloatPower scalar.
-         * @param v FloatTorque scalar
-         * @return FloatPower scalar as a multiplication of FloatTorque and FloatFrequency
-         */
-        public final FloatPower multiplyBy(final FloatFrequency v)
-        {
-            return new FloatPower(this.si * v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatTorque and FloatPower, which results in a FloatTime scalar.
+     * @param v FloatTorque scalar
+     * @return FloatTime scalar as a division of FloatTorque and FloatPower
+     */
+    public final FloatTime.Rel divideBy(final FloatPower v)
+    {
+        return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatTorque and FloatVolume, which results in a FloatPressure scalar.
-         * @param v FloatTorque scalar
-         * @return FloatPressure scalar as a division of FloatTorque and FloatVolume
-         */
-        public final FloatPressure divideBy(final FloatVolume v)
-        {
-            return new FloatPressure(this.si / v.si, PressureUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatTorque and FloatFrequency, which results in a FloatPower scalar.
+     * @param v FloatTorque scalar
+     * @return FloatPower scalar as a multiplication of FloatTorque and FloatFrequency
+     */
+    public final FloatPower multiplyBy(final FloatFrequency v)
+    {
+        return new FloatPower(this.si * v.si, PowerUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatTorque and FloatPressure, which results in a FloatVolume scalar.
-         * @param v FloatTorque scalar
-         * @return FloatVolume scalar as a division of FloatTorque and FloatPressure
-         */
-        public final FloatVolume divideBy(final FloatPressure v)
-        {
-            return new FloatVolume(this.si / v.si, VolumeUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatTorque and FloatVolume, which results in a FloatPressure scalar.
+     * @param v FloatTorque scalar
+     * @return FloatPressure scalar as a division of FloatTorque and FloatVolume
+     */
+    public final FloatPressure divideBy(final FloatVolume v)
+    {
+        return new FloatPressure(this.si / v.si, PressureUnit.SI);
+    }
 
+    /**
+     * Calculate the division of FloatTorque and FloatPressure, which results in a FloatVolume scalar.
+     * @param v FloatTorque scalar
+     * @return FloatVolume scalar as a division of FloatTorque and FloatPressure
+     */
+    public final FloatVolume divideBy(final FloatPressure v)
+    {
+        return new FloatVolume(this.si / v.si, VolumeUnit.SI);
+    }
 
 }
-
