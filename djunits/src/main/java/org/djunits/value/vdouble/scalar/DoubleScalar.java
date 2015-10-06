@@ -78,13 +78,6 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
             return new Double(this.si).compareTo(o.si);
         }
 
-        /** {@inheritDoc} */
-        @Override
-        public final DoubleScalar.Abs<U> copy()
-        {
-            return this;
-        }
-
         /**
          * Retrieve the value in the underlying SI unit.
          * @return double
@@ -442,13 +435,6 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
         public final int compareTo(final Rel<U> o)
         {
             return new Double(this.si).compareTo(o.si);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final DoubleScalar.Rel<U> copy()
-        {
-            return this;
         }
 
         /**

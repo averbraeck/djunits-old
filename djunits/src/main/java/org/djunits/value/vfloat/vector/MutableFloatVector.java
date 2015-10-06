@@ -6,6 +6,9 @@ import java.util.SortedMap;
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
 import org.djunits.value.DenseData;
+import org.djunits.value.FunctionsAbs;
+import org.djunits.value.FunctionsRel;
+import org.djunits.value.MathFunctions;
 import org.djunits.value.Relative;
 import org.djunits.value.SparseData;
 import org.djunits.value.ValueException;
@@ -24,13 +27,13 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version 26 jun, 2015 <br>
+ * version 30 Oct, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableFloatVector
  */
 public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<U> implements
-    WriteFloatVectorFunctions<U>, FloatMathFunctions<MutableFloatVector<U>>
+    MutableFloatVectorInterface<U>
 {
     /**  */
     private static final long serialVersionUID = 20151003L;
@@ -72,7 +75,9 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
     /**
      * @param <U> Unit the unit for which this Vector will be created
      */
-    public abstract static class Abs<U extends Unit<U>> extends MutableFloatVector<U> implements Absolute
+    public abstract static class Abs<U extends Unit<U>> extends MutableFloatVector<U> implements Absolute,
+        MathFunctions<MutableFloatVector.Abs<U>>, FloatMathFunctions<MutableFloatVector.Abs<U>>,
+        FunctionsAbs<U, FloatVector.Abs<U>, FloatVector.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -85,6 +90,24 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         {
             super(unit);
         }
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract MutableFloatVector.Abs<U> mutable();
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract FloatVector.Abs<U> immutable();
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract MutableFloatVector.Abs<U> copy();
+
+        /** {@inheritDoc} */
+        public abstract MutableFloatVector.Abs<U> toDense();
+
+        /** {@inheritDoc} */
+        public abstract MutableFloatVector.Abs<U> toSparse();
 
         /**
          * ABSOLUTE DENSE implementation of MutableFloatVector.
@@ -121,7 +144,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /**
              * Construct a new Absolute Dense Mutable FloatVector.
-             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Dense MutableFloatVector
+             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Dense
+             *            MutableFloatVector
              * @throws ValueException when values has zero entries
              */
             public Dense(final FloatScalar.Abs<U>[] values) throws ValueException
@@ -154,7 +178,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final FloatVector.Abs.Dense<U> immutable()
+            @SuppressWarnings("designforextension")
+            public FloatVector.Abs<U> immutable()
             {
                 setCopyOnWrite(true);
                 return new FloatVector.Abs.Dense<U>(getData(), getUnit());
@@ -162,7 +187,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final MutableFloatVector.Abs.Dense<U> mutable()
+            @SuppressWarnings("designforextension")
+            public MutableFloatVector.Abs<U> mutable()
             {
                 setCopyOnWrite(true);
                 final MutableFloatVector.Abs.Dense<U> result =
@@ -173,7 +199,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final MutableFloatVector.Abs.Dense<U> copy()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableFloatVector.Abs<U> copy()
             {
                 return mutable();
             }
@@ -183,6 +210,22 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             protected final FloatVectorDataDense getData()
             {
                 return (FloatVectorDataDense) this.data;
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableFloatVector.Abs<U> toDense()
+            {
+                return copy();
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableFloatVector.Abs<U> toSparse()
+            {
+                return new MutableFloatVector.Abs.Sparse<U>(getData().toSparse(), getUnit());
             }
         }
 
@@ -202,7 +245,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
              * @param length the size of the vector
              * @throws ValueException when values is null
              */
-            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
+            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length)
+                throws ValueException
             {
                 super(unit);
                 this.data = initializeSparse(values, length);
@@ -217,7 +261,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
              */
             public Sparse(final SortedMap<Integer, FloatScalar.Abs<U>> values, final int length) throws ValueException
             {
-                super(checkNonEmptyMA(values).get(0).getUnit());
+                super(checkNonEmptyMA(values).get(values.firstKey()).getUnit());
                 initializeSparseMA(values, length);
             }
 
@@ -258,7 +302,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final FloatVector.Abs.Sparse<U> immutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public FloatVector.Abs<U> immutable()
             {
                 setCopyOnWrite(true);
                 return new FloatVector.Abs.Sparse<U>(getData(), getUnit());
@@ -266,7 +311,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final MutableFloatVector.Abs.Sparse<U> mutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableFloatVector.Abs<U> mutable()
             {
                 setCopyOnWrite(true);
                 final MutableFloatVector.Abs.Sparse<U> result =
@@ -277,7 +323,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final MutableFloatVector.Abs.Sparse<U> copy()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableFloatVector.Abs<U> copy()
             {
                 return mutable();
             }
@@ -288,13 +335,30 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             {
                 return (FloatVectorDataSparse) this.data;
             }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableFloatVector.Abs<U> toDense()
+            {
+                return new MutableFloatVector.Abs.Dense<U>(getData().toDense(), getUnit());
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableFloatVector.Abs<U> toSparse()
+            {
+                return copy();
+            }
         }
 
         /** ================================= ABS GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
-        public final FloatScalar.Abs<U> get(final int index) throws ValueException
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Abs<U> get(final int index) throws ValueException
         {
             return new FloatScalar.Abs<U>(getInUnit(index, getUnit()), getUnit());
         }
@@ -321,13 +385,38 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             return (MutableFloatVector.Abs<U>) decrementByImpl(decrement);
         }
 
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public FloatVector.Abs<U> plus(final FloatVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateAbs(this.getData().plus(rel.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public FloatVector.Abs<U> minus(final FloatVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateAbs(this.getData().minus(rel.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public FloatVector.Rel<U> minus(final FloatVector.Abs<U> rel) throws ValueException
+        {
+            return instantiateRel(this.getData().minus(rel.getData()), getUnit());
+        }
+
         /**********************************************************************************/
         /********************************** MATH METHODS **********************************/
         /**********************************************************************************/
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> abs()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> abs()
         {
             assign(FloatMathFunctionsImpl.ABS);
             return this;
@@ -335,7 +424,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> acos()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> acos()
         {
             assign(FloatMathFunctionsImpl.ACOS);
             return this;
@@ -343,7 +433,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> asin()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> asin()
         {
             assign(FloatMathFunctionsImpl.ASIN);
             return this;
@@ -351,7 +442,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> atan()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> atan()
         {
             assign(FloatMathFunctionsImpl.ATAN);
             return this;
@@ -359,7 +451,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> cbrt()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> cbrt()
         {
             assign(FloatMathFunctionsImpl.CBRT);
             return this;
@@ -367,7 +460,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> ceil()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> ceil()
         {
             assign(FloatMathFunctionsImpl.CEIL);
             return this;
@@ -375,7 +469,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> cos()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> cos()
         {
             assign(FloatMathFunctionsImpl.COS);
             return this;
@@ -383,7 +478,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> cosh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> cosh()
         {
             assign(FloatMathFunctionsImpl.COSH);
             return this;
@@ -391,7 +487,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> exp()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> exp()
         {
             assign(FloatMathFunctionsImpl.EXP);
             return this;
@@ -399,7 +496,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> expm1()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> expm1()
         {
             assign(FloatMathFunctionsImpl.EXPM1);
             return this;
@@ -407,7 +505,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> floor()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> floor()
         {
             assign(FloatMathFunctionsImpl.FLOOR);
             return this;
@@ -415,7 +514,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> log()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> log()
         {
             assign(FloatMathFunctionsImpl.LOG);
             return this;
@@ -423,7 +523,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> log10()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> log10()
         {
             assign(FloatMathFunctionsImpl.LOG10);
             return this;
@@ -431,7 +532,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> log1p()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> log1p()
         {
             assign(FloatMathFunctionsImpl.LOG1P);
             return this;
@@ -439,7 +541,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> pow(final double x)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> pow(final double x)
         {
             assign(FloatMathFunctionsImpl.POW((float) x));
             return this;
@@ -447,7 +550,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> rint()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> rint()
         {
             assign(FloatMathFunctionsImpl.RINT);
             return this;
@@ -455,7 +559,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> round()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> round()
         {
             assign(FloatMathFunctionsImpl.ROUND);
             return this;
@@ -463,7 +568,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> signum()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> signum()
         {
             assign(FloatMathFunctionsImpl.SIGNUM);
             return this;
@@ -471,7 +577,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> sin()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> sin()
         {
             assign(FloatMathFunctionsImpl.SIN);
             return this;
@@ -479,7 +586,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> sinh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> sinh()
         {
             assign(FloatMathFunctionsImpl.SINH);
             return this;
@@ -487,7 +595,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> sqrt()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> sqrt()
         {
             assign(FloatMathFunctionsImpl.SQRT);
             return this;
@@ -495,7 +604,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> tan()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> tan()
         {
             assign(FloatMathFunctionsImpl.TAN);
             return this;
@@ -503,7 +613,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> tanh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> tanh()
         {
             assign(FloatMathFunctionsImpl.TANH);
             return this;
@@ -511,7 +622,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> toDegrees()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> toDegrees()
         {
             assign(FloatMathFunctionsImpl.TO_DEGREES);
             return this;
@@ -519,7 +631,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> toRadians()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> toRadians()
         {
             assign(FloatMathFunctionsImpl.TO_RADIANS);
             return this;
@@ -527,7 +640,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> inv()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> inv()
         {
             assign(FloatMathFunctionsImpl.INV);
             return this;
@@ -535,7 +649,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> multiplyBy(final float constant)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> multiplyBy(final float constant)
         {
             assign(FloatMathFunctionsImpl.MULT(constant));
             return this;
@@ -543,7 +658,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Abs<U> divideBy(final float constant)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> divideBy(final float constant)
         {
             assign(FloatMathFunctionsImpl.DIV(constant));
             return this;
@@ -558,7 +674,9 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
     /**
      * @param <U> Unit the unit for which this Vector will be created
      */
-    public abstract static class Rel<U extends Unit<U>> extends MutableFloatVector<U> implements Relative
+    public abstract static class Rel<U extends Unit<U>> extends MutableFloatVector<U> implements Relative,
+        MathFunctions<MutableFloatVector.Rel<U>>, FloatMathFunctions<MutableFloatVector.Rel<U>>,
+        FunctionsRel<U, FloatVector.Abs<U>, FloatVector.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -571,6 +689,24 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         {
             super(unit);
         }
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract MutableFloatVector.Rel<U> mutable();
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract FloatVector.Rel<U> immutable();
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract MutableFloatVector.Rel<U> copy();
+
+        /** {@inheritDoc} */
+        public abstract MutableFloatVector.Rel<U> toDense();
+
+        /** {@inheritDoc} */
+        public abstract MutableFloatVector.Rel<U> toSparse();
 
         /**
          * RELATIVE DENSE implementation of MutableFloatVector.
@@ -607,7 +743,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /**
              * Construct a new Relative Dense Mutable FloatVector.
-             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Dense MutableFloatVector
+             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Dense
+             *            MutableFloatVector
              * @throws ValueException when values has zero entries
              */
             public Dense(final FloatScalar.Rel<U>[] values) throws ValueException
@@ -640,7 +777,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final FloatVector.Rel.Dense<U> immutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public FloatVector.Rel<U> immutable()
             {
                 setCopyOnWrite(true);
                 return new FloatVector.Rel.Dense<U>(getData(), getUnit());
@@ -648,7 +786,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final MutableFloatVector.Rel.Dense<U> mutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableFloatVector.Rel<U> mutable()
             {
                 setCopyOnWrite(true);
                 final MutableFloatVector.Rel.Dense<U> result =
@@ -659,7 +798,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final MutableFloatVector.Rel.Dense<U> copy()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableFloatVector.Rel<U> copy()
             {
                 return mutable();
             }
@@ -669,6 +809,22 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             protected final FloatVectorDataDense getData()
             {
                 return (FloatVectorDataDense) this.data;
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableFloatVector.Rel<U> toDense()
+            {
+                return copy();
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableFloatVector.Rel<U> toSparse()
+            {
+                return new MutableFloatVector.Rel.Sparse<U>(getData().toSparse(), getUnit());
             }
         }
 
@@ -688,7 +844,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
              * @param length the size of the vector
              * @throws ValueException when values is null
              */
-            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
+            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length)
+                throws ValueException
             {
                 super(unit);
                 this.data = initializeSparse(values, length);
@@ -703,7 +860,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
              */
             public Sparse(final SortedMap<Integer, FloatScalar.Rel<U>> values, final int length) throws ValueException
             {
-                super(checkNonEmptyMR(values).get(0).getUnit());
+                super(checkNonEmptyMR(values).get(values.firstKey()).getUnit());
                 this.data = initializeSparseMR(values, length);
             }
 
@@ -725,7 +882,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
              *            FloatVector
              * @throws ValueException when values has zero entries
              */
-            public Sparse(final FloatScalar.Abs<U>[] values) throws ValueException
+            public Sparse(final FloatScalar.Rel<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
                 this.data = initializeDense(values).toSparse();
@@ -744,7 +901,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final FloatVector.Rel.Sparse<U> immutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public FloatVector.Rel<U> immutable()
             {
                 setCopyOnWrite(true);
                 return new FloatVector.Rel.Sparse<U>(getData(), getUnit());
@@ -752,7 +910,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final MutableFloatVector.Rel.Sparse<U> mutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableFloatVector.Rel<U> mutable()
             {
                 setCopyOnWrite(true);
                 final MutableFloatVector.Rel.Sparse<U> result =
@@ -763,16 +922,34 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /** {@inheritDoc} */
             @Override
-            public final MutableFloatVector.Rel.Sparse<U> copy()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableFloatVector.Rel<U> copy()
             {
                 return mutable();
             }
 
             /** {@inheritDoc} */
             @Override
-            protected final FloatVectorDataSparse getData()
+            @SuppressWarnings("checkstyle:designforextension")
+            protected FloatVectorDataSparse getData()
             {
                 return (FloatVectorDataSparse) this.data;
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableFloatVector.Rel<U> toDense()
+            {
+                return new MutableFloatVector.Rel.Dense<U>(getData().toDense(), getUnit());
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableFloatVector.Rel<U> toSparse()
+            {
+                return copy();
             }
         }
 
@@ -780,7 +957,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final FloatScalar.Rel<U> get(final int index) throws ValueException
+        @SuppressWarnings("checkstyle:designforextension")
+        public FloatScalar.Rel<U> get(final int index) throws ValueException
         {
             return new FloatScalar.Rel<U>(getInUnit(index, getUnit()), getUnit());
         }
@@ -807,13 +985,54 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             return (MutableFloatVector.Rel<U>) decrementByImpl(decrement);
         }
 
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public FloatVector.Rel<U> plus(final FloatVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateRel(this.getData().plus(rel.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public FloatVector.Abs<U> plus(final FloatVector.Abs<U> abs) throws ValueException
+        {
+            return instantiateAbs(this.getData().plus(abs.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public FloatVector.Rel<U> minus(final FloatVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateRel(this.getData().minus(rel.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public FloatVector.Rel<U> times(final FloatVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateRel(this.getData().times(rel.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public FloatVector.Rel<U> divide(final FloatVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateRel(this.getData().divide(rel.getData()), getUnit());
+        }
+
         /**********************************************************************************/
         /********************************** MATH METHODS **********************************/
         /**********************************************************************************/
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> abs()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> abs()
         {
             assign(FloatMathFunctionsImpl.ABS);
             return this;
@@ -821,7 +1040,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> acos()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> acos()
         {
             assign(FloatMathFunctionsImpl.ACOS);
             return this;
@@ -829,7 +1049,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> asin()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> asin()
         {
             assign(FloatMathFunctionsImpl.ASIN);
             return this;
@@ -837,7 +1058,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> atan()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> atan()
         {
             assign(FloatMathFunctionsImpl.ATAN);
             return this;
@@ -845,7 +1067,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> cbrt()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> cbrt()
         {
             assign(FloatMathFunctionsImpl.CBRT);
             return this;
@@ -853,7 +1076,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> ceil()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> ceil()
         {
             assign(FloatMathFunctionsImpl.CEIL);
             return this;
@@ -861,7 +1085,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> cos()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> cos()
         {
             assign(FloatMathFunctionsImpl.COS);
             return this;
@@ -869,7 +1094,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> cosh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> cosh()
         {
             assign(FloatMathFunctionsImpl.COSH);
             return this;
@@ -877,7 +1103,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> exp()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> exp()
         {
             assign(FloatMathFunctionsImpl.EXP);
             return this;
@@ -885,7 +1112,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> expm1()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> expm1()
         {
             assign(FloatMathFunctionsImpl.EXPM1);
             return this;
@@ -893,7 +1121,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> floor()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> floor()
         {
             assign(FloatMathFunctionsImpl.FLOOR);
             return this;
@@ -901,7 +1130,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> log()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> log()
         {
             assign(FloatMathFunctionsImpl.LOG);
             return this;
@@ -909,7 +1139,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> log10()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> log10()
         {
             assign(FloatMathFunctionsImpl.LOG10);
             return this;
@@ -917,7 +1148,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> log1p()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> log1p()
         {
             assign(FloatMathFunctionsImpl.LOG1P);
             return this;
@@ -925,7 +1157,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> pow(final double x)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> pow(final double x)
         {
             assign(FloatMathFunctionsImpl.POW((float) x));
             return this;
@@ -933,7 +1166,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> rint()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> rint()
         {
             assign(FloatMathFunctionsImpl.RINT);
             return this;
@@ -941,7 +1175,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> round()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> round()
         {
             assign(FloatMathFunctionsImpl.ROUND);
             return this;
@@ -949,7 +1184,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> signum()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> signum()
         {
             assign(FloatMathFunctionsImpl.SIGNUM);
             return this;
@@ -957,7 +1193,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> sin()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> sin()
         {
             assign(FloatMathFunctionsImpl.SIN);
             return this;
@@ -965,7 +1202,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> sinh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> sinh()
         {
             assign(FloatMathFunctionsImpl.SINH);
             return this;
@@ -973,7 +1211,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> sqrt()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> sqrt()
         {
             assign(FloatMathFunctionsImpl.SQRT);
             return this;
@@ -981,7 +1220,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> tan()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> tan()
         {
             assign(FloatMathFunctionsImpl.TAN);
             return this;
@@ -989,7 +1229,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> tanh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> tanh()
         {
             assign(FloatMathFunctionsImpl.TANH);
             return this;
@@ -997,7 +1238,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> toDegrees()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> toDegrees()
         {
             assign(FloatMathFunctionsImpl.TO_DEGREES);
             return this;
@@ -1005,7 +1247,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> toRadians()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> toRadians()
         {
             assign(FloatMathFunctionsImpl.TO_RADIANS);
             return this;
@@ -1013,7 +1256,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> inv()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> inv()
         {
             assign(FloatMathFunctionsImpl.INV);
             return this;
@@ -1021,7 +1265,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> multiplyBy(final float constant)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> multiplyBy(final float constant)
         {
             assign(FloatMathFunctionsImpl.MULT(constant));
             return this;
@@ -1029,18 +1274,13 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatVector.Rel<U> divideBy(final float constant)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> divideBy(final float constant)
         {
             assign(FloatMathFunctionsImpl.DIV(constant));
             return this;
         }
     }
-
-    /**
-     * Make (immutable) FloatVectorNew equivalent for any type of MutableFloatVector.
-     * @return FloatVector&lt;U&gt;; immutable version of this FloatVector
-     */
-    public abstract FloatVector<U> immutable();
 
     /**
      * Check the copyOnWrite flag and, if it is set, make a deep copy of the data and clear the flag.

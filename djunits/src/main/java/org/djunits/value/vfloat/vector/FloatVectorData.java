@@ -2,6 +2,8 @@ package org.djunits.value.vfloat.vector;
 
 import java.util.Arrays;
 
+import org.djunits.value.ValueException;
+
 /**
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
@@ -100,6 +102,107 @@ abstract class FloatVectorData
         if (!Arrays.equals(this.vectorSI, other.vectorSI))
             return false;
         return true;
+    }
+
+    /**
+     * Check the sizes of this data object and the other data object.
+     * @param other the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    private void checkSizes(final FloatVectorData other) throws ValueException
+    {
+        if (this.size() != other.size())
+        {
+            throw new ValueException("Two data objects used in a FloatVector operation do not have the same size");
+        }
+    }
+
+    /**
+     * Add two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
+     * vector is returned.
+     * @param right the other data object to add
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public FloatVectorData plus(final FloatVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        float[] dv = new float[this.size()];
+        for (int i = 0; i < dv.length; i++)
+        {
+            dv[i] = this.getSI(i) + right.getSI(i);
+        }
+        if (this instanceof FloatVectorDataSparse && right instanceof FloatVectorDataSparse)
+        {
+            return new FloatVectorDataDense(dv).toSparse();
+        }
+        return new FloatVectorDataDense(dv);
+    }
+
+    /**
+     * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
+     * vector is returned.
+     * @param right the other data object to subtract
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public FloatVectorData minus(final FloatVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        float[] dv = new float[this.size()];
+        for (int i = 0; i < dv.length; i++)
+        {
+            dv[i] = this.getSI(i) - right.getSI(i);
+        }
+        if (this instanceof FloatVectorDataSparse && right instanceof FloatVectorDataSparse)
+        {
+            return new FloatVectorDataDense(dv).toSparse();
+        }
+        return new FloatVectorDataDense(dv);
+    }
+
+    /**
+     * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
+     * vector is returned.
+     * @param right the other data object to multiply with
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public FloatVectorData times(final FloatVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        float[] dv = new float[this.size()];
+        for (int i = 0; i < dv.length; i++)
+        {
+            dv[i] = this.getSI(i) * right.getSI(i);
+        }
+        if (this instanceof FloatVectorDataDense && right instanceof FloatVectorDataDense)
+        {
+            return new FloatVectorDataDense(dv);
+        }
+        return new FloatVectorDataDense(dv).toSparse();
+    }
+
+    /**
+     * Divide two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
+     * vector is returned.
+     * @param right the other data object to divide by
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public FloatVectorData divide(final FloatVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        float[] dv = new float[this.size()];
+        for (int i = 0; i < dv.length; i++)
+        {
+            dv[i] = this.getSI(i) / right.getSI(i);
+        }
+        if (this instanceof FloatVectorDataDense && right instanceof FloatVectorDataDense)
+        {
+            return new FloatVectorDataDense(dv);
+        }
+        return new FloatVectorDataDense(dv).toSparse();
     }
 
     /**

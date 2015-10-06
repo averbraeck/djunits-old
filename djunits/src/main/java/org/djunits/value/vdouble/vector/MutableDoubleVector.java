@@ -6,6 +6,9 @@ import java.util.SortedMap;
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
 import org.djunits.value.DenseData;
+import org.djunits.value.FunctionsAbs;
+import org.djunits.value.FunctionsRel;
+import org.djunits.value.MathFunctions;
 import org.djunits.value.Relative;
 import org.djunits.value.SparseData;
 import org.djunits.value.ValueException;
@@ -30,7 +33,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <U> Unit; the unit of this MutableDoubleVector
  */
 public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVector<U> implements
-    WriteDoubleVectorFunctions<U>, DoubleMathFunctions<MutableDoubleVector<U>>
+    MutableDoubleVectorInterface<U>
 {
     /**  */
     private static final long serialVersionUID = 20151003L;
@@ -72,7 +75,9 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
     /**
      * @param <U> Unit the unit for which this Vector will be created
      */
-    public abstract static class Abs<U extends Unit<U>> extends MutableDoubleVector<U> implements Absolute
+    public abstract static class Abs<U extends Unit<U>> extends MutableDoubleVector<U> implements Absolute,
+        MathFunctions<MutableDoubleVector.Abs<U>>, DoubleMathFunctions<MutableDoubleVector.Abs<U>>,
+        FunctionsAbs<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -85,6 +90,24 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         {
             super(unit);
         }
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract MutableDoubleVector.Abs<U> mutable();
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract DoubleVector.Abs<U> immutable();
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract MutableDoubleVector.Abs<U> copy();
+
+        /** {@inheritDoc} */
+        public abstract MutableDoubleVector.Abs<U> toDense();
+
+        /** {@inheritDoc} */
+        public abstract MutableDoubleVector.Abs<U> toSparse();
 
         /**
          * ABSOLUTE DENSE implementation of MutableDoubleVector.
@@ -155,7 +178,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final DoubleVector.Abs.Dense<U> immutable()
+            @SuppressWarnings("designforextension")
+            public DoubleVector.Abs<U> immutable()
             {
                 setCopyOnWrite(true);
                 return new DoubleVector.Abs.Dense<U>(getData(), getUnit());
@@ -163,7 +187,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final MutableDoubleVector.Abs.Dense<U> mutable()
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Abs<U> mutable()
             {
                 setCopyOnWrite(true);
                 final MutableDoubleVector.Abs.Dense<U> result =
@@ -174,7 +199,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final MutableDoubleVector.Abs.Dense<U> copy()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableDoubleVector.Abs<U> copy()
             {
                 return mutable();
             }
@@ -184,6 +210,22 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             protected final DoubleVectorDataDense getData()
             {
                 return (DoubleVectorDataDense) this.data;
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Abs<U> toDense()
+            {
+                return copy();
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Abs<U> toSparse()
+            {
+                return new MutableDoubleVector.Abs.Sparse<U>(getData().toSparse(), getUnit());
             }
         }
 
@@ -219,7 +261,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
              */
             public Sparse(final SortedMap<Integer, DoubleScalar.Abs<U>> values, final int length) throws ValueException
             {
-                super(checkNonEmptyMA(values).get(0).getUnit());
+                super(checkNonEmptyMA(values).get(values.firstKey()).getUnit());
                 initializeSparseMA(values, length);
             }
 
@@ -260,7 +302,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final DoubleVector.Abs.Sparse<U> immutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public DoubleVector.Abs<U> immutable()
             {
                 setCopyOnWrite(true);
                 return new DoubleVector.Abs.Sparse<U>(getData(), getUnit());
@@ -268,7 +311,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final MutableDoubleVector.Abs.Sparse<U> mutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableDoubleVector.Abs<U> mutable()
             {
                 setCopyOnWrite(true);
                 final MutableDoubleVector.Abs.Sparse<U> result =
@@ -279,7 +323,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final MutableDoubleVector.Abs.Sparse<U> copy()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableDoubleVector.Abs<U> copy()
             {
                 return mutable();
             }
@@ -290,13 +335,30 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             {
                 return (DoubleVectorDataSparse) this.data;
             }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Abs<U> toDense()
+            {
+                return new MutableDoubleVector.Abs.Dense<U>(getData().toDense(), getUnit());
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Abs<U> toSparse()
+            {
+                return copy();
+            }
         }
 
         /** ================================= ABS GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
-        public final DoubleScalar.Abs<U> get(final int index) throws ValueException
+        @SuppressWarnings("checkstyle:designforextension")
+        public DoubleScalar.Abs<U> get(final int index) throws ValueException
         {
             return new DoubleScalar.Abs<U>(getInUnit(index, getUnit()), getUnit());
         }
@@ -323,13 +385,38 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             return (MutableDoubleVector.Abs<U>) decrementByImpl(decrement);
         }
 
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Abs<U> plus(final DoubleVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateAbs(this.getData().plus(rel.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Abs<U> minus(final DoubleVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateAbs(this.getData().minus(rel.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Rel<U> minus(final DoubleVector.Abs<U> rel) throws ValueException
+        {
+            return instantiateRel(this.getData().minus(rel.getData()), getUnit());
+        }
+
         /**********************************************************************************/
         /********************************** MATH METHODS **********************************/
         /**********************************************************************************/
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> abs()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> abs()
         {
             assign(DoubleMathFunctionsImpl.ABS);
             return this;
@@ -337,7 +424,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> acos()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> acos()
         {
             assign(DoubleMathFunctionsImpl.ACOS);
             return this;
@@ -345,7 +433,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> asin()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> asin()
         {
             assign(DoubleMathFunctionsImpl.ASIN);
             return this;
@@ -353,7 +442,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> atan()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> atan()
         {
             assign(DoubleMathFunctionsImpl.ATAN);
             return this;
@@ -361,7 +451,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> cbrt()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> cbrt()
         {
             assign(DoubleMathFunctionsImpl.CBRT);
             return this;
@@ -369,7 +460,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> ceil()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> ceil()
         {
             assign(DoubleMathFunctionsImpl.CEIL);
             return this;
@@ -377,7 +469,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> cos()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> cos()
         {
             assign(DoubleMathFunctionsImpl.COS);
             return this;
@@ -385,7 +478,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> cosh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> cosh()
         {
             assign(DoubleMathFunctionsImpl.COSH);
             return this;
@@ -393,7 +487,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> exp()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> exp()
         {
             assign(DoubleMathFunctionsImpl.EXP);
             return this;
@@ -401,7 +496,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> expm1()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> expm1()
         {
             assign(DoubleMathFunctionsImpl.EXPM1);
             return this;
@@ -409,7 +505,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> floor()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> floor()
         {
             assign(DoubleMathFunctionsImpl.FLOOR);
             return this;
@@ -417,7 +514,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> log()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> log()
         {
             assign(DoubleMathFunctionsImpl.LOG);
             return this;
@@ -425,7 +523,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> log10()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> log10()
         {
             assign(DoubleMathFunctionsImpl.LOG10);
             return this;
@@ -433,7 +532,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> log1p()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> log1p()
         {
             assign(DoubleMathFunctionsImpl.LOG1P);
             return this;
@@ -441,7 +541,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> pow(final double x)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> pow(final double x)
         {
             assign(DoubleMathFunctionsImpl.POW(x));
             return this;
@@ -449,7 +550,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> rint()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> rint()
         {
             assign(DoubleMathFunctionsImpl.RINT);
             return this;
@@ -457,7 +559,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> round()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> round()
         {
             assign(DoubleMathFunctionsImpl.ROUND);
             return this;
@@ -465,7 +568,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> signum()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> signum()
         {
             assign(DoubleMathFunctionsImpl.SIGNUM);
             return this;
@@ -473,7 +577,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> sin()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> sin()
         {
             assign(DoubleMathFunctionsImpl.SIN);
             return this;
@@ -481,7 +586,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> sinh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> sinh()
         {
             assign(DoubleMathFunctionsImpl.SINH);
             return this;
@@ -489,7 +595,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> sqrt()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> sqrt()
         {
             assign(DoubleMathFunctionsImpl.SQRT);
             return this;
@@ -497,7 +604,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> tan()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> tan()
         {
             assign(DoubleMathFunctionsImpl.TAN);
             return this;
@@ -505,7 +613,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> tanh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> tanh()
         {
             assign(DoubleMathFunctionsImpl.TANH);
             return this;
@@ -513,7 +622,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> toDegrees()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> toDegrees()
         {
             assign(DoubleMathFunctionsImpl.TO_DEGREES);
             return this;
@@ -521,7 +631,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> toRadians()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> toRadians()
         {
             assign(DoubleMathFunctionsImpl.TO_RADIANS);
             return this;
@@ -529,7 +640,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> inv()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> inv()
         {
             assign(DoubleMathFunctionsImpl.INV);
             return this;
@@ -537,7 +649,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> multiplyBy(final double constant)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> multiplyBy(final double constant)
         {
             assign(DoubleMathFunctionsImpl.MULT(constant));
             return this;
@@ -545,7 +658,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Abs<U> divideBy(final double constant)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Abs<U> divideBy(final double constant)
         {
             assign(DoubleMathFunctionsImpl.DIV(constant));
             return this;
@@ -560,7 +674,9 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
     /**
      * @param <U> Unit the unit for which this Vector will be created
      */
-    public abstract static class Rel<U extends Unit<U>> extends MutableDoubleVector<U> implements Relative
+    public abstract static class Rel<U extends Unit<U>> extends MutableDoubleVector<U> implements Relative,
+        MathFunctions<MutableDoubleVector.Rel<U>>, DoubleMathFunctions<MutableDoubleVector.Rel<U>>,
+        FunctionsRel<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -573,6 +689,24 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         {
             super(unit);
         }
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract MutableDoubleVector.Rel<U> mutable();
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract DoubleVector.Rel<U> immutable();
+
+        /** {@inheritDoc} */
+        @Override
+        public abstract MutableDoubleVector.Rel<U> copy();
+
+        /** {@inheritDoc} */
+        public abstract MutableDoubleVector.Rel<U> toDense();
+
+        /** {@inheritDoc} */
+        public abstract MutableDoubleVector.Rel<U> toSparse();
 
         /**
          * RELATIVE DENSE implementation of MutableDoubleVector.
@@ -643,7 +777,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final DoubleVector.Rel.Dense<U> immutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public DoubleVector.Rel<U> immutable()
             {
                 setCopyOnWrite(true);
                 return new DoubleVector.Rel.Dense<U>(getData(), getUnit());
@@ -651,7 +786,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final MutableDoubleVector.Rel.Dense<U> mutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableDoubleVector.Rel<U> mutable()
             {
                 setCopyOnWrite(true);
                 final MutableDoubleVector.Rel.Dense<U> result =
@@ -662,7 +798,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final MutableDoubleVector.Rel.Dense<U> copy()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableDoubleVector.Rel<U> copy()
             {
                 return mutable();
             }
@@ -672,6 +809,22 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             protected final DoubleVectorDataDense getData()
             {
                 return (DoubleVectorDataDense) this.data;
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Rel<U> toDense()
+            {
+                return copy();
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Rel<U> toSparse()
+            {
+                return new MutableDoubleVector.Rel.Sparse<U>(getData().toSparse(), getUnit());
             }
         }
 
@@ -707,7 +860,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
              */
             public Sparse(final SortedMap<Integer, DoubleScalar.Rel<U>> values, final int length) throws ValueException
             {
-                super(checkNonEmptyMR(values).get(0).getUnit());
+                super(checkNonEmptyMR(values).get(values.firstKey()).getUnit());
                 this.data = initializeSparseMR(values, length);
             }
 
@@ -729,7 +882,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
              *            DoubleVector
              * @throws ValueException when values has zero entries
              */
-            public Sparse(final DoubleScalar.Abs<U>[] values) throws ValueException
+            public Sparse(final DoubleScalar.Rel<U>[] values) throws ValueException
             {
                 super(checkNonEmpty(values)[0].getUnit());
                 this.data = initializeDense(values).toSparse();
@@ -748,7 +901,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final DoubleVector.Rel.Sparse<U> immutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public DoubleVector.Rel<U> immutable()
             {
                 setCopyOnWrite(true);
                 return new DoubleVector.Rel.Sparse<U>(getData(), getUnit());
@@ -756,7 +910,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final MutableDoubleVector.Rel.Sparse<U> mutable()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableDoubleVector.Rel<U> mutable()
             {
                 setCopyOnWrite(true);
                 final MutableDoubleVector.Rel.Sparse<U> result =
@@ -767,16 +922,34 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
             /** {@inheritDoc} */
             @Override
-            public final MutableDoubleVector.Rel.Sparse<U> copy()
+            @SuppressWarnings("checkstyle:designforextension")
+            public MutableDoubleVector.Rel<U> copy()
             {
                 return mutable();
             }
 
             /** {@inheritDoc} */
             @Override
-            protected final DoubleVectorDataSparse getData()
+            @SuppressWarnings("checkstyle:designforextension")
+            protected DoubleVectorDataSparse getData()
             {
                 return (DoubleVectorDataSparse) this.data;
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Rel<U> toDense()
+            {
+                return new MutableDoubleVector.Rel.Dense<U>(getData().toDense(), getUnit());
+            }
+
+            /** {@inheritDoc} */
+            @Override
+            @SuppressWarnings("designforextension")
+            public MutableDoubleVector.Rel<U> toSparse()
+            {
+                return copy();
             }
         }
 
@@ -784,7 +957,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final DoubleScalar.Rel<U> get(final int index) throws ValueException
+        @SuppressWarnings("checkstyle:designforextension")
+        public DoubleScalar.Rel<U> get(final int index) throws ValueException
         {
             return new DoubleScalar.Rel<U>(getInUnit(index, getUnit()), getUnit());
         }
@@ -811,13 +985,54 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
             return (MutableDoubleVector.Rel<U>) decrementByImpl(decrement);
         }
 
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Rel<U> plus(final DoubleVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateRel(this.getData().plus(rel.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Abs<U> plus(final DoubleVector.Abs<U> abs) throws ValueException
+        {
+            return instantiateAbs(this.getData().plus(abs.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Rel<U> minus(final DoubleVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateRel(this.getData().minus(rel.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Rel<U> times(final DoubleVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateRel(this.getData().times(rel.getData()), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Rel<U> divide(final DoubleVector.Rel<U> rel) throws ValueException
+        {
+            return instantiateRel(this.getData().divide(rel.getData()), getUnit());
+        }
+
         /**********************************************************************************/
         /********************************** MATH METHODS **********************************/
         /**********************************************************************************/
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> abs()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> abs()
         {
             assign(DoubleMathFunctionsImpl.ABS);
             return this;
@@ -825,7 +1040,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> acos()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> acos()
         {
             assign(DoubleMathFunctionsImpl.ACOS);
             return this;
@@ -833,7 +1049,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> asin()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> asin()
         {
             assign(DoubleMathFunctionsImpl.ASIN);
             return this;
@@ -841,7 +1058,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> atan()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> atan()
         {
             assign(DoubleMathFunctionsImpl.ATAN);
             return this;
@@ -849,7 +1067,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> cbrt()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> cbrt()
         {
             assign(DoubleMathFunctionsImpl.CBRT);
             return this;
@@ -857,7 +1076,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> ceil()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> ceil()
         {
             assign(DoubleMathFunctionsImpl.CEIL);
             return this;
@@ -865,7 +1085,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> cos()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> cos()
         {
             assign(DoubleMathFunctionsImpl.COS);
             return this;
@@ -873,7 +1094,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> cosh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> cosh()
         {
             assign(DoubleMathFunctionsImpl.COSH);
             return this;
@@ -881,7 +1103,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> exp()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> exp()
         {
             assign(DoubleMathFunctionsImpl.EXP);
             return this;
@@ -889,7 +1112,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> expm1()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> expm1()
         {
             assign(DoubleMathFunctionsImpl.EXPM1);
             return this;
@@ -897,7 +1121,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> floor()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> floor()
         {
             assign(DoubleMathFunctionsImpl.FLOOR);
             return this;
@@ -905,7 +1130,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> log()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> log()
         {
             assign(DoubleMathFunctionsImpl.LOG);
             return this;
@@ -913,7 +1139,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> log10()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> log10()
         {
             assign(DoubleMathFunctionsImpl.LOG10);
             return this;
@@ -921,7 +1148,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> log1p()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> log1p()
         {
             assign(DoubleMathFunctionsImpl.LOG1P);
             return this;
@@ -929,7 +1157,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> pow(final double x)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> pow(final double x)
         {
             assign(DoubleMathFunctionsImpl.POW(x));
             return this;
@@ -937,7 +1166,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> rint()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> rint()
         {
             assign(DoubleMathFunctionsImpl.RINT);
             return this;
@@ -945,7 +1175,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> round()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> round()
         {
             assign(DoubleMathFunctionsImpl.ROUND);
             return this;
@@ -953,7 +1184,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> signum()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> signum()
         {
             assign(DoubleMathFunctionsImpl.SIGNUM);
             return this;
@@ -961,7 +1193,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> sin()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> sin()
         {
             assign(DoubleMathFunctionsImpl.SIN);
             return this;
@@ -969,7 +1202,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> sinh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> sinh()
         {
             assign(DoubleMathFunctionsImpl.SINH);
             return this;
@@ -977,7 +1211,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> sqrt()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> sqrt()
         {
             assign(DoubleMathFunctionsImpl.SQRT);
             return this;
@@ -985,7 +1220,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> tan()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> tan()
         {
             assign(DoubleMathFunctionsImpl.TAN);
             return this;
@@ -993,7 +1229,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> tanh()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> tanh()
         {
             assign(DoubleMathFunctionsImpl.TANH);
             return this;
@@ -1001,7 +1238,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> toDegrees()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> toDegrees()
         {
             assign(DoubleMathFunctionsImpl.TO_DEGREES);
             return this;
@@ -1009,7 +1247,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> toRadians()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> toRadians()
         {
             assign(DoubleMathFunctionsImpl.TO_RADIANS);
             return this;
@@ -1017,7 +1256,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> inv()
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> inv()
         {
             assign(DoubleMathFunctionsImpl.INV);
             return this;
@@ -1025,7 +1265,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> multiplyBy(final double constant)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> multiplyBy(final double constant)
         {
             assign(DoubleMathFunctionsImpl.MULT(constant));
             return this;
@@ -1033,18 +1274,13 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
 
         /** {@inheritDoc} */
         @Override
-        public final MutableDoubleVector.Rel<U> divideBy(final double constant)
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableDoubleVector.Rel<U> divideBy(final double constant)
         {
             assign(DoubleMathFunctionsImpl.DIV(constant));
             return this;
         }
     }
-
-    /**
-     * Make (immutable) DoubleVectorNew equivalent for any type of MutableDoubleVector.
-     * @return DoubleVector&lt;U&gt;; immutable version of this DoubleVector
-     */
-    public abstract DoubleVector<U> immutable();
 
     /**
      * Check the copyOnWrite flag and, if it is set, make a deep copy of the data and clear the flag.

@@ -21,6 +21,12 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
 public interface WriteFloatMatrixFunctions<U extends Unit<U>>
 {
     /**
+     * Create a deep copy of this MutableDoubleMatrix. <br>
+     * @return DoubleMatrix&lt;U&gt;; deep copy of this MutableDoubleMatrix
+     */
+    MutableFloatMatrix<U> copy();
+
+    /**
      * Replace the value at row, column by the supplied value which is expressed in the standard SI unit.
      * @param row int; row of the value to replace
      * @param column int; column of the value to replace

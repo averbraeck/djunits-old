@@ -226,7 +226,7 @@ public class DoubleMatrixDenseTest
             double[][] value2 = data(3, 5, false, 38.0);
             value2[0][0] = 12345;
             DoubleMatrix.Abs.Dense<TemperatureUnit> dm = new DoubleMatrix.Abs.Dense<TemperatureUnit>(value, tempUnit);
-            DoubleMatrix.Abs<TemperatureUnit> dmCopy = dm.copy();
+            DoubleMatrix.Abs<TemperatureUnit> dmCopy = dm;
             MutableDoubleMatrix.Abs.Dense<TemperatureUnit> mdm = dm.mutable();
             checkContentsAndType(dm, value, 0.001, tempUnit, true);
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
@@ -1061,7 +1061,7 @@ public class DoubleMatrixDenseTest
             double[][] value2 = data(3, 5, false, 38.0);
             value2[0][0] = 12345;
             DoubleMatrix.Rel.Dense<TemperatureUnit> dm = new DoubleMatrix.Rel.Dense<TemperatureUnit>(value, tempUnit);
-            DoubleMatrix.Rel<TemperatureUnit> dmCopy = dm.copy();
+            DoubleMatrix.Rel<TemperatureUnit> dmCopy = dm;
             MutableDoubleMatrix.Rel.Dense<TemperatureUnit> mdm = dm.mutable();
             checkContentsAndType(dm, value, 0.001, tempUnit, false);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);

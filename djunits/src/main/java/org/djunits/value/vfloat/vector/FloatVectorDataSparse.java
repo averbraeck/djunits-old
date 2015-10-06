@@ -138,4 +138,19 @@ public class FloatVectorDataSparse extends FloatVectorData
         return true;
     }
 
+    /**
+     * @param left l
+     * @param right r
+     * @return plus
+     */
+    static FloatVectorDataSparse plus(final FloatVectorData left, final FloatVectorData right)
+    {
+        float[] dv = new float[left.vectorSI.length];
+        for (int i = 0; i < dv.length; i++)
+        {
+            dv[i] = left.getSI(i) + right.getSI(i);
+        }
+        return new FloatVectorDataDense(dv).toSparse();
+    }
+
 }
