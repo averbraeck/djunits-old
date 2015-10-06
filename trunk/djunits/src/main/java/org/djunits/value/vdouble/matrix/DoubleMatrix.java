@@ -130,13 +130,6 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
 
             /** {@inheritDoc} */
             @Override
-            public final DoubleMatrix.Abs.Dense<U> copy()
-            {
-                return this; // Immutable...
-            }
-
-            /** {@inheritDoc} */
-            @Override
             protected final DoubleMatrixDataDense getData()
             {
                 return (DoubleMatrixDataDense) this.data;
@@ -194,14 +187,7 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
                 return new MutableDoubleMatrix.Abs.Sparse<U>(getData(), getUnit());
             }
 
-            /** {@inheritDoc} */
-            @Override
-            public final DoubleMatrix.Abs.Sparse<U> copy()
-            {
-                return this; // Immutable...
-            }
-
-            /** {@inheritDoc} */
+           /** {@inheritDoc} */
             @Override
             protected final DoubleMatrixDataSparse getData()
             {
@@ -294,13 +280,6 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
 
             /** {@inheritDoc} */
             @Override
-            public final DoubleMatrix.Rel.Dense<U> copy()
-            {
-                return this; // Immutable...
-            }
-
-            /** {@inheritDoc} */
-            @Override
             protected final DoubleMatrixDataDense getData()
             {
                 return (DoubleMatrixDataDense) this.data;
@@ -356,13 +335,6 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
             public final MutableDoubleMatrix.Rel.Sparse<U> mutable()
             {
                 return new MutableDoubleMatrix.Rel.Sparse<U>(getData(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            public final DoubleMatrix.Rel.Sparse<U> copy()
-            {
-                return this; // Immutable...
             }
 
             /** {@inheritDoc} */

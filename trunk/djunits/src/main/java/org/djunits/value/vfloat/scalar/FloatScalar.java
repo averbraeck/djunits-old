@@ -78,13 +78,6 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
             return new Float(this.si).compareTo(o.si);
         }
 
-        /** {@inheritDoc} */
-        @Override
-        public final FloatScalar.Abs<U> copy()
-        {
-            return this;
-        }
-
         /**
          * Retrieve the value in the underlying SI unit.
          * @return float
@@ -442,13 +435,6 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
         public final int compareTo(final Rel<U> o)
         {
             return new Float(this.si).compareTo(o.si);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatScalar.Rel<U> copy()
-        {
-            return this;
         }
 
         /**

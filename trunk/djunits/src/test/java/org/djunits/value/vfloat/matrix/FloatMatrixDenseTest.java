@@ -226,7 +226,7 @@ public class FloatMatrixDenseTest
             float[][] value2 = data(3, 5, false, 38.0f);
             value2[0][0] = 12345;
             FloatMatrix.Abs.Dense<TemperatureUnit> fm = new FloatMatrix.Abs.Dense<TemperatureUnit>(value, tempUnit);
-            FloatMatrix.Abs<TemperatureUnit> fmCopy = fm.copy();
+            FloatMatrix.Abs<TemperatureUnit> fmCopy = fm;
             MutableFloatMatrix.Abs.Dense<TemperatureUnit> mfm = fm.mutable();
             checkContentsAndType(fm, value, 0.001f, tempUnit, true);
             checkContentsAndType(mfm, value, 0.001f, tempUnit, true);
@@ -1053,7 +1053,7 @@ public class FloatMatrixDenseTest
             float[][] value2 = data(3, 5, false, 38.0f);
             value2[0][0] = 12345;
             FloatMatrix.Rel.Dense<TemperatureUnit> fm = new FloatMatrix.Rel.Dense<TemperatureUnit>(value, tempUnit);
-            FloatMatrix.Rel<TemperatureUnit> fmCopy = fm.copy();
+            FloatMatrix.Rel<TemperatureUnit> fmCopy = fm;
             MutableFloatMatrix.Rel.Dense<TemperatureUnit> mfm = fm.mutable();
             checkContentsAndType(fm, value, 0.001f, tempUnit, false);
             checkContentsAndType(mfm, value, 0.001f, tempUnit, false);

@@ -200,14 +200,14 @@ public class DoubleVectorDenseTest
             double[] value2 = data(3, 38.0);
             value2[0] = 12345;
             DoubleVector.Abs.Dense<TemperatureUnit> dv = new DoubleVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
-            DoubleVector.Abs<TemperatureUnit> dvCopy = dv.copy();
-            MutableDoubleVector.Abs.Dense<TemperatureUnit> mdv = dv.mutable();
+            DoubleVector.Abs<TemperatureUnit> dvCopy = dv;
+            MutableDoubleVector.Abs<TemperatureUnit> mdv = dv.mutable();
             checkContentsAndType(dv, value, 0.001, tempUnit, true);
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
             checkContentsAndType(dvCopy, value, 0.001, tempUnit, true);
-            MutableDoubleVector.Abs.Dense<TemperatureUnit> mdvCopy = mdv.copy();
+            MutableDoubleVector.Abs<TemperatureUnit> mdvCopy = mdv.copy();
             checkContentsAndType(mdvCopy, value, 0.001, tempUnit, true);
-            MutableDoubleVector.Abs.Dense<TemperatureUnit> mmdv = mdv.mutable();
+            MutableDoubleVector.Abs<TemperatureUnit> mmdv = mdv.mutable();
             checkContentsAndType(mmdv, value, 0.001, tempUnit, true);
             assertEquals("hashCode is independent on mutability", dv.hashCode(), mdv.hashCode());
             // Modify mdv
@@ -563,7 +563,7 @@ public class DoubleVectorDenseTest
                 new DoubleVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             DoubleVector.Rel.Dense<LengthUnit> right =
                 new DoubleVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Abs.Dense<?> result = DoubleVector.plus(left, right);
+            DoubleVector.Abs<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
@@ -591,7 +591,7 @@ public class DoubleVectorDenseTest
                 new DoubleVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             DoubleVector.Rel.Dense<LengthUnit> right =
                 new DoubleVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Abs.Dense<?> result = DoubleVector.minus(left, right);
+            DoubleVector.Abs<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
@@ -619,7 +619,7 @@ public class DoubleVectorDenseTest
                 new DoubleVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             DoubleVector.Rel.Sparse<LengthUnit> right =
                 new DoubleVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Abs.Dense<?> result = DoubleVector.plus(left, right);
+            DoubleVector.Abs<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
@@ -647,7 +647,7 @@ public class DoubleVectorDenseTest
                 new DoubleVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             DoubleVector.Rel.Sparse<LengthUnit> right =
                 new DoubleVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Abs.Dense<?> result = DoubleVector.minus(left, right);
+            DoubleVector.Abs<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
@@ -680,33 +680,6 @@ public class DoubleVectorDenseTest
             junk++;
         }
         assertTrue("The variable junk is only used to suppress annoying warnings of the code checker", junk > 0);
-    }
-
-    /**
-     * Test that the times methods with a simple array as the 2nd argument.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void scaleAbsTest()
-    {
-        try
-        {
-            double[] leftIn = data(3, -12.34);
-            DoubleVector.Abs.Dense<TemperatureUnit> left =
-                new DoubleVector.Abs.Dense<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
-            double[] right = data(3, -4.321);
-            MutableDoubleVector.Abs.Dense<TemperatureUnit> result = DoubleVector.times(left, right);
-            assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
-            for (int index = right.length; --index >= 0;)
-            {
-                assertEquals("Content should match product of left and right", leftIn[index] * right[index], result
-                    .getSI(index), 0.001);
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected exception: " + ve.toString());
-        }
     }
 
     /**
@@ -838,14 +811,14 @@ public class DoubleVectorDenseTest
             double[] value2 = data(3, 38.0);
             value2[0] = 12345;
             DoubleVector.Rel.Dense<TemperatureUnit> dv = new DoubleVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
-            DoubleVector.Rel<TemperatureUnit> dvCopy = dv.copy();
-            MutableDoubleVector.Rel.Dense<TemperatureUnit> mdv = dv.mutable();
+            DoubleVector.Rel<TemperatureUnit> dvCopy = dv;
+            MutableDoubleVector.Rel<TemperatureUnit> mdv = dv.mutable();
             checkContentsAndType(dv, value, 0.001, tempUnit, false);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
             checkContentsAndType(dvCopy, value, 0.001, tempUnit, false);
-            MutableDoubleVector.Rel.Dense<TemperatureUnit> mdvCopy = mdv.copy();
+            MutableDoubleVector.Rel<TemperatureUnit> mdvCopy = mdv.copy();
             checkContentsAndType(mdvCopy, value, 0.001, tempUnit, false);
-            MutableDoubleVector.Rel.Dense<TemperatureUnit> mmdv = mdv.mutable();
+            MutableDoubleVector.Rel<TemperatureUnit> mmdv = mdv.mutable();
             checkContentsAndType(mmdv, value, 0.001, tempUnit, false);
             assertEquals("hashCode is independent on mutability", dv.hashCode(), mdv.hashCode());
             // Modify mdv
@@ -1201,7 +1174,7 @@ public class DoubleVectorDenseTest
                 new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             DoubleVector.Rel.Dense<LengthUnit> right =
                 new DoubleVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Rel.Dense<?> result = DoubleVector.plus(left, right);
+            DoubleVector.Rel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
@@ -1229,7 +1202,7 @@ public class DoubleVectorDenseTest
                 new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             DoubleVector.Rel.Dense<LengthUnit> right =
                 new DoubleVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Rel.Dense<?> result = DoubleVector.minus(left, right);
+            DoubleVector.Rel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
@@ -1257,7 +1230,7 @@ public class DoubleVectorDenseTest
                 new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             DoubleVector.Rel.Dense<LengthUnit> right =
                 new DoubleVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Rel.Dense<?> result = DoubleVector.times(left, right);
+            DoubleVector.Rel<?> result = left.times(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i)
@@ -1285,7 +1258,7 @@ public class DoubleVectorDenseTest
                 new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             DoubleVector.Rel.Sparse<LengthUnit> right =
                 new DoubleVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Rel.Dense<?> result = DoubleVector.plus(left, right);
+            DoubleVector.Rel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
@@ -1313,7 +1286,7 @@ public class DoubleVectorDenseTest
                 new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             DoubleVector.Rel.Sparse<LengthUnit> right =
                 new DoubleVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Rel.Dense<?> result = DoubleVector.minus(left, right);
+            DoubleVector.Rel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
@@ -1341,7 +1314,7 @@ public class DoubleVectorDenseTest
                 new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             DoubleVector.Rel.Sparse<LengthUnit> right =
                 new DoubleVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleVector.Rel.Sparse<?> result = DoubleVector.times(left, right);
+            DoubleVector.Rel<?> result = left.times(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i)
@@ -1374,33 +1347,6 @@ public class DoubleVectorDenseTest
             junk++;
         }
         assertTrue("The variable junk is only used to suppress annoying warnings of the code checker", junk > 0);
-    }
-
-    /**
-     * Test that the times methods with a simple array as the 2nd argument.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void scaleRelTest()
-    {
-        try
-        {
-            double[] leftIn = data(3, -12.34);
-            DoubleVector.Rel.Dense<TemperatureUnit> left =
-                new DoubleVector.Rel.Dense<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
-            double[] right = data(3, -4.321);
-            MutableDoubleVector.Rel.Dense<TemperatureUnit> result = DoubleVector.times(left, right);
-            assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
-            for (int index = right.length; --index >= 0;)
-            {
-                assertEquals("Content should match product of left and right", leftIn[index] * right[index], result
-                    .getSI(index), 0.001);
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected exception: " + ve.toString());
-        }
     }
 
     /** */

@@ -2,6 +2,8 @@ package org.djunits.value.vdouble.vector;
 
 import java.util.Arrays;
 
+import org.djunits.value.ValueException;
+
 /**
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
@@ -100,6 +102,107 @@ abstract class DoubleVectorData
         if (!Arrays.equals(this.vectorSI, other.vectorSI))
             return false;
         return true;
+    }
+
+    /**
+     * Check the sizes of this data object and the other data object.
+     * @param other the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    private void checkSizes(final DoubleVectorData other) throws ValueException
+    {
+        if (this.size() != other.size())
+        {
+            throw new ValueException("Two data objects used in a DoubleVector operation do not have the same size");
+        }
+    }
+
+    /**
+     * Add two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
+     * vector is returned.
+     * @param right the other data object to add
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public DoubleVectorData plus(final DoubleVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        double[] dv = new double[this.size()];
+        for (int i = 0; i < dv.length; i++)
+        {
+            dv[i] = this.getSI(i) + right.getSI(i);
+        }
+        if (this instanceof DoubleVectorDataSparse && right instanceof DoubleVectorDataSparse)
+        {
+            return new DoubleVectorDataDense(dv).toSparse();
+        }
+        return new DoubleVectorDataDense(dv);
+    }
+
+    /**
+     * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
+     * vector is returned.
+     * @param right the other data object to subtract
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public DoubleVectorData minus(final DoubleVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        double[] dv = new double[this.size()];
+        for (int i = 0; i < dv.length; i++)
+        {
+            dv[i] = this.getSI(i) - right.getSI(i);
+        }
+        if (this instanceof DoubleVectorDataSparse && right instanceof DoubleVectorDataSparse)
+        {
+            return new DoubleVectorDataDense(dv).toSparse();
+        }
+        return new DoubleVectorDataDense(dv);
+    }
+
+    /**
+     * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
+     * vector is returned.
+     * @param right the other data object to multiply with
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public DoubleVectorData times(final DoubleVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        double[] dv = new double[this.size()];
+        for (int i = 0; i < dv.length; i++)
+        {
+            dv[i] = this.getSI(i) * right.getSI(i);
+        }
+        if (this instanceof DoubleVectorDataDense && right instanceof DoubleVectorDataDense)
+        {
+            return new DoubleVectorDataDense(dv);
+        }
+        return new DoubleVectorDataDense(dv).toSparse();
+    }
+
+    /**
+     * Divide two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
+     * vector is returned.
+     * @param right the other data object to divide by
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public DoubleVectorData divide(final DoubleVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        double[] dv = new double[this.size()];
+        for (int i = 0; i < dv.length; i++)
+        {
+            dv[i] = this.getSI(i) / right.getSI(i);
+        }
+        if (this instanceof DoubleVectorDataDense && right instanceof DoubleVectorDataDense)
+        {
+            return new DoubleVectorDataDense(dv);
+        }
+        return new DoubleVectorDataDense(dv).toSparse();
     }
 
     /**

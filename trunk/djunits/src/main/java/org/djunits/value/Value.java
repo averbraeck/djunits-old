@@ -43,10 +43,4 @@ public interface Value<U extends Unit<U>>
      */
     boolean isRelative();
 
-    /**
-     * Create a deep copy of this Value.
-     * @return Value&lt;U&gt;
-     */
-    Value<U> copy();
-
 }

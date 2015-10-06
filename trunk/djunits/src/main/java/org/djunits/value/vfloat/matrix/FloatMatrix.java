@@ -130,13 +130,6 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
 
             /** {@inheritDoc} */
             @Override
-            public final FloatMatrix.Abs.Dense<U> copy()
-            {
-                return this; // Immutable...
-            }
-
-            /** {@inheritDoc} */
-            @Override
             protected final FloatMatrixDataDense getData()
             {
                 return (FloatMatrixDataDense) this.data;
@@ -192,13 +185,6 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             public final MutableFloatMatrix.Abs.Sparse<U> mutable()
             {
                 return new MutableFloatMatrix.Abs.Sparse<U>(getData(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            public final FloatMatrix.Abs.Sparse<U> copy()
-            {
-                return this; // Immutable...
             }
 
             /** {@inheritDoc} */
@@ -294,13 +280,6 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
 
             /** {@inheritDoc} */
             @Override
-            public final FloatMatrix.Rel.Dense<U> copy()
-            {
-                return this; // Immutable...
-            }
-
-            /** {@inheritDoc} */
-            @Override
             protected final FloatMatrixDataDense getData()
             {
                 return (FloatMatrixDataDense) this.data;
@@ -356,13 +335,6 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
             public final MutableFloatMatrix.Rel.Sparse<U> mutable()
             {
                 return new MutableFloatMatrix.Rel.Sparse<U>(getData(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            public final FloatMatrix.Rel.Sparse<U> copy()
-            {
-                return this; // Immutable...
             }
 
             /** {@inheritDoc} */

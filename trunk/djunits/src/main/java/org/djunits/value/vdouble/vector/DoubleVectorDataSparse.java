@@ -138,4 +138,19 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         return true;
     }
 
+    /**
+     * @param left l
+     * @param right r
+     * @return plus
+     */
+    static DoubleVectorDataSparse plus(final DoubleVectorData left, final DoubleVectorData right)
+    {
+        double[] dv = new double[left.vectorSI.length];
+        for (int i = 0; i < dv.length; i++)
+        {
+            dv[i] = left.getSI(i) + right.getSI(i);
+        }
+        return new DoubleVectorDataDense(dv).toSparse();
+    }
+
 }

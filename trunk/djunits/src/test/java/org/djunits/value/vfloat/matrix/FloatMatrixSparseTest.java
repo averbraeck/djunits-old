@@ -226,7 +226,7 @@ public class FloatMatrixSparseTest
             float[][] value2 = data(3, 5, false, 38.0f);
             value2[0][0] = 12345;
             FloatMatrix.Abs.Sparse<TemperatureUnit> fm = new FloatMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
-            FloatMatrix.Abs<TemperatureUnit> fmCopy = fm.copy();
+            FloatMatrix.Abs<TemperatureUnit> fmCopy = fm;
             MutableFloatMatrix.Abs.Sparse<TemperatureUnit> mfm = fm.mutable();
             checkContentsAndType(fm, value, 0.001f, tempUnit, true);
             checkContentsAndType(mfm, value, 0.001f, tempUnit, true);
@@ -1059,7 +1059,7 @@ public class FloatMatrixSparseTest
             float[][] value2 = data(3, 5, false, 38.0f);
             value2[0][0] = 12345;
             FloatMatrix.Rel.Sparse<TemperatureUnit> fm = new FloatMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
-            FloatMatrix.Rel<TemperatureUnit> fmCopy = fm.copy();
+            FloatMatrix.Rel<TemperatureUnit> fmCopy = fm;
             MutableFloatMatrix.Rel.Sparse<TemperatureUnit> mfm = fm.mutable();
             checkContentsAndType(fm, value, 0.001f, tempUnit, false);
             checkContentsAndType(mfm, value, 0.001f, tempUnit, false);

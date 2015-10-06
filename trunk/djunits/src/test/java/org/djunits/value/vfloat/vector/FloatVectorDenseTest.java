@@ -200,14 +200,14 @@ public class FloatVectorDenseTest
             float[] value2 = data(3, 38.0f);
             value2[0] = 12345;
             FloatVector.Abs.Dense<TemperatureUnit> fv = new FloatVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
-            FloatVector.Abs<TemperatureUnit> fvCopy = fv.copy();
-            MutableFloatVector.Abs.Dense<TemperatureUnit> mfv = fv.mutable();
+            FloatVector.Abs<TemperatureUnit> fvCopy = fv;
+            MutableFloatVector.Abs<TemperatureUnit> mfv = fv.mutable();
             checkContentsAndType(fv, value, 0.001f, tempUnit, true);
             checkContentsAndType(mfv, value, 0.001f, tempUnit, true);
             checkContentsAndType(fvCopy, value, 0.001f, tempUnit, true);
-            MutableFloatVector.Abs.Dense<TemperatureUnit> mfvCopy = mfv.copy();
+            MutableFloatVector.Abs<TemperatureUnit> mfvCopy = mfv.copy();
             checkContentsAndType(mfvCopy, value, 0.001f, tempUnit, true);
-            MutableFloatVector.Abs.Dense<TemperatureUnit> mmfv = mfv.mutable();
+            MutableFloatVector.Abs<TemperatureUnit> mmfv = mfv.mutable();
             checkContentsAndType(mmfv, value, 0.001f, tempUnit, true);
             assertEquals("hashCode is independent on mutability", fv.hashCode(), mfv.hashCode());
             // Modify mfv
@@ -560,7 +560,7 @@ public class FloatVectorDenseTest
             FloatVector.Abs.Dense<LengthUnit> left = new FloatVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             FloatVector.Rel.Dense<LengthUnit> right =
                 new FloatVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Abs.Dense<?> result = FloatVector.plus(left, right);
+            FloatVector.Abs<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
@@ -587,7 +587,7 @@ public class FloatVectorDenseTest
             FloatVector.Abs.Dense<LengthUnit> left = new FloatVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             FloatVector.Rel.Dense<LengthUnit> right =
                 new FloatVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Abs.Dense<?> result = FloatVector.minus(left, right);
+            FloatVector.Abs<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
@@ -614,7 +614,7 @@ public class FloatVectorDenseTest
             FloatVector.Abs.Dense<LengthUnit> left = new FloatVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             FloatVector.Rel.Sparse<LengthUnit> right =
                 new FloatVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Abs.Dense<?> result = FloatVector.plus(left, right);
+            FloatVector.Abs<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
@@ -641,7 +641,7 @@ public class FloatVectorDenseTest
             FloatVector.Abs.Dense<LengthUnit> left = new FloatVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             FloatVector.Rel.Sparse<LengthUnit> right =
                 new FloatVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Abs.Dense<?> result = FloatVector.minus(left, right);
+            FloatVector.Abs<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
@@ -674,33 +674,6 @@ public class FloatVectorDenseTest
             junk++;
         }
         assertTrue("The variable junk is only used to suppress annoying warnings of the code checker", junk > 0);
-    }
-
-    /**
-     * Test that the times methods with a simple array as the 2nd argument.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void scaleAbsTest()
-    {
-        try
-        {
-            float[] leftIn = data(3, -12.34f);
-            FloatVector.Abs.Dense<TemperatureUnit> left =
-                new FloatVector.Abs.Dense<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
-            float[] right = data(3, -4.321f);
-            MutableFloatVector.Abs.Dense<TemperatureUnit> result = FloatVector.times(left, right);
-            assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
-            for (int index = right.length; --index >= 0;)
-            {
-                assertEquals("Content should match product of left and right", leftIn[index] * right[index], result
-                    .getSI(index), 0.001f);
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected exception: " + ve.toString());
-        }
     }
 
     /**
@@ -832,14 +805,14 @@ public class FloatVectorDenseTest
             float[] value2 = data(3, 38.0f);
             value2[0] = 12345;
             FloatVector.Rel.Dense<TemperatureUnit> fv = new FloatVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
-            FloatVector.Rel<TemperatureUnit> fvCopy = fv.copy();
-            MutableFloatVector.Rel.Dense<TemperatureUnit> mfv = fv.mutable();
+            FloatVector.Rel<TemperatureUnit> fvCopy = fv;
+            MutableFloatVector.Rel<TemperatureUnit> mfv = fv.mutable();
             checkContentsAndType(fv, value, 0.001f, tempUnit, false);
             checkContentsAndType(mfv, value, 0.001f, tempUnit, false);
             checkContentsAndType(fvCopy, value, 0.001f, tempUnit, false);
-            MutableFloatVector.Rel.Dense<TemperatureUnit> mfvCopy = mfv.copy();
+            MutableFloatVector.Rel<TemperatureUnit> mfvCopy = mfv.copy();
             checkContentsAndType(mfvCopy, value, 0.001f, tempUnit, false);
-            MutableFloatVector.Rel.Dense<TemperatureUnit> mmfv = mfv.mutable();
+            MutableFloatVector.Rel<TemperatureUnit> mmfv = mfv.mutable();
             checkContentsAndType(mmfv, value, 0.001f, tempUnit, false);
             assertEquals("hashCode is independent on mutability", fv.hashCode(), mfv.hashCode());
             // Modify mfv
@@ -1192,7 +1165,7 @@ public class FloatVectorDenseTest
             FloatVector.Rel.Dense<LengthUnit> left = new FloatVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             FloatVector.Rel.Dense<LengthUnit> right =
                 new FloatVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Rel.Dense<?> result = FloatVector.plus(left, right);
+            FloatVector.Rel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
@@ -1219,7 +1192,7 @@ public class FloatVectorDenseTest
             FloatVector.Rel.Dense<LengthUnit> left = new FloatVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             FloatVector.Rel.Dense<LengthUnit> right =
                 new FloatVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Rel.Dense<?> result = FloatVector.minus(left, right);
+            FloatVector.Rel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
@@ -1246,7 +1219,7 @@ public class FloatVectorDenseTest
             FloatVector.Rel.Dense<LengthUnit> left = new FloatVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             FloatVector.Rel.Dense<LengthUnit> right =
                 new FloatVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Rel.Dense<?> result = FloatVector.times(left, right);
+            FloatVector.Rel<?> result = left.times(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i)
@@ -1273,7 +1246,7 @@ public class FloatVectorDenseTest
             FloatVector.Rel.Dense<LengthUnit> left = new FloatVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             FloatVector.Rel.Sparse<LengthUnit> right =
                 new FloatVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Rel.Dense<?> result = FloatVector.plus(left, right);
+            FloatVector.Rel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
@@ -1300,7 +1273,7 @@ public class FloatVectorDenseTest
             FloatVector.Rel.Dense<LengthUnit> left = new FloatVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             FloatVector.Rel.Sparse<LengthUnit> right =
                 new FloatVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Rel.Dense<?> result = FloatVector.minus(left, right);
+            FloatVector.Rel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
@@ -1327,7 +1300,7 @@ public class FloatVectorDenseTest
             FloatVector.Rel.Dense<LengthUnit> left = new FloatVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
             FloatVector.Rel.Sparse<LengthUnit> right =
                 new FloatVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatVector.Rel.Sparse<?> result = FloatVector.times(left, right);
+            FloatVector.Rel<?> result = left.times(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i)
@@ -1360,33 +1333,6 @@ public class FloatVectorDenseTest
             junk++;
         }
         assertTrue("The variable junk is only used to suppress annoying warnings of the code checker", junk > 0);
-    }
-
-    /**
-     * Test that the times methods with a simple array as the 2nd argument.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void scaleRelTest()
-    {
-        try
-        {
-            float[] leftIn = data(3, -12.34f);
-            FloatVector.Rel.Dense<TemperatureUnit> left =
-                new FloatVector.Rel.Dense<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
-            float[] right = data(3, -4.321f);
-            MutableFloatVector.Rel.Dense<TemperatureUnit> result = FloatVector.times(left, right);
-            assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
-            for (int index = right.length; --index >= 0;)
-            {
-                assertEquals("Content should match product of left and right", leftIn[index] * right[index], result
-                    .getSI(index), 0.001f);
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected exception: " + ve.toString());
-        }
     }
 
     /** */

@@ -226,7 +226,7 @@ public class DoubleMatrixSparseTest
             double[][] value2 = data(3, 5, false, 38.0);
             value2[0][0] = 12345;
             DoubleMatrix.Abs.Sparse<TemperatureUnit> dm = new DoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
-            DoubleMatrix.Abs<TemperatureUnit> dmCopy = dm.copy();
+            DoubleMatrix.Abs<TemperatureUnit> dmCopy = dm;
             MutableDoubleMatrix.Abs.Sparse<TemperatureUnit> mdm = dm.mutable();
             checkContentsAndType(dm, value, 0.001, tempUnit, true);
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
@@ -1061,7 +1061,7 @@ public class DoubleMatrixSparseTest
             double[][] value2 = data(3, 5, false, 38.0);
             value2[0][0] = 12345;
             DoubleMatrix.Rel.Sparse<TemperatureUnit> dm = new DoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
-            DoubleMatrix.Rel<TemperatureUnit> dmCopy = dm.copy();
+            DoubleMatrix.Rel<TemperatureUnit> dmCopy = dm;
             MutableDoubleMatrix.Rel.Sparse<TemperatureUnit> mdm = dm.mutable();
             checkContentsAndType(dm, value, 0.001, tempUnit, false);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
