@@ -322,7 +322,7 @@ public abstract class MutableElectricalPotentialVector extends MutableDoubleVect
      */
     public final ElectricalPotentialVector times(final ElectricalPotentialVector rel) throws ValueException
     {
-        return ElectricalPotentialVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalPotentialVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -335,7 +335,7 @@ public abstract class MutableElectricalPotentialVector extends MutableDoubleVect
      */
     public final ElectricalPotentialVector divide(final ElectricalPotentialVector rel) throws ValueException
     {
-        return ElectricalPotentialVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalPotentialVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -374,7 +374,7 @@ public abstract class MutableElectricalPotentialVector extends MutableDoubleVect
      */
     public final ElectricalPotentialVector times(final MutableElectricalPotentialVector rel) throws ValueException
     {
-        return ElectricalPotentialVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalPotentialVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -387,7 +387,7 @@ public abstract class MutableElectricalPotentialVector extends MutableDoubleVect
      */
     public final ElectricalPotentialVector divide(final MutableElectricalPotentialVector rel) throws ValueException
     {
-        return ElectricalPotentialVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalPotentialVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

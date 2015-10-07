@@ -303,7 +303,7 @@ public abstract class EnergyVector extends DoubleVector.Rel<EnergyUnit>
      */
     public final EnergyVector times(final EnergyVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -316,7 +316,7 @@ public abstract class EnergyVector extends DoubleVector.Rel<EnergyUnit>
      */
     public final EnergyVector divide(final EnergyVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

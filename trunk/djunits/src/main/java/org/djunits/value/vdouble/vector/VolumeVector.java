@@ -303,7 +303,7 @@ public abstract class VolumeVector extends DoubleVector.Rel<VolumeUnit>
      */
     public final VolumeVector times(final VolumeVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -316,7 +316,7 @@ public abstract class VolumeVector extends DoubleVector.Rel<VolumeUnit>
      */
     public final VolumeVector divide(final VolumeVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

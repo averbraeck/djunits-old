@@ -320,7 +320,7 @@ public abstract class MutableAngleSolidVector extends MutableDoubleVector.Rel<An
      */
     public final AngleSolidVector times(final AngleSolidVector rel) throws ValueException
     {
-        return AngleSolidVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AngleSolidVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -333,7 +333,7 @@ public abstract class MutableAngleSolidVector extends MutableDoubleVector.Rel<An
      */
     public final AngleSolidVector divide(final AngleSolidVector rel) throws ValueException
     {
-        return AngleSolidVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AngleSolidVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -372,7 +372,7 @@ public abstract class MutableAngleSolidVector extends MutableDoubleVector.Rel<An
      */
     public final AngleSolidVector times(final MutableAngleSolidVector rel) throws ValueException
     {
-        return AngleSolidVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AngleSolidVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -385,7 +385,7 @@ public abstract class MutableAngleSolidVector extends MutableDoubleVector.Rel<An
      */
     public final AngleSolidVector divide(final MutableAngleSolidVector rel) throws ValueException
     {
-        return AngleSolidVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AngleSolidVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

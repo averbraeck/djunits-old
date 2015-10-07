@@ -305,7 +305,7 @@ public abstract class ElectricalResistanceVector extends DoubleVector.Rel<Electr
      */
     public final ElectricalResistanceVector times(final ElectricalResistanceVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class ElectricalResistanceVector extends DoubleVector.Rel<Electr
      */
     public final ElectricalResistanceVector divide(final ElectricalResistanceVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

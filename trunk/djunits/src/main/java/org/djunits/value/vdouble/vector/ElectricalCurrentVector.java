@@ -305,7 +305,7 @@ public abstract class ElectricalCurrentVector extends DoubleVector.Rel<Electrica
      */
     public final ElectricalCurrentVector times(final ElectricalCurrentVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class ElectricalCurrentVector extends DoubleVector.Rel<Electrica
      */
     public final ElectricalCurrentVector divide(final ElectricalCurrentVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

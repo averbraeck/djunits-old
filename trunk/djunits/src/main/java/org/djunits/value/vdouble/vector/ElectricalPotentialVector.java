@@ -305,7 +305,7 @@ public abstract class ElectricalPotentialVector extends DoubleVector.Rel<Electri
      */
     public final ElectricalPotentialVector times(final ElectricalPotentialVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class ElectricalPotentialVector extends DoubleVector.Rel<Electri
      */
     public final ElectricalPotentialVector divide(final ElectricalPotentialVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

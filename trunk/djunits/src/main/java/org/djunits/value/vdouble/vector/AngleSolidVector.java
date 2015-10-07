@@ -305,7 +305,7 @@ public abstract class AngleSolidVector extends DoubleVector.Rel<AngleSolidUnit>
      */
     public final AngleSolidVector times(final AngleSolidVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class AngleSolidVector extends DoubleVector.Rel<AngleSolidUnit>
      */
     public final AngleSolidVector divide(final AngleSolidVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

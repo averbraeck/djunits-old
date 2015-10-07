@@ -302,7 +302,7 @@ public abstract class MassVector extends DoubleVector.Rel<MassUnit>
      */
     public final MassVector times(final MassVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -315,7 +315,7 @@ public abstract class MassVector extends DoubleVector.Rel<MassUnit>
      */
     public final MassVector divide(final MassVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

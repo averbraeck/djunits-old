@@ -318,7 +318,7 @@ public abstract class MutableForceVector extends MutableDoubleVector.Rel<ForceUn
      */
     public final ForceVector times(final ForceVector rel) throws ValueException
     {
-        return ForceVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ForceVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -331,7 +331,7 @@ public abstract class MutableForceVector extends MutableDoubleVector.Rel<ForceUn
      */
     public final ForceVector divide(final ForceVector rel) throws ValueException
     {
-        return ForceVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ForceVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -370,7 +370,7 @@ public abstract class MutableForceVector extends MutableDoubleVector.Rel<ForceUn
      */
     public final ForceVector times(final MutableForceVector rel) throws ValueException
     {
-        return ForceVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ForceVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -383,7 +383,7 @@ public abstract class MutableForceVector extends MutableDoubleVector.Rel<ForceUn
      */
     public final ForceVector divide(final MutableForceVector rel) throws ValueException
     {
-        return ForceVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ForceVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

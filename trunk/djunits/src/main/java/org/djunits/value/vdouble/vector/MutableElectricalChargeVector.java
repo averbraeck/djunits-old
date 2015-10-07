@@ -322,7 +322,7 @@ public abstract class MutableElectricalChargeVector extends MutableDoubleVector.
      */
     public final ElectricalChargeVector times(final ElectricalChargeVector rel) throws ValueException
     {
-        return ElectricalChargeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalChargeVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -335,7 +335,7 @@ public abstract class MutableElectricalChargeVector extends MutableDoubleVector.
      */
     public final ElectricalChargeVector divide(final ElectricalChargeVector rel) throws ValueException
     {
-        return ElectricalChargeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalChargeVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -374,7 +374,7 @@ public abstract class MutableElectricalChargeVector extends MutableDoubleVector.
      */
     public final ElectricalChargeVector times(final MutableElectricalChargeVector rel) throws ValueException
     {
-        return ElectricalChargeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalChargeVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -387,7 +387,7 @@ public abstract class MutableElectricalChargeVector extends MutableDoubleVector.
      */
     public final ElectricalChargeVector divide(final MutableElectricalChargeVector rel) throws ValueException
     {
-        return ElectricalChargeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalChargeVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

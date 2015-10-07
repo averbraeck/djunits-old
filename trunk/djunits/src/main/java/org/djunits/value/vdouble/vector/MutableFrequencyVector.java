@@ -320,7 +320,7 @@ public abstract class MutableFrequencyVector extends MutableDoubleVector.Rel<Fre
      */
     public final FrequencyVector times(final FrequencyVector rel) throws ValueException
     {
-        return FrequencyVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FrequencyVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -333,7 +333,7 @@ public abstract class MutableFrequencyVector extends MutableDoubleVector.Rel<Fre
      */
     public final FrequencyVector divide(final FrequencyVector rel) throws ValueException
     {
-        return FrequencyVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FrequencyVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -372,7 +372,7 @@ public abstract class MutableFrequencyVector extends MutableDoubleVector.Rel<Fre
      */
     public final FrequencyVector times(final MutableFrequencyVector rel) throws ValueException
     {
-        return FrequencyVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FrequencyVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -385,7 +385,7 @@ public abstract class MutableFrequencyVector extends MutableDoubleVector.Rel<Fre
      */
     public final FrequencyVector divide(final MutableFrequencyVector rel) throws ValueException
     {
-        return FrequencyVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FrequencyVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

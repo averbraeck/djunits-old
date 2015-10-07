@@ -322,7 +322,7 @@ public abstract class MutableElectricalResistanceVector extends MutableDoubleVec
      */
     public final ElectricalResistanceVector times(final ElectricalResistanceVector rel) throws ValueException
     {
-        return ElectricalResistanceVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalResistanceVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -335,7 +335,7 @@ public abstract class MutableElectricalResistanceVector extends MutableDoubleVec
      */
     public final ElectricalResistanceVector divide(final ElectricalResistanceVector rel) throws ValueException
     {
-        return ElectricalResistanceVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalResistanceVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -374,7 +374,7 @@ public abstract class MutableElectricalResistanceVector extends MutableDoubleVec
      */
     public final ElectricalResistanceVector times(final MutableElectricalResistanceVector rel) throws ValueException
     {
-        return ElectricalResistanceVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalResistanceVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -387,7 +387,7 @@ public abstract class MutableElectricalResistanceVector extends MutableDoubleVec
      */
     public final ElectricalResistanceVector divide(final MutableElectricalResistanceVector rel) throws ValueException
     {
-        return ElectricalResistanceVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalResistanceVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

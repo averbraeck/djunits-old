@@ -42,10 +42,10 @@ public interface FunctionsAbs<U extends Unit<U>, A extends Absolute & Value<U>, 
      * Subtract an Absolute value from this Absolute value for a vector or matrix. The subtraction is done value by value and
      * the result is stored in a new Relative value. If both operands are sparse, the result is a sparse vector or matrix,
      * otherwise the result is a dense vector or matrix.
-     * @param rel A the right operand
+     * @param abs A the right operand
      * @return R the subtraction of this vector and the operand
      * @throws ValueException in case this vector and the operand have a different size
      */
-    R minus(A rel) throws ValueException;
+    R minus(A abs) throws ValueException;
 
 }

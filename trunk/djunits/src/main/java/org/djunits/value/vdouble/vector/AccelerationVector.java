@@ -305,7 +305,7 @@ public abstract class AccelerationVector extends DoubleVector.Rel<AccelerationUn
      */
     public final AccelerationVector times(final AccelerationVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class AccelerationVector extends DoubleVector.Rel<AccelerationUn
      */
     public final AccelerationVector divide(final AccelerationVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

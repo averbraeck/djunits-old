@@ -305,7 +305,7 @@ public abstract class LinearDensityVector extends DoubleVector.Rel<LinearDensity
      */
     public final LinearDensityVector times(final LinearDensityVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class LinearDensityVector extends DoubleVector.Rel<LinearDensity
      */
     public final LinearDensityVector divide(final LinearDensityVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

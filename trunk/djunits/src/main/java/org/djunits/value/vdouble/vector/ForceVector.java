@@ -303,7 +303,7 @@ public abstract class ForceVector extends DoubleVector.Rel<ForceUnit>
      */
     public final ForceVector times(final ForceVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -316,7 +316,7 @@ public abstract class ForceVector extends DoubleVector.Rel<ForceUnit>
      */
     public final ForceVector divide(final ForceVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

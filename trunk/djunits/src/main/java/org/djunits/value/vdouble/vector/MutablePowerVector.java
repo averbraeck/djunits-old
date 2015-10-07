@@ -318,7 +318,7 @@ public abstract class MutablePowerVector extends MutableDoubleVector.Rel<PowerUn
      */
     public final PowerVector times(final PowerVector rel) throws ValueException
     {
-        return PowerVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return PowerVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -331,7 +331,7 @@ public abstract class MutablePowerVector extends MutableDoubleVector.Rel<PowerUn
      */
     public final PowerVector divide(final PowerVector rel) throws ValueException
     {
-        return PowerVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return PowerVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -370,7 +370,7 @@ public abstract class MutablePowerVector extends MutableDoubleVector.Rel<PowerUn
      */
     public final PowerVector times(final MutablePowerVector rel) throws ValueException
     {
-        return PowerVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return PowerVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -383,7 +383,7 @@ public abstract class MutablePowerVector extends MutableDoubleVector.Rel<PowerUn
      */
     public final PowerVector divide(final MutablePowerVector rel) throws ValueException
     {
-        return PowerVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return PowerVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

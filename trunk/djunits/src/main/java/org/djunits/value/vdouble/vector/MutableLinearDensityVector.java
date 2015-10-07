@@ -321,7 +321,7 @@ public abstract class MutableLinearDensityVector extends MutableDoubleVector.Rel
      */
     public final LinearDensityVector times(final LinearDensityVector rel) throws ValueException
     {
-        return LinearDensityVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return LinearDensityVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -334,7 +334,7 @@ public abstract class MutableLinearDensityVector extends MutableDoubleVector.Rel
      */
     public final LinearDensityVector divide(final LinearDensityVector rel) throws ValueException
     {
-        return LinearDensityVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return LinearDensityVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -373,7 +373,7 @@ public abstract class MutableLinearDensityVector extends MutableDoubleVector.Rel
      */
     public final LinearDensityVector times(final MutableLinearDensityVector rel) throws ValueException
     {
-        return LinearDensityVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return LinearDensityVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -386,7 +386,7 @@ public abstract class MutableLinearDensityVector extends MutableDoubleVector.Rel
      */
     public final LinearDensityVector divide(final MutableLinearDensityVector rel) throws ValueException
     {
-        return LinearDensityVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return LinearDensityVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

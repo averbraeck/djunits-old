@@ -316,7 +316,7 @@ public abstract class MutableAreaVector extends MutableDoubleVector.Rel<AreaUnit
      */
     public final AreaVector times(final AreaVector rel) throws ValueException
     {
-        return AreaVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AreaVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -329,7 +329,7 @@ public abstract class MutableAreaVector extends MutableDoubleVector.Rel<AreaUnit
      */
     public final AreaVector divide(final AreaVector rel) throws ValueException
     {
-        return AreaVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AreaVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -368,7 +368,7 @@ public abstract class MutableAreaVector extends MutableDoubleVector.Rel<AreaUnit
      */
     public final AreaVector times(final MutableAreaVector rel) throws ValueException
     {
-        return AreaVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AreaVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -381,7 +381,7 @@ public abstract class MutableAreaVector extends MutableDoubleVector.Rel<AreaUnit
      */
     public final AreaVector divide(final MutableAreaVector rel) throws ValueException
     {
-        return AreaVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AreaVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

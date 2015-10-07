@@ -318,7 +318,7 @@ public abstract class MutableSpeedVector extends MutableDoubleVector.Rel<SpeedUn
      */
     public final SpeedVector times(final SpeedVector rel) throws ValueException
     {
-        return SpeedVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return SpeedVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -331,7 +331,7 @@ public abstract class MutableSpeedVector extends MutableDoubleVector.Rel<SpeedUn
      */
     public final SpeedVector divide(final SpeedVector rel) throws ValueException
     {
-        return SpeedVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return SpeedVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -370,7 +370,7 @@ public abstract class MutableSpeedVector extends MutableDoubleVector.Rel<SpeedUn
      */
     public final SpeedVector times(final MutableSpeedVector rel) throws ValueException
     {
-        return SpeedVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return SpeedVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -383,7 +383,7 @@ public abstract class MutableSpeedVector extends MutableDoubleVector.Rel<SpeedUn
      */
     public final SpeedVector divide(final MutableSpeedVector rel) throws ValueException
     {
-        return SpeedVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return SpeedVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

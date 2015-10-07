@@ -1,6 +1,7 @@
 package org.djunits.value.vdouble.vector;
 
 import org.djunits.unit.AccelerationUnit;
+import org.djunits.unit.LengthUnit;
 import org.djunits.value.ValueException;
 
 /**
@@ -27,7 +28,7 @@ public final class Test
      */
     public static void main(final String[] args) throws ValueException
     {
-        double[] v1 = new double[]{1.0, 2.0, 3.0, 4.0, 6.0, 8.0, 9.0, 15.0, 20.0, 30.0};
+        double[] v1 = new double[]{1.0, 0.0, 3.0, 2.0, 4.0, 0.0, 9.0, 15.0, 20.0, 30.0};
         AccelerationVector av1 = new AccelerationVector.Dense(v1, AccelerationUnit.METER_PER_SECOND_2);
         System.out.println("zSum of " + av1.toString(true, true) + " = " + av1.zSum());
         AccelerationVector av2 = av1.mutable().sqrt().immutable();
@@ -44,6 +45,15 @@ public final class Test
             + av1.mutable().pow(2.0).toSparse().toString(true, true));
         AccelerationVector av4 = av1.plus(av2).toSparse();
         System.out.println("av1 + av2 = " + av4.toString(true, true));
+        AccelerationVector av5 = av1.minus(av2).toSparse();
+        System.out.println("av1 - av2 = " + av5.toString(true, true));
+        AccelerationVector av6 = av1.times(av2);
+        System.out.println("av1 * av2 = " + av6.toString(true, true));
+        AccelerationVector av7 = av1.divide(av2).toSparse();
+        System.out.println("av1 / av2 = " + av7.toString(true, true));
+
+        LengthVector.Rel lvr1 = new LengthVector.Rel.Dense(v1, LengthUnit.KILOMETER);
+        System.out.println("zSum of " + lvr1.toString(true, true) + " = " + lvr1.zSum());
     }
 
 }
