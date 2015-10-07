@@ -638,6 +638,51 @@ public class GenerateDJUNIT
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
         }
+    }
+
+    /**
+     * Generate all Money classes in value.vdouble.vector.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateDoubleVectorMoney() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/vector/";
+        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_VECTOR_REL.java");
+        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesMoney)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Vector.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = formulasVector(java, "DoubleVector => " + type, "");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
+        }
+
+        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_VECTOR_REL.java");
+        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesMoney)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = formulasVector(java, "MutableDoubleVector => " + type, "Mutable");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
+        }
 
     }
 
@@ -733,6 +778,7 @@ public class GenerateDJUNIT
 
         generateDoubleVectorAbsRel();
         generateDoubleVectorRel();
+        generateDoubleVectorMoney();
         // generateFloatVectorRel();
     }
 
