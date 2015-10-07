@@ -248,9 +248,7 @@ public class GenerateDJUNIT
                     fStr += "        }\n\n";
                 }
             }
-            ret =
-                ret.substring(0, pos - 1) + fStr
-                    + ret.substring(pos + type.length() + 5, ret.length() - 1);
+            ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 5, ret.length() - 1);
         }
 
         // remove the ".Abs" and ".Rel" for the purely relative units and money units.
@@ -457,7 +455,7 @@ public class GenerateDJUNIT
     /****************************************************************************************************************/
     /********************************************* VECTOR ***********************************************************/
     /****************************************************************************************************************/
-    
+
     /**
      * Insert formulas based on FORMULAS.txt into the %FORMULAS% marker within the Java file.
      * @param java the java file
@@ -489,40 +487,38 @@ public class GenerateDJUNIT
                 return ret.substring(0, pos - 1) + ret.substring(pos + type.length() + 2, ret.length() - 1);
             }
             String fStr = "";
-//            for (String f : formulas.get(type))
-//            {
-//                String dm = f.startsWith("/") ? "division" : "multiplication";
-//                String method = f.startsWith("/") ? "divideBy" : "multiplyBy";
-//                String mdsign = f.startsWith("/") ? "/" : "*";
-//                f = f.substring(1, f.length());
-//                String param = f.split("=")[0].trim();
-//                String result = f.split("=")[1].trim();
-//                String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
-//                if (!isAbs)
-//                {
-//                    String pParam = prefix + param;
-//                    String pResult = prefix + result;
-//
-//                    fStr += "        /**\n";
-//                    fStr +=
-//                        "         * Calculate the " + dm + " of " + pType + " and " + pParam + ", which results in a ";
-//                    fStr += pResult + " scalar.\n";
-//                    fStr += "         * @param v " + pType + " scalar\n";
-//                    fStr +=
-//                        "         * @return " + pResult + " scalar as a " + dm + " of " + pType + " and " + pParam
-//                            + "\n";
-//                    fStr += "         */\n";
-//                    fStr += "        public final " + pResult + "." + absRel + " " + method;
-//                    fStr += "(final " + pParam + "." + absRel + " v)\n";
-//                    fStr += "        {\n";
-//                    fStr += "            return new " + pResult + "." + absRel + "(this.si " + mdsign + " v.si, ";
-//                    fStr += result + "Unit" + siOrMoney + ");\n";
-//                    fStr += "        }\n\n";
-//                }
-//            }
-            ret =
-                ret.substring(0, pos - 1) + fStr
-                    + ret.substring(pos + type.length() + 5, ret.length() - 1);
+            // for (String f : formulas.get(type))
+            // {
+            // String dm = f.startsWith("/") ? "division" : "multiplication";
+            // String method = f.startsWith("/") ? "divideBy" : "multiplyBy";
+            // String mdsign = f.startsWith("/") ? "/" : "*";
+            // f = f.substring(1, f.length());
+            // String param = f.split("=")[0].trim();
+            // String result = f.split("=")[1].trim();
+            // String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
+            // if (!isAbs)
+            // {
+            // String pParam = prefix + param;
+            // String pResult = prefix + result;
+            //
+            // fStr += "        /**\n";
+            // fStr +=
+            // "         * Calculate the " + dm + " of " + pType + " and " + pParam + ", which results in a ";
+            // fStr += pResult + " scalar.\n";
+            // fStr += "         * @param v " + pType + " scalar\n";
+            // fStr +=
+            // "         * @return " + pResult + " scalar as a " + dm + " of " + pType + " and " + pParam
+            // + "\n";
+            // fStr += "         */\n";
+            // fStr += "        public final " + pResult + "." + absRel + " " + method;
+            // fStr += "(final " + pParam + "." + absRel + " v)\n";
+            // fStr += "        {\n";
+            // fStr += "            return new " + pResult + "." + absRel + "(this.si " + mdsign + " v.si, ";
+            // fStr += result + "Unit" + siOrMoney + ");\n";
+            // fStr += "        }\n\n";
+            // }
+            // }
+            ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 5, ret.length() - 1);
         }
 
         // remove the ".Abs" and ".Rel" for the purely relative units and money units.
@@ -537,6 +533,66 @@ public class GenerateDJUNIT
             ret = ret.replaceAll(moneyType + "\\.Abs", moneyType);
         }
         return ret;
+    }
+
+    /**
+     * Generate all Abs + Rel classes in value.vdouble.vector.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateDoubleVectorAbsRel() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/vector/";
+        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_VECTOR_ABS_REL.java");
+        URL insertURL = URLResource.getResource("/" + relativePath + "INSERT.java");
+        boolean isInsert = (insertURL != null) && new File(insertURL.toURI()).exists();
+        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        String insertJava = "";
+        if (isInsert)
+        {
+            insertJava = new String(Files.readAllBytes(Paths.get(insertURL.toURI())));
+        }
+
+        for (String type : typesAbsRel)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Vector.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (isInsert)
+            {
+                java = insert(java, insertJava, "DoubleVector => " + type);
+            }
+            java = formulasVector(java, "DoubleVector => " + type, "");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
+        }
+
+        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_VECTOR_ABS_REL.java");
+        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesAbsRel)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (isInsert)
+            {
+                java = insert(java, insertJava, "MutableDoubleVector => " + type);
+            }
+            java = formulasVector(java, "MutableDoubleVector => " + type, "Mutable");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
+        }
     }
 
     /**
@@ -564,7 +620,7 @@ public class GenerateDJUNIT
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
         }
-        
+
         scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_VECTOR_REL.java");
         scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
 
@@ -577,7 +633,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasVector(java, "DoubleVector => " + type, "Mutable");
+            java = formulasVector(java, "MutableDoubleVector => " + type, "Mutable");
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
@@ -674,7 +730,8 @@ public class GenerateDJUNIT
         generateFloatScalarAbsRel();
         generateFloatScalarRel();
         generateFloatScalarMoney();
-        
+
+        generateDoubleVectorAbsRel();
         generateDoubleVectorRel();
         // generateFloatVectorRel();
     }

@@ -320,7 +320,7 @@ public abstract class MutableFloat%Type%Vector extends MutableFloatVector.Rel<%T
      */
     public final Float%Type%Vector times(final Float%Type%Vector rel) throws ValueException
     {
-        return Float%Type%Vector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return Float%Type%Vector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -333,7 +333,7 @@ public abstract class MutableFloat%Type%Vector extends MutableFloatVector.Rel<%T
      */
     public final Float%Type%Vector divide(final Float%Type%Vector rel) throws ValueException
     {
-        return Float%Type%Vector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return Float%Type%Vector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -372,7 +372,7 @@ public abstract class MutableFloat%Type%Vector extends MutableFloatVector.Rel<%T
      */
     public final Float%Type%Vector times(final MutableFloat%Type%Vector rel) throws ValueException
     {
-        return Float%Type%Vector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return Float%Type%Vector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -385,7 +385,7 @@ public abstract class MutableFloat%Type%Vector extends MutableFloatVector.Rel<%T
      */
     public final Float%Type%Vector divide(final MutableFloat%Type%Vector rel) throws ValueException
     {
-        return Float%Type%Vector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return Float%Type%Vector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/
