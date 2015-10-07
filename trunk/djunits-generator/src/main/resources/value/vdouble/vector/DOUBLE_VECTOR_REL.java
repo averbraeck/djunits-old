@@ -305,7 +305,7 @@ public abstract class %Type%Vector extends DoubleVector.Rel<%Type%Unit>
      */
     public final %Type%Vector times(final %Type%Vector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class %Type%Vector extends DoubleVector.Rel<%Type%Unit>
      */
     public final %Type%Vector divide(final %Type%Vector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 %FORMULAS%%Type%.Rel%

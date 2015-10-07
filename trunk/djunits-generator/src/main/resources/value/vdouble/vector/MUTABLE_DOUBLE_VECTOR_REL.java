@@ -320,7 +320,7 @@ public abstract class Mutable%Type%Vector extends MutableDoubleVector.Rel<%Type%
      */
     public final %Type%Vector times(final %Type%Vector rel) throws ValueException
     {
-        return %Type%Vector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return %Type%Vector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -333,7 +333,7 @@ public abstract class Mutable%Type%Vector extends MutableDoubleVector.Rel<%Type%
      */
     public final %Type%Vector divide(final %Type%Vector rel) throws ValueException
     {
-        return %Type%Vector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return %Type%Vector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -372,7 +372,7 @@ public abstract class Mutable%Type%Vector extends MutableDoubleVector.Rel<%Type%
      */
     public final %Type%Vector times(final Mutable%Type%Vector rel) throws ValueException
     {
-        return %Type%Vector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return %Type%Vector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -385,7 +385,7 @@ public abstract class Mutable%Type%Vector extends MutableDoubleVector.Rel<%Type%
      */
     public final %Type%Vector divide(final Mutable%Type%Vector rel) throws ValueException
     {
-        return %Type%Vector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return %Type%Vector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/
