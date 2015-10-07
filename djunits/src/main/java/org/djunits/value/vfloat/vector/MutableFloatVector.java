@@ -144,8 +144,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /**
              * Construct a new Absolute Dense Mutable FloatVector.
-             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Dense
-             *            MutableFloatVector
+             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Dense MutableFloatVector
              * @throws ValueException when values has zero entries
              */
             public Dense(final FloatScalar.Abs<U>[] values) throws ValueException
@@ -245,8 +244,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
              * @param length the size of the vector
              * @throws ValueException when values is null
              */
-            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length)
-                throws ValueException
+            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
             {
                 super(unit);
                 this.data = initializeSparse(values, length);
@@ -743,8 +741,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
             /**
              * Construct a new Relative Dense Mutable FloatVector.
-             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Dense
-             *            MutableFloatVector
+             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Dense MutableFloatVector
              * @throws ValueException when values has zero entries
              */
             public Dense(final FloatScalar.Rel<U>[] values) throws ValueException
@@ -844,8 +841,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
              * @param length the size of the vector
              * @throws ValueException when values is null
              */
-            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length)
-                throws ValueException
+            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
             {
                 super(unit);
                 this.data = initializeSparse(values, length);

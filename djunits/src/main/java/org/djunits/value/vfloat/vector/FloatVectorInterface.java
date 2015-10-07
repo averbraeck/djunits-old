@@ -135,6 +135,5 @@ public interface FloatVectorInterface<U extends Unit<U>>
      * @return MutableFloatVector&lt;U&gt;; sparse version of this FloatVector
      */
     FloatVectorInterface<U> toSparse();
-    
-}
 
+}

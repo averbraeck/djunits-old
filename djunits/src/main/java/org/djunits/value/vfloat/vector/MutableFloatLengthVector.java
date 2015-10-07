@@ -7,8 +7,8 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.value.DenseData;
 import org.djunits.value.SparseData;
 import org.djunits.value.ValueException;
-import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.djunits.value.vfloat.scalar.FloatLength;
+import org.djunits.value.vfloat.scalar.FloatScalar;
 
 /**
  * Mutable FloatLength Vector.
@@ -210,7 +210,8 @@ public interface MutableFloatLengthVector
              * @param length the size of the vector
              * @throws ValueException when values has zero entries
              */
-            public Sparse(final SortedMap<Integer, FloatScalar.Abs<LengthUnit>> values, final int length) throws ValueException
+            public Sparse(final SortedMap<Integer, FloatScalar.Abs<LengthUnit>> values, final int length)
+                throws ValueException
             {
                 super(checkNonEmptyMA(values).get(values.firstKey()).getUnit());
                 initializeSparseMA(values, length);
@@ -561,7 +562,7 @@ public interface MutableFloatLengthVector
     /**
      * RELATIVE implementation of FloatLengthVector.
      */
-    public abstract static class Rel extends MutableFloatVector.Rel<LengthUnit> 
+    public abstract static class Rel extends MutableFloatVector.Rel<LengthUnit>
     {
         /** */
         private static final long serialVersionUID = 20151006L;
@@ -623,8 +624,8 @@ public interface MutableFloatLengthVector
 
             /**
              * Construct a new Relative Dense Immutable FloatVector.
-             * @param values List&lt;FloatLength&gt;; the values of the Scalar FloatLength entries in the new Relative Dense Immutable
-             *            FloatLength Vector
+             * @param values List&lt;FloatLength&gt;; the values of the Scalar FloatLength entries in the new Relative Dense
+             *            Immutable FloatLength Vector
              * @throws ValueException when values has zero entries
              */
             public Dense(final List<FloatScalar.Rel<LengthUnit>> values) throws ValueException
@@ -635,7 +636,8 @@ public interface MutableFloatLengthVector
 
             /**
              * Construct a new Relative Dense Immutable FloatLength Vector. An area is always relative.
-             * @param values FloatLength[]; the values of the Scalar FloatLength entries in the new Relative Dense Immutable FloatLength Vector
+             * @param values FloatLength[]; the values of the Scalar FloatLength entries in the new Relative Dense Immutable
+             *            FloatLength Vector
              * @throws ValueException when values has zero entries
              */
             public Dense(final FloatLength.Rel[] values) throws ValueException
@@ -668,7 +670,8 @@ public interface MutableFloatLengthVector
             public final MutableFloatLengthVector.Rel mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatLengthVector.Rel.Dense result = new MutableFloatLengthVector.Rel.Dense(getData(), getUnit());
+                final MutableFloatLengthVector.Rel.Dense result =
+                    new MutableFloatLengthVector.Rel.Dense(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }
@@ -719,8 +722,8 @@ public interface MutableFloatLengthVector
 
             /**
              * Construct a new Sparse Immutable FloatLength Vector. An area is always relative.
-             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Immutable FloatLength
-             *            Vector
+             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Immutable
+             *            FloatLength Vector
              * @param length the size of the vector
              * @throws ValueException when values has zero entries
              */
@@ -745,8 +748,8 @@ public interface MutableFloatLengthVector
 
             /**
              * Construct a new Relative Sparse Immutable FloatLength Vector. An area is always relative.
-             * @param values FloatLength[]; the values of the Scalar FloatLength entries in the new Relative Sparse Immutable FloatLength
-             *            Vector
+             * @param values FloatLength[]; the values of the Scalar FloatLength entries in the new Relative Sparse Immutable
+             *            FloatLength Vector
              * @throws ValueException when values has zero entries
              */
             public Sparse(final FloatLength.Rel[] values) throws ValueException
@@ -779,7 +782,8 @@ public interface MutableFloatLengthVector
             public final MutableFloatLengthVector.Rel mutable()
             {
                 setCopyOnWrite(true);
-                final MutableFloatLengthVector.Rel.Sparse result = new MutableFloatLengthVector.Rel.Sparse(getData(), getUnit());
+                final MutableFloatLengthVector.Rel.Sparse result =
+                    new MutableFloatLengthVector.Rel.Sparse(getData(), getUnit());
                 result.setCopyOnWrite(true);
                 return result;
             }

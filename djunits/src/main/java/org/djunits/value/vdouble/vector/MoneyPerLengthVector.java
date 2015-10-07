@@ -1,17 +1,17 @@
-package org.djunits.value.vfloat.vector;
+package org.djunits.value.vdouble.vector;
 
 import java.util.List;
 import java.util.SortedMap;
 
-import org.djunits.unit.AccelerationUnit;
+import org.djunits.unit.MoneyPerLengthUnit;
 import org.djunits.value.DenseData;
 import org.djunits.value.SparseData;
 import org.djunits.value.ValueException;
-import org.djunits.value.vfloat.scalar.FloatAcceleration;
-import org.djunits.value.vfloat.scalar.FloatScalar;
+import org.djunits.value.vdouble.scalar.DoubleScalar;
+import org.djunits.value.vdouble.scalar.MoneyPerLength;
 
 /**
- * Immutable Acceleration Vector.
+ * Immutable MoneyPerLength Vector.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public abstract class FloatAccelerationVector extends FloatVector.Rel<AccelerationUnit>
+public abstract class MoneyPerLengthVector extends DoubleVector.Rel<MoneyPerLengthUnit>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -29,83 +29,83 @@ public abstract class FloatAccelerationVector extends FloatVector.Rel<Accelerati
     /**
      * @param unit the unit to use
      */
-    public FloatAccelerationVector(final AccelerationUnit unit)
+    public MoneyPerLengthVector(final MoneyPerLengthUnit unit)
     {
         super(unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public abstract MutableFloatAccelerationVector mutable();
+    public abstract MutableMoneyPerLengthVector mutable();
 
     /** {@inheritDoc} */
-    public abstract FloatAccelerationVector toDense();
+    public abstract MoneyPerLengthVector toDense();
 
     /** {@inheritDoc} */
-    public abstract FloatAccelerationVector toSparse();
+    public abstract MoneyPerLengthVector toSparse();
 
     /**
-     * Float Dense Relative Immutable Acceleration class.
+     * Double Dense Relative Immutable MoneyPerLength class.
      */
-    public static class Dense extends FloatAccelerationVector implements DenseData
+    public static class Dense extends MoneyPerLengthVector implements DenseData
     {
         /** */
         private static final long serialVersionUID = 20150905L;
 
         /**
-         * Construct a new Dense Immutable Float Acceleration Vector. An acceleration is always relative.
-         * @param values float[]; the values of the entries in the new Dense Immutable Float Acceleration Vector
-         * @param unit U; the unit of the new Dense Immutable Acceleration Vector
+         * Construct a new Dense Immutable Double MoneyPerLength Vector. An moneyperlength is always relative.
+         * @param values double[]; the values of the entries in the new Dense Immutable Double MoneyPerLength Vector
+         * @param unit U; the unit of the new Dense Immutable MoneyPerLength Vector
          * @throws ValueException when values is null
          */
-        public Dense(final float[] values, final AccelerationUnit unit) throws ValueException
+        public Dense(final double[] values, final MoneyPerLengthUnit unit) throws ValueException
         {
             super(unit);
             this.data = initializeDense(values);
         }
 
         /**
-         * Construct a new Relative Dense Immutable FloatVector. An acceleration is always relative.
-         * @param values List; the values of the entries in the new Relative Dense Immutable Acceleration Vector
-         * @param unit U; the unit of the new Relative Dense Immutable Acceleration Vector
+         * Construct a new Relative Dense Immutable DoubleVector. An moneyperlength is always relative.
+         * @param values List; the values of the entries in the new Relative Dense Immutable MoneyPerLength Vector
+         * @param unit U; the unit of the new Relative Dense Immutable MoneyPerLength Vector
          * @throws ValueException when values is null
          */
-        public Dense(final List<Float> values, final AccelerationUnit unit) throws ValueException
+        public Dense(final List<Double> values, final MoneyPerLengthUnit unit) throws ValueException
         {
             super(unit);
             this.data = initializeDense(values);
         }
 
         /**
-         * Construct a new Relative Dense Immutable FloatVector.
-         * @param values List&lt;Acceleration&gt;; the values of the Scalar Acceleration entries in the new Relative Dense
-         *            Immutable FloatVector
+         * Construct a new Relative Dense Immutable DoubleVector.
+         * @param values List&lt;MoneyPerLength&gt;; the values of the Scalar MoneyPerLength entries in the new Relative Dense
+         *            Immutable DoubleVector
          * @throws ValueException when values has zero entries
          */
-        public Dense(final List<FloatScalar.Rel<AccelerationUnit>> values) throws ValueException
+        public Dense(final List<DoubleScalar.Rel<MoneyPerLengthUnit>> values) throws ValueException
         {
             super(checkNonEmptyLR(values).get(0).getUnit());
             this.data = initializeDenseLR(values);
         }
 
         /**
-         * Construct a new Relative Dense Immutable Acceleration Vector. An acceleration is always relative.
-         * @param values Acceleration[]; the values of the Scalar Acceleration entries in the new Relative Dense Immutable
-         *            Acceleration Vector
+         * Construct a new Relative Dense Immutable MoneyPerLength Vector. An moneyperlength is always relative.
+         * @param values MoneyPerLength[]; the values of the Scalar MoneyPerLength entries in the new Relative Dense Immutable
+         *            MoneyPerLength Vector
          * @throws ValueException when values has zero entries
          */
-        public Dense(final FloatAcceleration[] values) throws ValueException
+        public Dense(final MoneyPerLength[] values) throws ValueException
         {
             super(checkNonEmpty(values)[0].getUnit());
             this.data = initializeDense(values);
         }
 
         /**
-         * Construct a new Relative Dense Immutable FloatVector.
+         * Construct a new Relative Dense Immutable DoubleVector.
          * @param data an internal data object
          * @param unit the unit
          */
-        Dense(final FloatVectorDataDense data, final AccelerationUnit unit)
+        Dense(final DoubleVectorDataDense data, final MoneyPerLengthUnit unit)
         {
             super(unit);
             this.data = data.copy();
@@ -113,49 +113,49 @@ public abstract class FloatAccelerationVector extends FloatVector.Rel<Accelerati
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatAccelerationVector mutable()
+        public final MutableMoneyPerLengthVector mutable()
         {
-            return new MutableFloatAccelerationVector.Dense(getData(), getUnit());
+            return new MutableMoneyPerLengthVector.Dense(getData(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        protected final FloatVectorDataDense getData()
+        protected final DoubleVectorDataDense getData()
         {
-            return (FloatVectorDataDense) this.data;
+            return (DoubleVectorDataDense) this.data;
         }
 
         /** {@inheritDoc} */
         @Override
-        public final FloatAccelerationVector toDense()
+        public final MoneyPerLengthVector toDense()
         {
             return this;
         }
 
         /** {@inheritDoc} */
         @Override
-        public final FloatAccelerationVector toSparse()
+        public final MoneyPerLengthVector toSparse()
         {
-            return new FloatAccelerationVector.Sparse(getData().toSparse(), getUnit());
+            return new MoneyPerLengthVector.Sparse(getData().toSparse(), getUnit());
         }
     }
 
     /**
-     * Float Sparse Relative Immutable Acceleration class.
+     * Double Sparse Relative Immutable MoneyPerLength class.
      */
-    public static class Sparse extends FloatAccelerationVector implements SparseData
+    public static class Sparse extends MoneyPerLengthVector implements SparseData
     {
         /** */
         private static final long serialVersionUID = 20150905L;
 
         /**
-         * Construct a new Sparse Immutable Acceleration Vector. An acceleration is always relative.
-         * @param values Map; the map of indexes to values of the Relative Sparse Immutable Acceleration Vector
-         * @param unit AccelerationUnit; the unit of the new Relative Sparse Immutable Acceleration Vector
+         * Construct a new Sparse Immutable MoneyPerLength Vector. An moneyperlength is always relative.
+         * @param values Map; the map of indexes to values of the Relative Sparse Immutable MoneyPerLength Vector
+         * @param unit MoneyPerLengthUnit; the unit of the new Relative Sparse Immutable MoneyPerLength Vector
          * @param length the size of the vector
          * @throws ValueException when values is null
          */
-        public Sparse(final SortedMap<Integer, Float> values, final AccelerationUnit unit, final int length)
+        public Sparse(final SortedMap<Integer, Double> values, final MoneyPerLengthUnit unit, final int length)
             throws ValueException
         {
             super(unit);
@@ -163,13 +163,13 @@ public abstract class FloatAccelerationVector extends FloatVector.Rel<Accelerati
         }
 
         /**
-         * Construct a new Sparse Immutable Acceleration Vector. An acceleration is always relative.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Immutable Acceleration
-         *            Vector
+         * Construct a new Sparse Immutable MoneyPerLength Vector. An moneyperlength is always relative.
+         * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Immutable
+         *            MoneyPerLength Vector
          * @param length the size of the vector
          * @throws ValueException when values has zero entries
          */
-        public Sparse(final SortedMap<Integer, FloatScalar.Rel<AccelerationUnit>> values, final int length)
+        public Sparse(final SortedMap<Integer, DoubleScalar.Rel<MoneyPerLengthUnit>> values, final int length)
             throws ValueException
         {
             super(checkNonEmptyMR(values).get(values.firstKey()).getUnit());
@@ -177,35 +177,35 @@ public abstract class FloatAccelerationVector extends FloatVector.Rel<Accelerati
         }
 
         /**
-         * Construct a new Sparse Immutable Float Acceleration Vector. An acceleration is always relative.
-         * @param values float[]; the values of the entries in the new Sparse Immutable Float Acceleration Vector
-         * @param unit U; the unit of the new Sparse Immutable Acceleration Vector
+         * Construct a new Sparse Immutable Double MoneyPerLength Vector. An moneyperlength is always relative.
+         * @param values double[]; the values of the entries in the new Sparse Immutable Double MoneyPerLength Vector
+         * @param unit U; the unit of the new Sparse Immutable MoneyPerLength Vector
          * @throws ValueException when values is null
          */
-        public Sparse(final float[] values, final AccelerationUnit unit) throws ValueException
+        public Sparse(final double[] values, final MoneyPerLengthUnit unit) throws ValueException
         {
             super(unit);
             this.data = initializeDense(values).toSparse();
         }
 
         /**
-         * Construct a new Relative Sparse Immutable Acceleration Vector. An acceleration is always relative.
-         * @param values Acceleration[]; the values of the Scalar Acceleration entries in the new Relative Sparse Immutable
-         *            Acceleration Vector
+         * Construct a new Relative Sparse Immutable MoneyPerLength Vector. An moneyperlength is always relative.
+         * @param values MoneyPerLength[]; the values of the Scalar MoneyPerLength entries in the new Relative Sparse Immutable
+         *            MoneyPerLength Vector
          * @throws ValueException when values has zero entries
          */
-        public Sparse(final FloatAcceleration[] values) throws ValueException
+        public Sparse(final MoneyPerLength[] values) throws ValueException
         {
             super(checkNonEmpty(values)[0].getUnit());
             this.data = initializeDense(values).toSparse();
         }
 
         /**
-         * Construct a new Relative Sparse Immutable FloatVector.
+         * Construct a new Relative Sparse Immutable DoubleVector.
          * @param data an internal data object
          * @param unit the unit
          */
-        Sparse(final FloatVectorDataSparse data, final AccelerationUnit unit)
+        Sparse(final DoubleVectorDataSparse data, final MoneyPerLengthUnit unit)
         {
             super(unit);
             this.data = data.copy();
@@ -213,28 +213,28 @@ public abstract class FloatAccelerationVector extends FloatVector.Rel<Accelerati
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatAccelerationVector mutable()
+        public final MutableMoneyPerLengthVector mutable()
         {
-            return new MutableFloatAccelerationVector.Sparse(getData(), getUnit());
+            return new MutableMoneyPerLengthVector.Sparse(getData(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        protected final FloatVectorDataSparse getData()
+        protected final DoubleVectorDataSparse getData()
         {
-            return (FloatVectorDataSparse) this.data;
+            return (DoubleVectorDataSparse) this.data;
         }
 
         /** {@inheritDoc} */
         @Override
-        public final FloatAccelerationVector toDense()
+        public final MoneyPerLengthVector toDense()
         {
-            return new FloatAccelerationVector.Dense(getData().toDense(), getUnit());
+            return new MoneyPerLengthVector.Dense(getData().toDense(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final FloatAccelerationVector toSparse()
+        public final MoneyPerLengthVector toSparse()
         {
             return this;
         }
@@ -246,26 +246,26 @@ public abstract class FloatAccelerationVector extends FloatVector.Rel<Accelerati
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAcceleration get(final int index) throws ValueException
+    public final MoneyPerLength get(final int index) throws ValueException
     {
-        return (FloatAcceleration) super.get(index);
+        return (MoneyPerLength) super.get(index);
     }
 
     /**
      * Instantiate a vector based on the type of data.
-     * @param dvData the FloatVectorData
+     * @param dvData the DoubleVectorData
      * @param unit the unit to use
-     * @return an AccelerationVector
+     * @return an MoneyPerLengthVector
      */
-    static FloatAccelerationVector instantiate(final FloatVectorData dvData, final AccelerationUnit unit)
+    static MoneyPerLengthVector instantiate(final DoubleVectorData dvData, final MoneyPerLengthUnit unit)
     {
-        if (dvData instanceof FloatVectorDataSparse)
+        if (dvData instanceof DoubleVectorDataSparse)
         {
-            return new FloatAccelerationVector.Sparse((FloatVectorDataSparse) dvData, unit);
+            return new MoneyPerLengthVector.Sparse((DoubleVectorDataSparse) dvData, unit);
         }
         else
         {
-            return new FloatAccelerationVector.Dense((FloatVectorDataDense) dvData, unit);
+            return new MoneyPerLengthVector.Dense((DoubleVectorDataDense) dvData, unit);
         }
     }
 
@@ -277,7 +277,7 @@ public abstract class FloatAccelerationVector extends FloatVector.Rel<Accelerati
      * @return the addition of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector plus(final FloatAccelerationVector rel) throws ValueException
+    public final MoneyPerLengthVector plus(final MoneyPerLengthVector rel) throws ValueException
     {
         return instantiate(this.getData().plus(rel.getData()), getUnit());
     }
@@ -290,7 +290,7 @@ public abstract class FloatAccelerationVector extends FloatVector.Rel<Accelerati
      * @return the subtraction of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector minus(final FloatAccelerationVector rel) throws ValueException
+    public final MoneyPerLengthVector minus(final MoneyPerLengthVector rel) throws ValueException
     {
         return instantiate(this.getData().minus(rel.getData()), getUnit());
     }
@@ -303,9 +303,9 @@ public abstract class FloatAccelerationVector extends FloatVector.Rel<Accelerati
      * @return the multiplication of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector times(final FloatAccelerationVector rel) throws ValueException
+    public final MoneyPerLengthVector times(final MoneyPerLengthVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -316,9 +316,9 @@ public abstract class FloatAccelerationVector extends FloatVector.Rel<Accelerati
      * @return the division of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector divide(final FloatAccelerationVector rel) throws ValueException
+    public final MoneyPerLengthVector divide(final MoneyPerLengthVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

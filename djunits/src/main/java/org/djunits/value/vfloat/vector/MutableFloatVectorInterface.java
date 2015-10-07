@@ -59,7 +59,7 @@ public interface MutableFloatVectorInterface<U extends Unit<U>> extends FloatVec
      * @throws ValueException when the sum of the values is zero and normalization is not possible
      */
     void normalize() throws ValueException;
-    
+
     /** {@inheritDoc} */
     MutableFloatVectorInterface<U> toDense();
 
