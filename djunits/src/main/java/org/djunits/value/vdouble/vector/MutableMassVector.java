@@ -316,7 +316,7 @@ public abstract class MutableMassVector extends MutableDoubleVector.Rel<MassUnit
      */
     public final MassVector times(final MassVector rel) throws ValueException
     {
-        return MassVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return MassVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -329,7 +329,7 @@ public abstract class MutableMassVector extends MutableDoubleVector.Rel<MassUnit
      */
     public final MassVector divide(final MassVector rel) throws ValueException
     {
-        return MassVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return MassVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -368,7 +368,7 @@ public abstract class MutableMassVector extends MutableDoubleVector.Rel<MassUnit
      */
     public final MassVector times(final MutableMassVector rel) throws ValueException
     {
-        return MassVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return MassVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -381,7 +381,7 @@ public abstract class MutableMassVector extends MutableDoubleVector.Rel<MassUnit
      */
     public final MassVector divide(final MutableMassVector rel) throws ValueException
     {
-        return MassVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return MassVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

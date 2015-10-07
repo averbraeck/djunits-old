@@ -320,7 +320,7 @@ public abstract class MutableFlowMassVector extends MutableDoubleVector.Rel<Flow
      */
     public final FlowMassVector times(final FlowMassVector rel) throws ValueException
     {
-        return FlowMassVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FlowMassVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -333,7 +333,7 @@ public abstract class MutableFlowMassVector extends MutableDoubleVector.Rel<Flow
      */
     public final FlowMassVector divide(final FlowMassVector rel) throws ValueException
     {
-        return FlowMassVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FlowMassVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -372,7 +372,7 @@ public abstract class MutableFlowMassVector extends MutableDoubleVector.Rel<Flow
      */
     public final FlowMassVector times(final MutableFlowMassVector rel) throws ValueException
     {
-        return FlowMassVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FlowMassVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -385,7 +385,7 @@ public abstract class MutableFlowMassVector extends MutableDoubleVector.Rel<Flow
      */
     public final FlowMassVector divide(final MutableFlowMassVector rel) throws ValueException
     {
-        return FlowMassVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FlowMassVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

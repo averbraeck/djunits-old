@@ -318,7 +318,7 @@ public abstract class MutableDensityVector extends MutableDoubleVector.Rel<Densi
      */
     public final DensityVector times(final DensityVector rel) throws ValueException
     {
-        return DensityVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return DensityVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -331,7 +331,7 @@ public abstract class MutableDensityVector extends MutableDoubleVector.Rel<Densi
      */
     public final DensityVector divide(final DensityVector rel) throws ValueException
     {
-        return DensityVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return DensityVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -370,7 +370,7 @@ public abstract class MutableDensityVector extends MutableDoubleVector.Rel<Densi
      */
     public final DensityVector times(final MutableDensityVector rel) throws ValueException
     {
-        return DensityVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return DensityVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -383,7 +383,7 @@ public abstract class MutableDensityVector extends MutableDoubleVector.Rel<Densi
      */
     public final DensityVector divide(final MutableDensityVector rel) throws ValueException
     {
-        return DensityVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return DensityVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

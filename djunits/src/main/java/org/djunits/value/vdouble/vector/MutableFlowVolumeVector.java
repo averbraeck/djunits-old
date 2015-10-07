@@ -320,7 +320,7 @@ public abstract class MutableFlowVolumeVector extends MutableDoubleVector.Rel<Fl
      */
     public final FlowVolumeVector times(final FlowVolumeVector rel) throws ValueException
     {
-        return FlowVolumeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FlowVolumeVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -333,7 +333,7 @@ public abstract class MutableFlowVolumeVector extends MutableDoubleVector.Rel<Fl
      */
     public final FlowVolumeVector divide(final FlowVolumeVector rel) throws ValueException
     {
-        return FlowVolumeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FlowVolumeVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -372,7 +372,7 @@ public abstract class MutableFlowVolumeVector extends MutableDoubleVector.Rel<Fl
      */
     public final FlowVolumeVector times(final MutableFlowVolumeVector rel) throws ValueException
     {
-        return FlowVolumeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FlowVolumeVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -385,7 +385,7 @@ public abstract class MutableFlowVolumeVector extends MutableDoubleVector.Rel<Fl
      */
     public final FlowVolumeVector divide(final MutableFlowVolumeVector rel) throws ValueException
     {
-        return FlowVolumeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FlowVolumeVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

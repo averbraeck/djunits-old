@@ -320,7 +320,7 @@ public abstract class MutablePressureVector extends MutableDoubleVector.Rel<Pres
      */
     public final PressureVector times(final PressureVector rel) throws ValueException
     {
-        return PressureVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return PressureVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -333,7 +333,7 @@ public abstract class MutablePressureVector extends MutableDoubleVector.Rel<Pres
      */
     public final PressureVector divide(final PressureVector rel) throws ValueException
     {
-        return PressureVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return PressureVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -372,7 +372,7 @@ public abstract class MutablePressureVector extends MutableDoubleVector.Rel<Pres
      */
     public final PressureVector times(final MutablePressureVector rel) throws ValueException
     {
-        return PressureVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return PressureVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -385,7 +385,7 @@ public abstract class MutablePressureVector extends MutableDoubleVector.Rel<Pres
      */
     public final PressureVector divide(final MutablePressureVector rel) throws ValueException
     {
-        return PressureVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return PressureVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

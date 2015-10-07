@@ -318,7 +318,7 @@ public abstract class MutableEnergyVector extends MutableDoubleVector.Rel<Energy
      */
     public final EnergyVector times(final EnergyVector rel) throws ValueException
     {
-        return EnergyVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return EnergyVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -331,7 +331,7 @@ public abstract class MutableEnergyVector extends MutableDoubleVector.Rel<Energy
      */
     public final EnergyVector divide(final EnergyVector rel) throws ValueException
     {
-        return EnergyVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return EnergyVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -370,7 +370,7 @@ public abstract class MutableEnergyVector extends MutableDoubleVector.Rel<Energy
      */
     public final EnergyVector times(final MutableEnergyVector rel) throws ValueException
     {
-        return EnergyVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return EnergyVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -383,7 +383,7 @@ public abstract class MutableEnergyVector extends MutableDoubleVector.Rel<Energy
      */
     public final EnergyVector divide(final MutableEnergyVector rel) throws ValueException
     {
-        return EnergyVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return EnergyVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

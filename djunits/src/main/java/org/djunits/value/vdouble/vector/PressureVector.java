@@ -305,7 +305,7 @@ public abstract class PressureVector extends DoubleVector.Rel<PressureUnit>
      */
     public final PressureVector times(final PressureVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class PressureVector extends DoubleVector.Rel<PressureUnit>
      */
     public final PressureVector divide(final PressureVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

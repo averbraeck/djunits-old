@@ -303,7 +303,7 @@ public abstract class DensityVector extends DoubleVector.Rel<DensityUnit>
      */
     public final DensityVector times(final DensityVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -316,7 +316,7 @@ public abstract class DensityVector extends DoubleVector.Rel<DensityUnit>
      */
     public final DensityVector divide(final DensityVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

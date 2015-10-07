@@ -303,7 +303,7 @@ public abstract class SpeedVector extends DoubleVector.Rel<SpeedUnit>
      */
     public final SpeedVector times(final SpeedVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -316,7 +316,7 @@ public abstract class SpeedVector extends DoubleVector.Rel<SpeedUnit>
      */
     public final SpeedVector divide(final SpeedVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

@@ -302,7 +302,7 @@ public abstract class AreaVector extends DoubleVector.Rel<AreaUnit>
      */
     public final AreaVector times(final AreaVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -315,7 +315,7 @@ public abstract class AreaVector extends DoubleVector.Rel<AreaUnit>
      */
     public final AreaVector divide(final AreaVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

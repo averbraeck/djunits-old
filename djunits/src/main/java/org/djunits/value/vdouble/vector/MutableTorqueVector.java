@@ -318,7 +318,7 @@ public abstract class MutableTorqueVector extends MutableDoubleVector.Rel<Torque
      */
     public final TorqueVector times(final TorqueVector rel) throws ValueException
     {
-        return TorqueVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return TorqueVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -331,7 +331,7 @@ public abstract class MutableTorqueVector extends MutableDoubleVector.Rel<Torque
      */
     public final TorqueVector divide(final TorqueVector rel) throws ValueException
     {
-        return TorqueVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return TorqueVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -370,7 +370,7 @@ public abstract class MutableTorqueVector extends MutableDoubleVector.Rel<Torque
      */
     public final TorqueVector times(final MutableTorqueVector rel) throws ValueException
     {
-        return TorqueVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return TorqueVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -383,7 +383,7 @@ public abstract class MutableTorqueVector extends MutableDoubleVector.Rel<Torque
      */
     public final TorqueVector divide(final MutableTorqueVector rel) throws ValueException
     {
-        return TorqueVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return TorqueVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

@@ -305,7 +305,7 @@ public abstract class FrequencyVector extends DoubleVector.Rel<FrequencyUnit>
      */
     public final FrequencyVector times(final FrequencyVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class FrequencyVector extends DoubleVector.Rel<FrequencyUnit>
      */
     public final FrequencyVector divide(final FrequencyVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

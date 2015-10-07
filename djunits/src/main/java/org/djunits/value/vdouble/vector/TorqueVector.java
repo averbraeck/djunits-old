@@ -303,7 +303,7 @@ public abstract class TorqueVector extends DoubleVector.Rel<TorqueUnit>
      */
     public final TorqueVector times(final TorqueVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -316,7 +316,7 @@ public abstract class TorqueVector extends DoubleVector.Rel<TorqueUnit>
      */
     public final TorqueVector divide(final TorqueVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

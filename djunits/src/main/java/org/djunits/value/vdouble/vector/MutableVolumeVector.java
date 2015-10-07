@@ -318,7 +318,7 @@ public abstract class MutableVolumeVector extends MutableDoubleVector.Rel<Volume
      */
     public final VolumeVector times(final VolumeVector rel) throws ValueException
     {
-        return VolumeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return VolumeVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -331,7 +331,7 @@ public abstract class MutableVolumeVector extends MutableDoubleVector.Rel<Volume
      */
     public final VolumeVector divide(final VolumeVector rel) throws ValueException
     {
-        return VolumeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return VolumeVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -370,7 +370,7 @@ public abstract class MutableVolumeVector extends MutableDoubleVector.Rel<Volume
      */
     public final VolumeVector times(final MutableVolumeVector rel) throws ValueException
     {
-        return VolumeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return VolumeVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -383,7 +383,7 @@ public abstract class MutableVolumeVector extends MutableDoubleVector.Rel<Volume
      */
     public final VolumeVector divide(final MutableVolumeVector rel) throws ValueException
     {
-        return VolumeVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return VolumeVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

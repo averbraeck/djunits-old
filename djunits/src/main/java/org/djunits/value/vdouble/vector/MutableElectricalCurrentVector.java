@@ -322,7 +322,7 @@ public abstract class MutableElectricalCurrentVector extends MutableDoubleVector
      */
     public final ElectricalCurrentVector times(final ElectricalCurrentVector rel) throws ValueException
     {
-        return ElectricalCurrentVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalCurrentVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -335,7 +335,7 @@ public abstract class MutableElectricalCurrentVector extends MutableDoubleVector
      */
     public final ElectricalCurrentVector divide(final ElectricalCurrentVector rel) throws ValueException
     {
-        return ElectricalCurrentVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalCurrentVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -374,7 +374,7 @@ public abstract class MutableElectricalCurrentVector extends MutableDoubleVector
      */
     public final ElectricalCurrentVector times(final MutableElectricalCurrentVector rel) throws ValueException
     {
-        return ElectricalCurrentVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalCurrentVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -387,7 +387,7 @@ public abstract class MutableElectricalCurrentVector extends MutableDoubleVector
      */
     public final ElectricalCurrentVector divide(final MutableElectricalCurrentVector rel) throws ValueException
     {
-        return ElectricalCurrentVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return ElectricalCurrentVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

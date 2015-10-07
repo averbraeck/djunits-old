@@ -32,11 +32,11 @@ public interface FunctionsRel<U extends Unit<U>, A extends Absolute & Value<U>, 
      * Add an Absolute value to this Relative value for a vector or matrix. The addition is done value by value and the result
      * is stored in a new Absolute value. If both operands are sparse, the result is a sparse vector or matrix, otherwise the
      * result is a dense vector or matrix.
-     * @param rel A the right operand
+     * @param abs A the right operand
      * @return A the sum of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    A plus(A rel) throws ValueException;
+    A plus(A abs) throws ValueException;
 
     /**
      * Subtract a Relative value from this Relative value for a vector or matrix. The subtraction is done value by value and the

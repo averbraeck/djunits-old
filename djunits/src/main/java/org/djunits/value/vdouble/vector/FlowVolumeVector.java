@@ -305,7 +305,7 @@ public abstract class FlowVolumeVector extends DoubleVector.Rel<FlowVolumeUnit>
      */
     public final FlowVolumeVector times(final FlowVolumeVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class FlowVolumeVector extends DoubleVector.Rel<FlowVolumeUnit>
      */
     public final FlowVolumeVector divide(final FlowVolumeVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

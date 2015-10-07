@@ -320,7 +320,7 @@ public abstract class MutableAccelerationVector extends MutableDoubleVector.Rel<
      */
     public final AccelerationVector times(final AccelerationVector rel) throws ValueException
     {
-        return AccelerationVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AccelerationVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -333,7 +333,7 @@ public abstract class MutableAccelerationVector extends MutableDoubleVector.Rel<
      */
     public final AccelerationVector divide(final AccelerationVector rel) throws ValueException
     {
-        return AccelerationVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AccelerationVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -372,7 +372,7 @@ public abstract class MutableAccelerationVector extends MutableDoubleVector.Rel<
      */
     public final AccelerationVector times(final MutableAccelerationVector rel) throws ValueException
     {
-        return AccelerationVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AccelerationVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -385,7 +385,7 @@ public abstract class MutableAccelerationVector extends MutableDoubleVector.Rel<
      */
     public final AccelerationVector divide(final MutableAccelerationVector rel) throws ValueException
     {
-        return AccelerationVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return AccelerationVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/

@@ -305,7 +305,7 @@ public abstract class ElectricalChargeVector extends DoubleVector.Rel<Electrical
      */
     public final ElectricalChargeVector times(final ElectricalChargeVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class ElectricalChargeVector extends DoubleVector.Rel<Electrical
      */
     public final ElectricalChargeVector divide(final ElectricalChargeVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }

@@ -303,7 +303,7 @@ public abstract class PowerVector extends DoubleVector.Rel<PowerUnit>
      */
     public final PowerVector times(final PowerVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -316,7 +316,7 @@ public abstract class PowerVector extends DoubleVector.Rel<PowerUnit>
      */
     public final PowerVector divide(final PowerVector rel) throws ValueException
     {
-        return instantiate(this.getData().plus(rel.getData()), getUnit());
+        return instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
 }
