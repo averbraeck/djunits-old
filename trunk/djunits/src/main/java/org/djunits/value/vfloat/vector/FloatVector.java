@@ -86,7 +86,6 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
         /** {@inheritDoc} */
         public abstract FloatVector.Abs<U> toSparse();
 
-
         /**
          * ABSOLUTE DENSE implementation of FloatVector.
          * @param <U> Unit the unit for which this Vector will be created
@@ -201,8 +200,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
              * @param length the size of the vector
              * @throws ValueException when values is null
              */
-            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length)
-                throws ValueException
+            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
             {
                 super(unit);
                 this.data = initializeSparse(values, length);
@@ -471,8 +469,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
              * @param length the size of the vector
              * @throws ValueException when values is null
              */
-            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length)
-                throws ValueException
+            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
             {
                 super(unit);
                 this.data = initializeSparse(values, length);

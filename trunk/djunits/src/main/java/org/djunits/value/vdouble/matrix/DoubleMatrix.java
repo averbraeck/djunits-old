@@ -187,7 +187,7 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
                 return new MutableDoubleMatrix.Abs.Sparse<U>(getData(), getUnit());
             }
 
-           /** {@inheritDoc} */
+            /** {@inheritDoc} */
             @Override
             protected final DoubleMatrixDataSparse getData()
             {

@@ -1,17 +1,17 @@
-package org.djunits.value.vfloat.vector;
+package org.djunits.value.vdouble.vector;
 
 import java.util.List;
 import java.util.SortedMap;
 
-import org.djunits.unit.AccelerationUnit;
+import org.djunits.unit.MoneyPerAreaUnit;
 import org.djunits.value.DenseData;
 import org.djunits.value.SparseData;
 import org.djunits.value.ValueException;
-import org.djunits.value.vfloat.scalar.FloatAcceleration;
-import org.djunits.value.vfloat.scalar.FloatScalar;
+import org.djunits.value.vdouble.scalar.DoubleScalar;
+import org.djunits.value.vdouble.scalar.MoneyPerArea;
 
 /**
- * Mutable Acceleration Vector.
+ * Mutable MoneyPerArea Vector.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public abstract class MutableFloatAccelerationVector extends MutableFloatVector.Rel<AccelerationUnit>
+public abstract class MutableMoneyPerAreaVector extends MutableDoubleVector.Rel<MoneyPerAreaUnit>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -29,87 +29,87 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
     /**
      * @param unit the unit to use
      */
-    public MutableFloatAccelerationVector(final AccelerationUnit unit)
+    public MutableMoneyPerAreaVector(final MoneyPerAreaUnit unit)
     {
         super(unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public abstract MutableFloatAccelerationVector mutable();
+    public abstract MutableMoneyPerAreaVector mutable();
 
     /** {@inheritDoc} */
     @Override
-    public abstract FloatAccelerationVector immutable();
+    public abstract MoneyPerAreaVector immutable();
 
     /** {@inheritDoc} */
-    public abstract MutableFloatAccelerationVector toDense();
+    public abstract MutableMoneyPerAreaVector toDense();
 
     /** {@inheritDoc} */
-    public abstract MutableFloatAccelerationVector toSparse();
+    public abstract MutableMoneyPerAreaVector toSparse();
 
     /**
-     * Float Dense Relative Immutable Acceleration class.
+     * Double Dense Relative Immutable MoneyPerArea class.
      */
-    public static class Dense extends MutableFloatAccelerationVector implements DenseData
+    public static class Dense extends MutableMoneyPerAreaVector implements DenseData
     {
         /** */
         private static final long serialVersionUID = 20150905L;
 
         /**
-         * Construct a new Dense Immutable Float Acceleration Vector. An acceleration is always relative.
-         * @param values float[]; the values of the entries in the new Dense Immutable Float Acceleration Vector
-         * @param unit U; the unit of the new Dense Immutable Acceleration Vector
+         * Construct a new Dense Immutable Double MoneyPerArea Vector. An moneyperarea is always relative.
+         * @param values double[]; the values of the entries in the new Dense Immutable Double MoneyPerArea Vector
+         * @param unit U; the unit of the new Dense Immutable MoneyPerArea Vector
          * @throws ValueException when values is null
          */
-        public Dense(final float[] values, final AccelerationUnit unit) throws ValueException
+        public Dense(final double[] values, final MoneyPerAreaUnit unit) throws ValueException
         {
             super(unit);
             this.data = initializeDense(values);
         }
 
         /**
-         * Construct a new Relative Dense Immutable FloatVector. An acceleration is always relative.
-         * @param values List; the values of the entries in the new Relative Dense Immutable Acceleration Vector
-         * @param unit U; the unit of the new Relative Dense Immutable Acceleration Vector
+         * Construct a new Relative Dense Immutable DoubleVector. An moneyperarea is always relative.
+         * @param values List; the values of the entries in the new Relative Dense Immutable MoneyPerArea Vector
+         * @param unit U; the unit of the new Relative Dense Immutable MoneyPerArea Vector
          * @throws ValueException when values is null
          */
-        public Dense(final List<Float> values, final AccelerationUnit unit) throws ValueException
+        public Dense(final List<Double> values, final MoneyPerAreaUnit unit) throws ValueException
         {
             super(unit);
             this.data = initializeDense(values);
         }
 
         /**
-         * Construct a new Relative Dense Immutable FloatVector.
-         * @param values List&lt;Acceleration&gt;; the values of the Scalar Acceleration entries in the new Relative Dense
-         *            Immutable Acceleration Vector
+         * Construct a new Relative Dense Immutable DoubleVector.
+         * @param values List&lt;MoneyPerArea&gt;; the values of the Scalar MoneyPerArea entries in the new Relative Dense
+         *            Immutable MoneyPerArea Vector
          * @throws ValueException when values has zero entries
          */
-        public Dense(final List<FloatScalar.Rel<AccelerationUnit>> values) throws ValueException
+        public Dense(final List<DoubleScalar.Rel<MoneyPerAreaUnit>> values) throws ValueException
         {
             super(checkNonEmptyLR(values).get(0).getUnit());
             this.data = initializeDenseLR(values);
         }
 
         /**
-         * Construct a new Relative Dense Immutable Acceleration Vector. An acceleration is always relative.
-         * @param values Acceleration[]; the values of the Scalar Acceleration entries in the new Relative Dense Immutable
-         *            Acceleration Vector
+         * Construct a new Relative Dense Immutable MoneyPerArea Vector. An moneyperarea is always relative.
+         * @param values MoneyPerArea[]; the values of the Scalar MoneyPerArea entries in the new Relative Dense Immutable
+         *            MoneyPerArea Vector
          * @throws ValueException when values has zero entries
          */
-        public Dense(final FloatAcceleration[] values) throws ValueException
+        public Dense(final MoneyPerArea[] values) throws ValueException
         {
             super(checkNonEmpty(values)[0].getUnit());
             this.data = initializeDense(values);
         }
 
         /**
-         * Construct a new Relative Dense Mutable Acceleration Vector.
+         * Construct a new Relative Dense Mutable MoneyPerArea Vector.
          * @param data an internal data object
          * @param unit the unit
          */
-        Dense(final FloatVectorDataDense data, final AccelerationUnit unit)
+        Dense(final DoubleVectorDataDense data, final MoneyPerAreaUnit unit)
         {
             super(unit);
             this.data = data.copy();
@@ -117,61 +117,60 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
 
         /** {@inheritDoc} */
         @Override
-        public final FloatAccelerationVector immutable()
+        public final MoneyPerAreaVector immutable()
         {
             setCopyOnWrite(true);
-            return new FloatAccelerationVector.Dense(getData(), getUnit());
+            return new MoneyPerAreaVector.Dense(getData(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatAccelerationVector mutable()
+        public final MutableMoneyPerAreaVector mutable()
         {
             setCopyOnWrite(true);
-            final MutableFloatAccelerationVector.Dense result =
-                new MutableFloatAccelerationVector.Dense(getData(), getUnit());
+            final MutableMoneyPerAreaVector.Dense result = new MutableMoneyPerAreaVector.Dense(getData(), getUnit());
             result.setCopyOnWrite(true);
             return result;
         }
 
         /** {@inheritDoc} */
         @Override
-        protected final FloatVectorDataDense getData()
+        protected final DoubleVectorDataDense getData()
         {
-            return (FloatVectorDataDense) this.data;
+            return (DoubleVectorDataDense) this.data;
         }
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatAccelerationVector toDense()
+        public final MutableMoneyPerAreaVector toDense()
         {
             return copy();
         }
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatAccelerationVector toSparse()
+        public final MutableMoneyPerAreaVector toSparse()
         {
-            return new MutableFloatAccelerationVector.Sparse(getData().toSparse(), getUnit());
+            return new MutableMoneyPerAreaVector.Sparse(getData().toSparse(), getUnit());
         }
     }
 
     /**
-     * Float Sparse Relative Immutable Acceleration class.
+     * Double Sparse Relative Immutable MoneyPerArea class.
      */
-    public static class Sparse extends MutableFloatAccelerationVector implements SparseData
+    public static class Sparse extends MutableMoneyPerAreaVector implements SparseData
     {
         /** */
         private static final long serialVersionUID = 20150905L;
 
         /**
-         * Construct a new Sparse Immutable Acceleration Vector. An acceleration is always relative.
-         * @param values Map; the map of indexes to values of the Relative Sparse Immutable Acceleration Vector
-         * @param unit AccelerationUnit; the unit of the new Relative Sparse Immutable Acceleration Vector
+         * Construct a new Sparse Immutable MoneyPerArea Vector. An moneyperarea is always relative.
+         * @param values Map; the map of indexes to values of the Relative Sparse Immutable MoneyPerArea Vector
+         * @param unit MoneyPerAreaUnit; the unit of the new Relative Sparse Immutable MoneyPerArea Vector
          * @param length the size of the vector
          * @throws ValueException when values is null
          */
-        public Sparse(final SortedMap<Integer, Float> values, final AccelerationUnit unit, final int length)
+        public Sparse(final SortedMap<Integer, Double> values, final MoneyPerAreaUnit unit, final int length)
             throws ValueException
         {
             super(unit);
@@ -179,13 +178,13 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
         }
 
         /**
-         * Construct a new Sparse Immutable Acceleration Vector. An acceleration is always relative.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Immutable Acceleration
-         *            Vector
+         * Construct a new Sparse Immutable MoneyPerArea Vector. An moneyperarea is always relative.
+         * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Immutable
+         *            MoneyPerArea Vector
          * @param length the size of the vector
          * @throws ValueException when values has zero entries
          */
-        public Sparse(final SortedMap<Integer, FloatScalar.Rel<AccelerationUnit>> values, final int length)
+        public Sparse(final SortedMap<Integer, DoubleScalar.Rel<MoneyPerAreaUnit>> values, final int length)
             throws ValueException
         {
             super(checkNonEmptyMR(values).get(values.firstKey()).getUnit());
@@ -193,35 +192,35 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
         }
 
         /**
-         * Construct a new Sparse Immutable Float Acceleration Vector. An acceleration is always relative.
-         * @param values float[]; the values of the entries in the new Sparse Immutable Float Acceleration Vector
-         * @param unit U; the unit of the new Sparse Immutable Acceleration Vector
+         * Construct a new Sparse Immutable Double MoneyPerArea Vector. An moneyperarea is always relative.
+         * @param values double[]; the values of the entries in the new Sparse Immutable Double MoneyPerArea Vector
+         * @param unit U; the unit of the new Sparse Immutable MoneyPerArea Vector
          * @throws ValueException when values is null
          */
-        public Sparse(final float[] values, final AccelerationUnit unit) throws ValueException
+        public Sparse(final double[] values, final MoneyPerAreaUnit unit) throws ValueException
         {
             super(unit);
             this.data = initializeDense(values).toSparse();
         }
 
         /**
-         * Construct a new Relative Sparse Immutable Acceleration Vector. An acceleration is always relative.
-         * @param values Acceleration[]; the values of the Scalar Acceleration entries in the new Relative Sparse Immutable
-         *            Acceleration Vector
+         * Construct a new Relative Sparse Immutable MoneyPerArea Vector. An moneyperarea is always relative.
+         * @param values MoneyPerArea[]; the values of the Scalar MoneyPerArea entries in the new Relative Sparse Immutable
+         *            MoneyPerArea Vector
          * @throws ValueException when values has zero entries
          */
-        public Sparse(final FloatAcceleration[] values) throws ValueException
+        public Sparse(final MoneyPerArea[] values) throws ValueException
         {
             super(checkNonEmpty(values)[0].getUnit());
             this.data = initializeDense(values).toSparse();
         }
 
         /**
-         * Construct a new Relative Sparse Mutable Acceleration Vector.
+         * Construct a new Relative Sparse Mutable MoneyPerArea Vector.
          * @param data an internal data object
          * @param unit the unit
          */
-        Sparse(final FloatVectorDataSparse data, final AccelerationUnit unit)
+        Sparse(final DoubleVectorDataSparse data, final MoneyPerAreaUnit unit)
         {
             super(unit);
             this.data = data.copy();
@@ -229,40 +228,39 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
 
         /** {@inheritDoc} */
         @Override
-        public final FloatAccelerationVector immutable()
+        public final MoneyPerAreaVector immutable()
         {
             setCopyOnWrite(true);
-            return new FloatAccelerationVector.Sparse(getData(), getUnit());
+            return new MoneyPerAreaVector.Sparse(getData(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatAccelerationVector mutable()
+        public final MutableMoneyPerAreaVector mutable()
         {
             setCopyOnWrite(true);
-            final MutableFloatAccelerationVector.Sparse result =
-                new MutableFloatAccelerationVector.Sparse(getData(), getUnit());
+            final MutableMoneyPerAreaVector.Sparse result = new MutableMoneyPerAreaVector.Sparse(getData(), getUnit());
             result.setCopyOnWrite(true);
             return result;
         }
 
         /** {@inheritDoc} */
         @Override
-        protected final FloatVectorDataSparse getData()
+        protected final DoubleVectorDataSparse getData()
         {
-            return (FloatVectorDataSparse) this.data;
+            return (DoubleVectorDataSparse) this.data;
         }
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatAccelerationVector toDense()
+        public final MutableMoneyPerAreaVector toDense()
         {
-            return new MutableFloatAccelerationVector.Dense(getData().toDense(), getUnit());
+            return new MutableMoneyPerAreaVector.Dense(getData().toDense(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final MutableFloatAccelerationVector toSparse()
+        public final MutableMoneyPerAreaVector toSparse()
         {
             return copy();
         }
@@ -274,14 +272,14 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAcceleration get(final int index) throws ValueException
+    public final MoneyPerArea get(final int index) throws ValueException
     {
-        return (FloatAcceleration) super.get(index);
+        return (MoneyPerArea) super.get(index);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector copy()
+    public final MutableMoneyPerAreaVector copy()
     {
         return mutable();
     }
@@ -294,9 +292,9 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
      * @return the addition of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector plus(final FloatAccelerationVector rel) throws ValueException
+    public final MoneyPerAreaVector plus(final MoneyPerAreaVector rel) throws ValueException
     {
-        return FloatAccelerationVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return MoneyPerAreaVector.instantiate(this.getData().plus(rel.getData()), getUnit());
     }
 
     /**
@@ -307,9 +305,9 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
      * @return the subtraction of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector minus(final FloatAccelerationVector rel) throws ValueException
+    public final MoneyPerAreaVector minus(final MoneyPerAreaVector rel) throws ValueException
     {
-        return FloatAccelerationVector.instantiate(this.getData().minus(rel.getData()), getUnit());
+        return MoneyPerAreaVector.instantiate(this.getData().minus(rel.getData()), getUnit());
     }
 
     /**
@@ -320,9 +318,9 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
      * @return the multiplication of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector times(final FloatAccelerationVector rel) throws ValueException
+    public final MoneyPerAreaVector times(final MoneyPerAreaVector rel) throws ValueException
     {
-        return FloatAccelerationVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return MoneyPerAreaVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -333,9 +331,9 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
      * @return the division of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector divide(final FloatAccelerationVector rel) throws ValueException
+    public final MoneyPerAreaVector divide(final MoneyPerAreaVector rel) throws ValueException
     {
-        return FloatAccelerationVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return MoneyPerAreaVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**
@@ -346,9 +344,9 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
      * @return the addition of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector plus(final MutableFloatAccelerationVector rel) throws ValueException
+    public final MoneyPerAreaVector plus(final MutableMoneyPerAreaVector rel) throws ValueException
     {
-        return FloatAccelerationVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return MoneyPerAreaVector.instantiate(this.getData().plus(rel.getData()), getUnit());
     }
 
     /**
@@ -359,9 +357,9 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
      * @return the subtraction of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector minus(final MutableFloatAccelerationVector rel) throws ValueException
+    public final MoneyPerAreaVector minus(final MutableMoneyPerAreaVector rel) throws ValueException
     {
-        return FloatAccelerationVector.instantiate(this.getData().minus(rel.getData()), getUnit());
+        return MoneyPerAreaVector.instantiate(this.getData().minus(rel.getData()), getUnit());
     }
 
     /**
@@ -372,9 +370,9 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
      * @return the multiplication of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector times(final MutableFloatAccelerationVector rel) throws ValueException
+    public final MoneyPerAreaVector times(final MutableMoneyPerAreaVector rel) throws ValueException
     {
-        return FloatAccelerationVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return MoneyPerAreaVector.instantiate(this.getData().times(rel.getData()), getUnit());
     }
 
     /**
@@ -385,9 +383,9 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
      * @return the division of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
-    public final FloatAccelerationVector divide(final MutableFloatAccelerationVector rel) throws ValueException
+    public final MoneyPerAreaVector divide(final MutableMoneyPerAreaVector rel) throws ValueException
     {
-        return FloatAccelerationVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return MoneyPerAreaVector.instantiate(this.getData().divide(rel.getData()), getUnit());
     }
 
     /**********************************************************************************/
@@ -396,197 +394,198 @@ public abstract class MutableFloatAccelerationVector extends MutableFloatVector.
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector abs()
+    public final MutableMoneyPerAreaVector abs()
     {
-        return (MutableFloatAccelerationVector) super.abs();
+        return (MutableMoneyPerAreaVector) super.abs();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector acos()
+    public final MutableMoneyPerAreaVector acos()
     {
-        return (MutableFloatAccelerationVector) super.acos();
+        return (MutableMoneyPerAreaVector) super.acos();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector asin()
+    public final MutableMoneyPerAreaVector asin()
     {
-        return (MutableFloatAccelerationVector) super.asin();
+        return (MutableMoneyPerAreaVector) super.asin();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector atan()
+    public final MutableMoneyPerAreaVector atan()
     {
-        return (MutableFloatAccelerationVector) super.atan();
+        return (MutableMoneyPerAreaVector) super.atan();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector cbrt()
+    public final MutableMoneyPerAreaVector cbrt()
     {
-        return (MutableFloatAccelerationVector) super.cbrt();
+        return (MutableMoneyPerAreaVector) super.cbrt();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector ceil()
+    public final MutableMoneyPerAreaVector ceil()
     {
-        return (MutableFloatAccelerationVector) super.ceil();
+        return (MutableMoneyPerAreaVector) super.ceil();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector cos()
+    public final MutableMoneyPerAreaVector cos()
     {
-        return (MutableFloatAccelerationVector) super.cos();
+        return (MutableMoneyPerAreaVector) super.cos();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector cosh()
+    public final MutableMoneyPerAreaVector cosh()
     {
-        return (MutableFloatAccelerationVector) super.cosh();
+        return (MutableMoneyPerAreaVector) super.cosh();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector exp()
+    public final MutableMoneyPerAreaVector exp()
     {
-        return (MutableFloatAccelerationVector) super.exp();
+        return (MutableMoneyPerAreaVector) super.exp();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector expm1()
+    public final MutableMoneyPerAreaVector expm1()
     {
-        return (MutableFloatAccelerationVector) super.expm1();
+        return (MutableMoneyPerAreaVector) super.expm1();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector floor()
+    public final MutableMoneyPerAreaVector floor()
     {
-        return (MutableFloatAccelerationVector) super.floor();
+        return (MutableMoneyPerAreaVector) super.floor();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector log()
+    public final MutableMoneyPerAreaVector log()
     {
-        return (MutableFloatAccelerationVector) super.log();
+        return (MutableMoneyPerAreaVector) super.log();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector log10()
+    public final MutableMoneyPerAreaVector log10()
     {
-        return (MutableFloatAccelerationVector) super.log10();
+        return (MutableMoneyPerAreaVector) super.log10();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector log1p()
+    public final MutableMoneyPerAreaVector log1p()
     {
-        return (MutableFloatAccelerationVector) super.log1p();
+        return (MutableMoneyPerAreaVector) super.log1p();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector pow(final double x)
+    public final MutableMoneyPerAreaVector pow(final double x)
     {
-        return (MutableFloatAccelerationVector) super.pow(x);
+        return (MutableMoneyPerAreaVector) super.pow(x);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector rint()
+    public final MutableMoneyPerAreaVector rint()
     {
-        return (MutableFloatAccelerationVector) super.rint();
+        return (MutableMoneyPerAreaVector) super.rint();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector round()
+    public final MutableMoneyPerAreaVector round()
     {
-        return (MutableFloatAccelerationVector) super.round();
+        return (MutableMoneyPerAreaVector) super.round();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector signum()
+    public final MutableMoneyPerAreaVector signum()
     {
-        return (MutableFloatAccelerationVector) super.signum();
+        return (MutableMoneyPerAreaVector) super.signum();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector sin()
+    public final MutableMoneyPerAreaVector sin()
     {
-        return (MutableFloatAccelerationVector) super.sin();
+        return (MutableMoneyPerAreaVector) super.sin();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector sinh()
+    public final MutableMoneyPerAreaVector sinh()
     {
-        return (MutableFloatAccelerationVector) super.sinh();
+        return (MutableMoneyPerAreaVector) super.sinh();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector sqrt()
+    public final MutableMoneyPerAreaVector sqrt()
     {
-        return (MutableFloatAccelerationVector) super.sqrt();
+        return (MutableMoneyPerAreaVector) super.sqrt();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector tan()
+    public final MutableMoneyPerAreaVector tan()
     {
-        return (MutableFloatAccelerationVector) super.tan();
+        return (MutableMoneyPerAreaVector) super.tan();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector tanh()
+    public final MutableMoneyPerAreaVector tanh()
     {
-        return (MutableFloatAccelerationVector) super.tanh();
+        return (MutableMoneyPerAreaVector) super.tanh();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector toDegrees()
+    public final MutableMoneyPerAreaVector toDegrees()
     {
-        return (MutableFloatAccelerationVector) super.toDegrees();
+        return (MutableMoneyPerAreaVector) super.toDegrees();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector toRadians()
+    public final MutableMoneyPerAreaVector toRadians()
     {
-        return (MutableFloatAccelerationVector) super.toRadians();
+        return (MutableMoneyPerAreaVector) super.toRadians();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector inv()
+    public final MutableMoneyPerAreaVector inv()
     {
-        return (MutableFloatAccelerationVector) super.inv();
+        return (MutableMoneyPerAreaVector) super.inv();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector multiplyBy(final float constant)
+    public final MutableMoneyPerAreaVector multiplyBy(final double constant)
     {
-        return (MutableFloatAccelerationVector) super.multiplyBy(constant);
+        return (MutableMoneyPerAreaVector) super.multiplyBy(constant);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MutableFloatAccelerationVector divideBy(final float constant)
+    public final MutableMoneyPerAreaVector divideBy(final double constant)
     {
-        return (MutableFloatAccelerationVector) super.divideBy(constant);
+        return (MutableMoneyPerAreaVector) super.divideBy(constant);
     }
+
 }
