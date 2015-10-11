@@ -1,6 +1,7 @@
 package org.djunits.value.formatter;
 
 /**
+ * Formatter of values with width and precision.
  * <p>
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
