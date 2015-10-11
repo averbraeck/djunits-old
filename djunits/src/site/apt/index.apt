@@ -42,3 +42,9 @@ DJUNITS - Delft Java UNIT System
     * DJUNITS may be extended, evolved by anyone into anything else for any purpose.
     
     []
+    
+==========
+
+At this moment, Cobertura and JavaNCSS coverage is not included on the site, because both cannot handle Lava 8 Lambda expressions
+and closures, which are heavily used for parallelization of code in DJUNITS' vectors and matrices.
+
