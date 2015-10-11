@@ -1,5 +1,9 @@
 package org.djunits.value.vdouble.vector;
 
+import java.util.stream.IntStream;
+
+import org.djunits.value.DataType;
+import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.DoubleFunction;
 
 /**
@@ -20,7 +24,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
      */
     public DoubleVectorDataDense(final double[] vectorSI)
     {
-        super();
+        super(DataType.DENSE);
         this.vectorSI = new double[vectorSI.length];
         System.arraycopy(vectorSI, 0, this.vectorSI, 0, vectorSI.length);
     }
@@ -30,10 +34,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
      */
     public final void assign(final DoubleFunction doubleFunction)
     {
-        for (int index = 0; index < this.vectorSI.length; index++)
-        {
-            this.vectorSI[index] = doubleFunction.apply(this.vectorSI[index]);
-        }
+        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] = doubleFunction.apply(this.vectorSI[i]));
     }
 
     /**
@@ -41,20 +42,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
      */
     public final DoubleVectorDataSparse toSparse()
     {
-        int length = cardinality();
-        double[] sparseSI = new double[length];
-        int[] indices = new int[length];
-        int count = 0;
-        for (int i = 0; i < this.vectorSI.length; i++)
-        {
-            if (this.vectorSI[i] != 0.0)
-            {
-                sparseSI[count] = this.vectorSI[i];
-                indices[count] = i;
-                count++;
-            }
-        }
-        return new DoubleVectorDataSparse(sparseSI, indices, size());
+        return DoubleVectorDataSparse.instantiate(this.vectorSI);
     }
 
     /** {@inheritDoc} */
@@ -92,5 +80,33 @@ public class DoubleVectorDataDense extends DoubleVectorData
         double[] vCopy = new double[this.vectorSI.length];
         System.arraycopy(this.vectorSI, 0, vCopy, 0, this.vectorSI.length);
         return new DoubleVectorDataDense(vCopy);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void incrementBy(final DoubleVectorData right) throws ValueException
+    {
+        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] += right.getSI(i));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final DoubleVectorData right) throws ValueException
+    {
+        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] -= right.getSI(i));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void multiplyBy(final DoubleVectorData right) throws ValueException
+    {
+        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] *= right.getSI(i));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void divideBy(final DoubleVectorData right) throws ValueException
+    {
+        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] /= right.getSI(i));
     }
 }

@@ -35,7 +35,7 @@ public class DefinesSITest
         for (Class<? extends Unit> c : classes)
         {
             final String className = c.getCanonicalName();
-            if (className.endsWith("SIUnit") || className.endsWith("OffsetUnit") || className.contains("Money"))
+            if (className.endsWith("SIUnit") || className.endsWith("LinearUnit") || className.contains("Money"))
             {
                 continue;
             }

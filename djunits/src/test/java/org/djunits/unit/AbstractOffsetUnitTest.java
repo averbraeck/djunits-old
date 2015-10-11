@@ -2,6 +2,8 @@ package org.djunits.unit;
 
 import static org.junit.Assert.assertEquals;
 
+import org.djunits.unit.scale.OffsetLinearScale;
+
 /**
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
@@ -12,7 +14,7 @@ import static org.junit.Assert.assertEquals;
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <OU> Make the test specific for this sub class of OffsetUnit
  */
-public class AbstractOffsetUnitTest<OU extends OffsetUnit<OU>> extends AbstractUnitTest<OU>
+public class AbstractOffsetUnitTest<OU extends Unit<OU>> extends AbstractUnitTest<OU>
 {
     /**
      * Verify one length conversion factor to standard unit and the localization of the name and abbreviation.
@@ -27,10 +29,11 @@ public class AbstractOffsetUnitTest<OU extends OffsetUnit<OU>> extends AbstractU
         final double expectedOffset, final double precision, final String expectedName,
         final String expectedAbbreviation)
     {
+        OffsetLinearScale scale = (OffsetLinearScale) ou.getScale();
         assertEquals(String.format("zero %s is about %f reference unit", ou.getNameKey(), expectedOffset),
-            expectedOffset, ou.getOffsetToStandardUnit(), precision);
+            expectedOffset, scale.getOffsetToStandardUnit(), precision);
         assertEquals(String.format("one %s is about %f reference unit", ou.getNameKey(), expectedRatio), expectedRatio,
-            ou.getConversionFactorToStandardUnit(), precision);
+            scale.getConversionFactorToStandardUnit(), precision);
         assertEquals(String.format("Name of %s is %s", ou.getNameKey(), expectedName), expectedName, ou.getName());
         assertEquals(String.format("Abbreviation of %s is %s", ou.getNameKey(), expectedAbbreviation),
             expectedAbbreviation, ou.getAbbreviation());
@@ -39,17 +42,13 @@ public class AbstractOffsetUnitTest<OU extends OffsetUnit<OU>> extends AbstractU
     /**
      * @param fromUnit U; the unit to convert from
      * @param toUnit U; the unit to convert to
-     * @return offset to convert a value from fromUnit to toUnit
+     * @return multiplication factor to convert a value from fromUnit to toUnit
      */
-    public final double getOffsetTo(final OU fromUnit, final OU toUnit)
+    public final double getMultiplicationFactorTo(final OU fromUnit, final OU toUnit)
     {
-        double fromOffset = fromUnit.getOffsetToStandardUnit();
-        double fromFactor = fromUnit.getConversionFactorToStandardUnit();
-        double inStandard = (0d - fromOffset) * fromFactor;
-        double toOffset = toUnit.getOffsetToStandardUnit();
-        double toFactor = toUnit.getConversionFactorToStandardUnit();
-        double inToUnit = inStandard / toFactor + toOffset;
-        return inToUnit;
+        OffsetLinearScale fromScale = (OffsetLinearScale) fromUnit.getScale();
+        OffsetLinearScale toScale = (OffsetLinearScale) toUnit.getScale();
+        return fromScale.getConversionFactorToStandardUnit() / toScale.getConversionFactorToStandardUnit();
     }
 
 }

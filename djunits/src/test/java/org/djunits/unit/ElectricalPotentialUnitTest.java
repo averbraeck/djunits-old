@@ -20,7 +20,7 @@ import org.junit.Test;
  * initial version Jun 5, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ElectricalPotentialUnitTest extends AbstractUnitTest<ElectricalPotentialUnit>
+public class ElectricalPotentialUnitTest extends AbstractLinearUnitTest<ElectricalPotentialUnit>
 {
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.

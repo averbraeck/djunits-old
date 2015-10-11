@@ -8,6 +8,7 @@ import static org.junit.Assert.fail;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.Unit;
+import org.djunits.value.DataType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.junit.Test;
@@ -20,8 +21,8 @@ import org.junit.Test;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -82,7 +83,8 @@ public class DoubleVectorDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
-            DoubleVector.Abs.Dense<TemperatureUnit> dv = new DoubleVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
+            DoubleVector.Abs<TemperatureUnit> dv =
+                new DoubleVector.Abs<TemperatureUnit>(value, tempUnit, DataType.DENSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -106,8 +108,8 @@ public class DoubleVectorDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
-            MutableDoubleVector.Abs.Dense<TemperatureUnit> dv =
-                new MutableDoubleVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
+            MutableDoubleVector.Abs<TemperatureUnit> dv =
+                new MutableDoubleVector.Abs<TemperatureUnit>(value, tempUnit, DataType.DENSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -131,8 +133,8 @@ public class DoubleVectorDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[] value = data(3, 38.0);
-            DoubleVector.Abs.Dense<TemperatureUnit> temperatureDV =
-                new DoubleVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
+            DoubleVector.Abs<TemperatureUnit> temperatureDV =
+                new DoubleVector.Abs<TemperatureUnit>(value, tempUnit, DataType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
@@ -142,8 +144,8 @@ public class DoubleVectorDenseTest
             {
                 assertEquals("Value should match", value[index], out[index], 0.001);
             }
-            MutableDoubleVector.Abs.Dense<TemperatureUnit> mdv =
-                new MutableDoubleVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
+            MutableDoubleVector.Abs<TemperatureUnit> mdv =
+                new MutableDoubleVector.Abs<TemperatureUnit>(value, tempUnit, DataType.DENSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
             mdv.setSI(0, 73);
             double safe = value[0];
@@ -152,12 +154,13 @@ public class DoubleVectorDenseTest
             value[0] = safe; // Restore
             mdv.set(0, temperatureDV.get(0));
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
-            DoubleVector.Abs.Dense<TemperatureUnit> temperature2DV =
-                new DoubleVector.Abs.Dense<TemperatureUnit>(temperatureDV.getValuesSI(), TemperatureUnit.KELVIN);
+            DoubleVector.Abs<TemperatureUnit> temperature2DV =
+                new DoubleVector.Abs<TemperatureUnit>(temperatureDV.getValuesSI(), TemperatureUnit.KELVIN,
+                    DataType.DENSE);
             assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
             assertTrue("Value is Absolute", temperatureDV.isAbsolute());
             assertFalse("Value is not Relative", temperatureDV.isRelative());
-            temperatureDV = new DoubleVector.Abs.Dense<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+            temperatureDV = new DoubleVector.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN, DataType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, TemperatureUnit.KELVIN, true);
             out = temperatureDV.getValuesSI();
             for (int index = 0; index < value.length; index++)
@@ -169,7 +172,7 @@ public class DoubleVectorDenseTest
             {
                 scalar[index] = new DoubleScalar.Abs<TemperatureUnit>(value[index], TemperatureUnit.DEGREE_CELSIUS);
             }
-            temperatureDV = new DoubleVector.Abs.Dense<TemperatureUnit>(scalar);
+            temperatureDV = new DoubleVector.Abs<TemperatureUnit>(scalar, DataType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV
                 .cardinality());
@@ -199,7 +202,8 @@ public class DoubleVectorDenseTest
             double[] value = data(3, 38.0);
             double[] value2 = data(3, 38.0);
             value2[0] = 12345;
-            DoubleVector.Abs.Dense<TemperatureUnit> dv = new DoubleVector.Abs.Dense<TemperatureUnit>(value, tempUnit);
+            DoubleVector.Abs<TemperatureUnit> dv =
+                new DoubleVector.Abs<TemperatureUnit>(value, tempUnit, DataType.DENSE);
             DoubleVector.Abs<TemperatureUnit> dvCopy = dv;
             MutableDoubleVector.Abs<TemperatureUnit> mdv = dv.mutable();
             checkContentsAndType(dv, value, 0.001, tempUnit, true);
@@ -273,10 +277,10 @@ public class DoubleVectorDenseTest
         for (double seedValue : seedValues)
         {
             double[] input = data(3, seedValue);
-            MutableDoubleVector.Abs.Dense<LengthUnit> dv;
+            MutableDoubleVector.Abs<LengthUnit> dv;
             try
             {
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.abs();
                 MathTester.tester(input, "abs", dv, 0.001, new DoubleToDouble()
                 {
@@ -286,7 +290,7 @@ public class DoubleVectorDenseTest
                         return Math.abs(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.acos();
                 MathTester.tester(input, "acos", dv, 0.001, new DoubleToDouble()
                 {
@@ -296,7 +300,7 @@ public class DoubleVectorDenseTest
                         return Math.acos(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.asin();
                 MathTester.tester(input, "asin", dv, 0.001, new DoubleToDouble()
                 {
@@ -306,7 +310,7 @@ public class DoubleVectorDenseTest
                         return Math.asin(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.atan();
                 MathTester.tester(input, "atan", dv, 0.001, new DoubleToDouble()
                 {
@@ -316,7 +320,7 @@ public class DoubleVectorDenseTest
                         return Math.atan(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.cbrt();
                 MathTester.tester(input, "cbrt", dv, 0.001, new DoubleToDouble()
                 {
@@ -326,7 +330,7 @@ public class DoubleVectorDenseTest
                         return Math.cbrt(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.ceil();
                 MathTester.tester(input, "ceil", dv, 0.001, new DoubleToDouble()
                 {
@@ -336,7 +340,7 @@ public class DoubleVectorDenseTest
                         return Math.ceil(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.cos();
                 MathTester.tester(input, "cos", dv, 0.001, new DoubleToDouble()
                 {
@@ -346,7 +350,7 @@ public class DoubleVectorDenseTest
                         return Math.cos(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.cosh();
                 MathTester.tester(input, "cosh", dv, 0.001, new DoubleToDouble()
                 {
@@ -356,7 +360,7 @@ public class DoubleVectorDenseTest
                         return Math.cosh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.exp();
                 MathTester.tester(input, "exp", dv, 0.001, new DoubleToDouble()
                 {
@@ -366,7 +370,7 @@ public class DoubleVectorDenseTest
                         return Math.exp(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.expm1();
                 MathTester.tester(input, "expm1", dv, 0.001, new DoubleToDouble()
                 {
@@ -376,7 +380,7 @@ public class DoubleVectorDenseTest
                         return Math.expm1(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.floor();
                 MathTester.tester(input, "floor", dv, 0.001, new DoubleToDouble()
                 {
@@ -386,7 +390,7 @@ public class DoubleVectorDenseTest
                         return Math.floor(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.log();
                 MathTester.tester(input, "log", dv, 0.001, new DoubleToDouble()
                 {
@@ -396,7 +400,7 @@ public class DoubleVectorDenseTest
                         return Math.log(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.log10();
                 MathTester.tester(input, "log10", dv, 0.001, new DoubleToDouble()
                 {
@@ -406,7 +410,7 @@ public class DoubleVectorDenseTest
                         return Math.log10(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.log1p();
                 MathTester.tester(input, "log1p", dv, 0.001, new DoubleToDouble()
                 {
@@ -419,7 +423,7 @@ public class DoubleVectorDenseTest
                 for (int i = -10; i <= 10; i++)
                 {
                     final double exponent = i * 0.5d;
-                    dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                    dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                     dv.pow(exponent);
                     MathTester.tester(input, "pow(" + exponent + ")", dv, 0.001, new DoubleToDouble()
                     {
@@ -430,7 +434,7 @@ public class DoubleVectorDenseTest
                         }
                     });
                 }
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.rint();
                 MathTester.tester(input, "rint", dv, 0.001, new DoubleToDouble()
                 {
@@ -440,7 +444,7 @@ public class DoubleVectorDenseTest
                         return Math.rint(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.round();
                 MathTester.tester(input, "round", dv, 0.001, new DoubleToDouble()
                 {
@@ -450,7 +454,7 @@ public class DoubleVectorDenseTest
                         return Math.round(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.signum();
                 MathTester.tester(input, "signum", dv, 0.001, new DoubleToDouble()
                 {
@@ -460,7 +464,7 @@ public class DoubleVectorDenseTest
                         return Math.signum(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.sin();
                 MathTester.tester(input, "sin", dv, 0.001, new DoubleToDouble()
                 {
@@ -470,7 +474,7 @@ public class DoubleVectorDenseTest
                         return Math.sin(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.sinh();
                 MathTester.tester(input, "sinh", dv, 0.001, new DoubleToDouble()
                 {
@@ -480,7 +484,7 @@ public class DoubleVectorDenseTest
                         return Math.sinh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.sqrt();
                 MathTester.tester(input, "sqrt", dv, 0.001, new DoubleToDouble()
                 {
@@ -490,7 +494,7 @@ public class DoubleVectorDenseTest
                         return Math.sqrt(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.tan();
                 MathTester.tester(input, "tan", dv, 0.001, new DoubleToDouble()
                 {
@@ -500,7 +504,7 @@ public class DoubleVectorDenseTest
                         return Math.tan(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.tanh();
                 MathTester.tester(input, "tanh", dv, 0.001, new DoubleToDouble()
                 {
@@ -510,7 +514,7 @@ public class DoubleVectorDenseTest
                         return Math.tanh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.toDegrees();
                 MathTester.tester(input, "toDegrees", dv, 0.001, new DoubleToDouble()
                 {
@@ -520,7 +524,7 @@ public class DoubleVectorDenseTest
                         return Math.toDegrees(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.toRadians();
                 MathTester.tester(input, "toRadians", dv, 0.001, new DoubleToDouble()
                 {
@@ -530,7 +534,7 @@ public class DoubleVectorDenseTest
                         return Math.toRadians(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.inv();
                 MathTester.tester(input, "inv", dv, 0.001, new DoubleToDouble()
                 {
@@ -559,10 +563,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Abs.Dense<LengthUnit> left =
-                new DoubleVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Rel.Dense<LengthUnit> right =
-                new DoubleVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleVector.Abs<LengthUnit> left =
+                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, DataType.DENSE);
+            DoubleVector.Rel<LengthUnit> right =
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
             DoubleVector.Abs<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -587,10 +591,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Abs.Dense<LengthUnit> left =
-                new DoubleVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Rel.Dense<LengthUnit> right =
-                new DoubleVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleVector.Abs<LengthUnit> left =
+                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, DataType.DENSE);
+            DoubleVector.Rel<LengthUnit> right =
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
             DoubleVector.Abs<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -615,10 +619,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Abs.Dense<LengthUnit> left =
-                new DoubleVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Rel.Sparse<LengthUnit> right =
-                new DoubleVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleVector.Abs<LengthUnit> left =
+                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, DataType.DENSE);
+            DoubleVector.Rel<LengthUnit> right =
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.SPARSE);
             DoubleVector.Abs<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -643,10 +647,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Abs.Dense<LengthUnit> left =
-                new DoubleVector.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Rel.Sparse<LengthUnit> right =
-                new DoubleVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleVector.Abs<LengthUnit> left =
+                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, DataType.DENSE);
+            DoubleVector.Rel<LengthUnit> right =
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.SPARSE);
             DoubleVector.Abs<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -671,7 +675,7 @@ public class DoubleVectorDenseTest
         try
         {
             // null array
-            new DoubleVector.Abs.Dense<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT);
+            new DoubleVector.Abs<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, DataType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -693,7 +697,8 @@ public class DoubleVectorDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
-            DoubleVector.Rel.Dense<TemperatureUnit> dv = new DoubleVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
+            DoubleVector.Rel<TemperatureUnit> dv =
+                new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, DataType.DENSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -717,8 +722,8 @@ public class DoubleVectorDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
-            MutableDoubleVector.Rel.Dense<TemperatureUnit> dv =
-                new MutableDoubleVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
+            MutableDoubleVector.Rel<TemperatureUnit> dv =
+                new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, DataType.DENSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -742,8 +747,8 @@ public class DoubleVectorDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[] value = data(3, 38.0);
-            DoubleVector.Rel.Dense<TemperatureUnit> temperatureDV =
-                new DoubleVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
+            DoubleVector.Rel<TemperatureUnit> temperatureDV =
+                new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, DataType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
@@ -753,8 +758,8 @@ public class DoubleVectorDenseTest
             {
                 assertEquals("Value should match", value[index], out[index], 0.001);
             }
-            MutableDoubleVector.Rel.Dense<TemperatureUnit> mdv =
-                new MutableDoubleVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
+            MutableDoubleVector.Rel<TemperatureUnit> mdv =
+                new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, DataType.DENSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
             mdv.setSI(0, 73);
             double safe = value[0];
@@ -763,12 +768,13 @@ public class DoubleVectorDenseTest
             value[0] = safe; // Restore
             mdv.set(0, temperatureDV.get(0));
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
-            DoubleVector.Rel.Dense<TemperatureUnit> temperature2DV =
-                new DoubleVector.Rel.Dense<TemperatureUnit>(temperatureDV.getValuesSI(), TemperatureUnit.KELVIN);
+            DoubleVector.Rel<TemperatureUnit> temperature2DV =
+                new DoubleVector.Rel<TemperatureUnit>(temperatureDV.getValuesSI(), TemperatureUnit.KELVIN,
+                    DataType.DENSE);
             assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
             assertTrue("Value is Relative", temperatureDV.isRelative());
             assertFalse("Value is not Absolute", temperatureDV.isAbsolute());
-            temperatureDV = new DoubleVector.Rel.Dense<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+            temperatureDV = new DoubleVector.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, DataType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, TemperatureUnit.KELVIN, false);
             out = temperatureDV.getValuesSI();
             for (int index = 0; index < value.length; index++)
@@ -780,7 +786,7 @@ public class DoubleVectorDenseTest
             {
                 scalar[index] = new DoubleScalar.Rel<TemperatureUnit>(value[index], TemperatureUnit.DEGREE_CELSIUS);
             }
-            temperatureDV = new DoubleVector.Rel.Dense<TemperatureUnit>(scalar);
+            temperatureDV = new DoubleVector.Rel<TemperatureUnit>(scalar, DataType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV
                 .cardinality());
@@ -810,7 +816,8 @@ public class DoubleVectorDenseTest
             double[] value = data(3, 38.0);
             double[] value2 = data(3, 38.0);
             value2[0] = 12345;
-            DoubleVector.Rel.Dense<TemperatureUnit> dv = new DoubleVector.Rel.Dense<TemperatureUnit>(value, tempUnit);
+            DoubleVector.Rel<TemperatureUnit> dv =
+                new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, DataType.DENSE);
             DoubleVector.Rel<TemperatureUnit> dvCopy = dv;
             MutableDoubleVector.Rel<TemperatureUnit> mdv = dv.mutable();
             checkContentsAndType(dv, value, 0.001, tempUnit, false);
@@ -884,10 +891,10 @@ public class DoubleVectorDenseTest
         for (double seedValue : seedValues)
         {
             double[] input = data(3, seedValue);
-            MutableDoubleVector.Rel.Dense<LengthUnit> dv;
+            MutableDoubleVector.Rel<LengthUnit> dv;
             try
             {
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.abs();
                 MathTester.tester(input, "abs", dv, 0.001, new DoubleToDouble()
                 {
@@ -897,7 +904,7 @@ public class DoubleVectorDenseTest
                         return Math.abs(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.acos();
                 MathTester.tester(input, "acos", dv, 0.001, new DoubleToDouble()
                 {
@@ -907,7 +914,7 @@ public class DoubleVectorDenseTest
                         return Math.acos(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.asin();
                 MathTester.tester(input, "asin", dv, 0.001, new DoubleToDouble()
                 {
@@ -917,7 +924,7 @@ public class DoubleVectorDenseTest
                         return Math.asin(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.atan();
                 MathTester.tester(input, "atan", dv, 0.001, new DoubleToDouble()
                 {
@@ -927,7 +934,7 @@ public class DoubleVectorDenseTest
                         return Math.atan(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.cbrt();
                 MathTester.tester(input, "cbrt", dv, 0.001, new DoubleToDouble()
                 {
@@ -937,7 +944,7 @@ public class DoubleVectorDenseTest
                         return Math.cbrt(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.ceil();
                 MathTester.tester(input, "ceil", dv, 0.001, new DoubleToDouble()
                 {
@@ -947,7 +954,7 @@ public class DoubleVectorDenseTest
                         return Math.ceil(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.cos();
                 MathTester.tester(input, "cos", dv, 0.001, new DoubleToDouble()
                 {
@@ -957,7 +964,7 @@ public class DoubleVectorDenseTest
                         return Math.cos(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.cosh();
                 MathTester.tester(input, "cosh", dv, 0.001, new DoubleToDouble()
                 {
@@ -967,7 +974,7 @@ public class DoubleVectorDenseTest
                         return Math.cosh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.exp();
                 MathTester.tester(input, "exp", dv, 0.001, new DoubleToDouble()
                 {
@@ -977,7 +984,7 @@ public class DoubleVectorDenseTest
                         return Math.exp(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.expm1();
                 MathTester.tester(input, "expm1", dv, 0.001, new DoubleToDouble()
                 {
@@ -987,7 +994,7 @@ public class DoubleVectorDenseTest
                         return Math.expm1(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.floor();
                 MathTester.tester(input, "floor", dv, 0.001, new DoubleToDouble()
                 {
@@ -997,7 +1004,7 @@ public class DoubleVectorDenseTest
                         return Math.floor(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.log();
                 MathTester.tester(input, "log", dv, 0.001, new DoubleToDouble()
                 {
@@ -1007,7 +1014,7 @@ public class DoubleVectorDenseTest
                         return Math.log(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.log10();
                 MathTester.tester(input, "log10", dv, 0.001, new DoubleToDouble()
                 {
@@ -1017,7 +1024,7 @@ public class DoubleVectorDenseTest
                         return Math.log10(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.log1p();
                 MathTester.tester(input, "log1p", dv, 0.001, new DoubleToDouble()
                 {
@@ -1030,7 +1037,7 @@ public class DoubleVectorDenseTest
                 for (int i = -10; i <= 10; i++)
                 {
                     final double exponent = i * 0.5d;
-                    dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                    dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                     dv.pow(exponent);
                     MathTester.tester(input, "pow(" + exponent + ")", dv, 0.001, new DoubleToDouble()
                     {
@@ -1041,7 +1048,7 @@ public class DoubleVectorDenseTest
                         }
                     });
                 }
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.rint();
                 MathTester.tester(input, "rint", dv, 0.001, new DoubleToDouble()
                 {
@@ -1051,7 +1058,7 @@ public class DoubleVectorDenseTest
                         return Math.rint(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.round();
                 MathTester.tester(input, "round", dv, 0.001, new DoubleToDouble()
                 {
@@ -1061,7 +1068,7 @@ public class DoubleVectorDenseTest
                         return Math.round(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.signum();
                 MathTester.tester(input, "signum", dv, 0.001, new DoubleToDouble()
                 {
@@ -1071,7 +1078,7 @@ public class DoubleVectorDenseTest
                         return Math.signum(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.sin();
                 MathTester.tester(input, "sin", dv, 0.001, new DoubleToDouble()
                 {
@@ -1081,7 +1088,7 @@ public class DoubleVectorDenseTest
                         return Math.sin(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.sinh();
                 MathTester.tester(input, "sinh", dv, 0.001, new DoubleToDouble()
                 {
@@ -1091,7 +1098,7 @@ public class DoubleVectorDenseTest
                         return Math.sinh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.sqrt();
                 MathTester.tester(input, "sqrt", dv, 0.001, new DoubleToDouble()
                 {
@@ -1101,7 +1108,7 @@ public class DoubleVectorDenseTest
                         return Math.sqrt(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.tan();
                 MathTester.tester(input, "tan", dv, 0.001, new DoubleToDouble()
                 {
@@ -1111,7 +1118,7 @@ public class DoubleVectorDenseTest
                         return Math.tan(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.tanh();
                 MathTester.tester(input, "tanh", dv, 0.001, new DoubleToDouble()
                 {
@@ -1121,7 +1128,7 @@ public class DoubleVectorDenseTest
                         return Math.tanh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.toDegrees();
                 MathTester.tester(input, "toDegrees", dv, 0.001, new DoubleToDouble()
                 {
@@ -1131,7 +1138,7 @@ public class DoubleVectorDenseTest
                         return Math.toDegrees(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.toRadians();
                 MathTester.tester(input, "toRadians", dv, 0.001, new DoubleToDouble()
                 {
@@ -1141,7 +1148,7 @@ public class DoubleVectorDenseTest
                         return Math.toRadians(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.DENSE);
                 dv.inv();
                 MathTester.tester(input, "inv", dv, 0.001, new DoubleToDouble()
                 {
@@ -1170,10 +1177,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Rel.Dense<LengthUnit> left =
-                new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Rel.Dense<LengthUnit> right =
-                new DoubleVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleVector.Rel<LengthUnit> left =
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.DENSE);
+            DoubleVector.Rel<LengthUnit> right =
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
             DoubleVector.Rel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1198,10 +1205,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Rel.Dense<LengthUnit> left =
-                new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Rel.Dense<LengthUnit> right =
-                new DoubleVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleVector.Rel<LengthUnit> left =
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.DENSE);
+            DoubleVector.Rel<LengthUnit> right =
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
             DoubleVector.Rel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1226,10 +1233,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Rel.Dense<LengthUnit> left =
-                new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Rel.Dense<LengthUnit> right =
-                new DoubleVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleVector.Rel<LengthUnit> left =
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.DENSE);
+            DoubleVector.Rel<LengthUnit> right =
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
             DoubleVector.Rel<?> result = left.times(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1254,10 +1261,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Rel.Dense<LengthUnit> left =
-                new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Rel.Sparse<LengthUnit> right =
-                new DoubleVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleVector.Rel<LengthUnit> left =
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.DENSE);
+            DoubleVector.Rel<LengthUnit> right =
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.SPARSE);
             DoubleVector.Rel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1282,10 +1289,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Rel.Dense<LengthUnit> left =
-                new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Rel.Sparse<LengthUnit> right =
-                new DoubleVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleVector.Rel<LengthUnit> left =
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.DENSE);
+            DoubleVector.Rel<LengthUnit> right =
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.SPARSE);
             DoubleVector.Rel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1310,10 +1317,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Rel.Dense<LengthUnit> left =
-                new DoubleVector.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleVector.Rel.Sparse<LengthUnit> right =
-                new DoubleVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            DoubleVector.Rel<LengthUnit> left =
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.DENSE);
+            DoubleVector.Rel<LengthUnit> right =
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.SPARSE);
             DoubleVector.Rel<?> result = left.times(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1338,7 +1345,7 @@ public class DoubleVectorDenseTest
         try
         {
             // null array
-            new DoubleVector.Rel.Dense<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT);
+            new DoubleVector.Rel<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, DataType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)

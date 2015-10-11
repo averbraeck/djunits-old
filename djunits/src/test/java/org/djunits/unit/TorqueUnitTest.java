@@ -17,7 +17,7 @@ import org.junit.Test;
  * initial version Jun 6, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class TorqueUnitTest extends AbstractUnitTest<TorqueUnit>
+public class TorqueUnitTest extends AbstractLinearUnitTest<TorqueUnit>
 {
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.

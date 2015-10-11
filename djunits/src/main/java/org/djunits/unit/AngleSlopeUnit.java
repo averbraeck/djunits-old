@@ -4,6 +4,9 @@ import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.djunits.unit.unitsystem.UnitSystem.SI_ACCEPTED;
 import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
 
+import org.djunits.unit.scale.GradeScale;
+import org.djunits.unit.scale.LinearScale;
+import org.djunits.unit.scale.Scale;
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
@@ -29,8 +32,7 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
     public static final AngleSlopeUnit RADIAN;
 
     /** percent. */
-    // TODO: PERCENT unit. Non-linear.
-    // public static final AngleSlopeUnit PERCENT;
+    public static final AngleSlopeUnit PERCENT;
 
     /** degree. */
     public static final AngleSlopeUnit DEGREE;
@@ -72,6 +74,9 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
         CENTESIMAL_ARCSECOND =
             new AngleSlopeUnit("AngleSlopeUnit.centesimal_arcsecond", "AngleSlopeUnit.centesimal_arcsec", OTHER, GRAD,
                 1.0 / 10000.0, true);
+        PERCENT =
+            new AngleSlopeUnit("AngleSlopeUnit.percent", "AngleSlopeUnit.perc", OTHER, new GradeScale(0.01), true);
+
     }
 
     /**
@@ -99,8 +104,9 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
         final UnitSystem unitSystem, final AngleSlopeUnit referenceUnit, final double conversionFactorToReferenceUnit,
         final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, new LinearScale(((LinearScale) referenceUnit
+            .getScale()).getConversionFactorToStandardUnit()
+            * conversionFactorToReferenceUnit), standardUnit);
     }
 
     /**
@@ -115,6 +121,21 @@ public class AngleSlopeUnit extends Unit<AngleSlopeUnit>
         final AngleSlopeUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+    }
+
+    /**
+     * Build an angle-slope unit with its own scale.
+     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
+     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
+     *            otherwise the abbreviation itself
+     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param scale the scale to use
+     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     */
+    private AngleSlopeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+        final UnitSystem unitSystem, final Scale scale, final boolean standardUnit)
+    {
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, scale, standardUnit);
     }
 
     /** {@inheritDoc} */

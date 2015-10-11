@@ -18,7 +18,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * version May 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
+public class ElectricalChargeUnit extends LinearUnit<ElectricalChargeUnit>
 {
     /** */
     private static final long serialVersionUID = 20140607L;

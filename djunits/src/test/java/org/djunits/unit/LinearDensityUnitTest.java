@@ -19,7 +19,7 @@ import org.junit.Test;
  * initial version 11 nov. 2014 <br>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class LinearDensityUnitTest extends AbstractUnitTest<LinearDensityUnit>
+public class LinearDensityUnitTest extends AbstractLinearUnitTest<LinearDensityUnit>
 {
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.

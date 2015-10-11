@@ -19,7 +19,7 @@ import org.junit.Test;
  * initial version Jun 4, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class LengthUnitTest extends AbstractUnitTest<LengthUnit>
+public class LengthUnitTest extends AbstractLinearUnitTest<LengthUnit>
 {
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.
