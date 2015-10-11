@@ -19,7 +19,7 @@ import org.junit.Test;
  * initial version Jun 5, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FlowMassUnitTest extends AbstractUnitTest<FlowMassUnit>
+public class FlowMassUnitTest extends AbstractLinearUnitTest<FlowMassUnit>
 {
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.

@@ -15,7 +15,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * version 11 nov. 2014 <br>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class LinearDensityUnit extends Unit<LinearDensityUnit>
+public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
 {
     /** */
     private static final long serialVersionUID = 20141111L;

@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.djunits.locale.Localization;
+import org.djunits.unit.scale.Scale;
+import org.djunits.unit.scale.StandardScale;
 import org.djunits.unit.unitsystem.UnitSystem;
 import org.reflections.Reflections;
 
@@ -49,8 +51,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     /** the unit system, e.g. SI or Imperial. */
     private final UnitSystem unitSystem;
 
-    /** multiply by this number to convert to the standard (e.g., SI) unit. */
-    private final double conversionFactorToStandardUnit;
+    /** the scale to use to convert between this unit and the standard (e.g., SI) unit. */
+    @SuppressWarnings("checkstyle:visibilitymodifier")
+    protected Scale scale;
 
     /** SI unit information. */
     private SICoefficients siCoefficients;
@@ -95,20 +98,20 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * Build a standard unit. If the parameter standardUnit is true, it is a standard unit where name is the nameKey, and
-     * abbreviation is the abbreviationKey; if false, this unit is a user-defined unit where the localization files do not have
-     * an entry. If standardUnit is true, a UnitException is silently ignored; if standardUnit is false a UnitException is
-     * thrown as a RunTimeException.
+     * Build a standard unit and create the fields for a unit. If the parameter standardUnit is true, it is a standard unit
+     * where name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined unit where the
+     * localization files do not have an entry. If standardUnit is true, a UnitException is silently ignored; if standardUnit is
+     * false a UnitException is thrown as a RunTimeException.
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    protected Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+    public Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
         final boolean standardUnit)
     {
-        this.conversionFactorToStandardUnit = 1.0;
+        this.scale = StandardScale.SCALE;
         if (standardUnit)
         {
             this.nameKey = nameOrNameKey;
@@ -138,58 +141,22 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * Build a unit with a conversion factor to another unit. If the parameter standardUnit is true, it is a standard unit where
-     * name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined unit where the
-     * localization files do not have an entry. If standardUnit is true, a UnitException is silently ignored; if standardUnit is
-     * false a UnitException is thrown as a RunTimeException.
+     * Build a unit with a specific conversion scale to/from the standard unit. If the parameter standardUnit is true, it is a
+     * standard unit where name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined
+     * unit where the localization files do not have an entry. If standardUnit is true, a UnitException is silently ignored; if
+     * standardUnit is false a UnitException is thrown as a RunTimeException.
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scale the conversion scale to use for this unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     protected Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-        final U referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+        final Scale scale, final boolean standardUnit)
     {
-        // as it can happen that this method is called for the standard unit (when it is still null) we have to catch
-        // the null pointer for the reference unit here.
-        if (referenceUnit == null)
-        {
-            this.conversionFactorToStandardUnit = 1.0;
-        }
-        else
-        {
-            this.conversionFactorToStandardUnit =
-                referenceUnit.getConversionFactorToStandardUnit() * conversionFactorToReferenceUnit;
-        }
-        if (standardUnit)
-        {
-            this.nameKey = nameOrNameKey;
-            this.abbreviationKey = abbreviationOrAbbreviationKey;
-            this.name = null;
-            this.abbreviation = null;
-        }
-        else
-        {
-            this.nameKey = null;
-            this.abbreviationKey = null;
-            this.name = nameOrNameKey;
-            this.abbreviation = abbreviationOrAbbreviationKey;
-        }
-        this.unitSystem = unitSystem;
-        try
-        {
-            addUnit(this);
-        }
-        catch (UnitException ue)
-        {
-            if (!standardUnit)
-            {
-                throw new RuntimeException(ue);
-            }
-        }
+        this(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
+        this.scale = scale;
     }
 
     /**
@@ -340,11 +307,12 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * @return conversionFactorToStandardUnit. Multiply by this number to convert to the standard (e.g., SI) unit
+     * @return the scale to transform between this unit and the reference (e.g., SI) unit.
      */
-    public final double getConversionFactorToStandardUnit()
+    @SuppressWarnings("checkstyle:designforextension")
+    public Scale getScale()
     {
-        return this.conversionFactorToStandardUnit;
+        return this.scale;
     }
 
     /**

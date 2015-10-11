@@ -2,17 +2,15 @@ package org.djunits.value.vdouble.vector;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.SortedMap;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
 import org.djunits.value.AbstractValue;
-import org.djunits.value.DenseData;
+import org.djunits.value.DataType;
 import org.djunits.value.FunctionsAbs;
 import org.djunits.value.FunctionsRel;
 import org.djunits.value.Relative;
-import org.djunits.value.SparseData;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
 import org.djunits.value.formatter.Format;
@@ -41,9 +39,12 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
     protected DoubleVectorData data;
 
     /**
-     * @return the internal data -- can only be used within package.
+     * @return the internal data -- can only be used within package and by subclasses.
      */
-    protected abstract DoubleVectorData getData();
+    protected final DoubleVectorData getData()
+    {
+        return this.data;
+    }
 
     /**
      * Construct a new Absolute Immutable DoubleVector.
@@ -59,9 +60,10 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
     /* ============================================================================================ */
 
     /**
+     * ABSOLUTE implementation of DoubleVector.
      * @param <U> Unit the unit for which this Vector will be created
      */
-    public abstract static class Abs<U extends Unit<U>> extends DoubleVector<U> implements Absolute,
+    public static class Abs<U extends Unit<U>> extends DoubleVector<U> implements Absolute,
         FunctionsAbs<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>
     {
         /** */
@@ -69,225 +71,119 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
 
         /**
          * Construct a new Absolute Immutable DoubleVector.
+         * @param values double[]; the values of the entries in the new Absolute Immutable DoubleVector
          * @param unit U; the unit of the new Absolute Immutable DoubleVector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
          */
-        protected Abs(final U unit)
+        public Abs(final double[] values, final U unit, final DataType dataType) throws ValueException
         {
             super(unit);
+            this.data = DoubleVectorData.instantiate(values, unit.getScale(), dataType);
+        }
+
+        /**
+         * Construct a new Absolute Immutable DoubleVector.
+         * @param values List; the values of the entries in the new Absolute Immutable DoubleVector
+         * @param unit U; the unit of the new Absolute Immutable DoubleVector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
+         */
+        public Abs(final List<Double> values, final U unit, final DataType dataType) throws ValueException
+        {
+            super(unit);
+            this.data = DoubleVectorData.instantiate(values, unit.getScale(), dataType);
+        }
+
+        /**
+         * Construct a new Absolute Immutable DoubleVector.
+         * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Immutable DoubleVector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values has zero entries
+         */
+        public Abs(final DoubleScalar.Abs<U>[] values, final DataType dataType) throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = DoubleVectorData.instantiate(values, dataType);
+        }
+
+        /**
+         * Construct a new Absolute Immutable DoubleVector.
+         * @param values List; the values of the entries in the new Absolute Immutable DoubleVector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param <S> the Scalar type used
+         * @throws ValueException when values has zero entries
+         */
+        public <S extends DoubleScalar.Abs<U>> Abs(final List<S> values, final DataType dataType) throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = DoubleVectorData.instantiateLD(values, dataType);
+        }
+
+        /**
+         * Construct a new Relative Immutable DoubleVector.
+         * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable DoubleVector
+         * @param length the size of the vector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param <S> the Scalar type used
+         * @throws ValueException when values has zero entries
+         */
+        public <S extends DoubleScalar.Abs<U>> Abs(final SortedMap<Integer, S> values, final int length,
+            final DataType dataType) throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = DoubleVectorData.instantiateMD(values, length, dataType);
+        }
+
+        /**
+         * Construct a new Relative Immutable DoubleVector.
+         * @param values Map; the map of indexes to values of the Relative Sparse Mutable DoubleVector
+         * @param unit U; the unit of the new Relative Sparse Mutable DoubleVector
+         * @param length the size of the vector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
+         */
+        public Abs(final SortedMap<Integer, Double> values, final U unit, final int length, final DataType dataType)
+            throws ValueException
+        {
+            super(unit);
+            this.data = DoubleVectorData.instantiate(values, length, unit.getScale(), dataType);
+        }
+
+        /**
+         * Construct a new Absolute Immutable DoubleVector.
+         * @param data an internal data object
+         * @param unit the unit
+         */
+        Abs(final DoubleVectorData data, final U unit)
+        {
+            super(unit);
+            this.data = data.copy();
+        }
+
+        /** {@inheritDoc} */
+        @SuppressWarnings("checkstyle:designforextension")
+        @Override
+        public MutableDoubleVector.Abs<U> mutable()
+        {
+            return MutableDoubleVector.instantiateMutableAbs(getData(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public abstract MutableDoubleVector.Abs<U> mutable();
-
-        /** {@inheritDoc} */
-        public abstract DoubleVector.Abs<U> toDense();
-
-        /** {@inheritDoc} */
-        public abstract DoubleVector.Abs<U> toSparse();
-
-        /**
-         * ABSOLUTE DENSE implementation of DoubleVector.
-         * @param <U> Unit the unit for which this Vector will be created
-         */
-        public static class Dense<U extends Unit<U>> extends Abs<U> implements DenseData
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Abs<U> toDense()
         {
-            /**  */
-            private static final long serialVersionUID = 20151003L;
-
-            /**
-             * Construct a new Absolute Dense Immutable DoubleVector.
-             * @param values double[]; the values of the entries in the new Absolute Dense Immutable DoubleVector
-             * @param unit U; the unit of the new Absolute Dense Immutable DoubleVector
-             * @throws ValueException when values is null
-             */
-            public Dense(final double[] values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Absolute Dense Immutable DoubleVector.
-             * @param values List; the values of the entries in the new Absolute Dense Immutable DoubleVector
-             * @param unit U; the unit of the new Absolute Dense Immutable DoubleVector
-             * @throws ValueException when values is null
-             */
-            public Dense(final List<Double> values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Absolute Dense Immutable DoubleVector.
-             * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Dense Immutable
-             *            DoubleVector
-             * @throws ValueException when values has zero entries
-             */
-            public Dense(final DoubleScalar.Abs<U>[] values) throws ValueException
-            {
-                super(checkNonEmpty(values)[0].getUnit());
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Absolute Dense Immutable DoubleVector.
-             * @param values List; the values of the entries in the new Absolute Dense Immutable DoubleVector
-             * @throws ValueException when values has zero entries
-             */
-            public Dense(final List<DoubleScalar.Abs<U>> values) throws ValueException
-            {
-                super(checkNonEmptyLA(values).get(0).getUnit());
-                this.data = initializeDenseLA(values);
-            }
-
-            /**
-             * Construct a new Absolute Dense Immutable DoubleVector.
-             * @param data an internal data object
-             * @param unit the unit
-             */
-            Dense(final DoubleVectorDataDense data, final U unit)
-            {
-                super(unit);
-                this.data = data.copy();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            public final MutableDoubleVector.Abs<U> mutable()
-            {
-                return new MutableDoubleVector.Abs.Dense<U>(getData(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleVectorDataDense getData()
-            {
-                return (DoubleVectorDataDense) this.data;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public DoubleVector.Abs<U> toDense()
-            {
-                return this;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public DoubleVector.Abs<U> toSparse()
-            {
-                return new DoubleVector.Abs.Sparse<U>(getData().toSparse(), getUnit());
-            }
+            return this.data.isDense() ? this : instantiateAbs(this.data.toDense(), getUnit());
         }
 
-        /**
-         * ABSOLUTE SPARSE implementation of DoubleVector.
-         * @param <U> Unit the unit for which this Vector will be created
-         */
-        public static class Sparse<U extends Unit<U>> extends Abs<U> implements SparseData
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Abs<U> toSparse()
         {
-            /**  */
-            private static final long serialVersionUID = 20150626L;
-
-            /**
-             * Construct a new Absolute Sparse Immutable DoubleVector.
-             * @param values Map; the map of indexes to values of the Absolute Sparse Immutable DoubleVector
-             * @param unit U; the unit of the new Absolute Sparse Immutable DoubleVector
-             * @param length the size of the vector
-             * @throws ValueException when values is null
-             */
-            public Sparse(final SortedMap<Integer, Double> values, final U unit, final int length)
-                throws ValueException
-            {
-                super(unit);
-                this.data = initializeSparse(values, length);
-            }
-
-            /**
-             * Construct a new Absolute Sparse Immutable DoubleVector.
-             * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Immutable
-             *            DoubleVector
-             * @param length the size of the vector
-             * @throws ValueException when values has zero entries
-             */
-            public Sparse(final SortedMap<Integer, DoubleScalar.Abs<U>> values, final int length) throws ValueException
-            {
-                super(checkNonEmptyMA(values).get(values.firstKey()).getUnit());
-                this.data = initializeSparseMA(values, length);
-            }
-
-            /**
-             * Construct a new Absolute Sparse Immutable DoubleVector.
-             * @param values double[]; the values of the entries in the new Absolute Sparse Immutable DoubleVector
-             * @param unit U; the unit of the new Absolute Sparse Immutable DoubleVector
-             * @throws ValueException when values is null
-             */
-            public Sparse(final double[] values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values).toSparse();
-            }
-
-            /**
-             * Construct a new Absolute Sparse Immutable DoubleVector.
-             * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Immutable
-             *            DoubleVector
-             * @throws ValueException when values has zero entries
-             */
-            public Sparse(final DoubleScalar.Abs<U>[] values) throws ValueException
-            {
-                super(checkNonEmpty(values)[0].getUnit());
-                this.data = initializeDense(values).toSparse();
-            }
-
-            /**
-             * Construct a new Absolute Sparse Immutable DoubleVector, package method.
-             * @param data the sparse data (internal structure)
-             * @param unit U; the unit of the new Absolute Sparse Immutable DoubleVector
-             */
-            Sparse(final DoubleVectorDataSparse data, final U unit)
-            {
-                super(unit);
-                this.data = data.copy();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableDoubleVector.Abs<U> mutable()
-            {
-                return new MutableDoubleVector.Abs.Sparse<U>(getData(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleVectorDataSparse getData()
-            {
-                return (DoubleVectorDataSparse) this.data;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public DoubleVector.Abs<U> toDense()
-            {
-                return new DoubleVector.Abs.Dense<U>(getData().toDense(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public DoubleVector.Abs<U> toSparse()
-            {
-                return this;
-            }
+            return this.data.isSparse() ? this : instantiateAbs(this.data.toSparse(), getUnit());
         }
-
-        /* ================================= ABS GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
@@ -327,9 +223,10 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
     /* ============================================================================================ */
 
     /**
+     * RELATIVE implementation of DoubleVector.
      * @param <U> Unit the unit for which this Vector will be created
      */
-    public abstract static class Rel<U extends Unit<U>> extends DoubleVector<U> implements Relative,
+    public static class Rel<U extends Unit<U>> extends DoubleVector<U> implements Relative,
         FunctionsRel<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>
 
     {
@@ -338,226 +235,119 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
 
         /**
          * Construct a new Relative Immutable DoubleVector.
+         * @param values double[]; the values of the entries in the new Relative Immutable DoubleVector
          * @param unit U; the unit of the new Relative Immutable DoubleVector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
          */
-        protected Rel(final U unit)
+        public Rel(final double[] values, final U unit, final DataType dataType) throws ValueException
         {
             super(unit);
+            this.data = DoubleVectorData.instantiate(values, unit.getScale(), dataType);
+        }
+
+        /**
+         * Construct a new Relative Immutable DoubleVector.
+         * @param values List; the values of the entries in the new Relative Immutable DoubleVector
+         * @param unit U; the unit of the new Relative Immutable DoubleVector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
+         */
+        public Rel(final List<Double> values, final U unit, final DataType dataType) throws ValueException
+        {
+            super(unit);
+            this.data = DoubleVectorData.instantiate(values, unit.getScale(), dataType);
+        }
+
+        /**
+         * Construct a new Relative Immutable DoubleVector.
+         * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable DoubleVector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values has zero entries
+         */
+        public Rel(final DoubleScalar.Rel<U>[] values, final DataType dataType) throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = DoubleVectorData.instantiate(values, dataType);
+        }
+
+        /**
+         * Construct a new Relative Immutable DoubleVector.
+         * @param values List; the values of the entries in the new Relative Immutable DoubleVector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param <S> the Scalar type used
+         * @throws ValueException when values has zero entries
+         */
+        public <S extends DoubleScalar.Rel<U>> Rel(final List<S> values, final DataType dataType) throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = DoubleVectorData.instantiateLD(values, dataType);
+        }
+
+        /**
+         * Construct a new Relative Immutable DoubleVector.
+         * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable DoubleVector
+         * @param length the size of the vector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param <S> the Scalar type used
+         * @throws ValueException when values has zero entries
+         */
+        public <S extends DoubleScalar.Rel<U>> Rel(final SortedMap<Integer, S> values, final int length,
+            final DataType dataType) throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = DoubleVectorData.instantiateMD(values, length, dataType);
+        }
+
+        /**
+         * Construct a new Relative Immutable DoubleVector.
+         * @param values Map; the map of indexes to values of the Relative Sparse Mutable DoubleVector
+         * @param unit U; the unit of the new Relative Sparse Mutable DoubleVector
+         * @param length the size of the vector
+         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
+         */
+        public Rel(final SortedMap<Integer, Double> values, final U unit, final int length, final DataType dataType)
+            throws ValueException
+        {
+            super(unit);
+            this.data = DoubleVectorData.instantiate(values, length, unit.getScale(), dataType);
+        }
+
+        /**
+         * Construct a new Relative Immutable DoubleVector.
+         * @param data an internal data object
+         * @param unit the unit
+         */
+        Rel(final DoubleVectorData data, final U unit)
+        {
+            super(unit);
+            this.data = data.copy();
+        }
+
+        /** {@inheritDoc} */
+        @SuppressWarnings("checkstyle:designforextension")
+        @Override
+        public MutableDoubleVector.Rel<U> mutable()
+        {
+            return new MutableDoubleVector.Rel<U>(getData(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public abstract MutableDoubleVector.Rel<U> mutable();
-
-        /** {@inheritDoc} */
-        public abstract DoubleVector.Rel<U> toDense();
-
-        /** {@inheritDoc} */
-        public abstract DoubleVector.Rel<U> toSparse();
-
-        /**
-         * RELATIVE DENSE implementation of DoubleVector.
-         * @param <U> Unit the unit for which this Vector will be created
-         */
-        public static class Dense<U extends Unit<U>> extends Rel<U> implements DenseData
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Rel<U> toDense()
         {
-            /**  */
-            private static final long serialVersionUID = 20151003L;
-
-            /**
-             * Construct a new Relative Dense Immutable DoubleVector.
-             * @param values double[]; the values of the entries in the new Relative Dense Immutable DoubleVector
-             * @param unit U; the unit of the new Relative Dense Immutable DoubleVector
-             * @throws ValueException when values is null
-             */
-            public Dense(final double[] values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Relative Dense Immutable DoubleVector.
-             * @param values List; the values of the entries in the new Relative Dense Immutable DoubleVector
-             * @param unit U; the unit of the new Relative Dense Immutable DoubleVector
-             * @throws ValueException when values is null
-             */
-            public Dense(final List<Double> values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Relative Dense Immutable DoubleVector.
-             * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Dense Immutable
-             *            DoubleVector
-             * @throws ValueException when values has zero entries
-             */
-            public Dense(final DoubleScalar.Rel<U>[] values) throws ValueException
-            {
-                super(checkNonEmpty(values)[0].getUnit());
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Relative Dense Immutable DoubleVector.
-             * @param values List; the values of the entries in the new Relative Dense Immutable DoubleVector
-             * @throws ValueException when values has zero entries
-             */
-            public Dense(final List<DoubleScalar.Rel<U>> values) throws ValueException
-            {
-                super(checkNonEmptyLR(values).get(0).getUnit());
-                this.data = initializeDenseLR(values);
-            }
-
-            /**
-             * Construct a new Relative Dense Immutable DoubleVector.
-             * @param data an internal data object
-             * @param unit the unit
-             */
-            Dense(final DoubleVectorDataDense data, final U unit)
-            {
-                super(unit);
-                this.data = data.copy();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableDoubleVector.Rel<U> mutable()
-            {
-                return new MutableDoubleVector.Rel.Dense<U>(getData(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleVectorDataDense getData()
-            {
-                return (DoubleVectorDataDense) this.data;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public DoubleVector.Rel<U> toDense()
-            {
-                return this;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public DoubleVector.Rel<U> toSparse()
-            {
-                return new DoubleVector.Rel.Sparse<U>(getData().toSparse(), getUnit());
-            }
+            return this.data.isDense() ? this : instantiateRel(this.data.toDense(), getUnit());
         }
 
-        /**
-         * RELATIVE SPARSE implementation of DoubleVector.
-         * @param <U> Unit the unit for which this Vector will be created
-         */
-        public static class Sparse<U extends Unit<U>> extends Rel<U> implements SparseData
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public DoubleVector.Rel<U> toSparse()
         {
-            /**  */
-            private static final long serialVersionUID = 20150626L;
-
-            /**
-             * Construct a new Relative Sparse Immutable DoubleVector.
-             * @param values Map; the map of indexes to values of the Relative Sparse Immutable DoubleVector
-             * @param unit U; the unit of the new Relative Sparse Immutable DoubleVector
-             * @param length the size of the vector
-             * @throws ValueException when values is null
-             */
-            public Sparse(final SortedMap<Integer, Double> values, final U unit, final int length)
-                throws ValueException
-            {
-                super(unit);
-                this.data = initializeSparse(values, length);
-            }
-
-            /**
-             * Construct a new Relative Sparse Immutable DoubleVector.
-             * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Immutable
-             *            DoubleVector
-             * @param length the size of the vector
-             * @throws ValueException when values has zero entries
-             */
-            public Sparse(final SortedMap<Integer, DoubleScalar.Rel<U>> values, final int length) throws ValueException
-            {
-                super(checkNonEmptyMR(values).get(values.firstKey()).getUnit());
-                this.data = initializeSparseMR(values, length);
-            }
-
-            /**
-             * Construct a new Relative Sparse Immutable DoubleVector.
-             * @param values double[]; the values of the entries in the new Relative Sparse Immutable DoubleVector
-             * @param unit U; the unit of the new Relative Sparse Immutable DoubleVector
-             * @throws ValueException when values is null
-             */
-            public Sparse(final double[] values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values).toSparse();
-            }
-
-            /**
-             * Construct a new Relative Sparse Immutable DoubleVector.
-             * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Relative Sparse Immutable
-             *            DoubleVector
-             * @throws ValueException when values has zero entries
-             */
-            public Sparse(final DoubleScalar.Rel<U>[] values) throws ValueException
-            {
-                super(checkNonEmpty(values)[0].getUnit());
-                this.data = initializeDense(values).toSparse();
-            }
-
-            /**
-             * Construct a new Relative Sparse Immutable DoubleVector, package method.
-             * @param data the sparse data (internal structure)
-             * @param unit U; the unit of the new Absolute Sparse Immutable DoubleVector
-             */
-            Sparse(final DoubleVectorDataSparse data, final U unit)
-            {
-                super(unit);
-                this.data = data.copy();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableDoubleVector.Rel<U> mutable()
-            {
-                return new MutableDoubleVector.Rel.Sparse<U>(getData(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final DoubleVectorDataSparse getData()
-            {
-                return (DoubleVectorDataSparse) this.data;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public DoubleVector.Rel<U> toDense()
-            {
-                return new DoubleVector.Rel.Dense<U>(getData().toDense(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public DoubleVector.Rel<U> toSparse()
-            {
-                return this;
-            }
+            return this.data.isSparse() ? this : instantiateRel(this.data.toSparse(), getUnit());
         }
-
-        /* ================================= REL GENERAL METHODS ================================== */
 
         /** {@inheritDoc} */
         @Override
@@ -613,295 +403,57 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
     /* ============================================================================================ */
 
     /**
-     * Check that a provided array can be used to create some descendant of a DoubleVector.
-     * @param dsArray DoubleScalar&lt;U&gt;[]; the provided array
-     * @param <U> Unit; the unit of the DoubleScalar array
-     * @return DoubleScalar&lt;U&gt;[]; the provided array
+     * Check that a provided array can be used to create some descendant of a DoubleVector, and return the Unit.
+     * @param dsArray the array to check and get the unit for
+     * @param <U> the unit
+     * @return the unit of the object
      * @throws ValueException when the array has length equal to 0
      */
-    static <U extends Unit<U>> DoubleScalar.Abs<U>[] checkNonEmpty(final DoubleScalar.Abs<U>[] dsArray)
-        throws ValueException
+    static <U extends Unit<U>> U checkUnit(final DoubleScalar<U>[] dsArray) throws ValueException
     {
-        if (0 == dsArray.length)
+        if (dsArray.length > 0)
         {
-            throw new ValueException(
-                "Cannot create a DoubleVector or MutableDoubleVector from an empty array of DoubleScalar");
+            return dsArray[0].getUnit();
         }
-        return dsArray;
+        throw new ValueException(
+            "Cannot create a DoubleVector or MutableDoubleVector from an empty array of DoubleScalar");
     }
 
     /**
-     * Check that a provided List can be used to create some descendant of a DoubleVector.
-     * @param dsList the provided list
-     * @param <U> Unit; the unit of the DoubleScalar list
-     * @return List the provided list
-     * @throws ValueException when the list has size equal to 0
+     * Check that a provided list can be used to create some descendant of a DoubleVector, and return the Unit.
+     * @param dsList the list to check and get the unit for
+     * @param <U> the unit
+     * @param <S> the scalar in the list
+     * @return the unit of the object
+     * @throws ValueException when the array has length equal to 0
      */
-    static <U extends Unit<U>> List<DoubleScalar.Abs<U>> checkNonEmptyLA(final List<DoubleScalar.Abs<U>> dsList)
-        throws ValueException
+    static <U extends Unit<U>, S extends DoubleScalar<U>> U checkUnit(final List<S> dsList) throws ValueException
     {
-        if (0 == dsList.size())
+        if (dsList.size() > 0)
         {
-            throw new ValueException(
-                "Cannot create a DoubleVector or MutableDoubleVector from an empty List of DoubleScalar");
+            return dsList.get(0).getUnit();
         }
-        return dsList;
+        throw new ValueException(
+            "Cannot create a DoubleVector or MutableDoubleVector from an empty list of DoubleScalar");
     }
 
     /**
      * Check that a provided Map can be used to create some descendant of a DoubleVector.
      * @param dsMap the provided map
      * @param <U> Unit; the unit of the DoubleScalar list
+     * @param <S> the scalar in the list
      * @return List the provided list
      * @throws ValueException when the list has size equal to 0
      */
-    static <U extends Unit<U>> SortedMap<Integer, DoubleScalar.Abs<U>> checkNonEmptyMA(
-        final SortedMap<Integer, DoubleScalar.Abs<U>> dsMap) throws ValueException
-    {
-        if (0 == dsMap.size())
-        {
-            throw new ValueException(
-                "Cannot create a DoubleVector or MutableDoubleVector from an empty List of DoubleScalar");
-        }
-        return dsMap;
-    }
-
-    /**
-     * Check that a provided array can be used to create some descendant of a DoubleVector.
-     * @param dsArray DoubleScalar&lt;U&gt;[]; the provided array
-     * @param <U> Unit; the unit of the DoubleScalar array
-     * @return DoubleScalar&lt;U&gt;[]; the provided array
-     * @throws ValueException when the array has length equal to 0
-     */
-    static <U extends Unit<U>> DoubleScalar.Rel<U>[] checkNonEmpty(final DoubleScalar.Rel<U>[] dsArray)
+    static <U extends Unit<U>, S extends DoubleScalar<U>> U checkUnit(final SortedMap<Integer, S> dsMap)
         throws ValueException
     {
-        if (0 == dsArray.length)
+        if (dsMap.size() > 0)
         {
-            throw new ValueException(
-                "Cannot create a DoubleVector or MutableDoubleVector from an empty array of DoubleScalar");
+            return dsMap.get(dsMap.firstKey()).getUnit();
         }
-        return dsArray;
-    }
-
-    /**
-     * Check that a provided List can be used to create some descendant of a DoubleVector.
-     * @param dsList the provided list
-     * @param <U> Unit; the unit of the DoubleScalar list
-     * @return List the provided list
-     * @throws ValueException when the list has size equal to 0
-     */
-    static <U extends Unit<U>> List<DoubleScalar.Rel<U>> checkNonEmptyLR(final List<DoubleScalar.Rel<U>> dsList)
-        throws ValueException
-    {
-        if (0 == dsList.size())
-        {
-            throw new ValueException(
-                "Cannot create a DoubleVector or MutableDoubleVector from an empty List of DoubleScalar");
-        }
-        return dsList;
-    }
-
-    /**
-     * Check that a provided Map can be used to create some descendant of a DoubleVector.
-     * @param dsMap the provided map
-     * @param <U> Unit; the unit of the DoubleScalar list
-     * @return List the provided list
-     * @throws ValueException when the list has size equal to 0
-     */
-    static <U extends Unit<U>> SortedMap<Integer, DoubleScalar.Rel<U>> checkNonEmptyMR(
-        final SortedMap<Integer, DoubleScalar.Rel<U>> dsMap) throws ValueException
-    {
-        if (0 == dsMap.size())
-        {
-            throw new ValueException(
-                "Cannot create a DoubleVector or MutableDoubleVector from an empty List of DoubleScalar");
-        }
-        return dsMap;
-    }
-
-    /**
-     * Initialize a dense vector.
-     * @param values the values to store in the vector
-     * @return the dense vector
-     * @throws ValueException when no values are present
-     */
-    final DoubleVectorDataDense initializeDense(final double[] values) throws ValueException
-    {
-        if (null == values)
-        {
-            throw new ValueException("values is null");
-        }
-        double[] vectorSI = new double[values.length];
-        if (getUnit().equals(getUnit().getStandardUnit()))
-        {
-            System.arraycopy(values, 0, vectorSI, 0, values.length);
-        }
-        else
-        {
-            // TODO optimize for linear scale: multiply by factor
-            for (int index = values.length; --index >= 0;)
-            {
-                vectorSI[index] = expressAsSIUnit(values[index]);
-            }
-        }
-        return new DoubleVectorDataDense(vectorSI);
-    }
-
-    /**
-     * Initialize a dense vector.
-     * @param values the values to store in the vector
-     * @return the dense vector
-     * @throws ValueException when no values are present
-     */
-    final DoubleVectorDataDense initializeDense(final List<Double> values) throws ValueException
-    {
-        if (null == values)
-        {
-            throw new ValueException("values is null");
-        }
-        double[] vectorSI = new double[values.size()];
-        if (getUnit().equals(getUnit().getStandardUnit()))
-        {
-            for (int index = 0; index < values.size(); index++)
-            {
-                vectorSI[index] = values.get(index);
-            }
-        }
-        else
-        {
-            for (int index = values.size(); --index >= 0;)
-            {
-                // TODO optimize for linear scale: multiply by factor
-                vectorSI[index] = expressAsSIUnit(values.get(index));
-            }
-        }
-        return new DoubleVectorDataDense(vectorSI);
-    }
-
-    /**
-     * Initialize a dense vector.
-     * @param values the values to store in the vector
-     * @return the dense vector
-     * @throws ValueException when no values are present
-     */
-    final DoubleVectorDataDense initializeDense(final DoubleScalar<U>[] values) throws ValueException
-    {
-        if (null == values)
-        {
-            throw new ValueException("values is null");
-        }
-        double[] vectorSI = new double[values.length];
-        for (int index = 0; index < values.length; index++)
-        {
-            vectorSI[index] = values[index].getSI();
-        }
-        return new DoubleVectorDataDense(vectorSI);
-    }
-
-    /**
-     * Initialize a dense vector.
-     * @param values the values to store in the vector
-     * @return the dense vector
-     * @throws ValueException when no values are present
-     */
-    final DoubleVectorDataDense initializeDenseLA(final List<DoubleScalar.Abs<U>> values) throws ValueException
-    {
-        if (null == values)
-        {
-            throw new ValueException("values is null");
-        }
-        double[] vectorSI = new double[values.size()];
-        for (int index = 0; index < values.size(); index++)
-        {
-            vectorSI[index] = values.get(index).getSI();
-        }
-        return new DoubleVectorDataDense(vectorSI);
-    }
-
-    /**
-     * Initialize a dense vector.
-     * @param values the values to store in the vector
-     * @return the dense vector
-     * @throws ValueException when no values are present
-     */
-    final DoubleVectorDataDense initializeDenseLR(final List<DoubleScalar.Rel<U>> values) throws ValueException
-    {
-        if (null == values)
-        {
-            throw new ValueException("values is null");
-        }
-        double[] vectorSI = new double[values.size()];
-        for (int index = 0; index < values.size(); index++)
-        {
-            vectorSI[index] = values.get(index).getSI();
-        }
-        return new DoubleVectorDataDense(vectorSI);
-    }
-
-    /**
-     * Import the values from a sparse map of integers and values.
-     * @param values Map&lt;Integer, Double&gt;; the values
-     * @param length the size of the vector
-     * @return the sparse vector
-     */
-    protected final DoubleVectorDataSparse initializeSparse(final SortedMap<Integer, Double> values, final int length)
-    {
-        boolean isSI = getUnit().equals(getUnit().getStandardUnit());
-        double[] vectorSI = new double[values.size()];
-        int[] indices = new int[values.size()];
-        int index = 0;
-        for (Entry<Integer, Double> entry : values.entrySet())
-        {
-            vectorSI[index] = isSI ? entry.getValue() : expressAsSIUnit(entry.getValue());
-            indices[index] = entry.getKey();
-            index++;
-        }
-        return new DoubleVectorDataSparse(vectorSI, indices, length);
-    }
-
-    /**
-     * Import the values from a sparse map of integers and values.
-     * @param values Map&lt;Integer, Double&gt;; the values
-     * @param length the size of the vector
-     * @return the sparse vector
-     */
-    protected final DoubleVectorDataSparse initializeSparseMA(final SortedMap<Integer, DoubleScalar.Abs<U>> values,
-        final int length)
-    {
-        boolean isSI = getUnit().equals(getUnit().getStandardUnit());
-        double[] vectorSI = new double[values.size()];
-        int[] indices = new int[values.size()];
-        int index = 0;
-        for (Entry<Integer, DoubleScalar.Abs<U>> entry : values.entrySet())
-        {
-            vectorSI[index] = isSI ? entry.getValue().si : expressAsSIUnit(entry.getValue().si);
-            indices[index] = entry.getKey();
-            index++;
-        }
-        return new DoubleVectorDataSparse(vectorSI, indices, length);
-    }
-
-    /**
-     * Import the values from a sparse map of integers and values.
-     * @param values Map&lt;Integer, Double&gt;; the values
-     * @param length the size of the vector
-     * @return the sparse vector
-     */
-    protected final DoubleVectorDataSparse initializeSparseMR(final SortedMap<Integer, DoubleScalar.Rel<U>> values,
-        final int length)
-    {
-        boolean isSI = getUnit().equals(getUnit().getStandardUnit());
-        double[] vectorSI = new double[values.size()];
-        int[] indices = new int[values.size()];
-        int index = 0;
-        for (Entry<Integer, DoubleScalar.Rel<U>> entry : values.entrySet())
-        {
-            vectorSI[index] = isSI ? entry.getValue().si : expressAsSIUnit(entry.getValue().si);
-            indices[index] = entry.getKey();
-            index++;
-        }
-        return new DoubleVectorDataSparse(vectorSI, indices, length);
+        throw new ValueException(
+            "Cannot create a DoubleVector or MutableDoubleVector from an empty Map of DoubleScalar");
     }
 
     /**
@@ -913,14 +465,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      */
     static <U extends Unit<U>> DoubleVector.Rel<U> instantiateRel(final DoubleVectorData dvData, final U unit)
     {
-        if (dvData instanceof DoubleVectorDataSparse)
-        {
-            return new DoubleVector.Rel.Sparse<U>((DoubleVectorDataSparse) dvData, unit);
-        }
-        else
-        {
-            return new DoubleVector.Rel.Dense<U>((DoubleVectorDataDense) dvData, unit);
-        }
+        return new DoubleVector.Rel<U>(dvData, unit);
     }
 
     /**
@@ -932,14 +477,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      */
     static <U extends Unit<U>> DoubleVector.Abs<U> instantiateAbs(final DoubleVectorData dvData, final U unit)
     {
-        if (dvData instanceof DoubleVectorDataSparse)
-        {
-            return new DoubleVector.Abs.Sparse<U>((DoubleVectorDataSparse) dvData, unit);
-        }
-        else
-        {
-            return new DoubleVector.Abs.Dense<U>((DoubleVectorDataDense) dvData, unit);
-        }
+        return new DoubleVector.Abs<U>(dvData, unit);
     }
 
     /* ============================================================================================ */
@@ -1076,7 +614,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
         if (verbose)
         {
             String ab = this instanceof Absolute ? "Abs " : this instanceof Relative ? "Rel " : "??? ";
-            String ds = this instanceof DenseData ? "Dense  " : this instanceof SparseData ? "Sparse " : "?????? ";
+            String ds = this.data.isDense() ? "Dense  " : this.data.isSparse() ? "Sparse " : "?????? ";
             if (this instanceof MutableDoubleVector)
             {
                 buf.append("Mutable   " + ab + ds);
@@ -1089,8 +627,15 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
         buf.append("[");
         for (int i = 0; i < size(); i++)
         {
-            double d = ValueUtil.expressAsUnit(safeGet(i), displayUnit);
-            buf.append(" " + Format.format(d));
+            try
+            {
+                double d = ValueUtil.expressAsUnit(getSI(i), displayUnit);
+                buf.append(" " + Format.format(d));
+            }
+            catch (ValueException ve)
+            {
+                buf.append(" " + "********************".substring(0, Format.DEFAULTSIZE));
+            }
         }
         buf.append("]");
         if (withUnit)
@@ -1128,26 +673,6 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
         {
             throw new ValueException("The vector and the array have different sizes: " + size() + " != " + other.length);
         }
-    }
-
-    /**
-     * Retrieve a value in vectorSI without checking validity of the index.
-     * @param index int; the index
-     * @return double; the value stored at that index
-     */
-    protected final double safeGet(final int index)
-    {
-        return this.data.getSI(index);
-    }
-
-    /**
-     * Modify a value in vectorSI without checking validity of the index.
-     * @param index int; the index
-     * @param valueSI double; the new value for the entry in vectorSI
-     */
-    protected final void safeSet(final int index, final double valueSI)
-    {
-        this.data.setSI(index, valueSI);
     }
 
     /** {@inheritDoc} */

@@ -5,6 +5,7 @@ import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.djunits.unit.unitsystem.UnitSystem.SI_BASE;
 import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
 
+import org.djunits.unit.scale.OffsetLinearScale;
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
@@ -17,7 +18,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * version Jun 5, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class TemperatureUnit extends OffsetUnit<TemperatureUnit>
+public class TemperatureUnit extends Unit<TemperatureUnit>
 {
     /** */
     private static final long serialVersionUID = 20140605L;
@@ -45,14 +46,14 @@ public class TemperatureUnit extends OffsetUnit<TemperatureUnit>
         SI = new TemperatureUnit("TemperatureUnit.kelvin", "TemperatureUnit.K", SI_BASE, 1.0, 0.0, true);
         KELVIN = SI;
         DEGREE_CELSIUS =
-            new TemperatureUnit("TemperatureUnit.degree_Celsius", "TemperatureUnit.dgC", SI_DERIVED, 1.0, -273.15, true);
+            new TemperatureUnit("TemperatureUnit.degree_Celsius", "TemperatureUnit.dgC", SI_DERIVED, 1.0, 273.15, true);
         DEGREE_FAHRENHEIT =
             new TemperatureUnit("TemperatureUnit.degree_Fahrenheit", "TemperatureUnit.dgF", IMPERIAL, 5.0 / 9.0,
-                -459.67, true);
+                459.67, true);
         DEGREE_RANKINE =
             new TemperatureUnit("TemperatureUnit.degree_Rankine", "TemperatureUnit.dgR", OTHER, 5.0 / 9.0, 0.0, true);
         DEGREE_REAUMUR =
-            new TemperatureUnit("TemperatureUnit.degree_Reaumur", "TemperatureUnit.dgRe", OTHER, 4.0 / 5.0, -273.15,
+            new TemperatureUnit("TemperatureUnit.degree_Reaumur", "TemperatureUnit.dgRe", OTHER, 4.0 / 5.0, 273.15,
                 true);
     }
 
@@ -70,8 +71,8 @@ public class TemperatureUnit extends OffsetUnit<TemperatureUnit>
         final UnitSystem unitSystem, final double conversionFactorToStandardUnit, final double offsetToKelvin,
         final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, KELVIN, conversionFactorToStandardUnit,
-            offsetToKelvin, standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, new OffsetLinearScale(
+            conversionFactorToStandardUnit, offsetToKelvin), standardUnit);
     }
 
     /**
@@ -85,41 +86,7 @@ public class TemperatureUnit extends OffsetUnit<TemperatureUnit>
     public TemperatureUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
         final double conversionFactorToStandardUnit, final double offsetToKelvin)
     {
-        this(name, abbreviation, unitSystem, KELVIN, conversionFactorToStandardUnit, offsetToKelvin, false);
-    }
-
-    /**
-     * Build a TemperatureUnit with a conversion factor and offset to another TemperatureUnit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param offsetToKelvin the offsetToKelvin to add to convert to the standard (e.g., SI) unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
-     */
-    private TemperatureUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final TemperatureUnit referenceUnit, final double conversionFactorToReferenceUnit,
-        final double offsetToKelvin, final boolean standardUnit)
-    {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            offsetToKelvin, standardUnit);
-    }
-
-    /**
-     * Build a user-defined TemperatureUnit with a conversion factor and offset to another TemperatureUnit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param offsetToKelvin the offsetToKelvin to add to convert to the standard (e.g., SI) unit
-     */
-    public TemperatureUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-        final TemperatureUnit referenceUnit, final double conversionFactorToReferenceUnit, final double offsetToKelvin)
-    {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, offsetToKelvin, false);
+        this(name, abbreviation, unitSystem, conversionFactorToStandardUnit, offsetToKelvin, false);
     }
 
     /** {@inheritDoc} */

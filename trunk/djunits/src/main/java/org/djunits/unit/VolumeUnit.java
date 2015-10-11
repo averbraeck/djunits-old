@@ -17,7 +17,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * version May 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class VolumeUnit extends Unit<VolumeUnit>
+public class VolumeUnit extends LinearUnit<VolumeUnit>
 {
     /** */
     private static final long serialVersionUID = 20140604L;

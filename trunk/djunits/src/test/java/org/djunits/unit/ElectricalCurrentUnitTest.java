@@ -17,7 +17,7 @@ import org.junit.Test;
  * initial version Jun 5, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ElectricalCurrentUnitTest extends AbstractUnitTest<ElectricalCurrentUnit>
+public class ElectricalCurrentUnitTest extends AbstractLinearUnitTest<ElectricalCurrentUnit>
 {
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.

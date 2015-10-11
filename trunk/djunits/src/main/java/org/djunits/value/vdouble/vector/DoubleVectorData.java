@@ -1,8 +1,14 @@
 package org.djunits.value.vdouble.vector;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.SortedMap;
+import java.util.stream.IntStream;
 
+import org.djunits.unit.scale.Scale;
+import org.djunits.value.DataType;
 import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.scalar.DoubleScalar;
 
 /**
  * <p>
@@ -20,10 +26,263 @@ abstract class DoubleVectorData
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected double[] vectorSI;
 
+    /** the data type. */
+    private final DataType dataType;
+
+    /**
+     * @param dataType the data type.
+     */
+    DoubleVectorData(final DataType dataType)
+    {
+        super();
+        this.dataType = dataType;
+    }
+
+    /** ============================================================================================ */
+    /** ====================================== INSTANTIATION ======================================= */
+    /** ============================================================================================ */
+
+    /**
+     * Instantiate a DoubleVectorData with the right data type.
+     * @param values the (SI) values to store
+     * @param scale the scale of the unit to use for conversion to SI
+     * @param dataType the data type to use
+     * @return the DoubleVectorData with the right data type
+     * @throws ValueException when values are null, or dataType is null
+     */
+    public static DoubleVectorData instantiate(final double[] values, final Scale scale, final DataType dataType)
+        throws ValueException
+    {
+        if (values == null)
+        {
+            throw new ValueException("DoubleVectorData.instantiate: double[] values is null");
+        }
+
+        double[] valuesSI = new double[values.length];
+        IntStream.range(0, values.length).parallel().forEach(i -> valuesSI[i] = scale.toStandardUnit(values[i]));
+
+        switch (dataType)
+        {
+            case DENSE:
+                return new DoubleVectorDataDense(valuesSI);
+
+            case SPARSE:
+                return DoubleVectorDataSparse.instantiate(valuesSI);
+
+            default:
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+        }
+    }
+
+    /**
+     * Instantiate a DoubleVectorData with the right data type.
+     * @param values the values to store
+     * @param scale the scale of the unit to use for conversion to SI
+     * @param dataType the data type to use
+     * @return the DoubleVectorData with the right data type
+     * @throws ValueException when list is null, or dataType is null
+     */
+    public static DoubleVectorData instantiate(final List<Double> values, final Scale scale, final DataType dataType)
+        throws ValueException
+    {
+        if (values == null)
+        {
+            throw new ValueException("DoubleVectorData.instantiate: List<Double> values is null");
+        }
+
+        switch (dataType)
+        {
+            case DENSE:
+                return new DoubleVectorDataDense(values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d))
+                    .toArray());
+
+            case SPARSE:
+                return DoubleVectorDataSparse.instantiate(values.parallelStream().mapToDouble(
+                    d -> scale.toStandardUnit(d)).toArray());
+
+            default:
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+        }
+    }
+
+    /**
+     * Instantiate a DoubleVectorData with the right data type.
+     * @param values the values to store
+     * @param dataType the data type to use
+     * @return the DoubleVectorData with the right data type
+     * @throws ValueException when values is null, or dataType is null
+     */
+    public static DoubleVectorData instantiate(final DoubleScalar<?>[] values, final DataType dataType)
+        throws ValueException
+    {
+        if (values == null)
+        {
+            throw new ValueException("DoubleVectorData.instantiate: DoubleScalar[] values is null");
+        }
+
+        double[] valuesSI = Arrays.stream(values).parallel().mapToDouble(s -> s.getSI()).toArray();
+
+        switch (dataType)
+        {
+            case DENSE:
+                return new DoubleVectorDataDense(valuesSI);
+
+            case SPARSE:
+                return DoubleVectorDataSparse.instantiate(valuesSI);
+
+            default:
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+        }
+    }
+
+    /**
+     * Instantiate a DoubleVectorData with the right data type.
+     * @param values the DoubleScalar values to store
+     * @param dataType the data type to use
+     * @return the DoubleVectorData with the right data type
+     * @throws ValueException when values is null, or dataType is null
+     */
+    public static DoubleVectorData instantiateLD(final List<? extends DoubleScalar<?>> values, final DataType dataType)
+        throws ValueException
+    {
+        if (values == null)
+        {
+            throw new ValueException("DoubleVectorData.instantiate: values list is null");
+        }
+
+        double[] valuesSI = values.parallelStream().mapToDouble(s -> s.getSI()).toArray();
+
+        switch (dataType)
+        {
+            case DENSE:
+                return new DoubleVectorDataDense(valuesSI);
+
+            case SPARSE:
+                return DoubleVectorDataSparse.instantiate(valuesSI);
+
+            default:
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+        }
+    }
+
+    /**
+     * Instantiate a DoubleVectorData with the right data type.
+     * @param values the DoubleScalar values to store
+     * @param length the length of the vector to pad with 0 after last entry in map
+     * @param dataType the data type to use
+     * @param <S> the scalar type to use
+     * @return the DoubleVectorData with the right data type
+     * @throws ValueException when values is null, or dataType is null
+     */
+    public static <S extends DoubleScalar<?>> DoubleVectorData instantiateMD(final SortedMap<Integer, S> values,
+        final int length, final DataType dataType) throws ValueException
+    {
+        if (values == null)
+        {
+            throw new ValueException("DoubleVectorData.instantiate: values map is null");
+        }
+
+        switch (dataType)
+        {
+            case DENSE:
+            {
+                double[] valuesSI =
+                    values.keySet().parallelStream().mapToDouble(index -> values.get(index).getSI()).toArray();
+                return new DoubleVectorDataDense(valuesSI);
+            }
+
+            case SPARSE:
+            {
+                int[] indices = values.keySet().parallelStream().mapToInt(i -> i).toArray();
+                double[] valuesSI = values.values().parallelStream().mapToDouble(s -> s.getSI()).toArray();
+                return new DoubleVectorDataSparse(valuesSI, indices, length);
+            }
+
+            default:
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+        }
+    }
+
+    /**
+     * Instantiate a DoubleVectorData with the right data type.
+     * @param values the DoubleScalar values to store
+     * @param length the length of the vector to pad with 0 after last entry in map
+     * @param scale the scale of the unit to use for conversion to SI
+     * @param dataType the data type to use
+     * @return the DoubleVectorData with the right data type
+     * @throws ValueException when values is null, or dataType is null
+     */
+    public static DoubleVectorData instantiate(final SortedMap<Integer, Double> values, final int length,
+        final Scale scale, final DataType dataType) throws ValueException
+    {
+        if (values == null)
+        {
+            throw new ValueException("DoubleVectorData.instantiate: values map is null");
+        }
+
+        switch (dataType)
+        {
+            case DENSE:
+            {
+                double[] valuesSI =
+                    values.keySet().parallelStream().mapToDouble(index -> scale.toStandardUnit(values.get(index)))
+                        .toArray();
+                return new DoubleVectorDataDense(valuesSI);
+            }
+
+            case SPARSE:
+            {
+                int[] indices = values.keySet().parallelStream().mapToInt(i -> i).toArray();
+                double[] valuesSI =
+                    values.values().parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).toArray();
+                return new DoubleVectorDataSparse(valuesSI, indices, length);
+            }
+
+            default:
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+        }
+    }
+
+    /** ============================================================================================ */
+    /** ==================================== UTILITY FUNCTIONS ===================================== */
+    /** ============================================================================================ */
+
     /**
      * @return the size of the vector
      */
     public abstract int size();
+
+    /**
+     * @return whether data type is sparse.
+     */
+    public boolean isSparse()
+    {
+        return this.dataType.equals(DataType.SPARSE);
+    }
+
+    /**
+     * @return the sparse transformation of this data
+     */
+    public DoubleVectorDataSparse toSparse()
+    {
+        return isSparse() ? (DoubleVectorDataSparse) this : ((DoubleVectorDataDense) this).toSparse();
+    }
+
+    /**
+     * @return whether data type is dense.
+     */
+    public boolean isDense()
+    {
+        return this.dataType.equals(DataType.DENSE);
+    }
+
+    /**
+     * @return the dense transformation of this data
+     */
+    public DoubleVectorDataDense toDense()
+    {
+        return isDense() ? (DoubleVectorDataDense) this : ((DoubleVectorDataSparse) this).toDense();
+    }
 
     /**
      * @param index the index to get the value for
@@ -43,15 +302,7 @@ abstract class DoubleVectorData
      */
     public final int cardinality()
     {
-        int count = 0;
-        for (int i = 0; i < this.vectorSI.length; i++)
-        {
-            if (this.vectorSI[i] != 0.0)
-            {
-                count++;
-            }
-        }
-        return count;
+        return (int) Arrays.stream(this.vectorSI).parallel().filter(d -> d != 0.0).count();
     }
 
     /**
@@ -59,12 +310,7 @@ abstract class DoubleVectorData
      */
     public final double zSum()
     {
-        double result = 0.0;
-        for (int i = 0; i < this.vectorSI.length; i++)
-        {
-            result += this.vectorSI[i];
-        }
-        return result;
+        return Arrays.stream(this.vectorSI).parallel().sum();
     }
 
     /**
@@ -76,6 +322,165 @@ abstract class DoubleVectorData
      * @return a safe copy of VectorSI
      */
     public abstract double[] getDenseVectorSI();
+
+    /**
+     * Check the sizes of this data object and the other data object.
+     * @param other the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    private void checkSizes(final DoubleVectorData other) throws ValueException
+    {
+        if (this.size() != other.size())
+        {
+            throw new ValueException("Two data objects used in a DoubleVector operation do not have the same size");
+        }
+    }
+
+    /** ============================================================================================ */
+    /** ================================== CALCULATION FUNCTIONS =================================== */
+    /** ============================================================================================ */
+
+    /**
+     * Add two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
+     * vector is returned.
+     * @param right the other data object to add
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public DoubleVectorData plus(final DoubleVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        double[] dv = IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) + right.getSI(i)).toArray();
+        if (this instanceof DoubleVectorDataSparse && right instanceof DoubleVectorDataSparse)
+        {
+            return new DoubleVectorDataDense(dv).toSparse();
+        }
+        return new DoubleVectorDataDense(dv);
+    }
+
+    /**
+     * Add a vector to this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
+     * @param right the other data object to add
+     * @throws ValueException if vectors have different lengths
+     */
+    public abstract void incrementBy(final DoubleVectorData right) throws ValueException;
+
+    /**
+     * Add a number to this vector on a cell-by-cell basis.
+     * @param valueSI the value to add
+     */
+    public void incrementBy(final double valueSI)
+    {
+        Arrays.stream(this.vectorSI).parallel().map(d -> d + valueSI).toArray();
+    }
+
+    /**
+     * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
+     * vector is returned.
+     * @param right the other data object to subtract
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public DoubleVectorData minus(final DoubleVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        double[] dv = IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) - right.getSI(i)).toArray();
+        if (this instanceof DoubleVectorDataSparse && right instanceof DoubleVectorDataSparse)
+        {
+            return new DoubleVectorDataDense(dv).toSparse();
+        }
+        return new DoubleVectorDataDense(dv);
+    }
+
+    /**
+     * Subtract a vector from this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
+     * @param right the other data object to subtract
+     * @throws ValueException if vectors have different lengths
+     */
+    public abstract void decrementBy(final DoubleVectorData right) throws ValueException;
+
+    /**
+     * Subtract a number from this vector on a cell-by-cell basis.
+     * @param valueSI the value to subtract
+     */
+    public void decrementBy(final double valueSI)
+    {
+        Arrays.stream(this.vectorSI).parallel().map(d -> d - valueSI).toArray();
+    }
+
+    /**
+     * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
+     * vector is returned.
+     * @param right the other data object to multiply with
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public DoubleVectorData times(final DoubleVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        double[] dv = IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) * right.getSI(i)).toArray();
+        if (this instanceof DoubleVectorDataDense && right instanceof DoubleVectorDataDense)
+        {
+            return new DoubleVectorDataDense(dv);
+        }
+        return new DoubleVectorDataDense(dv).toSparse();
+    }
+
+    /**
+     * Multiply a vector with the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the
+     * same.
+     * @param right the other data object to multiply with
+     * @throws ValueException if vectors have different lengths
+     */
+    public abstract void multiplyBy(final DoubleVectorData right) throws ValueException;
+
+    /**
+     * Multiply the values of this vector with a number on a cell-by-cell basis.
+     * @param valueSI the value to multiply with
+     */
+    public void multiplyBy(final double valueSI)
+    {
+        Arrays.stream(this.vectorSI).parallel().map(d -> d * valueSI).toArray();
+    }
+
+    /**
+     * Divide two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
+     * vector is returned.
+     * @param right the other data object to divide by
+     * @return the sum of this data object and the other data object
+     * @throws ValueException if vectors have different lengths
+     */
+    public DoubleVectorData divide(final DoubleVectorData right) throws ValueException
+    {
+        checkSizes(right);
+        double[] dv = IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) / right.getSI(i)).toArray();
+        if (this instanceof DoubleVectorDataDense && right instanceof DoubleVectorDataDense)
+        {
+            return new DoubleVectorDataDense(dv);
+        }
+        return new DoubleVectorDataDense(dv).toSparse();
+    }
+
+    /**
+     * Divide the values of a vector by the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense)
+     * stays the same.
+     * @param right the other data object to divide by
+     * @throws ValueException if vectors have different lengths
+     */
+    public abstract void divideBy(final DoubleVectorData right) throws ValueException;
+
+    /**
+     * Divide the values of this vector by a number on a cell-by-cell basis.
+     * @param valueSI the value to multiply with
+     */
+    public void divideBy(final double valueSI)
+    {
+        Arrays.stream(this.vectorSI).parallel().map(d -> d / valueSI).toArray();
+    }
+
+    /** ============================================================================================ */
+    /** =============================== EQUALS, HASHCODE, TOSTRING ================================= */
+    /** ============================================================================================ */
 
     /** {@inheritDoc} */
     @Override
@@ -104,154 +509,10 @@ abstract class DoubleVectorData
         return true;
     }
 
-    /**
-     * Check the sizes of this data object and the other data object.
-     * @param other the other data object
-     * @throws ValueException if vectors have different lengths
-     */
-    private void checkSizes(final DoubleVectorData other) throws ValueException
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
     {
-        if (this.size() != other.size())
-        {
-            throw new ValueException("Two data objects used in a DoubleVector operation do not have the same size");
-        }
+        return "DoubleVectorData [dataType=" + this.dataType + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
     }
-
-    /**
-     * Add two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
-     * vector is returned.
-     * @param right the other data object to add
-     * @return the sum of this data object and the other data object
-     * @throws ValueException if vectors have different lengths
-     */
-    public DoubleVectorData plus(final DoubleVectorData right) throws ValueException
-    {
-        checkSizes(right);
-        double[] dv = new double[this.size()];
-        for (int i = 0; i < dv.length; i++)
-        {
-            dv[i] = this.getSI(i) + right.getSI(i);
-        }
-        if (this instanceof DoubleVectorDataSparse && right instanceof DoubleVectorDataSparse)
-        {
-            return new DoubleVectorDataDense(dv).toSparse();
-        }
-        return new DoubleVectorDataDense(dv);
-    }
-
-    /**
-     * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
-     * vector is returned.
-     * @param right the other data object to subtract
-     * @return the sum of this data object and the other data object
-     * @throws ValueException if vectors have different lengths
-     */
-    public DoubleVectorData minus(final DoubleVectorData right) throws ValueException
-    {
-        checkSizes(right);
-        double[] dv = new double[this.size()];
-        for (int i = 0; i < dv.length; i++)
-        {
-            dv[i] = this.getSI(i) - right.getSI(i);
-        }
-        if (this instanceof DoubleVectorDataSparse && right instanceof DoubleVectorDataSparse)
-        {
-            return new DoubleVectorDataDense(dv).toSparse();
-        }
-        return new DoubleVectorDataDense(dv);
-    }
-
-    /**
-     * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
-     * vector is returned.
-     * @param right the other data object to multiply with
-     * @return the sum of this data object and the other data object
-     * @throws ValueException if vectors have different lengths
-     */
-    public DoubleVectorData times(final DoubleVectorData right) throws ValueException
-    {
-        checkSizes(right);
-        double[] dv = new double[this.size()];
-        for (int i = 0; i < dv.length; i++)
-        {
-            dv[i] = this.getSI(i) * right.getSI(i);
-        }
-        if (this instanceof DoubleVectorDataDense && right instanceof DoubleVectorDataDense)
-        {
-            return new DoubleVectorDataDense(dv);
-        }
-        return new DoubleVectorDataDense(dv).toSparse();
-    }
-
-    /**
-     * Divide two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
-     * vector is returned.
-     * @param right the other data object to divide by
-     * @return the sum of this data object and the other data object
-     * @throws ValueException if vectors have different lengths
-     */
-    public DoubleVectorData divide(final DoubleVectorData right) throws ValueException
-    {
-        checkSizes(right);
-        double[] dv = new double[this.size()];
-        for (int i = 0; i < dv.length; i++)
-        {
-            dv[i] = this.getSI(i) / right.getSI(i);
-        }
-        if (this instanceof DoubleVectorDataDense && right instanceof DoubleVectorDataDense)
-        {
-            return new DoubleVectorDataDense(dv);
-        }
-        return new DoubleVectorDataDense(dv).toSparse();
-    }
-
-    /**
-     * - Assigns the result of a function to each cell; <tt>x[i] = function(x[i])</tt>. (Iterates downwards from
-     * <tt>[size()-1]</tt> to <tt>[0]</tt>).
-     * <p>
-     * <b>Example:</b>
-     * 
-     * <pre>
-     *   // change each cell to its sine
-     *   matrix =   0.5      1.5      2.5       3.5 
-     *   matrix.assign(cern.jet.math.Functions.sin);
-     *   --&gt;
-     *   matrix ==  0.479426 0.997495 0.598472 -0.350783
-     * 
-     * </pre>
-     * 
-     * For further examples, see the <a href="package-summary.html#FunctionObjects">package doc</a>.
-     * @param f a function object taking as argument the current cell's value.
-     * @return <tt>this</tt> (for convenience only).
-     * @see cern.jet.math.tdouble.DoubleFunctions
-     */
-    /*-
-    public DoubleMatrix1D assign(final cern.colt.function.tdouble.DoubleFunction f) {
-        int nthreads = ConcurrencyUtils.getNumberOfThreads();
-        if ((nthreads > 1) && (size >= ConcurrencyUtils.getThreadsBeginN_1D())) {
-            nthreads = Math.min(nthreads, size);
-            Future<?>[] futures = new Future[nthreads];
-            int k = size / nthreads;
-            for (int j = 0; j < nthreads; j++) {
-                final int firstIdx = j * k;
-                final int lastIdx = (j == nthreads - 1) ? size : firstIdx + k;
-                futures[j] = ConcurrencyUtils.submit(new Runnable() {
-
-                    public void run() {
-                        for (int i = firstIdx; i < lastIdx; i++) {
-                            setQuick(i, f.apply(getQuick(i)));
-                        }
-                    }
-                });
-            }
-            ConcurrencyUtils.waitForCompletion(futures);
-        } else {
-            for (int i = 0; i < size; i++) {
-                setQuick(i, f.apply(getQuick(i)));
-            }
-        }
-        return this;
-    }
-     */
-
 }

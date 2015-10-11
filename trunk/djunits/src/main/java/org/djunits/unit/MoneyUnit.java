@@ -14,7 +14,7 @@ import org.joda.money.CurrencyUnit;
  * version Sep 03, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MoneyUnit extends Unit<MoneyUnit>
+public class MoneyUnit extends LinearUnit<MoneyUnit>
 {
     // TODO allow for static conversion factors between MoneyUnits.
     // TODO allow for dynamic conversion factors between MoneyUnits.

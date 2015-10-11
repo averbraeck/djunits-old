@@ -19,7 +19,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * version May 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class AnglePlaneUnit extends Unit<AnglePlaneUnit>
+public class AnglePlaneUnit extends LinearUnit<AnglePlaneUnit>
 {
     /** */
     private static final long serialVersionUID = 20140607L;

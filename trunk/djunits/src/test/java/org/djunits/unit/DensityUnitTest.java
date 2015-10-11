@@ -19,7 +19,7 @@ import org.junit.Test;
  * initial version Jun 5, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DensityUnitTest extends AbstractUnitTest<DensityUnit>
+public class DensityUnitTest extends AbstractLinearUnitTest<DensityUnit>
 {
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.

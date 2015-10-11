@@ -19,7 +19,7 @@ import org.junit.Test;
  * initial version Jn 6, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class VolumeUnitTest extends AbstractUnitTest<VolumeUnit>
+public class VolumeUnitTest extends AbstractLinearUnitTest<VolumeUnit>
 {
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.

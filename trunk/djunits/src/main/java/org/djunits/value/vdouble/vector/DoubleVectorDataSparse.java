@@ -1,6 +1,10 @@
 package org.djunits.value.vdouble.vector;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
+
+import org.djunits.value.DataType;
+import org.djunits.value.ValueException;
 
 /**
  * <p>
@@ -18,20 +22,20 @@ public class DoubleVectorDataSparse extends DoubleVectorData
     private int[] indices;
 
     /** the length of the vector (padded with 0 after highest index in indices). */
-    private final int length;
+    private final int size;
 
     /**
      * Create a vector with sparse data.
      * @param vectorSI the data to store
      * @param indices the index values of the Vector
-     * @param length the length of the vector (padded with 0 after highest index in indices)
+     * @param size the length of the vector (padded with 0 after highest index in indices)
      */
-    public DoubleVectorDataSparse(final double[] vectorSI, final int[] indices, final int length)
+    public DoubleVectorDataSparse(final double[] vectorSI, final int[] indices, final int size)
     {
-        super();
+        super(DataType.SPARSE);
         this.vectorSI = vectorSI;
         this.indices = indices;
-        this.length = length;
+        this.size = size;
     }
 
     /**
@@ -39,7 +43,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
      */
     public final DoubleVectorDataDense toDense()
     {
-        double[] denseSI = new double[this.length];
+        double[] denseSI = new double[this.size];
         for (int index = 0; index < this.vectorSI.length; index++)
         {
             denseSI[this.indices[index]] = this.vectorSI[index];
@@ -51,7 +55,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
     @Override
     public final int size()
     {
-        return this.length;
+        return this.size;
     }
 
     /** {@inheritDoc} */
@@ -104,7 +108,139 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         System.arraycopy(this.vectorSI, 0, vCopy, 0, this.vectorSI.length);
         int[] iCopy = new int[this.indices.length];
         System.arraycopy(this.indices, 0, iCopy, 0, this.indices.length);
-        return new DoubleVectorDataSparse(vCopy, iCopy, this.length);
+        return new DoubleVectorDataSparse(vCopy, iCopy, this.size);
+    }
+
+    /**
+     * Instantiate a DoubleVectorDataSparse from an array.
+     * @param valuesSI the (SI) values to store
+     * @return the DoubleVectorDataSparse
+     */
+    public static DoubleVectorDataSparse instantiate(final double[] valuesSI)
+    {
+        // determine number of non-null cells
+        int length = (int) Arrays.stream(valuesSI).parallel().filter(d -> d != 0.0).count();
+        double[] sparseSI = new double[length];
+        int[] indices = new int[length];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int i = 0; i < valuesSI.length; i++)
+        {
+            if (valuesSI[i] != 0.0)
+            {
+                sparseSI[count] = valuesSI[i];
+                indices[count] = i;
+                count++;
+            }
+        }
+        return new DoubleVectorDataSparse(sparseSI, indices, valuesSI.length);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void incrementBy(final DoubleVectorData right) throws ValueException
+    {
+        int newLength =
+            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
+                .count();
+        double[] newVectorSI = new double[newLength];
+        int[] newIndices = new int[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        // note: if adding -2 and +2, a 0-value will be part of the new sparse matrix.
+        int count = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
+            {
+                newVectorSI[count] = getSI(i) + right.getSI(i);
+                newIndices[count] = i;
+                count++;
+            }
+        }
+
+        this.indices = newIndices;
+        this.vectorSI = newVectorSI;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final DoubleVectorData right) throws ValueException
+    {
+        int newLength =
+            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
+                .count();
+        double[] newVectorSI = new double[newLength];
+        int[] newIndices = new int[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        // note: if subtracting 2 from 2, a 0-value will be part of the new sparse matrix.
+        int count = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
+            {
+                newVectorSI[count] = getSI(i) - right.getSI(i);
+                newIndices[count] = i;
+                count++;
+            }
+        }
+
+        this.indices = newIndices;
+        this.vectorSI = newVectorSI;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void multiplyBy(final DoubleVectorData right) throws ValueException
+    {
+        int newLength =
+            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
+                .count();
+        double[] newVectorSI = new double[newLength];
+        int[] newIndices = new int[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
+            {
+                newVectorSI[count] = getSI(i) * right.getSI(i);
+                newIndices[count] = i;
+                count++;
+            }
+        }
+
+        this.indices = newIndices;
+        this.vectorSI = newVectorSI;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void divideBy(final DoubleVectorData right) throws ValueException
+    {
+        int newLength =
+            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
+                .count();
+        double[] newVectorSI = new double[newLength];
+        int[] newIndices = new int[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
+            {
+                newVectorSI[count] = getSI(i) / right.getSI(i);
+                newIndices[count] = i;
+                count++;
+            }
+        }
+
+        this.indices = newIndices;
+        this.vectorSI = newVectorSI;
     }
 
     /** {@inheritDoc} */
@@ -115,7 +251,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         final int prime = 31;
         int result = super.hashCode();
         result = prime * result + Arrays.hashCode(this.indices);
-        result = prime * result + this.length;
+        result = prime * result + this.size;
         return result;
     }
 
@@ -133,7 +269,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         DoubleVectorDataSparse other = (DoubleVectorDataSparse) obj;
         if (!Arrays.equals(this.indices, other.indices))
             return false;
-        if (this.length != other.length)
+        if (this.size != other.size)
             return false;
         return true;
     }

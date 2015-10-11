@@ -1,6 +1,5 @@
 package org.djunits.value;
 
-import org.djunits.unit.OffsetUnit;
 import org.djunits.unit.Unit;
 
 /**
@@ -34,12 +33,7 @@ public final class ValueUtil
      */
     public static double expressAsSIUnit(final double value, final Unit<?> unit)
     {
-        if (unit instanceof OffsetUnit<?>)
-        {
-            return (value - ((OffsetUnit<?>) unit).getOffsetToStandardUnit())
-                * unit.getConversionFactorToStandardUnit();
-        }
-        return value * unit.getConversionFactorToStandardUnit();
+        return unit.getScale().toStandardUnit(value);
     }
 
     /**
@@ -50,12 +44,7 @@ public final class ValueUtil
      */
     public static double expressAsUnit(final double siValue, final Unit<?> targetUnit)
     {
-        if (targetUnit instanceof OffsetUnit<?>)
-        {
-            return siValue / targetUnit.getConversionFactorToStandardUnit()
-                + ((OffsetUnit<?>) targetUnit).getOffsetToStandardUnit();
-        }
-        return siValue / targetUnit.getConversionFactorToStandardUnit();
+        return targetUnit.getScale().fromStandardUnit(siValue);
     }
 
 }

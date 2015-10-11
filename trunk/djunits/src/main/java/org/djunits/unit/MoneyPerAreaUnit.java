@@ -12,7 +12,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MoneyPerAreaUnit extends Unit<MoneyPerAreaUnit>
+public class MoneyPerAreaUnit extends LinearUnit<MoneyPerAreaUnit>
 {
     /** */
     private static final long serialVersionUID = 20150905L;

@@ -394,7 +394,6 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
         {
             return new DoubleScalar.Abs<U>(getInUnit() / constant, getUnit());
         }
-
     }
 
     /**

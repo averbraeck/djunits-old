@@ -19,7 +19,7 @@ import org.junit.Test;
  * initial version Jun 4, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class TimeUnitTest extends AbstractUnitTest<TimeUnit>
+public class TimeUnitTest extends AbstractLinearUnitTest<TimeUnit>
 {
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.
