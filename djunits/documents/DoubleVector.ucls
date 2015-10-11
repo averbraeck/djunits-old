@@ -4,7 +4,7 @@
   <class id="1" language="java" name="org.djunits.value.vdouble.vector.DoubleVectorDataSparse" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/DoubleVectorDataSparse.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1194" y="-166"/>    
+    <position height="-1" width="-1" x="771" y="-136"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -14,7 +14,7 @@
   <class id="2" language="java" name="org.djunits.value.vdouble.vector.DoubleVector.Abs" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/DoubleVector.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="782" y="145"/>    
+    <position height="-1" width="-1" x="394" y="165"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -23,285 +23,243 @@
   </class>  
   <class id="3" language="java" name="org.djunits.value.vdouble.vector.AreaVector" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/AreaVector.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1139" y="363"/>    
+    <position height="-1" width="-1" x="771" y="331"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="org.djunits.value.vdouble.vector.AreaVector.Dense" project="djunits" 
-    file="/djunits/src/main/java/org/djunits/value/vdouble/vector/AreaVector.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1060" y="453"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
-  <interface id="5" language="java" name="org.djunits.value.Value" project="djunits" 
+  <interface id="4" language="java" name="org.djunits.value.Value" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/Value.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="956" y="-209"/>    
+    <position height="-1" width="-1" x="533" y="-179"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <class id="6" language="java" name="org.djunits.value.vdouble.vector.MutableAreaVector.Dense" project="djunits" 
-    file="/djunits/src/main/java/org/djunits/value/vdouble/vector/MutableAreaVector.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1053" y="1000"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="org.djunits.value.vdouble.vector.AreaVector.Sparse" project="djunits" 
-    file="/djunits/src/main/java/org/djunits/value/vdouble/vector/AreaVector.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1252" y="455"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="org.djunits.value.AbstractValue" project="djunits" 
+  <class id="5" language="java" name="org.djunits.value.AbstractValue" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/AbstractValue.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="955" y="-115"/>    
+    <position height="-1" width="-1" x="533" y="-85"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <interface id="9" language="java" name="org.djunits.value.vdouble.vector.DoubleVectorInterface" project="djunits" 
+  <interface id="6" language="java" name="org.djunits.value.vdouble.vector.DoubleVectorInterface" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/DoubleVectorInterface.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="601" y="-1"/>    
+    <position height="-1" width="-1" x="272" y="28"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <class id="10" language="java" name="org.djunits.value.vdouble.vector.DoubleVectorDataDense" project="djunits" 
+  <class id="7" language="java" name="org.djunits.value.vdouble.vector.DoubleVectorDataDense" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/DoubleVectorDataDense.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1196" y="28"/>    
+    <position height="-1" width="-1" x="771" y="58"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="org.djunits.value.vdouble.vector.MutableAreaVector" project="djunits" 
+  <class id="8" language="java" name="org.djunits.value.vdouble.vector.MutableAreaVector" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/MutableAreaVector.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1134" y="885"/>    
+    <position height="-1" width="-1" x="771" y="643"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="org.djunits.value.vdouble.vector.MutableDoubleVector" project="djunits" 
+  <class id="9" language="java" name="org.djunits.value.vdouble.vector.MutableDoubleVector" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/MutableDoubleVector.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="957" y="530"/>    
+    <position height="-1" width="-1" x="533" y="329"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="org.djunits.value.vdouble.vector.DoubleVectorData" project="djunits" 
+  <class id="10" language="java" name="org.djunits.value.vdouble.vector.DoubleVectorData" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/DoubleVectorData.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1196" y="-66"/>    
+    <position height="-1" width="-1" x="771" y="-36"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <interface id="14" language="java" name="org.djunits.value.vdouble.vector.MutableDoubleVectorInterface" 
+  <interface id="11" language="java" name="org.djunits.value.vdouble.vector.MutableDoubleVectorInterface" 
     project="djunits" file="/djunits/src/main/java/org/djunits/value/vdouble/vector/MutableDoubleVectorInterface.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="602" y="532"/>    
+    <position height="-1" width="-1" x="273" y="329"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <class id="15" language="java" name="org.djunits.value.vdouble.vector.MutableAreaVector.Sparse" project="djunits" 
-    file="/djunits/src/main/java/org/djunits/value/vdouble/vector/MutableAreaVector.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1284" y="1000"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
-  <class id="16" language="java" name="org.djunits.value.vdouble.vector.MutableDoubleVector.Abs" project="djunits" 
+  <class id="12" language="java" name="org.djunits.value.vdouble.vector.MutableDoubleVector.Abs" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/MutableDoubleVector.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="789" y="674"/>    
+    <position height="-1" width="-1" x="394" y="467"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="org.djunits.value.vdouble.vector.DoubleVector.Rel" project="djunits" 
+  <class id="13" language="java" name="org.djunits.value.vdouble.vector.DoubleVector.Rel" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/DoubleVector.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1133" y="134"/>    
+    <position height="-1" width="-1" x="771" y="166"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="org.djunits.value.vdouble.vector.MutableDoubleVector.Rel" project="djunits" 
+  <class id="14" language="java" name="org.djunits.value.vdouble.vector.MutableDoubleVector.Rel" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/MutableDoubleVector.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1134" y="673"/>    
+    <position height="-1" width="-1" x="771" y="467"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="org.djunits.value.vdouble.vector.DoubleVector" project="djunits" 
+  <class id="15" language="java" name="org.djunits.value.vdouble.vector.DoubleVector" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/vector/DoubleVector.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="952" y="-2"/>    
+    <position height="-1" width="-1" x="533" y="28"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <generalization id="20">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="21">    
-    <bendpoint x="864" y="56"/>    
+  <class id="16" language="java" name="org.djunits.value.vdouble.vector.TypedDoubleVectorRel" project="djunits" 
+    file="/djunits/src/main/java/org/djunits/value/vdouble/vector/TypedDoubleVectorRel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="771" y="247"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="org.djunits.value.vdouble.vector.MutableTypedDoubleVectorRel" project="djunits" 
+    file="/djunits/src/main/java/org/djunits/value/vdouble/vector/MutableTypedDoubleVectorRel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="771" y="548"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <generalization id="18">    
+    <bendpoint x="441" y="86"/>    
     <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="19"/>  
-  </generalization>  
-  <nesting id="22">    
-    <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="15"/>  
-  </nesting>  
-  <generalization id="23">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="13"/>  
   </generalization>  
-  <nesting id="24">    
-    <end type="SOURCE" refId="12"/>    
+  <generalization id="19">    
+    <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="16"/>  
-  </nesting>  
-  <nesting id="25">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="7"/>  
-  </nesting>  
-  <generalization id="26">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="8"/>  
   </generalization>  
-  <realization id="27">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="14"/>  
-  </realization>  
-  <generalization id="28">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <nesting id="29">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </nesting>  
-  <generalization id="30">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <nesting id="31">    
-    <bendpoint x="881" y="79"/>    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="2"/>  
-  </nesting>  
-  <generalization id="32">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <generalization id="33">    
-    <bendpoint x="1031" y="93"/>    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="19"/>  
-  </generalization>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <nesting id="36">    
-    <bendpoint x="1069" y="72"/>    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="17"/>  
-  </nesting>  
-  <generalization id="37">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <realization id="38">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <generalization id="39">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="17"/>  
-  </generalization>  
-  <realization id="40">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
-  <generalization id="41">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="19"/>  
-  </generalization>  
-  <nesting id="42">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="6"/>  
-  </nesting>  
-  <association id="43">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="44" name="data"/>      
-      <multiplicity id="45" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="false" multiplicity="false"/>  
-  </association>  
-  <generalization id="46">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="18"/>  
-  </generalization>  
-  <nesting id="47">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="18"/>  
-  </nesting>  
-  <generalization id="48">    
+  <generalization id="20">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="9"/>  
   </generalization>  
+  <generalization id="21">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="22">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <nesting id="23">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="12"/>  
+  </nesting>  
+  <realization id="24">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="25">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <generalization id="26">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="27">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <generalization id="28">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <realization id="29">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <association id="31">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="32" name="data"/>      
+      <multiplicity id="33" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <nesting id="34">    
+    <bendpoint x="458" y="109"/>    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="2"/>  
+  </nesting>  
+  <generalization id="35">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="36">    
+    <bendpoint x="608" y="123"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <nesting id="38">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="14"/>  
+  </nesting>  
+  <generalization id="39">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <nesting id="40">    
+    <bendpoint x="646" y="102"/>    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="13"/>  
+  </nesting>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="false" package="false" protected="false" private="false" static="false"/>    
