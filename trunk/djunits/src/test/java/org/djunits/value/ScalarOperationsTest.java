@@ -16,7 +16,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Find all multiplyBy and divideBy operations and prove the type correctness.
+ * Find all plus, minus, multiplyBy and divideBy operations and prove the type correctness.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
