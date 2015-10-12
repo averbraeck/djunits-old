@@ -145,6 +145,16 @@ public interface MutableTimeVector
         {
             return new Time.Abs(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute Time vector.
+         */
+        public final MutableTimeVector.Rel toRel()
+        {
+            return new MutableTimeVector.Rel(getData(), getUnit());
+        }
+
     }
 
     /* ============================================================================================ */
@@ -263,6 +273,16 @@ public interface MutableTimeVector
         {
             return new Time.Rel(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative Time vector.
+         */
+        public final MutableTimeVector.Abs toAbs()
+        {
+            return new MutableTimeVector.Abs(getData(), getUnit());
+        }
+
     }
 
 }

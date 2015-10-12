@@ -151,6 +151,16 @@ public interface TemperatureVector
         {
             return new Temperature.Abs(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute Temperature vector.
+         */
+        public final TemperatureVector.Rel toRel()
+        {
+            return new TemperatureVector.Rel(getData(), getUnit());
+        }
+
     }
 
     /* ============================================================================================ */
@@ -273,6 +283,16 @@ public interface TemperatureVector
         {
             return new Temperature.Rel(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative Temperature vector.
+         */
+        public final TemperatureVector.Abs toAbs()
+        {
+            return new TemperatureVector.Abs(getData(), getUnit());
+        }
+
     }
 
 }

@@ -144,6 +144,16 @@ public interface TimeVector
         {
             return new Time.Abs(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute Time vector.
+         */
+        public final TimeVector.Rel toRel()
+        {
+            return new TimeVector.Rel(getData(), getUnit());
+        }
+
     }
 
     /* ============================================================================================ */
@@ -262,6 +272,16 @@ public interface TimeVector
         {
             return new Time.Rel(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative Time vector.
+         */
+        public final TimeVector.Abs toAbs()
+        {
+            return new TimeVector.Abs(getData(), getUnit());
+        }
+
     }
 
 }
