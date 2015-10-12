@@ -146,6 +146,17 @@ public interface Mutable%Type%Vector
         {
             return new %Type%.Abs(getInUnit(index, getUnit()), getUnit());
         }
+        
+        /**
+         * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute %Type% vector.
+         */
+        public final Mutable%Type%Vector.Rel toRel()
+        {
+            return new Mutable%Type%Vector.Rel(getData(), getUnit());
+        }
+        
+%FORMULAS%%Type%.Abs%
     }
 
     /* ============================================================================================ */
@@ -264,6 +275,17 @@ public interface Mutable%Type%Vector
         {
             return new %Type%.Rel(getInUnit(index, getUnit()), getUnit());
         }
+        
+        /**
+         * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative %Type% vector.
+         */
+        public final Mutable%Type%Vector.Abs toAbs()
+        {
+            return new Mutable%Type%Vector.Abs(getData(), getUnit());
+        }
+        
+%FORMULAS%%Type%.Rel%
     }
 
 }
