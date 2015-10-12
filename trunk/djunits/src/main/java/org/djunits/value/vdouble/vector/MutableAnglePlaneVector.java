@@ -148,6 +148,16 @@ public interface MutableAnglePlaneVector
         {
             return new AnglePlane.Abs(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute AnglePlane vector.
+         */
+        public final MutableAnglePlaneVector.Rel toRel()
+        {
+            return new MutableAnglePlaneVector.Rel(getData(), getUnit());
+        }
+
     }
 
     /* ============================================================================================ */
@@ -269,6 +279,16 @@ public interface MutableAnglePlaneVector
         {
             return new AnglePlane.Rel(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative AnglePlane vector.
+         */
+        public final MutableAnglePlaneVector.Abs toAbs()
+        {
+            return new MutableAnglePlaneVector.Abs(getData(), getUnit());
+        }
+
     }
 
 }

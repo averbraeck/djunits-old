@@ -151,6 +151,16 @@ public interface DimensionlessVector
         {
             return new Dimensionless.Abs(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute Dimensionless vector.
+         */
+        public final DimensionlessVector.Rel toRel()
+        {
+            return new DimensionlessVector.Rel(getData(), getUnit());
+        }
+
     }
 
     /* ============================================================================================ */
@@ -275,6 +285,16 @@ public interface DimensionlessVector
         {
             return new Dimensionless.Rel(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative Dimensionless vector.
+         */
+        public final DimensionlessVector.Abs toAbs()
+        {
+            return new DimensionlessVector.Abs(getData(), getUnit());
+        }
+
     }
 
 }

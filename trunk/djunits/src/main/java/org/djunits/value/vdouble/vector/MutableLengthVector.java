@@ -147,6 +147,16 @@ public interface MutableLengthVector
         {
             return new Length.Abs(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute Length vector.
+         */
+        public final MutableLengthVector.Rel toRel()
+        {
+            return new MutableLengthVector.Rel(getData(), getUnit());
+        }
+
     }
 
     /* ============================================================================================ */
@@ -266,6 +276,16 @@ public interface MutableLengthVector
         {
             return new Length.Rel(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative Length vector.
+         */
+        public final MutableLengthVector.Abs toAbs()
+        {
+            return new MutableLengthVector.Abs(getData(), getUnit());
+        }
+
     }
 
 }

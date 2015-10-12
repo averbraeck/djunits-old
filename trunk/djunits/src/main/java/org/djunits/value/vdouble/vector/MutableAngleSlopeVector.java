@@ -148,6 +148,16 @@ public interface MutableAngleSlopeVector
         {
             return new AngleSlope.Abs(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
+         * @return a relative version of this absolute AngleSlope vector.
+         */
+        public final MutableAngleSlopeVector.Rel toRel()
+        {
+            return new MutableAngleSlopeVector.Rel(getData(), getUnit());
+        }
+
     }
 
     /* ============================================================================================ */
@@ -269,6 +279,16 @@ public interface MutableAngleSlopeVector
         {
             return new AngleSlope.Rel(getInUnit(index, getUnit()), getUnit());
         }
+
+        /**
+         * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
+         * @return an absolute version of this relative AngleSlope vector.
+         */
+        public final MutableAngleSlopeVector.Abs toAbs()
+        {
+            return new MutableAngleSlopeVector.Abs(getData(), getUnit());
+        }
+
     }
 
 }
