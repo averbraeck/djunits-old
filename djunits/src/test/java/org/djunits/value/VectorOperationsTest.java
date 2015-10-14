@@ -7,7 +7,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
@@ -83,7 +85,6 @@ public class VectorOperationsTest
             IllegalArgumentException, ClassNotFoundException, ValueException
     {
         final String upperType = doubleType ? "Vector" : "FloatVector";
-        final String type = upperType.toLowerCase();
         String doubleOrFloat = doubleType ? "double" : "float";
         // get the interfaces such as org.djunits.value.vdouble.scalar.Time
         for (String vectorName : CLASSNAMES_ABSREL)
@@ -94,7 +95,7 @@ public class VectorOperationsTest
                 Class<?> vectorClassAbsRel = null;
                 // get the subClassName implementation of that class
                 String className = "org.djunits.value.v" + doubleOrFloat + ".vector." + vectorName + upperType + subClassName;
-                System.err.println("Looking up class " + className);
+                // System.out.println("Looking up class " + className);
                 vectorClassAbsRel = Class.forName(className);
                 testMethods(vectorClassAbsRel, isAbs, doubleType);
                 testAbsRelConversion(vectorClassAbsRel, isAbs, doubleType, DataType.DENSE);
@@ -221,6 +222,10 @@ public class VectorOperationsTest
                 testMultiplyOrDivideMethodAbsRel(scalarClassAbsRel, isAbs, method, false, doubleType);
             }
         }
+        testConstructors(scalarClassAbsRel, isAbs, doubleType, true, DataType.DENSE);
+        testConstructors(scalarClassAbsRel, isAbs, doubleType, true, DataType.SPARSE);
+        testConstructors(scalarClassAbsRel, isAbs, doubleType, false, DataType.DENSE);
+        testConstructors(scalarClassAbsRel, isAbs, doubleType, false, DataType.SPARSE);
         testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, true, DataType.DENSE);
         testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, true, DataType.SPARSE);
         testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, false, DataType.DENSE);
@@ -535,6 +540,175 @@ public class VectorOperationsTest
             fail("Result is neither Absolute, nor Relative");
         }
         return result;
+    }
+
+    /**
+     * @param vectorClass the class to test
+     * @param abs abs or rel class
+     * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
+     * @param mutable boolean; if true; perform test for mutable version; if false; perform test for non-mutable version
+     * @param dataType DataType; Dense or Sparse
+     * @throws NoSuchMethodException on class or method resolving error
+     * @throws InstantiationException on class or method resolving error
+     * @throws IllegalAccessException on class or method resolving error
+     * @throws InvocationTargetException on class or method resolving error
+     * @throws NoSuchFieldException on class or method resolving error
+     * @throws ClassNotFoundException
+     * @throws ValueException
+     */
+    private void testConstructors(final Class<?> vectorClass, final boolean abs, final boolean doubleType, boolean mutable,
+            DataType dataType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
+            InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
+    {
+        double[] doubleValue = { 1.23456, 2.34567, 3.45678 };
+        float[] floatValue = { 1.23456f, 2.34567f, 3.45678f };
+        Object value = doubleType ? doubleValue : floatValue;
+        findAndTestConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), dataType },
+                abs, doubleType, value);
+        if (doubleType)
+        {
+            List<Double> list = new ArrayList<Double>();
+            for (int i = 0; i < doubleValue.length; i++)
+            {
+                list.add(doubleValue[i]);
+            }
+            findAndTestConstructor(vectorClass, new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), dataType },
+                    abs, doubleType, value);
+            // Construct a list of scalar objects
+            // What is the corresponding Scalar type?
+            String scalarClassName = vectorClass.getName();
+            //System.out.println("name is " + scalarClassName);
+            scalarClassName = scalarClassName.replaceFirst("Vector", "");
+            //System.out.println("name is " + scalarClassName);
+            scalarClassName = scalarClassName.replaceFirst("vector", "scalar");
+            //System.out.println("name is " + scalarClassName);
+            Class<?> scalarClassAbsRel = Class.forName(scalarClassName);
+            //System.out.println("class is " + scalarClassAbsRel);
+            Constructor<?> constructor =
+                    scalarClassAbsRel.getConstructor(new Class<?>[] { double.class, getUnitClass(vectorClass) });
+            List<Object> objectList = new ArrayList<Object>();
+            for (Double d : list)
+            {
+                objectList.add(constructor.newInstance(d, getSIUnitInstance(getUnitClass(vectorClass))));
+            }
+            findAndTestConstructor(vectorClass, new Object[] { objectList, dataType }, abs, doubleType, value);
+            // Construct an array of scalar objects
+            Object[] objectArray;
+            if (abs)
+            {
+                objectArray = new DoubleScalar.Abs[objectList.size()];
+                for (int i = 0; i < objectList.size(); i++)
+                {
+                    objectArray[i] = objectList.get(i);
+                }
+            }
+            else
+            {
+                objectArray = new DoubleScalar.Rel[objectList.size()];
+                for (int i = 0; i < objectList.size(); i++)
+                {
+                    objectArray[i] = objectList.get(i);
+                }
+            }
+            // FIXME - FAILS findAndTestConstructor(vectorClass, new Object[] { objectArray, dataType }, abs, doubleType, value);
+        }
+        else
+        {
+            List<Float> list = new ArrayList<Float>();
+            for (int i = 0; i < floatValue.length; i++)
+            {
+                list.add(floatValue[i]);
+            }
+            findAndTestConstructor(vectorClass, new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), dataType },
+                    abs, doubleType, value);
+            // TODO add and convert all other stuff from the Float version 
+        }
+    }
+
+    /**
+     * Return a String with detailed information about a Constructor.
+     * @param constructor Constructor&lt;?&gt;; the Constructor
+     * @return String
+     */
+    private String constructorToString(Constructor<?> constructor)
+    {
+        StringBuilder result = new StringBuilder();
+        String separator = "(";
+        for (Class<?> parType : constructor.getParameterTypes())
+        {
+            result.append(separator + parType);
+            separator = ", ";
+        }
+        result.append(")");
+        return result.toString();
+    }
+
+    /**
+     * Execute a constructor and check the result.
+     * @param vectorClass Class&lt;?&gt;; the class to which the constructor belongs
+     * @param args Object[]; arguments to provide to the constructor
+     * @param abs boolean; if true; the result of the constructor is expected to be Absolute; if false; the result of the
+     *            constructor is expected to be relative
+     * @param doubleType boolean; if true; the args argument is array of double; of false; the args argument is array of float
+     * @param expectedResult Object; either array of double, or array of float
+     * @throws NoSuchMethodException
+     * @throws SecurityException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException
+     * @throws ValueException
+     */
+    private void findAndTestConstructor(final Class<?> vectorClass, final Object[] args, final boolean abs,
+            final boolean doubleType, final Object expectedResult) throws NoSuchMethodException, SecurityException,
+            InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ValueException
+    {
+        Class<?>[] parameterTypes = new Class<?>[args.length];
+        for (int i = 0; i < args.length; i++)
+        {
+            Class<?> c = args[i].getClass();
+            if (c.isAssignableFrom(double[].class))
+            {
+                c = double[].class;
+            }
+            else if (c.isAssignableFrom(float[].class))
+            {
+                c = float[].class;
+            }
+            parameterTypes[i] = c;
+            System.out.println("parameter type[" + i + "] is " + c);
+        }
+        Constructor<?> constructor = null;
+        for (Constructor<?> c : vectorClass.getConstructors())
+        {
+            System.out.print("Found constructor for " + vectorClass + " " + constructorToString(c));
+            Class<?>[] parTypes = c.getParameterTypes();
+            boolean compatible = parTypes.length == args.length;
+            for (int i = 0; i < parTypes.length; i++)
+            {
+                Class<?> parType = parTypes[i];
+                if (compatible && !parType.isAssignableFrom(parameterTypes[i]))
+                {
+                    compatible = false;
+                }
+            }
+            if (compatible)
+            {
+                System.out.println(" MATCH");
+                constructor = c;
+            }
+            else
+            {
+                System.out.println("");
+            }
+        }
+        // Constructor<?> constructor = vectorClass.getConstructor(parameterTypes);
+        if (null == constructor)
+        {
+            fail("Cannot find suitable constructor");
+        }
+        Object construction = constructor.newInstance(args);
+        verifyAbsRelPrecisionAndValues(abs, doubleType, construction, expectedResult, 0.0001);
     }
 
     /**
@@ -954,6 +1128,10 @@ public class VectorOperationsTest
         }
     }
 
+    /**
+     * Prove (?) that order of items does not change in Arrays.stream(a).parallel().toArray().
+     * @param args String[]; command line arguments; not used
+     */
     public static void main(String[] args)
     {
         int size = 100000000;
