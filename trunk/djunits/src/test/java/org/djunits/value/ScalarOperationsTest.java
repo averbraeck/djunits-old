@@ -676,7 +676,7 @@ public class ScalarOperationsTest
             Constructor<?> unitConstructor =
                     unitClass.getConstructor(String.class, String.class, UnitSystem.class, unitClass, double.class);
             Object newUnit = unitConstructor.newInstance("7fullName", "7abbr", unitSystem, referenceUnit, 7d);
-            System.out.println("new unit prints like " + newUnit);
+            //System.out.println("new unit prints like " + newUnit);
             if (doubleType)
             {
                 compatibleRight =
@@ -713,8 +713,8 @@ public class ScalarOperationsTest
                 assertEquals("Result of mixed operation", 8 * value,
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
                 // Swap the operands
-                System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
-                        + left.getClass().getName());
+                //System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
+                //        + left.getClass().getName());
                 plus = scalarClass.getDeclaredMethod("plus", new Class[] { compatibleRight.getClass() });
                 result = plus.invoke(compatibleRight, left);
                 assertEquals("Result of mixed operation", 8 * value,
@@ -728,7 +728,7 @@ public class ScalarOperationsTest
                             absScalarClass
                                     .getConstructor(doubleType ? double.class : float.class, getUnitClass(absScalarClass));
                     Object absOperand = null;
-                    System.out.println("unit is " + getUnitClass(absScalarClass));
+                    //System.out.println("unit is " + getUnitClass(absScalarClass));
                     if (doubleType)
                     {
                         absOperand = absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
@@ -777,7 +777,7 @@ public class ScalarOperationsTest
             Constructor<?> absScalarConstructor =
                     absScalarClass.getConstructor(doubleType ? double.class : float.class, getUnitClass(absScalarClass));
             Object absOperand = null;
-            System.out.println("unit is " + getUnitClass(absScalarClass));
+            //System.out.println("unit is " + getUnitClass(absScalarClass));
             if (doubleType)
             {
                 absOperand = absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
