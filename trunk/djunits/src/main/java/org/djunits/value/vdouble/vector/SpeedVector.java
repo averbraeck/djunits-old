@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.SpeedUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Speed;
 
@@ -28,46 +28,46 @@ public class SpeedVector extends TypedDoubleVectorRel<SpeedUnit, SpeedVector, Mu
      * Construct a new Relative Immutable Double SpeedVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double SpeedVector
      * @param unit U; the unit of the new Relative Immutable Double SpeedVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public SpeedVector(final double[] values, final SpeedUnit unit, final DataType dataType) throws ValueException
+    public SpeedVector(final double[] values, final SpeedUnit unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double SpeedVector.
      * @param values List; the values of the entries in the new Relative Immutable Double SpeedVector
      * @param unit U; the unit of the new Relative Immutable Double SpeedVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public SpeedVector(final List<Double> values, final SpeedUnit unit, final DataType dataType) throws ValueException
+    public SpeedVector(final List<Double> values, final SpeedUnit unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double SpeedVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double SpeedVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public SpeedVector(final Speed[] values, final DataType dataType) throws ValueException
+    public SpeedVector(final Speed[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double SpeedVector.
      * @param values List; the values of the entries in the new Relative Immutable Double SpeedVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public SpeedVector(final List<Speed> values, final DataType dataType) throws ValueException
+    public SpeedVector(final List<Speed> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -75,13 +75,13 @@ public class SpeedVector extends TypedDoubleVectorRel<SpeedUnit, SpeedVector, Mu
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            SpeedVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public SpeedVector(final SortedMap<Integer, Speed> values, final int length, final DataType dataType)
+    public SpeedVector(final SortedMap<Integer, Speed> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -89,13 +89,13 @@ public class SpeedVector extends TypedDoubleVectorRel<SpeedUnit, SpeedVector, Mu
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double SpeedVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double SpeedVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public SpeedVector(final SortedMap<Integer, Double> values, final SpeedUnit unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.ElectricalPotentialUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.ElectricalPotential;
 
@@ -30,50 +30,50 @@ public class ElectricalPotentialVector
      * Construct a new Relative Immutable Double ElectricalPotentialVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double ElectricalPotentialVector
      * @param unit U; the unit of the new Relative Immutable Double ElectricalPotentialVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalPotentialVector(final double[] values, final ElectricalPotentialUnit unit, final DataType dataType)
+    public ElectricalPotentialVector(final double[] values, final ElectricalPotentialUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double ElectricalPotentialVector.
      * @param values List; the values of the entries in the new Relative Immutable Double ElectricalPotentialVector
      * @param unit U; the unit of the new Relative Immutable Double ElectricalPotentialVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalPotentialVector(final List<Double> values, final ElectricalPotentialUnit unit,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double ElectricalPotentialVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
      *            ElectricalPotentialVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public ElectricalPotentialVector(final ElectricalPotential[] values, final DataType dataType) throws ValueException
+    public ElectricalPotentialVector(final ElectricalPotential[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double ElectricalPotentialVector.
      * @param values List; the values of the entries in the new Relative Immutable Double ElectricalPotentialVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public ElectricalPotentialVector(final List<ElectricalPotential> values, final DataType dataType)
+    public ElectricalPotentialVector(final List<ElectricalPotential> values, final StorageType storageType)
         throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -81,13 +81,13 @@ public class ElectricalPotentialVector
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            ElectricalPotentialVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalPotentialVector(final SortedMap<Integer, ElectricalPotential> values, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -95,13 +95,13 @@ public class ElectricalPotentialVector
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double ElectricalPotentialVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double ElectricalPotentialVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalPotentialVector(final SortedMap<Integer, Double> values, final ElectricalPotentialUnit unit,
-        final int length, final DataType dataType) throws ValueException
+        final int length, final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

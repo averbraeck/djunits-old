@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.FrequencyUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Frequency;
 
@@ -29,48 +29,48 @@ public class FrequencyVector extends
      * Construct a new Relative Immutable Double FrequencyVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double FrequencyVector
      * @param unit U; the unit of the new Relative Immutable Double FrequencyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FrequencyVector(final double[] values, final FrequencyUnit unit, final DataType dataType)
+    public FrequencyVector(final double[] values, final FrequencyUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double FrequencyVector.
      * @param values List; the values of the entries in the new Relative Immutable Double FrequencyVector
      * @param unit U; the unit of the new Relative Immutable Double FrequencyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FrequencyVector(final List<Double> values, final FrequencyUnit unit, final DataType dataType)
+    public FrequencyVector(final List<Double> values, final FrequencyUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double FrequencyVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double FrequencyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FrequencyVector(final Frequency[] values, final DataType dataType) throws ValueException
+    public FrequencyVector(final Frequency[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double FrequencyVector.
      * @param values List; the values of the entries in the new Relative Immutable Double FrequencyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FrequencyVector(final List<Frequency> values, final DataType dataType) throws ValueException
+    public FrequencyVector(final List<Frequency> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -78,13 +78,13 @@ public class FrequencyVector extends
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            FrequencyVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FrequencyVector(final SortedMap<Integer, Frequency> values, final int length, final DataType dataType)
+    public FrequencyVector(final SortedMap<Integer, Frequency> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -92,13 +92,13 @@ public class FrequencyVector extends
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double FrequencyVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double FrequencyVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FrequencyVector(final SortedMap<Integer, Double> values, final FrequencyUnit unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

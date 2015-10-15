@@ -8,7 +8,7 @@ import static org.junit.Assert.fail;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.Unit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.junit.Test;
@@ -84,7 +84,7 @@ public class DoubleVectorSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
             DoubleVector.Abs<TemperatureUnit> dv =
-                new DoubleVector.Abs<TemperatureUnit>(value, tempUnit, DataType.SPARSE);
+                new DoubleVector.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -109,7 +109,7 @@ public class DoubleVectorSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
             MutableDoubleVector.Abs<TemperatureUnit> dv =
-                new MutableDoubleVector.Abs<TemperatureUnit>(value, tempUnit, DataType.SPARSE);
+                new MutableDoubleVector.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -134,7 +134,7 @@ public class DoubleVectorSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[] value = data(3, 38.0);
             DoubleVector.Abs<TemperatureUnit> temperatureDV =
-                new DoubleVector.Abs<TemperatureUnit>(value, tempUnit, DataType.SPARSE);
+                new DoubleVector.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
@@ -145,7 +145,7 @@ public class DoubleVectorSparseTest
                 assertEquals("Value should match", value[index], out[index], 0.001);
             }
             MutableDoubleVector.Abs<TemperatureUnit> mdv =
-                new MutableDoubleVector.Abs<TemperatureUnit>(value, tempUnit, DataType.SPARSE);
+                new MutableDoubleVector.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
             mdv.setSI(0, 73);
             double safe = value[0];
@@ -156,11 +156,11 @@ public class DoubleVectorSparseTest
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
             DoubleVector.Abs<TemperatureUnit> temperature2DV =
                 new DoubleVector.Abs<TemperatureUnit>(temperatureDV.getValuesSI(), TemperatureUnit.KELVIN,
-                    DataType.SPARSE);
+                    StorageType.SPARSE);
             assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
             assertTrue("Value is Absolute", temperatureDV.isAbsolute());
             assertFalse("Value is not Relative", temperatureDV.isRelative());
-            temperatureDV = new DoubleVector.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN, DataType.SPARSE);
+            temperatureDV = new DoubleVector.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, TemperatureUnit.KELVIN, true);
             out = temperatureDV.getValuesSI();
             for (int index = 0; index < value.length; index++)
@@ -172,7 +172,7 @@ public class DoubleVectorSparseTest
             {
                 scalar[index] = new DoubleScalar.Abs<TemperatureUnit>(value[index], TemperatureUnit.DEGREE_CELSIUS);
             }
-            temperatureDV = new DoubleVector.Abs<TemperatureUnit>(scalar, DataType.SPARSE);
+            temperatureDV = new DoubleVector.Abs<TemperatureUnit>(scalar, StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV
                 .cardinality());
@@ -203,7 +203,7 @@ public class DoubleVectorSparseTest
             double[] value2 = data(3, 38.0);
             value2[0] = 12345;
             DoubleVector.Abs<TemperatureUnit> dv =
-                new DoubleVector.Abs<TemperatureUnit>(value, tempUnit, DataType.SPARSE);
+                new DoubleVector.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             DoubleVector.Abs<TemperatureUnit> dvCopy = dv;
             MutableDoubleVector.Abs<TemperatureUnit> mdv = dv.mutable();
             checkContentsAndType(dv, value, 0.001, tempUnit, true);
@@ -280,7 +280,7 @@ public class DoubleVectorSparseTest
             MutableDoubleVector.Abs<LengthUnit> dv;
             try
             {
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.abs();
                 MathTester.tester(input, "abs", dv, 0.001, new DoubleToDouble()
                 {
@@ -290,7 +290,7 @@ public class DoubleVectorSparseTest
                         return Math.abs(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.acos();
                 MathTester.tester(input, "acos", dv, 0.001, new DoubleToDouble()
                 {
@@ -300,7 +300,7 @@ public class DoubleVectorSparseTest
                         return Math.acos(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.asin();
                 MathTester.tester(input, "asin", dv, 0.001, new DoubleToDouble()
                 {
@@ -310,7 +310,7 @@ public class DoubleVectorSparseTest
                         return Math.asin(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.atan();
                 MathTester.tester(input, "atan", dv, 0.001, new DoubleToDouble()
                 {
@@ -320,7 +320,7 @@ public class DoubleVectorSparseTest
                         return Math.atan(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.cbrt();
                 MathTester.tester(input, "cbrt", dv, 0.001, new DoubleToDouble()
                 {
@@ -330,7 +330,7 @@ public class DoubleVectorSparseTest
                         return Math.cbrt(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.ceil();
                 MathTester.tester(input, "ceil", dv, 0.001, new DoubleToDouble()
                 {
@@ -340,7 +340,7 @@ public class DoubleVectorSparseTest
                         return Math.ceil(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.cos();
                 MathTester.tester(input, "cos", dv, 0.001, new DoubleToDouble()
                 {
@@ -350,7 +350,7 @@ public class DoubleVectorSparseTest
                         return Math.cos(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.cosh();
                 MathTester.tester(input, "cosh", dv, 0.001, new DoubleToDouble()
                 {
@@ -360,7 +360,7 @@ public class DoubleVectorSparseTest
                         return Math.cosh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.exp();
                 MathTester.tester(input, "exp", dv, 0.001, new DoubleToDouble()
                 {
@@ -370,7 +370,7 @@ public class DoubleVectorSparseTest
                         return Math.exp(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.expm1();
                 MathTester.tester(input, "expm1", dv, 0.001, new DoubleToDouble()
                 {
@@ -380,7 +380,7 @@ public class DoubleVectorSparseTest
                         return Math.expm1(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.floor();
                 MathTester.tester(input, "floor", dv, 0.001, new DoubleToDouble()
                 {
@@ -390,7 +390,7 @@ public class DoubleVectorSparseTest
                         return Math.floor(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.log();
                 MathTester.tester(input, "log", dv, 0.001, new DoubleToDouble()
                 {
@@ -400,7 +400,7 @@ public class DoubleVectorSparseTest
                         return Math.log(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.log10();
                 MathTester.tester(input, "log10", dv, 0.001, new DoubleToDouble()
                 {
@@ -410,7 +410,7 @@ public class DoubleVectorSparseTest
                         return Math.log10(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.log1p();
                 MathTester.tester(input, "log1p", dv, 0.001, new DoubleToDouble()
                 {
@@ -423,7 +423,7 @@ public class DoubleVectorSparseTest
                 for (int i = -10; i <= 10; i++)
                 {
                     final double exponent = i * 0.5d;
-                    dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                    dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                     dv.pow(exponent);
                     MathTester.tester(input, "pow(" + exponent + ")", dv, 0.001, new DoubleToDouble()
                     {
@@ -434,7 +434,7 @@ public class DoubleVectorSparseTest
                         }
                     });
                 }
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.rint();
                 MathTester.tester(input, "rint", dv, 0.001, new DoubleToDouble()
                 {
@@ -444,7 +444,7 @@ public class DoubleVectorSparseTest
                         return Math.rint(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.round();
                 MathTester.tester(input, "round", dv, 0.001, new DoubleToDouble()
                 {
@@ -454,7 +454,7 @@ public class DoubleVectorSparseTest
                         return Math.round(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.signum();
                 MathTester.tester(input, "signum", dv, 0.001, new DoubleToDouble()
                 {
@@ -464,7 +464,7 @@ public class DoubleVectorSparseTest
                         return Math.signum(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.sin();
                 MathTester.tester(input, "sin", dv, 0.001, new DoubleToDouble()
                 {
@@ -474,7 +474,7 @@ public class DoubleVectorSparseTest
                         return Math.sin(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.sinh();
                 MathTester.tester(input, "sinh", dv, 0.001, new DoubleToDouble()
                 {
@@ -484,7 +484,7 @@ public class DoubleVectorSparseTest
                         return Math.sinh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.sqrt();
                 MathTester.tester(input, "sqrt", dv, 0.001, new DoubleToDouble()
                 {
@@ -494,7 +494,7 @@ public class DoubleVectorSparseTest
                         return Math.sqrt(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.tan();
                 MathTester.tester(input, "tan", dv, 0.001, new DoubleToDouble()
                 {
@@ -504,7 +504,7 @@ public class DoubleVectorSparseTest
                         return Math.tan(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.tanh();
                 MathTester.tester(input, "tanh", dv, 0.001, new DoubleToDouble()
                 {
@@ -514,7 +514,7 @@ public class DoubleVectorSparseTest
                         return Math.tanh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.toDegrees();
                 MathTester.tester(input, "toDegrees", dv, 0.001, new DoubleToDouble()
                 {
@@ -524,7 +524,7 @@ public class DoubleVectorSparseTest
                         return Math.toDegrees(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.toRadians();
                 MathTester.tester(input, "toRadians", dv, 0.001, new DoubleToDouble()
                 {
@@ -534,7 +534,7 @@ public class DoubleVectorSparseTest
                         return Math.toRadians(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.inv();
                 MathTester.tester(input, "inv", dv, 0.001, new DoubleToDouble()
                 {
@@ -564,9 +564,9 @@ public class DoubleVectorSparseTest
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
             DoubleVector.Abs<LengthUnit> left =
-                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, DataType.SPARSE);
+                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
-                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleVector.Abs<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -592,9 +592,9 @@ public class DoubleVectorSparseTest
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
             DoubleVector.Abs<LengthUnit> left =
-                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, DataType.SPARSE);
+                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
-                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleVector.Abs<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -620,9 +620,9 @@ public class DoubleVectorSparseTest
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
             DoubleVector.Abs<LengthUnit> left =
-                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, DataType.SPARSE);
+                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
-                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleVector.Abs<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -648,9 +648,9 @@ public class DoubleVectorSparseTest
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
             DoubleVector.Abs<LengthUnit> left =
-                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, DataType.SPARSE);
+                new DoubleVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
-                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleVector.Abs<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -675,7 +675,7 @@ public class DoubleVectorSparseTest
         try
         {
             // null array
-            new DoubleVector.Abs<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, DataType.SPARSE);
+            new DoubleVector.Abs<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -698,7 +698,7 @@ public class DoubleVectorSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
             DoubleVector.Rel<TemperatureUnit> dv =
-                new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, DataType.SPARSE);
+                new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -723,7 +723,7 @@ public class DoubleVectorSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
             MutableDoubleVector.Rel<TemperatureUnit> dv =
-                new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, DataType.SPARSE);
+                new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -748,7 +748,7 @@ public class DoubleVectorSparseTest
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[] value = data(3, 38.0);
             DoubleVector.Rel<TemperatureUnit> temperatureDV =
-                new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, DataType.SPARSE);
+                new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
@@ -759,7 +759,7 @@ public class DoubleVectorSparseTest
                 assertEquals("Value should match", value[index], out[index], 0.001);
             }
             MutableDoubleVector.Rel<TemperatureUnit> mdv =
-                new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, DataType.SPARSE);
+                new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
             mdv.setSI(0, 73);
             double safe = value[0];
@@ -770,11 +770,11 @@ public class DoubleVectorSparseTest
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
             DoubleVector.Rel<TemperatureUnit> temperature2DV =
                 new DoubleVector.Rel<TemperatureUnit>(temperatureDV.getValuesSI(), TemperatureUnit.KELVIN,
-                    DataType.SPARSE);
+                    StorageType.SPARSE);
             assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
             assertTrue("Value is Relative", temperatureDV.isRelative());
             assertFalse("Value is not Absolute", temperatureDV.isAbsolute());
-            temperatureDV = new DoubleVector.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, DataType.SPARSE);
+            temperatureDV = new DoubleVector.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, TemperatureUnit.KELVIN, false);
             out = temperatureDV.getValuesSI();
             for (int index = 0; index < value.length; index++)
@@ -786,7 +786,7 @@ public class DoubleVectorSparseTest
             {
                 scalar[index] = new DoubleScalar.Rel<TemperatureUnit>(value[index], TemperatureUnit.DEGREE_CELSIUS);
             }
-            temperatureDV = new DoubleVector.Rel<TemperatureUnit>(scalar, DataType.SPARSE);
+            temperatureDV = new DoubleVector.Rel<TemperatureUnit>(scalar, StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV
                 .cardinality());
@@ -817,7 +817,7 @@ public class DoubleVectorSparseTest
             double[] value2 = data(3, 38.0);
             value2[0] = 12345;
             DoubleVector.Rel<TemperatureUnit> dv =
-                new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, DataType.SPARSE);
+                new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             DoubleVector.Rel<TemperatureUnit> dvCopy = dv;
             MutableDoubleVector.Rel<TemperatureUnit> mdv = dv.mutable();
             checkContentsAndType(dv, value, 0.001, tempUnit, false);
@@ -894,7 +894,7 @@ public class DoubleVectorSparseTest
             MutableDoubleVector.Rel<LengthUnit> dv;
             try
             {
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.abs();
                 MathTester.tester(input, "abs", dv, 0.001, new DoubleToDouble()
                 {
@@ -904,7 +904,7 @@ public class DoubleVectorSparseTest
                         return Math.abs(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.acos();
                 MathTester.tester(input, "acos", dv, 0.001, new DoubleToDouble()
                 {
@@ -914,7 +914,7 @@ public class DoubleVectorSparseTest
                         return Math.acos(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.asin();
                 MathTester.tester(input, "asin", dv, 0.001, new DoubleToDouble()
                 {
@@ -924,7 +924,7 @@ public class DoubleVectorSparseTest
                         return Math.asin(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.atan();
                 MathTester.tester(input, "atan", dv, 0.001, new DoubleToDouble()
                 {
@@ -934,7 +934,7 @@ public class DoubleVectorSparseTest
                         return Math.atan(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.cbrt();
                 MathTester.tester(input, "cbrt", dv, 0.001, new DoubleToDouble()
                 {
@@ -944,7 +944,7 @@ public class DoubleVectorSparseTest
                         return Math.cbrt(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.ceil();
                 MathTester.tester(input, "ceil", dv, 0.001, new DoubleToDouble()
                 {
@@ -954,7 +954,7 @@ public class DoubleVectorSparseTest
                         return Math.ceil(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.cos();
                 MathTester.tester(input, "cos", dv, 0.001, new DoubleToDouble()
                 {
@@ -964,7 +964,7 @@ public class DoubleVectorSparseTest
                         return Math.cos(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.cosh();
                 MathTester.tester(input, "cosh", dv, 0.001, new DoubleToDouble()
                 {
@@ -974,7 +974,7 @@ public class DoubleVectorSparseTest
                         return Math.cosh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.exp();
                 MathTester.tester(input, "exp", dv, 0.001, new DoubleToDouble()
                 {
@@ -984,7 +984,7 @@ public class DoubleVectorSparseTest
                         return Math.exp(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.expm1();
                 MathTester.tester(input, "expm1", dv, 0.001, new DoubleToDouble()
                 {
@@ -994,7 +994,7 @@ public class DoubleVectorSparseTest
                         return Math.expm1(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.floor();
                 MathTester.tester(input, "floor", dv, 0.001, new DoubleToDouble()
                 {
@@ -1004,7 +1004,7 @@ public class DoubleVectorSparseTest
                         return Math.floor(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.log();
                 MathTester.tester(input, "log", dv, 0.001, new DoubleToDouble()
                 {
@@ -1014,7 +1014,7 @@ public class DoubleVectorSparseTest
                         return Math.log(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.log10();
                 MathTester.tester(input, "log10", dv, 0.001, new DoubleToDouble()
                 {
@@ -1024,7 +1024,7 @@ public class DoubleVectorSparseTest
                         return Math.log10(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.log1p();
                 MathTester.tester(input, "log1p", dv, 0.001, new DoubleToDouble()
                 {
@@ -1037,7 +1037,7 @@ public class DoubleVectorSparseTest
                 for (int i = -10; i <= 10; i++)
                 {
                     final double exponent = i * 0.5d;
-                    dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                    dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                     dv.pow(exponent);
                     MathTester.tester(input, "pow(" + exponent + ")", dv, 0.001, new DoubleToDouble()
                     {
@@ -1048,7 +1048,7 @@ public class DoubleVectorSparseTest
                         }
                     });
                 }
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.rint();
                 MathTester.tester(input, "rint", dv, 0.001, new DoubleToDouble()
                 {
@@ -1058,7 +1058,7 @@ public class DoubleVectorSparseTest
                         return Math.rint(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.round();
                 MathTester.tester(input, "round", dv, 0.001, new DoubleToDouble()
                 {
@@ -1068,7 +1068,7 @@ public class DoubleVectorSparseTest
                         return Math.round(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.signum();
                 MathTester.tester(input, "signum", dv, 0.001, new DoubleToDouble()
                 {
@@ -1078,7 +1078,7 @@ public class DoubleVectorSparseTest
                         return Math.signum(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.sin();
                 MathTester.tester(input, "sin", dv, 0.001, new DoubleToDouble()
                 {
@@ -1088,7 +1088,7 @@ public class DoubleVectorSparseTest
                         return Math.sin(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.sinh();
                 MathTester.tester(input, "sinh", dv, 0.001, new DoubleToDouble()
                 {
@@ -1098,7 +1098,7 @@ public class DoubleVectorSparseTest
                         return Math.sinh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.sqrt();
                 MathTester.tester(input, "sqrt", dv, 0.001, new DoubleToDouble()
                 {
@@ -1108,7 +1108,7 @@ public class DoubleVectorSparseTest
                         return Math.sqrt(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.tan();
                 MathTester.tester(input, "tan", dv, 0.001, new DoubleToDouble()
                 {
@@ -1118,7 +1118,7 @@ public class DoubleVectorSparseTest
                         return Math.tan(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.tanh();
                 MathTester.tester(input, "tanh", dv, 0.001, new DoubleToDouble()
                 {
@@ -1128,7 +1128,7 @@ public class DoubleVectorSparseTest
                         return Math.tanh(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.toDegrees();
                 MathTester.tester(input, "toDegrees", dv, 0.001, new DoubleToDouble()
                 {
@@ -1138,7 +1138,7 @@ public class DoubleVectorSparseTest
                         return Math.toDegrees(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.toRadians();
                 MathTester.tester(input, "toRadians", dv, 0.001, new DoubleToDouble()
                 {
@@ -1148,7 +1148,7 @@ public class DoubleVectorSparseTest
                         return Math.toRadians(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, DataType.SPARSE);
+                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dv.inv();
                 MathTester.tester(input, "inv", dv, 0.001, new DoubleToDouble()
                 {
@@ -1178,9 +1178,9 @@ public class DoubleVectorSparseTest
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
             DoubleVector.Rel<LengthUnit> left =
-                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.SPARSE);
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
-                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleVector.Rel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1206,9 +1206,9 @@ public class DoubleVectorSparseTest
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
             DoubleVector.Rel<LengthUnit> left =
-                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.SPARSE);
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
-                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleVector.Rel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1234,9 +1234,9 @@ public class DoubleVectorSparseTest
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
             DoubleVector.Rel<LengthUnit> left =
-                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.SPARSE);
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
-                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleVector.Rel<?> result = left.times(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1262,9 +1262,9 @@ public class DoubleVectorSparseTest
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
             DoubleVector.Rel<LengthUnit> left =
-                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.SPARSE);
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
-                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleVector.Rel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1290,9 +1290,9 @@ public class DoubleVectorSparseTest
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
             DoubleVector.Rel<LengthUnit> left =
-                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.SPARSE);
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
-                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleVector.Rel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1318,9 +1318,9 @@ public class DoubleVectorSparseTest
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
             DoubleVector.Rel<LengthUnit> left =
-                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, DataType.SPARSE);
+                new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
-                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, DataType.DENSE);
+                new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleVector.Rel<?> result = left.times(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -1345,7 +1345,7 @@ public class DoubleVectorSparseTest
         try
         {
             // null array
-            new DoubleVector.Rel<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, DataType.SPARSE);
+            new DoubleVector.Rel<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)

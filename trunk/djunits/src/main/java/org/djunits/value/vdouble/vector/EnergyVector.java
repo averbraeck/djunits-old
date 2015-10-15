@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.EnergyUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Energy;
 
@@ -28,47 +28,47 @@ public class EnergyVector extends TypedDoubleVectorRel<EnergyUnit, EnergyVector,
      * Construct a new Relative Immutable Double EnergyVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double EnergyVector
      * @param unit U; the unit of the new Relative Immutable Double EnergyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public EnergyVector(final double[] values, final EnergyUnit unit, final DataType dataType) throws ValueException
+    public EnergyVector(final double[] values, final EnergyUnit unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double EnergyVector.
      * @param values List; the values of the entries in the new Relative Immutable Double EnergyVector
      * @param unit U; the unit of the new Relative Immutable Double EnergyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public EnergyVector(final List<Double> values, final EnergyUnit unit, final DataType dataType)
+    public EnergyVector(final List<Double> values, final EnergyUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double EnergyVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double EnergyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public EnergyVector(final Energy[] values, final DataType dataType) throws ValueException
+    public EnergyVector(final Energy[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double EnergyVector.
      * @param values List; the values of the entries in the new Relative Immutable Double EnergyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public EnergyVector(final List<Energy> values, final DataType dataType) throws ValueException
+    public EnergyVector(final List<Energy> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -76,13 +76,13 @@ public class EnergyVector extends TypedDoubleVectorRel<EnergyUnit, EnergyVector,
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            EnergyVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public EnergyVector(final SortedMap<Integer, Energy> values, final int length, final DataType dataType)
+    public EnergyVector(final SortedMap<Integer, Energy> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -90,13 +90,13 @@ public class EnergyVector extends TypedDoubleVectorRel<EnergyUnit, EnergyVector,
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double EnergyVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double EnergyVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public EnergyVector(final SortedMap<Integer, Double> values, final EnergyUnit unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

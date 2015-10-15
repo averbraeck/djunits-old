@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.ElectricalChargeUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.ElectricalCharge;
 
@@ -30,51 +30,51 @@ public class MutableElectricalChargeVector
      * Construct a new Relative Immutable Double ElectricalChargeVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double ElectricalChargeVector
      * @param unit U; the unit of the new Relative Immutable Double ElectricalChargeVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableElectricalChargeVector(final double[] values, final ElectricalChargeUnit unit, final DataType dataType)
+    public MutableElectricalChargeVector(final double[] values, final ElectricalChargeUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double ElectricalChargeVector.
      * @param values List; the values of the entries in the new Relative Immutable Double ElectricalChargeVector
      * @param unit U; the unit of the new Relative Immutable Double ElectricalChargeVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalChargeVector(final List<Double> values, final ElectricalChargeUnit unit,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double ElectricalChargeVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
      *            ElectricalChargeVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableElectricalChargeVector(final ElectricalCharge[] values, final DataType dataType)
+    public MutableElectricalChargeVector(final ElectricalCharge[] values, final StorageType storageType)
         throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double ElectricalChargeVector.
      * @param values List; the values of the entries in the new Relative Immutable Double ElectricalChargeVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableElectricalChargeVector(final List<ElectricalCharge> values, final DataType dataType)
+    public MutableElectricalChargeVector(final List<ElectricalCharge> values, final StorageType storageType)
         throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -82,13 +82,13 @@ public class MutableElectricalChargeVector
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            ElectricalChargeVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalChargeVector(final SortedMap<Integer, ElectricalCharge> values, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -96,13 +96,13 @@ public class MutableElectricalChargeVector
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double ElectricalChargeVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double ElectricalChargeVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalChargeVector(final SortedMap<Integer, Double> values, final ElectricalChargeUnit unit,
-        final int length, final DataType dataType) throws ValueException
+        final int length, final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

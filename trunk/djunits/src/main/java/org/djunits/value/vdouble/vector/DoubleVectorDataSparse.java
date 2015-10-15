@@ -3,7 +3,7 @@ package org.djunits.value.vdouble.vector;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 
 /**
@@ -33,7 +33,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
      */
     public DoubleVectorDataSparse(final double[] vectorSI, final int[] indices, final int size)
     {
-        super(DataType.SPARSE);
+        super(StorageType.SPARSE);
         this.vectorSI = vectorSI;
         this.indices = indices;
         this.size = size;

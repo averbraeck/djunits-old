@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.*;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.*;
 
@@ -29,49 +29,49 @@ public class Mutable%Type%Vector extends
      * Construct a new Relative Immutable Double %Type%Vector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double %Type%Vector
      * @param unit U; the unit of the new Relative Immutable Double %Type%Vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public Mutable%Type%Vector(final double[] values, final %Type%Unit unit, final DataType dataType)
+    public Mutable%Type%Vector(final double[] values, final %Type%Unit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double %Type%Vector.
      * @param values List; the values of the entries in the new Relative Immutable Double %Type%Vector
      * @param unit U; the unit of the new Relative Immutable Double %Type%Vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public Mutable%Type%Vector(final List<Double> values, final %Type%Unit unit, final DataType dataType)
+    public Mutable%Type%Vector(final List<Double> values, final %Type%Unit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double %Type%Vector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
      *            %Type%Vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public Mutable%Type%Vector(final %Type%[] values, final DataType dataType) throws ValueException
+    public Mutable%Type%Vector(final %Type%[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double %Type%Vector.
      * @param values List; the values of the entries in the new Relative Immutable Double %Type%Vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public Mutable%Type%Vector(final List<%Type%> values, final DataType dataType) throws ValueException
+    public Mutable%Type%Vector(final List<%Type%> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -79,13 +79,13 @@ public class Mutable%Type%Vector extends
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            %Type%Vector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public Mutable%Type%Vector(final SortedMap<Integer, %Type%> values, final int length, final DataType dataType)
+    public Mutable%Type%Vector(final SortedMap<Integer, %Type%> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -93,13 +93,13 @@ public class Mutable%Type%Vector extends
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double %Type%Vector
      * @param unit U; the unit of the new Relative Sparse Mutable Double %Type%Vector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public Mutable%Type%Vector(final SortedMap<Integer, Double> values, final %Type%Unit unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
     
     /**

@@ -98,8 +98,8 @@ public class VectorOperationsTest
                 // System.out.println("Looking up class " + className);
                 vectorClassAbsRel = Class.forName(className);
                 testMethods(vectorClassAbsRel, isAbs, doubleType);
-                testAbsRelConversion(vectorClassAbsRel, isAbs, doubleType, DataType.DENSE);
-                testAbsRelConversion(vectorClassAbsRel, isAbs, doubleType, DataType.SPARSE);
+                testAbsRelConversion(vectorClassAbsRel, isAbs, doubleType, StorageType.DENSE);
+                testAbsRelConversion(vectorClassAbsRel, isAbs, doubleType, StorageType.SPARSE);
             }
         }
 
@@ -143,7 +143,7 @@ public class VectorOperationsTest
      * @param vectorClassAbsRel class to test
      * @param isAbs boolean; if true; the scalarClassAbsRel must be aAsolute; if false; the scalarClassAbsRel must be Relative
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
-     * @param dataType DataType; DENSE or SPARSE
+     * @param storageType StorageType; DENSE or SPARSE
      * @throws SecurityException
      * @throws NoSuchMethodException
      * @throws NoSuchFieldException
@@ -153,7 +153,7 @@ public class VectorOperationsTest
      * @throws InstantiationException
      * @throws ValueException
      */
-    private void testAbsRelConversion(final Class<?> vectorClassAbsRel, boolean isAbs, boolean doubleType, DataType dataType)
+    private void testAbsRelConversion(final Class<?> vectorClassAbsRel, boolean isAbs, boolean doubleType, StorageType storageType)
             throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, NoSuchFieldException, ValueException
     {
@@ -164,21 +164,21 @@ public class VectorOperationsTest
         System.out.println("Looking for constructor of " + vectorClassAbsRel.getName());
         Constructor<?> constructor =
                 vectorClassAbsRel.getConstructor(doubleType ? double[].class : float[].class, getUnitClass(vectorClassAbsRel),
-                        DataType.class);
+                        StorageType.class);
         Object from;
         if (doubleType)
         {
             from =
                     isAbs ? (DoubleVector.Abs<?>) constructor.newInstance(inValue,
-                            getSIUnitInstance(getUnitClass(vectorClassAbsRel)), dataType) : (DoubleVector.Rel<?>) constructor
-                            .newInstance(inValue, getSIUnitInstance(getUnitClass(vectorClassAbsRel)), dataType);
+                            getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType) : (DoubleVector.Rel<?>) constructor
+                            .newInstance(inValue, getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType);
         }
         else
         {
             from =
                     isAbs ? (FloatVector.Abs<?>) constructor.newInstance((float) inValue,
-                            getSIUnitInstance(getUnitClass(vectorClassAbsRel)), dataType) : (FloatVector.Rel<?>) constructor
-                            .newInstance((float) inValue, getSIUnitInstance(getUnitClass(vectorClassAbsRel)), dataType);
+                            getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType) : (FloatVector.Rel<?>) constructor
+                            .newInstance((float) inValue, getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType);
         }
         // testje
         // AnglePlaneVector.Rel.Dense apvrd = new AnglePlaneVector.Rel.Dense(new double[] { 0.1, 2.3 },
@@ -222,16 +222,16 @@ public class VectorOperationsTest
                 testMultiplyOrDivideMethodAbsRel(scalarClassAbsRel, isAbs, method, false, doubleType);
             }
         }
-        testConstructors(scalarClassAbsRel, isAbs, doubleType, true, DataType.DENSE);
-        testConstructors(scalarClassAbsRel, isAbs, doubleType, true, DataType.SPARSE);
-        testConstructors(scalarClassAbsRel, isAbs, doubleType, false, DataType.DENSE);
-        testConstructors(scalarClassAbsRel, isAbs, doubleType, false, DataType.SPARSE);
-        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, true, DataType.DENSE);
-        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, true, DataType.SPARSE);
-        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, false, DataType.DENSE);
-        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, false, DataType.SPARSE);
-        testInterpolateMethod(scalarClassAbsRel, isAbs, doubleType, DataType.DENSE);
-        testInterpolateMethod(scalarClassAbsRel, isAbs, doubleType, DataType.SPARSE);
+        testConstructors(scalarClassAbsRel, isAbs, doubleType, true, StorageType.DENSE);
+        testConstructors(scalarClassAbsRel, isAbs, doubleType, true, StorageType.SPARSE);
+        testConstructors(scalarClassAbsRel, isAbs, doubleType, false, StorageType.DENSE);
+        testConstructors(scalarClassAbsRel, isAbs, doubleType, false, StorageType.SPARSE);
+        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, true, StorageType.DENSE);
+        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, true, StorageType.SPARSE);
+        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, false, StorageType.DENSE);
+        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, false, StorageType.SPARSE);
+        testInterpolateMethod(scalarClassAbsRel, isAbs, doubleType, StorageType.DENSE);
+        testInterpolateMethod(scalarClassAbsRel, isAbs, doubleType, StorageType.SPARSE);
     }
 
     /**
@@ -547,7 +547,7 @@ public class VectorOperationsTest
      * @param abs abs or rel class
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
      * @param mutable boolean; if true; perform test for mutable version; if false; perform test for non-mutable version
-     * @param dataType DataType; Dense or Sparse
+     * @param storageType StorageType; Dense or Sparse
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
      * @throws IllegalAccessException on class or method resolving error
@@ -557,13 +557,13 @@ public class VectorOperationsTest
      * @throws ValueException
      */
     private void testConstructors(final Class<?> vectorClass, final boolean abs, final boolean doubleType, boolean mutable,
-            DataType dataType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
+            StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
         double[] doubleValue = { 1.23456, 2.34567, 3.45678 };
         float[] floatValue = { 1.23456f, 2.34567f, 3.45678f };
         Object value = doubleType ? doubleValue : floatValue;
-        findAndTestConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), dataType },
+        findAndTestConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType },
                 abs, doubleType, value);
         if (doubleType)
         {
@@ -572,7 +572,7 @@ public class VectorOperationsTest
             {
                 list.add(doubleValue[i]);
             }
-            findAndTestConstructor(vectorClass, new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), dataType },
+            findAndTestConstructor(vectorClass, new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType },
                     abs, doubleType, value);
             // Construct a list of scalar objects
             // What is the corresponding Scalar type?
@@ -591,7 +591,7 @@ public class VectorOperationsTest
             {
                 objectList.add(constructor.newInstance(d, getSIUnitInstance(getUnitClass(vectorClass))));
             }
-            findAndTestConstructor(vectorClass, new Object[] { objectList, dataType }, abs, doubleType, value);
+            findAndTestConstructor(vectorClass, new Object[] { objectList, storageType }, abs, doubleType, value);
             // Construct an array of scalar objects
             Object[] objectArray;
             if (abs)
@@ -610,7 +610,7 @@ public class VectorOperationsTest
                     objectArray[i] = objectList.get(i);
                 }
             }
-            // FIXME - FAILS findAndTestConstructor(vectorClass, new Object[] { objectArray, dataType }, abs, doubleType, value);
+            // FIXME - FAILS findAndTestConstructor(vectorClass, new Object[] { objectArray, storageType }, abs, doubleType, value);
         }
         else
         {
@@ -619,7 +619,7 @@ public class VectorOperationsTest
             {
                 list.add(floatValue[i]);
             }
-            findAndTestConstructor(vectorClass, new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), dataType },
+            findAndTestConstructor(vectorClass, new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType },
                     abs, doubleType, value);
             // TODO add and convert all other stuff from the Float version 
         }
@@ -716,7 +716,7 @@ public class VectorOperationsTest
      * @param abs abs or rel class
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
      * @param mutable boolean; if true; perform test for mutable version; if false; perform test for non-mutable version
-     * @param dataType DataType; Dense or Sparse
+     * @param storageType StorageType; Dense or Sparse
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
      * @throws IllegalAccessException on class or method resolving error
@@ -726,7 +726,7 @@ public class VectorOperationsTest
      * @throws ValueException
      */
     private void testUnaryMethods(final Class<?> vectorClass, final boolean abs, final boolean doubleType, boolean mutable,
-            DataType dataType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
+            StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
         double[] doubleValue = { 1.23456, 2.34567, 3.45678 };
@@ -734,14 +734,14 @@ public class VectorOperationsTest
         Object value = doubleType ? doubleValue : floatValue;
         Constructor<?> constructor =
                 vectorClass.getConstructor(doubleType ? double[].class : float[].class, getUnitClass(vectorClass),
-                        DataType.class);
+                        StorageType.class);
         Object left;
         if (doubleType)
         {
             left =
                     abs ? (DoubleVector.Abs<?>) constructor.newInstance(value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            dataType) : (DoubleVector.Rel<?>) constructor.newInstance(value,
-                            getSIUnitInstance(getUnitClass(vectorClass)), dataType);
+                            storageType) : (DoubleVector.Rel<?>) constructor.newInstance(value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType);
             // System.out.println("Constructed object of type " + vectorClass + ": " + left.toString());
             // Find the constructor that takes an object of the current class as the single argument
             Constructor<?>[] constructors = vectorClass.getConstructors();
@@ -761,7 +761,7 @@ public class VectorOperationsTest
             left =
                     abs ? (FloatScalar.Abs<?>) constructor.newInstance(value, getSIUnitInstance(getUnitClass(vectorClass)))
                             : (FloatScalar.Rel<?>) constructor.newInstance(value, getSIUnitInstance(getUnitClass(vectorClass)),
-                                    dataType);
+                                    storageType);
             // Find the constructor that takes an object of the current class as the single argument
             Constructor<?>[] constructors = vectorClass.getConstructors();
             for (Constructor<?> c : constructors)
@@ -1059,7 +1059,7 @@ public class VectorOperationsTest
      * @param vectorClass Class&lt;?&gt;; the class to test
      * @param abs boolean; if true; scalarClass is Absolute; if false; scalarClass is Relative
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
-     * @param dataType DataType; DENSE or SPARSE
+     * @param storageType StorageType; DENSE or SPARSE
      * @throws NoSuchMethodException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
@@ -1068,25 +1068,25 @@ public class VectorOperationsTest
      * @throws ValueException
      */
     private void testInterpolateMethod(final Class<?> vectorClass, final boolean abs, final boolean doubleType,
-            DataType dataType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
+            StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ValueException
     {
         System.out.println("class name is " + vectorClass.getName());
         Constructor<?> constructor =
                 vectorClass.getConstructor(doubleType ? double[].class : float[].class, getUnitClass(vectorClass),
-                        DataType.class);
+                        StorageType.class);
         if (doubleType)
         {
             double[] zeroValue = { 1.23456, 2.45678 };
             DoubleVector<?> zero =
                     abs ? (DoubleVector.Abs<?>) constructor.newInstance(zeroValue,
-                            getSIUnitInstance(getUnitClass(vectorClass)), dataType) : (DoubleVector.Rel<?>) constructor
-                            .newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)), dataType);
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType) : (DoubleVector.Rel<?>) constructor
+                            .newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)), storageType);
             double[] oneValue = { 3.45678, 4.678901 };
             DoubleVector<?> one =
                     abs ? (DoubleVector.Abs<?>) constructor.newInstance(oneValue, getSIUnitInstance(getUnitClass(vectorClass)),
-                            dataType) : (DoubleVector.Rel<?>) constructor.newInstance(oneValue,
-                            getSIUnitInstance(getUnitClass(vectorClass)), dataType);
+                            storageType) : (DoubleVector.Rel<?>) constructor.newInstance(oneValue,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType);
             for (double ratio : new double[] { -5, -1, 0, 0.3, 1, 2, 10 })
             {
                 double[] expectedResult = new double[zeroValue.length];
@@ -1107,12 +1107,12 @@ public class VectorOperationsTest
             FloatScalar<?> zero =
                     abs ? (FloatScalar.Abs<?>) constructor.newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)))
                             : (FloatScalar.Rel<?>) constructor.newInstance(zeroValue,
-                                    getSIUnitInstance(getUnitClass(vectorClass)), dataType);
+                                    getSIUnitInstance(getUnitClass(vectorClass)), storageType);
             float[] oneValue = { 3.45678f, 4.678901f };
             FloatScalar<?> one =
                     abs ? (FloatScalar.Abs<?>) constructor.newInstance(oneValue, getSIUnitInstance(getUnitClass(vectorClass)))
                             : (FloatScalar.Rel<?>) constructor.newInstance(oneValue,
-                                    getSIUnitInstance(getUnitClass(vectorClass)), dataType);
+                                    getSIUnitInstance(getUnitClass(vectorClass)), storageType);
             for (float ratio : new float[] { -5, -1, 0, 0.3f, 1, 2, 10 })
             {
                 float[] expectedResult = new float[zeroValue.length];

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.PowerUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Power;
 
@@ -28,48 +28,48 @@ public class MutablePowerVector extends MutableTypedDoubleVectorRel<PowerUnit, P
      * Construct a new Relative Immutable Double PowerVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double PowerVector
      * @param unit U; the unit of the new Relative Immutable Double PowerVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutablePowerVector(final double[] values, final PowerUnit unit, final DataType dataType)
+    public MutablePowerVector(final double[] values, final PowerUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double PowerVector.
      * @param values List; the values of the entries in the new Relative Immutable Double PowerVector
      * @param unit U; the unit of the new Relative Immutable Double PowerVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutablePowerVector(final List<Double> values, final PowerUnit unit, final DataType dataType)
+    public MutablePowerVector(final List<Double> values, final PowerUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double PowerVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double PowerVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutablePowerVector(final Power[] values, final DataType dataType) throws ValueException
+    public MutablePowerVector(final Power[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double PowerVector.
      * @param values List; the values of the entries in the new Relative Immutable Double PowerVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutablePowerVector(final List<Power> values, final DataType dataType) throws ValueException
+    public MutablePowerVector(final List<Power> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -77,13 +77,13 @@ public class MutablePowerVector extends MutableTypedDoubleVectorRel<PowerUnit, P
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            PowerVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutablePowerVector(final SortedMap<Integer, Power> values, final int length, final DataType dataType)
+    public MutablePowerVector(final SortedMap<Integer, Power> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -91,13 +91,13 @@ public class MutablePowerVector extends MutableTypedDoubleVectorRel<PowerUnit, P
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double PowerVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double PowerVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutablePowerVector(final SortedMap<Integer, Double> values, final PowerUnit unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

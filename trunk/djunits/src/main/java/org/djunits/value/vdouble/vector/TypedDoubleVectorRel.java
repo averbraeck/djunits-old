@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.Unit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 
@@ -33,59 +33,59 @@ abstract class TypedDoubleVectorRel<U extends Unit<U>, R extends TypedDoubleVect
      * Construct a new Relative Immutable DoubleVector.
      * @param values double[]; the values of the entries in the new Relative Immutable DoubleVector
      * @param unit U; the unit of the new Relative Immutable DoubleVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    TypedDoubleVectorRel(final double[] values, final U unit, final DataType dataType) throws ValueException
+    TypedDoubleVectorRel(final double[] values, final U unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable DoubleVector.
      * @param values List; the values of the entries in the new Relative Immutable DoubleVector
      * @param unit U; the unit of the new Relative Immutable DoubleVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    TypedDoubleVectorRel(final List<Double> values, final U unit, final DataType dataType) throws ValueException
+    TypedDoubleVectorRel(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable DoubleVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable DoubleVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    TypedDoubleVectorRel(final S[] values, final DataType dataType) throws ValueException
+    TypedDoubleVectorRel(final S[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable DoubleVector.
      * @param values List; the values of the entries in the new Relative Immutable DoubleVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    TypedDoubleVectorRel(final List<S> values, final DataType dataType) throws ValueException
+    TypedDoubleVectorRel(final List<S> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable DoubleVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable DoubleVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    TypedDoubleVectorRel(final SortedMap<Integer, S> values, final int length, final DataType dataType)
+    TypedDoubleVectorRel(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -93,13 +93,13 @@ abstract class TypedDoubleVectorRel<U extends Unit<U>, R extends TypedDoubleVect
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable DoubleVector
      * @param unit U; the unit of the new Relative Sparse Mutable DoubleVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     TypedDoubleVectorRel(final SortedMap<Integer, Double> values, final U unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

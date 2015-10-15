@@ -2,7 +2,7 @@ package org.djunits.value.vdouble.vector;
 
 import org.djunits.unit.AccelerationUnit;
 import org.djunits.unit.LengthUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Acceleration;
 
@@ -31,7 +31,7 @@ public final class Test
     public static void main(final String[] args) throws ValueException
     {
         double[] v1 = new double[]{1.0, 0.0, 3.0, 2.0, 4.0, 0.0, 9.0, 15.0, 20.0, 30.0};
-        AccelerationVector av1 = new AccelerationVector(v1, AccelerationUnit.KM_PER_HOUR_2, DataType.DENSE);
+        AccelerationVector av1 = new AccelerationVector(v1, AccelerationUnit.KM_PER_HOUR_2, StorageType.DENSE);
         System.out.println("Sparse= " + av1.toSparse().toString(true, true));
         Acceleration acc = av1.get(4);
         System.out.println("acc[4]= " + acc);
@@ -54,7 +54,7 @@ public final class Test
         AccelerationVector av7 = av1.divide(av2).toSparse();
         System.out.println("av1 / av2 = " + av7.toString(true, true));
 
-        LengthVector.Rel lvr1 = new LengthVector.Rel(v1, LengthUnit.KILOMETER, DataType.DENSE);
+        LengthVector.Rel lvr1 = new LengthVector.Rel(v1, LengthUnit.KILOMETER, StorageType.DENSE);
         System.out.println("zSum of " + lvr1.toString(true, true) + " = " + lvr1.zSum());
     }
 

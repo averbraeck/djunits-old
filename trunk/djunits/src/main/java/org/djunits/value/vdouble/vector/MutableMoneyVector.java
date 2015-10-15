@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.MoneyUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Money;
 
@@ -28,48 +28,48 @@ public class MutableMoneyVector extends MutableTypedDoubleVectorRel<MoneyUnit, M
      * Construct a new Relative Immutable Double MoneyVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double MoneyVector
      * @param unit U; the unit of the new Relative Immutable Double MoneyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyVector(final double[] values, final MoneyUnit unit, final DataType dataType)
+    public MutableMoneyVector(final double[] values, final MoneyUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double MoneyVector.
      * @param values List; the values of the entries in the new Relative Immutable Double MoneyVector
      * @param unit U; the unit of the new Relative Immutable Double MoneyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyVector(final List<Double> values, final MoneyUnit unit, final DataType dataType)
+    public MutableMoneyVector(final List<Double> values, final MoneyUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double MoneyVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double MoneyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyVector(final Money[] values, final DataType dataType) throws ValueException
+    public MutableMoneyVector(final Money[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double MoneyVector.
      * @param values List; the values of the entries in the new Relative Immutable Double MoneyVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyVector(final List<Money> values, final DataType dataType) throws ValueException
+    public MutableMoneyVector(final List<Money> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -77,13 +77,13 @@ public class MutableMoneyVector extends MutableTypedDoubleVectorRel<MoneyUnit, M
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            MoneyVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyVector(final SortedMap<Integer, Money> values, final int length, final DataType dataType)
+    public MutableMoneyVector(final SortedMap<Integer, Money> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -91,13 +91,13 @@ public class MutableMoneyVector extends MutableTypedDoubleVectorRel<MoneyUnit, M
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double MoneyVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double MoneyVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMoneyVector(final SortedMap<Integer, Double> values, final MoneyUnit unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

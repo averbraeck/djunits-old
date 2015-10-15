@@ -11,7 +11,7 @@ package org.djunits.value;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public enum DataType
+public enum StorageType
 {
     /** Dense datatype. */
     DENSE,

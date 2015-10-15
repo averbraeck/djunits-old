@@ -6,7 +6,7 @@ import java.util.SortedMap;
 import java.util.stream.IntStream;
 
 import org.djunits.unit.scale.Scale;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 
@@ -28,15 +28,15 @@ abstract class DoubleVectorData
     protected double[] vectorSI;
 
     /** the data type. */
-    private final DataType dataType;
+    private final StorageType storageType;
 
     /**
-     * @param dataType the data type.
+     * @param storageType the data type.
      */
-    DoubleVectorData(final DataType dataType)
+    DoubleVectorData(final StorageType storageType)
     {
         super();
-        this.dataType = dataType;
+        this.storageType = storageType;
     }
 
     /** ============================================================================================ */
@@ -47,11 +47,11 @@ abstract class DoubleVectorData
      * Instantiate a DoubleVectorData with the right data type.
      * @param values the (SI) values to store
      * @param scale the scale of the unit to use for conversion to SI
-     * @param dataType the data type to use
+     * @param storageType the data type to use
      * @return the DoubleVectorData with the right data type
-     * @throws ValueException when values are null, or dataType is null
+     * @throws ValueException when values are null, or storageType is null
      */
-    public static DoubleVectorData instantiate(final double[] values, final Scale scale, final DataType dataType)
+    public static DoubleVectorData instantiate(final double[] values, final Scale scale, final StorageType storageType)
         throws ValueException
     {
         if (values == null)
@@ -62,7 +62,7 @@ abstract class DoubleVectorData
         double[] valuesSI = new double[values.length];
         IntStream.range(0, values.length).parallel().forEach(i -> valuesSI[i] = scale.toStandardUnit(values[i]));
 
-        switch (dataType)
+        switch (storageType)
         {
             case DENSE:
                 return new DoubleVectorDataDense(valuesSI);
@@ -71,7 +71,7 @@ abstract class DoubleVectorData
                 return DoubleVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 
@@ -79,11 +79,11 @@ abstract class DoubleVectorData
      * Instantiate a DoubleVectorData with the right data type.
      * @param values the values to store
      * @param scale the scale of the unit to use for conversion to SI
-     * @param dataType the data type to use
+     * @param storageType the data type to use
      * @return the DoubleVectorData with the right data type
-     * @throws ValueException when list is null, or dataType is null
+     * @throws ValueException when list is null, or storageType is null
      */
-    public static DoubleVectorData instantiate(final List<Double> values, final Scale scale, final DataType dataType)
+    public static DoubleVectorData instantiate(final List<Double> values, final Scale scale, final StorageType storageType)
         throws ValueException
     {
         if (values == null)
@@ -91,7 +91,7 @@ abstract class DoubleVectorData
             throw new ValueException("DoubleVectorData.instantiate: List<Double> values is null");
         }
 
-        switch (dataType)
+        switch (storageType)
         {
             case DENSE:
                 return new DoubleVectorDataDense(values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d))
@@ -102,18 +102,18 @@ abstract class DoubleVectorData
                     d -> scale.toStandardUnit(d)).toArray());
 
             default:
-                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
      * @param values the values to store
-     * @param dataType the data type to use
+     * @param storageType the data type to use
      * @return the DoubleVectorData with the right data type
-     * @throws ValueException when values is null, or dataType is null
+     * @throws ValueException when values is null, or storageType is null
      */
-    public static DoubleVectorData instantiate(final DoubleScalar<?>[] values, final DataType dataType)
+    public static DoubleVectorData instantiate(final DoubleScalar<?>[] values, final StorageType storageType)
         throws ValueException
     {
         if (values == null)
@@ -123,7 +123,7 @@ abstract class DoubleVectorData
 
         double[] valuesSI = Arrays.stream(values).parallel().mapToDouble(s -> s.getSI()).toArray();
 
-        switch (dataType)
+        switch (storageType)
         {
             case DENSE:
                 return new DoubleVectorDataDense(valuesSI);
@@ -132,18 +132,18 @@ abstract class DoubleVectorData
                 return DoubleVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
      * @param values the DoubleScalar values to store
-     * @param dataType the data type to use
+     * @param storageType the data type to use
      * @return the DoubleVectorData with the right data type
-     * @throws ValueException when values is null, or dataType is null
+     * @throws ValueException when values is null, or storageType is null
      */
-    public static DoubleVectorData instantiateLD(final List<? extends DoubleScalar<?>> values, final DataType dataType)
+    public static DoubleVectorData instantiateLD(final List<? extends DoubleScalar<?>> values, final StorageType storageType)
         throws ValueException
     {
         if (values == null)
@@ -153,7 +153,7 @@ abstract class DoubleVectorData
 
         double[] valuesSI = values.parallelStream().mapToDouble(s -> s.getSI()).toArray();
 
-        switch (dataType)
+        switch (storageType)
         {
             case DENSE:
                 return new DoubleVectorDataDense(valuesSI);
@@ -162,7 +162,7 @@ abstract class DoubleVectorData
                 return DoubleVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 
@@ -170,20 +170,20 @@ abstract class DoubleVectorData
      * Instantiate a DoubleVectorData with the right data type.
      * @param values the DoubleScalar values to store
      * @param length the length of the vector to pad with 0 after last entry in map
-     * @param dataType the data type to use
+     * @param storageType the data type to use
      * @param <S> the scalar type to use
      * @return the DoubleVectorData with the right data type
-     * @throws ValueException when values is null, or dataType is null
+     * @throws ValueException when values is null, or storageType is null
      */
     public static <S extends DoubleScalar<?>> DoubleVectorData instantiateMD(final SortedMap<Integer, S> values,
-        final int length, final DataType dataType) throws ValueException
+        final int length, final StorageType storageType) throws ValueException
     {
         if (values == null)
         {
             throw new ValueException("DoubleVectorData.instantiate: values map is null");
         }
 
-        switch (dataType)
+        switch (storageType)
         {
             case DENSE:
             {
@@ -200,7 +200,7 @@ abstract class DoubleVectorData
             }
 
             default:
-                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 
@@ -209,19 +209,19 @@ abstract class DoubleVectorData
      * @param values the DoubleScalar values to store
      * @param length the length of the vector to pad with 0 after last entry in map
      * @param scale the scale of the unit to use for conversion to SI
-     * @param dataType the data type to use
+     * @param storageType the data type to use
      * @return the DoubleVectorData with the right data type
-     * @throws ValueException when values is null, or dataType is null
+     * @throws ValueException when values is null, or storageType is null
      */
     public static DoubleVectorData instantiate(final SortedMap<Integer, Double> values, final int length,
-        final Scale scale, final DataType dataType) throws ValueException
+        final Scale scale, final StorageType storageType) throws ValueException
     {
         if (values == null)
         {
             throw new ValueException("DoubleVectorData.instantiate: values map is null");
         }
 
-        switch (dataType)
+        switch (storageType)
         {
             case DENSE:
             {
@@ -240,7 +240,7 @@ abstract class DoubleVectorData
             }
 
             default:
-                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + dataType);
+                throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 
@@ -258,7 +258,7 @@ abstract class DoubleVectorData
      */
     public boolean isSparse()
     {
-        return this.dataType.equals(DataType.SPARSE);
+        return this.storageType.equals(StorageType.SPARSE);
     }
 
     /**
@@ -274,7 +274,7 @@ abstract class DoubleVectorData
      */
     public boolean isDense()
     {
-        return this.dataType.equals(DataType.DENSE);
+        return this.storageType.equals(StorageType.DENSE);
     }
 
     /**
@@ -514,6 +514,6 @@ abstract class DoubleVectorData
     @Override
     public String toString()
     {
-        return "DoubleVectorData [dataType=" + this.dataType + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
+        return "DoubleVectorData [storageType=" + this.storageType + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.MoneyPerLengthUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.MoneyPerLength;
 
@@ -29,49 +29,49 @@ public class MoneyPerLengthVector extends
      * Construct a new Relative Immutable Double MoneyPerLengthVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double MoneyPerLengthVector
      * @param unit U; the unit of the new Relative Immutable Double MoneyPerLengthVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MoneyPerLengthVector(final double[] values, final MoneyPerLengthUnit unit, final DataType dataType)
+    public MoneyPerLengthVector(final double[] values, final MoneyPerLengthUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double MoneyPerLengthVector.
      * @param values List; the values of the entries in the new Relative Immutable Double MoneyPerLengthVector
      * @param unit U; the unit of the new Relative Immutable Double MoneyPerLengthVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MoneyPerLengthVector(final List<Double> values, final MoneyPerLengthUnit unit, final DataType dataType)
+    public MoneyPerLengthVector(final List<Double> values, final MoneyPerLengthUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double MoneyPerLengthVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
      *            MoneyPerLengthVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MoneyPerLengthVector(final MoneyPerLength[] values, final DataType dataType) throws ValueException
+    public MoneyPerLengthVector(final MoneyPerLength[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double MoneyPerLengthVector.
      * @param values List; the values of the entries in the new Relative Immutable Double MoneyPerLengthVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MoneyPerLengthVector(final List<MoneyPerLength> values, final DataType dataType) throws ValueException
+    public MoneyPerLengthVector(final List<MoneyPerLength> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -79,13 +79,13 @@ public class MoneyPerLengthVector extends
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            MoneyPerLengthVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MoneyPerLengthVector(final SortedMap<Integer, MoneyPerLength> values, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -93,13 +93,13 @@ public class MoneyPerLengthVector extends
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double MoneyPerLengthVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double MoneyPerLengthVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MoneyPerLengthVector(final SortedMap<Integer, Double> values, final MoneyPerLengthUnit unit,
-        final int length, final DataType dataType) throws ValueException
+        final int length, final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**
