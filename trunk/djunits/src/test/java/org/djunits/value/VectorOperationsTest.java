@@ -3,6 +3,7 @@ package org.djunits.value;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -10,6 +11,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
@@ -577,13 +580,13 @@ public class VectorOperationsTest
             // Construct a list of scalar objects
             // What is the corresponding Scalar type?
             String scalarClassName = vectorClass.getName();
-            //System.out.println("name is " + scalarClassName);
+            // System.out.println("name is " + scalarClassName);
             scalarClassName = scalarClassName.replaceFirst("Vector", "");
-            //System.out.println("name is " + scalarClassName);
+            // System.out.println("name is " + scalarClassName);
             scalarClassName = scalarClassName.replaceFirst("vector", "scalar");
-            //System.out.println("name is " + scalarClassName);
+            // System.out.println("name is " + scalarClassName);
             Class<?> scalarClassAbsRel = Class.forName(scalarClassName);
-            //System.out.println("class is " + scalarClassAbsRel);
+            // System.out.println("class is " + scalarClassAbsRel);
             Constructor<?> constructor =
                     scalarClassAbsRel.getConstructor(new Class<?>[] { double.class, getUnitClass(vectorClass) });
             List<Object> objectList = new ArrayList<Object>();
@@ -592,25 +595,20 @@ public class VectorOperationsTest
                 objectList.add(constructor.newInstance(d, getSIUnitInstance(getUnitClass(vectorClass))));
             }
             findAndTestConstructor(vectorClass, new Object[] { objectList, storageType }, abs, doubleType, value);
-            // Construct an array of scalar objects
-            Object[] objectArray;
-            if (abs)
+            // Construct an array of the correct scalar objects
+            Object[] objectArray = (Object[]) Array.newInstance(scalarClassAbsRel, objectList.size());
+            for (int i = 0; i < objectList.size(); i++)
             {
-                objectArray = new DoubleScalar.Abs[objectList.size()];
-                for (int i = 0; i < objectList.size(); i++)
-                {
-                    objectArray[i] = objectList.get(i);
-                }
+                objectArray[i] = objectList.get(i);
             }
-            else
+            findAndTestConstructor(vectorClass, new Object[] { objectArray, storageType }, abs, doubleType, value);
+            SortedMap<Integer, Object> map = new TreeMap<Integer, Object>();
+            for (int i = 0; i < objectList.size(); i++)
             {
-                objectArray = new DoubleScalar.Rel[objectList.size()];
-                for (int i = 0; i < objectList.size(); i++)
-                {
-                    objectArray[i] = objectList.get(i);
-                }
+                map.put(i, objectList.get(i));
             }
-            // FIXME - FAILS findAndTestConstructor(vectorClass, new Object[] { objectArray, storageType }, abs, doubleType, value);
+            System.out.println("int is assignable from Integer ? " + int.class.isAssignableFrom(Integer.class));
+            findAndTestConstructor(vectorClass, new Object[] { map, objectList.size(), storageType}, abs, doubleType, value);
         }
         else
         {
@@ -621,7 +619,7 @@ public class VectorOperationsTest
             }
             findAndTestConstructor(vectorClass, new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType },
                     abs, doubleType, value);
-            // TODO add and convert all other stuff from the Float version 
+            // TODO add and convert all other stuff from the Float version
         }
     }
 
@@ -687,7 +685,7 @@ public class VectorOperationsTest
             for (int i = 0; i < parTypes.length; i++)
             {
                 Class<?> parType = parTypes[i];
-                if (compatible && !parType.isAssignableFrom(parameterTypes[i]))
+                if (compatible && !parType.isAssignableFrom(parameterTypes[i]) && (!(parType == int.class && parameterTypes[i] == Integer.class)))
                 {
                     compatible = false;
                 }
@@ -705,6 +703,7 @@ public class VectorOperationsTest
         // Constructor<?> constructor = vectorClass.getConstructor(parameterTypes);
         if (null == constructor)
         {
+            System.out.println("No suitable constructor");
             fail("Cannot find suitable constructor");
         }
         Object construction = constructor.newInstance(args);
