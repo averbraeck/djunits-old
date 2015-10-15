@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.VolumeUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Volume;
 
@@ -28,47 +28,47 @@ public class VolumeVector extends TypedDoubleVectorRel<VolumeUnit, VolumeVector,
      * Construct a new Relative Immutable Double VolumeVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double VolumeVector
      * @param unit U; the unit of the new Relative Immutable Double VolumeVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public VolumeVector(final double[] values, final VolumeUnit unit, final DataType dataType) throws ValueException
+    public VolumeVector(final double[] values, final VolumeUnit unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double VolumeVector.
      * @param values List; the values of the entries in the new Relative Immutable Double VolumeVector
      * @param unit U; the unit of the new Relative Immutable Double VolumeVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public VolumeVector(final List<Double> values, final VolumeUnit unit, final DataType dataType)
+    public VolumeVector(final List<Double> values, final VolumeUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double VolumeVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double VolumeVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public VolumeVector(final Volume[] values, final DataType dataType) throws ValueException
+    public VolumeVector(final Volume[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double VolumeVector.
      * @param values List; the values of the entries in the new Relative Immutable Double VolumeVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public VolumeVector(final List<Volume> values, final DataType dataType) throws ValueException
+    public VolumeVector(final List<Volume> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -76,13 +76,13 @@ public class VolumeVector extends TypedDoubleVectorRel<VolumeUnit, VolumeVector,
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            VolumeVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public VolumeVector(final SortedMap<Integer, Volume> values, final int length, final DataType dataType)
+    public VolumeVector(final SortedMap<Integer, Volume> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -90,13 +90,13 @@ public class VolumeVector extends TypedDoubleVectorRel<VolumeUnit, VolumeVector,
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double VolumeVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double VolumeVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public VolumeVector(final SortedMap<Integer, Double> values, final VolumeUnit unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

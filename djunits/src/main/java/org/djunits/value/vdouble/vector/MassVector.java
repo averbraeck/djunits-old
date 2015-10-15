@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.MassUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Mass;
 
@@ -28,59 +28,59 @@ public class MassVector extends TypedDoubleVectorRel<MassUnit, MassVector, Mutab
      * Construct a new Relative Immutable Double MassVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double MassVector
      * @param unit U; the unit of the new Relative Immutable Double MassVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MassVector(final double[] values, final MassUnit unit, final DataType dataType) throws ValueException
+    public MassVector(final double[] values, final MassUnit unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double MassVector.
      * @param values List; the values of the entries in the new Relative Immutable Double MassVector
      * @param unit U; the unit of the new Relative Immutable Double MassVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MassVector(final List<Double> values, final MassUnit unit, final DataType dataType) throws ValueException
+    public MassVector(final List<Double> values, final MassUnit unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double MassVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double MassVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MassVector(final Mass[] values, final DataType dataType) throws ValueException
+    public MassVector(final Mass[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double MassVector.
      * @param values List; the values of the entries in the new Relative Immutable Double MassVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MassVector(final List<Mass> values, final DataType dataType) throws ValueException
+    public MassVector(final List<Mass> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double MassVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double MassVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MassVector(final SortedMap<Integer, Mass> values, final int length, final DataType dataType)
+    public MassVector(final SortedMap<Integer, Mass> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -88,13 +88,13 @@ public class MassVector extends TypedDoubleVectorRel<MassUnit, MassVector, Mutab
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double MassVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double MassVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MassVector(final SortedMap<Integer, Double> values, final MassUnit unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.ElectricalResistanceUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.ElectricalResistance;
 
@@ -30,51 +30,51 @@ public class MutableElectricalResistanceVector
      * Construct a new Relative Immutable Double ElectricalResistanceVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double ElectricalResistanceVector
      * @param unit U; the unit of the new Relative Immutable Double ElectricalResistanceVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalResistanceVector(final double[] values, final ElectricalResistanceUnit unit,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceVector.
      * @param values List; the values of the entries in the new Relative Immutable Double ElectricalResistanceVector
      * @param unit U; the unit of the new Relative Immutable Double ElectricalResistanceVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalResistanceVector(final List<Double> values, final ElectricalResistanceUnit unit,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
      *            ElectricalResistanceVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableElectricalResistanceVector(final ElectricalResistance[] values, final DataType dataType)
+    public MutableElectricalResistanceVector(final ElectricalResistance[] values, final StorageType storageType)
         throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceVector.
      * @param values List; the values of the entries in the new Relative Immutable Double ElectricalResistanceVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableElectricalResistanceVector(final List<ElectricalResistance> values, final DataType dataType)
+    public MutableElectricalResistanceVector(final List<ElectricalResistance> values, final StorageType storageType)
         throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -82,13 +82,13 @@ public class MutableElectricalResistanceVector
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            ElectricalResistanceVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalResistanceVector(final SortedMap<Integer, ElectricalResistance> values, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -96,13 +96,13 @@ public class MutableElectricalResistanceVector
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double ElectricalResistanceVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double ElectricalResistanceVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalResistanceVector(final SortedMap<Integer, Double> values,
-        final ElectricalResistanceUnit unit, final int length, final DataType dataType) throws ValueException
+        final ElectricalResistanceUnit unit, final int length, final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.DensityUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Density;
 
@@ -28,47 +28,47 @@ public class DensityVector extends TypedDoubleVectorRel<DensityUnit, DensityVect
      * Construct a new Relative Immutable Double DensityVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double DensityVector
      * @param unit U; the unit of the new Relative Immutable Double DensityVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public DensityVector(final double[] values, final DensityUnit unit, final DataType dataType) throws ValueException
+    public DensityVector(final double[] values, final DensityUnit unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double DensityVector.
      * @param values List; the values of the entries in the new Relative Immutable Double DensityVector
      * @param unit U; the unit of the new Relative Immutable Double DensityVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public DensityVector(final List<Double> values, final DensityUnit unit, final DataType dataType)
+    public DensityVector(final List<Double> values, final DensityUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double DensityVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double DensityVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public DensityVector(final Density[] values, final DataType dataType) throws ValueException
+    public DensityVector(final Density[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double DensityVector.
      * @param values List; the values of the entries in the new Relative Immutable Double DensityVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public DensityVector(final List<Density> values, final DataType dataType) throws ValueException
+    public DensityVector(final List<Density> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -76,13 +76,13 @@ public class DensityVector extends TypedDoubleVectorRel<DensityUnit, DensityVect
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            DensityVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public DensityVector(final SortedMap<Integer, Density> values, final int length, final DataType dataType)
+    public DensityVector(final SortedMap<Integer, Density> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -90,13 +90,13 @@ public class DensityVector extends TypedDoubleVectorRel<DensityUnit, DensityVect
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double DensityVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double DensityVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public DensityVector(final SortedMap<Integer, Double> values, final DensityUnit unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

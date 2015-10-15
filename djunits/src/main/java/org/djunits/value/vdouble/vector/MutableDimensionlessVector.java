@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.DimensionlessUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Dimensionless;
 
@@ -39,48 +39,48 @@ public interface MutableDimensionlessVector
          * Construct a new Absolute Mutable Double DimensionlessVector.
          * @param values double[]; the values of the entries in the new Absolute Mutable Double DimensionlessVector
          * @param unit U; the unit of the new Absolute Mutable Double DimensionlessVector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Abs(final double[] values, final DimensionlessUnit unit, final DataType dataType) throws ValueException
+        public Abs(final double[] values, final DimensionlessUnit unit, final StorageType storageType) throws ValueException
         {
-            super(values, unit, dataType);
+            super(values, unit, storageType);
         }
 
         /**
          * Construct a new Absolute Mutable Double DimensionlessVector.
          * @param values List; the values of the entries in the new Absolute Mutable Double DimensionlessVector
          * @param unit U; the unit of the new Absolute Mutable Double DimensionlessVector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Abs(final List<Double> values, final DimensionlessUnit unit, final DataType dataType)
+        public Abs(final List<Double> values, final DimensionlessUnit unit, final StorageType storageType)
             throws ValueException
         {
-            super(values, unit, dataType);
+            super(values, unit, storageType);
         }
 
         /**
          * Construct a new Absolute Mutable Double DimensionlessVector.
          * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable Double
          *            DimensionlessVector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
-        public Abs(final Dimensionless.Abs[] values, final DataType dataType) throws ValueException
+        public Abs(final Dimensionless.Abs[] values, final StorageType storageType) throws ValueException
         {
-            super(values, dataType);
+            super(values, storageType);
         }
 
         /**
          * Construct a new Absolute Mutable Double DimensionlessVector.
          * @param values List; the values of the entries in the new Absolute Mutable Double DimensionlessVector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
-        public Abs(final List<Dimensionless.Abs> values, final DataType dataType) throws ValueException
+        public Abs(final List<Dimensionless.Abs> values, final StorageType storageType) throws ValueException
         {
-            super(values, dataType);
+            super(values, storageType);
         }
 
         /**
@@ -88,13 +88,13 @@ public interface MutableDimensionlessVector
          * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable Double
          *            DimensionlessVector
          * @param length the size of the vector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
-        public Abs(final SortedMap<Integer, Dimensionless.Abs> values, final int length, final DataType dataType)
+        public Abs(final SortedMap<Integer, Dimensionless.Abs> values, final int length, final StorageType storageType)
             throws ValueException
         {
-            super(values, length, dataType);
+            super(values, length, storageType);
         }
 
         /**
@@ -102,13 +102,13 @@ public interface MutableDimensionlessVector
          * @param values Map; the map of indexes to values of the Absolute Sparse Mutable Double DimensionlessVector
          * @param unit U; the unit of the new Absolute Sparse Mutable Double DimensionlessVector
          * @param length the size of the vector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Abs(final SortedMap<Integer, Double> values, final DimensionlessUnit unit, final int length,
-            final DataType dataType) throws ValueException
+            final StorageType storageType) throws ValueException
         {
-            super(values, unit, length, dataType);
+            super(values, unit, length, storageType);
         }
 
         /**
@@ -181,48 +181,48 @@ public interface MutableDimensionlessVector
          * Construct a new Relative Mutable Double DimensionlessVector.
          * @param values double[]; the values of the entries in the new Relative Mutable Double DimensionlessVector
          * @param unit U; the unit of the new Relative Mutable Double DimensionlessVector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Rel(final double[] values, final DimensionlessUnit unit, final DataType dataType) throws ValueException
+        public Rel(final double[] values, final DimensionlessUnit unit, final StorageType storageType) throws ValueException
         {
-            super(values, unit, dataType);
+            super(values, unit, storageType);
         }
 
         /**
          * Construct a new Relative Mutable Double DimensionlessVector.
          * @param values List; the values of the entries in the new Relative Mutable Double DimensionlessVector
          * @param unit U; the unit of the new Relative Mutable Double DimensionlessVector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Rel(final List<Double> values, final DimensionlessUnit unit, final DataType dataType)
+        public Rel(final List<Double> values, final DimensionlessUnit unit, final StorageType storageType)
             throws ValueException
         {
-            super(values, unit, dataType);
+            super(values, unit, storageType);
         }
 
         /**
          * Construct a new Relative Mutable Double DimensionlessVector.
          * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable Double
          *            DimensionlessVector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
-        public Rel(final Dimensionless.Rel[] values, final DataType dataType) throws ValueException
+        public Rel(final Dimensionless.Rel[] values, final StorageType storageType) throws ValueException
         {
-            super(values, dataType);
+            super(values, storageType);
         }
 
         /**
          * Construct a new Relative Mutable Double DimensionlessVector.
          * @param values List; the values of the entries in the new Relative Mutable Double DimensionlessVector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
-        public Rel(final List<Dimensionless.Rel> values, final DataType dataType) throws ValueException
+        public Rel(final List<Dimensionless.Rel> values, final StorageType storageType) throws ValueException
         {
-            super(values, dataType);
+            super(values, storageType);
         }
 
         /**
@@ -230,13 +230,13 @@ public interface MutableDimensionlessVector
          * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
          *            DimensionlessVector
          * @param length the size of the vector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
-        public Rel(final SortedMap<Integer, Dimensionless.Rel> values, final int length, final DataType dataType)
+        public Rel(final SortedMap<Integer, Dimensionless.Rel> values, final int length, final StorageType storageType)
             throws ValueException
         {
-            super(values, length, dataType);
+            super(values, length, storageType);
         }
 
         /**
@@ -244,13 +244,13 @@ public interface MutableDimensionlessVector
          * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double DimensionlessVector
          * @param unit U; the unit of the new Relative Sparse Mutable Double DimensionlessVector
          * @param length the size of the vector
-         * @param dataType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Rel(final SortedMap<Integer, Double> values, final DimensionlessUnit unit, final int length,
-            final DataType dataType) throws ValueException
+            final StorageType storageType) throws ValueException
         {
-            super(values, unit, length, dataType);
+            super(values, unit, length, storageType);
         }
 
         /**

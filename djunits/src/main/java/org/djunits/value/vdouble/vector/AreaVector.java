@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.AreaUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Area;
 
@@ -28,59 +28,59 @@ public class AreaVector extends TypedDoubleVectorRel<AreaUnit, AreaVector, Mutab
      * Construct a new Relative Immutable Double AreaVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double AreaVector
      * @param unit U; the unit of the new Relative Immutable Double AreaVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public AreaVector(final double[] values, final AreaUnit unit, final DataType dataType) throws ValueException
+    public AreaVector(final double[] values, final AreaUnit unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double AreaVector.
      * @param values List; the values of the entries in the new Relative Immutable Double AreaVector
      * @param unit U; the unit of the new Relative Immutable Double AreaVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public AreaVector(final List<Double> values, final AreaUnit unit, final DataType dataType) throws ValueException
+    public AreaVector(final List<Double> values, final AreaUnit unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double AreaVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double AreaVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public AreaVector(final Area[] values, final DataType dataType) throws ValueException
+    public AreaVector(final Area[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double AreaVector.
      * @param values List; the values of the entries in the new Relative Immutable Double AreaVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public AreaVector(final List<Area> values, final DataType dataType) throws ValueException
+    public AreaVector(final List<Area> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double AreaVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double AreaVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public AreaVector(final SortedMap<Integer, Area> values, final int length, final DataType dataType)
+    public AreaVector(final SortedMap<Integer, Area> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -88,13 +88,13 @@ public class AreaVector extends TypedDoubleVectorRel<AreaUnit, AreaVector, Mutab
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double AreaVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double AreaVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public AreaVector(final SortedMap<Integer, Double> values, final AreaUnit unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

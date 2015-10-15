@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.Unit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 
@@ -34,59 +34,59 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * Construct a new Relative Mutable DoubleVector.
      * @param values double[]; the values of the entries in the new Relative Mutable DoubleVector
      * @param unit U; the unit of the new Relative Mutable DoubleVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorAbs(final double[] values, final U unit, final DataType dataType) throws ValueException
+    MutableTypedDoubleVectorAbs(final double[] values, final U unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Mutable DoubleVector.
      * @param values List; the values of the entries in the new Relative Mutable DoubleVector
      * @param unit U; the unit of the new Relative Mutable DoubleVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorAbs(final List<Double> values, final U unit, final DataType dataType) throws ValueException
+    MutableTypedDoubleVectorAbs(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Mutable DoubleVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable DoubleVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    MutableTypedDoubleVectorAbs(final S[] values, final DataType dataType) throws ValueException
+    MutableTypedDoubleVectorAbs(final S[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Mutable DoubleVector.
      * @param values List; the values of the entries in the new Relative Mutable DoubleVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    MutableTypedDoubleVectorAbs(final List<S> values, final DataType dataType) throws ValueException
+    MutableTypedDoubleVectorAbs(final List<S> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Mutable DoubleVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable DoubleVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    MutableTypedDoubleVectorAbs(final SortedMap<Integer, S> values, final int length, final DataType dataType)
+    MutableTypedDoubleVectorAbs(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -94,13 +94,13 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable DoubleVector
      * @param unit U; the unit of the new Relative Sparse Mutable DoubleVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     MutableTypedDoubleVectorAbs(final SortedMap<Integer, Double> values, final U unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**

@@ -2,7 +2,7 @@ package org.djunits.value.vdouble.vector;
 
 import java.util.stream.IntStream;
 
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.DoubleFunction;
 
@@ -25,7 +25,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
      */
     public DoubleVectorDataDense(final double[] vectorSI)
     {
-        super(DataType.DENSE);
+        super(StorageType.DENSE);
         this.vectorSI = new double[vectorSI.length];
         System.arraycopy(vectorSI, 0, this.vectorSI, 0, vectorSI.length);
     }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.LinearDensityUnit;
-import org.djunits.value.DataType;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.LinearDensity;
 
@@ -29,49 +29,49 @@ public class LinearDensityVector extends
      * Construct a new Relative Immutable Double LinearDensityVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double LinearDensityVector
      * @param unit U; the unit of the new Relative Immutable Double LinearDensityVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public LinearDensityVector(final double[] values, final LinearDensityUnit unit, final DataType dataType)
+    public LinearDensityVector(final double[] values, final LinearDensityUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double LinearDensityVector.
      * @param values List; the values of the entries in the new Relative Immutable Double LinearDensityVector
      * @param unit U; the unit of the new Relative Immutable Double LinearDensityVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public LinearDensityVector(final List<Double> values, final LinearDensityUnit unit, final DataType dataType)
+    public LinearDensityVector(final List<Double> values, final LinearDensityUnit unit, final StorageType storageType)
         throws ValueException
     {
-        super(values, unit, dataType);
+        super(values, unit, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double LinearDensityVector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
      *            LinearDensityVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public LinearDensityVector(final LinearDensity[] values, final DataType dataType) throws ValueException
+    public LinearDensityVector(final LinearDensity[] values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
      * Construct a new Relative Immutable Double LinearDensityVector.
      * @param values List; the values of the entries in the new Relative Immutable Double LinearDensityVector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public LinearDensityVector(final List<LinearDensity> values, final DataType dataType) throws ValueException
+    public LinearDensityVector(final List<LinearDensity> values, final StorageType storageType) throws ValueException
     {
-        super(values, dataType);
+        super(values, storageType);
     }
 
     /**
@@ -79,13 +79,13 @@ public class LinearDensityVector extends
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            LinearDensityVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public LinearDensityVector(final SortedMap<Integer, LinearDensity> values, final int length, final DataType dataType)
+    public LinearDensityVector(final SortedMap<Integer, LinearDensity> values, final int length, final StorageType storageType)
         throws ValueException
     {
-        super(values, length, dataType);
+        super(values, length, storageType);
     }
 
     /**
@@ -93,13 +93,13 @@ public class LinearDensityVector extends
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double LinearDensityVector
      * @param unit U; the unit of the new Relative Sparse Mutable Double LinearDensityVector
      * @param length the size of the vector
-     * @param dataType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public LinearDensityVector(final SortedMap<Integer, Double> values, final LinearDensityUnit unit, final int length,
-        final DataType dataType) throws ValueException
+        final StorageType storageType) throws ValueException
     {
-        super(values, unit, length, dataType);
+        super(values, unit, length, storageType);
     }
 
     /**
