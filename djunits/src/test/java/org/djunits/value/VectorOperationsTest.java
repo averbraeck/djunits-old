@@ -163,8 +163,7 @@ public class VectorOperationsTest
         double[] doubleInValue = { 1.23456, 2.34567, 3.45678 };
         float[] floatInValue = { 1.23456f, 2.34567f, 3.45678f };
         Object inValue = doubleType ? doubleInValue : floatInValue;
-
-        System.out.println("Looking for constructor of " + vectorClassAbsRel.getName());
+        //System.out.println("Looking for constructor of " + vectorClassAbsRel.getName());
         Constructor<?> constructor =
                 vectorClassAbsRel.getConstructor(doubleType ? double[].class : float[].class, getUnitClass(vectorClassAbsRel),
                         StorageType.class);
@@ -189,7 +188,7 @@ public class VectorOperationsTest
         // AnglePlaneUnit.ARCSECOND);
         // apvrd.toAbs();
 
-        System.out.println("Looking for method " + (isAbs ? "toRel" : "toAbs"));
+        //System.out.println("Looking for method " + (isAbs ? "toRel" : "toAbs"));
         Method method = vectorClassAbsRel.getMethod(isAbs ? "toRel" : "toAbs");
         Object result = method.invoke(from);
         verifyAbsRelPrecisionAndValues(!isAbs, doubleType, result, doubleType ? doubleInValue : floatInValue, 0.000001);
@@ -215,7 +214,7 @@ public class VectorOperationsTest
     {
         for (Method method : scalarClassAbsRel.getDeclaredMethods())
         {
-            System.out.println("Method name is " + method.getName());
+            //System.out.println("Method name is " + method.getName());
             if (method.getName().equals("multiplyBy"))
             {
                 // note: filter out the method that multiplies by a constant...
@@ -682,12 +681,12 @@ public class VectorOperationsTest
                 c = float[].class;
             }
             parameterTypes[i] = c;
-            System.out.println("parameter type[" + i + "] is " + c);
+            //System.out.println("parameter type[" + i + "] is " + c);
         }
         Constructor<?> constructor = null;
         for (Constructor<?> c : vectorClass.getConstructors())
         {
-            System.out.print("Found constructor for " + vectorClass + " " + constructorToString(c));
+            //System.out.print("Found constructor for " + vectorClass + " " + constructorToString(c));
             Class<?>[] parTypes = c.getParameterTypes();
             boolean compatible = parTypes.length == args.length;
             for (int i = 0; i < parTypes.length; i++)
@@ -701,18 +700,18 @@ public class VectorOperationsTest
             }
             if (compatible)
             {
-                System.out.println(" MATCH");
+                //System.out.println(" MATCH");
                 constructor = c;
             }
             else
             {
-                System.out.println("");
+                //System.out.println("");
             }
         }
         // Constructor<?> constructor = vectorClass.getConstructor(parameterTypes);
         if (null == constructor)
         {
-            System.out.println("No suitable constructor");
+            //System.out.println("No suitable constructor");
             fail("Cannot find suitable constructor");
         }
         Object construction = constructor.newInstance(args);
@@ -1079,7 +1078,7 @@ public class VectorOperationsTest
             StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ValueException
     {
-        System.out.println("class name is " + vectorClass.getName());
+        //System.out.println("class name is " + vectorClass.getName());
         Constructor<?> constructor =
                 vectorClass.getConstructor(doubleType ? double[].class : float[].class, getUnitClass(vectorClass),
                         StorageType.class);
