@@ -156,9 +156,9 @@ public class VectorOperationsTest
      * @throws InstantiationException
      * @throws ValueException
      */
-    private void testAbsRelConversion(final Class<?> vectorClassAbsRel, boolean isAbs, boolean doubleType, StorageType storageType)
-            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-            IllegalArgumentException, InvocationTargetException, NoSuchFieldException, ValueException
+    private void testAbsRelConversion(final Class<?> vectorClassAbsRel, boolean isAbs, boolean doubleType,
+            StorageType storageType) throws NoSuchMethodException, SecurityException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException, ValueException
     {
         double[] doubleInValue = { 1.23456, 2.34567, 3.45678 };
         float[] floatInValue = { 1.23456f, 2.34567f, 3.45678f };
@@ -173,8 +173,9 @@ public class VectorOperationsTest
         {
             from =
                     isAbs ? (DoubleVector.Abs<?>) constructor.newInstance(inValue,
-                            getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType) : (DoubleVector.Rel<?>) constructor
-                            .newInstance(inValue, getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType);
+                            getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType)
+                            : (DoubleVector.Rel<?>) constructor.newInstance(inValue,
+                                    getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType);
         }
         else
         {
@@ -575,8 +576,8 @@ public class VectorOperationsTest
             {
                 list.add(doubleValue[i]);
             }
-            findAndTestConstructor(vectorClass, new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType },
-                    abs, doubleType, value);
+            findAndTestConstructor(vectorClass,
+                    new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType, value);
             // Construct a list of scalar objects
             // What is the corresponding Scalar type?
             String scalarClassName = vectorClass.getName();
@@ -607,8 +608,15 @@ public class VectorOperationsTest
             {
                 map.put(i, objectList.get(i));
             }
-            System.out.println("int is assignable from Integer ? " + int.class.isAssignableFrom(Integer.class));
-            findAndTestConstructor(vectorClass, new Object[] { map, objectList.size(), storageType}, abs, doubleType, value);
+            // System.out.println("int is assignable from Integer ? " + int.class.isAssignableFrom(Integer.class));
+            findAndTestConstructor(vectorClass, new Object[] { map, objectList.size(), storageType }, abs, doubleType, value);
+            map.clear();
+            for (int i = 0; i < doubleValue.length; i++)
+            {
+                map.put(i, doubleValue[i]);
+            }
+            findAndTestConstructor(vectorClass, new Object[] { map, getSIUnitInstance(getUnitClass(vectorClass)),
+                    doubleValue.length, storageType }, abs, doubleType, value);
         }
         else
         {
@@ -617,8 +625,8 @@ public class VectorOperationsTest
             {
                 list.add(floatValue[i]);
             }
-            findAndTestConstructor(vectorClass, new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType },
-                    abs, doubleType, value);
+            findAndTestConstructor(vectorClass,
+                    new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType, value);
             // TODO add and convert all other stuff from the Float version
         }
     }
@@ -685,7 +693,8 @@ public class VectorOperationsTest
             for (int i = 0; i < parTypes.length; i++)
             {
                 Class<?> parType = parTypes[i];
-                if (compatible && !parType.isAssignableFrom(parameterTypes[i]) && (!(parType == int.class && parameterTypes[i] == Integer.class)))
+                if (compatible && !parType.isAssignableFrom(parameterTypes[i])
+                        && (!(parType == int.class && parameterTypes[i] == Integer.class)))
                 {
                     compatible = false;
                 }
