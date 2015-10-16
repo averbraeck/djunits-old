@@ -249,6 +249,15 @@ abstract class DoubleVectorData
     /** ============================================================================================ */
 
     /**
+     * Return the StorageType (DENSE, SPARSE, etc.) for the stored Vector.
+     * @return the StorageType (DENSE, SPARSE, etc.) for the stored Vector
+     */
+    public final StorageType getStorageType()
+    {
+        return this.storageType;
+    }
+
+    /**
      * @return the size of the vector
      */
     public abstract int size();
