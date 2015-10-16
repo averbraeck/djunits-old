@@ -9,7 +9,6 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.TimeUnit;
-import org.djunits.value.Relative;
 
 /**
  * Easy access methods for the Speed FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
@@ -27,10 +26,10 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatSpeed extends FloatScalar.Rel<SpeedUnit> implements Relative
+public class FloatSpeed extends TypedFloatScalarRel<SpeedUnit, FloatSpeed>
 {
     /** */
-    private static final long serialVersionUID = 20150905L;
+    private static final long serialVersionUID = 20150901L;
 
     /**
      * Construct FloatSpeed scalar.
@@ -43,22 +42,29 @@ public class FloatSpeed extends FloatScalar.Rel<SpeedUnit> implements Relative
     }
 
     /**
+     * Construct FloatSpeed scalar.
+     * @param value Scalar from which to construct this instance
+     */
+    public FloatSpeed(final FloatSpeed value)
+    {
+        super(value);
+    }
+
+    /**
      * Construct FloatSpeed scalar using a double value.
      * @param value double value
-     * @param unit unit for the value
+     * @param unit unit for the resulting float value
      */
     public FloatSpeed(final double value, final SpeedUnit unit)
     {
         super((float) value, unit);
     }
 
-    /**
-     * Construct FloatSpeed scalar.
-     * @param value Scalar from which to construct this instance
-     */
-    public FloatSpeed(final FloatScalar.Rel<SpeedUnit> value)
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatSpeed instantiateTypeRel(final float value, final SpeedUnit unit)
     {
-        super(value);
+        return new FloatSpeed(value, unit);
     }
 
     /**
@@ -71,256 +77,6 @@ public class FloatSpeed extends FloatScalar.Rel<SpeedUnit> implements Relative
     public static FloatSpeed interpolate(final FloatSpeed zero, final FloatSpeed one, final float ratio)
     {
         return new FloatSpeed(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-    }
-
-    /**
-     * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
-     */
-    public static FloatSpeed interpolate(final FloatSpeed zero, final FloatSpeed one, final double ratio)
-    {
-        return interpolate(zero, one, (float) ratio);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed abs()
-    {
-        return new FloatSpeed(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed acos()
-    {
-        return new FloatSpeed((float) Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed asin()
-    {
-        return new FloatSpeed((float) Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed atan()
-    {
-        return new FloatSpeed((float) Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed cbrt()
-    {
-        return new FloatSpeed((float) Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed ceil()
-    {
-        return new FloatSpeed((float) Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed cos()
-    {
-        return new FloatSpeed((float) Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed cosh()
-    {
-        return new FloatSpeed((float) Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed exp()
-    {
-        return new FloatSpeed((float) Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed expm1()
-    {
-        return new FloatSpeed((float) Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed floor()
-    {
-        return new FloatSpeed((float) Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed log()
-    {
-        return new FloatSpeed((float) Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed log10()
-    {
-        return new FloatSpeed((float) Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed log1p()
-    {
-        return new FloatSpeed((float) Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed rint()
-    {
-        return new FloatSpeed((float) Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed round()
-    {
-        return new FloatSpeed(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed signum()
-    {
-        return new FloatSpeed(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed sin()
-    {
-        return new FloatSpeed((float) Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed sinh()
-    {
-        return new FloatSpeed((float) Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed sqrt()
-    {
-        return new FloatSpeed((float) Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed tan()
-    {
-        return new FloatSpeed((float) Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed tanh()
-    {
-        return new FloatSpeed((float) Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed inv()
-    {
-        return new FloatSpeed(1.0f / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed toDegrees()
-    {
-        return new FloatSpeed((float) Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed toRadians()
-    {
-        return new FloatSpeed((float) Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed pow(final double x)
-    {
-        return new FloatSpeed((float) Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed multiplyBy(final float factor)
-    {
-        return new FloatSpeed(getInUnit() * factor, getUnit());
-    }
-
-    /**
-     * Multiply scalar with a double factor.
-     * @param factor the factor to multiply with
-     * @return new instance of a relative speed
-     */
-    public final FloatSpeed multiplyBy(final double factor)
-    {
-        return multiplyBy((float) factor);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatSpeed divideBy(final float divisor)
-    {
-        return new FloatSpeed(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Divide scalar by a double factor.
-     * @param factor the factor to divide by
-     * @return new instance of a relative speed
-     */
-    public final FloatSpeed divideBy(final double factor)
-    {
-        return divideBy((float) factor);
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final FloatSpeed plus(final FloatSpeed v)
-    {
-        return getUnit().equals(v.getUnit()) ? new FloatSpeed(getInUnit() + v.getInUnit(), getUnit()) : new FloatSpeed(
-            this.si + v.si, SpeedUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final FloatSpeed minus(final FloatSpeed v)
-    {
-        return getUnit().equals(v.getUnit()) ? new FloatSpeed(getInUnit() - v.getInUnit(), getUnit()) : new FloatSpeed(
-            this.si - v.si, SpeedUnit.SI);
     }
 
     /**

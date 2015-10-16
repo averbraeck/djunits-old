@@ -6,7 +6,6 @@ import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MoneyPerLengthUnit;
-import org.djunits.value.Relative;
 
 /**
  * Easy access methods for the LinearDensity FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
@@ -25,10 +24,10 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatLinearDensity extends FloatScalar.Rel<LinearDensityUnit> implements Relative
+public class FloatLinearDensity extends TypedFloatScalarRel<LinearDensityUnit, FloatLinearDensity>
 {
     /** */
-    private static final long serialVersionUID = 20150905L;
+    private static final long serialVersionUID = 20150901L;
 
     /**
      * Construct FloatLinearDensity scalar.
@@ -41,22 +40,29 @@ public class FloatLinearDensity extends FloatScalar.Rel<LinearDensityUnit> imple
     }
 
     /**
+     * Construct FloatLinearDensity scalar.
+     * @param value Scalar from which to construct this instance
+     */
+    public FloatLinearDensity(final FloatLinearDensity value)
+    {
+        super(value);
+    }
+
+    /**
      * Construct FloatLinearDensity scalar using a double value.
      * @param value double value
-     * @param unit unit for the value
+     * @param unit unit for the resulting float value
      */
     public FloatLinearDensity(final double value, final LinearDensityUnit unit)
     {
         super((float) value, unit);
     }
 
-    /**
-     * Construct FloatLinearDensity scalar.
-     * @param value Scalar from which to construct this instance
-     */
-    public FloatLinearDensity(final FloatScalar.Rel<LinearDensityUnit> value)
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatLinearDensity instantiateTypeRel(final float value, final LinearDensityUnit unit)
     {
-        super(value);
+        return new FloatLinearDensity(value, unit);
     }
 
     /**
@@ -71,257 +77,6 @@ public class FloatLinearDensity extends FloatScalar.Rel<LinearDensityUnit> imple
     {
         return new FloatLinearDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
             .getUnit());
-    }
-
-    /**
-     * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
-     */
-    public static FloatLinearDensity interpolate(final FloatLinearDensity zero, final FloatLinearDensity one,
-        final double ratio)
-    {
-        return interpolate(zero, one, (float) ratio);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity abs()
-    {
-        return new FloatLinearDensity(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity acos()
-    {
-        return new FloatLinearDensity((float) Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity asin()
-    {
-        return new FloatLinearDensity((float) Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity atan()
-    {
-        return new FloatLinearDensity((float) Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity cbrt()
-    {
-        return new FloatLinearDensity((float) Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity ceil()
-    {
-        return new FloatLinearDensity((float) Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity cos()
-    {
-        return new FloatLinearDensity((float) Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity cosh()
-    {
-        return new FloatLinearDensity((float) Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity exp()
-    {
-        return new FloatLinearDensity((float) Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity expm1()
-    {
-        return new FloatLinearDensity((float) Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity floor()
-    {
-        return new FloatLinearDensity((float) Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity log()
-    {
-        return new FloatLinearDensity((float) Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity log10()
-    {
-        return new FloatLinearDensity((float) Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity log1p()
-    {
-        return new FloatLinearDensity((float) Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity rint()
-    {
-        return new FloatLinearDensity((float) Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity round()
-    {
-        return new FloatLinearDensity(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity signum()
-    {
-        return new FloatLinearDensity(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity sin()
-    {
-        return new FloatLinearDensity((float) Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity sinh()
-    {
-        return new FloatLinearDensity((float) Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity sqrt()
-    {
-        return new FloatLinearDensity((float) Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity tan()
-    {
-        return new FloatLinearDensity((float) Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity tanh()
-    {
-        return new FloatLinearDensity((float) Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity inv()
-    {
-        return new FloatLinearDensity(1.0f / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity toDegrees()
-    {
-        return new FloatLinearDensity((float) Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity toRadians()
-    {
-        return new FloatLinearDensity((float) Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity pow(final double x)
-    {
-        return new FloatLinearDensity((float) Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity multiplyBy(final float factor)
-    {
-        return new FloatLinearDensity(getInUnit() * factor, getUnit());
-    }
-
-    /**
-     * Multiply scalar with a double factor.
-     * @param factor the factor to multiply with
-     * @return new instance of a relative lineardensity
-     */
-    public final FloatLinearDensity multiplyBy(final double factor)
-    {
-        return multiplyBy((float) factor);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatLinearDensity divideBy(final float divisor)
-    {
-        return new FloatLinearDensity(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Divide scalar by a double factor.
-     * @param factor the factor to divide by
-     * @return new instance of a relative lineardensity
-     */
-    public final FloatLinearDensity divideBy(final double factor)
-    {
-        return divideBy((float) factor);
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final FloatLinearDensity plus(final FloatLinearDensity v)
-    {
-        return getUnit().equals(v.getUnit()) ? new FloatLinearDensity(getInUnit() + v.getInUnit(), getUnit())
-            : new FloatLinearDensity(this.si + v.si, LinearDensityUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final FloatLinearDensity minus(final FloatLinearDensity v)
-    {
-        return getUnit().equals(v.getUnit()) ? new FloatLinearDensity(getInUnit() - v.getInUnit(), getUnit())
-            : new FloatLinearDensity(this.si - v.si, LinearDensityUnit.SI);
     }
 
     /**

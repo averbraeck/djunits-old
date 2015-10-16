@@ -29,7 +29,7 @@ import org.djunits.unit.VolumeUnit;
 public interface Time
 {
     /**
-     * Easy access methods for the Time DoubleScalar. Instead of <br>
+     * Easy access methods for the Relative Time DoubleScalar. Instead of <br>
      * <i>DoubleScalar.Rel&lt;TimeUnit&gt; value = new DoubleScalar.Rel&lt;TimeUnit&gt;(100.0, TimeUnit.SI);</i><br>
      * we can now write <br>
      * <i>Time.Rel value = new Time.Rel(100.0, TimeUnit.SI);</i><br>
@@ -45,7 +45,7 @@ public interface Time
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Rel extends DoubleScalar.Rel<TimeUnit>
+    class Rel extends TypedDoubleScalarRel<TimeUnit, Time.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -64,9 +64,27 @@ public interface Time
          * Construct Time.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Rel(final DoubleScalar.Rel<TimeUnit> value)
+        public Rel(final Time.Rel value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Time.Rel instantiateTypeRel(final double value, final TimeUnit unit)
+        {
+            return new Time.Rel(value, unit);
+        }
+
+        /**
+         * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
+         * @param value the double value
+         * @param unit the unit
+         * @return A a new absolute instance of the DoubleScalar of the right type
+         */
+        protected final Time.Abs instantiateTypeAbs(final double value, final TimeUnit unit)
+        {
+            return new Time.Abs(value, unit);
         }
 
         /**
@@ -81,224 +99,6 @@ public interface Time
             return new Time.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
         }
 
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel abs()
-        {
-            return new Time.Rel(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel acos()
-        {
-            return new Time.Rel(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel asin()
-        {
-            return new Time.Rel(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel atan()
-        {
-            return new Time.Rel(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel cbrt()
-        {
-            return new Time.Rel(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel ceil()
-        {
-            return new Time.Rel(Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel cos()
-        {
-            return new Time.Rel(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel cosh()
-        {
-            return new Time.Rel(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel exp()
-        {
-            return new Time.Rel(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel expm1()
-        {
-            return new Time.Rel(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel floor()
-        {
-            return new Time.Rel(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel log()
-        {
-            return new Time.Rel(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel log10()
-        {
-            return new Time.Rel(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel log1p()
-        {
-            return new Time.Rel(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel rint()
-        {
-            return new Time.Rel(Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel round()
-        {
-            return new Time.Rel(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel signum()
-        {
-            return new Time.Rel(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel sin()
-        {
-            return new Time.Rel(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel sinh()
-        {
-            return new Time.Rel(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel sqrt()
-        {
-            return new Time.Rel(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel tan()
-        {
-            return new Time.Rel(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel tanh()
-        {
-            return new Time.Rel(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel inv()
-        {
-            return new Time.Rel(1.0 / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel toDegrees()
-        {
-            return new Time.Rel(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel toRadians()
-        {
-            return new Time.Rel(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel pow(final double x)
-        {
-            return new Time.Rel(Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel multiplyBy(final double factor)
-        {
-            return new Time.Rel(getInUnit() * factor, getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel divideBy(final double divisor)
-        {
-            return new Time.Rel(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Relative scalar plus Relative scalar = Relative scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Time.Rel plus(final Time.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() + v.getInUnit(), getUnit()) : new Time.Rel(
-                this.si + v.si, TimeUnit.SI);
-        }
-
-        /**
-         * Relative scalar minus Relative scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Time.Rel minus(final Time.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(
-                this.si - v.si, TimeUnit.SI);
-        }
-
         /**
          * Relative scalar plus Absolute scalar = Absolute scalar.
          * @param v the value to add
@@ -306,8 +106,8 @@ public interface Time
          */
         public final Time.Abs plus(final Time.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(
-                this.si + v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
         }
 
         /**
@@ -412,7 +212,7 @@ public interface Time
     }
 
     /**
-     * Easy access methods for the Time DoubleScalar. Instead of <br>
+     * Easy access methods for the Absolute Time DoubleScalar. Instead of <br>
      * <i>DoubleScalar.Abs&lt;TimeUnit&gt; value = new DoubleScalar.Abs&lt;TimeUnit&gt;(100.0, TimeUnit.SI);</i><br>
      * we can now write <br>
      * <i>Time.Abs value = new Time.Abs(100.0, TimeUnit.SI);</i><br>
@@ -428,7 +228,7 @@ public interface Time
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Abs extends DoubleScalar.Abs<TimeUnit>
+    class Abs extends TypedDoubleScalarAbs<TimeUnit, Time.Abs, Time.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -447,9 +247,23 @@ public interface Time
          * Construct Time.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Abs(final DoubleScalar.Abs<TimeUnit> value)
+        public Abs(final Time.Abs value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Time.Abs instantiateTypeAbs(final double value, final TimeUnit unit)
+        {
+            return new Time.Abs(value, unit);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Time.Rel instantiateTypeRel(final double value, final TimeUnit unit)
+        {
+            return new Time.Rel(value, unit);
         }
 
         /**
@@ -462,230 +276,6 @@ public interface Time
         public static Time.Abs interpolate(final Time.Abs zero, final Time.Abs one, final double ratio)
         {
             return new Time.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs abs()
-        {
-            return new Time.Abs(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs acos()
-        {
-            return new Time.Abs(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs asin()
-        {
-            return new Time.Abs(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs atan()
-        {
-            return new Time.Abs(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs cbrt()
-        {
-            return new Time.Abs(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs ceil()
-        {
-            return new Time.Abs(Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs cos()
-        {
-            return new Time.Abs(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs cosh()
-        {
-            return new Time.Abs(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs exp()
-        {
-            return new Time.Abs(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs expm1()
-        {
-            return new Time.Abs(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs floor()
-        {
-            return new Time.Abs(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs log()
-        {
-            return new Time.Abs(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs log10()
-        {
-            return new Time.Abs(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs log1p()
-        {
-            return new Time.Abs(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs rint()
-        {
-            return new Time.Abs(Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs round()
-        {
-            return new Time.Abs(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs signum()
-        {
-            return new Time.Abs(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs sin()
-        {
-            return new Time.Abs(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs sinh()
-        {
-            return new Time.Abs(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs sqrt()
-        {
-            return new Time.Abs(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs tan()
-        {
-            return new Time.Abs(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs tanh()
-        {
-            return new Time.Abs(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs inv()
-        {
-            return new Time.Abs(1.0 / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs toDegrees()
-        {
-            return new Time.Abs(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs toRadians()
-        {
-            return new Time.Abs(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs pow(final double x)
-        {
-            return new Time.Abs(Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /**
-         * Absolute scalar plus Relative scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Time.Abs plus(final Time.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() + v.getInUnit(), getUnit()) : new Time.Abs(
-                this.si + v.si, TimeUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Absolute scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Time.Rel minus(final Time.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Time.Rel(getInUnit() - v.getInUnit(), getUnit()) : new Time.Rel(
-                this.si - v.si, TimeUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Relative scalar = Absolute scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Time.Abs minus(final Time.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Time.Abs(getInUnit() - v.getInUnit(), getUnit()) : new Time.Abs(
-                this.si - v.si, TimeUnit.SI);
-        }
-
-        /**
-         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute time scalar.
-         */
-        public final Time.Rel toRel()
-        {
-            return new Time.Rel(getInUnit(), getUnit());
         }
 
     }

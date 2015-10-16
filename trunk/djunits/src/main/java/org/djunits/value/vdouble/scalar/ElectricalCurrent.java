@@ -5,10 +5,9 @@ import org.djunits.unit.ElectricalChargeUnit;
 import org.djunits.unit.ElectricalCurrentUnit;
 import org.djunits.unit.ElectricalPotentialUnit;
 import org.djunits.unit.PowerUnit;
-import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the ElectricalCurrent DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * Easy access methods for the ElectricalCurrent DoubleScalar, which is relative by definition. Instead of <br>
  * <i>DoubleScalar.Rel&lt;ElectricalCurrentUnit&gt; value = new DoubleScalar.Rel&lt;ElectricalCurrentUnit&gt;(100.0,
  * ElectricalCurrentUnit.SI);</i><br>
  * we can now write <br>
@@ -24,7 +23,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ElectricalCurrent extends DoubleScalar.Rel<ElectricalCurrentUnit> implements Relative
+public class ElectricalCurrent extends TypedDoubleScalarRel<ElectricalCurrentUnit, ElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -43,9 +42,16 @@ public class ElectricalCurrent extends DoubleScalar.Rel<ElectricalCurrentUnit> i
      * Construct ElectricalCurrent scalar.
      * @param value Scalar from which to construct this instance
      */
-    public ElectricalCurrent(final DoubleScalar.Rel<ElectricalCurrentUnit> value)
+    public ElectricalCurrent(final ElectricalCurrent value)
     {
         super(value);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final ElectricalCurrent instantiateTypeRel(final double value, final ElectricalCurrentUnit unit)
+    {
+        return new ElectricalCurrent(value, unit);
     }
 
     /**
@@ -60,224 +66,6 @@ public class ElectricalCurrent extends DoubleScalar.Rel<ElectricalCurrentUnit> i
     {
         return new ElectricalCurrent(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
             .getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent abs()
-    {
-        return new ElectricalCurrent(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent acos()
-    {
-        return new ElectricalCurrent(Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent asin()
-    {
-        return new ElectricalCurrent(Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent atan()
-    {
-        return new ElectricalCurrent(Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent cbrt()
-    {
-        return new ElectricalCurrent(Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent ceil()
-    {
-        return new ElectricalCurrent(Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent cos()
-    {
-        return new ElectricalCurrent(Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent cosh()
-    {
-        return new ElectricalCurrent(Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent exp()
-    {
-        return new ElectricalCurrent(Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent expm1()
-    {
-        return new ElectricalCurrent(Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent floor()
-    {
-        return new ElectricalCurrent(Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent log()
-    {
-        return new ElectricalCurrent(Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent log10()
-    {
-        return new ElectricalCurrent(Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent log1p()
-    {
-        return new ElectricalCurrent(Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent rint()
-    {
-        return new ElectricalCurrent(Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent round()
-    {
-        return new ElectricalCurrent(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent signum()
-    {
-        return new ElectricalCurrent(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent sin()
-    {
-        return new ElectricalCurrent(Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent sinh()
-    {
-        return new ElectricalCurrent(Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent sqrt()
-    {
-        return new ElectricalCurrent(Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent tan()
-    {
-        return new ElectricalCurrent(Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent tanh()
-    {
-        return new ElectricalCurrent(Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent inv()
-    {
-        return new ElectricalCurrent(1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent toDegrees()
-    {
-        return new ElectricalCurrent(Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent toRadians()
-    {
-        return new ElectricalCurrent(Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent pow(final double x)
-    {
-        return new ElectricalCurrent(Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent multiplyBy(final double factor)
-    {
-        return new ElectricalCurrent(getInUnit() * factor, getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrent divideBy(final double divisor)
-    {
-        return new ElectricalCurrent(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final ElectricalCurrent plus(final ElectricalCurrent v)
-    {
-        return getUnit().equals(v.getUnit()) ? new ElectricalCurrent(getInUnit() + v.getInUnit(), getUnit())
-            : new ElectricalCurrent(this.si + v.si, ElectricalCurrentUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final ElectricalCurrent minus(final ElectricalCurrent v)
-    {
-        return getUnit().equals(v.getUnit()) ? new ElectricalCurrent(getInUnit() - v.getInUnit(), getUnit())
-            : new ElectricalCurrent(this.si - v.si, ElectricalCurrentUnit.SI);
     }
 
     /**

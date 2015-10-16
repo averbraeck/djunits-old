@@ -8,10 +8,9 @@ import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
 import org.djunits.unit.TimeUnit;
-import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the Energy DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * Easy access methods for the Energy DoubleScalar, which is relative by definition. Instead of <br>
  * <i>DoubleScalar.Rel&lt;EnergyUnit&gt; value = new DoubleScalar.Rel&lt;EnergyUnit&gt;(100.0, EnergyUnit.SI);</i><br>
  * we can now write <br>
  * <i>Energy value = new Energy(100.0, EnergyUnit.SI);</i><br>
@@ -26,7 +25,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Energy extends DoubleScalar.Rel<EnergyUnit> implements Relative
+public class Energy extends TypedDoubleScalarRel<EnergyUnit, Energy>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -45,9 +44,16 @@ public class Energy extends DoubleScalar.Rel<EnergyUnit> implements Relative
      * Construct Energy scalar.
      * @param value Scalar from which to construct this instance
      */
-    public Energy(final DoubleScalar.Rel<EnergyUnit> value)
+    public Energy(final Energy value)
     {
         super(value);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final Energy instantiateTypeRel(final double value, final EnergyUnit unit)
+    {
+        return new Energy(value, unit);
     }
 
     /**
@@ -60,224 +66,6 @@ public class Energy extends DoubleScalar.Rel<EnergyUnit> implements Relative
     public static Energy interpolate(final Energy zero, final Energy one, final double ratio)
     {
         return new Energy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy abs()
-    {
-        return new Energy(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy acos()
-    {
-        return new Energy(Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy asin()
-    {
-        return new Energy(Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy atan()
-    {
-        return new Energy(Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy cbrt()
-    {
-        return new Energy(Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy ceil()
-    {
-        return new Energy(Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy cos()
-    {
-        return new Energy(Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy cosh()
-    {
-        return new Energy(Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy exp()
-    {
-        return new Energy(Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy expm1()
-    {
-        return new Energy(Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy floor()
-    {
-        return new Energy(Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy log()
-    {
-        return new Energy(Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy log10()
-    {
-        return new Energy(Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy log1p()
-    {
-        return new Energy(Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy rint()
-    {
-        return new Energy(Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy round()
-    {
-        return new Energy(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy signum()
-    {
-        return new Energy(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy sin()
-    {
-        return new Energy(Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy sinh()
-    {
-        return new Energy(Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy sqrt()
-    {
-        return new Energy(Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy tan()
-    {
-        return new Energy(Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy tanh()
-    {
-        return new Energy(Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy inv()
-    {
-        return new Energy(1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy toDegrees()
-    {
-        return new Energy(Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy toRadians()
-    {
-        return new Energy(Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy pow(final double x)
-    {
-        return new Energy(Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy multiplyBy(final double factor)
-    {
-        return new Energy(getInUnit() * factor, getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Energy divideBy(final double divisor)
-    {
-        return new Energy(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final Energy plus(final Energy v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Energy(getInUnit() + v.getInUnit(), getUnit()) : new Energy(this.si
-            + v.si, EnergyUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final Energy minus(final Energy v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Energy(getInUnit() - v.getInUnit(), getUnit()) : new Energy(this.si
-            - v.si, EnergyUnit.SI);
     }
 
     /**

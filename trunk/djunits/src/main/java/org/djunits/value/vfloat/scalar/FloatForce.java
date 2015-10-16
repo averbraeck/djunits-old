@@ -9,7 +9,6 @@ import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
-import org.djunits.value.Relative;
 
 /**
  * Easy access methods for the Force FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
@@ -27,10 +26,10 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatForce extends FloatScalar.Rel<ForceUnit> implements Relative
+public class FloatForce extends TypedFloatScalarRel<ForceUnit, FloatForce>
 {
     /** */
-    private static final long serialVersionUID = 20150905L;
+    private static final long serialVersionUID = 20150901L;
 
     /**
      * Construct FloatForce scalar.
@@ -43,22 +42,29 @@ public class FloatForce extends FloatScalar.Rel<ForceUnit> implements Relative
     }
 
     /**
+     * Construct FloatForce scalar.
+     * @param value Scalar from which to construct this instance
+     */
+    public FloatForce(final FloatForce value)
+    {
+        super(value);
+    }
+
+    /**
      * Construct FloatForce scalar using a double value.
      * @param value double value
-     * @param unit unit for the value
+     * @param unit unit for the resulting float value
      */
     public FloatForce(final double value, final ForceUnit unit)
     {
         super((float) value, unit);
     }
 
-    /**
-     * Construct FloatForce scalar.
-     * @param value Scalar from which to construct this instance
-     */
-    public FloatForce(final FloatScalar.Rel<ForceUnit> value)
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatForce instantiateTypeRel(final float value, final ForceUnit unit)
     {
-        super(value);
+        return new FloatForce(value, unit);
     }
 
     /**
@@ -71,256 +77,6 @@ public class FloatForce extends FloatScalar.Rel<ForceUnit> implements Relative
     public static FloatForce interpolate(final FloatForce zero, final FloatForce one, final float ratio)
     {
         return new FloatForce(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-    }
-
-    /**
-     * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
-     */
-    public static FloatForce interpolate(final FloatForce zero, final FloatForce one, final double ratio)
-    {
-        return interpolate(zero, one, (float) ratio);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce abs()
-    {
-        return new FloatForce(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce acos()
-    {
-        return new FloatForce((float) Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce asin()
-    {
-        return new FloatForce((float) Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce atan()
-    {
-        return new FloatForce((float) Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce cbrt()
-    {
-        return new FloatForce((float) Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce ceil()
-    {
-        return new FloatForce((float) Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce cos()
-    {
-        return new FloatForce((float) Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce cosh()
-    {
-        return new FloatForce((float) Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce exp()
-    {
-        return new FloatForce((float) Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce expm1()
-    {
-        return new FloatForce((float) Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce floor()
-    {
-        return new FloatForce((float) Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce log()
-    {
-        return new FloatForce((float) Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce log10()
-    {
-        return new FloatForce((float) Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce log1p()
-    {
-        return new FloatForce((float) Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce rint()
-    {
-        return new FloatForce((float) Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce round()
-    {
-        return new FloatForce(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce signum()
-    {
-        return new FloatForce(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce sin()
-    {
-        return new FloatForce((float) Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce sinh()
-    {
-        return new FloatForce((float) Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce sqrt()
-    {
-        return new FloatForce((float) Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce tan()
-    {
-        return new FloatForce((float) Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce tanh()
-    {
-        return new FloatForce((float) Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce inv()
-    {
-        return new FloatForce(1.0f / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce toDegrees()
-    {
-        return new FloatForce((float) Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce toRadians()
-    {
-        return new FloatForce((float) Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce pow(final double x)
-    {
-        return new FloatForce((float) Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce multiplyBy(final float factor)
-    {
-        return new FloatForce(getInUnit() * factor, getUnit());
-    }
-
-    /**
-     * Multiply scalar with a double factor.
-     * @param factor the factor to multiply with
-     * @return new instance of a relative force
-     */
-    public final FloatForce multiplyBy(final double factor)
-    {
-        return multiplyBy((float) factor);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForce divideBy(final float divisor)
-    {
-        return new FloatForce(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Divide scalar by a double factor.
-     * @param factor the factor to divide by
-     * @return new instance of a relative force
-     */
-    public final FloatForce divideBy(final double factor)
-    {
-        return divideBy((float) factor);
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final FloatForce plus(final FloatForce v)
-    {
-        return getUnit().equals(v.getUnit()) ? new FloatForce(getInUnit() + v.getInUnit(), getUnit()) : new FloatForce(
-            this.si + v.si, ForceUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final FloatForce minus(final FloatForce v)
-    {
-        return getUnit().equals(v.getUnit()) ? new FloatForce(getInUnit() - v.getInUnit(), getUnit()) : new FloatForce(
-            this.si - v.si, ForceUnit.SI);
     }
 
     /**

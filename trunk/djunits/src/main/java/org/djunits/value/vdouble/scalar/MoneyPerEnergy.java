@@ -3,25 +3,25 @@ package org.djunits.value.vdouble.scalar;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.MoneyPerEnergyUnit;
 import org.djunits.unit.MoneyUnit;
-import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the MoneyPerEnergy DoubleScalar, which is relative by definition. An example is Money. Instead of <br>
- * <i>DoubleScalar.Rel&lt;MoneyUnit&gt; price = new DoubleScalar.Rel&lt;MoneyUnit&gt;(100.0, MoneyUnit.EUR);</i><br>
+ * Easy access methods for the MoneyPerEnergy DoubleScalar, which is relative by definition. Instead of <br>
+ * <i>DoubleScalar.Rel&lt;MoneyPerEnergyUnit&gt; value = new DoubleScalar.Rel&lt;MoneyPerEnergyUnit&gt;(100.0,
+ * MoneyPerEnergyUnit.SI);</i><br>
  * we can now write <br>
- * <i>Money price = new Money(100.0, MoneyUnit.EUR);</i><br>
+ * <i>MoneyPerEnergy value = new MoneyPerEnergy(100.0, MoneyPerEnergyUnit.SI);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerEnergy extends DoubleScalar.Rel<MoneyPerEnergyUnit> implements Relative
+public class MoneyPerEnergy extends TypedDoubleScalarRel<MoneyPerEnergyUnit, MoneyPerEnergy>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -40,9 +40,16 @@ public class MoneyPerEnergy extends DoubleScalar.Rel<MoneyPerEnergyUnit> impleme
      * Construct MoneyPerEnergy scalar.
      * @param value Scalar from which to construct this instance
      */
-    public MoneyPerEnergy(final DoubleScalar.Rel<MoneyPerEnergyUnit> value)
+    public MoneyPerEnergy(final MoneyPerEnergy value)
     {
         super(value);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final MoneyPerEnergy instantiateTypeRel(final double value, final MoneyPerEnergyUnit unit)
+    {
+        return new MoneyPerEnergy(value, unit);
     }
 
     /**
@@ -56,224 +63,6 @@ public class MoneyPerEnergy extends DoubleScalar.Rel<MoneyPerEnergyUnit> impleme
     {
         return new MoneyPerEnergy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
             .getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy abs()
-    {
-        return new MoneyPerEnergy(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy acos()
-    {
-        return new MoneyPerEnergy(Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy asin()
-    {
-        return new MoneyPerEnergy(Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy atan()
-    {
-        return new MoneyPerEnergy(Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy cbrt()
-    {
-        return new MoneyPerEnergy(Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy ceil()
-    {
-        return new MoneyPerEnergy(Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy cos()
-    {
-        return new MoneyPerEnergy(Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy cosh()
-    {
-        return new MoneyPerEnergy(Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy exp()
-    {
-        return new MoneyPerEnergy(Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy expm1()
-    {
-        return new MoneyPerEnergy(Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy floor()
-    {
-        return new MoneyPerEnergy(Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy log()
-    {
-        return new MoneyPerEnergy(Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy log10()
-    {
-        return new MoneyPerEnergy(Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy log1p()
-    {
-        return new MoneyPerEnergy(Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy rint()
-    {
-        return new MoneyPerEnergy(Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy round()
-    {
-        return new MoneyPerEnergy(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy signum()
-    {
-        return new MoneyPerEnergy(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy sin()
-    {
-        return new MoneyPerEnergy(Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy sinh()
-    {
-        return new MoneyPerEnergy(Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy sqrt()
-    {
-        return new MoneyPerEnergy(Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy tan()
-    {
-        return new MoneyPerEnergy(Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy tanh()
-    {
-        return new MoneyPerEnergy(Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy inv()
-    {
-        return new MoneyPerEnergy(1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy toDegrees()
-    {
-        return new MoneyPerEnergy(Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy toRadians()
-    {
-        return new MoneyPerEnergy(Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy pow(final double x)
-    {
-        return new MoneyPerEnergy(Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy multiplyBy(final double factor)
-    {
-        return new MoneyPerEnergy(getInUnit() * factor, getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MoneyPerEnergy divideBy(final double divisor)
-    {
-        return new MoneyPerEnergy(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final MoneyPerEnergy plus(final MoneyPerEnergy v)
-    {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerEnergy(getInUnit() + v.getInUnit(), getUnit())
-            : new MoneyPerEnergy(this.si + v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final MoneyPerEnergy minus(final MoneyPerEnergy v)
-    {
-        return getUnit().equals(v.getUnit()) ? new MoneyPerEnergy(getInUnit() - v.getInUnit(), getUnit())
-            : new MoneyPerEnergy(this.si - v.si, MoneyPerEnergyUnit.getStandardMoneyPerEnergyUnit());
     }
 
     /**

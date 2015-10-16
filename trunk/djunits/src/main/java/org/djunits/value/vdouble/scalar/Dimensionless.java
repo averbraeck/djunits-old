@@ -53,7 +53,7 @@ import org.djunits.unit.VolumeUnit;
 public interface Dimensionless
 {
     /**
-     * Easy access methods for the Dimensionless DoubleScalar. Instead of <br>
+     * Easy access methods for the Relative Dimensionless DoubleScalar. Instead of <br>
      * <i>DoubleScalar.Rel&lt;DimensionlessUnit&gt; value = new DoubleScalar.Rel&lt;DimensionlessUnit&gt;(100.0,
      * DimensionlessUnit.SI);</i><br>
      * we can now write <br>
@@ -70,7 +70,7 @@ public interface Dimensionless
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Rel extends DoubleScalar.Rel<DimensionlessUnit>
+    class Rel extends TypedDoubleScalarRel<DimensionlessUnit, Dimensionless.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -89,9 +89,27 @@ public interface Dimensionless
          * Construct Dimensionless.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Rel(final DoubleScalar.Rel<DimensionlessUnit> value)
+        public Rel(final Dimensionless.Rel value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Dimensionless.Rel instantiateTypeRel(final double value, final DimensionlessUnit unit)
+        {
+            return new Dimensionless.Rel(value, unit);
+        }
+
+        /**
+         * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
+         * @param value the double value
+         * @param unit the unit
+         * @return A a new absolute instance of the DoubleScalar of the right type
+         */
+        protected final Dimensionless.Abs instantiateTypeAbs(final double value, final DimensionlessUnit unit)
+        {
+            return new Dimensionless.Abs(value, unit);
         }
 
         /**
@@ -108,224 +126,6 @@ public interface Dimensionless
                 .getUnit());
         }
 
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel abs()
-        {
-            return new Dimensionless.Rel(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel acos()
-        {
-            return new Dimensionless.Rel(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel asin()
-        {
-            return new Dimensionless.Rel(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel atan()
-        {
-            return new Dimensionless.Rel(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel cbrt()
-        {
-            return new Dimensionless.Rel(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel ceil()
-        {
-            return new Dimensionless.Rel(Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel cos()
-        {
-            return new Dimensionless.Rel(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel cosh()
-        {
-            return new Dimensionless.Rel(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel exp()
-        {
-            return new Dimensionless.Rel(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel expm1()
-        {
-            return new Dimensionless.Rel(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel floor()
-        {
-            return new Dimensionless.Rel(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel log()
-        {
-            return new Dimensionless.Rel(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel log10()
-        {
-            return new Dimensionless.Rel(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel log1p()
-        {
-            return new Dimensionless.Rel(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel rint()
-        {
-            return new Dimensionless.Rel(Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel round()
-        {
-            return new Dimensionless.Rel(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel signum()
-        {
-            return new Dimensionless.Rel(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel sin()
-        {
-            return new Dimensionless.Rel(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel sinh()
-        {
-            return new Dimensionless.Rel(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel sqrt()
-        {
-            return new Dimensionless.Rel(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel tan()
-        {
-            return new Dimensionless.Rel(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel tanh()
-        {
-            return new Dimensionless.Rel(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel inv()
-        {
-            return new Dimensionless.Rel(1.0 / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel toDegrees()
-        {
-            return new Dimensionless.Rel(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel toRadians()
-        {
-            return new Dimensionless.Rel(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel pow(final double x)
-        {
-            return new Dimensionless.Rel(Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel multiplyBy(final double factor)
-        {
-            return new Dimensionless.Rel(getInUnit() * factor, getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Rel divideBy(final double divisor)
-        {
-            return new Dimensionless.Rel(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Relative scalar plus Relative scalar = Relative scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Dimensionless.Rel plus(final Dimensionless.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new Dimensionless.Rel(this.si + v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Relative scalar minus Relative scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Dimensionless.Rel minus(final Dimensionless.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
-        }
-
         /**
          * Relative scalar plus Absolute scalar = Absolute scalar.
          * @param v the value to add
@@ -333,8 +133,8 @@ public interface Dimensionless
          */
         public final Dimensionless.Abs plus(final Dimensionless.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
+            return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
         }
 
         /**
@@ -730,7 +530,7 @@ public interface Dimensionless
     }
 
     /**
-     * Easy access methods for the Dimensionless DoubleScalar. Instead of <br>
+     * Easy access methods for the Absolute Dimensionless DoubleScalar. Instead of <br>
      * <i>DoubleScalar.Abs&lt;DimensionlessUnit&gt; value = new DoubleScalar.Abs&lt;DimensionlessUnit&gt;(100.0,
      * DimensionlessUnit.SI);</i><br>
      * we can now write <br>
@@ -747,7 +547,7 @@ public interface Dimensionless
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Abs extends DoubleScalar.Abs<DimensionlessUnit>
+    class Abs extends TypedDoubleScalarAbs<DimensionlessUnit, Dimensionless.Abs, Dimensionless.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -766,9 +566,23 @@ public interface Dimensionless
          * Construct Dimensionless.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Abs(final DoubleScalar.Abs<DimensionlessUnit> value)
+        public Abs(final Dimensionless.Abs value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Dimensionless.Abs instantiateTypeAbs(final double value, final DimensionlessUnit unit)
+        {
+            return new Dimensionless.Abs(value, unit);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Dimensionless.Rel instantiateTypeRel(final double value, final DimensionlessUnit unit)
+        {
+            return new Dimensionless.Rel(value, unit);
         }
 
         /**
@@ -783,230 +597,6 @@ public interface Dimensionless
         {
             return new Dimensionless.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs abs()
-        {
-            return new Dimensionless.Abs(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs acos()
-        {
-            return new Dimensionless.Abs(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs asin()
-        {
-            return new Dimensionless.Abs(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs atan()
-        {
-            return new Dimensionless.Abs(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs cbrt()
-        {
-            return new Dimensionless.Abs(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs ceil()
-        {
-            return new Dimensionless.Abs(Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs cos()
-        {
-            return new Dimensionless.Abs(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs cosh()
-        {
-            return new Dimensionless.Abs(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs exp()
-        {
-            return new Dimensionless.Abs(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs expm1()
-        {
-            return new Dimensionless.Abs(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs floor()
-        {
-            return new Dimensionless.Abs(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs log()
-        {
-            return new Dimensionless.Abs(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs log10()
-        {
-            return new Dimensionless.Abs(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs log1p()
-        {
-            return new Dimensionless.Abs(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs rint()
-        {
-            return new Dimensionless.Abs(Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs round()
-        {
-            return new Dimensionless.Abs(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs signum()
-        {
-            return new Dimensionless.Abs(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs sin()
-        {
-            return new Dimensionless.Abs(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs sinh()
-        {
-            return new Dimensionless.Abs(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs sqrt()
-        {
-            return new Dimensionless.Abs(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs tan()
-        {
-            return new Dimensionless.Abs(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs tanh()
-        {
-            return new Dimensionless.Abs(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs inv()
-        {
-            return new Dimensionless.Abs(1.0 / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs toDegrees()
-        {
-            return new Dimensionless.Abs(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs toRadians()
-        {
-            return new Dimensionless.Abs(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Dimensionless.Abs pow(final double x)
-        {
-            return new Dimensionless.Abs(Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /**
-         * Absolute scalar plus Relative scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Dimensionless.Abs plus(final Dimensionless.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Dimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Absolute scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Dimensionless.Rel minus(final Dimensionless.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Dimensionless.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Dimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Relative scalar = Absolute scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Dimensionless.Abs minus(final Dimensionless.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Dimensionless.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new Dimensionless.Abs(this.si - v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute dimensionless scalar.
-         */
-        public final Dimensionless.Rel toRel()
-        {
-            return new Dimensionless.Rel(getInUnit(), getUnit());
         }
 
     }

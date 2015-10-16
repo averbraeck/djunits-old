@@ -5,7 +5,6 @@ import org.djunits.unit.FlowMassUnit;
 import org.djunits.unit.ForceUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.MassUnit;
-import org.djunits.value.Relative;
 
 /**
  * Easy access methods for the FlowMass FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
@@ -23,10 +22,10 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatFlowMass extends FloatScalar.Rel<FlowMassUnit> implements Relative
+public class FloatFlowMass extends TypedFloatScalarRel<FlowMassUnit, FloatFlowMass>
 {
     /** */
-    private static final long serialVersionUID = 20150905L;
+    private static final long serialVersionUID = 20150901L;
 
     /**
      * Construct FloatFlowMass scalar.
@@ -39,22 +38,29 @@ public class FloatFlowMass extends FloatScalar.Rel<FlowMassUnit> implements Rela
     }
 
     /**
+     * Construct FloatFlowMass scalar.
+     * @param value Scalar from which to construct this instance
+     */
+    public FloatFlowMass(final FloatFlowMass value)
+    {
+        super(value);
+    }
+
+    /**
      * Construct FloatFlowMass scalar using a double value.
      * @param value double value
-     * @param unit unit for the value
+     * @param unit unit for the resulting float value
      */
     public FloatFlowMass(final double value, final FlowMassUnit unit)
     {
         super((float) value, unit);
     }
 
-    /**
-     * Construct FloatFlowMass scalar.
-     * @param value Scalar from which to construct this instance
-     */
-    public FloatFlowMass(final FloatScalar.Rel<FlowMassUnit> value)
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatFlowMass instantiateTypeRel(final float value, final FlowMassUnit unit)
     {
-        super(value);
+        return new FloatFlowMass(value, unit);
     }
 
     /**
@@ -67,256 +73,6 @@ public class FloatFlowMass extends FloatScalar.Rel<FlowMassUnit> implements Rela
     public static FloatFlowMass interpolate(final FloatFlowMass zero, final FloatFlowMass one, final float ratio)
     {
         return new FloatFlowMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-    }
-
-    /**
-     * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
-     */
-    public static FloatFlowMass interpolate(final FloatFlowMass zero, final FloatFlowMass one, final double ratio)
-    {
-        return interpolate(zero, one, (float) ratio);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass abs()
-    {
-        return new FloatFlowMass(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass acos()
-    {
-        return new FloatFlowMass((float) Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass asin()
-    {
-        return new FloatFlowMass((float) Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass atan()
-    {
-        return new FloatFlowMass((float) Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass cbrt()
-    {
-        return new FloatFlowMass((float) Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass ceil()
-    {
-        return new FloatFlowMass((float) Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass cos()
-    {
-        return new FloatFlowMass((float) Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass cosh()
-    {
-        return new FloatFlowMass((float) Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass exp()
-    {
-        return new FloatFlowMass((float) Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass expm1()
-    {
-        return new FloatFlowMass((float) Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass floor()
-    {
-        return new FloatFlowMass((float) Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass log()
-    {
-        return new FloatFlowMass((float) Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass log10()
-    {
-        return new FloatFlowMass((float) Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass log1p()
-    {
-        return new FloatFlowMass((float) Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass rint()
-    {
-        return new FloatFlowMass((float) Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass round()
-    {
-        return new FloatFlowMass(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass signum()
-    {
-        return new FloatFlowMass(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass sin()
-    {
-        return new FloatFlowMass((float) Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass sinh()
-    {
-        return new FloatFlowMass((float) Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass sqrt()
-    {
-        return new FloatFlowMass((float) Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass tan()
-    {
-        return new FloatFlowMass((float) Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass tanh()
-    {
-        return new FloatFlowMass((float) Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass inv()
-    {
-        return new FloatFlowMass(1.0f / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass toDegrees()
-    {
-        return new FloatFlowMass((float) Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass toRadians()
-    {
-        return new FloatFlowMass((float) Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass pow(final double x)
-    {
-        return new FloatFlowMass((float) Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass multiplyBy(final float factor)
-    {
-        return new FloatFlowMass(getInUnit() * factor, getUnit());
-    }
-
-    /**
-     * Multiply scalar with a double factor.
-     * @param factor the factor to multiply with
-     * @return new instance of a relative flowmass
-     */
-    public final FloatFlowMass multiplyBy(final double factor)
-    {
-        return multiplyBy((float) factor);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFlowMass divideBy(final float divisor)
-    {
-        return new FloatFlowMass(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Divide scalar by a double factor.
-     * @param factor the factor to divide by
-     * @return new instance of a relative flowmass
-     */
-    public final FloatFlowMass divideBy(final double factor)
-    {
-        return divideBy((float) factor);
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final FloatFlowMass plus(final FloatFlowMass v)
-    {
-        return getUnit().equals(v.getUnit()) ? new FloatFlowMass(getInUnit() + v.getInUnit(), getUnit())
-            : new FloatFlowMass(this.si + v.si, FlowMassUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final FloatFlowMass minus(final FloatFlowMass v)
-    {
-        return getUnit().equals(v.getUnit()) ? new FloatFlowMass(getInUnit() - v.getInUnit(), getUnit())
-            : new FloatFlowMass(this.si - v.si, FlowMassUnit.SI);
     }
 
     /**

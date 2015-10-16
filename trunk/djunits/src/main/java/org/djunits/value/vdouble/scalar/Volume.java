@@ -9,10 +9,9 @@ import org.djunits.unit.MassUnit;
 import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.unit.VolumeUnit;
-import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the Volume DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * Easy access methods for the Volume DoubleScalar, which is relative by definition. Instead of <br>
  * <i>DoubleScalar.Rel&lt;VolumeUnit&gt; value = new DoubleScalar.Rel&lt;VolumeUnit&gt;(100.0, VolumeUnit.SI);</i><br>
  * we can now write <br>
  * <i>Volume value = new Volume(100.0, VolumeUnit.SI);</i><br>
@@ -27,7 +26,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Volume extends DoubleScalar.Rel<VolumeUnit> implements Relative
+public class Volume extends TypedDoubleScalarRel<VolumeUnit, Volume>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -46,9 +45,16 @@ public class Volume extends DoubleScalar.Rel<VolumeUnit> implements Relative
      * Construct Volume scalar.
      * @param value Scalar from which to construct this instance
      */
-    public Volume(final DoubleScalar.Rel<VolumeUnit> value)
+    public Volume(final Volume value)
     {
         super(value);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final Volume instantiateTypeRel(final double value, final VolumeUnit unit)
+    {
+        return new Volume(value, unit);
     }
 
     /**
@@ -61,224 +67,6 @@ public class Volume extends DoubleScalar.Rel<VolumeUnit> implements Relative
     public static Volume interpolate(final Volume zero, final Volume one, final double ratio)
     {
         return new Volume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume abs()
-    {
-        return new Volume(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume acos()
-    {
-        return new Volume(Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume asin()
-    {
-        return new Volume(Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume atan()
-    {
-        return new Volume(Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume cbrt()
-    {
-        return new Volume(Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume ceil()
-    {
-        return new Volume(Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume cos()
-    {
-        return new Volume(Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume cosh()
-    {
-        return new Volume(Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume exp()
-    {
-        return new Volume(Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume expm1()
-    {
-        return new Volume(Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume floor()
-    {
-        return new Volume(Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume log()
-    {
-        return new Volume(Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume log10()
-    {
-        return new Volume(Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume log1p()
-    {
-        return new Volume(Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume rint()
-    {
-        return new Volume(Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume round()
-    {
-        return new Volume(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume signum()
-    {
-        return new Volume(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume sin()
-    {
-        return new Volume(Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume sinh()
-    {
-        return new Volume(Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume sqrt()
-    {
-        return new Volume(Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume tan()
-    {
-        return new Volume(Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume tanh()
-    {
-        return new Volume(Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume inv()
-    {
-        return new Volume(1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume toDegrees()
-    {
-        return new Volume(Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume toRadians()
-    {
-        return new Volume(Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume pow(final double x)
-    {
-        return new Volume(Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume multiplyBy(final double factor)
-    {
-        return new Volume(getInUnit() * factor, getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Volume divideBy(final double divisor)
-    {
-        return new Volume(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final Volume plus(final Volume v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Volume(getInUnit() + v.getInUnit(), getUnit()) : new Volume(this.si
-            + v.si, VolumeUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final Volume minus(final Volume v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Volume(getInUnit() - v.getInUnit(), getUnit()) : new Volume(this.si
-            - v.si, VolumeUnit.SI);
     }
 
     /**

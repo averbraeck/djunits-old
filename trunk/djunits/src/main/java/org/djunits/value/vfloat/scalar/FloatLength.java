@@ -45,7 +45,7 @@ public interface FloatLength
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Rel extends FloatScalar.Rel<LengthUnit>
+    class Rel extends TypedFloatScalarRel<LengthUnit, FloatLength.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -61,22 +61,40 @@ public interface FloatLength
         }
 
         /**
+         * Construct FloatLength.Rel scalar.
+         * @param value Scalar from which to construct this instance
+         */
+        public Rel(final FloatLength.Rel value)
+        {
+            super(value);
+        }
+
+        /**
          * Construct FloatLength.Rel scalar using a double value.
-         * @param value float value
-         * @param unit unit for the float value
+         * @param value double value
+         * @param unit unit for the resulting float value
          */
         public Rel(final double value, final LengthUnit unit)
         {
             super((float) value, unit);
         }
 
-        /**
-         * Construct FloatLength.Rel scalar.
-         * @param value Scalar from which to construct this instance
-         */
-        public Rel(final FloatScalar.Rel<LengthUnit> value)
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatLength.Rel instantiateTypeRel(final float value, final LengthUnit unit)
         {
-            super(value);
+            return new FloatLength.Rel(value, unit);
+        }
+
+        /**
+         * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
+         * @param value the float value
+         * @param unit the unit
+         * @return A a new absolute instance of the FloatScalar of the right type
+         */
+        protected final FloatLength.Abs instantiateTypeAbs(final float value, final LengthUnit unit)
+        {
+            return new FloatLength.Abs(value, unit);
         }
 
         /**
@@ -94,265 +112,14 @@ public interface FloatLength
         }
 
         /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static FloatLength.Rel interpolate(final FloatLength.Rel zero, final FloatLength.Rel one,
-            final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel abs()
-        {
-            return new FloatLength.Rel(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel acos()
-        {
-            return new FloatLength.Rel((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel asin()
-        {
-            return new FloatLength.Rel((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel atan()
-        {
-            return new FloatLength.Rel((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel cbrt()
-        {
-            return new FloatLength.Rel((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel ceil()
-        {
-            return new FloatLength.Rel((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel cos()
-        {
-            return new FloatLength.Rel((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel cosh()
-        {
-            return new FloatLength.Rel((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel exp()
-        {
-            return new FloatLength.Rel((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel expm1()
-        {
-            return new FloatLength.Rel((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel floor()
-        {
-            return new FloatLength.Rel((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel log()
-        {
-            return new FloatLength.Rel((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel log10()
-        {
-            return new FloatLength.Rel((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel log1p()
-        {
-            return new FloatLength.Rel((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel rint()
-        {
-            return new FloatLength.Rel((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel round()
-        {
-            return new FloatLength.Rel(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel signum()
-        {
-            return new FloatLength.Rel(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel sin()
-        {
-            return new FloatLength.Rel((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel sinh()
-        {
-            return new FloatLength.Rel((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel sqrt()
-        {
-            return new FloatLength.Rel((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel tan()
-        {
-            return new FloatLength.Rel((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel tanh()
-        {
-            return new FloatLength.Rel((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel inv()
-        {
-            return new FloatLength.Rel(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel toDegrees()
-        {
-            return new FloatLength.Rel((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel toRadians()
-        {
-            return new FloatLength.Rel((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel pow(final double x)
-        {
-            return new FloatLength.Rel((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel multiplyBy(final float factor)
-        {
-            return new FloatLength.Rel(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of a relative length
-         */
-        public final FloatLength.Rel multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel divideBy(final float divisor)
-        {
-            return new FloatLength.Rel(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of a relative length
-         */
-        public final FloatLength.Rel divideBy(final double factor)
-        {
-            return divideBy((float) factor);
-        }
-
-        /**
-         * Relative scalar plus Relative scalar = Relative scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final FloatLength.Rel plus(final FloatLength.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatLength.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatLength.Rel(this.si + v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Relative scalar minus Relative scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatLength.Rel minus(final FloatLength.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatLength.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatLength.Rel(this.si - v.si, LengthUnit.SI);
-        }
-
-        /**
          * Relative scalar plus Absolute scalar = Absolute scalar.
          * @param v the value to add
          * @return sum of this value and v as a new object
          */
         public final FloatLength.Abs plus(final FloatLength.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new FloatLength.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatLength.Abs(this.si + v.si, LengthUnit.SI);
+            return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
         }
 
         /**
@@ -483,7 +250,7 @@ public interface FloatLength
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Abs extends FloatScalar.Abs<LengthUnit>
+    class Abs extends TypedFloatScalarAbs<LengthUnit, FloatLength.Abs, FloatLength.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -512,9 +279,23 @@ public interface FloatLength
          * Construct FloatLength.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Abs(final FloatScalar.Abs<LengthUnit> value)
+        public Abs(final FloatLength.Abs value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatLength.Abs instantiateTypeAbs(final float value, final LengthUnit unit)
+        {
+            return new FloatLength.Abs(value, unit);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatLength.Rel instantiateTypeRel(final float value, final LengthUnit unit)
+        {
+            return new FloatLength.Rel(value, unit);
         }
 
         /**
@@ -529,243 +310,6 @@ public interface FloatLength
         {
             return new FloatLength.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static FloatLength.Abs interpolate(final FloatLength.Abs zero, final FloatLength.Abs one,
-            final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs abs()
-        {
-            return new FloatLength.Abs(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs acos()
-        {
-            return new FloatLength.Abs((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs asin()
-        {
-            return new FloatLength.Abs((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs atan()
-        {
-            return new FloatLength.Abs((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs cbrt()
-        {
-            return new FloatLength.Abs((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs ceil()
-        {
-            return new FloatLength.Abs((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs cos()
-        {
-            return new FloatLength.Abs((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs cosh()
-        {
-            return new FloatLength.Abs((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs exp()
-        {
-            return new FloatLength.Abs((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs expm1()
-        {
-            return new FloatLength.Abs((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs floor()
-        {
-            return new FloatLength.Abs((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs log()
-        {
-            return new FloatLength.Abs((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs log10()
-        {
-            return new FloatLength.Abs((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs log1p()
-        {
-            return new FloatLength.Abs((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs rint()
-        {
-            return new FloatLength.Abs((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs round()
-        {
-            return new FloatLength.Abs(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs signum()
-        {
-            return new FloatLength.Abs(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs sin()
-        {
-            return new FloatLength.Abs((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs sinh()
-        {
-            return new FloatLength.Abs((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs sqrt()
-        {
-            return new FloatLength.Abs((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs tan()
-        {
-            return new FloatLength.Abs((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs tanh()
-        {
-            return new FloatLength.Abs((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs inv()
-        {
-            return new FloatLength.Abs(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs toDegrees()
-        {
-            return new FloatLength.Abs((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs toRadians()
-        {
-            return new FloatLength.Abs((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs pow(final double x)
-        {
-            return new FloatLength.Abs((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /**
-         * Absolute scalar plus Relative scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final FloatLength.Abs plus(final FloatLength.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatLength.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatLength.Abs(this.si + v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Absolute scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatLength.Rel minus(final FloatLength.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatLength.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatLength.Rel(this.si - v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Relative scalar = Absolute scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatLength.Abs minus(final FloatLength.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatLength.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatLength.Abs(this.si - v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute length scalar.
-         */
-        public final FloatLength.Rel toRel()
-        {
-            return new FloatLength.Rel(getInUnit(), getUnit());
         }
 
     }

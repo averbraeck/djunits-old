@@ -8,10 +8,9 @@ import org.djunits.unit.PressureUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.unit.TorqueUnit;
 import org.djunits.unit.VolumeUnit;
-import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the Torque DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * Easy access methods for the Torque DoubleScalar, which is relative by definition. Instead of <br>
  * <i>DoubleScalar.Rel&lt;TorqueUnit&gt; value = new DoubleScalar.Rel&lt;TorqueUnit&gt;(100.0, TorqueUnit.SI);</i><br>
  * we can now write <br>
  * <i>Torque value = new Torque(100.0, TorqueUnit.SI);</i><br>
@@ -26,7 +25,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Torque extends DoubleScalar.Rel<TorqueUnit> implements Relative
+public class Torque extends TypedDoubleScalarRel<TorqueUnit, Torque>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -45,9 +44,16 @@ public class Torque extends DoubleScalar.Rel<TorqueUnit> implements Relative
      * Construct Torque scalar.
      * @param value Scalar from which to construct this instance
      */
-    public Torque(final DoubleScalar.Rel<TorqueUnit> value)
+    public Torque(final Torque value)
     {
         super(value);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final Torque instantiateTypeRel(final double value, final TorqueUnit unit)
+    {
+        return new Torque(value, unit);
     }
 
     /**
@@ -60,224 +66,6 @@ public class Torque extends DoubleScalar.Rel<TorqueUnit> implements Relative
     public static Torque interpolate(final Torque zero, final Torque one, final double ratio)
     {
         return new Torque(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque abs()
-    {
-        return new Torque(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque acos()
-    {
-        return new Torque(Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque asin()
-    {
-        return new Torque(Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque atan()
-    {
-        return new Torque(Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque cbrt()
-    {
-        return new Torque(Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque ceil()
-    {
-        return new Torque(Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque cos()
-    {
-        return new Torque(Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque cosh()
-    {
-        return new Torque(Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque exp()
-    {
-        return new Torque(Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque expm1()
-    {
-        return new Torque(Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque floor()
-    {
-        return new Torque(Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque log()
-    {
-        return new Torque(Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque log10()
-    {
-        return new Torque(Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque log1p()
-    {
-        return new Torque(Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque rint()
-    {
-        return new Torque(Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque round()
-    {
-        return new Torque(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque signum()
-    {
-        return new Torque(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque sin()
-    {
-        return new Torque(Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque sinh()
-    {
-        return new Torque(Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque sqrt()
-    {
-        return new Torque(Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque tan()
-    {
-        return new Torque(Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque tanh()
-    {
-        return new Torque(Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque inv()
-    {
-        return new Torque(1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque toDegrees()
-    {
-        return new Torque(Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque toRadians()
-    {
-        return new Torque(Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque pow(final double x)
-    {
-        return new Torque(Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque multiplyBy(final double factor)
-    {
-        return new Torque(getInUnit() * factor, getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Torque divideBy(final double divisor)
-    {
-        return new Torque(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final Torque plus(final Torque v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Torque(getInUnit() + v.getInUnit(), getUnit()) : new Torque(this.si
-            + v.si, TorqueUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final Torque minus(final Torque v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Torque(getInUnit() - v.getInUnit(), getUnit()) : new Torque(this.si
-            - v.si, TorqueUnit.SI);
     }
 
     /**

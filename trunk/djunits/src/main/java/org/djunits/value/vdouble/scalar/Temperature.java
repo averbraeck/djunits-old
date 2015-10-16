@@ -22,7 +22,7 @@ import org.djunits.unit.TemperatureUnit;
 public interface Temperature
 {
     /**
-     * Easy access methods for the Temperature DoubleScalar. Instead of <br>
+     * Easy access methods for the Relative Temperature DoubleScalar. Instead of <br>
      * <i>DoubleScalar.Rel&lt;TemperatureUnit&gt; value = new DoubleScalar.Rel&lt;TemperatureUnit&gt;(100.0,
      * TemperatureUnit.SI);</i><br>
      * we can now write <br>
@@ -39,7 +39,7 @@ public interface Temperature
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Rel extends DoubleScalar.Rel<TemperatureUnit>
+    class Rel extends TypedDoubleScalarRel<TemperatureUnit, Temperature.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -58,9 +58,27 @@ public interface Temperature
          * Construct Temperature.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Rel(final DoubleScalar.Rel<TemperatureUnit> value)
+        public Rel(final Temperature.Rel value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Temperature.Rel instantiateTypeRel(final double value, final TemperatureUnit unit)
+        {
+            return new Temperature.Rel(value, unit);
+        }
+
+        /**
+         * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
+         * @param value the double value
+         * @param unit the unit
+         * @return A a new absolute instance of the DoubleScalar of the right type
+         */
+        protected final Temperature.Abs instantiateTypeAbs(final double value, final TemperatureUnit unit)
+        {
+            return new Temperature.Abs(value, unit);
         }
 
         /**
@@ -77,224 +95,6 @@ public interface Temperature
                 .getUnit());
         }
 
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel abs()
-        {
-            return new Temperature.Rel(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel acos()
-        {
-            return new Temperature.Rel(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel asin()
-        {
-            return new Temperature.Rel(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel atan()
-        {
-            return new Temperature.Rel(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel cbrt()
-        {
-            return new Temperature.Rel(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel ceil()
-        {
-            return new Temperature.Rel(Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel cos()
-        {
-            return new Temperature.Rel(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel cosh()
-        {
-            return new Temperature.Rel(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel exp()
-        {
-            return new Temperature.Rel(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel expm1()
-        {
-            return new Temperature.Rel(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel floor()
-        {
-            return new Temperature.Rel(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel log()
-        {
-            return new Temperature.Rel(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel log10()
-        {
-            return new Temperature.Rel(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel log1p()
-        {
-            return new Temperature.Rel(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel rint()
-        {
-            return new Temperature.Rel(Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel round()
-        {
-            return new Temperature.Rel(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel signum()
-        {
-            return new Temperature.Rel(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel sin()
-        {
-            return new Temperature.Rel(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel sinh()
-        {
-            return new Temperature.Rel(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel sqrt()
-        {
-            return new Temperature.Rel(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel tan()
-        {
-            return new Temperature.Rel(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel tanh()
-        {
-            return new Temperature.Rel(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel inv()
-        {
-            return new Temperature.Rel(1.0 / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel toDegrees()
-        {
-            return new Temperature.Rel(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel toRadians()
-        {
-            return new Temperature.Rel(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel pow(final double x)
-        {
-            return new Temperature.Rel(Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel multiplyBy(final double factor)
-        {
-            return new Temperature.Rel(getInUnit() * factor, getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Rel divideBy(final double divisor)
-        {
-            return new Temperature.Rel(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Relative scalar plus Relative scalar = Relative scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Temperature.Rel plus(final Temperature.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Temperature.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new Temperature.Rel(this.si + v.si, TemperatureUnit.SI);
-        }
-
-        /**
-         * Relative scalar minus Relative scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Temperature.Rel minus(final Temperature.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Temperature.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Temperature.Rel(this.si - v.si, TemperatureUnit.SI);
-        }
-
         /**
          * Relative scalar plus Absolute scalar = Absolute scalar.
          * @param v the value to add
@@ -302,8 +102,8 @@ public interface Temperature
          */
         public final Temperature.Abs plus(final Temperature.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Temperature.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Temperature.Abs(this.si + v.si, TemperatureUnit.SI);
+            return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
         }
 
         /**
@@ -328,7 +128,7 @@ public interface Temperature
     }
 
     /**
-     * Easy access methods for the Temperature DoubleScalar. Instead of <br>
+     * Easy access methods for the Absolute Temperature DoubleScalar. Instead of <br>
      * <i>DoubleScalar.Abs&lt;TemperatureUnit&gt; value = new DoubleScalar.Abs&lt;TemperatureUnit&gt;(100.0,
      * TemperatureUnit.SI);</i><br>
      * we can now write <br>
@@ -345,7 +145,7 @@ public interface Temperature
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Abs extends DoubleScalar.Abs<TemperatureUnit>
+    class Abs extends TypedDoubleScalarAbs<TemperatureUnit, Temperature.Abs, Temperature.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -364,9 +164,23 @@ public interface Temperature
          * Construct Temperature.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Abs(final DoubleScalar.Abs<TemperatureUnit> value)
+        public Abs(final Temperature.Abs value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Temperature.Abs instantiateTypeAbs(final double value, final TemperatureUnit unit)
+        {
+            return new Temperature.Abs(value, unit);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Temperature.Rel instantiateTypeRel(final double value, final TemperatureUnit unit)
+        {
+            return new Temperature.Rel(value, unit);
         }
 
         /**
@@ -381,230 +195,6 @@ public interface Temperature
         {
             return new Temperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs abs()
-        {
-            return new Temperature.Abs(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs acos()
-        {
-            return new Temperature.Abs(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs asin()
-        {
-            return new Temperature.Abs(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs atan()
-        {
-            return new Temperature.Abs(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs cbrt()
-        {
-            return new Temperature.Abs(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs ceil()
-        {
-            return new Temperature.Abs(Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs cos()
-        {
-            return new Temperature.Abs(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs cosh()
-        {
-            return new Temperature.Abs(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs exp()
-        {
-            return new Temperature.Abs(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs expm1()
-        {
-            return new Temperature.Abs(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs floor()
-        {
-            return new Temperature.Abs(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs log()
-        {
-            return new Temperature.Abs(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs log10()
-        {
-            return new Temperature.Abs(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs log1p()
-        {
-            return new Temperature.Abs(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs rint()
-        {
-            return new Temperature.Abs(Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs round()
-        {
-            return new Temperature.Abs(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs signum()
-        {
-            return new Temperature.Abs(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs sin()
-        {
-            return new Temperature.Abs(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs sinh()
-        {
-            return new Temperature.Abs(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs sqrt()
-        {
-            return new Temperature.Abs(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs tan()
-        {
-            return new Temperature.Abs(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs tanh()
-        {
-            return new Temperature.Abs(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs inv()
-        {
-            return new Temperature.Abs(1.0 / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs toDegrees()
-        {
-            return new Temperature.Abs(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs toRadians()
-        {
-            return new Temperature.Abs(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Temperature.Abs pow(final double x)
-        {
-            return new Temperature.Abs(Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /**
-         * Absolute scalar plus Relative scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Temperature.Abs plus(final Temperature.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Temperature.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Temperature.Abs(this.si + v.si, TemperatureUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Absolute scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Temperature.Rel minus(final Temperature.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Temperature.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Temperature.Rel(this.si - v.si, TemperatureUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Relative scalar = Absolute scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Temperature.Abs minus(final Temperature.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Temperature.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new Temperature.Abs(this.si - v.si, TemperatureUnit.SI);
-        }
-
-        /**
-         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute temperature scalar.
-         */
-        public final Temperature.Rel toRel()
-        {
-            return new Temperature.Rel(getInUnit(), getUnit());
         }
 
     }
