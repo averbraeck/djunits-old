@@ -67,7 +67,7 @@ public class VectorOperationsTest
             ClassNotFoundException, ValueException
     {
         doubleOrFloatScalarOperationsTest(true); // Double precision versions
-        // doubleOrFloatScalarOperationsTest(false); // Float versions
+        // TODO doubleOrFloatScalarOperationsTest(false); // Float versions
     }
 
     /**
@@ -163,7 +163,7 @@ public class VectorOperationsTest
         double[] doubleInValue = { 1.23456, 2.34567, 3.45678 };
         float[] floatInValue = { 1.23456f, 2.34567f, 3.45678f };
         Object inValue = doubleType ? doubleInValue : floatInValue;
-        //System.out.println("Looking for constructor of " + vectorClassAbsRel.getName());
+        // System.out.println("Looking for constructor of " + vectorClassAbsRel.getName());
         Constructor<?> constructor =
                 vectorClassAbsRel.getConstructor(doubleType ? double[].class : float[].class, getUnitClass(vectorClassAbsRel),
                         StorageType.class);
@@ -188,7 +188,7 @@ public class VectorOperationsTest
         // AnglePlaneUnit.ARCSECOND);
         // apvrd.toAbs();
 
-        //System.out.println("Looking for method " + (isAbs ? "toRel" : "toAbs"));
+        // System.out.println("Looking for method " + (isAbs ? "toRel" : "toAbs"));
         Method method = vectorClassAbsRel.getMethod(isAbs ? "toRel" : "toAbs");
         Object result = method.invoke(from);
         verifyAbsRelPrecisionAndValues(!isAbs, doubleType, result, doubleType ? doubleInValue : floatInValue, 0.000001);
@@ -214,7 +214,7 @@ public class VectorOperationsTest
     {
         for (Method method : scalarClassAbsRel.getDeclaredMethods())
         {
-            //System.out.println("Method name is " + method.getName());
+            // System.out.println("Method name is " + method.getName());
             if (method.getName().equals("multiplyBy"))
             {
                 // note: filter out the method that multiplies by a constant...
@@ -225,16 +225,16 @@ public class VectorOperationsTest
                 testMultiplyOrDivideMethodAbsRel(scalarClassAbsRel, isAbs, method, false, doubleType);
             }
         }
-        testConstructors(scalarClassAbsRel, isAbs, doubleType, true, StorageType.DENSE);
-        testConstructors(scalarClassAbsRel, isAbs, doubleType, true, StorageType.SPARSE);
-        testConstructors(scalarClassAbsRel, isAbs, doubleType, false, StorageType.DENSE);
-        testConstructors(scalarClassAbsRel, isAbs, doubleType, false, StorageType.SPARSE);
-        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, true, StorageType.DENSE);
-        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, true, StorageType.SPARSE);
-        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, false, StorageType.DENSE);
-        testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, false, StorageType.SPARSE);
-        testInterpolateMethod(scalarClassAbsRel, isAbs, doubleType, StorageType.DENSE);
-        testInterpolateMethod(scalarClassAbsRel, isAbs, doubleType, StorageType.SPARSE);
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        {
+            for (boolean mutable : new boolean[] { true, false })
+            {
+                testConstructors(scalarClassAbsRel, isAbs, doubleType, mutable, storageType);
+                testGet(scalarClassAbsRel, isAbs, doubleType, mutable, storageType);
+                testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, mutable, storageType);
+            }
+            testInterpolateMethod(scalarClassAbsRel, isAbs, doubleType, storageType);
+        }
     }
 
     /**
@@ -547,7 +547,7 @@ public class VectorOperationsTest
 
     /**
      * @param vectorClass the class to test
-     * @param abs abs or rel class
+     * @param abs boolean; if true; the absolute version is tested; if false; the relative version is tested
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
      * @param mutable boolean; if true; perform test for mutable version; if false; perform test for non-mutable version
      * @param storageType StorageType; Dense or Sparse
@@ -649,7 +649,75 @@ public class VectorOperationsTest
     }
 
     /**
-     * Execute a constructor and check the result.
+     * Find and execute a constructor and return the result.
+     * @param vectorClass Class&lt;?&gt;; the class to which the constructor belongs
+     * @param args Object[]; arguments to provide to the constructor
+     * @param abs boolean; if true; the result of the constructor is expected to be Absolute; if false; the result of the
+     *            constructor is expected to be relative
+     * @param doubleType boolean; if true; the args argument is array of double; of false; the args argument is array of float
+     * @throws NoSuchMethodException
+     * @throws SecurityException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException
+     * @throws ValueException
+     */
+    private Object findAndExecuteConstructor(final Class<?> vectorClass, final Object[] args, final boolean abs,
+            final boolean doubleType) throws NoSuchMethodException, SecurityException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException, InvocationTargetException, ValueException
+    {
+        Class<?>[] parameterTypes = new Class<?>[args.length];
+        for (int i = 0; i < args.length; i++)
+        {
+            Class<?> c = args[i].getClass();
+            if (c.isAssignableFrom(double[].class))
+            {
+                c = double[].class;
+            }
+            else if (c.isAssignableFrom(float[].class))
+            {
+                c = float[].class;
+            }
+            parameterTypes[i] = c;
+            // System.out.println("parameter type[" + i + "] is " + c);
+        }
+        Constructor<?> constructor = null;
+        for (Constructor<?> c : vectorClass.getConstructors())
+        {
+            // System.out.print("Found constructor for " + vectorClass + " " + constructorToString(c));
+            Class<?>[] parTypes = c.getParameterTypes();
+            boolean compatible = parTypes.length == args.length;
+            for (int i = 0; i < parTypes.length; i++)
+            {
+                Class<?> parType = parTypes[i];
+                if (compatible && !parType.isAssignableFrom(parameterTypes[i])
+                        && (!(parType == int.class && parameterTypes[i] == Integer.class)))
+                {
+                    compatible = false;
+                }
+            }
+            if (compatible)
+            {
+                // System.out.println(" MATCH");
+                constructor = c;
+            }
+            else
+            {
+                // System.out.println("");
+            }
+        }
+        // Constructor<?> constructor = vectorClass.getConstructor(parameterTypes);
+        if (null == constructor)
+        {
+            // System.out.println("No suitable constructor");
+            fail("Cannot find suitable constructor");
+        }
+        return constructor.newInstance(args);
+    }
+
+    /**
+     * Find and execute a constructor and check the result.
      * @param vectorClass Class&lt;?&gt;; the class to which the constructor belongs
      * @param args Object[]; arguments to provide to the constructor
      * @param abs boolean; if true; the result of the constructor is expected to be Absolute; if false; the result of the
@@ -668,54 +736,55 @@ public class VectorOperationsTest
             final boolean doubleType, final Object expectedResult) throws NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ValueException
     {
-        Class<?>[] parameterTypes = new Class<?>[args.length];
-        for (int i = 0; i < args.length; i++)
+        verifyAbsRelPrecisionAndValues(abs, doubleType, findAndExecuteConstructor(vectorClass, args, abs, doubleType),
+                expectedResult, 0.0001);
+    }
+
+    /**
+     * Test the get method.
+     * @param vectorClass the class to test
+     * @param abs boolean; if true; the absolute version is tested; if false; the relative version is tested
+     * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
+     * @param mutable boolean; if true; perform test for mutable version; if false; perform test for non-mutable version
+     * @param storageType StorageType; Dense or Sparse
+     * @throws NoSuchMethodException on class or method resolving error
+     * @throws InstantiationException on class or method resolving error
+     * @throws IllegalAccessException on class or method resolving error
+     * @throws InvocationTargetException on class or method resolving error
+     * @throws NoSuchFieldException on class or method resolving error
+     * @throws ClassNotFoundException
+     * @throws ValueException
+     */
+    private void testGet(final Class<?> vectorClass, final boolean abs, final boolean doubleType, boolean mutable,
+            StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
+            InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
+    {
+        double[] doubleValue = { 1.23456, 2.34567, 3.45678 };
+        float[] floatValue = { 1.23456f, 2.34567f, 3.45678f };
+        Object value = doubleType ? doubleValue : floatValue;
+        Object vector =
+                findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
+                        storageType }, abs, doubleType);
+        if (doubleType)
         {
-            Class<?> c = args[i].getClass();
-            if (c.isAssignableFrom(double[].class))
+            DoubleVector<?> dv = (DoubleVector<?>) vector;
+            for (int i = 0; i < doubleValue.length; i++)
             {
-                c = double[].class;
+                DoubleScalar<?> ds = dv.get(i);
+                double got = ds.getSI();
+                assertEquals("get returns expected value", doubleValue[i], got, 0.0001);
             }
-            else if (c.isAssignableFrom(float[].class))
-            {
-                c = float[].class;
-            }
-            parameterTypes[i] = c;
-            //System.out.println("parameter type[" + i + "] is " + c);
         }
-        Constructor<?> constructor = null;
-        for (Constructor<?> c : vectorClass.getConstructors())
+        else
         {
-            //System.out.print("Found constructor for " + vectorClass + " " + constructorToString(c));
-            Class<?>[] parTypes = c.getParameterTypes();
-            boolean compatible = parTypes.length == args.length;
-            for (int i = 0; i < parTypes.length; i++)
+            FloatVector<?> fv = (FloatVector<?>) vector;
+            for (int i = 0; i < doubleValue.length; i++)
             {
-                Class<?> parType = parTypes[i];
-                if (compatible && !parType.isAssignableFrom(parameterTypes[i])
-                        && (!(parType == int.class && parameterTypes[i] == Integer.class)))
-                {
-                    compatible = false;
-                }
-            }
-            if (compatible)
-            {
-                //System.out.println(" MATCH");
-                constructor = c;
-            }
-            else
-            {
-                //System.out.println("");
+                FloatScalar<?> fs = fv.get(i);
+                float got = fs.getSI();
+                assertEquals("get returns expected value", doubleValue[i], got, 0.0001);
             }
         }
-        // Constructor<?> constructor = vectorClass.getConstructor(parameterTypes);
-        if (null == constructor)
-        {
-            //System.out.println("No suitable constructor");
-            fail("Cannot find suitable constructor");
-        }
-        Object construction = constructor.newInstance(args);
-        verifyAbsRelPrecisionAndValues(abs, doubleType, construction, expectedResult, 0.0001);
     }
 
     /**
@@ -1078,7 +1147,7 @@ public class VectorOperationsTest
             StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ValueException
     {
-        //System.out.println("class name is " + vectorClass.getName());
+        // System.out.println("class name is " + vectorClass.getName());
         Constructor<?> constructor =
                 vectorClass.getConstructor(doubleType ? double[].class : float[].class, getUnitClass(vectorClass),
                         StorageType.class);
