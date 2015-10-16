@@ -39,7 +39,7 @@ public interface FloatTemperature
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Rel extends FloatScalar.Rel<TemperatureUnit>
+    class Rel extends TypedFloatScalarRel<TemperatureUnit, FloatTemperature.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -55,22 +55,40 @@ public interface FloatTemperature
         }
 
         /**
+         * Construct FloatTemperature.Rel scalar.
+         * @param value Scalar from which to construct this instance
+         */
+        public Rel(final FloatTemperature.Rel value)
+        {
+            super(value);
+        }
+
+        /**
          * Construct FloatTemperature.Rel scalar using a double value.
-         * @param value float value
-         * @param unit unit for the float value
+         * @param value double value
+         * @param unit unit for the resulting float value
          */
         public Rel(final double value, final TemperatureUnit unit)
         {
             super((float) value, unit);
         }
 
-        /**
-         * Construct FloatTemperature.Rel scalar.
-         * @param value Scalar from which to construct this instance
-         */
-        public Rel(final FloatScalar.Rel<TemperatureUnit> value)
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatTemperature.Rel instantiateTypeRel(final float value, final TemperatureUnit unit)
         {
-            super(value);
+            return new FloatTemperature.Rel(value, unit);
+        }
+
+        /**
+         * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
+         * @param value the float value
+         * @param unit the unit
+         * @return A a new absolute instance of the FloatScalar of the right type
+         */
+        protected final FloatTemperature.Abs instantiateTypeAbs(final float value, final TemperatureUnit unit)
+        {
+            return new FloatTemperature.Abs(value, unit);
         }
 
         /**
@@ -88,265 +106,14 @@ public interface FloatTemperature
         }
 
         /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static FloatTemperature.Rel interpolate(final FloatTemperature.Rel zero, final FloatTemperature.Rel one,
-            final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel abs()
-        {
-            return new FloatTemperature.Rel(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel acos()
-        {
-            return new FloatTemperature.Rel((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel asin()
-        {
-            return new FloatTemperature.Rel((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel atan()
-        {
-            return new FloatTemperature.Rel((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel cbrt()
-        {
-            return new FloatTemperature.Rel((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel ceil()
-        {
-            return new FloatTemperature.Rel((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel cos()
-        {
-            return new FloatTemperature.Rel((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel cosh()
-        {
-            return new FloatTemperature.Rel((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel exp()
-        {
-            return new FloatTemperature.Rel((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel expm1()
-        {
-            return new FloatTemperature.Rel((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel floor()
-        {
-            return new FloatTemperature.Rel((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel log()
-        {
-            return new FloatTemperature.Rel((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel log10()
-        {
-            return new FloatTemperature.Rel((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel log1p()
-        {
-            return new FloatTemperature.Rel((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel rint()
-        {
-            return new FloatTemperature.Rel((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel round()
-        {
-            return new FloatTemperature.Rel(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel signum()
-        {
-            return new FloatTemperature.Rel(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel sin()
-        {
-            return new FloatTemperature.Rel((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel sinh()
-        {
-            return new FloatTemperature.Rel((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel sqrt()
-        {
-            return new FloatTemperature.Rel((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel tan()
-        {
-            return new FloatTemperature.Rel((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel tanh()
-        {
-            return new FloatTemperature.Rel((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel inv()
-        {
-            return new FloatTemperature.Rel(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel toDegrees()
-        {
-            return new FloatTemperature.Rel((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel toRadians()
-        {
-            return new FloatTemperature.Rel((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel pow(final double x)
-        {
-            return new FloatTemperature.Rel((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel multiplyBy(final float factor)
-        {
-            return new FloatTemperature.Rel(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of a relative temperature
-         */
-        public final FloatTemperature.Rel multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel divideBy(final float divisor)
-        {
-            return new FloatTemperature.Rel(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of a relative temperature
-         */
-        public final FloatTemperature.Rel divideBy(final double factor)
-        {
-            return divideBy((float) factor);
-        }
-
-        /**
-         * Relative scalar plus Relative scalar = Relative scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final FloatTemperature.Rel plus(final FloatTemperature.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatTemperature.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatTemperature.Rel(this.si + v.si, TemperatureUnit.SI);
-        }
-
-        /**
-         * Relative scalar minus Relative scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatTemperature.Rel minus(final FloatTemperature.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatTemperature.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatTemperature.Rel(this.si - v.si, TemperatureUnit.SI);
-        }
-
-        /**
          * Relative scalar plus Absolute scalar = Absolute scalar.
          * @param v the value to add
          * @return sum of this value and v as a new object
          */
         public final FloatTemperature.Abs plus(final FloatTemperature.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new FloatTemperature.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatTemperature.Abs(this.si + v.si, TemperatureUnit.SI);
+            return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
         }
 
         /**
@@ -388,7 +155,7 @@ public interface FloatTemperature
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Abs extends FloatScalar.Abs<TemperatureUnit>
+    class Abs extends TypedFloatScalarAbs<TemperatureUnit, FloatTemperature.Abs, FloatTemperature.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -417,9 +184,23 @@ public interface FloatTemperature
          * Construct FloatTemperature.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Abs(final FloatScalar.Abs<TemperatureUnit> value)
+        public Abs(final FloatTemperature.Abs value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatTemperature.Abs instantiateTypeAbs(final float value, final TemperatureUnit unit)
+        {
+            return new FloatTemperature.Abs(value, unit);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatTemperature.Rel instantiateTypeRel(final float value, final TemperatureUnit unit)
+        {
+            return new FloatTemperature.Rel(value, unit);
         }
 
         /**
@@ -434,243 +215,6 @@ public interface FloatTemperature
         {
             return new FloatTemperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
                 zero.getUnit());
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static FloatTemperature.Abs interpolate(final FloatTemperature.Abs zero, final FloatTemperature.Abs one,
-            final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs abs()
-        {
-            return new FloatTemperature.Abs(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs acos()
-        {
-            return new FloatTemperature.Abs((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs asin()
-        {
-            return new FloatTemperature.Abs((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs atan()
-        {
-            return new FloatTemperature.Abs((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs cbrt()
-        {
-            return new FloatTemperature.Abs((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs ceil()
-        {
-            return new FloatTemperature.Abs((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs cos()
-        {
-            return new FloatTemperature.Abs((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs cosh()
-        {
-            return new FloatTemperature.Abs((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs exp()
-        {
-            return new FloatTemperature.Abs((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs expm1()
-        {
-            return new FloatTemperature.Abs((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs floor()
-        {
-            return new FloatTemperature.Abs((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs log()
-        {
-            return new FloatTemperature.Abs((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs log10()
-        {
-            return new FloatTemperature.Abs((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs log1p()
-        {
-            return new FloatTemperature.Abs((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs rint()
-        {
-            return new FloatTemperature.Abs((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs round()
-        {
-            return new FloatTemperature.Abs(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs signum()
-        {
-            return new FloatTemperature.Abs(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs sin()
-        {
-            return new FloatTemperature.Abs((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs sinh()
-        {
-            return new FloatTemperature.Abs((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs sqrt()
-        {
-            return new FloatTemperature.Abs((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs tan()
-        {
-            return new FloatTemperature.Abs((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs tanh()
-        {
-            return new FloatTemperature.Abs((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs inv()
-        {
-            return new FloatTemperature.Abs(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs toDegrees()
-        {
-            return new FloatTemperature.Abs((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs toRadians()
-        {
-            return new FloatTemperature.Abs((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs pow(final double x)
-        {
-            return new FloatTemperature.Abs((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /**
-         * Absolute scalar plus Relative scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final FloatTemperature.Abs plus(final FloatTemperature.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatTemperature.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatTemperature.Abs(this.si + v.si, TemperatureUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Absolute scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatTemperature.Rel minus(final FloatTemperature.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatTemperature.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatTemperature.Rel(this.si - v.si, TemperatureUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Relative scalar = Absolute scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatTemperature.Abs minus(final FloatTemperature.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatTemperature.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatTemperature.Abs(this.si - v.si, TemperatureUnit.SI);
-        }
-
-        /**
-         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute temperature scalar.
-         */
-        public final FloatTemperature.Rel toRel()
-        {
-            return new FloatTemperature.Rel(getInUnit(), getUnit());
         }
 
     }

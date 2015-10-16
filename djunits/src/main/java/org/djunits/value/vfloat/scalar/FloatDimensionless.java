@@ -70,7 +70,7 @@ public interface FloatDimensionless
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Rel extends FloatScalar.Rel<DimensionlessUnit>
+    class Rel extends TypedFloatScalarRel<DimensionlessUnit, FloatDimensionless.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -86,22 +86,40 @@ public interface FloatDimensionless
         }
 
         /**
+         * Construct FloatDimensionless.Rel scalar.
+         * @param value Scalar from which to construct this instance
+         */
+        public Rel(final FloatDimensionless.Rel value)
+        {
+            super(value);
+        }
+
+        /**
          * Construct FloatDimensionless.Rel scalar using a double value.
-         * @param value float value
-         * @param unit unit for the float value
+         * @param value double value
+         * @param unit unit for the resulting float value
          */
         public Rel(final double value, final DimensionlessUnit unit)
         {
             super((float) value, unit);
         }
 
-        /**
-         * Construct FloatDimensionless.Rel scalar.
-         * @param value Scalar from which to construct this instance
-         */
-        public Rel(final FloatScalar.Rel<DimensionlessUnit> value)
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatDimensionless.Rel instantiateTypeRel(final float value, final DimensionlessUnit unit)
         {
-            super(value);
+            return new FloatDimensionless.Rel(value, unit);
+        }
+
+        /**
+         * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
+         * @param value the float value
+         * @param unit the unit
+         * @return A a new absolute instance of the FloatScalar of the right type
+         */
+        protected final FloatDimensionless.Abs instantiateTypeAbs(final float value, final DimensionlessUnit unit)
+        {
+            return new FloatDimensionless.Abs(value, unit);
         }
 
         /**
@@ -119,265 +137,14 @@ public interface FloatDimensionless
         }
 
         /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static FloatDimensionless.Rel interpolate(final FloatDimensionless.Rel zero,
-            final FloatDimensionless.Rel one, final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel abs()
-        {
-            return new FloatDimensionless.Rel(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel acos()
-        {
-            return new FloatDimensionless.Rel((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel asin()
-        {
-            return new FloatDimensionless.Rel((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel atan()
-        {
-            return new FloatDimensionless.Rel((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel cbrt()
-        {
-            return new FloatDimensionless.Rel((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel ceil()
-        {
-            return new FloatDimensionless.Rel((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel cos()
-        {
-            return new FloatDimensionless.Rel((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel cosh()
-        {
-            return new FloatDimensionless.Rel((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel exp()
-        {
-            return new FloatDimensionless.Rel((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel expm1()
-        {
-            return new FloatDimensionless.Rel((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel floor()
-        {
-            return new FloatDimensionless.Rel((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel log()
-        {
-            return new FloatDimensionless.Rel((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel log10()
-        {
-            return new FloatDimensionless.Rel((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel log1p()
-        {
-            return new FloatDimensionless.Rel((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel rint()
-        {
-            return new FloatDimensionless.Rel((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel round()
-        {
-            return new FloatDimensionless.Rel(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel signum()
-        {
-            return new FloatDimensionless.Rel(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel sin()
-        {
-            return new FloatDimensionless.Rel((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel sinh()
-        {
-            return new FloatDimensionless.Rel((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel sqrt()
-        {
-            return new FloatDimensionless.Rel((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel tan()
-        {
-            return new FloatDimensionless.Rel((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel tanh()
-        {
-            return new FloatDimensionless.Rel((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel inv()
-        {
-            return new FloatDimensionless.Rel(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel toDegrees()
-        {
-            return new FloatDimensionless.Rel((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel toRadians()
-        {
-            return new FloatDimensionless.Rel((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel pow(final double x)
-        {
-            return new FloatDimensionless.Rel((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel multiplyBy(final float factor)
-        {
-            return new FloatDimensionless.Rel(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of a relative dimensionless
-         */
-        public final FloatDimensionless.Rel multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Rel divideBy(final float divisor)
-        {
-            return new FloatDimensionless.Rel(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of a relative dimensionless
-         */
-        public final FloatDimensionless.Rel divideBy(final double factor)
-        {
-            return divideBy((float) factor);
-        }
-
-        /**
-         * Relative scalar plus Relative scalar = Relative scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final FloatDimensionless.Rel plus(final FloatDimensionless.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatDimensionless.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatDimensionless.Rel(this.si + v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Relative scalar minus Relative scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatDimensionless.Rel minus(final FloatDimensionless.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatDimensionless.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatDimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
-        }
-
-        /**
          * Relative scalar plus Absolute scalar = Absolute scalar.
          * @param v the value to add
          * @return sum of this value and v as a new object
          */
         public final FloatDimensionless.Abs plus(final FloatDimensionless.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new FloatDimensionless.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatDimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
+            return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
         }
 
         /**
@@ -802,7 +569,7 @@ public interface FloatDimensionless
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Abs extends FloatScalar.Abs<DimensionlessUnit>
+    class Abs extends TypedFloatScalarAbs<DimensionlessUnit, FloatDimensionless.Abs, FloatDimensionless.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -831,9 +598,23 @@ public interface FloatDimensionless
          * Construct FloatDimensionless.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Abs(final FloatScalar.Abs<DimensionlessUnit> value)
+        public Abs(final FloatDimensionless.Abs value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatDimensionless.Abs instantiateTypeAbs(final float value, final DimensionlessUnit unit)
+        {
+            return new FloatDimensionless.Abs(value, unit);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatDimensionless.Rel instantiateTypeRel(final float value, final DimensionlessUnit unit)
+        {
+            return new FloatDimensionless.Rel(value, unit);
         }
 
         /**
@@ -848,243 +629,6 @@ public interface FloatDimensionless
         {
             return new FloatDimensionless.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
                 zero.getUnit());
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static FloatDimensionless.Abs interpolate(final FloatDimensionless.Abs zero,
-            final FloatDimensionless.Abs one, final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs abs()
-        {
-            return new FloatDimensionless.Abs(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs acos()
-        {
-            return new FloatDimensionless.Abs((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs asin()
-        {
-            return new FloatDimensionless.Abs((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs atan()
-        {
-            return new FloatDimensionless.Abs((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs cbrt()
-        {
-            return new FloatDimensionless.Abs((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs ceil()
-        {
-            return new FloatDimensionless.Abs((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs cos()
-        {
-            return new FloatDimensionless.Abs((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs cosh()
-        {
-            return new FloatDimensionless.Abs((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs exp()
-        {
-            return new FloatDimensionless.Abs((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs expm1()
-        {
-            return new FloatDimensionless.Abs((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs floor()
-        {
-            return new FloatDimensionless.Abs((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs log()
-        {
-            return new FloatDimensionless.Abs((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs log10()
-        {
-            return new FloatDimensionless.Abs((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs log1p()
-        {
-            return new FloatDimensionless.Abs((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs rint()
-        {
-            return new FloatDimensionless.Abs((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs round()
-        {
-            return new FloatDimensionless.Abs(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs signum()
-        {
-            return new FloatDimensionless.Abs(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs sin()
-        {
-            return new FloatDimensionless.Abs((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs sinh()
-        {
-            return new FloatDimensionless.Abs((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs sqrt()
-        {
-            return new FloatDimensionless.Abs((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs tan()
-        {
-            return new FloatDimensionless.Abs((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs tanh()
-        {
-            return new FloatDimensionless.Abs((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs inv()
-        {
-            return new FloatDimensionless.Abs(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs toDegrees()
-        {
-            return new FloatDimensionless.Abs((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs toRadians()
-        {
-            return new FloatDimensionless.Abs((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatDimensionless.Abs pow(final double x)
-        {
-            return new FloatDimensionless.Abs((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /**
-         * Absolute scalar plus Relative scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final FloatDimensionless.Abs plus(final FloatDimensionless.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatDimensionless.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatDimensionless.Abs(this.si + v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Absolute scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatDimensionless.Rel minus(final FloatDimensionless.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatDimensionless.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatDimensionless.Rel(this.si - v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Relative scalar = Absolute scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatDimensionless.Abs minus(final FloatDimensionless.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatDimensionless.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatDimensionless.Abs(this.si - v.si, DimensionlessUnit.SI);
-        }
-
-        /**
-         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute dimensionless scalar.
-         */
-        public final FloatDimensionless.Rel toRel()
-        {
-            return new FloatDimensionless.Rel(getInUnit(), getUnit());
         }
 
     }

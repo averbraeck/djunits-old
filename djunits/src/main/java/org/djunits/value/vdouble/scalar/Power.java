@@ -8,10 +8,9 @@ import org.djunits.unit.ForceUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
-import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the Power DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * Easy access methods for the Power DoubleScalar, which is relative by definition. Instead of <br>
  * <i>DoubleScalar.Rel&lt;PowerUnit&gt; value = new DoubleScalar.Rel&lt;PowerUnit&gt;(100.0, PowerUnit.SI);</i><br>
  * we can now write <br>
  * <i>Power value = new Power(100.0, PowerUnit.SI);</i><br>
@@ -26,7 +25,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Power extends DoubleScalar.Rel<PowerUnit> implements Relative
+public class Power extends TypedDoubleScalarRel<PowerUnit, Power>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -45,9 +44,16 @@ public class Power extends DoubleScalar.Rel<PowerUnit> implements Relative
      * Construct Power scalar.
      * @param value Scalar from which to construct this instance
      */
-    public Power(final DoubleScalar.Rel<PowerUnit> value)
+    public Power(final Power value)
     {
         super(value);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final Power instantiateTypeRel(final double value, final PowerUnit unit)
+    {
+        return new Power(value, unit);
     }
 
     /**
@@ -60,224 +66,6 @@ public class Power extends DoubleScalar.Rel<PowerUnit> implements Relative
     public static Power interpolate(final Power zero, final Power one, final double ratio)
     {
         return new Power(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power abs()
-    {
-        return new Power(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power acos()
-    {
-        return new Power(Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power asin()
-    {
-        return new Power(Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power atan()
-    {
-        return new Power(Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power cbrt()
-    {
-        return new Power(Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power ceil()
-    {
-        return new Power(Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power cos()
-    {
-        return new Power(Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power cosh()
-    {
-        return new Power(Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power exp()
-    {
-        return new Power(Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power expm1()
-    {
-        return new Power(Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power floor()
-    {
-        return new Power(Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power log()
-    {
-        return new Power(Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power log10()
-    {
-        return new Power(Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power log1p()
-    {
-        return new Power(Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power rint()
-    {
-        return new Power(Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power round()
-    {
-        return new Power(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power signum()
-    {
-        return new Power(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power sin()
-    {
-        return new Power(Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power sinh()
-    {
-        return new Power(Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power sqrt()
-    {
-        return new Power(Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power tan()
-    {
-        return new Power(Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power tanh()
-    {
-        return new Power(Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power inv()
-    {
-        return new Power(1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power toDegrees()
-    {
-        return new Power(Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power toRadians()
-    {
-        return new Power(Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power pow(final double x)
-    {
-        return new Power(Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power multiplyBy(final double factor)
-    {
-        return new Power(getInUnit() * factor, getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Power divideBy(final double divisor)
-    {
-        return new Power(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final Power plus(final Power v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Power(getInUnit() + v.getInUnit(), getUnit()) : new Power(this.si
-            + v.si, PowerUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final Power minus(final Power v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Power(getInUnit() - v.getInUnit(), getUnit()) : new Power(this.si
-            - v.si, PowerUnit.SI);
     }
 
     /**

@@ -9,10 +9,9 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.TimeUnit;
-import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the Speed DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * Easy access methods for the Speed DoubleScalar, which is relative by definition. Instead of <br>
  * <i>DoubleScalar.Rel&lt;SpeedUnit&gt; value = new DoubleScalar.Rel&lt;SpeedUnit&gt;(100.0, SpeedUnit.SI);</i><br>
  * we can now write <br>
  * <i>Speed value = new Speed(100.0, SpeedUnit.SI);</i><br>
@@ -27,7 +26,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Speed extends DoubleScalar.Rel<SpeedUnit> implements Relative
+public class Speed extends TypedDoubleScalarRel<SpeedUnit, Speed>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -46,9 +45,16 @@ public class Speed extends DoubleScalar.Rel<SpeedUnit> implements Relative
      * Construct Speed scalar.
      * @param value Scalar from which to construct this instance
      */
-    public Speed(final DoubleScalar.Rel<SpeedUnit> value)
+    public Speed(final Speed value)
     {
         super(value);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final Speed instantiateTypeRel(final double value, final SpeedUnit unit)
+    {
+        return new Speed(value, unit);
     }
 
     /**
@@ -61,224 +67,6 @@ public class Speed extends DoubleScalar.Rel<SpeedUnit> implements Relative
     public static Speed interpolate(final Speed zero, final Speed one, final double ratio)
     {
         return new Speed(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed abs()
-    {
-        return new Speed(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed acos()
-    {
-        return new Speed(Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed asin()
-    {
-        return new Speed(Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed atan()
-    {
-        return new Speed(Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed cbrt()
-    {
-        return new Speed(Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed ceil()
-    {
-        return new Speed(Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed cos()
-    {
-        return new Speed(Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed cosh()
-    {
-        return new Speed(Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed exp()
-    {
-        return new Speed(Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed expm1()
-    {
-        return new Speed(Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed floor()
-    {
-        return new Speed(Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed log()
-    {
-        return new Speed(Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed log10()
-    {
-        return new Speed(Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed log1p()
-    {
-        return new Speed(Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed rint()
-    {
-        return new Speed(Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed round()
-    {
-        return new Speed(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed signum()
-    {
-        return new Speed(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed sin()
-    {
-        return new Speed(Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed sinh()
-    {
-        return new Speed(Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed sqrt()
-    {
-        return new Speed(Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed tan()
-    {
-        return new Speed(Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed tanh()
-    {
-        return new Speed(Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed inv()
-    {
-        return new Speed(1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed toDegrees()
-    {
-        return new Speed(Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed toRadians()
-    {
-        return new Speed(Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed pow(final double x)
-    {
-        return new Speed(Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed multiplyBy(final double factor)
-    {
-        return new Speed(getInUnit() * factor, getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Speed divideBy(final double divisor)
-    {
-        return new Speed(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final Speed plus(final Speed v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Speed(getInUnit() + v.getInUnit(), getUnit()) : new Speed(this.si
-            + v.si, SpeedUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final Speed minus(final Speed v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Speed(getInUnit() - v.getInUnit(), getUnit()) : new Speed(this.si
-            - v.si, SpeedUnit.SI);
     }
 
     /**

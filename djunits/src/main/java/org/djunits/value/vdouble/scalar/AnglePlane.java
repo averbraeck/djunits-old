@@ -22,7 +22,7 @@ import org.djunits.unit.DimensionlessUnit;
 public interface AnglePlane
 {
     /**
-     * Easy access methods for the AnglePlane DoubleScalar. Instead of <br>
+     * Easy access methods for the Relative AnglePlane DoubleScalar. Instead of <br>
      * <i>DoubleScalar.Rel&lt;AnglePlaneUnit&gt; value = new DoubleScalar.Rel&lt;AnglePlaneUnit&gt;(100.0,
      * AnglePlaneUnit.SI);</i><br>
      * we can now write <br>
@@ -39,7 +39,7 @@ public interface AnglePlane
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Rel extends DoubleScalar.Rel<AnglePlaneUnit>
+    class Rel extends TypedDoubleScalarRel<AnglePlaneUnit, AnglePlane.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -58,9 +58,27 @@ public interface AnglePlane
          * Construct AnglePlane.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Rel(final DoubleScalar.Rel<AnglePlaneUnit> value)
+        public Rel(final AnglePlane.Rel value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final AnglePlane.Rel instantiateTypeRel(final double value, final AnglePlaneUnit unit)
+        {
+            return new AnglePlane.Rel(value, unit);
+        }
+
+        /**
+         * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
+         * @param value the double value
+         * @param unit the unit
+         * @return A a new absolute instance of the DoubleScalar of the right type
+         */
+        protected final AnglePlane.Abs instantiateTypeAbs(final double value, final AnglePlaneUnit unit)
+        {
+            return new AnglePlane.Abs(value, unit);
         }
 
         /**
@@ -77,224 +95,6 @@ public interface AnglePlane
                 .getUnit());
         }
 
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel abs()
-        {
-            return new AnglePlane.Rel(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel acos()
-        {
-            return new AnglePlane.Rel(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel asin()
-        {
-            return new AnglePlane.Rel(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel atan()
-        {
-            return new AnglePlane.Rel(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel cbrt()
-        {
-            return new AnglePlane.Rel(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel ceil()
-        {
-            return new AnglePlane.Rel(Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel cos()
-        {
-            return new AnglePlane.Rel(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel cosh()
-        {
-            return new AnglePlane.Rel(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel exp()
-        {
-            return new AnglePlane.Rel(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel expm1()
-        {
-            return new AnglePlane.Rel(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel floor()
-        {
-            return new AnglePlane.Rel(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel log()
-        {
-            return new AnglePlane.Rel(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel log10()
-        {
-            return new AnglePlane.Rel(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel log1p()
-        {
-            return new AnglePlane.Rel(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel rint()
-        {
-            return new AnglePlane.Rel(Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel round()
-        {
-            return new AnglePlane.Rel(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel signum()
-        {
-            return new AnglePlane.Rel(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel sin()
-        {
-            return new AnglePlane.Rel(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel sinh()
-        {
-            return new AnglePlane.Rel(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel sqrt()
-        {
-            return new AnglePlane.Rel(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel tan()
-        {
-            return new AnglePlane.Rel(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel tanh()
-        {
-            return new AnglePlane.Rel(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel inv()
-        {
-            return new AnglePlane.Rel(1.0 / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel toDegrees()
-        {
-            return new AnglePlane.Rel(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel toRadians()
-        {
-            return new AnglePlane.Rel(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel pow(final double x)
-        {
-            return new AnglePlane.Rel(Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel multiplyBy(final double factor)
-        {
-            return new AnglePlane.Rel(getInUnit() * factor, getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Rel divideBy(final double divisor)
-        {
-            return new AnglePlane.Rel(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Relative scalar plus Relative scalar = Relative scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final AnglePlane.Rel plus(final AnglePlane.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new AnglePlane.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new AnglePlane.Rel(this.si + v.si, AnglePlaneUnit.SI);
-        }
-
-        /**
-         * Relative scalar minus Relative scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final AnglePlane.Rel minus(final AnglePlane.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new AnglePlane.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new AnglePlane.Rel(this.si - v.si, AnglePlaneUnit.SI);
-        }
-
         /**
          * Relative scalar plus Absolute scalar = Absolute scalar.
          * @param v the value to add
@@ -302,8 +102,8 @@ public interface AnglePlane
          */
         public final AnglePlane.Abs plus(final AnglePlane.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new AnglePlane.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new AnglePlane.Abs(this.si + v.si, AnglePlaneUnit.SI);
+            return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
         }
 
         /**
@@ -328,7 +128,7 @@ public interface AnglePlane
     }
 
     /**
-     * Easy access methods for the AnglePlane DoubleScalar. Instead of <br>
+     * Easy access methods for the Absolute AnglePlane DoubleScalar. Instead of <br>
      * <i>DoubleScalar.Abs&lt;AnglePlaneUnit&gt; value = new DoubleScalar.Abs&lt;AnglePlaneUnit&gt;(100.0,
      * AnglePlaneUnit.SI);</i><br>
      * we can now write <br>
@@ -345,7 +145,7 @@ public interface AnglePlane
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Abs extends DoubleScalar.Abs<AnglePlaneUnit>
+    class Abs extends TypedDoubleScalarAbs<AnglePlaneUnit, AnglePlane.Abs, AnglePlane.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -364,9 +164,23 @@ public interface AnglePlane
          * Construct AnglePlane.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Abs(final DoubleScalar.Abs<AnglePlaneUnit> value)
+        public Abs(final AnglePlane.Abs value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final AnglePlane.Abs instantiateTypeAbs(final double value, final AnglePlaneUnit unit)
+        {
+            return new AnglePlane.Abs(value, unit);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final AnglePlane.Rel instantiateTypeRel(final double value, final AnglePlaneUnit unit)
+        {
+            return new AnglePlane.Rel(value, unit);
         }
 
         /**
@@ -381,230 +195,6 @@ public interface AnglePlane
         {
             return new AnglePlane.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs abs()
-        {
-            return new AnglePlane.Abs(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs acos()
-        {
-            return new AnglePlane.Abs(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs asin()
-        {
-            return new AnglePlane.Abs(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs atan()
-        {
-            return new AnglePlane.Abs(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs cbrt()
-        {
-            return new AnglePlane.Abs(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs ceil()
-        {
-            return new AnglePlane.Abs(Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs cos()
-        {
-            return new AnglePlane.Abs(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs cosh()
-        {
-            return new AnglePlane.Abs(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs exp()
-        {
-            return new AnglePlane.Abs(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs expm1()
-        {
-            return new AnglePlane.Abs(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs floor()
-        {
-            return new AnglePlane.Abs(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs log()
-        {
-            return new AnglePlane.Abs(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs log10()
-        {
-            return new AnglePlane.Abs(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs log1p()
-        {
-            return new AnglePlane.Abs(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs rint()
-        {
-            return new AnglePlane.Abs(Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs round()
-        {
-            return new AnglePlane.Abs(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs signum()
-        {
-            return new AnglePlane.Abs(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs sin()
-        {
-            return new AnglePlane.Abs(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs sinh()
-        {
-            return new AnglePlane.Abs(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs sqrt()
-        {
-            return new AnglePlane.Abs(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs tan()
-        {
-            return new AnglePlane.Abs(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs tanh()
-        {
-            return new AnglePlane.Abs(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs inv()
-        {
-            return new AnglePlane.Abs(1.0 / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs toDegrees()
-        {
-            return new AnglePlane.Abs(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs toRadians()
-        {
-            return new AnglePlane.Abs(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final AnglePlane.Abs pow(final double x)
-        {
-            return new AnglePlane.Abs(Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /**
-         * Absolute scalar plus Relative scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final AnglePlane.Abs plus(final AnglePlane.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new AnglePlane.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new AnglePlane.Abs(this.si + v.si, AnglePlaneUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Absolute scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final AnglePlane.Rel minus(final AnglePlane.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new AnglePlane.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new AnglePlane.Rel(this.si - v.si, AnglePlaneUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Relative scalar = Absolute scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final AnglePlane.Abs minus(final AnglePlane.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new AnglePlane.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new AnglePlane.Abs(this.si - v.si, AnglePlaneUnit.SI);
-        }
-
-        /**
-         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute angleplane scalar.
-         */
-        public final AnglePlane.Rel toRel()
-        {
-            return new AnglePlane.Rel(getInUnit(), getUnit());
         }
 
     }

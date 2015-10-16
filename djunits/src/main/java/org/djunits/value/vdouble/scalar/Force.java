@@ -9,10 +9,9 @@ import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
-import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the Force DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * Easy access methods for the Force DoubleScalar, which is relative by definition. Instead of <br>
  * <i>DoubleScalar.Rel&lt;ForceUnit&gt; value = new DoubleScalar.Rel&lt;ForceUnit&gt;(100.0, ForceUnit.SI);</i><br>
  * we can now write <br>
  * <i>Force value = new Force(100.0, ForceUnit.SI);</i><br>
@@ -27,7 +26,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Force extends DoubleScalar.Rel<ForceUnit> implements Relative
+public class Force extends TypedDoubleScalarRel<ForceUnit, Force>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -46,9 +45,16 @@ public class Force extends DoubleScalar.Rel<ForceUnit> implements Relative
      * Construct Force scalar.
      * @param value Scalar from which to construct this instance
      */
-    public Force(final DoubleScalar.Rel<ForceUnit> value)
+    public Force(final Force value)
     {
         super(value);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final Force instantiateTypeRel(final double value, final ForceUnit unit)
+    {
+        return new Force(value, unit);
     }
 
     /**
@@ -61,224 +67,6 @@ public class Force extends DoubleScalar.Rel<ForceUnit> implements Relative
     public static Force interpolate(final Force zero, final Force one, final double ratio)
     {
         return new Force(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force abs()
-    {
-        return new Force(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force acos()
-    {
-        return new Force(Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force asin()
-    {
-        return new Force(Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force atan()
-    {
-        return new Force(Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force cbrt()
-    {
-        return new Force(Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force ceil()
-    {
-        return new Force(Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force cos()
-    {
-        return new Force(Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force cosh()
-    {
-        return new Force(Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force exp()
-    {
-        return new Force(Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force expm1()
-    {
-        return new Force(Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force floor()
-    {
-        return new Force(Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force log()
-    {
-        return new Force(Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force log10()
-    {
-        return new Force(Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force log1p()
-    {
-        return new Force(Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force rint()
-    {
-        return new Force(Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force round()
-    {
-        return new Force(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force signum()
-    {
-        return new Force(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force sin()
-    {
-        return new Force(Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force sinh()
-    {
-        return new Force(Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force sqrt()
-    {
-        return new Force(Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force tan()
-    {
-        return new Force(Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force tanh()
-    {
-        return new Force(Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force inv()
-    {
-        return new Force(1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force toDegrees()
-    {
-        return new Force(Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force toRadians()
-    {
-        return new Force(Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force pow(final double x)
-    {
-        return new Force(Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force multiplyBy(final double factor)
-    {
-        return new Force(getInUnit() * factor, getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Force divideBy(final double divisor)
-    {
-        return new Force(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final Force plus(final Force v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Force(getInUnit() + v.getInUnit(), getUnit()) : new Force(this.si
-            + v.si, ForceUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final Force minus(final Force v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Force(getInUnit() - v.getInUnit(), getUnit()) : new Force(this.si
-            - v.si, ForceUnit.SI);
     }
 
     /**

@@ -8,10 +8,9 @@ import org.djunits.unit.MassUnit;
 import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.unit.VolumeUnit;
-import org.djunits.value.Relative;
 
 /**
- * Easy access methods for the Mass DoubleScalar, which is relative by definition. An example is Speed. Instead of <br>
+ * Easy access methods for the Mass DoubleScalar, which is relative by definition. Instead of <br>
  * <i>DoubleScalar.Rel&lt;MassUnit&gt; value = new DoubleScalar.Rel&lt;MassUnit&gt;(100.0, MassUnit.SI);</i><br>
  * we can now write <br>
  * <i>Mass value = new Mass(100.0, MassUnit.SI);</i><br>
@@ -26,7 +25,7 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Mass extends DoubleScalar.Rel<MassUnit> implements Relative
+public class Mass extends TypedDoubleScalarRel<MassUnit, Mass>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -45,9 +44,16 @@ public class Mass extends DoubleScalar.Rel<MassUnit> implements Relative
      * Construct Mass scalar.
      * @param value Scalar from which to construct this instance
      */
-    public Mass(final DoubleScalar.Rel<MassUnit> value)
+    public Mass(final Mass value)
     {
         super(value);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final Mass instantiateTypeRel(final double value, final MassUnit unit)
+    {
+        return new Mass(value, unit);
     }
 
     /**
@@ -60,224 +66,6 @@ public class Mass extends DoubleScalar.Rel<MassUnit> implements Relative
     public static Mass interpolate(final Mass zero, final Mass one, final double ratio)
     {
         return new Mass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass abs()
-    {
-        return new Mass(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass acos()
-    {
-        return new Mass(Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass asin()
-    {
-        return new Mass(Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass atan()
-    {
-        return new Mass(Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass cbrt()
-    {
-        return new Mass(Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass ceil()
-    {
-        return new Mass(Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass cos()
-    {
-        return new Mass(Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass cosh()
-    {
-        return new Mass(Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass exp()
-    {
-        return new Mass(Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass expm1()
-    {
-        return new Mass(Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass floor()
-    {
-        return new Mass(Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass log()
-    {
-        return new Mass(Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass log10()
-    {
-        return new Mass(Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass log1p()
-    {
-        return new Mass(Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass rint()
-    {
-        return new Mass(Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass round()
-    {
-        return new Mass(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass signum()
-    {
-        return new Mass(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass sin()
-    {
-        return new Mass(Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass sinh()
-    {
-        return new Mass(Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass sqrt()
-    {
-        return new Mass(Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass tan()
-    {
-        return new Mass(Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass tanh()
-    {
-        return new Mass(Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass inv()
-    {
-        return new Mass(1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass toDegrees()
-    {
-        return new Mass(Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass toRadians()
-    {
-        return new Mass(Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass pow(final double x)
-    {
-        return new Mass(Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass multiplyBy(final double factor)
-    {
-        return new Mass(getInUnit() * factor, getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Mass divideBy(final double divisor)
-    {
-        return new Mass(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final Mass plus(final Mass v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Mass(getInUnit() + v.getInUnit(), getUnit()) : new Mass(this.si
-            + v.si, MassUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final Mass minus(final Mass v)
-    {
-        return getUnit().equals(v.getUnit()) ? new Mass(getInUnit() - v.getInUnit(), getUnit()) : new Mass(this.si
-            - v.si, MassUnit.SI);
     }
 
     /**

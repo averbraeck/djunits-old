@@ -29,7 +29,7 @@ import org.djunits.unit.VolumeUnit;
 public interface Length
 {
     /**
-     * Easy access methods for the Length DoubleScalar. Instead of <br>
+     * Easy access methods for the Relative Length DoubleScalar. Instead of <br>
      * <i>DoubleScalar.Rel&lt;LengthUnit&gt; value = new DoubleScalar.Rel&lt;LengthUnit&gt;(100.0, LengthUnit.SI);</i><br>
      * we can now write <br>
      * <i>Length.Rel value = new Length.Rel(100.0, LengthUnit.SI);</i><br>
@@ -45,7 +45,7 @@ public interface Length
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Rel extends DoubleScalar.Rel<LengthUnit>
+    class Rel extends TypedDoubleScalarRel<LengthUnit, Length.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -64,9 +64,27 @@ public interface Length
          * Construct Length.Rel scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Rel(final DoubleScalar.Rel<LengthUnit> value)
+        public Rel(final Length.Rel value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Length.Rel instantiateTypeRel(final double value, final LengthUnit unit)
+        {
+            return new Length.Rel(value, unit);
+        }
+
+        /**
+         * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
+         * @param value the double value
+         * @param unit the unit
+         * @return A a new absolute instance of the DoubleScalar of the right type
+         */
+        protected final Length.Abs instantiateTypeAbs(final double value, final LengthUnit unit)
+        {
+            return new Length.Abs(value, unit);
         }
 
         /**
@@ -82,224 +100,6 @@ public interface Length
                 .getUnit());
         }
 
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel abs()
-        {
-            return new Length.Rel(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel acos()
-        {
-            return new Length.Rel(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel asin()
-        {
-            return new Length.Rel(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel atan()
-        {
-            return new Length.Rel(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel cbrt()
-        {
-            return new Length.Rel(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel ceil()
-        {
-            return new Length.Rel(Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel cos()
-        {
-            return new Length.Rel(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel cosh()
-        {
-            return new Length.Rel(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel exp()
-        {
-            return new Length.Rel(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel expm1()
-        {
-            return new Length.Rel(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel floor()
-        {
-            return new Length.Rel(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel log()
-        {
-            return new Length.Rel(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel log10()
-        {
-            return new Length.Rel(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel log1p()
-        {
-            return new Length.Rel(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel rint()
-        {
-            return new Length.Rel(Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel round()
-        {
-            return new Length.Rel(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel signum()
-        {
-            return new Length.Rel(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel sin()
-        {
-            return new Length.Rel(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel sinh()
-        {
-            return new Length.Rel(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel sqrt()
-        {
-            return new Length.Rel(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel tan()
-        {
-            return new Length.Rel(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel tanh()
-        {
-            return new Length.Rel(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel inv()
-        {
-            return new Length.Rel(1.0 / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel toDegrees()
-        {
-            return new Length.Rel(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel toRadians()
-        {
-            return new Length.Rel(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel pow(final double x)
-        {
-            return new Length.Rel(Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel multiplyBy(final double factor)
-        {
-            return new Length.Rel(getInUnit() * factor, getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel divideBy(final double divisor)
-        {
-            return new Length.Rel(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Relative scalar plus Relative scalar = Relative scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Length.Rel plus(final Length.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new Length.Rel(this.si + v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Relative scalar minus Relative scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Length.Rel minus(final Length.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Length.Rel(this.si - v.si, LengthUnit.SI);
-        }
-
         /**
          * Relative scalar plus Absolute scalar = Absolute scalar.
          * @param v the value to add
@@ -307,8 +107,8 @@ public interface Length
          */
         public final Length.Abs plus(final Length.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Length.Abs(this.si + v.si, LengthUnit.SI);
+            return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
         }
 
         /**
@@ -423,7 +223,7 @@ public interface Length
     }
 
     /**
-     * Easy access methods for the Length DoubleScalar. Instead of <br>
+     * Easy access methods for the Absolute Length DoubleScalar. Instead of <br>
      * <i>DoubleScalar.Abs&lt;LengthUnit&gt; value = new DoubleScalar.Abs&lt;LengthUnit&gt;(100.0, LengthUnit.SI);</i><br>
      * we can now write <br>
      * <i>Length.Abs value = new Length.Abs(100.0, LengthUnit.SI);</i><br>
@@ -439,7 +239,7 @@ public interface Length
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Abs extends DoubleScalar.Abs<LengthUnit>
+    class Abs extends TypedDoubleScalarAbs<LengthUnit, Length.Abs, Length.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -458,9 +258,23 @@ public interface Length
          * Construct Length.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Abs(final DoubleScalar.Abs<LengthUnit> value)
+        public Abs(final Length.Abs value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Length.Abs instantiateTypeAbs(final double value, final LengthUnit unit)
+        {
+            return new Length.Abs(value, unit);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final Length.Rel instantiateTypeRel(final double value, final LengthUnit unit)
+        {
+            return new Length.Rel(value, unit);
         }
 
         /**
@@ -474,230 +288,6 @@ public interface Length
         {
             return new Length.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs abs()
-        {
-            return new Length.Abs(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs acos()
-        {
-            return new Length.Abs(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs asin()
-        {
-            return new Length.Abs(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs atan()
-        {
-            return new Length.Abs(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs cbrt()
-        {
-            return new Length.Abs(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs ceil()
-        {
-            return new Length.Abs(Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs cos()
-        {
-            return new Length.Abs(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs cosh()
-        {
-            return new Length.Abs(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs exp()
-        {
-            return new Length.Abs(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs expm1()
-        {
-            return new Length.Abs(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs floor()
-        {
-            return new Length.Abs(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs log()
-        {
-            return new Length.Abs(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs log10()
-        {
-            return new Length.Abs(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs log1p()
-        {
-            return new Length.Abs(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs rint()
-        {
-            return new Length.Abs(Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs round()
-        {
-            return new Length.Abs(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs signum()
-        {
-            return new Length.Abs(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs sin()
-        {
-            return new Length.Abs(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs sinh()
-        {
-            return new Length.Abs(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs sqrt()
-        {
-            return new Length.Abs(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs tan()
-        {
-            return new Length.Abs(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs tanh()
-        {
-            return new Length.Abs(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs inv()
-        {
-            return new Length.Abs(1.0 / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs toDegrees()
-        {
-            return new Length.Abs(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs toRadians()
-        {
-            return new Length.Abs(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs pow(final double x)
-        {
-            return new Length.Abs(Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /**
-         * Absolute scalar plus Relative scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final Length.Abs plus(final Length.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new Length.Abs(this.si + v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Absolute scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Length.Rel minus(final Length.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Length.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new Length.Rel(this.si - v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Relative scalar = Absolute scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final Length.Abs minus(final Length.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new Length.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new Length.Abs(this.si - v.si, LengthUnit.SI);
-        }
-
-        /**
-         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute length scalar.
-         */
-        public final Length.Rel toRel()
-        {
-            return new Length.Rel(getInUnit(), getUnit());
         }
 
     }

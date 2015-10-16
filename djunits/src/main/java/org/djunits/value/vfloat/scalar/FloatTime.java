@@ -45,7 +45,7 @@ public interface FloatTime
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Rel extends FloatScalar.Rel<TimeUnit>
+    class Rel extends TypedFloatScalarRel<TimeUnit, FloatTime.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -61,22 +61,40 @@ public interface FloatTime
         }
 
         /**
+         * Construct FloatTime.Rel scalar.
+         * @param value Scalar from which to construct this instance
+         */
+        public Rel(final FloatTime.Rel value)
+        {
+            super(value);
+        }
+
+        /**
          * Construct FloatTime.Rel scalar using a double value.
-         * @param value float value
-         * @param unit unit for the float value
+         * @param value double value
+         * @param unit unit for the resulting float value
          */
         public Rel(final double value, final TimeUnit unit)
         {
             super((float) value, unit);
         }
 
-        /**
-         * Construct FloatTime.Rel scalar.
-         * @param value Scalar from which to construct this instance
-         */
-        public Rel(final FloatScalar.Rel<TimeUnit> value)
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatTime.Rel instantiateTypeRel(final float value, final TimeUnit unit)
         {
-            super(value);
+            return new FloatTime.Rel(value, unit);
+        }
+
+        /**
+         * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
+         * @param value the float value
+         * @param unit the unit
+         * @return A a new absolute instance of the FloatScalar of the right type
+         */
+        protected final FloatTime.Abs instantiateTypeAbs(final float value, final TimeUnit unit)
+        {
+            return new FloatTime.Abs(value, unit);
         }
 
         /**
@@ -93,264 +111,14 @@ public interface FloatTime
         }
 
         /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static FloatTime.Rel interpolate(final FloatTime.Rel zero, final FloatTime.Rel one, final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel abs()
-        {
-            return new FloatTime.Rel(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel acos()
-        {
-            return new FloatTime.Rel((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel asin()
-        {
-            return new FloatTime.Rel((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel atan()
-        {
-            return new FloatTime.Rel((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel cbrt()
-        {
-            return new FloatTime.Rel((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel ceil()
-        {
-            return new FloatTime.Rel((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel cos()
-        {
-            return new FloatTime.Rel((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel cosh()
-        {
-            return new FloatTime.Rel((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel exp()
-        {
-            return new FloatTime.Rel((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel expm1()
-        {
-            return new FloatTime.Rel((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel floor()
-        {
-            return new FloatTime.Rel((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel log()
-        {
-            return new FloatTime.Rel((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel log10()
-        {
-            return new FloatTime.Rel((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel log1p()
-        {
-            return new FloatTime.Rel((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel rint()
-        {
-            return new FloatTime.Rel((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel round()
-        {
-            return new FloatTime.Rel(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel signum()
-        {
-            return new FloatTime.Rel(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel sin()
-        {
-            return new FloatTime.Rel((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel sinh()
-        {
-            return new FloatTime.Rel((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel sqrt()
-        {
-            return new FloatTime.Rel((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel tan()
-        {
-            return new FloatTime.Rel((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel tanh()
-        {
-            return new FloatTime.Rel((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel inv()
-        {
-            return new FloatTime.Rel(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel toDegrees()
-        {
-            return new FloatTime.Rel((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel toRadians()
-        {
-            return new FloatTime.Rel((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel pow(final double x)
-        {
-            return new FloatTime.Rel((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel multiplyBy(final float factor)
-        {
-            return new FloatTime.Rel(getInUnit() * factor, getUnit());
-        }
-
-        /**
-         * Multiply scalar with a double factor.
-         * @param factor the factor to multiply with
-         * @return new instance of a relative time
-         */
-        public final FloatTime.Rel multiplyBy(final double factor)
-        {
-            return multiplyBy((float) factor);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel divideBy(final float divisor)
-        {
-            return new FloatTime.Rel(getInUnit() / divisor, getUnit());
-        }
-
-        /**
-         * Divide scalar by a double factor.
-         * @param factor the factor to divide by
-         * @return new instance of a relative time
-         */
-        public final FloatTime.Rel divideBy(final double factor)
-        {
-            return divideBy((float) factor);
-        }
-
-        /**
-         * Relative scalar plus Relative scalar = Relative scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final FloatTime.Rel plus(final FloatTime.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatTime.Rel(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatTime.Rel(this.si + v.si, TimeUnit.SI);
-        }
-
-        /**
-         * Relative scalar minus Relative scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatTime.Rel minus(final FloatTime.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatTime.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatTime.Rel(this.si - v.si, TimeUnit.SI);
-        }
-
-        /**
          * Relative scalar plus Absolute scalar = Absolute scalar.
          * @param v the value to add
          * @return sum of this value and v as a new object
          */
         public final FloatTime.Abs plus(final FloatTime.Abs v)
         {
-            return getUnit().equals(v.getUnit()) ? new FloatTime.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatTime.Abs(this.si + v.si, TimeUnit.SI);
+            return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
         }
 
         /**
@@ -472,7 +240,7 @@ public interface FloatTime
      * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
      */
-    public static class Abs extends FloatScalar.Abs<TimeUnit>
+    class Abs extends TypedFloatScalarAbs<TimeUnit, FloatTime.Abs, FloatTime.Rel>
     {
         /** */
         private static final long serialVersionUID = 20150901L;
@@ -501,9 +269,23 @@ public interface FloatTime
          * Construct FloatTime.Abs scalar.
          * @param value Scalar from which to construct this instance
          */
-        public Abs(final FloatScalar.Abs<TimeUnit> value)
+        public Abs(final FloatTime.Abs value)
         {
             super(value);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatTime.Abs instantiateTypeAbs(final float value, final TimeUnit unit)
+        {
+            return new FloatTime.Abs(value, unit);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        protected final FloatTime.Rel instantiateTypeRel(final float value, final TimeUnit unit)
+        {
+            return new FloatTime.Rel(value, unit);
         }
 
         /**
@@ -517,242 +299,6 @@ public interface FloatTime
         {
             return new FloatTime.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
                 .getUnit());
-        }
-
-        /**
-         * Interpolate between two values.
-         * @param zero the low value
-         * @param one the high value
-         * @param ratio the ratio between 0 and 1, inclusive
-         * @return a Scalar at the ratio between
-         */
-        public static FloatTime.Abs interpolate(final FloatTime.Abs zero, final FloatTime.Abs one, final double ratio)
-        {
-            return interpolate(zero, one, (float) ratio);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs abs()
-        {
-            return new FloatTime.Abs(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs acos()
-        {
-            return new FloatTime.Abs((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs asin()
-        {
-            return new FloatTime.Abs((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs atan()
-        {
-            return new FloatTime.Abs((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs cbrt()
-        {
-            return new FloatTime.Abs((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs ceil()
-        {
-            return new FloatTime.Abs((float) Math.ceil(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs cos()
-        {
-            return new FloatTime.Abs((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs cosh()
-        {
-            return new FloatTime.Abs((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs exp()
-        {
-            return new FloatTime.Abs((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs expm1()
-        {
-            return new FloatTime.Abs((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs floor()
-        {
-            return new FloatTime.Abs((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs log()
-        {
-            return new FloatTime.Abs((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs log10()
-        {
-            return new FloatTime.Abs((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs log1p()
-        {
-            return new FloatTime.Abs((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs rint()
-        {
-            return new FloatTime.Abs((float) Math.rint(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs round()
-        {
-            return new FloatTime.Abs(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs signum()
-        {
-            return new FloatTime.Abs(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs sin()
-        {
-            return new FloatTime.Abs((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs sinh()
-        {
-            return new FloatTime.Abs((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs sqrt()
-        {
-            return new FloatTime.Abs((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs tan()
-        {
-            return new FloatTime.Abs((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs tanh()
-        {
-            return new FloatTime.Abs((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs inv()
-        {
-            return new FloatTime.Abs(1.0f / getInUnit(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs toDegrees()
-        {
-            return new FloatTime.Abs((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs toRadians()
-        {
-            return new FloatTime.Abs((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs pow(final double x)
-        {
-            return new FloatTime.Abs((float) Math.pow(getInUnit(), x), getUnit());
-        }
-
-        /**
-         * Absolute scalar plus Relative scalar = Absolute scalar.
-         * @param v the value to add
-         * @return sum of this value and v as a new object
-         */
-        public final FloatTime.Abs plus(final FloatTime.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatTime.Abs(getInUnit() + v.getInUnit(), getUnit())
-                : new FloatTime.Abs(this.si + v.si, TimeUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Absolute scalar = Relative scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatTime.Rel minus(final FloatTime.Abs v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatTime.Rel(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatTime.Rel(this.si - v.si, TimeUnit.SI);
-        }
-
-        /**
-         * Absolute scalar minus Relative scalar = Absolute scalar.
-         * @param v the value to subtract
-         * @return difference of this value and v as a new object
-         */
-        public final FloatTime.Abs minus(final FloatTime.Rel v)
-        {
-            return getUnit().equals(v.getUnit()) ? new FloatTime.Abs(getInUnit() - v.getInUnit(), getUnit())
-                : new FloatTime.Abs(this.si - v.si, TimeUnit.SI);
-        }
-
-        /**
-         * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute time scalar.
-         */
-        public final FloatTime.Rel toRel()
-        {
-            return new FloatTime.Rel(getInUnit(), getUnit());
         }
 
     }

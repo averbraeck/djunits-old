@@ -6,7 +6,6 @@ import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.MoneyPerTimeUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
-import org.djunits.value.Relative;
 
 /**
  * Easy access methods for the Frequency FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
@@ -24,10 +23,10 @@ import org.djunits.value.Relative;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatFrequency extends FloatScalar.Rel<FrequencyUnit> implements Relative
+public class FloatFrequency extends TypedFloatScalarRel<FrequencyUnit, FloatFrequency>
 {
     /** */
-    private static final long serialVersionUID = 20150905L;
+    private static final long serialVersionUID = 20150901L;
 
     /**
      * Construct FloatFrequency scalar.
@@ -40,22 +39,29 @@ public class FloatFrequency extends FloatScalar.Rel<FrequencyUnit> implements Re
     }
 
     /**
+     * Construct FloatFrequency scalar.
+     * @param value Scalar from which to construct this instance
+     */
+    public FloatFrequency(final FloatFrequency value)
+    {
+        super(value);
+    }
+
+    /**
      * Construct FloatFrequency scalar using a double value.
      * @param value double value
-     * @param unit unit for the value
+     * @param unit unit for the resulting float value
      */
     public FloatFrequency(final double value, final FrequencyUnit unit)
     {
         super((float) value, unit);
     }
 
-    /**
-     * Construct FloatFrequency scalar.
-     * @param value Scalar from which to construct this instance
-     */
-    public FloatFrequency(final FloatScalar.Rel<FrequencyUnit> value)
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatFrequency instantiateTypeRel(final float value, final FrequencyUnit unit)
     {
-        super(value);
+        return new FloatFrequency(value, unit);
     }
 
     /**
@@ -69,256 +75,6 @@ public class FloatFrequency extends FloatScalar.Rel<FrequencyUnit> implements Re
     {
         return new FloatFrequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
             .getUnit());
-    }
-
-    /**
-     * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
-     */
-    public static FloatFrequency interpolate(final FloatFrequency zero, final FloatFrequency one, final double ratio)
-    {
-        return interpolate(zero, one, (float) ratio);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency abs()
-    {
-        return new FloatFrequency(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency acos()
-    {
-        return new FloatFrequency((float) Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency asin()
-    {
-        return new FloatFrequency((float) Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency atan()
-    {
-        return new FloatFrequency((float) Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency cbrt()
-    {
-        return new FloatFrequency((float) Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency ceil()
-    {
-        return new FloatFrequency((float) Math.ceil(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency cos()
-    {
-        return new FloatFrequency((float) Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency cosh()
-    {
-        return new FloatFrequency((float) Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency exp()
-    {
-        return new FloatFrequency((float) Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency expm1()
-    {
-        return new FloatFrequency((float) Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency floor()
-    {
-        return new FloatFrequency((float) Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency log()
-    {
-        return new FloatFrequency((float) Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency log10()
-    {
-        return new FloatFrequency((float) Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency log1p()
-    {
-        return new FloatFrequency((float) Math.log1p(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency rint()
-    {
-        return new FloatFrequency((float) Math.rint(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency round()
-    {
-        return new FloatFrequency(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency signum()
-    {
-        return new FloatFrequency(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency sin()
-    {
-        return new FloatFrequency((float) Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency sinh()
-    {
-        return new FloatFrequency((float) Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency sqrt()
-    {
-        return new FloatFrequency((float) Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency tan()
-    {
-        return new FloatFrequency((float) Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency tanh()
-    {
-        return new FloatFrequency((float) Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency inv()
-    {
-        return new FloatFrequency(1.0f / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency toDegrees()
-    {
-        return new FloatFrequency((float) Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency toRadians()
-    {
-        return new FloatFrequency((float) Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency pow(final double x)
-    {
-        return new FloatFrequency((float) Math.pow(getInUnit(), x), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency multiplyBy(final float factor)
-    {
-        return new FloatFrequency(getInUnit() * factor, getUnit());
-    }
-
-    /**
-     * Multiply scalar with a double factor.
-     * @param factor the factor to multiply with
-     * @return new instance of a relative frequency
-     */
-    public final FloatFrequency multiplyBy(final double factor)
-    {
-        return multiplyBy((float) factor);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatFrequency divideBy(final float divisor)
-    {
-        return new FloatFrequency(getInUnit() / divisor, getUnit());
-    }
-
-    /**
-     * Divide scalar by a double factor.
-     * @param factor the factor to divide by
-     * @return new instance of a relative frequency
-     */
-    public final FloatFrequency divideBy(final double factor)
-    {
-        return divideBy((float) factor);
-    }
-
-    /**
-     * Relative scalar plus Relative scalar = Relative scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final FloatFrequency plus(final FloatFrequency v)
-    {
-        return getUnit().equals(v.getUnit()) ? new FloatFrequency(getInUnit() + v.getInUnit(), getUnit())
-            : new FloatFrequency(this.si + v.si, FrequencyUnit.SI);
-    }
-
-    /**
-     * Relative scalar minus Relative scalar = Relative scalar.
-     * @param v the value to subtract
-     * @return difference of this value and v as a new object
-     */
-    public final FloatFrequency minus(final FloatFrequency v)
-    {
-        return getUnit().equals(v.getUnit()) ? new FloatFrequency(getInUnit() - v.getInUnit(), getUnit())
-            : new FloatFrequency(this.si - v.si, FrequencyUnit.SI);
     }
 
     /**
