@@ -55,6 +55,15 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
         super(unit);
     }
 
+    /**
+     * Return the StorageType (DENSE, SPARSE, etc.) for the stored Vector.
+     * @return the StorageType (DENSE, SPARSE, etc.) for the stored Vector
+     */
+    public final StorageType getStorageType()
+    {
+        return this.data.getStorageType();
+    }
+
     /* ============================================================================================ */
     /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
     /* ============================================================================================ */
