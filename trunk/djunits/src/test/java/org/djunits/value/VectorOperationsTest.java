@@ -16,7 +16,10 @@ import java.util.TreeMap;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
+import org.djunits.value.vdouble.vector.AnglePlaneVector;
 import org.djunits.value.vdouble.vector.DoubleVector;
+import org.djunits.value.vdouble.vector.DoubleVectorInterface;
+import org.djunits.value.vdouble.vector.MutableDoubleVectorInterface;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.djunits.value.vfloat.vector.FloatVector;
 import org.junit.Assert;
@@ -32,8 +35,9 @@ import org.junit.Test;
  * version Sep 14, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ * @param <TypedDoubleVectorAbs>
  */
-public class VectorOperationsTest
+public class VectorOperationsTest<TypedDoubleVectorAbs>
 {
     /** The classes that are absolute and relative (.Abs and .Rel, or $Abs and $Rel for class names). */
     public static final String[] CLASSNAMES_ABSREL = new String[] { "AnglePlane", "AngleSlope", "Dimensionless", "Length",
@@ -62,7 +66,7 @@ public class VectorOperationsTest
      */
     @SuppressWarnings("static-method")
     @Test
-    public final void scalarOperationsTest() throws NoSuchMethodException, InstantiationException, IllegalAccessException,
+    public final void vectorOperationsTest() throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, SecurityException, IllegalArgumentException,
             ClassNotFoundException, ValueException
     {
@@ -89,55 +93,44 @@ public class VectorOperationsTest
     {
         final String upperType = doubleType ? "Vector" : "FloatVector";
         String doubleOrFloat = doubleType ? "double" : "float";
-        // get the interfaces such as org.djunits.value.vdouble.scalar.Time
-        for (String vectorName : CLASSNAMES_ABSREL)
+        for (StorageType storageType : StorageType.values())
         {
-            for (String subClassName : new String[] { "$Rel", "$Abs" })
+            // get the interfaces such as org.djunits.value.vdouble.scalar.Time
+            for (String vectorName : CLASSNAMES_ABSREL)
             {
-                boolean isAbs = subClassName.contains("Abs");
-                Class<?> vectorClassAbsRel = null;
-                // get the subClassName implementation of that class
-                String className = "org.djunits.value.v" + doubleOrFloat + ".vector." + vectorName + upperType + subClassName;
-                // System.out.println("Looking up class " + className);
-                vectorClassAbsRel = Class.forName(className);
-                testMethods(vectorClassAbsRel, isAbs, doubleType);
-                testAbsRelConversion(vectorClassAbsRel, isAbs, doubleType, StorageType.DENSE);
-                testAbsRelConversion(vectorClassAbsRel, isAbs, doubleType, StorageType.SPARSE);
+                for (String subClassName : new String[] { "$Rel", "$Abs" })
+                {
+                    boolean isAbs = subClassName.contains("Abs");
+                    Class<?> vectorClassAbsRel = null;
+                    // get the subClassName implementation of that class
+                    String className =
+                            "org.djunits.value.v" + doubleOrFloat + ".vector." + vectorName + upperType + subClassName;
+                    // System.out.println("Looking up class " + className);
+                    vectorClassAbsRel = Class.forName(className);
+                    testMethods(vectorClassAbsRel, isAbs, doubleType, storageType);
+                    testAbsRelConversion(vectorClassAbsRel, isAbs, doubleType, StorageType.DENSE);
+                    testAbsRelConversion(vectorClassAbsRel, isAbs, doubleType, StorageType.SPARSE);
+                }
             }
-        }
-
-        // get the interfaces such as org.djunits.value.vXXXX.scalar.Area
-        for (String vectorName : CLASSNAMES_REL)
-        {
-            String vectorClassName = doubleType ? vectorName : "FloatVector" + vectorName;
-            String fullClassName = "org.djunits.value.v" + doubleOrFloat + ".vector." + vectorClassName + "Vector";
-            Class<?> vectorClassRel = null;
-            try
+            // get the interfaces such as org.djunits.value.vXXXX.scalar.Area
+            for (String vectorName : CLASSNAMES_REL)
             {
+                String vectorClassName = doubleType ? vectorName : "FloatVector" + vectorName;
+                String fullClassName = "org.djunits.value.v" + doubleOrFloat + ".vector." + vectorClassName + "Vector";
+                Class<?> vectorClassRel = null;
                 vectorClassRel = Class.forName(fullClassName);
+                testMethods(vectorClassRel, false, doubleType, storageType);
             }
-            catch (ClassNotFoundException exception)
-            {
-                fail("Class not found for " + vectorClassName);
-            }
-            testMethods(vectorClassRel, false, doubleType);
-        }
 
-        // get the interfaces such as org.djunits.value.vXXXX.scalar.MoneyPerArea
-        for (String vectorName : CLASSNAMES_MONEY)
-        {
-            String vectorClassName = doubleType ? vectorName : "Float" + vectorName;
-            String fullClassName = "org.djunits.value.v" + doubleOrFloat + ".vector." + vectorClassName + "Vector";
-            Class<?> scalarClassMoney = null;
-            try
+            // get the interfaces such as org.djunits.value.vXXXX.scalar.MoneyPerArea
+            for (String vectorName : CLASSNAMES_MONEY)
             {
+                String vectorClassName = doubleType ? vectorName : "Float" + vectorName;
+                String fullClassName = "org.djunits.value.v" + doubleOrFloat + ".vector." + vectorClassName + "Vector";
+                Class<?> scalarClassMoney = null;
                 scalarClassMoney = Class.forName(fullClassName);
+                testMethods(scalarClassMoney, false, doubleType, storageType);
             }
-            catch (ClassNotFoundException exception)
-            {
-                fail("Class not found for " + fullClassName);
-            }
-            testMethods(scalarClassMoney, false, doubleType);
         }
     }
 
@@ -156,21 +149,22 @@ public class VectorOperationsTest
      * @throws InstantiationException
      * @throws ValueException
      */
-    private void testAbsRelConversion(final Class<?> vectorClass, boolean isAbs, boolean doubleType,
-            StorageType storageType) throws NoSuchMethodException, SecurityException, InstantiationException,
-            IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException, ValueException
+    private void testAbsRelConversion(final Class<?> vectorClass, boolean isAbs, boolean doubleType, StorageType storageType)
+            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException, NoSuchFieldException, ValueException
     {
         double[] doubleInValue = { 1.23456, 2.34567, 3.45678 };
         float[] floatInValue = { 1.23456f, 2.34567f, 3.45678f };
         Object inValue = doubleType ? doubleInValue : floatInValue;
         // System.out.println("Looking for constructor of " + vectorClassAbsRel.getName());
         Object from =
-                findAndExecuteConstructor(vectorClass, new Object[] { inValue,
-                        getSIUnitInstance(getUnitClass(vectorClass)), storageType }, isAbs, doubleType);
+                findAndExecuteConstructor(vectorClass, new Object[] { inValue, getSIUnitInstance(getUnitClass(vectorClass)),
+                        storageType }, isAbs, doubleType);
         // System.out.println("Looking for method " + (isAbs ? "toRel" : "toAbs"));
         Method method = vectorClass.getMethod(isAbs ? "toRel" : "toAbs");
         Object result = method.invoke(from);
-        verifyAbsRelPrecisionAndValues(!isAbs, doubleType, result, doubleType ? doubleInValue : floatInValue, 0.000001);
+        verifyAbsRelPrecisionAndValues(!isAbs, doubleType, storageType, result, doubleType ? doubleInValue : floatInValue,
+                0.000001);
     }
 
     /**
@@ -179,6 +173,7 @@ public class VectorOperationsTest
      * @param scalarClassAbsRel class to test
      * @param isAbs boolean; if true; the scalarClassAbsRel must be aAsolute; if false; the scalarClassAbsRel must be Relative
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
+     * @param storageType StorageType; DENSE or SPARSE
      * @throws InvocationTargetException on class or method resolving error
      * @throws IllegalAccessException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
@@ -187,39 +182,34 @@ public class VectorOperationsTest
      * @throws ClassNotFoundException
      * @throws ValueException
      */
-    private void testMethods(final Class<?> scalarClassAbsRel, final boolean isAbs, final boolean doubleType)
-            throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
-            NoSuchFieldException, ClassNotFoundException, ValueException
+    private void testMethods(final Class<?> scalarClassAbsRel, final boolean isAbs, final boolean doubleType,
+            StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
+            InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
         for (Method method : scalarClassAbsRel.getDeclaredMethods())
         {
             // System.out.println("Method name is " + method.getName());
             if (method.getName().equals("multiplyBy"))
             {
-                // note: filter out the method that multiplies by a constant...
-                testMultiplyOrDivideMethodAbsRel(scalarClassAbsRel, isAbs, method, true, doubleType);
+                testMultiplyOrDivideMethod(scalarClassAbsRel, method, true, doubleType);
             }
             else if (method.getName().equals("divideBy"))
             {
-                testMultiplyOrDivideMethodAbsRel(scalarClassAbsRel, isAbs, method, false, doubleType);
+                testMultiplyOrDivideMethod(scalarClassAbsRel, method, false, doubleType);
             }
         }
-        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        for (boolean mutable : new boolean[] { true, false })
         {
-            for (boolean mutable : new boolean[] { true, false })
-            {
-                testConstructors(scalarClassAbsRel, isAbs, doubleType, mutable, storageType);
-                testGet(scalarClassAbsRel, isAbs, doubleType, mutable, storageType);
-                testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, mutable, storageType);
-            }
-            testInterpolateMethod(scalarClassAbsRel, isAbs, doubleType, storageType);
+            testConstructors(scalarClassAbsRel, isAbs, doubleType, mutable, storageType);
+            testGet(scalarClassAbsRel, isAbs, doubleType, mutable, storageType);
+            testUnaryMethods(scalarClassAbsRel, isAbs, doubleType, mutable, storageType);
         }
+        testInterpolateMethod(scalarClassAbsRel, isAbs, doubleType, storageType);
     }
 
     /**
-     * Test a multiplication method for an Abs or Rel scalar. Note: filter out the method that multiplies by a constant...
-     * @param scalarClass the Abs or Rel class for the multiplication, e.g. Length.Rel
-     * @param abs boolean; true to test the Abs sub-class; false to test the Rel sub-class
+     * Test a multiplication method for a Relative vector. Note: filter out the method that multiplies by a constant...
+     * @param vectorClass Class&lt;?&gt;; the Relative class for the multiplication, e.g. Length.Rel
      * @param method the method 'multiplyBy' for that class
      * @param multiply boolean; if true; test a multiplyBy method; if false; test a divideBy method
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
@@ -230,144 +220,106 @@ public class VectorOperationsTest
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException
      */
-    private void testMultiplyOrDivideMethodAbsRel(final Class<?> scalarClass, final boolean abs, final Method method,
-            final boolean multiply, final boolean doubleType) throws NoSuchMethodException, InstantiationException,
-            IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException
+    private void testMultiplyOrDivideMethod(final Class<?> vectorClass, final Method method, final boolean multiply,
+            final boolean doubleType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
+            InvocationTargetException, NoSuchFieldException, ClassNotFoundException
     {
-        Class<?> relativeOrAbsoluteClass = null;
-        relativeOrAbsoluteClass = Class.forName("org.djunits.value." + (abs ? "Absolute" : "Relative"));
         Class<?>[] parTypes = method.getParameterTypes();
         if (parTypes.length != 1)
         {
-            fail("DoubleScalar class " + scalarClass.getName() + "." + method.getName() + "() has " + parTypes.length
+            fail("DoubleScalar class " + vectorClass.getName() + "." + method.getName() + "() has " + parTypes.length
                     + " parameters, <> 1");
         }
         Class<?> parameterClass = parTypes[0];
         if (parameterClass.toString().equals("double") || parameterClass.toString().equals("float"))
         {
-            // not interested in multiplying a scalar with a double.
+            // Not (yet) testing multiplying a vector with a double or float.
             return;
         }
-        if (!relativeOrAbsoluteClass.isAssignableFrom(parameterClass))
+        if (!vectorClass.isAssignableFrom(parameterClass))
         {
-            System.out.println("abs=" + abs + ", method=" + scalarClass.getName() + "." + method.getName() + " param="
-                    + parameterClass.getName());
-            Assert.fail("DoubleScalar class " + scalarClass.getName() + "." + method.getName() + "() has parameter with non-"
-                    + relativeOrAbsoluteClass + " class: " + relativeOrAbsoluteClass.getName());
+            Assert.fail("DoubleScalar class " + vectorClass.getName() + "." + method.getName() + "() has parameter with non-"
+                    + vectorClass + " class: " + vectorClass.getName());
         }
 
         Class<?> returnClass = method.getReturnType();
-        if (!relativeOrAbsoluteClass.isAssignableFrom(returnClass))
+        if (!vectorClass.isAssignableFrom(returnClass))
         {
-            Assert.fail("DoubleScalar class " + scalarClass.getName()
-                    + ".multiplyBy() has return type with non-relative class: " + returnClass.getName());
+            Assert.fail("DoubleScalar class " + vectorClass.getName()
+                    + ".multiplyBy() has return type with incompatible class: " + returnClass.getName());
         }
 
         // get the SI coefficients of the unit classes, scalar type, parameter type and return type
         String returnSI = getCoefficients(getUnitClass(returnClass));
-        String scalarSI = getCoefficients(getUnitClass(scalarClass));
+        String scalarSI = getCoefficients(getUnitClass(vectorClass));
         String paramSI = getCoefficients(getUnitClass(parameterClass));
         // print what we just have found
-        System.out.println(scalarClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + "."
+        System.out.println(vectorClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + "."
                 + (multiply ? "multiplyBy" : "divideBy") + "("
                 + parameterClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ") => "
                 + returnClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ": " + scalarSI
                 + (multiply ? " * " : " : ") + paramSI + " => " + returnSI);
 
-        Constructor<?> constructor = scalarClass.getConstructor(double.class, getUnitClass(scalarClass));
-        if (abs)
+        Constructor<?> constructor = vectorClass.getConstructor(double.class, getUnitClass(vectorClass));
+        if (doubleType)
         {
-            fail("Absolute types should not have a multiply or divide method");
-            DoubleScalar.Abs<?> left =
-                    (DoubleScalar.Abs<?>) constructor.newInstance(123d, getSIUnitInstance(getUnitClass(scalarClass)));
+            DoubleScalar.Rel<?> left =
+                    (DoubleScalar.Rel<?>) constructor.newInstance(123d, getSIUnitInstance(getUnitClass(vectorClass)));
             // System.out.println("constructed left: " + left);
             constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
-            DoubleScalar.Abs<?> right =
-                    (DoubleScalar.Abs<?>) constructor.newInstance(456d, getSIUnitInstance(getUnitClass(parameterClass)));
+            DoubleScalar.Rel<?> right =
+                    (DoubleScalar.Rel<?>) constructor.newInstance(456d, getSIUnitInstance(getUnitClass(parameterClass)));
             // System.out.println("constructed right: " + right);
             double expectedValue = multiply ? 123d * 456 : 123d / 456;
 
             if (multiply)
             {
-                Method multiplyMethod = scalarClass.getDeclaredMethod("multiplyBy", new Class[] { parameterClass });
+                Method multiplyMethod = vectorClass.getDeclaredMethod("multiplyBy", new Class[] { parameterClass });
                 Object result = multiplyMethod.invoke(left, right);
-                double resultSI = ((DoubleScalar.Abs<?>) result).si;
+                double resultSI = ((DoubleScalar.Rel<?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
-                Method divideMethod = scalarClass.getDeclaredMethod("divideBy", new Class[] { parameterClass });
+                Method divideMethod = vectorClass.getDeclaredMethod("divideBy", new Class[] { parameterClass });
                 Object result = divideMethod.invoke(left, right);
-                double resultSI = ((DoubleScalar.Abs<?>) result).si;
+                double resultSI = ((DoubleScalar.Rel<?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
-            DoubleScalar.Abs<?> result = multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
+            DoubleScalar.Rel<?> result = multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
             // System.out.println("result is " + result);
             String resultCoefficients = result.getUnit().getSICoefficientsString();
             assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
         }
         else
         {
-            if (doubleType)
-            {
-                DoubleScalar.Rel<?> left =
-                        (DoubleScalar.Rel<?>) constructor.newInstance(123d, getSIUnitInstance(getUnitClass(scalarClass)));
-                // System.out.println("constructed left: " + left);
-                constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
-                DoubleScalar.Rel<?> right =
-                        (DoubleScalar.Rel<?>) constructor.newInstance(456d, getSIUnitInstance(getUnitClass(parameterClass)));
-                // System.out.println("constructed right: " + right);
-                double expectedValue = multiply ? 123d * 456 : 123d / 456;
+            FloatScalar.Rel<?> left =
+                    (FloatScalar.Rel<?>) constructor.newInstance(123f, getSIUnitInstance(getUnitClass(vectorClass)));
+            // System.out.println("constructed left: " + left);
+            constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
+            FloatScalar.Rel<?> right =
+                    (FloatScalar.Rel<?>) constructor.newInstance(456f, getSIUnitInstance(getUnitClass(parameterClass)));
+            // System.out.println("constructed right: " + right);
+            float expectedValue = multiply ? 123f * 456 : 123f / 456;
 
-                if (multiply)
-                {
-                    Method multiplyMethod = scalarClass.getDeclaredMethod("multiplyBy", new Class[] { parameterClass });
-                    Object result = multiplyMethod.invoke(left, right);
-                    double resultSI = ((DoubleScalar.Rel<?>) result).si;
-                    assertEquals("Result of operation", expectedValue, resultSI, 0.01);
-                }
-                else
-                {
-                    Method divideMethod = scalarClass.getDeclaredMethod("divideBy", new Class[] { parameterClass });
-                    Object result = divideMethod.invoke(left, right);
-                    double resultSI = ((DoubleScalar.Rel<?>) result).si;
-                    assertEquals("Result of operation", expectedValue, resultSI, 0.01);
-                }
-                DoubleScalar.Rel<?> result = multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
-                // System.out.println("result is " + result);
-                String resultCoefficients = result.getUnit().getSICoefficientsString();
-                assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
+            if (multiply)
+            {
+                Method multiplyMethod = vectorClass.getDeclaredMethod("multiplyBy", new Class[] { parameterClass });
+                Object result = multiplyMethod.invoke(left, right);
+                double resultSI = ((FloatScalar.Rel<?>) result).si;
+                assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
-                FloatScalar.Rel<?> left =
-                        (FloatScalar.Rel<?>) constructor.newInstance(123f, getSIUnitInstance(getUnitClass(scalarClass)));
-                // System.out.println("constructed left: " + left);
-                constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
-                FloatScalar.Rel<?> right =
-                        (FloatScalar.Rel<?>) constructor.newInstance(456f, getSIUnitInstance(getUnitClass(parameterClass)));
-                // System.out.println("constructed right: " + right);
-                float expectedValue = multiply ? 123f * 456 : 123f / 456;
-
-                if (multiply)
-                {
-                    Method multiplyMethod = scalarClass.getDeclaredMethod("multiplyBy", new Class[] { parameterClass });
-                    Object result = multiplyMethod.invoke(left, right);
-                    double resultSI = ((FloatScalar.Rel<?>) result).si;
-                    assertEquals("Result of operation", expectedValue, resultSI, 0.01);
-                }
-                else
-                {
-                    Method divideMethod = scalarClass.getDeclaredMethod("divideBy", new Class[] { parameterClass });
-                    Object result = divideMethod.invoke(left, right);
-                    float resultSI = ((FloatScalar.Rel<?>) result).si;
-                    assertEquals("Result of operation", expectedValue, resultSI, 0.01);
-                }
-                FloatScalar.Rel<?> result = multiply ? FloatScalar.multiply(left, right) : FloatScalar.divide(left, right);
-                // System.out.println("result is " + result);
-                String resultCoefficients = result.getUnit().getSICoefficientsString();
-                assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
+                Method divideMethod = vectorClass.getDeclaredMethod("divideBy", new Class[] { parameterClass });
+                Object result = divideMethod.invoke(left, right);
+                float resultSI = ((FloatScalar.Rel<?>) result).si;
+                assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
+            FloatScalar.Rel<?> result = multiply ? FloatScalar.multiply(left, right) : FloatScalar.divide(left, right);
+            // System.out.println("result is " + result);
+            String resultCoefficients = result.getUnit().getSICoefficientsString();
+            assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
         }
     }
 
@@ -456,20 +408,21 @@ public class VectorOperationsTest
      * Verify the Absoluteness, Relativeness, and SI values of a DoubleVector or FloatVector.
      * @param abs boolean; expected Absolute- or Relative-ness
      * @param doubleType boolean; if true; double is expected; if false; float is expected
+     * @param storageType TODO
      * @param got the (DoubleVector?) object
      * @param expected double[] or float[] with expected values
      * @param precision double; maximum error of the results
      * @throws ValueException
      */
-    private void verifyAbsRelPrecisionAndValues(final boolean abs, final boolean doubleType, final Object got,
-            final Object expected, double precision) throws ValueException
+    private void verifyAbsRelPrecisionAndValues(final boolean abs, final boolean doubleType, StorageType storageType,
+            final Object got, final Object expected, double precision) throws ValueException
     {
         int size = doubleType ? ((double[]) expected).length : ((float[]) expected).length;
         int refSize = doubleType ? ((double[]) expected).length : ((float[]) expected).length;
         assertEquals("size of resulting array", refSize, size);
         for (int i = 0; i < size; i++)
         {
-            double result = verifyAbsRelPrecisionAndExtractSI(abs, doubleType, got, i);
+            double result = verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, got, i);
             assertEquals("value check", doubleType ? ((double[]) expected)[i] : ((float[]) expected)[i], result, precision);
         }
     }
@@ -478,13 +431,14 @@ public class VectorOperationsTest
      * Verify the Absoluteness or Relativeness of a DoubleScalar and return the SI value.
      * @param abs boolean; expected Absolute- or Relativeness
      * @param doubleType boolean; if true; double is expected; if false; float is expected
+     * @param storageType StorageType; the expected StorageType (DENSE or SPARSE)
      * @param o the (DoubleScalar?) object
      * @param index int; the index of the value to return
      * @return double; the SI value
      * @throws ValueException
      */
-    private double verifyAbsRelPrecisionAndExtractSI(final boolean abs, final boolean doubleType, final Object o, int index)
-            throws ValueException
+    private double verifyAbsRelPrecisionAndExtractSI(final boolean abs, final boolean doubleType, StorageType storageType,
+            final Object o, int index) throws ValueException
     {
         double result = Double.NaN;
         if (doubleType)
@@ -493,7 +447,9 @@ public class VectorOperationsTest
             {
                 fail("object is not a DoubleVector");
             }
-            result = ((DoubleVector<?>) o).getSI(index);
+            DoubleVector<?> dv = (DoubleVector<?>) o;
+            result = dv.getSI(index);
+            assertEquals("StorageType", storageType, dv.getStorageType());
         }
         else
         {
@@ -501,7 +457,9 @@ public class VectorOperationsTest
             {
                 fail("object is not a FloatVector");
             }
-            result = ((FloatVector<?>) o).getSI(index);
+            FloatVector<?> fv = (FloatVector<?>) o;
+            result = fv.getSI(index);
+            // TODO not implemented yet - assertEquals("StorageType", storageType, fv.getStorageType());
         }
         if (o instanceof Absolute)
         {
@@ -546,7 +504,7 @@ public class VectorOperationsTest
         float[] floatValue = { 1.23456f, 2.34567f, 3.45678f };
         Object value = doubleType ? doubleValue : floatValue;
         findAndTestConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType },
-                abs, doubleType, value);
+                abs, doubleType, storageType, value);
         if (doubleType)
         {
             List<Double> list = new ArrayList<Double>();
@@ -555,7 +513,8 @@ public class VectorOperationsTest
                 list.add(doubleValue[i]);
             }
             findAndTestConstructor(vectorClass,
-                    new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType, value);
+                    new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType,
+                    storageType, value);
             // Construct a list of scalar objects
             // What is the corresponding Scalar type?
             String scalarClassName = vectorClass.getName();
@@ -573,28 +532,29 @@ public class VectorOperationsTest
             {
                 objectList.add(constructor.newInstance(d, getSIUnitInstance(getUnitClass(vectorClass))));
             }
-            findAndTestConstructor(vectorClass, new Object[] { objectList, storageType }, abs, doubleType, value);
+            findAndTestConstructor(vectorClass, new Object[] { objectList, storageType }, abs, doubleType, storageType, value);
             // Construct an array of the correct scalar objects
             Object[] objectArray = (Object[]) Array.newInstance(scalarClassAbsRel, objectList.size());
             for (int i = 0; i < objectList.size(); i++)
             {
                 objectArray[i] = objectList.get(i);
             }
-            findAndTestConstructor(vectorClass, new Object[] { objectArray, storageType }, abs, doubleType, value);
+            findAndTestConstructor(vectorClass, new Object[] { objectArray, storageType }, abs, doubleType, storageType, value);
             SortedMap<Integer, Object> map = new TreeMap<Integer, Object>();
             for (int i = 0; i < objectList.size(); i++)
             {
                 map.put(i, objectList.get(i));
             }
             // System.out.println("int is assignable from Integer ? " + int.class.isAssignableFrom(Integer.class));
-            findAndTestConstructor(vectorClass, new Object[] { map, objectList.size(), storageType }, abs, doubleType, value);
+            findAndTestConstructor(vectorClass, new Object[] { map, objectList.size(), storageType }, abs, doubleType,
+                    storageType, value);
             map.clear();
             for (int i = 0; i < doubleValue.length; i++)
             {
                 map.put(i, doubleValue[i]);
             }
             findAndTestConstructor(vectorClass, new Object[] { map, getSIUnitInstance(getUnitClass(vectorClass)),
-                    doubleValue.length, storageType }, abs, doubleType, value);
+                    doubleValue.length, storageType }, abs, doubleType, storageType, value);
         }
         else
         {
@@ -604,7 +564,8 @@ public class VectorOperationsTest
                 list.add(floatValue[i]);
             }
             findAndTestConstructor(vectorClass,
-                    new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType, value);
+                    new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType,
+                    storageType, value);
             // TODO add and convert all other stuff from the Float version
         }
     }
@@ -689,7 +650,12 @@ public class VectorOperationsTest
         // Constructor<?> constructor = vectorClass.getConstructor(parameterTypes);
         if (null == constructor)
         {
-            // System.out.println("No suitable constructor");
+            System.out.println("No suitable constructor for " + vectorClass + ":");
+            for (int i = 0; i < args.length; i++)
+            {
+                System.out.println("\tparameter type[" + i + "] is " + args[i].getClass());
+            }
+
             fail("Cannot find suitable constructor");
         }
         return constructor.newInstance(args);
@@ -702,6 +668,7 @@ public class VectorOperationsTest
      * @param abs boolean; if true; the result of the constructor is expected to be Absolute; if false; the result of the
      *            constructor is expected to be relative
      * @param doubleType boolean; if true; the args argument is array of double; of false; the args argument is array of float
+     * @param expectedStorageType StorageType; the expected Storage type (DENSE or SPARSE)
      * @param expectedResult Object; either array of double, or array of float
      * @throws NoSuchMethodException
      * @throws SecurityException
@@ -712,11 +679,12 @@ public class VectorOperationsTest
      * @throws ValueException
      */
     private void findAndTestConstructor(final Class<?> vectorClass, final Object[] args, final boolean abs,
-            final boolean doubleType, final Object expectedResult) throws NoSuchMethodException, SecurityException,
-            InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ValueException
+            final boolean doubleType, StorageType expectedStorageType, final Object expectedResult)
+            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException, ValueException
     {
-        verifyAbsRelPrecisionAndValues(abs, doubleType, findAndExecuteConstructor(vectorClass, args, abs, doubleType),
-                expectedResult, 0.0001);
+        verifyAbsRelPrecisionAndValues(abs, doubleType, expectedStorageType,
+                findAndExecuteConstructor(vectorClass, args, abs, doubleType), expectedResult, 0.0001);
     }
 
     /**
@@ -787,50 +755,44 @@ public class VectorOperationsTest
         double[] doubleValue = { 1.23456, 2.34567, 3.45678 };
         float[] floatValue = { 1.23456f, 2.34567f, 3.45678f };
         Object value = doubleType ? doubleValue : floatValue;
-        Constructor<?> constructor =
-                vectorClass.getConstructor(doubleType ? double[].class : float[].class, getUnitClass(vectorClass),
-                        StorageType.class);
-        Object left;
+        Object left =
+                findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
+                        storageType }, abs, doubleType);
+        Object result;
         if (doubleType)
         {
-            left =
-                    abs ? (DoubleVector.Abs<?>) constructor.newInstance(value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType) : (DoubleVector.Rel<?>) constructor.newInstance(value,
-                            getSIUnitInstance(getUnitClass(vectorClass)), storageType);
-            // System.out.println("Constructed object of type " + vectorClass + ": " + left.toString());
-            // Find the constructor that takes an object of the current class as the single argument
-            Constructor<?>[] constructors = vectorClass.getConstructors();
-            for (Constructor<?> c : constructors)
+            result = ((DoubleVectorInterface<?>) left).toSparse();
+            verifyAbsRelPrecisionAndValues(abs, doubleType, StorageType.SPARSE, result, value, 0.0001);
+            result = ((DoubleVectorInterface<?>) left).toDense();
+            verifyAbsRelPrecisionAndValues(abs, doubleType, StorageType.DENSE, result, value, 0.0001);
+            result = ((DoubleVectorInterface<?>) left).mutable();
+            verifyAbsRelPrecisionAndValues(abs, doubleType, storageType, result, value, 0.0001);
+            result = ((MutableDoubleVectorInterface<?>) result).immutable();
+            verifyAbsRelPrecisionAndValues(abs, doubleType, storageType, result, value, 0.0001);
+            if (abs)
             {
-                // System.out.println("Constructor name is " + c.getName() + " parameters " + c.getParameterTypes());
-                Class<?>[] parTypes = c.getParameterTypes();
-                if (parTypes.length == 1 && parTypes[0] == vectorClass)
+                double[] thirdValue = new double[doubleValue.length];
+                double[] twoThirdValue = new double[doubleValue.length];
+                for (int i = 0; i < thirdValue.length; i++)
                 {
-                    DoubleVector<?> newInstance = (DoubleVector<?>) c.newInstance(left);
-                    verifyAbsRelPrecisionAndValues(abs, doubleType, newInstance, value, 0.01);
+                    thirdValue[i] = doubleValue[i] / 3;
+                    twoThirdValue[i] = 2 * thirdValue[i];
+                }
+                // FIXME - Peter does not know how to write this with generics...
+                if (vectorClass == AnglePlaneVector.Abs.class)
+                {
+                    Object right =
+                            findAndExecuteConstructor(vectorClass, new Object[] { thirdValue,
+                                    getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType);
+                    result = ((AnglePlaneVector.Abs) left).minus((AnglePlaneVector.Abs) right);
+                    verifyAbsRelPrecisionAndValues(false, doubleType, storageType, result, twoThirdValue, 0.0001);
                 }
             }
         }
         else
         {
-            left =
-                    abs ? (FloatScalar.Abs<?>) constructor.newInstance(value, getSIUnitInstance(getUnitClass(vectorClass)))
-                            : (FloatScalar.Rel<?>) constructor.newInstance(value, getSIUnitInstance(getUnitClass(vectorClass)),
-                                    storageType);
-            // Find the constructor that takes an object of the current class as the single argument
-            Constructor<?>[] constructors = vectorClass.getConstructors();
-            for (Constructor<?> c : constructors)
-            {
-                Class<?>[] parTypes = c.getParameterTypes();
-                if (parTypes.length == 1)
-                {
-                    // System.out.println("parType is " + parTypes[0]);
-                    FloatScalar<?> newInstance = (FloatScalar<?>) c.newInstance(left);
-                    verifyAbsRelPrecisionAndValues(abs, doubleType, newInstance, value, 0.01);
-                }
-            }
+            // TODO implement for float
         }
-        Object result;
 
         /*-
         if (mutable)
@@ -1178,7 +1140,7 @@ public class VectorOperationsTest
                 Method interpolate = vectorClass.getMethod("interpolate", vectorClass, vectorClass, float.class);
                 FloatScalar<?> result;
                 result = (FloatScalar<?>) interpolate.invoke(null, zero, one, ratio);
-                verifyAbsRelPrecisionAndValues(abs, doubleType, result, expectedResult, 0.01);
+                verifyAbsRelPrecisionAndValues(abs, doubleType, storageType, result, expectedResult, 0.01);
             }
         }
     }
