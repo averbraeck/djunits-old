@@ -143,7 +143,7 @@ public class VectorOperationsTest
 
     /**
      * Test the toAbs or toRel method.
-     * @param vectorClassAbsRel class to test
+     * @param vectorClass class to test
      * @param isAbs boolean; if true; the scalarClassAbsRel must be aAsolute; if false; the scalarClassAbsRel must be Relative
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
      * @param storageType StorageType; DENSE or SPARSE
@@ -156,7 +156,7 @@ public class VectorOperationsTest
      * @throws InstantiationException
      * @throws ValueException
      */
-    private void testAbsRelConversion(final Class<?> vectorClassAbsRel, boolean isAbs, boolean doubleType,
+    private void testAbsRelConversion(final Class<?> vectorClass, boolean isAbs, boolean doubleType,
             StorageType storageType) throws NoSuchMethodException, SecurityException, InstantiationException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException, ValueException
     {
@@ -164,32 +164,11 @@ public class VectorOperationsTest
         float[] floatInValue = { 1.23456f, 2.34567f, 3.45678f };
         Object inValue = doubleType ? doubleInValue : floatInValue;
         // System.out.println("Looking for constructor of " + vectorClassAbsRel.getName());
-        Constructor<?> constructor =
-                vectorClassAbsRel.getConstructor(doubleType ? double[].class : float[].class, getUnitClass(vectorClassAbsRel),
-                        StorageType.class);
-        Object from;
-        if (doubleType)
-        {
-            from =
-                    isAbs ? (DoubleVector.Abs<?>) constructor.newInstance(inValue,
-                            getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType)
-                            : (DoubleVector.Rel<?>) constructor.newInstance(inValue,
-                                    getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType);
-        }
-        else
-        {
-            from =
-                    isAbs ? (FloatVector.Abs<?>) constructor.newInstance((float) inValue,
-                            getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType) : (FloatVector.Rel<?>) constructor
-                            .newInstance((float) inValue, getSIUnitInstance(getUnitClass(vectorClassAbsRel)), storageType);
-        }
-        // testje
-        // AnglePlaneVector.Rel.Dense apvrd = new AnglePlaneVector.Rel.Dense(new double[] { 0.1, 2.3 },
-        // AnglePlaneUnit.ARCSECOND);
-        // apvrd.toAbs();
-
+        Object from =
+                findAndExecuteConstructor(vectorClass, new Object[] { inValue,
+                        getSIUnitInstance(getUnitClass(vectorClass)), storageType }, isAbs, doubleType);
         // System.out.println("Looking for method " + (isAbs ? "toRel" : "toAbs"));
-        Method method = vectorClassAbsRel.getMethod(isAbs ? "toRel" : "toAbs");
+        Method method = vectorClass.getMethod(isAbs ? "toRel" : "toAbs");
         Object result = method.invoke(from);
         verifyAbsRelPrecisionAndValues(!isAbs, doubleType, result, doubleType ? doubleInValue : floatInValue, 0.000001);
     }
