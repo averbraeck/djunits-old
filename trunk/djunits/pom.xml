@@ -224,6 +224,7 @@
           <detectLinks>false</detectLinks>
           <detectOfflineLinks>true</detectOfflineLinks>
           <show>package</show>
+          <stylesheetfile>${basedir}/src/main/resources/development/javadoc/stylesheet.css</stylesheetfile>
         </configuration>
         <executions>
           <execution>
@@ -398,6 +399,7 @@
           <detectLinks>false</detectLinks>
           <detectOfflineLinks>true</detectOfflineLinks>
           <show>package</show>
+          <stylesheetfile>${basedir}/src/main/resources/development/javadoc/stylesheet.css</stylesheetfile>
         </configuration>
         <reportSets>
           <reportSet>
