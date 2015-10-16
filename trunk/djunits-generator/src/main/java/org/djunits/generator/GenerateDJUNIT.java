@@ -338,7 +338,7 @@ public class GenerateDJUNIT
     private static void generateDoubleScalarMoney() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/scalar/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_SCALAR_MONEY.java");
+        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_SCALAR_REL.java");
         String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
 
         for (String type : typesMoney)
@@ -432,7 +432,7 @@ public class GenerateDJUNIT
     private static void generateFloatScalarMoney() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/scalar/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_SCALAR_MONEY.java");
+        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_SCALAR_REL.java");
         String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
 
         for (String type : typesMoney)
