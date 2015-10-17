@@ -381,7 +381,7 @@ abstract class DoubleVectorData
      */
     public void incrementBy(final double valueSI)
     {
-        Arrays.stream(this.vectorSI).parallel().map(d -> d + valueSI).toArray();
+        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] += valueSI);
     }
 
     /**
@@ -415,7 +415,7 @@ abstract class DoubleVectorData
      */
     public void decrementBy(final double valueSI)
     {
-        Arrays.stream(this.vectorSI).parallel().map(d -> d - valueSI).toArray();
+        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] -= valueSI);
     }
 
     /**
@@ -450,7 +450,7 @@ abstract class DoubleVectorData
      */
     public void multiplyBy(final double valueSI)
     {
-        Arrays.stream(this.vectorSI).parallel().map(d -> d * valueSI).toArray();
+        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] *= valueSI);
     }
 
     /**
@@ -485,7 +485,7 @@ abstract class DoubleVectorData
      */
     public void divideBy(final double valueSI)
     {
-        Arrays.stream(this.vectorSI).parallel().map(d -> d / valueSI).toArray();
+        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] /= valueSI);
     }
 
     /** ============================================================================================ */

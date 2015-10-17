@@ -5,12 +5,11 @@ import java.util.SortedMap;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
-import org.djunits.value.DenseData;
 import org.djunits.value.FunctionsAbs;
 import org.djunits.value.FunctionsRel;
 import org.djunits.value.MathFunctions;
 import org.djunits.value.Relative;
-import org.djunits.value.SparseData;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
 import org.djunits.value.vfloat.FloatFunction;
@@ -26,8 +25,8 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version 30 Oct, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version 30 Oct, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableFloatVector
@@ -73,9 +72,10 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
     /** ============================================================================================ */
 
     /**
+     * ABSOLUTE implementation of MutableFloatVector.
      * @param <U> Unit the unit for which this Vector will be created
      */
-    public abstract static class Abs<U extends Unit<U>> extends MutableFloatVector<U> implements Absolute,
+    public static class Abs<U extends Unit<U>> extends MutableFloatVector<U> implements Absolute,
         MathFunctions<MutableFloatVector.Abs<U>>, FloatMathFunctions<MutableFloatVector.Abs<U>>,
         FunctionsAbs<U, FloatVector.Abs<U>, FloatVector.Rel<U>>
     {
@@ -83,275 +83,141 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         private static final long serialVersionUID = 20151003L;
 
         /**
-         * Construct a new Absolute MutableFloatVector.
-         * @param unit U; the unit of the new Absolute MutableFloatVector
+         * Construct a new Absolute Mutable FloatVector.
+         * @param values float[]; the values of the entries in the new Absolute Mutable FloatVector
+         * @param unit U; the unit of the new Absolute Mutable FloatVector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
          */
-        protected Abs(final U unit)
+        public Abs(final float[] values, final U unit, final StorageType storageType) throws ValueException
         {
             super(unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public abstract MutableFloatVector.Abs<U> mutable();
-
-        /** {@inheritDoc} */
-        @Override
-        public abstract FloatVector.Abs<U> immutable();
-
-        /** {@inheritDoc} */
-        @Override
-        public abstract MutableFloatVector.Abs<U> copy();
-
-        /** {@inheritDoc} */
-        public abstract MutableFloatVector.Abs<U> toDense();
-
-        /** {@inheritDoc} */
-        public abstract MutableFloatVector.Abs<U> toSparse();
-
-        /**
-         * ABSOLUTE DENSE implementation of MutableFloatVector.
-         * @param <U> Unit the unit for which this Vector will be created
-         */
-        public static class Dense<U extends Unit<U>> extends Abs<U> implements DenseData
-        {
-            /** */
-            private static final long serialVersionUID = 20151003L;
-
-            /**
-             * Construct a new Absolute Dense Mutable FloatVector.
-             * @param values float[]; the values of the entries in the new Absolute Dense Mutable FloatVector
-             * @param unit U; the unit of the new Absolute Dense MutableFloatVector
-             * @throws ValueException when values is null
-             */
-            public Dense(final float[] values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Absolute Dense Mutable FloatVector.
-             * @param values List; the values of the entries in the new Absolute Dense Mutable FloatVector
-             * @param unit U; the unit of the new Absolute Dense Mutable FloatVector
-             * @throws ValueException when values is null
-             */
-            public Dense(final List<Float> values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Absolute Dense Mutable FloatVector.
-             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Dense MutableFloatVector
-             * @throws ValueException when values has zero entries
-             */
-            public Dense(final FloatScalar.Abs<U>[] values) throws ValueException
-            {
-                super(checkNonEmpty(values)[0].getUnit());
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Absolute Dense Mutable FloatVector.
-             * @param values List; the values of the entries in the new Absolute Dense Mutable FloatVector
-             * @throws ValueException when values has zero entries
-             */
-            public Dense(final List<FloatScalar.Abs<U>> values) throws ValueException
-            {
-                super(checkNonEmptyLA(values).get(0).getUnit());
-                this.data = initializeDenseLA(values);
-            }
-
-            /**
-             * Construct a new Absolute Dense Mutable FloatVector.
-             * @param data an internal data object
-             * @param unit the unit
-             */
-            Dense(final FloatVectorDataDense data, final U unit)
-            {
-                super(unit);
-                this.data = data.copy();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public FloatVector.Abs<U> immutable()
-            {
-                setCopyOnWrite(true);
-                return new FloatVector.Abs.Dense<U>(getData(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableFloatVector.Abs<U> mutable()
-            {
-                setCopyOnWrite(true);
-                final MutableFloatVector.Abs.Dense<U> result =
-                    new MutableFloatVector.Abs.Dense<U>(getData(), getUnit());
-                result.setCopyOnWrite(true);
-                return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("checkstyle:designforextension")
-            public MutableFloatVector.Abs<U> copy()
-            {
-                return mutable();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatVectorDataDense getData()
-            {
-                return (FloatVectorDataDense) this.data;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableFloatVector.Abs<U> toDense()
-            {
-                return copy();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableFloatVector.Abs<U> toSparse()
-            {
-                return new MutableFloatVector.Abs.Sparse<U>(getData().toSparse(), getUnit());
-            }
+            this.data = FloatVectorData.instantiate(values, unit.getScale(), storageType);
         }
 
         /**
-         * ABSOLUTE SPARSE implementation of MutableFloatVector.
-         * @param <U> Unit the unit for which this Vector will be created
+         * Construct a new Absolute Mutable FloatVector.
+         * @param values List; the values of the entries in the new Absolute Mutable FloatVector
+         * @param unit U; the unit of the new Absolute Mutable FloatVector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
          */
-        public static class Sparse<U extends Unit<U>> extends Abs<U> implements SparseData
+        public Abs(final List<Float> values, final U unit, final StorageType storageType) throws ValueException
         {
-            /**  */
-            private static final long serialVersionUID = 20151003L;
-
-            /**
-             * Construct a new Absolute Sparse Mutable FloatVector.
-             * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatVector
-             * @param unit U; the unit of the new Absolute Sparse Mutable FloatVector
-             * @param length the size of the vector
-             * @throws ValueException when values is null
-             */
-            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
-            {
-                super(unit);
-                this.data = initializeSparse(values, length);
-            }
-
-            /**
-             * Construct a new Absolute Sparse Mutable FloatVector.
-             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable
-             *            FloatVector
-             * @param length the size of the vector
-             * @throws ValueException when values has zero entries
-             */
-            public Sparse(final SortedMap<Integer, FloatScalar.Abs<U>> values, final int length) throws ValueException
-            {
-                super(checkNonEmptyMA(values).get(values.firstKey()).getUnit());
-                initializeSparseMA(values, length);
-            }
-
-            /**
-             * Construct a new Absolute Sparse Mutable FloatVector.
-             * @param values float[]; the values of the entries in the new Absolute Sparse Mutable FloatVector
-             * @param unit U; the unit of the new Absolute Sparse Mutable FloatVector
-             * @throws ValueException when values is null
-             */
-            public Sparse(final float[] values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values).toSparse();
-            }
-
-            /**
-             * Construct a new Absolute Sparse Mutable FloatVector.
-             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable
-             *            FloatVector
-             * @throws ValueException when values has zero entries
-             */
-            public Sparse(final FloatScalar.Abs<U>[] values) throws ValueException
-            {
-                super(checkNonEmpty(values)[0].getUnit());
-                this.data = initializeDense(values).toSparse();
-            }
-
-            /**
-             * Construct a new Absolute Sparse Mutable FloatVector, package method.
-             * @param data the sparse data (internal structure)
-             * @param unit U; the unit of the new Absolute Sparse Mutable FloatVector
-             */
-            Sparse(final FloatVectorDataSparse data, final U unit)
-            {
-                super(unit);
-                this.data = data.copy();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("checkstyle:designforextension")
-            public FloatVector.Abs<U> immutable()
-            {
-                setCopyOnWrite(true);
-                return new FloatVector.Abs.Sparse<U>(getData(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("checkstyle:designforextension")
-            public MutableFloatVector.Abs<U> mutable()
-            {
-                setCopyOnWrite(true);
-                final MutableFloatVector.Abs.Sparse<U> result =
-                    new MutableFloatVector.Abs.Sparse<U>(getData(), getUnit());
-                result.setCopyOnWrite(true);
-                return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("checkstyle:designforextension")
-            public MutableFloatVector.Abs<U> copy()
-            {
-                return mutable();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatVectorDataSparse getData()
-            {
-                return (FloatVectorDataSparse) this.data;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableFloatVector.Abs<U> toDense()
-            {
-                return new MutableFloatVector.Abs.Dense<U>(getData().toDense(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableFloatVector.Abs<U> toSparse()
-            {
-                return copy();
-            }
+            super(unit);
+            this.data = FloatVectorData.instantiate(values, unit.getScale(), storageType);
         }
 
-        /** ================================= ABS GENERAL METHODS ================================== */
+        /**
+         * Construct a new Absolute Mutable FloatVector.
+         * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Mutable FloatVector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values has zero entries
+         */
+        public Abs(final FloatScalar.Abs<U>[] values, final StorageType storageType) throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = FloatVectorData.instantiate(values, storageType);
+        }
+
+        /**
+         * Construct a new Absolute Mutable FloatVector.
+         * @param values List; the values of the entries in the new Absolute Mutable FloatVector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param <S> the Scalar type used
+         * @throws ValueException when values has zero entries
+         */
+        public <S extends FloatScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType)
+            throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = FloatVectorData.instantiateLD(values, storageType);
+        }
+
+        /**
+         * Construct a new Relative Mutable FloatVector.
+         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable FloatVector
+         * @param length the size of the vector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param <S> the Scalar type used
+         * @throws ValueException when values has zero entries
+         */
+        public <S extends FloatScalar.Abs<U>> Abs(final SortedMap<Integer, S> values, final int length,
+            final StorageType storageType) throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = FloatVectorData.instantiateMD(values, length, storageType);
+        }
+
+        /**
+         * Construct a new Relative Mutable FloatVector.
+         * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatVector
+         * @param unit U; the unit of the new Relative Sparse Mutable FloatVector
+         * @param length the size of the vector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
+         */
+        public Abs(final SortedMap<Integer, Float> values, final U unit, final int length, final StorageType storageType)
+            throws ValueException
+        {
+            super(unit);
+            this.data = FloatVectorData.instantiate(values, length, unit.getScale(), storageType);
+        }
+
+        /**
+         * Construct a new Absolute Mutable FloatVector.
+         * @param data an internal data object
+         * @param unit the unit
+         */
+        Abs(final FloatVectorData data, final U unit)
+        {
+            super(unit);
+            this.data = data.copy();
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public FloatVector.Abs<U> immutable()
+        {
+            setCopyOnWrite(true);
+            return instantiateAbs(getData(), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public MutableFloatVector.Abs<U> mutable()
+        {
+            setCopyOnWrite(true);
+            final MutableFloatVector.Abs<U> result = MutableFloatVector.instantiateMutableAbs(getData(), getUnit());
+            result.setCopyOnWrite(true);
+            return result;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> copy()
+        {
+            return mutable();
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public MutableFloatVector.Abs<U> toDense()
+        {
+            return this.data.isDense() ? this : instantiateMutableAbs(this.data.toDense(), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public MutableFloatVector.Abs<U> toSparse()
+        {
+            return this.data.isSparse() ? this : instantiateMutableAbs(this.data.toSparse(), getUnit());
+        }
 
         /** {@inheritDoc} */
         @Override
@@ -362,25 +228,138 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         }
 
         /**
-         * Increment the value by the supplied value and return the result.
+         * Increment the value by the supplied value and return the changed vector.
          * @param increment FloatVector.Rel&lt;U&gt;; amount by which the value is incremented
-         * @return MutableFloatVector.Abs&lt;U&gt;
+         * @return the changed MutableFloatVector.Abs&lt;U&gt;
          * @throws ValueException when the size of increment is not identical to the size of this
          */
         public final MutableFloatVector.Abs<U> incrementBy(final FloatVector.Rel<U> increment) throws ValueException
         {
-            return (MutableFloatVector.Abs<U>) incrementByImpl(increment);
+            checkCopyOnWrite();
+            this.data.incrementBy(increment.getData());
+            return this;
         }
 
         /**
-         * Decrement the value by the supplied value and return the result.
+         * Increment the value by the supplied value and return the changed vector.
+         * @param increment FloatScalar.Rel&lt;U&gt;; amount by which the value is incremented
+         * @return the changed MutableFloatVector.Abs&lt;U&gt;
+         */
+        public final MutableFloatVector.Abs<U> incrementBy(final FloatScalar.Rel<U> increment)
+        {
+            return incrementBy(increment.si);
+        }
+
+        /**
+         * Increment the value by the supplied constant and return the changed vector.
+         * @param increment amount by which the value is incremented
+         * @return the changed MutableFloatVector.Abs&lt;U&gt;
+         */
+        public final MutableFloatVector.Abs<U> incrementBy(final float increment)
+        {
+            checkCopyOnWrite();
+            this.data.incrementBy(increment);
+            return this;
+        }
+
+        /**
+         * Decrement the value by the supplied value and return the changed vector.
          * @param decrement FloatVector.Rel&lt;U&gt;; amount by which the value is decremented
-         * @return MutableFloatVector.Abs&lt;U&gt;
+         * @return the changed MutableFloatVector.Abs&lt;U&gt;
          * @throws ValueException when the size of increment is not identical to the size of this
          */
         public final MutableFloatVector.Abs<U> decrementBy(final FloatVector.Rel<U> decrement) throws ValueException
         {
-            return (MutableFloatVector.Abs<U>) decrementByImpl(decrement);
+            checkCopyOnWrite();
+            this.data.decrementBy(decrement.getData());
+            return this;
+        }
+
+        /**
+         * Decrement the value by the supplied value and return the changed vector.
+         * @param decrement FloatScalar.Rel&lt;U&gt;; amount by which the value is decremented
+         * @return the changed MutableFloatVector.Abs&lt;U&gt;
+         */
+        public final MutableFloatVector.Abs<U> decrementBy(final FloatScalar.Rel<U> decrement)
+        {
+            return decrementBy(decrement.si);
+        }
+
+        /**
+         * Decrement the value by the supplied constant and return the changed vector.
+         * @param decrement amount by which the value is decremented
+         * @return the changed MutableFloatVector.Abs&lt;U&gt;
+         */
+        public final MutableFloatVector.Abs<U> decrementBy(final float decrement)
+        {
+            checkCopyOnWrite();
+            this.data.decrementBy(decrement);
+            return this;
+        }
+
+        /**
+         * Multiply the values in the vector by the supplied values and return the changed vector.
+         * @param factors FloatVector.Rel&lt;U&gt;; amounts by which the value is multiplied
+         * @return the changed MutableFloatVector.Abs&lt;U&gt;
+         * @throws ValueException when the size of the factors is not identical to the size of this
+         */
+        public final MutableFloatVector.Abs<U> multiplyBy(final FloatVector.Rel<U> factors) throws ValueException
+        {
+            checkCopyOnWrite();
+            this.data.multiplyBy(factors.getData());
+            return this;
+        }
+
+        /**
+         * Multiply the values in the vector by the supplied value and return the changed vector.
+         * @param factor FloatScalar.Rel&lt;U&gt;; amount by which the values in the vector are multiplied
+         * @return the changed MutableFloatVector.Abs&lt;U&gt;
+         */
+        public final MutableFloatVector.Abs<U> multiplyBy(final FloatScalar.Rel<U> factor)
+        {
+            return multiplyBy(factor.si);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> multiplyBy(final float factor)
+        {
+            checkCopyOnWrite();
+            this.data.multiplyBy(factor);
+            return this;
+        }
+
+        /**
+         * Divide the values in the vector by the supplied values and return the changed vector.
+         * @param factors FloatVector.Rel&lt;U&gt;; amounts by which the value is divided
+         * @return the changed MutableFloatVector.Abs&lt;U&gt;
+         * @throws ValueException when the size of the factors is not identical to the size of this
+         */
+        public final MutableFloatVector.Abs<U> divideBy(final FloatVector.Rel<U> factors) throws ValueException
+        {
+            checkCopyOnWrite();
+            this.data.divideBy(factors.getData());
+            return this;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Abs<U> divideBy(final float factor)
+        {
+            this.data.multiplyBy(factor);
+            return this;
+        }
+
+        /**
+         * Divide the values in the vector by the supplied value and return the changed vector.
+         * @param factor FloatScalar.Rel&lt;U&gt;; amount by which the values in the vector are divided
+         * @return the changed MutableFloatVector.Abs&lt;U&gt;
+         */
+        public final MutableFloatVector.Abs<U> divideBy(final FloatScalar.Rel<U> factor)
+        {
+            return divideBy(factor.si);
         }
 
         /** {@inheritDoc} */
@@ -644,25 +623,6 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             assign(FloatMathFunctionsImpl.INV);
             return this;
         }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> multiplyBy(final float constant)
-        {
-            assign(FloatMathFunctionsImpl.MULT(constant));
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> divideBy(final float constant)
-        {
-            assign(FloatMathFunctionsImpl.DIV(constant));
-            return this;
-        }
-
     }
 
     /** ============================================================================================ */
@@ -670,9 +630,10 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
     /** ============================================================================================ */
 
     /**
+     * RELATIVE implementation of MutableFloatVector.
      * @param <U> Unit the unit for which this Vector will be created
      */
-    public abstract static class Rel<U extends Unit<U>> extends MutableFloatVector<U> implements Relative,
+    public static class Rel<U extends Unit<U>> extends MutableFloatVector<U> implements Relative,
         MathFunctions<MutableFloatVector.Rel<U>>, FloatMathFunctions<MutableFloatVector.Rel<U>>,
         FunctionsRel<U, FloatVector.Abs<U>, FloatVector.Rel<U>>
     {
@@ -680,276 +641,141 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         private static final long serialVersionUID = 20151003L;
 
         /**
-         * Construct a new Relative MutableFloatVector.
-         * @param unit U; the unit of the new Relative MutableFloatVector
+         * Construct a new Relative Mutable FloatVector.
+         * @param values float[]; the values of the entries in the new Relative Mutable FloatVector
+         * @param unit U; the unit of the new Relative Mutable FloatVector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
          */
-        protected Rel(final U unit)
+        public Rel(final float[] values, final U unit, final StorageType storageType) throws ValueException
         {
             super(unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public abstract MutableFloatVector.Rel<U> mutable();
-
-        /** {@inheritDoc} */
-        @Override
-        public abstract FloatVector.Rel<U> immutable();
-
-        /** {@inheritDoc} */
-        @Override
-        public abstract MutableFloatVector.Rel<U> copy();
-
-        /** {@inheritDoc} */
-        public abstract MutableFloatVector.Rel<U> toDense();
-
-        /** {@inheritDoc} */
-        public abstract MutableFloatVector.Rel<U> toSparse();
-
-        /**
-         * RELATIVE DENSE implementation of MutableFloatVector.
-         * @param <U> Unit the unit for which this Vector will be created
-         */
-        public static class Dense<U extends Unit<U>> extends Rel<U> implements DenseData
-        {
-            /** */
-            private static final long serialVersionUID = 20151003L;
-
-            /**
-             * Construct a new Relative Dense Mutable FloatVector.
-             * @param values float[]; the values of the entries in the new Relative Dense Mutable FloatVector
-             * @param unit U; the unit of the new Relative Dense MutableFloatVector
-             * @throws ValueException when values is null
-             */
-            public Dense(final float[] values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Relative Dense Mutable FloatVector.
-             * @param values List; the values of the entries in the new Relative Dense Mutable FloatVector
-             * @param unit U; the unit of the new Relative Dense Mutable FloatVector
-             * @throws ValueException when values is null
-             */
-            public Dense(final List<Float> values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Relative Dense Mutable FloatVector.
-             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Dense MutableFloatVector
-             * @throws ValueException when values has zero entries
-             */
-            public Dense(final FloatScalar.Rel<U>[] values) throws ValueException
-            {
-                super(checkNonEmpty(values)[0].getUnit());
-                this.data = initializeDense(values);
-            }
-
-            /**
-             * Construct a new Relative Dense Mutable FloatVector.
-             * @param values List; the values of the entries in the new Relative Dense Mutable FloatVector
-             * @throws ValueException when values has zero entries
-             */
-            public Dense(final List<FloatScalar.Rel<U>> values) throws ValueException
-            {
-                super(checkNonEmptyLR(values).get(0).getUnit());
-                this.data = initializeDenseLR(values);
-            }
-
-            /**
-             * Construct a new Relative Dense Mutable FloatVector.
-             * @param data an internal data object
-             * @param unit the unit
-             */
-            Dense(final FloatVectorDataDense data, final U unit)
-            {
-                super(unit);
-                this.data = data.copy();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("checkstyle:designforextension")
-            public FloatVector.Rel<U> immutable()
-            {
-                setCopyOnWrite(true);
-                return new FloatVector.Rel.Dense<U>(getData(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("checkstyle:designforextension")
-            public MutableFloatVector.Rel<U> mutable()
-            {
-                setCopyOnWrite(true);
-                final MutableFloatVector.Rel.Dense<U> result =
-                    new MutableFloatVector.Rel.Dense<U>(getData(), getUnit());
-                result.setCopyOnWrite(true);
-                return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("checkstyle:designforextension")
-            public MutableFloatVector.Rel<U> copy()
-            {
-                return mutable();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            protected final FloatVectorDataDense getData()
-            {
-                return (FloatVectorDataDense) this.data;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableFloatVector.Rel<U> toDense()
-            {
-                return copy();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableFloatVector.Rel<U> toSparse()
-            {
-                return new MutableFloatVector.Rel.Sparse<U>(getData().toSparse(), getUnit());
-            }
+            this.data = FloatVectorData.instantiate(values, unit.getScale(), storageType);
         }
 
         /**
-         * RELATIVE SPARSE implementation of MutableFloatVector.
-         * @param <U> Unit the unit for which this Vector will be created
+         * Construct a new Relative Mutable FloatVector.
+         * @param values List; the values of the entries in the new Relative Mutable FloatVector
+         * @param unit U; the unit of the new Relative Mutable FloatVector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
          */
-        public static class Sparse<U extends Unit<U>> extends Rel<U> implements SparseData
+        public Rel(final List<Float> values, final U unit, final StorageType storageType) throws ValueException
         {
-            /**  */
-            private static final long serialVersionUID = 20151003L;
-
-            /**
-             * Construct a new Relative Sparse Mutable FloatVector.
-             * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatVector
-             * @param unit U; the unit of the new Relative Sparse Mutable FloatVector
-             * @param length the size of the vector
-             * @throws ValueException when values is null
-             */
-            public Sparse(final SortedMap<Integer, Float> values, final U unit, final int length) throws ValueException
-            {
-                super(unit);
-                this.data = initializeSparse(values, length);
-            }
-
-            /**
-             * Construct a new Relative Sparse Mutable FloatVector.
-             * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
-             *            FloatVector
-             * @param length the size of the vector
-             * @throws ValueException when values has zero entries
-             */
-            public Sparse(final SortedMap<Integer, FloatScalar.Rel<U>> values, final int length) throws ValueException
-            {
-                super(checkNonEmptyMR(values).get(values.firstKey()).getUnit());
-                this.data = initializeSparseMR(values, length);
-            }
-
-            /**
-             * Construct a new Relative Sparse Mutable FloatVector.
-             * @param values float[]; the values of the entries in the new Relative Sparse Mutable FloatVector
-             * @param unit U; the unit of the new Relative Sparse Mutable FloatVector
-             * @throws ValueException when values is null
-             */
-            public Sparse(final float[] values, final U unit) throws ValueException
-            {
-                super(unit);
-                this.data = initializeDense(values).toSparse();
-            }
-
-            /**
-             * Construct a new Relative Sparse Mutable FloatVector.
-             * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
-             *            FloatVector
-             * @throws ValueException when values has zero entries
-             */
-            public Sparse(final FloatScalar.Rel<U>[] values) throws ValueException
-            {
-                super(checkNonEmpty(values)[0].getUnit());
-                this.data = initializeDense(values).toSparse();
-            }
-
-            /**
-             * Construct a new Relative Sparse Mutable FloatVector, package method.
-             * @param data the sparse data (internal structure)
-             * @param unit U; the unit of the new Relative Sparse Mutable FloatVector
-             */
-            Sparse(final FloatVectorDataSparse data, final U unit)
-            {
-                super(unit);
-                this.data = data.copy();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("checkstyle:designforextension")
-            public FloatVector.Rel<U> immutable()
-            {
-                setCopyOnWrite(true);
-                return new FloatVector.Rel.Sparse<U>(getData(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("checkstyle:designforextension")
-            public MutableFloatVector.Rel<U> mutable()
-            {
-                setCopyOnWrite(true);
-                final MutableFloatVector.Rel.Sparse<U> result =
-                    new MutableFloatVector.Rel.Sparse<U>(getData(), getUnit());
-                result.setCopyOnWrite(true);
-                return result;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("checkstyle:designforextension")
-            public MutableFloatVector.Rel<U> copy()
-            {
-                return mutable();
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("checkstyle:designforextension")
-            protected FloatVectorDataSparse getData()
-            {
-                return (FloatVectorDataSparse) this.data;
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableFloatVector.Rel<U> toDense()
-            {
-                return new MutableFloatVector.Rel.Dense<U>(getData().toDense(), getUnit());
-            }
-
-            /** {@inheritDoc} */
-            @Override
-            @SuppressWarnings("designforextension")
-            public MutableFloatVector.Rel<U> toSparse()
-            {
-                return copy();
-            }
+            super(unit);
+            this.data = FloatVectorData.instantiate(values, unit.getScale(), storageType);
         }
 
-        /** ================================= REL GENERAL METHODS ================================== */
+        /**
+         * Construct a new Relative Mutable FloatVector.
+         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable FloatVector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values has zero entries
+         */
+        public Rel(final FloatScalar.Rel<U>[] values, final StorageType storageType) throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = FloatVectorData.instantiate(values, storageType);
+        }
+
+        /**
+         * Construct a new Relative Mutable FloatVector.
+         * @param values List; the values of the entries in the new Relative Mutable FloatVector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param <S> the Scalar type used
+         * @throws ValueException when values has zero entries
+         */
+        public <S extends FloatScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType)
+            throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = FloatVectorData.instantiateLD(values, storageType);
+        }
+
+        /**
+         * Construct a new Relative Mutable FloatVector.
+         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable FloatVector
+         * @param length the size of the vector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param <S> the Scalar type used
+         * @throws ValueException when values has zero entries
+         */
+        public <S extends FloatScalar.Rel<U>> Rel(final SortedMap<Integer, S> values, final int length,
+            final StorageType storageType) throws ValueException
+        {
+            super(checkUnit(values));
+            this.data = FloatVectorData.instantiateMD(values, length, storageType);
+        }
+
+        /**
+         * Construct a new Relative Mutable FloatVector.
+         * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatVector
+         * @param unit U; the unit of the new Relative Sparse Mutable FloatVector
+         * @param length the size of the vector
+         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @throws ValueException when values is null
+         */
+        public Rel(final SortedMap<Integer, Float> values, final U unit, final int length, final StorageType storageType)
+            throws ValueException
+        {
+            super(unit);
+            this.data = FloatVectorData.instantiate(values, length, unit.getScale(), storageType);
+        }
+
+        /**
+         * Construct a new Relative Mutable FloatVector.
+         * @param data an internal data object
+         * @param unit the unit
+         */
+        Rel(final FloatVectorData data, final U unit)
+        {
+            super(unit);
+            this.data = data.copy();
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public FloatVector.Rel<U> immutable()
+        {
+            setCopyOnWrite(true);
+            return instantiateRel(getData(), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public MutableFloatVector.Rel<U> mutable()
+        {
+            setCopyOnWrite(true);
+            final MutableFloatVector.Rel<U> result = new MutableFloatVector.Rel<U>(getData(), getUnit());
+            result.setCopyOnWrite(true);
+            return result;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> copy()
+        {
+            return mutable();
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public MutableFloatVector.Rel<U> toDense()
+        {
+            return this.data.isDense() ? this : new MutableFloatVector.Rel<U>(this.data.toDense(), getUnit());
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("designforextension")
+        public MutableFloatVector.Rel<U> toSparse()
+        {
+            return this.data.isSparse() ? this : new MutableFloatVector.Rel<U>(this.data.toSparse(), getUnit());
+        }
 
         /** {@inheritDoc} */
         @Override
@@ -960,25 +786,138 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         }
 
         /**
-         * Increment the value by the supplied value and return the result.
+         * Increment the value by the supplied value and return the changed vector.
          * @param increment FloatVector.Rel&lt;U&gt;; amount by which the value is incremented
-         * @return MutableFloatVector.Rel&lt;U&gt;
+         * @return the changed MutableFloatVector.Rel&lt;U&gt;
          * @throws ValueException when the size of increment is not identical to the size of this
          */
         public final MutableFloatVector.Rel<U> incrementBy(final FloatVector.Rel<U> increment) throws ValueException
         {
-            return (MutableFloatVector.Rel<U>) incrementByImpl(increment);
+            checkCopyOnWrite();
+            this.data.incrementBy(increment.getData());
+            return this;
         }
 
         /**
-         * Decrement the value by the supplied value and return the result.
+         * Increment the value by the supplied value and return the changed vector.
+         * @param increment FloatScalar.Rel&lt;U&gt;; amount by which the value is incremented
+         * @return the changed MutableFloatVector.Rel&lt;U&gt;
+         */
+        public final MutableFloatVector.Rel<U> incrementBy(final FloatScalar.Rel<U> increment)
+        {
+            return incrementBy(increment.si);
+        }
+
+        /**
+         * Increment the value by the supplied constant and return the changed vector.
+         * @param increment amount by which the value is incremented
+         * @return the changed MutableFloatVector.Rel&lt;U&gt;
+         */
+        public final MutableFloatVector.Rel<U> incrementBy(final float increment)
+        {
+            checkCopyOnWrite();
+            this.data.incrementBy(increment);
+            return this;
+        }
+
+        /**
+         * Decrement the value by the supplied value and return the changed vector.
          * @param decrement FloatVector.Rel&lt;U&gt;; amount by which the value is decremented
-         * @return MutableFloatVector.Rel&lt;U&gt;
+         * @return the changed MutableFloatVector.Rel&lt;U&gt;
          * @throws ValueException when the size of increment is not identical to the size of this
          */
         public final MutableFloatVector.Rel<U> decrementBy(final FloatVector.Rel<U> decrement) throws ValueException
         {
-            return (MutableFloatVector.Rel<U>) decrementByImpl(decrement);
+            checkCopyOnWrite();
+            this.data.decrementBy(decrement.getData());
+            return this;
+        }
+
+        /**
+         * Decrement the value by the supplied value and return the changed vector.
+         * @param decrement FloatScalar.Rel&lt;U&gt;; amount by which the value is decremented
+         * @return the changed MutableFloatVector.Rel&lt;U&gt;
+         */
+        public final MutableFloatVector.Rel<U> decrementBy(final FloatScalar.Rel<U> decrement)
+        {
+            return decrementBy(decrement.si);
+        }
+
+        /**
+         * Decrement the value by the supplied constant and return the changed vector.
+         * @param decrement amount by which the value is decremented
+         * @return the changed MutableFloatVector.Rel&lt;U&gt;
+         */
+        public final MutableFloatVector.Rel<U> decrementBy(final float decrement)
+        {
+            checkCopyOnWrite();
+            this.data.decrementBy(decrement);
+            return this;
+        }
+
+        /**
+         * Multiply the values in the vector by the supplied values and return the changed vector.
+         * @param factors FloatVector.Rel&lt;U&gt;; amounts by which the value is multiplied
+         * @return the changed MutableFloatVector.Rel&lt;U&gt;
+         * @throws ValueException when the size of the factors is not identical to the size of this
+         */
+        public final MutableFloatVector.Rel<U> multiplyBy(final FloatVector.Rel<U> factors) throws ValueException
+        {
+            checkCopyOnWrite();
+            this.data.multiplyBy(factors.getData());
+            return this;
+        }
+
+        /**
+         * Multiply the values in the vector by the supplied value and return the changed vector.
+         * @param factor FloatScalar.Rel&lt;U&gt;; amount by which the values in the vector are multiplied
+         * @return the changed MutableFloatVector.Rel&lt;U&gt;
+         */
+        public final MutableFloatVector.Rel<U> multiplyBy(final FloatScalar.Rel<U> factor)
+        {
+            return multiplyBy(factor.si);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> multiplyBy(final float factor)
+        {
+            checkCopyOnWrite();
+            this.data.multiplyBy(factor);
+            return this;
+        }
+
+        /**
+         * Divide the values in the vector by the supplied values and return the changed vector.
+         * @param factors FloatVector.Rel&lt;U&gt;; amounts by which the value is divided
+         * @return the changed MutableFloatVector.Rel&lt;U&gt;
+         * @throws ValueException when the size of the factors is not identical to the size of this
+         */
+        public final MutableFloatVector.Rel<U> divideBy(final FloatVector.Rel<U> factors) throws ValueException
+        {
+            checkCopyOnWrite();
+            this.data.divideBy(factors.getData());
+            return this;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        @SuppressWarnings("checkstyle:designforextension")
+        public MutableFloatVector.Rel<U> divideBy(final float factor)
+        {
+            this.data.multiplyBy(factor);
+            return this;
+        }
+
+        /**
+         * Divide the values in the vector by the supplied value and return the changed vector.
+         * @param factor FloatScalar.Rel&lt;U&gt;; amount by which the values in the vector are divided
+         * @return the changed MutableFloatVector.Rel&lt;U&gt;
+         */
+        public final MutableFloatVector.Rel<U> divideBy(final FloatScalar.Rel<U> factor)
+        {
+            return divideBy(factor.si);
         }
 
         /** {@inheritDoc} */
@@ -1259,23 +1198,23 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             return this;
         }
 
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> multiplyBy(final float constant)
-        {
-            assign(FloatMathFunctionsImpl.MULT(constant));
-            return this;
-        }
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> divideBy(final float constant)
-        {
-            assign(FloatMathFunctionsImpl.DIV(constant));
-            return this;
-        }
+    /**********************************************************************************/
+    /******************************** ABS + REL METHODS *******************************/
+    /**********************************************************************************/
+
+    /**
+     * Instantiate a vector based on the type of data.
+     * @param dvData the FloatVectorData
+     * @param unit the unit to use
+     * @param <U> the unit
+     * @return an instantiated vector
+     */
+    static <U extends Unit<U>> MutableFloatVector.Abs<U> instantiateMutableAbs(final FloatVectorData dvData,
+        final U unit)
+    {
+        return new MutableFloatVector.Abs<U>(dvData, unit);
     }
 
     /**
@@ -1296,7 +1235,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
     {
         checkIndex(index);
         checkCopyOnWrite();
-        safeSet(index, valueSI);
+        this.data.setSI(index, valueSI);
     }
 
     /** {@inheritDoc} */
@@ -1315,7 +1254,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
 
     /**
      * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
-     * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a dense
+     * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a sparse
      * dataset if necessary.
      * @param floatFunction the function to apply
      */
@@ -1334,103 +1273,6 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         }
     }
 
-    /**********************************************************************************/
-    /******************************* NON-STATIC METHODS *******************************/
-    /**********************************************************************************/
-
-    /**
-     * Increment the values in this MutableFloatVector by the corresponding values in a FloatVector.
-     * @param increment FloatVector&lt;U&gt;; the values by which to increment the corresponding values in this
-     *            MutableFloatVector
-     * @return MutableFloatVector&lt;U&gt;; this modified MutableFloatVector
-     * @throws ValueException when the vectors do not have the same size
-     */
-    private MutableFloatVector<U> incrementValueByValue(final FloatVector<U> increment) throws ValueException
-    {
-        checkSizeAndCopyOnWrite(increment);
-        for (int index = size(); --index >= 0;)
-        {
-            safeSet(index, safeGet(index) + increment.safeGet(index));
-        }
-        return this;
-    }
-
-    /**
-     * Decrement the values in this MutableFloatVector by the corresponding values in a FloatVector.
-     * @param decrement FloatVector&lt;U&gt;; the values by which to decrement the corresponding values in this
-     *            MutableFloatVector
-     * @return MutableFloatVector&lt;U&gt;; this modified MutableFloatVector
-     * @throws ValueException when the vectors do not have the same size
-     */
-    private MutableFloatVector<U> decrementValueByValue(final FloatVector<U> decrement) throws ValueException
-    {
-        checkSizeAndCopyOnWrite(decrement);
-        for (int index = size(); --index >= 0;)
-        {
-            safeSet(index, safeGet(index) - decrement.safeGet(index));
-        }
-        return this;
-    }
-
-    /**
-     * Increment the values in this MutableFloatVector by the corresponding values in a Relative FloatVector. <br>
-     * Only Relative values are allowed; adding an Absolute value to an Absolute value is not allowed. Adding an Absolute value
-     * to an existing Relative value would require the result to become Absolute, which is a type change that is impossible. For
-     * that operation use a static method.
-     * @param rel FloatVector.Rel&lt;U&gt;; the Relative FloatVector
-     * @return MutableFloatVector&lt;U&gt;; this modified MutableFloatVector
-     * @throws ValueException when the vectors do not have the same size
-     */
-    protected final MutableFloatVector<U> incrementByImpl(final FloatVector.Rel<U> rel) throws ValueException
-    {
-        return incrementValueByValue(rel);
-    }
-
-    /**
-     * Decrement the corresponding values of this Relative FloatVector from the values of this MutableFloatVector. <br>
-     * Only Relative values are allowed; subtracting an Absolute value from a Relative value is not allowed. Subtracting an
-     * Absolute value from an existing Absolute value would require the result to become Relative, which is a type change that
-     * is impossible. For that operation use a static method.
-     * @param rel FloatVector.Rel&lt;U&gt;; the Relative FloatVector
-     * @return MutableFloatVector&lt;U&gt;; this modified MutableFloatVector
-     * @throws ValueException when the vectors do not have the same size
-     */
-    protected final MutableFloatVector<U> decrementByImpl(final FloatVector.Rel<U> rel) throws ValueException
-    {
-        return decrementValueByValue(rel);
-    }
-
-    /**
-     * Scale the values in this MutableFloatVector by the corresponding values in a FloatVector.
-     * @param factor FloatVector&lt;?&gt;; contains the values by which to scale the corresponding values in this
-     *            MutableFloatVector
-     * @throws ValueException when the vectors do not have the same size
-     */
-    protected final void scaleValueByValue(final FloatVector<?> factor) throws ValueException
-    {
-        checkSizeAndCopyOnWrite(factor);
-        for (int index = size(); --index >= 0;)
-        {
-            safeSet(index, safeGet(index) * factor.safeGet(index));
-        }
-    }
-
-    /**
-     * Scale the values in this MutableFloatVector by the corresponding values in a float array.
-     * @param factor float[]; contains the values by which to scale the corresponding values in this MutableFloatVector
-     * @return MutableFloatVector&lt;U&gt;; this modified MutableFloatVector
-     * @throws ValueException when the vector and the array do not have the same size
-     */
-    protected final MutableFloatVector<U> scaleValueByValue(final float[] factor) throws ValueException
-    {
-        checkSizeAndCopyOnWrite(factor);
-        for (int index = size(); --index >= 0;)
-        {
-            safeSet(index, safeGet(index) * factor[index]);
-        }
-        return this;
-    }
-
     /** {@inheritDoc} */
     @Override
     public final void normalize() throws ValueException
@@ -1441,33 +1283,6 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
             throw new ValueException("zSum is 0; cannot normalize");
         }
         checkCopyOnWrite();
-        for (int i = 0; i < size(); i++)
-        {
-            // TODO parallel divide by factor
-            safeSet(i, safeGet(i) / sum);
-        }
+        this.data.divideBy(sum);
     }
-
-    /**
-     * Check sizes and copy the data if the copyOnWrite flag is set.
-     * @param other FloatVector&lt;?&gt;; partner for the size check
-     * @throws ValueException when the vectors do not have the same size
-     */
-    private void checkSizeAndCopyOnWrite(final FloatVector<?> other) throws ValueException
-    {
-        checkSize(other);
-        checkCopyOnWrite();
-    }
-
-    /**
-     * Check sizes and copy the data if the copyOnWrite flag is set.
-     * @param other float[]; partner for the size check
-     * @throws ValueException when the vectors do not have the same size
-     */
-    private void checkSizeAndCopyOnWrite(final float[] other) throws ValueException
-    {
-        checkSize(other);
-        checkCopyOnWrite();
-    }
-
 }

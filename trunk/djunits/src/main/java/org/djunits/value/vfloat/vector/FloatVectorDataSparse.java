@@ -1,8 +1,13 @@
 package org.djunits.value.vfloat.vector;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
+
+import org.djunits.value.StorageType;
+import org.djunits.value.ValueException;
 
 /**
+ * Stores sparse data for a FloatVector and carries out basic operations.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -18,20 +23,20 @@ public class FloatVectorDataSparse extends FloatVectorData
     private int[] indices;
 
     /** the length of the vector (padded with 0 after highest index in indices). */
-    private final int length;
+    private final int size;
 
     /**
      * Create a vector with sparse data.
      * @param vectorSI the data to store
      * @param indices the index values of the Vector
-     * @param length the length of the vector (padded with 0 after highest index in indices)
+     * @param size the length of the vector (padded with 0 after highest index in indices)
      */
-    public FloatVectorDataSparse(final float[] vectorSI, final int[] indices, final int length)
+    public FloatVectorDataSparse(final float[] vectorSI, final int[] indices, final int size)
     {
-        super();
+        super(StorageType.SPARSE);
         this.vectorSI = vectorSI;
         this.indices = indices;
-        this.length = length;
+        this.size = size;
     }
 
     /**
@@ -39,7 +44,7 @@ public class FloatVectorDataSparse extends FloatVectorData
      */
     public final FloatVectorDataDense toDense()
     {
-        float[] denseSI = new float[this.length];
+        float[] denseSI = new float[this.size];
         for (int index = 0; index < this.vectorSI.length; index++)
         {
             denseSI[this.indices[index]] = this.vectorSI[index];
@@ -51,7 +56,7 @@ public class FloatVectorDataSparse extends FloatVectorData
     @Override
     public final int size()
     {
-        return this.length;
+        return this.size;
     }
 
     /** {@inheritDoc} */
@@ -104,7 +109,141 @@ public class FloatVectorDataSparse extends FloatVectorData
         System.arraycopy(this.vectorSI, 0, vCopy, 0, this.vectorSI.length);
         int[] iCopy = new int[this.indices.length];
         System.arraycopy(this.indices, 0, iCopy, 0, this.indices.length);
-        return new FloatVectorDataSparse(vCopy, iCopy, this.length);
+        return new FloatVectorDataSparse(vCopy, iCopy, this.size);
+    }
+
+    /**
+     * Instantiate a FloatVectorDataSparse from an array.
+     * @param valuesSI the (SI) values to store
+     * @return the FloatVectorDataSparse
+     */
+    public static FloatVectorDataSparse instantiate(final float[] valuesSI)
+    {
+        // determine number of non-null cells
+        int length =
+            (int) IntStream.range(0, valuesSI.length).parallel().mapToDouble(i -> valuesSI[i]).filter(f -> f != 0.0f)
+                .count();
+        float[] sparseSI = new float[length];
+        int[] indices = new int[length];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int i = 0; i < valuesSI.length; i++)
+        {
+            if (valuesSI[i] != 0.0)
+            {
+                sparseSI[count] = valuesSI[i];
+                indices[count] = i;
+                count++;
+            }
+        }
+        return new FloatVectorDataSparse(sparseSI, indices, valuesSI.length);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void incrementBy(final FloatVectorData right) throws ValueException
+    {
+        int newLength =
+            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
+                .count();
+        float[] newVectorSI = new float[newLength];
+        int[] newIndices = new int[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        // note: if adding -2 and +2, a 0-value will be part of the new sparse matrix.
+        int count = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
+            {
+                newVectorSI[count] = getSI(i) + right.getSI(i);
+                newIndices[count] = i;
+                count++;
+            }
+        }
+
+        this.indices = newIndices;
+        this.vectorSI = newVectorSI;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final FloatVectorData right) throws ValueException
+    {
+        int newLength =
+            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
+                .count();
+        float[] newVectorSI = new float[newLength];
+        int[] newIndices = new int[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        // note: if subtracting 2 from 2, a 0-value will be part of the new sparse matrix.
+        int count = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
+            {
+                newVectorSI[count] = getSI(i) - right.getSI(i);
+                newIndices[count] = i;
+                count++;
+            }
+        }
+
+        this.indices = newIndices;
+        this.vectorSI = newVectorSI;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void multiplyBy(final FloatVectorData right) throws ValueException
+    {
+        int newLength =
+            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
+                .count();
+        float[] newVectorSI = new float[newLength];
+        int[] newIndices = new int[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
+            {
+                newVectorSI[count] = getSI(i) * right.getSI(i);
+                newIndices[count] = i;
+                count++;
+            }
+        }
+
+        this.indices = newIndices;
+        this.vectorSI = newVectorSI;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void divideBy(final FloatVectorData right) throws ValueException
+    {
+        int newLength =
+            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
+                .count();
+        float[] newVectorSI = new float[newLength];
+        int[] newIndices = new int[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
+            {
+                newVectorSI[count] = getSI(i) / right.getSI(i);
+                newIndices[count] = i;
+                count++;
+            }
+        }
+
+        this.indices = newIndices;
+        this.vectorSI = newVectorSI;
     }
 
     /** {@inheritDoc} */
@@ -115,7 +254,7 @@ public class FloatVectorDataSparse extends FloatVectorData
         final int prime = 31;
         int result = super.hashCode();
         result = prime * result + Arrays.hashCode(this.indices);
-        result = prime * result + this.length;
+        result = prime * result + this.size;
         return result;
     }
 
@@ -133,9 +272,8 @@ public class FloatVectorDataSparse extends FloatVectorData
         FloatVectorDataSparse other = (FloatVectorDataSparse) obj;
         if (!Arrays.equals(this.indices, other.indices))
             return false;
-        if (this.length != other.length)
+        if (this.size != other.size)
             return false;
         return true;
     }
-
 }
