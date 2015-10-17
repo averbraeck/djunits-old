@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.*;
 
 /**
- * Mutable Float%Type%Vector, a vector of values with a %Type%Unit. 
+ * Immutable Float%Type%Vector, a vector of values with a %Type%Unit. 
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,8 +19,8 @@ import org.djunits.value.vfloat.scalar.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloat%Type%Vector extends
-    MutableTypedFloatVectorRel<%Type%Unit, Float%Type%Vector, MutableFloat%Type%Vector, Float%Type%>
+public class Float%Type%Vector extends
+    TypedFloatVectorRel<%Type%Unit, Float%Type%Vector, MutableFloat%Type%Vector, Float%Type%>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -32,7 +32,7 @@ public class MutableFloat%Type%Vector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloat%Type%Vector(final float[] values, final %Type%Unit unit, final StorageType storageType)
+    public Float%Type%Vector(final float[] values, final %Type%Unit unit, final StorageType storageType)
         throws ValueException
     {
         super(values, unit, storageType);
@@ -45,7 +45,7 @@ public class MutableFloat%Type%Vector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloat%Type%Vector(final List<Float> values, final %Type%Unit unit, final StorageType storageType)
+    public Float%Type%Vector(final List<Float> values, final %Type%Unit unit, final StorageType storageType)
         throws ValueException
     {
         super(values, unit, storageType);
@@ -58,7 +58,7 @@ public class MutableFloat%Type%Vector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloat%Type%Vector(final Float%Type%[] values, final StorageType storageType) throws ValueException
+    public Float%Type%Vector(final Float%Type%[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -69,7 +69,7 @@ public class MutableFloat%Type%Vector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloat%Type%Vector(final List<Float%Type%> values, final StorageType storageType) throws ValueException
+    public Float%Type%Vector(final List<Float%Type%> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -82,7 +82,7 @@ public class MutableFloat%Type%Vector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloat%Type%Vector(final SortedMap<Integer, Float%Type%> values, final int length, final StorageType storageType)
+    public Float%Type%Vector(final SortedMap<Integer, Float%Type%> values, final int length, final StorageType storageType)
         throws ValueException
     {
         super(values, length, storageType);
@@ -96,17 +96,17 @@ public class MutableFloat%Type%Vector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloat%Type%Vector(final SortedMap<Integer, Float> values, final %Type%Unit unit, final int length,
+    public Float%Type%Vector(final SortedMap<Integer, Float> values, final %Type%Unit unit, final int length,
         final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
-    
+
     /**
      * @param data an internal data object
      * @param unit the unit
      */
-    MutableFloat%Type%Vector(final FloatVectorData data, final %Type%Unit unit)
+    Float%Type%Vector(final FloatVectorData data, final %Type%Unit unit)
     {
         super(data, unit);
     }
@@ -132,7 +132,7 @@ public class MutableFloat%Type%Vector extends
         return new Float%Type%(getInUnit(index, getUnit()), getUnit());
     }
 
+    
 %FORMULAS%%Type%.Rel%
-
 }
 

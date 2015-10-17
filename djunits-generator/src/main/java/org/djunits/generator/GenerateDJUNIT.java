@@ -453,7 +453,7 @@ public class GenerateDJUNIT
     }
 
     /****************************************************************************************************************/
-    /********************************************* VECTOR ***********************************************************/
+    /************************************************ VECTOR ********************************************************/
     /****************************************************************************************************************/
 
     /**
@@ -534,6 +534,10 @@ public class GenerateDJUNIT
         }
         return ret;
     }
+
+    /****************************************************************************************************************/
+    /********************************************* DOUBLEVECTOR *****************************************************/
+    /****************************************************************************************************************/
 
     /**
      * Generate all Abs + Rel classes in value.vdouble.vector.
@@ -687,6 +691,167 @@ public class GenerateDJUNIT
     }
 
     /****************************************************************************************************************/
+    /********************************************** FLOATVECTOR *****************************************************/
+    /****************************************************************************************************************/
+
+    /**
+     * Generate all Abs + Rel classes in value.vfloat.vector.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateFloatVectorAbsRel() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vfloat/vector/";
+        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_VECTOR_ABS_REL.java");
+        URL insertURL = URLResource.getResource("/" + relativePath + "INSERT.java");
+        boolean isInsert = (insertURL != null) && new File(insertURL.toURI()).exists();
+        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        String insertJava = "";
+        if (isInsert)
+        {
+            insertJava = new String(Files.readAllBytes(Paths.get(insertURL.toURI())));
+        }
+
+        for (String type : typesAbsRel)
+        {
+            String fType = "Float" + type;
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Vector.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (isInsert)
+            {
+                java = insert(java, insertJava, "FloatVector => " + fType);
+            }
+            java = formulasVector(java, "FloatVector => " + fType, "");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
+        }
+
+        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_VECTOR_ABS_REL.java");
+        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesAbsRel)
+        {
+            String fType = "Float" + type;
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (isInsert)
+            {
+                java = insert(java, insertJava, "MutableFloatVector => " + fType);
+            }
+            java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
+        }
+    }
+
+    /**
+     * Generate all Rel classes in value.vfloat.vector.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateFloatVectorRel() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vfloat/vector/";
+        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_VECTOR_REL.java");
+        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesRel)
+        {
+            String fType = "Float" + type;
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Vector.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = formulasVector(java, "FloatVector => " + fType, "");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
+        }
+
+        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_VECTOR_REL.java");
+        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesRel)
+        {
+            String fType = "Float" + type;
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
+        }
+    }
+
+    /**
+     * Generate all Money classes in value.vfloat.vector.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateFloatVectorMoney() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vfloat/vector/";
+        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_VECTOR_REL.java");
+        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesMoney)
+        {
+            String fType = "Float" + type;
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Vector.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = formulasVector(java, "FloatVector => " + fType, "");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
+        }
+
+        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_VECTOR_REL.java");
+        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesMoney)
+        {
+            String fType = "Float" + type;
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
+        }
+
+    }
+
+    /****************************************************************************************************************/
     /********************************************* GENERIC **********************************************************/
     /****************************************************************************************************************/
 
@@ -779,7 +944,9 @@ public class GenerateDJUNIT
         generateDoubleVectorAbsRel();
         generateDoubleVectorRel();
         generateDoubleVectorMoney();
-        // generateFloatVectorRel();
+        generateFloatVectorAbsRel();
+        generateFloatVectorRel();
+        generateFloatVectorMoney();
     }
 
 }
