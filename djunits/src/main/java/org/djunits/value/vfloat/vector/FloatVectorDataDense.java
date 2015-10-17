@@ -1,8 +1,13 @@
 package org.djunits.value.vfloat.vector;
 
+import java.util.stream.IntStream;
+
+import org.djunits.value.StorageType;
+import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.FloatFunction;
 
 /**
+ * Stores dense data for a FloatVector and carries out basic operations.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -20,7 +25,7 @@ public class FloatVectorDataDense extends FloatVectorData
      */
     public FloatVectorDataDense(final float[] vectorSI)
     {
-        super();
+        super(StorageType.DENSE);
         this.vectorSI = new float[vectorSI.length];
         System.arraycopy(vectorSI, 0, this.vectorSI, 0, vectorSI.length);
     }
@@ -30,10 +35,7 @@ public class FloatVectorDataDense extends FloatVectorData
      */
     public final void assign(final FloatFunction floatFunction)
     {
-        for (int index = 0; index < this.vectorSI.length; index++)
-        {
-            this.vectorSI[index] = floatFunction.apply(this.vectorSI[index]);
-        }
+        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] = floatFunction.apply(this.vectorSI[i]));
     }
 
     /**
@@ -41,20 +43,7 @@ public class FloatVectorDataDense extends FloatVectorData
      */
     public final FloatVectorDataSparse toSparse()
     {
-        int length = cardinality();
-        float[] sparseSI = new float[length];
-        int[] indices = new int[length];
-        int count = 0;
-        for (int i = 0; i < this.vectorSI.length; i++)
-        {
-            if (this.vectorSI[i] != 0.0)
-            {
-                sparseSI[count] = this.vectorSI[i];
-                indices[count] = i;
-                count++;
-            }
-        }
-        return new FloatVectorDataSparse(sparseSI, indices, size());
+        return FloatVectorDataSparse.instantiate(this.vectorSI);
     }
 
     /** {@inheritDoc} */
@@ -92,5 +81,33 @@ public class FloatVectorDataDense extends FloatVectorData
         float[] vCopy = new float[this.vectorSI.length];
         System.arraycopy(this.vectorSI, 0, vCopy, 0, this.vectorSI.length);
         return new FloatVectorDataDense(vCopy);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void incrementBy(final FloatVectorData right) throws ValueException
+    {
+        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] += right.getSI(i));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final FloatVectorData right) throws ValueException
+    {
+        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] -= right.getSI(i));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void multiplyBy(final FloatVectorData right) throws ValueException
+    {
+        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] *= right.getSI(i));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void divideBy(final FloatVectorData right) throws ValueException
+    {
+        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] /= right.getSI(i));
     }
 }

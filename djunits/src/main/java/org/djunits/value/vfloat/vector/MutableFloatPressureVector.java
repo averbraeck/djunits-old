@@ -3,13 +3,13 @@ package org.djunits.value.vfloat.vector;
 import java.util.List;
 import java.util.SortedMap;
 
-import org.djunits.unit.AccelerationUnit;
+import org.djunits.unit.PressureUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.vfloat.scalar.FloatAcceleration;
+import org.djunits.value.vfloat.scalar.FloatPressure;
 
 /**
- * Immutable FloatAccelerationVector, a vector of values with a AccelerationUnit.
+ * Mutable FloatPressureVector, a vector of values with a PressureUnit.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,86 +19,86 @@ import org.djunits.value.vfloat.scalar.FloatAcceleration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatAccelerationVector extends
-    TypedFloatVectorRel<AccelerationUnit, FloatAccelerationVector, MutableFloatAccelerationVector, FloatAcceleration>
+public class MutableFloatPressureVector extends
+    MutableTypedFloatVectorRel<PressureUnit, FloatPressureVector, MutableFloatPressureVector, FloatPressure>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatPressureVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable FloatPressureVector
+     * @param unit U; the unit of the new Relative Immutable FloatPressureVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatAccelerationVector(final float[] values, final AccelerationUnit unit, final StorageType storageType)
+    public MutableFloatPressureVector(final float[] values, final PressureUnit unit, final StorageType storageType)
         throws ValueException
     {
         super(values, unit, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatPressureVector.
+     * @param values List; the values of the entries in the new Relative Immutable FloatPressureVector
+     * @param unit U; the unit of the new Relative Immutable FloatPressureVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatAccelerationVector(final List<Float> values, final AccelerationUnit unit, final StorageType storageType)
+    public MutableFloatPressureVector(final List<Float> values, final PressureUnit unit, final StorageType storageType)
         throws ValueException
     {
         super(values, unit, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
+     * Construct a new Relative Immutable FloatPressureVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatAccelerationVector
+     *            FloatPressureVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatAccelerationVector(final FloatAcceleration[] values, final StorageType storageType)
+    public MutableFloatPressureVector(final FloatPressure[] values, final StorageType storageType)
         throws ValueException
     {
         super(values, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatPressureVector.
+     * @param values List; the values of the entries in the new Relative Immutable FloatPressureVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatAccelerationVector(final List<FloatAcceleration> values, final StorageType storageType)
+    public MutableFloatPressureVector(final List<FloatPressure> values, final StorageType storageType)
         throws ValueException
     {
         super(values, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
+     * Construct a new Relative Immutable FloatPressureVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatAccelerationVector
+     *            FloatPressureVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatAccelerationVector(final SortedMap<Integer, FloatAcceleration> values, final int length,
+    public MutableFloatPressureVector(final SortedMap<Integer, FloatPressure> values, final int length,
         final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatPressureVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatPressureVector
+     * @param unit U; the unit of the new Relative Sparse Mutable FloatPressureVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatAccelerationVector(final SortedMap<Integer, Float> values, final AccelerationUnit unit,
+    public MutableFloatPressureVector(final SortedMap<Integer, Float> values, final PressureUnit unit,
         final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -108,31 +108,31 @@ public class FloatAccelerationVector extends
      * @param data an internal data object
      * @param unit the unit
      */
-    FloatAccelerationVector(final FloatVectorData data, final AccelerationUnit unit)
+    MutableFloatPressureVector(final FloatVectorData data, final PressureUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatAccelerationVector instantiateType(final FloatVectorData dvd, final AccelerationUnit unit)
+    protected final FloatPressureVector instantiateType(final FloatVectorData dvd, final PressureUnit unit)
     {
-        return new FloatAccelerationVector(dvd, unit);
+        return new FloatPressureVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatAccelerationVector instantiateMutableType(final FloatVectorData dvd,
-        final AccelerationUnit unit)
+    protected final MutableFloatPressureVector
+        instantiateMutableType(final FloatVectorData dvd, final PressureUnit unit)
     {
-        return new MutableFloatAccelerationVector(dvd, unit);
+        return new MutableFloatPressureVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAcceleration get(final int index) throws ValueException
+    public final FloatPressure get(final int index) throws ValueException
     {
-        return new FloatAcceleration(getInUnit(index, getUnit()), getUnit());
+        return new FloatPressure(getInUnit(index, getUnit()), getUnit());
     }
 
 }

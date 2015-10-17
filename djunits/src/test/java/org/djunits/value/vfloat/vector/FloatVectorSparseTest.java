@@ -8,6 +8,7 @@ import static org.junit.Assert.fail;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.Unit;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.junit.Test;
@@ -20,8 +21,8 @@ import org.junit.Test;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -45,29 +46,29 @@ public class FloatVectorSparseTest
 
     /**
      * Check that the values in a FloatVectormatch the expected values.
-     * @param fv FloatVector&lt;?&gt;; the FloatVector to match
+     * @param dv FloatVector&lt;?&gt;; the FloatVector to match
      * @param reference float[]; the reference values
-     * @param precision float; the maximum allowed error
+     * @param precision double; the maximum allowed error
      * @param u Unit&lt;?&gt;; the expected type
-     * @param expectAbsolute boolean; if true; fv should be Absolute; if false; fv should be Relative
+     * @param expectAbsolute boolean; if true; dv should be Absolute; if false; dv should be Relative
      */
-    private static void checkContentsAndType(final FloatVector<?> fv, final float[] reference, final float precision,
-        final Unit<?> u, final boolean expectAbsolute)
+    private static void checkContentsAndType(final FloatVector<?> dv, final float[] reference,
+        final double precision, final Unit<?> u, final boolean expectAbsolute)
     {
-        assertTrue("FloatVector should not be null", null != fv);
-        for (int index = fv.size(); --index >= 0;)
+        assertTrue("FloatVector should not be null", null != dv);
+        for (int index = dv.size(); --index >= 0;)
         {
             try
             {
-                assertEquals("Value should match", reference[index], fv.getInUnit(index), precision);
+                assertEquals("Value should match", reference[index], dv.getInUnit(index), precision);
             }
             catch (ValueException exception)
             {
                 fail("Unexpected exception");
             }
         }
-        assertEquals("Unit should be " + u.toString(), u, fv.getUnit());
-        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"), expectAbsolute ? fv.isAbsolute() : fv
+        assertEquals("Unit should be " + u.toString(), u, dv.getUnit());
+        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"), expectAbsolute ? dv.isAbsolute() : dv
             .isRelative());
     }
 
@@ -82,8 +83,9 @@ public class FloatVectorSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             float[] value = data(3, 38.0f);
-            FloatVector.Abs.Sparse<TemperatureUnit> fv = new FloatVector.Abs.Sparse<TemperatureUnit>(value, tempUnit);
-            String result = fv.toString(true, true);
+            FloatVector.Abs<TemperatureUnit> dv =
+                new FloatVector.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            String result = dv.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
@@ -106,9 +108,9 @@ public class FloatVectorSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             float[] value = data(3, 38.0f);
-            MutableFloatVector.Abs.Sparse<TemperatureUnit> fv =
-                new MutableFloatVector.Abs.Sparse<TemperatureUnit>(value, tempUnit);
-            String result = fv.toString(true, true);
+            MutableFloatVector.Abs<TemperatureUnit> dv =
+                new MutableFloatVector.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            String result = dv.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
@@ -131,35 +133,36 @@ public class FloatVectorSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             float[] value = data(3, 38.0f);
-            FloatVector.Abs.Sparse<TemperatureUnit> temperatureFV =
-                new FloatVector.Abs.Sparse<TemperatureUnit>(value, tempUnit);
-            checkContentsAndType(temperatureFV, value, 0.001f, tempUnit, true);
-            assertEquals("Value in SI is equivalent in Kelvin", 311.15f, temperatureFV.getSI(0), 0.05);
-            assertEquals("Value in Fahrenheit", 100.4f, temperatureFV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
+            FloatVector.Abs<TemperatureUnit> temperatureDV =
+                new FloatVector.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
+            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
+            assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
                 0.1);
-            float[] out = temperatureFV.getValuesInUnit();
+            float[] out = temperatureDV.getValuesInUnit();
             for (int index = 0; index < value.length; index++)
             {
                 assertEquals("Value should match", value[index], out[index], 0.001);
             }
-            MutableFloatVector.Abs.Sparse<TemperatureUnit> mfv =
-                new MutableFloatVector.Abs.Sparse<TemperatureUnit>(value, tempUnit);
-            checkContentsAndType(mfv, value, 0.001f, tempUnit, true);
-            mfv.setSI(0, 73);
+            MutableFloatVector.Abs<TemperatureUnit> mdv =
+                new MutableFloatVector.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            checkContentsAndType(mdv, value, 0.001, tempUnit, true);
+            mdv.setSI(0, 73);
             float safe = value[0];
             value[0] = -200; // Approximate Celsius equivalent of 73 Kelvin
-            checkContentsAndType(mfv, value, 1, tempUnit, true);
+            checkContentsAndType(mdv, value, 1, tempUnit, true);
             value[0] = safe; // Restore
-            mfv.set(0, temperatureFV.get(0));
-            checkContentsAndType(mfv, value, 0.001f, tempUnit, true);
-            FloatVector.Abs.Sparse<TemperatureUnit> temperature2FV =
-                new FloatVector.Abs.Sparse<TemperatureUnit>(temperatureFV.getValuesSI(), TemperatureUnit.KELVIN);
-            assertTrue("temperature2FV should be equal to temperatureFV", temperature2FV.equals(temperatureFV));
-            assertTrue("Value is Absolute", temperatureFV.isAbsolute());
-            assertFalse("Value is not Relative", temperatureFV.isRelative());
-            temperatureFV = new FloatVector.Abs.Sparse<TemperatureUnit>(value, TemperatureUnit.KELVIN);
-            checkContentsAndType(temperatureFV, value, 0.001f, TemperatureUnit.KELVIN, true);
-            out = temperatureFV.getValuesSI();
+            mdv.set(0, temperatureDV.get(0));
+            checkContentsAndType(mdv, value, 0.001, tempUnit, true);
+            FloatVector.Abs<TemperatureUnit> temperature2DV =
+                new FloatVector.Abs<TemperatureUnit>(temperatureDV.getValuesSI(), TemperatureUnit.KELVIN,
+                    StorageType.SPARSE);
+            assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
+            assertTrue("Value is Absolute", temperatureDV.isAbsolute());
+            assertFalse("Value is not Relative", temperatureDV.isRelative());
+            temperatureDV = new FloatVector.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.SPARSE);
+            checkContentsAndType(temperatureDV, value, 0.001, TemperatureUnit.KELVIN, true);
+            out = temperatureDV.getValuesSI();
             for (int index = 0; index < value.length; index++)
             {
                 assertEquals("Value should match", value[index], out[index], 0.001);
@@ -169,16 +172,16 @@ public class FloatVectorSparseTest
             {
                 scalar[index] = new FloatScalar.Abs<TemperatureUnit>(value[index], TemperatureUnit.DEGREE_CELSIUS);
             }
-            temperatureFV = new FloatVector.Abs.Sparse<TemperatureUnit>(scalar);
-            checkContentsAndType(temperatureFV, value, 0.001f, tempUnit, true);
-            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureFV
+            temperatureDV = new FloatVector.Abs<TemperatureUnit>(scalar, StorageType.SPARSE);
+            checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
+            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV
                 .cardinality());
             float sum = 0;
             for (int index = 0; index < value.length; index++)
             {
-                sum += temperatureFV.getSI(index);
+                sum += temperatureDV.getSI(index);
             }
-            assertEquals("zSum should be sum of all values", sum, temperatureFV.zSum(), 0.001);
+            assertEquals("zSum should be sum of all values", sum, temperatureDV.zSum(), 0.001);
         }
         catch (ValueException ve)
         {
@@ -199,34 +202,35 @@ public class FloatVectorSparseTest
             float[] value = data(3, 38.0f);
             float[] value2 = data(3, 38.0f);
             value2[0] = 12345;
-            FloatVector.Abs.Sparse<TemperatureUnit> fv = new FloatVector.Abs.Sparse<TemperatureUnit>(value, tempUnit);
-            FloatVector.Abs<TemperatureUnit> fvCopy = fv;
-            MutableFloatVector.Abs<TemperatureUnit> mfv = fv.mutable();
-            checkContentsAndType(fv, value, 0.001f, tempUnit, true);
-            checkContentsAndType(mfv, value, 0.001f, tempUnit, true);
-            checkContentsAndType(fvCopy, value, 0.001f, tempUnit, true);
-            MutableFloatVector.Abs<TemperatureUnit> mfvCopy = mfv.copy();
-            checkContentsAndType(mfvCopy, value, 0.001f, tempUnit, true);
-            MutableFloatVector.Abs<TemperatureUnit> mmfv = mfv.mutable();
-            checkContentsAndType(mmfv, value, 0.001f, tempUnit, true);
-            assertEquals("hashCode is independent on mutability", fv.hashCode(), mfv.hashCode());
-            // Modify mfv
-            mfv.setInUnit(0, 12345, TemperatureUnit.DEGREE_CELSIUS);
-            checkContentsAndType(fv, value, 0.001f, tempUnit, true);
-            checkContentsAndType(mfv, value2, 0.01f, tempUnit, true);
-            checkContentsAndType(mfvCopy, value, 0.001f, tempUnit, true);
-            checkContentsAndType(mmfv, value, 0.001f, tempUnit, true);
-            FloatVector.Abs<TemperatureUnit> ifv = mfv.immutable();
-            assertTrue("Different value extremely likely results in different hashCode", fv.hashCode() != mfv
+            FloatVector.Abs<TemperatureUnit> dv =
+                new FloatVector.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            FloatVector.Abs<TemperatureUnit> dvCopy = dv;
+            MutableFloatVector.Abs<TemperatureUnit> mdv = dv.mutable();
+            checkContentsAndType(dv, value, 0.001, tempUnit, true);
+            checkContentsAndType(mdv, value, 0.001, tempUnit, true);
+            checkContentsAndType(dvCopy, value, 0.001, tempUnit, true);
+            MutableFloatVector.Abs<TemperatureUnit> mdvCopy = mdv.copy();
+            checkContentsAndType(mdvCopy, value, 0.001, tempUnit, true);
+            MutableFloatVector.Abs<TemperatureUnit> mmdv = mdv.mutable();
+            checkContentsAndType(mmdv, value, 0.001, tempUnit, true);
+            assertEquals("hashCode is independent on mutability", dv.hashCode(), mdv.hashCode());
+            // Modify mdv
+            mdv.setInUnit(0, 12345, TemperatureUnit.DEGREE_CELSIUS);
+            checkContentsAndType(dv, value, 0.001, tempUnit, true);
+            checkContentsAndType(mdv, value2, 0.01, tempUnit, true);
+            checkContentsAndType(mdvCopy, value, 0.001, tempUnit, true);
+            checkContentsAndType(mmdv, value, 0.001, tempUnit, true);
+            FloatVector.Abs<TemperatureUnit> idv = mdv.immutable();
+            assertTrue("Different value extremely likely results in different hashCode", dv.hashCode() != mdv
                 .hashCode());
-            // Restore value of mfv
-            mfv.setSI(0, fv.getSI(0));
-            checkContentsAndType(ifv, value2, 0.01f, tempUnit, true);
-            checkContentsAndType(mfv, value, 0.001f, tempUnit, true);
-            checkContentsAndType(mmfv, value, 0.001f, tempUnit, true);
-            mmfv.setSI(0, 0);
-            checkContentsAndType(mfv, value, 0.001f, tempUnit, true);
-            assertEquals("value should be about -273", -273, mmfv.getInUnit(0, tempUnit), 0.2);
+            // Restore value of mdv
+            mdv.setSI(0, dv.getSI(0));
+            checkContentsAndType(idv, value2, 0.01, tempUnit, true);
+            checkContentsAndType(mdv, value, 0.001, tempUnit, true);
+            checkContentsAndType(mmdv, value, 0.001, tempUnit, true);
+            mmdv.setSI(0, 0);
+            checkContentsAndType(mdv, value, 0.001, tempUnit, true);
+            assertEquals("value should be about -273", -273, mmdv.getInUnit(0, tempUnit), 0.2);
         }
         catch (ValueException ve)
         {
@@ -243,21 +247,23 @@ public class FloatVectorSparseTest
     {
         LengthUnit lengthUnit = LengthUnit.METER;
         float value = 38.0f;
-        FloatScalar.Abs<LengthUnit> fv = new FloatScalar.Abs<LengthUnit>(value, lengthUnit);
-        assertTrue("Equal to itself", fv.equals(fv));
-        assertFalse("Not equal to null", fv.equals(null));
-        assertFalse("Not equal to some other kind of object; e.g. a String", fv.equals(new String("abc")));
-        FloatScalar.Rel<LengthUnit> fvCounterPart = new FloatScalar.Rel<LengthUnit>(value, lengthUnit);
-        assertFalse("Not equal if one Absolute and other Relative", fv.equals(fvCounterPart));
-        FloatScalar.Abs<TemperatureUnit> fvWrongBaseUnit =
+        FloatScalar.Abs<LengthUnit> dv = new FloatScalar.Abs<LengthUnit>(value, lengthUnit);
+        assertTrue("Equal to itself", dv.equals(dv));
+        assertFalse("Not equal to null", dv.equals(null));
+        assertFalse("Not equal to some other kind of object; e.g. a String", dv.equals(new String("abc")));
+        FloatScalar.Rel<LengthUnit> dvCounterPart = new FloatScalar.Rel<LengthUnit>(value, lengthUnit);
+        assertFalse("Not equal if one Absolute and other Relative", dv.equals(dvCounterPart));
+        FloatScalar.Abs<TemperatureUnit> dvWrongBaseUnit =
             new FloatScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
-        assertEquals("The underlying SI values are the same", fv.getSI(), fvWrongBaseUnit.getSI(), 0.0001f);
-        assertFalse("Not equals because the standard SI unit differs", fv.equals(fvWrongBaseUnit));
-        FloatScalar.Abs<LengthUnit> fvCompatibleUnit = new FloatScalar.Abs<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
-        assertFalse("Units are different", fv.getUnit().equals(fvCompatibleUnit.getUnit()));
-        assertTrue("equals returns true", fv.equals(fvCompatibleUnit));
-        FloatScalar.Abs<LengthUnit> fvDifferentValue = new FloatScalar.Abs<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
-        assertFalse("Different value makes equals return false", fv.equals(fvDifferentValue));
+        assertEquals("The underlying SI values are the same", dv.getSI(), dvWrongBaseUnit.getSI(), 0.0001);
+        assertFalse("Not equals because the standard SI unit differs", dv.equals(dvWrongBaseUnit));
+        FloatScalar.Abs<LengthUnit> dvCompatibleUnit =
+            new FloatScalar.Abs<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
+        assertFalse("Units are different", dv.getUnit().equals(dvCompatibleUnit.getUnit()));
+        assertTrue("equals returns true", dv.equals(dvCompatibleUnit));
+        FloatScalar.Abs<LengthUnit> dvDifferentValue =
+            new FloatScalar.Abs<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
+        assertFalse("Different value makes equals return false", dv.equals(dvDifferentValue));
     }
 
     /**
@@ -271,271 +277,271 @@ public class FloatVectorSparseTest
         for (float seedValue : seedValues)
         {
             float[] input = data(3, seedValue);
-            MutableFloatVector.Abs.Sparse<LengthUnit> fv;
+            MutableFloatVector.Abs<LengthUnit> dv;
             try
             {
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.abs();
-                MathTester.tester(input, "abs", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.abs();
+                MathTester.tester(input, "abs", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.abs(f);
+                        return Math.abs(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.acos();
-                MathTester.tester(input, "acos", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.acos();
+                MathTester.tester(input, "acos", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.acos(f);
+                        return (float) Math.acos(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.asin();
-                MathTester.tester(input, "asin", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.asin();
+                MathTester.tester(input, "asin", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.asin(f);
+                        return (float) Math.asin(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.atan();
-                MathTester.tester(input, "atan", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.atan();
+                MathTester.tester(input, "atan", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.atan(f);
+                        return (float) Math.atan(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.cbrt();
-                MathTester.tester(input, "cbrt", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.cbrt();
+                MathTester.tester(input, "cbrt", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cbrt(f);
+                        return (float) Math.cbrt(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.ceil();
-                MathTester.tester(input, "ceil", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.ceil();
+                MathTester.tester(input, "ceil", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.ceil(f);
+                        return (float) Math.ceil(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.cos();
-                MathTester.tester(input, "cos", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.cos();
+                MathTester.tester(input, "cos", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cos(f);
+                        return (float) Math.cos(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.cosh();
-                MathTester.tester(input, "cosh", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.cosh();
+                MathTester.tester(input, "cosh", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cosh(f);
+                        return (float) Math.cosh(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.exp();
-                MathTester.tester(input, "exp", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.exp();
+                MathTester.tester(input, "exp", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.exp(f);
+                        return (float) Math.exp(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.expm1();
-                MathTester.tester(input, "expm1", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.expm1();
+                MathTester.tester(input, "expm1", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.expm1(f);
+                        return (float) Math.expm1(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.floor();
-                MathTester.tester(input, "floor", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.floor();
+                MathTester.tester(input, "floor", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.floor(f);
+                        return (float) Math.floor(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.log();
-                MathTester.tester(input, "log", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.log();
+                MathTester.tester(input, "log", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log(f);
+                        return (float) Math.log(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.log10();
-                MathTester.tester(input, "log10", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.log10();
+                MathTester.tester(input, "log10", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log10(f);
+                        return (float) Math.log10(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.log1p();
-                MathTester.tester(input, "log1p", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.log1p();
+                MathTester.tester(input, "log1p", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log1p(f);
+                        return (float) Math.log1p(d);
                     }
                 });
                 for (int i = -10; i <= 10; i++)
                 {
                     final float exponent = i * 0.5f;
-                    fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                    fv.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", fv, 0.001, new FloatToFloat()
+                    dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                    dv.pow(exponent);
+                    MathTester.tester(input, "pow(" + exponent + ")", dv, 0.001, new FloatToFloat()
                     {
                         @Override
-                        public float function(final float f)
+                        public float function(final float d)
                         {
-                            return (float) Math.pow(f, exponent);
+                            return (float) Math.pow(d, exponent);
                         }
                     });
                 }
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.rint();
-                MathTester.tester(input, "rint", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.rint();
+                MathTester.tester(input, "rint", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.rint(f);
+                        return (float) Math.rint(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.round();
-                MathTester.tester(input, "round", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.round();
+                MathTester.tester(input, "round", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.round(f);
+                        return Math.round(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.signum();
-                MathTester.tester(input, "signum", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.signum();
+                MathTester.tester(input, "signum", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.signum(f);
+                        return Math.signum(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.sin();
-                MathTester.tester(input, "sin", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.sin();
+                MathTester.tester(input, "sin", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sin(f);
+                        return (float) Math.sin(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.sinh();
-                MathTester.tester(input, "sinh", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.sinh();
+                MathTester.tester(input, "sinh", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sinh(f);
+                        return (float) Math.sinh(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.sqrt();
-                MathTester.tester(input, "sqrt", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.sqrt();
+                MathTester.tester(input, "sqrt", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sqrt(f);
+                        return (float) Math.sqrt(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.tan();
-                MathTester.tester(input, "tan", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.tan();
+                MathTester.tester(input, "tan", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.tan(f);
+                        return (float) Math.tan(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.tanh();
-                MathTester.tester(input, "tanh", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.tanh();
+                MathTester.tester(input, "tanh", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.tanh(f);
+                        return (float) Math.tanh(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.toDegrees();
-                MathTester.tester(input, "toDegrees", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.toDegrees();
+                MathTester.tester(input, "toDegrees", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.toDegrees(f);
+                        return (float) Math.toDegrees(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.toRadians();
-                MathTester.tester(input, "toRadians", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.toRadians();
+                MathTester.tester(input, "toRadians", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.toRadians(f);
+                        return (float) Math.toRadians(d);
                     }
                 });
-                fv = new MutableFloatVector.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.inv();
-                MathTester.tester(input, "inv", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.inv();
+                MathTester.tester(input, "inv", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return 1 / f;
+                        return 1 / d;
                     }
                 });
             }
@@ -557,15 +563,15 @@ public class FloatVectorSparseTest
         {
             float[] leftValue = data(3, 123.4f);
             float[] rightValue = data(3, 234.5f);
-            FloatVector.Abs.Sparse<LengthUnit> left =
-                new FloatVector.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Rel.Dense<LengthUnit> right =
-                new FloatVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            FloatVector.Abs<LengthUnit> left =
+                new FloatVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Rel<LengthUnit> right =
+                new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             FloatVector.Abs<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
-                    + right.getSI(i), result.getSI(i), 0.001f);
+                    + right.getSI(i), result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -585,15 +591,15 @@ public class FloatVectorSparseTest
         {
             float[] leftValue = data(3, 123.4f);
             float[] rightValue = data(3, 234.5f);
-            FloatVector.Abs.Sparse<LengthUnit> left =
-                new FloatVector.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Rel.Dense<LengthUnit> right =
-                new FloatVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            FloatVector.Abs<LengthUnit> left =
+                new FloatVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Rel<LengthUnit> right =
+                new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             FloatVector.Abs<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
-                    - right.getSI(i), result.getSI(i), 0.001f);
+                    - right.getSI(i), result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -613,15 +619,15 @@ public class FloatVectorSparseTest
         {
             float[] leftValue = data(3, 123.4f);
             float[] rightValue = data(3, 234.5f);
-            FloatVector.Abs.Sparse<LengthUnit> left =
-                new FloatVector.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Rel.Sparse<LengthUnit> right =
-                new FloatVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            FloatVector.Abs<LengthUnit> left =
+                new FloatVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Rel<LengthUnit> right =
+                new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             FloatVector.Abs<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
-                    + right.getSI(i), result.getSI(i), 0.001f);
+                    + right.getSI(i), result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -641,15 +647,15 @@ public class FloatVectorSparseTest
         {
             float[] leftValue = data(3, 123.4f);
             float[] rightValue = data(3, 234.5f);
-            FloatVector.Abs.Sparse<LengthUnit> left =
-                new FloatVector.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Rel.Sparse<LengthUnit> right =
-                new FloatVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            FloatVector.Abs<LengthUnit> left =
+                new FloatVector.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Rel<LengthUnit> right =
+                new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             FloatVector.Abs<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
-                    - right.getSI(i), result.getSI(i), 0.001f);
+                    - right.getSI(i), result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -669,7 +675,7 @@ public class FloatVectorSparseTest
         try
         {
             // null array
-            new FloatVector.Abs.Sparse<TemperatureUnit>((float[]) null, TemperatureUnit.DEGREE_FAHRENHEIT);
+            new FloatVector.Abs<TemperatureUnit>((float[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -691,8 +697,9 @@ public class FloatVectorSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             float[] value = data(3, 38.0f);
-            FloatVector.Rel.Sparse<TemperatureUnit> fv = new FloatVector.Rel.Sparse<TemperatureUnit>(value, tempUnit);
-            String result = fv.toString(true, true);
+            FloatVector.Rel<TemperatureUnit> dv =
+                new FloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            String result = dv.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
@@ -715,9 +722,9 @@ public class FloatVectorSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             float[] value = data(3, 38.0f);
-            MutableFloatVector.Rel.Sparse<TemperatureUnit> fv =
-                new MutableFloatVector.Rel.Sparse<TemperatureUnit>(value, tempUnit);
-            String result = fv.toString(true, true);
+            MutableFloatVector.Rel<TemperatureUnit> dv =
+                new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            String result = dv.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
@@ -740,35 +747,36 @@ public class FloatVectorSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             float[] value = data(3, 38.0f);
-            FloatVector.Rel.Sparse<TemperatureUnit> temperatureFV =
-                new FloatVector.Rel.Sparse<TemperatureUnit>(value, tempUnit);
-            checkContentsAndType(temperatureFV, value, 0.001f, tempUnit, false);
-            assertEquals("Value in SI is equivalent in Kelvin", 311.15f, temperatureFV.getSI(0), 0.05);
-            assertEquals("Value in Fahrenheit", 100.4f, temperatureFV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
+            FloatVector.Rel<TemperatureUnit> temperatureDV =
+                new FloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
+            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
+            assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
                 0.1);
-            float[] out = temperatureFV.getValuesInUnit();
+            float[] out = temperatureDV.getValuesInUnit();
             for (int index = 0; index < value.length; index++)
             {
                 assertEquals("Value should match", value[index], out[index], 0.001);
             }
-            MutableFloatVector.Rel.Sparse<TemperatureUnit> mfv =
-                new MutableFloatVector.Rel.Sparse<TemperatureUnit>(value, tempUnit);
-            checkContentsAndType(mfv, value, 0.001f, tempUnit, false);
-            mfv.setSI(0, 73);
+            MutableFloatVector.Rel<TemperatureUnit> mdv =
+                new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            checkContentsAndType(mdv, value, 0.001, tempUnit, false);
+            mdv.setSI(0, 73);
             float safe = value[0];
             value[0] = -200; // Approximate Celsius equivalent of 73 Kelvin
-            checkContentsAndType(mfv, value, 1, tempUnit, false);
+            checkContentsAndType(mdv, value, 1, tempUnit, false);
             value[0] = safe; // Restore
-            mfv.set(0, temperatureFV.get(0));
-            checkContentsAndType(mfv, value, 0.001f, tempUnit, false);
-            FloatVector.Rel.Sparse<TemperatureUnit> temperature2FV =
-                new FloatVector.Rel.Sparse<TemperatureUnit>(temperatureFV.getValuesSI(), TemperatureUnit.KELVIN);
-            assertTrue("temperature2FV should be equal to temperatureFV", temperature2FV.equals(temperatureFV));
-            assertTrue("Value is Relative", temperatureFV.isRelative());
-            assertFalse("Value is not Absolute", temperatureFV.isAbsolute());
-            temperatureFV = new FloatVector.Rel.Sparse<TemperatureUnit>(value, TemperatureUnit.KELVIN);
-            checkContentsAndType(temperatureFV, value, 0.001f, TemperatureUnit.KELVIN, false);
-            out = temperatureFV.getValuesSI();
+            mdv.set(0, temperatureDV.get(0));
+            checkContentsAndType(mdv, value, 0.001, tempUnit, false);
+            FloatVector.Rel<TemperatureUnit> temperature2DV =
+                new FloatVector.Rel<TemperatureUnit>(temperatureDV.getValuesSI(), TemperatureUnit.KELVIN,
+                    StorageType.SPARSE);
+            assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
+            assertTrue("Value is Relative", temperatureDV.isRelative());
+            assertFalse("Value is not Absolute", temperatureDV.isAbsolute());
+            temperatureDV = new FloatVector.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.SPARSE);
+            checkContentsAndType(temperatureDV, value, 0.001, TemperatureUnit.KELVIN, false);
+            out = temperatureDV.getValuesSI();
             for (int index = 0; index < value.length; index++)
             {
                 assertEquals("Value should match", value[index], out[index], 0.001);
@@ -778,16 +786,16 @@ public class FloatVectorSparseTest
             {
                 scalar[index] = new FloatScalar.Rel<TemperatureUnit>(value[index], TemperatureUnit.DEGREE_CELSIUS);
             }
-            temperatureFV = new FloatVector.Rel.Sparse<TemperatureUnit>(scalar);
-            checkContentsAndType(temperatureFV, value, 0.001f, tempUnit, false);
-            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureFV
+            temperatureDV = new FloatVector.Rel<TemperatureUnit>(scalar, StorageType.SPARSE);
+            checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
+            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV
                 .cardinality());
             float sum = 0;
             for (int index = 0; index < value.length; index++)
             {
-                sum += temperatureFV.getSI(index);
+                sum += temperatureDV.getSI(index);
             }
-            assertEquals("zSum should be sum of all values", sum, temperatureFV.zSum(), 0.001);
+            assertEquals("zSum should be sum of all values", sum, temperatureDV.zSum(), 0.001);
         }
         catch (ValueException ve)
         {
@@ -808,34 +816,35 @@ public class FloatVectorSparseTest
             float[] value = data(3, 38.0f);
             float[] value2 = data(3, 38.0f);
             value2[0] = 12345;
-            FloatVector.Rel.Sparse<TemperatureUnit> fv = new FloatVector.Rel.Sparse<TemperatureUnit>(value, tempUnit);
-            FloatVector.Rel<TemperatureUnit> fvCopy = fv;
-            MutableFloatVector.Rel<TemperatureUnit> mfv = fv.mutable();
-            checkContentsAndType(fv, value, 0.001f, tempUnit, false);
-            checkContentsAndType(mfv, value, 0.001f, tempUnit, false);
-            checkContentsAndType(fvCopy, value, 0.001f, tempUnit, false);
-            MutableFloatVector.Rel<TemperatureUnit> mfvCopy = mfv.copy();
-            checkContentsAndType(mfvCopy, value, 0.001f, tempUnit, false);
-            MutableFloatVector.Rel<TemperatureUnit> mmfv = mfv.mutable();
-            checkContentsAndType(mmfv, value, 0.001f, tempUnit, false);
-            assertEquals("hashCode is independent on mutability", fv.hashCode(), mfv.hashCode());
-            // Modify mfv
-            mfv.setInUnit(0, 12345, TemperatureUnit.DEGREE_CELSIUS);
-            checkContentsAndType(fv, value, 0.001f, tempUnit, false);
-            checkContentsAndType(mfv, value2, 0.01f, tempUnit, false);
-            checkContentsAndType(mfvCopy, value, 0.001f, tempUnit, false);
-            checkContentsAndType(mmfv, value, 0.001f, tempUnit, false);
-            FloatVector.Rel<TemperatureUnit> ifv = mfv.immutable();
-            assertTrue("Different value extremely likely results in different hashCode", fv.hashCode() != mfv
+            FloatVector.Rel<TemperatureUnit> dv =
+                new FloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            FloatVector.Rel<TemperatureUnit> dvCopy = dv;
+            MutableFloatVector.Rel<TemperatureUnit> mdv = dv.mutable();
+            checkContentsAndType(dv, value, 0.001, tempUnit, false);
+            checkContentsAndType(mdv, value, 0.001, tempUnit, false);
+            checkContentsAndType(dvCopy, value, 0.001, tempUnit, false);
+            MutableFloatVector.Rel<TemperatureUnit> mdvCopy = mdv.copy();
+            checkContentsAndType(mdvCopy, value, 0.001, tempUnit, false);
+            MutableFloatVector.Rel<TemperatureUnit> mmdv = mdv.mutable();
+            checkContentsAndType(mmdv, value, 0.001, tempUnit, false);
+            assertEquals("hashCode is independent on mutability", dv.hashCode(), mdv.hashCode());
+            // Modify mdv
+            mdv.setInUnit(0, 12345, TemperatureUnit.DEGREE_CELSIUS);
+            checkContentsAndType(dv, value, 0.001, tempUnit, false);
+            checkContentsAndType(mdv, value2, 0.01, tempUnit, false);
+            checkContentsAndType(mdvCopy, value, 0.001, tempUnit, false);
+            checkContentsAndType(mmdv, value, 0.001, tempUnit, false);
+            FloatVector.Rel<TemperatureUnit> idv = mdv.immutable();
+            assertTrue("Different value extremely likely results in different hashCode", dv.hashCode() != mdv
                 .hashCode());
-            // Restore value of mfv
-            mfv.setSI(0, fv.getSI(0));
-            checkContentsAndType(ifv, value2, 0.01f, tempUnit, false);
-            checkContentsAndType(mfv, value, 0.001f, tempUnit, false);
-            checkContentsAndType(mmfv, value, 0.001f, tempUnit, false);
-            mmfv.setSI(0, 0);
-            checkContentsAndType(mfv, value, 0.001f, tempUnit, false);
-            assertEquals("value should be about -273", -273, mmfv.getInUnit(0, tempUnit), 0.2);
+            // Restore value of mdv
+            mdv.setSI(0, dv.getSI(0));
+            checkContentsAndType(idv, value2, 0.01, tempUnit, false);
+            checkContentsAndType(mdv, value, 0.001, tempUnit, false);
+            checkContentsAndType(mmdv, value, 0.001, tempUnit, false);
+            mmdv.setSI(0, 0);
+            checkContentsAndType(mdv, value, 0.001, tempUnit, false);
+            assertEquals("value should be about -273", -273, mmdv.getInUnit(0, tempUnit), 0.2);
         }
         catch (ValueException ve)
         {
@@ -852,21 +861,23 @@ public class FloatVectorSparseTest
     {
         LengthUnit lengthUnit = LengthUnit.METER;
         float value = 38.0f;
-        FloatScalar.Rel<LengthUnit> fv = new FloatScalar.Rel<LengthUnit>(value, lengthUnit);
-        assertTrue("Equal to itself", fv.equals(fv));
-        assertFalse("Not equal to null", fv.equals(null));
-        assertFalse("Not equal to some other kind of object; e.g. a String", fv.equals(new String("abc")));
-        FloatScalar.Abs<LengthUnit> fvCounterPart = new FloatScalar.Abs<LengthUnit>(value, lengthUnit);
-        assertFalse("Not equal if one Absolute and other Relative", fv.equals(fvCounterPart));
-        FloatScalar.Rel<TemperatureUnit> fvWrongBaseUnit =
+        FloatScalar.Rel<LengthUnit> dv = new FloatScalar.Rel<LengthUnit>(value, lengthUnit);
+        assertTrue("Equal to itself", dv.equals(dv));
+        assertFalse("Not equal to null", dv.equals(null));
+        assertFalse("Not equal to some other kind of object; e.g. a String", dv.equals(new String("abc")));
+        FloatScalar.Abs<LengthUnit> dvCounterPart = new FloatScalar.Abs<LengthUnit>(value, lengthUnit);
+        assertFalse("Not equal if one Absolute and other Relative", dv.equals(dvCounterPart));
+        FloatScalar.Rel<TemperatureUnit> dvWrongBaseUnit =
             new FloatScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
-        assertEquals("The underlying SI values are the same", fv.getSI(), fvWrongBaseUnit.getSI(), 0.0001f);
-        assertFalse("Not equals because the standard SI unit differs", fv.equals(fvWrongBaseUnit));
-        FloatScalar.Rel<LengthUnit> fvCompatibleUnit = new FloatScalar.Rel<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
-        assertFalse("Units are different", fv.getUnit().equals(fvCompatibleUnit.getUnit()));
-        assertTrue("equals returns true", fv.equals(fvCompatibleUnit));
-        FloatScalar.Rel<LengthUnit> fvDifferentValue = new FloatScalar.Rel<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
-        assertFalse("Different value makes equals return false", fv.equals(fvDifferentValue));
+        assertEquals("The underlying SI values are the same", dv.getSI(), dvWrongBaseUnit.getSI(), 0.0001);
+        assertFalse("Not equals because the standard SI unit differs", dv.equals(dvWrongBaseUnit));
+        FloatScalar.Rel<LengthUnit> dvCompatibleUnit =
+            new FloatScalar.Rel<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
+        assertFalse("Units are different", dv.getUnit().equals(dvCompatibleUnit.getUnit()));
+        assertTrue("equals returns true", dv.equals(dvCompatibleUnit));
+        FloatScalar.Rel<LengthUnit> dvDifferentValue =
+            new FloatScalar.Rel<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
+        assertFalse("Different value makes equals return false", dv.equals(dvDifferentValue));
     }
 
     /**
@@ -880,271 +891,271 @@ public class FloatVectorSparseTest
         for (float seedValue : seedValues)
         {
             float[] input = data(3, seedValue);
-            MutableFloatVector.Rel.Sparse<LengthUnit> fv;
+            MutableFloatVector.Rel<LengthUnit> dv;
             try
             {
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.abs();
-                MathTester.tester(input, "abs", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.abs();
+                MathTester.tester(input, "abs", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.abs(f);
+                        return Math.abs(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.acos();
-                MathTester.tester(input, "acos", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.acos();
+                MathTester.tester(input, "acos", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.acos(f);
+                        return (float) Math.acos(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.asin();
-                MathTester.tester(input, "asin", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.asin();
+                MathTester.tester(input, "asin", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.asin(f);
+                        return (float) Math.asin(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.atan();
-                MathTester.tester(input, "atan", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.atan();
+                MathTester.tester(input, "atan", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.atan(f);
+                        return (float) Math.atan(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.cbrt();
-                MathTester.tester(input, "cbrt", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.cbrt();
+                MathTester.tester(input, "cbrt", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cbrt(f);
+                        return (float) Math.cbrt(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.ceil();
-                MathTester.tester(input, "ceil", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.ceil();
+                MathTester.tester(input, "ceil", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.ceil(f);
+                        return (float) Math.ceil(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.cos();
-                MathTester.tester(input, "cos", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.cos();
+                MathTester.tester(input, "cos", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cos(f);
+                        return (float) Math.cos(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.cosh();
-                MathTester.tester(input, "cosh", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.cosh();
+                MathTester.tester(input, "cosh", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cosh(f);
+                        return (float) Math.cosh(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.exp();
-                MathTester.tester(input, "exp", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.exp();
+                MathTester.tester(input, "exp", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.exp(f);
+                        return (float) Math.exp(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.expm1();
-                MathTester.tester(input, "expm1", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.expm1();
+                MathTester.tester(input, "expm1", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.expm1(f);
+                        return (float) Math.expm1(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.floor();
-                MathTester.tester(input, "floor", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.floor();
+                MathTester.tester(input, "floor", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.floor(f);
+                        return (float) Math.floor(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.log();
-                MathTester.tester(input, "log", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.log();
+                MathTester.tester(input, "log", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log(f);
+                        return (float) Math.log(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.log10();
-                MathTester.tester(input, "log10", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.log10();
+                MathTester.tester(input, "log10", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log10(f);
+                        return (float) Math.log10(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.log1p();
-                MathTester.tester(input, "log1p", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.log1p();
+                MathTester.tester(input, "log1p", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log1p(f);
+                        return (float) Math.log1p(d);
                     }
                 });
                 for (int i = -10; i <= 10; i++)
                 {
                     final float exponent = i * 0.5f;
-                    fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                    fv.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", fv, 0.001, new FloatToFloat()
+                    dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                    dv.pow(exponent);
+                    MathTester.tester(input, "pow(" + exponent + ")", dv, 0.001, new FloatToFloat()
                     {
                         @Override
-                        public float function(final float f)
+                        public float function(final float d)
                         {
-                            return (float) Math.pow(f, exponent);
+                            return (float) Math.pow(d, exponent);
                         }
                     });
                 }
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.rint();
-                MathTester.tester(input, "rint", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.rint();
+                MathTester.tester(input, "rint", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.rint(f);
+                        return (float) Math.rint(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.round();
-                MathTester.tester(input, "round", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.round();
+                MathTester.tester(input, "round", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.round(f);
+                        return Math.round(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.signum();
-                MathTester.tester(input, "signum", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.signum();
+                MathTester.tester(input, "signum", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.signum(f);
+                        return Math.signum(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.sin();
-                MathTester.tester(input, "sin", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.sin();
+                MathTester.tester(input, "sin", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sin(f);
+                        return (float) Math.sin(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.sinh();
-                MathTester.tester(input, "sinh", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.sinh();
+                MathTester.tester(input, "sinh", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sinh(f);
+                        return (float) Math.sinh(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.sqrt();
-                MathTester.tester(input, "sqrt", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.sqrt();
+                MathTester.tester(input, "sqrt", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sqrt(f);
+                        return (float) Math.sqrt(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.tan();
-                MathTester.tester(input, "tan", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.tan();
+                MathTester.tester(input, "tan", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.tan(f);
+                        return (float) Math.tan(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.tanh();
-                MathTester.tester(input, "tanh", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.tanh();
+                MathTester.tester(input, "tanh", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.tanh(f);
+                        return (float) Math.tanh(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.toDegrees();
-                MathTester.tester(input, "toDegrees", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.toDegrees();
+                MathTester.tester(input, "toDegrees", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.toDegrees(f);
+                        return (float) Math.toDegrees(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.toRadians();
-                MathTester.tester(input, "toRadians", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.toRadians();
+                MathTester.tester(input, "toRadians", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.toRadians(f);
+                        return (float) Math.toRadians(d);
                     }
                 });
-                fv = new MutableFloatVector.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
-                fv.inv();
-                MathTester.tester(input, "inv", fv, 0.001, new FloatToFloat()
+                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
+                dv.inv();
+                MathTester.tester(input, "inv", dv, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return 1 / f;
+                        return 1 / d;
                     }
                 });
             }
@@ -1166,15 +1177,15 @@ public class FloatVectorSparseTest
         {
             float[] leftValue = data(3, 123.4f);
             float[] rightValue = data(3, 234.5f);
-            FloatVector.Rel.Sparse<LengthUnit> left =
-                new FloatVector.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Rel.Dense<LengthUnit> right =
-                new FloatVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            FloatVector.Rel<LengthUnit> left =
+                new FloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Rel<LengthUnit> right =
+                new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             FloatVector.Rel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
-                    + right.getSI(i), result.getSI(i), 0.001f);
+                    + right.getSI(i), result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1194,15 +1205,15 @@ public class FloatVectorSparseTest
         {
             float[] leftValue = data(3, 123.4f);
             float[] rightValue = data(3, 234.5f);
-            FloatVector.Rel.Sparse<LengthUnit> left =
-                new FloatVector.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Rel.Dense<LengthUnit> right =
-                new FloatVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            FloatVector.Rel<LengthUnit> left =
+                new FloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Rel<LengthUnit> right =
+                new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             FloatVector.Rel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
-                    - right.getSI(i), result.getSI(i), 0.001f);
+                    - right.getSI(i), result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1222,15 +1233,15 @@ public class FloatVectorSparseTest
         {
             float[] leftValue = data(3, 123.4f);
             float[] rightValue = data(3, 234.5f);
-            FloatVector.Rel.Sparse<LengthUnit> left =
-                new FloatVector.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Rel.Dense<LengthUnit> right =
-                new FloatVector.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
+            FloatVector.Rel<LengthUnit> left =
+                new FloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Rel<LengthUnit> right =
+                new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             FloatVector.Rel<?> result = left.times(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i)
-                    * right.getSI(i), result.getSI(i), 0.001f);
+                    * right.getSI(i), result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1250,15 +1261,15 @@ public class FloatVectorSparseTest
         {
             float[] leftValue = data(3, 123.4f);
             float[] rightValue = data(3, 234.5f);
-            FloatVector.Rel.Sparse<LengthUnit> left =
-                new FloatVector.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Rel.Sparse<LengthUnit> right =
-                new FloatVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            FloatVector.Rel<LengthUnit> left =
+                new FloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Rel<LengthUnit> right =
+                new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             FloatVector.Rel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i)
-                    + right.getSI(i), result.getSI(i), 0.001f);
+                    + right.getSI(i), result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1278,15 +1289,15 @@ public class FloatVectorSparseTest
         {
             float[] leftValue = data(3, 123.4f);
             float[] rightValue = data(3, 234.5f);
-            FloatVector.Rel.Sparse<LengthUnit> left =
-                new FloatVector.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Rel.Sparse<LengthUnit> right =
-                new FloatVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            FloatVector.Rel<LengthUnit> left =
+                new FloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Rel<LengthUnit> right =
+                new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             FloatVector.Rel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i)
-                    - right.getSI(i), result.getSI(i), 0.001f);
+                    - right.getSI(i), result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1306,15 +1317,15 @@ public class FloatVectorSparseTest
         {
             float[] leftValue = data(3, 123.4f);
             float[] rightValue = data(3, 234.5f);
-            FloatVector.Rel.Sparse<LengthUnit> left =
-                new FloatVector.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatVector.Rel.Sparse<LengthUnit> right =
-                new FloatVector.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
+            FloatVector.Rel<LengthUnit> left =
+                new FloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Rel<LengthUnit> right =
+                new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             FloatVector.Rel<?> result = left.times(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI times of contributing elements", left.getSI(i)
-                    * right.getSI(i), result.getSI(i), 0.001f);
+                    * right.getSI(i), result.getSI(i), 0.001);
             }
         }
         catch (ValueException ve)
@@ -1334,7 +1345,7 @@ public class FloatVectorSparseTest
         try
         {
             // null array
-            new FloatVector.Rel.Sparse<TemperatureUnit>((float[]) null, TemperatureUnit.DEGREE_FAHRENHEIT);
+            new FloatVector.Rel<TemperatureUnit>((float[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1349,10 +1360,10 @@ public class FloatVectorSparseTest
     interface FloatToFloat
     {
         /**
-         * @param f float; value
+         * @param d float; value
          * @return float value
          */
-        float function(float f);
+        float function(float d);
     }
 
     /** */
@@ -1366,8 +1377,8 @@ public class FloatVectorSparseTest
          * @param precision double; expected accuracy
          * @param function FloatToFloat; encapsulated function that converts one inputValue to an outputValue
          */
-        public static void tester(final float[] inputValues, final String operation, final FloatVector<?> actualResult,
-            final double precision, final FloatToFloat function)
+        public static void tester(final float[] inputValues, final String operation,
+            final FloatVector<?> actualResult, final double precision, final FloatToFloat function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {

@@ -3,13 +3,13 @@ package org.djunits.value.vfloat.vector;
 import java.util.List;
 import java.util.SortedMap;
 
-import org.djunits.unit.AccelerationUnit;
+import org.djunits.unit.LinearDensityUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.vfloat.scalar.FloatAcceleration;
+import org.djunits.value.vfloat.scalar.FloatLinearDensity;
 
 /**
- * Mutable FloatAccelerationVector, a vector of values with a AccelerationUnit.
+ * Immutable FloatLinearDensityVector, a vector of values with a LinearDensityUnit.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,87 +19,87 @@ import org.djunits.value.vfloat.scalar.FloatAcceleration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatAccelerationVector
+public class FloatLinearDensityVector
     extends
-    MutableTypedFloatVectorRel<AccelerationUnit, FloatAccelerationVector, MutableFloatAccelerationVector, FloatAcceleration>
+    TypedFloatVectorRel<LinearDensityUnit, FloatLinearDensityVector, MutableFloatLinearDensityVector, FloatLinearDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatLinearDensityVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable FloatLinearDensityVector
+     * @param unit U; the unit of the new Relative Immutable FloatLinearDensityVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatAccelerationVector(final float[] values, final AccelerationUnit unit,
+    public FloatLinearDensityVector(final float[] values, final LinearDensityUnit unit, final StorageType storageType)
+        throws ValueException
+    {
+        super(values, unit, storageType);
+    }
+
+    /**
+     * Construct a new Relative Immutable FloatLinearDensityVector.
+     * @param values List; the values of the entries in the new Relative Immutable FloatLinearDensityVector
+     * @param unit U; the unit of the new Relative Immutable FloatLinearDensityVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
+     */
+    public FloatLinearDensityVector(final List<Float> values, final LinearDensityUnit unit,
         final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Immutable FloatAccelerationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public MutableFloatAccelerationVector(final List<Float> values, final AccelerationUnit unit,
-        final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
+     * Construct a new Relative Immutable FloatLinearDensityVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatAccelerationVector
+     *            FloatLinearDensityVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatAccelerationVector(final FloatAcceleration[] values, final StorageType storageType)
+    public FloatLinearDensityVector(final FloatLinearDensity[] values, final StorageType storageType)
         throws ValueException
     {
         super(values, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatLinearDensityVector.
+     * @param values List; the values of the entries in the new Relative Immutable FloatLinearDensityVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatAccelerationVector(final List<FloatAcceleration> values, final StorageType storageType)
+    public FloatLinearDensityVector(final List<FloatLinearDensity> values, final StorageType storageType)
         throws ValueException
     {
         super(values, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
+     * Construct a new Relative Immutable FloatLinearDensityVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatAccelerationVector
+     *            FloatLinearDensityVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatAccelerationVector(final SortedMap<Integer, FloatAcceleration> values, final int length,
+    public FloatLinearDensityVector(final SortedMap<Integer, FloatLinearDensity> values, final int length,
         final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatLinearDensityVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatLinearDensityVector
+     * @param unit U; the unit of the new Relative Sparse Mutable FloatLinearDensityVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatAccelerationVector(final SortedMap<Integer, Float> values, final AccelerationUnit unit,
+    public FloatLinearDensityVector(final SortedMap<Integer, Float> values, final LinearDensityUnit unit,
         final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -109,31 +109,31 @@ public class MutableFloatAccelerationVector
      * @param data an internal data object
      * @param unit the unit
      */
-    MutableFloatAccelerationVector(final FloatVectorData data, final AccelerationUnit unit)
+    FloatLinearDensityVector(final FloatVectorData data, final LinearDensityUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatAccelerationVector instantiateType(final FloatVectorData dvd, final AccelerationUnit unit)
+    protected final FloatLinearDensityVector instantiateType(final FloatVectorData dvd, final LinearDensityUnit unit)
     {
-        return new FloatAccelerationVector(dvd, unit);
+        return new FloatLinearDensityVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatAccelerationVector instantiateMutableType(final FloatVectorData dvd,
-        final AccelerationUnit unit)
+    protected final MutableFloatLinearDensityVector instantiateMutableType(final FloatVectorData dvd,
+        final LinearDensityUnit unit)
     {
-        return new MutableFloatAccelerationVector(dvd, unit);
+        return new MutableFloatLinearDensityVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAcceleration get(final int index) throws ValueException
+    public final FloatLinearDensity get(final int index) throws ValueException
     {
-        return new FloatAcceleration(getInUnit(index, getUnit()), getUnit());
+        return new FloatLinearDensity(getInUnit(index, getUnit()), getUnit());
     }
 
 }

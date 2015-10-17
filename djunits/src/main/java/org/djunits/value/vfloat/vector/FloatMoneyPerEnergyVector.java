@@ -3,13 +3,13 @@ package org.djunits.value.vfloat.vector;
 import java.util.List;
 import java.util.SortedMap;
 
-import org.djunits.unit.AccelerationUnit;
+import org.djunits.unit.MoneyPerEnergyUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.vfloat.scalar.FloatAcceleration;
+import org.djunits.value.vfloat.scalar.FloatMoneyPerEnergy;
 
 /**
- * Mutable FloatAccelerationVector, a vector of values with a AccelerationUnit.
+ * Immutable FloatMoneyPerEnergyVector, a vector of values with a MoneyPerEnergyUnit.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,87 +19,87 @@ import org.djunits.value.vfloat.scalar.FloatAcceleration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatAccelerationVector
+public class FloatMoneyPerEnergyVector
     extends
-    MutableTypedFloatVectorRel<AccelerationUnit, FloatAccelerationVector, MutableFloatAccelerationVector, FloatAcceleration>
+    TypedFloatVectorRel<MoneyPerEnergyUnit, FloatMoneyPerEnergyVector, MutableFloatMoneyPerEnergyVector, FloatMoneyPerEnergy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatMoneyPerEnergyVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable FloatMoneyPerEnergyVector
+     * @param unit U; the unit of the new Relative Immutable FloatMoneyPerEnergyVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatAccelerationVector(final float[] values, final AccelerationUnit unit,
+    public FloatMoneyPerEnergyVector(final float[] values, final MoneyPerEnergyUnit unit, final StorageType storageType)
+        throws ValueException
+    {
+        super(values, unit, storageType);
+    }
+
+    /**
+     * Construct a new Relative Immutable FloatMoneyPerEnergyVector.
+     * @param values List; the values of the entries in the new Relative Immutable FloatMoneyPerEnergyVector
+     * @param unit U; the unit of the new Relative Immutable FloatMoneyPerEnergyVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
+     */
+    public FloatMoneyPerEnergyVector(final List<Float> values, final MoneyPerEnergyUnit unit,
         final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Immutable FloatAccelerationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public MutableFloatAccelerationVector(final List<Float> values, final AccelerationUnit unit,
-        final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
+     * Construct a new Relative Immutable FloatMoneyPerEnergyVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatAccelerationVector
+     *            FloatMoneyPerEnergyVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatAccelerationVector(final FloatAcceleration[] values, final StorageType storageType)
+    public FloatMoneyPerEnergyVector(final FloatMoneyPerEnergy[] values, final StorageType storageType)
         throws ValueException
     {
         super(values, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatMoneyPerEnergyVector.
+     * @param values List; the values of the entries in the new Relative Immutable FloatMoneyPerEnergyVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatAccelerationVector(final List<FloatAcceleration> values, final StorageType storageType)
+    public FloatMoneyPerEnergyVector(final List<FloatMoneyPerEnergy> values, final StorageType storageType)
         throws ValueException
     {
         super(values, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
+     * Construct a new Relative Immutable FloatMoneyPerEnergyVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatAccelerationVector
+     *            FloatMoneyPerEnergyVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatAccelerationVector(final SortedMap<Integer, FloatAcceleration> values, final int length,
+    public FloatMoneyPerEnergyVector(final SortedMap<Integer, FloatMoneyPerEnergy> values, final int length,
         final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatMoneyPerEnergyVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatMoneyPerEnergyVector
+     * @param unit U; the unit of the new Relative Sparse Mutable FloatMoneyPerEnergyVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatAccelerationVector(final SortedMap<Integer, Float> values, final AccelerationUnit unit,
+    public FloatMoneyPerEnergyVector(final SortedMap<Integer, Float> values, final MoneyPerEnergyUnit unit,
         final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -109,31 +109,31 @@ public class MutableFloatAccelerationVector
      * @param data an internal data object
      * @param unit the unit
      */
-    MutableFloatAccelerationVector(final FloatVectorData data, final AccelerationUnit unit)
+    FloatMoneyPerEnergyVector(final FloatVectorData data, final MoneyPerEnergyUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatAccelerationVector instantiateType(final FloatVectorData dvd, final AccelerationUnit unit)
+    protected final FloatMoneyPerEnergyVector instantiateType(final FloatVectorData dvd, final MoneyPerEnergyUnit unit)
     {
-        return new FloatAccelerationVector(dvd, unit);
+        return new FloatMoneyPerEnergyVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatAccelerationVector instantiateMutableType(final FloatVectorData dvd,
-        final AccelerationUnit unit)
+    protected final MutableFloatMoneyPerEnergyVector instantiateMutableType(final FloatVectorData dvd,
+        final MoneyPerEnergyUnit unit)
     {
-        return new MutableFloatAccelerationVector(dvd, unit);
+        return new MutableFloatMoneyPerEnergyVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAcceleration get(final int index) throws ValueException
+    public final FloatMoneyPerEnergy get(final int index) throws ValueException
     {
-        return new FloatAcceleration(getInUnit(index, getUnit()), getUnit());
+        return new FloatMoneyPerEnergy(getInUnit(index, getUnit()), getUnit());
     }
 
 }

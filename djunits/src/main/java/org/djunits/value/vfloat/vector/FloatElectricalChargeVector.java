@@ -3,13 +3,13 @@ package org.djunits.value.vfloat.vector;
 import java.util.List;
 import java.util.SortedMap;
 
-import org.djunits.unit.AccelerationUnit;
+import org.djunits.unit.ElectricalChargeUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.vfloat.scalar.FloatAcceleration;
+import org.djunits.value.vfloat.scalar.FloatElectricalCharge;
 
 /**
- * Mutable FloatAccelerationVector, a vector of values with a AccelerationUnit.
+ * Immutable FloatElectricalChargeVector, a vector of values with a ElectricalChargeUnit.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,87 +19,87 @@ import org.djunits.value.vfloat.scalar.FloatAcceleration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatAccelerationVector
+public class FloatElectricalChargeVector
     extends
-    MutableTypedFloatVectorRel<AccelerationUnit, FloatAccelerationVector, MutableFloatAccelerationVector, FloatAcceleration>
+    TypedFloatVectorRel<ElectricalChargeUnit, FloatElectricalChargeVector, MutableFloatElectricalChargeVector, FloatElectricalCharge>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatElectricalChargeVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable FloatElectricalChargeVector
+     * @param unit U; the unit of the new Relative Immutable FloatElectricalChargeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatAccelerationVector(final float[] values, final AccelerationUnit unit,
+    public FloatElectricalChargeVector(final float[] values, final ElectricalChargeUnit unit,
         final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatElectricalChargeVector.
+     * @param values List; the values of the entries in the new Relative Immutable FloatElectricalChargeVector
+     * @param unit U; the unit of the new Relative Immutable FloatElectricalChargeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatAccelerationVector(final List<Float> values, final AccelerationUnit unit,
+    public FloatElectricalChargeVector(final List<Float> values, final ElectricalChargeUnit unit,
         final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
+     * Construct a new Relative Immutable FloatElectricalChargeVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatAccelerationVector
+     *            FloatElectricalChargeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatAccelerationVector(final FloatAcceleration[] values, final StorageType storageType)
+    public FloatElectricalChargeVector(final FloatElectricalCharge[] values, final StorageType storageType)
         throws ValueException
     {
         super(values, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatElectricalChargeVector.
+     * @param values List; the values of the entries in the new Relative Immutable FloatElectricalChargeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatAccelerationVector(final List<FloatAcceleration> values, final StorageType storageType)
+    public FloatElectricalChargeVector(final List<FloatElectricalCharge> values, final StorageType storageType)
         throws ValueException
     {
         super(values, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
+     * Construct a new Relative Immutable FloatElectricalChargeVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatAccelerationVector
+     *            FloatElectricalChargeVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatAccelerationVector(final SortedMap<Integer, FloatAcceleration> values, final int length,
+    public FloatElectricalChargeVector(final SortedMap<Integer, FloatElectricalCharge> values, final int length,
         final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatAccelerationVector
+     * Construct a new Relative Immutable FloatElectricalChargeVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatElectricalChargeVector
+     * @param unit U; the unit of the new Relative Sparse Mutable FloatElectricalChargeVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatAccelerationVector(final SortedMap<Integer, Float> values, final AccelerationUnit unit,
+    public FloatElectricalChargeVector(final SortedMap<Integer, Float> values, final ElectricalChargeUnit unit,
         final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -109,31 +109,32 @@ public class MutableFloatAccelerationVector
      * @param data an internal data object
      * @param unit the unit
      */
-    MutableFloatAccelerationVector(final FloatVectorData data, final AccelerationUnit unit)
+    FloatElectricalChargeVector(final FloatVectorData data, final ElectricalChargeUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatAccelerationVector instantiateType(final FloatVectorData dvd, final AccelerationUnit unit)
+    protected final FloatElectricalChargeVector instantiateType(final FloatVectorData dvd,
+        final ElectricalChargeUnit unit)
     {
-        return new FloatAccelerationVector(dvd, unit);
+        return new FloatElectricalChargeVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatAccelerationVector instantiateMutableType(final FloatVectorData dvd,
-        final AccelerationUnit unit)
+    protected final MutableFloatElectricalChargeVector instantiateMutableType(final FloatVectorData dvd,
+        final ElectricalChargeUnit unit)
     {
-        return new MutableFloatAccelerationVector(dvd, unit);
+        return new MutableFloatElectricalChargeVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAcceleration get(final int index) throws ValueException
+    public final FloatElectricalCharge get(final int index) throws ValueException
     {
-        return new FloatAcceleration(getInUnit(index, getUnit()), getUnit());
+        return new FloatElectricalCharge(getInUnit(index, getUnit()), getUnit());
     }
 
 }
