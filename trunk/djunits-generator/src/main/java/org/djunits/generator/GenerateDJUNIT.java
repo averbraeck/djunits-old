@@ -852,6 +852,244 @@ public class GenerateDJUNIT
     }
 
     /****************************************************************************************************************/
+    /************************************************ MATRIX ********************************************************/
+    /****************************************************************************************************************/
+
+    /**
+     * Insert formulas based on FORMULAS.txt into the %FORMULAS% marker within the Java file.
+     * @param java the java file
+     * @param errorType the type for error messaging
+     * @param prefix e.g., Float for Float types, or blank for Double types
+     * @return the file with replacements
+     */
+    private static String formulasMatrix(String java, String errorType, String prefix)
+    {
+        String ret = java;
+        while (ret.contains("%FORMULAS%"))
+        {
+            int pos = ret.indexOf("%FORMULAS%");
+            ret = ret.replaceFirst("%FORMULAS%", "");
+            int end = ret.indexOf("%", pos);
+            if (end == -1)
+            {
+                System.err.println("Closing % not found for %FORMULAS% in file for type " + errorType);
+                return ret;
+            }
+            String type = ret.substring(pos, end);
+            boolean isAbs = type.endsWith(".Abs");
+            String absRel = isAbs ? "Abs" : "Rel";
+            type = type.substring(0, type.length() - 4);
+            String pType = prefix + type;
+            if (!formulas.containsKey(type))
+            {
+                System.err.println("Formulas in FORMULAS.txt does not contain entry for type " + errorType);
+                return ret.substring(0, pos - 1) + ret.substring(pos + type.length() + 2, ret.length() - 1);
+            }
+            String fStr = "";
+            // for (String f : formulas.get(type))
+            // {
+            // String dm = f.startsWith("/") ? "division" : "multiplication";
+            // String method = f.startsWith("/") ? "divideBy" : "multiplyBy";
+            // String mdsign = f.startsWith("/") ? "/" : "*";
+            // f = f.substring(1, f.length());
+            // String param = f.split("=")[0].trim();
+            // String result = f.split("=")[1].trim();
+            // String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
+            // if (!isAbs)
+            // {
+            // String pParam = prefix + param;
+            // String pResult = prefix + result;
+            //
+            // fStr += "        /**\n";
+            // fStr +=
+            // "         * Calculate the " + dm + " of " + pType + " and " + pParam + ", which results in a ";
+            // fStr += pResult + " scalar.\n";
+            // fStr += "         * @param v " + pType + " scalar\n";
+            // fStr +=
+            // "         * @return " + pResult + " scalar as a " + dm + " of " + pType + " and " + pParam
+            // + "\n";
+            // fStr += "         */\n";
+            // fStr += "        public final " + pResult + "." + absRel + " " + method;
+            // fStr += "(final " + pParam + "." + absRel + " v)\n";
+            // fStr += "        {\n";
+            // fStr += "            return new " + pResult + "." + absRel + "(this.si " + mdsign + " v.si, ";
+            // fStr += result + "Unit" + siOrMoney + ");\n";
+            // fStr += "        }\n\n";
+            // }
+            // }
+            ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 5, ret.length() - 1);
+        }
+
+        // remove the ".Abs" and ".Rel" for the purely relative units and money units.
+        for (String relType : typesRel)
+        {
+            ret = ret.replaceAll(relType + "\\.Rel", relType);
+            ret = ret.replaceAll(relType + "\\.Abs", relType);
+        }
+        for (String moneyType : typesMoney)
+        {
+            ret = ret.replaceAll(moneyType + "\\.Rel", moneyType);
+            ret = ret.replaceAll(moneyType + "\\.Abs", moneyType);
+        }
+        return ret;
+    }
+
+    /****************************************************************************************************************/
+    /********************************************* DOUBLEMATRIX *****************************************************/
+    /****************************************************************************************************************/
+
+    /**
+     * Generate all Abs + Rel classes in value.vdouble.matrix.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateDoubleMatrixAbsRel() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/matrix/";
+        URL matrixURL = URLResource.getResource("/" + relativePath + "DOUBLE_MATRIX_ABS_REL.java");
+        URL insertURL = URLResource.getResource("/" + relativePath + "INSERT.java");
+        boolean isInsert = (insertURL != null) && new File(insertURL.toURI()).exists();
+        String scalarJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
+        String insertJava = "";
+        if (isInsert)
+        {
+            insertJava = new String(Files.readAllBytes(Paths.get(insertURL.toURI())));
+        }
+
+        for (String type : typesAbsRel)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Matrix.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (isInsert)
+            {
+                java = insert(java, insertJava, "DoubleMatrix => " + type);
+            }
+            java = formulasMatrix(java, "DoubleMatrix => " + type, "");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
+        }
+
+        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_MATRIX_ABS_REL.java");
+        scalarJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
+
+        for (String type : typesAbsRel)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (isInsert)
+            {
+                java = insert(java, insertJava, "MutableDoubleMatrix => " + type);
+            }
+            java = formulasMatrix(java, "MutableDoubleMatrix => " + type, "Mutable");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
+        }
+    }
+
+    /**
+     * Generate all Rel classes in value.vdouble.matrix.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateDoubleMatrixRel() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/matrix/";
+        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_MATRIX_REL.java");
+        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesRel)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Matrix.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = formulasMatrix(java, "DoubleMatrix => " + type, "");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
+        }
+
+        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_MATRIX_REL.java");
+        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesRel)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = formulasMatrix(java, "MutableDoubleMatrix => " + type, "Mutable");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
+        }
+    }
+
+    /**
+     * Generate all Money classes in value.vdouble.matrix.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    private static void generateDoubleMatrixMoney() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/matrix/";
+        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_MATRIX_REL.java");
+        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesMoney)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Matrix.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = formulasMatrix(java, "DoubleMatrix => " + type, "");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
+        }
+
+        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_MATRIX_REL.java");
+        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+        for (String type : typesMoney)
+        {
+            File outPath = new File(absoluteRootPath + relativePath);
+            outPath.mkdirs();
+            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
+            String java = new String(scalarJava);
+            java = java.replaceAll("%Type%", type);
+            java = java.replaceAll("%type%", type.toLowerCase());
+            java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = formulasMatrix(java, "MutableDoubleMatrix => " + type, "Mutable");
+            out.print(java);
+            out.close();
+            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
+        }
+
+    }
+
+    /****************************************************************************************************************/
     /********************************************* GENERIC **********************************************************/
     /****************************************************************************************************************/
 
@@ -947,6 +1185,11 @@ public class GenerateDJUNIT
         generateFloatVectorAbsRel();
         generateFloatVectorRel();
         generateFloatVectorMoney();
+        
+        generateDoubleMatrixAbsRel();
+        generateDoubleMatrixRel();
+        generateDoubleMatrixMoney();
+
     }
 
 }
