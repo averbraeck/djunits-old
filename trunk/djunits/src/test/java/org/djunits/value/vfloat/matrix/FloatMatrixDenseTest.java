@@ -8,6 +8,7 @@ import static org.junit.Assert.fail;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.Unit;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.junit.Test;
@@ -20,8 +21,8 @@ import org.junit.Test;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -53,23 +54,23 @@ public class FloatMatrixDenseTest
 
     /**
      * Check that the values in a FloatMatrixmatch the expected values.
-     * @param fm FloatMatrix&lt;?&gt;; the FloatMatrix to match
+     * @param dm FloatMatrix&lt;?&gt;; the FloatMatrix to match
      * @param reference float[][]; the reference values
      * @param precision float; the maximum allowed error
      * @param u Unit&lt;?&gt;; the expected type
-     * @param expectAbsolute boolean; if true; fm should be Absolute; if false; fm should be Relative
+     * @param expectAbsolute boolean; if true; dm should be Absolute; if false; dm should be Relative
      */
-    private static void checkContentsAndType(final FloatMatrix<?> fm, final float[][] reference, final float precision,
-        final Unit<?> u, final boolean expectAbsolute)
+    private static void checkContentsAndType(final FloatMatrix<?> dm, final float[][] reference,
+        final double precision, final Unit<?> u, final boolean expectAbsolute)
     {
-        assertTrue("FloatMatrix should not be null", null != fm);
-        for (int row = fm.rows(); --row >= 0;)
+        assertTrue("FloatMatrix should not be null", null != dm);
+        for (int row = dm.rows(); --row >= 0;)
         {
-            for (int column = fm.columns(); --column >= 0;)
+            for (int column = dm.columns(); --column >= 0;)
             {
                 try
                 {
-                    assertEquals("Value should match", reference[row][column], fm.getInUnit(row, column), precision);
+                    assertEquals("Value should match", reference[row][column], dm.getInUnit(row, column), precision);
                 }
                 catch (ValueException exception)
                 {
@@ -77,8 +78,8 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        assertEquals("Unit should be " + u.toString(), u, fm.getUnit());
-        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"), expectAbsolute ? fm.isAbsolute() : fm
+        assertEquals("Unit should be " + u.toString(), u, dm.getUnit());
+        assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"), expectAbsolute ? dm.isAbsolute() : dm
             .isRelative());
     }
 
@@ -93,8 +94,9 @@ public class FloatMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             float[][] value = data(3, 5, false, 38.0f);
-            FloatMatrix.Abs.Dense<TemperatureUnit> fm = new FloatMatrix.Abs.Dense<TemperatureUnit>(value, tempUnit);
-            String result = fm.toString(true, true);
+            FloatMatrix.Abs<TemperatureUnit> dm =
+                new FloatMatrix.Abs<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            String result = dm.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
@@ -117,9 +119,9 @@ public class FloatMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             float[][] value = data(3, 5, false, 38.0f);
-            MutableFloatMatrix.Abs.Dense<TemperatureUnit> fm =
-                new MutableFloatMatrix.Abs.Dense<TemperatureUnit>(value, tempUnit);
-            String result = fm.toString(true, true);
+            MutableFloatMatrix.Abs<TemperatureUnit> dm =
+                new MutableFloatMatrix.Abs<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            String result = dm.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
@@ -142,13 +144,13 @@ public class FloatMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             float[][] value = data(3, 5, false, 38.0f);
-            FloatMatrix.Abs.Dense<TemperatureUnit> temperatureFM =
-                new FloatMatrix.Abs.Dense<TemperatureUnit>(value, tempUnit);
-            checkContentsAndType(temperatureFM, value, 0.001f, tempUnit, true);
-            assertEquals("Value in SI is equivalent in Kelvin", 311.15f, temperatureFM.getSI(0, 0), 0.05);
-            assertEquals("Value in Fahrenheit", 100.4f, temperatureFM
-                .getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
-            float[][] out = temperatureFM.getValuesInUnit();
+            FloatMatrix.Abs<TemperatureUnit> temperatureDM =
+                new FloatMatrix.Abs<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            checkContentsAndType(temperatureDM, value, 0.001, tempUnit, true);
+            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDM.getSI(0, 0), 0.05);
+            assertEquals("Value in Fahrenheit", 100.4,
+                temperatureDM.getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
+            float[][] out = temperatureDM.getValuesInUnit();
             for (int row = 0; row < value.length; row++)
             {
                 for (int column = 0; column < value[row].length; column++)
@@ -156,24 +158,25 @@ public class FloatMatrixDenseTest
                     assertEquals("Value should match", value[row][column], out[row][column], 0.001);
                 }
             }
-            MutableFloatMatrix.Abs.Dense<TemperatureUnit> mfm =
-                new MutableFloatMatrix.Abs.Dense<TemperatureUnit>(value, tempUnit);
-            checkContentsAndType(mfm, value, 0.001f, tempUnit, true);
-            mfm.setSI(0, 0, 73);
+            MutableFloatMatrix.Abs<TemperatureUnit> mdm =
+                new MutableFloatMatrix.Abs<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            checkContentsAndType(mdm, value, 0.001, tempUnit, true);
+            mdm.setSI(0, 0, 73);
             float safe = value[0][0];
             value[0][0] = -200; // Approximate Celsius equivalent of 73 Kelvin
-            checkContentsAndType(mfm, value, 1, tempUnit, true);
+            checkContentsAndType(mdm, value, 1, tempUnit, true);
             value[0][0] = safe; // Restore
-            mfm.set(0, 0, temperatureFM.get(0, 0));
-            checkContentsAndType(mfm, value, 0.001f, tempUnit, true);
-            FloatMatrix.Abs.Dense<TemperatureUnit> temperature2FM =
-                new FloatMatrix.Abs.Dense<TemperatureUnit>(temperatureFM.getValuesSI(), TemperatureUnit.KELVIN);
-            assertTrue("temperature2FM should be equal to temperatureFM", temperature2FM.equals(temperatureFM));
-            assertTrue("Value is Absolute", temperatureFM.isAbsolute());
-            assertFalse("Value is not Relative", temperatureFM.isRelative());
-            temperatureFM = new FloatMatrix.Abs.Dense<TemperatureUnit>(value, TemperatureUnit.KELVIN);
-            checkContentsAndType(temperatureFM, value, 0.001f, TemperatureUnit.KELVIN, true);
-            out = temperatureFM.getValuesSI();
+            mdm.set(0, 0, temperatureDM.get(0, 0));
+            checkContentsAndType(mdm, value, 0.001, tempUnit, true);
+            FloatMatrix.Abs<TemperatureUnit> temperature2DM =
+                new FloatMatrix.Abs<TemperatureUnit>(temperatureDM.getValuesSI(), TemperatureUnit.KELVIN,
+                    StorageType.DENSE);
+            assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
+            assertTrue("Value is Absolute", temperatureDM.isAbsolute());
+            assertFalse("Value is not Relative", temperatureDM.isRelative());
+            temperatureDM = new FloatMatrix.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
+            checkContentsAndType(temperatureDM, value, 0.001, TemperatureUnit.KELVIN, true);
+            out = temperatureDM.getValuesSI();
             for (int row = 0; row < value.length; row++)
             {
                 for (int column = 0; column < value[row].length; column++)
@@ -191,20 +194,20 @@ public class FloatMatrixDenseTest
                         new FloatScalar.Abs<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
                 }
             }
-            temperatureFM = new FloatMatrix.Abs.Dense<TemperatureUnit>(scalar);
-            checkContentsAndType(temperatureFM, value, 0.001f, tempUnit, true);
+            temperatureDM = new FloatMatrix.Abs<TemperatureUnit>(scalar, StorageType.DENSE);
+            checkContentsAndType(temperatureDM, value, 0.001, tempUnit, true);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
-                temperatureFM.cardinality());
+                temperatureDM.cardinality());
             float sum = 0;
             for (int row = 0; row < value.length; row++)
             {
                 scalar[row] = new FloatScalar.Abs[value[row].length];
                 for (int column = 0; column < value[row].length; column++)
                 {
-                    sum += temperatureFM.getSI(row, column);
+                    sum += temperatureDM.getSI(row, column);
                 }
             }
-            assertEquals("zSum should be sum of all values", sum, temperatureFM.zSum(), 0.001);
+            assertEquals("zSum should be sum of all values", sum, temperatureDM.zSum(), 0.001);
         }
         catch (ValueException ve)
         {
@@ -225,34 +228,35 @@ public class FloatMatrixDenseTest
             float[][] value = data(3, 5, false, 38.0f);
             float[][] value2 = data(3, 5, false, 38.0f);
             value2[0][0] = 12345;
-            FloatMatrix.Abs.Dense<TemperatureUnit> fm = new FloatMatrix.Abs.Dense<TemperatureUnit>(value, tempUnit);
-            FloatMatrix.Abs<TemperatureUnit> fmCopy = fm;
-            MutableFloatMatrix.Abs.Dense<TemperatureUnit> mfm = fm.mutable();
-            checkContentsAndType(fm, value, 0.001f, tempUnit, true);
-            checkContentsAndType(mfm, value, 0.001f, tempUnit, true);
-            checkContentsAndType(fmCopy, value, 0.001f, tempUnit, true);
-            MutableFloatMatrix.Abs.Dense<TemperatureUnit> mfmCopy = mfm.copy();
-            checkContentsAndType(mfmCopy, value, 0.001f, tempUnit, true);
-            MutableFloatMatrix.Abs.Dense<TemperatureUnit> mmfm = mfm.mutable();
-            checkContentsAndType(mmfm, value, 0.001f, tempUnit, true);
-            assertEquals("hashCode is independent on mutability", fm.hashCode(), mfm.hashCode());
-            // Modify mfm
-            mfm.setInUnit(0, 0, 12345, TemperatureUnit.DEGREE_CELSIUS);
-            checkContentsAndType(fm, value, 0.001f, tempUnit, true);
-            checkContentsAndType(mfm, value2, 0.01f, tempUnit, true);
-            checkContentsAndType(mfmCopy, value, 0.001f, tempUnit, true);
-            checkContentsAndType(mmfm, value, 0.001f, tempUnit, true);
-            FloatMatrix.Abs<TemperatureUnit> ifm = mfm.immutable();
-            assertTrue("Different value extremely likely results in different hashCode", fm.hashCode() != mfm
+            FloatMatrix.Abs<TemperatureUnit> dm =
+                new FloatMatrix.Abs<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatMatrix.Abs<TemperatureUnit> dmCopy = dm;
+            MutableFloatMatrix.Abs<TemperatureUnit> mdm = dm.mutable();
+            checkContentsAndType(dm, value, 0.001, tempUnit, true);
+            checkContentsAndType(mdm, value, 0.001, tempUnit, true);
+            checkContentsAndType(dmCopy, value, 0.001, tempUnit, true);
+            MutableFloatMatrix.Abs<TemperatureUnit> mdmCopy = mdm.copy();
+            checkContentsAndType(mdmCopy, value, 0.001, tempUnit, true);
+            MutableFloatMatrix.Abs<TemperatureUnit> mmdm = mdm.mutable();
+            checkContentsAndType(mmdm, value, 0.001, tempUnit, true);
+            assertEquals("hashCode is independent on mutability", dm.hashCode(), mdm.hashCode());
+            // Modify mdm
+            mdm.setInUnit(0, 0, 12345, TemperatureUnit.DEGREE_CELSIUS);
+            checkContentsAndType(dm, value, 0.001, tempUnit, true);
+            checkContentsAndType(mdm, value2, 0.01, tempUnit, true);
+            checkContentsAndType(mdmCopy, value, 0.001, tempUnit, true);
+            checkContentsAndType(mmdm, value, 0.001, tempUnit, true);
+            FloatMatrix.Abs<TemperatureUnit> idm = mdm.immutable();
+            assertTrue("Different value extremely likely results in different hashCode", dm.hashCode() != mdm
                 .hashCode());
-            // Restore value of mfm
-            mfm.setSI(0, 0, fm.getSI(0, 0));
-            checkContentsAndType(ifm, value2, 0.01f, tempUnit, true);
-            checkContentsAndType(mfm, value, 0.001f, tempUnit, true);
-            checkContentsAndType(mmfm, value, 0.001f, tempUnit, true);
-            mmfm.setSI(0, 0, 0);
-            checkContentsAndType(mfm, value, 0.001f, tempUnit, true);
-            assertEquals("value should be about -273", -273, mmfm.getInUnit(0, 0, tempUnit), 0.2);
+            // Restore value of mdm
+            mdm.setSI(0, 0, dm.getSI(0, 0));
+            checkContentsAndType(idm, value2, 0.01, tempUnit, true);
+            checkContentsAndType(mdm, value, 0.001, tempUnit, true);
+            checkContentsAndType(mmdm, value, 0.001, tempUnit, true);
+            mmdm.setSI(0, 0, 0);
+            checkContentsAndType(mdm, value, 0.001, tempUnit, true);
+            assertEquals("value should be about -273", -273, mmdm.getInUnit(0, 0, tempUnit), 0.2);
         }
         catch (ValueException ve)
         {
@@ -269,21 +273,23 @@ public class FloatMatrixDenseTest
     {
         LengthUnit lengthUnit = LengthUnit.METER;
         float value = 38.0f;
-        FloatScalar.Abs<LengthUnit> fm = new FloatScalar.Abs<LengthUnit>(value, lengthUnit);
-        assertTrue("Equal to itself", fm.equals(fm));
-        assertFalse("Not equal to null", fm.equals(null));
-        assertFalse("Not equal to some other kind of object; e.g. a String", fm.equals(new String("abc")));
-        FloatScalar.Rel<LengthUnit> fmCounterPart = new FloatScalar.Rel<LengthUnit>(value, lengthUnit);
-        assertFalse("Not equal if one Absolute and other Relative", fm.equals(fmCounterPart));
-        FloatScalar.Abs<TemperatureUnit> fmWrongBaseUnit =
+        FloatScalar.Abs<LengthUnit> dm = new FloatScalar.Abs<LengthUnit>(value, lengthUnit);
+        assertTrue("Equal to itself", dm.equals(dm));
+        assertFalse("Not equal to null", dm.equals(null));
+        assertFalse("Not equal to some other kind of object; e.g. a String", dm.equals(new String("abc")));
+        FloatScalar.Rel<LengthUnit> dmCounterPart = new FloatScalar.Rel<LengthUnit>(value, lengthUnit);
+        assertFalse("Not equal if one Absolute and other Relative", dm.equals(dmCounterPart));
+        FloatScalar.Abs<TemperatureUnit> dmWrongBaseUnit =
             new FloatScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
-        assertEquals("The underlying SI values are the same", fm.getSI(), fmWrongBaseUnit.getSI(), 0.0001f);
-        assertFalse("Not equals because the standard SI unit differs", fm.equals(fmWrongBaseUnit));
-        FloatScalar.Abs<LengthUnit> fmCompatibleUnit = new FloatScalar.Abs<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
-        assertFalse("Units are different", fm.getUnit().equals(fmCompatibleUnit.getUnit()));
-        assertTrue("equals returns true", fm.equals(fmCompatibleUnit));
-        FloatScalar.Abs<LengthUnit> fmDifferentValue = new FloatScalar.Abs<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
-        assertFalse("Different value makes equals return false", fm.equals(fmDifferentValue));
+        assertEquals("The underlying SI values are the same", dm.getSI(), dmWrongBaseUnit.getSI(), 0.0001);
+        assertFalse("Not equals because the standard SI unit differs", dm.equals(dmWrongBaseUnit));
+        FloatScalar.Abs<LengthUnit> dmCompatibleUnit =
+            new FloatScalar.Abs<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
+        assertFalse("Units are different", dm.getUnit().equals(dmCompatibleUnit.getUnit()));
+        assertTrue("equals returns true", dm.equals(dmCompatibleUnit));
+        FloatScalar.Abs<LengthUnit> dmDifferentValue =
+            new FloatScalar.Abs<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
+        assertFalse("Different value makes equals return false", dm.equals(dmDifferentValue));
     }
 
     /**
@@ -297,271 +303,271 @@ public class FloatMatrixDenseTest
         for (float seedValue : seedValues)
         {
             float[][] input = data(3, 5, false, seedValue);
-            MutableFloatMatrix.Abs.Dense<LengthUnit> fm;
+            MutableFloatMatrix.Abs<LengthUnit> dm;
             try
             {
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.abs();
-                MathTester.tester(input, "abs", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.abs();
+                MathTester.tester(input, "abs", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.abs(f);
+                        return Math.abs(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.acos();
-                MathTester.tester(input, "acos", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.acos();
+                MathTester.tester(input, "acos", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.acos(f);
+                        return (float) Math.acos(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.asin();
-                MathTester.tester(input, "asin", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.asin();
+                MathTester.tester(input, "asin", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.asin(f);
+                        return (float) Math.asin(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.atan();
-                MathTester.tester(input, "atan", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.atan();
+                MathTester.tester(input, "atan", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.atan(f);
+                        return (float) Math.atan(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.cbrt();
-                MathTester.tester(input, "cbrt", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.cbrt();
+                MathTester.tester(input, "cbrt", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cbrt(f);
+                        return (float) Math.cbrt(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.ceil();
-                MathTester.tester(input, "ceil", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.ceil();
+                MathTester.tester(input, "ceil", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.ceil(f);
+                        return (float) Math.ceil(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.cos();
-                MathTester.tester(input, "cos", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.cos();
+                MathTester.tester(input, "cos", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cos(f);
+                        return (float) Math.cos(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.cosh();
-                MathTester.tester(input, "cosh", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.cosh();
+                MathTester.tester(input, "cosh", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cosh(f);
+                        return (float) Math.cosh(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.exp();
-                MathTester.tester(input, "exp", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.exp();
+                MathTester.tester(input, "exp", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.exp(f);
+                        return (float) Math.exp(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.expm1();
-                MathTester.tester(input, "expm1", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.expm1();
+                MathTester.tester(input, "expm1", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.expm1(f);
+                        return (float) Math.expm1(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.floor();
-                MathTester.tester(input, "floor", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.floor();
+                MathTester.tester(input, "floor", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.floor(f);
+                        return (float) Math.floor(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.log();
-                MathTester.tester(input, "log", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.log();
+                MathTester.tester(input, "log", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log(f);
+                        return (float) Math.log(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.log10();
-                MathTester.tester(input, "log10", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.log10();
+                MathTester.tester(input, "log10", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log10(f);
+                        return (float) Math.log10(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.log1p();
-                MathTester.tester(input, "log1p", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.log1p();
+                MathTester.tester(input, "log1p", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log1p(f);
+                        return (float) Math.log1p(d);
                     }
                 });
                 for (int i = -10; i <= 10; i++)
                 {
                     final float exponent = i * 0.5f;
-                    fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                    fm.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", fm, 0.001, new FloatToFloat()
+                    dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                    dm.pow(exponent);
+                    MathTester.tester(input, "pow(" + exponent + ")", dm, 0.001, new FloatToFloat()
                     {
                         @Override
-                        public float function(final float f)
+                        public float function(final float d)
                         {
-                            return (float) Math.pow(f, exponent);
+                            return (float) Math.pow(d, exponent);
                         }
                     });
                 }
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.rint();
-                MathTester.tester(input, "rint", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.rint();
+                MathTester.tester(input, "rint", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.rint(f);
+                        return (float) Math.rint(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.round();
-                MathTester.tester(input, "round", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.round();
+                MathTester.tester(input, "round", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.round(f);
+                        return Math.round(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.signum();
-                MathTester.tester(input, "signum", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.signum();
+                MathTester.tester(input, "signum", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.signum(f);
+                        return Math.signum(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.sin();
-                MathTester.tester(input, "sin", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.sin();
+                MathTester.tester(input, "sin", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sin(f);
+                        return (float) Math.sin(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.sinh();
-                MathTester.tester(input, "sinh", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.sinh();
+                MathTester.tester(input, "sinh", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sinh(f);
+                        return (float) Math.sinh(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.sqrt();
-                MathTester.tester(input, "sqrt", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.sqrt();
+                MathTester.tester(input, "sqrt", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sqrt(f);
+                        return (float) Math.sqrt(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.tan();
-                MathTester.tester(input, "tan", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.tan();
+                MathTester.tester(input, "tan", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.tan(f);
+                        return (float) Math.tan(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.tanh();
-                MathTester.tester(input, "tanh", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.tanh();
+                MathTester.tester(input, "tanh", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.tanh(f);
+                        return (float) Math.tanh(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.toDegrees();
-                MathTester.tester(input, "toDegrees", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.toDegrees();
+                MathTester.tester(input, "toDegrees", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.toDegrees(f);
+                        return (float) Math.toDegrees(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.toRadians();
-                MathTester.tester(input, "toRadians", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.toRadians();
+                MathTester.tester(input, "toRadians", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.toRadians(f);
+                        return (float) Math.toRadians(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Abs.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.inv();
-                MathTester.tester(input, "inv", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.inv();
+                MathTester.tester(input, "inv", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return 1 / f;
+                        return 1 / d;
                     }
                 });
             }
@@ -583,16 +589,17 @@ public class FloatMatrixDenseTest
         {
             float[][] leftValue = data(3, 5, false, 123.4f);
             float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Abs.Dense<LengthUnit> left = new FloatMatrix.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Rel.Dense<LengthUnit> right =
-                new FloatMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Abs.Dense<?> result = FloatMatrix.plus(left, right);
+            FloatMatrix.Abs<LengthUnit> left =
+                new FloatMatrix.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<LengthUnit> right =
+                new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Abs<?> result = FloatMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI plus of contributing elements", left.getSI(i, j)
-                        + right.getSI(i, j), result.getSI(i, j), 0.001f);
+                        + right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -613,46 +620,17 @@ public class FloatMatrixDenseTest
         {
             float[][] leftValue = data(3, 5, false, 123.4f);
             float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Abs.Dense<LengthUnit> left = new FloatMatrix.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Rel.Dense<LengthUnit> right =
-                new FloatMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Abs.Dense<?> result = FloatMatrix.minus(left, right);
+            FloatMatrix.Abs<LengthUnit> left =
+                new FloatMatrix.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<LengthUnit> right =
+                new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Abs<?> result = FloatMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI minus of contributing elements", left.getSI(i, j)
-                        - right.getSI(i, j), result.getSI(i, j), 0.001f);
-                }
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected ValueException: " + ve.toString());
-        }
-    }
-
-    /**
-     * Test times(FloatMatrixAbs.Dense, FloatMatrixAbs.Dense).
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void binarytimesOfAbsDenseAndAbsDenseTest()
-    {
-        try
-        {
-            float[][] leftValue = data(3, 5, false, 123.4f);
-            float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Abs.Dense<LengthUnit> left = new FloatMatrix.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Abs.Dense<LengthUnit> right =
-                new FloatMatrix.Abs.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Abs.Dense<?> result = FloatMatrix.times(left, right);
-            for (int i = 0; i < leftValue.length; i++)
-            {
-                for (int j = 0; j < leftValue[i].length; j++)
-                {
-                    assertEquals("value of element should be SI times of contributing elements", left.getSI(i, j)
-                        * right.getSI(i, j), result.getSI(i, j), 0.001f);
+                        - right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -673,16 +651,17 @@ public class FloatMatrixDenseTest
         {
             float[][] leftValue = data(3, 5, false, 123.4f);
             float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Abs.Dense<LengthUnit> left = new FloatMatrix.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Rel.Sparse<LengthUnit> right =
-                new FloatMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Abs.Dense<?> result = FloatMatrix.plus(left, right);
+            FloatMatrix.Abs<LengthUnit> left =
+                new FloatMatrix.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<LengthUnit> right =
+                new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatMatrix.Abs<?> result = FloatMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI plus of contributing elements", left.getSI(i, j)
-                        + right.getSI(i, j), result.getSI(i, j), 0.001f);
+                        + right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -703,46 +682,17 @@ public class FloatMatrixDenseTest
         {
             float[][] leftValue = data(3, 5, false, 123.4f);
             float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Abs.Dense<LengthUnit> left = new FloatMatrix.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Rel.Sparse<LengthUnit> right =
-                new FloatMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Abs.Dense<?> result = FloatMatrix.minus(left, right);
+            FloatMatrix.Abs<LengthUnit> left =
+                new FloatMatrix.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<LengthUnit> right =
+                new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatMatrix.Abs<?> result = FloatMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI minus of contributing elements", left.getSI(i, j)
-                        - right.getSI(i, j), result.getSI(i, j), 0.001f);
-                }
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected ValueException: " + ve.toString());
-        }
-    }
-
-    /**
-     * Test times(FloatMatrixAbs.Dense, FloatMatrixAbs.Sparse).
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void binarytimesOfAbsDenseAndAbsSparseTest()
-    {
-        try
-        {
-            float[][] leftValue = data(3, 5, false, 123.4f);
-            float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Abs.Dense<LengthUnit> left = new FloatMatrix.Abs.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Abs.Sparse<LengthUnit> right =
-                new FloatMatrix.Abs.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Abs.Sparse<?> result = FloatMatrix.times(left, right);
-            for (int i = 0; i < leftValue.length; i++)
-            {
-                for (int j = 0; j < leftValue[i].length; j++)
-                {
-                    assertEquals("value of element should be SI times of contributing elements", left.getSI(i, j)
-                        * right.getSI(i, j), result.getSI(i, j), 0.001f);
+                        - right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -763,7 +713,8 @@ public class FloatMatrixDenseTest
         try
         {
             // null array
-            new FloatMatrix.Abs.Dense<TemperatureUnit>((float[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT);
+            new FloatMatrix.Abs<TemperatureUnit>((float[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT,
+                StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -776,7 +727,7 @@ public class FloatMatrixDenseTest
             // Matrix with null on first row
             float[][] in = data(3, 5, false, 12.3f);
             in[0] = null;
-            new FloatMatrix.Abs.Dense<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new FloatMatrix.Abs<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -789,7 +740,7 @@ public class FloatMatrixDenseTest
             // Matrix with null on last row
             float[][] in = data(3, 5, false, 12.3f);
             in[in.length - 1] = null;
-            new FloatMatrix.Abs.Dense<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new FloatMatrix.Abs<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -801,7 +752,7 @@ public class FloatMatrixDenseTest
         {
             // Non-rectangular array
             float[][] in = data(3, 5, true, 12.3f);
-            new FloatMatrix.Abs.Dense<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new FloatMatrix.Abs<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -813,37 +764,16 @@ public class FloatMatrixDenseTest
         float[][] in = data(3, 5, false, 12.3f);
         try
         {
-            FloatMatrix.Abs.Dense<TemperatureUnit> matrix = null;
+            FloatMatrix.Abs<TemperatureUnit> matrix = null;
             try
             {
-                matrix = new FloatMatrix.Abs.Dense<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+                matrix = new FloatMatrix.Abs<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             }
             catch (ValueException ve)
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
             matrix.determinant();
-            fail("Preceding code should have thrown a ValueException");
-        }
-        catch (ValueException ve)
-        {
-            // Ignore (exception was expected)
-            junk++;
-        }
-        try
-        {
-            FloatMatrix.Abs.Dense<TemperatureUnit> matrix = null;
-            float[][] rowCountWrong = null;
-            try
-            {
-                matrix = new FloatMatrix.Abs.Dense<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
-                rowCountWrong = data(4, 5, false, 2);
-            }
-            catch (ValueException ve)
-            {
-                fail("Caught unexpected exception: " + ve.toString());
-            }
-            FloatMatrix.times(matrix, rowCountWrong);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -864,8 +794,8 @@ public class FloatMatrixDenseTest
         try
         {
             float[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
-            FloatMatrix.Abs.Dense<TemperatureUnit> matrix =
-                new FloatMatrix.Abs.Dense<TemperatureUnit>(values, TemperatureUnit.KELVIN);
+            FloatMatrix.Abs<TemperatureUnit> matrix =
+                new FloatMatrix.Abs<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.DENSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
         catch (ValueException ve)
@@ -880,36 +810,6 @@ public class FloatMatrixDenseTest
     }
 
     /**
-     * Test that the times methods with a simple array as the 2nd argument.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void scaleAbsTest()
-    {
-        try
-        {
-            float[][] leftIn = data(3, 5, false, -12.34f);
-            FloatMatrix.Abs.Dense<TemperatureUnit> left =
-                new FloatMatrix.Abs.Dense<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
-            float[][] right = data(3, 5, false, -4.321f);
-            MutableFloatMatrix.Abs.Dense<TemperatureUnit> result = FloatMatrix.times(left, right);
-            assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
-            for (int row = right.length; --row >= 0;)
-            {
-                for (int column = right[row].length; --column >= 0;)
-                {
-                    assertEquals("Content should match product of left and right", leftIn[row][column]
-                        * right[row][column], result.getSI(row, column), 0.001f);
-                }
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected exception: " + ve.toString());
-        }
-    }
-
-    /**
      * Test that the toString method returns something sensible.
      */
     @SuppressWarnings("static-method")
@@ -920,8 +820,9 @@ public class FloatMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             float[][] value = data(3, 5, false, 38.0f);
-            FloatMatrix.Rel.Dense<TemperatureUnit> fm = new FloatMatrix.Rel.Dense<TemperatureUnit>(value, tempUnit);
-            String result = fm.toString(true, true);
+            FloatMatrix.Rel<TemperatureUnit> dm =
+                new FloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            String result = dm.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
@@ -944,9 +845,9 @@ public class FloatMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             float[][] value = data(3, 5, false, 38.0f);
-            MutableFloatMatrix.Rel.Dense<TemperatureUnit> fm =
-                new MutableFloatMatrix.Rel.Dense<TemperatureUnit>(value, tempUnit);
-            String result = fm.toString(true, true);
+            MutableFloatMatrix.Rel<TemperatureUnit> dm =
+                new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            String result = dm.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
@@ -969,13 +870,13 @@ public class FloatMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             float[][] value = data(3, 5, false, 38.0f);
-            FloatMatrix.Rel.Dense<TemperatureUnit> temperatureFM =
-                new FloatMatrix.Rel.Dense<TemperatureUnit>(value, tempUnit);
-            checkContentsAndType(temperatureFM, value, 0.001f, tempUnit, false);
-            assertEquals("Value in SI is equivalent in Kelvin", 311.15f, temperatureFM.getSI(0, 0), 0.05);
-            assertEquals("Value in Fahrenheit", 100.4f, temperatureFM
-                .getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
-            float[][] out = temperatureFM.getValuesInUnit();
+            FloatMatrix.Rel<TemperatureUnit> temperatureDM =
+                new FloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
+            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDM.getSI(0, 0), 0.05);
+            assertEquals("Value in Fahrenheit", 100.4,
+                temperatureDM.getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
+            float[][] out = temperatureDM.getValuesInUnit();
             for (int row = 0; row < value.length; row++)
             {
                 for (int column = 0; column < value[row].length; column++)
@@ -983,24 +884,25 @@ public class FloatMatrixDenseTest
                     assertEquals("Value should match", value[row][column], out[row][column], 0.001);
                 }
             }
-            MutableFloatMatrix.Rel.Dense<TemperatureUnit> mfm =
-                new MutableFloatMatrix.Rel.Dense<TemperatureUnit>(value, tempUnit);
-            checkContentsAndType(mfm, value, 0.001f, tempUnit, false);
-            mfm.setSI(0, 0, 73);
+            MutableFloatMatrix.Rel<TemperatureUnit> mdm =
+                new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            checkContentsAndType(mdm, value, 0.001, tempUnit, false);
+            mdm.setSI(0, 0, 73);
             float safe = value[0][0];
             value[0][0] = -200; // Approximate Celsius equivalent of 73 Kelvin
-            checkContentsAndType(mfm, value, 1, tempUnit, false);
+            checkContentsAndType(mdm, value, 1, tempUnit, false);
             value[0][0] = safe; // Restore
-            mfm.set(0, 0, temperatureFM.get(0, 0));
-            checkContentsAndType(mfm, value, 0.001f, tempUnit, false);
-            FloatMatrix.Rel.Dense<TemperatureUnit> temperature2FM =
-                new FloatMatrix.Rel.Dense<TemperatureUnit>(temperatureFM.getValuesSI(), TemperatureUnit.KELVIN);
-            assertTrue("temperature2FM should be equal to temperatureFM", temperature2FM.equals(temperatureFM));
-            assertTrue("Value is Relative", temperatureFM.isRelative());
-            assertFalse("Value is not Absolute", temperatureFM.isAbsolute());
-            temperatureFM = new FloatMatrix.Rel.Dense<TemperatureUnit>(value, TemperatureUnit.KELVIN);
-            checkContentsAndType(temperatureFM, value, 0.001f, TemperatureUnit.KELVIN, false);
-            out = temperatureFM.getValuesSI();
+            mdm.set(0, 0, temperatureDM.get(0, 0));
+            checkContentsAndType(mdm, value, 0.001, tempUnit, false);
+            FloatMatrix.Rel<TemperatureUnit> temperature2DM =
+                new FloatMatrix.Rel<TemperatureUnit>(temperatureDM.getValuesSI(), TemperatureUnit.KELVIN,
+                    StorageType.DENSE);
+            assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
+            assertTrue("Value is Relative", temperatureDM.isRelative());
+            assertFalse("Value is not Absolute", temperatureDM.isAbsolute());
+            temperatureDM = new FloatMatrix.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
+            checkContentsAndType(temperatureDM, value, 0.001, TemperatureUnit.KELVIN, false);
+            out = temperatureDM.getValuesSI();
             for (int row = 0; row < value.length; row++)
             {
                 for (int column = 0; column < value[row].length; column++)
@@ -1018,20 +920,20 @@ public class FloatMatrixDenseTest
                         new FloatScalar.Rel<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
                 }
             }
-            temperatureFM = new FloatMatrix.Rel.Dense<TemperatureUnit>(scalar);
-            checkContentsAndType(temperatureFM, value, 0.001f, tempUnit, false);
+            temperatureDM = new FloatMatrix.Rel<TemperatureUnit>(scalar, StorageType.DENSE);
+            checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
-                temperatureFM.cardinality());
+                temperatureDM.cardinality());
             float sum = 0;
             for (int row = 0; row < value.length; row++)
             {
                 scalar[row] = new FloatScalar.Rel[value[row].length];
                 for (int column = 0; column < value[row].length; column++)
                 {
-                    sum += temperatureFM.getSI(row, column);
+                    sum += temperatureDM.getSI(row, column);
                 }
             }
-            assertEquals("zSum should be sum of all values", sum, temperatureFM.zSum(), 0.001);
+            assertEquals("zSum should be sum of all values", sum, temperatureDM.zSum(), 0.001);
         }
         catch (ValueException ve)
         {
@@ -1052,34 +954,35 @@ public class FloatMatrixDenseTest
             float[][] value = data(3, 5, false, 38.0f);
             float[][] value2 = data(3, 5, false, 38.0f);
             value2[0][0] = 12345;
-            FloatMatrix.Rel.Dense<TemperatureUnit> fm = new FloatMatrix.Rel.Dense<TemperatureUnit>(value, tempUnit);
-            FloatMatrix.Rel<TemperatureUnit> fmCopy = fm;
-            MutableFloatMatrix.Rel.Dense<TemperatureUnit> mfm = fm.mutable();
-            checkContentsAndType(fm, value, 0.001f, tempUnit, false);
-            checkContentsAndType(mfm, value, 0.001f, tempUnit, false);
-            checkContentsAndType(fmCopy, value, 0.001f, tempUnit, false);
-            MutableFloatMatrix.Rel.Dense<TemperatureUnit> mfmCopy = mfm.copy();
-            checkContentsAndType(mfmCopy, value, 0.001f, tempUnit, false);
-            MutableFloatMatrix.Rel.Dense<TemperatureUnit> mmfm = mfm.mutable();
-            checkContentsAndType(mmfm, value, 0.001f, tempUnit, false);
-            assertEquals("hashCode is independent on mutability", fm.hashCode(), mfm.hashCode());
-            // Modify mfm
-            mfm.setInUnit(0, 0, 12345, TemperatureUnit.DEGREE_CELSIUS);
-            checkContentsAndType(fm, value, 0.001f, tempUnit, false);
-            checkContentsAndType(mfm, value2, 0.01f, tempUnit, false);
-            checkContentsAndType(mfmCopy, value, 0.001f, tempUnit, false);
-            checkContentsAndType(mmfm, value, 0.001f, tempUnit, false);
-            FloatMatrix.Rel<TemperatureUnit> ifm = mfm.immutable();
-            assertTrue("Different value extremely likely results in different hashCode", fm.hashCode() != mfm
+            FloatMatrix.Rel<TemperatureUnit> dm =
+                new FloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatMatrix.Rel<TemperatureUnit> dmCopy = dm;
+            MutableFloatMatrix.Rel<TemperatureUnit> mdm = dm.mutable();
+            checkContentsAndType(dm, value, 0.001, tempUnit, false);
+            checkContentsAndType(mdm, value, 0.001, tempUnit, false);
+            checkContentsAndType(dmCopy, value, 0.001, tempUnit, false);
+            MutableFloatMatrix.Rel<TemperatureUnit> mdmCopy = mdm.copy();
+            checkContentsAndType(mdmCopy, value, 0.001, tempUnit, false);
+            MutableFloatMatrix.Rel<TemperatureUnit> mmdm = mdm.mutable();
+            checkContentsAndType(mmdm, value, 0.001, tempUnit, false);
+            assertEquals("hashCode is independent on mutability", dm.hashCode(), mdm.hashCode());
+            // Modify mdm
+            mdm.setInUnit(0, 0, 12345, TemperatureUnit.DEGREE_CELSIUS);
+            checkContentsAndType(dm, value, 0.001, tempUnit, false);
+            checkContentsAndType(mdm, value2, 0.01, tempUnit, false);
+            checkContentsAndType(mdmCopy, value, 0.001, tempUnit, false);
+            checkContentsAndType(mmdm, value, 0.001, tempUnit, false);
+            FloatMatrix.Rel<TemperatureUnit> idm = mdm.immutable();
+            assertTrue("Different value extremely likely results in different hashCode", dm.hashCode() != mdm
                 .hashCode());
-            // Restore value of mfm
-            mfm.setSI(0, 0, fm.getSI(0, 0));
-            checkContentsAndType(ifm, value2, 0.01f, tempUnit, false);
-            checkContentsAndType(mfm, value, 0.001f, tempUnit, false);
-            checkContentsAndType(mmfm, value, 0.001f, tempUnit, false);
-            mmfm.setSI(0, 0, 0);
-            checkContentsAndType(mfm, value, 0.001f, tempUnit, false);
-            assertEquals("value should be about -273", -273, mmfm.getInUnit(0, 0, tempUnit), 0.2);
+            // Restore value of mdm
+            mdm.setSI(0, 0, dm.getSI(0, 0));
+            checkContentsAndType(idm, value2, 0.01, tempUnit, false);
+            checkContentsAndType(mdm, value, 0.001, tempUnit, false);
+            checkContentsAndType(mmdm, value, 0.001, tempUnit, false);
+            mmdm.setSI(0, 0, 0);
+            checkContentsAndType(mdm, value, 0.001, tempUnit, false);
+            assertEquals("value should be about -273", -273, mmdm.getInUnit(0, 0, tempUnit), 0.2);
         }
         catch (ValueException ve)
         {
@@ -1096,21 +999,23 @@ public class FloatMatrixDenseTest
     {
         LengthUnit lengthUnit = LengthUnit.METER;
         float value = 38.0f;
-        FloatScalar.Rel<LengthUnit> fm = new FloatScalar.Rel<LengthUnit>(value, lengthUnit);
-        assertTrue("Equal to itself", fm.equals(fm));
-        assertFalse("Not equal to null", fm.equals(null));
-        assertFalse("Not equal to some other kind of object; e.g. a String", fm.equals(new String("abc")));
-        FloatScalar.Abs<LengthUnit> fmCounterPart = new FloatScalar.Abs<LengthUnit>(value, lengthUnit);
-        assertFalse("Not equal if one Absolute and other Relative", fm.equals(fmCounterPart));
-        FloatScalar.Rel<TemperatureUnit> fmWrongBaseUnit =
+        FloatScalar.Rel<LengthUnit> dm = new FloatScalar.Rel<LengthUnit>(value, lengthUnit);
+        assertTrue("Equal to itself", dm.equals(dm));
+        assertFalse("Not equal to null", dm.equals(null));
+        assertFalse("Not equal to some other kind of object; e.g. a String", dm.equals(new String("abc")));
+        FloatScalar.Abs<LengthUnit> dmCounterPart = new FloatScalar.Abs<LengthUnit>(value, lengthUnit);
+        assertFalse("Not equal if one Absolute and other Relative", dm.equals(dmCounterPart));
+        FloatScalar.Rel<TemperatureUnit> dmWrongBaseUnit =
             new FloatScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
-        assertEquals("The underlying SI values are the same", fm.getSI(), fmWrongBaseUnit.getSI(), 0.0001f);
-        assertFalse("Not equals because the standard SI unit differs", fm.equals(fmWrongBaseUnit));
-        FloatScalar.Rel<LengthUnit> fmCompatibleUnit = new FloatScalar.Rel<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
-        assertFalse("Units are different", fm.getUnit().equals(fmCompatibleUnit.getUnit()));
-        assertTrue("equals returns true", fm.equals(fmCompatibleUnit));
-        FloatScalar.Rel<LengthUnit> fmDifferentValue = new FloatScalar.Rel<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
-        assertFalse("Different value makes equals return false", fm.equals(fmDifferentValue));
+        assertEquals("The underlying SI values are the same", dm.getSI(), dmWrongBaseUnit.getSI(), 0.0001);
+        assertFalse("Not equals because the standard SI unit differs", dm.equals(dmWrongBaseUnit));
+        FloatScalar.Rel<LengthUnit> dmCompatibleUnit =
+            new FloatScalar.Rel<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
+        assertFalse("Units are different", dm.getUnit().equals(dmCompatibleUnit.getUnit()));
+        assertTrue("equals returns true", dm.equals(dmCompatibleUnit));
+        FloatScalar.Rel<LengthUnit> dmDifferentValue =
+            new FloatScalar.Rel<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
+        assertFalse("Different value makes equals return false", dm.equals(dmDifferentValue));
     }
 
     /**
@@ -1124,271 +1029,271 @@ public class FloatMatrixDenseTest
         for (float seedValue : seedValues)
         {
             float[][] input = data(3, 5, false, seedValue);
-            MutableFloatMatrix.Rel.Dense<LengthUnit> fm;
+            MutableFloatMatrix.Rel<LengthUnit> dm;
             try
             {
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.abs();
-                MathTester.tester(input, "abs", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.abs();
+                MathTester.tester(input, "abs", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.abs(f);
+                        return Math.abs(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.acos();
-                MathTester.tester(input, "acos", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.acos();
+                MathTester.tester(input, "acos", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.acos(f);
+                        return (float) Math.acos(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.asin();
-                MathTester.tester(input, "asin", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.asin();
+                MathTester.tester(input, "asin", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.asin(f);
+                        return (float) Math.asin(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.atan();
-                MathTester.tester(input, "atan", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.atan();
+                MathTester.tester(input, "atan", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.atan(f);
+                        return (float) Math.atan(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.cbrt();
-                MathTester.tester(input, "cbrt", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.cbrt();
+                MathTester.tester(input, "cbrt", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cbrt(f);
+                        return (float) Math.cbrt(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.ceil();
-                MathTester.tester(input, "ceil", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.ceil();
+                MathTester.tester(input, "ceil", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.ceil(f);
+                        return (float) Math.ceil(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.cos();
-                MathTester.tester(input, "cos", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.cos();
+                MathTester.tester(input, "cos", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cos(f);
+                        return (float) Math.cos(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.cosh();
-                MathTester.tester(input, "cosh", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.cosh();
+                MathTester.tester(input, "cosh", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.cosh(f);
+                        return (float) Math.cosh(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.exp();
-                MathTester.tester(input, "exp", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.exp();
+                MathTester.tester(input, "exp", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.exp(f);
+                        return (float) Math.exp(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.expm1();
-                MathTester.tester(input, "expm1", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.expm1();
+                MathTester.tester(input, "expm1", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.expm1(f);
+                        return (float) Math.expm1(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.floor();
-                MathTester.tester(input, "floor", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.floor();
+                MathTester.tester(input, "floor", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.floor(f);
+                        return (float) Math.floor(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.log();
-                MathTester.tester(input, "log", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.log();
+                MathTester.tester(input, "log", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log(f);
+                        return (float) Math.log(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.log10();
-                MathTester.tester(input, "log10", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.log10();
+                MathTester.tester(input, "log10", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log10(f);
+                        return (float) Math.log10(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.log1p();
-                MathTester.tester(input, "log1p", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.log1p();
+                MathTester.tester(input, "log1p", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.log1p(f);
+                        return (float) Math.log1p(d);
                     }
                 });
                 for (int i = -10; i <= 10; i++)
                 {
                     final float exponent = i * 0.5f;
-                    fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                    fm.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", fm, 0.001, new FloatToFloat()
+                    dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                    dm.pow(exponent);
+                    MathTester.tester(input, "pow(" + exponent + ")", dm, 0.001, new FloatToFloat()
                     {
                         @Override
-                        public float function(final float f)
+                        public float function(final float d)
                         {
-                            return (float) Math.pow(f, exponent);
+                            return (float) Math.pow(d, exponent);
                         }
                     });
                 }
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.rint();
-                MathTester.tester(input, "rint", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.rint();
+                MathTester.tester(input, "rint", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.rint(f);
+                        return (float) Math.rint(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.round();
-                MathTester.tester(input, "round", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.round();
+                MathTester.tester(input, "round", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.round(f);
+                        return Math.round(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.signum();
-                MathTester.tester(input, "signum", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.signum();
+                MathTester.tester(input, "signum", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return Math.signum(f);
+                        return Math.signum(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.sin();
-                MathTester.tester(input, "sin", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.sin();
+                MathTester.tester(input, "sin", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sin(f);
+                        return (float) Math.sin(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.sinh();
-                MathTester.tester(input, "sinh", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.sinh();
+                MathTester.tester(input, "sinh", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sinh(f);
+                        return (float) Math.sinh(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.sqrt();
-                MathTester.tester(input, "sqrt", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.sqrt();
+                MathTester.tester(input, "sqrt", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.sqrt(f);
+                        return (float) Math.sqrt(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.tan();
-                MathTester.tester(input, "tan", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.tan();
+                MathTester.tester(input, "tan", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.tan(f);
+                        return (float) Math.tan(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.tanh();
-                MathTester.tester(input, "tanh", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.tanh();
+                MathTester.tester(input, "tanh", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.tanh(f);
+                        return (float) Math.tanh(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.toDegrees();
-                MathTester.tester(input, "toDegrees", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.toDegrees();
+                MathTester.tester(input, "toDegrees", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.toDegrees(f);
+                        return (float) Math.toDegrees(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.toRadians();
-                MathTester.tester(input, "toRadians", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.toRadians();
+                MathTester.tester(input, "toRadians", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return (float) Math.toRadians(f);
+                        return (float) Math.toRadians(d);
                     }
                 });
-                fm = new MutableFloatMatrix.Rel.Dense<LengthUnit>(input, LengthUnit.METER);
-                fm.inv();
-                MathTester.tester(input, "inv", fm, 0.001, new FloatToFloat()
+                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm.inv();
+                MathTester.tester(input, "inv", dm, 0.001, new FloatToFloat()
                 {
                     @Override
-                    public float function(final float f)
+                    public float function(final float d)
                     {
-                        return 1 / f;
+                        return 1 / d;
                     }
                 });
             }
@@ -1410,16 +1315,17 @@ public class FloatMatrixDenseTest
         {
             float[][] leftValue = data(3, 5, false, 123.4f);
             float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Rel.Dense<LengthUnit> left = new FloatMatrix.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Rel.Dense<LengthUnit> right =
-                new FloatMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Rel.Dense<?> result = FloatMatrix.plus(left, right);
+            FloatMatrix.Rel<LengthUnit> left =
+                new FloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<LengthUnit> right =
+                new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<?> result = FloatMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI plus of contributing elements", left.getSI(i, j)
-                        + right.getSI(i, j), result.getSI(i, j), 0.001f);
+                        + right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1440,16 +1346,17 @@ public class FloatMatrixDenseTest
         {
             float[][] leftValue = data(3, 5, false, 123.4f);
             float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Rel.Dense<LengthUnit> left = new FloatMatrix.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Rel.Dense<LengthUnit> right =
-                new FloatMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Rel.Dense<?> result = FloatMatrix.minus(left, right);
+            FloatMatrix.Rel<LengthUnit> left =
+                new FloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<LengthUnit> right =
+                new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<?> result = FloatMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI minus of contributing elements", left.getSI(i, j)
-                        - right.getSI(i, j), result.getSI(i, j), 0.001f);
+                        - right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1470,16 +1377,17 @@ public class FloatMatrixDenseTest
         {
             float[][] leftValue = data(3, 5, false, 123.4f);
             float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Rel.Dense<LengthUnit> left = new FloatMatrix.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Rel.Dense<LengthUnit> right =
-                new FloatMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Rel.Dense<?> result = FloatMatrix.times(left, right);
+            FloatMatrix.Rel<LengthUnit> left =
+                new FloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<LengthUnit> right =
+                new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<?> result = FloatMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI times of contributing elements", left.getSI(i, j)
-                        * right.getSI(i, j), result.getSI(i, j), 0.001f);
+                        * right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1500,16 +1408,17 @@ public class FloatMatrixDenseTest
         {
             float[][] leftValue = data(3, 5, false, 123.4f);
             float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Rel.Dense<LengthUnit> left = new FloatMatrix.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Rel.Sparse<LengthUnit> right =
-                new FloatMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Rel.Dense<?> result = FloatMatrix.plus(left, right);
+            FloatMatrix.Rel<LengthUnit> left =
+                new FloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<LengthUnit> right =
+                new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatMatrix.Rel<?> result = FloatMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI plus of contributing elements", left.getSI(i, j)
-                        + right.getSI(i, j), result.getSI(i, j), 0.001f);
+                        + right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1530,16 +1439,17 @@ public class FloatMatrixDenseTest
         {
             float[][] leftValue = data(3, 5, false, 123.4f);
             float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Rel.Dense<LengthUnit> left = new FloatMatrix.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Rel.Sparse<LengthUnit> right =
-                new FloatMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Rel.Dense<?> result = FloatMatrix.minus(left, right);
+            FloatMatrix.Rel<LengthUnit> left =
+                new FloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<LengthUnit> right =
+                new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatMatrix.Rel<?> result = FloatMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI minus of contributing elements", left.getSI(i, j)
-                        - right.getSI(i, j), result.getSI(i, j), 0.001f);
+                        - right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1560,16 +1470,17 @@ public class FloatMatrixDenseTest
         {
             float[][] leftValue = data(3, 5, false, 123.4f);
             float[][] rightValue = data(3, 5, false, 234.5f);
-            FloatMatrix.Rel.Dense<LengthUnit> left = new FloatMatrix.Rel.Dense<LengthUnit>(leftValue, LengthUnit.MILE);
-            FloatMatrix.Rel.Sparse<LengthUnit> right =
-                new FloatMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableFloatMatrix.Rel.Sparse<?> result = FloatMatrix.times(left, right);
+            FloatMatrix.Rel<LengthUnit> left =
+                new FloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Rel<LengthUnit> right =
+                new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatMatrix.Rel<?> result = FloatMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI times of contributing elements", left.getSI(i, j)
-                        * right.getSI(i, j), result.getSI(i, j), 0.001f);
+                        * right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -1590,7 +1501,8 @@ public class FloatMatrixDenseTest
         try
         {
             // null array
-            new FloatMatrix.Rel.Dense<TemperatureUnit>((float[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT);
+            new FloatMatrix.Rel<TemperatureUnit>((float[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT,
+                StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1603,7 +1515,7 @@ public class FloatMatrixDenseTest
             // Matrix with null on first row
             float[][] in = data(3, 5, false, 12.3f);
             in[0] = null;
-            new FloatMatrix.Rel.Dense<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1616,7 +1528,7 @@ public class FloatMatrixDenseTest
             // Matrix with null on last row
             float[][] in = data(3, 5, false, 12.3f);
             in[in.length - 1] = null;
-            new FloatMatrix.Rel.Dense<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1628,7 +1540,7 @@ public class FloatMatrixDenseTest
         {
             // Non-rectangular array
             float[][] in = data(3, 5, true, 12.3f);
-            new FloatMatrix.Rel.Dense<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1640,37 +1552,16 @@ public class FloatMatrixDenseTest
         float[][] in = data(3, 5, false, 12.3f);
         try
         {
-            FloatMatrix.Rel.Dense<TemperatureUnit> matrix = null;
+            FloatMatrix.Rel<TemperatureUnit> matrix = null;
             try
             {
-                matrix = new FloatMatrix.Rel.Dense<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+                matrix = new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             }
             catch (ValueException ve)
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
             matrix.determinant();
-            fail("Preceding code should have thrown a ValueException");
-        }
-        catch (ValueException ve)
-        {
-            // Ignore (exception was expected)
-            junk++;
-        }
-        try
-        {
-            FloatMatrix.Rel.Dense<TemperatureUnit> matrix = null;
-            float[][] rowCountWrong = null;
-            try
-            {
-                matrix = new FloatMatrix.Rel.Dense<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
-                rowCountWrong = data(4, 5, false, 2);
-            }
-            catch (ValueException ve)
-            {
-                fail("Caught unexpected exception: " + ve.toString());
-            }
-            FloatMatrix.times(matrix, rowCountWrong);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1691,8 +1582,8 @@ public class FloatMatrixDenseTest
         try
         {
             float[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
-            FloatMatrix.Rel.Dense<TemperatureUnit> matrix =
-                new FloatMatrix.Rel.Dense<TemperatureUnit>(values, TemperatureUnit.KELVIN);
+            FloatMatrix.Rel<TemperatureUnit> matrix =
+                new FloatMatrix.Rel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.DENSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
         catch (ValueException ve)
@@ -1706,44 +1597,14 @@ public class FloatMatrixDenseTest
         }
     }
 
-    /**
-     * Test that the times methods with a simple array as the 2nd argument.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void scaleRelTest()
-    {
-        try
-        {
-            float[][] leftIn = data(3, 5, false, -12.34f);
-            FloatMatrix.Rel.Dense<TemperatureUnit> left =
-                new FloatMatrix.Rel.Dense<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
-            float[][] right = data(3, 5, false, -4.321f);
-            MutableFloatMatrix.Rel.Dense<TemperatureUnit> result = FloatMatrix.times(left, right);
-            assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
-            for (int row = right.length; --row >= 0;)
-            {
-                for (int column = right[row].length; --column >= 0;)
-                {
-                    assertEquals("Content should match product of left and right", leftIn[row][column]
-                        * right[row][column], result.getSI(row, column), 0.001f);
-                }
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected exception: " + ve.toString());
-        }
-    }
-
     /** */
     interface FloatToFloat
     {
         /**
-         * @param f float; value
+         * @param d float; value
          * @return float value
          */
-        float function(float f);
+        float function(float d);
     }
 
     /** */
@@ -1754,7 +1615,7 @@ public class FloatMatrixDenseTest
          * @param inputValues float[][]; unprocessed value
          * @param operation String; description of method that is being tested
          * @param actualResult FloatMatrix&lt;?&gt;; the actual result of the operation
-         * @param precision double; expected accuracy
+         * @param precision float; expected accuracy
          * @param function FloatToFloat; encapsulated function that converts one inputValue to an outputValue
          */
         public static void tester(final float[][] inputValues, final String operation,

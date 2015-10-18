@@ -5,6 +5,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 
 /**
+ * Interface with specific (write) functions for the Mutable DoubleVector classes.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.

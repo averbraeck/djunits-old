@@ -1,13 +1,9 @@
-package org.djunits.value.vfloat.matrix;
+package org.djunits.value.vfloat.matrix.copy;
 
-import java.util.stream.IntStream;
-
-import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.FloatFunction;
 
 /**
- * Stores dense data for a FloatMatrix and carries out basic operations.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -20,7 +16,7 @@ import org.djunits.value.vfloat.FloatFunction;
 public class FloatMatrixDataDense extends FloatMatrixData
 {
     /**
-     * Create a matrix with dense data.
+     * Create a vector with dense data.
      * @param matrixSI the data to store
      * @param rows the number of rows
      * @param cols the number of columns
@@ -28,7 +24,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
      */
     public FloatMatrixDataDense(final float[] matrixSI, final int rows, final int cols) throws ValueException
     {
-        super(StorageType.DENSE);
+        super();
         if (rows * cols != matrixSI.length)
         {
             throw new ValueException("FloatMatrixDataDense constructor, rows * cols != matrixSI.length");
@@ -40,13 +36,13 @@ public class FloatMatrixDataDense extends FloatMatrixData
     }
 
     /**
-     * Create a matrix with dense data.
+     * Create a vector with dense data.
      * @param matrixSI the data to store
      * @throws ValueException in case matrix is ragged
      */
     public FloatMatrixDataDense(final float[][] matrixSI) throws ValueException
     {
-        super(StorageType.DENSE);
+        super();
         if (matrixSI == null || matrixSI.length == 0)
         {
             throw new ValueException("FloatMatrixDataDense constructor, matrixSI == null || matrixSI.length == 0");
@@ -70,8 +66,10 @@ public class FloatMatrixDataDense extends FloatMatrixData
      */
     public final void assign(final FloatFunction floatFunction)
     {
-        IntStream.range(0, this.rows() * this.cols()).parallel().forEach(
-            i -> this.matrixSI[i] = floatFunction.apply(this.matrixSI[i]));
+        for (int index = 0; index < this.matrixSI.length; index++)
+        {
+            this.matrixSI[index] = floatFunction.apply(this.matrixSI[index]);
+        }
     }
 
     /**
@@ -115,6 +113,15 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public final float[] getDenseVectorSI()
+    {
+        float[] mCopy = new float[this.matrixSI.length];
+        System.arraycopy(this.matrixSI, 0, mCopy, 0, this.matrixSI.length);
+        return mCopy;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final float[][] getDenseMatrixSI()
     {
         float[][] matrix = new float[this.rows][];
@@ -129,18 +136,17 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final double[][] getDoubleDenseMatrixSI()
+    public final double[][] getDenseDoubleMatrixSI()
     {
         double[][] matrix = new double[this.rows][];
         for (int r = 0; r < this.rows; r++)
         {
             double[] row = new double[this.cols];
-            int offset = r * this.cols;
+            matrix[r] = row;
             for (int c = 0; c < this.cols; c++)
             {
-                row[c] = this.matrixSI[offset++];
+                matrix[r][c] = this.matrixSI[r * this.cols + c];
             }
-            matrix[r] = row;
         }
         return matrix;
     }
@@ -151,43 +157,11 @@ public class FloatMatrixDataDense extends FloatMatrixData
     {
         try
         {
-            return new FloatMatrixDataDense(getDenseMatrixSI());
+            return new FloatMatrixDataDense(getDenseVectorSI(), this.rows, this.cols);
         }
         catch (ValueException exception)
         {
             throw new RuntimeException(exception); // should not happen -- original is not ragged...
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void incrementBy(final FloatMatrixData right) throws ValueException
-    {
-        IntStream.range(0, this.rows).parallel().forEach(
-            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right.getSI(r, c)));
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void decrementBy(final FloatMatrixData right) throws ValueException
-    {
-        IntStream.range(0, this.rows).parallel().forEach(
-            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right.getSI(r, c)));
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void multiplyBy(final FloatMatrixData right) throws ValueException
-    {
-        IntStream.range(0, this.rows).parallel().forEach(
-            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] *= right.getSI(r, c)));
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void divideBy(final FloatMatrixData right) throws ValueException
-    {
-        IntStream.range(0, this.rows).parallel().forEach(
-            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
     }
 }
