@@ -1,10 +1,14 @@
 package org.djunits.value.vdouble.matrix;
 
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 
 /**
+ * Stores sparse data for a DoubleMatrix and carries out basic operations.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -16,7 +20,7 @@ import org.djunits.value.ValueException;
  */
 public class DoubleMatrixDataSparse extends DoubleMatrixData
 {
-    /** the index values of the Vector. */
+    /** the index values of the Matrix. */
     private long[] indices;
 
     /** the length of the vector (padded with 0 after highest index in indices). */
@@ -25,7 +29,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     /**
      * Create a vector with sparse data.
      * @param matrixSI the data to store
-     * @param indices the index values of the Vector, with <tt>index = row * cols + col</tt>
+     * @param indices the index values of the Matrix, with <tt>index = row * cols + col</tt>
      * @param length the length of the vector (padded with 0 after highest index in indices)
      * @param rows the number of rows
      * @param cols the number of columns
@@ -33,7 +37,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     public DoubleMatrixDataSparse(final double[] matrixSI, final long[] indices, final int length, final int rows,
         final int cols)
     {
-        super();
+        super(StorageType.SPARSE);
         this.matrixSI = matrixSI;
         this.indices = indices;
         this.length = length;
@@ -42,58 +46,103 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     }
 
     /**
+     * Create a vector with sparse data from an internal vector with dense data.
+     * @param denseSI the dense data to store
+     * @param rows the number of rows
+     * @param cols the number of columns
+     * @throws ValueException in case size is incorrect
+     */
+    public DoubleMatrixDataSparse(final double[] denseSI, final int rows, final int cols) throws ValueException
+    {
+        super(StorageType.SPARSE);
+        if (denseSI == null || denseSI.length == 0)
+        {
+            throw new ValueException("DoubleMatrixDataSparse constructor, denseSI == null || denseSI.length == 0");
+        }
+
+        this.length = nonZero(denseSI);
+        this.rows = rows;
+        this.cols = cols;
+        this.matrixSI = new double[this.length];
+        this.indices = new long[this.length];
+        fill(denseSI, this.matrixSI, this.indices);
+    }
+
+    /**
      * Create a vector with sparse data.
-     * @param matrixSI the data to store
+     * @param dataSI the data to store
      * @throws ValueException in case matrix is ragged
      */
-    public DoubleMatrixDataSparse(final double[][] matrixSI) throws ValueException
+    public DoubleMatrixDataSparse(final double[][] dataSI) throws ValueException
     {
-        super();
-        if (matrixSI == null || matrixSI.length == 0)
+        super(StorageType.SPARSE);
+        if (dataSI == null || dataSI.length == 0)
         {
             throw new ValueException("DoubleMatrixDataSparse constructor, matrixSI == null || matrixSI.length == 0");
         }
 
-        this.rows = matrixSI.length;
-        this.cols = matrixSI[0].length;
+        this.length = nonZero(dataSI);
+        this.rows = dataSI.length;
+        this.cols = dataSI[0].length;
+        this.matrixSI = new double[this.length];
+        this.indices = new long[this.length];
+        fill(dataSI, this.matrixSI, this.indices);
+    }
 
-        int card = 0;
-        for (int r = 0; r < this.rows; r++)
-        {
-            double[] row = matrixSI[r];
-            if (row.length != this.cols)
-            {
-                throw new ValueException("DoubleMatrixDataDense constructor, ragged matrix");
-            }
-            for (int c = 0; c < this.cols; c++)
-            {
-                if (matrixSI[r][c] != 0.0)
-                {
-                    card++;
-                }
-            }
-        }
-
-        this.matrixSI = new double[card];
-        this.indices = new long[card];
-
+    /**
+     * Fill the sparse data structures matrixSI[] and indices[]. Note: output vectors have to be initialized at the right size.
+     * Cannot be parallelized because of stateful and sequence-sensitive count.
+     * @param data the input data
+     * @param matrixSI the matrix data to write
+     * @param indices the indices to write
+     * @throws ValueException in case matrix is ragged
+     */
+    @SuppressWarnings("checkstyle:finalparameters")
+    private static void fill(final double[][] data, double[] matrixSI, long[] indices) throws ValueException
+    {
+        int rows = data.length;
+        int cols = data[0].length;
         int count = 0;
-        for (int r = 0; r < this.rows; r++)
+        for (int r = 0; r < rows; r++)
         {
-            double[] row = matrixSI[r];
-            for (int c = 0; c < this.cols; c++)
+            double[] row = data[r];
+            if (row.length != cols)
             {
-                int index = r * this.cols + c;
+                throw new ValueException("Matrix is ragged");
+            }
+            for (int c = 0; c < cols; c++)
+            {
+                int index = r * cols + c;
                 if (row[c] != 0.0)
                 {
-                    this.matrixSI[count] = row[c];
-                    this.indices[count] = index;
+                    matrixSI[count] = row[c];
+                    indices[count] = index;
                     count++;
                 }
             }
         }
+    }
 
-        this.length = card;
+    /**
+     * Fill the sparse data structures matrixSI[] and indices[]. Note: output vectors have to be initialized at the right size.
+     * Cannot be parallelized because of stateful and sequence-sensitive count.
+     * @param data the input data
+     * @param matrixSI the matrix data to write
+     * @param indices the indices to write
+     */
+    @SuppressWarnings("checkstyle:finalparameters")
+    private static void fill(final double[] data, double[] matrixSI, long[] indices)
+    {
+        int count = 0;
+        for (int i = 0; i < data.length; i++)
+        {
+            if (data[i] != 0.0)
+            {
+                matrixSI[count] = data[i];
+                indices[count] = i;
+                count++;
+            }
+        }
     }
 
     /**
@@ -155,13 +204,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final double[] getDenseVectorSI()
-    {
-        return toDense().matrixSI;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final double[][] getDenseMatrixSI()
     {
         return toDense().getDenseMatrixSI();
@@ -178,6 +220,223 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         return new DoubleMatrixDataSparse(vCopy, iCopy, this.length, this.rows, this.cols);
     }
 
+    /**
+     * Instantiate a DoubleMatrixDataSparse from an array.
+     * @param valuesSI the (SI) values to store
+     * @return the DoubleMatrixDataSparse
+     * @throws ValueException in case matrix is ragged
+     */
+    public static DoubleMatrixDataSparse instantiate(final double[][] valuesSI) throws ValueException
+    {
+        int length = nonZero(valuesSI);
+        final int rows = valuesSI.length;
+        final int cols = valuesSI[0].length;
+        double[] sparseSI = new double[length];
+        long[] indices = new long[length];
+        fill(valuesSI, sparseSI, indices);
+        return new DoubleMatrixDataSparse(sparseSI, indices, length, rows, cols);
+    }
+
+    /**
+     * Calculate the number of non-zero values in this double[][] matrix.
+     * @param valuesSI the double[][] matrix
+     * @return the number of non-zero values in this double[][] matrix
+     */
+    private static int nonZero(final double[][] valuesSI)
+    {
+        // determine number of non-null cells
+        AtomicInteger atomicLength = new AtomicInteger(0);
+        IntStream.range(0, valuesSI.length).parallel().forEach(
+            r -> IntStream.range(0, valuesSI[0].length).forEach(c -> {
+                if (valuesSI[r][c] != 0.0)
+                {
+                    atomicLength.incrementAndGet();
+                }
+            }));
+
+        return atomicLength.get();
+    }
+
+    /**
+     * Calculate the number of non-zero values in this double[] vector.
+     * @param valuesSI the double[] vector
+     * @return the number of non-zero values in this double[] vector
+     */
+    private static int nonZero(final double[] valuesSI)
+    {
+        return (int) Arrays.stream(valuesSI).parallel().filter(d -> d != 0.0).count();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void incrementBy(final DoubleMatrixData right) throws ValueException
+    {
+        /*-
+            // the number of new cells = the sum of the number of cells of each minus the overlapping cells.
+            int overlap = 0;
+            for (int index = 0; index < this.matrixSI.length; index++)
+            {
+                int c = (int) this.indices[index] % this.cols;
+                int r = (int) this.indices[index] / this.cols;
+                if (right.getSI(r, c) != 0.0)
+                {
+                    overlap++;
+                }
+            }
+            int newLength = cardinality() + right.cardinality() - overlap;
+         */
+        int newLength = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                if (this.getSI(r, c) + right.getSI(r, c) != 0.0)
+                {
+                    newLength++;
+                }
+            }
+        }
+        double[] newMatrixSI = new double[newLength];
+        long[] newIndices = new long[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                double value = this.getSI(r, c) + right.getSI(r, c);
+                if (value != 0.0)
+                {
+                    int index = r * cols() + c;
+                    newMatrixSI[count] = value;
+                    newIndices[count] = index;
+                    count++;
+                }
+            }
+        }
+
+        this.indices = newIndices;
+        this.matrixSI = newMatrixSI;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final DoubleMatrixData right) throws ValueException
+    {
+        int newLength = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                if (this.getSI(r, c) - right.getSI(r, c) != 0.0)
+                {
+                    newLength++;
+                }
+            }
+        }
+        double[] newMatrixSI = new double[newLength];
+        long[] newIndices = new long[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                double value = this.getSI(r, c) - right.getSI(r, c);
+                if (value != 0.0)
+                {
+                    int index = r * cols() + c;
+                    newMatrixSI[count] = value;
+                    newIndices[count] = index;
+                    count++;
+                }
+            }
+        }
+
+        this.indices = newIndices;
+        this.matrixSI = newMatrixSI;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void multiplyBy(final DoubleMatrixData right) throws ValueException
+    {
+        int newLength = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                if (this.getSI(r, c) * right.getSI(r, c) != 0.0)
+                {
+                    newLength++;
+                }
+            }
+        }
+        double[] newMatrixSI = new double[newLength];
+        long[] newIndices = new long[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                double value = this.getSI(r, c) * right.getSI(r, c);
+                if (value != 0.0)
+                {
+                    int index = r * cols() + c;
+                    newMatrixSI[count] = value;
+                    newIndices[count] = index;
+                    count++;
+                }
+            }
+        }
+
+        this.indices = newIndices;
+        this.matrixSI = newMatrixSI;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void divideBy(final DoubleMatrixData right) throws ValueException
+    {
+        int newLength = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                if (this.getSI(r, c) / right.getSI(r, c) != 0.0)
+                {
+                    newLength++;
+                }
+            }
+        }
+        double[] newMatrixSI = new double[newLength];
+        long[] newIndices = new long[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                double value = this.getSI(r, c) / right.getSI(r, c);
+                if (value != 0.0)
+                {
+                    int index = r * cols() + c;
+                    newMatrixSI[count] = value;
+                    newIndices[count] = index;
+                    count++;
+                }
+            }
+        }
+
+        this.indices = newIndices;
+        this.matrixSI = newMatrixSI;
+    }
+
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
@@ -191,8 +450,8 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
     @Override
+    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
     public boolean equals(final Object obj)
     {
         if (this == obj)
@@ -208,5 +467,4 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
             return false;
         return true;
     }
-
 }

@@ -149,7 +149,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         int[] newIndices = new int[newLength];
 
         // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        // note: if adding -2 and +2, a 0-value will be part of the new sparse matrix.
+        // note: if adding -2 and +2, a 0-value will be part of the new sparse vector.
         int count = 0;
         for (int i = 0; i < size(); i++)
         {
@@ -176,7 +176,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         int[] newIndices = new int[newLength];
 
         // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        // note: if subtracting 2 from 2, a 0-value will be part of the new sparse matrix.
+        // note: if subtracting 2 from 2, a 0-value will be part of the new sparse vector.
         int count = 0;
         for (int i = 0; i < size(); i++)
         {

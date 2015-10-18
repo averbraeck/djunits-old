@@ -8,6 +8,7 @@ import static org.junit.Assert.fail;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.Unit;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.junit.Test;
@@ -20,8 +21,8 @@ import org.junit.Test;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -93,7 +94,8 @@ public class DoubleMatrixSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[][] value = data(3, 5, false, 38.0);
-            DoubleMatrix.Abs.Sparse<TemperatureUnit> dm = new DoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
+            DoubleMatrix.Abs<TemperatureUnit> dm =
+                new DoubleMatrix.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -117,8 +119,8 @@ public class DoubleMatrixSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[][] value = data(3, 5, false, 38.0);
-            MutableDoubleMatrix.Abs.Sparse<TemperatureUnit> dm =
-                new MutableDoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
+            MutableDoubleMatrix.Abs<TemperatureUnit> dm =
+                new MutableDoubleMatrix.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -142,8 +144,8 @@ public class DoubleMatrixSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[][] value = data(3, 5, false, 38.0);
-            DoubleMatrix.Abs.Sparse<TemperatureUnit> temperatureDM =
-                new DoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
+            DoubleMatrix.Abs<TemperatureUnit> temperatureDM =
+                new DoubleMatrix.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, true);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDM.getSI(0, 0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4,
@@ -156,8 +158,8 @@ public class DoubleMatrixSparseTest
                     assertEquals("Value should match", value[row][column], out[row][column], 0.001);
                 }
             }
-            MutableDoubleMatrix.Abs.Sparse<TemperatureUnit> mdm =
-                new MutableDoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
+            MutableDoubleMatrix.Abs<TemperatureUnit> mdm =
+                new MutableDoubleMatrix.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
             mdm.setSI(0, 0, 73);
             double safe = value[0][0];
@@ -166,12 +168,13 @@ public class DoubleMatrixSparseTest
             value[0][0] = safe; // Restore
             mdm.set(0, 0, temperatureDM.get(0, 0));
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
-            DoubleMatrix.Abs.Sparse<TemperatureUnit> temperature2DM =
-                new DoubleMatrix.Abs.Sparse<TemperatureUnit>(temperatureDM.getValuesSI(), TemperatureUnit.KELVIN);
+            DoubleMatrix.Abs<TemperatureUnit> temperature2DM =
+                new DoubleMatrix.Abs<TemperatureUnit>(temperatureDM.getValuesSI(), TemperatureUnit.KELVIN,
+                    StorageType.SPARSE);
             assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
             assertTrue("Value is Absolute", temperatureDM.isAbsolute());
             assertFalse("Value is not Relative", temperatureDM.isRelative());
-            temperatureDM = new DoubleMatrix.Abs.Sparse<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+            temperatureDM = new DoubleMatrix.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, TemperatureUnit.KELVIN, true);
             out = temperatureDM.getValuesSI();
             for (int row = 0; row < value.length; row++)
@@ -191,7 +194,7 @@ public class DoubleMatrixSparseTest
                         new DoubleScalar.Abs<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
                 }
             }
-            temperatureDM = new DoubleMatrix.Abs.Sparse<TemperatureUnit>(scalar);
+            temperatureDM = new DoubleMatrix.Abs<TemperatureUnit>(scalar, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, true);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
                 temperatureDM.cardinality());
@@ -225,15 +228,16 @@ public class DoubleMatrixSparseTest
             double[][] value = data(3, 5, false, 38.0);
             double[][] value2 = data(3, 5, false, 38.0);
             value2[0][0] = 12345;
-            DoubleMatrix.Abs.Sparse<TemperatureUnit> dm = new DoubleMatrix.Abs.Sparse<TemperatureUnit>(value, tempUnit);
+            DoubleMatrix.Abs<TemperatureUnit> dm =
+                new DoubleMatrix.Abs<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             DoubleMatrix.Abs<TemperatureUnit> dmCopy = dm;
-            MutableDoubleMatrix.Abs.Sparse<TemperatureUnit> mdm = dm.mutable();
+            MutableDoubleMatrix.Abs<TemperatureUnit> mdm = dm.mutable();
             checkContentsAndType(dm, value, 0.001, tempUnit, true);
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
             checkContentsAndType(dmCopy, value, 0.001, tempUnit, true);
-            MutableDoubleMatrix.Abs.Sparse<TemperatureUnit> mdmCopy = mdm.copy();
+            MutableDoubleMatrix.Abs<TemperatureUnit> mdmCopy = mdm.copy();
             checkContentsAndType(mdmCopy, value, 0.001, tempUnit, true);
-            MutableDoubleMatrix.Abs.Sparse<TemperatureUnit> mmdm = mdm.mutable();
+            MutableDoubleMatrix.Abs<TemperatureUnit> mmdm = mdm.mutable();
             checkContentsAndType(mmdm, value, 0.001, tempUnit, true);
             assertEquals("hashCode is independent on mutability", dm.hashCode(), mdm.hashCode());
             // Modify mdm
@@ -299,10 +303,10 @@ public class DoubleMatrixSparseTest
         for (double seedValue : seedValues)
         {
             double[][] input = data(3, 5, false, seedValue);
-            MutableDoubleMatrix.Abs.Sparse<LengthUnit> dm;
+            MutableDoubleMatrix.Abs<LengthUnit> dm;
             try
             {
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.abs();
                 MathTester.tester(input, "abs", dm, 0.001, new DoubleToDouble()
                 {
@@ -312,7 +316,7 @@ public class DoubleMatrixSparseTest
                         return Math.abs(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.acos();
                 MathTester.tester(input, "acos", dm, 0.001, new DoubleToDouble()
                 {
@@ -322,7 +326,7 @@ public class DoubleMatrixSparseTest
                         return Math.acos(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.asin();
                 MathTester.tester(input, "asin", dm, 0.001, new DoubleToDouble()
                 {
@@ -332,7 +336,7 @@ public class DoubleMatrixSparseTest
                         return Math.asin(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.atan();
                 MathTester.tester(input, "atan", dm, 0.001, new DoubleToDouble()
                 {
@@ -342,7 +346,7 @@ public class DoubleMatrixSparseTest
                         return Math.atan(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.cbrt();
                 MathTester.tester(input, "cbrt", dm, 0.001, new DoubleToDouble()
                 {
@@ -352,7 +356,7 @@ public class DoubleMatrixSparseTest
                         return Math.cbrt(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.ceil();
                 MathTester.tester(input, "ceil", dm, 0.001, new DoubleToDouble()
                 {
@@ -362,7 +366,7 @@ public class DoubleMatrixSparseTest
                         return Math.ceil(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.cos();
                 MathTester.tester(input, "cos", dm, 0.001, new DoubleToDouble()
                 {
@@ -372,7 +376,7 @@ public class DoubleMatrixSparseTest
                         return Math.cos(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.cosh();
                 MathTester.tester(input, "cosh", dm, 0.001, new DoubleToDouble()
                 {
@@ -382,7 +386,7 @@ public class DoubleMatrixSparseTest
                         return Math.cosh(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.exp();
                 MathTester.tester(input, "exp", dm, 0.001, new DoubleToDouble()
                 {
@@ -392,7 +396,7 @@ public class DoubleMatrixSparseTest
                         return Math.exp(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.expm1();
                 MathTester.tester(input, "expm1", dm, 0.001, new DoubleToDouble()
                 {
@@ -402,7 +406,7 @@ public class DoubleMatrixSparseTest
                         return Math.expm1(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.floor();
                 MathTester.tester(input, "floor", dm, 0.001, new DoubleToDouble()
                 {
@@ -412,7 +416,7 @@ public class DoubleMatrixSparseTest
                         return Math.floor(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.log();
                 MathTester.tester(input, "log", dm, 0.001, new DoubleToDouble()
                 {
@@ -422,7 +426,7 @@ public class DoubleMatrixSparseTest
                         return Math.log(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.log10();
                 MathTester.tester(input, "log10", dm, 0.001, new DoubleToDouble()
                 {
@@ -432,7 +436,7 @@ public class DoubleMatrixSparseTest
                         return Math.log10(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.log1p();
                 MathTester.tester(input, "log1p", dm, 0.001, new DoubleToDouble()
                 {
@@ -445,7 +449,7 @@ public class DoubleMatrixSparseTest
                 for (int i = -10; i <= 10; i++)
                 {
                     final double exponent = i * 0.5d;
-                    dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                    dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                     dm.pow(exponent);
                     MathTester.tester(input, "pow(" + exponent + ")", dm, 0.001, new DoubleToDouble()
                     {
@@ -456,7 +460,7 @@ public class DoubleMatrixSparseTest
                         }
                     });
                 }
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.rint();
                 MathTester.tester(input, "rint", dm, 0.001, new DoubleToDouble()
                 {
@@ -466,7 +470,7 @@ public class DoubleMatrixSparseTest
                         return Math.rint(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.round();
                 MathTester.tester(input, "round", dm, 0.001, new DoubleToDouble()
                 {
@@ -476,7 +480,7 @@ public class DoubleMatrixSparseTest
                         return Math.round(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.signum();
                 MathTester.tester(input, "signum", dm, 0.001, new DoubleToDouble()
                 {
@@ -486,7 +490,7 @@ public class DoubleMatrixSparseTest
                         return Math.signum(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.sin();
                 MathTester.tester(input, "sin", dm, 0.001, new DoubleToDouble()
                 {
@@ -496,7 +500,7 @@ public class DoubleMatrixSparseTest
                         return Math.sin(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.sinh();
                 MathTester.tester(input, "sinh", dm, 0.001, new DoubleToDouble()
                 {
@@ -506,7 +510,7 @@ public class DoubleMatrixSparseTest
                         return Math.sinh(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.sqrt();
                 MathTester.tester(input, "sqrt", dm, 0.001, new DoubleToDouble()
                 {
@@ -516,7 +520,7 @@ public class DoubleMatrixSparseTest
                         return Math.sqrt(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.tan();
                 MathTester.tester(input, "tan", dm, 0.001, new DoubleToDouble()
                 {
@@ -526,7 +530,7 @@ public class DoubleMatrixSparseTest
                         return Math.tan(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.tanh();
                 MathTester.tester(input, "tanh", dm, 0.001, new DoubleToDouble()
                 {
@@ -536,7 +540,7 @@ public class DoubleMatrixSparseTest
                         return Math.tanh(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.toDegrees();
                 MathTester.tester(input, "toDegrees", dm, 0.001, new DoubleToDouble()
                 {
@@ -546,7 +550,7 @@ public class DoubleMatrixSparseTest
                         return Math.toDegrees(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.toRadians();
                 MathTester.tester(input, "toRadians", dm, 0.001, new DoubleToDouble()
                 {
@@ -556,7 +560,7 @@ public class DoubleMatrixSparseTest
                         return Math.toRadians(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.inv();
                 MathTester.tester(input, "inv", dm, 0.001, new DoubleToDouble()
                 {
@@ -585,11 +589,11 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left =
-                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Dense<LengthUnit> right =
-                new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Abs.Dense<?> result = DoubleMatrix.plus(left, right);
+            DoubleMatrix.Abs<LengthUnit> left =
+                new DoubleMatrix.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<LengthUnit> right =
+                new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.Abs<?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -616,48 +620,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left =
-                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Dense<LengthUnit> right =
-                new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Abs.Dense<?> result = DoubleMatrix.minus(left, right);
+            DoubleMatrix.Abs<LengthUnit> left =
+                new DoubleMatrix.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<LengthUnit> right =
+                new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.Abs<?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI minus of contributing elements", left.getSI(i, j)
                         - right.getSI(i, j), result.getSI(i, j), 0.001);
-                }
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected ValueException: " + ve.toString());
-        }
-    }
-
-    /**
-     * Test times(DoubleMatrixAbs.Sparse, DoubleMatrixAbs.Dense).
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void binarytimesOfAbsSparseAndAbsDenseTest()
-    {
-        try
-        {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left =
-                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Abs.Dense<LengthUnit> right =
-                new DoubleMatrix.Abs.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Abs.Sparse<?> result = DoubleMatrix.times(left, right);
-            for (int i = 0; i < leftValue.length; i++)
-            {
-                for (int j = 0; j < leftValue[i].length; j++)
-                {
-                    assertEquals("value of element should be SI times of contributing elements", left.getSI(i, j)
-                        * right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -678,11 +651,11 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left =
-                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Sparse<LengthUnit> right =
-                new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Abs.Sparse<?> result = DoubleMatrix.plus(left, right);
+            DoubleMatrix.Abs<LengthUnit> left =
+                new DoubleMatrix.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<LengthUnit> right =
+                new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Abs<?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -709,48 +682,17 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left =
-                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Sparse<LengthUnit> right =
-                new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Abs.Sparse<?> result = DoubleMatrix.minus(left, right);
+            DoubleMatrix.Abs<LengthUnit> left =
+                new DoubleMatrix.Abs<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<LengthUnit> right =
+                new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Abs<?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
                 {
                     assertEquals("value of element should be SI minus of contributing elements", left.getSI(i, j)
                         - right.getSI(i, j), result.getSI(i, j), 0.001);
-                }
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected ValueException: " + ve.toString());
-        }
-    }
-
-    /**
-     * Test times(DoubleMatrixAbs.Sparse, DoubleMatrixAbs.Sparse).
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void binarytimesOfAbsSparseAndAbsSparseTest()
-    {
-        try
-        {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs.Sparse<LengthUnit> left =
-                new DoubleMatrix.Abs.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Abs.Sparse<LengthUnit> right =
-                new DoubleMatrix.Abs.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Abs.Sparse<?> result = DoubleMatrix.times(left, right);
-            for (int i = 0; i < leftValue.length; i++)
-            {
-                for (int j = 0; j < leftValue[i].length; j++)
-                {
-                    assertEquals("value of element should be SI times of contributing elements", left.getSI(i, j)
-                        * right.getSI(i, j), result.getSI(i, j), 0.001);
                 }
             }
         }
@@ -771,7 +713,8 @@ public class DoubleMatrixSparseTest
         try
         {
             // null array
-            new DoubleMatrix.Abs.Sparse<TemperatureUnit>((double[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT);
+            new DoubleMatrix.Abs<TemperatureUnit>((double[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT,
+                StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -784,7 +727,7 @@ public class DoubleMatrixSparseTest
             // Matrix with null on first row
             double[][] in = data(3, 5, false, 12.3);
             in[0] = null;
-            new DoubleMatrix.Abs.Sparse<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new DoubleMatrix.Abs<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -797,7 +740,7 @@ public class DoubleMatrixSparseTest
             // Matrix with null on last row
             double[][] in = data(3, 5, false, 12.3);
             in[in.length - 1] = null;
-            new DoubleMatrix.Abs.Sparse<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new DoubleMatrix.Abs<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -809,7 +752,7 @@ public class DoubleMatrixSparseTest
         {
             // Non-rectangular array
             double[][] in = data(3, 5, true, 12.3);
-            new DoubleMatrix.Abs.Sparse<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new DoubleMatrix.Abs<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -821,37 +764,16 @@ public class DoubleMatrixSparseTest
         double[][] in = data(3, 5, false, 12.3);
         try
         {
-            DoubleMatrix.Abs.Sparse<TemperatureUnit> matrix = null;
+            DoubleMatrix.Abs<TemperatureUnit> matrix = null;
             try
             {
-                matrix = new DoubleMatrix.Abs.Sparse<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+                matrix = new DoubleMatrix.Abs<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             }
             catch (ValueException ve)
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
             matrix.determinant();
-            fail("Preceding code should have thrown a ValueException");
-        }
-        catch (ValueException ve)
-        {
-            // Ignore (exception was expected)
-            junk++;
-        }
-        try
-        {
-            DoubleMatrix.Abs.Sparse<TemperatureUnit> matrix = null;
-            double[][] rowCountWrong = null;
-            try
-            {
-                matrix = new DoubleMatrix.Abs.Sparse<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
-                rowCountWrong = data(4, 5, false, 2);
-            }
-            catch (ValueException ve)
-            {
-                fail("Caught unexpected exception: " + ve.toString());
-            }
-            DoubleMatrix.times(matrix, rowCountWrong);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -872,8 +794,8 @@ public class DoubleMatrixSparseTest
         try
         {
             double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
-            DoubleMatrix.Abs.Sparse<TemperatureUnit> matrix =
-                new DoubleMatrix.Abs.Sparse<TemperatureUnit>(values, TemperatureUnit.KELVIN);
+            DoubleMatrix.Abs<TemperatureUnit> matrix =
+                new DoubleMatrix.Abs<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.SPARSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
         catch (ValueException ve)
@@ -888,36 +810,6 @@ public class DoubleMatrixSparseTest
     }
 
     /**
-     * Test that the times methods with a simple array as the 2nd argument.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void scaleAbsTest()
-    {
-        try
-        {
-            double[][] leftIn = data(3, 5, false, -12.34);
-            DoubleMatrix.Abs.Sparse<TemperatureUnit> left =
-                new DoubleMatrix.Abs.Sparse<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
-            double[][] right = data(3, 5, false, -4.321);
-            MutableDoubleMatrix.Abs.Sparse<TemperatureUnit> result = DoubleMatrix.times(left, right);
-            assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
-            for (int row = right.length; --row >= 0;)
-            {
-                for (int column = right[row].length; --column >= 0;)
-                {
-                    assertEquals("Content should match product of left and right", leftIn[row][column]
-                        * right[row][column], result.getSI(row, column), 0.001);
-                }
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected exception: " + ve.toString());
-        }
-    }
-
-    /**
      * Test that the toString method returns something sensible.
      */
     @SuppressWarnings("static-method")
@@ -928,7 +820,8 @@ public class DoubleMatrixSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[][] value = data(3, 5, false, 38.0);
-            DoubleMatrix.Rel.Sparse<TemperatureUnit> dm = new DoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
+            DoubleMatrix.Rel<TemperatureUnit> dm =
+                new DoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -952,8 +845,8 @@ public class DoubleMatrixSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[][] value = data(3, 5, false, 38.0);
-            MutableDoubleMatrix.Rel.Sparse<TemperatureUnit> dm =
-                new MutableDoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
+            MutableDoubleMatrix.Rel<TemperatureUnit> dm =
+                new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -977,8 +870,8 @@ public class DoubleMatrixSparseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[][] value = data(3, 5, false, 38.0);
-            DoubleMatrix.Rel.Sparse<TemperatureUnit> temperatureDM =
-                new DoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
+            DoubleMatrix.Rel<TemperatureUnit> temperatureDM =
+                new DoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDM.getSI(0, 0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4,
@@ -991,8 +884,8 @@ public class DoubleMatrixSparseTest
                     assertEquals("Value should match", value[row][column], out[row][column], 0.001);
                 }
             }
-            MutableDoubleMatrix.Rel.Sparse<TemperatureUnit> mdm =
-                new MutableDoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
+            MutableDoubleMatrix.Rel<TemperatureUnit> mdm =
+                new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
             mdm.setSI(0, 0, 73);
             double safe = value[0][0];
@@ -1001,12 +894,13 @@ public class DoubleMatrixSparseTest
             value[0][0] = safe; // Restore
             mdm.set(0, 0, temperatureDM.get(0, 0));
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
-            DoubleMatrix.Rel.Sparse<TemperatureUnit> temperature2DM =
-                new DoubleMatrix.Rel.Sparse<TemperatureUnit>(temperatureDM.getValuesSI(), TemperatureUnit.KELVIN);
+            DoubleMatrix.Rel<TemperatureUnit> temperature2DM =
+                new DoubleMatrix.Rel<TemperatureUnit>(temperatureDM.getValuesSI(), TemperatureUnit.KELVIN,
+                    StorageType.SPARSE);
             assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
             assertTrue("Value is Relative", temperatureDM.isRelative());
             assertFalse("Value is not Absolute", temperatureDM.isAbsolute());
-            temperatureDM = new DoubleMatrix.Rel.Sparse<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+            temperatureDM = new DoubleMatrix.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, TemperatureUnit.KELVIN, false);
             out = temperatureDM.getValuesSI();
             for (int row = 0; row < value.length; row++)
@@ -1026,7 +920,7 @@ public class DoubleMatrixSparseTest
                         new DoubleScalar.Rel<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
                 }
             }
-            temperatureDM = new DoubleMatrix.Rel.Sparse<TemperatureUnit>(scalar);
+            temperatureDM = new DoubleMatrix.Rel<TemperatureUnit>(scalar, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
                 temperatureDM.cardinality());
@@ -1060,15 +954,16 @@ public class DoubleMatrixSparseTest
             double[][] value = data(3, 5, false, 38.0);
             double[][] value2 = data(3, 5, false, 38.0);
             value2[0][0] = 12345;
-            DoubleMatrix.Rel.Sparse<TemperatureUnit> dm = new DoubleMatrix.Rel.Sparse<TemperatureUnit>(value, tempUnit);
+            DoubleMatrix.Rel<TemperatureUnit> dm =
+                new DoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             DoubleMatrix.Rel<TemperatureUnit> dmCopy = dm;
-            MutableDoubleMatrix.Rel.Sparse<TemperatureUnit> mdm = dm.mutable();
+            MutableDoubleMatrix.Rel<TemperatureUnit> mdm = dm.mutable();
             checkContentsAndType(dm, value, 0.001, tempUnit, false);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
             checkContentsAndType(dmCopy, value, 0.001, tempUnit, false);
-            MutableDoubleMatrix.Rel.Sparse<TemperatureUnit> mdmCopy = mdm.copy();
+            MutableDoubleMatrix.Rel<TemperatureUnit> mdmCopy = mdm.copy();
             checkContentsAndType(mdmCopy, value, 0.001, tempUnit, false);
-            MutableDoubleMatrix.Rel.Sparse<TemperatureUnit> mmdm = mdm.mutable();
+            MutableDoubleMatrix.Rel<TemperatureUnit> mmdm = mdm.mutable();
             checkContentsAndType(mmdm, value, 0.001, tempUnit, false);
             assertEquals("hashCode is independent on mutability", dm.hashCode(), mdm.hashCode());
             // Modify mdm
@@ -1134,10 +1029,10 @@ public class DoubleMatrixSparseTest
         for (double seedValue : seedValues)
         {
             double[][] input = data(3, 5, false, seedValue);
-            MutableDoubleMatrix.Rel.Sparse<LengthUnit> dm;
+            MutableDoubleMatrix.Rel<LengthUnit> dm;
             try
             {
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.abs();
                 MathTester.tester(input, "abs", dm, 0.001, new DoubleToDouble()
                 {
@@ -1147,7 +1042,7 @@ public class DoubleMatrixSparseTest
                         return Math.abs(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.acos();
                 MathTester.tester(input, "acos", dm, 0.001, new DoubleToDouble()
                 {
@@ -1157,7 +1052,7 @@ public class DoubleMatrixSparseTest
                         return Math.acos(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.asin();
                 MathTester.tester(input, "asin", dm, 0.001, new DoubleToDouble()
                 {
@@ -1167,7 +1062,7 @@ public class DoubleMatrixSparseTest
                         return Math.asin(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.atan();
                 MathTester.tester(input, "atan", dm, 0.001, new DoubleToDouble()
                 {
@@ -1177,7 +1072,7 @@ public class DoubleMatrixSparseTest
                         return Math.atan(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.cbrt();
                 MathTester.tester(input, "cbrt", dm, 0.001, new DoubleToDouble()
                 {
@@ -1187,7 +1082,7 @@ public class DoubleMatrixSparseTest
                         return Math.cbrt(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.ceil();
                 MathTester.tester(input, "ceil", dm, 0.001, new DoubleToDouble()
                 {
@@ -1197,7 +1092,7 @@ public class DoubleMatrixSparseTest
                         return Math.ceil(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.cos();
                 MathTester.tester(input, "cos", dm, 0.001, new DoubleToDouble()
                 {
@@ -1207,7 +1102,7 @@ public class DoubleMatrixSparseTest
                         return Math.cos(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.cosh();
                 MathTester.tester(input, "cosh", dm, 0.001, new DoubleToDouble()
                 {
@@ -1217,7 +1112,7 @@ public class DoubleMatrixSparseTest
                         return Math.cosh(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.exp();
                 MathTester.tester(input, "exp", dm, 0.001, new DoubleToDouble()
                 {
@@ -1227,7 +1122,7 @@ public class DoubleMatrixSparseTest
                         return Math.exp(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.expm1();
                 MathTester.tester(input, "expm1", dm, 0.001, new DoubleToDouble()
                 {
@@ -1237,7 +1132,7 @@ public class DoubleMatrixSparseTest
                         return Math.expm1(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.floor();
                 MathTester.tester(input, "floor", dm, 0.001, new DoubleToDouble()
                 {
@@ -1247,7 +1142,7 @@ public class DoubleMatrixSparseTest
                         return Math.floor(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.log();
                 MathTester.tester(input, "log", dm, 0.001, new DoubleToDouble()
                 {
@@ -1257,7 +1152,7 @@ public class DoubleMatrixSparseTest
                         return Math.log(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.log10();
                 MathTester.tester(input, "log10", dm, 0.001, new DoubleToDouble()
                 {
@@ -1267,7 +1162,7 @@ public class DoubleMatrixSparseTest
                         return Math.log10(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.log1p();
                 MathTester.tester(input, "log1p", dm, 0.001, new DoubleToDouble()
                 {
@@ -1280,7 +1175,7 @@ public class DoubleMatrixSparseTest
                 for (int i = -10; i <= 10; i++)
                 {
                     final double exponent = i * 0.5d;
-                    dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                    dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                     dm.pow(exponent);
                     MathTester.tester(input, "pow(" + exponent + ")", dm, 0.001, new DoubleToDouble()
                     {
@@ -1291,7 +1186,7 @@ public class DoubleMatrixSparseTest
                         }
                     });
                 }
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.rint();
                 MathTester.tester(input, "rint", dm, 0.001, new DoubleToDouble()
                 {
@@ -1301,7 +1196,7 @@ public class DoubleMatrixSparseTest
                         return Math.rint(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.round();
                 MathTester.tester(input, "round", dm, 0.001, new DoubleToDouble()
                 {
@@ -1311,7 +1206,7 @@ public class DoubleMatrixSparseTest
                         return Math.round(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.signum();
                 MathTester.tester(input, "signum", dm, 0.001, new DoubleToDouble()
                 {
@@ -1321,7 +1216,7 @@ public class DoubleMatrixSparseTest
                         return Math.signum(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.sin();
                 MathTester.tester(input, "sin", dm, 0.001, new DoubleToDouble()
                 {
@@ -1331,7 +1226,7 @@ public class DoubleMatrixSparseTest
                         return Math.sin(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.sinh();
                 MathTester.tester(input, "sinh", dm, 0.001, new DoubleToDouble()
                 {
@@ -1341,7 +1236,7 @@ public class DoubleMatrixSparseTest
                         return Math.sinh(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.sqrt();
                 MathTester.tester(input, "sqrt", dm, 0.001, new DoubleToDouble()
                 {
@@ -1351,7 +1246,7 @@ public class DoubleMatrixSparseTest
                         return Math.sqrt(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.tan();
                 MathTester.tester(input, "tan", dm, 0.001, new DoubleToDouble()
                 {
@@ -1361,7 +1256,7 @@ public class DoubleMatrixSparseTest
                         return Math.tan(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.tanh();
                 MathTester.tester(input, "tanh", dm, 0.001, new DoubleToDouble()
                 {
@@ -1371,7 +1266,7 @@ public class DoubleMatrixSparseTest
                         return Math.tanh(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.toDegrees();
                 MathTester.tester(input, "toDegrees", dm, 0.001, new DoubleToDouble()
                 {
@@ -1381,7 +1276,7 @@ public class DoubleMatrixSparseTest
                         return Math.toDegrees(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.toRadians();
                 MathTester.tester(input, "toRadians", dm, 0.001, new DoubleToDouble()
                 {
@@ -1391,7 +1286,7 @@ public class DoubleMatrixSparseTest
                         return Math.toRadians(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel.Sparse<LengthUnit>(input, LengthUnit.METER);
+                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.inv();
                 MathTester.tester(input, "inv", dm, 0.001, new DoubleToDouble()
                 {
@@ -1420,11 +1315,11 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left =
-                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Dense<LengthUnit> right =
-                new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Rel.Dense<?> result = DoubleMatrix.plus(left, right);
+            DoubleMatrix.Rel<LengthUnit> left =
+                new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<LengthUnit> right =
+                new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.Rel<?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -1451,11 +1346,11 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left =
-                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Dense<LengthUnit> right =
-                new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Rel.Dense<?> result = DoubleMatrix.minus(left, right);
+            DoubleMatrix.Rel<LengthUnit> left =
+                new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<LengthUnit> right =
+                new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.Rel<?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -1482,11 +1377,11 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left =
-                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Dense<LengthUnit> right =
-                new DoubleMatrix.Rel.Dense<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Rel.Sparse<?> result = DoubleMatrix.times(left, right);
+            DoubleMatrix.Rel<LengthUnit> left =
+                new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<LengthUnit> right =
+                new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.Rel<?> result = DoubleMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -1513,11 +1408,11 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left =
-                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Sparse<LengthUnit> right =
-                new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Rel.Sparse<?> result = DoubleMatrix.plus(left, right);
+            DoubleMatrix.Rel<LengthUnit> left =
+                new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<LengthUnit> right =
+                new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -1544,11 +1439,11 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left =
-                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Sparse<LengthUnit> right =
-                new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Rel.Sparse<?> result = DoubleMatrix.minus(left, right);
+            DoubleMatrix.Rel<LengthUnit> left =
+                new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<LengthUnit> right =
+                new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -1575,11 +1470,11 @@ public class DoubleMatrixSparseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel.Sparse<LengthUnit> left =
-                new DoubleMatrix.Rel.Sparse<LengthUnit>(leftValue, LengthUnit.MILE);
-            DoubleMatrix.Rel.Sparse<LengthUnit> right =
-                new DoubleMatrix.Rel.Sparse<LengthUnit>(rightValue, LengthUnit.MILE);
-            MutableDoubleMatrix.Rel.Sparse<?> result = DoubleMatrix.times(left, right);
+            DoubleMatrix.Rel<LengthUnit> left =
+                new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<LengthUnit> right =
+                new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.Rel<?> result = DoubleMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -1606,7 +1501,8 @@ public class DoubleMatrixSparseTest
         try
         {
             // null array
-            new DoubleMatrix.Rel.Sparse<TemperatureUnit>((double[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT);
+            new DoubleMatrix.Rel<TemperatureUnit>((double[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT,
+                StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1619,7 +1515,7 @@ public class DoubleMatrixSparseTest
             // Matrix with null on first row
             double[][] in = data(3, 5, false, 12.3);
             in[0] = null;
-            new DoubleMatrix.Rel.Sparse<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new DoubleMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1632,7 +1528,7 @@ public class DoubleMatrixSparseTest
             // Matrix with null on last row
             double[][] in = data(3, 5, false, 12.3);
             in[in.length - 1] = null;
-            new DoubleMatrix.Rel.Sparse<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new DoubleMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1644,7 +1540,7 @@ public class DoubleMatrixSparseTest
         {
             // Non-rectangular array
             double[][] in = data(3, 5, true, 12.3);
-            new DoubleMatrix.Rel.Sparse<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+            new DoubleMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1656,37 +1552,16 @@ public class DoubleMatrixSparseTest
         double[][] in = data(3, 5, false, 12.3);
         try
         {
-            DoubleMatrix.Rel.Sparse<TemperatureUnit> matrix = null;
+            DoubleMatrix.Rel<TemperatureUnit> matrix = null;
             try
             {
-                matrix = new DoubleMatrix.Rel.Sparse<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
+                matrix = new DoubleMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             }
             catch (ValueException ve)
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
             matrix.determinant();
-            fail("Preceding code should have thrown a ValueException");
-        }
-        catch (ValueException ve)
-        {
-            // Ignore (exception was expected)
-            junk++;
-        }
-        try
-        {
-            DoubleMatrix.Rel.Sparse<TemperatureUnit> matrix = null;
-            double[][] rowCountWrong = null;
-            try
-            {
-                matrix = new DoubleMatrix.Rel.Sparse<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS);
-                rowCountWrong = data(4, 5, false, 2);
-            }
-            catch (ValueException ve)
-            {
-                fail("Caught unexpected exception: " + ve.toString());
-            }
-            DoubleMatrix.times(matrix, rowCountWrong);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1707,8 +1582,8 @@ public class DoubleMatrixSparseTest
         try
         {
             double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
-            DoubleMatrix.Rel.Sparse<TemperatureUnit> matrix =
-                new DoubleMatrix.Rel.Sparse<TemperatureUnit>(values, TemperatureUnit.KELVIN);
+            DoubleMatrix.Rel<TemperatureUnit> matrix =
+                new DoubleMatrix.Rel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.SPARSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
         catch (ValueException ve)
@@ -1719,36 +1594,6 @@ public class DoubleMatrixSparseTest
                 return;
             }
             fail("Caught unexpected ValueException: " + ve.toString());
-        }
-    }
-
-    /**
-     * Test that the times methods with a simple array as the 2nd argument.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public final void scaleRelTest()
-    {
-        try
-        {
-            double[][] leftIn = data(3, 5, false, -12.34);
-            DoubleMatrix.Rel.Sparse<TemperatureUnit> left =
-                new DoubleMatrix.Rel.Sparse<TemperatureUnit>(leftIn, TemperatureUnit.KELVIN);
-            double[][] right = data(3, 5, false, -4.321);
-            MutableDoubleMatrix.Rel.Sparse<TemperatureUnit> result = DoubleMatrix.times(left, right);
-            assertEquals("Result should be in Kelvin", TemperatureUnit.KELVIN, result.getUnit());
-            for (int row = right.length; --row >= 0;)
-            {
-                for (int column = right[row].length; --column >= 0;)
-                {
-                    assertEquals("Content should match product of left and right", leftIn[row][column]
-                        * right[row][column], result.getSI(row, column), 0.001);
-                }
-            }
-        }
-        catch (ValueException ve)
-        {
-            fail("Caught unexpected exception: " + ve.toString());
         }
     }
 

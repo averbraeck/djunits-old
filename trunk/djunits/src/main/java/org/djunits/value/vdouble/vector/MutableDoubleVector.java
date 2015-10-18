@@ -25,8 +25,8 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version 30 Oct, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version 30 Oct, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableDoubleVector
@@ -67,9 +67,9 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         this.copyOnWrite = copyOnWrite;
     }
 
-    /** ============================================================================================ */
-    /** ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /** ============================================================================================ */
+    /* ============================================================================================ */
+    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
+    /* ============================================================================================ */
 
     /**
      * ABSOLUTE implementation of MutableDoubleVector.
@@ -127,7 +127,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends DoubleScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType) throws ValueException
+        public <S extends DoubleScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType)
+            throws ValueException
         {
             super(checkUnit(values));
             this.data = DoubleVectorData.instantiateLD(values, storageType);
@@ -156,8 +157,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Abs(final SortedMap<Integer, Double> values, final U unit, final int length, final StorageType storageType)
-            throws ValueException
+        public Abs(final SortedMap<Integer, Double> values, final U unit, final int length,
+            final StorageType storageType) throws ValueException
         {
             super(unit);
             this.data = DoubleVectorData.instantiate(values, length, unit.getScale(), storageType);
@@ -624,9 +625,9 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         }
     }
 
-    /** ============================================================================================ */
-    /** ================================= RELATIVE IMPLEMENTATION ================================== */
-    /** ============================================================================================ */
+    /* ============================================================================================ */
+    /* ================================= RELATIVE IMPLEMENTATION ================================== */
+    /* ============================================================================================ */
 
     /**
      * RELATIVE implementation of MutableDoubleVector.
@@ -684,7 +685,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends DoubleScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType) throws ValueException
+        public <S extends DoubleScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType)
+            throws ValueException
         {
             super(checkUnit(values));
             this.data = DoubleVectorData.instantiateLD(values, storageType);
@@ -713,8 +715,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Rel(final SortedMap<Integer, Double> values, final U unit, final int length, final StorageType storageType)
-            throws ValueException
+        public Rel(final SortedMap<Integer, Double> values, final U unit, final int length,
+            final StorageType storageType) throws ValueException
         {
             super(unit);
             this.data = DoubleVectorData.instantiate(values, length, unit.getScale(), storageType);
