@@ -1,4 +1,4 @@
-package org.djunits.value.vfloat.matrix;
+package org.djunits.value.vfloat.matrix.copy;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.ValueException;
@@ -12,7 +12,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * $LastChangedDate: 2015-10-04 20:48:33 +0200 (Sun, 04 Oct 2015) $, @version $Revision: 87 $, by $Author: averbraeck $, initial
  * version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>

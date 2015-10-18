@@ -1,11 +1,11 @@
-package org.djunits.value.vdouble.matrix;
+package org.djunits.value.vfloat.matrix;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.ValueException;
-import org.djunits.value.vdouble.scalar.DoubleScalar;
+import org.djunits.value.vfloat.scalar.FloatScalar;
 
 /**
- * Interface for the Immutable and Mutable DoubleMatrix classes.
+ * Interface for the Immutable and Mutable FloatMatrix classes.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> the unit
  */
-public interface DoubleMatrixInterface<U extends Unit<U>>
+public interface FloatMatrixInterface<U extends Unit<U>>
 {
     /**
      * Retrieve the number of rows of the matrix.
@@ -40,82 +40,82 @@ public interface DoubleMatrixInterface<U extends Unit<U>>
      * Retrieve the value stored at a specified row and column in the standard SI unit.
      * @param row int; row of the value to retrieve
      * @param column int; column of the value to retrieve
-     * @return double; value at position row, column in the standard SI unit
+     * @return float; value at position row, column in the standard SI unit
      * @throws ValueException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
      *             columns())
      */
-    double getSI(int row, int column) throws ValueException;
+    float getSI(int row, int column) throws ValueException;
 
     /**
      * Retrieve the value stored at a specified row and column in the original unit.
      * @param row int; row of the value to retrieve
      * @param column int; column of the value to retrieve
-     * @return double; value at position row, column in the original unit
+     * @return float; value at position row, column in the original unit
      * @throws ValueException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
      *             columns())
      */
-    double getInUnit(int row, int column) throws ValueException;
+    float getInUnit(int row, int column) throws ValueException;
 
     /**
      * Retrieve the value stored at a specified row and column converted into a specified unit.
      * @param row int; row of the value to retrieve
      * @param column int; column of the value to retrieve
      * @param targetUnit U; the unit for the result
-     * @return double; value at position row, column converted into the specified unit
+     * @return float; value at position row, column converted into the specified unit
      * @throws ValueException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
      *             columns())
      */
-    double getInUnit(int row, int column, U targetUnit) throws ValueException;
+    float getInUnit(int row, int column, U targetUnit) throws ValueException;
 
     /**
-     * Retrieve the value stored at a specified row and column as a DoubleScalar.
+     * Retrieve the value stored at a specified row and column as a FloatScalar.
      * @param row int; row of the value to retrieve
      * @param column int; column of the value to retrieve
-     * @return DoubleScalar&lt;U&gt;; the strongly typed value of the selected cell
+     * @return FloatScalar&lt;U&gt;; the strongly typed value of the selected cell
      * @throws ValueException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
      *             columns())
      */
-    DoubleScalar<U> get(int row, int column) throws ValueException;
+    FloatScalar<U> get(int row, int column) throws ValueException;
 
     /**
      * Compute the sum of all values of this matrix.
-     * @return double; the sum of all values of this matrix
+     * @return float; the sum of all values of this matrix
      */
-    double zSum();
+    float zSum();
 
     /**
      * Compute the determinant of the matrix.
-     * @return double; the determinant of the matrix
+     * @return float; the determinant of the matrix
      * @throws ValueException when matrix is neither sparse, nor dense, or not square
      */
-    double determinant() throws ValueException;
+    float determinant() throws ValueException;
 
     /**
-     * Create a mutable version of this DoubleMatrix. <br>
+     * Create a mutable version of this FloatMatrix. <br>
      * The mutable version is created with a shallow copy of the data and the internal copyOnWrite flag set. The first operation
      * in the mutable version that modifies the data shall trigger a deep copy of the data.
-     * @return MutableDoubleMatrix&lt;U&gt;; mutable version of this DoubleMatrix
+     * @return MutableFloatMatrix&lt;U&gt;; mutable version of this FloatMatrix
      */
-    MutableDoubleMatrixInterface<U> mutable();
+    MutableFloatMatrixInterface<U> mutable();
 
     /**
-     * Create a dense double[][] array filled with the values in the standard SI unit.
-     * @return double[][]; array of values in the standard SI unit
+     * Create a dense float[][] array filled with the values in the standard SI unit.
+     * @return float[][]; array of values in the standard SI unit
      */
-    double[][] getValuesSI();
+    float[][] getValuesSI();
 
     /**
-     * Create a dense double[][] array filled with the values in the original unit.
-     * @return double[][]; the values in the original unit
+     * Create a dense float[][] array filled with the values in the original unit.
+     * @return float[][]; the values in the original unit
      */
-    double[][] getValuesInUnit();
+    float[][] getValuesInUnit();
 
     /**
-     * Create a dense double[][] array filled with the values converted into a specified unit.
+     * Create a dense float[][] array filled with the values converted into a specified unit.
      * @param targetUnit U; the unit into which the values are converted for use
-     * @return double[][]; the values converted into the specified unit
+     * @return float[][]; the values converted into the specified unit
      */
-    double[][] getValuesInUnit(final U targetUnit);
+    float[][] getValuesInUnit(final U targetUnit);
 
     /**
      * @return a String with the Matrix, non-verbose, with the unit attached.
@@ -123,14 +123,14 @@ public interface DoubleMatrixInterface<U extends Unit<U>>
     String toString();
 
     /**
-     * Print this DoubleMatrix with the values expressed in the specified unit.
+     * Print this FloatMatrix with the values expressed in the specified unit.
      * @param displayUnit U; the unit into which the values are converted for display
      * @return String; printable string with the matrix contents expressed in the specified unit
      */
     String toString(final U displayUnit);
 
     /**
-     * Print this DoubleMatrix with optional type and unit information.
+     * Print this FloatMatrix with optional type and unit information.
      * @param verbose boolean; if true; include type info; if false; exclude type info
      * @param withUnit boolean; if true; include the unit; of false; exclude the unit
      * @return String; printable string with the matrix contents
@@ -138,7 +138,7 @@ public interface DoubleMatrixInterface<U extends Unit<U>>
     String toString(final boolean verbose, final boolean withUnit);
 
     /**
-     * Print this DoubleMatrix with the values expressed in the specified unit.
+     * Print this FloatMatrix with the values expressed in the specified unit.
      * @param displayUnit U; the unit into which the values are converted for display
      * @param verbose boolean; if true; include type info; if false; exclude type info
      * @param withUnit boolean; if true; include the unit; of false; exclude the unit
@@ -147,14 +147,14 @@ public interface DoubleMatrixInterface<U extends Unit<U>>
     String toString(final U displayUnit, final boolean verbose, final boolean withUnit);
 
     /**
-     * Create a dense version of this DoubleMatrix. <br>
-     * @return MutableDoubleMatrix&lt;U&gt;; dense version of this DoubleMatrix
+     * Create a dense version of this FloatMatrix. <br>
+     * @return MutableFloatMatrix&lt;U&gt;; dense version of this FloatMatrix
      */
-    DoubleMatrixInterface<U> toDense();
+    FloatMatrixInterface<U> toDense();
 
     /**
-     * Create a sparse version of this DoubleMatrix. <br>
-     * @return MutableDoubleMatrix&lt;U&gt;; sparse version of this DoubleMatrix
+     * Create a sparse version of this FloatMatrix. <br>
+     * @return MutableFloatMatrix&lt;U&gt;; sparse version of this FloatMatrix
      */
-    DoubleMatrixInterface<U> toSparse();
+    FloatMatrixInterface<U> toSparse();
 }
