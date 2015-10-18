@@ -1,9 +1,13 @@
 package org.djunits.value.vdouble.matrix;
 
+import java.util.stream.IntStream;
+
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.DoubleFunction;
 
 /**
+ * Stores dense data for a DoubleMatrix and carries out basic operations.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -16,7 +20,7 @@ import org.djunits.value.vdouble.DoubleFunction;
 public class DoubleMatrixDataDense extends DoubleMatrixData
 {
     /**
-     * Create a vector with dense data.
+     * Create a matrix with dense data.
      * @param matrixSI the data to store
      * @param rows the number of rows
      * @param cols the number of columns
@@ -24,7 +28,7 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
      */
     public DoubleMatrixDataDense(final double[] matrixSI, final int rows, final int cols) throws ValueException
     {
-        super();
+        super(StorageType.DENSE);
         if (rows * cols != matrixSI.length)
         {
             throw new ValueException("DoubleMatrixDataDense constructor, rows * cols != matrixSI.length");
@@ -36,13 +40,13 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
     }
 
     /**
-     * Create a vector with dense data.
+     * Create a matrix with dense data.
      * @param matrixSI the data to store
      * @throws ValueException in case matrix is ragged
      */
     public DoubleMatrixDataDense(final double[][] matrixSI) throws ValueException
     {
-        super();
+        super(StorageType.DENSE);
         if (matrixSI == null || matrixSI.length == 0)
         {
             throw new ValueException("DoubleMatrixDataDense constructor, matrixSI == null || matrixSI.length == 0");
@@ -66,10 +70,8 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
      */
     public final void assign(final DoubleFunction doubleFunction)
     {
-        for (int index = 0; index < this.matrixSI.length; index++)
-        {
-            this.matrixSI[index] = doubleFunction.apply(this.matrixSI[index]);
-        }
+        IntStream.range(0, this.rows() * this.cols()).parallel().forEach(
+            i -> this.matrixSI[i] = doubleFunction.apply(this.matrixSI[i]));
     }
 
     /**
@@ -113,15 +115,6 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final double[] getDenseVectorSI()
-    {
-        double[] mCopy = new double[this.matrixSI.length];
-        System.arraycopy(this.matrixSI, 0, mCopy, 0, this.matrixSI.length);
-        return mCopy;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final double[][] getDenseMatrixSI()
     {
         double[][] matrix = new double[this.rows][];
@@ -140,11 +133,43 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
     {
         try
         {
-            return new DoubleMatrixDataDense(getDenseVectorSI(), this.rows, this.cols);
+            return new DoubleMatrixDataDense(getDenseMatrixSI());
         }
         catch (ValueException exception)
         {
             throw new RuntimeException(exception); // should not happen -- original is not ragged...
         }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void incrementBy(final DoubleMatrixData right) throws ValueException
+    {
+        IntStream.range(0, this.rows).parallel().forEach(
+            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right.getSI(r, c)));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final DoubleMatrixData right) throws ValueException
+    {
+        IntStream.range(0, this.rows).parallel().forEach(
+            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right.getSI(r, c)));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void multiplyBy(final DoubleMatrixData right) throws ValueException
+    {
+        IntStream.range(0, this.rows).parallel().forEach(
+            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] *= right.getSI(r, c)));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void divideBy(final DoubleMatrixData right) throws ValueException
+    {
+        IntStream.range(0, this.rows).parallel().forEach(
+            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
     }
 }
