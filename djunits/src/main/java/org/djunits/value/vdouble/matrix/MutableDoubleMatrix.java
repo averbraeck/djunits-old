@@ -322,9 +322,9 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("designforextension")
-        public DoubleMatrix.Rel<U> minus(final DoubleMatrix.Abs<U> rel) throws ValueException
+        public DoubleMatrix.Rel<U> minus(final DoubleMatrix.Abs<U> abs) throws ValueException
         {
-            return instantiateRel(this.getData().minus(rel.getData()), getUnit());
+            return instantiateRel(this.getData().minus(abs.getData()), getUnit());
         }
 
         /**********************************************************************************/

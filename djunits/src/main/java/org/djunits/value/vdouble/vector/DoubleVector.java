@@ -378,9 +378,9 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("designforextension")
-        public DoubleVector.Abs<U> plus(final DoubleVector.Abs<U> rel) throws ValueException
+        public DoubleVector.Abs<U> plus(final DoubleVector.Abs<U> abs) throws ValueException
         {
-            return instantiateAbs(this.getData().plus(rel.getData()), getUnit());
+            return instantiateAbs(this.getData().plus(abs.getData()), getUnit());
         }
 
         /** {@inheritDoc} */

@@ -381,9 +381,9 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("designforextension")
-        public FloatVector.Rel<U> minus(final FloatVector.Abs<U> rel) throws ValueException
+        public FloatVector.Rel<U> minus(final FloatVector.Abs<U> abs) throws ValueException
         {
-            return instantiateRel(this.getData().minus(rel.getData()), getUnit());
+            return instantiateRel(this.getData().minus(abs.getData()), getUnit());
         }
 
         /**********************************************************************************/

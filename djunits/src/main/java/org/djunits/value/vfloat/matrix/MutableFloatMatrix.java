@@ -322,9 +322,9 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("designforextension")
-        public FloatMatrix.Rel<U> minus(final FloatMatrix.Abs<U> rel) throws ValueException
+        public FloatMatrix.Rel<U> minus(final FloatMatrix.Abs<U> abs) throws ValueException
         {
-            return instantiateRel(this.getData().minus(rel.getData()), getUnit());
+            return instantiateRel(this.getData().minus(abs.getData()), getUnit());
         }
 
         /**********************************************************************************/

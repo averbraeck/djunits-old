@@ -269,9 +269,9 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("designforextension")
-        public DoubleMatrix.Abs<U> plus(final DoubleMatrix.Abs<U> rel) throws ValueException
+        public DoubleMatrix.Abs<U> plus(final DoubleMatrix.Abs<U> abs) throws ValueException
         {
-            return instantiateAbs(this.getData().plus(rel.getData()), getUnit());
+            return instantiateAbs(this.getData().plus(abs.getData()), getUnit());
         }
 
         /** {@inheritDoc} */

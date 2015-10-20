@@ -269,9 +269,9 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("designforextension")
-        public FloatMatrix.Abs<U> plus(final FloatMatrix.Abs<U> rel) throws ValueException
+        public FloatMatrix.Abs<U> plus(final FloatMatrix.Abs<U> abs) throws ValueException
         {
-            return instantiateAbs(this.getData().plus(rel.getData()), getUnit());
+            return instantiateAbs(this.getData().plus(abs.getData()), getUnit());
         }
 
         /** {@inheritDoc} */

@@ -381,9 +381,9 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("designforextension")
-        public DoubleVector.Rel<U> minus(final DoubleVector.Abs<U> rel) throws ValueException
+        public DoubleVector.Rel<U> minus(final DoubleVector.Abs<U> abs) throws ValueException
         {
-            return instantiateRel(this.getData().minus(rel.getData()), getUnit());
+            return instantiateRel(this.getData().minus(abs.getData()), getUnit());
         }
 
         /**********************************************************************************/
