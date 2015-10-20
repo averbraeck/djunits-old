@@ -595,6 +595,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
      * @param abs boolean; if true; the result of the constructor is expected to be Absolute; if false; the result of the
      *            constructor is expected to be relative
      * @param doubleType boolean; if true; the args argument is array of double; of false; the args argument is array of float
+     * @return constructed object
      * @throws NoSuchMethodException
      * @throws SecurityException
      * @throws InstantiationException
