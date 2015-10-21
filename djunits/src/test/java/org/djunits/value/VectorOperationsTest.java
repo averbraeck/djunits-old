@@ -14,12 +14,17 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import org.djunits.unit.AnglePlaneUnit;
+import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.Unit;
 import org.djunits.unit.unitsystem.UnitSystem;
+import org.djunits.util.ClassUtil;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
+import org.djunits.value.vdouble.vector.AnglePlaneVector;
 import org.djunits.value.vdouble.vector.DoubleVector;
 import org.djunits.value.vdouble.vector.DoubleVectorInterface;
 import org.djunits.value.vdouble.vector.MutableDoubleVectorInterface;
+import org.djunits.value.vdouble.vector.TemperatureVector;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.djunits.value.vfloat.vector.FloatVector;
 import org.junit.Assert;
@@ -585,9 +590,19 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
      */
     private String constructorToString(Constructor<?> constructor)
     {
+        return paramsToString(constructor.getParameterTypes());
+    }
+
+    /**
+     * Return a string with the types of all types of a class array.
+     * @param params Class&lt;?&gt;[]; the class array
+     * @return String
+     */
+    private String paramsToString(Class<?>[] params)
+    {
         StringBuilder result = new StringBuilder();
         String separator = "(";
-        for (Class<?> parType : constructor.getParameterTypes())
+        for (Class<?> parType : params)
         {
             result.append(separator + parType);
             separator = ", ";
@@ -985,31 +1000,19 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
                     verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
              */
 
-            left =
-                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, abs, doubleType);
-            Object compatibleRight = null;
-            if (!vectorClass.getName().contains("Money") && !vectorClass.getName().contains("Dimensionless")
-                    && !vectorClass.getName().contains("Temperature"))
+        }
+        left =
+                findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
+                        storageType }, abs, doubleType);
+        for (Method m : vectorClass.getMethods())
+        {
+            if (m.getName().equals("multiplyBy"))
             {
-                // Construct a new unit to test mixed unit plus and minus
-                Class<?> unitClass = getUnitClass(vectorClass);
-                UnitSystem unitSystem = UnitSystem.SI_DERIVED;
-                Unit<?> referenceUnit;
-                // Call the getUnit method of left
-                Method getUnitMethod = vectorClass.getMethod("getUnit");
-                referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
-                Constructor<?> unitConstructor =
-                        unitClass.getConstructor(String.class, String.class, UnitSystem.class, unitClass, double.class);
-                Object newUnit = unitConstructor.newInstance("7fullName", "7abbr", unitSystem, referenceUnit, 7d);
-                // System.out.println("new unit prints like " + newUnit);
-                compatibleRight =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value, newUnit, storageType }, abs, doubleType);
-                // compatibleRight =
-                // abs ? constructor.newInstance((float) value, newUnit)
-                // : constructor.newInstance((float) value, newUnit);
-                System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
+                System.out.println("Method " + m.getName() + paramsToString(m.getParameterTypes()));
             }
+        }
+        if (mutable)
+        {
             Method multiplyBy = vectorClass.getMethod("multiplyBy", new Class[] { double.class });
             multiplyBy.setAccessible(true); // FIXME this should not be necessary
             result = multiplyBy.invoke(left, Math.PI);
@@ -1040,73 +1043,77 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
             }
         }
-    }
-
-    /*-
-            Method divideBy = vectorClass.getDeclaredMethod("divideBy", new Class[] { double.class });
-            result = divideBy.invoke(left, Math.PI);
-            assertEquals("Result of operation", value / Math.PI,
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method plus = vectorClass.getDeclaredMethod("plus", new Class[] { vectorClass });
-            result = plus.invoke(left, left);
-            assertEquals("Result of operation", value + value,
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            if (null != compatibleRight)
+        Object compatibleRight = null;
+        Object compatibleRel = null;
+        if (!vectorClass.getName().contains("Money") && !vectorClass.getName().contains("Dimensionless")
+                && !vectorClass.getName().contains("Temperature"))
+        {
+            // Construct a new unit to test mixed unit plus and minus
+            Class<?> unitClass = getUnitClass(vectorClass);
+            UnitSystem unitSystem = UnitSystem.SI_DERIVED;
+            Unit<?> referenceUnit;
+            // Call the getUnit method of left
+            Method getUnitMethod = vectorClass.getMethod("getUnit");
+            referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
+            Constructor<?> unitConstructor =
+                    unitClass.getConstructor(String.class, String.class, UnitSystem.class, unitClass, double.class);
+            Object newUnit = unitConstructor.newInstance("7fullName", "7abbr", unitSystem, referenceUnit, 7d);
+            // System.out.println("new unit prints like " + newUnit);
+            compatibleRight =
+                    findAndExecuteConstructor(vectorClass, new Object[] { value, newUnit, storageType }, abs, doubleType);
+            // System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
+            if (abs)
             {
-                result = plus.invoke(left, compatibleRight);
-                assertEquals("Result of mixed operation", 8 * value,
-                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-                // Swap the operands
-                System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
-                        + left.getClass().getName());
-                plus = vectorClass.getDeclaredMethod("plus", new Class[] { compatibleRight.getClass() });
-                result = plus.invoke(compatibleRight, left);
-                assertEquals("Result of mixed operation", 8 * value,
-                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-                if (vectorClass.getName().contains("$Rel"))
+                System.out.println("Trying to make a compatible Rel");
+                String className = vectorClass.getName();
+                className = className.replaceFirst("Abs", "Rel");
+                Class<?> relClass = Class.forName(className);
+                compatibleRel =
+                        findAndExecuteConstructor(relClass, new Object[] { value, newUnit, storageType }, false, doubleType);
+                // System.out.println("compatibleRel prints like \"" + compatibleRight + "\"");
+            }
+        }
+        if (null != compatibleRight)
+        {
+            left =
+                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
+                            storageType }, abs, doubleType);
+            // System.out.print(listMethods(vectorClass, "plus", "\t"));
+            // System.out.println("Mutable is " + mutable);
+            if (!mutable)
+            { // FIXME: should also work for mutable and mix of mutable and immutable
+                // System.out.println("Type of right is " + compatibleRight.getClass());
+                if (!abs)
                 {
-                    // Make an Absolute for one operand
-                    String absScalarClassName = vectorClass.getName().replace("$Rel", "$Abs");
-                    Class<?> absScalarClass = Class.forName(absScalarClassName);
-                    Constructor<?> absScalarConstructor =
-                            absScalarClass.getConstructor(doubleType ? double.class : float.class,
-                                    getUnitClass(absScalarClass));
-                    Object absOperand = null;
-                    System.out.println("unit is " + getUnitClass(absScalarClass));
-                    if (doubleType)
+                    Method plus =
+                            ClassUtil.resolveMethod(vectorClass, "plus", new Class<?>[] { compatibleRight.getClass()
+                                    .getSuperclass() });
+                    plus.setAccessible(true);
+                    result = plus.invoke(left, compatibleRight);
+                    for (int i = 0; i < doubleValue.length; i++)
                     {
-                        absOperand =
-                                absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
+                        assertEquals("Result of mixed operation", 8 * doubleValue[i],
+                                verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i), 0.01);
                     }
-                    else
+                }
+                if (null != compatibleRel)
+                {
+                    // System.out.print(listMethods(vectorClass, "plus", "\t"));
+                    // System.out.println("Type of rel is " + compatibleRel.getClass());
+                    Method plus =
+                            ClassUtil.resolveMethod(vectorClass, "plus", new Class<?>[] { compatibleRel.getClass()
+                                    .getSuperclass() });
+                    plus.setAccessible(true);
+                    result = plus.invoke(left, compatibleRel);
+                    for (int i = 0; i < doubleValue.length; i++)
                     {
-                        absOperand =
-                                absScalarConstructor.newInstance((float) value,
-                                        getSIUnitInstance(getUnitClass(absScalarClass)));
+                        assertEquals("Result of mixed operation", 8 * doubleValue[i],
+                                verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i), 0.01);
                     }
-                    // abs plus rel yields abs
-                    plus = absScalarClass.getDeclaredMethod("plus", vectorClass);
-                    result = plus.invoke(absOperand, left);
-                    assertEquals("Result of mixed abs + rel", 2 * value,
-                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
-                    Method toAbs = compatibleRight.getClass().getDeclaredMethod("toAbs");
-                    Object absCompatible = toAbs.invoke(compatibleRight);
-                    result = plus.invoke(absCompatible, left);
-                    assertEquals("Result of mixed compatible abs + rel", 8 * value,
-                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
-                    // rel plus abs yields abs
-                    plus = vectorClass.getDeclaredMethod("plus", absScalarClass);
-                    result = plus.invoke(left, absOperand);
-                    assertEquals("Result of mixed rel + abs", 2 * value,
-                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
-                    result = plus.invoke(left, absCompatible);
-                    assertEquals("Result of mixed rel + compatible abs", 8 * value,
-                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
                 }
             }
         }
+        /*-
         Method minus = vectorClass.getDeclaredMethod("minus", new Class[] { vectorClass });
         result = minus.invoke(left, left);
         assertEquals("Result of minus", 0, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result, XXXX), 0.01);
@@ -1147,7 +1154,27 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
                         verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result, XXXX), 0.01);
             }
         }
+         */
     }
+
+    /**
+     * List all methods matching the given name.
+     * @param theClass Class&lt;?&gt;; the class
+     * @param name String; the name of the method, or null to list all methods in the class
+     * @param prefix String; prefix for each line in the result;
+     * @return String
+     */
+    public String listMethods(final Class<?> theClass, final String name, final String prefix)
+    {
+        StringBuilder result = new StringBuilder();
+        for (Method m : theClass.getMethods())
+        {
+            if (null == name || name.equals(m.getName()))
+            {
+                result.append(prefix + m.getName() + paramsToString(m.getParameterTypes()) + "\r\n");
+            }
+        }
+        return result.toString();
     }
 
     /**
@@ -1229,9 +1256,16 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
     /**
      * Prove (?) that order of items does not change in Arrays.stream(a).parallel().toArray().
      * @param args String[]; command line arguments; not used
+     * @throws ValueException
      */
-    public static void main(String[] args)
+    public static void main(String[] args) throws ValueException
     {
+
+        TemperatureVector.Rel tvr =
+                new TemperatureVector.Rel(new double[] { 1, 2, 3 }, TemperatureUnit.KELVIN, StorageType.DENSE);
+        AnglePlaneVector.Rel apvr = new AnglePlaneVector.Rel(new double[] { 5, 6, 7 }, AnglePlaneUnit.SI, StorageType.DENSE);
+        tvr.plus(tvr);
+
         int size = 100000000;
         int[] a = new int[size];
         for (int i = 0; i < size; i++)
