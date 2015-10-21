@@ -15,6 +15,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.djunits.unit.Unit;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.djunits.value.vdouble.vector.DoubleVector;
 import org.djunits.value.vdouble.vector.DoubleVectorInterface;
@@ -760,8 +761,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
-        double[] doubleValue = { 1.23456, 2.34567, 3.45678 };
-        float[] floatValue = { 1.23456f, 2.34567f, 3.45678f };
+        double[] doubleValue = { 1.23456, -2.34567, 3.45678 };
+        float[] floatValue = { 1.23456f, -2.34567f, 3.45678f };
         Object value = doubleType ? doubleValue : floatValue;
         Object left =
                 findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
@@ -816,7 +817,12 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             for (int i = 0; i < doubleValue.length; i++)
             {
                 double resultElement = verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i);
-                assertEquals("value check", doubleType ? (doubleValue[i] + 42d) : (floatValue[i] + 42f), resultElement, 0.00001);
+                assertEquals("value check result", doubleType ? (doubleValue[i] + 42d) : (floatValue[i] + 42f), resultElement,
+                        0.00001);
+                // Check that original is also modified
+                double originalElement = verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i);
+                assertEquals("value check original", doubleType ? (doubleValue[i] + 42d) : (floatValue[i] + 42f),
+                        originalElement, 0.00001);
             }
             left =
                     findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
@@ -827,15 +833,31 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             {
                 double resultElement = verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i);
                 assertEquals("value check", doubleType ? (doubleValue[i] - 42d) : (floatValue[i] - 42f), resultElement, 0.00001);
+                // Check that original is also modified
+                double originalElement = verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i);
+                assertEquals("value check original", doubleType ? (doubleValue[i] - 42d) : (floatValue[i] - 42f),
+                        originalElement, 0.00001);
             }
             left =
                     findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
                             storageType }, abs, doubleType);
-            /*-
-            Method methodAbs = vectorClass.getDeclaredMethod("abs", new Class[] {});
+
+            Method methodAbs = vectorClass.getMethod("abs", new Class[] {});
+            methodAbs.setAccessible(true); // FIXME this should not be necessary
             result = methodAbs.invoke(left);
-            assertEquals("Result of operation", Math.abs(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
+            for (int i = 0; i < doubleValue.length; i++)
+            {
+                assertEquals("Result of operation", doubleType ? Math.abs(doubleValue[i]) : ((float) Math.abs(doubleValue[i])),
+                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i), 0.01);
+                // Check that original is also modified
+                assertEquals("Result of operation", doubleType ? Math.abs(doubleValue[i]) : ((float) Math.abs(doubleValue[i])),
+                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
+            }
+            // For now we'll believe that the other math methods are correctly tested elsewhere
+            /*-
+            left =
+                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
+                            storageType }, abs, doubleType);
 
             Method asin = vectorClass.getDeclaredMethod("asin", new Class[] {});
             result = asin.invoke(left);
@@ -961,7 +983,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             result = pow.invoke(left, Math.PI);
             assertEquals("Result of operation", Math.pow(value, Math.PI),
                     verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
+             */
 
+            left =
+                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
+                            storageType }, abs, doubleType);
             Object compatibleRight = null;
             if (!vectorClass.getName().contains("Money") && !vectorClass.getName().contains("Dimensionless")
                     && !vectorClass.getName().contains("Temperature"))
@@ -976,134 +1002,152 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
                 Constructor<?> unitConstructor =
                         unitClass.getConstructor(String.class, String.class, UnitSystem.class, unitClass, double.class);
                 Object newUnit = unitConstructor.newInstance("7fullName", "7abbr", unitSystem, referenceUnit, 7d);
-                System.out.println("new unit prints like " + newUnit);
-                if (doubleType)
-                {
-                    compatibleRight =
-                            abs ? (DoubleScalar.Abs<?>) constructor.newInstance(value, newUnit)
-                                    : (DoubleScalar.Rel<?>) constructor.newInstance(value, newUnit);
-                }
-                else
-                {
-                    compatibleRight =
-                            abs ? (FloatScalar.Abs<?>) constructor.newInstance((float) value, newUnit)
-                                    : (FloatScalar.Rel<?>) constructor.newInstance((float) value, newUnit);
-                }
-                // System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
+                // System.out.println("new unit prints like " + newUnit);
+                compatibleRight =
+                        findAndExecuteConstructor(vectorClass, new Object[] { value, newUnit, storageType }, abs, doubleType);
+                // compatibleRight =
+                // abs ? constructor.newInstance((float) value, newUnit)
+                // : constructor.newInstance((float) value, newUnit);
+                System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
             }
-            if (!abs)
+            Method multiplyBy = vectorClass.getMethod("multiplyBy", new Class[] { double.class });
+            multiplyBy.setAccessible(true); // FIXME this should not be necessary
+            result = multiplyBy.invoke(left, Math.PI);
+            for (int i = 0; i < doubleValue.length; i++)
             {
-                Method multiplyBy = vectorClass.getDeclaredMethod("multiplyBy", new Class[] { double.class });
-                result = multiplyBy.invoke(left, Math.PI);
-                assertEquals("Result of operation", Math.PI * value,
-                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-                Method divideBy = vectorClass.getDeclaredMethod("divideBy", new Class[] { double.class });
-                result = divideBy.invoke(left, Math.PI);
-                assertEquals("Result of operation", value / Math.PI,
-                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-                Method plus = vectorClass.getDeclaredMethod("plus", new Class[] { vectorClass });
-                result = plus.invoke(left, left);
-                assertEquals("Result of operation", value + value,
-                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-                if (null != compatibleRight)
-                {
-                    result = plus.invoke(left, compatibleRight);
-                    assertEquals("Result of mixed operation", 8 * value,
-                            verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-                    // Swap the operands
-                    System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
-                            + left.getClass().getName());
-                    plus = vectorClass.getDeclaredMethod("plus", new Class[] { compatibleRight.getClass() });
-                    result = plus.invoke(compatibleRight, left);
-                    assertEquals("Result of mixed operation", 8 * value,
-                            verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-                    if (vectorClass.getName().contains("$Rel"))
-                    {
-                        // Make an Absolute for one operand
-                        String absScalarClassName = vectorClass.getName().replace("$Rel", "$Abs");
-                        Class<?> absScalarClass = Class.forName(absScalarClassName);
-                        Constructor<?> absScalarConstructor =
-                                absScalarClass.getConstructor(doubleType ? double.class : float.class,
-                                        getUnitClass(absScalarClass));
-                        Object absOperand = null;
-                        System.out.println("unit is " + getUnitClass(absScalarClass));
-                        if (doubleType)
-                        {
-                            absOperand =
-                                    absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
-                        }
-                        else
-                        {
-                            absOperand =
-                                    absScalarConstructor.newInstance((float) value,
-                                            getSIUnitInstance(getUnitClass(absScalarClass)));
-                        }
-                        // abs plus rel yields abs
-                        plus = absScalarClass.getDeclaredMethod("plus", vectorClass);
-                        result = plus.invoke(absOperand, left);
-                        assertEquals("Result of mixed abs + rel", 2 * value,
-                                verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
-                        Method toAbs = compatibleRight.getClass().getDeclaredMethod("toAbs");
-                        Object absCompatible = toAbs.invoke(compatibleRight);
-                        result = plus.invoke(absCompatible, left);
-                        assertEquals("Result of mixed compatible abs + rel", 8 * value,
-                                verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
-                        // rel plus abs yields abs
-                        plus = vectorClass.getDeclaredMethod("plus", absScalarClass);
-                        result = plus.invoke(left, absOperand);
-                        assertEquals("Result of mixed rel + abs", 2 * value,
-                                verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
-                        result = plus.invoke(left, absCompatible);
-                        assertEquals("Result of mixed rel + compatible abs", 8 * value,
-                                verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
-                    }
-                }
+                assertEquals("Result of operation", doubleType ? (doubleValue[i] * Math.PI)
+                        : ((float) (doubleValue[i] * Math.PI)),
+                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i), 0.01);
+                // Check that original is also modified
+                assertEquals("Result of operation", doubleType ? (doubleValue[i] * Math.PI)
+                        : ((float) (doubleValue[i] * Math.PI)),
+                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
             }
-            Method minus = vectorClass.getDeclaredMethod("minus", new Class[] { vectorClass });
-            result = minus.invoke(left, left);
-            assertEquals("Result of minus", 0, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result, XXXX), 0.01);
+            left =
+                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
+                            storageType }, abs, doubleType);
+            Method divideBy = vectorClass.getMethod("divideBy", new Class[] { double.class });
+            divideBy.setAccessible(true); // FIXME this should not be necessary
+            result = divideBy.invoke(left, Math.PI);
+            for (int i = 0; i < doubleValue.length; i++)
+            {
+                assertEquals("Result of operation", doubleType ? (doubleValue[i] / Math.PI)
+                        : ((float) (doubleValue[i] / Math.PI)),
+                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i), 0.01);
+                // Check that original is also modified
+                assertEquals("Result of operation", doubleType ? (doubleValue[i] / Math.PI)
+                        : ((float) (doubleValue[i] / Math.PI)),
+                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
+            }
+        }
+    }
+
+    /*-
+            Method divideBy = vectorClass.getDeclaredMethod("divideBy", new Class[] { double.class });
+            result = divideBy.invoke(left, Math.PI);
+            assertEquals("Result of operation", value / Math.PI,
+                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
+
+            Method plus = vectorClass.getDeclaredMethod("plus", new Class[] { vectorClass });
+            result = plus.invoke(left, left);
+            assertEquals("Result of operation", value + value,
+                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
+
             if (null != compatibleRight)
             {
-                result = minus.invoke(left, compatibleRight);
-                assertEquals("Result of minus with compatible arg", -6 * value,
-                        verifyAbsRelPrecisionAndExtractSI(false, doubleType, result, XXXX), 0.01);
-            }
-            if (vectorClass.getName().contains("$Rel") || vectorClass.getName().contains("$Abs"))
-            {
-                // Make an Absolute for one operand
-                String absScalarClassName = vectorClass.getName().replace("$Rel", "$Abs");
-                Class<?> absScalarClass = Class.forName(absScalarClassName);
-                Constructor<?> absScalarConstructor =
-                        absScalarClass.getConstructor(doubleType ? double.class : float.class, getUnitClass(absScalarClass));
-                Object absOperand = null;
-                System.out.println("unit is " + getUnitClass(absScalarClass));
-                if (doubleType)
+                result = plus.invoke(left, compatibleRight);
+                assertEquals("Result of mixed operation", 8 * value,
+                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
+                // Swap the operands
+                System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
+                        + left.getClass().getName());
+                plus = vectorClass.getDeclaredMethod("plus", new Class[] { compatibleRight.getClass() });
+                result = plus.invoke(compatibleRight, left);
+                assertEquals("Result of mixed operation", 8 * value,
+                        verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
+                if (vectorClass.getName().contains("$Rel"))
                 {
-                    absOperand = absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
-                }
-                else
-                {
-                    absOperand =
-                            absScalarConstructor.newInstance((float) value, getSIUnitInstance(getUnitClass(absScalarClass)));
-                }
-                minus = absScalarClass.getDeclaredMethod("minus", vectorClass);
-                result = minus.invoke(absOperand, left);
-                assertEquals("Result of abs or rel minus rel", 0,
-                        verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result, XXXX), 0.01);
-                if (null != compatibleRight && vectorClass.getName().contains("$Rel"))
-                {
+                    // Make an Absolute for one operand
+                    String absScalarClassName = vectorClass.getName().replace("$Rel", "$Abs");
+                    Class<?> absScalarClass = Class.forName(absScalarClassName);
+                    Constructor<?> absScalarConstructor =
+                            absScalarClass.getConstructor(doubleType ? double.class : float.class,
+                                    getUnitClass(absScalarClass));
+                    Object absOperand = null;
+                    System.out.println("unit is " + getUnitClass(absScalarClass));
+                    if (doubleType)
+                    {
+                        absOperand =
+                                absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
+                    }
+                    else
+                    {
+                        absOperand =
+                                absScalarConstructor.newInstance((float) value,
+                                        getSIUnitInstance(getUnitClass(absScalarClass)));
+                    }
+                    // abs plus rel yields abs
+                    plus = absScalarClass.getDeclaredMethod("plus", vectorClass);
+                    result = plus.invoke(absOperand, left);
+                    assertEquals("Result of mixed abs + rel", 2 * value,
+                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
                     Method toAbs = compatibleRight.getClass().getDeclaredMethod("toAbs");
                     Object absCompatible = toAbs.invoke(compatibleRight);
-                    result = minus.invoke(absCompatible, left);
-                    assertEquals("Result of compatible abs or rel minus rel", 6 * value,
-                            verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result, XXXX), 0.01);
+                    result = plus.invoke(absCompatible, left);
+                    assertEquals("Result of mixed compatible abs + rel", 8 * value,
+                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
+                    // rel plus abs yields abs
+                    plus = vectorClass.getDeclaredMethod("plus", absScalarClass);
+                    result = plus.invoke(left, absOperand);
+                    assertEquals("Result of mixed rel + abs", 2 * value,
+                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
+                    result = plus.invoke(left, absCompatible);
+                    assertEquals("Result of mixed rel + compatible abs", 8 * value,
+                            verifyAbsRelPrecisionAndExtractSI(true, doubleType, result, XXXX), 0.01);
                 }
             }
-             */
         }
+        Method minus = vectorClass.getDeclaredMethod("minus", new Class[] { vectorClass });
+        result = minus.invoke(left, left);
+        assertEquals("Result of minus", 0, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result, XXXX), 0.01);
+        if (null != compatibleRight)
+        {
+            result = minus.invoke(left, compatibleRight);
+            assertEquals("Result of minus with compatible arg", -6 * value,
+                    verifyAbsRelPrecisionAndExtractSI(false, doubleType, result, XXXX), 0.01);
+        }
+        if (vectorClass.getName().contains("$Rel") || vectorClass.getName().contains("$Abs"))
+        {
+            // Make an Absolute for one operand
+            String absScalarClassName = vectorClass.getName().replace("$Rel", "$Abs");
+            Class<?> absScalarClass = Class.forName(absScalarClassName);
+            Constructor<?> absScalarConstructor =
+                    absScalarClass.getConstructor(doubleType ? double.class : float.class, getUnitClass(absScalarClass));
+            Object absOperand = null;
+            System.out.println("unit is " + getUnitClass(absScalarClass));
+            if (doubleType)
+            {
+                absOperand = absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
+            }
+            else
+            {
+                absOperand =
+                        absScalarConstructor.newInstance((float) value, getSIUnitInstance(getUnitClass(absScalarClass)));
+            }
+            minus = absScalarClass.getDeclaredMethod("minus", vectorClass);
+            result = minus.invoke(absOperand, left);
+            assertEquals("Result of abs or rel minus rel", 0,
+                    verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result, XXXX), 0.01);
+            if (null != compatibleRight && vectorClass.getName().contains("$Rel"))
+            {
+                Method toAbs = compatibleRight.getClass().getDeclaredMethod("toAbs");
+                Object absCompatible = toAbs.invoke(compatibleRight);
+                result = minus.invoke(absCompatible, left);
+                assertEquals("Result of compatible abs or rel minus rel", 6 * value,
+                        verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result, XXXX), 0.01);
+            }
+        }
+    }
     }
 
     /**
