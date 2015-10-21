@@ -7,14 +7,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
-import org.djunits.unit.AccelerationUnit;
 import org.djunits.unit.Unit;
 import org.djunits.unit.unitsystem.UnitSystem;
-import org.djunits.value.vdouble.scalar.Acceleration;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
-import org.djunits.value.vdouble.scalar.TypedDoubleScalarRel;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.junit.Assert;
 import org.junit.Test;
@@ -710,7 +706,7 @@ public class ScalarOperationsTest
             Constructor<?> unitConstructor =
                 unitClass.getConstructor(String.class, String.class, UnitSystem.class, unitClass, double.class);
             Object newUnit = unitConstructor.newInstance("7fullName", "7abbr", unitSystem, referenceUnit, 7d);
-            System.out.println("new unit prints like " + newUnit);
+            // System.out.println("new unit prints like " + newUnit);
             if (doubleType)
             {
                 compatibleRight =
@@ -752,8 +748,8 @@ public class ScalarOperationsTest
                 assertEquals("Result of mixed operation", 8 * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType,
                     result), 0.01);
                 // Swap the operands
-                System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
-                    + left.getClass().getName());
+                // System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
+                //    + left.getClass().getName());
                 plus =
                     scalarClass.getSuperclass().getMethod("plus",
                         new Class[]{compatibleRight.getClass().getSuperclass()});
@@ -769,7 +765,7 @@ public class ScalarOperationsTest
                         absScalarClass.getConstructor(doubleType ? double.class : float.class,
                             getUnitClass(absScalarClass));
                     Object absOperand = null;
-                    System.out.println("unit is " + getUnitClass(absScalarClass));
+                    // System.out.println("unit is " + getUnitClass(absScalarClass));
                     if (doubleType)
                     {
                         absOperand =
@@ -820,7 +816,7 @@ public class ScalarOperationsTest
             Constructor<?> absScalarConstructor =
                 absScalarClass.getConstructor(doubleType ? double.class : float.class, getUnitClass(absScalarClass));
             Object absOperand = null;
-            System.out.println("unit is " + getUnitClass(absScalarClass));
+            // System.out.println("unit is " + getUnitClass(absScalarClass));
             if (doubleType)
             {
                 absOperand = absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
