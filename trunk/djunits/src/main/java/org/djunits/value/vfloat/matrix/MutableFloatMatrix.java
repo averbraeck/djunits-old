@@ -289,7 +289,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatMatrix.Abs<U> divideBy(final float factor)
         {
-            this.data.multiplyBy(factor);
+            this.data.divideBy(factor);
             return this;
         }
 
@@ -791,7 +791,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatMatrix.Rel<U> divideBy(final float factor)
         {
-            this.data.multiplyBy(factor);
+            this.data.divideBy(factor);
             return this;
         }
 
