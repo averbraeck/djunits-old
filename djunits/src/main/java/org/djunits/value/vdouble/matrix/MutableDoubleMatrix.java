@@ -289,7 +289,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleMatrix.Abs<U> divideBy(final double factor)
         {
-            this.data.multiplyBy(factor);
+            this.data.divideBy(factor);
             return this;
         }
 
@@ -791,7 +791,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleMatrix.Rel<U> divideBy(final double factor)
         {
-            this.data.multiplyBy(factor);
+            this.data.divideBy(factor);
             return this;
         }
 

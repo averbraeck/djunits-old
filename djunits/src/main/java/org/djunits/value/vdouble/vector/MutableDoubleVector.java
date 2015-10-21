@@ -348,7 +348,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleVector.Abs<U> divideBy(final double factor)
         {
-            this.data.multiplyBy(factor);
+            this.data.divideBy(factor);
             return this;
         }
 
@@ -906,7 +906,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleVector.Rel<U> divideBy(final double factor)
         {
-            this.data.multiplyBy(factor);
+            this.data.divideBy(factor);
             return this;
         }
 

@@ -348,7 +348,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatVector.Abs<U> divideBy(final float factor)
         {
-            this.data.multiplyBy(factor);
+            this.data.divideBy(factor);
             return this;
         }
 
@@ -906,7 +906,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatVector.Rel<U> divideBy(final float factor)
         {
-            this.data.multiplyBy(factor);
+            this.data.divideBy(factor);
             return this;
         }
 
