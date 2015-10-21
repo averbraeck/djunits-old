@@ -14,17 +14,13 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.djunits.unit.AnglePlaneUnit;
-import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.Unit;
 import org.djunits.unit.unitsystem.UnitSystem;
 import org.djunits.util.ClassUtil;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
-import org.djunits.value.vdouble.vector.AnglePlaneVector;
 import org.djunits.value.vdouble.vector.DoubleVector;
 import org.djunits.value.vdouble.vector.DoubleVectorInterface;
 import org.djunits.value.vdouble.vector.MutableDoubleVectorInterface;
-import org.djunits.value.vdouble.vector.TemperatureVector;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.djunits.value.vfloat.vector.FloatVector;
 import org.junit.Assert;
@@ -584,16 +580,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
     }
 
     /**
-     * Return a String with detailed information about a Constructor.
-     * @param constructor Constructor&lt;?&gt;; the Constructor
-     * @return String
-     */
-    private String constructorToString(Constructor<?> constructor)
-    {
-        return paramsToString(constructor.getParameterTypes());
-    }
-
-    /**
      * Return a string with the types of all types of a class array.
      * @param params Class&lt;?&gt;[]; the class array
      * @return String
@@ -804,9 +790,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
                 }
                 // FIXME - Peter does not know how to write this with generics...
                 // Does not work yet because mixed mutable immutable minus does not exist yet
-                Object right =
-                        findAndExecuteConstructor(vectorClass, new Object[] { thirdValue,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType);
+                // Object right =
+                // findAndExecuteConstructor(vectorClass, new Object[] { thirdValue,
+                // getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType);
                 // System.out.println("left : " + left.getClass() + " right : " + right.getClass());
                 // System.out.println(Arrays.toString(left.getClass().getMethods()).replaceAll(" org", "\norg"));
                 // System.out.println("super class " + right.getClass().getSuperclass());
@@ -824,7 +810,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
         if (mutable)
         {
             Object difference = doubleType ? 42d : 42f;
-            Method[] methods = vectorClass.getMethods();
             Class<?> argumentClass = doubleType ? double.class : float.class;
             Method incrementBy = vectorClass.getMethod("incrementBy", new Class<?>[] { argumentClass });
             incrementBy = vectorClass.getMethod("incrementBy", new Class<?>[] { argumentClass });
@@ -1004,13 +989,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
         left =
                 findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
                         storageType }, abs, doubleType);
-        for (Method m : vectorClass.getMethods())
-        {
-            if (m.getName().equals("multiplyBy"))
-            {
-                System.out.println("Method " + m.getName() + paramsToString(m.getParameterTypes()));
-            }
-        }
         if (mutable)
         {
             Method multiplyBy = vectorClass.getMethod("multiplyBy", new Class[] { double.class });
@@ -1064,7 +1042,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             // System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
             if (abs)
             {
-                System.out.println("Trying to make a compatible Rel");
                 String className = vectorClass.getName();
                 className = className.replaceFirst("Abs", "Rel");
                 Class<?> relClass = Class.forName(className);
@@ -1118,7 +1095,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
                         storageType }, abs, doubleType);
         if (!mutable)
         {
-            System.out.print(listMethods(vectorClass, "minus", "\t"));
+            // System.out.print(listMethods(vectorClass, "minus", "\t"));
             Method minus = vectorClass.getMethod("minus", new Class[] { vectorClass.getSuperclass() });
             minus.setAccessible(true);
             result = minus.invoke(left, left);
@@ -1138,37 +1115,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
                     assertEquals("Result of minus with compatible arg", -6 * doubleValue[i],
                             verifyAbsRelPrecisionAndExtractSI(false, doubleType, storageType, result, i), 0.01);
                 }
-            }
-            if (vectorClass.getName().contains("$Rel") || vectorClass.getName().contains("$Abs"))
-            {
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType);
-                // Make an Absolute for one operand
-                String absVectorClassName = vectorClass.getName().replace("$Rel", "$Abs");
-                Class<?> absVectorClass = Class.forName(absVectorClassName);
-                // Constructor<?> absVectorConstructor =
-                // absVectorClass.getConstructor(doubleType ? double.class : float.class, getUnitClass(absVectorClass));
-                // Object absOperand = null;
-                // System.out.println("unit is " + getUnitClass(absVectorClass));
-                // absOperand = absVectorConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absVectorClass)));
-                // minus = absVectorClass.getDeclaredMethod("minus", vectorClass);
-                // result = minus.invoke(absOperand, left);
-                // for (int i = 0; i < doubleValue.length; i++)
-                // {
-                // assertEquals("Result of abs or rel minus rel", 0,
-                // verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, storageType, result, i), 0.01);
-                // }
-                /*-
-                if (null != compatibleRight && vectorClass.getName().contains("$Rel"))
-                {
-                    Method toAbs = compatibleRight.getClass().getDeclaredMethod("toAbs");
-                    Object absCompatible = toAbs.invoke(compatibleRight);
-                    result = minus.invoke(absCompatible, left);
-                    assertEquals("Result of compatible abs or rel minus rel", 6 * value,
-                            verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result, XXXX), 0.01);
-                }
-                 */
             }
         }
     }
@@ -1276,12 +1222,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
      */
     public static void main(String[] args) throws ValueException
     {
-
-        TemperatureVector.Rel tvr =
-                new TemperatureVector.Rel(new double[] { 1, 2, 3 }, TemperatureUnit.KELVIN, StorageType.DENSE);
-        AnglePlaneVector.Rel apvr = new AnglePlaneVector.Rel(new double[] { 5, 6, 7 }, AnglePlaneUnit.SI, StorageType.DENSE);
-        tvr.plus(tvr);
-
         int size = 100000000;
         int[] a = new int[size];
         for (int i = 0; i < size; i++)
