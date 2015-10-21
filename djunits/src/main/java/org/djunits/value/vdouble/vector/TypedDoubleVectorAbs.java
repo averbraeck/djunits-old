@@ -24,7 +24,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <MA> the mutable absolute vector type
  * @param <S> the absolute scalar type
  */
-abstract class TypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDoubleVectorAbs<U, A, R, MA, S>, R extends TypedDoubleVectorRel<U, R, ?, ?>, MA extends MutableTypedDoubleVectorAbs<U, A, R, MA, S>, S extends DoubleScalar.Abs<U>>
+public abstract class TypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDoubleVectorAbs<U, A, R, MA, S>, R extends TypedDoubleVectorRel<U, R, ?, ?>, MA extends MutableTypedDoubleVectorAbs<U, A, R, MA, S>, S extends DoubleScalar.Abs<U>>
     extends DoubleVector.Abs<U>
 {
     /** */
