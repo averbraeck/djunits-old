@@ -1082,7 +1082,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             // System.out.println("Mutable is " + mutable);
             if (!mutable)
             { // FIXME: should also work for mutable and mix of mutable and immutable
-                // System.out.println("Type of right is " + compatibleRight.getClass());
+              // System.out.println("Type of right is " + compatibleRight.getClass());
                 if (!abs)
                 {
                     Method plus =
@@ -1113,48 +1113,64 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
                 }
             }
         }
-        /*-
-        Method minus = vectorClass.getDeclaredMethod("minus", new Class[] { vectorClass });
-        result = minus.invoke(left, left);
-        assertEquals("Result of minus", 0, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result, XXXX), 0.01);
-        if (null != compatibleRight)
+        left =
+                findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
+                        storageType }, abs, doubleType);
+        if (!mutable)
         {
-            result = minus.invoke(left, compatibleRight);
-            assertEquals("Result of minus with compatible arg", -6 * value,
-                    verifyAbsRelPrecisionAndExtractSI(false, doubleType, result, XXXX), 0.01);
+            System.out.print(listMethods(vectorClass, "minus", "\t"));
+            Method minus = vectorClass.getMethod("minus", new Class[] { vectorClass.getSuperclass() });
+            minus.setAccessible(true);
+            result = minus.invoke(left, left);
+            for (int i = 0; i < doubleValue.length; i++)
+            {
+                assertEquals("Result of minus", 0,
+                        verifyAbsRelPrecisionAndExtractSI(false, doubleType, storageType, result, i), 0.01);
+            }
+            if (null != compatibleRight)
+            {
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[] { value,
+                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType);
+                result = minus.invoke(left, compatibleRight);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of minus with compatible arg", -6 * doubleValue[i],
+                            verifyAbsRelPrecisionAndExtractSI(false, doubleType, storageType, result, i), 0.01);
+                }
+            }
+            if (vectorClass.getName().contains("$Rel") || vectorClass.getName().contains("$Abs"))
+            {
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[] { value,
+                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType);
+                // Make an Absolute for one operand
+                String absVectorClassName = vectorClass.getName().replace("$Rel", "$Abs");
+                Class<?> absVectorClass = Class.forName(absVectorClassName);
+                // Constructor<?> absVectorConstructor =
+                // absVectorClass.getConstructor(doubleType ? double.class : float.class, getUnitClass(absVectorClass));
+                // Object absOperand = null;
+                // System.out.println("unit is " + getUnitClass(absVectorClass));
+                // absOperand = absVectorConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absVectorClass)));
+                // minus = absVectorClass.getDeclaredMethod("minus", vectorClass);
+                // result = minus.invoke(absOperand, left);
+                // for (int i = 0; i < doubleValue.length; i++)
+                // {
+                // assertEquals("Result of abs or rel minus rel", 0,
+                // verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, storageType, result, i), 0.01);
+                // }
+                /*-
+                if (null != compatibleRight && vectorClass.getName().contains("$Rel"))
+                {
+                    Method toAbs = compatibleRight.getClass().getDeclaredMethod("toAbs");
+                    Object absCompatible = toAbs.invoke(compatibleRight);
+                    result = minus.invoke(absCompatible, left);
+                    assertEquals("Result of compatible abs or rel minus rel", 6 * value,
+                            verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result, XXXX), 0.01);
+                }
+                 */
+            }
         }
-        if (vectorClass.getName().contains("$Rel") || vectorClass.getName().contains("$Abs"))
-        {
-            // Make an Absolute for one operand
-            String absScalarClassName = vectorClass.getName().replace("$Rel", "$Abs");
-            Class<?> absScalarClass = Class.forName(absScalarClassName);
-            Constructor<?> absScalarConstructor =
-                    absScalarClass.getConstructor(doubleType ? double.class : float.class, getUnitClass(absScalarClass));
-            Object absOperand = null;
-            System.out.println("unit is " + getUnitClass(absScalarClass));
-            if (doubleType)
-            {
-                absOperand = absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
-            }
-            else
-            {
-                absOperand =
-                        absScalarConstructor.newInstance((float) value, getSIUnitInstance(getUnitClass(absScalarClass)));
-            }
-            minus = absScalarClass.getDeclaredMethod("minus", vectorClass);
-            result = minus.invoke(absOperand, left);
-            assertEquals("Result of abs or rel minus rel", 0,
-                    verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result, XXXX), 0.01);
-            if (null != compatibleRight && vectorClass.getName().contains("$Rel"))
-            {
-                Method toAbs = compatibleRight.getClass().getDeclaredMethod("toAbs");
-                Object absCompatible = toAbs.invoke(compatibleRight);
-                result = minus.invoke(absCompatible, left);
-                assertEquals("Result of compatible abs or rel minus rel", 6 * value,
-                        verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result, XXXX), 0.01);
-            }
-        }
-         */
     }
 
     /**
