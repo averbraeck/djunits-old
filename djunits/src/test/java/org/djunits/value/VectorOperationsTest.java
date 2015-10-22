@@ -23,6 +23,8 @@ import org.djunits.value.vdouble.vector.DoubleVectorInterface;
 import org.djunits.value.vdouble.vector.MutableDoubleVectorInterface;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.djunits.value.vfloat.vector.FloatVector;
+import org.djunits.value.vfloat.vector.FloatVectorInterface;
+import org.djunits.value.vfloat.vector.MutableFloatVectorInterface;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -416,7 +418,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
      * Verify the Absoluteness, Relativeness, and SI values of a DoubleVector or FloatVector.
      * @param abs boolean; expected Absolute- or Relative-ness
      * @param doubleType boolean; if true; double is expected; if false; float is expected
-     * @param storageType TODO
+     * @param storageType StorageType; DENSE or SPARSE
      * @param got the (DoubleVector?) object
      * @param expected double[] or float[] with expected values
      * @param precision double; maximum error of the results
@@ -467,7 +469,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             }
             FloatVector<?> fv = (FloatVector<?>) o;
             result = fv.getSI(index);
-            // TODO not implemented yet - assertEquals("StorageType", storageType, fv.getStorageType());
+            assertEquals("StorageType", storageType, fv.getStorageType());
         }
         if (o instanceof Absolute)
         {
@@ -513,6 +515,17 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
         Object value = doubleType ? doubleValue : floatValue;
         findAndTestConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType },
                 abs, doubleType, storageType, value);
+        // What is the corresponding Scalar type?
+        String scalarClassName = vectorClass.getName();
+        // System.out.println("name is " + scalarClassName);
+        scalarClassName = scalarClassName.replaceFirst("Vector", "");
+        // System.out.println("name is " + scalarClassName);
+        scalarClassName = scalarClassName.replaceFirst("vector", "scalar");
+        // System.out.println("name is " + scalarClassName);
+        scalarClassName = scalarClassName.replaceFirst("Mutable", "");
+        // System.out.println("name is " + scalarClassName);
+        Class<?> scalarClassAbsRel = Class.forName(scalarClassName);
+        // System.out.println("class is " + scalarClassAbsRel);
         if (doubleType)
         {
             List<Double> list = new ArrayList<Double>();
@@ -524,17 +537,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
                     new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType,
                     storageType, value);
             // Construct a list of scalar objects
-            // What is the corresponding Scalar type?
-            String scalarClassName = vectorClass.getName();
-            // System.out.println("name is " + scalarClassName);
-            scalarClassName = scalarClassName.replaceFirst("Vector", "");
-            // System.out.println("name is " + scalarClassName);
-            scalarClassName = scalarClassName.replaceFirst("vector", "scalar");
-            // System.out.println("name is " + scalarClassName);
-            scalarClassName = scalarClassName.replaceFirst("Mutable", "");
-            // System.out.println("name is " + scalarClassName);
-            Class<?> scalarClassAbsRel = Class.forName(scalarClassName);
-            // System.out.println("class is " + scalarClassAbsRel);
             Constructor<?> constructor =
                     scalarClassAbsRel.getConstructor(new Class<?>[] { double.class, getUnitClass(vectorClass) });
             List<Object> objectList = new ArrayList<Object>();
@@ -576,7 +578,37 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             findAndTestConstructor(vectorClass,
                     new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType,
                     storageType, value);
-            // TODO add and convert all other stuff from the Float version
+            // Construct a list of scalar objects
+            Constructor<?> constructor =
+                    scalarClassAbsRel.getConstructor(new Class<?>[] { double.class, getUnitClass(vectorClass) });
+            List<Object> objectList = new ArrayList<Object>();
+            for (Float f : list)
+            {
+                objectList.add(constructor.newInstance(f, getSIUnitInstance(getUnitClass(vectorClass))));
+            }
+            findAndTestConstructor(vectorClass, new Object[] { objectList, storageType }, abs, doubleType, storageType, value);
+            // Construct an array of the correct scalar objects
+            Object[] objectArray = (Object[]) Array.newInstance(scalarClassAbsRel, objectList.size());
+            for (int i = 0; i < objectList.size(); i++)
+            {
+                objectArray[i] = objectList.get(i);
+            }
+            findAndTestConstructor(vectorClass, new Object[] { objectArray, storageType }, abs, doubleType, storageType, value);
+            SortedMap<Integer, Object> map = new TreeMap<Integer, Object>();
+            for (int i = 0; i < objectList.size(); i++)
+            {
+                map.put(i, objectList.get(i));
+            }
+            // System.out.println("int is assignable from Integer ? " + int.class.isAssignableFrom(Integer.class));
+            findAndTestConstructor(vectorClass, new Object[] { map, objectList.size(), storageType }, abs, doubleType,
+                    storageType, value);
+            map.clear();
+            for (int i = 0; i < floatValue.length; i++)
+            {
+                map.put(i, floatValue[i]);
+            }
+            findAndTestConstructor(vectorClass, new Object[] { map, getSIUnitInstance(getUnitClass(vectorClass)),
+                    floatValue.length, storageType }, abs, doubleType, storageType, value);
         }
     }
 
@@ -805,7 +837,36 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
         }
         else
         {
-            // TODO implement for float
+            result = ((FloatVectorInterface<?>) left).toSparse();
+            verifyAbsRelPrecisionAndValues(abs, doubleType, StorageType.SPARSE, result, value, 0.0001);
+            result = ((FloatVectorInterface<?>) left).toDense();
+            verifyAbsRelPrecisionAndValues(abs, doubleType, StorageType.DENSE, result, value, 0.0001);
+            result = ((FloatVectorInterface<?>) left).mutable();
+            verifyAbsRelPrecisionAndValues(abs, doubleType, storageType, result, value, 0.0001);
+            result = ((MutableFloatVectorInterface<?>) result).immutable();
+            verifyAbsRelPrecisionAndValues(abs, doubleType, storageType, result, value, 0.0001);
+            if (abs)
+            {
+                double[] thirdValue = new double[floatValue.length];
+                double[] twoThirdValue = new double[floatValue.length];
+                for (int i = 0; i < thirdValue.length; i++)
+                {
+                    thirdValue[i] = floatValue[i] / 3;
+                    twoThirdValue[i] = 2 * thirdValue[i];
+                }
+                // FIXME - Peter does not know how to write this with generics...
+                // Does not work yet because mixed mutable immutable minus does not exist yet
+                // Object right =
+                // findAndExecuteConstructor(vectorClass, new Object[] { thirdValue,
+                // getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType);
+                // System.out.println("left : " + left.getClass() + " right : " + right.getClass());
+                // System.out.println(Arrays.toString(left.getClass().getMethods()).replaceAll(" org", "\norg"));
+                // System.out.println("super class " + right.getClass().getSuperclass());
+                // Method minus = left.getClass().getMethod("minus", new Class<?>[] { right.getClass().getSuperclass() });
+                // result = minus.invoke(left, right);
+                // result = left.minus(right);
+                // verifyAbsRelPrecisionAndValues(false, doubleType, storageType, result, twoThirdValue, 0.0001);
+            }
         }
 
         if (mutable)
@@ -821,13 +882,13 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             // System.out.println("type of difference is " + difference.getClass());
             if (doubleType)
             {
-                result = incrementBy.invoke(left, new Object[] { doubleDifference } );
+                result = incrementBy.invoke(left, new Object[] { doubleDifference });
             }
             else
             {
-                result = incrementBy.invoke(left, new Object[] { floatDifference } );
+                result = incrementBy.invoke(left, new Object[] { floatDifference });
             }
-            // This does NOT work: result = incrementBy.invoke(left, new Object[] { difference });  
+            // This does NOT work: result = incrementBy.invoke(left, new Object[] { difference });
             for (int i = 0; i < doubleValue.length; i++)
             {
                 double resultElement = verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i);
@@ -844,11 +905,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             Method decrementBy = vectorClass.getMethod("decrementBy", new Class<?>[] { argumentClass });
             if (doubleType)
             {
-                result = decrementBy.invoke(left, new Object[] { doubleDifference } );
+                result = decrementBy.invoke(left, new Object[] { doubleDifference });
             }
             else
             {
-                result = decrementBy.invoke(left, new Object[] { floatDifference } );
+                result = decrementBy.invoke(left, new Object[] { floatDifference });
             }
             // This does NOT work: result = decrementBy.invoke(left, new Object[] { difference });
             for (int i = 0; i < doubleValue.length; i++)
@@ -1014,7 +1075,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
                         storageType }, abs, doubleType);
         if (mutable)
         {
-            Method multiplyBy = vectorClass.getMethod("multiplyBy", new Class[] { doubleType ? double.class : float.class});
+            Method multiplyBy = vectorClass.getMethod("multiplyBy", new Class[] { doubleType ? double.class : float.class });
             multiplyBy.setAccessible(true); // FIXME this should not be necessary
             if (doubleType)
             {
@@ -1022,7 +1083,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             }
             else
             {
-                result = multiplyBy.invoke(left,  (float) Math.PI);
+                result = multiplyBy.invoke(left, (float) Math.PI);
             }
             // Does not work for float: result = multiplyBy.invoke(left, doubleType ? Math.PI : ((float) Math.PI));
             for (int i = 0; i < doubleValue.length; i++)
@@ -1038,15 +1099,15 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             left =
                     findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
                             storageType }, abs, doubleType);
-            Method divideBy = vectorClass.getMethod("divideBy", new Class[] { doubleType ? double.class : float.class});
+            Method divideBy = vectorClass.getMethod("divideBy", new Class[] { doubleType ? double.class : float.class });
             divideBy.setAccessible(true); // FIXME this should not be necessary
             if (doubleType)
             {
-                result = divideBy.invoke(left,  Math.PI);
+                result = divideBy.invoke(left, Math.PI);
             }
             else
             {
-                result = divideBy.invoke(left,  (float) Math.PI);
+                result = divideBy.invoke(left, (float) Math.PI);
             }
             // Does not work for float: result = divideBy.invoke(left, Math.PI);
             for (int i = 0; i < doubleValue.length; i++)
