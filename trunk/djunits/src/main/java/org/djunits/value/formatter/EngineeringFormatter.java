@@ -77,7 +77,7 @@ public final class EngineeringFormatter
         double max = Math.pow(10, room - roomForSignAndFraction);
         if (absVal < max - 0.5 && absVal > EFORMATLIMIT)
         {
-            // display as floating point number
+            // Express as floating point number.
             String format = String.format(FLOATFORMAT, room, room - 2);
             String result = String.format(format, val);
             int length = result.length();
@@ -86,16 +86,9 @@ public final class EngineeringFormatter
                 format = String.format(FLOATFORMAT, room, room - 2 + room - length);
                 result = String.format(format, val);
             }
-            /*-
-            if (result.length() > room)
-            {
-                format = String.format(floatFormat, room, room - 3 + room - length);
-                result = String.format(format, val);
-            }
-             */
             return result;
         }
-        // display in scientific notation using at least 2 digits for the exponent
+        // Express in scientific notation using at least 2 digits for the exponent.
         int roomForSignRadixAndExponent = val > 0 ? 6 : 7;
         String format = String.format(exponentFormat, room, room - roomForSignRadixAndExponent);
         String result = String.format(format, val);
@@ -106,7 +99,7 @@ public final class EngineeringFormatter
             result = String.format(format, val);
         }
         result = convertToEngineering(result);
-        if (result.length() < room) // exponent 100, or 101 was reduced to 99 which is one digit shorter
+        if (result.length() < room) // Exponent 100, or 101 was reduced to 99 which is one digit shorter
         {
             format = String.format(exponentFormat, room, 1 + room - length + room - roomForSignRadixAndExponent);
             result = convertToEngineering(String.format(format, val));
@@ -117,7 +110,7 @@ public final class EngineeringFormatter
     /**
      * Make the exponent of a floating point value a multiple of 3. Assumes that the first dot or comma is the radix symbol.
      * @param in String; String representation of a floating point value
-     * @return String;
+     * @return String; The engineering formatted value
      */
     public static String convertToEngineering(final String in)
     {
@@ -157,8 +150,8 @@ public final class EngineeringFormatter
         {
             return in; // No radix symbol encountered
         }
-        // shift the radix to the right
         pos++;
+        // Shift the radix to the right
         while (0 != exponent % 3)
         {
             String symbol = in.substring(pos, pos + 1);

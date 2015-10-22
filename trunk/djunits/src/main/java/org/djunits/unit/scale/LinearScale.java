@@ -1,7 +1,11 @@
 package org.djunits.unit.scale;
 
 /**
- * A Scale for linear transformations, e.g. for Length, Time, Area. 
+ * A Scale for linear transformations not involving a zero-offset, e.g. for Length, Time, Area. <br>
+ * A linear scale is a scale that is linearly relates a unit to the underlying SI standard unit. E.g. Mile is linearly related
+ * to meter (the SI unit for length) and the conversion is zero-based (0 miles equals 0 meter). Unlike temperature in degrees
+ * Celsius which is <strong>not</strong> linearly related to the Kelvin (the SI unit for temperature) because the conversion is
+ * not zero-based (0&deg;C is 273.15K).
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.

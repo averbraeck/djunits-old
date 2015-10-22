@@ -1,7 +1,7 @@
 package org.djunits.value;
 
 /**
- * Data type to store vectors and matrices, e.g. DENSE or SPARSE.
+ * Possible ways to store vectors and matrices, e.g. DENSE or SPARSE.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -13,10 +13,15 @@ package org.djunits.value;
  */
 public enum StorageType
 {
-    /** Dense datatype. */
+    /**
+     * Dense storage. Use Dense to store small quantities of values, or values where zero is not common, or larger access times
+     * are unacceptable, or memory availability is high.
+     */
     DENSE,
-    
-    /** Sparse datatype. */
+
+    /**
+     * Sparse storage. Use Sparse to store large quantities of values when most are zero and larger access times are acceptable
+     * and memory availability is low. Changing a zero value to a non-zero value is CPU-time-expensive
+     */
     SPARSE;
 }
-

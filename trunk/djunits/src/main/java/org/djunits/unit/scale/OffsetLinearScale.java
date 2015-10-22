@@ -15,10 +15,10 @@ package org.djunits.unit.scale;
  */
 public class OffsetLinearScale implements Scale
 {
-    /** multiply by this number to convert to the standard (e.g., SI) unit. */
+    /** Multiply by this number to convert to the standard (e.g., SI) unit. */
     private final double conversionFactorToStandardUnit;
 
-    /** the offset that has to be taken into account for conversions. */
+    /** The offset that has to be taken into account for conversions. */
     private final double offsetToStandardUnit;
 
     /**

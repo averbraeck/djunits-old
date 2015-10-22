@@ -1,7 +1,7 @@
 package org.djunits.unit.scale;
 
 /**
- * A Scale for standard, e.g. SI, units. 
+ * A Scale for standard, e.g. SI, units. Values in these units need no conversion.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
