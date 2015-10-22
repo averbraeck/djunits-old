@@ -937,6 +937,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
                 assertEquals("Result of operation", doubleType ? Math.abs(doubleValue[i]) : ((float) Math.abs(doubleValue[i])),
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
             }
+
             // For now we'll believe that the other math methods are correctly tested elsewhere
             /*-
             left =
@@ -1085,15 +1086,12 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             {
                 result = multiplyBy.invoke(left, (float) Math.PI);
             }
-            // Does not work for float: result = multiplyBy.invoke(left, doubleType ? Math.PI : ((float) Math.PI));
             for (int i = 0; i < doubleValue.length; i++)
             {
-                assertEquals("Result of operation", doubleType ? (doubleValue[i] * Math.PI)
-                        : ((float) (doubleValue[i] * Math.PI)),
+                assertEquals("Result of operation", doubleValue[i] * Math.PI,
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i), 0.01);
                 // Check that original is also modified
-                assertEquals("Result of operation", doubleType ? (doubleValue[i] * Math.PI)
-                        : ((float) (doubleValue[i] * Math.PI)),
+                assertEquals("Result of operation", doubleValue[i] * Math.PI,
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
             }
             left =
@@ -1109,16 +1107,82 @@ public class VectorOperationsTest<TypedDoubleVectorAbs>
             {
                 result = divideBy.invoke(left, (float) Math.PI);
             }
-            // Does not work for float: result = divideBy.invoke(left, Math.PI);
             for (int i = 0; i < doubleValue.length; i++)
             {
-                assertEquals("Result of operation", doubleType ? (doubleValue[i] / Math.PI)
-                        : ((float) (doubleValue[i] / Math.PI)),
+                assertEquals("Result of operation", doubleValue[i] / Math.PI,
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i), 0.01);
                 // Check that original is also modified
-                assertEquals("Result of operation", doubleType ? (doubleValue[i] / Math.PI)
-                        : ((float) (doubleValue[i] / Math.PI)),
+                assertEquals("Result of operation", doubleValue[i] / Math.PI,
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
+            }
+            double[] zDoubleValues = { 0, 0, 0, 0, 0, 0, 0 };
+            float[] zFloatValues = { 0, 0, 0, 0, 0, 0, 0 };
+            Object zValues = doubleType ? zDoubleValues : zFloatValues;
+            Method set = vectorClass.getMethod("setSI", new Class[] { int.class, doubleType ? double.class : float.class });
+            for (int pivot2 = 0; pivot2 < zDoubleValues.length; pivot2++)
+            {
+                for (int pivot = 0; pivot < zDoubleValues.length; pivot++)
+                {
+                    if (pivot == pivot2)
+                    {
+                        continue;
+                    }
+                    left =
+                            findAndExecuteConstructor(vectorClass, new Object[] { zValues,
+                                    getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType);
+                    // System.out.println("initial " + pivot + ", " + pivot2 + "     " + left);
+                    if (doubleType)
+                    {
+                        set.invoke(left, new Object[] { pivot, Math.PI * (pivot + 1) });
+                    }
+                    else
+                    {
+                        set.invoke(left, new Object[] { pivot, (float) (Math.PI * (pivot + 1)) });
+                    }
+                    // System.out.println("after one set    " + left);
+                    for (int i = 0; i < zDoubleValues.length; i++)
+                    {
+                        assertEquals("after one set, i=" + i, i == pivot ? Math.PI * (pivot + 1) : 0,
+                                verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
+                    }
+                    if (doubleType)
+                    {
+                        set.invoke(left, new Object[] { pivot2, Math.PI * (pivot2 + 20) });
+                    }
+                    else
+                    {
+                        set.invoke(left, new Object[] { pivot2, (float) (Math.PI * (pivot2 + 20)) });
+                    }
+                    // System.out.println("after second set " + left);
+                    for (int i = 0; i < zDoubleValues.length; i++)
+                    {
+                        assertEquals("after second set, i=" + i, i == pivot ? Math.PI * (pivot + 1) : i == pivot2 ? Math.PI
+                                * (pivot2 + 20) : 0, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                                0.01);
+                    }
+                    for (int i = 0; i < zDoubleValues.length; i++)
+                    {
+                        if (i == pivot || i == pivot2)
+                        {
+                            continue;
+                        }
+                        if (doubleType)
+                        {
+                            set.invoke(left, new Object[] { i, (double) (i + 1) });
+                        }
+                        else
+                        {
+                            set.invoke(left, new Object[] { i, (float) (i + 1) });
+                        }
+                    }
+                    // System.out.println("after fill       " + left);
+                    for (int i = 0; i < zDoubleValues.length; i++)
+                    {
+                        assertEquals("after all set i=" + i + " pivot=" + pivot + ", pivot2=" + pivot2, i == pivot ? Math.PI
+                                * (pivot + 1) : i == pivot2 ? Math.PI * (pivot2 + 20) : i + 1,
+                                verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
+                    }
+                }
             }
         }
         Object compatibleRight = null;
