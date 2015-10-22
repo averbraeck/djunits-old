@@ -6,7 +6,10 @@ import org.djunits.unit.scale.StandardScale;
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
- * A linear unit with easy-access constructor with a linear factor, and access to the linear factor.
+ * A linear unit with easy-access constructor with a linear factor, and access to the linear factor. <br>
+ * A linear unit is a unit that is linearly related to the SI standard unit. E.g. Mile is linearly related to meter (the SI unit
+ * for length). Unlike temperature in degrees Celsius which is <strong>not</strong> linearly related to the Kelvin (the SI unit
+ * for temperature).
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -33,8 +36,8 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    public LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final boolean standardUnit)
+    public LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
     }
@@ -52,9 +55,8 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final U referenceUnit, final double conversionFactorToReferenceUnit,
-        final boolean standardUnit)
+    protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final U referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
 
@@ -67,8 +69,8 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
         else
         {
             this.scale =
-                new LinearScale(referenceUnit.getScale().getConversionFactorToStandardUnit()
-                    * conversionFactorToReferenceUnit);
+                    new LinearScale(referenceUnit.getScale().getConversionFactorToStandardUnit()
+                            * conversionFactorToReferenceUnit);
         }
     }
 
@@ -84,8 +86,8 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
      * @param scale the conversion scale to use for this unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final Scale scale, final boolean standardUnit)
+    protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final Scale scale, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, scale, standardUnit);
     }

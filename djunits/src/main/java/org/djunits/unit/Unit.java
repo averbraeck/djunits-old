@@ -15,7 +15,7 @@ import org.reflections.Reflections;
 /**
  * All units are internally <i>stored</i> relative to a standard unit with conversion factor. This means that e.g., a meter is
  * stored with conversion factor 1.0, whereas kilometer is stored with a conversion factor 1000.0. This means that if we want to
- * display a meter as kilometers, we have to <i>divide</i> by the conversion factor.
+ * express a length meter in kilometers, we have to <i>divide</i> by the conversion factor.
  * <p>
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -30,51 +30,51 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     /** */
     private static final long serialVersionUID = 20140607;
 
-    /** the key to the locale file for the long name of the unit, or null when it is a user-defined unit. */
+    /** The key to the locale file for the long name of the unit, or null when it is a user-defined unit. */
     private final String nameKey;
 
-    /** the key to the locale file for the abbreviation of the unit, or null when it is a user-defined unit. */
+    /** The key to the locale file for the abbreviation of the unit, or null when it is a user-defined unit. */
     private final String abbreviationKey;
 
     /**
-     * the long name of the unit in case it does not exist in the locale file, e.g. when defining a run-time unit. The name will
+     * The long name of the unit in case it does not exist in the locale file, e.g. when defining a run-time unit. The name will
      * be null if the locale has to be used, i.e. for standard units.
      */
     private final String name;
 
     /**
-     * the abbreviation of the unit in case it does not exist in the locale file, e.g. when defining a run-time unit. The
+     * The abbreviation of the unit in case it does not exist in the locale file, e.g. when defining a run-time unit. The
      * abbreviation will be null if the locale has to be used, i.e. for standard units.
      */
     private final String abbreviation;
 
-    /** the unit system, e.g. SI or Imperial. */
+    /** The unit system, e.g. SI or Imperial. */
     private final UnitSystem unitSystem;
 
-    /** the scale to use to convert between this unit and the standard (e.g., SI) unit. */
+    /** The scale to use to convert between this unit and the standard (e.g., SI) unit. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected Scale scale;
 
     /** SI unit information. */
     private SICoefficients siCoefficients;
 
-    /** static map of all defined coefficient strings, to avoid double creation and allow lookup. */
+    /** A static map of all defined coefficient strings, to avoid double creation and allow lookup. */
     private static final Map<String, SICoefficients> SI_COEFFICIENTS = new HashMap<String, SICoefficients>();
 
-    /** static map of all defined coefficient strings, mapped to the existing units. */
+    /** A static map of all defined coefficient strings, mapped to the existing units. */
     private static final Map<String, Map<Class<Unit<?>>, Unit<?>>> SI_UNITS =
         new HashMap<String, Map<Class<Unit<?>>, Unit<?>>>();
 
-    /** a static map of all defined units. */
+    /** A static map of all defined units. */
     private static final Map<String, Set<Unit<?>>> UNITS = new HashMap<String, Set<Unit<?>>>();
 
-    /** localization information. */
+    /** Localization information. */
     private static Localization localization = new Localization("localeunit");
 
-    /** has this class been initialized? */
+    /** Has this class been initialized? */
     private static boolean initialized = false;
 
-    /** force all units to be loaded. */
+    /** Force all units to be loaded. */
     private static void initialize()
     {
         Reflections reflections = new Reflections("org.djunits.unit");

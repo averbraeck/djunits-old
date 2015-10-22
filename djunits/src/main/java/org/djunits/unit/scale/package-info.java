@@ -1,5 +1,5 @@
 /**
- * Double scales for unit conversion, offers functions to and from SI units. E.g., LinearScale for Length, Area, etc.
+ * Scales for unit conversion, offers functions to and from SI units. E.g., LinearScale for Length, Area, etc.
  * LinearOffsetScale for Temperature. PercentScale for Angle. LogarithmicScale for Sound.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
