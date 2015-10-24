@@ -127,13 +127,13 @@ public interface DoubleVectorInterface<U extends Unit<U>>
 
     /**
      * Create a dense version of this DoubleVector. <br>
-     * @return MutableDoubleVector&lt;U&gt;; dense version of this DoubleVector
+     * @return DoubleVector&lt;U&gt;; dense version of this DoubleVector
      */
     DoubleVectorInterface<U> toDense();
 
     /**
      * Create a sparse version of this DoubleVector. <br>
-     * @return MutableDoubleVector&lt;U&gt;; sparse version of this DoubleVector
+     * @return DoubleVector&lt;U&gt;; sparse version of this DoubleVector
      */
     DoubleVectorInterface<U> toSparse();
 
