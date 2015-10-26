@@ -174,7 +174,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         // System.out.println("Looking for constructor of " + vectorClassAbsRel.getName());
         Object from =
                 findAndExecuteConstructor(vectorClass, new Object[] { inValue, getSIUnitInstance(getUnitClass(vectorClass)),
-                        storageType }, isAbs, doubleType);
+                        storageType }, doubleType);
         // System.out.println("Looking for method " + (isAbs ? "toRel" : "toAbs"));
         Method method = vectorClass.getMethod(isAbs ? "toRel" : "toAbs");
         Object result = method.invoke(from);
@@ -208,11 +208,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             // System.out.println("Method name is " + method.getName());
             if (method.getName().equals("multiplyBy"))
             {
-                testMultiplyOrDivideMethod(vectorClassAbsRel, method, true, doubleType);
+                testMultiplyByOrDivideByMethod(vectorClassAbsRel, method, true, doubleType, isAbs, storageType);
             }
             else if (method.getName().equals("divideBy"))
             {
-                testMultiplyOrDivideMethod(vectorClassAbsRel, method, false, doubleType);
+                testMultiplyByOrDivideByMethod(vectorClassAbsRel, method, false, doubleType, isAbs, storageType);
             }
         }
         testConstructors(vectorClassAbsRel, isAbs, doubleType, mutable, storageType);
@@ -227,18 +227,24 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @param method the method 'multiplyBy' for that class
      * @param multiply boolean; if true; test a multiplyBy method; if false; test a divideBy method
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
+     * @param abs boolean; if true; the vector class is absolute; if false; the vector class is relative
+     * @param storageType StorageType; DENSE or SPARSE
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
      * @throws IllegalAccessException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException
+     * @throws ValueException
+     * @throws IllegalArgumentException
+     * @throws SecurityException
      */
-    private void testMultiplyOrDivideMethod(final Class<?> vectorClass, final Method method, final boolean multiply,
-            final boolean doubleType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
-            InvocationTargetException, NoSuchFieldException, ClassNotFoundException
+    private void testMultiplyByOrDivideByMethod(final Class<?> vectorClass, final Method method, final boolean multiply,
+            final boolean doubleType, boolean abs, StorageType storageType) throws NoSuchMethodException, InstantiationException,
+            IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, SecurityException,
+            IllegalArgumentException, ValueException
     {
-        System.out.println(method.getName() + paramsToString(method.getParameterTypes()));
+        // System.out.println(method.getName() + paramsToString(method.getParameterTypes()));
         Class<?>[] parTypes = method.getParameterTypes();
         if (parTypes.length != 1)
         {
@@ -248,10 +254,12 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         Class<?> parameterClass = parTypes[0];
         if (parameterClass.toString().equals("double") || parameterClass.toString().equals("float"))
         {
-            // Not (yet) testing multiplying a vector with a double or float.
+            // Tested elsewhere.
             return;
         }
-        // FIXME: multiplyBy and divideBy currently require an non mutable argument. The next if statement is always taken.
+        // FIXME: multiplyBy and divideBy are currently only available for a non mutable argument.
+        // Next if statement is always taken.
+        // It is quite possible that multiplyBy will be restricted to Dimensionless vector arguments.
         if (!vectorClass.isAssignableFrom(parameterClass))
         {
             return;
@@ -640,8 +648,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * Find and execute a constructor and return the result.
      * @param vectorClass Class&lt;?&gt;; the class to which the constructor belongs
      * @param args Object[]; arguments to provide to the constructor
-     * @param abs boolean; if true; the result of the constructor is expected to be Absolute; if false; the result of the
-     *            constructor is expected to be relative
      * @param doubleType boolean; if true; the args argument is array of double; of false; the args argument is array of float
      * @return constructed object
      * @throws NoSuchMethodException
@@ -652,9 +658,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws InvocationTargetException
      * @throws ValueException
      */
-    private Object findAndExecuteConstructor(final Class<?> vectorClass, final Object[] args, final boolean abs,
-            final boolean doubleType) throws NoSuchMethodException, SecurityException, InstantiationException,
-            IllegalAccessException, IllegalArgumentException, InvocationTargetException, ValueException
+    private Object findAndExecuteConstructor(final Class<?> vectorClass, final Object[] args, final boolean doubleType)
+            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException, ValueException
     {
         Class<?>[] parameterTypes = new Class<?>[args.length];
         for (int i = 0; i < args.length; i++)
@@ -674,7 +680,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         Constructor<?> constructor = null;
         for (Constructor<?> c : vectorClass.getConstructors())
         {
-            // System.out.print("Found constructor for " + vectorClass + " " + constructorToString(c));
+            // System.out.println("Found constructor for " + vectorClass + " " + paramsToString(c.getParameterTypes()));
             Class<?>[] parTypes = c.getParameterTypes();
             boolean compatible = parTypes.length == args.length;
             for (int i = 0; i < parTypes.length; i++)
@@ -704,7 +710,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             {
                 System.out.println("\tparameter type[" + i + "] is " + args[i].getClass());
             }
-
             fail("Cannot find suitable constructor");
         }
         return constructor.newInstance(args);
@@ -733,7 +738,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             IllegalArgumentException, InvocationTargetException, ValueException
     {
         verifyAbsRelPrecisionAndValues(abs, doubleType, expectedStorageType,
-                findAndExecuteConstructor(vectorClass, args, abs, doubleType), expectedResult, 0.0001);
+                findAndExecuteConstructor(vectorClass, args, doubleType), expectedResult, 0.0001);
     }
 
     /**
@@ -760,7 +765,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         Object value = doubleType ? doubleValue : floatValue;
         Object vector =
                 findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                        storageType }, abs, doubleType);
+                        storageType }, doubleType);
         if (doubleType)
         {
             DoubleVector<?> dv = (DoubleVector<?>) vector;
@@ -806,7 +811,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         Object value = doubleType ? doubleValue : floatValue;
         Object left =
                 findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                        storageType }, abs, doubleType);
+                        storageType }, doubleType);
         Object result;
         if (doubleType)
         {
@@ -920,7 +925,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             }
             left =
                     findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, abs, doubleType);
+                            storageType }, doubleType);
             Method decrementBy = vectorClass.getMethod("decrementBy", new Class<?>[] { argumentClass });
             if (doubleType)
             {
@@ -943,7 +948,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             }
             left =
                     findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, abs, doubleType);
+                            storageType }, doubleType);
 
             Method methodAbs = vectorClass.getMethod("abs", new Class[] {});
             methodAbs.setAccessible(true); // FIXME this should not be necessary
@@ -1092,7 +1097,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         }
         left =
                 findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                        storageType }, abs, doubleType);
+                        storageType }, doubleType);
         if (mutable)
         {
             Method multiplyBy = vectorClass.getMethod("multiplyBy", new Class[] { doubleType ? double.class : float.class });
@@ -1115,7 +1120,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             }
             left =
                     findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, abs, doubleType);
+                            storageType }, doubleType);
             Method divideBy = vectorClass.getMethod("divideBy", new Class[] { doubleType ? double.class : float.class });
             divideBy.setAccessible(true); // FIXME this should not be necessary
             if (doubleType)
@@ -1148,7 +1153,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     }
                     left =
                             findAndExecuteConstructor(vectorClass, new Object[] { zValues,
-                                    getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType);
+                                    getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                     // System.out.println("initial " + pivot + ", " + pivot2 + "     " + left);
                     if (doubleType)
                     {
@@ -1220,16 +1225,14 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     unitClass.getConstructor(String.class, String.class, UnitSystem.class, unitClass, double.class);
             Object newUnit = unitConstructor.newInstance("7fullName", "7abbr", unitSystem, referenceUnit, 7d);
             // System.out.println("new unit prints like " + newUnit);
-            compatibleRight =
-                    findAndExecuteConstructor(vectorClass, new Object[] { value, newUnit, storageType }, abs, doubleType);
+            compatibleRight = findAndExecuteConstructor(vectorClass, new Object[] { value, newUnit, storageType }, doubleType);
             // System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
             if (abs)
             {
                 String className = vectorClass.getName();
                 className = className.replaceFirst("Abs", "Rel");
                 Class<?> relClass = Class.forName(className);
-                compatibleRel =
-                        findAndExecuteConstructor(relClass, new Object[] { value, newUnit, storageType }, false, doubleType);
+                compatibleRel = findAndExecuteConstructor(relClass, new Object[] { value, newUnit, storageType }, doubleType);
                 // System.out.println("compatibleRel prints like \"" + compatibleRight + "\"");
             }
         }
@@ -1237,7 +1240,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         {
             left =
                     findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, abs, doubleType);
+                            storageType }, doubleType);
             // System.out.print(listMethods(vectorClass, "plus", "\t"));
             // System.out.println("Mutable is " + mutable);
             if (!mutable)
@@ -1275,7 +1278,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         }
         left =
                 findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                        storageType }, abs, doubleType);
+                        storageType }, doubleType);
         if (!mutable)
         {
             // System.out.print(listMethods(vectorClass, "minus", "\t"));
@@ -1291,7 +1294,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             {
                 left =
                         findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType);
+                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 result = minus.invoke(left, compatibleRight);
                 for (int i = 0; i < doubleValue.length; i++)
                 {
