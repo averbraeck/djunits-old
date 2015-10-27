@@ -45,8 +45,8 @@ public class MutableMoneyPerAreaVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyPerAreaVector(final List<Double> values, final MoneyPerAreaUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutableMoneyPerAreaVector(final List<Double> values, final MoneyPerAreaUnit unit,
+        final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -69,7 +69,8 @@ public class MutableMoneyPerAreaVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyPerAreaVector(final List<MoneyPerArea> values, final StorageType storageType) throws ValueException
+    public MutableMoneyPerAreaVector(final List<MoneyPerArea> values, final StorageType storageType)
+        throws ValueException
     {
         super(values, storageType);
     }

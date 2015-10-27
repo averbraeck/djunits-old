@@ -81,8 +81,8 @@ public class MutableDensityVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableDensityVector(final SortedMap<Integer, Density> values, final int length, final StorageType storageType)
-        throws ValueException
+    public MutableDensityVector(final SortedMap<Integer, Density> values, final int length,
+        final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }

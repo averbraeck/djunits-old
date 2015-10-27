@@ -15,7 +15,7 @@ public class StandardScale extends LinearScale
 {
     /** a ready-to-use instance of the standard scale (they are all the same...). */
     public static final StandardScale SCALE = new StandardScale();
-    
+
     /**
      * Construct a standard Scale without a transformation.
      */

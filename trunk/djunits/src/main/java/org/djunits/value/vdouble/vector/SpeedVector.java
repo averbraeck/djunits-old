@@ -31,7 +31,8 @@ public class SpeedVector extends TypedDoubleVectorRel<SpeedUnit, SpeedVector, Mu
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public SpeedVector(final double[] values, final SpeedUnit unit, final StorageType storageType) throws ValueException
+    public SpeedVector(final double[] values, final SpeedUnit unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -43,7 +44,8 @@ public class SpeedVector extends TypedDoubleVectorRel<SpeedUnit, SpeedVector, Mu
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public SpeedVector(final List<Double> values, final SpeedUnit unit, final StorageType storageType) throws ValueException
+    public SpeedVector(final List<Double> values, final SpeedUnit unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }

@@ -81,8 +81,8 @@ public class MutableFrequencyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFrequencyVector(final SortedMap<Integer, Frequency> values, final int length, final StorageType storageType)
-        throws ValueException
+    public MutableFrequencyVector(final SortedMap<Integer, Frequency> values, final int length,
+        final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }

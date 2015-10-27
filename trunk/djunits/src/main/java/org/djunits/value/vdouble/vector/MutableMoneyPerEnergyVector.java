@@ -32,8 +32,8 @@ public class MutableMoneyPerEnergyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyPerEnergyVector(final double[] values, final MoneyPerEnergyUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutableMoneyPerEnergyVector(final double[] values, final MoneyPerEnergyUnit unit,
+        final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,8 +45,8 @@ public class MutableMoneyPerEnergyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyPerEnergyVector(final List<Double> values, final MoneyPerEnergyUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutableMoneyPerEnergyVector(final List<Double> values, final MoneyPerEnergyUnit unit,
+        final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,7 +58,8 @@ public class MutableMoneyPerEnergyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyPerEnergyVector(final MoneyPerEnergy[] values, final StorageType storageType) throws ValueException
+    public MutableMoneyPerEnergyVector(final MoneyPerEnergy[] values, final StorageType storageType)
+        throws ValueException
     {
         super(values, storageType);
     }

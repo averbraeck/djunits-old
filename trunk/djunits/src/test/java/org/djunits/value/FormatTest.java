@@ -14,8 +14,8 @@ import org.junit.Test;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Jul 1, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Jul 1, 2014 <br>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FormatTest
@@ -28,7 +28,7 @@ public class FormatTest
     public final void format()
     {
         Locale.setDefault(Locale.US);
-        double[] baseValues = { 1, (float) (1 / 3d) };
+        double[] baseValues = {1, (float) (1 / 3d)};
         for (int width = 8; width <= 20; width++)
         {
             for (int precision = 0; precision <= 10; precision++)
@@ -54,7 +54,7 @@ public class FormatTest
                         }
                         double tolerance = Math.abs(value / Math.pow(10, expectedPrecision));
                         assertEquals("Parsed result should equal original value within tolerance " + tolerance, value,
-                                reverseValue, tolerance);
+                            reverseValue, tolerance);
                     }
                     for (double baseValue : baseValues)
                     {
@@ -71,7 +71,7 @@ public class FormatTest
                         }
                         double tolerance = Math.abs(value / Math.pow(10, expectedPrecision));
                         assertEquals("Parsed result should equal original value within tolerance " + tolerance, value,
-                                reverseValue, tolerance);
+                            reverseValue, tolerance);
                     }
                 }
             }
@@ -85,9 +85,10 @@ public class FormatTest
             assertEquals("With should be at least 10 characters", 10, EngineeringFormatter.format(12.3, len).length());
         }
         String input = "78757587585858.55873468764";
-        assertEquals("String with no E or e is returned unaltered", input, EngineeringFormatter.convertToEngineering(input));
+        assertEquals("String with no E or e is returned unaltered", input, EngineeringFormatter
+            .convertToEngineering(input));
         input = "123e4";
-        assertEquals("String with no dot or comma is returned unaltered", input,
-                EngineeringFormatter.convertToEngineering(input));
+        assertEquals("String with no dot or comma is returned unaltered", input, EngineeringFormatter
+            .convertToEngineering(input));
     }
 }

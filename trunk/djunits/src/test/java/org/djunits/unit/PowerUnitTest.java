@@ -15,8 +15,8 @@ import org.junit.Test;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Jun 6, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Jun 6, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class PowerUnitTest extends AbstractLinearUnitTest<PowerUnit>

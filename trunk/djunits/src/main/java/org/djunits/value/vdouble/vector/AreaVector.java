@@ -43,7 +43,8 @@ public class AreaVector extends TypedDoubleVectorRel<AreaUnit, AreaVector, Mutab
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public AreaVector(final List<Double> values, final AreaUnit unit, final StorageType storageType) throws ValueException
+    public AreaVector(final List<Double> values, final AreaUnit unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }

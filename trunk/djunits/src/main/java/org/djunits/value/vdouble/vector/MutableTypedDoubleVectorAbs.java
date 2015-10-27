@@ -37,7 +37,8 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorAbs(final double[] values, final U unit, final StorageType storageType) throws ValueException
+    MutableTypedDoubleVectorAbs(final double[] values, final U unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -49,7 +50,8 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorAbs(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
+    MutableTypedDoubleVectorAbs(final List<Double> values, final U unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }

@@ -21,8 +21,8 @@ import org.djunits.unit.PressureUnit;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -84,9 +84,9 @@ public class FloatForce extends TypedFloatScalarRel<ForceUnit, FloatForce>
      * @param v FloatForce scalar
      * @return FloatDimensionless scalar as a division of FloatForce and FloatForce
      */
-    public final FloatDimensionless.Rel divideBy(final FloatForce v)
+    public final FloatDimensionless divideBy(final FloatForce v)
     {
-        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
 
     /**

@@ -45,8 +45,8 @@ public class MutableMoneyPerTimeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyPerTimeVector(final List<Double> values, final MoneyPerTimeUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutableMoneyPerTimeVector(final List<Double> values, final MoneyPerTimeUnit unit,
+        final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -69,7 +69,8 @@ public class MutableMoneyPerTimeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyPerTimeVector(final List<MoneyPerTime> values, final StorageType storageType) throws ValueException
+    public MutableMoneyPerTimeVector(final List<MoneyPerTime> values, final StorageType storageType)
+        throws ValueException
     {
         super(values, storageType);
     }

@@ -36,8 +36,8 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    public LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final boolean standardUnit)
+    public LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+        final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
     }
@@ -55,8 +55,9 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final U referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+    protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+        final UnitSystem unitSystem, final U referenceUnit, final double conversionFactorToReferenceUnit,
+        final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
 
@@ -69,8 +70,8 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
         else
         {
             this.scale =
-                    new LinearScale(referenceUnit.getScale().getConversionFactorToStandardUnit()
-                            * conversionFactorToReferenceUnit);
+                new LinearScale(referenceUnit.getScale().getConversionFactorToStandardUnit()
+                    * conversionFactorToReferenceUnit);
         }
     }
 
@@ -86,8 +87,8 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
      * @param scale the conversion scale to use for this unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final Scale scale, final boolean standardUnit)
+    protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+        final UnitSystem unitSystem, final Scale scale, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, scale, standardUnit);
     }

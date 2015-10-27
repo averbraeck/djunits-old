@@ -21,8 +21,8 @@ import org.junit.Test;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -283,12 +283,10 @@ public class FloatMatrixSparseTest
             new FloatScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dm.getSI(), dmWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dm.equals(dmWrongBaseUnit));
-        FloatScalar.Abs<LengthUnit> dmCompatibleUnit =
-            new FloatScalar.Abs<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
+        FloatScalar.Abs<LengthUnit> dmCompatibleUnit = new FloatScalar.Abs<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
         assertFalse("Units are different", dm.getUnit().equals(dmCompatibleUnit.getUnit()));
         assertTrue("equals returns true", dm.equals(dmCompatibleUnit));
-        FloatScalar.Abs<LengthUnit> dmDifferentValue =
-            new FloatScalar.Abs<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
+        FloatScalar.Abs<LengthUnit> dmDifferentValue = new FloatScalar.Abs<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", dm.equals(dmDifferentValue));
     }
 
@@ -1009,12 +1007,10 @@ public class FloatMatrixSparseTest
             new FloatScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dm.getSI(), dmWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dm.equals(dmWrongBaseUnit));
-        FloatScalar.Rel<LengthUnit> dmCompatibleUnit =
-            new FloatScalar.Rel<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
+        FloatScalar.Rel<LengthUnit> dmCompatibleUnit = new FloatScalar.Rel<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
         assertFalse("Units are different", dm.getUnit().equals(dmCompatibleUnit.getUnit()));
         assertTrue("equals returns true", dm.equals(dmCompatibleUnit));
-        FloatScalar.Rel<LengthUnit> dmDifferentValue =
-            new FloatScalar.Rel<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
+        FloatScalar.Rel<LengthUnit> dmDifferentValue = new FloatScalar.Rel<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", dm.equals(dmDifferentValue));
     }
 

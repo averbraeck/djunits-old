@@ -21,8 +21,8 @@ import org.junit.Test;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -52,8 +52,8 @@ public class FloatVectorSparseTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; dv should be Absolute; if false; dv should be Relative
      */
-    private static void checkContentsAndType(final FloatVector<?> dv, final float[] reference,
-        final double precision, final Unit<?> u, final boolean expectAbsolute)
+    private static void checkContentsAndType(final FloatVector<?> dv, final float[] reference, final double precision,
+        final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("FloatVector should not be null", null != dv);
         for (int index = dv.size(); --index >= 0;)
@@ -257,12 +257,10 @@ public class FloatVectorSparseTest
             new FloatScalar.Abs<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dv.getSI(), dvWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dv.equals(dvWrongBaseUnit));
-        FloatScalar.Abs<LengthUnit> dvCompatibleUnit =
-            new FloatScalar.Abs<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
+        FloatScalar.Abs<LengthUnit> dvCompatibleUnit = new FloatScalar.Abs<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
         assertFalse("Units are different", dv.getUnit().equals(dvCompatibleUnit.getUnit()));
         assertTrue("equals returns true", dv.equals(dvCompatibleUnit));
-        FloatScalar.Abs<LengthUnit> dvDifferentValue =
-            new FloatScalar.Abs<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
+        FloatScalar.Abs<LengthUnit> dvDifferentValue = new FloatScalar.Abs<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", dv.equals(dvDifferentValue));
     }
 
@@ -871,12 +869,10 @@ public class FloatVectorSparseTest
             new FloatScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dv.getSI(), dvWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dv.equals(dvWrongBaseUnit));
-        FloatScalar.Rel<LengthUnit> dvCompatibleUnit =
-            new FloatScalar.Rel<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
+        FloatScalar.Rel<LengthUnit> dvCompatibleUnit = new FloatScalar.Rel<LengthUnit>(38000.0f, LengthUnit.MILLIMETER);
         assertFalse("Units are different", dv.getUnit().equals(dvCompatibleUnit.getUnit()));
         assertTrue("equals returns true", dv.equals(dvCompatibleUnit));
-        FloatScalar.Rel<LengthUnit> dvDifferentValue =
-            new FloatScalar.Rel<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
+        FloatScalar.Rel<LengthUnit> dvDifferentValue = new FloatScalar.Rel<LengthUnit>(123.456f, LengthUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", dv.equals(dvDifferentValue));
     }
 
@@ -1377,8 +1373,8 @@ public class FloatVectorSparseTest
          * @param precision double; expected accuracy
          * @param function FloatToFloat; encapsulated function that converts one inputValue to an outputValue
          */
-        public static void tester(final float[] inputValues, final String operation,
-            final FloatVector<?> actualResult, final double precision, final FloatToFloat function)
+        public static void tester(final float[] inputValues, final String operation, final FloatVector<?> actualResult,
+            final double precision, final FloatToFloat function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {

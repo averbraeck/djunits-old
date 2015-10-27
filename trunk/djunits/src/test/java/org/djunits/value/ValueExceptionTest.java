@@ -11,7 +11,8 @@ import org.junit.Test;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/node/13">OpenTrafficSim License</a>.
  * <p>
- * @version $Revision$, $LastChangedDate$, by $Author$, initial version 27 sep. 2015 <br>
+ * @version $Revision$, $LastChangedDate$, by $Author$, initial
+ *          version 27 sep. 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -42,9 +43,9 @@ public class ValueExceptionTest
         assertEquals("message should be our message", message, e.getMessage());
         assertEquals("cause should not be our cause", cause, e.getCause());
         assertEquals("cause description should be our cause string", causeString, e.getCause().getMessage());
-        for (boolean enableSuppression : new boolean[] { true, false })
+        for (boolean enableSuppression : new boolean[]{true, false})
         {
-            for (boolean writableStackTrace : new boolean[] { true, false })
+            for (boolean writableStackTrace : new boolean[]{true, false})
             {
                 e = new ValueException(message, cause, enableSuppression, writableStackTrace);
                 assertTrue("Exception should not be null", null != e);

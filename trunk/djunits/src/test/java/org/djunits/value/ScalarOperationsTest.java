@@ -29,13 +29,13 @@ import org.junit.Test;
 public class ScalarOperationsTest
 {
     /** The classes that are absolute and relative (.Abs and .Rel, or $Abs and $Rel for class names). */
-    public static final String[] CLASSNAMES_ABSREL = new String[]{"AnglePlane", "AngleSlope", "Dimensionless",
-        "Length", "Temperature", "Time"};
+    public static final String[] CLASSNAMES_ABSREL = new String[]{"Angle", "Length", "Temperature", "Time"};
 
     /** The classes that are just relative (name = class name). */
     public static final String[] CLASSNAMES_REL = new String[]{"Acceleration", "AngleSolid", "Area", "Density",
-        "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance", "Energy", "FlowMass",
-        "FlowVolume", "Force", "Frequency", "LinearDensity", "Mass", "Power", "Pressure", "Speed", "Torque", "Volume"};
+        "Dimensionless", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance",
+        "Energy", "FlowMass", "FlowVolume", "Force", "Frequency", "LinearDensity", "Mass", "Power", "Pressure",
+        "Speed", "Torque", "Volume"};
 
     /** The money classes that are just relative (name = class name); these classes don't have an si field. */
     public static final String[] CLASSNAMES_MONEY = new String[]{"Money", "MoneyPerArea", "MoneyPerEnergy",
@@ -749,7 +749,7 @@ public class ScalarOperationsTest
                     result), 0.01);
                 // Swap the operands
                 // System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
-                //    + left.getClass().getName());
+                // + left.getClass().getName());
                 plus =
                     scalarClass.getSuperclass().getMethod("plus",
                         new Class[]{compatibleRight.getClass().getSuperclass()});

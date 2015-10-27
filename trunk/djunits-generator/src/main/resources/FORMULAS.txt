@@ -5,11 +5,8 @@
 /Frequency=Speed
 /Speed=Frequency
 
-%AnglePlane
-/AnglePlane=Dimensionless
-
-%AngleSlope
-/AngleSlope=Dimensionless
+%Angle
+/Angle=Dimensionless
 
 %AngleSolid
 /AngleSolid=Dimensionless
@@ -228,8 +225,7 @@
 %Dimensionless
 /Dimensionless=Dimensionless
 *Acceleration=Acceleration
-*AnglePlane=AnglePlane
-*AngleSlope=AngleSlope
+*Angle=Angle
 *AngleSolid=AngleSolid
 *Area=Area
 *Density=Density

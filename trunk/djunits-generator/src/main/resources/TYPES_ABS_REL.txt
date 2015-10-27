@@ -1,6 +1,4 @@
-AnglePlane
-AngleSlope
-Dimensionless
+Angle
 Length
 Temperature
 Time
