@@ -33,8 +33,8 @@ public class ElectricalPotentialVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalPotentialVector(final double[] values, final ElectricalPotentialUnit unit, final StorageType storageType)
-        throws ValueException
+    public ElectricalPotentialVector(final double[] values, final ElectricalPotentialUnit unit,
+        final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -59,7 +59,8 @@ public class ElectricalPotentialVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public ElectricalPotentialVector(final ElectricalPotential[] values, final StorageType storageType) throws ValueException
+    public ElectricalPotentialVector(final ElectricalPotential[] values, final StorageType storageType)
+        throws ValueException
     {
         super(values, storageType);
     }

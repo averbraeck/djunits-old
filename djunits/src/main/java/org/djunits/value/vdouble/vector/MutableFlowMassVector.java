@@ -81,8 +81,8 @@ public class MutableFlowMassVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFlowMassVector(final SortedMap<Integer, FlowMass> values, final int length, final StorageType storageType)
-        throws ValueException
+    public MutableFlowMassVector(final SortedMap<Integer, FlowMass> values, final int length,
+        final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }

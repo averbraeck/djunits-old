@@ -10,8 +10,8 @@ import org.junit.Test;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Jun 18, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$, initial
+ * version Jun 18, 2014 <br>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class UnitTest
@@ -27,32 +27,21 @@ public class UnitTest
         // .toString());
         // System.out.println(ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString());
         // System.out.println(ElectricalPotentialUnit.VOLT.getSICoefficients().toString());
-        assertTrue(
-                "ABVOLT is expressed in Volt",
-                Unit.lookupUnitWithSICoefficients(ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString()).contains(
-                        ElectricalPotentialUnit.VOLT));
-        assertTrue(
-                "ABVOLT / STATAMPERE is expressed in Ohm",
-                Unit.lookupUnitWithSICoefficients(
-                        SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString()).contains(
-                        ElectricalResistanceUnit.OHM));
-        assertTrue(
-                "ABVOLT * STATAMPERE is expressed in Watt",
-                Unit.lookupUnitWithSICoefficients(
-                        SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString()).contains(PowerUnit.WATT));
-        assertTrue(
-                "ABVOLT / Watt is expressed in 1/A",
-                Unit.lookupOrCreateUnitWithSICoefficients(
-                        SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                                PowerUnit.WATT.getSICoefficients()).toString()).toString().contains("1/A"));
-        assertTrue(
-                "ABVOLT * KILOVOLT is expressed in kg2.m4/s6/A2",
-                Unit.lookupOrCreateUnitWithSICoefficients(
-                        SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                                ElectricalPotentialUnit.KILOVOLT.getSICoefficients()).toString()).toString()
-                        .contains("kg2m4/s6A2"));
+        assertTrue("ABVOLT is expressed in Volt", Unit.lookupUnitWithSICoefficients(
+            ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString()).contains(ElectricalPotentialUnit.VOLT));
+        assertTrue("ABVOLT / STATAMPERE is expressed in Ohm", Unit.lookupUnitWithSICoefficients(
+            SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString())
+            .contains(ElectricalResistanceUnit.OHM));
+        assertTrue("ABVOLT * STATAMPERE is expressed in Watt", Unit.lookupUnitWithSICoefficients(
+            SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString()).contains(PowerUnit.WATT));
+        assertTrue("ABVOLT / Watt is expressed in 1/A", Unit.lookupOrCreateUnitWithSICoefficients(
+            SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                PowerUnit.WATT.getSICoefficients()).toString()).toString().contains("1/A"));
+        assertTrue("ABVOLT * KILOVOLT is expressed in kg2.m4/s6/A2", Unit.lookupOrCreateUnitWithSICoefficients(
+            SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
+                ElectricalPotentialUnit.KILOVOLT.getSICoefficients()).toString()).toString().contains("kg2m4/s6A2"));
     }
 
     /**
@@ -77,7 +66,7 @@ public class UnitTest
             }
         }
     }
-    
+
     /**
      * Test all constructors for UnitException.
      */
@@ -103,9 +92,9 @@ public class UnitTest
         assertEquals("message should be our message", message, e.getMessage());
         assertEquals("cause should not be our cause", cause, e.getCause());
         assertEquals("cause description should be our cause string", causeString, e.getCause().getMessage());
-        for (boolean enableSuppression : new boolean[] { true, false })
+        for (boolean enableSuppression : new boolean[]{true, false})
         {
-            for (boolean writableStackTrace : new boolean[] { true, false })
+            for (boolean writableStackTrace : new boolean[]{true, false})
             {
                 e = new UnitException(message, cause, enableSuppression, writableStackTrace);
                 assertTrue("Exception should not be null", null != e);
@@ -133,5 +122,5 @@ public class UnitTest
             }
         }
     }
-    
+
 }

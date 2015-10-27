@@ -16,8 +16,8 @@ import org.djunits.unit.MoneyUnit;
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -81,9 +81,9 @@ public class FloatMoneyPerMass extends TypedFloatScalarRel<MoneyPerMassUnit, Flo
      * @param v FloatMoneyPerMass scalar
      * @return FloatDimensionless scalar as a division of FloatMoneyPerMass and FloatMoneyPerMass
      */
-    public final FloatDimensionless.Rel divideBy(final FloatMoneyPerMass v)
+    public final FloatDimensionless divideBy(final FloatMoneyPerMass v)
     {
-        return new FloatDimensionless.Rel(this.si / v.si, DimensionlessUnit.SI);
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
 
     /**

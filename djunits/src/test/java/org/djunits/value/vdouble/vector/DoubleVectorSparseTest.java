@@ -21,8 +21,8 @@ import org.junit.Test;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -675,7 +675,8 @@ public class DoubleVectorSparseTest
         try
         {
             // null array
-            new DoubleVector.Abs<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.SPARSE);
+            new DoubleVector.Abs<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT,
+                StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)
@@ -1345,7 +1346,8 @@ public class DoubleVectorSparseTest
         try
         {
             // null array
-            new DoubleVector.Rel<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.SPARSE);
+            new DoubleVector.Rel<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT,
+                StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueException ve)

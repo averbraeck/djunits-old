@@ -31,7 +31,8 @@ public class ForceVector extends TypedDoubleVectorRel<ForceUnit, ForceVector, Mu
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ForceVector(final double[] values, final ForceUnit unit, final StorageType storageType) throws ValueException
+    public ForceVector(final double[] values, final ForceUnit unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -43,7 +44,8 @@ public class ForceVector extends TypedDoubleVectorRel<ForceUnit, ForceVector, Mu
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ForceVector(final List<Double> values, final ForceUnit unit, final StorageType storageType) throws ValueException
+    public ForceVector(final List<Double> values, final ForceUnit unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }

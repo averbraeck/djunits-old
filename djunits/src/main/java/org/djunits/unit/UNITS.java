@@ -37,30 +37,16 @@ public interface UNITS
     AccelerationUnit STANDARD_GRAVITY         = AccelerationUnit.STANDARD_GRAVITY;
         
     /****************************************************************************************************************/
-    /************************************************** ANGLE_PLANE *************************************************/ 
+    /***************************************************** ANGLE ****************************************************/ 
     /****************************************************************************************************************/
 
-    AnglePlaneUnit RADIAN               = AnglePlaneUnit.RADIAN;
-    AnglePlaneUnit ARCMINUTE            = AnglePlaneUnit.ARCMINUTE;
-    AnglePlaneUnit ARCSECOND            = AnglePlaneUnit.ARCSECOND;
-    AnglePlaneUnit CENTESIMAL_ARCMINUTE = AnglePlaneUnit.CENTESIMAL_ARCMINUTE;
-    AnglePlaneUnit CENTESIMAL_ARCSECOND = AnglePlaneUnit.CENTESIMAL_ARCSECOND;
-    AnglePlaneUnit DEGREE               = AnglePlaneUnit.DEGREE;
-    AnglePlaneUnit GRAD                 = AnglePlaneUnit.GRAD;
-    AnglePlaneUnit RAD                  = AnglePlaneUnit.RADIAN;
-    AnglePlaneUnit DEG                  = AnglePlaneUnit.DEGREE;
-    
-    /****************************************************************************************************************/
-    /************************************************** ANGLE_SLOPE *************************************************/ 
-    /****************************************************************************************************************/
-
-    AngleSlopeUnit SLOPE_RADIAN               = AngleSlopeUnit.RADIAN;
-    AngleSlopeUnit SLOPE_ARCMINUTE            = AngleSlopeUnit.ARCMINUTE;
-    AngleSlopeUnit SLOPE_ARCSECOND            = AngleSlopeUnit.ARCSECOND;
-    AngleSlopeUnit SLOPE_CENTESIMAL_ARCMINUTE = AngleSlopeUnit.CENTESIMAL_ARCMINUTE;
-    AngleSlopeUnit SLOPE_CENTESIMAL_ARCSECOND = AngleSlopeUnit.CENTESIMAL_ARCSECOND;
-    AngleSlopeUnit SLOPE_DEGREE               = AngleSlopeUnit.DEGREE;
-    AngleSlopeUnit SLOPE_GRAD                 = AngleSlopeUnit.GRAD;
+    AngleUnit RADIAN               = AngleUnit.RADIAN;
+    AngleUnit ARCMINUTE            = AngleUnit.ARCMINUTE;
+    AngleUnit ARCSECOND            = AngleUnit.ARCSECOND;
+    AngleUnit CENTESIMAL_ARCMINUTE = AngleUnit.CENTESIMAL_ARCMINUTE;
+    AngleUnit CENTESIMAL_ARCSECOND = AngleUnit.CENTESIMAL_ARCSECOND;
+    AngleUnit DEGREE               = AngleUnit.DEGREE;
+    AngleUnit GRAD                 = AngleUnit.GRAD;
     
     /****************************************************************************************************************/
     /************************************************** ANGLE_SOLID *************************************************/ 

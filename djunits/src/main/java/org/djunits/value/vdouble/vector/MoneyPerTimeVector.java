@@ -82,8 +82,8 @@ public class MoneyPerTimeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MoneyPerTimeVector(final SortedMap<Integer, MoneyPerTime> values, final int length, final StorageType storageType)
-        throws ValueException
+    public MoneyPerTimeVector(final SortedMap<Integer, MoneyPerTime> values, final int length,
+        final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }

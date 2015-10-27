@@ -83,8 +83,8 @@ abstract class DoubleVectorData
      * @return the DoubleVectorData with the right data type
      * @throws ValueException when list is null, or storageType is null
      */
-    public static DoubleVectorData instantiate(final List<Double> values, final Scale scale, final StorageType storageType)
-        throws ValueException
+    public static DoubleVectorData instantiate(final List<Double> values, final Scale scale,
+        final StorageType storageType) throws ValueException
     {
         if (values == null)
         {
@@ -143,8 +143,8 @@ abstract class DoubleVectorData
      * @return the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
-    public static DoubleVectorData instantiateLD(final List<? extends DoubleScalar<?>> values, final StorageType storageType)
-        throws ValueException
+    public static DoubleVectorData instantiateLD(final List<? extends DoubleScalar<?>> values,
+        final StorageType storageType) throws ValueException
     {
         if (values == null)
         {
@@ -523,6 +523,7 @@ abstract class DoubleVectorData
     @Override
     public String toString()
     {
-        return "DoubleVectorData [storageType=" + this.storageType + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
+        return "DoubleVectorData [storageType=" + this.storageType + ", vectorSI=" + Arrays.toString(this.vectorSI)
+            + "]";
     }
 }

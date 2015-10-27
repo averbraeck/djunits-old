@@ -5,11 +5,11 @@ import java.util.SortedMap;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
-import org.djunits.value.StorageType;
 import org.djunits.value.FunctionsAbs;
 import org.djunits.value.FunctionsRel;
 import org.djunits.value.MathFunctions;
 import org.djunits.value.Relative;
+import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
 import org.djunits.value.vdouble.DoubleFunction;

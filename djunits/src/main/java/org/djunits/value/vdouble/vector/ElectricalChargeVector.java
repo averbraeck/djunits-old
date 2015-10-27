@@ -45,8 +45,8 @@ public class ElectricalChargeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalChargeVector(final List<Double> values, final ElectricalChargeUnit unit, final StorageType storageType)
-        throws ValueException
+    public ElectricalChargeVector(final List<Double> values, final ElectricalChargeUnit unit,
+        final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -69,7 +69,8 @@ public class ElectricalChargeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public ElectricalChargeVector(final List<ElectricalCharge> values, final StorageType storageType) throws ValueException
+    public ElectricalChargeVector(final List<ElectricalCharge> values, final StorageType storageType)
+        throws ValueException
     {
         super(values, storageType);
     }

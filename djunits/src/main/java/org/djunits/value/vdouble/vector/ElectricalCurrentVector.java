@@ -33,8 +33,8 @@ public class ElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalCurrentVector(final double[] values, final ElectricalCurrentUnit unit, final StorageType storageType)
-        throws ValueException
+    public ElectricalCurrentVector(final double[] values, final ElectricalCurrentUnit unit,
+        final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,8 +46,8 @@ public class ElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalCurrentVector(final List<Double> values, final ElectricalCurrentUnit unit, final StorageType storageType)
-        throws ValueException
+    public ElectricalCurrentVector(final List<Double> values, final ElectricalCurrentUnit unit,
+        final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -59,7 +59,8 @@ public class ElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public ElectricalCurrentVector(final ElectricalCurrent[] values, final StorageType storageType) throws ValueException
+    public ElectricalCurrentVector(final ElectricalCurrent[] values, final StorageType storageType)
+        throws ValueException
     {
         super(values, storageType);
     }
@@ -70,7 +71,8 @@ public class ElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public ElectricalCurrentVector(final List<ElectricalCurrent> values, final StorageType storageType) throws ValueException
+    public ElectricalCurrentVector(final List<ElectricalCurrent> values, final StorageType storageType)
+        throws ValueException
     {
         super(values, storageType);
     }

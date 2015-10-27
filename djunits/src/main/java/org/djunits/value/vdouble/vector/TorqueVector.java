@@ -31,7 +31,8 @@ public class TorqueVector extends TypedDoubleVectorRel<TorqueUnit, TorqueVector,
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public TorqueVector(final double[] values, final TorqueUnit unit, final StorageType storageType) throws ValueException
+    public TorqueVector(final double[] values, final TorqueUnit unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }

@@ -31,7 +31,8 @@ public class MutableAreaVector extends MutableTypedDoubleVectorRel<AreaUnit, Are
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableAreaVector(final double[] values, final AreaUnit unit, final StorageType storageType) throws ValueException
+    public MutableAreaVector(final double[] values, final AreaUnit unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }

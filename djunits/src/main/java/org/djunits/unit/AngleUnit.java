@@ -4,12 +4,15 @@ import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.djunits.unit.unitsystem.UnitSystem.SI_ACCEPTED;
 import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
 
+import org.djunits.unit.scale.GradeScale;
+import org.djunits.unit.scale.LinearScale;
+import org.djunits.unit.scale.Scale;
 import org.djunits.unit.unitsystem.UnitSystem;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 
 /**
- * Standard plane angle unit. Several conversion factors have been taken from <a
+ * Standard angle unit. Several conversion factors have been taken from <a
  * href="http://en.wikipedia.org/wiki/Conversion_of_units">http://en.wikipedia.org/wiki/Conversion_of_units</a>.
  * <p>
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
@@ -19,57 +22,54 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * version May 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class AnglePlaneUnit extends LinearUnit<AnglePlaneUnit>
+public class AngleUnit extends Unit<AngleUnit>
 {
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** The SI unit for plane angle is radian. */
-    public static final AnglePlaneUnit SI;
+    /** The SI unit for angle is radian. */
+    public static final AngleUnit SI;
 
     /** radian. */
-    public static final AnglePlaneUnit RADIAN;
+    public static final AngleUnit RADIAN;
+
+    /** percent (non-linear, 100% is 45 degrees; 90 degrees is infinite). */
+    public static final AngleUnit PERCENT;
 
     /** degree. */
-    public static final AnglePlaneUnit DEGREE;
+    public static final AngleUnit DEGREE;
 
     /** arcminute. */
-    public static final AnglePlaneUnit ARCMINUTE;
+    public static final AngleUnit ARCMINUTE;
 
     /** arcsecond. */
-    public static final AnglePlaneUnit ARCSECOND;
+    public static final AngleUnit ARCSECOND;
 
     /** grad. */
-    public static final AnglePlaneUnit GRAD;
+    public static final AngleUnit GRAD;
 
     /** centesimal arcminute. */
-    public static final AnglePlaneUnit CENTESIMAL_ARCMINUTE;
+    public static final AngleUnit CENTESIMAL_ARCMINUTE;
 
     /** centesimal arcsecond. */
-    public static final AnglePlaneUnit CENTESIMAL_ARCSECOND;
+    public static final AngleUnit CENTESIMAL_ARCSECOND;
 
     static
     {
-        SI = new AnglePlaneUnit("AnglePlaneUnit.radian", "AnglePlaneUnit.rad", SI_DERIVED);
+        SI = new AngleUnit("AngleUnit.radian", "AngleUnit.rad", SI_DERIVED);
         RADIAN = SI;
-        DEGREE =
-            new AnglePlaneUnit("AnglePlaneUnit.degree", "AnglePlaneUnit.deg", SI_ACCEPTED, RADIAN, Math.PI / 180.0,
-                true);
-        ARCMINUTE =
-            new AnglePlaneUnit("AnglePlaneUnit.arcminute", "AnglePlaneUnit.arcmin", SI_ACCEPTED, DEGREE, 1.0 / 60.0,
-                true);
-        ARCSECOND =
-            new AnglePlaneUnit("AnglePlaneUnit.arcsecond", "AnglePlaneUnit.arcsec", SI_ACCEPTED, DEGREE, 1.0 / 3600.0,
-                true);
-        GRAD =
-            new AnglePlaneUnit("AnglePlaneUnit.gradian", "AnglePlaneUnit.grad", OTHER, RADIAN, 2.0 * Math.PI / 400.0,
-                true);
+        DEGREE = new AngleUnit("AngleUnit.degree", "AngleUnit.deg", SI_ACCEPTED, RADIAN, Math.PI / 180.0, true);
+        ARCMINUTE = new AngleUnit("AngleUnit.arcminute", "AngleUnit.arcmin", SI_ACCEPTED, DEGREE, 1.0 / 60.0, true);
+        ARCSECOND = new AngleUnit("AngleUnit.arcsecond", "AngleUnit.arcsec", SI_ACCEPTED, DEGREE, 1.0 / 3600.0, true);
+        GRAD = new AngleUnit("AngleUnit.gradian", "AngleUnit.grad", OTHER, RADIAN, 2.0 * Math.PI / 400.0, true);
         CENTESIMAL_ARCMINUTE =
-            new AnglePlaneUnit("AnglePlaneUnit.centesimal_arcminute", "AnglePlaneUnit.centesimal_arcmin", OTHER, GRAD,
-                1.0 / 100.0, true);
+            new AngleUnit("AngleUnit.centesimal_arcminute", "AngleUnit.centesimal_arcmin", OTHER, GRAD, 1.0 / 100.0,
+                true);
         CENTESIMAL_ARCSECOND =
-            new AnglePlaneUnit("AnglePlaneUnit.centesimal_arcsecond", "AnglePlaneUnit.centesimal_arcsec", OTHER, GRAD,
-                1.0 / 10000.0, true);
+            new AngleUnit("AngleUnit.centesimal_arcsecond", "AngleUnit.centesimal_arcsec", OTHER, GRAD, 1.0 / 10000.0,
+                true);
+        PERCENT = new AngleUnit("AngleUnit.percent", "AngleUnit.perc", OTHER, new GradeScale(0.01), true);
+
     }
 
     /**
@@ -78,7 +78,7 @@ public class AnglePlaneUnit extends LinearUnit<AnglePlaneUnit>
      * @param abbreviationKey the key to the locale file for the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    private AnglePlaneUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
+    private AngleUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
     {
         super(nameKey, abbreviationKey, unitSystem, true);
     }
@@ -93,12 +93,13 @@ public class AnglePlaneUnit extends LinearUnit<AnglePlaneUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private AnglePlaneUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final AnglePlaneUnit referenceUnit, final double conversionFactorToReferenceUnit,
+    private AngleUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+        final UnitSystem unitSystem, final AngleUnit referenceUnit, final double conversionFactorToReferenceUnit,
         final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, new LinearScale(((LinearScale) referenceUnit
+            .getScale()).getConversionFactorToStandardUnit()
+            * conversionFactorToReferenceUnit), standardUnit);
     }
 
     /**
@@ -109,15 +110,30 @@ public class AnglePlaneUnit extends LinearUnit<AnglePlaneUnit>
      * @param referenceUnit the unit to convert to
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
-    public AnglePlaneUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-        final AnglePlaneUnit referenceUnit, final double conversionFactorToReferenceUnit)
+    public AngleUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
+        final AngleUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }
 
+    /**
+     * Build an angle-slope unit with its own scale.
+     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
+     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
+     *            otherwise the abbreviation itself
+     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param scale the scale to use
+     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     */
+    private AngleUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+        final UnitSystem unitSystem, final Scale scale, final boolean standardUnit)
+    {
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, scale, standardUnit);
+    }
+
     /** {@inheritDoc} */
     @Override
-    public final AnglePlaneUnit getStandardUnit()
+    public final AngleUnit getStandardUnit()
     {
         return RADIAN;
     }
@@ -164,10 +180,10 @@ public class AnglePlaneUnit extends LinearUnit<AnglePlaneUnit>
      * @param angle original angle.
      * @return angle between 0 and 2 * PI.
      */
-    public static DoubleScalar.Abs<AnglePlaneUnit> normalize(final DoubleScalar.Abs<AnglePlaneUnit> angle)
+    public static DoubleScalar.Abs<AngleUnit> normalize(final DoubleScalar.Abs<AngleUnit> angle)
     {
-        double normalized = normalize(angle.getSI()) / angle.getUnit().getConversionFactorToStandardUnit();
-        return new DoubleScalar.Abs<AnglePlaneUnit>(normalized, angle.getUnit());
+        double normalized = angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
+        return new DoubleScalar.Abs<AngleUnit>(normalized, angle.getUnit());
     }
 
     /**
@@ -175,10 +191,10 @@ public class AnglePlaneUnit extends LinearUnit<AnglePlaneUnit>
      * @param angle original angle.
      * @return angle between 0 and 2 * PI.
      */
-    public static DoubleScalar.Rel<AnglePlaneUnit> normalize(final DoubleScalar.Rel<AnglePlaneUnit> angle)
+    public static DoubleScalar.Rel<AngleUnit> normalize(final DoubleScalar.Rel<AngleUnit> angle)
     {
-        double normalized = normalize(angle.getSI()) / angle.getUnit().getConversionFactorToStandardUnit();
-        return new DoubleScalar.Rel<AnglePlaneUnit>(normalized, angle.getUnit());
+        double normalized = angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
+        return new DoubleScalar.Rel<AngleUnit>(normalized, angle.getUnit());
     }
 
     /**
@@ -186,10 +202,10 @@ public class AnglePlaneUnit extends LinearUnit<AnglePlaneUnit>
      * @param angle original angle.
      * @return angle between 0 and 2 * PI.
      */
-    public static FloatScalar.Abs<AnglePlaneUnit> normalize(final FloatScalar.Abs<AnglePlaneUnit> angle)
+    public static FloatScalar.Abs<AngleUnit> normalize(final FloatScalar.Abs<AngleUnit> angle)
     {
-        float normalized = (float) (normalize(angle.getSI()) / angle.getUnit().getConversionFactorToStandardUnit());
-        return new FloatScalar.Abs<AnglePlaneUnit>(normalized, angle.getUnit());
+        float normalized = (float) angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
+        return new FloatScalar.Abs<AngleUnit>(normalized, angle.getUnit());
     }
 
     /**
@@ -197,10 +213,9 @@ public class AnglePlaneUnit extends LinearUnit<AnglePlaneUnit>
      * @param angle original angle.
      * @return angle between 0 and 2 * PI.
      */
-    public static FloatScalar.Rel<AnglePlaneUnit> normalize(final FloatScalar.Rel<AnglePlaneUnit> angle)
+    public static FloatScalar.Rel<AngleUnit> normalize(final FloatScalar.Rel<AngleUnit> angle)
     {
-        float normalized = (float) (normalize(angle.getSI()) / angle.getUnit().getConversionFactorToStandardUnit());
-        return new FloatScalar.Rel<AnglePlaneUnit>(normalized, angle.getUnit());
+        float normalized = (float) angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
+        return new FloatScalar.Rel<AngleUnit>(normalized, angle.getUnit());
     }
-
 }

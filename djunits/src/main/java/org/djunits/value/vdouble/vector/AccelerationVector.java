@@ -82,8 +82,8 @@ public class AccelerationVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public AccelerationVector(final SortedMap<Integer, Acceleration> values, final int length, final StorageType storageType)
-        throws ValueException
+    public AccelerationVector(final SortedMap<Integer, Acceleration> values, final int length,
+        final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }

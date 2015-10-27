@@ -82,8 +82,8 @@ public class LinearDensityVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public LinearDensityVector(final SortedMap<Integer, LinearDensity> values, final int length, final StorageType storageType)
-        throws ValueException
+    public LinearDensityVector(final SortedMap<Integer, LinearDensity> values, final int length,
+        final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }

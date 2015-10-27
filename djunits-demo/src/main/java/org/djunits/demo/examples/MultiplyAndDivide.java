@@ -2,10 +2,15 @@ package org.djunits.demo.examples;
 
 import java.util.Locale;
 
+import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.UNITS;
+import org.djunits.value.StorageType;
+import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.djunits.value.vdouble.scalar.Length;
 import org.djunits.value.vdouble.scalar.Speed;
 import org.djunits.value.vdouble.scalar.Time;
+import org.djunits.value.vdouble.vector.DoubleVector;
 
 /**
  * This Java code demonstrates multiplication and division using DJUNITS.
@@ -28,8 +33,9 @@ public final class MultiplyAndDivide implements UNITS
     /**
      * Create some scalar values to demonstrate conversion from and to related units.
      * @param args String[]; the command line arguments; not used
+     * @throws ValueException in case of error
      */
-    public static void main(final String[] args)
+    public static void main(final String[] args) throws ValueException
     {
         Locale.setDefault(Locale.US); // Ensure that floating point values are printed using a dot (".")
         Speed speed = new Speed(50, KM_PER_HOUR);
@@ -44,6 +50,11 @@ public final class MultiplyAndDivide implements UNITS
         Speed requiredSpeed = finish.divideBy(duration);
         System.out.println("speed required to reach finish at " + finish + " in " + duration + " is "
                 + requiredSpeed.toString(KM_PER_HOUR));
+        DoubleScalar.Rel<SpeedUnit> speed1 = new DoubleScalar.Rel<>(1.2, SpeedUnit.SI);
+        DoubleScalar.Rel<SpeedUnit> speed2 = speed1.multiplyBy(2.0); 
+        DoubleScalar.Rel<SpeedUnit> speed3 = speed1.multiplyBy(3.0);
+        double[] sv = new double[] {1, 2, 3, 4, 5}; 
+        DoubleVector.Rel<SpeedUnit> speedVector = new DoubleVector.Rel<SpeedUnit>(sv, SpeedUnit.SI, StorageType.DENSE);
     }
 
 }

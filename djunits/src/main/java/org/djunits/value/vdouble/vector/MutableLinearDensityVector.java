@@ -45,8 +45,8 @@ public class MutableLinearDensityVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableLinearDensityVector(final List<Double> values, final LinearDensityUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutableLinearDensityVector(final List<Double> values, final LinearDensityUnit unit,
+        final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,7 +58,8 @@ public class MutableLinearDensityVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableLinearDensityVector(final LinearDensity[] values, final StorageType storageType) throws ValueException
+    public MutableLinearDensityVector(final LinearDensity[] values, final StorageType storageType)
+        throws ValueException
     {
         super(values, storageType);
     }
@@ -69,7 +70,8 @@ public class MutableLinearDensityVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableLinearDensityVector(final List<LinearDensity> values, final StorageType storageType) throws ValueException
+    public MutableLinearDensityVector(final List<LinearDensity> values, final StorageType storageType)
+        throws ValueException
     {
         super(values, storageType);
     }

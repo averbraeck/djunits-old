@@ -36,7 +36,8 @@ abstract class MutableTypedDoubleVectorRel<U extends Unit<U>, R extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorRel(final double[] values, final U unit, final StorageType storageType) throws ValueException
+    MutableTypedDoubleVectorRel(final double[] values, final U unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -48,7 +49,8 @@ abstract class MutableTypedDoubleVectorRel<U extends Unit<U>, R extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorRel(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
+    MutableTypedDoubleVectorRel(final List<Double> values, final U unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }
