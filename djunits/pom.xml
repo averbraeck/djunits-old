@@ -188,6 +188,21 @@
             </configuration>
           </execution>
 
+          <execution>
+            <id>upload-main-website</id>
+            <phase>site-deploy</phase>
+            <goals>
+              <goal>upload</goal>
+            </goals>
+            <configuration>
+              <fromDir>${basedir}/website</fromDir>
+              <includes>**</includes>
+              <url>sftp://djunits.org/home/web/djunits.org</url>
+              <toDir>/</toDir>
+              <serverId>djunits-deployment</serverId>
+            </configuration>
+          </execution>
+
         </executions>
       </plugin>
 
