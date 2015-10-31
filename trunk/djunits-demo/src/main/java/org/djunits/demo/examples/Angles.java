@@ -33,13 +33,13 @@ public class Angles
         // + " (" + AngleUnit.normalize(a1).toString(AngleUnit.DEGREE) + ")");
         System.out.println("3 * \u03c0: " + a1 + " (" + a1.toString(AngleUnit.DEGREE) + ", " + a1.toString(AngleUnit.PERCENT)
                 + ") -> " + AngleUnit.normalize(a1) + " (" + AngleUnit.normalize(a1).toString(AngleUnit.DEGREE) + ", "
-                + AngleUnit.normalize(a1).toString(AngleUnit.PERCENT) + ") - OOPS");
+                + AngleUnit.normalize(a1).toString(AngleUnit.PERCENT) + ") Note: percentage almost 0");
         Angle.Rel a2 = new Angle.Rel(-Math.PI, AngleUnit.RADIAN);
         // System.out.println("   -\u03c0: " + a2 + " (" + a2.toString(AngleUnit.DEGREE) + ") -> " + AngleUnit.normalize(a2)
         // + " (" + AngleUnit.normalize(a2).toString(AngleUnit.DEGREE) + ")");
         System.out.println("   -\u03c0: " + a2 + " (" + a2.toString(AngleUnit.DEGREE) + ", " + a2.toString(AngleUnit.PERCENT)
                 + ") -> " + AngleUnit.normalize(a2) + " (" + AngleUnit.normalize(a2).toString(AngleUnit.DEGREE) + ", "
-                + AngleUnit.normalize(a2).toString(AngleUnit.PERCENT) + ") - OOPS");
+                + AngleUnit.normalize(a2).toString(AngleUnit.PERCENT) + ") Note: percentage almost 0");
         Angle.Rel a3 = new Angle.Rel(-45, AngleUnit.DEGREE);
         System.out.println("  -45\u0090: " + a3 + " (" + a3.toString(AngleUnit.RADIAN) + ", " + a3.toString(AngleUnit.PERCENT)
                 + ") -> " + AngleUnit.normalize(a3) + " (" + AngleUnit.normalize(a3).toString(AngleUnit.RADIAN) + ", "
