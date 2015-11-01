@@ -2,7 +2,6 @@ package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.MathFunctionsDimensionless;
-import org.djunits.value.Relative;
 
 /**
  * Absolute Relative typed scalar. <br>
@@ -20,7 +19,7 @@ import org.djunits.value.Relative;
  * @param <R> the relative vector type
  */
 public abstract class TypedDoubleScalarDimensionless<U extends Unit<U>, R extends TypedDoubleScalarDimensionless<U, R>>
-    extends TypedDoubleScalarRel<U, R> implements Relative, MathFunctionsDimensionless<R>
+    extends TypedDoubleScalarRel<U, R> implements MathFunctionsDimensionless<R>
 {
     /** */
     private static final long serialVersionUID = 20150905L;

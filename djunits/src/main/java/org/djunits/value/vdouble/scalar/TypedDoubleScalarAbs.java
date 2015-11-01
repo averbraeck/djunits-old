@@ -1,7 +1,6 @@
 package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.Unit;
-import org.djunits.value.Absolute;
 
 /**
  * Absolute Immutable typed scalar. <br>
@@ -19,7 +18,7 @@ import org.djunits.value.Absolute;
  * @param <R> the relative scalar type
  */
 public abstract class TypedDoubleScalarAbs<U extends Unit<U>, A extends TypedDoubleScalarAbs<U, A, R>, R extends TypedDoubleScalarRel<U, R>>
-    extends DoubleScalar.Abs<U> implements Absolute
+    extends DoubleScalar.Abs<U>
 {
     /** */
     private static final long serialVersionUID = 20150901L;

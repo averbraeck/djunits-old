@@ -170,6 +170,16 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
             return minus(this, decrement);
         }
 
+        /**
+         * Decrement the value by the supplied value and return the result.
+         * @param decrement FloatScalar.Abs&lt;U&gt;; amount by which the value is decremented
+         * @return FloatScalar.Rel&lt;U&gt;
+         */
+        public final FloatScalar.Rel<U> minus(final FloatScalar.Abs<U> decrement)
+        {
+            return minus(this, decrement);
+        }
+
         /**********************************************************************************/
         /********************************** MATH METHODS **********************************/
         /**********************************************************************************/

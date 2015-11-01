@@ -171,6 +171,16 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
             return minus(this, decrement);
         }
 
+        /**
+         * Decrement the value by the supplied value and return the result.
+         * @param decrement DoubleScalar.Abs&lt;U&gt;; amount by which the value is decremented
+         * @return DoubleScalar.Rel&lt;U&gt;
+         */
+        public final DoubleScalar.Rel<U> minus(final DoubleScalar.Abs<U> decrement)
+        {
+            return minus(this, decrement);
+        }
+
         /**********************************************************************************/
         /********************************** MATH METHODS **********************************/
         /**********************************************************************************/
