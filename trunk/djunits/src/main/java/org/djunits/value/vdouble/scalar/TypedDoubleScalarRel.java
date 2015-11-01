@@ -1,7 +1,6 @@
 package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.Unit;
-import org.djunits.value.Relative;
 
 /**
  * Absolute Relative typed scalar. <br>
@@ -19,7 +18,7 @@ import org.djunits.value.Relative;
  * @param <R> the relative vector type
  */
 public abstract class TypedDoubleScalarRel<U extends Unit<U>, R extends TypedDoubleScalarRel<U, R>> extends
-    DoubleScalar.Rel<U> implements Relative
+    DoubleScalar.Rel<U>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
