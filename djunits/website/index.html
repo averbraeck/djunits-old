@@ -24,12 +24,11 @@
 
   <!-- ======== Header ======== -->
 
-  <table width="100%" height="60px" cellpadding="0">
-    <th></th>
-    <tr>
+  <table width="100%" cellpadding="0">
+    <tr style="line-height: 1px; height: 60px">
       <td style="background-color: #0094FE">
-        <p>
-          <font color="BLACK" style="font-size:30px"> <b>&nbsp;DJUNITS - Delft Java UNIT System &nbsp;</b></font>
+        <p style="font-color: BLACK; font-size: 30px">
+          <b>&nbsp;DJUNITS - Delft Java UNIT System &nbsp;</b>
         </p>
       </td>
     </tr>
@@ -101,10 +100,15 @@
       distances are Relative.</p>
     <p>Generally, if adding a value to itself makes no sense, the value is Absolute; otherwise it is Relative.</p>
     <table class="simple">
-      <th valign="bottom">&nbsp;<br>Operation</th>
-      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right operand &rarr;<br>&darr; Left operand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-      <th valign="top">Absolute<br>&nbsp;</th>
-      <th valign="top">Relative<br>&nbsp;</th>
+      <tr>
+        <th valign="bottom">&nbsp;<br />Operation
+        </th>
+        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right operand &rarr;<br />&darr; Left operand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <th valign="top">Absolute<br />&nbsp;
+        </th>
+        <th valign="top">Relative<br />&nbsp;
+        </th>
       </tr>
       <tr>
         <th rowspan="2">+ (plus)</th>
@@ -180,10 +184,10 @@
         <td>Duration</td>
       </tr>
     </table>
-    The use of Absolute in relation to Temperature here may be confusing. In the table above, an absolute temperature is not necessarily expressed in Kelvin.
-    E.g. the melting temperature of water at normal atmospheric pressure is an Absolute value (it does not make sense to add this temperature to itself). In
-    DJUNITS this value would internally be stored as 273.15K, but on display it may be converted (back) to Celsius and displayed as 0&deg;C. A temperature
-    difference of 5K (Kelvin) is a Relative, even though Kelvin is often called absolute temperature.
+    <p>The use of Absolute in relation to Temperature here may be confusing. In the table above, an absolute temperature is not necessarily expressed in
+      Kelvin. E.g. the melting temperature of water at normal atmospheric pressure is an Absolute value (it does not make sense to add this temperature to
+      itself). In DJUNITS this value would internally be stored as 273.15K, but on display it may be converted (back) to Celsius and displayed as 0&deg;C. A
+      temperature difference of 5K (Kelvin) is a Relative, even though Kelvin is often called absolute temperature.</p>
 
     <p>Dimensionless is a special relative unit in DJUNITS that has a unit of 1.</p>
 
@@ -229,7 +233,6 @@ Volume vol = area.multiplyBy(distance);
 
     <p>Although we're not entirely sure, we believe that there is never a need for multiplication or division with an Absolute operand. It just does not
       make sense to multiply 23 September 2015, 3 PM (an absolute Time) by 2...</p>
-    p>
 
     <h2>Scalars, Vectors and Matrices</h2>
     Simple values are referred to as scalars. DJUNITS also handles groups of values (these must all be of the same type) as vectors or matrices. Vectors and
@@ -278,9 +281,8 @@ Volume vol = area.multiplyBy(distance);
 
   <div id="footer">
     <hr />
-    Copyright &copy; 2015, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br> DJUNITS uses a BSD-style
-      license. See 
-    <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
+    Copyright &copy; 2015, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br /> DJUNITS uses a BSD-style
+    license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
   </div>
 
 </body>
