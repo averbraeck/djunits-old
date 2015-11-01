@@ -6,8 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 import org.djunits.value.ValueUtil;
 import org.djunits.value.formatter.Format;
 import org.djunits.value.formatter.Formatter;
-import org.djunits.value.vdouble.DoubleMathFunctionsImpl;
-import org.djunits.value.vfloat.FloatMathFunctionsImpl;
+import org.djunits.value.vdouble.DoubleMathFunctions;
+import org.djunits.value.vfloat.FloatMathFunctions;
 import org.junit.Test;
 
 /**
@@ -55,8 +55,6 @@ public class PrivateConstructorsTest
         callPrivateConstructor(Format.class);
         callPrivateConstructor(Formatter.class);
         callPrivateConstructor(ValueUtil.class);
-        callPrivateConstructor(DoubleMathFunctionsImpl.class);
-        callPrivateConstructor(FloatMathFunctionsImpl.class);
     }
 
 }

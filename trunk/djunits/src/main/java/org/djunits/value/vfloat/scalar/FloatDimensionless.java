@@ -50,7 +50,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatDimensionless extends TypedFloatScalarRel<DimensionlessUnit, FloatDimensionless>
+public class FloatDimensionless extends TypedFloatScalarDimensionless<DimensionlessUnit, FloatDimensionless>
 {
     /** */
     private static final long serialVersionUID = 20150901L;

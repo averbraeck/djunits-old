@@ -305,56 +305,6 @@ public class FloatMatrixSparseTest
             try
             {
                 dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.abs();
-                MathTester.tester(input, "abs", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return Math.abs(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.acos();
-                MathTester.tester(input, "acos", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.acos(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.asin();
-                MathTester.tester(input, "asin", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.asin(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.atan();
-                MathTester.tester(input, "atan", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.atan(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cbrt();
-                MathTester.tester(input, "cbrt", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cbrt(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.ceil();
                 MathTester.tester(input, "ceil", dm, 0.001, new FloatToFloat()
                 {
@@ -362,46 +312,6 @@ public class FloatMatrixSparseTest
                     public float function(final float d)
                     {
                         return (float) Math.ceil(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cos();
-                MathTester.tester(input, "cos", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cos(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cosh();
-                MathTester.tester(input, "cosh", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cosh(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.exp();
-                MathTester.tester(input, "exp", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.exp(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.expm1();
-                MathTester.tester(input, "expm1", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.expm1(d);
                     }
                 });
                 dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
@@ -414,50 +324,6 @@ public class FloatMatrixSparseTest
                         return (float) Math.floor(d);
                     }
                 });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log();
-                MathTester.tester(input, "log", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log10();
-                MathTester.tester(input, "log10", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log10(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log1p();
-                MathTester.tester(input, "log1p", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log1p(d);
-                    }
-                });
-                for (int i = -10; i <= 10; i++)
-                {
-                    final float exponent = i * 0.5f;
-                    dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                    dm.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", dm, 0.001, new FloatToFloat()
-                    {
-                        @Override
-                        public float function(final float d)
-                        {
-                            return (float) Math.pow(d, exponent);
-                        }
-                    });
-                }
                 dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.rint();
                 MathTester.tester(input, "rint", dm, 0.001, new FloatToFloat()
@@ -476,96 +342,6 @@ public class FloatMatrixSparseTest
                     public float function(final float d)
                     {
                         return Math.round(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.signum();
-                MathTester.tester(input, "signum", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return Math.signum(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sin();
-                MathTester.tester(input, "sin", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sin(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sinh();
-                MathTester.tester(input, "sinh", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sinh(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sqrt();
-                MathTester.tester(input, "sqrt", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sqrt(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.tan();
-                MathTester.tester(input, "tan", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.tan(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.tanh();
-                MathTester.tester(input, "tanh", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.tanh(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.toDegrees();
-                MathTester.tester(input, "toDegrees", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.toDegrees(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.toRadians();
-                MathTester.tester(input, "toRadians", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.toRadians(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.inv();
-                MathTester.tester(input, "inv", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return 1 / d;
                     }
                 });
             }
@@ -1039,46 +815,6 @@ public class FloatMatrixSparseTest
                     }
                 });
                 dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.acos();
-                MathTester.tester(input, "acos", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.acos(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.asin();
-                MathTester.tester(input, "asin", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.asin(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.atan();
-                MathTester.tester(input, "atan", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.atan(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cbrt();
-                MathTester.tester(input, "cbrt", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cbrt(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.ceil();
                 MathTester.tester(input, "ceil", dm, 0.001, new FloatToFloat()
                 {
@@ -1089,45 +825,6 @@ public class FloatMatrixSparseTest
                     }
                 });
                 dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cos();
-                MathTester.tester(input, "cos", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cos(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cosh();
-                MathTester.tester(input, "cosh", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cosh(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.exp();
-                MathTester.tester(input, "exp", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.exp(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.expm1();
-                MathTester.tester(input, "expm1", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.expm1(d);
-                    }
-                });
                 dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.floor();
                 MathTester.tester(input, "floor", dm, 0.001, new FloatToFloat()
@@ -1138,50 +835,6 @@ public class FloatMatrixSparseTest
                         return (float) Math.floor(d);
                     }
                 });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log();
-                MathTester.tester(input, "log", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log10();
-                MathTester.tester(input, "log10", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log10(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log1p();
-                MathTester.tester(input, "log1p", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log1p(d);
-                    }
-                });
-                for (int i = -10; i <= 10; i++)
-                {
-                    final float exponent = i * 0.5f;
-                    dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                    dm.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", dm, 0.001, new FloatToFloat()
-                    {
-                        @Override
-                        public float function(final float d)
-                        {
-                            return (float) Math.pow(d, exponent);
-                        }
-                    });
-                }
                 dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.rint();
                 MathTester.tester(input, "rint", dm, 0.001, new FloatToFloat()
@@ -1200,96 +853,6 @@ public class FloatMatrixSparseTest
                     public float function(final float d)
                     {
                         return Math.round(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.signum();
-                MathTester.tester(input, "signum", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return Math.signum(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sin();
-                MathTester.tester(input, "sin", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sin(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sinh();
-                MathTester.tester(input, "sinh", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sinh(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sqrt();
-                MathTester.tester(input, "sqrt", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sqrt(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.tan();
-                MathTester.tester(input, "tan", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.tan(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.tanh();
-                MathTester.tester(input, "tanh", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.tanh(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.toDegrees();
-                MathTester.tester(input, "toDegrees", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.toDegrees(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.toRadians();
-                MathTester.tester(input, "toRadians", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.toRadians(d);
-                    }
-                });
-                dm = new MutableFloatMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.inv();
-                MathTester.tester(input, "inv", dm, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return 1 / d;
                     }
                 });
             }

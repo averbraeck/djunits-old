@@ -63,41 +63,6 @@ public abstract class TypedFloatScalarAbs<U extends Unit<U>, A extends TypedFloa
 
     /** {@inheritDoc} */
     @Override
-    public final A abs()
-    {
-        return instantiateTypeAbs(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A acos()
-    {
-        return instantiateTypeAbs((float) Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A asin()
-    {
-        return instantiateTypeAbs((float) Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A atan()
-    {
-        return instantiateTypeAbs((float) Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A cbrt()
-    {
-        return instantiateTypeAbs((float) Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final A ceil()
     {
         return instantiateTypeAbs((float) Math.ceil(getInUnit()), getUnit());
@@ -105,58 +70,9 @@ public abstract class TypedFloatScalarAbs<U extends Unit<U>, A extends TypedFloa
 
     /** {@inheritDoc} */
     @Override
-    public final A cos()
-    {
-        return instantiateTypeAbs((float) Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A cosh()
-    {
-        return instantiateTypeAbs((float) Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A exp()
-    {
-        return instantiateTypeAbs((float) Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A expm1()
-    {
-        return instantiateTypeAbs((float) Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final A floor()
     {
         return instantiateTypeAbs((float) Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A log()
-    {
-        return instantiateTypeAbs((float) Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A log10()
-    {
-        return instantiateTypeAbs((float) Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A log1p()
-    {
-        return instantiateTypeAbs((float) Math.log1p(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
@@ -171,76 +87,6 @@ public abstract class TypedFloatScalarAbs<U extends Unit<U>, A extends TypedFloa
     public final A round()
     {
         return instantiateTypeAbs(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A signum()
-    {
-        return instantiateTypeAbs(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A sin()
-    {
-        return instantiateTypeAbs((float) Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A sinh()
-    {
-        return instantiateTypeAbs((float) Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A sqrt()
-    {
-        return instantiateTypeAbs((float) Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A tan()
-    {
-        return instantiateTypeAbs((float) Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A tanh()
-    {
-        return instantiateTypeAbs((float) Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A inv()
-    {
-        return instantiateTypeAbs((float) 1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A toDegrees()
-    {
-        return instantiateTypeAbs((float) Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A toRadians()
-    {
-        return instantiateTypeAbs((float) Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A pow(final double x)
-    {
-        return instantiateTypeAbs((float) Math.pow(getInUnit(), x), getUnit());
     }
 
     /**

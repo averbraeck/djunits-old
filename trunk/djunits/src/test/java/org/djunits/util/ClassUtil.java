@@ -84,7 +84,7 @@ public final class ClassUtil
      * @throws NoSuchMethodException if the method cannot be resolved
      */
     public static Constructor<?> resolveConstructor(final Class<?> clazz, final Class<?> callerClass,
-        final Class<?>[] parameterTypes) throws NoSuchMethodException
+        final Class<?>... parameterTypes) throws NoSuchMethodException
     {
         Constructor<?> constructor = ClassUtil.resolveConstructor(clazz, parameterTypes);
         if (ClassUtil.isVisible(constructor, callerClass.getClass()))
@@ -101,7 +101,7 @@ public final class ClassUtil
      * @return Constructor
      * @throws NoSuchMethodException if the method cannot be resolved
      */
-    public static Constructor<?> resolveConstructor(final Class<?> clazz, final Class<?>[] parameterTypes)
+    public static Constructor<?> resolveConstructor(final Class<?> clazz, final Class<?>... parameterTypes)
         throws NoSuchMethodException
     {
         try
@@ -300,7 +300,7 @@ public final class ClassUtil
      * @throws NoSuchMethodException on lookup failure
      */
     public static Method resolveMethod(final Class<?> clazz, final Class<?> callerClass, final String name,
-        final Class<?>[] parameterTypes) throws NoSuchMethodException
+        final Class<?>... parameterTypes) throws NoSuchMethodException
     {
         Method method = ClassUtil.resolveMethod(clazz, name, parameterTypes);
         if (ClassUtil.isVisible(method, callerClass))
@@ -318,7 +318,7 @@ public final class ClassUtil
      * @return Method
      * @throws NoSuchMethodException on lookup failure
      */
-    public static Method resolveMethod(final Class<?> clazz, final String name, final Class<?>[] parameterTypes)
+    public static Method resolveMethod(final Class<?> clazz, final String name, final Class<?>... parameterTypes)
         throws NoSuchMethodException
     {
         try
@@ -339,10 +339,41 @@ public final class ClassUtil
                 {
                     throw new NoSuchMethodException("class " + parentClass + " not found to resolve method " + name);
                 }
-                return ClassUtil.resolveMethod(parentClass, name, (Class<?>[]) ClassUtil.checkInput(parameterTypes,
-                    Class.class));
+                try
+                {
+                    return ClassUtil.resolveMethod(parentClass, name, (Class<?>[]) ClassUtil.checkInput(parameterTypes,
+                        Class.class));
+                }
+                catch (NoSuchMethodException rmnsme)
+                {
+                    // ignore -- we will try another way
+                }
             }
-            throw new NoSuchMethodException("class " + clazz + " does not contain method " + name);
+
+            // We get all methods
+            Method[] methods = ClassUtil.getAllMethods(clazz, name, new Method[0]);
+            if (methods.length == 0)
+            {
+                throw new NoSuchMethodException("No such method: " + name + " for class " + clazz);
+            }
+            // now we match the signatures
+            methods = ClassUtil.matchSignature(methods, name, parameterTypes);
+            if (methods.length == 0)
+            {
+                throw new NoSuchMethodException("No method with right signature: " + name + " for class " + clazz);
+            }
+            try
+            {
+                // Now we find the most specific
+                Method result = ClassUtil.getSpecificMethod(methods);
+                String key = "METHOD:" + clazz + "@" + name + "@" + FieldSignature.toDescriptor(parameterTypes);
+                CACHE.put(key, result);
+                return result;
+            }
+            catch (NoSuchMethodException nsme)
+            {
+                throw new NoSuchMethodException("class " + clazz + " does not contain method " + name);
+            }
         }
     }
 
@@ -354,7 +385,7 @@ public final class ClassUtil
      * @return Method
      * @throws NoSuchMethodException on lookup failure
      */
-    public static Method resolveMethod(final Object object, final String name, final Class<?>[] parameterTypes)
+    public static Method resolveMethod(final Object object, final String name, final Class<?>... parameterTypes)
         throws NoSuchMethodException
     {
         if (object == null)
@@ -381,29 +412,7 @@ public final class ClassUtil
         {
             return (Method) CACHE.get(key);
         }
-        try
-        {
-            return ClassUtil.resolveMethod(object, name, parameterTypes);
-        }
-        catch (NoSuchMethodException noSuchMethodException)
-        {
-            // We get all methods
-            Method[] methods = ClassUtil.getAllMethods(object.getClass(), name, new Method[0]);
-            if (methods.length == 0)
-            {
-                throw new NoSuchMethodException("No such method: " + name + " for object " + object);
-            }
-            // now we match the signatures
-            methods = ClassUtil.matchSignature(methods, name, parameterTypes);
-            if (methods.length == 0)
-            {
-                throw new NoSuchMethodException("No method with right signature: " + name + " for object " + object);
-            }
-            // Now we find the most specific
-            Method result = ClassUtil.getSpecificMethod(methods);
-            CACHE.put(key, result);
-            return result;
-        }
+        return ClassUtil.resolveMethod(object, name, parameterTypes);
     }
 
     /**
@@ -542,7 +551,7 @@ public final class ClassUtil
      * @return Method[] An unordered Method-array consisting of the elements of 'methods' that match with the given signature.
      *         An array with 0 elements is returned when no matching Method objects are found.
      */
-    public static Method[] matchSignature(final Method[] methods, final String name, final Class<?>[] argTypes)
+    public static Method[] matchSignature(final Method[] methods, final String name, final Class<?>... argTypes)
     {
         List<Method> results = new ArrayList<Method>();
         for (int i = 0; i < methods.length; i++)
@@ -562,7 +571,7 @@ public final class ClassUtil
      * @param argTypes are the method's argument types
      * @return boolean if methodParameters assignable from argTypes
      */
-    public static boolean matchSignature(final Method method, final String name, final Class<?>[] argTypes)
+    public static boolean matchSignature(final Method method, final String name, final Class<?>... argTypes)
     {
         if (!method.getName().equals(name))
         {
@@ -589,7 +598,7 @@ public final class ClassUtil
      * @param argTypes are the constructor's argument types
      * @return boolean if methodParameters assignable from argTypes
      */
-    public static boolean matchSignature(final Constructor<?> constructor, final Class<?>[] argTypes)
+    public static boolean matchSignature(final Constructor<?> constructor, final Class<?>... argTypes)
     {
         if (constructor.getParameterTypes().length != argTypes.length)
         {
@@ -613,7 +622,7 @@ public final class ClassUtil
      * @return Constructor&lt;?&gt;[] An unordered Constructor-array consisting of the elements of 'constructors' that match
      *         with the given signature. An array with 0 elements is returned when no matching Method objects are found.
      */
-    public static Constructor<?>[] matchSignature(final Constructor<?>[] constructors, final Class<?>[] argTypes)
+    public static Constructor<?>[] matchSignature(final Constructor<?>[] constructors, final Class<?>... argTypes)
     {
         List<Constructor<?>> results = new ArrayList<Constructor<?>>();
         for (int i = 0; i < constructors.length; i++)
@@ -769,7 +778,7 @@ public final class ClassUtil
      * @return Method
      * @throws NoSuchMethodException if the method cannot be resolved
      */
-    private static Constructor<?> resolveConstructorSuper(final Class<?> clazz, final Class<?>[] parameterTypes)
+    private static Constructor<?> resolveConstructorSuper(final Class<?> clazz, final Class<?>... parameterTypes)
         throws NoSuchMethodException
     {
         String key = "CONSTRUCTOR:" + clazz + "@" + FieldSignature.toDescriptor(parameterTypes);
@@ -803,7 +812,7 @@ public final class ClassUtil
      * @return Method
      * @throws NoSuchMethodException on lookup failure
      */
-    private static Method resolveMethodSuper(final Class<?> clazz, final String name, final Class<?>[] parameterTypes)
+    private static Method resolveMethodSuper(final Class<?> clazz, final String name, final Class<?>... parameterTypes)
         throws NoSuchMethodException
     {
         String key = "METHOD:" + clazz + "@" + name + "@" + FieldSignature.toDescriptor(parameterTypes);

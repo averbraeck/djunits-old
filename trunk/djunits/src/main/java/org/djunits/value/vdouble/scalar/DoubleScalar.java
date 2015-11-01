@@ -4,6 +4,8 @@ import org.djunits.unit.SICoefficients;
 import org.djunits.unit.SIUnit;
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
+import org.djunits.value.MathFunctionsAbs;
+import org.djunits.value.MathFunctionsRel;
 import org.djunits.value.Relative;
 import org.djunits.value.Scalar;
 import org.djunits.value.ValueUtil;
@@ -42,7 +44,8 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
      * Absolute Immutable DoubleScalar.
      * @param <U> Unit
      */
-    public static class Abs<U extends Unit<U>> extends DoubleScalar<U> implements Absolute, Comparable<Abs<U>>
+    public static class Abs<U extends Unit<U>> extends DoubleScalar<U> implements Absolute, Comparable<Abs<U>>,
+        MathFunctionsAbs<DoubleScalar.Abs<U>>
     {
         /**  */
         private static final long serialVersionUID = 20150626L;
@@ -175,46 +178,6 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> abs()
-        {
-            return new DoubleScalar.Abs<U>(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> acos()
-        {
-            return new DoubleScalar.Abs<U>(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> asin()
-        {
-            return new DoubleScalar.Abs<U>(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> atan()
-        {
-            return new DoubleScalar.Abs<U>(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> cbrt()
-        {
-            return new DoubleScalar.Abs<U>(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
         public DoubleScalar.Abs<U> ceil()
         {
             return new DoubleScalar.Abs<U>(Math.ceil(getInUnit()), getUnit());
@@ -223,73 +186,9 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> cos()
-        {
-            return new DoubleScalar.Abs<U>(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> cosh()
-        {
-            return new DoubleScalar.Abs<U>(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> exp()
-        {
-            return new DoubleScalar.Abs<U>(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> expm1()
-        {
-            return new DoubleScalar.Abs<U>(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
         public DoubleScalar.Abs<U> floor()
         {
             return new DoubleScalar.Abs<U>(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> log()
-        {
-            return new DoubleScalar.Abs<U>(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> log10()
-        {
-            return new DoubleScalar.Abs<U>(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> log1p()
-        {
-            return new DoubleScalar.Abs<U>(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> pow(final double x)
-        {
-            return new DoubleScalar.Abs<U>(Math.pow(getSI(), x), getUnit());
         }
 
         /** {@inheritDoc} */
@@ -306,78 +205,6 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
         public DoubleScalar.Abs<U> round()
         {
             return new DoubleScalar.Abs<U>(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> signum()
-        {
-            return new DoubleScalar.Abs<U>(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> sin()
-        {
-            return new DoubleScalar.Abs<U>(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> sinh()
-        {
-            return new DoubleScalar.Abs<U>(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> sqrt()
-        {
-            return new DoubleScalar.Abs<U>(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> tan()
-        {
-            return new DoubleScalar.Abs<U>(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> tanh()
-        {
-            return new DoubleScalar.Abs<U>(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> toDegrees()
-        {
-            return new DoubleScalar.Abs<U>(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> toRadians()
-        {
-            return new DoubleScalar.Abs<U>(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> inv()
-        {
-            return new DoubleScalar.Abs<U>(1.0 / getInUnit(), getUnit());
         }
 
         /** {@inheritDoc} */
@@ -401,7 +228,8 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
      * Relative Immutable DoubleScalar.
      * @param <U> Unit
      */
-    public static class Rel<U extends Unit<U>> extends DoubleScalar<U> implements Relative, Comparable<Rel<U>>
+    public static class Rel<U extends Unit<U>> extends DoubleScalar<U> implements Relative, Comparable<Rel<U>>,
+        MathFunctionsRel<DoubleScalar.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20150626L;
@@ -542,38 +370,6 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> acos()
-        {
-            return new DoubleScalar.Rel<U>(Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> asin()
-        {
-            return new DoubleScalar.Rel<U>(Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> atan()
-        {
-            return new DoubleScalar.Rel<U>(Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> cbrt()
-        {
-            return new DoubleScalar.Rel<U>(Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
         public DoubleScalar.Rel<U> ceil()
         {
             return new DoubleScalar.Rel<U>(Math.ceil(getInUnit()), getUnit());
@@ -582,73 +378,9 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> cos()
-        {
-            return new DoubleScalar.Rel<U>(Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> cosh()
-        {
-            return new DoubleScalar.Rel<U>(Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> exp()
-        {
-            return new DoubleScalar.Rel<U>(Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> expm1()
-        {
-            return new DoubleScalar.Rel<U>(Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
         public DoubleScalar.Rel<U> floor()
         {
             return new DoubleScalar.Rel<U>(Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> log()
-        {
-            return new DoubleScalar.Rel<U>(Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> log10()
-        {
-            return new DoubleScalar.Rel<U>(Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> log1p()
-        {
-            return new DoubleScalar.Rel<U>(Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> pow(final double x)
-        {
-            return new DoubleScalar.Rel<U>(Math.pow(getSI(), x), getUnit());
         }
 
         /** {@inheritDoc} */
@@ -665,78 +397,6 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
         public DoubleScalar.Rel<U> round()
         {
             return new DoubleScalar.Rel<U>(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> signum()
-        {
-            return new DoubleScalar.Rel<U>(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> sin()
-        {
-            return new DoubleScalar.Rel<U>(Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> sinh()
-        {
-            return new DoubleScalar.Rel<U>(Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> sqrt()
-        {
-            return new DoubleScalar.Rel<U>(Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> tan()
-        {
-            return new DoubleScalar.Rel<U>(Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> tanh()
-        {
-            return new DoubleScalar.Rel<U>(Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> toDegrees()
-        {
-            return new DoubleScalar.Rel<U>(Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> toRadians()
-        {
-            return new DoubleScalar.Rel<U>(Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> inv()
-        {
-            return new DoubleScalar.Rel<U>(1.0 / getInUnit(), getUnit());
         }
 
         /** {@inheritDoc} */

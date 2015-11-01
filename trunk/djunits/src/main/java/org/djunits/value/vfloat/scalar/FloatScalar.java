@@ -4,6 +4,8 @@ import org.djunits.unit.SICoefficients;
 import org.djunits.unit.SIUnit;
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
+import org.djunits.value.MathFunctionsAbs;
+import org.djunits.value.MathFunctionsRel;
 import org.djunits.value.Relative;
 import org.djunits.value.Scalar;
 import org.djunits.value.ValueUtil;
@@ -41,7 +43,8 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
     /**
      * @param <U> Unit
      */
-    public static class Abs<U extends Unit<U>> extends FloatScalar<U> implements Absolute, Comparable<Abs<U>>
+    public static class Abs<U extends Unit<U>> extends FloatScalar<U> implements Absolute, Comparable<Abs<U>>,
+        MathFunctionsAbs<FloatScalar.Abs<U>>
     {
         /**  */
         private static final long serialVersionUID = 20150626L;
@@ -174,46 +177,6 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> abs()
-        {
-            return new FloatScalar.Abs<U>(Math.abs(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> acos()
-        {
-            return new FloatScalar.Abs<U>((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> asin()
-        {
-            return new FloatScalar.Abs<U>((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> atan()
-        {
-            return new FloatScalar.Abs<U>((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> cbrt()
-        {
-            return new FloatScalar.Abs<U>((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
         public FloatScalar.Abs<U> ceil()
         {
             return new FloatScalar.Abs<U>((float) Math.ceil(getInUnit()), getUnit());
@@ -222,73 +185,9 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> cos()
-        {
-            return new FloatScalar.Abs<U>((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> cosh()
-        {
-            return new FloatScalar.Abs<U>((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> exp()
-        {
-            return new FloatScalar.Abs<U>((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> expm1()
-        {
-            return new FloatScalar.Abs<U>((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
         public FloatScalar.Abs<U> floor()
         {
             return new FloatScalar.Abs<U>((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> log()
-        {
-            return new FloatScalar.Abs<U>((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> log10()
-        {
-            return new FloatScalar.Abs<U>((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> log1p()
-        {
-            return new FloatScalar.Abs<U>((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> pow(final double x)
-        {
-            return new FloatScalar.Abs<U>((float) Math.pow(getSI(), x), getUnit());
         }
 
         /** {@inheritDoc} */
@@ -305,78 +204,6 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
         public FloatScalar.Abs<U> round()
         {
             return new FloatScalar.Abs<U>(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> signum()
-        {
-            return new FloatScalar.Abs<U>(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> sin()
-        {
-            return new FloatScalar.Abs<U>((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> sinh()
-        {
-            return new FloatScalar.Abs<U>((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> sqrt()
-        {
-            return new FloatScalar.Abs<U>((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> tan()
-        {
-            return new FloatScalar.Abs<U>((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> tanh()
-        {
-            return new FloatScalar.Abs<U>((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> toDegrees()
-        {
-            return new FloatScalar.Abs<U>((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> toRadians()
-        {
-            return new FloatScalar.Abs<U>((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Abs<U> inv()
-        {
-            return new FloatScalar.Abs<U>(1.0f / getInUnit(), getUnit());
         }
 
         /** {@inheritDoc} */
@@ -400,7 +227,8 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
     /**
      * @param <U> Unit
      */
-    public static class Rel<U extends Unit<U>> extends FloatScalar<U> implements Relative, Comparable<Rel<U>>
+    public static class Rel<U extends Unit<U>> extends FloatScalar<U> implements Relative, Comparable<Rel<U>>,
+        MathFunctionsRel<FloatScalar.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20150626L;
@@ -541,38 +369,6 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> acos()
-        {
-            return new FloatScalar.Rel<U>((float) Math.acos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> asin()
-        {
-            return new FloatScalar.Rel<U>((float) Math.asin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> atan()
-        {
-            return new FloatScalar.Rel<U>((float) Math.atan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> cbrt()
-        {
-            return new FloatScalar.Rel<U>((float) Math.cbrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
         public FloatScalar.Rel<U> ceil()
         {
             return new FloatScalar.Rel<U>((float) Math.ceil(getInUnit()), getUnit());
@@ -581,73 +377,9 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> cos()
-        {
-            return new FloatScalar.Rel<U>((float) Math.cos(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> cosh()
-        {
-            return new FloatScalar.Rel<U>((float) Math.cosh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> exp()
-        {
-            return new FloatScalar.Rel<U>((float) Math.exp(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> expm1()
-        {
-            return new FloatScalar.Rel<U>((float) Math.expm1(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
         public FloatScalar.Rel<U> floor()
         {
             return new FloatScalar.Rel<U>((float) Math.floor(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> log()
-        {
-            return new FloatScalar.Rel<U>((float) Math.log(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> log10()
-        {
-            return new FloatScalar.Rel<U>((float) Math.log10(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> log1p()
-        {
-            return new FloatScalar.Rel<U>((float) Math.log1p(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> pow(final double x)
-        {
-            return new FloatScalar.Rel<U>((float) Math.pow(getSI(), x), getUnit());
         }
 
         /** {@inheritDoc} */
@@ -664,78 +396,6 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
         public FloatScalar.Rel<U> round()
         {
             return new FloatScalar.Rel<U>(Math.round(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> signum()
-        {
-            return new FloatScalar.Rel<U>(Math.signum(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> sin()
-        {
-            return new FloatScalar.Rel<U>((float) Math.sin(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> sinh()
-        {
-            return new FloatScalar.Rel<U>((float) Math.sinh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> sqrt()
-        {
-            return new FloatScalar.Rel<U>((float) Math.sqrt(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> tan()
-        {
-            return new FloatScalar.Rel<U>((float) Math.tan(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> tanh()
-        {
-            return new FloatScalar.Rel<U>((float) Math.tanh(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> toDegrees()
-        {
-            return new FloatScalar.Rel<U>((float) Math.toDegrees(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> toRadians()
-        {
-            return new FloatScalar.Rel<U>((float) Math.toRadians(getInUnit()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public FloatScalar.Rel<U> inv()
-        {
-            return new FloatScalar.Rel<U>(1.0f / getInUnit(), getUnit());
         }
 
         /** {@inheritDoc} */

@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.Unit;
+import org.djunits.value.MathFunctionsDimensionless;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.FloatMathFunctions;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 
 /**
- * Absolute Mutable typed Vector.
+ * Relative Mutable typed Vector.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -19,13 +21,13 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> the unit
- * @param <A> the absolute vector type
- * @param <R> the relative vector type
- * @param <MA> the mutable absolute vector type
- * @param <S> the absolute scalar type
+ * @param <R> the vector type
+ * @param <MR> the mutable vector type
+ * @param <S> the scalar type
  */
-abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloatVectorAbs<U, A, R, MA, S>, R extends TypedFloatVectorRel<U, R, ?, ?>, MA extends MutableTypedFloatVectorAbs<U, A, R, MA, S>, S extends FloatScalar.Abs<U>>
-    extends MutableFloatVector.Abs<U>
+abstract class MutableTypedFloatVectorDimensionless<U extends Unit<U>, R extends TypedFloatVectorRel<U, R, MR, S>, MR extends MutableTypedFloatVectorDimensionless<U, R, MR, S>, S extends FloatScalar.Rel<U>>
+    extends MutableTypedFloatVectorRel<U, R, MR, S> implements
+    MathFunctionsDimensionless<MutableTypedFloatVectorDimensionless<U, R, MR, S>>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -37,7 +39,8 @@ abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloa
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedFloatVectorAbs(final float[] values, final U unit, final StorageType storageType) throws ValueException
+    MutableTypedFloatVectorDimensionless(final float[] values, final U unit, final StorageType storageType)
+        throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -49,7 +52,7 @@ abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloa
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedFloatVectorAbs(final List<Float> values, final U unit, final StorageType storageType)
+    MutableTypedFloatVectorDimensionless(final List<Float> values, final U unit, final StorageType storageType)
         throws ValueException
     {
         super(values, unit, storageType);
@@ -61,7 +64,7 @@ abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloa
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    MutableTypedFloatVectorAbs(final S[] values, final StorageType storageType) throws ValueException
+    MutableTypedFloatVectorDimensionless(final S[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -72,7 +75,7 @@ abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloa
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    MutableTypedFloatVectorAbs(final List<S> values, final StorageType storageType) throws ValueException
+    MutableTypedFloatVectorDimensionless(final List<S> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -84,8 +87,8 @@ abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloa
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    MutableTypedFloatVectorAbs(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
-        throws ValueException
+    MutableTypedFloatVectorDimensionless(final SortedMap<Integer, S> values, final int length,
+        final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -98,7 +101,7 @@ abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloa
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedFloatVectorAbs(final SortedMap<Integer, Float> values, final U unit, final int length,
+    MutableTypedFloatVectorDimensionless(final SortedMap<Integer, Float> values, final U unit, final int length,
         final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -109,78 +112,9 @@ abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloa
      * @param data an internal data object
      * @param unit the unit
      */
-    MutableTypedFloatVectorAbs(final FloatVectorData data, final U unit)
+    MutableTypedFloatVectorDimensionless(final FloatVectorData data, final U unit)
     {
         super(data, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MA mutable()
-    {
-        setCopyOnWrite(true);
-        final MA result = instantiateMutableType(getData(), getUnit());
-        result.setCopyOnWrite(true);
-        return result;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public A immutable()
-    {
-        setCopyOnWrite(true);
-        return instantiateTypeAbs(getData(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("unchecked")
-    public final MA toDense()
-    {
-        return this.data.isDense() ? (MA) this : instantiateMutableType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("unchecked")
-    public final MA toSparse()
-    {
-        return this.data.isSparse() ? (MA) this : instantiateMutableType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
-     * @return M the Mutable FloatVector of the right type
-     */
-    protected abstract A instantiateTypeAbs(final FloatVectorData dvd, final U unit);
-
-    /**
-     * Construct a new Relative Immutable FloatVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
-     * @return M the Mutable FloatVector of the right type
-     */
-    protected abstract R instantiateTypeRel(final FloatVectorData dvd, final U unit);
-
-    /**
-     * Construct a new Absolute Mutable FloatVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
-     * @return M the Mutable FloatVector of the right type
-     */
-    protected abstract MA instantiateMutableType(final FloatVectorData dvd, final U unit);
-
-    /** {@inheritDoc} */
-    @Override
-    public abstract S get(final int index) throws ValueException;
-
-    /** {@inheritDoc} */
-    @Override
-    public final MA copy()
-    {
-        return mutable();
     }
 
     /**********************************************************************************/
@@ -190,49 +124,171 @@ abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloa
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA ceil()
+    public final MR acos()
     {
-        return (MA) super.ceil();
+        assign(FloatMathFunctions.ACOS);
+        return (MR) this;
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA floor()
+    public final MR asin()
     {
-        return (MA) super.floor();
+        assign(FloatMathFunctions.ASIN);
+        return (MR) this;
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA rint()
+    public final MR atan()
     {
-        return (MA) super.rint();
+        assign(FloatMathFunctions.ATAN);
+        return (MR) this;
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA round()
+    public final MR cbrt()
     {
-        return (MA) super.round();
+        assign(FloatMathFunctions.CBRT);
+        return (MR) this;
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA multiplyBy(final float constant)
+    public final MR cos()
     {
-        return (MA) super.multiplyBy(constant);
+        assign(FloatMathFunctions.COS);
+        return (MR) this;
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA divideBy(final float constant)
+    public final MR cosh()
     {
-        return (MA) super.divideBy(constant);
+        assign(FloatMathFunctions.COSH);
+        return (MR) this;
     }
 
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR exp()
+    {
+        assign(FloatMathFunctions.EXP);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR expm1()
+    {
+        assign(FloatMathFunctions.EXPM1);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR log()
+    {
+        assign(FloatMathFunctions.LOG);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR log10()
+    {
+        assign(FloatMathFunctions.LOG10);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR log1p()
+    {
+        assign(FloatMathFunctions.LOG1P);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR pow(final double x)
+    {
+        assign(FloatMathFunctions.POW((float) x));
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR signum()
+    {
+        assign(FloatMathFunctions.SIGNUM);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR sin()
+    {
+        assign(FloatMathFunctions.SIN);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR sinh()
+    {
+        assign(FloatMathFunctions.SINH);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR sqrt()
+    {
+        assign(FloatMathFunctions.SQRT);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR tan()
+    {
+        assign(FloatMathFunctions.TAN);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR tanh()
+    {
+        assign(FloatMathFunctions.TANH);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR inv()
+    {
+        assign(FloatMathFunctions.INV);
+        return (MR) this;
+    }
 }

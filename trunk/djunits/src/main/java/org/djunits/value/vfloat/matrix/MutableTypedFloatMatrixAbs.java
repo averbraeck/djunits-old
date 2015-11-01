@@ -137,46 +137,6 @@ abstract class MutableTypedFloatMatrixAbs<U extends Unit<U>, A extends TypedFloa
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA abs()
-    {
-        return (MA) super.abs();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA acos()
-    {
-        return (MA) super.acos();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA asin()
-    {
-        return (MA) super.asin();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA atan()
-    {
-        return (MA) super.atan();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA cbrt()
-    {
-        return (MA) super.cbrt();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
     public final MA ceil()
     {
         return (MA) super.ceil();
@@ -185,73 +145,9 @@ abstract class MutableTypedFloatMatrixAbs<U extends Unit<U>, A extends TypedFloa
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA cos()
-    {
-        return (MA) super.cos();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA cosh()
-    {
-        return (MA) super.cosh();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA exp()
-    {
-        return (MA) super.exp();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA expm1()
-    {
-        return (MA) super.expm1();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
     public final MA floor()
     {
         return (MA) super.floor();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA log()
-    {
-        return (MA) super.log();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA log10()
-    {
-        return (MA) super.log10();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA log1p()
-    {
-        return (MA) super.log1p();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA pow(final double x)
-    {
-        return (MA) super.pow((float) x);
     }
 
     /** {@inheritDoc} */
@@ -268,78 +164,6 @@ abstract class MutableTypedFloatMatrixAbs<U extends Unit<U>, A extends TypedFloa
     public final MA round()
     {
         return (MA) super.round();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA signum()
-    {
-        return (MA) super.signum();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA sin()
-    {
-        return (MA) super.sin();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA sinh()
-    {
-        return (MA) super.sinh();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA sqrt()
-    {
-        return (MA) super.sqrt();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA tan()
-    {
-        return (MA) super.tan();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA tanh()
-    {
-        return (MA) super.tanh();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA toDegrees()
-    {
-        return (MA) super.toDegrees();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA toRadians()
-    {
-        return (MA) super.toRadians();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MA inv()
-    {
-        return (MA) super.inv();
     }
 
     /** {@inheritDoc} */
