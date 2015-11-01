@@ -8,8 +8,6 @@ import org.djunits.unit.scale.GradeScale;
 import org.djunits.unit.scale.LinearScale;
 import org.djunits.unit.scale.Scale;
 import org.djunits.unit.unitsystem.UnitSystem;
-import org.djunits.value.vdouble.scalar.DoubleScalar;
-import org.djunits.value.vfloat.scalar.FloatScalar;
 
 /**
  * Standard angle unit. Several conversion factors have been taken from <a
@@ -18,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version May 15, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version May 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class AngleUnit extends Unit<AngleUnit>
@@ -143,79 +141,5 @@ public class AngleUnit extends Unit<AngleUnit>
     public final String getSICoefficientsString()
     {
         return "1";
-    }
-
-    /**
-     * Normalize an angle between 0 and 2 * PI.
-     * @param angle original angle.
-     * @return angle between 0 and 2 * PI.
-     */
-    public static double normalize(final double angle)
-    {
-        double normalized = angle % (2 * Math.PI);
-        if (normalized < 0.0)
-        {
-            normalized += 2 * Math.PI;
-        }
-        return normalized;
-    }
-
-    /**
-     * Normalize an angle between 0 and 2 * PI.
-     * @param angle original angle.
-     * @return angle between 0 and 2 * PI.
-     */
-    public static float normalize(final float angle)
-    {
-        float normalized = (float) (angle % (2 * Math.PI));
-        if (normalized < 0.0)
-        {
-            normalized += 2 * Math.PI;
-        }
-        return normalized;
-    }
-
-    /**
-     * Normalize an angle between 0 and 2 * PI.
-     * @param angle original angle.
-     * @return angle between 0 and 2 * PI.
-     */
-    public static DoubleScalar.Abs<AngleUnit> normalize(final DoubleScalar.Abs<AngleUnit> angle)
-    {
-        double normalized = angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
-        return new DoubleScalar.Abs<AngleUnit>(normalized, angle.getUnit());
-    }
-
-    /**
-     * Normalize an angle between 0 and 2 * PI.
-     * @param angle original angle.
-     * @return angle between 0 and 2 * PI.
-     */
-    public static DoubleScalar.Rel<AngleUnit> normalize(final DoubleScalar.Rel<AngleUnit> angle)
-    {
-        double normalized = angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
-        return new DoubleScalar.Rel<AngleUnit>(normalized, angle.getUnit());
-    }
-
-    /**
-     * Normalize an angle between 0 and 2 * PI.
-     * @param angle original angle.
-     * @return angle between 0 and 2 * PI.
-     */
-    public static FloatScalar.Abs<AngleUnit> normalize(final FloatScalar.Abs<AngleUnit> angle)
-    {
-        float normalized = (float) angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
-        return new FloatScalar.Abs<AngleUnit>(normalized, angle.getUnit());
-    }
-
-    /**
-     * Normalize an angle between 0 and 2 * PI.
-     * @param angle original angle.
-     * @return angle between 0 and 2 * PI.
-     */
-    public static FloatScalar.Rel<AngleUnit> normalize(final FloatScalar.Rel<AngleUnit> angle)
-    {
-        float normalized = (float) angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
-        return new FloatScalar.Rel<AngleUnit>(normalized, angle.getUnit());
     }
 }

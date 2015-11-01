@@ -279,56 +279,6 @@ public class FloatVectorDenseTest
             try
             {
                 dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.abs();
-                MathTester.tester(input, "abs", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return Math.abs(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.acos();
-                MathTester.tester(input, "acos", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.acos(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.asin();
-                MathTester.tester(input, "asin", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.asin(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.atan();
-                MathTester.tester(input, "atan", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.atan(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cbrt();
-                MathTester.tester(input, "cbrt", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cbrt(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dv.ceil();
                 MathTester.tester(input, "ceil", dv, 0.001, new FloatToFloat()
                 {
@@ -336,46 +286,6 @@ public class FloatVectorDenseTest
                     public float function(final float d)
                     {
                         return (float) Math.ceil(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cos();
-                MathTester.tester(input, "cos", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cos(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cosh();
-                MathTester.tester(input, "cosh", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cosh(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.exp();
-                MathTester.tester(input, "exp", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.exp(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.expm1();
-                MathTester.tester(input, "expm1", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.expm1(d);
                     }
                 });
                 dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
@@ -388,50 +298,6 @@ public class FloatVectorDenseTest
                         return (float) Math.floor(d);
                     }
                 });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log();
-                MathTester.tester(input, "log", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log10();
-                MathTester.tester(input, "log10", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log10(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log1p();
-                MathTester.tester(input, "log1p", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log1p(d);
-                    }
-                });
-                for (int i = -10; i <= 10; i++)
-                {
-                    final float exponent = i * 0.5f;
-                    dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                    dv.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", dv, 0.001, new FloatToFloat()
-                    {
-                        @Override
-                        public float function(final float d)
-                        {
-                            return (float) Math.pow(d, exponent);
-                        }
-                    });
-                }
                 dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dv.rint();
                 MathTester.tester(input, "rint", dv, 0.001, new FloatToFloat()
@@ -450,96 +316,6 @@ public class FloatVectorDenseTest
                     public float function(final float d)
                     {
                         return Math.round(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.signum();
-                MathTester.tester(input, "signum", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return Math.signum(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sin();
-                MathTester.tester(input, "sin", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sin(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sinh();
-                MathTester.tester(input, "sinh", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sinh(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sqrt();
-                MathTester.tester(input, "sqrt", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sqrt(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.tan();
-                MathTester.tester(input, "tan", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.tan(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.tanh();
-                MathTester.tester(input, "tanh", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.tanh(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.toDegrees();
-                MathTester.tester(input, "toDegrees", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.toDegrees(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.toRadians();
-                MathTester.tester(input, "toRadians", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.toRadians(d);
-                    }
-                });
-                dv = new MutableFloatVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.inv();
-                MathTester.tester(input, "inv", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return 1 / d;
                     }
                 });
             }
@@ -901,46 +677,6 @@ public class FloatVectorDenseTest
                     }
                 });
                 dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.acos();
-                MathTester.tester(input, "acos", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.acos(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.asin();
-                MathTester.tester(input, "asin", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.asin(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.atan();
-                MathTester.tester(input, "atan", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.atan(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cbrt();
-                MathTester.tester(input, "cbrt", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cbrt(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dv.ceil();
                 MathTester.tester(input, "ceil", dv, 0.001, new FloatToFloat()
                 {
@@ -948,46 +684,6 @@ public class FloatVectorDenseTest
                     public float function(final float d)
                     {
                         return (float) Math.ceil(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cos();
-                MathTester.tester(input, "cos", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cos(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cosh();
-                MathTester.tester(input, "cosh", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.cosh(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.exp();
-                MathTester.tester(input, "exp", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.exp(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.expm1();
-                MathTester.tester(input, "expm1", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.expm1(d);
                     }
                 });
                 dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
@@ -1000,50 +696,6 @@ public class FloatVectorDenseTest
                         return (float) Math.floor(d);
                     }
                 });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log();
-                MathTester.tester(input, "log", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log10();
-                MathTester.tester(input, "log10", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log10(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log1p();
-                MathTester.tester(input, "log1p", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.log1p(d);
-                    }
-                });
-                for (int i = -10; i <= 10; i++)
-                {
-                    final float exponent = i * 0.5f;
-                    dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                    dv.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", dv, 0.001, new FloatToFloat()
-                    {
-                        @Override
-                        public float function(final float d)
-                        {
-                            return (float) Math.pow(d, exponent);
-                        }
-                    });
-                }
                 dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dv.rint();
                 MathTester.tester(input, "rint", dv, 0.001, new FloatToFloat()
@@ -1062,96 +714,6 @@ public class FloatVectorDenseTest
                     public float function(final float d)
                     {
                         return Math.round(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.signum();
-                MathTester.tester(input, "signum", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return Math.signum(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sin();
-                MathTester.tester(input, "sin", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sin(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sinh();
-                MathTester.tester(input, "sinh", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sinh(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sqrt();
-                MathTester.tester(input, "sqrt", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.sqrt(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.tan();
-                MathTester.tester(input, "tan", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.tan(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.tanh();
-                MathTester.tester(input, "tanh", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.tanh(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.toDegrees();
-                MathTester.tester(input, "toDegrees", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.toDegrees(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.toRadians();
-                MathTester.tester(input, "toRadians", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return (float) Math.toRadians(d);
-                    }
-                });
-                dv = new MutableFloatVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.inv();
-                MathTester.tester(input, "inv", dv, 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float d)
-                    {
-                        return 1 / d;
                     }
                 });
             }

@@ -7,14 +7,14 @@ import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
 import org.djunits.value.FunctionsAbs;
 import org.djunits.value.FunctionsRel;
-import org.djunits.value.MathFunctions;
+import org.djunits.value.MathFunctionsAbs;
+import org.djunits.value.MathFunctionsRel;
 import org.djunits.value.Relative;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
 import org.djunits.value.vdouble.DoubleFunction;
 import org.djunits.value.vdouble.DoubleMathFunctions;
-import org.djunits.value.vdouble.DoubleMathFunctionsImpl;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 
 /**
@@ -76,8 +76,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Abs<U extends Unit<U>> extends MutableDoubleVector<U> implements Absolute,
-        MathFunctions<MutableDoubleVector.Abs<U>>, DoubleMathFunctions<MutableDoubleVector.Abs<U>>,
-        FunctionsAbs<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>
+        MathFunctionsAbs<MutableDoubleVector.Abs<U>>, FunctionsAbs<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>,
+        DoubleMathFunctions<MutableDoubleVector.Abs<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -393,90 +393,9 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> abs()
-        {
-            assign(DoubleMathFunctionsImpl.ABS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> acos()
-        {
-            assign(DoubleMathFunctionsImpl.ACOS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> asin()
-        {
-            assign(DoubleMathFunctionsImpl.ASIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> atan()
-        {
-            assign(DoubleMathFunctionsImpl.ATAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> cbrt()
-        {
-            assign(DoubleMathFunctionsImpl.CBRT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleVector.Abs<U> ceil()
         {
-            assign(DoubleMathFunctionsImpl.CEIL);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> cos()
-        {
-            assign(DoubleMathFunctionsImpl.COS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> cosh()
-        {
-            assign(DoubleMathFunctionsImpl.COSH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> exp()
-        {
-            assign(DoubleMathFunctionsImpl.EXP);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> expm1()
-        {
-            assign(DoubleMathFunctionsImpl.EXPM1);
+            assign(DoubleMathFunctions.CEIL);
             return this;
         }
 
@@ -485,43 +404,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleVector.Abs<U> floor()
         {
-            assign(DoubleMathFunctionsImpl.FLOOR);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> log()
-        {
-            assign(DoubleMathFunctionsImpl.LOG);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> log10()
-        {
-            assign(DoubleMathFunctionsImpl.LOG10);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> log1p()
-        {
-            assign(DoubleMathFunctionsImpl.LOG1P);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> pow(final double x)
-        {
-            assign(DoubleMathFunctionsImpl.POW(x));
+            assign(DoubleMathFunctions.FLOOR);
             return this;
         }
 
@@ -530,7 +413,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleVector.Abs<U> rint()
         {
-            assign(DoubleMathFunctionsImpl.RINT);
+            assign(DoubleMathFunctions.RINT);
             return this;
         }
 
@@ -539,90 +422,10 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleVector.Abs<U> round()
         {
-            assign(DoubleMathFunctionsImpl.ROUND);
+            assign(DoubleMathFunctions.ROUND);
             return this;
         }
 
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> signum()
-        {
-            assign(DoubleMathFunctionsImpl.SIGNUM);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> sin()
-        {
-            assign(DoubleMathFunctionsImpl.SIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> sinh()
-        {
-            assign(DoubleMathFunctionsImpl.SINH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> sqrt()
-        {
-            assign(DoubleMathFunctionsImpl.SQRT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> tan()
-        {
-            assign(DoubleMathFunctionsImpl.TAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> tanh()
-        {
-            assign(DoubleMathFunctionsImpl.TANH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> toDegrees()
-        {
-            assign(DoubleMathFunctionsImpl.TO_DEGREES);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> toRadians()
-        {
-            assign(DoubleMathFunctionsImpl.TO_RADIANS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> inv()
-        {
-            assign(DoubleMathFunctionsImpl.INV);
-            return this;
-        }
     }
 
     /* ============================================================================================ */
@@ -634,8 +437,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Rel<U extends Unit<U>> extends MutableDoubleVector<U> implements Relative,
-        MathFunctions<MutableDoubleVector.Rel<U>>, DoubleMathFunctions<MutableDoubleVector.Rel<U>>,
-        FunctionsRel<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>
+        MathFunctionsRel<MutableDoubleVector.Rel<U>>, FunctionsRel<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>,
+        DoubleMathFunctions<MutableDoubleVector.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -969,43 +772,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleVector.Rel<U> abs()
         {
-            assign(DoubleMathFunctionsImpl.ABS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> acos()
-        {
-            assign(DoubleMathFunctionsImpl.ACOS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> asin()
-        {
-            assign(DoubleMathFunctionsImpl.ASIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> atan()
-        {
-            assign(DoubleMathFunctionsImpl.ATAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> cbrt()
-        {
-            assign(DoubleMathFunctionsImpl.CBRT);
+            assign(DoubleMathFunctions.ABS);
             return this;
         }
 
@@ -1014,43 +781,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleVector.Rel<U> ceil()
         {
-            assign(DoubleMathFunctionsImpl.CEIL);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> cos()
-        {
-            assign(DoubleMathFunctionsImpl.COS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> cosh()
-        {
-            assign(DoubleMathFunctionsImpl.COSH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> exp()
-        {
-            assign(DoubleMathFunctionsImpl.EXP);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> expm1()
-        {
-            assign(DoubleMathFunctionsImpl.EXPM1);
+            assign(DoubleMathFunctions.CEIL);
             return this;
         }
 
@@ -1059,43 +790,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleVector.Rel<U> floor()
         {
-            assign(DoubleMathFunctionsImpl.FLOOR);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> log()
-        {
-            assign(DoubleMathFunctionsImpl.LOG);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> log10()
-        {
-            assign(DoubleMathFunctionsImpl.LOG10);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> log1p()
-        {
-            assign(DoubleMathFunctionsImpl.LOG1P);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> pow(final double x)
-        {
-            assign(DoubleMathFunctionsImpl.POW(x));
+            assign(DoubleMathFunctions.FLOOR);
             return this;
         }
 
@@ -1104,7 +799,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleVector.Rel<U> rint()
         {
-            assign(DoubleMathFunctionsImpl.RINT);
+            assign(DoubleMathFunctions.RINT);
             return this;
         }
 
@@ -1113,91 +808,9 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleVector.Rel<U> round()
         {
-            assign(DoubleMathFunctionsImpl.ROUND);
+            assign(DoubleMathFunctions.ROUND);
             return this;
         }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> signum()
-        {
-            assign(DoubleMathFunctionsImpl.SIGNUM);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> sin()
-        {
-            assign(DoubleMathFunctionsImpl.SIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> sinh()
-        {
-            assign(DoubleMathFunctionsImpl.SINH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> sqrt()
-        {
-            assign(DoubleMathFunctionsImpl.SQRT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> tan()
-        {
-            assign(DoubleMathFunctionsImpl.TAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> tanh()
-        {
-            assign(DoubleMathFunctionsImpl.TANH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> toDegrees()
-        {
-            assign(DoubleMathFunctionsImpl.TO_DEGREES);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> toRadians()
-        {
-            assign(DoubleMathFunctionsImpl.TO_RADIANS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> inv()
-        {
-            assign(DoubleMathFunctionsImpl.INV);
-            return this;
-        }
-
     }
 
     /**********************************************************************************/

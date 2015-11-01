@@ -4,14 +4,14 @@ import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
 import org.djunits.value.FunctionsAbs;
 import org.djunits.value.FunctionsRel;
-import org.djunits.value.MathFunctions;
+import org.djunits.value.MathFunctionsAbs;
+import org.djunits.value.MathFunctionsRel;
 import org.djunits.value.Relative;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
 import org.djunits.value.vdouble.DoubleFunction;
 import org.djunits.value.vdouble.DoubleMathFunctions;
-import org.djunits.value.vdouble.DoubleMathFunctionsImpl;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 
 /**
@@ -73,8 +73,8 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Abs<U extends Unit<U>> extends MutableDoubleMatrix<U> implements Absolute,
-        MathFunctions<MutableDoubleMatrix.Abs<U>>, DoubleMathFunctions<MutableDoubleMatrix.Abs<U>>,
-        FunctionsAbs<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>
+        MathFunctionsAbs<MutableDoubleMatrix.Abs<U>>, FunctionsAbs<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>,
+        DoubleMathFunctions<MutableDoubleMatrix.Abs<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -334,90 +334,9 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> abs()
-        {
-            assign(DoubleMathFunctionsImpl.ABS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> acos()
-        {
-            assign(DoubleMathFunctionsImpl.ACOS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> asin()
-        {
-            assign(DoubleMathFunctionsImpl.ASIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> atan()
-        {
-            assign(DoubleMathFunctionsImpl.ATAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> cbrt()
-        {
-            assign(DoubleMathFunctionsImpl.CBRT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleMatrix.Abs<U> ceil()
         {
-            assign(DoubleMathFunctionsImpl.CEIL);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> cos()
-        {
-            assign(DoubleMathFunctionsImpl.COS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> cosh()
-        {
-            assign(DoubleMathFunctionsImpl.COSH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> exp()
-        {
-            assign(DoubleMathFunctionsImpl.EXP);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> expm1()
-        {
-            assign(DoubleMathFunctionsImpl.EXPM1);
+            assign(DoubleMathFunctions.CEIL);
             return this;
         }
 
@@ -426,43 +345,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleMatrix.Abs<U> floor()
         {
-            assign(DoubleMathFunctionsImpl.FLOOR);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> log()
-        {
-            assign(DoubleMathFunctionsImpl.LOG);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> log10()
-        {
-            assign(DoubleMathFunctionsImpl.LOG10);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> log1p()
-        {
-            assign(DoubleMathFunctionsImpl.LOG1P);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> pow(final double x)
-        {
-            assign(DoubleMathFunctionsImpl.POW(x));
+            assign(DoubleMathFunctions.FLOOR);
             return this;
         }
 
@@ -471,7 +354,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleMatrix.Abs<U> rint()
         {
-            assign(DoubleMathFunctionsImpl.RINT);
+            assign(DoubleMathFunctions.RINT);
             return this;
         }
 
@@ -480,88 +363,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleMatrix.Abs<U> round()
         {
-            assign(DoubleMathFunctionsImpl.ROUND);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> signum()
-        {
-            assign(DoubleMathFunctionsImpl.SIGNUM);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> sin()
-        {
-            assign(DoubleMathFunctionsImpl.SIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> sinh()
-        {
-            assign(DoubleMathFunctionsImpl.SINH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> sqrt()
-        {
-            assign(DoubleMathFunctionsImpl.SQRT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> tan()
-        {
-            assign(DoubleMathFunctionsImpl.TAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> tanh()
-        {
-            assign(DoubleMathFunctionsImpl.TANH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> toDegrees()
-        {
-            assign(DoubleMathFunctionsImpl.TO_DEGREES);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> toRadians()
-        {
-            assign(DoubleMathFunctionsImpl.TO_RADIANS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Abs<U> inv()
-        {
-            assign(DoubleMathFunctionsImpl.INV);
+            assign(DoubleMathFunctions.ROUND);
             return this;
         }
     }
@@ -575,8 +377,8 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
      * @param <U> Unit the unit for which this Matrix will be created
      */
     public static class Rel<U extends Unit<U>> extends MutableDoubleMatrix<U> implements Relative,
-        MathFunctions<MutableDoubleMatrix.Rel<U>>, DoubleMathFunctions<MutableDoubleMatrix.Rel<U>>,
-        FunctionsRel<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>
+        MathFunctionsRel<MutableDoubleMatrix.Rel<U>>, FunctionsRel<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>,
+        DoubleMathFunctions<MutableDoubleMatrix.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -854,43 +656,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleMatrix.Rel<U> abs()
         {
-            assign(DoubleMathFunctionsImpl.ABS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> acos()
-        {
-            assign(DoubleMathFunctionsImpl.ACOS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> asin()
-        {
-            assign(DoubleMathFunctionsImpl.ASIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> atan()
-        {
-            assign(DoubleMathFunctionsImpl.ATAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> cbrt()
-        {
-            assign(DoubleMathFunctionsImpl.CBRT);
+            assign(DoubleMathFunctions.ABS);
             return this;
         }
 
@@ -899,43 +665,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleMatrix.Rel<U> ceil()
         {
-            assign(DoubleMathFunctionsImpl.CEIL);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> cos()
-        {
-            assign(DoubleMathFunctionsImpl.COS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> cosh()
-        {
-            assign(DoubleMathFunctionsImpl.COSH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> exp()
-        {
-            assign(DoubleMathFunctionsImpl.EXP);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> expm1()
-        {
-            assign(DoubleMathFunctionsImpl.EXPM1);
+            assign(DoubleMathFunctions.CEIL);
             return this;
         }
 
@@ -944,43 +674,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleMatrix.Rel<U> floor()
         {
-            assign(DoubleMathFunctionsImpl.FLOOR);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> log()
-        {
-            assign(DoubleMathFunctionsImpl.LOG);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> log10()
-        {
-            assign(DoubleMathFunctionsImpl.LOG10);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> log1p()
-        {
-            assign(DoubleMathFunctionsImpl.LOG1P);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> pow(final double x)
-        {
-            assign(DoubleMathFunctionsImpl.POW(x));
+            assign(DoubleMathFunctions.FLOOR);
             return this;
         }
 
@@ -989,7 +683,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleMatrix.Rel<U> rint()
         {
-            assign(DoubleMathFunctionsImpl.RINT);
+            assign(DoubleMathFunctions.RINT);
             return this;
         }
 
@@ -998,91 +692,9 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
         @SuppressWarnings("checkstyle:designforextension")
         public MutableDoubleMatrix.Rel<U> round()
         {
-            assign(DoubleMathFunctionsImpl.ROUND);
+            assign(DoubleMathFunctions.ROUND);
             return this;
         }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> signum()
-        {
-            assign(DoubleMathFunctionsImpl.SIGNUM);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> sin()
-        {
-            assign(DoubleMathFunctionsImpl.SIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> sinh()
-        {
-            assign(DoubleMathFunctionsImpl.SINH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> sqrt()
-        {
-            assign(DoubleMathFunctionsImpl.SQRT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> tan()
-        {
-            assign(DoubleMathFunctionsImpl.TAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> tanh()
-        {
-            assign(DoubleMathFunctionsImpl.TANH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> toDegrees()
-        {
-            assign(DoubleMathFunctionsImpl.TO_DEGREES);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> toRadians()
-        {
-            assign(DoubleMathFunctionsImpl.TO_RADIANS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleMatrix.Rel<U> inv()
-        {
-            assign(DoubleMathFunctionsImpl.INV);
-            return this;
-        }
-
     }
 
     /**********************************************************************************/

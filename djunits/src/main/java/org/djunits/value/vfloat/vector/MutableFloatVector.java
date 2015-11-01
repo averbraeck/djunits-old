@@ -7,14 +7,14 @@ import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
 import org.djunits.value.FunctionsAbs;
 import org.djunits.value.FunctionsRel;
-import org.djunits.value.MathFunctions;
+import org.djunits.value.MathFunctionsAbs;
+import org.djunits.value.MathFunctionsRel;
 import org.djunits.value.Relative;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
 import org.djunits.value.vfloat.FloatFunction;
 import org.djunits.value.vfloat.FloatMathFunctions;
-import org.djunits.value.vfloat.FloatMathFunctionsImpl;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 
 /**
@@ -76,8 +76,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Abs<U extends Unit<U>> extends MutableFloatVector<U> implements Absolute,
-        MathFunctions<MutableFloatVector.Abs<U>>, FloatMathFunctions<MutableFloatVector.Abs<U>>,
-        FunctionsAbs<U, FloatVector.Abs<U>, FloatVector.Rel<U>>
+        MathFunctionsAbs<MutableFloatVector.Abs<U>>, FunctionsAbs<U, FloatVector.Abs<U>, FloatVector.Rel<U>>,
+        FloatMathFunctions<MutableFloatVector.Abs<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -393,90 +393,9 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> abs()
-        {
-            assign(FloatMathFunctionsImpl.ABS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> acos()
-        {
-            assign(FloatMathFunctionsImpl.ACOS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> asin()
-        {
-            assign(FloatMathFunctionsImpl.ASIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> atan()
-        {
-            assign(FloatMathFunctionsImpl.ATAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> cbrt()
-        {
-            assign(FloatMathFunctionsImpl.CBRT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatVector.Abs<U> ceil()
         {
-            assign(FloatMathFunctionsImpl.CEIL);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> cos()
-        {
-            assign(FloatMathFunctionsImpl.COS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> cosh()
-        {
-            assign(FloatMathFunctionsImpl.COSH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> exp()
-        {
-            assign(FloatMathFunctionsImpl.EXP);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> expm1()
-        {
-            assign(FloatMathFunctionsImpl.EXPM1);
+            assign(FloatMathFunctions.CEIL);
             return this;
         }
 
@@ -485,43 +404,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatVector.Abs<U> floor()
         {
-            assign(FloatMathFunctionsImpl.FLOOR);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> log()
-        {
-            assign(FloatMathFunctionsImpl.LOG);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> log10()
-        {
-            assign(FloatMathFunctionsImpl.LOG10);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> log1p()
-        {
-            assign(FloatMathFunctionsImpl.LOG1P);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> pow(final double x)
-        {
-            assign(FloatMathFunctionsImpl.POW((float) x));
+            assign(FloatMathFunctions.FLOOR);
             return this;
         }
 
@@ -530,7 +413,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatVector.Abs<U> rint()
         {
-            assign(FloatMathFunctionsImpl.RINT);
+            assign(FloatMathFunctions.RINT);
             return this;
         }
 
@@ -539,90 +422,10 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatVector.Abs<U> round()
         {
-            assign(FloatMathFunctionsImpl.ROUND);
+            assign(FloatMathFunctions.ROUND);
             return this;
         }
 
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> signum()
-        {
-            assign(FloatMathFunctionsImpl.SIGNUM);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> sin()
-        {
-            assign(FloatMathFunctionsImpl.SIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> sinh()
-        {
-            assign(FloatMathFunctionsImpl.SINH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> sqrt()
-        {
-            assign(FloatMathFunctionsImpl.SQRT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> tan()
-        {
-            assign(FloatMathFunctionsImpl.TAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> tanh()
-        {
-            assign(FloatMathFunctionsImpl.TANH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> toDegrees()
-        {
-            assign(FloatMathFunctionsImpl.TO_DEGREES);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> toRadians()
-        {
-            assign(FloatMathFunctionsImpl.TO_RADIANS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Abs<U> inv()
-        {
-            assign(FloatMathFunctionsImpl.INV);
-            return this;
-        }
     }
 
     /** ============================================================================================ */
@@ -634,8 +437,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Rel<U extends Unit<U>> extends MutableFloatVector<U> implements Relative,
-        MathFunctions<MutableFloatVector.Rel<U>>, FloatMathFunctions<MutableFloatVector.Rel<U>>,
-        FunctionsRel<U, FloatVector.Abs<U>, FloatVector.Rel<U>>
+        MathFunctionsRel<MutableFloatVector.Rel<U>>, FunctionsRel<U, FloatVector.Abs<U>, FloatVector.Rel<U>>,
+        FloatMathFunctions<MutableFloatVector.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -969,43 +772,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatVector.Rel<U> abs()
         {
-            assign(FloatMathFunctionsImpl.ABS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> acos()
-        {
-            assign(FloatMathFunctionsImpl.ACOS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> asin()
-        {
-            assign(FloatMathFunctionsImpl.ASIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> atan()
-        {
-            assign(FloatMathFunctionsImpl.ATAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> cbrt()
-        {
-            assign(FloatMathFunctionsImpl.CBRT);
+            assign(FloatMathFunctions.ABS);
             return this;
         }
 
@@ -1014,43 +781,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatVector.Rel<U> ceil()
         {
-            assign(FloatMathFunctionsImpl.CEIL);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> cos()
-        {
-            assign(FloatMathFunctionsImpl.COS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> cosh()
-        {
-            assign(FloatMathFunctionsImpl.COSH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> exp()
-        {
-            assign(FloatMathFunctionsImpl.EXP);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> expm1()
-        {
-            assign(FloatMathFunctionsImpl.EXPM1);
+            assign(FloatMathFunctions.CEIL);
             return this;
         }
 
@@ -1059,43 +790,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatVector.Rel<U> floor()
         {
-            assign(FloatMathFunctionsImpl.FLOOR);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> log()
-        {
-            assign(FloatMathFunctionsImpl.LOG);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> log10()
-        {
-            assign(FloatMathFunctionsImpl.LOG10);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> log1p()
-        {
-            assign(FloatMathFunctionsImpl.LOG1P);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> pow(final double x)
-        {
-            assign(FloatMathFunctionsImpl.POW((float) x));
+            assign(FloatMathFunctions.FLOOR);
             return this;
         }
 
@@ -1104,7 +799,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatVector.Rel<U> rint()
         {
-            assign(FloatMathFunctionsImpl.RINT);
+            assign(FloatMathFunctions.RINT);
             return this;
         }
 
@@ -1113,88 +808,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
         @SuppressWarnings("checkstyle:designforextension")
         public MutableFloatVector.Rel<U> round()
         {
-            assign(FloatMathFunctionsImpl.ROUND);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> signum()
-        {
-            assign(FloatMathFunctionsImpl.SIGNUM);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> sin()
-        {
-            assign(FloatMathFunctionsImpl.SIN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> sinh()
-        {
-            assign(FloatMathFunctionsImpl.SINH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> sqrt()
-        {
-            assign(FloatMathFunctionsImpl.SQRT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> tan()
-        {
-            assign(FloatMathFunctionsImpl.TAN);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> tanh()
-        {
-            assign(FloatMathFunctionsImpl.TANH);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> toDegrees()
-        {
-            assign(FloatMathFunctionsImpl.TO_DEGREES);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> toRadians()
-        {
-            assign(FloatMathFunctionsImpl.TO_RADIANS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatVector.Rel<U> inv()
-        {
-            assign(FloatMathFunctionsImpl.INV);
+            assign(FloatMathFunctions.ROUND);
             return this;
         }
 

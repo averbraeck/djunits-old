@@ -281,56 +281,6 @@ public class DoubleVectorDenseTest
             try
             {
                 dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.abs();
-                MathTester.tester(input, "abs", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.abs(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.acos();
-                MathTester.tester(input, "acos", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.acos(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.asin();
-                MathTester.tester(input, "asin", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.asin(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.atan();
-                MathTester.tester(input, "atan", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.atan(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cbrt();
-                MathTester.tester(input, "cbrt", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cbrt(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dv.ceil();
                 MathTester.tester(input, "ceil", dv, 0.001, new DoubleToDouble()
                 {
@@ -338,46 +288,6 @@ public class DoubleVectorDenseTest
                     public double function(final double d)
                     {
                         return Math.ceil(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cos();
-                MathTester.tester(input, "cos", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cos(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cosh();
-                MathTester.tester(input, "cosh", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cosh(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.exp();
-                MathTester.tester(input, "exp", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.exp(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.expm1();
-                MathTester.tester(input, "expm1", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.expm1(d);
                     }
                 });
                 dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
@@ -390,50 +300,6 @@ public class DoubleVectorDenseTest
                         return Math.floor(d);
                     }
                 });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log();
-                MathTester.tester(input, "log", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log10();
-                MathTester.tester(input, "log10", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log10(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log1p();
-                MathTester.tester(input, "log1p", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log1p(d);
-                    }
-                });
-                for (int i = -10; i <= 10; i++)
-                {
-                    final double exponent = i * 0.5d;
-                    dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                    dv.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", dv, 0.001, new DoubleToDouble()
-                    {
-                        @Override
-                        public double function(final double d)
-                        {
-                            return Math.pow(d, exponent);
-                        }
-                    });
-                }
                 dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dv.rint();
                 MathTester.tester(input, "rint", dv, 0.001, new DoubleToDouble()
@@ -452,96 +318,6 @@ public class DoubleVectorDenseTest
                     public double function(final double d)
                     {
                         return Math.round(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.signum();
-                MathTester.tester(input, "signum", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.signum(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sin();
-                MathTester.tester(input, "sin", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sin(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sinh();
-                MathTester.tester(input, "sinh", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sinh(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sqrt();
-                MathTester.tester(input, "sqrt", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sqrt(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.tan();
-                MathTester.tester(input, "tan", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.tan(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.tanh();
-                MathTester.tester(input, "tanh", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.tanh(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.toDegrees();
-                MathTester.tester(input, "toDegrees", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.toDegrees(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.toRadians();
-                MathTester.tester(input, "toRadians", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.toRadians(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.inv();
-                MathTester.tester(input, "inv", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return 1 / d;
                     }
                 });
             }
@@ -905,46 +681,6 @@ public class DoubleVectorDenseTest
                     }
                 });
                 dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.acos();
-                MathTester.tester(input, "acos", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.acos(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.asin();
-                MathTester.tester(input, "asin", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.asin(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.atan();
-                MathTester.tester(input, "atan", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.atan(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cbrt();
-                MathTester.tester(input, "cbrt", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cbrt(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dv.ceil();
                 MathTester.tester(input, "ceil", dv, 0.001, new DoubleToDouble()
                 {
@@ -952,46 +688,6 @@ public class DoubleVectorDenseTest
                     public double function(final double d)
                     {
                         return Math.ceil(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cos();
-                MathTester.tester(input, "cos", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cos(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.cosh();
-                MathTester.tester(input, "cosh", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cosh(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.exp();
-                MathTester.tester(input, "exp", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.exp(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.expm1();
-                MathTester.tester(input, "expm1", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.expm1(d);
                     }
                 });
                 dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
@@ -1004,50 +700,6 @@ public class DoubleVectorDenseTest
                         return Math.floor(d);
                     }
                 });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log();
-                MathTester.tester(input, "log", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log10();
-                MathTester.tester(input, "log10", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log10(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.log1p();
-                MathTester.tester(input, "log1p", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log1p(d);
-                    }
-                });
-                for (int i = -10; i <= 10; i++)
-                {
-                    final double exponent = i * 0.5d;
-                    dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                    dv.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", dv, 0.001, new DoubleToDouble()
-                    {
-                        @Override
-                        public double function(final double d)
-                        {
-                            return Math.pow(d, exponent);
-                        }
-                    });
-                }
                 dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dv.rint();
                 MathTester.tester(input, "rint", dv, 0.001, new DoubleToDouble()
@@ -1066,96 +718,6 @@ public class DoubleVectorDenseTest
                     public double function(final double d)
                     {
                         return Math.round(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.signum();
-                MathTester.tester(input, "signum", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.signum(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sin();
-                MathTester.tester(input, "sin", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sin(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sinh();
-                MathTester.tester(input, "sinh", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sinh(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.sqrt();
-                MathTester.tester(input, "sqrt", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sqrt(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.tan();
-                MathTester.tester(input, "tan", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.tan(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.tanh();
-                MathTester.tester(input, "tanh", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.tanh(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.toDegrees();
-                MathTester.tester(input, "toDegrees", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.toDegrees(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.toRadians();
-                MathTester.tester(input, "toRadians", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.toRadians(d);
-                    }
-                });
-                dv = new MutableDoubleVector.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dv.inv();
-                MathTester.tester(input, "inv", dv, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return 1 / d;
                     }
                 });
             }

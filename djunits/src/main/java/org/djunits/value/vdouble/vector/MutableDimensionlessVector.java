@@ -19,8 +19,9 @@ import org.djunits.value.vdouble.scalar.Dimensionless;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableDimensionlessVector extends
-    MutableTypedDoubleVectorRel<DimensionlessUnit, DimensionlessVector, MutableDimensionlessVector, Dimensionless>
+public class MutableDimensionlessVector
+    extends
+    MutableTypedDoubleVectorDimensionless<DimensionlessUnit, DimensionlessVector, MutableDimensionlessVector, Dimensionless>
 {
     /** */
     private static final long serialVersionUID = 20151109L;

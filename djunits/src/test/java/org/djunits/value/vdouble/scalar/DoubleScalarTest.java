@@ -17,8 +17,8 @@ import org.junit.Test;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -169,93 +169,12 @@ public class DoubleScalarTest
             double input = seedValue;
             DoubleScalar.Abs<LengthUnit> ds;
             ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "abs", ds.abs(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.abs(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "acos", ds.acos(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.acos(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "asin", ds.asin(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.asin(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "atan", ds.atan(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.atan(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cbrt", ds.cbrt(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.cbrt(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
             MathTester.tester(input, "ceil", ds.ceil(), 0.001, new DoubleToDouble()
             {
                 @Override
                 public double function(final double d)
                 {
                     return Math.ceil(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cos", ds.cos(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.cos(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cosh", ds.cosh(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.cosh(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "exp", ds.exp(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.exp(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "expm1", ds.expm1(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.expm1(d);
                 }
             });
             ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
@@ -267,46 +186,6 @@ public class DoubleScalarTest
                     return Math.floor(d);
                 }
             });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log", ds.log(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.log(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log10", ds.log10(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.log10(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log1p", ds.log1p(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.log1p(d);
-                }
-            });
-            for (int i = -10; i <= 10; i++)
-            {
-                final double exponent = i * 0.5d;
-                ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-                MathTester.tester(input, "pow(" + exponent + ")", ds.pow(exponent), 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.pow(d, exponent);
-                    }
-                });
-            }
             ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
             MathTester.tester(input, "rint", ds.rint(), 0.001, new DoubleToDouble()
             {
@@ -323,87 +202,6 @@ public class DoubleScalarTest
                 public double function(final double d)
                 {
                     return Math.round(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "signum", ds.signum(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.signum(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sin", ds.sin(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.sin(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sinh", ds.sinh(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.sinh(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sqrt", ds.sqrt(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.sqrt(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "tan", ds.tan(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.tan(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "tanh", ds.tanh(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.tanh(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "toDegrees", ds.toDegrees(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.toDegrees(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "toRadians", ds.toRadians(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.toRadians(d);
-                }
-            });
-            ds = new DoubleScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "inv", ds.inv(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return 1 / d;
                 }
             });
         }
@@ -609,84 +407,12 @@ public class DoubleScalarTest
                 }
             });
             ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "acos", ds.acos(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.acos(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "asin", ds.asin(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.asin(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "atan", ds.atan(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.atan(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cbrt", ds.cbrt(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.cbrt(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
             MathTester.tester(input, "ceil", ds.ceil(), 0.001, new DoubleToDouble()
             {
                 @Override
                 public double function(final double d)
                 {
                     return Math.ceil(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cos", ds.cos(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.cos(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cosh", ds.cosh(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.cosh(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "exp", ds.exp(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.exp(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "expm1", ds.expm1(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.expm1(d);
                 }
             });
             ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
@@ -698,46 +424,6 @@ public class DoubleScalarTest
                     return Math.floor(d);
                 }
             });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log", ds.log(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.log(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log10", ds.log10(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.log10(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log1p", ds.log1p(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.log1p(d);
-                }
-            });
-            for (int i = -10; i <= 10; i++)
-            {
-                final double exponent = i * 0.5d;
-                ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-                MathTester.tester(input, "pow(" + exponent + ")", ds.pow(exponent), 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.pow(d, exponent);
-                    }
-                });
-            }
             ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
             MathTester.tester(input, "rint", ds.rint(), 0.001, new DoubleToDouble()
             {
@@ -754,87 +440,6 @@ public class DoubleScalarTest
                 public double function(final double d)
                 {
                     return Math.round(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "signum", ds.signum(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.signum(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sin", ds.sin(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.sin(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sinh", ds.sinh(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.sinh(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sqrt", ds.sqrt(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.sqrt(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "tan", ds.tan(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.tan(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "tanh", ds.tanh(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.tanh(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "toDegrees", ds.toDegrees(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.toDegrees(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "toRadians", ds.toRadians(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return Math.toRadians(d);
-                }
-            });
-            ds = new DoubleScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "inv", ds.inv(), 0.001, new DoubleToDouble()
-            {
-                @Override
-                public double function(final double d)
-                {
-                    return 1 / d;
                 }
             });
         }

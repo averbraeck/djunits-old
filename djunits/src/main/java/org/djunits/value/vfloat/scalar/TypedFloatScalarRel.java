@@ -63,34 +63,6 @@ public abstract class TypedFloatScalarRel<U extends Unit<U>, R extends TypedFloa
 
     /** {@inheritDoc} */
     @Override
-    public final R acos()
-    {
-        return instantiateTypeRel((float) Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R asin()
-    {
-        return instantiateTypeRel((float) Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R atan()
-    {
-        return instantiateTypeRel((float) Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R cbrt()
-    {
-        return instantiateTypeRel((float) Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final R ceil()
     {
         return instantiateTypeRel((float) Math.ceil(getInUnit()), getUnit());
@@ -98,58 +70,9 @@ public abstract class TypedFloatScalarRel<U extends Unit<U>, R extends TypedFloa
 
     /** {@inheritDoc} */
     @Override
-    public final R cos()
-    {
-        return instantiateTypeRel((float) Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R cosh()
-    {
-        return instantiateTypeRel((float) Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R exp()
-    {
-        return instantiateTypeRel((float) Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R expm1()
-    {
-        return instantiateTypeRel((float) Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final R floor()
     {
         return instantiateTypeRel((float) Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R log()
-    {
-        return instantiateTypeRel((float) Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R log10()
-    {
-        return instantiateTypeRel((float) Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R log1p()
-    {
-        return instantiateTypeRel((float) Math.log1p(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
@@ -164,76 +87,6 @@ public abstract class TypedFloatScalarRel<U extends Unit<U>, R extends TypedFloa
     public final R round()
     {
         return instantiateTypeRel(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R signum()
-    {
-        return instantiateTypeRel(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R sin()
-    {
-        return instantiateTypeRel((float) Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R sinh()
-    {
-        return instantiateTypeRel((float) Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R sqrt()
-    {
-        return instantiateTypeRel((float) Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R tan()
-    {
-        return instantiateTypeRel((float) Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R tanh()
-    {
-        return instantiateTypeRel((float) Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R inv()
-    {
-        return instantiateTypeRel((float) 1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R toDegrees()
-    {
-        return instantiateTypeRel((float) Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R toRadians()
-    {
-        return instantiateTypeRel((float) Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R pow(final double x)
-    {
-        return instantiateTypeRel((float) Math.pow(getInUnit(), x), getUnit());
     }
 
     /** {@inheritDoc} */

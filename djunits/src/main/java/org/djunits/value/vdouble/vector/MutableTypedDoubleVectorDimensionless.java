@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.Unit;
+import org.djunits.value.MathFunctionsDimensionless;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.DoubleMathFunctions;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 
 /**
- * Absolute Mutable typed Vector.
+ * Relative Mutable typed Dimensionless Vector.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -19,13 +21,13 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> the unit
- * @param <A> the absolute vector type
- * @param <R> the relative vector type
- * @param <MA> the mutable absolute vector type
- * @param <S> the absolute scalar type
+ * @param <R> the vector type
+ * @param <MR> the mutable vector type
+ * @param <S> the scalar type
  */
-abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDoubleVectorAbs<U, A, R, MA, S>, R extends TypedDoubleVectorRel<U, R, ?, ?>, MA extends MutableTypedDoubleVectorAbs<U, A, R, MA, S>, S extends DoubleScalar.Abs<U>>
-    extends MutableDoubleVector.Abs<U>
+abstract class MutableTypedDoubleVectorDimensionless<U extends Unit<U>, R extends TypedDoubleVectorRel<U, R, MR, S>, MR extends MutableTypedDoubleVectorDimensionless<U, R, MR, S>, S extends DoubleScalar.Rel<U>>
+    extends MutableTypedDoubleVectorRel<U, R, MR, S> implements
+    MathFunctionsDimensionless<MutableTypedDoubleVectorDimensionless<U, R, MR, S>>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -37,7 +39,7 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorAbs(final double[] values, final U unit, final StorageType storageType)
+    MutableTypedDoubleVectorDimensionless(final double[] values, final U unit, final StorageType storageType)
         throws ValueException
     {
         super(values, unit, storageType);
@@ -50,7 +52,7 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorAbs(final List<Double> values, final U unit, final StorageType storageType)
+    MutableTypedDoubleVectorDimensionless(final List<Double> values, final U unit, final StorageType storageType)
         throws ValueException
     {
         super(values, unit, storageType);
@@ -62,7 +64,7 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    MutableTypedDoubleVectorAbs(final S[] values, final StorageType storageType) throws ValueException
+    MutableTypedDoubleVectorDimensionless(final S[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -73,7 +75,7 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    MutableTypedDoubleVectorAbs(final List<S> values, final StorageType storageType) throws ValueException
+    MutableTypedDoubleVectorDimensionless(final List<S> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -85,8 +87,8 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    MutableTypedDoubleVectorAbs(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
-        throws ValueException
+    MutableTypedDoubleVectorDimensionless(final SortedMap<Integer, S> values, final int length,
+        final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -99,7 +101,7 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorAbs(final SortedMap<Integer, Double> values, final U unit, final int length,
+    MutableTypedDoubleVectorDimensionless(final SortedMap<Integer, Double> values, final U unit, final int length,
         final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -110,78 +112,9 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param data an internal data object
      * @param unit the unit
      */
-    MutableTypedDoubleVectorAbs(final DoubleVectorData data, final U unit)
+    MutableTypedDoubleVectorDimensionless(final DoubleVectorData data, final U unit)
     {
         super(data, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MA mutable()
-    {
-        setCopyOnWrite(true);
-        final MA result = instantiateMutableType(getData(), getUnit());
-        result.setCopyOnWrite(true);
-        return result;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public A immutable()
-    {
-        setCopyOnWrite(true);
-        return instantiateTypeAbs(getData(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("unchecked")
-    public final MA toDense()
-    {
-        return this.data.isDense() ? (MA) this : instantiateMutableType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("unchecked")
-    public final MA toSparse()
-    {
-        return this.data.isSparse() ? (MA) this : instantiateMutableType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Construct a new Absolute Immutable DoubleVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
-     * @return M the Mutable DoubleVector of the right type
-     */
-    protected abstract A instantiateTypeAbs(final DoubleVectorData dvd, final U unit);
-
-    /**
-     * Construct a new Relative Immutable DoubleVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
-     * @return M the Mutable DoubleVector of the right type
-     */
-    protected abstract R instantiateTypeRel(final DoubleVectorData dvd, final U unit);
-
-    /**
-     * Construct a new Absolute Mutable DoubleVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
-     * @return M the Mutable DoubleVector of the right type
-     */
-    protected abstract MA instantiateMutableType(final DoubleVectorData dvd, final U unit);
-
-    /** {@inheritDoc} */
-    @Override
-    public abstract S get(final int index) throws ValueException;
-
-    /** {@inheritDoc} */
-    @Override
-    public final MA copy()
-    {
-        return mutable();
     }
 
     /**********************************************************************************/
@@ -191,49 +124,171 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA ceil()
+    public final MR acos()
     {
-        return (MA) super.ceil();
+        assign(DoubleMathFunctions.ACOS);
+        return (MR) this;
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA floor()
+    public final MR asin()
     {
-        return (MA) super.floor();
+        assign(DoubleMathFunctions.ASIN);
+        return (MR) this;
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA rint()
+    public final MR atan()
     {
-        return (MA) super.rint();
+        assign(DoubleMathFunctions.ATAN);
+        return (MR) this;
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA round()
+    public final MR cbrt()
     {
-        return (MA) super.round();
+        assign(DoubleMathFunctions.CBRT);
+        return (MR) this;
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA multiplyBy(final double constant)
+    public final MR cos()
     {
-        return (MA) super.multiplyBy(constant);
+        assign(DoubleMathFunctions.COS);
+        return (MR) this;
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MA divideBy(final double constant)
+    public final MR cosh()
     {
-        return (MA) super.divideBy(constant);
+        assign(DoubleMathFunctions.COSH);
+        return (MR) this;
     }
 
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR exp()
+    {
+        assign(DoubleMathFunctions.EXP);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR expm1()
+    {
+        assign(DoubleMathFunctions.EXPM1);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR log()
+    {
+        assign(DoubleMathFunctions.LOG);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR log10()
+    {
+        assign(DoubleMathFunctions.LOG10);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR log1p()
+    {
+        assign(DoubleMathFunctions.LOG1P);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR pow(final double x)
+    {
+        assign(DoubleMathFunctions.POW(x));
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR signum()
+    {
+        assign(DoubleMathFunctions.SIGNUM);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR sin()
+    {
+        assign(DoubleMathFunctions.SIN);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR sinh()
+    {
+        assign(DoubleMathFunctions.SINH);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR sqrt()
+    {
+        assign(DoubleMathFunctions.SQRT);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR tan()
+    {
+        assign(DoubleMathFunctions.TAN);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR tanh()
+    {
+        assign(DoubleMathFunctions.TANH);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final MR inv()
+    {
+        assign(DoubleMathFunctions.INV);
+        return (MR) this;
+    }
 }

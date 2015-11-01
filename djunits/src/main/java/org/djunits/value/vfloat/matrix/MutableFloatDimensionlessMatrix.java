@@ -18,7 +18,7 @@ import org.djunits.value.vfloat.scalar.FloatDimensionless;
  */
 public class MutableFloatDimensionlessMatrix
     extends
-    MutableTypedFloatMatrixRel<DimensionlessUnit, FloatDimensionlessMatrix, MutableFloatDimensionlessMatrix, FloatDimensionless>
+    MutableTypedFloatMatrixDimensionless<DimensionlessUnit, FloatDimensionlessMatrix, MutableFloatDimensionlessMatrix, FloatDimensionless>
 {
     /** */
     private static final long serialVersionUID = 20151109L;

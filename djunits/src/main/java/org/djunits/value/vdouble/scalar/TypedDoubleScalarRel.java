@@ -63,34 +63,6 @@ public abstract class TypedDoubleScalarRel<U extends Unit<U>, R extends TypedDou
 
     /** {@inheritDoc} */
     @Override
-    public final R acos()
-    {
-        return instantiateTypeRel(Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R asin()
-    {
-        return instantiateTypeRel(Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R atan()
-    {
-        return instantiateTypeRel(Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R cbrt()
-    {
-        return instantiateTypeRel(Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final R ceil()
     {
         return instantiateTypeRel(Math.ceil(getInUnit()), getUnit());
@@ -98,58 +70,9 @@ public abstract class TypedDoubleScalarRel<U extends Unit<U>, R extends TypedDou
 
     /** {@inheritDoc} */
     @Override
-    public final R cos()
-    {
-        return instantiateTypeRel(Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R cosh()
-    {
-        return instantiateTypeRel(Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R exp()
-    {
-        return instantiateTypeRel(Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R expm1()
-    {
-        return instantiateTypeRel(Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final R floor()
     {
         return instantiateTypeRel(Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R log()
-    {
-        return instantiateTypeRel(Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R log10()
-    {
-        return instantiateTypeRel(Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R log1p()
-    {
-        return instantiateTypeRel(Math.log1p(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
@@ -164,76 +87,6 @@ public abstract class TypedDoubleScalarRel<U extends Unit<U>, R extends TypedDou
     public final R round()
     {
         return instantiateTypeRel(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R signum()
-    {
-        return instantiateTypeRel(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R sin()
-    {
-        return instantiateTypeRel(Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R sinh()
-    {
-        return instantiateTypeRel(Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R sqrt()
-    {
-        return instantiateTypeRel(Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R tan()
-    {
-        return instantiateTypeRel(Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R tanh()
-    {
-        return instantiateTypeRel(Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R inv()
-    {
-        return instantiateTypeRel(1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R toDegrees()
-    {
-        return instantiateTypeRel(Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R toRadians()
-    {
-        return instantiateTypeRel(Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final R pow(final double x)
-    {
-        return instantiateTypeRel(Math.pow(getInUnit(), x), getUnit());
     }
 
     /** {@inheritDoc} */

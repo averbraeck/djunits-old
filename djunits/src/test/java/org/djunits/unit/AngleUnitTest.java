@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
+import org.djunits.value.AngleUtil;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.junit.Before;
@@ -111,11 +112,11 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
         {
             expected += 2 * Math.PI;
         }
-        assertEquals("double normalize", expected, AngleUnit.normalize(input), margin);
+        assertEquals("double normalize", expected, AngleUtil.normalize(input), margin);
         DoubleScalar.Abs<AngleUnit> dsa = new DoubleScalar.Abs<AngleUnit>(input, AngleUnit.SI);
-        assertEquals("DoubleScalar.Abs normalize", expected, AngleUnit.normalize(dsa).getSI(), margin);
+        assertEquals("DoubleScalar.Abs normalize", expected, AngleUtil.normalize(dsa).getSI(), margin);
         DoubleScalar.Rel<AngleUnit> dsr = new DoubleScalar.Rel<AngleUnit>(input, AngleUnit.SI);
-        assertEquals("DoubleScalar.Rel normalize", expected, AngleUnit.normalize(dsr).getSI(), margin);
+        assertEquals("DoubleScalar.Rel normalize", expected, AngleUtil.normalize(dsr).getSI(), margin);
     }
 
     /**
@@ -134,11 +135,11 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
         {
             expected += 2 * Math.PI;
         }
-        assertEquals("float normalize", expected, AngleUnit.normalize(input), margin);
+        assertEquals("float normalize", expected, AngleUtil.normalize(input), margin);
         FloatScalar.Abs<AngleUnit> fsa = new FloatScalar.Abs<AngleUnit>(input, AngleUnit.SI);
-        assertEquals("FloatScalar.Abs normalize", expected, AngleUnit.normalize(fsa).getSI(), margin);
+        assertEquals("FloatScalar.Abs normalize", expected, AngleUtil.normalize(fsa).getSI(), margin);
         FloatScalar.Rel<AngleUnit> fsr = new FloatScalar.Rel<AngleUnit>(input, AngleUnit.SI);
-        assertEquals("FloatScalar.Rek normalize", expected, AngleUnit.normalize(fsr).getSI(), margin);
+        assertEquals("FloatScalar.Rek normalize", expected, AngleUtil.normalize(fsr).getSI(), margin);
     }
 
     /**

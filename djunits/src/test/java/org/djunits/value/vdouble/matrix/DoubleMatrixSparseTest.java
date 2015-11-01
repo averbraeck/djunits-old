@@ -307,56 +307,6 @@ public class DoubleMatrixSparseTest
             try
             {
                 dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.abs();
-                MathTester.tester(input, "abs", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.abs(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.acos();
-                MathTester.tester(input, "acos", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.acos(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.asin();
-                MathTester.tester(input, "asin", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.asin(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.atan();
-                MathTester.tester(input, "atan", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.atan(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cbrt();
-                MathTester.tester(input, "cbrt", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cbrt(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.ceil();
                 MathTester.tester(input, "ceil", dm, 0.001, new DoubleToDouble()
                 {
@@ -364,46 +314,6 @@ public class DoubleMatrixSparseTest
                     public double function(final double d)
                     {
                         return Math.ceil(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cos();
-                MathTester.tester(input, "cos", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cos(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cosh();
-                MathTester.tester(input, "cosh", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cosh(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.exp();
-                MathTester.tester(input, "exp", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.exp(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.expm1();
-                MathTester.tester(input, "expm1", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.expm1(d);
                     }
                 });
                 dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
@@ -416,50 +326,6 @@ public class DoubleMatrixSparseTest
                         return Math.floor(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log();
-                MathTester.tester(input, "log", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log10();
-                MathTester.tester(input, "log10", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log10(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log1p();
-                MathTester.tester(input, "log1p", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log1p(d);
-                    }
-                });
-                for (int i = -10; i <= 10; i++)
-                {
-                    final double exponent = i * 0.5d;
-                    dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                    dm.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", dm, 0.001, new DoubleToDouble()
-                    {
-                        @Override
-                        public double function(final double d)
-                        {
-                            return Math.pow(d, exponent);
-                        }
-                    });
-                }
                 dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.rint();
                 MathTester.tester(input, "rint", dm, 0.001, new DoubleToDouble()
@@ -478,96 +344,6 @@ public class DoubleMatrixSparseTest
                     public double function(final double d)
                     {
                         return Math.round(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.signum();
-                MathTester.tester(input, "signum", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.signum(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sin();
-                MathTester.tester(input, "sin", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sin(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sinh();
-                MathTester.tester(input, "sinh", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sinh(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sqrt();
-                MathTester.tester(input, "sqrt", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sqrt(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.tan();
-                MathTester.tester(input, "tan", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.tan(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.tanh();
-                MathTester.tester(input, "tanh", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.tanh(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.toDegrees();
-                MathTester.tester(input, "toDegrees", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.toDegrees(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.toRadians();
-                MathTester.tester(input, "toRadians", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.toRadians(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Abs<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.inv();
-                MathTester.tester(input, "inv", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return 1 / d;
                     }
                 });
             }
@@ -1043,46 +819,6 @@ public class DoubleMatrixSparseTest
                     }
                 });
                 dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.acos();
-                MathTester.tester(input, "acos", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.acos(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.asin();
-                MathTester.tester(input, "asin", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.asin(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.atan();
-                MathTester.tester(input, "atan", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.atan(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cbrt();
-                MathTester.tester(input, "cbrt", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cbrt(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.ceil();
                 MathTester.tester(input, "ceil", dm, 0.001, new DoubleToDouble()
                 {
@@ -1090,46 +826,6 @@ public class DoubleMatrixSparseTest
                     public double function(final double d)
                     {
                         return Math.ceil(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cos();
-                MathTester.tester(input, "cos", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cos(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.cosh();
-                MathTester.tester(input, "cosh", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.cosh(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.exp();
-                MathTester.tester(input, "exp", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.exp(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.expm1();
-                MathTester.tester(input, "expm1", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.expm1(d);
                     }
                 });
                 dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
@@ -1142,50 +838,6 @@ public class DoubleMatrixSparseTest
                         return Math.floor(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log();
-                MathTester.tester(input, "log", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log10();
-                MathTester.tester(input, "log10", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log10(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.log1p();
-                MathTester.tester(input, "log1p", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.log1p(d);
-                    }
-                });
-                for (int i = -10; i <= 10; i++)
-                {
-                    final double exponent = i * 0.5d;
-                    dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                    dm.pow(exponent);
-                    MathTester.tester(input, "pow(" + exponent + ")", dm, 0.001, new DoubleToDouble()
-                    {
-                        @Override
-                        public double function(final double d)
-                        {
-                            return Math.pow(d, exponent);
-                        }
-                    });
-                }
                 dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
                 dm.rint();
                 MathTester.tester(input, "rint", dm, 0.001, new DoubleToDouble()
@@ -1204,96 +856,6 @@ public class DoubleMatrixSparseTest
                     public double function(final double d)
                     {
                         return Math.round(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.signum();
-                MathTester.tester(input, "signum", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.signum(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sin();
-                MathTester.tester(input, "sin", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sin(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sinh();
-                MathTester.tester(input, "sinh", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sinh(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.sqrt();
-                MathTester.tester(input, "sqrt", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.sqrt(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.tan();
-                MathTester.tester(input, "tan", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.tan(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.tanh();
-                MathTester.tester(input, "tanh", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.tanh(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.toDegrees();
-                MathTester.tester(input, "toDegrees", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.toDegrees(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.toRadians();
-                MathTester.tester(input, "toRadians", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return Math.toRadians(d);
-                    }
-                });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.SPARSE);
-                dm.inv();
-                MathTester.tester(input, "inv", dm, 0.001, new DoubleToDouble()
-                {
-                    @Override
-                    public double function(final double d)
-                    {
-                        return 1 / d;
                     }
                 });
             }

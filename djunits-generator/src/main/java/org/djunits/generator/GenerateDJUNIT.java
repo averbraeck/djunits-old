@@ -273,6 +273,10 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (java.contains("class Dimensionless"))
+            {
+                java = java.replaceAll("TypedDoubleScalarRel", "TypedDoubleScalarDimensionless");
+            }
             java = formulas(java, "DoubleScalar => " + type, "");
             out.print(java);
             out.close();
@@ -356,6 +360,10 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (java.contains("class FloatDimensionless"))
+            {
+                java = java.replaceAll("TypedFloatScalarRel", "TypedFloatScalarDimensionless");
+            }
             java = formulas(java, "FloatScalar => " + type, "Float");
             out.print(java);
             out.close();
@@ -561,6 +569,10 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (java.contains("class MutableDimensionless"))
+            {
+                java = java.replaceAll("TypedDoubleVectorRel", "TypedDoubleVectorDimensionless");
+            }
             java = formulasVector(java, "MutableDoubleVector => " + type, "Mutable");
             out.print(java);
             out.close();
@@ -705,6 +717,10 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (java.contains("class MutableFloatDimensionless"))
+            {
+                java = java.replaceAll("TypedFloatVectorRel", "TypedFloatVectorDimensionless");
+            }
             java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
             out.print(java);
             out.close();
@@ -930,6 +946,10 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (java.contains("class MutableDimensionless"))
+            {
+                java = java.replaceAll("TypedDoubleMatrixRel", "TypedDoubleMatrixDimensionless");
+            }
             java = formulasMatrix(java, "MutableDoubleMatrix => " + type, "Mutable");
             out.print(java);
             out.close();
@@ -1074,6 +1094,10 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            if (java.contains("class MutableFloatDimensionless"))
+            {
+                java = java.replaceAll("TypedFloatMatrixRel", "TypedFloatMatrixDimensionless");
+            }
             java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
             out.print(java);
             out.close();

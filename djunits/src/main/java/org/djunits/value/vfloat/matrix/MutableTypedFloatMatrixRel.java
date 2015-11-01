@@ -196,38 +196,6 @@ abstract class MutableTypedFloatMatrixRel<U extends Unit<U>, R extends TypedFloa
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MR acos()
-    {
-        return (MR) super.acos();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR asin()
-    {
-        return (MR) super.asin();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR atan()
-    {
-        return (MR) super.atan();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR cbrt()
-    {
-        return (MR) super.cbrt();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
     public final MR ceil()
     {
         return (MR) super.ceil();
@@ -236,73 +204,9 @@ abstract class MutableTypedFloatMatrixRel<U extends Unit<U>, R extends TypedFloa
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MR cos()
-    {
-        return (MR) super.cos();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR cosh()
-    {
-        return (MR) super.cosh();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR exp()
-    {
-        return (MR) super.exp();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR expm1()
-    {
-        return (MR) super.expm1();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
     public final MR floor()
     {
         return (MR) super.floor();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR log()
-    {
-        return (MR) super.log();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR log10()
-    {
-        return (MR) super.log10();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR log1p()
-    {
-        return (MR) super.log1p();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR pow(final double x)
-    {
-        return (MR) super.pow((float) x);
     }
 
     /** {@inheritDoc} */
@@ -319,78 +223,6 @@ abstract class MutableTypedFloatMatrixRel<U extends Unit<U>, R extends TypedFloa
     public final MR round()
     {
         return (MR) super.round();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR signum()
-    {
-        return (MR) super.signum();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR sin()
-    {
-        return (MR) super.sin();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR sinh()
-    {
-        return (MR) super.sinh();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR sqrt()
-    {
-        return (MR) super.sqrt();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR tan()
-    {
-        return (MR) super.tan();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR tanh()
-    {
-        return (MR) super.tanh();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR toDegrees()
-    {
-        return (MR) super.toDegrees();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR toRadians()
-    {
-        return (MR) super.toRadians();
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public final MR inv()
-    {
-        return (MR) super.inv();
     }
 
     /** {@inheritDoc} */

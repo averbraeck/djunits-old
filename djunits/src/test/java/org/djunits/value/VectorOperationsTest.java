@@ -858,7 +858,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 // findAndExecuteConstructor(vectorClass, new Object[] { thirdValue,
                 // getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType);
                 // System.out.println("left : " + left.getClass() + " right : " + right.getClass());
-                // System.out.println(Arrays.toString(left.getClass().getMethods()).replaceAll(" org", "\norg"));
+                // System.out.println(Arrays.toString(left.getClass().ClassUtil.resolveMethod(left.getClass(), s()).replaceAll(" org", "\norg"));
                 // System.out.println("super class " + right.getClass().getSuperclass());
                 // Method minus = left.getClass().getMethod("minus", new Class<?>[] { right.getClass().getSuperclass() });
                 // result = minus.invoke(left, right);
@@ -893,7 +893,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 // System.out.println("left : " + left.getClass() + " right : " + right.getClass());
                 // System.out.println(Arrays.toString(left.getClass().getMethods()).replaceAll(" org", "\norg"));
                 // System.out.println("super class " + right.getClass().getSuperclass());
-                // Method minus = left.getClass().getMethod("minus", new Class<?>[] { right.getClass().getSuperclass() });
+                // Method minus = ClassUtil.resolveMethod(left.getClass(), "minus", new Class<?>[] { right.getClass().getSuperclass() });
                 // result = minus.invoke(left, right);
                 // result = left.minus(right);
                 // verifyAbsRelPrecisionAndValues(false, doubleType, storageType, result, twoThirdValue, 0.0001);
@@ -906,8 +906,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             float floatDifference = 42.42f;
             // Object difference = doubleType ? doubleDifference : floatDifference;
             Class<?> argumentClass = doubleType ? double.class : float.class;
-            Method incrementBy = vectorClass.getMethod("incrementBy", new Class<?>[]{argumentClass});
-            incrementBy = vectorClass.getMethod("incrementBy", new Class<?>[]{argumentClass});
+            Method incrementBy = ClassUtil.resolveMethod(vectorClass, "incrementBy", new Class<?>[]{argumentClass});
+            incrementBy = ClassUtil.resolveMethod(vectorClass, "incrementBy", new Class<?>[]{argumentClass});
             // System.out.print(paramsToString(incrementBy.getParameterTypes()));
             // System.out.println("type of value is " + value.getClass());
             // System.out.println("type of difference is " + difference.getClass());
@@ -933,7 +933,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             left =
                 findAndExecuteConstructor(vectorClass, new Object[]{value,
                     getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
-            Method decrementBy = vectorClass.getMethod("decrementBy", new Class<?>[]{argumentClass});
+            Method decrementBy = ClassUtil.resolveMethod(vectorClass, "decrementBy", new Class<?>[]{argumentClass});
             if (doubleType)
             {
                 result = decrementBy.invoke(left, new Object[]{doubleDifference});
@@ -953,164 +953,398 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 assertEquals("value check original", doubleType ? (doubleValue[i] - doubleDifference)
                     : (floatValue[i] - floatDifference), originalElement, 0.00001);
             }
+
             left =
                 findAndExecuteConstructor(vectorClass, new Object[]{value,
                     getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
-
-            Method methodAbs = vectorClass.getMethod("abs", new Class[]{});
-            methodAbs.setAccessible(true); // FIXME this should not be necessary
-            result = methodAbs.invoke(left);
+            Method mathMethod = ClassUtil.resolveMethod(vectorClass, "ceil", new Class[]{});
+            mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+            result = mathMethod.invoke(left);
             for (int i = 0; i < doubleValue.length; i++)
             {
-                assertEquals("Result of operation", doubleType ? Math.abs(doubleValue[i]) : ((float) Math
-                    .abs(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                assertEquals("Result of operation", doubleType ? Math.ceil(doubleValue[i]) : ((float) Math
+                    .ceil(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
                     0.01);
                 // Check that original is also modified
-                assertEquals("Result of operation", doubleType ? Math.abs(doubleValue[i]) : ((float) Math
-                    .abs(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                assertEquals("Result of operation", doubleType ? Math.ceil(doubleValue[i]) : ((float) Math
+                    .ceil(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
                     0.01);
             }
 
-            // For now we'll believe that the other math methods are correctly tested elsewhere
-            /*-
             left =
-                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, abs, doubleType);
-
-            Method asin = vectorClass.getDeclaredMethod("asin", new Class[] {});
-            result = asin.invoke(left);
-            assertEquals("Result of operation", Math.asin(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method acos = vectorClass.getDeclaredMethod("acos", new Class[] {});
-            result = acos.invoke(left);
-            assertEquals("Result of operation", Math.acos(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method atan = vectorClass.getDeclaredMethod("atan", new Class[] {});
-            result = atan.invoke(left);
-            assertEquals("Result of operation", Math.atan(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method cbrt = vectorClass.getDeclaredMethod("cbrt", new Class[] {});
-            result = cbrt.invoke(left);
-            assertEquals("Result of operation", Math.cbrt(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method ceil = vectorClass.getDeclaredMethod("ceil", new Class[] {});
-            result = ceil.invoke(left);
-            assertEquals("Result of operation", Math.ceil(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method cos = vectorClass.getDeclaredMethod("cos", new Class[] {});
-            result = cos.invoke(left);
-            assertEquals("Result of operation", Math.cos(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method cosh = vectorClass.getDeclaredMethod("cosh", new Class[] {});
-            result = cosh.invoke(left);
-            assertEquals("Result of operation", Math.cosh(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method exp = vectorClass.getDeclaredMethod("exp", new Class[] {});
-            result = exp.invoke(left);
-            assertEquals("Result of operation", Math.exp(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method expm1 = vectorClass.getDeclaredMethod("expm1", new Class[] {});
-            result = expm1.invoke(left);
-            assertEquals("Result of operation", Math.expm1(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method floor = vectorClass.getDeclaredMethod("floor", new Class[] {});
-            result = floor.invoke(left);
-            assertEquals("Result of operation", Math.floor(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method log = vectorClass.getDeclaredMethod("log", new Class[] {});
-            result = log.invoke(left);
-            assertEquals("Result of operation", Math.log(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method log10 = vectorClass.getDeclaredMethod("log10", new Class[] {});
-            result = log10.invoke(left);
-            assertEquals("Result of operation", Math.log10(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method log1p = vectorClass.getDeclaredMethod("log1p", new Class[] {});
-            result = log1p.invoke(left);
-            assertEquals("Result of operation", Math.log1p(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method rint = vectorClass.getDeclaredMethod("rint", new Class[] {});
-            result = rint.invoke(left);
-            assertEquals("Result of operation", Math.rint(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method round = vectorClass.getDeclaredMethod("round", new Class[] {});
-            result = round.invoke(left);
-            assertEquals("Result of operation", Math.round(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method signum = vectorClass.getDeclaredMethod("signum", new Class[] {});
-            result = signum.invoke(left);
-            assertEquals("Result of operation", Math.signum(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method sin = vectorClass.getDeclaredMethod("sin", new Class[] {});
-            result = sin.invoke(left);
-            assertEquals("Result of operation", Math.sin(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method sinh = vectorClass.getDeclaredMethod("sinh", new Class[] {});
-            result = sinh.invoke(left);
-            assertEquals("Result of operation", Math.sinh(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method sqrt = vectorClass.getDeclaredMethod("sqrt", new Class[] {});
-            result = sqrt.invoke(left);
-            assertEquals("Result of operation", Math.sqrt(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method tan = vectorClass.getDeclaredMethod("tan", new Class[] {});
-            result = tan.invoke(left);
-            assertEquals("Result of operation", Math.tan(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method tanh = vectorClass.getDeclaredMethod("tanh", new Class[] {});
-            result = tanh.invoke(left);
-            assertEquals("Result of operation", Math.tanh(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-
-            Method inv = vectorClass.getDeclaredMethod("inv", new Class[] {});
-            result = inv.invoke(left);
-            assertEquals("Result of operation", 1 / value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX),
+                    findAndExecuteConstructor(vectorClass, new Object[]{value,
+                        getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+            mathMethod = ClassUtil.resolveMethod(vectorClass, "floor", new Class[]{});
+            mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+            result = mathMethod.invoke(left);
+            for (int i = 0; i < doubleValue.length; i++)
+            {
+                assertEquals("Result of operation", doubleType ? Math.floor(doubleValue[i]) : ((float) Math
+                    .floor(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
                     0.01);
+                // Check that original is also modified
+                assertEquals("Result of operation", doubleType ? Math.floor(doubleValue[i]) : ((float) Math
+                    .floor(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                    0.01);
+            }
 
-            Method toDegrees = vectorClass.getDeclaredMethod("toDegrees", new Class[] {});
-            result = toDegrees.invoke(left);
-            assertEquals("Result of operation", Math.toDegrees(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
+            left =
+                    findAndExecuteConstructor(vectorClass, new Object[]{value,
+                        getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+            mathMethod = ClassUtil.resolveMethod(vectorClass, "rint", new Class[]{});
+            mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+            result = mathMethod.invoke(left);
+            for (int i = 0; i < doubleValue.length; i++)
+            {
+                assertEquals("Result of operation", doubleType ? Math.rint(doubleValue[i]) : ((float) Math
+                    .rint(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                    0.01);
+                // Check that original is also modified
+                assertEquals("Result of operation", doubleType ? Math.rint(doubleValue[i]) : ((float) Math
+                    .rint(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                    0.01);
+            }
 
-            Method toRadians = vectorClass.getDeclaredMethod("toRadians", new Class[] {});
-            result = toRadians.invoke(left);
-            assertEquals("Result of operation", Math.toRadians(value),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
+            left =
+                    findAndExecuteConstructor(vectorClass, new Object[]{value,
+                        getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+            mathMethod = ClassUtil.resolveMethod(vectorClass, "round", new Class[]{});
+            mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+            result = mathMethod.invoke(left);
+            for (int i = 0; i < doubleValue.length; i++)
+            {
+                assertEquals("Result of operation", doubleType ? Math.round(doubleValue[i]) : ((float) Math
+                    .round(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                    0.01);
+                // Check that original is also modified
+                assertEquals("Result of operation", doubleType ? Math.round(doubleValue[i]) : ((float) Math
+                    .round(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                    0.01);
+            }
 
-            Method pow = vectorClass.getDeclaredMethod("pow", new Class[] { double.class });
-            result = pow.invoke(left, Math.PI);
-            assertEquals("Result of operation", Math.pow(value, Math.PI),
-                    verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result, XXXX), 0.01);
-             */
+            if (!abs)
+            {
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "abs", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.abs(doubleValue[i]) : ((float) Math
+                        .abs(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.abs(doubleValue[i]) : ((float) Math
+                        .abs(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+            }
+            
+            if (vectorClass.getName().contains("Dimensionless"))
+            {
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "acos", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.acos(doubleValue[i]) : ((float) Math
+                        .acos(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.acos(doubleValue[i]) : ((float) Math
+                        .acos(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
 
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "asin", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.asin(doubleValue[i]) : ((float) Math
+                        .asin(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.asin(doubleValue[i]) : ((float) Math
+                        .asin(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "atan", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.atan(doubleValue[i]) : ((float) Math
+                        .atan(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.atan(doubleValue[i]) : ((float) Math
+                        .atan(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "cbrt", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.cbrt(doubleValue[i]) : ((float) Math
+                        .cbrt(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.cbrt(doubleValue[i]) : ((float) Math
+                        .cbrt(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "cos", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.cos(doubleValue[i]) : ((float) Math
+                        .cos(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.cos(doubleValue[i]) : ((float) Math
+                        .cos(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "cosh", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.cosh(doubleValue[i]) : ((float) Math
+                        .cosh(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.cosh(doubleValue[i]) : ((float) Math
+                        .cosh(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "exp", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.exp(doubleValue[i]) : ((float) Math
+                        .exp(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.exp(doubleValue[i]) : ((float) Math
+                        .exp(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "expm1", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.expm1(doubleValue[i]) : ((float) Math
+                        .expm1(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.expm1(doubleValue[i]) : ((float) Math
+                        .expm1(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "log", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.log(doubleValue[i]) : ((float) Math
+                        .log(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.log(doubleValue[i]) : ((float) Math
+                        .log(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "log10", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.log10(doubleValue[i]) : ((float) Math
+                        .log10(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.log10(doubleValue[i]) : ((float) Math
+                        .log10(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "log1p", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.log1p(doubleValue[i]) : ((float) Math
+                        .log1p(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.log1p(doubleValue[i]) : ((float) Math
+                        .log1p(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "signum", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.signum(doubleValue[i]) : ((float) Math
+                        .signum(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.signum(doubleValue[i]) : ((float) Math
+                        .signum(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "sin", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.sin(doubleValue[i]) : ((float) Math
+                        .sin(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.sin(doubleValue[i]) : ((float) Math
+                        .sin(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "sinh", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.sinh(doubleValue[i]) : ((float) Math
+                        .sinh(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.sinh(doubleValue[i]) : ((float) Math
+                        .sinh(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "sqrt", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.sqrt(doubleValue[i]) : ((float) Math
+                        .sqrt(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.sqrt(doubleValue[i]) : ((float) Math
+                        .sqrt(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "tan", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.tan(doubleValue[i]) : ((float) Math
+                        .tan(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.tan(doubleValue[i]) : ((float) Math
+                        .tan(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                left =
+                        findAndExecuteConstructor(vectorClass, new Object[]{value,
+                            getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                mathMethod = ClassUtil.resolveMethod(vectorClass, "tanh", new Class[]{});
+                mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
+                result = mathMethod.invoke(left);
+                for (int i = 0; i < doubleValue.length; i++)
+                {
+                    assertEquals("Result of operation", doubleType ? Math.tanh(doubleValue[i]) : ((float) Math
+                        .tanh(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i),
+                        0.01);
+                    // Check that original is also modified
+                    assertEquals("Result of operation", doubleType ? Math.tanh(doubleValue[i]) : ((float) Math
+                        .tanh(doubleValue[i])), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
+                        0.01);
+                }
+
+                // TODO: INV
+                // TODO: POW
+            }
         }
+        
         left =
             findAndExecuteConstructor(vectorClass, new Object[]{value, getSIUnitInstance(getUnitClass(vectorClass)),
                 storageType}, doubleType);
         if (mutable)
         {
             Method multiplyBy =
-                vectorClass.getMethod("multiplyBy", new Class[]{doubleType ? double.class : float.class});
+                ClassUtil.resolveMethod(vectorClass, "multiplyBy", new Class[]{doubleType ? double.class : float.class});
             multiplyBy.setAccessible(true); // FIXME this should not be necessary
             if (doubleType)
             {
@@ -1131,7 +1365,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             left =
                 findAndExecuteConstructor(vectorClass, new Object[]{value,
                     getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
-            Method divideBy = vectorClass.getMethod("divideBy", new Class[]{doubleType ? double.class : float.class});
+            Method divideBy = ClassUtil.resolveMethod(vectorClass, "divideBy", new Class[]{doubleType ? double.class : float.class});
             divideBy.setAccessible(true); // FIXME this should not be necessary
             if (doubleType)
             {
@@ -1153,7 +1387,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             float[] zFloatValues = {0, 0, 0, 0, 0, 0, 0};
             Object zValues = doubleType ? zDoubleValues : zFloatValues;
             Method set =
-                vectorClass.getMethod("setSI", new Class[]{int.class, doubleType ? double.class : float.class});
+                ClassUtil.resolveMethod(vectorClass, "setSI", new Class[]{int.class, doubleType ? double.class : float.class});
             for (int pivot2 = 0; pivot2 < zDoubleValues.length; pivot2++)
             {
                 for (int pivot = 0; pivot < zDoubleValues.length; pivot++)
@@ -1230,7 +1464,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             UnitSystem unitSystem = UnitSystem.SI_DERIVED;
             Unit<?> referenceUnit;
             // Call the getUnit method of left
-            Method getUnitMethod = vectorClass.getMethod("getUnit");
+            Method getUnitMethod = ClassUtil.resolveMethod(vectorClass, "getUnit");
             referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
             Constructor<?> unitConstructor =
                 unitClass.getConstructor(String.class, String.class, UnitSystem.class, unitClass, double.class);
@@ -1295,7 +1529,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         if (!mutable)
         {
             // System.out.print(listMethods(vectorClass, "minus", "\t"));
-            Method minus = vectorClass.getMethod("minus", new Class[]{vectorClass.getSuperclass()});
+            Method minus = ClassUtil.resolveMethod(vectorClass, "minus", new Class[]{vectorClass.getSuperclass()});
             minus.setAccessible(true);
             result = minus.invoke(left, left);
             for (int i = 0; i < doubleValue.length; i++)
@@ -1382,7 +1616,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     expectedResult[i] = (1.0 - ratio) * zeroValue[i] + ratio * oneValue[i];
                 }
                 // TODO: interpolate is not yet generated by the code generator ...
-                // Method interpolate = vectorClass.getMethod("interpolate", vectorClass, vectorClass, double.class);
+                // Method interpolate = ClassUtil.resolveMethod(vectorClass, "interpolate", vectorClass, vectorClass, double.class);
                 // DoubleScalar<?> result;
                 // result = (DoubleScalar<?>) interpolate.invoke(null, zero, one, ratio);
                 // verifyAbsRelPrecisionAndValues(abs, doubleType, result, expectedResult, 0.01);
@@ -1405,7 +1639,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 {
                     expectedResult[i] = (float) ((1.0 - ratio) * zeroValue[i] + ratio * oneValue[i]);
                 }
-                // Method interpolate = vectorClass.getMethod("interpolate", vectorClass, vectorClass, float.class);
+                // Method interpolate = ClassUtil.resolveMethod(vectorClass, "interpolate", vectorClass, vectorClass, float.class);
                 // FloatScalar<?> result;
                 // result = (FloatScalar<?>) interpolate.invoke(null, zero, one, ratio);
                 // verifyAbsRelPrecisionAndValues(abs, doubleType, storageType, result, expectedResult, 0.01);

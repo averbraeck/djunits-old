@@ -17,8 +17,8 @@ import org.junit.Test;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -165,93 +165,12 @@ public class FloatScalarTest
             float input = seedValue;
             FloatScalar.Abs<LengthUnit> fs;
             fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "abs", fs.abs(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return Math.abs(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "acos", fs.acos(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.acos(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "asin", fs.asin(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.asin(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "atan", fs.atan(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.atan(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cbrt", fs.cbrt(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.cbrt(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
             MathTester.tester(input, "ceil", fs.ceil(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
                 {
                     return (float) Math.ceil(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cos", fs.cos(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.cos(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cosh", fs.cosh(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.cosh(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "exp", fs.exp(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.exp(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "expm1", fs.expm1(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.expm1(f);
                 }
             });
             fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
@@ -263,46 +182,6 @@ public class FloatScalarTest
                     return (float) Math.floor(f);
                 }
             });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log", fs.log(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.log(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log10", fs.log10(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.log10(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log1p", fs.log1p(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.log1p(f);
-                }
-            });
-            for (int i = -10; i <= 10; i++)
-            {
-                final float exponent = i * 0.5f;
-                fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-                MathTester.tester(input, "pow(" + exponent + ")", fs.pow(exponent), 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float f)
-                    {
-                        return (float) Math.pow(f, exponent);
-                    }
-                });
-            }
             fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
             MathTester.tester(input, "rint", fs.rint(), 0.001, new FloatToFloat()
             {
@@ -319,87 +198,6 @@ public class FloatScalarTest
                 public float function(final float f)
                 {
                     return Math.round(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "signum", fs.signum(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return Math.signum(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sin", fs.sin(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.sin(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sinh", fs.sinh(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.sinh(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sqrt", fs.sqrt(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.sqrt(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "tan", fs.tan(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.tan(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "tanh", fs.tanh(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.tanh(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "toDegrees", fs.toDegrees(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.toDegrees(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "toRadians", fs.toRadians(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.toRadians(f);
-                }
-            });
-            fs = new FloatScalar.Abs<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "inv", fs.inv(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return 1 / f;
                 }
             });
         }
@@ -601,84 +399,12 @@ public class FloatScalarTest
                 }
             });
             fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "acos", fs.acos(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.acos(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "asin", fs.asin(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.asin(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "atan", fs.atan(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.atan(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cbrt", fs.cbrt(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.cbrt(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
             MathTester.tester(input, "ceil", fs.ceil(), 0.001, new FloatToFloat()
             {
                 @Override
                 public float function(final float f)
                 {
                     return (float) Math.ceil(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cos", fs.cos(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.cos(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "cosh", fs.cosh(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.cosh(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "exp", fs.exp(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.exp(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "expm1", fs.expm1(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.expm1(f);
                 }
             });
             fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
@@ -690,46 +416,6 @@ public class FloatScalarTest
                     return (float) Math.floor(f);
                 }
             });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log", fs.log(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.log(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log10", fs.log10(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.log10(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "log1p", fs.log1p(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.log1p(f);
-                }
-            });
-            for (int i = -10; i <= 10; i++)
-            {
-                final float exponent = i * 0.5f;
-                fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-                MathTester.tester(input, "pow(" + exponent + ")", fs.pow(exponent), 0.001, new FloatToFloat()
-                {
-                    @Override
-                    public float function(final float f)
-                    {
-                        return (float) Math.pow(f, exponent);
-                    }
-                });
-            }
             fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
             MathTester.tester(input, "rint", fs.rint(), 0.001, new FloatToFloat()
             {
@@ -746,87 +432,6 @@ public class FloatScalarTest
                 public float function(final float f)
                 {
                     return Math.round(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "signum", fs.signum(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return Math.signum(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sin", fs.sin(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.sin(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sinh", fs.sinh(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.sinh(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "sqrt", fs.sqrt(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.sqrt(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "tan", fs.tan(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.tan(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "tanh", fs.tanh(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.tanh(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "toDegrees", fs.toDegrees(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.toDegrees(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "toRadians", fs.toRadians(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return (float) Math.toRadians(f);
-                }
-            });
-            fs = new FloatScalar.Rel<LengthUnit>(input, LengthUnit.METER);
-            MathTester.tester(input, "inv", fs.inv(), 0.001, new FloatToFloat()
-            {
-                @Override
-                public float function(final float f)
-                {
-                    return 1 / f;
                 }
             });
         }

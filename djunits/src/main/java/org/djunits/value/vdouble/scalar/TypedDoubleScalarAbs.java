@@ -63,41 +63,6 @@ public abstract class TypedDoubleScalarAbs<U extends Unit<U>, A extends TypedDou
 
     /** {@inheritDoc} */
     @Override
-    public final A abs()
-    {
-        return instantiateTypeAbs(Math.abs(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A acos()
-    {
-        return instantiateTypeAbs(Math.acos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A asin()
-    {
-        return instantiateTypeAbs(Math.asin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A atan()
-    {
-        return instantiateTypeAbs(Math.atan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A cbrt()
-    {
-        return instantiateTypeAbs(Math.cbrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final A ceil()
     {
         return instantiateTypeAbs(Math.ceil(getInUnit()), getUnit());
@@ -105,58 +70,9 @@ public abstract class TypedDoubleScalarAbs<U extends Unit<U>, A extends TypedDou
 
     /** {@inheritDoc} */
     @Override
-    public final A cos()
-    {
-        return instantiateTypeAbs(Math.cos(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A cosh()
-    {
-        return instantiateTypeAbs(Math.cosh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A exp()
-    {
-        return instantiateTypeAbs(Math.exp(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A expm1()
-    {
-        return instantiateTypeAbs(Math.expm1(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final A floor()
     {
         return instantiateTypeAbs(Math.floor(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A log()
-    {
-        return instantiateTypeAbs(Math.log(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A log10()
-    {
-        return instantiateTypeAbs(Math.log10(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A log1p()
-    {
-        return instantiateTypeAbs(Math.log1p(getInUnit()), getUnit());
     }
 
     /** {@inheritDoc} */
@@ -171,76 +87,6 @@ public abstract class TypedDoubleScalarAbs<U extends Unit<U>, A extends TypedDou
     public final A round()
     {
         return instantiateTypeAbs(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A signum()
-    {
-        return instantiateTypeAbs(Math.signum(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A sin()
-    {
-        return instantiateTypeAbs(Math.sin(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A sinh()
-    {
-        return instantiateTypeAbs(Math.sinh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A sqrt()
-    {
-        return instantiateTypeAbs(Math.sqrt(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A tan()
-    {
-        return instantiateTypeAbs(Math.tan(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A tanh()
-    {
-        return instantiateTypeAbs(Math.tanh(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A inv()
-    {
-        return instantiateTypeAbs(1.0 / getInUnit(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A toDegrees()
-    {
-        return instantiateTypeAbs(Math.toDegrees(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A toRadians()
-    {
-        return instantiateTypeAbs(Math.toRadians(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final A pow(final double x)
-    {
-        return instantiateTypeAbs(Math.pow(getInUnit(), x), getUnit());
     }
 
     /**
