@@ -313,30 +313,6 @@ public interface DoubleMathFunctions<T>
     };
 
     /**
-     * Function that returns <tt>Math.toDegrees(a)</tt>.
-     */
-    DoubleFunction TO_DEGREES = new DoubleFunction()
-    {
-        @Override
-        public double apply(final double a)
-        {
-            return Math.toDegrees(a);
-        }
-    };
-
-    /**
-     * Function that returns <tt>Math.toRadians(a)</tt>.
-     */
-    DoubleFunction TO_RADIANS = new DoubleFunction()
-    {
-        @Override
-        public double apply(final double a)
-        {
-            return Math.toRadians(a);
-        }
-    };
-
-    /**
      * Function that returns <tt>1/a</tt>.
      */
     DoubleFunction INV = new DoubleFunction()
