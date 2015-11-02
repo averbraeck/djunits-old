@@ -6,8 +6,6 @@ import java.lang.reflect.InvocationTargetException;
 import org.djunits.value.ValueUtil;
 import org.djunits.value.formatter.Format;
 import org.djunits.value.formatter.Formatter;
-import org.djunits.value.vdouble.DoubleMathFunctions;
-import org.djunits.value.vfloat.FloatMathFunctions;
 import org.junit.Test;
 
 /**
