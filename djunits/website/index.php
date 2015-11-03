@@ -39,7 +39,7 @@
       <li>DJUNITS knows or computes the SI type of the result when a value in one unit is multiplied, or divided by another value (that may have another
         unit),</li>
       <li>DJUNITS handles Scalars, Vectors and Matrices.</li>
-      <li>DJUNITS stores almost everyting in immutable objects. Vectors and Matrices also come in a Mutable variant where the stored values can be modified
+      <li>DJUNITS stores almost everything in immutable objects. Vectors and Matrices also come in a Mutable variant where the stored values can be modified
         one by one or all at once.</li>
       <li>DJUNITS stores values as Float or Double values.</li>
     </ul>
