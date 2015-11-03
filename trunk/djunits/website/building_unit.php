@@ -47,7 +47,7 @@ public static SpeedUnit FURLONGS_PER_FORTNIGHT = new SpeedUnit(
     LinearScale and as it has a constructor with a factor. It is no problem that the Furlong is defined with respect to a Foot; the factor to the SI unit will
     be calculated as part of the constructor. The last definition uses the speed unit constructor that takes a length unit and a time unit, and constructs a
     speed unit from this. Again, the factor to map Furlongs per Fortnight to and from the SI unit meters per second, will be automatically calculated. These
-    units can now be usede in any piece of code, e.g.:
+    units can now be used in any piece of code, e.g.:
 
     <pre class="highlight">
 Length.Rel fr1000 = new Length.Rel(1000.0, FURLONG);
