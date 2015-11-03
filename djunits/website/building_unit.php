@@ -22,40 +22,10 @@
 
 <body>
 
-  <!-- ======== Header ======== -->
-
-  <table width="100%" cellpadding="0">
-    <tr style="line-height: 1px; height: 60px">
-      <td style="background-color: #0094FE">
-        <p style="font-color: BLACK; font-size: 30px">
-          <b>&nbsp;DJUNITS - Delft Java UNIT System &nbsp;</b>
-        </p>
-      </td>
-    </tr>
-  </table>
-
-  <!-- ======== Left Sidebar ======== -->
-
-  <div id="sidebar">
-    <div>
-      <p class="title">
-        <a href="index.html">DJUNITS</a>
-      </p>
-      <ul>
-        <li><a href="index.html">Overview</a></li>
-        <li><a href="source.html">Source code</a></li>
-        <li><a href="maven.html">Maven use</a></li>
-        <li class="highlight"><a href="building_unit.html">Building a unit</a></li>
-        <li><a href="building_scalar.html">Building a scalar</a></li>
-        <li><a href="vectors_matrices.html">Vectors and matrices</a></li>
-        <li><a href="vector_classes.html">Class diagrams</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- ======== Main Content ======== -->
-
-  <div id="main">
+  <?php
+  include ("common.php");
+  bodyStart ("building_unit");
+  ?>
 
     <h2>Adding a unit instance to an existing unit</h2>
 
