@@ -1,7 +1,7 @@
                    --------------------------------
                    DJUNITS - Delft Java UNIT System
                    --------------------------------
-                   September, 2015
+                   September - November, 2015
                    --------------------------------
                    
 DJUNITS - Delft Java UNIT System
@@ -45,6 +45,6 @@ DJUNITS - Delft Java UNIT System
     
 ==========
 
-	At this moment, Cobertura and JavaNCSS coverage is not included on the site, because both cannot handle Lava 8 Lambda expressions
+	At this moment, Cobertura and JavaNCSS coverage are not included on the site, because both cannot handle Java 8 Lambda expressions
 	and closures, which are heavily used for parallelization of code in DJUNITS' vectors and matrices.
 
