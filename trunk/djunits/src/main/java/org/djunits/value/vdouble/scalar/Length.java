@@ -50,6 +50,9 @@ public interface Length
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final Length.Rel ZERO = new Length.Rel(0.0, LengthUnit.SI);
+
         /**
          * Construct Length.Rel scalar.
          * @param value double value
@@ -96,8 +99,8 @@ public interface Length
          */
         public static Length.Rel interpolate(final Length.Rel zero, final Length.Rel one, final double ratio)
         {
-            return new Length.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new Length.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
         /**
@@ -244,6 +247,9 @@ public interface Length
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final Length.Abs ZERO = new Length.Abs(0.0, LengthUnit.SI);
+
         /**
          * Construct Length.Abs scalar.
          * @param value double value
@@ -286,8 +292,8 @@ public interface Length
          */
         public static Length.Abs interpolate(final Length.Abs zero, final Length.Abs one, final double ratio)
         {
-            return new Length.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new Length.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
     }

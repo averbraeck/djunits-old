@@ -30,6 +30,9 @@ public class Energy extends TypedDoubleScalarRel<EnergyUnit, Energy>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Energy ZERO = new Energy(0.0, EnergyUnit.SI);
+
     /**
      * Construct Energy scalar.
      * @param value double value

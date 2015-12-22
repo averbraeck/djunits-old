@@ -30,6 +30,9 @@ public class FloatMass extends TypedFloatScalarRel<MassUnit, FloatMass>
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatMass ZERO = new FloatMass(0.0f, MassUnit.SI);
+
     /**
      * Construct FloatMass scalar.
      * @param value float value

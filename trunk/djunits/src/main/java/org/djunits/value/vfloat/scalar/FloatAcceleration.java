@@ -28,6 +28,9 @@ public class FloatAcceleration extends TypedFloatScalarRel<AccelerationUnit, Flo
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatAcceleration ZERO = new FloatAcceleration(0.0f, AccelerationUnit.SI);
+
     /**
      * Construct FloatAcceleration scalar.
      * @param value float value
@@ -74,8 +77,8 @@ public class FloatAcceleration extends TypedFloatScalarRel<AccelerationUnit, Flo
     public static FloatAcceleration interpolate(final FloatAcceleration zero, final FloatAcceleration one,
         final float ratio)
     {
-        return new FloatAcceleration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatAcceleration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

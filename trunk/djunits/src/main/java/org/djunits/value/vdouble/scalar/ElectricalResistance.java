@@ -26,6 +26,9 @@ public class ElectricalResistance extends TypedDoubleScalarRel<ElectricalResista
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final ElectricalResistance ZERO = new ElectricalResistance(0.0, ElectricalResistanceUnit.SI);
+
     /**
      * Construct ElectricalResistance scalar.
      * @param value double value
@@ -62,8 +65,8 @@ public class ElectricalResistance extends TypedDoubleScalarRel<ElectricalResista
     public static ElectricalResistance interpolate(final ElectricalResistance zero, final ElectricalResistance one,
         final double ratio)
     {
-        return new ElectricalResistance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new ElectricalResistance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

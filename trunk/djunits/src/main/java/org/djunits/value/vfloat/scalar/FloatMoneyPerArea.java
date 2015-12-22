@@ -72,8 +72,8 @@ public class FloatMoneyPerArea extends TypedFloatScalarRel<MoneyPerAreaUnit, Flo
     public static FloatMoneyPerArea interpolate(final FloatMoneyPerArea zero, final FloatMoneyPerArea one,
         final float ratio)
     {
-        return new FloatMoneyPerArea(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatMoneyPerArea(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

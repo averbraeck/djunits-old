@@ -59,8 +59,8 @@ public class DensityUnit extends LinearUnit<DensityUnit>
         final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, KG_PER_METER_3, massUnit
-            .getConversionFactorToStandardUnit()
-            / Math.pow(lengthUnit.getConversionFactorToStandardUnit(), 3.0), standardUnit);
+            .getConversionFactorToStandardUnit() / Math.pow(lengthUnit.getConversionFactorToStandardUnit(), 3.0),
+            standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
     }

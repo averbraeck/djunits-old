@@ -28,6 +28,9 @@ public class FloatElectricalCurrent extends TypedFloatScalarRel<ElectricalCurren
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatElectricalCurrent ZERO = new FloatElectricalCurrent(0.0f, ElectricalCurrentUnit.SI);
+
     /**
      * Construct FloatElectricalCurrent scalar.
      * @param value float value
@@ -74,8 +77,8 @@ public class FloatElectricalCurrent extends TypedFloatScalarRel<ElectricalCurren
     public static FloatElectricalCurrent interpolate(final FloatElectricalCurrent zero,
         final FloatElectricalCurrent one, final float ratio)
     {
-        return new FloatElectricalCurrent(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatElectricalCurrent(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

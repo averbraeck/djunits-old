@@ -181,8 +181,7 @@ public class PressureUnit extends LinearUnit<PressureUnit>
         final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, PASCAL, forceUnit
-            .getConversionFactorToStandardUnit()
-            / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = forceUnit.getMassUnit();
         this.lengthUnit = forceUnit.getLengthUnit();
         this.timeUnit = forceUnit.getTimeUnit();

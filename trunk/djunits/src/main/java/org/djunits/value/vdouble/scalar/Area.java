@@ -30,6 +30,9 @@ public class Area extends TypedDoubleScalarRel<AreaUnit, Area>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Area ZERO = new Area(0.0, AreaUnit.SI);
+
     /**
      * Construct Area scalar.
      * @param value double value

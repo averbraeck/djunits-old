@@ -62,8 +62,7 @@ public class MoneyPerAreaUnit extends LinearUnit<MoneyPerAreaUnit>
         final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerAreaUnit, moneyUnit
-            .getConversionFactorToStandardUnit()
-            / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.areaUnit = areaUnit;
     }

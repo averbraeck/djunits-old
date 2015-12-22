@@ -93,8 +93,8 @@ abstract class FloatVectorData
         }
 
         float[] valuesSI = new float[values.size()];
-        IntStream.range(0, values.size()).parallel().forEach(
-            i -> valuesSI[i] = (float) scale.toStandardUnit(values.get(i)));
+        IntStream.range(0, values.size()).parallel()
+            .forEach(i -> valuesSI[i] = (float) scale.toStandardUnit(values.get(i)));
 
         switch (storageType)
         {
@@ -232,8 +232,8 @@ abstract class FloatVectorData
             case DENSE:
             {
                 float[] valuesSI = new float[length];
-                values.keySet().parallelStream().forEach(
-                    index -> valuesSI[index] = (float) scale.toStandardUnit(values.get(index)));
+                values.keySet().parallelStream()
+                    .forEach(index -> valuesSI[index] = (float) scale.toStandardUnit(values.get(index)));
                 return new FloatVectorDataDense(valuesSI);
             }
 
@@ -241,8 +241,8 @@ abstract class FloatVectorData
             {
                 int[] indices = values.keySet().parallelStream().mapToInt(i -> i).toArray();
                 float[] valuesSI = new float[values.size()];
-                values.keySet().parallelStream().forEach(
-                    index -> valuesSI[index] = (float) scale.toStandardUnit(values.get(index)));
+                values.keySet().parallelStream()
+                    .forEach(index -> valuesSI[index] = (float) scale.toStandardUnit(values.get(index)));
                 return new FloatVectorDataSparse(valuesSI, indices, length);
             }
 
@@ -320,8 +320,8 @@ abstract class FloatVectorData
     public final int cardinality()
     {
         // this does not copy the data. See http://stackoverflow.com/questions/23106093/how-to-get-a-stream-from-a-float
-        return (int) IntStream.range(0, this.vectorSI.length).parallel().mapToDouble(i -> this.vectorSI[i]).filter(
-            d -> d != 0.0).count();
+        return (int) IntStream.range(0, this.vectorSI.length).parallel().mapToDouble(i -> this.vectorSI[i])
+            .filter(d -> d != 0.0).count();
     }
 
     /**

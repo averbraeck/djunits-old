@@ -27,6 +27,9 @@ public class FloatFlowMass extends TypedFloatScalarRel<FlowMassUnit, FloatFlowMa
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatFlowMass ZERO = new FloatFlowMass(0.0f, FlowMassUnit.SI);
+
     /**
      * Construct FloatFlowMass scalar.
      * @param value float value

@@ -74,8 +74,7 @@ public class MoneyPerEnergyUnit extends LinearUnit<MoneyPerEnergyUnit>
         final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerEnergyUnit, moneyUnit
-            .getConversionFactorToStandardUnit()
-            / energyUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / energyUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.energyUnit = energyUnit;
     }

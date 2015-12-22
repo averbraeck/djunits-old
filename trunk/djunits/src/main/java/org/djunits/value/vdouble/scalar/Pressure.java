@@ -26,6 +26,9 @@ public class Pressure extends TypedDoubleScalarRel<PressureUnit, Pressure>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Pressure ZERO = new Pressure(0.0, PressureUnit.SI);
+
     /**
      * Construct Pressure scalar.
      * @param value double value

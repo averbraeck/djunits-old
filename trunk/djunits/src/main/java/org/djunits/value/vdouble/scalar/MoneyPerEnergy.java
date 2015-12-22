@@ -61,8 +61,8 @@ public class MoneyPerEnergy extends TypedDoubleScalarRel<MoneyPerEnergyUnit, Mon
      */
     public static MoneyPerEnergy interpolate(final MoneyPerEnergy zero, final MoneyPerEnergy one, final double ratio)
     {
-        return new MoneyPerEnergy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new MoneyPerEnergy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

@@ -68,8 +68,7 @@ public class MoneyPerMassUnit extends LinearUnit<MoneyPerMassUnit>
         final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerMassUnit, moneyUnit
-            .getConversionFactorToStandardUnit()
-            / massUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / massUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.massUnit = massUnit;
     }

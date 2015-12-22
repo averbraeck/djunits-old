@@ -28,6 +28,9 @@ public class ElectricalPotential extends TypedDoubleScalarRel<ElectricalPotentia
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final ElectricalPotential ZERO = new ElectricalPotential(0.0, ElectricalPotentialUnit.SI);
+
     /**
      * Construct ElectricalPotential scalar.
      * @param value double value
@@ -64,8 +67,8 @@ public class ElectricalPotential extends TypedDoubleScalarRel<ElectricalPotentia
     public static ElectricalPotential interpolate(final ElectricalPotential zero, final ElectricalPotential one,
         final double ratio)
     {
-        return new ElectricalPotential(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new ElectricalPotential(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

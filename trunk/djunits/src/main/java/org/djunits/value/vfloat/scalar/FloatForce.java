@@ -31,6 +31,9 @@ public class FloatForce extends TypedFloatScalarRel<ForceUnit, FloatForce>
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatForce ZERO = new FloatForce(0.0f, ForceUnit.SI);
+
     /**
      * Construct FloatForce scalar.
      * @param value float value

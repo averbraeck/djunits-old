@@ -86,8 +86,8 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
             * lengthUnit.getConversionFactorToStandardUnit()
             * lengthUnit.getConversionFactorToStandardUnit()
             / (electricalCurrentUnit.getConversionFactorToStandardUnit()
-                * electricalCurrentUnit.getConversionFactorToStandardUnit() * Math.pow(timeUnit
-                .getConversionFactorToStandardUnit(), 3.0)), standardUnit);
+                * electricalCurrentUnit.getConversionFactorToStandardUnit() * Math.pow(
+                timeUnit.getConversionFactorToStandardUnit(), 3.0)), standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.electricalCurrentUnit = electricalCurrentUnit;
@@ -126,8 +126,8 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
         final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, OHM, electricalPotentialUnit
-            .getConversionFactorToStandardUnit()
-            / electricalCurrentUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / electricalCurrentUnit.getConversionFactorToStandardUnit(),
+            standardUnit);
         this.massUnit = electricalPotentialUnit.getMassUnit();
         this.lengthUnit = electricalPotentialUnit.getLengthUnit();
         this.electricalCurrentUnit = electricalCurrentUnit;

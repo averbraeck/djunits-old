@@ -150,8 +150,8 @@ public class PowerUnit extends LinearUnit<PowerUnit>
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, WATT, lengthUnit
             .getConversionFactorToStandardUnit()
-            * forceUnit.getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(),
-            standardUnit);
+            * forceUnit.getConversionFactorToStandardUnit()
+            / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = forceUnit.getMassUnit();
         this.lengthUnit = forceUnit.getLengthUnit();
         this.timeUnit = forceUnit.getTimeUnit();

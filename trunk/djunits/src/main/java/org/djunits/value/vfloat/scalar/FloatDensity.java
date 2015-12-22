@@ -25,6 +25,9 @@ public class FloatDensity extends TypedFloatScalarRel<DensityUnit, FloatDensity>
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatDensity ZERO = new FloatDensity(0.0f, DensityUnit.SI);
+
     /**
      * Construct FloatDensity scalar.
      * @param value float value

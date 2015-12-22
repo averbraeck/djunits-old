@@ -28,6 +28,9 @@ public class FlowVolume extends TypedDoubleScalarRel<FlowVolumeUnit, FlowVolume>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final FlowVolume ZERO = new FlowVolume(0.0, FlowVolumeUnit.SI);
+
     /**
      * Construct FlowVolume scalar.
      * @param value double value

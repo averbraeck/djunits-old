@@ -26,6 +26,9 @@ public class FloatPressure extends TypedFloatScalarRel<PressureUnit, FloatPressu
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatPressure ZERO = new FloatPressure(0.0f, PressureUnit.SI);
+
     /**
      * Construct FloatPressure scalar.
      * @param value float value

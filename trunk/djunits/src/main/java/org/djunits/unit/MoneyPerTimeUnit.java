@@ -60,8 +60,7 @@ public class MoneyPerTimeUnit extends LinearUnit<MoneyPerTimeUnit>
         final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerTimeUnit, moneyUnit
-            .getConversionFactorToStandardUnit()
-            / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.timeUnit = timeUnit;
     }

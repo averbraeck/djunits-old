@@ -42,6 +42,9 @@ public interface Float%Type%
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final Float%Type%.Rel ZERO = new Float%Type%.Rel(0.0f, %Type%Unit.SI);
+
         /**
          * Construct Float%Type%.Rel scalar.
          * @param value float value
@@ -146,6 +149,9 @@ public interface Float%Type%
     {
         /** */
         private static final long serialVersionUID = 20150901L;
+
+        /** constant with value zero. */
+        public static final Float%Type%.Abs ZERO = new Float%Type%.Abs(0.0f, %Type%Unit.SI);
 
         /**
          * Construct Float%Type%.Abs scalar.

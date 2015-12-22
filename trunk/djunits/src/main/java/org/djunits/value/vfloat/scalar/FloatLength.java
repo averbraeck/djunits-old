@@ -50,6 +50,9 @@ public interface FloatLength
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final FloatLength.Rel ZERO = new FloatLength.Rel(0.0f, LengthUnit.SI);
+
         /**
          * Construct FloatLength.Rel scalar.
          * @param value float value
@@ -107,8 +110,8 @@ public interface FloatLength
         public static FloatLength.Rel interpolate(final FloatLength.Rel zero, final FloatLength.Rel one,
             final float ratio)
         {
-            return new FloatLength.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new FloatLength.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
         /**
@@ -255,6 +258,9 @@ public interface FloatLength
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final FloatLength.Abs ZERO = new FloatLength.Abs(0.0f, LengthUnit.SI);
+
         /**
          * Construct FloatLength.Abs scalar.
          * @param value float value
@@ -308,8 +314,8 @@ public interface FloatLength
         public static FloatLength.Abs interpolate(final FloatLength.Abs zero, final FloatLength.Abs one,
             final float ratio)
         {
-            return new FloatLength.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new FloatLength.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
     }

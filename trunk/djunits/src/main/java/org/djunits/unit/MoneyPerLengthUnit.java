@@ -61,8 +61,7 @@ public class MoneyPerLengthUnit extends LinearUnit<MoneyPerLengthUnit>
         final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerLengthUnit, moneyUnit
-            .getConversionFactorToStandardUnit()
-            / lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.lengthUnit = lengthUnit;
     }

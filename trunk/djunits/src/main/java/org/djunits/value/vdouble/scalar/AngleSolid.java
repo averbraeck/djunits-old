@@ -24,6 +24,9 @@ public class AngleSolid extends TypedDoubleScalarRel<AngleSolidUnit, AngleSolid>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final AngleSolid ZERO = new AngleSolid(0.0, AngleSolidUnit.SI);
+
     /**
      * Construct AngleSolid scalar.
      * @param value double value

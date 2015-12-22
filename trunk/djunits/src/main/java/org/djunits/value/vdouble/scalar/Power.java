@@ -30,6 +30,9 @@ public class Power extends TypedDoubleScalarRel<PowerUnit, Power>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Power ZERO = new Power(0.0, PowerUnit.SI);
+
     /**
      * Construct Power scalar.
      * @param value double value

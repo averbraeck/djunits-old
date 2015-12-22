@@ -42,6 +42,9 @@ public interface %Type%
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final %Type%.Rel ZERO = new %Type%.Rel(0.0, %Type%Unit.SI);
+
         /**
          * Construct %Type%.Rel scalar.
          * @param value double value
@@ -136,6 +139,9 @@ public interface %Type%
     {
         /** */
         private static final long serialVersionUID = 20150901L;
+
+        /** constant with value zero. */
+        public static final %Type%.Abs ZERO = new %Type%.Abs(0.0, %Type%Unit.SI);
 
         /**
          * Construct %Type%.Abs scalar.

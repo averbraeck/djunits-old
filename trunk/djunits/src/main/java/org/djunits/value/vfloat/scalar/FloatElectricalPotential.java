@@ -28,6 +28,9 @@ public class FloatElectricalPotential extends TypedFloatScalarRel<ElectricalPote
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatElectricalPotential ZERO = new FloatElectricalPotential(0.0f, ElectricalPotentialUnit.SI);
+
     /**
      * Construct FloatElectricalPotential scalar.
      * @param value float value

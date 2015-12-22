@@ -44,6 +44,9 @@ public interface Temperature
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final Temperature.Rel ZERO = new Temperature.Rel(0.0, TemperatureUnit.SI);
+
         /**
          * Construct Temperature.Rel scalar.
          * @param value double value
@@ -91,8 +94,8 @@ public interface Temperature
         public static Temperature.Rel interpolate(final Temperature.Rel zero, final Temperature.Rel one,
             final double ratio)
         {
-            return new Temperature.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new Temperature.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
         /**
@@ -150,6 +153,9 @@ public interface Temperature
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final Temperature.Abs ZERO = new Temperature.Abs(0.0, TemperatureUnit.SI);
+
         /**
          * Construct Temperature.Abs scalar.
          * @param value double value
@@ -193,8 +199,8 @@ public interface Temperature
         public static Temperature.Abs interpolate(final Temperature.Abs zero, final Temperature.Abs one,
             final double ratio)
         {
-            return new Temperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new Temperature.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
     }

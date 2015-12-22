@@ -127,8 +127,8 @@ public class VolumeUnit extends LinearUnit<VolumeUnit>
     private VolumeUnit(final LengthUnit lengthUnit, final String nameOrNameKey,
         final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, CUBIC_METER, Math.pow(lengthUnit
-            .getConversionFactorToStandardUnit(), 3), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, CUBIC_METER, Math.pow(
+            lengthUnit.getConversionFactorToStandardUnit(), 3), standardUnit);
         this.lengthUnit = lengthUnit;
     }
 

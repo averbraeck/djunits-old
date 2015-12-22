@@ -76,8 +76,7 @@ public class SpeedUnit extends LinearUnit<SpeedUnit>
         final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, METER_PER_SECOND, lengthUnit
-            .getConversionFactorToStandardUnit()
-            / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.lengthUnit = lengthUnit;
         this.timeUnit = timeUnit;
     }

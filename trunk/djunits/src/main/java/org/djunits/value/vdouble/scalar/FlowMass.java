@@ -27,6 +27,9 @@ public class FlowMass extends TypedDoubleScalarRel<FlowMassUnit, FlowMass>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final FlowMass ZERO = new FlowMass(0.0, FlowMassUnit.SI);
+
     /**
      * Construct FlowMass scalar.
      * @param value double value

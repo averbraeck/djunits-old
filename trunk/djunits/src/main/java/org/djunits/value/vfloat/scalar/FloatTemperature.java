@@ -44,6 +44,9 @@ public interface FloatTemperature
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final FloatTemperature.Rel ZERO = new FloatTemperature.Rel(0.0f, TemperatureUnit.SI);
+
         /**
          * Construct FloatTemperature.Rel scalar.
          * @param value float value
@@ -159,6 +162,9 @@ public interface FloatTemperature
     {
         /** */
         private static final long serialVersionUID = 20150901L;
+
+        /** constant with value zero. */
+        public static final FloatTemperature.Abs ZERO = new FloatTemperature.Abs(0.0f, TemperatureUnit.SI);
 
         /**
          * Construct FloatTemperature.Abs scalar.

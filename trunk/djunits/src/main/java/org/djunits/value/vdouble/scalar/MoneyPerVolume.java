@@ -61,8 +61,8 @@ public class MoneyPerVolume extends TypedDoubleScalarRel<MoneyPerVolumeUnit, Mon
      */
     public static MoneyPerVolume interpolate(final MoneyPerVolume zero, final MoneyPerVolume one, final double ratio)
     {
-        return new MoneyPerVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new MoneyPerVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

@@ -61,8 +61,8 @@ public class MoneyPerLength extends TypedDoubleScalarRel<MoneyPerLengthUnit, Mon
      */
     public static MoneyPerLength interpolate(final MoneyPerLength zero, final MoneyPerLength one, final double ratio)
     {
-        return new MoneyPerLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new MoneyPerLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

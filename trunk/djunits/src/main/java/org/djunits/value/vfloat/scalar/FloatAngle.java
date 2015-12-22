@@ -43,6 +43,9 @@ public interface FloatAngle
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final FloatAngle.Rel ZERO = new FloatAngle.Rel(0.0f, AngleUnit.SI);
+
         /**
          * Construct FloatAngle.Rel scalar.
          * @param value float value
@@ -100,8 +103,8 @@ public interface FloatAngle
         public static FloatAngle.Rel
             interpolate(final FloatAngle.Rel zero, final FloatAngle.Rel one, final float ratio)
         {
-            return new FloatAngle.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new FloatAngle.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
         /**
@@ -158,6 +161,9 @@ public interface FloatAngle
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final FloatAngle.Abs ZERO = new FloatAngle.Abs(0.0f, AngleUnit.SI);
+
         /**
          * Construct FloatAngle.Abs scalar.
          * @param value float value
@@ -211,8 +217,8 @@ public interface FloatAngle
         public static FloatAngle.Abs
             interpolate(final FloatAngle.Abs zero, final FloatAngle.Abs one, final float ratio)
         {
-            return new FloatAngle.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new FloatAngle.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
     }

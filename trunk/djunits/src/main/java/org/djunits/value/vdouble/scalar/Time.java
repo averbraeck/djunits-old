@@ -50,6 +50,9 @@ public interface Time
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final Time.Rel ZERO = new Time.Rel(0.0, TimeUnit.SI);
+
         /**
          * Construct Time.Rel scalar.
          * @param value double value
@@ -232,6 +235,9 @@ public interface Time
     {
         /** */
         private static final long serialVersionUID = 20150901L;
+
+        /** constant with value zero. */
+        public static final Time.Abs ZERO = new Time.Abs(0.0, TimeUnit.SI);
 
         /**
          * Construct Time.Abs scalar.

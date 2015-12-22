@@ -98,8 +98,8 @@ abstract class DoubleVectorData
                     .toArray());
 
             case SPARSE:
-                return DoubleVectorDataSparse.instantiate(values.parallelStream().mapToDouble(
-                    d -> scale.toStandardUnit(d)).toArray());
+                return DoubleVectorDataSparse.instantiate(values.parallelStream()
+                    .mapToDouble(d -> scale.toStandardUnit(d)).toArray());
 
             default:
                 throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + storageType);

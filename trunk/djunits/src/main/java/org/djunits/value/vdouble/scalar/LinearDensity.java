@@ -29,6 +29,9 @@ public class LinearDensity extends TypedDoubleScalarRel<LinearDensityUnit, Linea
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final LinearDensity ZERO = new LinearDensity(0.0, LinearDensityUnit.SI);
+
     /**
      * Construct LinearDensity scalar.
      * @param value double value

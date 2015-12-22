@@ -30,6 +30,9 @@ public class Mass extends TypedDoubleScalarRel<MassUnit, Mass>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Mass ZERO = new Mass(0.0, MassUnit.SI);
+
     /**
      * Construct Mass scalar.
      * @param value double value
