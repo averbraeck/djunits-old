@@ -20,8 +20,8 @@ import org.djunits.value.vfloat.FloatMathFunctions;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this FloatScalar
@@ -744,8 +744,8 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
     public static <U extends Unit<U>> FloatScalar.Abs<U> interpolate(final FloatScalar.Abs<U> zero,
         final FloatScalar.Abs<U> one, final float ratio)
     {
-        return new FloatScalar.Abs<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatScalar.Abs<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**
@@ -759,8 +759,8 @@ public abstract class FloatScalar<U extends Unit<U>> extends Scalar<U> implement
     public static <U extends Unit<U>> FloatScalar.Rel<U> interpolate(final FloatScalar.Rel<U> zero,
         final FloatScalar.Rel<U> one, final float ratio)
     {
-        return new FloatScalar.Rel<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatScalar.Rel<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
 }

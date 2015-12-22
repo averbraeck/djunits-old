@@ -60,8 +60,7 @@ public class FlowMassUnit extends LinearUnit<FlowMassUnit>
         final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, KILOGRAM_PER_SECOND, massUnit
-            .getConversionFactorToStandardUnit()
-            / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = massUnit;
         this.timeUnit = timeUnit;
     }

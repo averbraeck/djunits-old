@@ -95,9 +95,9 @@ public class AngleUnit extends Unit<AngleUnit>
         final UnitSystem unitSystem, final AngleUnit referenceUnit, final double conversionFactorToReferenceUnit,
         final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, new LinearScale(((LinearScale) referenceUnit
-            .getScale()).getConversionFactorToStandardUnit()
-            * conversionFactorToReferenceUnit), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, new LinearScale(
+            ((LinearScale) referenceUnit.getScale()).getConversionFactorToStandardUnit()
+                * conversionFactorToReferenceUnit), standardUnit);
     }
 
     /**

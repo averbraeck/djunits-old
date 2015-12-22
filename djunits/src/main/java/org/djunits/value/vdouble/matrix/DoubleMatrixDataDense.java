@@ -70,8 +70,8 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
      */
     public final void assign(final DoubleFunction doubleFunction)
     {
-        IntStream.range(0, this.rows() * this.cols()).parallel().forEach(
-            i -> this.matrixSI[i] = doubleFunction.apply(this.matrixSI[i]));
+        IntStream.range(0, this.rows() * this.cols()).parallel()
+            .forEach(i -> this.matrixSI[i] = doubleFunction.apply(this.matrixSI[i]));
     }
 
     /**
@@ -145,31 +145,43 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
     @Override
     public final void incrementBy(final DoubleMatrixData right) throws ValueException
     {
-        IntStream.range(0, this.rows).parallel().forEach(
-            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right.getSI(r, c)));
+        IntStream
+            .range(0, this.rows)
+            .parallel()
+            .forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right.getSI(r, c)));
     }
 
     /** {@inheritDoc} */
     @Override
     public final void decrementBy(final DoubleMatrixData right) throws ValueException
     {
-        IntStream.range(0, this.rows).parallel().forEach(
-            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right.getSI(r, c)));
+        IntStream
+            .range(0, this.rows)
+            .parallel()
+            .forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right.getSI(r, c)));
     }
 
     /** {@inheritDoc} */
     @Override
     public final void multiplyBy(final DoubleMatrixData right) throws ValueException
     {
-        IntStream.range(0, this.rows).parallel().forEach(
-            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] *= right.getSI(r, c)));
+        IntStream
+            .range(0, this.rows)
+            .parallel()
+            .forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] *= right.getSI(r, c)));
     }
 
     /** {@inheritDoc} */
     @Override
     public final void divideBy(final DoubleMatrixData right) throws ValueException
     {
-        IntStream.range(0, this.rows).parallel().forEach(
-            r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
+        IntStream
+            .range(0, this.rows)
+            .parallel()
+            .forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
     }
 }

@@ -30,6 +30,9 @@ public class FloatPower extends TypedFloatScalarRel<PowerUnit, FloatPower>
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatPower ZERO = new FloatPower(0.0f, PowerUnit.SI);
+
     /**
      * Construct FloatPower scalar.
      * @param value float value

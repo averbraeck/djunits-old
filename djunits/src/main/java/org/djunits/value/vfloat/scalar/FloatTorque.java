@@ -30,6 +30,9 @@ public class FloatTorque extends TypedFloatScalarRel<TorqueUnit, FloatTorque>
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatTorque ZERO = new FloatTorque(0.0f, TorqueUnit.SI);
+
     /**
      * Construct FloatTorque scalar.
      * @param value float value

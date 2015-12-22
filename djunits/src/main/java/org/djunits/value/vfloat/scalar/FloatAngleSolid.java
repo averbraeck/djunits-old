@@ -24,6 +24,9 @@ public class FloatAngleSolid extends TypedFloatScalarRel<AngleSolidUnit, FloatAn
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatAngleSolid ZERO = new FloatAngleSolid(0.0f, AngleSolidUnit.SI);
+
     /**
      * Construct FloatAngleSolid scalar.
      * @param value float value
@@ -69,8 +72,8 @@ public class FloatAngleSolid extends TypedFloatScalarRel<AngleSolidUnit, FloatAn
      */
     public static FloatAngleSolid interpolate(final FloatAngleSolid zero, final FloatAngleSolid one, final float ratio)
     {
-        return new FloatAngleSolid(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatAngleSolid(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

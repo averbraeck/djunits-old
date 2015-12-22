@@ -27,6 +27,9 @@ public class FloatElectricalCharge extends TypedFloatScalarRel<ElectricalChargeU
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatElectricalCharge ZERO = new FloatElectricalCharge(0.0f, ElectricalChargeUnit.SI);
+
     /**
      * Construct FloatElectricalCharge scalar.
      * @param value float value
@@ -73,8 +76,8 @@ public class FloatElectricalCharge extends TypedFloatScalarRel<ElectricalChargeU
     public static FloatElectricalCharge interpolate(final FloatElectricalCharge zero, final FloatElectricalCharge one,
         final float ratio)
     {
-        return new FloatElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

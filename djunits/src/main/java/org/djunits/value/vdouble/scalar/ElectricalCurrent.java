@@ -28,6 +28,9 @@ public class ElectricalCurrent extends TypedDoubleScalarRel<ElectricalCurrentUni
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final ElectricalCurrent ZERO = new ElectricalCurrent(0.0, ElectricalCurrentUnit.SI);
+
     /**
      * Construct ElectricalCurrent scalar.
      * @param value double value
@@ -64,8 +67,8 @@ public class ElectricalCurrent extends TypedDoubleScalarRel<ElectricalCurrentUni
     public static ElectricalCurrent interpolate(final ElectricalCurrent zero, final ElectricalCurrent one,
         final double ratio)
     {
-        return new ElectricalCurrent(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new ElectricalCurrent(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

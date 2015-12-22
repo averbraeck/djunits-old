@@ -50,6 +50,9 @@ public interface FloatTime
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final FloatTime.Rel ZERO = new FloatTime.Rel(0.0f, TimeUnit.SI);
+
         /**
          * Construct FloatTime.Rel scalar.
          * @param value float value
@@ -106,8 +109,8 @@ public interface FloatTime
          */
         public static FloatTime.Rel interpolate(final FloatTime.Rel zero, final FloatTime.Rel one, final float ratio)
         {
-            return new FloatTime.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new FloatTime.Rel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
         /**
@@ -245,6 +248,9 @@ public interface FloatTime
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final FloatTime.Abs ZERO = new FloatTime.Abs(0.0f, TimeUnit.SI);
+
         /**
          * Construct FloatTime.Abs scalar.
          * @param value float value
@@ -297,8 +303,8 @@ public interface FloatTime
          */
         public static FloatTime.Abs interpolate(final FloatTime.Abs zero, final FloatTime.Abs one, final float ratio)
         {
-            return new FloatTime.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-                .getUnit());
+            return new FloatTime.Abs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
         }
 
     }

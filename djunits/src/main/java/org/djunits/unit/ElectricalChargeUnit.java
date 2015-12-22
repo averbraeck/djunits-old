@@ -106,8 +106,7 @@ public class ElectricalChargeUnit extends LinearUnit<ElectricalChargeUnit>
         final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, COULOMB, electricalCurrentUnit
-            .getConversionFactorToStandardUnit()
-            * timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.electricalCurrentUnit = electricalCurrentUnit;
         this.timeUnit = timeUnit;
     }

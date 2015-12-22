@@ -29,6 +29,9 @@ public class FloatLinearDensity extends TypedFloatScalarRel<LinearDensityUnit, F
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatLinearDensity ZERO = new FloatLinearDensity(0.0f, LinearDensityUnit.SI);
+
     /**
      * Construct FloatLinearDensity scalar.
      * @param value float value
@@ -75,8 +78,8 @@ public class FloatLinearDensity extends TypedFloatScalarRel<LinearDensityUnit, F
     public static FloatLinearDensity interpolate(final FloatLinearDensity zero, final FloatLinearDensity one,
         final float ratio)
     {
-        return new FloatLinearDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatLinearDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

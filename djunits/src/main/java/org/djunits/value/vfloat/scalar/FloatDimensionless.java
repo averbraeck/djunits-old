@@ -55,6 +55,9 @@ public class FloatDimensionless extends TypedFloatScalarDimensionless<Dimensionl
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatDimensionless ZERO = new FloatDimensionless(0.0f, DimensionlessUnit.SI);
+
     /**
      * Construct FloatDimensionless scalar.
      * @param value float value
@@ -101,8 +104,8 @@ public class FloatDimensionless extends TypedFloatScalarDimensionless<Dimensionl
     public static FloatDimensionless interpolate(final FloatDimensionless zero, final FloatDimensionless one,
         final float ratio)
     {
-        return new FloatDimensionless(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatDimensionless(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

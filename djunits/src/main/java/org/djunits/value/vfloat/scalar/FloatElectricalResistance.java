@@ -27,6 +27,10 @@ public class FloatElectricalResistance extends TypedFloatScalarRel<ElectricalRes
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatElectricalResistance ZERO = new FloatElectricalResistance(0.0f,
+        ElectricalResistanceUnit.SI);
+
     /**
      * Construct FloatElectricalResistance scalar.
      * @param value float value

@@ -31,6 +31,9 @@ public class Force extends TypedDoubleScalarRel<ForceUnit, Force>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Force ZERO = new Force(0.0, ForceUnit.SI);
+
     /**
      * Construct Force scalar.
      * @param value double value

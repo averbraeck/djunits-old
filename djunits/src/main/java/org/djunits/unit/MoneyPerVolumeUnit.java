@@ -64,8 +64,7 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
         final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerVolumeUnit, moneyUnit
-            .getConversionFactorToStandardUnit()
-            / volumeUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / volumeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.volumeUnit = volumeUnit;
     }

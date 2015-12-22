@@ -72,8 +72,8 @@ public class FloatMoneyPerEnergy extends TypedFloatScalarRel<MoneyPerEnergyUnit,
     public static FloatMoneyPerEnergy interpolate(final FloatMoneyPerEnergy zero, final FloatMoneyPerEnergy one,
         final float ratio)
     {
-        return new FloatMoneyPerEnergy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatMoneyPerEnergy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

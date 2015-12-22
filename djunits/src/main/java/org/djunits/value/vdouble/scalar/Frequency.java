@@ -28,6 +28,9 @@ public class Frequency extends TypedDoubleScalarRel<FrequencyUnit, Frequency>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Frequency ZERO = new Frequency(0.0, FrequencyUnit.SI);
+
     /**
      * Construct Frequency scalar.
      * @param value double value

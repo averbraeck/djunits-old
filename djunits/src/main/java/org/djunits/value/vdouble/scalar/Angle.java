@@ -43,6 +43,9 @@ public interface Angle
         /** */
         private static final long serialVersionUID = 20150901L;
 
+        /** constant with value zero. */
+        public static final Angle.Rel ZERO = new Angle.Rel(0.0, AngleUnit.SI);
+
         /**
          * Construct Angle.Rel scalar.
          * @param value double value
@@ -145,6 +148,9 @@ public interface Angle
     {
         /** */
         private static final long serialVersionUID = 20150901L;
+
+        /** constant with value zero. */
+        public static final Angle.Abs ZERO = new Angle.Abs(0.0, AngleUnit.SI);
 
         /**
          * Construct Angle.Abs scalar.

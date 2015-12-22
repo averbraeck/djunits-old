@@ -91,8 +91,7 @@ public class AreaUnit extends LinearUnit<AreaUnit>
         final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, SQUARE_METER, lengthUnit
-            .getConversionFactorToStandardUnit()
-            * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.lengthUnit = lengthUnit;
     }
 

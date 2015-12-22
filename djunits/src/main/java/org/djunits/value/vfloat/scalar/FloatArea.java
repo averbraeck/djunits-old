@@ -30,6 +30,9 @@ public class FloatArea extends TypedFloatScalarRel<AreaUnit, FloatArea>
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatArea ZERO = new FloatArea(0.0f, AreaUnit.SI);
+
     /**
      * Construct FloatArea scalar.
      * @param value float value

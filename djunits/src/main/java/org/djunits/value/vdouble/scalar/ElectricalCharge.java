@@ -27,6 +27,9 @@ public class ElectricalCharge extends TypedDoubleScalarRel<ElectricalChargeUnit,
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final ElectricalCharge ZERO = new ElectricalCharge(0.0, ElectricalChargeUnit.SI);
+
     /**
      * Construct ElectricalCharge scalar.
      * @param value double value
@@ -63,8 +66,8 @@ public class ElectricalCharge extends TypedDoubleScalarRel<ElectricalChargeUnit,
     public static ElectricalCharge interpolate(final ElectricalCharge zero, final ElectricalCharge one,
         final double ratio)
     {
-        return new ElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new ElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

@@ -144,8 +144,7 @@ public class AccelerationUnit extends LinearUnit<AccelerationUnit>
         final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, METER_PER_SECOND_2, speedUnit
-            .getConversionFactorToStandardUnit()
-            / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.lengthUnit = speedUnit.getLengthUnit();
         this.timeUnit = timeUnit;
     }

@@ -72,8 +72,8 @@ public class FloatMoneyPerMass extends TypedFloatScalarRel<MoneyPerMassUnit, Flo
     public static FloatMoneyPerMass interpolate(final FloatMoneyPerMass zero, final FloatMoneyPerMass one,
         final float ratio)
     {
-        return new FloatMoneyPerMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatMoneyPerMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

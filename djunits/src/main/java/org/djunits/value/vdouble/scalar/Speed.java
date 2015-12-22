@@ -31,6 +31,9 @@ public class Speed extends TypedDoubleScalarRel<SpeedUnit, Speed>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Speed ZERO = new Speed(0.0, SpeedUnit.SI);
+
     /**
      * Construct Speed scalar.
      * @param value double value

@@ -31,6 +31,9 @@ public class FloatVolume extends TypedFloatScalarRel<VolumeUnit, FloatVolume>
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatVolume ZERO = new FloatVolume(0.0f, VolumeUnit.SI);
+
     /**
      * Construct FloatVolume scalar.
      * @param value float value

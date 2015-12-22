@@ -105,8 +105,8 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
             .getConversionFactorToStandardUnit()
             * lengthUnit.getConversionFactorToStandardUnit()
             * lengthUnit.getConversionFactorToStandardUnit()
-            / (electricalCurrentUnit.getConversionFactorToStandardUnit() * Math.pow(timeUnit
-                .getConversionFactorToStandardUnit(), 3.0)), standardUnit);
+            / (electricalCurrentUnit.getConversionFactorToStandardUnit() * Math.pow(
+                timeUnit.getConversionFactorToStandardUnit(), 3.0)), standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.electricalCurrentUnit = electricalCurrentUnit;
@@ -147,8 +147,8 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
         final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, VOLT, powerUnit
-            .getConversionFactorToStandardUnit()
-            / electricalCurrentUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() / electricalCurrentUnit.getConversionFactorToStandardUnit(),
+            standardUnit);
         this.massUnit = powerUnit.getMassUnit();
         this.lengthUnit = powerUnit.getLengthUnit();
         this.electricalCurrentUnit = electricalCurrentUnit;

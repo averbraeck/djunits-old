@@ -30,6 +30,9 @@ public class FloatEnergy extends TypedFloatScalarRel<EnergyUnit, FloatEnergy>
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatEnergy ZERO = new FloatEnergy(0.0f, EnergyUnit.SI);
+
     /**
      * Construct FloatEnergy scalar.
      * @param value float value

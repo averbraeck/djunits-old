@@ -136,8 +136,7 @@ public class ForceUnit extends LinearUnit<ForceUnit>
         final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, NEWTON, massUnit
-            .getConversionFactorToStandardUnit()
-            * accelerationUnit.getConversionFactorToStandardUnit(), standardUnit);
+            .getConversionFactorToStandardUnit() * accelerationUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = accelerationUnit.getLengthUnit();
         this.timeUnit = accelerationUnit.getTimeUnit();

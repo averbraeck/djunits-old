@@ -28,6 +28,9 @@ public class FloatFlowVolume extends TypedFloatScalarRel<FlowVolumeUnit, FloatFl
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatFlowVolume ZERO = new FloatFlowVolume(0.0f, FlowVolumeUnit.SI);
+
     /**
      * Construct FloatFlowVolume scalar.
      * @param value float value
@@ -73,8 +76,8 @@ public class FloatFlowVolume extends TypedFloatScalarRel<FlowVolumeUnit, FloatFl
      */
     public static FloatFlowVolume interpolate(final FloatFlowVolume zero, final FloatFlowVolume one, final float ratio)
     {
-        return new FloatFlowVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatFlowVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

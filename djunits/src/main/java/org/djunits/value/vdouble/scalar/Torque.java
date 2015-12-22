@@ -30,6 +30,9 @@ public class Torque extends TypedDoubleScalarRel<TorqueUnit, Torque>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Torque ZERO = new Torque(0.0, TorqueUnit.SI);
+
     /**
      * Construct Torque scalar.
      * @param value double value

@@ -72,8 +72,8 @@ public class FloatMoneyPerLength extends TypedFloatScalarRel<MoneyPerLengthUnit,
     public static FloatMoneyPerLength interpolate(final FloatMoneyPerLength zero, final FloatMoneyPerLength one,
         final float ratio)
     {
-        return new FloatMoneyPerLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatMoneyPerLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**

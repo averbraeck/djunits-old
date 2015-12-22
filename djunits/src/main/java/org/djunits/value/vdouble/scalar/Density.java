@@ -25,6 +25,9 @@ public class Density extends TypedDoubleScalarRel<DensityUnit, Density>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Density ZERO = new Density(0.0, DensityUnit.SI);
+
     /**
      * Construct Density scalar.
      * @param value double value

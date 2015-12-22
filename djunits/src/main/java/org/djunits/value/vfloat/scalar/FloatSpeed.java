@@ -31,6 +31,9 @@ public class FloatSpeed extends TypedFloatScalarRel<SpeedUnit, FloatSpeed>
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatSpeed ZERO = new FloatSpeed(0.0f, SpeedUnit.SI);
+
     /**
      * Construct FloatSpeed scalar.
      * @param value float value

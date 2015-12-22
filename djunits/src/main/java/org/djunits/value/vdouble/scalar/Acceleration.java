@@ -28,6 +28,9 @@ public class Acceleration extends TypedDoubleScalarRel<AccelerationUnit, Acceler
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Acceleration ZERO = new Acceleration(0.0, AccelerationUnit.SI);
+
     /**
      * Construct Acceleration scalar.
      * @param value double value

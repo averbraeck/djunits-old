@@ -55,6 +55,9 @@ public class Dimensionless extends TypedDoubleScalarDimensionless<DimensionlessU
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Dimensionless ZERO = new Dimensionless(0.0, DimensionlessUnit.SI);
+
     /**
      * Construct Dimensionless scalar.
      * @param value double value

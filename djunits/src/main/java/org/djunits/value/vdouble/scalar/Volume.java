@@ -31,6 +31,9 @@ public class Volume extends TypedDoubleScalarRel<VolumeUnit, Volume>
     /** */
     private static final long serialVersionUID = 20150905L;
 
+    /** constant with value zero. */
+    public static final Volume ZERO = new Volume(0.0, VolumeUnit.SI);
+
     /**
      * Construct Volume scalar.
      * @param value double value

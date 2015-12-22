@@ -747,8 +747,8 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
     public static <U extends Unit<U>> DoubleScalar.Abs<U> interpolate(final DoubleScalar.Abs<U> zero,
         final DoubleScalar.Abs<U> one, final double ratio)
     {
-        return new DoubleScalar.Abs<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new DoubleScalar.Abs<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**
@@ -762,8 +762,8 @@ public abstract class DoubleScalar<U extends Unit<U>> extends Scalar<U> implemen
     public static <U extends Unit<U>> DoubleScalar.Rel<U> interpolate(final DoubleScalar.Rel<U> zero,
         final DoubleScalar.Rel<U> one, final double ratio)
     {
-        return new DoubleScalar.Rel<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new DoubleScalar.Rel<U>(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
 }

@@ -28,6 +28,9 @@ public class FloatFrequency extends TypedFloatScalarRel<FrequencyUnit, FloatFreq
     /** */
     private static final long serialVersionUID = 20150901L;
 
+    /** constant with value zero. */
+    public static final FloatFrequency ZERO = new FloatFrequency(0.0f, FrequencyUnit.SI);
+
     /**
      * Construct FloatFrequency scalar.
      * @param value float value
@@ -73,8 +76,8 @@ public class FloatFrequency extends TypedFloatScalarRel<FrequencyUnit, FloatFreq
      */
     public static FloatFrequency interpolate(final FloatFrequency zero, final FloatFrequency one, final float ratio)
     {
-        return new FloatFrequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatFrequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+            zero.getUnit());
     }
 
     /**
