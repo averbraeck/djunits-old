@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Language" content="en" />
 <link rev="made" href="mailto:p.knoppers@tudelft.nl" />
 <link rel="StyleSheet" href="sinorcaish-screen.css" type="text/css" media="screen" />
+<link href="/favicon.ico" type="image/x-icon" rel="icon" />
 
 <script type="text/javascript">
 	/* Prevent another site from "framing" this web page */
