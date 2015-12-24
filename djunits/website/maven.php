@@ -38,12 +38,12 @@
   &lt;dependency&gt;
     &lt;groupId&gt;org.djunits&lt;/groupId&gt;
     &lt;artifactId&gt;djunits&lt;/artifactId&gt;
-    &lt;version&gt;1.02.04&lt;/version&gt;
+    &lt;version&gt;1.02.06&lt;/version&gt;
   &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </pre>
 
-    <p>Of course, the version number (1.01.01 in the above example) needs to be replaced with the version that one wants to include in the project.</p>
+    <p>Of course, the version number (1.02.06 in the above example) needs to be replaced with the version that one wants to include in the project.</p>
     <p>Right now, the DJUNITS files are kept on a server at TU Delft, and are not yet made available on Maven Central. Therefore, the repository location
       has to be specified separately in the Maven POM-file:</p>
 
@@ -58,11 +58,9 @@
 </pre>
 
     <h2>Dependencies</h2>
-    <p>DJUNITS is directly dependent on three packages, which can have further dependencies:</p>
+    <p>DJUNITS is directly dependent on two packages, which have no further dependencies:</p>
     <ul>
       <li><b>ojalgo</b> for vector and matrix calculations. ojAlgo has no further dependencies.</li>
-      <li><b>reflections</b> for quickly finding the classes for initialization of the unit system. The reflections library is dependent on guava, jsr305,
-        javassist, dom4j, and xml-apis.</li>
       <li><b>joda-money</b> for the money units. Joda-money has no further dependencies.</li>
     </ul>
     <p>If the DJUNITS library is used as a part of a Maven project, all dependencies will be automatically resolved, and the programmer / user does not have
