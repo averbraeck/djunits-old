@@ -4,7 +4,7 @@
 
   <groupId>org.djunits</groupId>
   <artifactId>djunits</artifactId>
-  <version>1.02.05</version>
+  <version>1.02.06</version>
 
   <name>DJUNITS</name>
   <description>Delft Java UNIT System</description>
@@ -24,7 +24,6 @@
     <sonar.scm.disabled>true</sonar.scm.disabled>
 
     <djunits.version>${project.version}</djunits.version>
-    <reflections.version>0.9.10</reflections.version>
     <joda-money.version>0.10.0</joda-money.version>
     <junit.version>4.11</junit.version>
     <ojalgo.version>38.2</ojalgo.version>
@@ -575,6 +574,10 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-changes-plugin</artifactId>
         <version>${maven.changes.version}</version>
+        <configuration>
+          <escapeHTML>false</escapeHTML>
+          <xmlPath>../djunits/src/changes/changes.xml</xmlPath>
+        </configuration>
         <reportSets>
           <reportSet>
             <reports>
@@ -615,12 +618,6 @@
       <version>${junit.version}</version>
       <scope>test</scope>
       <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>org.reflections</groupId>
-      <artifactId>reflections</artifactId>
-      <version>${reflections.version}</version>
     </dependency>
 
     <dependency>

@@ -10,7 +10,6 @@ import org.djunits.locale.Localization;
 import org.djunits.unit.scale.Scale;
 import org.djunits.unit.scale.StandardScale;
 import org.djunits.unit.unitsystem.UnitSystem;
-import org.reflections.Reflections;
 
 /**
  * All units are internally <i>stored</i> relative to a standard unit with conversion factor. This means that e.g., a meter is
@@ -74,24 +73,27 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     /** Has this class been initialized? */
     private static boolean initialized = false;
 
+    /** The array of the names of the standard units. */
+    public static final String[] STANDARD_UNITS = new String[]{"AccelerationUnit", "AngleSolidUnit", "AngleUnit",
+        "AreaUnit", "DensityUnit", "DimensionlessUnit", "ElectricalChargeUnit", "ElectricalCurrentUnit",
+        "ElectricalPotentialUnit", "ElectricalResistanceUnit", "EnergyUnit", "FlowMassUnit", "FlowVolumeUnit",
+        "ForceUnit", "FrequencyUnit", "LengthUnit", "LinearDensityUnit", "MassUnit", "MoneyUnit", "MoneyPerAreaUnit",
+        "MoneyPerEnergyUnit", "MoneyPerLengthUnit", "MoneyPerMassUnit", "MoneyPerTimeUnit", "MoneyPerVolumeUnit",
+        "PowerUnit", "PressureUnit", "SpeedUnit", "TemperatureUnit", "TimeUnit", "TorqueUnit", "VolumeUnit"};
+
     /** Force all units to be loaded. */
     private static void initialize()
     {
-        Reflections reflections = new Reflections("org.djunits.unit");
-        @SuppressWarnings("rawtypes")
-        Set<Class<? extends Unit>> classes = reflections.getSubTypesOf(Unit.class);
-
-        for (@SuppressWarnings("rawtypes")
-        Class<? extends Unit> clazz : classes)
+        for (String className : STANDARD_UNITS)
         {
             try
             {
-                Class.forName(clazz.getCanonicalName());
+                Class.forName("org.djunits.unit." + className);
             }
             catch (Exception exception)
             {
                 // TODO professional logging of errors
-                System.err.println("Could not load class " + clazz.getCanonicalName());
+                System.err.println("Could not load class org.djunits.unit." + className);
             }
         }
         initialized = true;

@@ -1,7 +1,6 @@
 package org.djunits.unit;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,16 +16,16 @@ import java.util.Set;
 
 import org.djunits.AvailableLocalizations;
 import org.djunits.locale.DefaultLocale;
+import org.junit.Assert;
 import org.junit.Test;
-import org.reflections.Reflections;
 
 /**
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Jun 10, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Jun 10, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class UnitLocalizationsTest
@@ -60,15 +59,19 @@ public class UnitLocalizationsTest
             DefaultLocale.setLocale(new Locale(localeName));
 
             // Reflections reflections = new Reflections("org.djunits.core.unit");
-            Reflections reflections = new Reflections("org.djunits.unit");
-            Set<Class<? extends Unit>> classes = reflections.getSubTypesOf(Unit.class);
-            if (0 == classes.size())
+            for (String className : Unit.STANDARD_UNITS)
             {
-                fail("getSubTypesOf(Unit.class) returned empty set");
-            }
+                Class c;
+                try
+                {
+                    c = Class.forName("org.djunits.unit." + className);
+                }
+                catch (Exception exception)
+                {
+                    Assert.fail("Class org.djunits.unit." + className + " could not be loaded");
+                    return;
+                }
 
-            for (Class c : classes)
-            {
                 // System.out.println(c.getSimpleName() + ": " + Unit.getUnits(c));
                 for (Object o : Unit.getUnits(c))
                 {
