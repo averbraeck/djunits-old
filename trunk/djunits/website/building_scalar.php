@@ -85,7 +85,7 @@ public Jerk(final Jerk value)
 
     <pre class="highlight">
 @Override
-public instantiateTypeRel(final double value, final JerkUnit unit)
+public final Jerk instantiateTypeRel(final double value, final JerkUnit unit)
 {
     return new Jerk(value, unit);
 }
