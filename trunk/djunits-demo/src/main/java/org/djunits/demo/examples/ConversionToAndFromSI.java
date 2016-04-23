@@ -31,11 +31,11 @@ public final class ConversionToAndFromSI implements UNITS
     public static void main(final String[] args)
     {
         Locale.setDefault(Locale.US); // Ensure that floating point values are printed using a dot (".")
-        Length.Rel length = new Length.Rel(123, KILOMETER); // Construct a Relative Length
+        Length length = new Length(123, KILOMETER); // Construct a Relative Length
         System.out.println("length is " + length); // prints 123.000km; i.e. uses original unit
         System.out.println("length in METER is " + length.toString(METER)); // prints 1.230+05m
         System.out.println("si value is " + length.si); // prints 123000.0
-        Length.Rel delta = new Length.Rel(250, MILE);
+        Length delta = new Length(250, MILE);
         System.out.println("delta is " + delta); // prints 250.000mi
         System.out.println("length + delta is " + length.plus(delta)); // prints 5.253e+05m
         System.out.println("length + delta in km is " + (length.plus(delta)).toString(KILOMETER)); // prints 525.336km

@@ -230,7 +230,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
 
     /**
      * Test a multiplication method for a Relative vector. Note: filter out the method that multiplies by a constant...
-     * @param vectorClass Class&lt;?&gt;; the Relative class for the multiplication, e.g. Length.Rel
+     * @param vectorClass Class&lt;?&gt;; the Relative class for the multiplication, e.g. Length
      * @param method the method 'multiplyBy' for that class
      * @param multiply boolean; if true; test a multiplyBy method; if false; test a divideBy method
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
@@ -1722,8 +1722,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         System.out.println("Area is " + area);
 
         // Does not work (and should not work).
-        // Length.Abs la = new Length.Abs(5, METER);
-        // Length.Abs lb = new Length.Abs(7, METER);
+        // Position la = new Position(5, METER);
+        // Position lb = new Position(7, METER);
         // la.multiplyBy(lb);
 
         // Check that Arrays.stream(.).parallel().toArray() does not affect ordering of elements
