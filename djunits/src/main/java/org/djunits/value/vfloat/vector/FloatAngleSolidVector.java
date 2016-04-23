@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatAngleSolid;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatAngleSolidVector extends
-    TypedFloatVectorRel<AngleSolidUnit, FloatAngleSolidVector, MutableFloatAngleSolidVector, FloatAngleSolid>
+        TypedFloatVectorRel<AngleSolidUnit, FloatAngleSolidVector, MutableFloatAngleSolidVector, FloatAngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class FloatAngleSolidVector extends
      * @throws ValueException when values is null
      */
     public FloatAngleSolidVector(final float[] values, final AngleSolidUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class FloatAngleSolidVector extends
      * @throws ValueException when values is null
      */
     public FloatAngleSolidVector(final List<Float> values, final AngleSolidUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -69,8 +69,7 @@ public class FloatAngleSolidVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatAngleSolidVector(final List<FloatAngleSolid> values, final StorageType storageType)
-        throws ValueException
+    public FloatAngleSolidVector(final List<FloatAngleSolid> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -84,7 +83,7 @@ public class FloatAngleSolidVector extends
      * @throws ValueException when values has zero entries
      */
     public FloatAngleSolidVector(final SortedMap<Integer, FloatAngleSolid> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -98,7 +97,7 @@ public class FloatAngleSolidVector extends
      * @throws ValueException when values is null
      */
     public FloatAngleSolidVector(final SortedMap<Integer, Float> values, final AngleSolidUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -121,8 +120,7 @@ public class FloatAngleSolidVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatAngleSolidVector instantiateMutableType(final FloatVectorData dvd,
-        final AngleSolidUnit unit)
+    protected final MutableFloatAngleSolidVector instantiateMutableType(final FloatVectorData dvd, final AngleSolidUnit unit)
     {
         return new MutableFloatAngleSolidVector(dvd, unit);
     }

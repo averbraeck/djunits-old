@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatPower;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatPowerMatrix extends
-    MutableTypedFloatMatrixRel<PowerUnit, FloatPowerMatrix, MutableFloatPowerMatrix, FloatPower>
+        MutableTypedFloatMatrixRel<PowerUnit, FloatPowerMatrix, MutableFloatPowerMatrix, FloatPower>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MutableFloatPowerMatrix extends
      * @throws ValueException when values is null
      */
     public MutableFloatPowerMatrix(final float[][] values, final PowerUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

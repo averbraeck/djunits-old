@@ -31,8 +31,7 @@ public class ForceVector extends TypedDoubleVectorRel<ForceUnit, ForceVector, Mu
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ForceVector(final double[] values, final ForceUnit unit, final StorageType storageType)
-        throws ValueException
+    public ForceVector(final double[] values, final ForceUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,8 +43,7 @@ public class ForceVector extends TypedDoubleVectorRel<ForceUnit, ForceVector, Mu
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ForceVector(final List<Double> values, final ForceUnit unit, final StorageType storageType)
-        throws ValueException
+    public ForceVector(final List<Double> values, final ForceUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +79,7 @@ public class ForceVector extends TypedDoubleVectorRel<ForceUnit, ForceVector, Mu
      * @throws ValueException when values has zero entries
      */
     public ForceVector(final SortedMap<Integer, Force> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +93,7 @@ public class ForceVector extends TypedDoubleVectorRel<ForceUnit, ForceVector, Mu
      * @throws ValueException when values is null
      */
     public ForceVector(final SortedMap<Integer, Double> values, final ForceUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

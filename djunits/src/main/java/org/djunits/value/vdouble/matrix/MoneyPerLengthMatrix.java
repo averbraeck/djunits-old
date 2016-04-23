@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerLength;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MoneyPerLengthMatrix extends
-    TypedDoubleMatrixRel<MoneyPerLengthUnit, MoneyPerLengthMatrix, MutableMoneyPerLengthMatrix, MoneyPerLength>
+        TypedDoubleMatrixRel<MoneyPerLengthUnit, MoneyPerLengthMatrix, MutableMoneyPerLengthMatrix, MoneyPerLength>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MoneyPerLengthMatrix extends
      * @throws ValueException when values is null
      */
     public MoneyPerLengthMatrix(final double[][] values, final MoneyPerLengthUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -65,8 +65,7 @@ public class MoneyPerLengthMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerLengthMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final MoneyPerLengthUnit unit)
+    protected final MutableMoneyPerLengthMatrix instantiateMutableType(final DoubleMatrixData dmd, final MoneyPerLengthUnit unit)
     {
         return new MutableMoneyPerLengthMatrix(dmd, unit);
     }

@@ -43,8 +43,7 @@ public class AreaVector extends TypedDoubleVectorRel<AreaUnit, AreaVector, Mutab
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public AreaVector(final List<Double> values, final AreaUnit unit, final StorageType storageType)
-        throws ValueException
+    public AreaVector(final List<Double> values, final AreaUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -79,7 +78,7 @@ public class AreaVector extends TypedDoubleVectorRel<AreaUnit, AreaVector, Mutab
      * @throws ValueException when values has zero entries
      */
     public AreaVector(final SortedMap<Integer, Area> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -93,7 +92,7 @@ public class AreaVector extends TypedDoubleVectorRel<AreaUnit, AreaVector, Mutab
      * @throws ValueException when values is null
      */
     public AreaVector(final SortedMap<Integer, Double> values, final AreaUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

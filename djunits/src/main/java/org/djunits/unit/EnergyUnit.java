@@ -16,8 +16,8 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version May 15, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version May 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class EnergyUnit extends LinearUnit<EnergyUnit>
@@ -118,55 +118,47 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
     static
     {
         SI =
-            new EnergyUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "EnergyUnit.Joule", "EnergyUnit.J",
-                SI_DERIVED, true);
+                new EnergyUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "EnergyUnit.Joule", "EnergyUnit.J",
+                        SI_DERIVED, true);
         JOULE = SI;
         KILOJOULE = new EnergyUnit("EnergyUnit.kilojoule", "EnergyUnit.kJ", SI_BASE, JOULE, 1000.0, true);
         MEGAJOULE = new EnergyUnit("EnergyUnit.megajoule", "EnergyUnit.MJ", SI_BASE, JOULE, 1E9, true);
         FOOT_POUND_FORCE =
-            new EnergyUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "EnergyUnit.foot_pound-force", "EnergyUnit.ft.lbf",
-                IMPERIAL, true);
+                new EnergyUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "EnergyUnit.foot_pound-force", "EnergyUnit.ft.lbf",
+                        IMPERIAL, true);
         INCH_POUND_FORCE =
-            new EnergyUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "EnergyUnit.inch_pound-force", "EnergyUnit.in.lbf",
-                IMPERIAL, true);
+                new EnergyUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "EnergyUnit.inch_pound-force", "EnergyUnit.in.lbf",
+                        IMPERIAL, true);
         BTU_ISO =
-            new EnergyUnit("EnergyUnit.British_thermal_unit_(ISO)", "EnergyUnit.BTU(ISO)", IMPERIAL, JOULE, 1.0545E3,
-                true);
+                new EnergyUnit("EnergyUnit.British_thermal_unit_(ISO)", "EnergyUnit.BTU(ISO)", IMPERIAL, JOULE, 1.0545E3, true);
         BTU_IT =
-            new EnergyUnit("EnergyUnit.British_thermal_unit_(International_Table)", "EnergyUnit.BTU(IT)", IMPERIAL,
-                JOULE, 1.05505585262E3, true);
+                new EnergyUnit("EnergyUnit.British_thermal_unit_(International_Table)", "EnergyUnit.BTU(IT)", IMPERIAL, JOULE,
+                        1.05505585262E3, true);
         CALORIE_IT =
-            new EnergyUnit("EnergyUnit.calorie_(International_Table)", "EnergyUnit.cal(IT)", OTHER, JOULE, 4.1868, true);
+                new EnergyUnit("EnergyUnit.calorie_(International_Table)", "EnergyUnit.cal(IT)", OTHER, JOULE, 4.1868, true);
         KILOCALORIE = new EnergyUnit("EnergyUnit.kilocalorie", "EnergyUnit.kcal", OTHER, CALORIE_IT, 1000.0, true);
         WATT_HOUR = new EnergyUnit("EnergyUnit.watt-hour", "EnergyUnit.Wh", SI_DERIVED, JOULE, 3600.0, true);
-        KILOWATT_HOUR =
-            new EnergyUnit("EnergyUnit.kilowatt-hour", "EnergyUnit.kWh", SI_DERIVED, WATT_HOUR, 1000.0, true);
-        MEGAWATT_HOUR =
-            new EnergyUnit("EnergyUnit.megawatt-hour", "EnergyUnit.MWh", SI_DERIVED, WATT_HOUR, 1.0E6, true);
-        GIGAWATT_HOUR =
-            new EnergyUnit("EnergyUnit.gigawatt-hour", "EnergyUnit.GWh", SI_DERIVED, WATT_HOUR, 1.0E9, true);
-        TERAWATT_HOUR =
-            new EnergyUnit("EnergyUnit.terawatt-hour", "EnergyUnit.TWh", SI_DERIVED, WATT_HOUR, 1.0E12, true);
-        MILLIWATT_HOUR =
-            new EnergyUnit("EnergyUnit.milliwatt-hour", "EnergyUnit.mWh", SI_DERIVED, WATT_HOUR, 1.0E-3, true);
-        MICROWATT_HOUR =
-            new EnergyUnit("EnergyUnit.microwatt-hour", "EnergyUnit.muWh", SI_DERIVED, WATT_HOUR, 1.0E-6, true);
-        ELECTRONVOLT =
-            new EnergyUnit("EnergyUnit.electronvolt", "EnergyUnit.eV", SI_ACCEPTED, JOULE, 1.602176565314E-19, true);
+        KILOWATT_HOUR = new EnergyUnit("EnergyUnit.kilowatt-hour", "EnergyUnit.kWh", SI_DERIVED, WATT_HOUR, 1000.0, true);
+        MEGAWATT_HOUR = new EnergyUnit("EnergyUnit.megawatt-hour", "EnergyUnit.MWh", SI_DERIVED, WATT_HOUR, 1.0E6, true);
+        GIGAWATT_HOUR = new EnergyUnit("EnergyUnit.gigawatt-hour", "EnergyUnit.GWh", SI_DERIVED, WATT_HOUR, 1.0E9, true);
+        TERAWATT_HOUR = new EnergyUnit("EnergyUnit.terawatt-hour", "EnergyUnit.TWh", SI_DERIVED, WATT_HOUR, 1.0E12, true);
+        MILLIWATT_HOUR = new EnergyUnit("EnergyUnit.milliwatt-hour", "EnergyUnit.mWh", SI_DERIVED, WATT_HOUR, 1.0E-3, true);
+        MICROWATT_HOUR = new EnergyUnit("EnergyUnit.microwatt-hour", "EnergyUnit.muWh", SI_DERIVED, WATT_HOUR, 1.0E-6, true);
+        ELECTRONVOLT = new EnergyUnit("EnergyUnit.electronvolt", "EnergyUnit.eV", SI_ACCEPTED, JOULE, 1.602176565314E-19, true);
         MILLI_ELECTRONVOLT =
-            new EnergyUnit("EnergyUnit.milli-electronvolt", "EnergyUnit.meV", SI_ACCEPTED, ELECTRONVOLT, 1.0E-3, true);
+                new EnergyUnit("EnergyUnit.milli-electronvolt", "EnergyUnit.meV", SI_ACCEPTED, ELECTRONVOLT, 1.0E-3, true);
         KILO_ELECTRONVOLT =
-            new EnergyUnit("EnergyUnit.kilo-electronvolt", "EnergyUnit.keV", SI_ACCEPTED, ELECTRONVOLT, 1.0E3, true);
+                new EnergyUnit("EnergyUnit.kilo-electronvolt", "EnergyUnit.keV", SI_ACCEPTED, ELECTRONVOLT, 1.0E3, true);
         MEGA_ELECTRONVOLT =
-            new EnergyUnit("EnergyUnit.mega-electronvolt", "EnergyUnit.MeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E6, true);
+                new EnergyUnit("EnergyUnit.mega-electronvolt", "EnergyUnit.MeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E6, true);
         GIGA_ELECTRONVOLT =
-            new EnergyUnit("EnergyUnit.giga-electronvolt", "EnergyUnit.GeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E9, true);
+                new EnergyUnit("EnergyUnit.giga-electronvolt", "EnergyUnit.GeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E9, true);
         TERA_ELECTRONVOLT =
-            new EnergyUnit("EnergyUnit.tera-electronvolt", "EnergyUnit.TeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E12, true);
+                new EnergyUnit("EnergyUnit.tera-electronvolt", "EnergyUnit.TeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E12, true);
         PETA_ELECTRONVOLT =
-            new EnergyUnit("EnergyUnit.peta-electronvolt", "EnergyUnit.PeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E15, true);
+                new EnergyUnit("EnergyUnit.peta-electronvolt", "EnergyUnit.PeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E15, true);
         EXA_ELECTRONVOLT =
-            new EnergyUnit("EnergyUnit.exa-electronvolt", "EnergyUnit.EeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E18, true);
+                new EnergyUnit("EnergyUnit.exa-electronvolt", "EnergyUnit.EeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E18, true);
         STHENE_METER = new EnergyUnit("EnergyUnit.sthene_meter", "EnergyUnit.sn.m", MTS, JOULE, 1000.0, true);
         ERG = new EnergyUnit("EnergyUnit.erg_(full)", "EnergyUnit.erg", CGS, JOULE, 1.0E-7, true);
     }
@@ -183,15 +175,12 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private EnergyUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit,
-        final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-        final boolean standardUnit)
+            final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, JOULE, massUnit
-            .getConversionFactorToStandardUnit()
-            * lengthUnit.getConversionFactorToStandardUnit()
-            * lengthUnit.getConversionFactorToStandardUnit()
-            / (timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()),
-            standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, JOULE, massUnit.getConversionFactorToStandardUnit()
+                * lengthUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
+                / (timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()), standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.timeUnit = timeUnit;
@@ -207,7 +196,7 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
     public EnergyUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit, final String name,
-        final String abbreviation, final UnitSystem unitSystem)
+            final String abbreviation, final UnitSystem unitSystem)
     {
         this(massUnit, lengthUnit, timeUnit, name, abbreviation, unitSystem, false);
     }
@@ -223,10 +212,10 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private EnergyUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String nameOrNameKey,
-        final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, JOULE, forceUnit
-            .getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, JOULE, forceUnit.getConversionFactorToStandardUnit()
+                * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = forceUnit.getMassUnit();
         this.lengthUnit = forceUnit.getLengthUnit();
         this.timeUnit = forceUnit.getTimeUnit();
@@ -240,8 +229,8 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public EnergyUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String name,
-        final String abbreviation, final UnitSystem unitSystem)
+    public EnergyUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String name, final String abbreviation,
+            final UnitSystem unitSystem)
     {
         this(forceUnit, lengthUnit, name, abbreviation, unitSystem, false);
     }
@@ -256,12 +245,11 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private EnergyUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final EnergyUnit referenceUnit, final double conversionFactorToReferenceUnit,
-        final boolean standardUnit)
+    private EnergyUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final EnergyUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+                standardUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
         this.timeUnit = referenceUnit.getTimeUnit();
@@ -276,7 +264,7 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public EnergyUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-        final EnergyUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final EnergyUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

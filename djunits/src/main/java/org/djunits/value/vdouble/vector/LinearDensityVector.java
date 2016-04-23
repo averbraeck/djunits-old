@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.LinearDensity;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class LinearDensityVector extends
-    TypedDoubleVectorRel<LinearDensityUnit, LinearDensityVector, MutableLinearDensityVector, LinearDensity>
+        TypedDoubleVectorRel<LinearDensityUnit, LinearDensityVector, MutableLinearDensityVector, LinearDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class LinearDensityVector extends
      * @throws ValueException when values is null
      */
     public LinearDensityVector(final double[] values, final LinearDensityUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class LinearDensityVector extends
      * @throws ValueException when values is null
      */
     public LinearDensityVector(final List<Double> values, final LinearDensityUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,8 +82,8 @@ public class LinearDensityVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public LinearDensityVector(final SortedMap<Integer, LinearDensity> values, final int length,
-        final StorageType storageType) throws ValueException
+    public LinearDensityVector(final SortedMap<Integer, LinearDensity> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,7 +97,7 @@ public class LinearDensityVector extends
      * @throws ValueException when values is null
      */
     public LinearDensityVector(final SortedMap<Integer, Double> values, final LinearDensityUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class LinearDensityVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableLinearDensityVector instantiateMutableType(final DoubleVectorData dvd,
-        final LinearDensityUnit unit)
+    protected final MutableLinearDensityVector instantiateMutableType(final DoubleVectorData dvd, final LinearDensityUnit unit)
     {
         return new MutableLinearDensityVector(dvd, unit);
     }

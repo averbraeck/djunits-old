@@ -31,8 +31,7 @@ public class MutableForceVector extends MutableTypedDoubleVectorRel<ForceUnit, F
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableForceVector(final double[] values, final ForceUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutableForceVector(final double[] values, final ForceUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,7 +44,7 @@ public class MutableForceVector extends MutableTypedDoubleVectorRel<ForceUnit, F
      * @throws ValueException when values is null
      */
     public MutableForceVector(final List<Double> values, final ForceUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +80,7 @@ public class MutableForceVector extends MutableTypedDoubleVectorRel<ForceUnit, F
      * @throws ValueException when values has zero entries
      */
     public MutableForceVector(final SortedMap<Integer, Force> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +94,7 @@ public class MutableForceVector extends MutableTypedDoubleVectorRel<ForceUnit, F
      * @throws ValueException when values is null
      */
     public MutableForceVector(final SortedMap<Integer, Double> values, final ForceUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

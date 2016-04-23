@@ -22,7 +22,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @param <S> the absolute scalar type
  */
 abstract class TypedFloatMatrixAbs<U extends Unit<U>, A extends TypedFloatMatrixAbs<U, A, R, MA, S>, R extends TypedFloatMatrixRel<U, R, ?, ?>, MA extends MutableTypedFloatMatrixAbs<U, A, R, MA, S>, S extends FloatScalar.Abs<U>>
-    extends FloatMatrix.Abs<U>
+        extends FloatMatrix.Abs<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;

@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.Dimensionless;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class DimensionlessVector extends
-    TypedDoubleVectorRel<DimensionlessUnit, DimensionlessVector, MutableDimensionlessVector, Dimensionless>
+        TypedDoubleVectorRel<DimensionlessUnit, DimensionlessVector, MutableDimensionlessVector, Dimensionless>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class DimensionlessVector extends
      * @throws ValueException when values is null
      */
     public DimensionlessVector(final double[] values, final DimensionlessUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class DimensionlessVector extends
      * @throws ValueException when values is null
      */
     public DimensionlessVector(final List<Double> values, final DimensionlessUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,8 +82,8 @@ public class DimensionlessVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public DimensionlessVector(final SortedMap<Integer, Dimensionless> values, final int length,
-        final StorageType storageType) throws ValueException
+    public DimensionlessVector(final SortedMap<Integer, Dimensionless> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,7 +97,7 @@ public class DimensionlessVector extends
      * @throws ValueException when values is null
      */
     public DimensionlessVector(final SortedMap<Integer, Double> values, final DimensionlessUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class DimensionlessVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableDimensionlessVector instantiateMutableType(final DoubleVectorData dvd,
-        final DimensionlessUnit unit)
+    protected final MutableDimensionlessVector instantiateMutableType(final DoubleVectorData dvd, final DimensionlessUnit unit)
     {
         return new MutableDimensionlessVector(dvd, unit);
     }

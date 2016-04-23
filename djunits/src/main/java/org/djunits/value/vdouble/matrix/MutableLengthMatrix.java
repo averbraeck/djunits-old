@@ -16,173 +16,73 @@ import org.djunits.value.vdouble.scalar.Length;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface MutableLengthMatrix
+public class MutableLengthMatrix extends MutableTypedDoubleMatrixRel<LengthUnit, LengthMatrix, MutableLengthMatrix, Length>
 {
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /** */
+    private static final long serialVersionUID = 20151006L;
 
     /**
-     * ABSOLUTE implementation of LengthMatrix.
+     * Construct a new Relative Mutable Double LengthMatrix.
+     * @param values double[][]; the values of the entries in the new Relative Mutable Double LengthMatrix
+     * @param unit U; the unit of the new Relative Mutable Double LengthMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
      */
-    class Abs
-        extends
-        MutableTypedDoubleMatrixAbs<LengthUnit, LengthMatrix.Abs, LengthMatrix.Rel, MutableLengthMatrix.Abs, Length.Abs>
+    public MutableLengthMatrix(final double[][] values, final LengthUnit unit, final StorageType storageType)
+            throws ValueException
     {
-        /** */
-        private static final long serialVersionUID = 20151003L;
-
-        /**
-         * Construct a new Absolute Mutable Double LengthMatrix.
-         * @param values double[][]; the values of the entries in the new Absolute Mutable Double LengthMatrix
-         * @param unit U; the unit of the new Absolute Mutable Double LengthMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final double[][] values, final LengthUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable Double LengthMatrix.
-         * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable Double
-         *            LengthMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final Length.Abs[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable Double LengthMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Abs(final DoubleMatrixData data, final LengthUnit unit)
-        {
-            super(data, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final LengthMatrix.Abs instantiateTypeAbs(final DoubleMatrixData dmd, final LengthUnit unit)
-        {
-            return new LengthMatrix.Abs(dmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final LengthMatrix.Rel instantiateTypeRel(final DoubleMatrixData dmd, final LengthUnit unit)
-        {
-            return new LengthMatrix.Rel(dmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableLengthMatrix.Abs
-            instantiateMutableType(final DoubleMatrixData dmd, final LengthUnit unit)
-        {
-            return new MutableLengthMatrix.Abs(dmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Abs get(final int row, final int column) throws ValueException
-        {
-            return new Length.Abs(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the absolute matrix into a relative matrix (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute Length matrix.
-         */
-        public final MutableLengthMatrix.Rel toRel()
-        {
-            return new MutableLengthMatrix.Rel(getData(), getUnit());
-        }
-
+        super(values, unit, storageType);
     }
 
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /**
+     * Construct a new Relative Mutable Double LengthMatrix.
+     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Mutable Double LengthMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public MutableLengthMatrix(final Length[][] values, final StorageType storageType) throws ValueException
+    {
+        super(values, storageType);
+    }
 
     /**
-     * RELATIVE implementation of LengthMatrix.
+     * Construct a new Relative Mutable Double LengthMatrix.
+     * @param data an internal data object
+     * @param unit the unit
      */
-    class Rel extends MutableTypedDoubleMatrixRel<LengthUnit, LengthMatrix.Rel, MutableLengthMatrix.Rel, Length.Rel>
+    MutableLengthMatrix(final DoubleMatrixData data, final LengthUnit unit)
     {
-        /** */
-        private static final long serialVersionUID = 20151006L;
+        super(data, unit);
+    }
 
-        /**
-         * Construct a new Relative Mutable Double LengthMatrix.
-         * @param values double[][]; the values of the entries in the new Relative Mutable Double LengthMatrix
-         * @param unit U; the unit of the new Relative Mutable Double LengthMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final double[][] values, final LengthUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final LengthMatrix instantiateType(final DoubleMatrixData dmd, final LengthUnit unit)
+    {
+        return new LengthMatrix(dmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Mutable Double LengthMatrix.
-         * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Mutable Double
-         *            LengthMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final Length.Rel[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final MutableLengthMatrix instantiateMutableType(final DoubleMatrixData dmd, final LengthUnit unit)
+    {
+        return new MutableLengthMatrix(dmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Mutable Double LengthMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Rel(final DoubleMatrixData data, final LengthUnit unit)
-        {
-            super(data, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    public final Length get(final int row, final int column) throws ValueException
+    {
+        return new Length(getInUnit(row, column, getUnit()), getUnit());
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final LengthMatrix.Rel instantiateType(final DoubleMatrixData dmd, final LengthUnit unit)
-        {
-            return new LengthMatrix.Rel(dmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableLengthMatrix.Rel
-            instantiateMutableType(final DoubleMatrixData dmd, final LengthUnit unit)
-        {
-            return new MutableLengthMatrix.Rel(dmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Length.Rel get(final int row, final int column) throws ValueException
-        {
-            return new Length.Rel(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
-         * @return an absolute version of this relative Length matrix.
-         */
-        public final MutableLengthMatrix.Abs toAbs()
-        {
-            return new MutableLengthMatrix.Abs(getData(), getUnit());
-        }
-
+    /**
+     * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
+     * @return an absolute version of this relative Length matrix.
+     */
+    public final MutablePositionMatrix toAbs()
+    {
+        return new MutablePositionMatrix(getData(), getUnit());
     }
 
 }

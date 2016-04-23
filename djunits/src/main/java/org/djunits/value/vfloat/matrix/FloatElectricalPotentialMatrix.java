@@ -17,8 +17,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalPotential;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatElectricalPotentialMatrix
-    extends
-    TypedFloatMatrixRel<ElectricalPotentialUnit, FloatElectricalPotentialMatrix, MutableFloatElectricalPotentialMatrix, FloatElectricalPotential>
+        extends
+        TypedFloatMatrixRel<ElectricalPotentialUnit, FloatElectricalPotentialMatrix, MutableFloatElectricalPotentialMatrix, FloatElectricalPotential>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -31,7 +31,7 @@ public class FloatElectricalPotentialMatrix
      * @throws ValueException when values is null
      */
     public FloatElectricalPotentialMatrix(final float[][] values, final ElectricalPotentialUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,7 +44,7 @@ public class FloatElectricalPotentialMatrix
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalPotentialMatrix(final FloatElectricalPotential[][] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -60,8 +60,7 @@ public class FloatElectricalPotentialMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalPotentialMatrix instantiateType(final FloatMatrixData fmd,
-        final ElectricalPotentialUnit unit)
+    protected final FloatElectricalPotentialMatrix instantiateType(final FloatMatrixData fmd, final ElectricalPotentialUnit unit)
     {
         return new FloatElectricalPotentialMatrix(fmd, unit);
     }
@@ -69,7 +68,7 @@ public class FloatElectricalPotentialMatrix
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatElectricalPotentialMatrix instantiateMutableType(final FloatMatrixData fmd,
-        final ElectricalPotentialUnit unit)
+            final ElectricalPotentialUnit unit)
     {
         return new MutableFloatElectricalPotentialMatrix(fmd, unit);
     }

@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.LinearDensity;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableLinearDensityMatrix extends
-    MutableTypedDoubleMatrixRel<LinearDensityUnit, LinearDensityMatrix, MutableLinearDensityMatrix, LinearDensity>
+        MutableTypedDoubleMatrixRel<LinearDensityUnit, LinearDensityMatrix, MutableLinearDensityMatrix, LinearDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -29,8 +29,8 @@ public class MutableLinearDensityMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableLinearDensityMatrix(final double[][] values, final LinearDensityUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableLinearDensityMatrix(final double[][] values, final LinearDensityUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -42,8 +42,7 @@ public class MutableLinearDensityMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableLinearDensityMatrix(final LinearDensity[][] values, final StorageType storageType)
-        throws ValueException
+    public MutableLinearDensityMatrix(final LinearDensity[][] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -66,8 +65,7 @@ public class MutableLinearDensityMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableLinearDensityMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final LinearDensityUnit unit)
+    protected final MutableLinearDensityMatrix instantiateMutableType(final DoubleMatrixData dmd, final LinearDensityUnit unit)
     {
         return new MutableLinearDensityMatrix(dmd, unit);
     }

@@ -24,7 +24,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @param <S> the scalar type
  */
 abstract class TypedFloatVectorRel<U extends Unit<U>, R extends TypedFloatVectorRel<U, R, MR, S>, MR extends MutableTypedFloatVectorRel<U, R, MR, S>, S extends FloatScalar.Rel<U>>
-    extends FloatVector.Rel<U>
+        extends FloatVector.Rel<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -83,7 +83,7 @@ abstract class TypedFloatVectorRel<U extends Unit<U>, R extends TypedFloatVector
      * @throws ValueException when values has zero entries
      */
     TypedFloatVectorRel(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -96,8 +96,8 @@ abstract class TypedFloatVectorRel<U extends Unit<U>, R extends TypedFloatVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    TypedFloatVectorRel(final SortedMap<Integer, Float> values, final U unit, final int length,
-        final StorageType storageType) throws ValueException
+    TypedFloatVectorRel(final SortedMap<Integer, Float> values, final U unit, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, length, storageType);
     }

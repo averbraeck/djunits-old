@@ -18,8 +18,8 @@ import org.djunits.value.MathFunctionsDimensionless;
  * @param <U> the unit
  * @param <R> the relative vector type
  */
-public abstract class TypedDoubleScalarDimensionless<U extends Unit<U>, R extends TypedDoubleScalarDimensionless<U, R>>
-    extends TypedDoubleScalarRel<U, R> implements MathFunctionsDimensionless<R>
+public abstract class TypedDoubleScalarDimensionless<U extends Unit<U>, R extends TypedDoubleScalarDimensionless<U, R>> extends
+        TypedDoubleScalarRel<U, R> implements MathFunctionsDimensionless<R>
 {
     /** */
     private static final long serialVersionUID = 20150905L;

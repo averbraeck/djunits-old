@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerMass;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatMoneyPerMassVector extends
-    TypedFloatVectorRel<MoneyPerMassUnit, FloatMoneyPerMassVector, MutableFloatMoneyPerMassVector, FloatMoneyPerMass>
+        TypedFloatVectorRel<MoneyPerMassUnit, FloatMoneyPerMassVector, MutableFloatMoneyPerMassVector, FloatMoneyPerMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class FloatMoneyPerMassVector extends
      * @throws ValueException when values is null
      */
     public FloatMoneyPerMassVector(final float[] values, final MoneyPerMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class FloatMoneyPerMassVector extends
      * @throws ValueException when values is null
      */
     public FloatMoneyPerMassVector(final List<Float> values, final MoneyPerMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,8 +58,7 @@ public class FloatMoneyPerMassVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatMoneyPerMassVector(final FloatMoneyPerMass[] values, final StorageType storageType)
-        throws ValueException
+    public FloatMoneyPerMassVector(final FloatMoneyPerMass[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -70,8 +69,7 @@ public class FloatMoneyPerMassVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatMoneyPerMassVector(final List<FloatMoneyPerMass> values, final StorageType storageType)
-        throws ValueException
+    public FloatMoneyPerMassVector(final List<FloatMoneyPerMass> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -85,7 +83,7 @@ public class FloatMoneyPerMassVector extends
      * @throws ValueException when values has zero entries
      */
     public FloatMoneyPerMassVector(final SortedMap<Integer, FloatMoneyPerMass> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -98,8 +96,8 @@ public class FloatMoneyPerMassVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatMoneyPerMassVector(final SortedMap<Integer, Float> values, final MoneyPerMassUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public FloatMoneyPerMassVector(final SortedMap<Integer, Float> values, final MoneyPerMassUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -122,8 +120,7 @@ public class FloatMoneyPerMassVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatMoneyPerMassVector instantiateMutableType(final FloatVectorData dvd,
-        final MoneyPerMassUnit unit)
+    protected final MutableFloatMoneyPerMassVector instantiateMutableType(final FloatVectorData dvd, final MoneyPerMassUnit unit)
     {
         return new MutableFloatMoneyPerMassVector(dvd, unit);
     }

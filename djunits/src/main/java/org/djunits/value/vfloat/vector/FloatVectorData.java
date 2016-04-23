@@ -52,7 +52,7 @@ abstract class FloatVectorData
      * @throws ValueException when values are null, or storageType is null
      */
     public static FloatVectorData instantiate(final float[] values, final Scale scale, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         if (values == null)
         {
@@ -60,8 +60,7 @@ abstract class FloatVectorData
         }
 
         float[] valuesSI = new float[values.length];
-        IntStream.range(0, values.length).parallel()
-            .forEach(i -> valuesSI[i] = (float) scale.toStandardUnit(values[i]));
+        IntStream.range(0, values.length).parallel().forEach(i -> valuesSI[i] = (float) scale.toStandardUnit(values[i]));
 
         switch (storageType)
         {
@@ -84,8 +83,8 @@ abstract class FloatVectorData
      * @return the FloatVectorData with the right data type
      * @throws ValueException when list is null, or storageType is null
      */
-    public static FloatVectorData
-        instantiate(final List<Float> values, final Scale scale, final StorageType storageType) throws ValueException
+    public static FloatVectorData instantiate(final List<Float> values, final Scale scale, final StorageType storageType)
+            throws ValueException
     {
         if (values == null)
         {
@@ -93,8 +92,7 @@ abstract class FloatVectorData
         }
 
         float[] valuesSI = new float[values.size()];
-        IntStream.range(0, values.size()).parallel()
-            .forEach(i -> valuesSI[i] = (float) scale.toStandardUnit(values.get(i)));
+        IntStream.range(0, values.size()).parallel().forEach(i -> valuesSI[i] = (float) scale.toStandardUnit(values.get(i)));
 
         switch (storageType)
         {
@@ -117,7 +115,7 @@ abstract class FloatVectorData
      * @throws ValueException when values is null, or storageType is null
      */
     public static FloatVectorData instantiate(final FloatScalar<?>[] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         if (values == null)
         {
@@ -147,8 +145,8 @@ abstract class FloatVectorData
      * @return the FloatVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
-    public static FloatVectorData instantiateLD(final List<? extends FloatScalar<?>> values,
-        final StorageType storageType) throws ValueException
+    public static FloatVectorData instantiateLD(final List<? extends FloatScalar<?>> values, final StorageType storageType)
+            throws ValueException
     {
         if (values == null)
         {
@@ -181,7 +179,7 @@ abstract class FloatVectorData
      * @throws ValueException when values is null, or storageType is null
      */
     public static <S extends FloatScalar<?>> FloatVectorData instantiateMD(final SortedMap<Integer, S> values,
-        final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueException
     {
         if (values == null)
         {
@@ -219,8 +217,8 @@ abstract class FloatVectorData
      * @return the FloatVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
-    public static FloatVectorData instantiate(final SortedMap<Integer, Float> values, final int length,
-        final Scale scale, final StorageType storageType) throws ValueException
+    public static FloatVectorData instantiate(final SortedMap<Integer, Float> values, final int length, final Scale scale,
+            final StorageType storageType) throws ValueException
     {
         if (values == null)
         {
@@ -233,7 +231,7 @@ abstract class FloatVectorData
             {
                 float[] valuesSI = new float[length];
                 values.keySet().parallelStream()
-                    .forEach(index -> valuesSI[index] = (float) scale.toStandardUnit(values.get(index)));
+                        .forEach(index -> valuesSI[index] = (float) scale.toStandardUnit(values.get(index)));
                 return new FloatVectorDataDense(valuesSI);
             }
 
@@ -242,7 +240,7 @@ abstract class FloatVectorData
                 int[] indices = values.keySet().parallelStream().mapToInt(i -> i).toArray();
                 float[] valuesSI = new float[values.size()];
                 values.keySet().parallelStream()
-                    .forEach(index -> valuesSI[index] = (float) scale.toStandardUnit(values.get(index)));
+                        .forEach(index -> valuesSI[index] = (float) scale.toStandardUnit(values.get(index)));
                 return new FloatVectorDataSparse(valuesSI, indices, length);
             }
 
@@ -321,7 +319,7 @@ abstract class FloatVectorData
     {
         // this does not copy the data. See http://stackoverflow.com/questions/23106093/how-to-get-a-stream-from-a-float
         return (int) IntStream.range(0, this.vectorSI.length).parallel().mapToDouble(i -> this.vectorSI[i])
-            .filter(d -> d != 0.0).count();
+                .filter(d -> d != 0.0).count();
     }
 
     /**
@@ -537,7 +535,6 @@ abstract class FloatVectorData
     @Override
     public String toString()
     {
-        return "FloatVectorData [storageType=" + this.storageType + ", vectorSI=" + Arrays.toString(this.vectorSI)
-            + "]";
+        return "FloatVectorData [storageType=" + this.storageType + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
     }
 }

@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatMoney;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatMoneyMatrix extends
-    MutableTypedFloatMatrixRel<MoneyUnit, FloatMoneyMatrix, MutableFloatMoneyMatrix, FloatMoney>
+        MutableTypedFloatMatrixRel<MoneyUnit, FloatMoneyMatrix, MutableFloatMoneyMatrix, FloatMoney>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MutableFloatMoneyMatrix extends
      * @throws ValueException when values is null
      */
     public MutableFloatMoneyMatrix(final float[][] values, final MoneyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

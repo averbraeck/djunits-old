@@ -28,8 +28,7 @@ public class PowerMatrix extends TypedDoubleMatrixRel<PowerUnit, PowerMatrix, Mu
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public PowerMatrix(final double[][] values, final PowerUnit unit, final StorageType storageType)
-        throws ValueException
+    public PowerMatrix(final double[][] values, final PowerUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

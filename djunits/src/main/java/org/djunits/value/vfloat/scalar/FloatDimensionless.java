@@ -101,11 +101,9 @@ public class FloatDimensionless extends TypedFloatScalarDimensionless<Dimensionl
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatDimensionless interpolate(final FloatDimensionless zero, final FloatDimensionless one,
-        final float ratio)
+    public static FloatDimensionless interpolate(final FloatDimensionless zero, final FloatDimensionless one, final float ratio)
     {
-        return new FloatDimensionless(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new FloatDimensionless(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -133,9 +131,9 @@ public class FloatDimensionless extends TypedFloatScalarDimensionless<Dimensionl
      * @param v FloatDimensionless scalar
      * @return FloatAngle scalar as a multiplication of FloatDimensionless and FloatAngle
      */
-    public final FloatAngle.Rel multiplyBy(final FloatAngle.Rel v)
+    public final FloatAngle multiplyBy(final FloatAngle v)
     {
-        return new FloatAngle.Rel(this.si * v.si, AngleUnit.SI);
+        return new FloatAngle(this.si * v.si, AngleUnit.SI);
     }
 
     /**
@@ -277,9 +275,9 @@ public class FloatDimensionless extends TypedFloatScalarDimensionless<Dimensionl
      * @param v FloatDimensionless scalar
      * @return FloatLength scalar as a multiplication of FloatDimensionless and FloatLength
      */
-    public final FloatLength.Rel multiplyBy(final FloatLength.Rel v)
+    public final FloatLength multiplyBy(final FloatLength v)
     {
-        return new FloatLength.Rel(this.si * v.si, LengthUnit.SI);
+        return new FloatLength(this.si * v.si, LengthUnit.SI);
     }
 
     /**
@@ -410,19 +408,19 @@ public class FloatDimensionless extends TypedFloatScalarDimensionless<Dimensionl
      * @param v FloatDimensionless scalar
      * @return FloatTemperature scalar as a multiplication of FloatDimensionless and FloatTemperature
      */
-    public final FloatTemperature.Rel multiplyBy(final FloatTemperature.Rel v)
+    public final FloatTemperature multiplyBy(final FloatTemperature v)
     {
-        return new FloatTemperature.Rel(this.si * v.si, TemperatureUnit.SI);
+        return new FloatTemperature(this.si * v.si, TemperatureUnit.SI);
     }
 
     /**
-     * Calculate the multiplication of FloatDimensionless and FloatTime, which results in a FloatTime scalar.
+     * Calculate the multiplication of FloatDimensionless and FloatDuration, which results in a FloatDuration scalar.
      * @param v FloatDimensionless scalar
-     * @return FloatTime scalar as a multiplication of FloatDimensionless and FloatTime
+     * @return FloatDuration scalar as a multiplication of FloatDimensionless and FloatDuration
      */
-    public final FloatTime.Rel multiplyBy(final FloatTime.Rel v)
+    public final FloatDuration multiplyBy(final FloatDuration v)
     {
-        return new FloatTime.Rel(this.si * v.si, TimeUnit.SI);
+        return new FloatDuration(this.si * v.si, TimeUnit.SI);
     }
 
     /**
@@ -450,7 +448,7 @@ public class FloatDimensionless extends TypedFloatScalarDimensionless<Dimensionl
      * @param v FloatDimensionless scalar
      * @return FloatLinearDensity scalar as a division of FloatDimensionless and FloatLength
      */
-    public final FloatLinearDensity divideBy(final FloatLength.Rel v)
+    public final FloatLinearDensity divideBy(final FloatLength v)
     {
         return new FloatLinearDensity(this.si / v.si, LinearDensityUnit.SI);
     }
@@ -460,29 +458,29 @@ public class FloatDimensionless extends TypedFloatScalarDimensionless<Dimensionl
      * @param v FloatDimensionless scalar
      * @return FloatLength scalar as a division of FloatDimensionless and FloatLinearDensity
      */
-    public final FloatLength.Rel divideBy(final FloatLinearDensity v)
+    public final FloatLength divideBy(final FloatLinearDensity v)
     {
-        return new FloatLength.Rel(this.si / v.si, LengthUnit.SI);
+        return new FloatLength(this.si / v.si, LengthUnit.SI);
     }
 
     /**
-     * Calculate the division of FloatDimensionless and FloatTime, which results in a FloatFrequency scalar.
+     * Calculate the division of FloatDimensionless and FloatDuration, which results in a FloatFrequency scalar.
      * @param v FloatDimensionless scalar
-     * @return FloatFrequency scalar as a division of FloatDimensionless and FloatTime
+     * @return FloatFrequency scalar as a division of FloatDimensionless and FloatDuration
      */
-    public final FloatFrequency divideBy(final FloatTime.Rel v)
+    public final FloatFrequency divideBy(final FloatDuration v)
     {
         return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
     }
 
     /**
-     * Calculate the division of FloatDimensionless and FloatFrequency, which results in a FloatTime scalar.
+     * Calculate the division of FloatDimensionless and FloatFrequency, which results in a FloatDuration scalar.
      * @param v FloatDimensionless scalar
-     * @return FloatTime scalar as a division of FloatDimensionless and FloatFrequency
+     * @return FloatDuration scalar as a division of FloatDimensionless and FloatFrequency
      */
-    public final FloatTime.Rel divideBy(final FloatFrequency v)
+    public final FloatDuration divideBy(final FloatFrequency v)
     {
-        return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
+        return new FloatDuration(this.si / v.si, TimeUnit.SI);
     }
 
 }

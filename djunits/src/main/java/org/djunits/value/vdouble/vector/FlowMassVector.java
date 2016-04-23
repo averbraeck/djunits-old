@@ -31,8 +31,7 @@ public class FlowMassVector extends TypedDoubleVectorRel<FlowMassUnit, FlowMassV
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FlowMassVector(final double[] values, final FlowMassUnit unit, final StorageType storageType)
-        throws ValueException
+    public FlowMassVector(final double[] values, final FlowMassUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,7 +44,7 @@ public class FlowMassVector extends TypedDoubleVectorRel<FlowMassUnit, FlowMassV
      * @throws ValueException when values is null
      */
     public FlowMassVector(final List<Double> values, final FlowMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +80,7 @@ public class FlowMassVector extends TypedDoubleVectorRel<FlowMassUnit, FlowMassV
      * @throws ValueException when values has zero entries
      */
     public FlowMassVector(final SortedMap<Integer, FlowMass> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +94,7 @@ public class FlowMassVector extends TypedDoubleVectorRel<FlowMassUnit, FlowMassV
      * @throws ValueException when values is null
      */
     public FlowMassVector(final SortedMap<Integer, Double> values, final FlowMassUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

@@ -28,8 +28,7 @@ public class FloatElectricalResistance extends TypedFloatScalarRel<ElectricalRes
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final FloatElectricalResistance ZERO = new FloatElectricalResistance(0.0f,
-        ElectricalResistanceUnit.SI);
+    public static final FloatElectricalResistance ZERO = new FloatElectricalResistance(0.0f, ElectricalResistanceUnit.SI);
 
     /**
      * Construct FloatElectricalResistance scalar.
@@ -62,8 +61,7 @@ public class FloatElectricalResistance extends TypedFloatScalarRel<ElectricalRes
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalResistance
-        instantiateTypeRel(final float value, final ElectricalResistanceUnit unit)
+    protected final FloatElectricalResistance instantiateTypeRel(final float value, final ElectricalResistanceUnit unit)
     {
         return new FloatElectricalResistance(value, unit);
     }
@@ -76,10 +74,10 @@ public class FloatElectricalResistance extends TypedFloatScalarRel<ElectricalRes
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalResistance interpolate(final FloatElectricalResistance zero,
-        final FloatElectricalResistance one, final float ratio)
+            final FloatElectricalResistance one, final float ratio)
     {
         return new FloatElectricalResistance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+                zero.getUnit());
     }
 
     /**

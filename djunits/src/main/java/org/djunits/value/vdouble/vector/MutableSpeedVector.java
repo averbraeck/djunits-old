@@ -31,8 +31,7 @@ public class MutableSpeedVector extends MutableTypedDoubleVectorRel<SpeedUnit, S
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableSpeedVector(final double[] values, final SpeedUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutableSpeedVector(final double[] values, final SpeedUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,7 +44,7 @@ public class MutableSpeedVector extends MutableTypedDoubleVectorRel<SpeedUnit, S
      * @throws ValueException when values is null
      */
     public MutableSpeedVector(final List<Double> values, final SpeedUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +80,7 @@ public class MutableSpeedVector extends MutableTypedDoubleVectorRel<SpeedUnit, S
      * @throws ValueException when values has zero entries
      */
     public MutableSpeedVector(final SortedMap<Integer, Speed> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +94,7 @@ public class MutableSpeedVector extends MutableTypedDoubleVectorRel<SpeedUnit, S
      * @throws ValueException when values is null
      */
     public MutableSpeedVector(final SortedMap<Integer, Double> values, final SpeedUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

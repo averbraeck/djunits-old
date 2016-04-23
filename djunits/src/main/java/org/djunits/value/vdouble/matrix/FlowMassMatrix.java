@@ -29,7 +29,7 @@ public class FlowMassMatrix extends TypedDoubleMatrixRel<FlowMassUnit, FlowMassM
      * @throws ValueException when values is null
      */
     public FlowMassMatrix(final double[][] values, final FlowMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

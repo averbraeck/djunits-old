@@ -58,8 +58,7 @@ public class Localization
             {
                 try
                 {
-                    this.resourceBundle =
-                        ResourceBundle.getBundle("resources/" + this.bundleNamePrefix, this.currentLocale);
+                    this.resourceBundle = ResourceBundle.getBundle("resources/" + this.bundleNamePrefix, this.currentLocale);
                 }
                 catch (MissingResourceException e2)
                 {

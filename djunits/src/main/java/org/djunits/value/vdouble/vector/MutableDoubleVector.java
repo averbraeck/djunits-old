@@ -31,8 +31,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableDoubleVector
  */
-public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVector<U> implements
-    MutableDoubleVectorInterface<U>
+public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVector<U> implements MutableDoubleVectorInterface<U>
 {
     /**  */
     private static final long serialVersionUID = 20151003L;
@@ -76,8 +75,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Abs<U extends Unit<U>> extends MutableDoubleVector<U> implements Absolute,
-        MathFunctionsAbs<MutableDoubleVector.Abs<U>>, FunctionsAbs<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>,
-        DoubleMathFunctions<MutableDoubleVector.Abs<U>>
+            MathFunctionsAbs<MutableDoubleVector.Abs<U>>, FunctionsAbs<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>,
+            DoubleMathFunctions<MutableDoubleVector.Abs<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -127,8 +126,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends DoubleScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType)
-            throws ValueException
+        public <S extends DoubleScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = DoubleVectorData.instantiateLD(values, storageType);
@@ -143,7 +141,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @throws ValueException when values has zero entries
          */
         public <S extends DoubleScalar.Abs<U>> Abs(final SortedMap<Integer, S> values, final int length,
-            final StorageType storageType) throws ValueException
+                final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = DoubleVectorData.instantiateMD(values, length, storageType);
@@ -157,8 +155,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Abs(final SortedMap<Integer, Double> values, final U unit, final int length,
-            final StorageType storageType) throws ValueException
+        public Abs(final SortedMap<Integer, Double> values, final U unit, final int length, final StorageType storageType)
+                throws ValueException
         {
             super(unit);
             this.data = DoubleVectorData.instantiate(values, length, unit.getScale(), storageType);
@@ -437,8 +435,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Rel<U extends Unit<U>> extends MutableDoubleVector<U> implements Relative,
-        MathFunctionsRel<MutableDoubleVector.Rel<U>>, FunctionsRel<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>,
-        DoubleMathFunctions<MutableDoubleVector.Rel<U>>
+            MathFunctionsRel<MutableDoubleVector.Rel<U>>, FunctionsRel<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>,
+            DoubleMathFunctions<MutableDoubleVector.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -488,8 +486,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends DoubleScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType)
-            throws ValueException
+        public <S extends DoubleScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = DoubleVectorData.instantiateLD(values, storageType);
@@ -504,7 +501,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @throws ValueException when values has zero entries
          */
         public <S extends DoubleScalar.Rel<U>> Rel(final SortedMap<Integer, S> values, final int length,
-            final StorageType storageType) throws ValueException
+                final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = DoubleVectorData.instantiateMD(values, length, storageType);
@@ -518,8 +515,8 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Rel(final SortedMap<Integer, Double> values, final U unit, final int length,
-            final StorageType storageType) throws ValueException
+        public Rel(final SortedMap<Integer, Double> values, final U unit, final int length, final StorageType storageType)
+                throws ValueException
         {
             super(unit);
             this.data = DoubleVectorData.instantiate(values, length, unit.getScale(), storageType);
@@ -824,8 +821,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
      * @param <U> the unit
      * @return an instantiated vector
      */
-    static <U extends Unit<U>> MutableDoubleVector.Abs<U> instantiateMutableAbs(final DoubleVectorData dvData,
-        final U unit)
+    static <U extends Unit<U>> MutableDoubleVector.Abs<U> instantiateMutableAbs(final DoubleVectorData dvData, final U unit)
     {
         return new MutableDoubleVector.Abs<U>(dvData, unit);
     }

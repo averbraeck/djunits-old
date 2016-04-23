@@ -74,11 +74,9 @@ public class FloatAcceleration extends TypedFloatScalarRel<AccelerationUnit, Flo
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatAcceleration interpolate(final FloatAcceleration zero, final FloatAcceleration one,
-        final float ratio)
+    public static FloatAcceleration interpolate(final FloatAcceleration zero, final FloatAcceleration one, final float ratio)
     {
-        return new FloatAcceleration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new FloatAcceleration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -102,11 +100,11 @@ public class FloatAcceleration extends TypedFloatScalarRel<AccelerationUnit, Flo
     }
 
     /**
-     * Calculate the multiplication of FloatAcceleration and FloatTime, which results in a FloatSpeed scalar.
+     * Calculate the multiplication of FloatAcceleration and FloatDuration, which results in a FloatSpeed scalar.
      * @param v FloatAcceleration scalar
-     * @return FloatSpeed scalar as a multiplication of FloatAcceleration and FloatTime
+     * @return FloatSpeed scalar as a multiplication of FloatAcceleration and FloatDuration
      */
-    public final FloatSpeed multiplyBy(final FloatTime.Rel v)
+    public final FloatSpeed multiplyBy(final FloatDuration v)
     {
         return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
     }

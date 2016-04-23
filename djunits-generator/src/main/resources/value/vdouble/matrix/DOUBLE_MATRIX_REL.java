@@ -81,6 +81,6 @@ public class %Type%Matrix extends
     }
 
     
-%FORMULAS%%Type%.Rel%
+%FORMULAS%%Type%%
 }
 

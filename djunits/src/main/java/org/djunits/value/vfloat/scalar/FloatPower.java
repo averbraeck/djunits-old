@@ -92,11 +92,11 @@ public class FloatPower extends TypedFloatScalarRel<PowerUnit, FloatPower>
     }
 
     /**
-     * Calculate the multiplication of FloatPower and FloatTime, which results in a FloatEnergy scalar.
+     * Calculate the multiplication of FloatPower and FloatDuration, which results in a FloatEnergy scalar.
      * @param v FloatPower scalar
-     * @return FloatEnergy scalar as a multiplication of FloatPower and FloatTime
+     * @return FloatEnergy scalar as a multiplication of FloatPower and FloatDuration
      */
-    public final FloatEnergy multiplyBy(final FloatTime.Rel v)
+    public final FloatEnergy multiplyBy(final FloatDuration v)
     {
         return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
     }

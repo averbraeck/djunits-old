@@ -31,8 +31,7 @@ public class FloatMassVector extends TypedFloatVectorRel<MassUnit, FloatMassVect
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatMassVector(final float[] values, final MassUnit unit, final StorageType storageType)
-        throws ValueException
+    public FloatMassVector(final float[] values, final MassUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,8 +43,7 @@ public class FloatMassVector extends TypedFloatVectorRel<MassUnit, FloatMassVect
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatMassVector(final List<Float> values, final MassUnit unit, final StorageType storageType)
-        throws ValueException
+    public FloatMassVector(final List<Float> values, final MassUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +79,7 @@ public class FloatMassVector extends TypedFloatVectorRel<MassUnit, FloatMassVect
      * @throws ValueException when values has zero entries
      */
     public FloatMassVector(final SortedMap<Integer, FloatMass> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +93,7 @@ public class FloatMassVector extends TypedFloatVectorRel<MassUnit, FloatMassVect
      * @throws ValueException when values is null
      */
     public FloatMassVector(final SortedMap<Integer, Float> values, final MassUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

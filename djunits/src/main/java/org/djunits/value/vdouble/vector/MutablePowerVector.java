@@ -31,8 +31,7 @@ public class MutablePowerVector extends MutableTypedDoubleVectorRel<PowerUnit, P
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutablePowerVector(final double[] values, final PowerUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutablePowerVector(final double[] values, final PowerUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,7 +44,7 @@ public class MutablePowerVector extends MutableTypedDoubleVectorRel<PowerUnit, P
      * @throws ValueException when values is null
      */
     public MutablePowerVector(final List<Double> values, final PowerUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +80,7 @@ public class MutablePowerVector extends MutableTypedDoubleVectorRel<PowerUnit, P
      * @throws ValueException when values has zero entries
      */
     public MutablePowerVector(final SortedMap<Integer, Power> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +94,7 @@ public class MutablePowerVector extends MutableTypedDoubleVectorRel<PowerUnit, P
      * @throws ValueException when values is null
      */
     public MutablePowerVector(final SortedMap<Integer, Double> values, final PowerUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

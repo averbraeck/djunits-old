@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatTorque;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatTorqueMatrix extends
-    TypedFloatMatrixRel<TorqueUnit, FloatTorqueMatrix, MutableFloatTorqueMatrix, FloatTorque>
+        TypedFloatMatrixRel<TorqueUnit, FloatTorqueMatrix, MutableFloatTorqueMatrix, FloatTorque>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class FloatTorqueMatrix extends
      * @throws ValueException when values is null
      */
     public FloatTorqueMatrix(final float[][] values, final TorqueUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

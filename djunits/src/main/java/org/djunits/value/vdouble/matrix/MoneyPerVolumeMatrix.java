@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerVolume;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MoneyPerVolumeMatrix extends
-    TypedDoubleMatrixRel<MoneyPerVolumeUnit, MoneyPerVolumeMatrix, MutableMoneyPerVolumeMatrix, MoneyPerVolume>
+        TypedDoubleMatrixRel<MoneyPerVolumeUnit, MoneyPerVolumeMatrix, MutableMoneyPerVolumeMatrix, MoneyPerVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MoneyPerVolumeMatrix extends
      * @throws ValueException when values is null
      */
     public MoneyPerVolumeMatrix(final double[][] values, final MoneyPerVolumeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -65,8 +65,7 @@ public class MoneyPerVolumeMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerVolumeMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final MoneyPerVolumeUnit unit)
+    protected final MutableMoneyPerVolumeMatrix instantiateMutableType(final DoubleMatrixData dmd, final MoneyPerVolumeUnit unit)
     {
         return new MutableMoneyPerVolumeMatrix(dmd, unit);
     }

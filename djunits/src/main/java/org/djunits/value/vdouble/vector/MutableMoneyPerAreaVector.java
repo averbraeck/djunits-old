@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerArea;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableMoneyPerAreaVector extends
-    MutableTypedDoubleVectorRel<MoneyPerAreaUnit, MoneyPerAreaVector, MutableMoneyPerAreaVector, MoneyPerArea>
+        MutableTypedDoubleVectorRel<MoneyPerAreaUnit, MoneyPerAreaVector, MutableMoneyPerAreaVector, MoneyPerArea>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MutableMoneyPerAreaVector extends
      * @throws ValueException when values is null
      */
     public MutableMoneyPerAreaVector(final double[] values, final MoneyPerAreaUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,8 +45,8 @@ public class MutableMoneyPerAreaVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyPerAreaVector(final List<Double> values, final MoneyPerAreaUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableMoneyPerAreaVector(final List<Double> values, final MoneyPerAreaUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -69,8 +69,7 @@ public class MutableMoneyPerAreaVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyPerAreaVector(final List<MoneyPerArea> values, final StorageType storageType)
-        throws ValueException
+    public MutableMoneyPerAreaVector(final List<MoneyPerArea> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -84,7 +83,7 @@ public class MutableMoneyPerAreaVector extends
      * @throws ValueException when values has zero entries
      */
     public MutableMoneyPerAreaVector(final SortedMap<Integer, MoneyPerArea> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,8 +96,8 @@ public class MutableMoneyPerAreaVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyPerAreaVector(final SortedMap<Integer, Double> values, final MoneyPerAreaUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public MutableMoneyPerAreaVector(final SortedMap<Integer, Double> values, final MoneyPerAreaUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -121,8 +120,7 @@ public class MutableMoneyPerAreaVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerAreaVector instantiateMutableType(final DoubleVectorData dvd,
-        final MoneyPerAreaUnit unit)
+    protected final MutableMoneyPerAreaVector instantiateMutableType(final DoubleVectorData dvd, final MoneyPerAreaUnit unit)
     {
         return new MutableMoneyPerAreaVector(dvd, unit);
     }

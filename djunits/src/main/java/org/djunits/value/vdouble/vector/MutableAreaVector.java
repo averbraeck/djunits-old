@@ -31,8 +31,7 @@ public class MutableAreaVector extends MutableTypedDoubleVectorRel<AreaUnit, Are
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableAreaVector(final double[] values, final AreaUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutableAreaVector(final double[] values, final AreaUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,7 +44,7 @@ public class MutableAreaVector extends MutableTypedDoubleVectorRel<AreaUnit, Are
      * @throws ValueException when values is null
      */
     public MutableAreaVector(final List<Double> values, final AreaUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -80,7 +79,7 @@ public class MutableAreaVector extends MutableTypedDoubleVectorRel<AreaUnit, Are
      * @throws ValueException when values has zero entries
      */
     public MutableAreaVector(final SortedMap<Integer, Area> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -94,7 +93,7 @@ public class MutableAreaVector extends MutableTypedDoubleVectorRel<AreaUnit, Are
      * @throws ValueException when values is null
      */
     public MutableAreaVector(final SortedMap<Integer, Double> values, final AreaUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

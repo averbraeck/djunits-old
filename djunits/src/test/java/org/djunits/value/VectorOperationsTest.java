@@ -45,14 +45,17 @@ import org.junit.Test;
  */
 public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
 {
-    /** The classes that are absolute and relative (.Abs and .Rel, or $Abs and $Rel for class names). */
-    public static final String[] CLASSNAMES_ABSREL = new String[] { "Angle", "Length", "Temperature", "Time" };
+    /** The classes that are absolute (name = class name). */
+    public static final String[] CLASSNAMES_ABS = new String[] { "AbsoluteTemperature", "Direction", "Position", "Time" };
+
+    /** The relative classes that mirror the absolute ones (name = class name). */
+    public static final String[] CLASSNAMES_ABS_REL = new String[] { "Temperature", "Angle", "Length", "Duration" };
 
     /** The classes that are just relative (name = class name). */
-    public static final String[] CLASSNAMES_REL = new String[] { "Acceleration", "AngleSolid", "Area", "Density",
-            "Dimensionless", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance", "Energy",
-            "FlowMass", "FlowVolume", "Force", "Frequency", "LinearDensity", "Mass", "Power", "Pressure", "Speed", "Torque",
-            "Volume" };
+    public static final String[] CLASSNAMES_REL = new String[] { "Angle", "Acceleration", "AngleSolid", "Area", "Density",
+            "Dimensionless", "Duration", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential",
+            "ElectricalResistance", "Energy", "FlowMass", "FlowVolume", "Force", "Frequency", "Length", "LinearDensity",
+            "Mass", "Power", "Pressure", "Speed", "Temperature", "Torque", "Volume" };
 
     /** The money classes that are just relative (name = class name); these classes don't have an si field. */
     public static final String[] CLASSNAMES_MONEY = new String[] { "Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",
@@ -105,22 +108,27 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             for (StorageType storageType : StorageType.values())
             {
                 // get the interfaces such as org.djunits.value.vdouble.vector.Time
-                for (String vectorName : CLASSNAMES_ABSREL)
+                for (int i = 0; i < CLASSNAMES_ABS.length; i++)
                 {
-                    for (String subClassName : new String[] { "$Rel", "$Abs" })
-                    {
-                        boolean isAbs = subClassName.contains("Abs");
-                        Class<?> vectorClass = null;
-                        // get the subClassName implementation of that class
-                        String className =
-                                "org.djunits.value.v" + doubleOrFloat + ".vector." + (mutable ? "Mutable" : "") + floatPrefix
-                                        + vectorName + upperVectorType + subClassName;
-                        System.out.println("Looking up class " + className);
-                        vectorClass = Class.forName(className);
-                        testMethods(vectorClass, isAbs, doubleType, storageType, mutable);
-                        testAbsRelConversion(vectorClass, isAbs, doubleType, StorageType.DENSE);
-                        testAbsRelConversion(vectorClass, isAbs, doubleType, StorageType.SPARSE);
-                    }
+                    String vectorNameAbs = CLASSNAMES_ABS[i];
+                    Class<?> vectorClassAbs = null;
+                    String classNameAbs =
+                            "org.djunits.value.v" + doubleOrFloat + ".vector." + (mutable ? "Mutable" : "") + floatPrefix
+                                    + vectorNameAbs + upperVectorType;
+                    System.out.println("Looking up class " + classNameAbs);
+                    vectorClassAbs = Class.forName(classNameAbs);
+                    Class<?> vectorClassRel = null;
+
+                    String vectorNameRel = CLASSNAMES_ABS_REL[i];
+                    String classNameRel =
+                            "org.djunits.value.v" + doubleOrFloat + ".vector." + (mutable ? "Mutable" : "") + floatPrefix
+                                    + vectorNameRel + upperVectorType;
+                    vectorClassRel = Class.forName(classNameRel);
+
+                    testMethods(vectorClassAbs, true, doubleType, storageType, mutable);
+                    testMethods(vectorClassRel, false, doubleType, storageType, mutable);
+                    // testAbsRelConversion(vectorClass, true, doubleType, StorageType.DENSE);
+                    // testAbsRelConversion(vectorClass, true, doubleType, StorageType.SPARSE);
                 }
                 // get the interfaces such as org.djunits.value.vXXXX.vector.Area
                 for (String vectorName : CLASSNAMES_REL)
@@ -1525,7 +1533,10 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             if (abs)
             {
                 String className = vectorClass.getName();
-                className = className.replaceFirst("Abs", "Rel");
+                for (int i = 0; i < CLASSNAMES_ABS.length; i++)
+                {
+                    className = className.replaceAll(CLASSNAMES_ABS[i], CLASSNAMES_ABS_REL[i]);
+                }
                 Class<?> relClass = Class.forName(className);
                 compatibleRel = findAndExecuteConstructor(relClass, new Object[] { value, newUnit, storageType }, doubleType);
                 // System.out.println("compatibleRel prints like \"" + compatibleRight + "\"");
@@ -1705,8 +1716,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      */
     public static void main(String[] args) throws ValueException
     {
-        Length.Rel l = new Length.Rel(3, METER);
-        Length.Rel w = new Length.Rel(2, METER);
+        Length l = new Length(3, METER);
+        Length w = new Length(2, METER);
         Area area = l.multiplyBy(w);
         System.out.println("Area is " + area);
 

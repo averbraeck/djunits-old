@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.Acceleration;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class AccelerationVector extends
-    TypedDoubleVectorRel<AccelerationUnit, AccelerationVector, MutableAccelerationVector, Acceleration>
+        TypedDoubleVectorRel<AccelerationUnit, AccelerationVector, MutableAccelerationVector, Acceleration>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class AccelerationVector extends
      * @throws ValueException when values is null
      */
     public AccelerationVector(final double[] values, final AccelerationUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class AccelerationVector extends
      * @throws ValueException when values is null
      */
     public AccelerationVector(final List<Double> values, final AccelerationUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,8 +82,8 @@ public class AccelerationVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public AccelerationVector(final SortedMap<Integer, Acceleration> values, final int length,
-        final StorageType storageType) throws ValueException
+    public AccelerationVector(final SortedMap<Integer, Acceleration> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,7 +97,7 @@ public class AccelerationVector extends
      * @throws ValueException when values is null
      */
     public AccelerationVector(final SortedMap<Integer, Double> values, final AccelerationUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class AccelerationVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableAccelerationVector instantiateMutableType(final DoubleVectorData dvd,
-        final AccelerationUnit unit)
+    protected final MutableAccelerationVector instantiateMutableType(final DoubleVectorData dvd, final AccelerationUnit unit)
     {
         return new MutableAccelerationVector(dvd, unit);
     }

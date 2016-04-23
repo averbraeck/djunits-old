@@ -16,172 +16,74 @@ import org.djunits.value.vfloat.scalar.FloatLength;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface FloatLengthMatrix
+public class FloatLengthMatrix extends
+        TypedFloatMatrixRel<LengthUnit, FloatLengthMatrix, MutableFloatLengthMatrix, FloatLength>
 {
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /** */
+    private static final long serialVersionUID = 20151006L;
 
     /**
-     * ABSOLUTE implementation of FloatLengthMatrix.
+     * Construct a new Relative Immutable FloatLengthMatrix.
+     * @param values float[][]; the values of the entries in the new Relative Immutable FloatLengthMatrix
+     * @param unit U; the unit of the new Relative Immutable FloatLengthMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
      */
-    class Abs
-        extends
-        TypedFloatMatrixAbs<LengthUnit, FloatLengthMatrix.Abs, FloatLengthMatrix.Rel, MutableFloatLengthMatrix.Abs, FloatLength.Abs>
+    public FloatLengthMatrix(final float[][] values, final LengthUnit unit, final StorageType storageType)
+            throws ValueException
     {
-        /** */
-        private static final long serialVersionUID = 20151003L;
-
-        /**
-         * Construct a new Absolute Immutable FloatLengthMatrix.
-         * @param values float[][]; the values of the entries in the new Absolute Immutable FloatLengthMatrix
-         * @param unit U; the unit of the new Absolute Immutable FloatLengthMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final float[][] values, final LengthUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Immutable FloatLengthMatrix.
-         * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable FloatLengthMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final FloatLength.Abs[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Immutable FloatLengthMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Abs(final FloatMatrixData data, final LengthUnit unit)
-        {
-            super(data, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatLengthMatrix.Abs instantiateTypeAbs(final FloatMatrixData fmd, final LengthUnit unit)
-        {
-            return new FloatLengthMatrix.Abs(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatLengthMatrix.Rel instantiateTypeRel(final FloatMatrixData fmd, final LengthUnit unit)
-        {
-            return new FloatLengthMatrix.Rel(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatLengthMatrix.Abs instantiateMutableType(final FloatMatrixData fmd,
-            final LengthUnit unit)
-        {
-            return new MutableFloatLengthMatrix.Abs(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs get(final int row, final int column) throws ValueException
-        {
-            return new FloatLength.Abs(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the absolute matrix into a relative matrix (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute FloatLength matrix.
-         */
-        public final FloatLengthMatrix.Rel toRel()
-        {
-            return new FloatLengthMatrix.Rel(getData(), getUnit());
-        }
-
+        super(values, unit, storageType);
     }
 
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /**
+     * Construct a new Relative Immutable FloatLengthMatrix.
+     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable FloatLengthMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public FloatLengthMatrix(final FloatLength[][] values, final StorageType storageType) throws ValueException
+    {
+        super(values, storageType);
+    }
 
     /**
-     * RELATIVE implementation of FloatLengthMatrix.
+     * Construct a new Relative Immutable FloatLengthMatrix.
+     * @param data an internal data object
+     * @param unit the unit
      */
-    class Rel extends
-        TypedFloatMatrixRel<LengthUnit, FloatLengthMatrix.Rel, MutableFloatLengthMatrix.Rel, FloatLength.Rel>
+    FloatLengthMatrix(final FloatMatrixData data, final LengthUnit unit)
     {
-        /** */
-        private static final long serialVersionUID = 20151006L;
+        super(data, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatLengthMatrix.
-         * @param values float[][]; the values of the entries in the new Relative Immutable FloatLengthMatrix
-         * @param unit U; the unit of the new Relative Immutable FloatLengthMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final float[][] values, final LengthUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatLengthMatrix instantiateType(final FloatMatrixData fmd, final LengthUnit unit)
+    {
+        return new FloatLengthMatrix(fmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatLengthMatrix.
-         * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable FloatLengthMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final FloatLength.Rel[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final MutableFloatLengthMatrix instantiateMutableType(final FloatMatrixData fmd, final LengthUnit unit)
+    {
+        return new MutableFloatLengthMatrix(fmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatLengthMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Rel(final FloatMatrixData data, final LengthUnit unit)
-        {
-            super(data, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    public final FloatLength get(final int row, final int column) throws ValueException
+    {
+        return new FloatLength(getInUnit(row, column, getUnit()), getUnit());
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatLengthMatrix.Rel instantiateType(final FloatMatrixData fmd, final LengthUnit unit)
-        {
-            return new FloatLengthMatrix.Rel(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatLengthMatrix.Rel instantiateMutableType(final FloatMatrixData fmd,
-            final LengthUnit unit)
-        {
-            return new MutableFloatLengthMatrix.Rel(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel get(final int row, final int column) throws ValueException
-        {
-            return new FloatLength.Rel(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
-         * @return an absolute version of this relative FloatLength matrix.
-         */
-        public final FloatLengthMatrix.Abs toAbs()
-        {
-            return new FloatLengthMatrix.Abs(getData(), getUnit());
-        }
-
+    /**
+     * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
+     * @return an absolute version of this relative FloatLength matrix.
+     */
+    public final FloatPositionMatrix toAbs()
+    {
+        return new FloatPositionMatrix(getData(), getUnit());
     }
 
 }

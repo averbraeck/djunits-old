@@ -31,8 +31,7 @@ public class FloatAreaVector extends TypedFloatVectorRel<AreaUnit, FloatAreaVect
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatAreaVector(final float[] values, final AreaUnit unit, final StorageType storageType)
-        throws ValueException
+    public FloatAreaVector(final float[] values, final AreaUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,8 +43,7 @@ public class FloatAreaVector extends TypedFloatVectorRel<AreaUnit, FloatAreaVect
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatAreaVector(final List<Float> values, final AreaUnit unit, final StorageType storageType)
-        throws ValueException
+    public FloatAreaVector(final List<Float> values, final AreaUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +79,7 @@ public class FloatAreaVector extends TypedFloatVectorRel<AreaUnit, FloatAreaVect
      * @throws ValueException when values has zero entries
      */
     public FloatAreaVector(final SortedMap<Integer, FloatArea> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +93,7 @@ public class FloatAreaVector extends TypedFloatVectorRel<AreaUnit, FloatAreaVect
      * @throws ValueException when values is null
      */
     public FloatAreaVector(final SortedMap<Integer, Float> values, final AreaUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

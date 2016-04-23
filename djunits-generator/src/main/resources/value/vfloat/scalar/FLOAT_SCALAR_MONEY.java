@@ -73,7 +73,7 @@ public class Float%Type% extends TypedFloatScalarRel<%Type%Unit, Float%Type%>
             .getUnit());
     }
 
-%FORMULAS%%Type%.Rel%
+%FORMULAS%%Type%%
 }
 
 

@@ -23,8 +23,8 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <S> the scalar type
  */
 abstract class MutableTypedDoubleMatrixDimensionless<U extends Unit<U>, R extends TypedDoubleMatrixRel<U, R, MR, S>, MR extends MutableTypedDoubleMatrixDimensionless<U, R, MR, S>, S extends DoubleScalar.Rel<U>>
-    extends MutableTypedDoubleMatrixRel<U, R, MR, S> implements
-    MathFunctionsDimensionless<MutableTypedDoubleMatrixDimensionless<U, R, MR, S>>
+        extends MutableTypedDoubleMatrixRel<U, R, MR, S> implements
+        MathFunctionsDimensionless<MutableTypedDoubleMatrixDimensionless<U, R, MR, S>>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -37,7 +37,7 @@ abstract class MutableTypedDoubleMatrixDimensionless<U extends Unit<U>, R extend
      * @throws ValueException when values is null
      */
     MutableTypedDoubleMatrixDimensionless(final double[][] values, final U unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

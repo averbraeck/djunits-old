@@ -74,11 +74,11 @@ public class FloatElectricalCurrent extends TypedFloatScalarRel<ElectricalCurren
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatElectricalCurrent interpolate(final FloatElectricalCurrent zero,
-        final FloatElectricalCurrent one, final float ratio)
+    public static FloatElectricalCurrent interpolate(final FloatElectricalCurrent zero, final FloatElectricalCurrent one,
+            final float ratio)
     {
         return new FloatElectricalCurrent(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+                zero.getUnit());
     }
 
     /**
@@ -104,11 +104,12 @@ public class FloatElectricalCurrent extends TypedFloatScalarRel<ElectricalCurren
     }
 
     /**
-     * Calculate the multiplication of FloatElectricalCurrent and FloatTime, which results in a FloatElectricalCharge scalar.
+     * Calculate the multiplication of FloatElectricalCurrent and FloatDuration, which results in a FloatElectricalCharge
+     * scalar.
      * @param v FloatElectricalCurrent scalar
-     * @return FloatElectricalCharge scalar as a multiplication of FloatElectricalCurrent and FloatTime
+     * @return FloatElectricalCharge scalar as a multiplication of FloatElectricalCurrent and FloatDuration
      */
-    public final FloatElectricalCharge multiplyBy(final FloatTime.Rel v)
+    public final FloatElectricalCharge multiplyBy(final FloatDuration v)
     {
         return new FloatElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
     }

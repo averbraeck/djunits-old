@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatFlowMass;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatFlowMassVector extends
-    MutableTypedFloatVectorRel<FlowMassUnit, FloatFlowMassVector, MutableFloatFlowMassVector, FloatFlowMass>
+        MutableTypedFloatVectorRel<FlowMassUnit, FloatFlowMassVector, MutableFloatFlowMassVector, FloatFlowMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MutableFloatFlowMassVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatFlowMassVector(final float[] values, final FlowMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MutableFloatFlowMassVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatFlowMassVector(final List<Float> values, final FlowMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,8 +58,7 @@ public class MutableFloatFlowMassVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatFlowMassVector(final FloatFlowMass[] values, final StorageType storageType)
-        throws ValueException
+    public MutableFloatFlowMassVector(final FloatFlowMass[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -70,8 +69,7 @@ public class MutableFloatFlowMassVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatFlowMassVector(final List<FloatFlowMass> values, final StorageType storageType)
-        throws ValueException
+    public MutableFloatFlowMassVector(final List<FloatFlowMass> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -85,7 +83,7 @@ public class MutableFloatFlowMassVector extends
      * @throws ValueException when values has zero entries
      */
     public MutableFloatFlowMassVector(final SortedMap<Integer, FloatFlowMass> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -98,8 +96,8 @@ public class MutableFloatFlowMassVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatFlowMassVector(final SortedMap<Integer, Float> values, final FlowMassUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public MutableFloatFlowMassVector(final SortedMap<Integer, Float> values, final FlowMassUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -122,8 +120,7 @@ public class MutableFloatFlowMassVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatFlowMassVector
-        instantiateMutableType(final FloatVectorData dvd, final FlowMassUnit unit)
+    protected final MutableFloatFlowMassVector instantiateMutableType(final FloatVectorData dvd, final FlowMassUnit unit)
     {
         return new MutableFloatFlowMassVector(dvd, unit);
     }

@@ -20,8 +20,8 @@ import org.djunits.value.vdouble.scalar.Dimensionless;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableDimensionlessVector
-    extends
-    MutableTypedDoubleVectorDimensionless<DimensionlessUnit, DimensionlessVector, MutableDimensionlessVector, Dimensionless>
+        extends
+        MutableTypedDoubleVectorDimensionless<DimensionlessUnit, DimensionlessVector, MutableDimensionlessVector, Dimensionless>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -34,7 +34,7 @@ public class MutableDimensionlessVector
      * @throws ValueException when values is null
      */
     public MutableDimensionlessVector(final double[] values, final DimensionlessUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,8 +46,8 @@ public class MutableDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableDimensionlessVector(final List<Double> values, final DimensionlessUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableDimensionlessVector(final List<Double> values, final DimensionlessUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -59,8 +59,7 @@ public class MutableDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableDimensionlessVector(final Dimensionless[] values, final StorageType storageType)
-        throws ValueException
+    public MutableDimensionlessVector(final Dimensionless[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -71,8 +70,7 @@ public class MutableDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableDimensionlessVector(final List<Dimensionless> values, final StorageType storageType)
-        throws ValueException
+    public MutableDimensionlessVector(final List<Dimensionless> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +84,7 @@ public class MutableDimensionlessVector
      * @throws ValueException when values has zero entries
      */
     public MutableDimensionlessVector(final SortedMap<Integer, Dimensionless> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -99,8 +97,8 @@ public class MutableDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableDimensionlessVector(final SortedMap<Integer, Double> values, final DimensionlessUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public MutableDimensionlessVector(final SortedMap<Integer, Double> values, final DimensionlessUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -123,8 +121,7 @@ public class MutableDimensionlessVector
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableDimensionlessVector instantiateMutableType(final DoubleVectorData dvd,
-        final DimensionlessUnit unit)
+    protected final MutableDimensionlessVector instantiateMutableType(final DoubleVectorData dvd, final DimensionlessUnit unit)
     {
         return new MutableDimensionlessVector(dvd, unit);
     }

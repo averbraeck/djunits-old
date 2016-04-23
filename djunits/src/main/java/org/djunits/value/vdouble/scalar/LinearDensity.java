@@ -85,9 +85,9 @@ public class LinearDensity extends TypedDoubleScalarRel<LinearDensityUnit, Linea
      * @param v LinearDensity scalar
      * @return Length scalar as a multiplication of LinearDensity and Area
      */
-    public final Length.Rel multiplyBy(final Area v)
+    public final Length multiplyBy(final Area v)
     {
-        return new Length.Rel(this.si * v.si, LengthUnit.SI);
+        return new Length(this.si * v.si, LengthUnit.SI);
     }
 
     /**

@@ -25,7 +25,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @param <S> the absolute scalar type
  */
 abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloatVectorAbs<U, A, R, MA, S>, R extends TypedFloatVectorRel<U, R, ?, ?>, MA extends MutableTypedFloatVectorAbs<U, A, R, MA, S>, S extends FloatScalar.Abs<U>>
-    extends MutableFloatVector.Abs<U>
+        extends MutableFloatVector.Abs<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -49,8 +49,7 @@ abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloa
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedFloatVectorAbs(final List<Float> values, final U unit, final StorageType storageType)
-        throws ValueException
+    MutableTypedFloatVectorAbs(final List<Float> values, final U unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -85,7 +84,7 @@ abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloa
      * @throws ValueException when values has zero entries
      */
     MutableTypedFloatVectorAbs(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -99,7 +98,7 @@ abstract class MutableTypedFloatVectorAbs<U extends Unit<U>, A extends TypedFloa
      * @throws ValueException when values is null
      */
     MutableTypedFloatVectorAbs(final SortedMap<Integer, Float> values, final U unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

@@ -25,7 +25,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <S> the absolute scalar type
  */
 abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDoubleVectorAbs<U, A, R, MA, S>, R extends TypedDoubleVectorRel<U, R, ?, ?>, MA extends MutableTypedDoubleVectorAbs<U, A, R, MA, S>, S extends DoubleScalar.Abs<U>>
-    extends MutableDoubleVector.Abs<U>
+        extends MutableDoubleVector.Abs<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -37,8 +37,7 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorAbs(final double[] values, final U unit, final StorageType storageType)
-        throws ValueException
+    MutableTypedDoubleVectorAbs(final double[] values, final U unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -50,8 +49,7 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorAbs(final List<Double> values, final U unit, final StorageType storageType)
-        throws ValueException
+    MutableTypedDoubleVectorAbs(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -86,7 +84,7 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @throws ValueException when values has zero entries
      */
     MutableTypedDoubleVectorAbs(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -100,7 +98,7 @@ abstract class MutableTypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @throws ValueException when values is null
      */
     MutableTypedDoubleVectorAbs(final SortedMap<Integer, Double> values, final U unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

@@ -1,7 +1,9 @@
+%AbsoluteTemperature
+
 %Acceleration
 /Acceleration=Dimensionless
 *Mass=Force
-*Time=Speed
+*Duration=Speed
 /Frequency=Speed
 /Speed=Frequency
 
@@ -26,15 +28,28 @@
 /Density=Dimensionless
 *Volume=Mass
 
+%Direction
+
+%Duration
+/Duration=Dimensionless
+*Frequency=Dimensionless
+*ElectricalCurrent=ElectricalCharge
+*FlowMass=Mass
+*FlowVolume=Volume
+*Acceleration=Speed
+*Power=Energy
+*Speed=Length
+*MoneyPerTime=Money
+
 %ElectricalCharge
 /ElectricalCharge=Dimensionless
-/Time=ElectricalCurrent
-/ElectricalCurrent=Time
+/Duration=ElectricalCurrent
+/ElectricalCurrent=Duration
 
 %ElectricalCurrent
 /ElectricalCurrent=Dimensionless
 *ElectricalPotential=Power
-*Time=ElectricalCharge
+*Duration=ElectricalCharge
 *ElectricalResistance=ElectricalPotential
 
 %ElectricalPotential
@@ -52,22 +67,22 @@
 /Force=Length
 /Length=Force
 *LinearDensity=Force
-/Time=Power
-/Power=Time
+/Duration=Power
+/Power=Duration
 /Volume=Pressure
 *Frequency=Power
 *MoneyPerEnergy=Money
 
 %FlowMass
 /FlowMass=Dimensionless
-*Time=Mass
+*Duration=Mass
 /Frequency=Mass
 /Mass=Frequency
 *Speed=Force
 
 %FlowVolume
 /FlowVolume=Dimensionless
-*Time=Volume
+*Duration=Volume
 /Frequency=Volume
 /Volume=Frequency
 /Area=Speed
@@ -86,7 +101,7 @@
 
 %Frequency
 /Frequency=Dimensionless
-*Time=Dimensionless
+*Duration=Dimensionless
 *Length=Speed
 *Speed=Acceleration
 *Energy=Power
@@ -100,8 +115,8 @@
 *Area=Volume
 *Force=Energy
 *Frequency=Speed
-/Time=Speed
-/Speed=Time
+/Duration=Speed
+/Speed=Duration
 *MoneyPerLength=Money
 
 %LinearDensity
@@ -113,8 +128,8 @@
 
 %Mass
 /Mass=Dimensionless
-/FlowMass=Time
-/Time=FlowMass
+/FlowMass=Duration
+/Duration=FlowMass
 *Acceleration=Force
 *Frequency=FlowMass
 /Density=Volume
@@ -128,7 +143,7 @@
 /Length=MoneyPerLength
 *LinearDensity=MoneyPerLength
 /Mass=MoneyPerMass
-/Time=MoneyPerTime
+/Duration=MoneyPerTime
 *Frequency=MoneyPerTime
 /Volume=MoneyPerVolume
 
@@ -151,16 +166,18 @@
 
 %MoneyPerTime
 /MoneyPerTime=Dimensionless
-*Time=Money
+*Duration=Money
 /Frequency=Money
 
 %MoneyPerVolume
 /MoneyPerVolume=Dimensionless
 *Volume=Money
 
+%Position
+
 %Power
 /Power=Dimensionless
-*Time=Energy
+*Duration=Energy
 /Frequency=Energy
 /Energy=Frequency
 /Speed=Force
@@ -181,32 +198,23 @@
 /Length=Frequency
 /Frequency=Length
 *LinearDensity=Frequency
-*Time=Length
-/Time=Acceleration
-/Acceleration=Time
+*Duration=Length
+/Duration=Acceleration
+/Acceleration=Duration
 *FlowMass=Force
 
 %Temperature
 /Temperature=Dimensionless
 
 %Time
-/Time=Dimensionless
-*Frequency=Dimensionless
-*ElectricalCurrent=ElectricalCharge
-*FlowMass=Mass
-*FlowVolume=Volume
-*Acceleration=Speed
-*Power=Energy
-*Speed=Length
-*MoneyPerTime=Money
 
 %Torque
 /Torque=Dimensionless
 /Force=Length
 /Length=Force
 *LinearDensity=Force
-/Time=Power
-/Power=Time
+/Duration=Power
+/Power=Duration
 *Frequency=Power
 /Volume=Pressure
 /Pressure=Volume
@@ -218,8 +226,8 @@
 /Length=Area
 /Area=Length
 *LinearDensity=Area
-/Time=FlowVolume
-/FlowVolume=Time
+/Duration=FlowVolume
+/FlowVolume=Duration
 *MoneyPerVolume=Money
 
 %Dimensionless
@@ -253,10 +261,10 @@
 *Pressure=Pressure
 *Speed=Speed
 *Temperature=Temperature
-*Time=Time
+*Duration=Duration
 *Torque=Torque
 *Volume=Volume
 /Length=LinearDensity
 /LinearDensity=Length
-/Time=Frequency
-/Frequency=Time
+/Duration=Frequency
+/Frequency=Duration

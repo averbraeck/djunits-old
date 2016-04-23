@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatDensity;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatDensityMatrix extends
-    TypedFloatMatrixRel<DensityUnit, FloatDensityMatrix, MutableFloatDensityMatrix, FloatDensity>
+        TypedFloatMatrixRel<DensityUnit, FloatDensityMatrix, MutableFloatDensityMatrix, FloatDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class FloatDensityMatrix extends
      * @throws ValueException when values is null
      */
     public FloatDensityMatrix(final float[][] values, final DensityUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

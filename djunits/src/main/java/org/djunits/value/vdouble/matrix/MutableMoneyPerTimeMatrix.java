@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerTime;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableMoneyPerTimeMatrix extends
-    MutableTypedDoubleMatrixRel<MoneyPerTimeUnit, MoneyPerTimeMatrix, MutableMoneyPerTimeMatrix, MoneyPerTime>
+        MutableTypedDoubleMatrixRel<MoneyPerTimeUnit, MoneyPerTimeMatrix, MutableMoneyPerTimeMatrix, MoneyPerTime>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MutableMoneyPerTimeMatrix extends
      * @throws ValueException when values is null
      */
     public MutableMoneyPerTimeMatrix(final double[][] values, final MoneyPerTimeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -42,8 +42,7 @@ public class MutableMoneyPerTimeMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyPerTimeMatrix(final MoneyPerTime[][] values, final StorageType storageType)
-        throws ValueException
+    public MutableMoneyPerTimeMatrix(final MoneyPerTime[][] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -66,8 +65,7 @@ public class MutableMoneyPerTimeMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerTimeMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final MoneyPerTimeUnit unit)
+    protected final MutableMoneyPerTimeMatrix instantiateMutableType(final DoubleMatrixData dmd, final MoneyPerTimeUnit unit)
     {
         return new MutableMoneyPerTimeMatrix(dmd, unit);
     }

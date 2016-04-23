@@ -24,7 +24,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <S> the scalar type
  */
 abstract class TypedDoubleVectorRel<U extends Unit<U>, R extends TypedDoubleVectorRel<U, R, MR, S>, MR extends MutableTypedDoubleVectorRel<U, R, MR, S>, S extends DoubleScalar.Rel<U>>
-    extends DoubleVector.Rel<U>
+        extends DoubleVector.Rel<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -83,7 +83,7 @@ abstract class TypedDoubleVectorRel<U extends Unit<U>, R extends TypedDoubleVect
      * @throws ValueException when values has zero entries
      */
     TypedDoubleVectorRel(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -96,8 +96,8 @@ abstract class TypedDoubleVectorRel<U extends Unit<U>, R extends TypedDoubleVect
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    TypedDoubleVectorRel(final SortedMap<Integer, Double> values, final U unit, final int length,
-        final StorageType storageType) throws ValueException
+    TypedDoubleVectorRel(final SortedMap<Integer, Double> values, final U unit, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, length, storageType);
     }

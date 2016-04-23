@@ -17,8 +17,8 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerVolume;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatMoneyPerVolumeMatrix
-    extends
-    TypedFloatMatrixRel<MoneyPerVolumeUnit, FloatMoneyPerVolumeMatrix, MutableFloatMoneyPerVolumeMatrix, FloatMoneyPerVolume>
+        extends
+        TypedFloatMatrixRel<MoneyPerVolumeUnit, FloatMoneyPerVolumeMatrix, MutableFloatMoneyPerVolumeMatrix, FloatMoneyPerVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,8 +30,8 @@ public class FloatMoneyPerVolumeMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatMoneyPerVolumeMatrix(final float[][] values, final MoneyPerVolumeUnit unit,
-        final StorageType storageType) throws ValueException
+    public FloatMoneyPerVolumeMatrix(final float[][] values, final MoneyPerVolumeUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -43,8 +43,7 @@ public class FloatMoneyPerVolumeMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatMoneyPerVolumeMatrix(final FloatMoneyPerVolume[][] values, final StorageType storageType)
-        throws ValueException
+    public FloatMoneyPerVolumeMatrix(final FloatMoneyPerVolume[][] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -68,7 +67,7 @@ public class FloatMoneyPerVolumeMatrix
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatMoneyPerVolumeMatrix instantiateMutableType(final FloatMatrixData fmd,
-        final MoneyPerVolumeUnit unit)
+            final MoneyPerVolumeUnit unit)
     {
         return new MutableFloatMoneyPerVolumeMatrix(fmd, unit);
     }

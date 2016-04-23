@@ -17,8 +17,8 @@ import org.djunits.value.vdouble.scalar.ElectricalCurrent;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableElectricalCurrentMatrix
-    extends
-    MutableTypedDoubleMatrixRel<ElectricalCurrentUnit, ElectricalCurrentMatrix, MutableElectricalCurrentMatrix, ElectricalCurrent>
+        extends
+        MutableTypedDoubleMatrixRel<ElectricalCurrentUnit, ElectricalCurrentMatrix, MutableElectricalCurrentMatrix, ElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -31,7 +31,7 @@ public class MutableElectricalCurrentMatrix
      * @throws ValueException when values is null
      */
     public MutableElectricalCurrentMatrix(final double[][] values, final ElectricalCurrentUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,7 +44,7 @@ public class MutableElectricalCurrentMatrix
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalCurrentMatrix(final ElectricalCurrent[][] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -60,8 +60,7 @@ public class MutableElectricalCurrentMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalCurrentMatrix
-        instantiateType(final DoubleMatrixData dmd, final ElectricalCurrentUnit unit)
+    protected final ElectricalCurrentMatrix instantiateType(final DoubleMatrixData dmd, final ElectricalCurrentUnit unit)
     {
         return new ElectricalCurrentMatrix(dmd, unit);
     }
@@ -69,7 +68,7 @@ public class MutableElectricalCurrentMatrix
     /** {@inheritDoc} */
     @Override
     protected final MutableElectricalCurrentMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final ElectricalCurrentUnit unit)
+            final ElectricalCurrentUnit unit)
     {
         return new MutableElectricalCurrentMatrix(dmd, unit);
     }

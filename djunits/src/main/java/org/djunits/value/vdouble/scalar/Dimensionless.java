@@ -121,9 +121,9 @@ public class Dimensionless extends TypedDoubleScalarDimensionless<DimensionlessU
      * @param v Dimensionless scalar
      * @return Angle scalar as a multiplication of Dimensionless and Angle
      */
-    public final Angle.Rel multiplyBy(final Angle.Rel v)
+    public final Angle multiplyBy(final Angle v)
     {
-        return new Angle.Rel(this.si * v.si, AngleUnit.SI);
+        return new Angle(this.si * v.si, AngleUnit.SI);
     }
 
     /**
@@ -261,9 +261,9 @@ public class Dimensionless extends TypedDoubleScalarDimensionless<DimensionlessU
      * @param v Dimensionless scalar
      * @return Length scalar as a multiplication of Dimensionless and Length
      */
-    public final Length.Rel multiplyBy(final Length.Rel v)
+    public final Length multiplyBy(final Length v)
     {
-        return new Length.Rel(this.si * v.si, LengthUnit.SI);
+        return new Length(this.si * v.si, LengthUnit.SI);
     }
 
     /**
@@ -391,19 +391,19 @@ public class Dimensionless extends TypedDoubleScalarDimensionless<DimensionlessU
      * @param v Dimensionless scalar
      * @return Temperature scalar as a multiplication of Dimensionless and Temperature
      */
-    public final Temperature.Rel multiplyBy(final Temperature.Rel v)
+    public final Temperature multiplyBy(final Temperature v)
     {
-        return new Temperature.Rel(this.si * v.si, TemperatureUnit.SI);
+        return new Temperature(this.si * v.si, TemperatureUnit.SI);
     }
 
     /**
-     * Calculate the multiplication of Dimensionless and Time, which results in a Time scalar.
+     * Calculate the multiplication of Dimensionless and Duration, which results in a Duration scalar.
      * @param v Dimensionless scalar
-     * @return Time scalar as a multiplication of Dimensionless and Time
+     * @return Duration scalar as a multiplication of Dimensionless and Duration
      */
-    public final Time.Rel multiplyBy(final Time.Rel v)
+    public final Duration multiplyBy(final Duration v)
     {
-        return new Time.Rel(this.si * v.si, TimeUnit.SI);
+        return new Duration(this.si * v.si, TimeUnit.SI);
     }
 
     /**
@@ -431,7 +431,7 @@ public class Dimensionless extends TypedDoubleScalarDimensionless<DimensionlessU
      * @param v Dimensionless scalar
      * @return LinearDensity scalar as a division of Dimensionless and Length
      */
-    public final LinearDensity divideBy(final Length.Rel v)
+    public final LinearDensity divideBy(final Length v)
     {
         return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
     }
@@ -441,29 +441,29 @@ public class Dimensionless extends TypedDoubleScalarDimensionless<DimensionlessU
      * @param v Dimensionless scalar
      * @return Length scalar as a division of Dimensionless and LinearDensity
      */
-    public final Length.Rel divideBy(final LinearDensity v)
+    public final Length divideBy(final LinearDensity v)
     {
-        return new Length.Rel(this.si / v.si, LengthUnit.SI);
+        return new Length(this.si / v.si, LengthUnit.SI);
     }
 
     /**
-     * Calculate the division of Dimensionless and Time, which results in a Frequency scalar.
+     * Calculate the division of Dimensionless and Duration, which results in a Frequency scalar.
      * @param v Dimensionless scalar
-     * @return Frequency scalar as a division of Dimensionless and Time
+     * @return Frequency scalar as a division of Dimensionless and Duration
      */
-    public final Frequency divideBy(final Time.Rel v)
+    public final Frequency divideBy(final Duration v)
     {
         return new Frequency(this.si / v.si, FrequencyUnit.SI);
     }
 
     /**
-     * Calculate the division of Dimensionless and Frequency, which results in a Time scalar.
+     * Calculate the division of Dimensionless and Frequency, which results in a Duration scalar.
      * @param v Dimensionless scalar
-     * @return Time scalar as a division of Dimensionless and Frequency
+     * @return Duration scalar as a division of Dimensionless and Frequency
      */
-    public final Time.Rel divideBy(final Frequency v)
+    public final Duration divideBy(final Frequency v)
     {
-        return new Time.Rel(this.si / v.si, TimeUnit.SI);
+        return new Duration(this.si / v.si, TimeUnit.SI);
     }
 
 }

@@ -74,10 +74,9 @@ public class FloatElectricalCharge extends TypedFloatScalarRel<ElectricalChargeU
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalCharge interpolate(final FloatElectricalCharge zero, final FloatElectricalCharge one,
-        final float ratio)
+            final float ratio)
     {
-        return new FloatElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new FloatElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -91,23 +90,23 @@ public class FloatElectricalCharge extends TypedFloatScalarRel<ElectricalChargeU
     }
 
     /**
-     * Calculate the division of FloatElectricalCharge and FloatTime, which results in a FloatElectricalCurrent scalar.
+     * Calculate the division of FloatElectricalCharge and FloatDuration, which results in a FloatElectricalCurrent scalar.
      * @param v FloatElectricalCharge scalar
-     * @return FloatElectricalCurrent scalar as a division of FloatElectricalCharge and FloatTime
+     * @return FloatElectricalCurrent scalar as a division of FloatElectricalCharge and FloatDuration
      */
-    public final FloatElectricalCurrent divideBy(final FloatTime.Rel v)
+    public final FloatElectricalCurrent divideBy(final FloatDuration v)
     {
         return new FloatElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
     }
 
     /**
-     * Calculate the division of FloatElectricalCharge and FloatElectricalCurrent, which results in a FloatTime scalar.
+     * Calculate the division of FloatElectricalCharge and FloatElectricalCurrent, which results in a FloatDuration scalar.
      * @param v FloatElectricalCharge scalar
-     * @return FloatTime scalar as a division of FloatElectricalCharge and FloatElectricalCurrent
+     * @return FloatDuration scalar as a division of FloatElectricalCharge and FloatElectricalCurrent
      */
-    public final FloatTime.Rel divideBy(final FloatElectricalCurrent v)
+    public final FloatDuration divideBy(final FloatElectricalCurrent v)
     {
-        return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
+        return new FloatDuration(this.si / v.si, TimeUnit.SI);
     }
 
 }

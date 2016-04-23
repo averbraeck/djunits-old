@@ -16,8 +16,7 @@ import org.djunits.value.vdouble.scalar.Volume;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableVolumeMatrix extends
-    MutableTypedDoubleMatrixRel<VolumeUnit, VolumeMatrix, MutableVolumeMatrix, Volume>
+public class MutableVolumeMatrix extends MutableTypedDoubleMatrixRel<VolumeUnit, VolumeMatrix, MutableVolumeMatrix, Volume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +29,7 @@ public class MutableVolumeMatrix extends
      * @throws ValueException when values is null
      */
     public MutableVolumeMatrix(final double[][] values, final VolumeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

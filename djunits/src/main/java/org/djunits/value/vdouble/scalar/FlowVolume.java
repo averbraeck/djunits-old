@@ -80,11 +80,11 @@ public class FlowVolume extends TypedDoubleScalarRel<FlowVolumeUnit, FlowVolume>
     }
 
     /**
-     * Calculate the multiplication of FlowVolume and Time, which results in a Volume scalar.
+     * Calculate the multiplication of FlowVolume and Duration, which results in a Volume scalar.
      * @param v FlowVolume scalar
-     * @return Volume scalar as a multiplication of FlowVolume and Time
+     * @return Volume scalar as a multiplication of FlowVolume and Duration
      */
-    public final Volume multiplyBy(final Time.Rel v)
+    public final Volume multiplyBy(final Duration v)
     {
         return new Volume(this.si * v.si, VolumeUnit.SI);
     }

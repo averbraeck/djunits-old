@@ -16,8 +16,7 @@ import org.djunits.value.vdouble.scalar.Energy;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableEnergyMatrix extends
-    MutableTypedDoubleMatrixRel<EnergyUnit, EnergyMatrix, MutableEnergyMatrix, Energy>
+public class MutableEnergyMatrix extends MutableTypedDoubleMatrixRel<EnergyUnit, EnergyMatrix, MutableEnergyMatrix, Energy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +29,7 @@ public class MutableEnergyMatrix extends
      * @throws ValueException when values is null
      */
     public MutableEnergyMatrix(final double[][] values, final EnergyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatTorque;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatTorqueVector extends
-    MutableTypedFloatVectorRel<TorqueUnit, FloatTorqueVector, MutableFloatTorqueVector, FloatTorque>
+        MutableTypedFloatVectorRel<TorqueUnit, FloatTorqueVector, MutableFloatTorqueVector, FloatTorque>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MutableFloatTorqueVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatTorqueVector(final float[] values, final TorqueUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MutableFloatTorqueVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatTorqueVector(final List<Float> values, final TorqueUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -68,8 +68,7 @@ public class MutableFloatTorqueVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatTorqueVector(final List<FloatTorque> values, final StorageType storageType)
-        throws ValueException
+    public MutableFloatTorqueVector(final List<FloatTorque> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -83,7 +82,7 @@ public class MutableFloatTorqueVector extends
      * @throws ValueException when values has zero entries
      */
     public MutableFloatTorqueVector(final SortedMap<Integer, FloatTorque> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,7 +96,7 @@ public class MutableFloatTorqueVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatTorqueVector(final SortedMap<Integer, Float> values, final TorqueUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

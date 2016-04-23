@@ -28,8 +28,7 @@ public class MutableAreaMatrix extends MutableTypedDoubleMatrixRel<AreaUnit, Are
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableAreaMatrix(final double[][] values, final AreaUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutableAreaMatrix(final double[][] values, final AreaUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

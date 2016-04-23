@@ -16,168 +16,80 @@ import org.djunits.value.vdouble.scalar.Time;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface MutableTimeMatrix
+public class MutableTimeMatrix extends
+        MutableTypedDoubleMatrixAbs<TimeUnit, TimeMatrix, DurationMatrix, MutableTimeMatrix, Time>
 {
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /** */
+    private static final long serialVersionUID = 20151003L;
 
     /**
-     * ABSOLUTE implementation of TimeMatrix.
+     * Construct a new Absolute Mutable Double TimeMatrix.
+     * @param values double[][]; the values of the entries in the new Absolute Mutable Double TimeMatrix
+     * @param unit U; the unit of the new Absolute Mutable Double TimeMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
      */
-    class Abs extends
-        MutableTypedDoubleMatrixAbs<TimeUnit, TimeMatrix.Abs, TimeMatrix.Rel, MutableTimeMatrix.Abs, Time.Abs>
+    public MutableTimeMatrix(final double[][] values, final TimeUnit unit, final StorageType storageType) throws ValueException
     {
-        /** */
-        private static final long serialVersionUID = 20151003L;
-
-        /**
-         * Construct a new Absolute Mutable Double TimeMatrix.
-         * @param values double[][]; the values of the entries in the new Absolute Mutable Double TimeMatrix
-         * @param unit U; the unit of the new Absolute Mutable Double TimeMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final double[][] values, final TimeUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable Double TimeMatrix.
-         * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable Double TimeMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final Time.Abs[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable Double TimeMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Abs(final DoubleMatrixData data, final TimeUnit unit)
-        {
-            super(data, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final TimeMatrix.Abs instantiateTypeAbs(final DoubleMatrixData dmd, final TimeUnit unit)
-        {
-            return new TimeMatrix.Abs(dmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final TimeMatrix.Rel instantiateTypeRel(final DoubleMatrixData dmd, final TimeUnit unit)
-        {
-            return new TimeMatrix.Rel(dmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableTimeMatrix.Abs instantiateMutableType(final DoubleMatrixData dmd, final TimeUnit unit)
-        {
-            return new MutableTimeMatrix.Abs(dmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Abs get(final int row, final int column) throws ValueException
-        {
-            return new Time.Abs(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the absolute matrix into a relative matrix (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute Time matrix.
-         */
-        public final MutableTimeMatrix.Rel toRel()
-        {
-            return new MutableTimeMatrix.Rel(getData(), getUnit());
-        }
-
+        super(values, unit, storageType);
     }
 
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /**
+     * Construct a new Absolute Mutable Double TimeMatrix.
+     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable Double TimeMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public MutableTimeMatrix(final Time[][] values, final StorageType storageType) throws ValueException
+    {
+        super(values, storageType);
+    }
 
     /**
-     * RELATIVE implementation of TimeMatrix.
+     * Construct a new Absolute Mutable Double TimeMatrix.
+     * @param data an internal data object
+     * @param unit the unit
      */
-    class Rel extends MutableTypedDoubleMatrixRel<TimeUnit, TimeMatrix.Rel, MutableTimeMatrix.Rel, Time.Rel>
+    MutableTimeMatrix(final DoubleMatrixData data, final TimeUnit unit)
     {
-        /** */
-        private static final long serialVersionUID = 20151006L;
+        super(data, unit);
+    }
 
-        /**
-         * Construct a new Relative Mutable Double TimeMatrix.
-         * @param values double[][]; the values of the entries in the new Relative Mutable Double TimeMatrix
-         * @param unit U; the unit of the new Relative Mutable Double TimeMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final double[][] values, final TimeUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final TimeMatrix instantiateTypeAbs(final DoubleMatrixData dmd, final TimeUnit unit)
+    {
+        return new TimeMatrix(dmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Mutable Double TimeMatrix.
-         * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Mutable Double TimeMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final Time.Rel[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final DurationMatrix instantiateTypeRel(final DoubleMatrixData dmd, final TimeUnit unit)
+    {
+        return new DurationMatrix(dmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Mutable Double TimeMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Rel(final DoubleMatrixData data, final TimeUnit unit)
-        {
-            super(data, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final MutableTimeMatrix instantiateMutableType(final DoubleMatrixData dmd, final TimeUnit unit)
+    {
+        return new MutableTimeMatrix(dmd, unit);
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final TimeMatrix.Rel instantiateType(final DoubleMatrixData dmd, final TimeUnit unit)
-        {
-            return new TimeMatrix.Rel(dmd, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    public final Time get(final int row, final int column) throws ValueException
+    {
+        return new Time(getInUnit(row, column, getUnit()), getUnit());
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableTimeMatrix.Rel instantiateMutableType(final DoubleMatrixData dmd, final TimeUnit unit)
-        {
-            return new MutableTimeMatrix.Rel(dmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final Time.Rel get(final int row, final int column) throws ValueException
-        {
-            return new Time.Rel(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
-         * @return an absolute version of this relative Time matrix.
-         */
-        public final MutableTimeMatrix.Abs toAbs()
-        {
-            return new MutableTimeMatrix.Abs(getData(), getUnit());
-        }
-
+    /**
+     * Translate the absolute matrix into a relative matrix (e.g., before or after a multiplication or division).
+     * @return a relative version of this absolute Time matrix.
+     */
+    public final MutableDurationMatrix toRel()
+    {
+        return new MutableDurationMatrix(getData(), getUnit());
     }
 
 }

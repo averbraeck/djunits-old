@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.FlowVolume;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFlowVolumeVector extends
-    MutableTypedDoubleVectorRel<FlowVolumeUnit, FlowVolumeVector, MutableFlowVolumeVector, FlowVolume>
+        MutableTypedDoubleVectorRel<FlowVolumeUnit, FlowVolumeVector, MutableFlowVolumeVector, FlowVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MutableFlowVolumeVector extends
      * @throws ValueException when values is null
      */
     public MutableFlowVolumeVector(final double[] values, final FlowVolumeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MutableFlowVolumeVector extends
      * @throws ValueException when values is null
      */
     public MutableFlowVolumeVector(final List<Double> values, final FlowVolumeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,8 +82,8 @@ public class MutableFlowVolumeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFlowVolumeVector(final SortedMap<Integer, FlowVolume> values, final int length,
-        final StorageType storageType) throws ValueException
+    public MutableFlowVolumeVector(final SortedMap<Integer, FlowVolume> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -96,8 +96,8 @@ public class MutableFlowVolumeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFlowVolumeVector(final SortedMap<Integer, Double> values, final FlowVolumeUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public MutableFlowVolumeVector(final SortedMap<Integer, Double> values, final FlowVolumeUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class MutableFlowVolumeVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFlowVolumeVector
-        instantiateMutableType(final DoubleVectorData dvd, final FlowVolumeUnit unit)
+    protected final MutableFlowVolumeVector instantiateMutableType(final DoubleVectorData dvd, final FlowVolumeUnit unit)
     {
         return new MutableFlowVolumeVector(dvd, unit);
     }

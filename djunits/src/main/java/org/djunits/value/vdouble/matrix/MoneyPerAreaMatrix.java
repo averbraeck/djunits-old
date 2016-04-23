@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerArea;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MoneyPerAreaMatrix extends
-    TypedDoubleMatrixRel<MoneyPerAreaUnit, MoneyPerAreaMatrix, MutableMoneyPerAreaMatrix, MoneyPerArea>
+        TypedDoubleMatrixRel<MoneyPerAreaUnit, MoneyPerAreaMatrix, MutableMoneyPerAreaMatrix, MoneyPerArea>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MoneyPerAreaMatrix extends
      * @throws ValueException when values is null
      */
     public MoneyPerAreaMatrix(final double[][] values, final MoneyPerAreaUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -65,8 +65,7 @@ public class MoneyPerAreaMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerAreaMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final MoneyPerAreaUnit unit)
+    protected final MutableMoneyPerAreaMatrix instantiateMutableType(final DoubleMatrixData dmd, final MoneyPerAreaUnit unit)
     {
         return new MutableMoneyPerAreaMatrix(dmd, unit);
     }

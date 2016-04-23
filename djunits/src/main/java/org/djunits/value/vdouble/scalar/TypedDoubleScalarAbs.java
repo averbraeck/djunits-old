@@ -18,7 +18,7 @@ import org.djunits.unit.Unit;
  * @param <R> the relative scalar type
  */
 public abstract class TypedDoubleScalarAbs<U extends Unit<U>, A extends TypedDoubleScalarAbs<U, A, R>, R extends TypedDoubleScalarRel<U, R>>
-    extends DoubleScalar.Abs<U>
+        extends DoubleScalar.Abs<U>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -95,8 +95,8 @@ public abstract class TypedDoubleScalarAbs<U extends Unit<U>, A extends TypedDou
      */
     public final A plus(final R v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
-            : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit()) : instantiateTypeAbs(
+                this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**
@@ -106,8 +106,8 @@ public abstract class TypedDoubleScalarAbs<U extends Unit<U>, A extends TypedDou
      */
     public final R minus(final A v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeRel(getInUnit() - v.getInUnit(), getUnit())
-            : instantiateTypeRel(this.si - v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateTypeRel(getInUnit() - v.getInUnit(), getUnit()) : instantiateTypeRel(
+                this.si - v.si, getUnit().getStandardUnit());
     }
 
     /**
@@ -117,8 +117,8 @@ public abstract class TypedDoubleScalarAbs<U extends Unit<U>, A extends TypedDou
      */
     public final A minus(final R v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() - v.getInUnit(), getUnit())
-            : instantiateTypeAbs(this.si - v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() - v.getInUnit(), getUnit()) : instantiateTypeAbs(
+                this.si - v.si, getUnit().getStandardUnit());
     }
 
     /**

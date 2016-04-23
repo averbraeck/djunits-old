@@ -76,8 +76,7 @@ public class FloatFlowVolume extends TypedFloatScalarRel<FlowVolumeUnit, FloatFl
      */
     public static FloatFlowVolume interpolate(final FloatFlowVolume zero, final FloatFlowVolume one, final float ratio)
     {
-        return new FloatFlowVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new FloatFlowVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -91,11 +90,11 @@ public class FloatFlowVolume extends TypedFloatScalarRel<FlowVolumeUnit, FloatFl
     }
 
     /**
-     * Calculate the multiplication of FloatFlowVolume and FloatTime, which results in a FloatVolume scalar.
+     * Calculate the multiplication of FloatFlowVolume and FloatDuration, which results in a FloatVolume scalar.
      * @param v FloatFlowVolume scalar
-     * @return FloatVolume scalar as a multiplication of FloatFlowVolume and FloatTime
+     * @return FloatVolume scalar as a multiplication of FloatFlowVolume and FloatDuration
      */
-    public final FloatVolume multiplyBy(final FloatTime.Rel v)
+    public final FloatVolume multiplyBy(final FloatDuration v)
     {
         return new FloatVolume(this.si * v.si, VolumeUnit.SI);
     }

@@ -16,171 +16,72 @@ import org.djunits.value.vfloat.scalar.FloatAngle;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface FloatAngleMatrix
+public class FloatAngleMatrix extends TypedFloatMatrixRel<AngleUnit, FloatAngleMatrix, MutableFloatAngleMatrix, FloatAngle>
 {
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /** */
+    private static final long serialVersionUID = 20151006L;
 
     /**
-     * ABSOLUTE implementation of FloatAngleMatrix.
+     * Construct a new Relative Immutable FloatAngleMatrix.
+     * @param values float[][]; the values of the entries in the new Relative Immutable FloatAngleMatrix
+     * @param unit U; the unit of the new Relative Immutable FloatAngleMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
      */
-    class Abs
-        extends
-        TypedFloatMatrixAbs<AngleUnit, FloatAngleMatrix.Abs, FloatAngleMatrix.Rel, MutableFloatAngleMatrix.Abs, FloatAngle.Abs>
+    public FloatAngleMatrix(final float[][] values, final AngleUnit unit, final StorageType storageType) throws ValueException
     {
-        /** */
-        private static final long serialVersionUID = 20151003L;
-
-        /**
-         * Construct a new Absolute Immutable FloatAngleMatrix.
-         * @param values float[][]; the values of the entries in the new Absolute Immutable FloatAngleMatrix
-         * @param unit U; the unit of the new Absolute Immutable FloatAngleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final float[][] values, final AngleUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Immutable FloatAngleMatrix.
-         * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable FloatAngleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final FloatAngle.Abs[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Immutable FloatAngleMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Abs(final FloatMatrixData data, final AngleUnit unit)
-        {
-            super(data, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatAngleMatrix.Abs instantiateTypeAbs(final FloatMatrixData fmd, final AngleUnit unit)
-        {
-            return new FloatAngleMatrix.Abs(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatAngleMatrix.Rel instantiateTypeRel(final FloatMatrixData fmd, final AngleUnit unit)
-        {
-            return new FloatAngleMatrix.Rel(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatAngleMatrix.Abs instantiateMutableType(final FloatMatrixData fmd,
-            final AngleUnit unit)
-        {
-            return new MutableFloatAngleMatrix.Abs(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatAngle.Abs get(final int row, final int column) throws ValueException
-        {
-            return new FloatAngle.Abs(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the absolute matrix into a relative matrix (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute FloatAngle matrix.
-         */
-        public final FloatAngleMatrix.Rel toRel()
-        {
-            return new FloatAngleMatrix.Rel(getData(), getUnit());
-        }
-
+        super(values, unit, storageType);
     }
 
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /**
+     * Construct a new Relative Immutable FloatAngleMatrix.
+     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable FloatAngleMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public FloatAngleMatrix(final FloatAngle[][] values, final StorageType storageType) throws ValueException
+    {
+        super(values, storageType);
+    }
 
     /**
-     * RELATIVE implementation of FloatAngleMatrix.
+     * Construct a new Relative Immutable FloatAngleMatrix.
+     * @param data an internal data object
+     * @param unit the unit
      */
-    class Rel extends TypedFloatMatrixRel<AngleUnit, FloatAngleMatrix.Rel, MutableFloatAngleMatrix.Rel, FloatAngle.Rel>
+    FloatAngleMatrix(final FloatMatrixData data, final AngleUnit unit)
     {
-        /** */
-        private static final long serialVersionUID = 20151006L;
+        super(data, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatAngleMatrix.
-         * @param values float[][]; the values of the entries in the new Relative Immutable FloatAngleMatrix
-         * @param unit U; the unit of the new Relative Immutable FloatAngleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final float[][] values, final AngleUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatAngleMatrix instantiateType(final FloatMatrixData fmd, final AngleUnit unit)
+    {
+        return new FloatAngleMatrix(fmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatAngleMatrix.
-         * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable FloatAngleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final FloatAngle.Rel[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final MutableFloatAngleMatrix instantiateMutableType(final FloatMatrixData fmd, final AngleUnit unit)
+    {
+        return new MutableFloatAngleMatrix(fmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatAngleMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Rel(final FloatMatrixData data, final AngleUnit unit)
-        {
-            super(data, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    public final FloatAngle get(final int row, final int column) throws ValueException
+    {
+        return new FloatAngle(getInUnit(row, column, getUnit()), getUnit());
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatAngleMatrix.Rel instantiateType(final FloatMatrixData fmd, final AngleUnit unit)
-        {
-            return new FloatAngleMatrix.Rel(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatAngleMatrix.Rel instantiateMutableType(final FloatMatrixData fmd,
-            final AngleUnit unit)
-        {
-            return new MutableFloatAngleMatrix.Rel(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatAngle.Rel get(final int row, final int column) throws ValueException
-        {
-            return new FloatAngle.Rel(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
-         * @return an absolute version of this relative FloatAngle matrix.
-         */
-        public final FloatAngleMatrix.Abs toAbs()
-        {
-            return new FloatAngleMatrix.Abs(getData(), getUnit());
-        }
-
+    /**
+     * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
+     * @return an absolute version of this relative FloatAngle matrix.
+     */
+    public final FloatDirectionMatrix toAbs()
+    {
+        return new FloatDirectionMatrix(getData(), getUnit());
     }
 
 }

@@ -20,8 +20,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalCurrent;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatElectricalCurrentVector
-    extends
-    TypedFloatVectorRel<ElectricalCurrentUnit, FloatElectricalCurrentVector, MutableFloatElectricalCurrentVector, FloatElectricalCurrent>
+        extends
+        TypedFloatVectorRel<ElectricalCurrentUnit, FloatElectricalCurrentVector, MutableFloatElectricalCurrentVector, FloatElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,8 +33,8 @@ public class FloatElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatElectricalCurrentVector(final float[] values, final ElectricalCurrentUnit unit,
-        final StorageType storageType) throws ValueException
+    public FloatElectricalCurrentVector(final float[] values, final ElectricalCurrentUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -47,7 +47,7 @@ public class FloatElectricalCurrentVector
      * @throws ValueException when values is null
      */
     public FloatElectricalCurrentVector(final List<Float> values, final ElectricalCurrentUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -60,7 +60,7 @@ public class FloatElectricalCurrentVector
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalCurrentVector(final FloatElectricalCurrent[] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -72,7 +72,7 @@ public class FloatElectricalCurrentVector
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalCurrentVector(final List<FloatElectricalCurrent> values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +86,7 @@ public class FloatElectricalCurrentVector
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalCurrentVector(final SortedMap<Integer, FloatElectricalCurrent> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -100,7 +100,7 @@ public class FloatElectricalCurrentVector
      * @throws ValueException when values is null
      */
     public FloatElectricalCurrentVector(final SortedMap<Integer, Float> values, final ElectricalCurrentUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -116,8 +116,7 @@ public class FloatElectricalCurrentVector
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalCurrentVector instantiateType(final FloatVectorData dvd,
-        final ElectricalCurrentUnit unit)
+    protected final FloatElectricalCurrentVector instantiateType(final FloatVectorData dvd, final ElectricalCurrentUnit unit)
     {
         return new FloatElectricalCurrentVector(dvd, unit);
     }
@@ -125,7 +124,7 @@ public class FloatElectricalCurrentVector
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatElectricalCurrentVector instantiateMutableType(final FloatVectorData dvd,
-        final ElectricalCurrentUnit unit)
+            final ElectricalCurrentUnit unit)
     {
         return new MutableFloatElectricalCurrentVector(dvd, unit);
     }

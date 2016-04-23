@@ -22,7 +22,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @param <S> the absolute scalar type
  */
 abstract class MutableTypedFloatMatrixAbs<U extends Unit<U>, A extends TypedFloatMatrixAbs<U, A, R, MA, S>, R extends TypedFloatMatrixRel<U, R, ?, ?>, MA extends MutableTypedFloatMatrixAbs<U, A, R, MA, S>, S extends FloatScalar.Abs<U>>
-    extends MutableFloatMatrix.Abs<U>
+        extends MutableFloatMatrix.Abs<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -34,8 +34,7 @@ abstract class MutableTypedFloatMatrixAbs<U extends Unit<U>, A extends TypedFloa
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedFloatMatrixAbs(final float[][] values, final U unit, final StorageType storageType)
-        throws ValueException
+    MutableTypedFloatMatrixAbs(final float[][] values, final U unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

@@ -29,7 +29,7 @@ public class PressureMatrix extends TypedDoubleMatrixRel<PressureUnit, PressureM
      * @throws ValueException when values is null
      */
     public PressureMatrix(final double[][] values, final PressureUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

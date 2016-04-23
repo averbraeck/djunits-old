@@ -19,9 +19,8 @@ import org.djunits.value.vfloat.scalar.FloatDimensionless;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatDimensionlessVector
-    extends
-    TypedFloatVectorRel<DimensionlessUnit, FloatDimensionlessVector, MutableFloatDimensionlessVector, FloatDimensionless>
+public class FloatDimensionlessVector extends
+        TypedFloatVectorRel<DimensionlessUnit, FloatDimensionlessVector, MutableFloatDimensionlessVector, FloatDimensionless>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -34,7 +33,7 @@ public class FloatDimensionlessVector
      * @throws ValueException when values is null
      */
     public FloatDimensionlessVector(final float[] values, final DimensionlessUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,8 +45,8 @@ public class FloatDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatDimensionlessVector(final List<Float> values, final DimensionlessUnit unit,
-        final StorageType storageType) throws ValueException
+    public FloatDimensionlessVector(final List<Float> values, final DimensionlessUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -59,8 +58,7 @@ public class FloatDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatDimensionlessVector(final FloatDimensionless[] values, final StorageType storageType)
-        throws ValueException
+    public FloatDimensionlessVector(final FloatDimensionless[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -71,8 +69,7 @@ public class FloatDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatDimensionlessVector(final List<FloatDimensionless> values, final StorageType storageType)
-        throws ValueException
+    public FloatDimensionlessVector(final List<FloatDimensionless> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +83,7 @@ public class FloatDimensionlessVector
      * @throws ValueException when values has zero entries
      */
     public FloatDimensionlessVector(final SortedMap<Integer, FloatDimensionless> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -99,8 +96,8 @@ public class FloatDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatDimensionlessVector(final SortedMap<Integer, Float> values, final DimensionlessUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public FloatDimensionlessVector(final SortedMap<Integer, Float> values, final DimensionlessUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -124,7 +121,7 @@ public class FloatDimensionlessVector
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatDimensionlessVector instantiateMutableType(final FloatVectorData dvd,
-        final DimensionlessUnit unit)
+            final DimensionlessUnit unit)
     {
         return new MutableFloatDimensionlessVector(dvd, unit);
     }

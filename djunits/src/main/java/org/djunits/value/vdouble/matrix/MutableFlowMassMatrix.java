@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.FlowMass;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFlowMassMatrix extends
-    MutableTypedDoubleMatrixRel<FlowMassUnit, FlowMassMatrix, MutableFlowMassMatrix, FlowMass>
+        MutableTypedDoubleMatrixRel<FlowMassUnit, FlowMassMatrix, MutableFlowMassMatrix, FlowMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MutableFlowMassMatrix extends
      * @throws ValueException when values is null
      */
     public MutableFlowMassMatrix(final double[][] values, final FlowMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

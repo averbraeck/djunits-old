@@ -17,8 +17,8 @@ import org.djunits.value.vfloat.scalar.FloatDimensionless;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatDimensionlessMatrix
-    extends
-    MutableTypedFloatMatrixDimensionless<DimensionlessUnit, FloatDimensionlessMatrix, MutableFloatDimensionlessMatrix, FloatDimensionless>
+        extends
+        MutableTypedFloatMatrixDimensionless<DimensionlessUnit, FloatDimensionlessMatrix, MutableFloatDimensionlessMatrix, FloatDimensionless>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,8 +30,8 @@ public class MutableFloatDimensionlessMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatDimensionlessMatrix(final float[][] values, final DimensionlessUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableFloatDimensionlessMatrix(final float[][] values, final DimensionlessUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,7 +44,7 @@ public class MutableFloatDimensionlessMatrix
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDimensionlessMatrix(final FloatDimensionless[][] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -68,7 +68,7 @@ public class MutableFloatDimensionlessMatrix
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatDimensionlessMatrix instantiateMutableType(final FloatMatrixData fmd,
-        final DimensionlessUnit unit)
+            final DimensionlessUnit unit)
     {
         return new MutableFloatDimensionlessMatrix(fmd, unit);
     }

@@ -87,10 +87,8 @@ public class FloatVectorDataSparse extends FloatVectorData
         // System.out.println("arraycopy1 current size is " + this.indices.length + " srcPos=" + internalIndex +
         // ", new size is "
         // + indicesNew.length + " dstPos=" + (internalIndex + 1) + " length=" + (this.indices.length - internalIndex));
-        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex + 1, this.indices.length
-            - internalIndex);
-        System.arraycopy(this.vectorSI, internalIndex, vectorSINew, internalIndex + 1, this.indices.length
-            - internalIndex);
+        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex + 1, this.indices.length - internalIndex);
+        System.arraycopy(this.vectorSI, internalIndex, vectorSINew, internalIndex + 1, this.indices.length - internalIndex);
         indicesNew[internalIndex] = index;
         vectorSINew[internalIndex] = valueSI;
         this.indices = indicesNew;
@@ -124,8 +122,8 @@ public class FloatVectorDataSparse extends FloatVectorData
     {
         // determine number of non-null cells
         int length =
-            (int) IntStream.range(0, valuesSI.length).parallel().mapToDouble(i -> valuesSI[i]).filter(f -> f != 0.0f)
-                .count();
+                (int) IntStream.range(0, valuesSI.length).parallel().mapToDouble(i -> valuesSI[i]).filter(f -> f != 0.0f)
+                        .count();
         float[] sparseSI = new float[length];
         int[] indices = new int[length];
 
@@ -148,8 +146,7 @@ public class FloatVectorDataSparse extends FloatVectorData
     public final void incrementBy(final FloatVectorData right) throws ValueException
     {
         int newLength =
-            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
-                .count();
+                (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 || right.getSI(i) != 0.0).count();
         float[] newVectorSI = new float[newLength];
         int[] newIndices = new int[newLength];
 
@@ -175,8 +172,7 @@ public class FloatVectorDataSparse extends FloatVectorData
     public final void decrementBy(final FloatVectorData right) throws ValueException
     {
         int newLength =
-            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
-                .count();
+                (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 || right.getSI(i) != 0.0).count();
         float[] newVectorSI = new float[newLength];
         int[] newIndices = new int[newLength];
 
@@ -202,8 +198,7 @@ public class FloatVectorDataSparse extends FloatVectorData
     public final void multiplyBy(final FloatVectorData right) throws ValueException
     {
         int newLength =
-            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
-                .count();
+                (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 && right.getSI(i) != 0.0).count();
         float[] newVectorSI = new float[newLength];
         int[] newIndices = new int[newLength];
 
@@ -228,8 +223,7 @@ public class FloatVectorDataSparse extends FloatVectorData
     public final void divideBy(final FloatVectorData right) throws ValueException
     {
         int newLength =
-            (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
-                .count();
+                (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 && right.getSI(i) != 0.0).count();
         float[] newVectorSI = new float[newLength];
         int[] newIndices = new int[newLength];
 
@@ -262,7 +256,7 @@ public class FloatVectorDataSparse extends FloatVectorData
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     @Override
     public boolean equals(final Object obj)
     {

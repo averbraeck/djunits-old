@@ -24,7 +24,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <S> the scalar type
  */
 abstract class MutableTypedDoubleVectorRel<U extends Unit<U>, R extends TypedDoubleVectorRel<U, R, MR, S>, MR extends MutableTypedDoubleVectorRel<U, R, MR, S>, S extends DoubleScalar.Rel<U>>
-    extends MutableDoubleVector.Rel<U>
+        extends MutableDoubleVector.Rel<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -36,8 +36,7 @@ abstract class MutableTypedDoubleVectorRel<U extends Unit<U>, R extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorRel(final double[] values, final U unit, final StorageType storageType)
-        throws ValueException
+    MutableTypedDoubleVectorRel(final double[] values, final U unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -49,8 +48,7 @@ abstract class MutableTypedDoubleVectorRel<U extends Unit<U>, R extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleVectorRel(final List<Double> values, final U unit, final StorageType storageType)
-        throws ValueException
+    MutableTypedDoubleVectorRel(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -85,7 +83,7 @@ abstract class MutableTypedDoubleVectorRel<U extends Unit<U>, R extends TypedDou
      * @throws ValueException when values has zero entries
      */
     MutableTypedDoubleVectorRel(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -99,7 +97,7 @@ abstract class MutableTypedDoubleVectorRel<U extends Unit<U>, R extends TypedDou
      * @throws ValueException when values is null
      */
     MutableTypedDoubleVectorRel(final SortedMap<Integer, Double> values, final U unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

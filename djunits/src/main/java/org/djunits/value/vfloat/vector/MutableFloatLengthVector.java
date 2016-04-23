@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatLength;
 
 /**
- * Mutable FloatLength Vector.
+ * Mutable Relative FloatLength Vector.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -19,276 +19,125 @@ import org.djunits.value.vfloat.scalar.FloatLength;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface MutableFloatLengthVector
+public class MutableFloatLengthVector extends
+        MutableTypedFloatVectorRel<LengthUnit, FloatLengthVector, MutableFloatLengthVector, FloatLength>
 {
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /** */
+    private static final long serialVersionUID = 20151006L;
 
     /**
-     * ABSOLUTE implementation of FloatLengthVector.
+     * Construct a new Relative Mutable FloatLengthVector.
+     * @param values float[]; the values of the entries in the new Relative Mutable FloatLengthVector
+     * @param unit U; the unit of the new Relative Mutable FloatLengthVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
      */
-    class Abs
-        extends
-        MutableTypedFloatVectorAbs<LengthUnit, FloatLengthVector.Abs, FloatLengthVector.Rel, MutableFloatLengthVector.Abs, FloatLength.Abs>
+    public MutableFloatLengthVector(final float[] values, final LengthUnit unit, final StorageType storageType)
+            throws ValueException
     {
-        /** */
-        private static final long serialVersionUID = 20151003L;
-
-        /**
-         * Construct a new Absolute Mutable FloatLengthVector.
-         * @param values float[]; the values of the entries in the new Absolute Mutable FloatLengthVector
-         * @param unit U; the unit of the new Absolute Mutable FloatLengthVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final float[] values, final LengthUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatLengthVector.
-         * @param values List; the values of the entries in the new Absolute Mutable FloatLengthVector
-         * @param unit U; the unit of the new Absolute Mutable FloatLengthVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final List<Float> values, final LengthUnit unit, final StorageType storageType)
-            throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatLengthVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable FloatLengthVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final FloatLength.Abs[] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatLengthVector.
-         * @param values List; the values of the entries in the new Absolute Mutable FloatLengthVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final List<FloatLength.Abs> values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatLengthVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable
-         *            FloatLengthVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final SortedMap<Integer, FloatLength.Abs> values, final int length, final StorageType storageType)
-            throws ValueException
-        {
-            super(values, length, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatLengthVector.
-         * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatLengthVector
-         * @param unit U; the unit of the new Absolute Sparse Mutable FloatLengthVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final SortedMap<Integer, Float> values, final LengthUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-        {
-            super(values, unit, length, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatLengthVector.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Abs(final FloatVectorData data, final LengthUnit unit)
-        {
-            super(data, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatLengthVector.Abs instantiateTypeAbs(final FloatVectorData dvd, final LengthUnit unit)
-        {
-            return new FloatLengthVector.Abs(dvd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatLengthVector.Rel instantiateTypeRel(final FloatVectorData dvd, final LengthUnit unit)
-        {
-            return new FloatLengthVector.Rel(dvd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatLengthVector.Abs instantiateMutableType(final FloatVectorData dvd,
-            final LengthUnit unit)
-        {
-            return new MutableFloatLengthVector.Abs(dvd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Abs get(final int index) throws ValueException
-        {
-            return new FloatLength.Abs(getInUnit(index, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute FloatLength vector.
-         */
-        public final MutableFloatLengthVector.Rel toRel()
-        {
-            return new MutableFloatLengthVector.Rel(getData(), getUnit());
-        }
-
+        super(values, unit, storageType);
     }
 
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /**
+     * Construct a new Relative Mutable FloatLengthVector.
+     * @param values List; the values of the entries in the new Relative Mutable FloatLengthVector
+     * @param unit U; the unit of the new Relative Mutable FloatLengthVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
+     */
+    public MutableFloatLengthVector(final List<Float> values, final LengthUnit unit, final StorageType storageType)
+            throws ValueException
+    {
+        super(values, unit, storageType);
+    }
 
     /**
-     * RELATIVE implementation of FloatLengthVector.
+     * Construct a new Relative Mutable FloatLengthVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable FloatLengthVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
      */
-    class Rel extends
-        MutableTypedFloatVectorRel<LengthUnit, FloatLengthVector.Rel, MutableFloatLengthVector.Rel, FloatLength.Rel>
+    public MutableFloatLengthVector(final FloatLength[] values, final StorageType storageType) throws ValueException
     {
-        /** */
-        private static final long serialVersionUID = 20151006L;
+        super(values, storageType);
+    }
 
-        /**
-         * Construct a new Relative Mutable FloatLengthVector.
-         * @param values float[]; the values of the entries in the new Relative Mutable FloatLengthVector
-         * @param unit U; the unit of the new Relative Mutable FloatLengthVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final float[] values, final LengthUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
+    /**
+     * Construct a new Relative Mutable FloatLengthVector.
+     * @param values List; the values of the entries in the new Relative Mutable FloatLengthVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public MutableFloatLengthVector(final List<FloatLength> values, final StorageType storageType) throws ValueException
+    {
+        super(values, storageType);
+    }
 
-        /**
-         * Construct a new Relative Mutable FloatLengthVector.
-         * @param values List; the values of the entries in the new Relative Mutable FloatLengthVector
-         * @param unit U; the unit of the new Relative Mutable FloatLengthVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final List<Float> values, final LengthUnit unit, final StorageType storageType)
-            throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Relative Mutable FloatLengthVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable FloatLengthVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final FloatLength.Rel[] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Relative Mutable FloatLengthVector.
-         * @param values List; the values of the entries in the new Relative Mutable FloatLengthVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final List<FloatLength.Rel> values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Relative Mutable FloatLengthVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
-         *            FloatLengthVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final SortedMap<Integer, FloatLength.Rel> values, final int length, final StorageType storageType)
-            throws ValueException
-        {
-            super(values, length, storageType);
-        }
-
-        /**
-         * Construct a new Relative Mutable FloatLengthVector.
-         * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatLengthVector
-         * @param unit U; the unit of the new Relative Sparse Mutable FloatLengthVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final SortedMap<Integer, Float> values, final LengthUnit unit, final int length,
+    /**
+     * Construct a new Relative Mutable FloatLengthVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable FloatLengthVector
+     * @param length the size of the vector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public MutableFloatLengthVector(final SortedMap<Integer, FloatLength> values, final int length,
             final StorageType storageType) throws ValueException
-        {
-            super(values, unit, length, storageType);
-        }
+    {
+        super(values, length, storageType);
+    }
 
-        /**
-         * Construct a new Relative Mutable FloatLengthVector.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Rel(final FloatVectorData data, final LengthUnit unit)
-        {
-            super(data, unit);
-        }
+    /**
+     * Construct a new Relative Mutable FloatLengthVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatLengthVector
+     * @param unit U; the unit of the new Relative Sparse Mutable FloatLengthVector
+     * @param length the size of the vector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
+     */
+    public MutableFloatLengthVector(final SortedMap<Integer, Float> values, final LengthUnit unit, final int length,
+            final StorageType storageType) throws ValueException
+    {
+        super(values, unit, length, storageType);
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatLengthVector.Rel instantiateType(final FloatVectorData dvd, final LengthUnit unit)
-        {
-            return new FloatLengthVector.Rel(dvd, unit);
-        }
+    /**
+     * Construct a new Relative Mutable FloatLengthVector.
+     * @param data an internal data object
+     * @param unit the unit
+     */
+    MutableFloatLengthVector(final FloatVectorData data, final LengthUnit unit)
+    {
+        super(data, unit);
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatLengthVector.Rel instantiateMutableType(final FloatVectorData dvd,
-            final LengthUnit unit)
-        {
-            return new MutableFloatLengthVector.Rel(dvd, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatLengthVector instantiateType(final FloatVectorData dvd, final LengthUnit unit)
+    {
+        return new FloatLengthVector(dvd, unit);
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        public final FloatLength.Rel get(final int index) throws ValueException
-        {
-            return new FloatLength.Rel(getInUnit(index, getUnit()), getUnit());
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final MutableFloatLengthVector instantiateMutableType(final FloatVectorData dvd, final LengthUnit unit)
+    {
+        return new MutableFloatLengthVector(dvd, unit);
+    }
 
-        /**
-         * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-         * @return an absolute version of this relative FloatLength vector.
-         */
-        public final MutableFloatLengthVector.Abs toAbs()
-        {
-            return new MutableFloatLengthVector.Abs(getData(), getUnit());
-        }
+    /** {@inheritDoc} */
+    @Override
+    public final FloatLength get(final int index) throws ValueException
+    {
+        return new FloatLength(getInUnit(index, getUnit()), getUnit());
+    }
 
+    /**
+     * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
+     * @return an absolute version of this relative FloatLength vector.
+     */
+    public final MutableFloatPositionVector toAbs()
+    {
+        return new MutableFloatPositionVector(getData(), getUnit());
     }
 
 }

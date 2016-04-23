@@ -20,8 +20,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalResistance;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatElectricalResistanceVector
-    extends
-    MutableTypedFloatVectorRel<ElectricalResistanceUnit, FloatElectricalResistanceVector, MutableFloatElectricalResistanceVector, FloatElectricalResistance>
+        extends
+        MutableTypedFloatVectorRel<ElectricalResistanceUnit, FloatElectricalResistanceVector, MutableFloatElectricalResistanceVector, FloatElectricalResistance>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -34,7 +34,7 @@ public class MutableFloatElectricalResistanceVector
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalResistanceVector(final float[] values, final ElectricalResistanceUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -47,7 +47,7 @@ public class MutableFloatElectricalResistanceVector
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalResistanceVector(final List<Float> values, final ElectricalResistanceUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -59,8 +59,8 @@ public class MutableFloatElectricalResistanceVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatElectricalResistanceVector(final FloatElectricalResistance[] values,
-        final StorageType storageType) throws ValueException
+    public MutableFloatElectricalResistanceVector(final FloatElectricalResistance[] values, final StorageType storageType)
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -71,8 +71,8 @@ public class MutableFloatElectricalResistanceVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatElectricalResistanceVector(final List<FloatElectricalResistance> values,
-        final StorageType storageType) throws ValueException
+    public MutableFloatElectricalResistanceVector(final List<FloatElectricalResistance> values, final StorageType storageType)
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -85,8 +85,8 @@ public class MutableFloatElectricalResistanceVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatElectricalResistanceVector(final SortedMap<Integer, FloatElectricalResistance> values,
-        final int length, final StorageType storageType) throws ValueException
+    public MutableFloatElectricalResistanceVector(final SortedMap<Integer, FloatElectricalResistance> values, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -99,8 +99,8 @@ public class MutableFloatElectricalResistanceVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatElectricalResistanceVector(final SortedMap<Integer, Float> values,
-        final ElectricalResistanceUnit unit, final int length, final StorageType storageType) throws ValueException
+    public MutableFloatElectricalResistanceVector(final SortedMap<Integer, Float> values, final ElectricalResistanceUnit unit,
+            final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -117,7 +117,7 @@ public class MutableFloatElectricalResistanceVector
     /** {@inheritDoc} */
     @Override
     protected final FloatElectricalResistanceVector instantiateType(final FloatVectorData dvd,
-        final ElectricalResistanceUnit unit)
+            final ElectricalResistanceUnit unit)
     {
         return new FloatElectricalResistanceVector(dvd, unit);
     }
@@ -125,7 +125,7 @@ public class MutableFloatElectricalResistanceVector
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatElectricalResistanceVector instantiateMutableType(final FloatVectorData dvd,
-        final ElectricalResistanceUnit unit)
+            final ElectricalResistanceUnit unit)
     {
         return new MutableFloatElectricalResistanceVector(dvd, unit);
     }

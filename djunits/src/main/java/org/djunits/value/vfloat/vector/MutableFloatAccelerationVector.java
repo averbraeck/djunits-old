@@ -20,8 +20,8 @@ import org.djunits.value.vfloat.scalar.FloatAcceleration;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatAccelerationVector
-    extends
-    MutableTypedFloatVectorRel<AccelerationUnit, FloatAccelerationVector, MutableFloatAccelerationVector, FloatAcceleration>
+        extends
+        MutableTypedFloatVectorRel<AccelerationUnit, FloatAccelerationVector, MutableFloatAccelerationVector, FloatAcceleration>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,8 +33,8 @@ public class MutableFloatAccelerationVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatAccelerationVector(final float[] values, final AccelerationUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableFloatAccelerationVector(final float[] values, final AccelerationUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,8 +46,8 @@ public class MutableFloatAccelerationVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatAccelerationVector(final List<Float> values, final AccelerationUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableFloatAccelerationVector(final List<Float> values, final AccelerationUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -60,7 +60,7 @@ public class MutableFloatAccelerationVector
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAccelerationVector(final FloatAcceleration[] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -72,7 +72,7 @@ public class MutableFloatAccelerationVector
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAccelerationVector(final List<FloatAcceleration> values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +86,7 @@ public class MutableFloatAccelerationVector
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAccelerationVector(final SortedMap<Integer, FloatAcceleration> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -100,7 +100,7 @@ public class MutableFloatAccelerationVector
      * @throws ValueException when values is null
      */
     public MutableFloatAccelerationVector(final SortedMap<Integer, Float> values, final AccelerationUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -123,8 +123,7 @@ public class MutableFloatAccelerationVector
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatAccelerationVector instantiateMutableType(final FloatVectorData dvd,
-        final AccelerationUnit unit)
+    protected final MutableFloatAccelerationVector instantiateMutableType(final FloatVectorData dvd, final AccelerationUnit unit)
     {
         return new MutableFloatAccelerationVector(dvd, unit);
     }

@@ -31,8 +31,7 @@ public class MutableMoneyVector extends MutableTypedDoubleVectorRel<MoneyUnit, M
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyVector(final double[] values, final MoneyUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutableMoneyVector(final double[] values, final MoneyUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,7 +44,7 @@ public class MutableMoneyVector extends MutableTypedDoubleVectorRel<MoneyUnit, M
      * @throws ValueException when values is null
      */
     public MutableMoneyVector(final List<Double> values, final MoneyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +80,7 @@ public class MutableMoneyVector extends MutableTypedDoubleVectorRel<MoneyUnit, M
      * @throws ValueException when values has zero entries
      */
     public MutableMoneyVector(final SortedMap<Integer, Money> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +94,7 @@ public class MutableMoneyVector extends MutableTypedDoubleVectorRel<MoneyUnit, M
      * @throws ValueException when values is null
      */
     public MutableMoneyVector(final SortedMap<Integer, Double> values, final MoneyUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

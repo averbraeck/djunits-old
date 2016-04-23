@@ -70,10 +70,9 @@ public class FloatMoneyPerLength extends TypedFloatScalarRel<MoneyPerLengthUnit,
      * @return a Scalar at the ratio between
      */
     public static FloatMoneyPerLength interpolate(final FloatMoneyPerLength zero, final FloatMoneyPerLength one,
-        final float ratio)
+            final float ratio)
     {
-        return new FloatMoneyPerLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new FloatMoneyPerLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -91,7 +90,7 @@ public class FloatMoneyPerLength extends TypedFloatScalarRel<MoneyPerLengthUnit,
      * @param v FloatMoneyPerLength scalar
      * @return FloatMoney scalar as a multiplication of FloatMoneyPerLength and FloatLength
      */
-    public final FloatMoney multiplyBy(final FloatLength.Rel v)
+    public final FloatMoney multiplyBy(final FloatLength v)
     {
         return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
     }

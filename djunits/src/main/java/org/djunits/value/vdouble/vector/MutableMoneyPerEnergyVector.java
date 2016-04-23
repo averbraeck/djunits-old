@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerEnergy;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableMoneyPerEnergyVector extends
-    MutableTypedDoubleVectorRel<MoneyPerEnergyUnit, MoneyPerEnergyVector, MutableMoneyPerEnergyVector, MoneyPerEnergy>
+        MutableTypedDoubleVectorRel<MoneyPerEnergyUnit, MoneyPerEnergyVector, MutableMoneyPerEnergyVector, MoneyPerEnergy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -32,8 +32,8 @@ public class MutableMoneyPerEnergyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyPerEnergyVector(final double[] values, final MoneyPerEnergyUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableMoneyPerEnergyVector(final double[] values, final MoneyPerEnergyUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,8 +45,8 @@ public class MutableMoneyPerEnergyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyPerEnergyVector(final List<Double> values, final MoneyPerEnergyUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableMoneyPerEnergyVector(final List<Double> values, final MoneyPerEnergyUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,8 +58,7 @@ public class MutableMoneyPerEnergyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyPerEnergyVector(final MoneyPerEnergy[] values, final StorageType storageType)
-        throws ValueException
+    public MutableMoneyPerEnergyVector(final MoneyPerEnergy[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -70,8 +69,7 @@ public class MutableMoneyPerEnergyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyPerEnergyVector(final List<MoneyPerEnergy> values, final StorageType storageType)
-        throws ValueException
+    public MutableMoneyPerEnergyVector(final List<MoneyPerEnergy> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -85,7 +83,7 @@ public class MutableMoneyPerEnergyVector extends
      * @throws ValueException when values has zero entries
      */
     public MutableMoneyPerEnergyVector(final SortedMap<Integer, MoneyPerEnergy> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -99,7 +97,7 @@ public class MutableMoneyPerEnergyVector extends
      * @throws ValueException when values is null
      */
     public MutableMoneyPerEnergyVector(final SortedMap<Integer, Double> values, final MoneyPerEnergyUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -122,8 +120,7 @@ public class MutableMoneyPerEnergyVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerEnergyVector instantiateMutableType(final DoubleVectorData dvd,
-        final MoneyPerEnergyUnit unit)
+    protected final MutableMoneyPerEnergyVector instantiateMutableType(final DoubleVectorData dvd, final MoneyPerEnergyUnit unit)
     {
         return new MutableMoneyPerEnergyVector(dvd, unit);
     }

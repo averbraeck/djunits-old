@@ -31,8 +31,7 @@ public class DensityVector extends TypedDoubleVectorRel<DensityUnit, DensityVect
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public DensityVector(final double[] values, final DensityUnit unit, final StorageType storageType)
-        throws ValueException
+    public DensityVector(final double[] values, final DensityUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,7 +44,7 @@ public class DensityVector extends TypedDoubleVectorRel<DensityUnit, DensityVect
      * @throws ValueException when values is null
      */
     public DensityVector(final List<Double> values, final DensityUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +80,7 @@ public class DensityVector extends TypedDoubleVectorRel<DensityUnit, DensityVect
      * @throws ValueException when values has zero entries
      */
     public DensityVector(final SortedMap<Integer, Density> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +94,7 @@ public class DensityVector extends TypedDoubleVectorRel<DensityUnit, DensityVect
      * @throws ValueException when values is null
      */
     public DensityVector(final SortedMap<Integer, Double> values, final DensityUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

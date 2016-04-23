@@ -86,9 +86,9 @@ public class Energy extends TypedDoubleScalarRel<EnergyUnit, Energy>
      * @param v Energy scalar
      * @return Length scalar as a division of Energy and Force
      */
-    public final Length.Rel divideBy(final Force v)
+    public final Length divideBy(final Force v)
     {
-        return new Length.Rel(this.si / v.si, LengthUnit.SI);
+        return new Length(this.si / v.si, LengthUnit.SI);
     }
 
     /**
@@ -96,7 +96,7 @@ public class Energy extends TypedDoubleScalarRel<EnergyUnit, Energy>
      * @param v Energy scalar
      * @return Force scalar as a division of Energy and Length
      */
-    public final Force divideBy(final Length.Rel v)
+    public final Force divideBy(final Length v)
     {
         return new Force(this.si / v.si, ForceUnit.SI);
     }
@@ -112,23 +112,23 @@ public class Energy extends TypedDoubleScalarRel<EnergyUnit, Energy>
     }
 
     /**
-     * Calculate the division of Energy and Time, which results in a Power scalar.
+     * Calculate the division of Energy and Duration, which results in a Power scalar.
      * @param v Energy scalar
-     * @return Power scalar as a division of Energy and Time
+     * @return Power scalar as a division of Energy and Duration
      */
-    public final Power divideBy(final Time.Rel v)
+    public final Power divideBy(final Duration v)
     {
         return new Power(this.si / v.si, PowerUnit.SI);
     }
 
     /**
-     * Calculate the division of Energy and Power, which results in a Time scalar.
+     * Calculate the division of Energy and Power, which results in a Duration scalar.
      * @param v Energy scalar
-     * @return Time scalar as a division of Energy and Power
+     * @return Duration scalar as a division of Energy and Power
      */
-    public final Time.Rel divideBy(final Power v)
+    public final Duration divideBy(final Power v)
     {
-        return new Time.Rel(this.si / v.si, TimeUnit.SI);
+        return new Duration(this.si / v.si, TimeUnit.SI);
     }
 
     /**

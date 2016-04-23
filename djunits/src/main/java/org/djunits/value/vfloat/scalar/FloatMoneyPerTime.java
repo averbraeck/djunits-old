@@ -69,11 +69,9 @@ public class FloatMoneyPerTime extends TypedFloatScalarRel<MoneyPerTimeUnit, Flo
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMoneyPerTime interpolate(final FloatMoneyPerTime zero, final FloatMoneyPerTime one,
-        final float ratio)
+    public static FloatMoneyPerTime interpolate(final FloatMoneyPerTime zero, final FloatMoneyPerTime one, final float ratio)
     {
-        return new FloatMoneyPerTime(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new FloatMoneyPerTime(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -87,11 +85,11 @@ public class FloatMoneyPerTime extends TypedFloatScalarRel<MoneyPerTimeUnit, Flo
     }
 
     /**
-     * Calculate the multiplication of FloatMoneyPerTime and FloatTime, which results in a FloatMoney scalar.
+     * Calculate the multiplication of FloatMoneyPerTime and FloatDuration, which results in a FloatMoney scalar.
      * @param v FloatMoneyPerTime scalar
-     * @return FloatMoney scalar as a multiplication of FloatMoneyPerTime and FloatTime
+     * @return FloatMoney scalar as a multiplication of FloatMoneyPerTime and FloatDuration
      */
-    public final FloatMoney multiplyBy(final FloatTime.Rel v)
+    public final FloatMoney multiplyBy(final FloatDuration v)
     {
         return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
     }

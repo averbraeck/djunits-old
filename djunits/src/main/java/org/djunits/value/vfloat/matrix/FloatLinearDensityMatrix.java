@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatLinearDensity;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatLinearDensityMatrix
-    extends
-    TypedFloatMatrixRel<LinearDensityUnit, FloatLinearDensityMatrix, MutableFloatLinearDensityMatrix, FloatLinearDensity>
+public class FloatLinearDensityMatrix extends
+        TypedFloatMatrixRel<LinearDensityUnit, FloatLinearDensityMatrix, MutableFloatLinearDensityMatrix, FloatLinearDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -31,7 +30,7 @@ public class FloatLinearDensityMatrix
      * @throws ValueException when values is null
      */
     public FloatLinearDensityMatrix(final float[][] values, final LinearDensityUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -43,8 +42,7 @@ public class FloatLinearDensityMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatLinearDensityMatrix(final FloatLinearDensity[][] values, final StorageType storageType)
-        throws ValueException
+    public FloatLinearDensityMatrix(final FloatLinearDensity[][] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -68,7 +66,7 @@ public class FloatLinearDensityMatrix
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatLinearDensityMatrix instantiateMutableType(final FloatMatrixData fmd,
-        final LinearDensityUnit unit)
+            final LinearDensityUnit unit)
     {
         return new MutableFloatLinearDensityMatrix(fmd, unit);
     }

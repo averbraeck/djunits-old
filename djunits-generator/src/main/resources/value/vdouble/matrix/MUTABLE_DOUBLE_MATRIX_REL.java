@@ -80,7 +80,7 @@ public class Mutable%Type%Matrix extends
         return new %Type%(getInUnit(row, column, getUnit()), getUnit());
     }
 
-%FORMULAS%%Type%.Rel%
+%FORMULAS%%Type%%
 
 }
 

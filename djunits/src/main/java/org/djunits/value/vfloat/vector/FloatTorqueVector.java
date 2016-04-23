@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatTorque;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatTorqueVector extends
-    TypedFloatVectorRel<TorqueUnit, FloatTorqueVector, MutableFloatTorqueVector, FloatTorque>
+        TypedFloatVectorRel<TorqueUnit, FloatTorqueVector, MutableFloatTorqueVector, FloatTorque>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -32,8 +32,7 @@ public class FloatTorqueVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatTorqueVector(final float[] values, final TorqueUnit unit, final StorageType storageType)
-        throws ValueException
+    public FloatTorqueVector(final float[] values, final TorqueUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +45,7 @@ public class FloatTorqueVector extends
      * @throws ValueException when values is null
      */
     public FloatTorqueVector(final List<Float> values, final TorqueUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,8 +80,8 @@ public class FloatTorqueVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatTorqueVector(final SortedMap<Integer, FloatTorque> values, final int length,
-        final StorageType storageType) throws ValueException
+    public FloatTorqueVector(final SortedMap<Integer, FloatTorque> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -96,7 +95,7 @@ public class FloatTorqueVector extends
      * @throws ValueException when values is null
      */
     public FloatTorqueVector(final SortedMap<Integer, Float> values, final TorqueUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

@@ -75,11 +75,9 @@ public class FloatLinearDensity extends TypedFloatScalarRel<LinearDensityUnit, F
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatLinearDensity interpolate(final FloatLinearDensity zero, final FloatLinearDensity one,
-        final float ratio)
+    public static FloatLinearDensity interpolate(final FloatLinearDensity zero, final FloatLinearDensity one, final float ratio)
     {
-        return new FloatLinearDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new FloatLinearDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -97,9 +95,9 @@ public class FloatLinearDensity extends TypedFloatScalarRel<LinearDensityUnit, F
      * @param v FloatLinearDensity scalar
      * @return FloatLength scalar as a multiplication of FloatLinearDensity and FloatArea
      */
-    public final FloatLength.Rel multiplyBy(final FloatArea v)
+    public final FloatLength multiplyBy(final FloatArea v)
     {
-        return new FloatLength.Rel(this.si * v.si, LengthUnit.SI);
+        return new FloatLength(this.si * v.si, LengthUnit.SI);
     }
 
     /**

@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.ElectricalCharge;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class ElectricalChargeVector extends
-    TypedDoubleVectorRel<ElectricalChargeUnit, ElectricalChargeVector, MutableElectricalChargeVector, ElectricalCharge>
+        TypedDoubleVectorRel<ElectricalChargeUnit, ElectricalChargeVector, MutableElectricalChargeVector, ElectricalCharge>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class ElectricalChargeVector extends
      * @throws ValueException when values is null
      */
     public ElectricalChargeVector(final double[] values, final ElectricalChargeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,8 +45,8 @@ public class ElectricalChargeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalChargeVector(final List<Double> values, final ElectricalChargeUnit unit,
-        final StorageType storageType) throws ValueException
+    public ElectricalChargeVector(final List<Double> values, final ElectricalChargeUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -69,8 +69,7 @@ public class ElectricalChargeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public ElectricalChargeVector(final List<ElectricalCharge> values, final StorageType storageType)
-        throws ValueException
+    public ElectricalChargeVector(final List<ElectricalCharge> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -84,7 +83,7 @@ public class ElectricalChargeVector extends
      * @throws ValueException when values has zero entries
      */
     public ElectricalChargeVector(final SortedMap<Integer, ElectricalCharge> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,8 +96,8 @@ public class ElectricalChargeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalChargeVector(final SortedMap<Integer, Double> values, final ElectricalChargeUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public ElectricalChargeVector(final SortedMap<Integer, Double> values, final ElectricalChargeUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -122,7 +121,7 @@ public class ElectricalChargeVector extends
     /** {@inheritDoc} */
     @Override
     protected final MutableElectricalChargeVector instantiateMutableType(final DoubleVectorData dvd,
-        final ElectricalChargeUnit unit)
+            final ElectricalChargeUnit unit)
     {
         return new MutableElectricalChargeVector(dvd, unit);
     }

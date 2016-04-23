@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerEnergy;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MoneyPerEnergyMatrix extends
-    TypedDoubleMatrixRel<MoneyPerEnergyUnit, MoneyPerEnergyMatrix, MutableMoneyPerEnergyMatrix, MoneyPerEnergy>
+        TypedDoubleMatrixRel<MoneyPerEnergyUnit, MoneyPerEnergyMatrix, MutableMoneyPerEnergyMatrix, MoneyPerEnergy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MoneyPerEnergyMatrix extends
      * @throws ValueException when values is null
      */
     public MoneyPerEnergyMatrix(final double[][] values, final MoneyPerEnergyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -65,8 +65,7 @@ public class MoneyPerEnergyMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerEnergyMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final MoneyPerEnergyUnit unit)
+    protected final MutableMoneyPerEnergyMatrix instantiateMutableType(final DoubleMatrixData dmd, final MoneyPerEnergyUnit unit)
     {
         return new MutableMoneyPerEnergyMatrix(dmd, unit);
     }

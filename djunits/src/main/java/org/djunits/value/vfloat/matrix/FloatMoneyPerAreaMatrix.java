@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerArea;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatMoneyPerAreaMatrix extends
-    TypedFloatMatrixRel<MoneyPerAreaUnit, FloatMoneyPerAreaMatrix, MutableFloatMoneyPerAreaMatrix, FloatMoneyPerArea>
+        TypedFloatMatrixRel<MoneyPerAreaUnit, FloatMoneyPerAreaMatrix, MutableFloatMoneyPerAreaMatrix, FloatMoneyPerArea>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class FloatMoneyPerAreaMatrix extends
      * @throws ValueException when values is null
      */
     public FloatMoneyPerAreaMatrix(final float[][] values, final MoneyPerAreaUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -42,8 +42,7 @@ public class FloatMoneyPerAreaMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatMoneyPerAreaMatrix(final FloatMoneyPerArea[][] values, final StorageType storageType)
-        throws ValueException
+    public FloatMoneyPerAreaMatrix(final FloatMoneyPerArea[][] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -66,8 +65,7 @@ public class FloatMoneyPerAreaMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatMoneyPerAreaMatrix instantiateMutableType(final FloatMatrixData fmd,
-        final MoneyPerAreaUnit unit)
+    protected final MutableFloatMoneyPerAreaMatrix instantiateMutableType(final FloatMatrixData fmd, final MoneyPerAreaUnit unit)
     {
         return new MutableFloatMoneyPerAreaMatrix(fmd, unit);
     }

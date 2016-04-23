@@ -33,8 +33,8 @@ public class AngleSolidUnit extends LinearUnit<AngleSolidUnit>
         SI = new AngleSolidUnit("AngleSolidUnit.steradian", "AngleSolidUnit.sr", SI_DERIVED);
         STERADIAN = SI;
         SQUARE_DEGREE =
-            new AngleSolidUnit("AngleSolidUnit.square_degree", "AngleSolidUnit.sq_deg", SI_DERIVED, STERADIAN,
-                (Math.PI / 180.0) * (Math.PI / 180.0), true);
+                new AngleSolidUnit("AngleSolidUnit.square_degree", "AngleSolidUnit.sq_deg", SI_DERIVED, STERADIAN,
+                        (Math.PI / 180.0) * (Math.PI / 180.0), true);
     }
 
     /**
@@ -58,12 +58,11 @@ public class AngleSolidUnit extends LinearUnit<AngleSolidUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private AngleSolidUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final AngleSolidUnit referenceUnit, final double conversionFactorToReferenceUnit,
-        final boolean standardUnit)
+    private AngleSolidUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final AngleSolidUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+                standardUnit);
     }
 
     /**
@@ -75,7 +74,7 @@ public class AngleSolidUnit extends LinearUnit<AngleSolidUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public AngleSolidUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-        final AngleSolidUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final AngleSolidUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

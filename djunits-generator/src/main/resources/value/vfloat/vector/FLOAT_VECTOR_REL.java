@@ -133,6 +133,6 @@ public class Float%Type%Vector extends
     }
 
     
-%FORMULAS%%Type%.Rel%
+%FORMULAS%%Type%%
 }
 

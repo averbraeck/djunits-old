@@ -113,7 +113,7 @@ public class FloatMoney extends TypedFloatScalarRel<MoneyUnit, FloatMoney>
      * @param v FloatMoney scalar
      * @return FloatMoneyPerLength scalar as a division of FloatMoney and FloatLength
      */
-    public final FloatMoneyPerLength divideBy(final FloatLength.Rel v)
+    public final FloatMoneyPerLength divideBy(final FloatLength v)
     {
         return new FloatMoneyPerLength(this.si / v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
     }
@@ -139,11 +139,11 @@ public class FloatMoney extends TypedFloatScalarRel<MoneyUnit, FloatMoney>
     }
 
     /**
-     * Calculate the division of FloatMoney and FloatTime, which results in a FloatMoneyPerTime scalar.
+     * Calculate the division of FloatMoney and FloatDuration, which results in a FloatMoneyPerTime scalar.
      * @param v FloatMoney scalar
-     * @return FloatMoneyPerTime scalar as a division of FloatMoney and FloatTime
+     * @return FloatMoneyPerTime scalar as a division of FloatMoney and FloatDuration
      */
-    public final FloatMoneyPerTime divideBy(final FloatTime.Rel v)
+    public final FloatMoneyPerTime divideBy(final FloatDuration v)
     {
         return new FloatMoneyPerTime(this.si / v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
     }

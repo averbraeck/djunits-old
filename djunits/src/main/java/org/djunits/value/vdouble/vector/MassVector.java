@@ -43,8 +43,7 @@ public class MassVector extends TypedDoubleVectorRel<MassUnit, MassVector, Mutab
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MassVector(final List<Double> values, final MassUnit unit, final StorageType storageType)
-        throws ValueException
+    public MassVector(final List<Double> values, final MassUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -79,7 +78,7 @@ public class MassVector extends TypedDoubleVectorRel<MassUnit, MassVector, Mutab
      * @throws ValueException when values has zero entries
      */
     public MassVector(final SortedMap<Integer, Mass> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -93,7 +92,7 @@ public class MassVector extends TypedDoubleVectorRel<MassUnit, MassVector, Mutab
      * @throws ValueException when values is null
      */
     public MassVector(final SortedMap<Integer, Double> values, final MassUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

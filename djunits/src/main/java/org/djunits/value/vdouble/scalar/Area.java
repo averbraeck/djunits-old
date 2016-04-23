@@ -86,7 +86,7 @@ public class Area extends TypedDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return Volume scalar as a multiplication of Area and Length
      */
-    public final Volume multiplyBy(final Length.Rel v)
+    public final Volume multiplyBy(final Length v)
     {
         return new Volume(this.si * v.si, VolumeUnit.SI);
     }
@@ -116,9 +116,9 @@ public class Area extends TypedDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return Length scalar as a division of Area and Length
      */
-    public final Length.Rel divideBy(final Length.Rel v)
+    public final Length divideBy(final Length v)
     {
-        return new Length.Rel(this.si / v.si, LengthUnit.SI);
+        return new Length(this.si / v.si, LengthUnit.SI);
     }
 
     /**
@@ -126,9 +126,9 @@ public class Area extends TypedDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return Length scalar as a multiplication of Area and LinearDensity
      */
-    public final Length.Rel multiplyBy(final LinearDensity v)
+    public final Length multiplyBy(final LinearDensity v)
     {
-        return new Length.Rel(this.si * v.si, LengthUnit.SI);
+        return new Length(this.si * v.si, LengthUnit.SI);
     }
 
     /**

@@ -82,21 +82,21 @@ public class Mass extends TypedDoubleScalarRel<MassUnit, Mass>
     }
 
     /**
-     * Calculate the division of Mass and FlowMass, which results in a Time scalar.
+     * Calculate the division of Mass and FlowMass, which results in a Duration scalar.
      * @param v Mass scalar
-     * @return Time scalar as a division of Mass and FlowMass
+     * @return Duration scalar as a division of Mass and FlowMass
      */
-    public final Time.Rel divideBy(final FlowMass v)
+    public final Duration divideBy(final FlowMass v)
     {
-        return new Time.Rel(this.si / v.si, TimeUnit.SI);
+        return new Duration(this.si / v.si, TimeUnit.SI);
     }
 
     /**
-     * Calculate the division of Mass and Time, which results in a FlowMass scalar.
+     * Calculate the division of Mass and Duration, which results in a FlowMass scalar.
      * @param v Mass scalar
-     * @return FlowMass scalar as a division of Mass and Time
+     * @return FlowMass scalar as a division of Mass and Duration
      */
-    public final FlowMass divideBy(final Time.Rel v)
+    public final FlowMass divideBy(final Duration v)
     {
         return new FlowMass(this.si / v.si, FlowMassUnit.SI);
     }

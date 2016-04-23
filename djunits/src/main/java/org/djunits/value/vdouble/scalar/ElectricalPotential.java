@@ -65,10 +65,9 @@ public class ElectricalPotential extends TypedDoubleScalarRel<ElectricalPotentia
      * @return a Scalar at the ratio between
      */
     public static ElectricalPotential interpolate(final ElectricalPotential zero, final ElectricalPotential one,
-        final double ratio)
+            final double ratio)
     {
-        return new ElectricalPotential(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new ElectricalPotential(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**

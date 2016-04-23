@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerLength;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableMoneyPerLengthMatrix extends
-    MutableTypedDoubleMatrixRel<MoneyPerLengthUnit, MoneyPerLengthMatrix, MutableMoneyPerLengthMatrix, MoneyPerLength>
+        MutableTypedDoubleMatrixRel<MoneyPerLengthUnit, MoneyPerLengthMatrix, MutableMoneyPerLengthMatrix, MoneyPerLength>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -29,8 +29,8 @@ public class MutableMoneyPerLengthMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMoneyPerLengthMatrix(final double[][] values, final MoneyPerLengthUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableMoneyPerLengthMatrix(final double[][] values, final MoneyPerLengthUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -42,8 +42,7 @@ public class MutableMoneyPerLengthMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyPerLengthMatrix(final MoneyPerLength[][] values, final StorageType storageType)
-        throws ValueException
+    public MutableMoneyPerLengthMatrix(final MoneyPerLength[][] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -66,8 +65,7 @@ public class MutableMoneyPerLengthMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerLengthMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final MoneyPerLengthUnit unit)
+    protected final MutableMoneyPerLengthMatrix instantiateMutableType(final DoubleMatrixData dmd, final MoneyPerLengthUnit unit)
     {
         return new MutableMoneyPerLengthMatrix(dmd, unit);
     }

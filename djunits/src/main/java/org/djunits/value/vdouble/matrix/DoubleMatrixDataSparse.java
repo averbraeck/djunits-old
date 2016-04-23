@@ -35,7 +35,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
      * @param cols the number of columns
      */
     public DoubleMatrixDataSparse(final double[] matrixSI, final long[] indices, final int length, final int rows,
-        final int cols)
+            final int cols)
     {
         super(StorageType.SPARSE);
         this.matrixSI = matrixSI;
@@ -192,10 +192,8 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         double[] matrixSINew = new double[this.matrixSI.length + 1];
         System.arraycopy(this.indices, 0, indicesNew, 0, internalIndex);
         System.arraycopy(this.matrixSI, 0, matrixSINew, 0, internalIndex);
-        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex - 1, this.indices.length
-            - internalIndex);
-        System.arraycopy(this.matrixSI, internalIndex, matrixSINew, internalIndex - 1, this.indices.length
-            - internalIndex);
+        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex - 1, this.indices.length - internalIndex);
+        System.arraycopy(this.matrixSI, internalIndex, matrixSINew, internalIndex - 1, this.indices.length - internalIndex);
         indicesNew[internalIndex] = index;
         matrixSINew[internalIndex] = valueSI;
         this.indices = indicesNew;
@@ -246,13 +244,12 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     {
         // determine number of non-null cells
         AtomicInteger atomicLength = new AtomicInteger(0);
-        IntStream.range(0, valuesSI.length).parallel()
-            .forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c -> {
-                if (valuesSI[r][c] != 0.0)
-                {
-                    atomicLength.incrementAndGet();
-                }
-            }));
+        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c -> {
+            if (valuesSI[r][c] != 0.0)
+            {
+                atomicLength.incrementAndGet();
+            }
+        }));
 
         return atomicLength.get();
     }
@@ -451,7 +448,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

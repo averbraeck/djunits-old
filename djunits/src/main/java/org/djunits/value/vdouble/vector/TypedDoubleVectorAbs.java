@@ -25,7 +25,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <S> the absolute scalar type
  */
 public abstract class TypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDoubleVectorAbs<U, A, R, MA, S>, R extends TypedDoubleVectorRel<U, R, ?, ?>, MA extends MutableTypedDoubleVectorAbs<U, A, R, MA, S>, S extends DoubleScalar.Abs<U>>
-    extends DoubleVector.Abs<U>
+        extends DoubleVector.Abs<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -84,7 +84,7 @@ public abstract class TypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @throws ValueException when values has zero entries
      */
     TypedDoubleVectorAbs(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,8 +97,8 @@ public abstract class TypedDoubleVectorAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    TypedDoubleVectorAbs(final SortedMap<Integer, Double> values, final U unit, final int length,
-        final StorageType storageType) throws ValueException
+    TypedDoubleVectorAbs(final SortedMap<Integer, Double> values, final U unit, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, length, storageType);
     }

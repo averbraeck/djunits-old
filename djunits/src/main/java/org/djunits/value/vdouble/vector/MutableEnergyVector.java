@@ -19,8 +19,7 @@ import org.djunits.value.vdouble.scalar.Energy;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableEnergyVector extends
-    MutableTypedDoubleVectorRel<EnergyUnit, EnergyVector, MutableEnergyVector, Energy>
+public class MutableEnergyVector extends MutableTypedDoubleVectorRel<EnergyUnit, EnergyVector, MutableEnergyVector, Energy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +32,7 @@ public class MutableEnergyVector extends
      * @throws ValueException when values is null
      */
     public MutableEnergyVector(final double[] values, final EnergyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +45,7 @@ public class MutableEnergyVector extends
      * @throws ValueException when values is null
      */
     public MutableEnergyVector(final List<Double> values, final EnergyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,7 +81,7 @@ public class MutableEnergyVector extends
      * @throws ValueException when values has zero entries
      */
     public MutableEnergyVector(final SortedMap<Integer, Energy> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -96,7 +95,7 @@ public class MutableEnergyVector extends
      * @throws ValueException when values is null
      */
     public MutableEnergyVector(final SortedMap<Integer, Double> values, final EnergyUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

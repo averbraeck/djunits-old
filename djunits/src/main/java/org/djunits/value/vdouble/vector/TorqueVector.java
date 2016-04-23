@@ -31,8 +31,7 @@ public class TorqueVector extends TypedDoubleVectorRel<TorqueUnit, TorqueVector,
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public TorqueVector(final double[] values, final TorqueUnit unit, final StorageType storageType)
-        throws ValueException
+    public TorqueVector(final double[] values, final TorqueUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,8 +43,7 @@ public class TorqueVector extends TypedDoubleVectorRel<TorqueUnit, TorqueVector,
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public TorqueVector(final List<Double> values, final TorqueUnit unit, final StorageType storageType)
-        throws ValueException
+    public TorqueVector(final List<Double> values, final TorqueUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +79,7 @@ public class TorqueVector extends TypedDoubleVectorRel<TorqueUnit, TorqueVector,
      * @throws ValueException when values has zero entries
      */
     public TorqueVector(final SortedMap<Integer, Torque> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +93,7 @@ public class TorqueVector extends TypedDoubleVectorRel<TorqueUnit, TorqueVector,
      * @throws ValueException when values is null
      */
     public TorqueVector(final SortedMap<Integer, Double> values, final TorqueUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

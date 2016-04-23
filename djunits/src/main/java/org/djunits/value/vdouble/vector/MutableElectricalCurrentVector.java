@@ -20,8 +20,8 @@ import org.djunits.value.vdouble.scalar.ElectricalCurrent;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableElectricalCurrentVector
-    extends
-    MutableTypedDoubleVectorRel<ElectricalCurrentUnit, ElectricalCurrentVector, MutableElectricalCurrentVector, ElectricalCurrent>
+        extends
+        MutableTypedDoubleVectorRel<ElectricalCurrentUnit, ElectricalCurrentVector, MutableElectricalCurrentVector, ElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,8 +33,8 @@ public class MutableElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableElectricalCurrentVector(final double[] values, final ElectricalCurrentUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableElectricalCurrentVector(final double[] values, final ElectricalCurrentUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -47,7 +47,7 @@ public class MutableElectricalCurrentVector
      * @throws ValueException when values is null
      */
     public MutableElectricalCurrentVector(final List<Double> values, final ElectricalCurrentUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -60,7 +60,7 @@ public class MutableElectricalCurrentVector
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalCurrentVector(final ElectricalCurrent[] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -72,7 +72,7 @@ public class MutableElectricalCurrentVector
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalCurrentVector(final List<ElectricalCurrent> values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +86,7 @@ public class MutableElectricalCurrentVector
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalCurrentVector(final SortedMap<Integer, ElectricalCurrent> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -100,7 +100,7 @@ public class MutableElectricalCurrentVector
      * @throws ValueException when values is null
      */
     public MutableElectricalCurrentVector(final SortedMap<Integer, Double> values, final ElectricalCurrentUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -116,8 +116,7 @@ public class MutableElectricalCurrentVector
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalCurrentVector
-        instantiateType(final DoubleVectorData dvd, final ElectricalCurrentUnit unit)
+    protected final ElectricalCurrentVector instantiateType(final DoubleVectorData dvd, final ElectricalCurrentUnit unit)
     {
         return new ElectricalCurrentVector(dvd, unit);
     }
@@ -125,7 +124,7 @@ public class MutableElectricalCurrentVector
     /** {@inheritDoc} */
     @Override
     protected final MutableElectricalCurrentVector instantiateMutableType(final DoubleVectorData dvd,
-        final ElectricalCurrentUnit unit)
+            final ElectricalCurrentUnit unit)
     {
         return new MutableElectricalCurrentVector(dvd, unit);
     }

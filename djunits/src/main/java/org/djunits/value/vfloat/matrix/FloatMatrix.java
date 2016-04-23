@@ -31,8 +31,7 @@ import org.ojalgo.matrix.PrimitiveMatrix;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this FloatMatrix
  */
-public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> implements Serializable,
-    FloatMatrixInterface<U>
+public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> implements Serializable, FloatMatrixInterface<U>
 {
     /**  */
     private static final long serialVersionUID = 20151003L;
@@ -76,7 +75,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @param <U> Unit the unit for which this Matrix will be created
      */
     public static class Abs<U extends Unit<U>> extends FloatMatrix<U> implements Absolute,
-        FunctionsAbs<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
+            FunctionsAbs<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -184,7 +183,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @param <U> Unit the unit for which this Matrix will be created
      */
     public static class Rel<U extends Unit<U>> extends FloatMatrix<U> implements Relative,
-        FunctionsRel<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
+            FunctionsRel<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
     {
         /** */
         private static final long serialVersionUID = 20151003L;
@@ -335,8 +334,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         {
             if (null == values[row] || values[0].length != values[row].length)
             {
-                throw new ValueException(
-                    "Creating FloatVector or MutableFloatVector: Lengths of rows are not all the same");
+                throw new ValueException("Creating FloatVector or MutableFloatVector: Lengths of rows are not all the same");
             }
         }
     }
@@ -350,20 +348,18 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     {
         if (null == values)
         {
-            throw new ValueException(
-                "Cannot create a FloatVector or MutableFloatVector from an empty array of FloatScalar");
+            throw new ValueException("Cannot create a FloatVector or MutableFloatVector from an empty array of FloatScalar");
         }
         if (0 == values.length || 0 == values[0].length)
         {
             throw new ValueException("Creating FloatVector or MutableFloatVector: "
-                + "Cannot determine unit for FloatMatrix from an empty array of FloatScalar");
+                    + "Cannot determine unit for FloatMatrix from an empty array of FloatScalar");
         }
         for (int row = values.length; --row >= 1;)
         {
             if (values[0].length != values[row].length)
             {
-                throw new ValueException(
-                    "Creating FloatVector or MutableFloatVector: Lengths of rows are not all the same");
+                throw new ValueException("Creating FloatVector or MutableFloatVector: Lengths of rows are not all the same");
             }
         }
     }
@@ -405,7 +401,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <U extends Unit<U>> FloatMatrix.Abs<U> plus(final FloatMatrix.Abs<U> left, final FloatMatrix.Rel<U> right)
-        throws ValueException
+            throws ValueException
     {
         return left.mutable().plus(right);
     }
@@ -419,7 +415,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <U extends Unit<U>> FloatMatrix.Rel<U> plus(final FloatMatrix.Rel<U> left, final FloatMatrix.Rel<U> right)
-        throws ValueException
+            throws ValueException
     {
         return left.mutable().plus(right);
     }
@@ -433,7 +429,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <U extends Unit<U>> FloatMatrix.Abs<U> minus(final FloatMatrix.Abs<U> left, final FloatMatrix.Rel<U> right)
-        throws ValueException
+            throws ValueException
     {
         return left.mutable().minus(right);
     }
@@ -447,7 +443,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <U extends Unit<U>> FloatMatrix.Rel<U> minus(final FloatMatrix.Abs<U> left, final FloatMatrix.Abs<U> right)
-        throws ValueException
+            throws ValueException
     {
         return left.mutable().minus(right);
     }
@@ -461,7 +457,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <U extends Unit<U>> FloatMatrix.Rel<U> minus(final FloatMatrix.Rel<U> left, final FloatMatrix.Rel<U> right)
-        throws ValueException
+            throws ValueException
     {
         return left.mutable().minus(right);
     }
@@ -476,7 +472,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <U extends Unit<U>> FloatMatrix.Rel<U> times(final FloatMatrix.Rel<U> left, final FloatMatrix.Rel<U> right)
-        throws ValueException
+            throws ValueException
     {
         return left.mutable().times(right);
     }
@@ -491,7 +487,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <U extends Unit<U>> FloatMatrix.Rel<U> divide(final FloatMatrix.Rel<U> left, final FloatMatrix.Rel<U> right)
-        throws ValueException
+            throws ValueException
     {
         return left.mutable().divide(right);
     }
@@ -674,8 +670,8 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         }
         if (rows() != other.rows() || columns() != other.columns())
         {
-            throw new ValueException("The matrices have different sizes: " + rows() + "x" + columns() + " != "
-                + other.rows() + "x" + other.columns());
+            throw new ValueException("The matrices have different sizes: " + rows() + "x" + columns() + " != " + other.rows()
+                    + "x" + other.columns());
         }
     }
 
@@ -690,8 +686,8 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         final int otherColumns = other[0].length;
         if (rows() != other.length || columns() != otherColumns)
         {
-            throw new ValueException("The matrix and the array have different sizes: " + rows() + "x" + columns()
-                + " != " + other.length + "x" + otherColumns);
+            throw new ValueException("The matrix and the array have different sizes: " + rows() + "x" + columns() + " != "
+                    + other.length + "x" + otherColumns);
         }
     }
 
@@ -705,8 +701,8 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
     {
         if (row < 0 || row >= rows() || column < 0 || column >= columns())
         {
-            throw new ValueException("index out of range (valid range is 0.." + (rows() - 1) + ", 0.."
-                + (columns() - 1) + ", got " + row + ", " + column + ")");
+            throw new ValueException("index out of range (valid range is 0.." + (rows() - 1) + ", 0.." + (columns() - 1)
+                    + ", got " + row + ", " + column + ")");
         }
     }
 
@@ -739,7 +735,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

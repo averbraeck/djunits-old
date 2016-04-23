@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerVolume;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MoneyPerVolumeVector extends
-    TypedDoubleVectorRel<MoneyPerVolumeUnit, MoneyPerVolumeVector, MutableMoneyPerVolumeVector, MoneyPerVolume>
+        TypedDoubleVectorRel<MoneyPerVolumeUnit, MoneyPerVolumeVector, MutableMoneyPerVolumeVector, MoneyPerVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MoneyPerVolumeVector extends
      * @throws ValueException when values is null
      */
     public MoneyPerVolumeVector(final double[] values, final MoneyPerVolumeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MoneyPerVolumeVector extends
      * @throws ValueException when values is null
      */
     public MoneyPerVolumeVector(final List<Double> values, final MoneyPerVolumeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,8 +82,8 @@ public class MoneyPerVolumeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MoneyPerVolumeVector(final SortedMap<Integer, MoneyPerVolume> values, final int length,
-        final StorageType storageType) throws ValueException
+    public MoneyPerVolumeVector(final SortedMap<Integer, MoneyPerVolume> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -96,8 +96,8 @@ public class MoneyPerVolumeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MoneyPerVolumeVector(final SortedMap<Integer, Double> values, final MoneyPerVolumeUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public MoneyPerVolumeVector(final SortedMap<Integer, Double> values, final MoneyPerVolumeUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class MoneyPerVolumeVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerVolumeVector instantiateMutableType(final DoubleVectorData dvd,
-        final MoneyPerVolumeUnit unit)
+    protected final MutableMoneyPerVolumeVector instantiateMutableType(final DoubleVectorData dvd, final MoneyPerVolumeUnit unit)
     {
         return new MutableMoneyPerVolumeVector(dvd, unit);
     }

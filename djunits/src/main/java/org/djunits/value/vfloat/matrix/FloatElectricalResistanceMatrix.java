@@ -17,8 +17,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalResistance;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatElectricalResistanceMatrix
-    extends
-    TypedFloatMatrixRel<ElectricalResistanceUnit, FloatElectricalResistanceMatrix, MutableFloatElectricalResistanceMatrix, FloatElectricalResistance>
+        extends
+        TypedFloatMatrixRel<ElectricalResistanceUnit, FloatElectricalResistanceMatrix, MutableFloatElectricalResistanceMatrix, FloatElectricalResistance>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -31,7 +31,7 @@ public class FloatElectricalResistanceMatrix
      * @throws ValueException when values is null
      */
     public FloatElectricalResistanceMatrix(final float[][] values, final ElectricalResistanceUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,7 +44,7 @@ public class FloatElectricalResistanceMatrix
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalResistanceMatrix(final FloatElectricalResistance[][] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -61,7 +61,7 @@ public class FloatElectricalResistanceMatrix
     /** {@inheritDoc} */
     @Override
     protected final FloatElectricalResistanceMatrix instantiateType(final FloatMatrixData fmd,
-        final ElectricalResistanceUnit unit)
+            final ElectricalResistanceUnit unit)
     {
         return new FloatElectricalResistanceMatrix(fmd, unit);
     }
@@ -69,7 +69,7 @@ public class FloatElectricalResistanceMatrix
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatElectricalResistanceMatrix instantiateMutableType(final FloatMatrixData fmd,
-        final ElectricalResistanceUnit unit)
+            final ElectricalResistanceUnit unit)
     {
         return new MutableFloatElectricalResistanceMatrix(fmd, unit);
     }

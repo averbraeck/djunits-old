@@ -11,8 +11,8 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version May 15, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version May 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class FlowMassUnit extends LinearUnit<FlowMassUnit>
@@ -38,12 +38,12 @@ public class FlowMassUnit extends LinearUnit<FlowMassUnit>
     static
     {
         SI =
-            new FlowMassUnit(MassUnit.KILOGRAM, TimeUnit.SECOND, "FlowMassUnit.kilogram_per_second",
-                "FlowMassUnit.kg/s", SI_DERIVED, true);
+                new FlowMassUnit(MassUnit.KILOGRAM, TimeUnit.SECOND, "FlowMassUnit.kilogram_per_second", "FlowMassUnit.kg/s",
+                        SI_DERIVED, true);
         KILOGRAM_PER_SECOND = SI;
         POUND_PER_SECOND =
-            new FlowMassUnit(MassUnit.POUND, TimeUnit.SECOND, "FlowMassUnit.pound_per_second", "FlowMassUnit.lb/s",
-                IMPERIAL, true);
+                new FlowMassUnit(MassUnit.POUND, TimeUnit.SECOND, "FlowMassUnit.pound_per_second", "FlowMassUnit.lb/s",
+                        IMPERIAL, true);
     }
 
     /**
@@ -57,10 +57,10 @@ public class FlowMassUnit extends LinearUnit<FlowMassUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private FlowMassUnit(final MassUnit massUnit, final TimeUnit timeUnit, final String nameOrNameKey,
-        final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, KILOGRAM_PER_SECOND, massUnit
-            .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+                .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = massUnit;
         this.timeUnit = timeUnit;
     }
@@ -74,7 +74,7 @@ public class FlowMassUnit extends LinearUnit<FlowMassUnit>
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
     public FlowMassUnit(final MassUnit massUnit, final TimeUnit timeUnit, final String name, final String abbreviation,
-        final UnitSystem unitSystem)
+            final UnitSystem unitSystem)
     {
         this(massUnit, timeUnit, name, abbreviation, unitSystem, false);
     }
@@ -89,12 +89,11 @@ public class FlowMassUnit extends LinearUnit<FlowMassUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private FlowMassUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final FlowMassUnit referenceUnit, final double conversionFactorToReferenceUnit,
-        final boolean standardUnit)
+    private FlowMassUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final FlowMassUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+                standardUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.timeUnit = referenceUnit.getTimeUnit();
     }
@@ -108,7 +107,7 @@ public class FlowMassUnit extends LinearUnit<FlowMassUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public FlowMassUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-        final FlowMassUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final FlowMassUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

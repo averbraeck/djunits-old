@@ -29,7 +29,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <U> Unit the unit for which this Vector will be created
  */
 public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> implements DoubleVectorInterface<U>,
-    Serializable
+        Serializable
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -73,7 +73,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Abs<U extends Unit<U>> extends DoubleVector<U> implements Absolute,
-        FunctionsAbs<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>
+            FunctionsAbs<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>
     {
         /** */
         private static final long serialVersionUID = 20151003L;
@@ -123,8 +123,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
          * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends DoubleScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType)
-            throws ValueException
+        public <S extends DoubleScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = DoubleVectorData.instantiateLD(values, storageType);
@@ -139,7 +138,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
          * @throws ValueException when values has zero entries
          */
         public <S extends DoubleScalar.Abs<U>> Abs(final SortedMap<Integer, S> values, final int length,
-            final StorageType storageType) throws ValueException
+                final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = DoubleVectorData.instantiateMD(values, length, storageType);
@@ -153,8 +152,8 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Abs(final SortedMap<Integer, Double> values, final U unit, final int length,
-            final StorageType storageType) throws ValueException
+        public Abs(final SortedMap<Integer, Double> values, final U unit, final int length, final StorageType storageType)
+                throws ValueException
         {
             super(unit);
             this.data = DoubleVectorData.instantiate(values, length, unit.getScale(), storageType);
@@ -237,7 +236,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Rel<U extends Unit<U>> extends DoubleVector<U> implements Relative,
-        FunctionsRel<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>
+            FunctionsRel<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>
     {
         /** */
         private static final long serialVersionUID = 20151003L;
@@ -287,8 +286,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
          * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends DoubleScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType)
-            throws ValueException
+        public <S extends DoubleScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = DoubleVectorData.instantiateLD(values, storageType);
@@ -303,7 +301,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
          * @throws ValueException when values has zero entries
          */
         public <S extends DoubleScalar.Rel<U>> Rel(final SortedMap<Integer, S> values, final int length,
-            final StorageType storageType) throws ValueException
+                final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = DoubleVectorData.instantiateMD(values, length, storageType);
@@ -317,8 +315,8 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Rel(final SortedMap<Integer, Double> values, final U unit, final int length,
-            final StorageType storageType) throws ValueException
+        public Rel(final SortedMap<Integer, Double> values, final U unit, final int length, final StorageType storageType)
+                throws ValueException
         {
             super(unit);
             this.data = DoubleVectorData.instantiate(values, length, unit.getScale(), storageType);
@@ -426,7 +424,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
             return dsArray[0].getUnit();
         }
         throw new ValueException(
-            "Cannot create a DoubleVector or MutableDoubleVector from a null or empty array of DoubleScalar");
+                "Cannot create a DoubleVector or MutableDoubleVector from a null or empty array of DoubleScalar");
     }
 
     /**
@@ -444,7 +442,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
             return dsList.get(0).getUnit();
         }
         throw new ValueException(
-            "Cannot create a DoubleVector or MutableDoubleVector from a null or empty list of DoubleScalar");
+                "Cannot create a DoubleVector or MutableDoubleVector from a null or empty list of DoubleScalar");
     }
 
     /**
@@ -455,15 +453,13 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
      * @return List the provided list
      * @throws ValueException when the list has size equal to 0
      */
-    static <U extends Unit<U>, S extends DoubleScalar<U>> U checkUnit(final SortedMap<Integer, S> dsMap)
-        throws ValueException
+    static <U extends Unit<U>, S extends DoubleScalar<U>> U checkUnit(final SortedMap<Integer, S> dsMap) throws ValueException
     {
         if (dsMap != null && dsMap.size() > 0)
         {
             return dsMap.get(dsMap.firstKey()).getUnit();
         }
-        throw new ValueException(
-            "Cannot create a DoubleVector or MutableDoubleVector from a null or empty Map of DoubleScalar");
+        throw new ValueException("Cannot create a DoubleVector or MutableDoubleVector from a null or empty Map of DoubleScalar");
     }
 
     /**
@@ -698,7 +694,7 @@ public abstract class DoubleVector<U extends Unit<U>> extends AbstractValue<U> i
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

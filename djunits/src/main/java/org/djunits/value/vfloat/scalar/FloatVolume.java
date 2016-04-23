@@ -117,7 +117,7 @@ public class FloatVolume extends TypedFloatScalarRel<VolumeUnit, FloatVolume>
      * @param v FloatVolume scalar
      * @return FloatArea scalar as a division of FloatVolume and FloatLength
      */
-    public final FloatArea divideBy(final FloatLength.Rel v)
+    public final FloatArea divideBy(final FloatLength v)
     {
         return new FloatArea(this.si / v.si, AreaUnit.SI);
     }
@@ -127,9 +127,9 @@ public class FloatVolume extends TypedFloatScalarRel<VolumeUnit, FloatVolume>
      * @param v FloatVolume scalar
      * @return FloatLength scalar as a division of FloatVolume and FloatArea
      */
-    public final FloatLength.Rel divideBy(final FloatArea v)
+    public final FloatLength divideBy(final FloatArea v)
     {
-        return new FloatLength.Rel(this.si / v.si, LengthUnit.SI);
+        return new FloatLength(this.si / v.si, LengthUnit.SI);
     }
 
     /**
@@ -143,23 +143,23 @@ public class FloatVolume extends TypedFloatScalarRel<VolumeUnit, FloatVolume>
     }
 
     /**
-     * Calculate the division of FloatVolume and FloatTime, which results in a FloatFlowVolume scalar.
+     * Calculate the division of FloatVolume and FloatDuration, which results in a FloatFlowVolume scalar.
      * @param v FloatVolume scalar
-     * @return FloatFlowVolume scalar as a division of FloatVolume and FloatTime
+     * @return FloatFlowVolume scalar as a division of FloatVolume and FloatDuration
      */
-    public final FloatFlowVolume divideBy(final FloatTime.Rel v)
+    public final FloatFlowVolume divideBy(final FloatDuration v)
     {
         return new FloatFlowVolume(this.si / v.si, FlowVolumeUnit.SI);
     }
 
     /**
-     * Calculate the division of FloatVolume and FloatFlowVolume, which results in a FloatTime scalar.
+     * Calculate the division of FloatVolume and FloatFlowVolume, which results in a FloatDuration scalar.
      * @param v FloatVolume scalar
-     * @return FloatTime scalar as a division of FloatVolume and FloatFlowVolume
+     * @return FloatDuration scalar as a division of FloatVolume and FloatFlowVolume
      */
-    public final FloatTime.Rel divideBy(final FloatFlowVolume v)
+    public final FloatDuration divideBy(final FloatFlowVolume v)
     {
-        return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
+        return new FloatDuration(this.si / v.si, TimeUnit.SI);
     }
 
     /**

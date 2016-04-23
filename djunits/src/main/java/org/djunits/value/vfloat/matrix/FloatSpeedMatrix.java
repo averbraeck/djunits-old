@@ -16,8 +16,7 @@ import org.djunits.value.vfloat.scalar.FloatSpeed;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatSpeedMatrix extends
-    TypedFloatMatrixRel<SpeedUnit, FloatSpeedMatrix, MutableFloatSpeedMatrix, FloatSpeed>
+public class FloatSpeedMatrix extends TypedFloatMatrixRel<SpeedUnit, FloatSpeedMatrix, MutableFloatSpeedMatrix, FloatSpeed>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -29,8 +28,7 @@ public class FloatSpeedMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatSpeedMatrix(final float[][] values, final SpeedUnit unit, final StorageType storageType)
-        throws ValueException
+    public FloatSpeedMatrix(final float[][] values, final SpeedUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

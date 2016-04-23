@@ -28,8 +28,7 @@ public class SpeedMatrix extends TypedDoubleMatrixRel<SpeedUnit, SpeedMatrix, Mu
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public SpeedMatrix(final double[][] values, final SpeedUnit unit, final StorageType storageType)
-        throws ValueException
+    public SpeedMatrix(final double[][] values, final SpeedUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

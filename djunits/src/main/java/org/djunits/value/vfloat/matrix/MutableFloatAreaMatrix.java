@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatArea;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatAreaMatrix extends
-    MutableTypedFloatMatrixRel<AreaUnit, FloatAreaMatrix, MutableFloatAreaMatrix, FloatArea>
+        MutableTypedFloatMatrixRel<AreaUnit, FloatAreaMatrix, MutableFloatAreaMatrix, FloatArea>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MutableFloatAreaMatrix extends
      * @throws ValueException when values is null
      */
     public MutableFloatAreaMatrix(final float[][] values, final AreaUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

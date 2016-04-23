@@ -31,8 +31,7 @@ public class VolumeVector extends TypedDoubleVectorRel<VolumeUnit, VolumeVector,
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public VolumeVector(final double[] values, final VolumeUnit unit, final StorageType storageType)
-        throws ValueException
+    public VolumeVector(final double[] values, final VolumeUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,8 +43,7 @@ public class VolumeVector extends TypedDoubleVectorRel<VolumeUnit, VolumeVector,
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public VolumeVector(final List<Double> values, final VolumeUnit unit, final StorageType storageType)
-        throws ValueException
+    public VolumeVector(final List<Double> values, final VolumeUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +79,7 @@ public class VolumeVector extends TypedDoubleVectorRel<VolumeUnit, VolumeVector,
      * @throws ValueException when values has zero entries
      */
     public VolumeVector(final SortedMap<Integer, Volume> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +93,7 @@ public class VolumeVector extends TypedDoubleVectorRel<VolumeUnit, VolumeVector,
      * @throws ValueException when values is null
      */
     public VolumeVector(final SortedMap<Integer, Double> values, final VolumeUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

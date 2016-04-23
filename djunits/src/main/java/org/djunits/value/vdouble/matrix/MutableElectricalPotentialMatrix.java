@@ -17,8 +17,8 @@ import org.djunits.value.vdouble.scalar.ElectricalPotential;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableElectricalPotentialMatrix
-    extends
-    MutableTypedDoubleMatrixRel<ElectricalPotentialUnit, ElectricalPotentialMatrix, MutableElectricalPotentialMatrix, ElectricalPotential>
+        extends
+        MutableTypedDoubleMatrixRel<ElectricalPotentialUnit, ElectricalPotentialMatrix, MutableElectricalPotentialMatrix, ElectricalPotential>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -31,7 +31,7 @@ public class MutableElectricalPotentialMatrix
      * @throws ValueException when values is null
      */
     public MutableElectricalPotentialMatrix(final double[][] values, final ElectricalPotentialUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,7 +44,7 @@ public class MutableElectricalPotentialMatrix
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalPotentialMatrix(final ElectricalPotential[][] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -60,8 +60,7 @@ public class MutableElectricalPotentialMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalPotentialMatrix instantiateType(final DoubleMatrixData dmd,
-        final ElectricalPotentialUnit unit)
+    protected final ElectricalPotentialMatrix instantiateType(final DoubleMatrixData dmd, final ElectricalPotentialUnit unit)
     {
         return new ElectricalPotentialMatrix(dmd, unit);
     }
@@ -69,7 +68,7 @@ public class MutableElectricalPotentialMatrix
     /** {@inheritDoc} */
     @Override
     protected final MutableElectricalPotentialMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final ElectricalPotentialUnit unit)
+            final ElectricalPotentialUnit unit)
     {
         return new MutableElectricalPotentialMatrix(dmd, unit);
     }

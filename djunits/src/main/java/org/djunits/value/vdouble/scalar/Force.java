@@ -87,7 +87,7 @@ public class Force extends TypedDoubleScalarRel<ForceUnit, Force>
      * @param v Force scalar
      * @return Energy scalar as a multiplication of Force and Length
      */
-    public final Energy multiplyBy(final Length.Rel v)
+    public final Energy multiplyBy(final Length v)
     {
         return new Energy(this.si * v.si, EnergyUnit.SI);
     }

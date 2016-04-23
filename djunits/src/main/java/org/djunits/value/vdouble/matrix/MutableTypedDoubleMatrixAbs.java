@@ -22,7 +22,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <S> the absolute scalar type
  */
 abstract class MutableTypedDoubleMatrixAbs<U extends Unit<U>, A extends TypedDoubleMatrixAbs<U, A, R, MA, S>, R extends TypedDoubleMatrixRel<U, R, ?, ?>, MA extends MutableTypedDoubleMatrixAbs<U, A, R, MA, S>, S extends DoubleScalar.Abs<U>>
-    extends MutableDoubleMatrix.Abs<U>
+        extends MutableDoubleMatrix.Abs<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -34,8 +34,7 @@ abstract class MutableTypedDoubleMatrixAbs<U extends Unit<U>, A extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleMatrixAbs(final double[][] values, final U unit, final StorageType storageType)
-        throws ValueException
+    MutableTypedDoubleMatrixAbs(final double[][] values, final U unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

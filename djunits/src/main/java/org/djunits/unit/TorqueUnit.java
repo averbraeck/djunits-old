@@ -12,8 +12,8 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version May 15, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version May 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class TorqueUnit extends LinearUnit<TorqueUnit>
@@ -48,18 +48,18 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
     static
     {
         SI =
-            new TorqueUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "TorqueUnit.Newton_meter",
-                "TorqueUnit.N.m", SI_DERIVED, true);
+                new TorqueUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "TorqueUnit.Newton_meter",
+                        "TorqueUnit.N.m", SI_DERIVED, true);
         NEWTON_METER = SI;
         METER_KILOGRAM_FORCE =
-            new TorqueUnit(ForceUnit.KILOGRAM_FORCE, LengthUnit.METER, "TorqueUnit.meter_kilogram-force",
-                "TorqueUnit.m.kgf", OTHER, true);
+                new TorqueUnit(ForceUnit.KILOGRAM_FORCE, LengthUnit.METER, "TorqueUnit.meter_kilogram-force",
+                        "TorqueUnit.m.kgf", OTHER, true);
         POUND_FOOT =
-            new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "TorqueUnit.pound-foot", "TorqueUnit.lbf.ft",
-                IMPERIAL, true);
+                new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "TorqueUnit.pound-foot", "TorqueUnit.lbf.ft", IMPERIAL,
+                        true);
         POUND_INCH =
-            new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "TorqueUnit.pound-inch", "TorqueUnit.lbf.in",
-                IMPERIAL, true);
+                new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "TorqueUnit.pound-inch", "TorqueUnit.lbf.in", IMPERIAL,
+                        true);
     }
 
     /**
@@ -74,15 +74,14 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private TorqueUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit,
-        final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-        final boolean standardUnit)
+            final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, NEWTON_METER, massUnit
-            .getConversionFactorToStandardUnit()
-            * lengthUnit.getConversionFactorToStandardUnit()
-            * lengthUnit.getConversionFactorToStandardUnit()
-            / (timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()),
-            standardUnit);
+                .getConversionFactorToStandardUnit()
+                * lengthUnit.getConversionFactorToStandardUnit()
+                * lengthUnit.getConversionFactorToStandardUnit()
+                / (timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()), standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.timeUnit = timeUnit;
@@ -98,7 +97,7 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
     public TorqueUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit, final String name,
-        final String abbreviation, final UnitSystem unitSystem)
+            final String abbreviation, final UnitSystem unitSystem)
     {
         this(massUnit, lengthUnit, timeUnit, name, abbreviation, unitSystem, false);
     }
@@ -114,10 +113,10 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private TorqueUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String nameOrNameKey,
-        final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, NEWTON_METER, forceUnit
-            .getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
+                .getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = forceUnit.getMassUnit();
         this.lengthUnit = forceUnit.getLengthUnit();
         this.timeUnit = forceUnit.getTimeUnit();
@@ -131,8 +130,8 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public TorqueUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String name,
-        final String abbreviation, final UnitSystem unitSystem)
+    public TorqueUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String name, final String abbreviation,
+            final UnitSystem unitSystem)
     {
         this(forceUnit, lengthUnit, name, abbreviation, unitSystem, false);
     }
@@ -147,12 +146,11 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private TorqueUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final TorqueUnit referenceUnit, final double conversionFactorToReferenceUnit,
-        final boolean standardUnit)
+    private TorqueUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final TorqueUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+                standardUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
         this.timeUnit = referenceUnit.getTimeUnit();
@@ -167,7 +165,7 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public TorqueUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-        final TorqueUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final TorqueUnit referenceUnit, final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

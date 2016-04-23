@@ -20,8 +20,8 @@ import org.djunits.value.vdouble.scalar.ElectricalResistance;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class ElectricalResistanceVector
-    extends
-    TypedDoubleVectorRel<ElectricalResistanceUnit, ElectricalResistanceVector, MutableElectricalResistanceVector, ElectricalResistance>
+        extends
+        TypedDoubleVectorRel<ElectricalResistanceUnit, ElectricalResistanceVector, MutableElectricalResistanceVector, ElectricalResistance>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,8 +33,8 @@ public class ElectricalResistanceVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalResistanceVector(final double[] values, final ElectricalResistanceUnit unit,
-        final StorageType storageType) throws ValueException
+    public ElectricalResistanceVector(final double[] values, final ElectricalResistanceUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -47,7 +47,7 @@ public class ElectricalResistanceVector
      * @throws ValueException when values is null
      */
     public ElectricalResistanceVector(final List<Double> values, final ElectricalResistanceUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -59,8 +59,7 @@ public class ElectricalResistanceVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public ElectricalResistanceVector(final ElectricalResistance[] values, final StorageType storageType)
-        throws ValueException
+    public ElectricalResistanceVector(final ElectricalResistance[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -72,7 +71,7 @@ public class ElectricalResistanceVector
      * @throws ValueException when values has zero entries
      */
     public ElectricalResistanceVector(final List<ElectricalResistance> values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +85,7 @@ public class ElectricalResistanceVector
      * @throws ValueException when values has zero entries
      */
     public ElectricalResistanceVector(final SortedMap<Integer, ElectricalResistance> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -100,7 +99,7 @@ public class ElectricalResistanceVector
      * @throws ValueException when values is null
      */
     public ElectricalResistanceVector(final SortedMap<Integer, Double> values, final ElectricalResistanceUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -116,8 +115,7 @@ public class ElectricalResistanceVector
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalResistanceVector instantiateType(final DoubleVectorData dvd,
-        final ElectricalResistanceUnit unit)
+    protected final ElectricalResistanceVector instantiateType(final DoubleVectorData dvd, final ElectricalResistanceUnit unit)
     {
         return new ElectricalResistanceVector(dvd, unit);
     }
@@ -125,7 +123,7 @@ public class ElectricalResistanceVector
     /** {@inheritDoc} */
     @Override
     protected final MutableElectricalResistanceVector instantiateMutableType(final DoubleVectorData dvd,
-        final ElectricalResistanceUnit unit)
+            final ElectricalResistanceUnit unit)
     {
         return new MutableElectricalResistanceVector(dvd, unit);
     }

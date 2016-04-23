@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.Density;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableDensityVector extends
-    MutableTypedDoubleVectorRel<DensityUnit, DensityVector, MutableDensityVector, Density>
+        MutableTypedDoubleVectorRel<DensityUnit, DensityVector, MutableDensityVector, Density>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MutableDensityVector extends
      * @throws ValueException when values is null
      */
     public MutableDensityVector(final double[] values, final DensityUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MutableDensityVector extends
      * @throws ValueException when values is null
      */
     public MutableDensityVector(final List<Double> values, final DensityUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,8 +81,8 @@ public class MutableDensityVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableDensityVector(final SortedMap<Integer, Density> values, final int length,
-        final StorageType storageType) throws ValueException
+    public MutableDensityVector(final SortedMap<Integer, Density> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -96,7 +96,7 @@ public class MutableDensityVector extends
      * @throws ValueException when values is null
      */
     public MutableDensityVector(final SortedMap<Integer, Double> values, final DensityUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.Acceleration;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableAccelerationVector extends
-    MutableTypedDoubleVectorRel<AccelerationUnit, AccelerationVector, MutableAccelerationVector, Acceleration>
+        MutableTypedDoubleVectorRel<AccelerationUnit, AccelerationVector, MutableAccelerationVector, Acceleration>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MutableAccelerationVector extends
      * @throws ValueException when values is null
      */
     public MutableAccelerationVector(final double[] values, final AccelerationUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,8 +45,8 @@ public class MutableAccelerationVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableAccelerationVector(final List<Double> values, final AccelerationUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableAccelerationVector(final List<Double> values, final AccelerationUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -69,8 +69,7 @@ public class MutableAccelerationVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableAccelerationVector(final List<Acceleration> values, final StorageType storageType)
-        throws ValueException
+    public MutableAccelerationVector(final List<Acceleration> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -84,7 +83,7 @@ public class MutableAccelerationVector extends
      * @throws ValueException when values has zero entries
      */
     public MutableAccelerationVector(final SortedMap<Integer, Acceleration> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,8 +96,8 @@ public class MutableAccelerationVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableAccelerationVector(final SortedMap<Integer, Double> values, final AccelerationUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public MutableAccelerationVector(final SortedMap<Integer, Double> values, final AccelerationUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -121,8 +120,7 @@ public class MutableAccelerationVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableAccelerationVector instantiateMutableType(final DoubleVectorData dvd,
-        final AccelerationUnit unit)
+    protected final MutableAccelerationVector instantiateMutableType(final DoubleVectorData dvd, final AccelerationUnit unit)
     {
         return new MutableAccelerationVector(dvd, unit);
     }

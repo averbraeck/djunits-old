@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatMass;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatMassMatrix extends
-    MutableTypedFloatMatrixRel<MassUnit, FloatMassMatrix, MutableFloatMassMatrix, FloatMass>
+        MutableTypedFloatMatrixRel<MassUnit, FloatMassMatrix, MutableFloatMassMatrix, FloatMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MutableFloatMassMatrix extends
      * @throws ValueException when values is null
      */
     public MutableFloatMassMatrix(final float[][] values, final MassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

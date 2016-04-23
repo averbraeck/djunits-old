@@ -64,11 +64,9 @@ public class ElectricalCurrent extends TypedDoubleScalarRel<ElectricalCurrentUni
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static ElectricalCurrent interpolate(final ElectricalCurrent zero, final ElectricalCurrent one,
-        final double ratio)
+    public static ElectricalCurrent interpolate(final ElectricalCurrent zero, final ElectricalCurrent one, final double ratio)
     {
-        return new ElectricalCurrent(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new ElectricalCurrent(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -92,11 +90,11 @@ public class ElectricalCurrent extends TypedDoubleScalarRel<ElectricalCurrentUni
     }
 
     /**
-     * Calculate the multiplication of ElectricalCurrent and Time, which results in a ElectricalCharge scalar.
+     * Calculate the multiplication of ElectricalCurrent and Duration, which results in a ElectricalCharge scalar.
      * @param v ElectricalCurrent scalar
-     * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Time
+     * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Duration
      */
-    public final ElectricalCharge multiplyBy(final Time.Rel v)
+    public final ElectricalCharge multiplyBy(final Duration v)
     {
         return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
     }

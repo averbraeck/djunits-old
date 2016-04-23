@@ -28,8 +28,7 @@ public class FloatAreaMatrix extends TypedFloatMatrixRel<AreaUnit, FloatAreaMatr
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatAreaMatrix(final float[][] values, final AreaUnit unit, final StorageType storageType)
-        throws ValueException
+    public FloatAreaMatrix(final float[][] values, final AreaUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

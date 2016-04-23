@@ -7,9 +7,9 @@ import org.djunits.unit.UNITS;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
+import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vdouble.scalar.Length;
 import org.djunits.value.vdouble.scalar.Speed;
-import org.djunits.value.vdouble.scalar.Time;
 import org.djunits.value.vdouble.vector.DoubleVector;
 
 /**
@@ -39,13 +39,13 @@ public final class MultiplyAndDivide implements UNITS
     {
         Locale.setDefault(Locale.US); // Ensure that floating point values are printed using a dot (".")
         Speed speed = new Speed(50, KM_PER_HOUR);
-        Time.Rel duration = new Time.Rel(0.5, HOUR);
+        Duration duration = new Duration(0.5, HOUR);
         System.out.println("speed is " + speed); // prints 50.000km/h
         System.out.println("duration is " + duration); // prints 0.500h
-        Length.Rel distance = speed.multiplyBy(duration);
+        Length distance = speed.multiplyBy(duration);
         System.out.println("distance is " + distance); // prints 2.500e+04m
-        Length.Rel finish = new Length.Rel(100, KILOMETER);
-        Time.Rel timeToFinish = finish.divideBy(speed);
+        Length finish = new Length(100, KILOMETER);
+        Duration timeToFinish = finish.divideBy(speed);
         System.out.println("at speed " + speed + " it will take " + timeToFinish + " to travel " + finish);
         Speed requiredSpeed = finish.divideBy(duration);
         System.out.println("speed required to reach finish at " + finish + " in " + duration + " is "
