@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>DJUNITS - Delft Java UNIT System</title>
+<title>DJUNITS - Delft Java UNIT System, version 1.03</title>
 <meta name="Author" content="Peter Knoppers, p.knoppers@tudelft.nl" />
 <meta name="Author" content="Alexander Verbraeck, a.verbraeck@tudelft.nl" />
 <meta name="Description" content="Delft Java Unit System" />
@@ -132,27 +132,42 @@
       <tr>
         <th>Quantity</th>
         <th>Absolute interpretation</th>
+        <th>Absolute class</th>
         <th>Relative interpretation</th>
-      </tr>
+        <th>Relative class</th>
+        <th>Unit</th>
+        </tr>
       <tr>
         <th>Length</th>
         <td>Position</td>
+        <td>Position</td>
         <td>Distance</td>
-      </tr>
+        <td>Length</td>
+        <td>LengthUnit</td>
+        </tr>
       <tr>
         <th>Angle</th>
         <td>Direction or Slope</td>
+        <td>Direction</td>
         <td>Angle (difference in direction or slope)</td>
-      </tr>
+        <td>Angle</td>
+        <td>AngleUnit</td>
+        </tr>
       <tr>
         <th>Temperature</th>
         <td>Temperature</td>
+        <td>AbsoluteTemperature</td>
         <td>Temperature difference</td>
-      </tr>
+        <td>Temperature</td>
+        <td>TemperatureUnit</td>
+        </tr>
       <tr>
         <th>Time</th>
         <td>Time (instant)</td>
+        <td>Time</td>
         <td>Duration</td>
+        <td>Duration</td>
+        <td>TimeUnit</td>
       </tr>
     </table>
     <p>The use of Absolute in relation to Temperature here may be confusing. In the table above, an absolute temperature is not necessarily expressed in
@@ -186,7 +201,7 @@ System.out.println(diff.toString(SpeedUnit.<b>KM_PER_HOUR</b>, false, true));
 55.9065600km/h
 </pre>
     When a class implements the interface UNITS (org.djunits.unit.UNITS), all defined units are available without the prefix XxxUnit. So, in that case a
-    Length.Rel can be defined as <b>new</b> Length.Rel(12.0, <b>METER</b>).
+    Length can be defined as <b>new</b> Length(12.0, <b>METER</b>).
 
     <h2>Multiplication and Division</h2>
     <p>Multiplying or dividing physical quantities produces a result in a different physical unit. There is no general way (we could think of) where the
@@ -194,8 +209,8 @@ System.out.println(diff.toString(SpeedUnit.<b>KM_PER_HOUR</b>, false, true));
       operations with known result type. For instance</p>
     <pre class="highlight">
 Speed speed = <b>new</b> Speed(50, SpeedUnit.<b>KM_PER_HOUR</b>);
-Time.Rel duration = <b>new</b> Time.Rel(0.5, TimeUnit.<b>HOUR</b>);
-Length.Rel distance = speed.multiplyBy(duration);
+Duration duration = <b>new</b> Duration(0.5, TimeUnit.<b>HOUR</b>);
+Length distance = speed.multiplyBy(duration);
 Acceleration acc0 = speed.divideBy(duration);
 Area area = distance.multiplyBy(distance);
 Volume vol = area.multiplyBy(distance);
@@ -229,7 +244,7 @@ Volume vol = area.multiplyBy(distance);
     <h2>Extensions</h2>
     <p>Several extensions are planned on a short notice:</p>
     <ul>
-      <li>Typed vectors and matrices, so a LengthMatrix.Rel can be multiplied with the inverse of a TimeMatrix.Rel (units in 1/s) to give a SpeedMatrix.
+      <li>Typed vectors and matrices, so a LengthMatrix can be multiplied with the inverse of a DurationMatrix (units in 1/s) to give a SpeedMatrix.
         This can be cell-cell multiplication (n x m matrix 'times' an n x m matrix yielding an n x m matrix) or real matrix multiplication (n x m matrix times
         an m x p matrix yielding an n x p matrix).</li>
       <li>Operations on matrices such as Transposition, Linear Equations, Eigenvalues, Eigenvectors, LU-decomposition, QR-decomposition, etc. ojAlgo is
@@ -252,7 +267,7 @@ Volume vol = area.multiplyBy(distance);
 
   <div id="footer">
     <hr />
-    Copyright &copy; 2015, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br /> DJUNITS uses a BSD-style
+    Copyright &copy; 2015-2016, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br /> DJUNITS uses a BSD-style
     license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
   </div>
 

@@ -69,8 +69,8 @@
       <li><b>org.djunits.value.vdouble.scalar</b> provides two types of classes for double precision implementations. The first one is the generic
         DoubleScalar that can be instantiated with any unit in absolute or relative form through generalization: <br /> <pre>DoubleScalar.Rel&lt;NoiseUnit&gt; noise = <b>new</b> DoubleScalar.Rel&lt;&gt;(10.0, NoiseUnit.DECIBEL);</pre>
           The second class of scalars are the predefined scalars such as Area, Temperature, Time, and Length. A number of these scalars have both an absolute
-          and a relative implementation, indicated by adding '.Rel' or '.Abs' after the class name. Time, Length, Temperature, AnglePlane, AngleSolid, and
-          Dimensionless have both an absolute and a relative form. All other scalars are always relative. Each class has a multitude of mathematical operations
+          and a relative implementation. Time/Duration, Position/Length, AbsoluteTemperature/Temperature, and Direction/Angle have both an absolute and a 
+          relative form. All other scalars are always relative. Each class has a multitude of mathematical operations
           that can be applied on the scalar, such as goniometric functions, logarithms, power functions, etc. Furthermore, many multiplications and divisions
           are implemented in a strongly typed way that is checked by the compiler. If an ElectricalPotential scalar (e.g. in Volts) is divided by an
           ElectricalCurrent scalar (e.g. in Amperes), the result can only be assigned to a scalar thas has an ElectricalResistance unit (e.g., in Ohms). Please
@@ -93,8 +93,8 @@ DoubleVector.Abs&lt;TemperatureUnit&gt; dv
       <li><b>org.djunits.value.vfloat.scalar</b> provides two types of classes for float implementations. The first one is the generic FloatScalar that can
         be instantiated with any unit in absolute or relative form through generalization: <br /> <pre>FloatScalar.Rel&lt;NoiseUnit&gt; noise = <b>new</b> FloatScalar.Rel&lt;&gt;(10.0f, NoiseUnit.DECIBEL);</pre>
           The second class of scalars are the predefined scalars such as Area, Temperature, Time, and Length. A number of these scalars have both an absolute
-          and a relative implementation, indicated by adding '.Rel' or '.Abs' after the class name. Time, Length, Temperature, AnglePlane, AngleSolid, and
-          Dimensionless have both an absolute and a relative form. All other scalars are always relative. Each class has a multitude of mathematical operations
+          and a relative implementation, indicated by adding '.Rel' or '.Abs' after the class name. Time/Duration, Position/Length, AbsoluteTemperature/Temperature, 
+          and Direction/Angle have both an absolute and a relative form. All other scalars are always relative. Each class has a multitude of mathematical operations
           that can be applied on the scalar, such as goniometric functions, logarithms, power functions, etc. Furthermore, many multiplications and divisions
           are implemented in a strongly typed way that is checked by the compiler. If an ElectricalPotential scalar (e.g. in Volts) is divided by an
           ElectricalCurrent scalar (e.g. in Amperes), the result can only be allocated to an ElectricalResistance unit (e.g., in Ohms). Please note that the
@@ -122,7 +122,7 @@ FloatVector.Rel&lt;AreaUnit&gt; dv2 = dv.exp();
 
   <div id="footer">
     <hr />
-    Copyright &copy; 2015, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br /> DJUNITS uses a BSD-style
+    Copyright &copy; 2015-2016, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br /> DJUNITS uses a BSD-style
     license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
   </div>
 
