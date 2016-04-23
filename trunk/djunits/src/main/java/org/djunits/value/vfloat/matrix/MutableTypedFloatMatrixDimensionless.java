@@ -23,8 +23,8 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @param <S> the scalar type
  */
 abstract class MutableTypedFloatMatrixDimensionless<U extends Unit<U>, R extends TypedFloatMatrixRel<U, R, MR, S>, MR extends MutableTypedFloatMatrixDimensionless<U, R, MR, S>, S extends FloatScalar.Rel<U>>
-    extends MutableTypedFloatMatrixRel<U, R, MR, S> implements
-    MathFunctionsDimensionless<MutableTypedFloatMatrixDimensionless<U, R, MR, S>>
+        extends MutableTypedFloatMatrixRel<U, R, MR, S> implements
+        MathFunctionsDimensionless<MutableTypedFloatMatrixDimensionless<U, R, MR, S>>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -37,7 +37,7 @@ abstract class MutableTypedFloatMatrixDimensionless<U extends Unit<U>, R extends
      * @throws ValueException when values is null
      */
     MutableTypedFloatMatrixDimensionless(final float[][] values, final U unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.FlowVolume;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FlowVolumeVector extends
-    TypedDoubleVectorRel<FlowVolumeUnit, FlowVolumeVector, MutableFlowVolumeVector, FlowVolume>
+        TypedDoubleVectorRel<FlowVolumeUnit, FlowVolumeVector, MutableFlowVolumeVector, FlowVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class FlowVolumeVector extends
      * @throws ValueException when values is null
      */
     public FlowVolumeVector(final double[] values, final FlowVolumeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class FlowVolumeVector extends
      * @throws ValueException when values is null
      */
     public FlowVolumeVector(final List<Double> values, final FlowVolumeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -83,7 +83,7 @@ public class FlowVolumeVector extends
      * @throws ValueException when values has zero entries
      */
     public FlowVolumeVector(final SortedMap<Integer, FlowVolume> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,7 +97,7 @@ public class FlowVolumeVector extends
      * @throws ValueException when values is null
      */
     public FlowVolumeVector(final SortedMap<Integer, Double> values, final FlowVolumeUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class FlowVolumeVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFlowVolumeVector
-        instantiateMutableType(final DoubleVectorData dvd, final FlowVolumeUnit unit)
+    protected final MutableFlowVolumeVector instantiateMutableType(final DoubleVectorData dvd, final FlowVolumeUnit unit)
     {
         return new MutableFlowVolumeVector(dvd, unit);
     }

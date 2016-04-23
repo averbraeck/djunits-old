@@ -97,7 +97,7 @@ public class FloatForce extends TypedFloatScalarRel<ForceUnit, FloatForce>
      * @param v FloatForce scalar
      * @return FloatEnergy scalar as a multiplication of FloatForce and FloatLength
      */
-    public final FloatEnergy multiplyBy(final FloatLength.Rel v)
+    public final FloatEnergy multiplyBy(final FloatLength v)
     {
         return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
     }

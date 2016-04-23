@@ -31,8 +31,7 @@ public class MutableMassVector extends MutableTypedDoubleVectorRel<MassUnit, Mas
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableMassVector(final double[] values, final MassUnit unit, final StorageType storageType)
-        throws ValueException
+    public MutableMassVector(final double[] values, final MassUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,7 +44,7 @@ public class MutableMassVector extends MutableTypedDoubleVectorRel<MassUnit, Mas
      * @throws ValueException when values is null
      */
     public MutableMassVector(final List<Double> values, final MassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -80,7 +79,7 @@ public class MutableMassVector extends MutableTypedDoubleVectorRel<MassUnit, Mas
      * @throws ValueException when values has zero entries
      */
     public MutableMassVector(final SortedMap<Integer, Mass> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -94,7 +93,7 @@ public class MutableMassVector extends MutableTypedDoubleVectorRel<MassUnit, Mas
      * @throws ValueException when values is null
      */
     public MutableMassVector(final SortedMap<Integer, Double> values, final MassUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

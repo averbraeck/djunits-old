@@ -19,9 +19,8 @@ import org.djunits.value.vfloat.scalar.FloatLinearDensity;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatLinearDensityVector
-    extends
-    TypedFloatVectorRel<LinearDensityUnit, FloatLinearDensityVector, MutableFloatLinearDensityVector, FloatLinearDensity>
+public class FloatLinearDensityVector extends
+        TypedFloatVectorRel<LinearDensityUnit, FloatLinearDensityVector, MutableFloatLinearDensityVector, FloatLinearDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -34,7 +33,7 @@ public class FloatLinearDensityVector
      * @throws ValueException when values is null
      */
     public FloatLinearDensityVector(final float[] values, final LinearDensityUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,8 +45,8 @@ public class FloatLinearDensityVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatLinearDensityVector(final List<Float> values, final LinearDensityUnit unit,
-        final StorageType storageType) throws ValueException
+    public FloatLinearDensityVector(final List<Float> values, final LinearDensityUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -59,8 +58,7 @@ public class FloatLinearDensityVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatLinearDensityVector(final FloatLinearDensity[] values, final StorageType storageType)
-        throws ValueException
+    public FloatLinearDensityVector(final FloatLinearDensity[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -71,8 +69,7 @@ public class FloatLinearDensityVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatLinearDensityVector(final List<FloatLinearDensity> values, final StorageType storageType)
-        throws ValueException
+    public FloatLinearDensityVector(final List<FloatLinearDensity> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +83,7 @@ public class FloatLinearDensityVector
      * @throws ValueException when values has zero entries
      */
     public FloatLinearDensityVector(final SortedMap<Integer, FloatLinearDensity> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -99,8 +96,8 @@ public class FloatLinearDensityVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatLinearDensityVector(final SortedMap<Integer, Float> values, final LinearDensityUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public FloatLinearDensityVector(final SortedMap<Integer, Float> values, final LinearDensityUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -124,7 +121,7 @@ public class FloatLinearDensityVector
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatLinearDensityVector instantiateMutableType(final FloatVectorData dvd,
-        final LinearDensityUnit unit)
+            final LinearDensityUnit unit)
     {
         return new MutableFloatLinearDensityVector(dvd, unit);
     }

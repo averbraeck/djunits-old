@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @param <S> the scalar type
  */
 abstract class MutableTypedFloatMatrixRel<U extends Unit<U>, R extends TypedFloatMatrixRel<U, R, MR, S>, MR extends MutableTypedFloatMatrixRel<U, R, MR, S>, S extends FloatScalar.Rel<U>>
-    extends MutableFloatMatrix.Rel<U>
+        extends MutableFloatMatrix.Rel<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -33,8 +33,7 @@ abstract class MutableTypedFloatMatrixRel<U extends Unit<U>, R extends TypedFloa
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedFloatMatrixRel(final float[][] values, final U unit, final StorageType storageType)
-        throws ValueException
+    MutableTypedFloatMatrixRel(final float[][] values, final U unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

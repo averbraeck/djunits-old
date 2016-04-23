@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatFrequency;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatFrequencyVector extends
-    MutableTypedFloatVectorRel<FrequencyUnit, FloatFrequencyVector, MutableFloatFrequencyVector, FloatFrequency>
+        MutableTypedFloatVectorRel<FrequencyUnit, FloatFrequencyVector, MutableFloatFrequencyVector, FloatFrequency>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MutableFloatFrequencyVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatFrequencyVector(final float[] values, final FrequencyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MutableFloatFrequencyVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatFrequencyVector(final List<Float> values, final FrequencyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,8 +58,7 @@ public class MutableFloatFrequencyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatFrequencyVector(final FloatFrequency[] values, final StorageType storageType)
-        throws ValueException
+    public MutableFloatFrequencyVector(final FloatFrequency[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -70,8 +69,7 @@ public class MutableFloatFrequencyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatFrequencyVector(final List<FloatFrequency> values, final StorageType storageType)
-        throws ValueException
+    public MutableFloatFrequencyVector(final List<FloatFrequency> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -85,7 +83,7 @@ public class MutableFloatFrequencyVector extends
      * @throws ValueException when values has zero entries
      */
     public MutableFloatFrequencyVector(final SortedMap<Integer, FloatFrequency> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -98,8 +96,8 @@ public class MutableFloatFrequencyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatFrequencyVector(final SortedMap<Integer, Float> values, final FrequencyUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public MutableFloatFrequencyVector(final SortedMap<Integer, Float> values, final FrequencyUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -122,8 +120,7 @@ public class MutableFloatFrequencyVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatFrequencyVector instantiateMutableType(final FloatVectorData dvd,
-        final FrequencyUnit unit)
+    protected final MutableFloatFrequencyVector instantiateMutableType(final FloatVectorData dvd, final FrequencyUnit unit)
     {
         return new MutableFloatFrequencyVector(dvd, unit);
     }

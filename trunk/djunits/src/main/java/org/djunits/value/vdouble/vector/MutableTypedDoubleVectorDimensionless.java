@@ -26,8 +26,8 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <S> the scalar type
  */
 abstract class MutableTypedDoubleVectorDimensionless<U extends Unit<U>, R extends TypedDoubleVectorRel<U, R, MR, S>, MR extends MutableTypedDoubleVectorDimensionless<U, R, MR, S>, S extends DoubleScalar.Rel<U>>
-    extends MutableTypedDoubleVectorRel<U, R, MR, S> implements
-    MathFunctionsDimensionless<MutableTypedDoubleVectorDimensionless<U, R, MR, S>>
+        extends MutableTypedDoubleVectorRel<U, R, MR, S> implements
+        MathFunctionsDimensionless<MutableTypedDoubleVectorDimensionless<U, R, MR, S>>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -40,7 +40,7 @@ abstract class MutableTypedDoubleVectorDimensionless<U extends Unit<U>, R extend
      * @throws ValueException when values is null
      */
     MutableTypedDoubleVectorDimensionless(final double[] values, final U unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -53,7 +53,7 @@ abstract class MutableTypedDoubleVectorDimensionless<U extends Unit<U>, R extend
      * @throws ValueException when values is null
      */
     MutableTypedDoubleVectorDimensionless(final List<Double> values, final U unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -87,8 +87,8 @@ abstract class MutableTypedDoubleVectorDimensionless<U extends Unit<U>, R extend
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    MutableTypedDoubleVectorDimensionless(final SortedMap<Integer, S> values, final int length,
-        final StorageType storageType) throws ValueException
+    MutableTypedDoubleVectorDimensionless(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -102,7 +102,7 @@ abstract class MutableTypedDoubleVectorDimensionless<U extends Unit<U>, R extend
      * @throws ValueException when values is null
      */
     MutableTypedDoubleVectorDimensionless(final SortedMap<Integer, Double> values, final U unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

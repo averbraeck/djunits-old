@@ -96,9 +96,9 @@ public class FloatEnergy extends TypedFloatScalarRel<EnergyUnit, FloatEnergy>
      * @param v FloatEnergy scalar
      * @return FloatLength scalar as a division of FloatEnergy and FloatForce
      */
-    public final FloatLength.Rel divideBy(final FloatForce v)
+    public final FloatLength divideBy(final FloatForce v)
     {
-        return new FloatLength.Rel(this.si / v.si, LengthUnit.SI);
+        return new FloatLength(this.si / v.si, LengthUnit.SI);
     }
 
     /**
@@ -106,7 +106,7 @@ public class FloatEnergy extends TypedFloatScalarRel<EnergyUnit, FloatEnergy>
      * @param v FloatEnergy scalar
      * @return FloatForce scalar as a division of FloatEnergy and FloatLength
      */
-    public final FloatForce divideBy(final FloatLength.Rel v)
+    public final FloatForce divideBy(final FloatLength v)
     {
         return new FloatForce(this.si / v.si, ForceUnit.SI);
     }
@@ -122,23 +122,23 @@ public class FloatEnergy extends TypedFloatScalarRel<EnergyUnit, FloatEnergy>
     }
 
     /**
-     * Calculate the division of FloatEnergy and FloatTime, which results in a FloatPower scalar.
+     * Calculate the division of FloatEnergy and FloatDuration, which results in a FloatPower scalar.
      * @param v FloatEnergy scalar
-     * @return FloatPower scalar as a division of FloatEnergy and FloatTime
+     * @return FloatPower scalar as a division of FloatEnergy and FloatDuration
      */
-    public final FloatPower divideBy(final FloatTime.Rel v)
+    public final FloatPower divideBy(final FloatDuration v)
     {
         return new FloatPower(this.si / v.si, PowerUnit.SI);
     }
 
     /**
-     * Calculate the division of FloatEnergy and FloatPower, which results in a FloatTime scalar.
+     * Calculate the division of FloatEnergy and FloatPower, which results in a FloatDuration scalar.
      * @param v FloatEnergy scalar
-     * @return FloatTime scalar as a division of FloatEnergy and FloatPower
+     * @return FloatDuration scalar as a division of FloatEnergy and FloatPower
      */
-    public final FloatTime.Rel divideBy(final FloatPower v)
+    public final FloatDuration divideBy(final FloatPower v)
     {
-        return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
+        return new FloatDuration(this.si / v.si, TimeUnit.SI);
     }
 
     /**

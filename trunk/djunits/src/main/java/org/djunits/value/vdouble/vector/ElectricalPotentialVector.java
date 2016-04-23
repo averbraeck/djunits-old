@@ -20,8 +20,8 @@ import org.djunits.value.vdouble.scalar.ElectricalPotential;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class ElectricalPotentialVector
-    extends
-    TypedDoubleVectorRel<ElectricalPotentialUnit, ElectricalPotentialVector, MutableElectricalPotentialVector, ElectricalPotential>
+        extends
+        TypedDoubleVectorRel<ElectricalPotentialUnit, ElectricalPotentialVector, MutableElectricalPotentialVector, ElectricalPotential>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,8 +33,8 @@ public class ElectricalPotentialVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalPotentialVector(final double[] values, final ElectricalPotentialUnit unit,
-        final StorageType storageType) throws ValueException
+    public ElectricalPotentialVector(final double[] values, final ElectricalPotentialUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -47,7 +47,7 @@ public class ElectricalPotentialVector
      * @throws ValueException when values is null
      */
     public ElectricalPotentialVector(final List<Double> values, final ElectricalPotentialUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -59,8 +59,7 @@ public class ElectricalPotentialVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public ElectricalPotentialVector(final ElectricalPotential[] values, final StorageType storageType)
-        throws ValueException
+    public ElectricalPotentialVector(final ElectricalPotential[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -72,7 +71,7 @@ public class ElectricalPotentialVector
      * @throws ValueException when values has zero entries
      */
     public ElectricalPotentialVector(final List<ElectricalPotential> values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +85,7 @@ public class ElectricalPotentialVector
      * @throws ValueException when values has zero entries
      */
     public ElectricalPotentialVector(final SortedMap<Integer, ElectricalPotential> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -100,7 +99,7 @@ public class ElectricalPotentialVector
      * @throws ValueException when values is null
      */
     public ElectricalPotentialVector(final SortedMap<Integer, Double> values, final ElectricalPotentialUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -116,8 +115,7 @@ public class ElectricalPotentialVector
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalPotentialVector instantiateType(final DoubleVectorData dvd,
-        final ElectricalPotentialUnit unit)
+    protected final ElectricalPotentialVector instantiateType(final DoubleVectorData dvd, final ElectricalPotentialUnit unit)
     {
         return new ElectricalPotentialVector(dvd, unit);
     }
@@ -125,7 +123,7 @@ public class ElectricalPotentialVector
     /** {@inheritDoc} */
     @Override
     protected final MutableElectricalPotentialVector instantiateMutableType(final DoubleVectorData dvd,
-        final ElectricalPotentialUnit unit)
+            final ElectricalPotentialUnit unit)
     {
         return new MutableElectricalPotentialVector(dvd, unit);
     }

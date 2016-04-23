@@ -18,8 +18,8 @@ import org.djunits.value.Relative;
  * @param <U> the unit
  * @param <R> the relative vector type
  */
-public abstract class TypedFloatScalarRel<U extends Unit<U>, R extends TypedFloatScalarRel<U, R>> extends
-    FloatScalar.Rel<U> implements Relative
+public abstract class TypedFloatScalarRel<U extends Unit<U>, R extends TypedFloatScalarRel<U, R>> extends FloatScalar.Rel<U>
+        implements Relative
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -110,8 +110,8 @@ public abstract class TypedFloatScalarRel<U extends Unit<U>, R extends TypedFloa
      */
     public final R plus(final R v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeRel(getInUnit() + v.getInUnit(), getUnit())
-            : instantiateTypeRel(this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateTypeRel(getInUnit() + v.getInUnit(), getUnit()) : instantiateTypeRel(
+                this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**
@@ -121,8 +121,8 @@ public abstract class TypedFloatScalarRel<U extends Unit<U>, R extends TypedFloa
      */
     public final R minus(final R v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeRel(getInUnit() - v.getInUnit(), getUnit())
-            : instantiateTypeRel(this.si - v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateTypeRel(getInUnit() - v.getInUnit(), getUnit()) : instantiateTypeRel(
+                this.si - v.si, getUnit().getStandardUnit());
     }
 
 }

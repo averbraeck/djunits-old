@@ -75,11 +75,11 @@ public class MoneyPerTime extends TypedDoubleScalarRel<MoneyPerTimeUnit, MoneyPe
     }
 
     /**
-     * Calculate the multiplication of MoneyPerTime and Time, which results in a Money scalar.
+     * Calculate the multiplication of MoneyPerTime and Duration, which results in a Money scalar.
      * @param v MoneyPerTime scalar
-     * @return Money scalar as a multiplication of MoneyPerTime and Time
+     * @return Money scalar as a multiplication of MoneyPerTime and Duration
      */
-    public final Money multiplyBy(final Time.Rel v)
+    public final Money multiplyBy(final Duration v)
     {
         return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
     }

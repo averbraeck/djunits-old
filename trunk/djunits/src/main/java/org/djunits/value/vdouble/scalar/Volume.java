@@ -107,7 +107,7 @@ public class Volume extends TypedDoubleScalarRel<VolumeUnit, Volume>
      * @param v Volume scalar
      * @return Area scalar as a division of Volume and Length
      */
-    public final Area divideBy(final Length.Rel v)
+    public final Area divideBy(final Length v)
     {
         return new Area(this.si / v.si, AreaUnit.SI);
     }
@@ -117,9 +117,9 @@ public class Volume extends TypedDoubleScalarRel<VolumeUnit, Volume>
      * @param v Volume scalar
      * @return Length scalar as a division of Volume and Area
      */
-    public final Length.Rel divideBy(final Area v)
+    public final Length divideBy(final Area v)
     {
-        return new Length.Rel(this.si / v.si, LengthUnit.SI);
+        return new Length(this.si / v.si, LengthUnit.SI);
     }
 
     /**
@@ -133,23 +133,23 @@ public class Volume extends TypedDoubleScalarRel<VolumeUnit, Volume>
     }
 
     /**
-     * Calculate the division of Volume and Time, which results in a FlowVolume scalar.
+     * Calculate the division of Volume and Duration, which results in a FlowVolume scalar.
      * @param v Volume scalar
-     * @return FlowVolume scalar as a division of Volume and Time
+     * @return FlowVolume scalar as a division of Volume and Duration
      */
-    public final FlowVolume divideBy(final Time.Rel v)
+    public final FlowVolume divideBy(final Duration v)
     {
         return new FlowVolume(this.si / v.si, FlowVolumeUnit.SI);
     }
 
     /**
-     * Calculate the division of Volume and FlowVolume, which results in a Time scalar.
+     * Calculate the division of Volume and FlowVolume, which results in a Duration scalar.
      * @param v Volume scalar
-     * @return Time scalar as a division of Volume and FlowVolume
+     * @return Duration scalar as a division of Volume and FlowVolume
      */
-    public final Time.Rel divideBy(final FlowVolume v)
+    public final Duration divideBy(final FlowVolume v)
     {
-        return new Time.Rel(this.si / v.si, TimeUnit.SI);
+        return new Duration(this.si / v.si, TimeUnit.SI);
     }
 
     /**

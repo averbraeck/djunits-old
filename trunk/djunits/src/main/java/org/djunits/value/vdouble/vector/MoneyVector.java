@@ -31,8 +31,7 @@ public class MoneyVector extends TypedDoubleVectorRel<MoneyUnit, MoneyVector, Mu
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MoneyVector(final double[] values, final MoneyUnit unit, final StorageType storageType)
-        throws ValueException
+    public MoneyVector(final double[] values, final MoneyUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,8 +43,7 @@ public class MoneyVector extends TypedDoubleVectorRel<MoneyUnit, MoneyVector, Mu
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MoneyVector(final List<Double> values, final MoneyUnit unit, final StorageType storageType)
-        throws ValueException
+    public MoneyVector(final List<Double> values, final MoneyUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +79,7 @@ public class MoneyVector extends TypedDoubleVectorRel<MoneyUnit, MoneyVector, Mu
      * @throws ValueException when values has zero entries
      */
     public MoneyVector(final SortedMap<Integer, Money> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +93,7 @@ public class MoneyVector extends TypedDoubleVectorRel<MoneyUnit, MoneyVector, Mu
      * @throws ValueException when values is null
      */
     public MoneyVector(final SortedMap<Integer, Double> values, final MoneyUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

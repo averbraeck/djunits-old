@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.AngleSolid;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class AngleSolidVector extends
-    TypedDoubleVectorRel<AngleSolidUnit, AngleSolidVector, MutableAngleSolidVector, AngleSolid>
+        TypedDoubleVectorRel<AngleSolidUnit, AngleSolidVector, MutableAngleSolidVector, AngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class AngleSolidVector extends
      * @throws ValueException when values is null
      */
     public AngleSolidVector(final double[] values, final AngleSolidUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class AngleSolidVector extends
      * @throws ValueException when values is null
      */
     public AngleSolidVector(final List<Double> values, final AngleSolidUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -83,7 +83,7 @@ public class AngleSolidVector extends
      * @throws ValueException when values has zero entries
      */
     public AngleSolidVector(final SortedMap<Integer, AngleSolid> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,7 +97,7 @@ public class AngleSolidVector extends
      * @throws ValueException when values is null
      */
     public AngleSolidVector(final SortedMap<Integer, Double> values, final AngleSolidUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class AngleSolidVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableAngleSolidVector
-        instantiateMutableType(final DoubleVectorData dvd, final AngleSolidUnit unit)
+    protected final MutableAngleSolidVector instantiateMutableType(final DoubleVectorData dvd, final AngleSolidUnit unit)
     {
         return new MutableAngleSolidVector(dvd, unit);
     }

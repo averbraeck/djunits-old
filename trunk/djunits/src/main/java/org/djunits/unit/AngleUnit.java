@@ -61,11 +61,9 @@ public class AngleUnit extends Unit<AngleUnit>
         ARCSECOND = new AngleUnit("AngleUnit.arcsecond", "AngleUnit.arcsec", SI_ACCEPTED, DEGREE, 1.0 / 3600.0, true);
         GRAD = new AngleUnit("AngleUnit.gradian", "AngleUnit.grad", OTHER, RADIAN, 2.0 * Math.PI / 400.0, true);
         CENTESIMAL_ARCMINUTE =
-            new AngleUnit("AngleUnit.centesimal_arcminute", "AngleUnit.centesimal_arcmin", OTHER, GRAD, 1.0 / 100.0,
-                true);
+                new AngleUnit("AngleUnit.centesimal_arcminute", "AngleUnit.centesimal_arcmin", OTHER, GRAD, 1.0 / 100.0, true);
         CENTESIMAL_ARCSECOND =
-            new AngleUnit("AngleUnit.centesimal_arcsecond", "AngleUnit.centesimal_arcsec", OTHER, GRAD, 1.0 / 10000.0,
-                true);
+                new AngleUnit("AngleUnit.centesimal_arcsecond", "AngleUnit.centesimal_arcsec", OTHER, GRAD, 1.0 / 10000.0, true);
         PERCENT = new AngleUnit("AngleUnit.percent", "AngleUnit.perc", OTHER, new GradeScale(0.01), true);
 
     }
@@ -91,13 +89,12 @@ public class AngleUnit extends Unit<AngleUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private AngleUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final AngleUnit referenceUnit, final double conversionFactorToReferenceUnit,
-        final boolean standardUnit)
+    private AngleUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final AngleUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, new LinearScale(
-            ((LinearScale) referenceUnit.getScale()).getConversionFactorToStandardUnit()
-                * conversionFactorToReferenceUnit), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem,
+                new LinearScale(((LinearScale) referenceUnit.getScale()).getConversionFactorToStandardUnit()
+                        * conversionFactorToReferenceUnit), standardUnit);
     }
 
     /**
@@ -108,8 +105,8 @@ public class AngleUnit extends Unit<AngleUnit>
      * @param referenceUnit the unit to convert to
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
-    public AngleUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-        final AngleUnit referenceUnit, final double conversionFactorToReferenceUnit)
+    public AngleUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final AngleUnit referenceUnit,
+            final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }
@@ -123,8 +120,8 @@ public class AngleUnit extends Unit<AngleUnit>
      * @param scale the scale to use
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private AngleUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final Scale scale, final boolean standardUnit)
+    private AngleUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final Scale scale, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, scale, standardUnit);
     }

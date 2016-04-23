@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatFrequency;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatFrequencyMatrix extends
-    TypedFloatMatrixRel<FrequencyUnit, FloatFrequencyMatrix, MutableFloatFrequencyMatrix, FloatFrequency>
+        TypedFloatMatrixRel<FrequencyUnit, FloatFrequencyMatrix, MutableFloatFrequencyMatrix, FloatFrequency>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class FloatFrequencyMatrix extends
      * @throws ValueException when values is null
      */
     public FloatFrequencyMatrix(final float[][] values, final FrequencyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -65,8 +65,7 @@ public class FloatFrequencyMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatFrequencyMatrix instantiateMutableType(final FloatMatrixData fmd,
-        final FrequencyUnit unit)
+    protected final MutableFloatFrequencyMatrix instantiateMutableType(final FloatMatrixData fmd, final FrequencyUnit unit)
     {
         return new MutableFloatFrequencyMatrix(fmd, unit);
     }

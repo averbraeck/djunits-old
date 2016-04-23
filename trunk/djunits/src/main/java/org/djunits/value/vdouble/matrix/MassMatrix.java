@@ -28,8 +28,7 @@ public class MassMatrix extends TypedDoubleMatrixRel<MassUnit, MassMatrix, Mutab
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MassMatrix(final double[][] values, final MassUnit unit, final StorageType storageType)
-        throws ValueException
+    public MassMatrix(final double[][] values, final MassUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

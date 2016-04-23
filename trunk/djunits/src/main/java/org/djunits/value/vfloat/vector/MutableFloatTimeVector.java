@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatTime;
 
 /**
- * Mutable FloatTime Vector.
+ * Mutable Absolute FloatTime Vector a vector of values with a TimeUnit.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -19,274 +19,132 @@ import org.djunits.value.vfloat.scalar.FloatTime;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface MutableFloatTimeVector
+public class MutableFloatTimeVector extends
+        MutableTypedFloatVectorAbs<TimeUnit, FloatTimeVector, FloatDurationVector, MutableFloatTimeVector, FloatTime>
 {
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /** */
+    private static final long serialVersionUID = 20151003L;
 
     /**
-     * ABSOLUTE implementation of FloatTimeVector.
+     * Construct a new Absolute Mutable FloatTimeVector.
+     * @param values float[]; the values of the entries in the new Absolute Mutable FloatTimeVector
+     * @param unit U; the unit of the new Absolute Mutable FloatTimeVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
      */
-    class Abs
-        extends
-        MutableTypedFloatVectorAbs<TimeUnit, FloatTimeVector.Abs, FloatTimeVector.Rel, MutableFloatTimeVector.Abs, FloatTime.Abs>
-    {
-        /** */
-        private static final long serialVersionUID = 20151003L;
-
-        /**
-         * Construct a new Absolute Mutable FloatTimeVector.
-         * @param values float[]; the values of the entries in the new Absolute Mutable FloatTimeVector
-         * @param unit U; the unit of the new Absolute Mutable FloatTimeVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final float[] values, final TimeUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTimeVector.
-         * @param values List; the values of the entries in the new Absolute Mutable FloatTimeVector
-         * @param unit U; the unit of the new Absolute Mutable FloatTimeVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final List<Float> values, final TimeUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTimeVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable FloatTimeVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final FloatTime.Abs[] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTimeVector.
-         * @param values List; the values of the entries in the new Absolute Mutable FloatTimeVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final List<FloatTime.Abs> values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTimeVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable
-         *            FloatTimeVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final SortedMap<Integer, FloatTime.Abs> values, final int length, final StorageType storageType)
+    public MutableFloatTimeVector(final float[] values, final TimeUnit unit, final StorageType storageType)
             throws ValueException
-        {
-            super(values, length, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTimeVector.
-         * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatTimeVector
-         * @param unit U; the unit of the new Absolute Sparse Mutable FloatTimeVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final SortedMap<Integer, Float> values, final TimeUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-        {
-            super(values, unit, length, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTimeVector.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Abs(final FloatVectorData data, final TimeUnit unit)
-        {
-            super(data, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTimeVector.Abs instantiateTypeAbs(final FloatVectorData dvd, final TimeUnit unit)
-        {
-            return new FloatTimeVector.Abs(dvd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTimeVector.Rel instantiateTypeRel(final FloatVectorData dvd, final TimeUnit unit)
-        {
-            return new FloatTimeVector.Rel(dvd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatTimeVector.Abs
-            instantiateMutableType(final FloatVectorData dvd, final TimeUnit unit)
-        {
-            return new MutableFloatTimeVector.Abs(dvd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs get(final int index) throws ValueException
-        {
-            return new FloatTime.Abs(getInUnit(index, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute FloatTime vector.
-         */
-        public final MutableFloatTimeVector.Rel toRel()
-        {
-            return new MutableFloatTimeVector.Rel(getData(), getUnit());
-        }
-
+    {
+        super(values, unit, storageType);
     }
 
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /**
+     * Construct a new Absolute Mutable FloatTimeVector.
+     * @param values List; the values of the entries in the new Absolute Mutable FloatTimeVector
+     * @param unit U; the unit of the new Absolute Mutable FloatTimeVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
+     */
+    public MutableFloatTimeVector(final List<Float> values, final TimeUnit unit, final StorageType storageType)
+            throws ValueException
+    {
+        super(values, unit, storageType);
+    }
 
     /**
-     * RELATIVE implementation of FloatTimeVector.
+     * Construct a new Absolute Mutable FloatTimeVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable FloatTimeVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
      */
-    class Rel extends
-        MutableTypedFloatVectorRel<TimeUnit, FloatTimeVector.Rel, MutableFloatTimeVector.Rel, FloatTime.Rel>
+    public MutableFloatTimeVector(final FloatTime[] values, final StorageType storageType) throws ValueException
     {
-        /** */
-        private static final long serialVersionUID = 20151006L;
+        super(values, storageType);
+    }
 
-        /**
-         * Construct a new Relative Mutable FloatTimeVector.
-         * @param values float[]; the values of the entries in the new Relative Mutable FloatTimeVector
-         * @param unit U; the unit of the new Relative Mutable FloatTimeVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final float[] values, final TimeUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
+    /**
+     * Construct a new Absolute Mutable FloatTimeVector.
+     * @param values List; the values of the entries in the new Absolute Mutable FloatTimeVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public MutableFloatTimeVector(final List<FloatTime> values, final StorageType storageType) throws ValueException
+    {
+        super(values, storageType);
+    }
 
-        /**
-         * Construct a new Relative Mutable FloatTimeVector.
-         * @param values List; the values of the entries in the new Relative Mutable FloatTimeVector
-         * @param unit U; the unit of the new Relative Mutable FloatTimeVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final List<Float> values, final TimeUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Relative Mutable FloatTimeVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable FloatTimeVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final FloatTime.Rel[] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Relative Mutable FloatTimeVector.
-         * @param values List; the values of the entries in the new Relative Mutable FloatTimeVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final List<FloatTime.Rel> values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Relative Mutable FloatTimeVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
-         *            FloatTimeVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final SortedMap<Integer, FloatTime.Rel> values, final int length, final StorageType storageType)
+    /**
+     * Construct a new Absolute Mutable FloatTimeVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable FloatTimeVector
+     * @param length the size of the vector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public MutableFloatTimeVector(final SortedMap<Integer, FloatTime> values, final int length, final StorageType storageType)
             throws ValueException
-        {
-            super(values, length, storageType);
-        }
+    {
+        super(values, length, storageType);
+    }
 
-        /**
-         * Construct a new Relative Mutable FloatTimeVector.
-         * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatTimeVector
-         * @param unit U; the unit of the new Relative Sparse Mutable FloatTimeVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final SortedMap<Integer, Float> values, final TimeUnit unit, final int length,
+    /**
+     * Construct a new Absolute Mutable FloatTimeVector.
+     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatTimeVector
+     * @param unit U; the unit of the new Absolute Sparse Mutable FloatTimeVector
+     * @param length the size of the vector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
+     */
+    public MutableFloatTimeVector(final SortedMap<Integer, Float> values, final TimeUnit unit, final int length,
             final StorageType storageType) throws ValueException
-        {
-            super(values, unit, length, storageType);
-        }
+    {
+        super(values, unit, length, storageType);
+    }
 
-        /**
-         * Construct a new Relative Mutable FloatTimeVector.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Rel(final FloatVectorData data, final TimeUnit unit)
-        {
-            super(data, unit);
-        }
+    /**
+     * Construct a new Absolute Mutable FloatTimeVector.
+     * @param data an internal data object
+     * @param unit the unit
+     */
+    MutableFloatTimeVector(final FloatVectorData data, final TimeUnit unit)
+    {
+        super(data, unit);
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTimeVector.Rel instantiateType(final FloatVectorData dvd, final TimeUnit unit)
-        {
-            return new FloatTimeVector.Rel(dvd, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatTimeVector instantiateTypeAbs(final FloatVectorData dvd, final TimeUnit unit)
+    {
+        return new FloatTimeVector(dvd, unit);
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatTimeVector.Rel
-            instantiateMutableType(final FloatVectorData dvd, final TimeUnit unit)
-        {
-            return new MutableFloatTimeVector.Rel(dvd, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatDurationVector instantiateTypeRel(final FloatVectorData dvd, final TimeUnit unit)
+    {
+        return new FloatDurationVector(dvd, unit);
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel get(final int index) throws ValueException
-        {
-            return new FloatTime.Rel(getInUnit(index, getUnit()), getUnit());
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final MutableFloatTimeVector instantiateMutableType(final FloatVectorData dvd, final TimeUnit unit)
+    {
+        return new MutableFloatTimeVector(dvd, unit);
+    }
 
-        /**
-         * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-         * @return an absolute version of this relative FloatTime vector.
-         */
-        public final MutableFloatTimeVector.Abs toAbs()
-        {
-            return new MutableFloatTimeVector.Abs(getData(), getUnit());
-        }
+    /** {@inheritDoc} */
+    @Override
+    public final FloatTime get(final int index) throws ValueException
+    {
+        return new FloatTime(getInUnit(index, getUnit()), getUnit());
+    }
 
+    /**
+     * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
+     * @return a relative version of this absolute FloatTime vector.
+     */
+    public final MutableFloatDurationVector toRel()
+    {
+        return new MutableFloatDurationVector(getData(), getUnit());
     }
 
 }

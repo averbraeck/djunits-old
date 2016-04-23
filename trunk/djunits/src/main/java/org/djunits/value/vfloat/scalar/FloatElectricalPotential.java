@@ -74,11 +74,11 @@ public class FloatElectricalPotential extends TypedFloatScalarRel<ElectricalPote
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatElectricalPotential interpolate(final FloatElectricalPotential zero,
-        final FloatElectricalPotential one, final float ratio)
+    public static FloatElectricalPotential interpolate(final FloatElectricalPotential zero, final FloatElectricalPotential one,
+            final float ratio)
     {
         return new FloatElectricalPotential(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+                zero.getUnit());
     }
 
     /**

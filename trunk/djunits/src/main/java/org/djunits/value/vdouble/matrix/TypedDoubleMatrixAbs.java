@@ -22,7 +22,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <S> the absolute scalar type
  */
 abstract class TypedDoubleMatrixAbs<U extends Unit<U>, A extends TypedDoubleMatrixAbs<U, A, R, MA, S>, R extends TypedDoubleMatrixRel<U, R, ?, ?>, MA extends MutableTypedDoubleMatrixAbs<U, A, R, MA, S>, S extends DoubleScalar.Abs<U>>
-    extends DoubleMatrix.Abs<U>
+        extends DoubleMatrix.Abs<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;

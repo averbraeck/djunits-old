@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.AngleSolid;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableAngleSolidMatrix extends
-    MutableTypedDoubleMatrixRel<AngleSolidUnit, AngleSolidMatrix, MutableAngleSolidMatrix, AngleSolid>
+        MutableTypedDoubleMatrixRel<AngleSolidUnit, AngleSolidMatrix, MutableAngleSolidMatrix, AngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MutableAngleSolidMatrix extends
      * @throws ValueException when values is null
      */
     public MutableAngleSolidMatrix(final double[][] values, final AngleSolidUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -65,8 +65,7 @@ public class MutableAngleSolidMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableAngleSolidMatrix
-        instantiateMutableType(final DoubleMatrixData dmd, final AngleSolidUnit unit)
+    protected final MutableAngleSolidMatrix instantiateMutableType(final DoubleMatrixData dmd, final AngleSolidUnit unit)
     {
         return new MutableAngleSolidMatrix(dmd, unit);
     }

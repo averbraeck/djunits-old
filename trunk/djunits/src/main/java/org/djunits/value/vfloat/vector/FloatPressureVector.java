@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatPressure;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatPressureVector extends
-    TypedFloatVectorRel<PressureUnit, FloatPressureVector, MutableFloatPressureVector, FloatPressure>
+        TypedFloatVectorRel<PressureUnit, FloatPressureVector, MutableFloatPressureVector, FloatPressure>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class FloatPressureVector extends
      * @throws ValueException when values is null
      */
     public FloatPressureVector(final float[] values, final PressureUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class FloatPressureVector extends
      * @throws ValueException when values is null
      */
     public FloatPressureVector(final List<Float> values, final PressureUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,8 +82,8 @@ public class FloatPressureVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatPressureVector(final SortedMap<Integer, FloatPressure> values, final int length,
-        final StorageType storageType) throws ValueException
+    public FloatPressureVector(final SortedMap<Integer, FloatPressure> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,7 +97,7 @@ public class FloatPressureVector extends
      * @throws ValueException when values is null
      */
     public FloatPressureVector(final SortedMap<Integer, Float> values, final PressureUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class FloatPressureVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatPressureVector
-        instantiateMutableType(final FloatVectorData dvd, final PressureUnit unit)
+    protected final MutableFloatPressureVector instantiateMutableType(final FloatVectorData dvd, final PressureUnit unit)
     {
         return new MutableFloatPressureVector(dvd, unit);
     }

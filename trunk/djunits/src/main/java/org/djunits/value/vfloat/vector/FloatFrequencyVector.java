@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatFrequency;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatFrequencyVector extends
-    TypedFloatVectorRel<FrequencyUnit, FloatFrequencyVector, MutableFloatFrequencyVector, FloatFrequency>
+        TypedFloatVectorRel<FrequencyUnit, FloatFrequencyVector, MutableFloatFrequencyVector, FloatFrequency>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class FloatFrequencyVector extends
      * @throws ValueException when values is null
      */
     public FloatFrequencyVector(final float[] values, final FrequencyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class FloatFrequencyVector extends
      * @throws ValueException when values is null
      */
     public FloatFrequencyVector(final List<Float> values, final FrequencyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,8 +82,8 @@ public class FloatFrequencyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatFrequencyVector(final SortedMap<Integer, FloatFrequency> values, final int length,
-        final StorageType storageType) throws ValueException
+    public FloatFrequencyVector(final SortedMap<Integer, FloatFrequency> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,7 +97,7 @@ public class FloatFrequencyVector extends
      * @throws ValueException when values is null
      */
     public FloatFrequencyVector(final SortedMap<Integer, Float> values, final FrequencyUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class FloatFrequencyVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatFrequencyVector instantiateMutableType(final FloatVectorData dvd,
-        final FrequencyUnit unit)
+    protected final MutableFloatFrequencyVector instantiateMutableType(final FloatVectorData dvd, final FrequencyUnit unit)
     {
         return new MutableFloatFrequencyVector(dvd, unit);
     }

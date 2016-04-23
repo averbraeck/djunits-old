@@ -17,8 +17,8 @@ import org.djunits.value.vdouble.scalar.ElectricalResistance;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class ElectricalResistanceMatrix
-    extends
-    TypedDoubleMatrixRel<ElectricalResistanceUnit, ElectricalResistanceMatrix, MutableElectricalResistanceMatrix, ElectricalResistance>
+        extends
+        TypedDoubleMatrixRel<ElectricalResistanceUnit, ElectricalResistanceMatrix, MutableElectricalResistanceMatrix, ElectricalResistance>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -31,7 +31,7 @@ public class ElectricalResistanceMatrix
      * @throws ValueException when values is null
      */
     public ElectricalResistanceMatrix(final double[][] values, final ElectricalResistanceUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,7 +44,7 @@ public class ElectricalResistanceMatrix
      * @throws ValueException when values has zero entries
      */
     public ElectricalResistanceMatrix(final ElectricalResistance[][] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -60,8 +60,7 @@ public class ElectricalResistanceMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalResistanceMatrix instantiateType(final DoubleMatrixData dmd,
-        final ElectricalResistanceUnit unit)
+    protected final ElectricalResistanceMatrix instantiateType(final DoubleMatrixData dmd, final ElectricalResistanceUnit unit)
     {
         return new ElectricalResistanceMatrix(dmd, unit);
     }
@@ -69,7 +68,7 @@ public class ElectricalResistanceMatrix
     /** {@inheritDoc} */
     @Override
     protected final MutableElectricalResistanceMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final ElectricalResistanceUnit unit)
+            final ElectricalResistanceUnit unit)
     {
         return new MutableElectricalResistanceMatrix(dmd, unit);
     }

@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerMass;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableMoneyPerMassMatrix extends
-    MutableTypedDoubleMatrixRel<MoneyPerMassUnit, MoneyPerMassMatrix, MutableMoneyPerMassMatrix, MoneyPerMass>
+        MutableTypedDoubleMatrixRel<MoneyPerMassUnit, MoneyPerMassMatrix, MutableMoneyPerMassMatrix, MoneyPerMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MutableMoneyPerMassMatrix extends
      * @throws ValueException when values is null
      */
     public MutableMoneyPerMassMatrix(final double[][] values, final MoneyPerMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -42,8 +42,7 @@ public class MutableMoneyPerMassMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableMoneyPerMassMatrix(final MoneyPerMass[][] values, final StorageType storageType)
-        throws ValueException
+    public MutableMoneyPerMassMatrix(final MoneyPerMass[][] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -66,8 +65,7 @@ public class MutableMoneyPerMassMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerMassMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final MoneyPerMassUnit unit)
+    protected final MutableMoneyPerMassMatrix instantiateMutableType(final DoubleMatrixData dmd, final MoneyPerMassUnit unit)
     {
         return new MutableMoneyPerMassMatrix(dmd, unit);
     }

@@ -127,7 +127,7 @@ public class FloatSpeed extends TypedFloatScalarRel<SpeedUnit, FloatSpeed>
      * @param v FloatSpeed scalar
      * @return FloatFrequency scalar as a division of FloatSpeed and FloatLength
      */
-    public final FloatFrequency divideBy(final FloatLength.Rel v)
+    public final FloatFrequency divideBy(final FloatLength v)
     {
         return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
     }
@@ -137,9 +137,9 @@ public class FloatSpeed extends TypedFloatScalarRel<SpeedUnit, FloatSpeed>
      * @param v FloatSpeed scalar
      * @return FloatLength scalar as a division of FloatSpeed and FloatFrequency
      */
-    public final FloatLength.Rel divideBy(final FloatFrequency v)
+    public final FloatLength divideBy(final FloatFrequency v)
     {
-        return new FloatLength.Rel(this.si / v.si, LengthUnit.SI);
+        return new FloatLength(this.si / v.si, LengthUnit.SI);
     }
 
     /**
@@ -153,33 +153,33 @@ public class FloatSpeed extends TypedFloatScalarRel<SpeedUnit, FloatSpeed>
     }
 
     /**
-     * Calculate the multiplication of FloatSpeed and FloatTime, which results in a FloatLength scalar.
+     * Calculate the multiplication of FloatSpeed and FloatDuration, which results in a FloatLength scalar.
      * @param v FloatSpeed scalar
-     * @return FloatLength scalar as a multiplication of FloatSpeed and FloatTime
+     * @return FloatLength scalar as a multiplication of FloatSpeed and FloatDuration
      */
-    public final FloatLength.Rel multiplyBy(final FloatTime.Rel v)
+    public final FloatLength multiplyBy(final FloatDuration v)
     {
-        return new FloatLength.Rel(this.si * v.si, LengthUnit.SI);
+        return new FloatLength(this.si * v.si, LengthUnit.SI);
     }
 
     /**
-     * Calculate the division of FloatSpeed and FloatTime, which results in a FloatAcceleration scalar.
+     * Calculate the division of FloatSpeed and FloatDuration, which results in a FloatAcceleration scalar.
      * @param v FloatSpeed scalar
-     * @return FloatAcceleration scalar as a division of FloatSpeed and FloatTime
+     * @return FloatAcceleration scalar as a division of FloatSpeed and FloatDuration
      */
-    public final FloatAcceleration divideBy(final FloatTime.Rel v)
+    public final FloatAcceleration divideBy(final FloatDuration v)
     {
         return new FloatAcceleration(this.si / v.si, AccelerationUnit.SI);
     }
 
     /**
-     * Calculate the division of FloatSpeed and FloatAcceleration, which results in a FloatTime scalar.
+     * Calculate the division of FloatSpeed and FloatAcceleration, which results in a FloatDuration scalar.
      * @param v FloatSpeed scalar
-     * @return FloatTime scalar as a division of FloatSpeed and FloatAcceleration
+     * @return FloatDuration scalar as a division of FloatSpeed and FloatAcceleration
      */
-    public final FloatTime.Rel divideBy(final FloatAcceleration v)
+    public final FloatDuration divideBy(final FloatAcceleration v)
     {
-        return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
+        return new FloatDuration(this.si / v.si, TimeUnit.SI);
     }
 
     /**

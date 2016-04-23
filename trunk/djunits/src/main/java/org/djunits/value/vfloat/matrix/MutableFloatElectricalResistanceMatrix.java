@@ -17,8 +17,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalResistance;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatElectricalResistanceMatrix
-    extends
-    MutableTypedFloatMatrixRel<ElectricalResistanceUnit, FloatElectricalResistanceMatrix, MutableFloatElectricalResistanceMatrix, FloatElectricalResistance>
+        extends
+        MutableTypedFloatMatrixRel<ElectricalResistanceUnit, FloatElectricalResistanceMatrix, MutableFloatElectricalResistanceMatrix, FloatElectricalResistance>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -31,7 +31,7 @@ public class MutableFloatElectricalResistanceMatrix
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalResistanceMatrix(final float[][] values, final ElectricalResistanceUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -43,8 +43,8 @@ public class MutableFloatElectricalResistanceMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatElectricalResistanceMatrix(final FloatElectricalResistance[][] values,
-        final StorageType storageType) throws ValueException
+    public MutableFloatElectricalResistanceMatrix(final FloatElectricalResistance[][] values, final StorageType storageType)
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -61,7 +61,7 @@ public class MutableFloatElectricalResistanceMatrix
     /** {@inheritDoc} */
     @Override
     protected final FloatElectricalResistanceMatrix instantiateType(final FloatMatrixData fmd,
-        final ElectricalResistanceUnit unit)
+            final ElectricalResistanceUnit unit)
     {
         return new FloatElectricalResistanceMatrix(fmd, unit);
     }
@@ -69,7 +69,7 @@ public class MutableFloatElectricalResistanceMatrix
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatElectricalResistanceMatrix instantiateMutableType(final FloatMatrixData fmd,
-        final ElectricalResistanceUnit unit)
+            final ElectricalResistanceUnit unit)
     {
         return new MutableFloatElectricalResistanceMatrix(fmd, unit);
     }

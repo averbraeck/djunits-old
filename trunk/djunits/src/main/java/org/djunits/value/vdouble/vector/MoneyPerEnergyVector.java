@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerEnergy;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MoneyPerEnergyVector extends
-    TypedDoubleVectorRel<MoneyPerEnergyUnit, MoneyPerEnergyVector, MutableMoneyPerEnergyVector, MoneyPerEnergy>
+        TypedDoubleVectorRel<MoneyPerEnergyUnit, MoneyPerEnergyVector, MutableMoneyPerEnergyVector, MoneyPerEnergy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MoneyPerEnergyVector extends
      * @throws ValueException when values is null
      */
     public MoneyPerEnergyVector(final double[] values, final MoneyPerEnergyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MoneyPerEnergyVector extends
      * @throws ValueException when values is null
      */
     public MoneyPerEnergyVector(final List<Double> values, final MoneyPerEnergyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,8 +82,8 @@ public class MoneyPerEnergyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MoneyPerEnergyVector(final SortedMap<Integer, MoneyPerEnergy> values, final int length,
-        final StorageType storageType) throws ValueException
+    public MoneyPerEnergyVector(final SortedMap<Integer, MoneyPerEnergy> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -96,8 +96,8 @@ public class MoneyPerEnergyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MoneyPerEnergyVector(final SortedMap<Integer, Double> values, final MoneyPerEnergyUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public MoneyPerEnergyVector(final SortedMap<Integer, Double> values, final MoneyPerEnergyUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class MoneyPerEnergyVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerEnergyVector instantiateMutableType(final DoubleVectorData dvd,
-        final MoneyPerEnergyUnit unit)
+    protected final MutableMoneyPerEnergyVector instantiateMutableType(final DoubleVectorData dvd, final MoneyPerEnergyUnit unit)
     {
         return new MutableMoneyPerEnergyVector(dvd, unit);
     }

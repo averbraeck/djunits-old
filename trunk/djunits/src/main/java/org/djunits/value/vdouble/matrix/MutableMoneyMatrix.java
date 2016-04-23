@@ -29,7 +29,7 @@ public class MutableMoneyMatrix extends MutableTypedDoubleMatrixRel<MoneyUnit, M
      * @throws ValueException when values is null
      */
     public MutableMoneyMatrix(final double[][] values, final MoneyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

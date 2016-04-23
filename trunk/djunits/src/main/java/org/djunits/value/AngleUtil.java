@@ -2,8 +2,10 @@ package org.djunits.value;
 
 import org.djunits.unit.AngleUnit;
 import org.djunits.value.vdouble.scalar.Angle;
+import org.djunits.value.vdouble.scalar.Direction;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.djunits.value.vfloat.scalar.FloatAngle;
+import org.djunits.value.vfloat.scalar.FloatDirection;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 
 /**
@@ -98,10 +100,10 @@ public interface AngleUtil
      * @param angle original angle.
      * @return angle between 0 and 2 * PI.
      */
-    static Angle.Abs normalize(final Angle.Abs angle)
+    static Direction normalize(final Direction angle)
     {
         double normalized = angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
-        return new Angle.Abs(normalized, angle.getUnit());
+        return new Direction(normalized, angle.getUnit());
     }
 
     /**
@@ -109,10 +111,10 @@ public interface AngleUtil
      * @param angle original angle.
      * @return angle between 0 and 2 * PI.
      */
-    static Angle.Rel normalize(final Angle.Rel angle)
+    static Angle normalize(final Angle angle)
     {
         double normalized = angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
-        return new Angle.Rel(normalized, angle.getUnit());
+        return new Angle(normalized, angle.getUnit());
     }
 
     /**
@@ -120,10 +122,10 @@ public interface AngleUtil
      * @param angle original angle.
      * @return angle between 0 and 2 * PI.
      */
-    static FloatAngle.Abs normalize(final FloatAngle.Abs angle)
+    static FloatDirection normalize(final FloatDirection angle)
     {
         float normalized = (float) angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
-        return new FloatAngle.Abs(normalized, angle.getUnit());
+        return new FloatDirection(normalized, angle.getUnit());
     }
 
     /**
@@ -131,9 +133,9 @@ public interface AngleUtil
      * @param angle original angle.
      * @return angle between 0 and 2 * PI.
      */
-    static FloatAngle.Rel normalize(final FloatAngle.Rel angle)
+    static FloatAngle normalize(final FloatAngle angle)
     {
         float normalized = (float) angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
-        return new FloatAngle.Rel(normalized, angle.getUnit());
+        return new FloatAngle(normalized, angle.getUnit());
     }
 }

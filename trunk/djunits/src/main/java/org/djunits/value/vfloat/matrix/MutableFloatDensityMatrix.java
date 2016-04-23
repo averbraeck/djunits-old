@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatDensity;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatDensityMatrix extends
-    MutableTypedFloatMatrixRel<DensityUnit, FloatDensityMatrix, MutableFloatDensityMatrix, FloatDensity>
+        MutableTypedFloatMatrixRel<DensityUnit, FloatDensityMatrix, MutableFloatDensityMatrix, FloatDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MutableFloatDensityMatrix extends
      * @throws ValueException when values is null
      */
     public MutableFloatDensityMatrix(final float[][] values, final DensityUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -42,8 +42,7 @@ public class MutableFloatDensityMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatDensityMatrix(final FloatDensity[][] values, final StorageType storageType)
-        throws ValueException
+    public MutableFloatDensityMatrix(final FloatDensity[][] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }

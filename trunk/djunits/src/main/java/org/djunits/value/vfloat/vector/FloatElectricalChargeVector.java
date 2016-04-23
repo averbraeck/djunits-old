@@ -20,8 +20,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalCharge;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatElectricalChargeVector
-    extends
-    TypedFloatVectorRel<ElectricalChargeUnit, FloatElectricalChargeVector, MutableFloatElectricalChargeVector, FloatElectricalCharge>
+        extends
+        TypedFloatVectorRel<ElectricalChargeUnit, FloatElectricalChargeVector, MutableFloatElectricalChargeVector, FloatElectricalCharge>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,8 +33,8 @@ public class FloatElectricalChargeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatElectricalChargeVector(final float[] values, final ElectricalChargeUnit unit,
-        final StorageType storageType) throws ValueException
+    public FloatElectricalChargeVector(final float[] values, final ElectricalChargeUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,8 +46,8 @@ public class FloatElectricalChargeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatElectricalChargeVector(final List<Float> values, final ElectricalChargeUnit unit,
-        final StorageType storageType) throws ValueException
+    public FloatElectricalChargeVector(final List<Float> values, final ElectricalChargeUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -60,7 +60,7 @@ public class FloatElectricalChargeVector
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalChargeVector(final FloatElectricalCharge[] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -72,7 +72,7 @@ public class FloatElectricalChargeVector
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalChargeVector(final List<FloatElectricalCharge> values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +86,7 @@ public class FloatElectricalChargeVector
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalChargeVector(final SortedMap<Integer, FloatElectricalCharge> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -100,7 +100,7 @@ public class FloatElectricalChargeVector
      * @throws ValueException when values is null
      */
     public FloatElectricalChargeVector(final SortedMap<Integer, Float> values, final ElectricalChargeUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -116,8 +116,7 @@ public class FloatElectricalChargeVector
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalChargeVector instantiateType(final FloatVectorData dvd,
-        final ElectricalChargeUnit unit)
+    protected final FloatElectricalChargeVector instantiateType(final FloatVectorData dvd, final ElectricalChargeUnit unit)
     {
         return new FloatElectricalChargeVector(dvd, unit);
     }
@@ -125,7 +124,7 @@ public class FloatElectricalChargeVector
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatElectricalChargeVector instantiateMutableType(final FloatVectorData dvd,
-        final ElectricalChargeUnit unit)
+            final ElectricalChargeUnit unit)
     {
         return new MutableFloatElectricalChargeVector(dvd, unit);
     }

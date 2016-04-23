@@ -90,11 +90,11 @@ public class Acceleration extends TypedDoubleScalarRel<AccelerationUnit, Acceler
     }
 
     /**
-     * Calculate the multiplication of Acceleration and Time, which results in a Speed scalar.
+     * Calculate the multiplication of Acceleration and Duration, which results in a Speed scalar.
      * @param v Acceleration scalar
-     * @return Speed scalar as a multiplication of Acceleration and Time
+     * @return Speed scalar as a multiplication of Acceleration and Duration
      */
-    public final Speed multiplyBy(final Time.Rel v)
+    public final Speed multiplyBy(final Duration v)
     {
         return new Speed(this.si * v.si, SpeedUnit.SI);
     }

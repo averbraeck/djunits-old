@@ -31,8 +31,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableFloatVector
  */
-public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<U> implements
-    MutableFloatVectorInterface<U>
+public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<U> implements MutableFloatVectorInterface<U>
 {
     /**  */
     private static final long serialVersionUID = 20151003L;
@@ -76,8 +75,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Abs<U extends Unit<U>> extends MutableFloatVector<U> implements Absolute,
-        MathFunctionsAbs<MutableFloatVector.Abs<U>>, FunctionsAbs<U, FloatVector.Abs<U>, FloatVector.Rel<U>>,
-        FloatMathFunctions<MutableFloatVector.Abs<U>>
+            MathFunctionsAbs<MutableFloatVector.Abs<U>>, FunctionsAbs<U, FloatVector.Abs<U>, FloatVector.Rel<U>>,
+            FloatMathFunctions<MutableFloatVector.Abs<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -127,8 +126,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
          * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends FloatScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType)
-            throws ValueException
+        public <S extends FloatScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = FloatVectorData.instantiateLD(values, storageType);
@@ -143,7 +141,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
          * @throws ValueException when values has zero entries
          */
         public <S extends FloatScalar.Abs<U>> Abs(final SortedMap<Integer, S> values, final int length,
-            final StorageType storageType) throws ValueException
+                final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = FloatVectorData.instantiateMD(values, length, storageType);
@@ -158,7 +156,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
          * @throws ValueException when values is null
          */
         public Abs(final SortedMap<Integer, Float> values, final U unit, final int length, final StorageType storageType)
-            throws ValueException
+                throws ValueException
         {
             super(unit);
             this.data = FloatVectorData.instantiate(values, length, unit.getScale(), storageType);
@@ -437,8 +435,8 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Rel<U extends Unit<U>> extends MutableFloatVector<U> implements Relative,
-        MathFunctionsRel<MutableFloatVector.Rel<U>>, FunctionsRel<U, FloatVector.Abs<U>, FloatVector.Rel<U>>,
-        FloatMathFunctions<MutableFloatVector.Rel<U>>
+            MathFunctionsRel<MutableFloatVector.Rel<U>>, FunctionsRel<U, FloatVector.Abs<U>, FloatVector.Rel<U>>,
+            FloatMathFunctions<MutableFloatVector.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -488,8 +486,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
          * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends FloatScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType)
-            throws ValueException
+        public <S extends FloatScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = FloatVectorData.instantiateLD(values, storageType);
@@ -504,7 +501,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
          * @throws ValueException when values has zero entries
          */
         public <S extends FloatScalar.Rel<U>> Rel(final SortedMap<Integer, S> values, final int length,
-            final StorageType storageType) throws ValueException
+                final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = FloatVectorData.instantiateMD(values, length, storageType);
@@ -519,7 +516,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
          * @throws ValueException when values is null
          */
         public Rel(final SortedMap<Integer, Float> values, final U unit, final int length, final StorageType storageType)
-            throws ValueException
+                throws ValueException
         {
             super(unit);
             this.data = FloatVectorData.instantiate(values, length, unit.getScale(), storageType);
@@ -825,8 +822,7 @@ public abstract class MutableFloatVector<U extends Unit<U>> extends FloatVector<
      * @param <U> the unit
      * @return an instantiated vector
      */
-    static <U extends Unit<U>> MutableFloatVector.Abs<U> instantiateMutableAbs(final FloatVectorData dvData,
-        final U unit)
+    static <U extends Unit<U>> MutableFloatVector.Abs<U> instantiateMutableAbs(final FloatVectorData dvData, final U unit)
     {
         return new MutableFloatVector.Abs<U>(dvData, unit);
     }

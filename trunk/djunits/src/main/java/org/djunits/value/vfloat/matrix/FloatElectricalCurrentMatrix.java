@@ -17,8 +17,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalCurrent;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatElectricalCurrentMatrix
-    extends
-    TypedFloatMatrixRel<ElectricalCurrentUnit, FloatElectricalCurrentMatrix, MutableFloatElectricalCurrentMatrix, FloatElectricalCurrent>
+        extends
+        TypedFloatMatrixRel<ElectricalCurrentUnit, FloatElectricalCurrentMatrix, MutableFloatElectricalCurrentMatrix, FloatElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,8 +30,8 @@ public class FloatElectricalCurrentMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatElectricalCurrentMatrix(final float[][] values, final ElectricalCurrentUnit unit,
-        final StorageType storageType) throws ValueException
+    public FloatElectricalCurrentMatrix(final float[][] values, final ElectricalCurrentUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,7 +44,7 @@ public class FloatElectricalCurrentMatrix
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalCurrentMatrix(final FloatElectricalCurrent[][] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -60,8 +60,7 @@ public class FloatElectricalCurrentMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalCurrentMatrix instantiateType(final FloatMatrixData fmd,
-        final ElectricalCurrentUnit unit)
+    protected final FloatElectricalCurrentMatrix instantiateType(final FloatMatrixData fmd, final ElectricalCurrentUnit unit)
     {
         return new FloatElectricalCurrentMatrix(fmd, unit);
     }
@@ -69,7 +68,7 @@ public class FloatElectricalCurrentMatrix
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatElectricalCurrentMatrix instantiateMutableType(final FloatMatrixData fmd,
-        final ElectricalCurrentUnit unit)
+            final ElectricalCurrentUnit unit)
     {
         return new MutableFloatElectricalCurrentMatrix(fmd, unit);
     }

@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatTemperature;
 
 /**
- * Mutable FloatTemperature Vector.
+ * Mutable Relative FloatTemperature Vector.
  * <p>
  * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -19,284 +19,127 @@ import org.djunits.value.vfloat.scalar.FloatTemperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface MutableFloatTemperatureVector
+public class MutableFloatTemperatureVector extends
+        MutableTypedFloatVectorRel<TemperatureUnit, FloatTemperatureVector, MutableFloatTemperatureVector, FloatTemperature>
 {
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /** */
+    private static final long serialVersionUID = 20151006L;
 
     /**
-     * ABSOLUTE implementation of FloatTemperatureVector.
+     * Construct a new Relative Mutable FloatTemperatureVector.
+     * @param values float[]; the values of the entries in the new Relative Mutable FloatTemperatureVector
+     * @param unit U; the unit of the new Relative Mutable FloatTemperatureVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
      */
-    class Abs
-        extends
-        MutableTypedFloatVectorAbs<TemperatureUnit, FloatTemperatureVector.Abs, FloatTemperatureVector.Rel, MutableFloatTemperatureVector.Abs, FloatTemperature.Abs>
+    public MutableFloatTemperatureVector(final float[] values, final TemperatureUnit unit, final StorageType storageType)
+            throws ValueException
     {
-        /** */
-        private static final long serialVersionUID = 20151003L;
-
-        /**
-         * Construct a new Absolute Mutable FloatTemperatureVector.
-         * @param values float[]; the values of the entries in the new Absolute Mutable FloatTemperatureVector
-         * @param unit U; the unit of the new Absolute Mutable FloatTemperatureVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final float[] values, final TemperatureUnit unit, final StorageType storageType)
-            throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTemperatureVector.
-         * @param values List; the values of the entries in the new Absolute Mutable FloatTemperatureVector
-         * @param unit U; the unit of the new Absolute Mutable FloatTemperatureVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final List<Float> values, final TemperatureUnit unit, final StorageType storageType)
-            throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTemperatureVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable
-         *            FloatTemperatureVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final FloatTemperature.Abs[] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTemperatureVector.
-         * @param values List; the values of the entries in the new Absolute Mutable FloatTemperatureVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final List<FloatTemperature.Abs> values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTemperatureVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable
-         *            FloatTemperatureVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final SortedMap<Integer, FloatTemperature.Abs> values, final int length,
-            final StorageType storageType) throws ValueException
-        {
-            super(values, length, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTemperatureVector.
-         * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatTemperatureVector
-         * @param unit U; the unit of the new Absolute Sparse Mutable FloatTemperatureVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final SortedMap<Integer, Float> values, final TemperatureUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-        {
-            super(values, unit, length, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Mutable FloatTemperatureVector.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Abs(final FloatVectorData data, final TemperatureUnit unit)
-        {
-            super(data, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTemperatureVector.Abs instantiateTypeAbs(final FloatVectorData dvd,
-            final TemperatureUnit unit)
-        {
-            return new FloatTemperatureVector.Abs(dvd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTemperatureVector.Rel instantiateTypeRel(final FloatVectorData dvd,
-            final TemperatureUnit unit)
-        {
-            return new FloatTemperatureVector.Rel(dvd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatTemperatureVector.Abs instantiateMutableType(final FloatVectorData dvd,
-            final TemperatureUnit unit)
-        {
-            return new MutableFloatTemperatureVector.Abs(dvd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs get(final int index) throws ValueException
-        {
-            return new FloatTemperature.Abs(getInUnit(index, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute FloatTemperature vector.
-         */
-        public final MutableFloatTemperatureVector.Rel toRel()
-        {
-            return new MutableFloatTemperatureVector.Rel(getData(), getUnit());
-        }
-
+        super(values, unit, storageType);
     }
 
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /**
+     * Construct a new Relative Mutable FloatTemperatureVector.
+     * @param values List; the values of the entries in the new Relative Mutable FloatTemperatureVector
+     * @param unit U; the unit of the new Relative Mutable FloatTemperatureVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
+     */
+    public MutableFloatTemperatureVector(final List<Float> values, final TemperatureUnit unit, final StorageType storageType)
+            throws ValueException
+    {
+        super(values, unit, storageType);
+    }
 
     /**
-     * RELATIVE implementation of FloatTemperatureVector.
+     * Construct a new Relative Mutable FloatTemperatureVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable FloatTemperatureVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
      */
-    class Rel
-        extends
-        MutableTypedFloatVectorRel<TemperatureUnit, FloatTemperatureVector.Rel, MutableFloatTemperatureVector.Rel, FloatTemperature.Rel>
+    public MutableFloatTemperatureVector(final FloatTemperature[] values, final StorageType storageType) throws ValueException
     {
-        /** */
-        private static final long serialVersionUID = 20151006L;
+        super(values, storageType);
+    }
 
-        /**
-         * Construct a new Relative Mutable FloatTemperatureVector.
-         * @param values float[]; the values of the entries in the new Relative Mutable FloatTemperatureVector
-         * @param unit U; the unit of the new Relative Mutable FloatTemperatureVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final float[] values, final TemperatureUnit unit, final StorageType storageType)
+    /**
+     * Construct a new Relative Mutable FloatTemperatureVector.
+     * @param values List; the values of the entries in the new Relative Mutable FloatTemperatureVector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public MutableFloatTemperatureVector(final List<FloatTemperature> values, final StorageType storageType)
             throws ValueException
-        {
-            super(values, unit, storageType);
-        }
+    {
+        super(values, storageType);
+    }
 
-        /**
-         * Construct a new Relative Mutable FloatTemperatureVector.
-         * @param values List; the values of the entries in the new Relative Mutable FloatTemperatureVector
-         * @param unit U; the unit of the new Relative Mutable FloatTemperatureVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final List<Float> values, final TemperatureUnit unit, final StorageType storageType)
-            throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Relative Mutable FloatTemperatureVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable
-         *            FloatTemperatureVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final FloatTemperature.Rel[] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Relative Mutable FloatTemperatureVector.
-         * @param values List; the values of the entries in the new Relative Mutable FloatTemperatureVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final List<FloatTemperature.Rel> values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Relative Mutable FloatTemperatureVector.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
-         *            FloatTemperatureVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final SortedMap<Integer, FloatTemperature.Rel> values, final int length,
+    /**
+     * Construct a new Relative Mutable FloatTemperatureVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
+     *            FloatTemperatureVector
+     * @param length the size of the vector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public MutableFloatTemperatureVector(final SortedMap<Integer, FloatTemperature> values, final int length,
             final StorageType storageType) throws ValueException
-        {
-            super(values, length, storageType);
-        }
+    {
+        super(values, length, storageType);
+    }
 
-        /**
-         * Construct a new Relative Mutable FloatTemperatureVector.
-         * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatTemperatureVector
-         * @param unit U; the unit of the new Relative Sparse Mutable FloatTemperatureVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final SortedMap<Integer, Float> values, final TemperatureUnit unit, final int length,
+    /**
+     * Construct a new Relative Mutable FloatTemperatureVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatTemperatureVector
+     * @param unit U; the unit of the new Relative Sparse Mutable FloatTemperatureVector
+     * @param length the size of the vector
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
+     */
+    public MutableFloatTemperatureVector(final SortedMap<Integer, Float> values, final TemperatureUnit unit, final int length,
             final StorageType storageType) throws ValueException
-        {
-            super(values, unit, length, storageType);
-        }
+    {
+        super(values, unit, length, storageType);
+    }
 
-        /**
-         * Construct a new Relative Mutable FloatTemperatureVector.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Rel(final FloatVectorData data, final TemperatureUnit unit)
-        {
-            super(data, unit);
-        }
+    /**
+     * Construct a new Relative Mutable FloatTemperatureVector.
+     * @param data an internal data object
+     * @param unit the unit
+     */
+    MutableFloatTemperatureVector(final FloatVectorData data, final TemperatureUnit unit)
+    {
+        super(data, unit);
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTemperatureVector.Rel
-            instantiateType(final FloatVectorData dvd, final TemperatureUnit unit)
-        {
-            return new FloatTemperatureVector.Rel(dvd, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatTemperatureVector instantiateType(final FloatVectorData dvd, final TemperatureUnit unit)
+    {
+        return new FloatTemperatureVector(dvd, unit);
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatTemperatureVector.Rel instantiateMutableType(final FloatVectorData dvd,
-            final TemperatureUnit unit)
-        {
-            return new MutableFloatTemperatureVector.Rel(dvd, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final MutableFloatTemperatureVector instantiateMutableType(final FloatVectorData dvd, final TemperatureUnit unit)
+    {
+        return new MutableFloatTemperatureVector(dvd, unit);
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel get(final int index) throws ValueException
-        {
-            return new FloatTemperature.Rel(getInUnit(index, getUnit()), getUnit());
-        }
+    /** {@inheritDoc} */
+    @Override
+    public final FloatTemperature get(final int index) throws ValueException
+    {
+        return new FloatTemperature(getInUnit(index, getUnit()), getUnit());
+    }
 
-        /**
-         * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-         * @return an absolute version of this relative FloatTemperature vector.
-         */
-        public final MutableFloatTemperatureVector.Abs toAbs()
-        {
-            return new MutableFloatTemperatureVector.Abs(getData(), getUnit());
-        }
-
+    /**
+     * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
+     * @return an absolute version of this relative FloatTemperature vector.
+     */
+    public final MutableFloatAbsoluteTemperatureVector toAbs()
+    {
+        return new MutableFloatAbsoluteTemperatureVector(getData(), getUnit());
     }
 
 }

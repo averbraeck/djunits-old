@@ -32,7 +32,7 @@ import org.ojalgo.matrix.PrimitiveMatrix;
  * @param <U> Unit; the unit of this DoubleMatrix
  */
 public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> implements Serializable,
-    DoubleMatrixInterface<U>
+        DoubleMatrixInterface<U>
 {
     /**  */
     private static final long serialVersionUID = 20151003L;
@@ -76,7 +76,7 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
      * @param <U> Unit the unit for which this Matrix will be created
      */
     public static class Abs<U extends Unit<U>> extends DoubleMatrix<U> implements Absolute,
-        FunctionsAbs<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>
+            FunctionsAbs<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -184,7 +184,7 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
      * @param <U> Unit the unit for which this Matrix will be created
      */
     public static class Rel<U extends Unit<U>> extends DoubleMatrix<U> implements Relative,
-        FunctionsRel<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>
+            FunctionsRel<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>
     {
         /** */
         private static final long serialVersionUID = 20151003L;
@@ -325,8 +325,7 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
     {
         if (null == values)
         {
-            throw new ValueException(
-                "Cannot create a DoubleVector or MutableDoubleVector from a null array of double[][]");
+            throw new ValueException("Cannot create a DoubleVector or MutableDoubleVector from a null array of double[][]");
         }
         if (values.length > 0 && null == values[0])
         {
@@ -336,8 +335,7 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
         {
             if (null == values[row] || values[0].length != values[row].length)
             {
-                throw new ValueException(
-                    "Creating DoubleVector or MutableDoubleVector: Lengths of rows are not all the same");
+                throw new ValueException("Creating DoubleVector or MutableDoubleVector: Lengths of rows are not all the same");
             }
         }
     }
@@ -351,20 +349,18 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
     {
         if (null == values)
         {
-            throw new ValueException(
-                "Cannot create a DoubleVector or MutableDoubleVector from an empty array of DoubleScalar");
+            throw new ValueException("Cannot create a DoubleVector or MutableDoubleVector from an empty array of DoubleScalar");
         }
         if (0 == values.length || 0 == values[0].length)
         {
             throw new ValueException("Creating DoubleVector or MutableDoubleVector: "
-                + "Cannot determine unit for DoubleMatrix from an empty array of DoubleScalar");
+                    + "Cannot determine unit for DoubleMatrix from an empty array of DoubleScalar");
         }
         for (int row = values.length; --row >= 1;)
         {
             if (values[0].length != values[row].length)
             {
-                throw new ValueException(
-                    "Creating DoubleVector or MutableDoubleVector: Lengths of rows are not all the same");
+                throw new ValueException("Creating DoubleVector or MutableDoubleVector: Lengths of rows are not all the same");
             }
         }
     }
@@ -405,8 +401,8 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
      * @return the sum of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
-    static <U extends Unit<U>> DoubleMatrix.Abs<U>
-        plus(final DoubleMatrix.Abs<U> left, final DoubleMatrix.Rel<U> right) throws ValueException
+    static <U extends Unit<U>> DoubleMatrix.Abs<U> plus(final DoubleMatrix.Abs<U> left, final DoubleMatrix.Rel<U> right)
+            throws ValueException
     {
         return left.mutable().plus(right);
     }
@@ -419,8 +415,8 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
      * @return the sum of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
-    static <U extends Unit<U>> DoubleMatrix.Rel<U>
-        plus(final DoubleMatrix.Rel<U> left, final DoubleMatrix.Rel<U> right) throws ValueException
+    static <U extends Unit<U>> DoubleMatrix.Rel<U> plus(final DoubleMatrix.Rel<U> left, final DoubleMatrix.Rel<U> right)
+            throws ValueException
     {
         return left.mutable().plus(right);
     }
@@ -433,8 +429,8 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
      * @return the difference of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
-    static <U extends Unit<U>> DoubleMatrix.Abs<U>
-        minus(final DoubleMatrix.Abs<U> left, final DoubleMatrix.Rel<U> right) throws ValueException
+    static <U extends Unit<U>> DoubleMatrix.Abs<U> minus(final DoubleMatrix.Abs<U> left, final DoubleMatrix.Rel<U> right)
+            throws ValueException
     {
         return left.mutable().minus(right);
     }
@@ -447,8 +443,8 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
      * @return the difference of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
-    static <U extends Unit<U>> DoubleMatrix.Rel<U>
-        minus(final DoubleMatrix.Abs<U> left, final DoubleMatrix.Abs<U> right) throws ValueException
+    static <U extends Unit<U>> DoubleMatrix.Rel<U> minus(final DoubleMatrix.Abs<U> left, final DoubleMatrix.Abs<U> right)
+            throws ValueException
     {
         return left.mutable().minus(right);
     }
@@ -461,8 +457,8 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
      * @return the difference of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
-    static <U extends Unit<U>> DoubleMatrix.Rel<U>
-        minus(final DoubleMatrix.Rel<U> left, final DoubleMatrix.Rel<U> right) throws ValueException
+    static <U extends Unit<U>> DoubleMatrix.Rel<U> minus(final DoubleMatrix.Rel<U> left, final DoubleMatrix.Rel<U> right)
+            throws ValueException
     {
         return left.mutable().minus(right);
     }
@@ -476,8 +472,8 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
      * @return the cell-by-cell multiplication of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
-    static <U extends Unit<U>> DoubleMatrix.Rel<U>
-        times(final DoubleMatrix.Rel<U> left, final DoubleMatrix.Rel<U> right) throws ValueException
+    static <U extends Unit<U>> DoubleMatrix.Rel<U> times(final DoubleMatrix.Rel<U> left, final DoubleMatrix.Rel<U> right)
+            throws ValueException
     {
         return left.mutable().times(right);
     }
@@ -491,8 +487,8 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
      * @return the cell-by-cell division of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
-    static <U extends Unit<U>> DoubleMatrix.Rel<U> divide(final DoubleMatrix.Rel<U> left,
-        final DoubleMatrix.Rel<U> right) throws ValueException
+    static <U extends Unit<U>> DoubleMatrix.Rel<U> divide(final DoubleMatrix.Rel<U> left, final DoubleMatrix.Rel<U> right)
+            throws ValueException
     {
         return left.mutable().divide(right);
     }
@@ -675,8 +671,8 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
         }
         if (rows() != other.rows() || columns() != other.columns())
         {
-            throw new ValueException("The matrices have different sizes: " + rows() + "x" + columns() + " != "
-                + other.rows() + "x" + other.columns());
+            throw new ValueException("The matrices have different sizes: " + rows() + "x" + columns() + " != " + other.rows()
+                    + "x" + other.columns());
         }
     }
 
@@ -691,8 +687,8 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
         final int otherColumns = other[0].length;
         if (rows() != other.length || columns() != otherColumns)
         {
-            throw new ValueException("The matrix and the array have different sizes: " + rows() + "x" + columns()
-                + " != " + other.length + "x" + otherColumns);
+            throw new ValueException("The matrix and the array have different sizes: " + rows() + "x" + columns() + " != "
+                    + other.length + "x" + otherColumns);
         }
     }
 
@@ -706,8 +702,8 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
     {
         if (row < 0 || row >= rows() || column < 0 || column >= columns())
         {
-            throw new ValueException("index out of range (valid range is 0.." + (rows() - 1) + ", 0.."
-                + (columns() - 1) + ", got " + row + ", " + column + ")");
+            throw new ValueException("index out of range (valid range is 0.." + (rows() - 1) + ", 0.." + (columns() - 1)
+                    + ", got " + row + ", " + column + ")");
         }
     }
 
@@ -740,7 +736,7 @@ public abstract class DoubleMatrix<U extends Unit<U>> extends AbstractValue<U> i
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

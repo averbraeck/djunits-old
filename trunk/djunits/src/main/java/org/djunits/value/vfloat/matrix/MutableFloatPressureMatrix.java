@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatPressure;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatPressureMatrix extends
-    MutableTypedFloatMatrixRel<PressureUnit, FloatPressureMatrix, MutableFloatPressureMatrix, FloatPressure>
+        MutableTypedFloatMatrixRel<PressureUnit, FloatPressureMatrix, MutableFloatPressureMatrix, FloatPressure>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MutableFloatPressureMatrix extends
      * @throws ValueException when values is null
      */
     public MutableFloatPressureMatrix(final float[][] values, final PressureUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -42,8 +42,7 @@ public class MutableFloatPressureMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatPressureMatrix(final FloatPressure[][] values, final StorageType storageType)
-        throws ValueException
+    public MutableFloatPressureMatrix(final FloatPressure[][] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -66,8 +65,7 @@ public class MutableFloatPressureMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatPressureMatrix
-        instantiateMutableType(final FloatMatrixData fmd, final PressureUnit unit)
+    protected final MutableFloatPressureMatrix instantiateMutableType(final FloatMatrixData fmd, final PressureUnit unit)
     {
         return new MutableFloatPressureMatrix(fmd, unit);
     }

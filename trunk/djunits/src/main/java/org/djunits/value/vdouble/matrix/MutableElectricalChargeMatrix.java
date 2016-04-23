@@ -17,8 +17,8 @@ import org.djunits.value.vdouble.scalar.ElectricalCharge;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableElectricalChargeMatrix
-    extends
-    MutableTypedDoubleMatrixRel<ElectricalChargeUnit, ElectricalChargeMatrix, MutableElectricalChargeMatrix, ElectricalCharge>
+        extends
+        MutableTypedDoubleMatrixRel<ElectricalChargeUnit, ElectricalChargeMatrix, MutableElectricalChargeMatrix, ElectricalCharge>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,8 +30,8 @@ public class MutableElectricalChargeMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableElectricalChargeMatrix(final double[][] values, final ElectricalChargeUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableElectricalChargeMatrix(final double[][] values, final ElectricalChargeUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,7 +44,7 @@ public class MutableElectricalChargeMatrix
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalChargeMatrix(final ElectricalCharge[][] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -68,7 +68,7 @@ public class MutableElectricalChargeMatrix
     /** {@inheritDoc} */
     @Override
     protected final MutableElectricalChargeMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final ElectricalChargeUnit unit)
+            final ElectricalChargeUnit unit)
     {
         return new MutableElectricalChargeMatrix(dmd, unit);
     }

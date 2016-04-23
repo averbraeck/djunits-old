@@ -28,8 +28,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit the unit for which this Vector will be created
  */
-public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> implements FloatVectorInterface<U>,
-    Serializable
+public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> implements FloatVectorInterface<U>, Serializable
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -73,7 +72,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Abs<U extends Unit<U>> extends FloatVector<U> implements Absolute,
-        FunctionsAbs<U, FloatVector.Abs<U>, FloatVector.Rel<U>>
+            FunctionsAbs<U, FloatVector.Abs<U>, FloatVector.Rel<U>>
     {
         /** */
         private static final long serialVersionUID = 20151003L;
@@ -123,8 +122,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
          * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends FloatScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType)
-            throws ValueException
+        public <S extends FloatScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = FloatVectorData.instantiateLD(values, storageType);
@@ -139,7 +137,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
          * @throws ValueException when values has zero entries
          */
         public <S extends FloatScalar.Abs<U>> Abs(final SortedMap<Integer, S> values, final int length,
-            final StorageType storageType) throws ValueException
+                final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = FloatVectorData.instantiateMD(values, length, storageType);
@@ -154,7 +152,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
          * @throws ValueException when values is null
          */
         public Abs(final SortedMap<Integer, Float> values, final U unit, final int length, final StorageType storageType)
-            throws ValueException
+                throws ValueException
         {
             super(unit);
             this.data = FloatVectorData.instantiate(values, length, unit.getScale(), storageType);
@@ -237,7 +235,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Rel<U extends Unit<U>> extends FloatVector<U> implements Relative,
-        FunctionsRel<U, FloatVector.Abs<U>, FloatVector.Rel<U>>
+            FunctionsRel<U, FloatVector.Abs<U>, FloatVector.Rel<U>>
 
     {
         /** */
@@ -288,8 +286,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
          * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends FloatScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType)
-            throws ValueException
+        public <S extends FloatScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = FloatVectorData.instantiateLD(values, storageType);
@@ -304,7 +301,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
          * @throws ValueException when values has zero entries
          */
         public <S extends FloatScalar.Rel<U>> Rel(final SortedMap<Integer, S> values, final int length,
-            final StorageType storageType) throws ValueException
+                final StorageType storageType) throws ValueException
         {
             super(checkUnit(values));
             this.data = FloatVectorData.instantiateMD(values, length, storageType);
@@ -319,7 +316,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
          * @throws ValueException when values is null
          */
         public Rel(final SortedMap<Integer, Float> values, final U unit, final int length, final StorageType storageType)
-            throws ValueException
+                throws ValueException
         {
             super(unit);
             this.data = FloatVectorData.instantiate(values, length, unit.getScale(), storageType);
@@ -454,8 +451,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
      * @return List the provided list
      * @throws ValueException when the list has size equal to 0
      */
-    static <U extends Unit<U>, S extends FloatScalar<U>> U checkUnit(final SortedMap<Integer, S> dsMap)
-        throws ValueException
+    static <U extends Unit<U>, S extends FloatScalar<U>> U checkUnit(final SortedMap<Integer, S> dsMap) throws ValueException
     {
         if (dsMap.size() > 0)
         {
@@ -696,7 +692,7 @@ public abstract class FloatVector<U extends Unit<U>> extends AbstractValue<U> im
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

@@ -28,8 +28,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableDoubleMatrix
  */
-public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatrix<U> implements
-    MutableDoubleMatrixInterface<U>
+public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatrix<U> implements MutableDoubleMatrixInterface<U>
 {
     /**  */
     private static final long serialVersionUID = 20151003L;
@@ -73,8 +72,8 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Abs<U extends Unit<U>> extends MutableDoubleMatrix<U> implements Absolute,
-        MathFunctionsAbs<MutableDoubleMatrix.Abs<U>>, FunctionsAbs<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>,
-        DoubleMathFunctions<MutableDoubleMatrix.Abs<U>>
+            MathFunctionsAbs<MutableDoubleMatrix.Abs<U>>, FunctionsAbs<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>,
+            DoubleMathFunctions<MutableDoubleMatrix.Abs<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -377,8 +376,8 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
      * @param <U> Unit the unit for which this Matrix will be created
      */
     public static class Rel<U extends Unit<U>> extends MutableDoubleMatrix<U> implements Relative,
-        MathFunctionsRel<MutableDoubleMatrix.Rel<U>>, FunctionsRel<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>,
-        DoubleMathFunctions<MutableDoubleMatrix.Rel<U>>
+            MathFunctionsRel<MutableDoubleMatrix.Rel<U>>, FunctionsRel<U, DoubleMatrix.Abs<U>, DoubleMatrix.Rel<U>>,
+            DoubleMathFunctions<MutableDoubleMatrix.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -708,8 +707,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
      * @param <U> the unit
      * @return an instantiated vector
      */
-    static <U extends Unit<U>> MutableDoubleMatrix.Abs<U> instantiateMutableAbs(final DoubleMatrixData dmData,
-        final U unit)
+    static <U extends Unit<U>> MutableDoubleMatrix.Abs<U> instantiateMutableAbs(final DoubleMatrixData dmData, final U unit)
     {
         return new MutableDoubleMatrix.Abs<U>(dmData, unit);
     }
@@ -744,8 +742,7 @@ public abstract class MutableDoubleMatrix<U extends Unit<U>> extends DoubleMatri
 
     /** {@inheritDoc} */
     @Override
-    public final void setInUnit(final int row, final int column, final double value, final U valueUnit)
-        throws ValueException
+    public final void setInUnit(final int row, final int column, final double value, final U valueUnit) throws ValueException
     {
         setSI(row, column, ValueUtil.expressAsSIUnit(value, valueUnit));
     }

@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <S> the scalar type
  */
 abstract class MutableTypedDoubleMatrixRel<U extends Unit<U>, R extends TypedDoubleMatrixRel<U, R, MR, S>, MR extends MutableTypedDoubleMatrixRel<U, R, MR, S>, S extends DoubleScalar.Rel<U>>
-    extends MutableDoubleMatrix.Rel<U>
+        extends MutableDoubleMatrix.Rel<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -33,8 +33,7 @@ abstract class MutableTypedDoubleMatrixRel<U extends Unit<U>, R extends TypedDou
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    MutableTypedDoubleMatrixRel(final double[][] values, final U unit, final StorageType storageType)
-        throws ValueException
+    MutableTypedDoubleMatrixRel(final double[][] values, final U unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

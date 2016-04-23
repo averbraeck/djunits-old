@@ -28,8 +28,7 @@ public class ForceMatrix extends TypedDoubleMatrixRel<ForceUnit, ForceMatrix, Mu
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ForceMatrix(final double[][] values, final ForceUnit unit, final StorageType storageType)
-        throws ValueException
+    public ForceMatrix(final double[][] values, final ForceUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

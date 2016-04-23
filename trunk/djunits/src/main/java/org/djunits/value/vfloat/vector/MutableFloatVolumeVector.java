@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatVolume;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatVolumeVector extends
-    MutableTypedFloatVectorRel<VolumeUnit, FloatVolumeVector, MutableFloatVolumeVector, FloatVolume>
+        MutableTypedFloatVectorRel<VolumeUnit, FloatVolumeVector, MutableFloatVolumeVector, FloatVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MutableFloatVolumeVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatVolumeVector(final float[] values, final VolumeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MutableFloatVolumeVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatVolumeVector(final List<Float> values, final VolumeUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -68,8 +68,7 @@ public class MutableFloatVolumeVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatVolumeVector(final List<FloatVolume> values, final StorageType storageType)
-        throws ValueException
+    public MutableFloatVolumeVector(final List<FloatVolume> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -83,7 +82,7 @@ public class MutableFloatVolumeVector extends
      * @throws ValueException when values has zero entries
      */
     public MutableFloatVolumeVector(final SortedMap<Integer, FloatVolume> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,7 +96,7 @@ public class MutableFloatVolumeVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatVolumeVector(final SortedMap<Integer, Float> values, final VolumeUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

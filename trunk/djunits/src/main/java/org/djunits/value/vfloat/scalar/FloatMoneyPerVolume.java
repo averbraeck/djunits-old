@@ -70,10 +70,9 @@ public class FloatMoneyPerVolume extends TypedFloatScalarRel<MoneyPerVolumeUnit,
      * @return a Scalar at the ratio between
      */
     public static FloatMoneyPerVolume interpolate(final FloatMoneyPerVolume zero, final FloatMoneyPerVolume one,
-        final float ratio)
+            final float ratio)
     {
-        return new FloatMoneyPerVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new FloatMoneyPerVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**

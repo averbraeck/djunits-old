@@ -34,8 +34,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
      * @param rows the number of rows
      * @param cols the number of columns
      */
-    public FloatMatrixDataSparse(final float[] matrixSI, final long[] indices, final int length, final int rows,
-        final int cols)
+    public FloatMatrixDataSparse(final float[] matrixSI, final long[] indices, final int length, final int rows, final int cols)
     {
         super(StorageType.SPARSE);
         this.matrixSI = matrixSI;
@@ -192,10 +191,8 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         float[] matrixSINew = new float[this.matrixSI.length + 1];
         System.arraycopy(this.indices, 0, indicesNew, 0, internalIndex);
         System.arraycopy(this.matrixSI, 0, matrixSINew, 0, internalIndex);
-        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex - 1, this.indices.length
-            - internalIndex);
-        System.arraycopy(this.matrixSI, internalIndex, matrixSINew, internalIndex - 1, this.indices.length
-            - internalIndex);
+        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex - 1, this.indices.length - internalIndex);
+        System.arraycopy(this.matrixSI, internalIndex, matrixSINew, internalIndex - 1, this.indices.length - internalIndex);
         indicesNew[internalIndex] = index;
         matrixSINew[internalIndex] = valueSI;
         this.indices = indicesNew;
@@ -253,13 +250,12 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     {
         // determine number of non-null cells
         AtomicInteger atomicLength = new AtomicInteger(0);
-        IntStream.range(0, valuesSI.length).parallel()
-            .forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c -> {
-                if (valuesSI[r][c] != 0.0)
-                {
-                    atomicLength.incrementAndGet();
-                }
-            }));
+        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c -> {
+            if (valuesSI[r][c] != 0.0)
+            {
+                atomicLength.incrementAndGet();
+            }
+        }));
 
         return atomicLength.get();
     }
@@ -271,8 +267,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
      */
     private static int nonZero(final float[] valuesSI)
     {
-        return (int) IntStream.range(0, valuesSI.length).parallel().mapToDouble(i -> valuesSI[i]).filter(d -> d != 0.0)
-            .count();
+        return (int) IntStream.range(0, valuesSI.length).parallel().mapToDouble(i -> valuesSI[i]).filter(d -> d != 0.0).count();
     }
 
     /** {@inheritDoc} */
@@ -459,7 +454,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

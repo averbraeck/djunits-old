@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatPressure;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatPressureVector extends
-    MutableTypedFloatVectorRel<PressureUnit, FloatPressureVector, MutableFloatPressureVector, FloatPressure>
+        MutableTypedFloatVectorRel<PressureUnit, FloatPressureVector, MutableFloatPressureVector, FloatPressure>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MutableFloatPressureVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatPressureVector(final float[] values, final PressureUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MutableFloatPressureVector extends
      * @throws ValueException when values is null
      */
     public MutableFloatPressureVector(final List<Float> values, final PressureUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,8 +58,7 @@ public class MutableFloatPressureVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatPressureVector(final FloatPressure[] values, final StorageType storageType)
-        throws ValueException
+    public MutableFloatPressureVector(final FloatPressure[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -70,8 +69,7 @@ public class MutableFloatPressureVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatPressureVector(final List<FloatPressure> values, final StorageType storageType)
-        throws ValueException
+    public MutableFloatPressureVector(final List<FloatPressure> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -85,7 +83,7 @@ public class MutableFloatPressureVector extends
      * @throws ValueException when values has zero entries
      */
     public MutableFloatPressureVector(final SortedMap<Integer, FloatPressure> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -98,8 +96,8 @@ public class MutableFloatPressureVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatPressureVector(final SortedMap<Integer, Float> values, final PressureUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public MutableFloatPressureVector(final SortedMap<Integer, Float> values, final PressureUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -122,8 +120,7 @@ public class MutableFloatPressureVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatPressureVector
-        instantiateMutableType(final FloatVectorData dvd, final PressureUnit unit)
+    protected final MutableFloatPressureVector instantiateMutableType(final FloatVectorData dvd, final PressureUnit unit)
     {
         return new MutableFloatPressureVector(dvd, unit);
     }

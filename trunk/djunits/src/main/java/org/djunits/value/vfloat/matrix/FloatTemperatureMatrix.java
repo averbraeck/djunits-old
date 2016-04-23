@@ -16,180 +16,75 @@ import org.djunits.value.vfloat.scalar.FloatTemperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface FloatTemperatureMatrix
+public class FloatTemperatureMatrix extends
+        TypedFloatMatrixRel<TemperatureUnit, FloatTemperatureMatrix, MutableFloatTemperatureMatrix, FloatTemperature>
 {
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /** */
+    private static final long serialVersionUID = 20151006L;
 
     /**
-     * ABSOLUTE implementation of FloatTemperatureMatrix.
+     * Construct a new Relative Immutable FloatTemperatureMatrix.
+     * @param values float[][]; the values of the entries in the new Relative Immutable FloatTemperatureMatrix
+     * @param unit U; the unit of the new Relative Immutable FloatTemperatureMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
      */
-    class Abs
-        extends
-        TypedFloatMatrixAbs<TemperatureUnit, FloatTemperatureMatrix.Abs, FloatTemperatureMatrix.Rel, MutableFloatTemperatureMatrix.Abs, FloatTemperature.Abs>
-    {
-        /** */
-        private static final long serialVersionUID = 20151003L;
-
-        /**
-         * Construct a new Absolute Immutable FloatTemperatureMatrix.
-         * @param values float[][]; the values of the entries in the new Absolute Immutable FloatTemperatureMatrix
-         * @param unit U; the unit of the new Absolute Immutable FloatTemperatureMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final float[][] values, final TemperatureUnit unit, final StorageType storageType)
+    public FloatTemperatureMatrix(final float[][] values, final TemperatureUnit unit, final StorageType storageType)
             throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Immutable FloatTemperatureMatrix.
-         * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable
-         *            FloatTemperatureMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final FloatTemperature.Abs[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Immutable FloatTemperatureMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Abs(final FloatMatrixData data, final TemperatureUnit unit)
-        {
-            super(data, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTemperatureMatrix.Abs instantiateTypeAbs(final FloatMatrixData fmd,
-            final TemperatureUnit unit)
-        {
-            return new FloatTemperatureMatrix.Abs(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTemperatureMatrix.Rel instantiateTypeRel(final FloatMatrixData fmd,
-            final TemperatureUnit unit)
-        {
-            return new FloatTemperatureMatrix.Rel(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatTemperatureMatrix.Abs instantiateMutableType(final FloatMatrixData fmd,
-            final TemperatureUnit unit)
-        {
-            return new MutableFloatTemperatureMatrix.Abs(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Abs get(final int row, final int column) throws ValueException
-        {
-            return new FloatTemperature.Abs(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the absolute matrix into a relative matrix (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute FloatTemperature matrix.
-         */
-        public final FloatTemperatureMatrix.Rel toRel()
-        {
-            return new FloatTemperatureMatrix.Rel(getData(), getUnit());
-        }
-
+    {
+        super(values, unit, storageType);
     }
 
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /**
+     * Construct a new Relative Immutable FloatTemperatureMatrix.
+     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable
+     *            FloatTemperatureMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public FloatTemperatureMatrix(final FloatTemperature[][] values, final StorageType storageType) throws ValueException
+    {
+        super(values, storageType);
+    }
 
     /**
-     * RELATIVE implementation of FloatTemperatureMatrix.
+     * Construct a new Relative Immutable FloatTemperatureMatrix.
+     * @param data an internal data object
+     * @param unit the unit
      */
-    class Rel
-        extends
-        TypedFloatMatrixRel<TemperatureUnit, FloatTemperatureMatrix.Rel, MutableFloatTemperatureMatrix.Rel, FloatTemperature.Rel>
+    FloatTemperatureMatrix(final FloatMatrixData data, final TemperatureUnit unit)
     {
-        /** */
-        private static final long serialVersionUID = 20151006L;
+        super(data, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatTemperatureMatrix.
-         * @param values float[][]; the values of the entries in the new Relative Immutable FloatTemperatureMatrix
-         * @param unit U; the unit of the new Relative Immutable FloatTemperatureMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final float[][] values, final TemperatureUnit unit, final StorageType storageType)
-            throws ValueException
-        {
-            super(values, unit, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatTemperatureMatrix instantiateType(final FloatMatrixData fmd, final TemperatureUnit unit)
+    {
+        return new FloatTemperatureMatrix(fmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatTemperatureMatrix.
-         * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable
-         *            FloatTemperatureMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final FloatTemperature.Rel[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final MutableFloatTemperatureMatrix instantiateMutableType(final FloatMatrixData fmd, final TemperatureUnit unit)
+    {
+        return new MutableFloatTemperatureMatrix(fmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatTemperatureMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Rel(final FloatMatrixData data, final TemperatureUnit unit)
-        {
-            super(data, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    public final FloatTemperature get(final int row, final int column) throws ValueException
+    {
+        return new FloatTemperature(getInUnit(row, column, getUnit()), getUnit());
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTemperatureMatrix.Rel
-            instantiateType(final FloatMatrixData fmd, final TemperatureUnit unit)
-        {
-            return new FloatTemperatureMatrix.Rel(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatTemperatureMatrix.Rel instantiateMutableType(final FloatMatrixData fmd,
-            final TemperatureUnit unit)
-        {
-            return new MutableFloatTemperatureMatrix.Rel(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTemperature.Rel get(final int row, final int column) throws ValueException
-        {
-            return new FloatTemperature.Rel(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
-         * @return an absolute version of this relative FloatTemperature matrix.
-         */
-        public final FloatTemperatureMatrix.Abs toAbs()
-        {
-            return new FloatTemperatureMatrix.Abs(getData(), getUnit());
-        }
-
+    /**
+     * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
+     * @return an absolute version of this relative FloatTemperature matrix.
+     */
+    public final FloatAbsoluteTemperatureMatrix toAbs()
+    {
+        return new FloatAbsoluteTemperatureMatrix(getData(), getUnit());
     }
 
 }

@@ -31,8 +31,7 @@ public class EnergyVector extends TypedDoubleVectorRel<EnergyUnit, EnergyVector,
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public EnergyVector(final double[] values, final EnergyUnit unit, final StorageType storageType)
-        throws ValueException
+    public EnergyVector(final double[] values, final EnergyUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,8 +43,7 @@ public class EnergyVector extends TypedDoubleVectorRel<EnergyUnit, EnergyVector,
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public EnergyVector(final List<Double> values, final EnergyUnit unit, final StorageType storageType)
-        throws ValueException
+    public EnergyVector(final List<Double> values, final EnergyUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +79,7 @@ public class EnergyVector extends TypedDoubleVectorRel<EnergyUnit, EnergyVector,
      * @throws ValueException when values has zero entries
      */
     public EnergyVector(final SortedMap<Integer, Energy> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +93,7 @@ public class EnergyVector extends TypedDoubleVectorRel<EnergyUnit, EnergyVector,
      * @throws ValueException when values is null
      */
     public EnergyVector(final SortedMap<Integer, Double> values, final EnergyUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

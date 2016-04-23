@@ -17,8 +17,8 @@ import org.djunits.value.vdouble.scalar.Dimensionless;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableDimensionlessMatrix
-    extends
-    MutableTypedDoubleMatrixDimensionless<DimensionlessUnit, DimensionlessMatrix, MutableDimensionlessMatrix, Dimensionless>
+        extends
+        MutableTypedDoubleMatrixDimensionless<DimensionlessUnit, DimensionlessMatrix, MutableDimensionlessMatrix, Dimensionless>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,8 +30,8 @@ public class MutableDimensionlessMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableDimensionlessMatrix(final double[][] values, final DimensionlessUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableDimensionlessMatrix(final double[][] values, final DimensionlessUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -43,8 +43,7 @@ public class MutableDimensionlessMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableDimensionlessMatrix(final Dimensionless[][] values, final StorageType storageType)
-        throws ValueException
+    public MutableDimensionlessMatrix(final Dimensionless[][] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -67,8 +66,7 @@ public class MutableDimensionlessMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableDimensionlessMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final DimensionlessUnit unit)
+    protected final MutableDimensionlessMatrix instantiateMutableType(final DoubleMatrixData dmd, final DimensionlessUnit unit)
     {
         return new MutableDimensionlessMatrix(dmd, unit);
     }

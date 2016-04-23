@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @param <S> the scalar type
  */
 abstract class TypedFloatMatrixRel<U extends Unit<U>, R extends TypedFloatMatrixRel<U, R, MR, S>, MR extends MutableTypedFloatMatrixRel<U, R, MR, S>, S extends FloatScalar.Rel<U>>
-    extends FloatMatrix.Rel<U>
+        extends FloatMatrix.Rel<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;

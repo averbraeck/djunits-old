@@ -103,7 +103,7 @@ public class Money extends TypedDoubleScalarRel<MoneyUnit, Money>
      * @param v Money scalar
      * @return MoneyPerLength scalar as a division of Money and Length
      */
-    public final MoneyPerLength divideBy(final Length.Rel v)
+    public final MoneyPerLength divideBy(final Length v)
     {
         return new MoneyPerLength(this.si / v.si, MoneyPerLengthUnit.getStandardMoneyPerLengthUnit());
     }
@@ -129,11 +129,11 @@ public class Money extends TypedDoubleScalarRel<MoneyUnit, Money>
     }
 
     /**
-     * Calculate the division of Money and Time, which results in a MoneyPerTime scalar.
+     * Calculate the division of Money and Duration, which results in a MoneyPerTime scalar.
      * @param v Money scalar
-     * @return MoneyPerTime scalar as a division of Money and Time
+     * @return MoneyPerTime scalar as a division of Money and Duration
      */
-    public final MoneyPerTime divideBy(final Time.Rel v)
+    public final MoneyPerTime divideBy(final Duration v)
     {
         return new MoneyPerTime(this.si / v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
     }

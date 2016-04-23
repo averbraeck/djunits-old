@@ -19,7 +19,7 @@ import org.djunits.value.Absolute;
  * @param <R> the relative scalar type
  */
 public abstract class TypedFloatScalarAbs<U extends Unit<U>, A extends TypedFloatScalarAbs<U, A, R>, R extends TypedFloatScalarRel<U, R>>
-    extends FloatScalar.Abs<U> implements Absolute
+        extends FloatScalar.Abs<U> implements Absolute
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -96,8 +96,8 @@ public abstract class TypedFloatScalarAbs<U extends Unit<U>, A extends TypedFloa
      */
     public final A plus(final R v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
-            : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit()) : instantiateTypeAbs(
+                this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**
@@ -107,8 +107,8 @@ public abstract class TypedFloatScalarAbs<U extends Unit<U>, A extends TypedFloa
      */
     public final R minus(final A v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeRel(getInUnit() - v.getInUnit(), getUnit())
-            : instantiateTypeRel(this.si - v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateTypeRel(getInUnit() - v.getInUnit(), getUnit()) : instantiateTypeRel(
+                this.si - v.si, getUnit().getStandardUnit());
     }
 
     /**
@@ -118,8 +118,8 @@ public abstract class TypedFloatScalarAbs<U extends Unit<U>, A extends TypedFloa
      */
     public final A minus(final R v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() - v.getInUnit(), getUnit())
-            : instantiateTypeAbs(this.si - v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() - v.getInUnit(), getUnit()) : instantiateTypeAbs(
+                this.si - v.si, getUnit().getStandardUnit());
     }
 
     /**

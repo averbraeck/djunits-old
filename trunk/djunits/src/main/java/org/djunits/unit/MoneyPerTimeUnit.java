@@ -8,8 +8,8 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Sep 5, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class MoneyPerTimeUnit extends LinearUnit<MoneyPerTimeUnit>
@@ -57,10 +57,10 @@ public class MoneyPerTimeUnit extends LinearUnit<MoneyPerTimeUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerTimeUnit(final MoneyUnit moneyUnit, final TimeUnit timeUnit, final String nameOrNameKey,
-        final String abbreviationOrAbbreviationKey, final boolean standardUnit)
+            final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerTimeUnit, moneyUnit
-            .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+                .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.timeUnit = timeUnit;
     }
@@ -72,8 +72,7 @@ public class MoneyPerTimeUnit extends LinearUnit<MoneyPerTimeUnit>
      * @param name the key to the locale file for the long name of the unit
      * @param abbreviation the key to the locale file for the abbreviation of the unit
      */
-    public MoneyPerTimeUnit(final MoneyUnit moneyUnit, final TimeUnit timeUnit, final String name,
-        final String abbreviation)
+    public MoneyPerTimeUnit(final MoneyUnit moneyUnit, final TimeUnit timeUnit, final String name, final String abbreviation)
     {
         this(moneyUnit, timeUnit, name, abbreviation, false);
     }
@@ -88,10 +87,10 @@ public class MoneyPerTimeUnit extends LinearUnit<MoneyPerTimeUnit>
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerTimeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final MoneyPerTimeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final MoneyPerTimeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit,
-            conversionFactorToReferenceUnit, standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, conversionFactorToReferenceUnit,
+                standardUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.timeUnit = referenceUnit.getTimeUnit();
     }
@@ -104,7 +103,7 @@ public class MoneyPerTimeUnit extends LinearUnit<MoneyPerTimeUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MoneyPerTimeUnit(final String name, final String abbreviation, final MoneyPerTimeUnit referenceUnit,
-        final double conversionFactorToReferenceUnit)
+            final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, referenceUnit, conversionFactorToReferenceUnit, false);
     }
@@ -134,8 +133,8 @@ public class MoneyPerTimeUnit extends LinearUnit<MoneyPerTimeUnit>
         try
         {
             standardMoneyPerTimeUnit =
-                new MoneyPerTimeUnit(standardMoneyUnit, TimeUnit.HOUR, standardMoneyUnit.getName() + " per hour",
-                    standardMoneyUnit.getAbbreviation() + "/h");
+                    new MoneyPerTimeUnit(standardMoneyUnit, TimeUnit.HOUR, standardMoneyUnit.getName() + " per hour",
+                            standardMoneyUnit.getAbbreviation() + "/h");
         }
         catch (Exception e)
         {

@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatAngleSolid;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatAngleSolidMatrix extends
-    TypedFloatMatrixRel<AngleSolidUnit, FloatAngleSolidMatrix, MutableFloatAngleSolidMatrix, FloatAngleSolid>
+        TypedFloatMatrixRel<AngleSolidUnit, FloatAngleSolidMatrix, MutableFloatAngleSolidMatrix, FloatAngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class FloatAngleSolidMatrix extends
      * @throws ValueException when values is null
      */
     public FloatAngleSolidMatrix(final float[][] values, final AngleSolidUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -65,8 +65,7 @@ public class FloatAngleSolidMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatAngleSolidMatrix instantiateMutableType(final FloatMatrixData fmd,
-        final AngleSolidUnit unit)
+    protected final MutableFloatAngleSolidMatrix instantiateMutableType(final FloatMatrixData fmd, final AngleSolidUnit unit)
     {
         return new MutableFloatAngleSolidMatrix(fmd, unit);
     }

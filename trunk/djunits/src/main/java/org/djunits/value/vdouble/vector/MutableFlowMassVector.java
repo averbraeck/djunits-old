@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.FlowMass;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFlowMassVector extends
-    MutableTypedDoubleVectorRel<FlowMassUnit, FlowMassVector, MutableFlowMassVector, FlowMass>
+        MutableTypedDoubleVectorRel<FlowMassUnit, FlowMassVector, MutableFlowMassVector, FlowMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MutableFlowMassVector extends
      * @throws ValueException when values is null
      */
     public MutableFlowMassVector(final double[] values, final FlowMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MutableFlowMassVector extends
      * @throws ValueException when values is null
      */
     public MutableFlowMassVector(final List<Double> values, final FlowMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,8 +81,8 @@ public class MutableFlowMassVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFlowMassVector(final SortedMap<Integer, FlowMass> values, final int length,
-        final StorageType storageType) throws ValueException
+    public MutableFlowMassVector(final SortedMap<Integer, FlowMass> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -96,7 +96,7 @@ public class MutableFlowMassVector extends
      * @throws ValueException when values is null
      */
     public MutableFlowMassVector(final SortedMap<Integer, Double> values, final FlowMassUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

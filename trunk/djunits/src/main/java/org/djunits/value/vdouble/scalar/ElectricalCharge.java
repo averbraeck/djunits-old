@@ -63,11 +63,9 @@ public class ElectricalCharge extends TypedDoubleScalarRel<ElectricalChargeUnit,
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static ElectricalCharge interpolate(final ElectricalCharge zero, final ElectricalCharge one,
-        final double ratio)
+    public static ElectricalCharge interpolate(final ElectricalCharge zero, final ElectricalCharge one, final double ratio)
     {
-        return new ElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new ElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -81,23 +79,23 @@ public class ElectricalCharge extends TypedDoubleScalarRel<ElectricalChargeUnit,
     }
 
     /**
-     * Calculate the division of ElectricalCharge and Time, which results in a ElectricalCurrent scalar.
+     * Calculate the division of ElectricalCharge and Duration, which results in a ElectricalCurrent scalar.
      * @param v ElectricalCharge scalar
-     * @return ElectricalCurrent scalar as a division of ElectricalCharge and Time
+     * @return ElectricalCurrent scalar as a division of ElectricalCharge and Duration
      */
-    public final ElectricalCurrent divideBy(final Time.Rel v)
+    public final ElectricalCurrent divideBy(final Duration v)
     {
         return new ElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
     }
 
     /**
-     * Calculate the division of ElectricalCharge and ElectricalCurrent, which results in a Time scalar.
+     * Calculate the division of ElectricalCharge and ElectricalCurrent, which results in a Duration scalar.
      * @param v ElectricalCharge scalar
-     * @return Time scalar as a division of ElectricalCharge and ElectricalCurrent
+     * @return Duration scalar as a division of ElectricalCharge and ElectricalCurrent
      */
-    public final Time.Rel divideBy(final ElectricalCurrent v)
+    public final Duration divideBy(final ElectricalCurrent v)
     {
-        return new Time.Rel(this.si / v.si, TimeUnit.SI);
+        return new Duration(this.si / v.si, TimeUnit.SI);
     }
 
 }

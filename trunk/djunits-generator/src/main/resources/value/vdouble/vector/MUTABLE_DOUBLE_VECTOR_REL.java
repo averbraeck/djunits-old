@@ -132,7 +132,7 @@ public class Mutable%Type%Vector extends
         return new %Type%(getInUnit(index, getUnit()), getUnit());
     }
 
-%FORMULAS%%Type%.Rel%
+%FORMULAS%%Type%%
 
 }
 

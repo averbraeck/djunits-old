@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.AngleSolid;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableAngleSolidVector extends
-    MutableTypedDoubleVectorRel<AngleSolidUnit, AngleSolidVector, MutableAngleSolidVector, AngleSolid>
+        MutableTypedDoubleVectorRel<AngleSolidUnit, AngleSolidVector, MutableAngleSolidVector, AngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MutableAngleSolidVector extends
      * @throws ValueException when values is null
      */
     public MutableAngleSolidVector(final double[] values, final AngleSolidUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MutableAngleSolidVector extends
      * @throws ValueException when values is null
      */
     public MutableAngleSolidVector(final List<Double> values, final AngleSolidUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,8 +82,8 @@ public class MutableAngleSolidVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableAngleSolidVector(final SortedMap<Integer, AngleSolid> values, final int length,
-        final StorageType storageType) throws ValueException
+    public MutableAngleSolidVector(final SortedMap<Integer, AngleSolid> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -96,8 +96,8 @@ public class MutableAngleSolidVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableAngleSolidVector(final SortedMap<Integer, Double> values, final AngleSolidUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public MutableAngleSolidVector(final SortedMap<Integer, Double> values, final AngleSolidUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class MutableAngleSolidVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableAngleSolidVector
-        instantiateMutableType(final DoubleVectorData dvd, final AngleSolidUnit unit)
+    protected final MutableAngleSolidVector instantiateMutableType(final DoubleVectorData dvd, final AngleSolidUnit unit)
     {
         return new MutableAngleSolidVector(dvd, unit);
     }

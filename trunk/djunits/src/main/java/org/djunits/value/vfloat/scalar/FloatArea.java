@@ -96,7 +96,7 @@ public class FloatArea extends TypedFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatVolume scalar as a multiplication of FloatArea and FloatLength
      */
-    public final FloatVolume multiplyBy(final FloatLength.Rel v)
+    public final FloatVolume multiplyBy(final FloatLength v)
     {
         return new FloatVolume(this.si * v.si, VolumeUnit.SI);
     }
@@ -126,9 +126,9 @@ public class FloatArea extends TypedFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatLength scalar as a division of FloatArea and FloatLength
      */
-    public final FloatLength.Rel divideBy(final FloatLength.Rel v)
+    public final FloatLength divideBy(final FloatLength v)
     {
-        return new FloatLength.Rel(this.si / v.si, LengthUnit.SI);
+        return new FloatLength(this.si / v.si, LengthUnit.SI);
     }
 
     /**
@@ -136,9 +136,9 @@ public class FloatArea extends TypedFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatLength scalar as a multiplication of FloatArea and FloatLinearDensity
      */
-    public final FloatLength.Rel multiplyBy(final FloatLinearDensity v)
+    public final FloatLength multiplyBy(final FloatLinearDensity v)
     {
-        return new FloatLength.Rel(this.si * v.si, LengthUnit.SI);
+        return new FloatLength(this.si * v.si, LengthUnit.SI);
     }
 
     /**

@@ -56,13 +56,11 @@ public abstract class UnitSystem implements Serializable
     {
         CGS = new CGS("UnitSystem.CGS", "UnitSystem.centimeter-gram-second_system");
         CGS_ESU = new CGS_ESU("UnitSystem.CGS_(ESU)", "UnitSystem.centimeter-gram-second_system,_electrostatic_units");
-        CGS_EMU =
-            new CGS_EMU("UnitSystem.CGS_(EMU)", "UnitSystem.centimeter-gram-second_system,_electromagnetic_units");
+        CGS_EMU = new CGS_EMU("UnitSystem.CGS_(EMU)", "UnitSystem.centimeter-gram-second_system,_electromagnetic_units");
         IMPERIAL = new Imperial("UnitSystem.Imperial", "UnitSystem.Imperial_system");
         MTS = new MTS("UnitSystem.MTS", "UnitSystem.meter-tonne-second_system");
         OTHER = new Other("UnitSystem.Other", "UnitSystem.other_system");
-        SI_ACCEPTED =
-            new SIAccepted("UnitSystem.SI_accepted", "UnitSystem.International_System_of_Units_(Accepted_Unit)");
+        SI_ACCEPTED = new SIAccepted("UnitSystem.SI_accepted", "UnitSystem.International_System_of_Units_(Accepted_Unit)");
         SI_BASE = new SIBase("UnitSystem.SI", "UnitSystem.International_System_of_Units_(Base_Unit)");
         SI_DERIVED = new SIDerived("UnitSystem.SI_derived", "UnitSystem.International_System_of_Units_(Derived_Unit)");
         US_CUSTOMARY = new USCustomary("UnitSystem.US_customary", "UnitSystem.US_customary_system");

@@ -132,7 +132,7 @@ public class MutableFloat%Type%Vector extends
         return new Float%Type%(getInUnit(index, getUnit()), getUnit());
     }
 
-%FORMULAS%%Type%.Rel%
+%FORMULAS%%Type%%
 
 }
 

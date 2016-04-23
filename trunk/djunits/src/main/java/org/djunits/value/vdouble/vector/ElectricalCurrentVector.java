@@ -19,9 +19,8 @@ import org.djunits.value.vdouble.scalar.ElectricalCurrent;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ElectricalCurrentVector
-    extends
-    TypedDoubleVectorRel<ElectricalCurrentUnit, ElectricalCurrentVector, MutableElectricalCurrentVector, ElectricalCurrent>
+public class ElectricalCurrentVector extends
+        TypedDoubleVectorRel<ElectricalCurrentUnit, ElectricalCurrentVector, MutableElectricalCurrentVector, ElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,8 +32,8 @@ public class ElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalCurrentVector(final double[] values, final ElectricalCurrentUnit unit,
-        final StorageType storageType) throws ValueException
+    public ElectricalCurrentVector(final double[] values, final ElectricalCurrentUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,8 +45,8 @@ public class ElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalCurrentVector(final List<Double> values, final ElectricalCurrentUnit unit,
-        final StorageType storageType) throws ValueException
+    public ElectricalCurrentVector(final List<Double> values, final ElectricalCurrentUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -59,8 +58,7 @@ public class ElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public ElectricalCurrentVector(final ElectricalCurrent[] values, final StorageType storageType)
-        throws ValueException
+    public ElectricalCurrentVector(final ElectricalCurrent[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -71,8 +69,7 @@ public class ElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public ElectricalCurrentVector(final List<ElectricalCurrent> values, final StorageType storageType)
-        throws ValueException
+    public ElectricalCurrentVector(final List<ElectricalCurrent> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +83,7 @@ public class ElectricalCurrentVector
      * @throws ValueException when values has zero entries
      */
     public ElectricalCurrentVector(final SortedMap<Integer, ElectricalCurrent> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -99,8 +96,8 @@ public class ElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public ElectricalCurrentVector(final SortedMap<Integer, Double> values, final ElectricalCurrentUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+    public ElectricalCurrentVector(final SortedMap<Integer, Double> values, final ElectricalCurrentUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -116,8 +113,7 @@ public class ElectricalCurrentVector
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalCurrentVector
-        instantiateType(final DoubleVectorData dvd, final ElectricalCurrentUnit unit)
+    protected final ElectricalCurrentVector instantiateType(final DoubleVectorData dvd, final ElectricalCurrentUnit unit)
     {
         return new ElectricalCurrentVector(dvd, unit);
     }
@@ -125,7 +121,7 @@ public class ElectricalCurrentVector
     /** {@inheritDoc} */
     @Override
     protected final MutableElectricalCurrentVector instantiateMutableType(final DoubleVectorData dvd,
-        final ElectricalCurrentUnit unit)
+            final ElectricalCurrentUnit unit)
     {
         return new MutableElectricalCurrentVector(dvd, unit);
     }

@@ -19,8 +19,8 @@ import org.djunits.value.Relative;
  * @param <U> the unit
  * @param <R> the relative vector type
  */
-public abstract class TypedFloatScalarDimensionless<U extends Unit<U>, R extends TypedFloatScalarDimensionless<U, R>>
-    extends TypedFloatScalarRel<U, R> implements Relative, MathFunctionsDimensionless<R>
+public abstract class TypedFloatScalarDimensionless<U extends Unit<U>, R extends TypedFloatScalarDimensionless<U, R>> extends
+        TypedFloatScalarRel<U, R> implements Relative, MathFunctionsDimensionless<R>
 {
     /** */
     private static final long serialVersionUID = 20150905L;

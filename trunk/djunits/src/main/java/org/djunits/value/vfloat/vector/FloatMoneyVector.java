@@ -19,8 +19,7 @@ import org.djunits.value.vfloat.scalar.FloatMoney;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatMoneyVector extends
-    TypedFloatVectorRel<MoneyUnit, FloatMoneyVector, MutableFloatMoneyVector, FloatMoney>
+public class FloatMoneyVector extends TypedFloatVectorRel<MoneyUnit, FloatMoneyVector, MutableFloatMoneyVector, FloatMoney>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -32,8 +31,7 @@ public class FloatMoneyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatMoneyVector(final float[] values, final MoneyUnit unit, final StorageType storageType)
-        throws ValueException
+    public FloatMoneyVector(final float[] values, final MoneyUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +44,7 @@ public class FloatMoneyVector extends
      * @throws ValueException when values is null
      */
     public FloatMoneyVector(final List<Float> values, final MoneyUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,7 +80,7 @@ public class FloatMoneyVector extends
      * @throws ValueException when values has zero entries
      */
     public FloatMoneyVector(final SortedMap<Integer, FloatMoney> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -96,7 +94,7 @@ public class FloatMoneyVector extends
      * @throws ValueException when values is null
      */
     public FloatMoneyVector(final SortedMap<Integer, Float> values, final MoneyUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

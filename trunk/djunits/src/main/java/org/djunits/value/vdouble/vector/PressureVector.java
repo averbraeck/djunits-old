@@ -31,8 +31,7 @@ public class PressureVector extends TypedDoubleVectorRel<PressureUnit, PressureV
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public PressureVector(final double[] values, final PressureUnit unit, final StorageType storageType)
-        throws ValueException
+    public PressureVector(final double[] values, final PressureUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,7 +44,7 @@ public class PressureVector extends TypedDoubleVectorRel<PressureUnit, PressureV
      * @throws ValueException when values is null
      */
     public PressureVector(final List<Double> values, final PressureUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,7 +80,7 @@ public class PressureVector extends TypedDoubleVectorRel<PressureUnit, PressureV
      * @throws ValueException when values has zero entries
      */
     public PressureVector(final SortedMap<Integer, Pressure> values, final int length, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -95,7 +94,7 @@ public class PressureVector extends TypedDoubleVectorRel<PressureUnit, PressureV
      * @throws ValueException when values is null
      */
     public PressureVector(final SortedMap<Integer, Double> values, final PressureUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }

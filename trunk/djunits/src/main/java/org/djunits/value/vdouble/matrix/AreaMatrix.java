@@ -28,8 +28,7 @@ public class AreaMatrix extends TypedDoubleMatrixRel<AreaUnit, AreaMatrix, Mutab
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public AreaMatrix(final double[][] values, final AreaUnit unit, final StorageType storageType)
-        throws ValueException
+    public AreaMatrix(final double[][] values, final AreaUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

@@ -63,6 +63,6 @@ public class %Type% extends TypedDoubleScalarRel<%Type%Unit, %Type%>
         return new %Type%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
     
-%FORMULAS%%Type%.Rel%
+%FORMULAS%%Type%%
 }
 

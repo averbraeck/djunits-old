@@ -58,12 +58,12 @@ abstract class FloatMatrixData
      * @throws ValueException when values are null, or storageType is null
      */
     public static FloatMatrixData instantiate(final float[][] values, final Scale scale, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         if (values == null || values.length == 0 || values[0].length == 0)
         {
             throw new ValueException("FloatMatrixData.instantiate: float[][] values is null or "
-                + "values.length == 0 or values[0].length == 0");
+                    + "values.length == 0 or values[0].length == 0");
         }
 
         final int rows = values.length;
@@ -74,21 +74,21 @@ abstract class FloatMatrixData
             case DENSE:
                 float[] valuesSI = new float[rows * cols];
                 IntStream
-                    .range(0, values.length)
-                    .parallel()
-                    .forEach(
-                        r -> IntStream.range(0, cols).forEach(
-                            c -> valuesSI[r * cols + c] = (float) scale.toStandardUnit(values[r][c])));
+                        .range(0, values.length)
+                        .parallel()
+                        .forEach(
+                                r -> IntStream.range(0, cols).forEach(
+                                        c -> valuesSI[r * cols + c] = (float) scale.toStandardUnit(values[r][c])));
                 return new FloatMatrixDataDense(valuesSI, rows, cols);
 
             case SPARSE:
                 float[][] matrixSI = new float[rows][cols];
                 IntStream
-                    .range(0, values.length)
-                    .parallel()
-                    .forEach(
-                        r -> IntStream.range(0, cols).forEach(
-                            c -> matrixSI[r][c] = (float) scale.toStandardUnit(values[r][c])));
+                        .range(0, values.length)
+                        .parallel()
+                        .forEach(
+                                r -> IntStream.range(0, cols).forEach(
+                                        c -> matrixSI[r][c] = (float) scale.toStandardUnit(values[r][c])));
                 return FloatMatrixDataSparse.instantiate(matrixSI);
 
             default:
@@ -104,7 +104,7 @@ abstract class FloatMatrixData
      * @throws ValueException when values is null, or storageType is null
      */
     public static FloatMatrixData instantiate(final FloatScalar<?>[][] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         if (values == null)
         {
@@ -114,7 +114,7 @@ abstract class FloatMatrixData
         if (values == null || values.length == 0 || values[0].length == 0)
         {
             throw new ValueException("FloatMatrixData.instantiate: FloatScalar[][] values is null or "
-                + "values.length == 0 or values[0].length == 0");
+                    + "values.length == 0 or values[0].length == 0");
         }
 
         final int rows = values.length;
@@ -125,13 +125,13 @@ abstract class FloatMatrixData
             case DENSE:
                 float[] valuesSI = new float[rows * cols];
                 IntStream.range(0, rows).parallel()
-                    .forEach(r -> IntStream.range(0, cols).forEach(c -> valuesSI[r * cols + c] = values[r][c].getSI()));
+                        .forEach(r -> IntStream.range(0, cols).forEach(c -> valuesSI[r * cols + c] = values[r][c].getSI()));
                 return new FloatMatrixDataDense(valuesSI, rows, cols);
 
             case SPARSE:
                 float[][] matrixSI = new float[rows][cols];
                 IntStream.range(0, values.length).parallel()
-                    .forEach(r -> IntStream.range(0, cols).forEach(c -> matrixSI[r][c] = values[r][c].getSI()));
+                        .forEach(r -> IntStream.range(0, cols).forEach(c -> matrixSI[r][c] = values[r][c].getSI()));
                 return FloatMatrixDataSparse.instantiate(matrixSI);
 
             default:
@@ -222,7 +222,7 @@ abstract class FloatMatrixData
     {
         // this does not copy the data. See http://stackoverflow.com/questions/23106093/how-to-get-a-stream-from-a-float
         return (int) IntStream.range(0, this.matrixSI.length).parallel().mapToDouble(i -> this.matrixSI[i])
-            .filter(d -> d != 0.0).count();
+                .filter(d -> d != 0.0).count();
     }
 
     /**
@@ -278,11 +278,11 @@ abstract class FloatMatrixData
         checkSizes(right);
         float[] dm = new float[this.rows * this.cols];
         IntStream
-            .range(0, this.rows)
-            .parallel()
-            .forEach(
-                r -> IntStream.range(0, this.cols)
-                    .forEach(c -> dm[r * this.cols + c] = getSI(r, c) + right.getSI(r, c)));
+                .range(0, this.rows)
+                .parallel()
+                .forEach(
+                        r -> IntStream.range(0, this.cols)
+                                .forEach(c -> dm[r * this.cols + c] = getSI(r, c) + right.getSI(r, c)));
         if (this instanceof FloatMatrixDataSparse && right instanceof FloatMatrixDataSparse)
         {
             return new FloatMatrixDataDense(dm, this.rows, this.cols).toSparse();
@@ -318,11 +318,11 @@ abstract class FloatMatrixData
         checkSizes(right);
         float[] dm = new float[this.rows * this.cols];
         IntStream
-            .range(0, this.rows)
-            .parallel()
-            .forEach(
-                r -> IntStream.range(0, this.cols)
-                    .forEach(c -> dm[r * this.cols + c] = getSI(r, c) - right.getSI(r, c)));
+                .range(0, this.rows)
+                .parallel()
+                .forEach(
+                        r -> IntStream.range(0, this.cols)
+                                .forEach(c -> dm[r * this.cols + c] = getSI(r, c) - right.getSI(r, c)));
         if (this instanceof FloatMatrixDataSparse && right instanceof FloatMatrixDataSparse)
         {
             return new FloatMatrixDataDense(dm, this.rows, this.cols).toSparse();
@@ -358,11 +358,11 @@ abstract class FloatMatrixData
         checkSizes(right);
         float[] dm = new float[this.rows * this.cols];
         IntStream
-            .range(0, this.rows)
-            .parallel()
-            .forEach(
-                r -> IntStream.range(0, this.cols)
-                    .forEach(c -> dm[r * this.cols + c] = getSI(r, c) * right.getSI(r, c)));
+                .range(0, this.rows)
+                .parallel()
+                .forEach(
+                        r -> IntStream.range(0, this.cols)
+                                .forEach(c -> dm[r * this.cols + c] = getSI(r, c) * right.getSI(r, c)));
         if (this instanceof FloatMatrixDataDense && right instanceof FloatMatrixDataDense)
         {
             return new FloatMatrixDataDense(dm, this.rows, this.cols);
@@ -399,11 +399,11 @@ abstract class FloatMatrixData
         checkSizes(right);
         float[] dm = new float[this.rows * this.cols];
         IntStream
-            .range(0, this.rows)
-            .parallel()
-            .forEach(
-                r -> IntStream.range(0, this.cols)
-                    .forEach(c -> dm[r * this.cols + c] = getSI(r, c) / right.getSI(r, c)));
+                .range(0, this.rows)
+                .parallel()
+                .forEach(
+                        r -> IntStream.range(0, this.cols)
+                                .forEach(c -> dm[r * this.cols + c] = getSI(r, c) / right.getSI(r, c)));
         if (this instanceof FloatMatrixDataDense && right instanceof FloatMatrixDataDense)
         {
             return new FloatMatrixDataDense(dm, this.rows, this.cols);
@@ -472,7 +472,6 @@ abstract class FloatMatrixData
     @Override
     public String toString()
     {
-        return "FloatMatrixData [storageType=" + this.storageType + ", matrixSI=" + Arrays.toString(this.matrixSI)
-            + "]";
+        return "FloatMatrixData [storageType=" + this.storageType + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
     }
 }

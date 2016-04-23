@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerMass;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MoneyPerMassVector extends
-    TypedDoubleVectorRel<MoneyPerMassUnit, MoneyPerMassVector, MutableMoneyPerMassVector, MoneyPerMass>
+        TypedDoubleVectorRel<MoneyPerMassUnit, MoneyPerMassVector, MutableMoneyPerMassVector, MoneyPerMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,7 +33,7 @@ public class MoneyPerMassVector extends
      * @throws ValueException when values is null
      */
     public MoneyPerMassVector(final double[] values, final MoneyPerMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -46,7 +46,7 @@ public class MoneyPerMassVector extends
      * @throws ValueException when values is null
      */
     public MoneyPerMassVector(final List<Double> values, final MoneyPerMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -82,8 +82,8 @@ public class MoneyPerMassVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MoneyPerMassVector(final SortedMap<Integer, MoneyPerMass> values, final int length,
-        final StorageType storageType) throws ValueException
+    public MoneyPerMassVector(final SortedMap<Integer, MoneyPerMass> values, final int length, final StorageType storageType)
+            throws ValueException
     {
         super(values, length, storageType);
     }
@@ -97,7 +97,7 @@ public class MoneyPerMassVector extends
      * @throws ValueException when values is null
      */
     public MoneyPerMassVector(final SortedMap<Integer, Double> values, final MoneyPerMassUnit unit, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -120,8 +120,7 @@ public class MoneyPerMassVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerMassVector instantiateMutableType(final DoubleVectorData dvd,
-        final MoneyPerMassUnit unit)
+    protected final MutableMoneyPerMassVector instantiateMutableType(final DoubleVectorData dvd, final MoneyPerMassUnit unit)
     {
         return new MutableMoneyPerMassVector(dvd, unit);
     }

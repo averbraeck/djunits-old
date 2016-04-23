@@ -16,171 +16,80 @@ import org.djunits.value.vfloat.scalar.FloatTime;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface FloatTimeMatrix
+public class FloatTimeMatrix extends
+        TypedFloatMatrixAbs<TimeUnit, FloatTimeMatrix, FloatDurationMatrix, MutableFloatTimeMatrix, FloatTime>
 {
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /** */
+    private static final long serialVersionUID = 20151003L;
 
     /**
-     * ABSOLUTE implementation of FloatTimeMatrix.
+     * Construct a new Absolute Immutable FloatTimeMatrix.
+     * @param values float[][]; the values of the entries in the new Absolute Immutable FloatTimeMatrix
+     * @param unit U; the unit of the new Absolute Immutable FloatTimeMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
      */
-    class Abs
-        extends
-        TypedFloatMatrixAbs<TimeUnit, FloatTimeMatrix.Abs, FloatTimeMatrix.Rel, MutableFloatTimeMatrix.Abs, FloatTime.Abs>
+    public FloatTimeMatrix(final float[][] values, final TimeUnit unit, final StorageType storageType) throws ValueException
     {
-        /** */
-        private static final long serialVersionUID = 20151003L;
-
-        /**
-         * Construct a new Absolute Immutable FloatTimeMatrix.
-         * @param values float[][]; the values of the entries in the new Absolute Immutable FloatTimeMatrix
-         * @param unit U; the unit of the new Absolute Immutable FloatTimeMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Abs(final float[][] values, final TimeUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Immutable FloatTimeMatrix.
-         * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable FloatTimeMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Abs(final FloatTime.Abs[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
-
-        /**
-         * Construct a new Absolute Immutable FloatTimeMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Abs(final FloatMatrixData data, final TimeUnit unit)
-        {
-            super(data, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTimeMatrix.Abs instantiateTypeAbs(final FloatMatrixData fmd, final TimeUnit unit)
-        {
-            return new FloatTimeMatrix.Abs(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTimeMatrix.Rel instantiateTypeRel(final FloatMatrixData fmd, final TimeUnit unit)
-        {
-            return new FloatTimeMatrix.Rel(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatTimeMatrix.Abs
-            instantiateMutableType(final FloatMatrixData fmd, final TimeUnit unit)
-        {
-            return new MutableFloatTimeMatrix.Abs(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Abs get(final int row, final int column) throws ValueException
-        {
-            return new FloatTime.Abs(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the absolute matrix into a relative matrix (e.g., before or after a multiplication or division).
-         * @return a relative version of this absolute FloatTime matrix.
-         */
-        public final FloatTimeMatrix.Rel toRel()
-        {
-            return new FloatTimeMatrix.Rel(getData(), getUnit());
-        }
-
+        super(values, unit, storageType);
     }
 
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
+    /**
+     * Construct a new Absolute Immutable FloatTimeMatrix.
+     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable FloatTimeMatrix
+     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public FloatTimeMatrix(final FloatTime[][] values, final StorageType storageType) throws ValueException
+    {
+        super(values, storageType);
+    }
 
     /**
-     * RELATIVE implementation of FloatTimeMatrix.
+     * Construct a new Absolute Immutable FloatTimeMatrix.
+     * @param data an internal data object
+     * @param unit the unit
      */
-    class Rel extends TypedFloatMatrixRel<TimeUnit, FloatTimeMatrix.Rel, MutableFloatTimeMatrix.Rel, FloatTime.Rel>
+    FloatTimeMatrix(final FloatMatrixData data, final TimeUnit unit)
     {
-        /** */
-        private static final long serialVersionUID = 20151006L;
+        super(data, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatTimeMatrix.
-         * @param values float[][]; the values of the entries in the new Relative Immutable FloatTimeMatrix
-         * @param unit U; the unit of the new Relative Immutable FloatTimeMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
-         */
-        public Rel(final float[][] values, final TimeUnit unit, final StorageType storageType) throws ValueException
-        {
-            super(values, unit, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatTimeMatrix instantiateTypeAbs(final FloatMatrixData fmd, final TimeUnit unit)
+    {
+        return new FloatTimeMatrix(fmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatTimeMatrix.
-         * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable FloatTimeMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
-         */
-        public Rel(final FloatTime.Rel[][] values, final StorageType storageType) throws ValueException
-        {
-            super(values, storageType);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatDurationMatrix instantiateTypeRel(final FloatMatrixData fmd, final TimeUnit unit)
+    {
+        return new FloatDurationMatrix(fmd, unit);
+    }
 
-        /**
-         * Construct a new Relative Immutable FloatTimeMatrix.
-         * @param data an internal data object
-         * @param unit the unit
-         */
-        Rel(final FloatMatrixData data, final TimeUnit unit)
-        {
-            super(data, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    protected final MutableFloatTimeMatrix instantiateMutableType(final FloatMatrixData fmd, final TimeUnit unit)
+    {
+        return new MutableFloatTimeMatrix(fmd, unit);
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final FloatTimeMatrix.Rel instantiateType(final FloatMatrixData fmd, final TimeUnit unit)
-        {
-            return new FloatTimeMatrix.Rel(fmd, unit);
-        }
+    /** {@inheritDoc} */
+    @Override
+    public final FloatTime get(final int row, final int column) throws ValueException
+    {
+        return new FloatTime(getInUnit(row, column, getUnit()), getUnit());
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        protected final MutableFloatTimeMatrix.Rel
-            instantiateMutableType(final FloatMatrixData fmd, final TimeUnit unit)
-        {
-            return new MutableFloatTimeMatrix.Rel(fmd, unit);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public final FloatTime.Rel get(final int row, final int column) throws ValueException
-        {
-            return new FloatTime.Rel(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
-         * @return an absolute version of this relative FloatTime matrix.
-         */
-        public final FloatTimeMatrix.Abs toAbs()
-        {
-            return new FloatTimeMatrix.Abs(getData(), getUnit());
-        }
-
+    /**
+     * Translate the absolute matrix into a relative matrix (e.g., before or after a multiplication or division).
+     * @return a relative version of this absolute FloatTime matrix.
+     */
+    public final FloatDurationMatrix toRel()
+    {
+        return new FloatDurationMatrix(getData(), getUnit());
     }
 
 }

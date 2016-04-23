@@ -20,8 +20,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalPotential;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatElectricalPotentialVector
-    extends
-    TypedFloatVectorRel<ElectricalPotentialUnit, FloatElectricalPotentialVector, MutableFloatElectricalPotentialVector, FloatElectricalPotential>
+        extends
+        TypedFloatVectorRel<ElectricalPotentialUnit, FloatElectricalPotentialVector, MutableFloatElectricalPotentialVector, FloatElectricalPotential>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -34,7 +34,7 @@ public class FloatElectricalPotentialVector
      * @throws ValueException when values is null
      */
     public FloatElectricalPotentialVector(final float[] values, final ElectricalPotentialUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -47,7 +47,7 @@ public class FloatElectricalPotentialVector
      * @throws ValueException when values is null
      */
     public FloatElectricalPotentialVector(final List<Float> values, final ElectricalPotentialUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -60,7 +60,7 @@ public class FloatElectricalPotentialVector
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalPotentialVector(final FloatElectricalPotential[] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -72,7 +72,7 @@ public class FloatElectricalPotentialVector
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalPotentialVector(final List<FloatElectricalPotential> values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +86,7 @@ public class FloatElectricalPotentialVector
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalPotentialVector(final SortedMap<Integer, FloatElectricalPotential> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -100,7 +100,7 @@ public class FloatElectricalPotentialVector
      * @throws ValueException when values is null
      */
     public FloatElectricalPotentialVector(final SortedMap<Integer, Float> values, final ElectricalPotentialUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -116,8 +116,7 @@ public class FloatElectricalPotentialVector
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalPotentialVector instantiateType(final FloatVectorData dvd,
-        final ElectricalPotentialUnit unit)
+    protected final FloatElectricalPotentialVector instantiateType(final FloatVectorData dvd, final ElectricalPotentialUnit unit)
     {
         return new FloatElectricalPotentialVector(dvd, unit);
     }
@@ -125,7 +124,7 @@ public class FloatElectricalPotentialVector
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatElectricalPotentialVector instantiateMutableType(final FloatVectorData dvd,
-        final ElectricalPotentialUnit unit)
+            final ElectricalPotentialUnit unit)
     {
         return new MutableFloatElectricalPotentialVector(dvd, unit);
     }

@@ -20,8 +20,8 @@ import java.util.Map;
  * Copyright (c) 2013-2014 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Sep 1, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Sep 1, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -37,7 +37,7 @@ public class GenerateDJUNIT
     private static String absoluteRootPath;
 
     /** List of Abs + Rel types. */
-    private static List<String> typesAbsRel = new ArrayList<>();
+    private static List<String[]> typesAbsRel = new ArrayList<>();
 
     /** List of Rel types. */
     private static List<String> typesRel = new ArrayList<>();
@@ -62,7 +62,7 @@ public class GenerateDJUNIT
         {
             if (line.length() > 0)
             {
-                typesAbsRel.add(line);
+                typesAbsRel.add(line.split(","));
             }
         }
         bufferedReader.close();
@@ -168,9 +168,6 @@ public class GenerateDJUNIT
                 return ret;
             }
             String type = ret.substring(pos, end);
-            boolean isAbs = type.endsWith(".Abs");
-            String absRel = isAbs ? "Abs" : "Rel";
-            type = type.substring(0, type.length() - 4);
             String pType = prefix + type;
             if (!formulas.containsKey(type))
             {
@@ -187,43 +184,49 @@ public class GenerateDJUNIT
                 String param = f.split("=")[0].trim();
                 String result = f.split("=")[1].trim();
                 String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
-                if (!isAbs)
-                {
-                    String pParam = prefix + param;
-                    String pResult = prefix + result;
+                String pParam = prefix + param;
+                String pResult = prefix + result;
 
-                    fStr += "        /**\n";
-                    fStr +=
-                        "         * Calculate the " + dm + " of " + pType + " and " + pParam + ", which results in a ";
-                    fStr += pResult + " scalar.\n";
-                    fStr += "         * @param v " + pType + " scalar\n";
-                    fStr +=
-                        "         * @return " + pResult + " scalar as a " + dm + " of " + pType + " and " + pParam
-                            + "\n";
-                    fStr += "         */\n";
-                    fStr += "        public final " + pResult + "." + absRel + " " + method;
-                    fStr += "(final " + pParam + "." + absRel + " v)\n";
-                    fStr += "        {\n";
-                    fStr += "            return new " + pResult + "." + absRel + "(this.si " + mdsign + " v.si, ";
-                    fStr += result + "Unit" + siOrMoney + ");\n";
-                    fStr += "        }\n\n";
-                }
+                fStr += "        /**\n";
+                fStr += "         * Calculate the " + dm + " of " + pType + " and " + pParam + ", which results in a ";
+                fStr += pResult + " scalar.\n";
+                fStr += "         * @param v " + pType + " scalar\n";
+                fStr += "         * @return " + pResult + " scalar as a " + dm + " of " + pType + " and " + pParam + "\n";
+                fStr += "         */\n";
+                fStr += "        public final " + pResult + " " + method;
+                fStr += "(final " + pParam + " v)\n";
+                fStr += "        {\n";
+                fStr += "            return new " + pResult + "(this.si " + mdsign + " v.si, ";
+                fStr += result + "Unit" + siOrMoney + ");\n";
+                fStr += "        }\n\n";
             }
-            ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 5, ret.length() - 1);
+            ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 1, ret.length() - 1);
         }
-
-        // remove the ".Abs" and ".Rel" for the purely relative units and money units.
-        for (String relType : typesRel)
-        {
-            ret = ret.replaceAll(relType + "\\.Rel", relType);
-            ret = ret.replaceAll(relType + "\\.Abs", relType);
-        }
-        for (String moneyType : typesMoney)
-        {
-            ret = ret.replaceAll(moneyType + "\\.Rel", moneyType);
-            ret = ret.replaceAll(moneyType + "\\.Abs", moneyType);
-        }
+        ret = ret.replaceAll("DurationUnit", "TimeUnit");
         return ret;
+    }
+
+    /**
+     * Replace the %TypeAbs%, %TypeRel%, and %TypeUnit% tags in the java string.
+     * @param in the original java string
+     * @param type the types: [abs, rel, unit]
+     * @return the java string with replacements
+     */
+    private static String replaceAbsRel(final String in, final String[] type)
+    {
+        String typeAbs = type[0];
+        String typeRel = type[1];
+        String typeUnit = type[2];
+        String java = in.replaceAll("%TypeAbs%", typeAbs);
+        java = java.replaceAll("%typeabs%", typeAbs.toLowerCase());
+        java = java.replaceAll("%TYPEABS%", typeAbs.toUpperCase());
+        java = java.replaceAll("%TypeRel%", typeRel);
+        java = java.replaceAll("%typerel%", typeRel.toLowerCase());
+        java = java.replaceAll("%TYPEREL%", typeRel.toUpperCase());
+        java = java.replaceAll("%TypeUnit%", typeUnit);
+        java = java.replaceAll("%typeunit%", typeUnit.toLowerCase());
+        java = java.replaceAll("%TYPEUNIT%", typeUnit.toUpperCase());
+        return java;
     }
 
     /**
@@ -233,23 +236,26 @@ public class GenerateDJUNIT
      */
     private static void generateDoubleScalarAbsRel() throws IOException, URISyntaxException
     {
-        String relativePath = "value/vdouble/scalar/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_SCALAR_ABS_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
-
-        for (String type : typesAbsRel)
+        for (int i = 0; i <= 1; i++)
         {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulas(java, "DoubleScalar => " + type, "");
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
+            String relativePath = "value/vdouble/scalar/";
+            URL scalarURL =
+                    URLResource.getResource("/" + relativePath
+                            + ((i == 0) ? "DOUBLE_SCALAR_AR_ABS.java" : "DOUBLE_SCALAR_AR_REL.java"));
+            String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+            for (String[] type : typesAbsRel)
+            {
+                File outPath = new File(absoluteRootPath + relativePath);
+                outPath.mkdirs();
+                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type[i] + ".java");
+                String java = new String(scalarJava);
+                java = replaceAbsRel(java, type);
+                java = formulas(java, "DoubleScalar => " + type[i], "");
+                out.print(java);
+                out.close();
+                System.out.println("built: " + absoluteRootPath + relativePath + type[i] + ".java");
+            }
         }
     }
 
@@ -318,24 +324,27 @@ public class GenerateDJUNIT
      */
     private static void generateFloatScalarAbsRel() throws IOException, URISyntaxException
     {
-        String relativePath = "value/vfloat/scalar/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_SCALAR_ABS_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
-
-        for (String type : typesAbsRel)
+        for (int i = 0; i <= 1; i++)
         {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + ".java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulas(java, "FloatScalar => " + type, "Float");
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + fType + ".java");
+            String relativePath = "value/vfloat/scalar/";
+            URL scalarURL =
+                    URLResource.getResource("/" + relativePath
+                            + ((i == 0) ? "FLOAT_SCALAR_AR_ABS.java" : "FLOAT_SCALAR_AR_REL.java"));
+            String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+
+            for (String type[] : typesAbsRel)
+            {
+                String fType = "Float" + type[i];
+                File outPath = new File(absoluteRootPath + relativePath);
+                outPath.mkdirs();
+                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + ".java");
+                String java = new String(scalarJava);
+                java = replaceAbsRel(java, type);
+                java = formulas(java, "FloatScalar => " + type[i], "Float");
+                out.print(java);
+                out.close();
+                System.out.println("built: " + absoluteRootPath + relativePath + fType + ".java");
+            }
         }
     }
 
@@ -424,9 +433,6 @@ public class GenerateDJUNIT
                 return ret;
             }
             String type = ret.substring(pos, end);
-            boolean isAbs = type.endsWith(".Abs");
-            String absRel = isAbs ? "Abs" : "Rel";
-            type = type.substring(0, type.length() - 4);
             String pType = prefix + type;
             if (!formulas.containsKey(type))
             {
@@ -434,51 +440,9 @@ public class GenerateDJUNIT
                 return ret.substring(0, pos - 1) + ret.substring(pos + type.length() + 2, ret.length() - 1);
             }
             String fStr = "";
-            // for (String f : formulas.get(type))
-            // {
-            // String dm = f.startsWith("/") ? "division" : "multiplication";
-            // String method = f.startsWith("/") ? "divideBy" : "multiplyBy";
-            // String mdsign = f.startsWith("/") ? "/" : "*";
-            // f = f.substring(1, f.length());
-            // String param = f.split("=")[0].trim();
-            // String result = f.split("=")[1].trim();
-            // String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
-            // if (!isAbs)
-            // {
-            // String pParam = prefix + param;
-            // String pResult = prefix + result;
-            //
-            // fStr += "        /**\n";
-            // fStr +=
-            // "         * Calculate the " + dm + " of " + pType + " and " + pParam + ", which results in a ";
-            // fStr += pResult + " scalar.\n";
-            // fStr += "         * @param v " + pType + " scalar\n";
-            // fStr +=
-            // "         * @return " + pResult + " scalar as a " + dm + " of " + pType + " and " + pParam
-            // + "\n";
-            // fStr += "         */\n";
-            // fStr += "        public final " + pResult + "." + absRel + " " + method;
-            // fStr += "(final " + pParam + "." + absRel + " v)\n";
-            // fStr += "        {\n";
-            // fStr += "            return new " + pResult + "." + absRel + "(this.si " + mdsign + " v.si, ";
-            // fStr += result + "Unit" + siOrMoney + ");\n";
-            // fStr += "        }\n\n";
-            // }
-            // }
-            ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 5, ret.length() - 1);
+            ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 1, ret.length() - 1);
         }
-
-        // remove the ".Abs" and ".Rel" for the purely relative units and money units.
-        for (String relType : typesRel)
-        {
-            ret = ret.replaceAll(relType + "\\.Rel", relType);
-            ret = ret.replaceAll(relType + "\\.Abs", relType);
-        }
-        for (String moneyType : typesMoney)
-        {
-            ret = ret.replaceAll(moneyType + "\\.Rel", moneyType);
-            ret = ret.replaceAll(moneyType + "\\.Abs", moneyType);
-        }
+        ret = ret.replaceAll("DurationUnit", "TimeUnit");
         return ret;
     }
 
@@ -493,41 +457,44 @@ public class GenerateDJUNIT
      */
     private static void generateDoubleVectorAbsRel() throws IOException, URISyntaxException
     {
-        String relativePath = "value/vdouble/vector/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_VECTOR_ABS_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
-
-        for (String type : typesAbsRel)
+        for (int i = 0; i <= 1; i++)
         {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Vector.java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasVector(java, "DoubleVector => " + type, "");
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
-        }
+            String relativePath = "value/vdouble/vector/";
+            URL vectorURL =
+                    URLResource.getResource("/" + relativePath
+                            + ((i == 0) ? "DOUBLE_VECTOR_AR_ABS.java" : "DOUBLE_VECTOR_AR_REL.java"));
+            String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
-        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_VECTOR_ABS_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+            for (String type[] : typesAbsRel)
+            {
+                File outPath = new File(absoluteRootPath + relativePath);
+                outPath.mkdirs();
+                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type[i] + "Vector.java");
+                String java = new String(vectorJava);
+                java = replaceAbsRel(java, type);
+                java = formulasVector(java, "DoubleVector => " + type[i], "");
+                out.print(java);
+                out.close();
+                System.out.println("built: " + absoluteRootPath + relativePath + type[i] + "Vector.java");
+            }
 
-        for (String type : typesAbsRel)
-        {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasVector(java, "MutableDoubleVector => " + type, "Mutable");
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
+            vectorURL =
+                    URLResource.getResource("/" + relativePath
+                            + ((i == 0) ? "MUTABLE_DOUBLE_VECTOR_AR_ABS.java" : "MUTABLE_DOUBLE_VECTOR_AR_REL.java"));
+            vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
+
+            for (String type[] : typesAbsRel)
+            {
+                File outPath = new File(absoluteRootPath + relativePath);
+                outPath.mkdirs();
+                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type[i] + "Vector.java");
+                String java = new String(vectorJava);
+                java = replaceAbsRel(java, type);
+                java = formulasVector(java, "MutableDoubleVector => " + type[i], "Mutable");
+                out.print(java);
+                out.close();
+                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type[i] + "Vector.java");
+            }
         }
     }
 
@@ -539,15 +506,15 @@ public class GenerateDJUNIT
     private static void generateDoubleVectorRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/vector/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_VECTOR_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        URL vectorURL = URLResource.getResource("/" + relativePath + "DOUBLE_VECTOR_REL.java");
+        String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
         for (String type : typesRel)
         {
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Vector.java");
-            String java = new String(scalarJava);
+            String java = new String(vectorJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -557,15 +524,15 @@ public class GenerateDJUNIT
             System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
         }
 
-        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_VECTOR_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        vectorURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_VECTOR_REL.java");
+        vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
         for (String type : typesRel)
         {
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
-            String java = new String(scalarJava);
+            String java = new String(vectorJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -588,15 +555,15 @@ public class GenerateDJUNIT
     private static void generateDoubleVectorMoney() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/vector/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_VECTOR_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        URL vectorURL = URLResource.getResource("/" + relativePath + "DOUBLE_VECTOR_REL.java");
+        String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
         for (String type : typesMoney)
         {
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Vector.java");
-            String java = new String(scalarJava);
+            String java = new String(vectorJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -606,15 +573,15 @@ public class GenerateDJUNIT
             System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
         }
 
-        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_VECTOR_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        vectorURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_VECTOR_REL.java");
+        vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
         for (String type : typesMoney)
         {
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
-            String java = new String(scalarJava);
+            String java = new String(vectorJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -637,43 +604,46 @@ public class GenerateDJUNIT
      */
     private static void generateFloatVectorAbsRel() throws IOException, URISyntaxException
     {
-        String relativePath = "value/vfloat/vector/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_VECTOR_ABS_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
-
-        for (String type : typesAbsRel)
+        for (int i = 0; i <= 1; i++)
         {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Vector.java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasVector(java, "FloatVector => " + fType, "");
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
-        }
+            String relativePath = "value/vfloat/vector/";
+            URL vectorURL =
+                    URLResource.getResource("/" + relativePath
+                            + ((i == 0) ? "FLOAT_VECTOR_AR_ABS.java" : "FLOAT_VECTOR_AR_REL.java"));
+            String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
-        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_VECTOR_ABS_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+            for (String type[] : typesAbsRel)
+            {
+                String fType = "Float" + type[i];
+                File outPath = new File(absoluteRootPath + relativePath);
+                outPath.mkdirs();
+                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Vector.java");
+                String java = new String(vectorJava);
+                java = replaceAbsRel(java, type);
+                java = formulasVector(java, "FloatVector => " + fType, "");
+                out.print(java);
+                out.close();
+                System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
+            }
 
-        for (String type : typesAbsRel)
-        {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
+            vectorURL =
+                    URLResource.getResource("/" + relativePath
+                            + ((i == 0) ? "MUTABLE_FLOAT_VECTOR_AR_ABS.java" : "MUTABLE_FLOAT_VECTOR_AR_REL.java"));
+            vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
+
+            for (String type[] : typesAbsRel)
+            {
+                String fType = "Float" + type[i];
+                File outPath = new File(absoluteRootPath + relativePath);
+                outPath.mkdirs();
+                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
+                String java = new String(vectorJava);
+                java = replaceAbsRel(java, type);
+                java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
+                out.print(java);
+                out.close();
+                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
+            }
         }
     }
 
@@ -685,8 +655,8 @@ public class GenerateDJUNIT
     private static void generateFloatVectorRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/vector/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_VECTOR_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        URL vectorURL = URLResource.getResource("/" + relativePath + "FLOAT_VECTOR_REL.java");
+        String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
         for (String type : typesRel)
         {
@@ -694,7 +664,7 @@ public class GenerateDJUNIT
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Vector.java");
-            String java = new String(scalarJava);
+            String java = new String(vectorJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -704,8 +674,8 @@ public class GenerateDJUNIT
             System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
         }
 
-        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_VECTOR_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        vectorURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_VECTOR_REL.java");
+        vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
         for (String type : typesRel)
         {
@@ -713,7 +683,7 @@ public class GenerateDJUNIT
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-            String java = new String(scalarJava);
+            String java = new String(vectorJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -736,8 +706,8 @@ public class GenerateDJUNIT
     private static void generateFloatVectorMoney() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/vector/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_VECTOR_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        URL vectorURL = URLResource.getResource("/" + relativePath + "FLOAT_VECTOR_REL.java");
+        String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
         for (String type : typesMoney)
         {
@@ -745,7 +715,7 @@ public class GenerateDJUNIT
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Vector.java");
-            String java = new String(scalarJava);
+            String java = new String(vectorJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -755,8 +725,8 @@ public class GenerateDJUNIT
             System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
         }
 
-        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_VECTOR_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        vectorURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_VECTOR_REL.java");
+        vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
         for (String type : typesMoney)
         {
@@ -764,7 +734,7 @@ public class GenerateDJUNIT
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-            String java = new String(scalarJava);
+            String java = new String(vectorJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -801,9 +771,6 @@ public class GenerateDJUNIT
                 return ret;
             }
             String type = ret.substring(pos, end);
-            boolean isAbs = type.endsWith(".Abs");
-            String absRel = isAbs ? "Abs" : "Rel";
-            type = type.substring(0, type.length() - 4);
             String pType = prefix + type;
             if (!formulas.containsKey(type))
             {
@@ -811,51 +778,9 @@ public class GenerateDJUNIT
                 return ret.substring(0, pos - 1) + ret.substring(pos + type.length() + 2, ret.length() - 1);
             }
             String fStr = "";
-            // for (String f : formulas.get(type))
-            // {
-            // String dm = f.startsWith("/") ? "division" : "multiplication";
-            // String method = f.startsWith("/") ? "divideBy" : "multiplyBy";
-            // String mdsign = f.startsWith("/") ? "/" : "*";
-            // f = f.substring(1, f.length());
-            // String param = f.split("=")[0].trim();
-            // String result = f.split("=")[1].trim();
-            // String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
-            // if (!isAbs)
-            // {
-            // String pParam = prefix + param;
-            // String pResult = prefix + result;
-            //
-            // fStr += "        /**\n";
-            // fStr +=
-            // "         * Calculate the " + dm + " of " + pType + " and " + pParam + ", which results in a ";
-            // fStr += pResult + " scalar.\n";
-            // fStr += "         * @param v " + pType + " scalar\n";
-            // fStr +=
-            // "         * @return " + pResult + " scalar as a " + dm + " of " + pType + " and " + pParam
-            // + "\n";
-            // fStr += "         */\n";
-            // fStr += "        public final " + pResult + "." + absRel + " " + method;
-            // fStr += "(final " + pParam + "." + absRel + " v)\n";
-            // fStr += "        {\n";
-            // fStr += "            return new " + pResult + "." + absRel + "(this.si " + mdsign + " v.si, ";
-            // fStr += result + "Unit" + siOrMoney + ");\n";
-            // fStr += "        }\n\n";
-            // }
-            // }
-            ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 5, ret.length() - 1);
+            ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 1, ret.length() - 1);
         }
-
-        // remove the ".Abs" and ".Rel" for the purely relative units and money units.
-        for (String relType : typesRel)
-        {
-            ret = ret.replaceAll(relType + "\\.Rel", relType);
-            ret = ret.replaceAll(relType + "\\.Abs", relType);
-        }
-        for (String moneyType : typesMoney)
-        {
-            ret = ret.replaceAll(moneyType + "\\.Rel", moneyType);
-            ret = ret.replaceAll(moneyType + "\\.Abs", moneyType);
-        }
+        ret = ret.replaceAll("DurationUnit", "TimeUnit");
         return ret;
     }
 
@@ -870,41 +795,44 @@ public class GenerateDJUNIT
      */
     private static void generateDoubleMatrixAbsRel() throws IOException, URISyntaxException
     {
-        String relativePath = "value/vdouble/matrix/";
-        URL matrixURL = URLResource.getResource("/" + relativePath + "DOUBLE_MATRIX_ABS_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-        for (String type : typesAbsRel)
+        for (int i = 0; i <= 1; i++)
         {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Matrix.java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasMatrix(java, "DoubleMatrix => " + type, "");
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
-        }
+            String relativePath = "value/vdouble/matrix/";
+            URL matrixURL =
+                    URLResource.getResource("/" + relativePath
+                            + ((i == 0) ? "DOUBLE_MATRIX_AR_ABS.java" : "DOUBLE_MATRIX_AR_REL.java"));
+            String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
-        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_MATRIX_ABS_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
+            for (String[] type : typesAbsRel)
+            {
+                File outPath = new File(absoluteRootPath + relativePath);
+                outPath.mkdirs();
+                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type[i] + "Matrix.java");
+                String java = new String(matrixJava);
+                java = replaceAbsRel(java, type);
+                java = formulasMatrix(java, "DoubleMatrix => " + type[i], "");
+                out.print(java);
+                out.close();
+                System.out.println("built: " + absoluteRootPath + relativePath + type[i] + "Matrix.java");
+            }
 
-        for (String type : typesAbsRel)
-        {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasMatrix(java, "MutableDoubleMatrix => " + type, "Mutable");
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
+            matrixURL =
+                    URLResource.getResource("/" + relativePath
+                            + ((i == 0) ? "MUTABLE_DOUBLE_MATRIX_AR_ABS.java" : "MUTABLE_DOUBLE_MATRIX_AR_REL.java"));
+            matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
+
+            for (String[] type : typesAbsRel)
+            {
+                File outPath = new File(absoluteRootPath + relativePath);
+                outPath.mkdirs();
+                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type[i] + "Matrix.java");
+                String java = new String(matrixJava);
+                java = replaceAbsRel(java, type);
+                java = formulasMatrix(java, "MutableDoubleMatrix => " + type[i], "Mutable");
+                out.print(java);
+                out.close();
+                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type[i] + "Matrix.java");
+            }
         }
     }
 
@@ -916,15 +844,15 @@ public class GenerateDJUNIT
     private static void generateDoubleMatrixRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/matrix/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_MATRIX_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        URL matrixURL = URLResource.getResource("/" + relativePath + "DOUBLE_MATRIX_REL.java");
+        String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
         for (String type : typesRel)
         {
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Matrix.java");
-            String java = new String(scalarJava);
+            String java = new String(matrixJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -934,15 +862,15 @@ public class GenerateDJUNIT
             System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
         }
 
-        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_MATRIX_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_MATRIX_REL.java");
+        matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
         for (String type : typesRel)
         {
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
-            String java = new String(scalarJava);
+            String java = new String(matrixJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -965,15 +893,15 @@ public class GenerateDJUNIT
     private static void generateDoubleMatrixMoney() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/matrix/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_MATRIX_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        URL matrixURL = URLResource.getResource("/" + relativePath + "DOUBLE_MATRIX_REL.java");
+        String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
         for (String type : typesMoney)
         {
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Matrix.java");
-            String java = new String(scalarJava);
+            String java = new String(matrixJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -983,15 +911,15 @@ public class GenerateDJUNIT
             System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
         }
 
-        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_MATRIX_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_MATRIX_REL.java");
+        matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
         for (String type : typesMoney)
         {
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
-            String java = new String(scalarJava);
+            String java = new String(matrixJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -1014,43 +942,46 @@ public class GenerateDJUNIT
      */
     private static void generateFloatMatrixAbsRel() throws IOException, URISyntaxException
     {
-        String relativePath = "value/vfloat/matrix/";
-        URL matrixURL = URLResource.getResource("/" + relativePath + "FLOAT_MATRIX_ABS_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-        for (String type : typesAbsRel)
+        for (int i = 0; i <= 1; i++)
         {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Matrix.java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasMatrix(java, "FloatMatrix => " + fType, "");
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
-        }
+            String relativePath = "value/vfloat/matrix/";
+            URL matrixURL =
+                    URLResource.getResource("/" + relativePath
+                            + ((i == 0) ? "FLOAT_MATRIX_AR_ABS.java" : "FLOAT_MATRIX_AR_REL.java"));
+            String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
-        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_MATRIX_ABS_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
+            for (String type[] : typesAbsRel)
+            {
+                String fType = "Float" + type[i];
+                File outPath = new File(absoluteRootPath + relativePath);
+                outPath.mkdirs();
+                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Matrix.java");
+                String java = new String(matrixJava);
+                java = replaceAbsRel(java, type);
+                java = formulasMatrix(java, "FloatMatrix => " + fType, "");
+                out.print(java);
+                out.close();
+                System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
+            }
 
-        for (String type : typesAbsRel)
-        {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
+            matrixURL =
+                    URLResource.getResource("/" + relativePath
+                            + ((i == 0) ? "MUTABLE_FLOAT_MATRIX_AR_ABS.java" : "MUTABLE_FLOAT_MATRIX_AR_REL.java"));
+            matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
+
+            for (String type[] : typesAbsRel)
+            {
+                String fType = "Float" + type[i];
+                File outPath = new File(absoluteRootPath + relativePath);
+                outPath.mkdirs();
+                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
+                String java = new String(matrixJava);
+                java = replaceAbsRel(java, type);
+                java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
+                out.print(java);
+                out.close();
+                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
+            }
         }
     }
 
@@ -1062,8 +993,8 @@ public class GenerateDJUNIT
     private static void generateFloatMatrixRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/matrix/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_MATRIX_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        URL matrixURL = URLResource.getResource("/" + relativePath + "FLOAT_MATRIX_REL.java");
+        String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
         for (String type : typesRel)
         {
@@ -1071,7 +1002,7 @@ public class GenerateDJUNIT
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Matrix.java");
-            String java = new String(scalarJava);
+            String java = new String(matrixJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -1081,8 +1012,8 @@ public class GenerateDJUNIT
             System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
         }
 
-        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_MATRIX_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_MATRIX_REL.java");
+        matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
         for (String type : typesRel)
         {
@@ -1090,7 +1021,7 @@ public class GenerateDJUNIT
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
-            String java = new String(scalarJava);
+            String java = new String(matrixJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -1113,8 +1044,8 @@ public class GenerateDJUNIT
     private static void generateFloatMatrixMoney() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/matrix/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_MATRIX_REL.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        URL matrixURL = URLResource.getResource("/" + relativePath + "FLOAT_MATRIX_REL.java");
+        String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
         for (String type : typesMoney)
         {
@@ -1122,7 +1053,7 @@ public class GenerateDJUNIT
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Matrix.java");
-            String java = new String(scalarJava);
+            String java = new String(matrixJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -1132,8 +1063,8 @@ public class GenerateDJUNIT
             System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
         }
 
-        scalarURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_MATRIX_REL.java");
-        scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
+        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_MATRIX_REL.java");
+        matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
         for (String type : typesMoney)
         {
@@ -1141,7 +1072,7 @@ public class GenerateDJUNIT
             File outPath = new File(absoluteRootPath + relativePath);
             outPath.mkdirs();
             PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
-            String java = new String(scalarJava);
+            String java = new String(matrixJava);
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
@@ -1249,7 +1180,7 @@ public class GenerateDJUNIT
         generateFloatVectorAbsRel();
         generateFloatVectorRel();
         generateFloatVectorMoney();
-        
+
         generateDoubleMatrixAbsRel();
         generateDoubleMatrixRel();
         generateDoubleMatrixMoney();

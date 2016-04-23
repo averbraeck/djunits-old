@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.MoneyPerMass;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MoneyPerMassMatrix extends
-    TypedDoubleMatrixRel<MoneyPerMassUnit, MoneyPerMassMatrix, MutableMoneyPerMassMatrix, MoneyPerMass>
+        TypedDoubleMatrixRel<MoneyPerMassUnit, MoneyPerMassMatrix, MutableMoneyPerMassMatrix, MoneyPerMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,7 +30,7 @@ public class MoneyPerMassMatrix extends
      * @throws ValueException when values is null
      */
     public MoneyPerMassMatrix(final double[][] values, final MoneyPerMassUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -65,8 +65,7 @@ public class MoneyPerMassMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerMassMatrix instantiateMutableType(final DoubleMatrixData dmd,
-        final MoneyPerMassUnit unit)
+    protected final MutableMoneyPerMassMatrix instantiateMutableType(final DoubleMatrixData dmd, final MoneyPerMassUnit unit)
     {
         return new MutableMoneyPerMassMatrix(dmd, unit);
     }

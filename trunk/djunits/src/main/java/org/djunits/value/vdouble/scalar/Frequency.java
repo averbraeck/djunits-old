@@ -80,11 +80,11 @@ public class Frequency extends TypedDoubleScalarRel<FrequencyUnit, Frequency>
     }
 
     /**
-     * Calculate the multiplication of Frequency and Time, which results in a Dimensionless scalar.
+     * Calculate the multiplication of Frequency and Duration, which results in a Dimensionless scalar.
      * @param v Frequency scalar
-     * @return Dimensionless scalar as a multiplication of Frequency and Time
+     * @return Dimensionless scalar as a multiplication of Frequency and Duration
      */
-    public final Dimensionless multiplyBy(final Time.Rel v)
+    public final Dimensionless multiplyBy(final Duration v)
     {
         return new Dimensionless(this.si * v.si, DimensionlessUnit.SI);
     }
@@ -94,7 +94,7 @@ public class Frequency extends TypedDoubleScalarRel<FrequencyUnit, Frequency>
      * @param v Frequency scalar
      * @return Speed scalar as a multiplication of Frequency and Length
      */
-    public final Speed multiplyBy(final Length.Rel v)
+    public final Speed multiplyBy(final Length v)
     {
         return new Speed(this.si * v.si, SpeedUnit.SI);
     }

@@ -29,7 +29,7 @@ public class MutablePowerMatrix extends MutableTypedDoubleMatrixRel<PowerUnit, P
      * @throws ValueException when values is null
      */
     public MutablePowerMatrix(final double[][] values, final PowerUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

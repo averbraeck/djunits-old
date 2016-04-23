@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * @param <S> the scalar type
  */
 abstract class TypedDoubleMatrixRel<U extends Unit<U>, R extends TypedDoubleMatrixRel<U, R, MR, S>, MR extends MutableTypedDoubleMatrixRel<U, R, MR, S>, S extends DoubleScalar.Rel<U>>
-    extends DoubleMatrix.Rel<U>
+        extends DoubleMatrix.Rel<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;

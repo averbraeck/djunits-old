@@ -12,8 +12,8 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version May 15, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version May 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class AreaUnit extends LinearUnit<AreaUnit>
@@ -66,9 +66,9 @@ public class AreaUnit extends LinearUnit<AreaUnit>
         SQUARE_METER = SI;
         SQUARE_KM = new AreaUnit(LengthUnit.KILOMETER, "AreaUnit.square_kilometer", "AreaUnit.km^2", SI_DERIVED, true);
         SQUARE_CENTIMETER =
-            new AreaUnit(LengthUnit.CENTIMETER, "AreaUnit.square_centimeter", "AreaUnit.cm^2", SI_DERIVED, true);
+                new AreaUnit(LengthUnit.CENTIMETER, "AreaUnit.square_centimeter", "AreaUnit.cm^2", SI_DERIVED, true);
         SQUARE_MILLIMETER =
-            new AreaUnit(LengthUnit.MILLIMETER, "AreaUnit.square_millimeter", "AreaUnit.mm^2", SI_DERIVED, true);
+                new AreaUnit(LengthUnit.MILLIMETER, "AreaUnit.square_millimeter", "AreaUnit.mm^2", SI_DERIVED, true);
         ARE = new AreaUnit("AreaUnit.are", "AreaUnit.a", OTHER, SQUARE_METER, 100.0, true);
         HECTARE = new AreaUnit("AreaUnit.hectare", "AreaUnit.ha", OTHER, ARE, 100.0, true);
         SQUARE_MILE = new AreaUnit(LengthUnit.MILE, "AreaUnit.square_mile", "AreaUnit.mi^2", IMPERIAL, true);
@@ -87,11 +87,11 @@ public class AreaUnit extends LinearUnit<AreaUnit>
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private AreaUnit(final LengthUnit lengthUnit, final String nameOrNameKey,
-        final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+    private AreaUnit(final LengthUnit lengthUnit, final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
+            final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, SQUARE_METER, lengthUnit
-            .getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
+                .getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.lengthUnit = lengthUnit;
     }
 
@@ -102,8 +102,7 @@ public class AreaUnit extends LinearUnit<AreaUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public AreaUnit(final LengthUnit lengthUnit, final String name, final String abbreviation,
-        final UnitSystem unitSystem)
+    public AreaUnit(final LengthUnit lengthUnit, final String name, final String abbreviation, final UnitSystem unitSystem)
     {
         this(lengthUnit, name, abbreviation, unitSystem, false);
     }
@@ -118,12 +117,11 @@ public class AreaUnit extends LinearUnit<AreaUnit>
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private AreaUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-        final UnitSystem unitSystem, final AreaUnit referenceUnit, final double conversionFactorToReferenceUnit,
-        final boolean standardUnit)
+    private AreaUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final AreaUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-            standardUnit);
+                standardUnit);
         this.lengthUnit = referenceUnit.getLengthUnit();
     }
 
@@ -135,8 +133,8 @@ public class AreaUnit extends LinearUnit<AreaUnit>
      * @param referenceUnit the unit to convert to
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
-    public AreaUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-        final AreaUnit referenceUnit, final double conversionFactorToReferenceUnit)
+    public AreaUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final AreaUnit referenceUnit,
+            final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

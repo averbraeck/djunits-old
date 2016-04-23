@@ -79,11 +79,11 @@ public class FlowMass extends TypedDoubleScalarRel<FlowMassUnit, FlowMass>
     }
 
     /**
-     * Calculate the multiplication of FlowMass and Time, which results in a Mass scalar.
+     * Calculate the multiplication of FlowMass and Duration, which results in a Mass scalar.
      * @param v FlowMass scalar
-     * @return Mass scalar as a multiplication of FlowMass and Time
+     * @return Mass scalar as a multiplication of FlowMass and Duration
      */
-    public final Mass multiplyBy(final Time.Rel v)
+    public final Mass multiplyBy(final Duration v)
     {
         return new Mass(this.si * v.si, MassUnit.SI);
     }

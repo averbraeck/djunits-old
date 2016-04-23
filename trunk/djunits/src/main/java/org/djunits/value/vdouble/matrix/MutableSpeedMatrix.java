@@ -29,7 +29,7 @@ public class MutableSpeedMatrix extends MutableTypedDoubleMatrixRel<SpeedUnit, S
      * @throws ValueException when values is null
      */
     public MutableSpeedMatrix(final double[][] values, final SpeedUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

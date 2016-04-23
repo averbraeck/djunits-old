@@ -89,11 +89,11 @@ public class FloatFlowMass extends TypedFloatScalarRel<FlowMassUnit, FloatFlowMa
     }
 
     /**
-     * Calculate the multiplication of FloatFlowMass and FloatTime, which results in a FloatMass scalar.
+     * Calculate the multiplication of FloatFlowMass and FloatDuration, which results in a FloatMass scalar.
      * @param v FloatFlowMass scalar
-     * @return FloatMass scalar as a multiplication of FloatFlowMass and FloatTime
+     * @return FloatMass scalar as a multiplication of FloatFlowMass and FloatDuration
      */
-    public final FloatMass multiplyBy(final FloatTime.Rel v)
+    public final FloatMass multiplyBy(final FloatDuration v)
     {
         return new FloatMass(this.si * v.si, MassUnit.SI);
     }

@@ -28,8 +28,7 @@ public class DensityMatrix extends TypedDoubleMatrixRel<DensityUnit, DensityMatr
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public DensityMatrix(final double[][] values, final DensityUnit unit, final StorageType storageType)
-        throws ValueException
+    public DensityMatrix(final double[][] values, final DensityUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }

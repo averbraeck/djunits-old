@@ -28,8 +28,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Unit; the unit of this MutableFloatMatrix
  */
-public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<U> implements
-    MutableFloatMatrixInterface<U>
+public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<U> implements MutableFloatMatrixInterface<U>
 {
     /**  */
     private static final long serialVersionUID = 20151003L;
@@ -73,8 +72,8 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
      * @param <U> Unit the unit for which this Vector will be created
      */
     public static class Abs<U extends Unit<U>> extends MutableFloatMatrix<U> implements Absolute,
-        MathFunctionsAbs<MutableFloatMatrix.Abs<U>>, FloatMathFunctions<MutableFloatMatrix.Abs<U>>,
-        FunctionsAbs<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
+            MathFunctionsAbs<MutableFloatMatrix.Abs<U>>, FloatMathFunctions<MutableFloatMatrix.Abs<U>>,
+            FunctionsAbs<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -378,8 +377,8 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
      * @param <U> Unit the unit for which this Matrix will be created
      */
     public static class Rel<U extends Unit<U>> extends MutableFloatMatrix<U> implements Relative,
-        MathFunctionsRel<MutableFloatMatrix.Rel<U>>, FloatMathFunctions<MutableFloatMatrix.Rel<U>>,
-        FunctionsRel<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
+            MathFunctionsRel<MutableFloatMatrix.Rel<U>>, FloatMathFunctions<MutableFloatMatrix.Rel<U>>,
+            FunctionsRel<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -710,8 +709,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
      * @param <U> the unit
      * @return an instantiated vector
      */
-    static <U extends Unit<U>> MutableFloatMatrix.Abs<U> instantiateMutableAbs(final FloatMatrixData dmData,
-        final U unit)
+    static <U extends Unit<U>> MutableFloatMatrix.Abs<U> instantiateMutableAbs(final FloatMatrixData dmData, final U unit)
     {
         return new MutableFloatMatrix.Abs<U>(dmData, unit);
     }
@@ -746,8 +744,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
 
     /** {@inheritDoc} */
     @Override
-    public final void setInUnit(final int row, final int column, final float value, final U valueUnit)
-        throws ValueException
+    public final void setInUnit(final int row, final int column, final float value, final U valueUnit) throws ValueException
     {
         setSI(row, column, (float) ValueUtil.expressAsSIUnit(value, valueUnit));
     }

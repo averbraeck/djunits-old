@@ -82,11 +82,11 @@ public class Power extends TypedDoubleScalarRel<PowerUnit, Power>
     }
 
     /**
-     * Calculate the multiplication of Power and Time, which results in a Energy scalar.
+     * Calculate the multiplication of Power and Duration, which results in a Energy scalar.
      * @param v Power scalar
-     * @return Energy scalar as a multiplication of Power and Time
+     * @return Energy scalar as a multiplication of Power and Duration
      */
-    public final Energy multiplyBy(final Time.Rel v)
+    public final Energy multiplyBy(final Duration v)
     {
         return new Energy(this.si * v.si, EnergyUnit.SI);
     }

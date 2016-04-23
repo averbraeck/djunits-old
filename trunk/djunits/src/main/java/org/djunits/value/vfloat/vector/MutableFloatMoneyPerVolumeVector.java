@@ -20,8 +20,8 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerVolume;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatMoneyPerVolumeVector
-    extends
-    MutableTypedFloatVectorRel<MoneyPerVolumeUnit, FloatMoneyPerVolumeVector, MutableFloatMoneyPerVolumeVector, FloatMoneyPerVolume>
+        extends
+        MutableTypedFloatVectorRel<MoneyPerVolumeUnit, FloatMoneyPerVolumeVector, MutableFloatMoneyPerVolumeVector, FloatMoneyPerVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,8 +33,8 @@ public class MutableFloatMoneyPerVolumeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatMoneyPerVolumeVector(final float[] values, final MoneyPerVolumeUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableFloatMoneyPerVolumeVector(final float[] values, final MoneyPerVolumeUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -47,7 +47,7 @@ public class MutableFloatMoneyPerVolumeVector
      * @throws ValueException when values is null
      */
     public MutableFloatMoneyPerVolumeVector(final List<Float> values, final MoneyPerVolumeUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -60,7 +60,7 @@ public class MutableFloatMoneyPerVolumeVector
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMoneyPerVolumeVector(final FloatMoneyPerVolume[] values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -72,7 +72,7 @@ public class MutableFloatMoneyPerVolumeVector
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMoneyPerVolumeVector(final List<FloatMoneyPerVolume> values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +86,7 @@ public class MutableFloatMoneyPerVolumeVector
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMoneyPerVolumeVector(final SortedMap<Integer, FloatMoneyPerVolume> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -100,7 +100,7 @@ public class MutableFloatMoneyPerVolumeVector
      * @throws ValueException when values is null
      */
     public MutableFloatMoneyPerVolumeVector(final SortedMap<Integer, Float> values, final MoneyPerVolumeUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -124,7 +124,7 @@ public class MutableFloatMoneyPerVolumeVector
     /** {@inheritDoc} */
     @Override
     protected final MutableFloatMoneyPerVolumeVector instantiateMutableType(final FloatVectorData dvd,
-        final MoneyPerVolumeUnit unit)
+            final MoneyPerVolumeUnit unit)
     {
         return new MutableFloatMoneyPerVolumeVector(dvd, unit);
     }

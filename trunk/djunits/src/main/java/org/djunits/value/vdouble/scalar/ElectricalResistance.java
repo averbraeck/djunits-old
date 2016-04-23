@@ -63,10 +63,9 @@ public class ElectricalResistance extends TypedDoubleScalarRel<ElectricalResista
      * @return a Scalar at the ratio between
      */
     public static ElectricalResistance interpolate(final ElectricalResistance zero, final ElectricalResistance one,
-        final double ratio)
+            final double ratio)
     {
-        return new ElectricalResistance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new ElectricalResistance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**

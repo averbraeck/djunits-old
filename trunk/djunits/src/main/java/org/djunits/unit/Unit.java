@@ -19,8 +19,8 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version May 15, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version May 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @param <U> the unit for transformation reasons
  */
@@ -62,7 +62,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
 
     /** A static map of all defined coefficient strings, mapped to the existing units. */
     private static final Map<String, Map<Class<Unit<?>>, Unit<?>>> SI_UNITS =
-        new HashMap<String, Map<Class<Unit<?>>, Unit<?>>>();
+            new HashMap<String, Map<Class<Unit<?>>, Unit<?>>>();
 
     /** A static map of all defined units. */
     private static final Map<String, Set<Unit<?>>> UNITS = new HashMap<String, Set<Unit<?>>>();
@@ -74,12 +74,12 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     private static boolean initialized = false;
 
     /** The array of the names of the standard units. */
-    public static final String[] STANDARD_UNITS = new String[]{"AccelerationUnit", "AngleSolidUnit", "AngleUnit",
-        "AreaUnit", "DensityUnit", "DimensionlessUnit", "ElectricalChargeUnit", "ElectricalCurrentUnit",
-        "ElectricalPotentialUnit", "ElectricalResistanceUnit", "EnergyUnit", "FlowMassUnit", "FlowVolumeUnit",
-        "ForceUnit", "FrequencyUnit", "LengthUnit", "LinearDensityUnit", "MassUnit", "MoneyUnit", "MoneyPerAreaUnit",
-        "MoneyPerEnergyUnit", "MoneyPerLengthUnit", "MoneyPerMassUnit", "MoneyPerTimeUnit", "MoneyPerVolumeUnit",
-        "PowerUnit", "PressureUnit", "SpeedUnit", "TemperatureUnit", "TimeUnit", "TorqueUnit", "VolumeUnit"};
+    public static final String[] STANDARD_UNITS = new String[] { "AccelerationUnit", "AngleSolidUnit", "AngleUnit", "AreaUnit",
+            "DensityUnit", "DimensionlessUnit", "ElectricalChargeUnit", "ElectricalCurrentUnit", "ElectricalPotentialUnit",
+            "ElectricalResistanceUnit", "EnergyUnit", "FlowMassUnit", "FlowVolumeUnit", "ForceUnit", "FrequencyUnit",
+            "LengthUnit", "LinearDensityUnit", "MassUnit", "MoneyUnit", "MoneyPerAreaUnit", "MoneyPerEnergyUnit",
+            "MoneyPerLengthUnit", "MoneyPerMassUnit", "MoneyPerTimeUnit", "MoneyPerVolumeUnit", "PowerUnit", "PressureUnit",
+            "SpeedUnit", "TemperatureUnit", "TimeUnit", "TorqueUnit", "VolumeUnit" };
 
     /** Force all units to be loaded. */
     private static void initialize()
@@ -111,7 +111,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     public Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-        final boolean standardUnit)
+            final boolean standardUnit)
     {
         this.scale = StandardScale.SCALE;
         if (standardUnit)
@@ -155,7 +155,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     protected Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-        final Scale scale, final boolean standardUnit)
+            final Scale scale, final boolean standardUnit)
     {
         this(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
         this.scale = scale;
@@ -393,7 +393,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
             initialize();
         }
         if (SI_UNITS.containsKey(normalizedSICoefficientsString)
-            && SI_UNITS.get(normalizedSICoefficientsString).containsKey(SIUnit.class))
+                && SI_UNITS.get(normalizedSICoefficientsString).containsKey(SIUnit.class))
         {
             return (SIUnit) SI_UNITS.get(normalizedSICoefficientsString).get(SIUnit.class);
         }
@@ -423,7 +423,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces"})
+    @SuppressWarnings({ "checkstyle:designforextension", "checkstyle:needbraces" })
     @Override
     public boolean equals(final Object obj)
     {

@@ -29,7 +29,7 @@ public class MutableForceMatrix extends MutableTypedDoubleMatrixRel<ForceUnit, F
      * @throws ValueException when values is null
      */
     public MutableForceMatrix(final double[][] values, final ForceUnit unit, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, unit, storageType);
     }

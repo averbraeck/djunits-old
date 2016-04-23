@@ -20,8 +20,8 @@ import org.djunits.value.vdouble.scalar.ElectricalCharge;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableElectricalChargeVector
-    extends
-    MutableTypedDoubleVectorRel<ElectricalChargeUnit, ElectricalChargeVector, MutableElectricalChargeVector, ElectricalCharge>
+        extends
+        MutableTypedDoubleVectorRel<ElectricalChargeUnit, ElectricalChargeVector, MutableElectricalChargeVector, ElectricalCharge>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,8 +33,8 @@ public class MutableElectricalChargeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableElectricalChargeVector(final double[] values, final ElectricalChargeUnit unit,
-        final StorageType storageType) throws ValueException
+    public MutableElectricalChargeVector(final double[] values, final ElectricalChargeUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -47,7 +47,7 @@ public class MutableElectricalChargeVector
      * @throws ValueException when values is null
      */
     public MutableElectricalChargeVector(final List<Double> values, final ElectricalChargeUnit unit,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -59,8 +59,7 @@ public class MutableElectricalChargeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableElectricalChargeVector(final ElectricalCharge[] values, final StorageType storageType)
-        throws ValueException
+    public MutableElectricalChargeVector(final ElectricalCharge[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -72,7 +71,7 @@ public class MutableElectricalChargeVector
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalChargeVector(final List<ElectricalCharge> values, final StorageType storageType)
-        throws ValueException
+            throws ValueException
     {
         super(values, storageType);
     }
@@ -86,7 +85,7 @@ public class MutableElectricalChargeVector
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalChargeVector(final SortedMap<Integer, ElectricalCharge> values, final int length,
-        final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -100,7 +99,7 @@ public class MutableElectricalChargeVector
      * @throws ValueException when values is null
      */
     public MutableElectricalChargeVector(final SortedMap<Integer, Double> values, final ElectricalChargeUnit unit,
-        final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -124,7 +123,7 @@ public class MutableElectricalChargeVector
     /** {@inheritDoc} */
     @Override
     protected final MutableElectricalChargeVector instantiateMutableType(final DoubleVectorData dvd,
-        final ElectricalChargeUnit unit)
+            final ElectricalChargeUnit unit)
     {
         return new MutableElectricalChargeVector(dvd, unit);
     }

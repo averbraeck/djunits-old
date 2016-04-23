@@ -117,7 +117,7 @@ public class Speed extends TypedDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Frequency scalar as a division of Speed and Length
      */
-    public final Frequency divideBy(final Length.Rel v)
+    public final Frequency divideBy(final Length v)
     {
         return new Frequency(this.si / v.si, FrequencyUnit.SI);
     }
@@ -127,9 +127,9 @@ public class Speed extends TypedDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Length scalar as a division of Speed and Frequency
      */
-    public final Length.Rel divideBy(final Frequency v)
+    public final Length divideBy(final Frequency v)
     {
-        return new Length.Rel(this.si / v.si, LengthUnit.SI);
+        return new Length(this.si / v.si, LengthUnit.SI);
     }
 
     /**
@@ -143,33 +143,33 @@ public class Speed extends TypedDoubleScalarRel<SpeedUnit, Speed>
     }
 
     /**
-     * Calculate the multiplication of Speed and Time, which results in a Length scalar.
+     * Calculate the multiplication of Speed and Duration, which results in a Length scalar.
      * @param v Speed scalar
-     * @return Length scalar as a multiplication of Speed and Time
+     * @return Length scalar as a multiplication of Speed and Duration
      */
-    public final Length.Rel multiplyBy(final Time.Rel v)
+    public final Length multiplyBy(final Duration v)
     {
-        return new Length.Rel(this.si * v.si, LengthUnit.SI);
+        return new Length(this.si * v.si, LengthUnit.SI);
     }
 
     /**
-     * Calculate the division of Speed and Time, which results in a Acceleration scalar.
+     * Calculate the division of Speed and Duration, which results in a Acceleration scalar.
      * @param v Speed scalar
-     * @return Acceleration scalar as a division of Speed and Time
+     * @return Acceleration scalar as a division of Speed and Duration
      */
-    public final Acceleration divideBy(final Time.Rel v)
+    public final Acceleration divideBy(final Duration v)
     {
         return new Acceleration(this.si / v.si, AccelerationUnit.SI);
     }
 
     /**
-     * Calculate the division of Speed and Acceleration, which results in a Time scalar.
+     * Calculate the division of Speed and Acceleration, which results in a Duration scalar.
      * @param v Speed scalar
-     * @return Time scalar as a division of Speed and Acceleration
+     * @return Duration scalar as a division of Speed and Acceleration
      */
-    public final Time.Rel divideBy(final Acceleration v)
+    public final Duration divideBy(final Acceleration v)
     {
-        return new Time.Rel(this.si / v.si, TimeUnit.SI);
+        return new Duration(this.si / v.si, TimeUnit.SI);
     }
 
     /**

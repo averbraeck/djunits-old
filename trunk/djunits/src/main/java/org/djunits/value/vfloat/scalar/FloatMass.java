@@ -92,21 +92,21 @@ public class FloatMass extends TypedFloatScalarRel<MassUnit, FloatMass>
     }
 
     /**
-     * Calculate the division of FloatMass and FloatFlowMass, which results in a FloatTime scalar.
+     * Calculate the division of FloatMass and FloatFlowMass, which results in a FloatDuration scalar.
      * @param v FloatMass scalar
-     * @return FloatTime scalar as a division of FloatMass and FloatFlowMass
+     * @return FloatDuration scalar as a division of FloatMass and FloatFlowMass
      */
-    public final FloatTime.Rel divideBy(final FloatFlowMass v)
+    public final FloatDuration divideBy(final FloatFlowMass v)
     {
-        return new FloatTime.Rel(this.si / v.si, TimeUnit.SI);
+        return new FloatDuration(this.si / v.si, TimeUnit.SI);
     }
 
     /**
-     * Calculate the division of FloatMass and FloatTime, which results in a FloatFlowMass scalar.
+     * Calculate the division of FloatMass and FloatDuration, which results in a FloatFlowMass scalar.
      * @param v FloatMass scalar
-     * @return FloatFlowMass scalar as a division of FloatMass and FloatTime
+     * @return FloatFlowMass scalar as a division of FloatMass and FloatDuration
      */
-    public final FloatFlowMass divideBy(final FloatTime.Rel v)
+    public final FloatFlowMass divideBy(final FloatDuration v)
     {
         return new FloatFlowMass(this.si / v.si, FlowMassUnit.SI);
     }

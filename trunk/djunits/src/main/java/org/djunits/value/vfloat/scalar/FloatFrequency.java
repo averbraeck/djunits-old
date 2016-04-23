@@ -76,8 +76,7 @@ public class FloatFrequency extends TypedFloatScalarRel<FrequencyUnit, FloatFreq
      */
     public static FloatFrequency interpolate(final FloatFrequency zero, final FloatFrequency one, final float ratio)
     {
-        return new FloatFrequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-            zero.getUnit());
+        return new FloatFrequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -91,11 +90,11 @@ public class FloatFrequency extends TypedFloatScalarRel<FrequencyUnit, FloatFreq
     }
 
     /**
-     * Calculate the multiplication of FloatFrequency and FloatTime, which results in a FloatDimensionless scalar.
+     * Calculate the multiplication of FloatFrequency and FloatDuration, which results in a FloatDimensionless scalar.
      * @param v FloatFrequency scalar
-     * @return FloatDimensionless scalar as a multiplication of FloatFrequency and FloatTime
+     * @return FloatDimensionless scalar as a multiplication of FloatFrequency and FloatDuration
      */
-    public final FloatDimensionless multiplyBy(final FloatTime.Rel v)
+    public final FloatDimensionless multiplyBy(final FloatDuration v)
     {
         return new FloatDimensionless(this.si * v.si, DimensionlessUnit.SI);
     }
@@ -105,7 +104,7 @@ public class FloatFrequency extends TypedFloatScalarRel<FrequencyUnit, FloatFreq
      * @param v FloatFrequency scalar
      * @return FloatSpeed scalar as a multiplication of FloatFrequency and FloatLength
      */
-    public final FloatSpeed multiplyBy(final FloatLength.Rel v)
+    public final FloatSpeed multiplyBy(final FloatLength v)
     {
         return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
     }
