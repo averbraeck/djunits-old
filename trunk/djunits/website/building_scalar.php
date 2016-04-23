@@ -102,7 +102,7 @@ public final Jerk instantiateTypeRel(final double value, final JerkUnit unit)
     </p>
 
     <pre class="highlight">
-public final Acceleration multiplyBy(final Time.Rel v)
+public final Acceleration multiplyBy(final Duration v)
 {
     return new Acceleration(this.si * v.si, AccelerationUnit.SI);
 }
@@ -143,7 +143,7 @@ public static Jerk interpolate(final Jerk zero,
 
   <div id="footer">
     <hr />
-    Copyright &copy; 2015, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br /> DJUNITS uses a BSD-style
+    Copyright &copy; 2015-2016, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br /> DJUNITS uses a BSD-style
     license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
   </div>
 

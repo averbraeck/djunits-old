@@ -38,7 +38,7 @@
   &lt;dependency&gt;
     &lt;groupId&gt;org.djunits&lt;/groupId&gt;
     &lt;artifactId&gt;djunits&lt;/artifactId&gt;
-    &lt;version&gt;1.02.06&lt;/version&gt;
+    &lt;version&gt;1.03.00&lt;/version&gt;
   &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </pre>
@@ -72,7 +72,7 @@
 
   <div id="footer">
     <hr />
-    Copyright &copy; 2015, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br /> DJUNITS uses a BSD-style
+    Copyright &copy; 2015-2016, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br /> DJUNITS uses a BSD-style
     license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
   </div>
 
