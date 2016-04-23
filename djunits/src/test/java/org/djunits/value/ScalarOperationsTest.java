@@ -226,7 +226,7 @@ public class ScalarOperationsTest
 
     /**
      * Test a multiplication method for an Abs or Rel scalar. Note: filter out the method that multiplies by a constant...
-     * @param scalarClass the Abs or Rel class for the multiplication, e.g. Length.Rel
+     * @param scalarClass the Abs or Rel class for the multiplication, e.g. Length
      * @param abs boolean; true to test the Abs sub-class; false to test the Rel sub-class
      * @param method the method 'multiplyBy' for that class
      * @param multiply boolean; if true; test a multiplyBy method; if false; test a divideBy method

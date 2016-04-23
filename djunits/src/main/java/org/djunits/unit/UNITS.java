@@ -4,7 +4,7 @@ package org.djunits.unit;
  * Easy access methods for the DoubleScalar, DoubleVector, DoubleMatrix classes and their Float equivalents. Instead of <br>
  * <i>DoubleScalar.Rel&lt;LengthUnit&gt; margin = new DoubleScalar.Rel&lt;LengthUnit&gt;(0.2, LengthUnit.METER);</i><br>
  * we can now write <br>
- * <i>Length.Rel margin = new Length.Rel(0.2, METER);</i><br>
+ * <i>Length margin = new Length(0.2, METER);</i><br>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
