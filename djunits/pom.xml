@@ -254,9 +254,18 @@
             </goals>
           </execution>
         </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>5.0.4</version>
+          </dependency>
+        </dependencies>
         <configuration>
-          <argLine>-XX:MaxPermSize=4096m
-            -Xmx4096m</argLine>
+          <argLine>-XX:MaxPermSize=4096m -Xmx4096m</argLine>
+          <formats>
+            <format>xml</format>
+          </formats>
         </configuration>
       </plugin>
 
@@ -571,11 +580,11 @@
         </reportSets>
       </plugin>
 
-      <plugin> 
+      <!-- plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>javancss-maven-plugin</artifactId>
-        <version>${codehaus.javancss.version}</version> 
-      </plugin>
+        <version>${codehaus.javancss.version}</version>
+      </plugin -->
 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
