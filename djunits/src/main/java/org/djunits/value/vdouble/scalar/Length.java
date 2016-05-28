@@ -11,14 +11,22 @@ import org.djunits.unit.TimeUnit;
 import org.djunits.unit.VolumeUnit;
 
 /**
- * Easy access methods for the Relative Length DoubleScalar. Instead of <br>
- * <i>DoubleScalar&lt;LengthUnit&gt; value = new DoubleScalar&lt;LengthUnit&gt;(100.0, LengthUnit.SI);</i><br>
- * we can now write <br>
- * <i>Length value = new Length(100.0, LengthUnit.SI);</i><br>
+ * Easy access methods for the Relative Length DoubleScalar. Instead of:
+ * 
+ * <pre>
+ * DoubleScalar&lt;LengthUnit&gt; value = new DoubleScalar&lt;LengthUnit&gt;(100.0, LengthUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * Length value = new Length(100.0, LengthUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -102,6 +110,68 @@ public class Length extends TypedDoubleScalarRel<LengthUnit, Length>
     public final Position toAbs()
     {
         return new Position(getInUnit(), getUnit());
+    }
+
+    /**
+     * Return the maximum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two relative scalars
+     */
+    public static Length max(final Length r1, final Length r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two relative scalars
+     */
+    public static Length max(final Length r1, final Length r2, final Length... rn)
+    {
+        Length maxr = (r1.gt(r2)) ? r1 : r2;
+        for (Length r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two relative scalars
+     */
+    public static Length min(final Length r1, final Length r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two relative scalars
+     */
+    public static Length min(final Length r1, final Length r2, final Length... rn)
+    {
+        Length minr = (r1.lt(r2)) ? r1 : r2;
+        for (Length r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**

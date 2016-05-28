@@ -5,15 +5,22 @@ import org.djunits.unit.MoneyPerTimeUnit;
 import org.djunits.unit.MoneyUnit;
 
 /**
- * Easy access methods for the MoneyPerTime DoubleScalar, which is relative by definition. Instead of <br>
- * <i>DoubleScalar.Rel&lt;MoneyPerTimeUnit&gt; value = new DoubleScalar.Rel&lt;MoneyPerTimeUnit&gt;(100.0,
- * MoneyPerTimeUnit.SI);</i><br>
- * we can now write <br>
- * <i>MoneyPerTime value = new MoneyPerTime(100.0, MoneyPerTimeUnit.SI);</i><br>
+ * Easy access methods for the MoneyPerTime DoubleScalar, which is relative by definition. Instead of:
+ * 
+ * <pre>
+ * DoubleScalar.Rel&lt;MoneyPerTimeUnit&gt; value = new DoubleScalar.Rel&lt;MoneyPerTimeUnit&gt;(100.0, MoneyPerTimeUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * MoneyPerTime value = new MoneyPerTime(100.0, MoneyPerTimeUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -62,6 +69,68 @@ public class MoneyPerTime extends TypedDoubleScalarRel<MoneyPerTimeUnit, MoneyPe
     public static MoneyPerTime interpolate(final MoneyPerTime zero, final MoneyPerTime one, final double ratio)
     {
         return new MoneyPerTime(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
+     * Return the maximum value of two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two monetary scalars
+     */
+    public static MoneyPerTime max(final MoneyPerTime r1, final MoneyPerTime r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two monetary scalars
+     */
+    public static MoneyPerTime max(final MoneyPerTime r1, final MoneyPerTime r2, final MoneyPerTime... rn)
+    {
+        MoneyPerTime maxr = (r1.gt(r2)) ? r1 : r2;
+        for (MoneyPerTime r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two monetary scalars
+     */
+    public static MoneyPerTime min(final MoneyPerTime r1, final MoneyPerTime r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two monetary scalars
+     */
+    public static MoneyPerTime min(final MoneyPerTime r1, final MoneyPerTime r2, final MoneyPerTime... rn)
+    {
+        MoneyPerTime minr = (r1.lt(r2)) ? r1 : r2;
+        for (MoneyPerTime r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**

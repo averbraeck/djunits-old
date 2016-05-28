@@ -11,14 +11,22 @@ import org.djunits.unit.TimeUnit;
 import org.djunits.unit.VolumeUnit;
 
 /**
- * Easy access methods for the %Type% FloatScalar. Instead of <br>
- * <i>FloatScalar.Rel&lt;LengthUnit&gt; value = new FloatScalar.Rel&lt;LengthUnit&gt;(100.0, LengthUnit.SI);</i><br>
- * we can now write <br>
- * <i>FloatLength value = new FloatLength(100.0, LengthUnit.SI);</i><br>
+ * Easy access methods for the %Type% FloatScalar. Instead of:
+ * 
+ * <pre>
+ * FloatScalar.Rel&lt;LengthUnit&gt; value = new FloatScalar.Rel&lt;LengthUnit&gt;(100.0, LengthUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * FloatLength value = new FloatLength(100.0, LengthUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -112,6 +120,68 @@ public class FloatLength extends TypedFloatScalarRel<LengthUnit, FloatLength>
     public final FloatPosition toAbs()
     {
         return new FloatPosition(getInUnit(), getUnit());
+    }
+
+    /**
+     * Return the maximum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two relative scalars
+     */
+    public static FloatLength max(final FloatLength r1, final FloatLength r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two relative scalars
+     */
+    public static FloatLength max(final FloatLength r1, final FloatLength r2, final FloatLength... rn)
+    {
+        FloatLength maxr = (r1.gt(r2)) ? r1 : r2;
+        for (FloatLength r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two relative scalars
+     */
+    public static FloatLength min(final FloatLength r1, final FloatLength r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two relative scalars
+     */
+    public static FloatLength min(final FloatLength r1, final FloatLength r2, final FloatLength... rn)
+    {
+        FloatLength minr = (r1.lt(r2)) ? r1 : r2;
+        for (FloatLength r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**

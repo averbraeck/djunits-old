@@ -5,7 +5,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * MoneyPerAreaUnit defines a unit for the cost or benefit per area, e.g. the cost of land per hectare.
  * <p>
- * Copyright (c) 2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,

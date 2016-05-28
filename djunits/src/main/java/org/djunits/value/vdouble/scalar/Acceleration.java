@@ -7,15 +7,22 @@ import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.SpeedUnit;
 
 /**
- * Easy access methods for the Acceleration DoubleScalar, which is relative by definition. Instead of <br>
- * <i>DoubleScalar.Rel&lt;AccelerationUnit&gt; value = new DoubleScalar.Rel&lt;AccelerationUnit&gt;(100.0,
- * AccelerationUnit.SI);</i><br>
- * we can now write <br>
- * <i>Acceleration value = new Acceleration(100.0, AccelerationUnit.SI);</i><br>
+ * Easy access methods for the Acceleration DoubleScalar, which is relative by definition. Instead of:
+ * 
+ * <pre>
+ * DoubleScalar.Rel&lt;AccelerationUnit&gt; value = new DoubleScalar.Rel&lt;AccelerationUnit&gt;(100.0, AccelerationUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * Acceleration value = new Acceleration(100.0, AccelerationUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -67,6 +74,68 @@ public class Acceleration extends TypedDoubleScalarRel<AccelerationUnit, Acceler
     public static Acceleration interpolate(final Acceleration zero, final Acceleration one, final double ratio)
     {
         return new Acceleration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
+     * Return the maximum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two relative scalars
+     */
+    public static Acceleration max(final Acceleration r1, final Acceleration r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two relative scalars
+     */
+    public static Acceleration max(final Acceleration r1, final Acceleration r2, final Acceleration... rn)
+    {
+        Acceleration maxr = (r1.gt(r2)) ? r1 : r2;
+        for (Acceleration r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two relative scalars
+     */
+    public static Acceleration min(final Acceleration r1, final Acceleration r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two relative scalars
+     */
+    public static Acceleration min(final Acceleration r1, final Acceleration r2, final Acceleration... rn)
+    {
+        Acceleration minr = (r1.lt(r2)) ? r1 : r2;
+        for (Acceleration r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**

@@ -10,14 +10,22 @@ import org.djunits.unit.MoneyPerVolumeUnit;
 import org.djunits.unit.MoneyUnit;
 
 /**
- * Easy access methods for the Money FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
- * <i>FloatScalar.Rel&lt;MoneyUnit&gt; value = new FloatScalar.Rel&lt;MoneyUnit&gt;(100.0, MoneyUnit.SI);</i><br>
- * we can now write <br>
- * <i>FloatMoney value = new FloatMoney(100.0, MoneyUnit.SI);</i><br>
+ * Easy access methods for the Money FloatScalar, which is relative by definition. An example is Speed. Instead of:
+ * 
+ * <pre>
+ * FloatScalar.Rel&lt;MoneyUnit&gt; value = new FloatScalar.Rel&lt;MoneyUnit&gt;(100.0, MoneyUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * FloatMoney value = new FloatMoney(100.0, MoneyUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -76,6 +84,68 @@ public class FloatMoney extends TypedFloatScalarRel<MoneyUnit, FloatMoney>
     public static FloatMoney interpolate(final FloatMoney zero, final FloatMoney one, final float ratio)
     {
         return new FloatMoney(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
+     * Return the maximum value of two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two monetary scalars
+     */
+    public static FloatMoney max(final FloatMoney r1, final FloatMoney r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two monetary scalars
+     */
+    public static FloatMoney max(final FloatMoney r1, final FloatMoney r2, final FloatMoney... rn)
+    {
+        FloatMoney maxr = (r1.gt(r2)) ? r1 : r2;
+        for (FloatMoney r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two monetary scalars
+     */
+    public static FloatMoney min(final FloatMoney r1, final FloatMoney r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two monetary scalars
+     */
+    public static FloatMoney min(final FloatMoney r1, final FloatMoney r2, final FloatMoney... rn)
+    {
+        FloatMoney minr = (r1.lt(r2)) ? r1 : r2;
+        for (FloatMoney r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**

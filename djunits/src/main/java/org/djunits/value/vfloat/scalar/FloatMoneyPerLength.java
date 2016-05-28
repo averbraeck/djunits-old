@@ -5,15 +5,22 @@ import org.djunits.unit.MoneyPerLengthUnit;
 import org.djunits.unit.MoneyUnit;
 
 /**
- * Easy access methods for the MoneyPerLength FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
- * <i>FloatScalar.Rel&lt;MoneyPerLengthUnit&gt; value = new FloatScalar.Rel&lt;MoneyPerLengthUnit&gt;(100.0,
- * MoneyPerLengthUnit.SI);</i><br>
- * we can now write <br>
- * <i>FloatMoneyPerLength value = new FloatMoneyPerLength(100.0, MoneyPerLengthUnit.SI);</i><br>
+ * Easy access methods for the MoneyPerLength FloatScalar, which is relative by definition. An example is Speed. Instead of:
+ * 
+ * <pre>
+ * FloatScalar.Rel&lt;MoneyPerLengthUnit&gt; value = new FloatScalar.Rel&lt;MoneyPerLengthUnit&gt;(100.0, MoneyPerLengthUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * FloatMoneyPerLength value = new FloatMoneyPerLength(100.0, MoneyPerLengthUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -73,6 +80,70 @@ public class FloatMoneyPerLength extends TypedFloatScalarRel<MoneyPerLengthUnit,
             final float ratio)
     {
         return new FloatMoneyPerLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
+     * Return the maximum value of two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two monetary scalars
+     */
+    public static FloatMoneyPerLength max(final FloatMoneyPerLength r1, final FloatMoneyPerLength r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two monetary scalars
+     */
+    public static FloatMoneyPerLength max(final FloatMoneyPerLength r1, final FloatMoneyPerLength r2,
+            final FloatMoneyPerLength... rn)
+    {
+        FloatMoneyPerLength maxr = (r1.gt(r2)) ? r1 : r2;
+        for (FloatMoneyPerLength r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two monetary scalars
+     */
+    public static FloatMoneyPerLength min(final FloatMoneyPerLength r1, final FloatMoneyPerLength r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two monetary scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two monetary scalars
+     */
+    public static FloatMoneyPerLength min(final FloatMoneyPerLength r1, final FloatMoneyPerLength r2,
+            final FloatMoneyPerLength... rn)
+    {
+        FloatMoneyPerLength minr = (r1.lt(r2)) ? r1 : r2;
+        for (FloatMoneyPerLength r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**

@@ -11,14 +11,22 @@ import org.djunits.unit.TimeUnit;
 import org.djunits.unit.VolumeUnit;
 
 /**
- * Easy access methods for the Relative Duration DoubleScalar. Instead of <br>
- * <i>DoubleScalar&lt;TimeUnit&gt; value = new DoubleScalar&lt;TimeUnit&gt;(100.0, TimeUnit.SI);</i><br>
- * we can now write <br>
- * <i>Duration value = new Duration(100.0, TimeUnit.SI);</i><br>
+ * Easy access methods for the Relative Duration DoubleScalar. Instead of:
+ * 
+ * <pre>
+ * DoubleScalar&lt;TimeUnit&gt; value = new DoubleScalar&lt;TimeUnit&gt;(100.0, TimeUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * Duration value = new Duration(100.0, TimeUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -102,6 +110,68 @@ public class Duration extends TypedDoubleScalarRel<TimeUnit, Duration>
     public final Time toAbs()
     {
         return new Time(getInUnit(), getUnit());
+    }
+
+    /**
+     * Return the maximum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two relative scalars
+     */
+    public static Duration max(final Duration r1, final Duration r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two relative scalars
+     */
+    public static Duration max(final Duration r1, final Duration r2, final Duration... rn)
+    {
+        Duration maxr = (r1.gt(r2)) ? r1 : r2;
+        for (Duration r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two relative scalars
+     */
+    public static Duration min(final Duration r1, final Duration r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two relative scalars
+     */
+    public static Duration min(final Duration r1, final Duration r2, final Duration... rn)
+    {
+        Duration minr = (r1.lt(r2)) ? r1 : r2;
+        for (Duration r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**
