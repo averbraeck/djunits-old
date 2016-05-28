@@ -4,14 +4,22 @@ import org.djunits.unit.AngleUnit;
 import org.djunits.unit.DimensionlessUnit;
 
 /**
- * Easy access methods for the Relative Angle DoubleScalar. Instead of <br>
- * <i>DoubleScalar&lt;AngleUnit&gt; value = new DoubleScalar&lt;AngleUnit&gt;(100.0, AngleUnit.SI);</i><br>
- * we can now write <br>
- * <i>Angle value = new Angle(100.0, AngleUnit.SI);</i><br>
+ * Easy access methods for the Relative Angle DoubleScalar. Instead of:
+ * 
+ * <pre>
+ * DoubleScalar&lt;AngleUnit&gt; value = new DoubleScalar&lt;AngleUnit&gt;(100.0, AngleUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * Angle value = new Angle(100.0, AngleUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -95,6 +103,68 @@ public class Angle extends TypedDoubleScalarRel<AngleUnit, Angle>
     public final Direction toAbs()
     {
         return new Direction(getInUnit(), getUnit());
+    }
+
+    /**
+     * Return the maximum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two relative scalars
+     */
+    public static Angle max(final Angle r1, final Angle r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two relative scalars
+     */
+    public static Angle max(final Angle r1, final Angle r2, final Angle... rn)
+    {
+        Angle maxr = (r1.gt(r2)) ? r1 : r2;
+        for (Angle r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two relative scalars
+     */
+    public static Angle min(final Angle r1, final Angle r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two relative scalars
+     */
+    public static Angle min(final Angle r1, final Angle r2, final Angle... rn)
+    {
+        Angle minr = (r1.lt(r2)) ? r1 : r2;
+        for (Angle r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**

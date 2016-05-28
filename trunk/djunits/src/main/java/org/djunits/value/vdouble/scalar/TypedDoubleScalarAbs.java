@@ -6,7 +6,7 @@ import org.djunits.unit.Unit;
  * Absolute Immutable typed scalar. <br>
  * Note: Each scalar class should implement the static interpolate(zero, one, ratio).
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-10-04 20:47:10 +0200 (Sun, 04 Oct 2015) $, @version $Revision: 86 $, by $Author: averbraeck $, initial
@@ -129,4 +129,5 @@ public abstract class TypedDoubleScalarAbs<U extends Unit<U>, A extends TypedDou
     {
         return instantiateTypeRel(getInUnit(), getUnit());
     }
+
 }

@@ -10,14 +10,22 @@ import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
 
 /**
- * Easy access methods for the Power DoubleScalar, which is relative by definition. Instead of <br>
- * <i>DoubleScalar.Rel&lt;PowerUnit&gt; value = new DoubleScalar.Rel&lt;PowerUnit&gt;(100.0, PowerUnit.SI);</i><br>
- * we can now write <br>
- * <i>Power value = new Power(100.0, PowerUnit.SI);</i><br>
+ * Easy access methods for the Power DoubleScalar, which is relative by definition. Instead of:
+ * 
+ * <pre>
+ * DoubleScalar.Rel&lt;PowerUnit&gt; value = new DoubleScalar.Rel&lt;PowerUnit&gt;(100.0, PowerUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * Power value = new Power(100.0, PowerUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -69,6 +77,68 @@ public class Power extends TypedDoubleScalarRel<PowerUnit, Power>
     public static Power interpolate(final Power zero, final Power one, final double ratio)
     {
         return new Power(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
+     * Return the maximum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two relative scalars
+     */
+    public static Power max(final Power r1, final Power r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two relative scalars
+     */
+    public static Power max(final Power r1, final Power r2, final Power... rn)
+    {
+        Power maxr = (r1.gt(r2)) ? r1 : r2;
+        for (Power r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two relative scalars
+     */
+    public static Power min(final Power r1, final Power r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two relative scalars
+     */
+    public static Power min(final Power r1, final Power r2, final Power... rn)
+    {
+        Power minr = (r1.lt(r2)) ? r1 : r2;
+        for (Power r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**

@@ -7,15 +7,24 @@ import org.djunits.unit.ElectricalResistanceUnit;
 import org.djunits.unit.PowerUnit;
 
 /**
- * Easy access methods for the ElectricalPotential FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
- * <i>FloatScalar.Rel&lt;ElectricalPotentialUnit&gt; value = new FloatScalar.Rel&lt;ElectricalPotentialUnit&gt;(100.0,
- * ElectricalPotentialUnit.SI);</i><br>
- * we can now write <br>
- * <i>FloatElectricalPotential value = new FloatElectricalPotential(100.0, ElectricalPotentialUnit.SI);</i><br>
+ * Easy access methods for the ElectricalPotential FloatScalar, which is relative by definition. An example is Speed. Instead
+ * of:
+ * 
+ * <pre>
+ * FloatScalar.Rel&lt;ElectricalPotentialUnit&gt; value =
+ *         new FloatScalar.Rel&lt;ElectricalPotentialUnit&gt;(100.0, ElectricalPotentialUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * FloatElectricalPotential value = new FloatElectricalPotential(100.0, ElectricalPotentialUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -79,6 +88,70 @@ public class FloatElectricalPotential extends TypedFloatScalarRel<ElectricalPote
     {
         return new FloatElectricalPotential(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
                 zero.getUnit());
+    }
+
+    /**
+     * Return the maximum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two relative scalars
+     */
+    public static FloatElectricalPotential max(final FloatElectricalPotential r1, final FloatElectricalPotential r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two relative scalars
+     */
+    public static FloatElectricalPotential max(final FloatElectricalPotential r1, final FloatElectricalPotential r2,
+            final FloatElectricalPotential... rn)
+    {
+        FloatElectricalPotential maxr = (r1.gt(r2)) ? r1 : r2;
+        for (FloatElectricalPotential r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two relative scalars
+     */
+    public static FloatElectricalPotential min(final FloatElectricalPotential r1, final FloatElectricalPotential r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two relative scalars
+     */
+    public static FloatElectricalPotential min(final FloatElectricalPotential r1, final FloatElectricalPotential r2,
+            final FloatElectricalPotential... rn)
+    {
+        FloatElectricalPotential minr = (r1.lt(r2)) ? r1 : r2;
+        for (FloatElectricalPotential r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**

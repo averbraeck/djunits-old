@@ -4,14 +4,22 @@ import org.djunits.unit.AngleUnit;
 import org.djunits.unit.DimensionlessUnit;
 
 /**
- * Easy access methods for the %Type% FloatScalar. Instead of <br>
- * <i>FloatScalar.Rel&lt;AngleUnit&gt; value = new FloatScalar.Rel&lt;AngleUnit&gt;(100.0, AngleUnit.SI);</i><br>
- * we can now write <br>
- * <i>FloatAngle value = new FloatAngle(100.0, AngleUnit.SI);</i><br>
+ * Easy access methods for the %Type% FloatScalar. Instead of:
+ * 
+ * <pre>
+ * FloatScalar.Rel&lt;AngleUnit&gt; value = new FloatScalar.Rel&lt;AngleUnit&gt;(100.0, AngleUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * FloatAngle value = new FloatAngle(100.0, AngleUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -105,6 +113,68 @@ public class FloatAngle extends TypedFloatScalarRel<AngleUnit, FloatAngle>
     public final FloatDirection toAbs()
     {
         return new FloatDirection(getInUnit(), getUnit());
+    }
+
+    /**
+     * Return the maximum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two relative scalars
+     */
+    public static FloatAngle max(final FloatAngle r1, final FloatAngle r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two relative scalars
+     */
+    public static FloatAngle max(final FloatAngle r1, final FloatAngle r2, final FloatAngle... rn)
+    {
+        FloatAngle maxr = (r1.gt(r2)) ? r1 : r2;
+        for (FloatAngle r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two relative scalars
+     */
+    public static FloatAngle min(final FloatAngle r1, final FloatAngle r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two relative scalars
+     */
+    public static FloatAngle min(final FloatAngle r1, final FloatAngle r2, final FloatAngle... rn)
+    {
+        FloatAngle minr = (r1.lt(r2)) ? r1 : r2;
+        for (FloatAngle r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**

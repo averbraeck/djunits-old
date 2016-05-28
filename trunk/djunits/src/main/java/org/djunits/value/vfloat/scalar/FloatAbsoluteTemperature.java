@@ -3,18 +3,26 @@ package org.djunits.value.vfloat.scalar;
 import org.djunits.unit.TemperatureUnit;
 
 /**
- * Easy access methods for the %Type% FloatScalar. Instead of <br>
- * <i>FloatScalar.Abs&lt;TemperatureUnit&gt; value = new FloatScalar.Abs&lt;TemperatureUnit&gt;(100.0, TemperatureUnit.SI);</i><br>
- * we can now write <br>
- * <i>FloatAbsoluteTemperature value = new FloatAbsoluteTemperature(100.0, TemperatureUnit.SI);</i><br>
+ * Easy access methods for the AbsoluteTemperature FloatScalar. Instead of:
+ * 
+ * <pre>
+ * FloatScalar.Abs&lt;TemperatureUnit&gt; value = new FloatScalar.Abs&lt;TemperatureUnit&gt;(100.0, TemperatureUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * FloatAbsoluteTemperature value = new FloatAbsoluteTemperature(100.0, TemperatureUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
+ * $LastChangedDate: 2016-04-23 21:28:04 +0200 (Sat, 23 Apr 2016) $, @version $Revision: 191 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
@@ -82,6 +90,70 @@ public class FloatAbsoluteTemperature extends TypedFloatScalarAbs<TemperatureUni
     {
         return new FloatAbsoluteTemperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
                 zero.getUnit());
+    }
+
+    /**
+     * Return the maximum value of two absolute scalars.
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @return the maximum value of two absolute scalars
+     */
+    public static FloatAbsoluteTemperature max(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2)
+    {
+        return (a1.gt(a2)) ? a1 : a2;
+    }
+
+    /**
+     * Return the maximum value of more than two absolute scalars.
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @param an the other scalars
+     * @return the maximum value of more than two absolute scalars
+     */
+    public static FloatAbsoluteTemperature max(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2,
+            final FloatAbsoluteTemperature... an)
+    {
+        FloatAbsoluteTemperature maxa = (a1.gt(a2)) ? a1 : a2;
+        for (FloatAbsoluteTemperature a : an)
+        {
+            if (a.gt(maxa))
+            {
+                maxa = a;
+            }
+        }
+        return maxa;
+    }
+
+    /**
+     * Return the minimum value of two absolute scalars.
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @return the minimum value of two absolute scalars
+     */
+    public static FloatAbsoluteTemperature min(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2)
+    {
+        return (a1.lt(a2)) ? a1 : a2;
+    }
+
+    /**
+     * Return the minimum value of more than two absolute scalars.
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @param an the other scalars
+     * @return the minimum value of more than two absolute scalars
+     */
+    public static FloatAbsoluteTemperature min(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2,
+            final FloatAbsoluteTemperature... an)
+    {
+        FloatAbsoluteTemperature mina = (a1.lt(a2)) ? a1 : a2;
+        for (FloatAbsoluteTemperature a : an)
+        {
+            if (a.lt(mina))
+            {
+                mina = a;
+            }
+        }
+        return mina;
     }
 
 }

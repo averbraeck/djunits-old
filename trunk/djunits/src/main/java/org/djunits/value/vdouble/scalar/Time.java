@@ -3,14 +3,22 @@ package org.djunits.value.vdouble.scalar;
 import org.djunits.unit.TimeUnit;
 
 /**
- * Easy access methods for the Absolute %Type% DoubleScalar. Instead of <br>
- * <i>DoubleScalar.Abs&lt;TimeUnit&gt; value = new DoubleScalar.Abs&lt;TimeUnit&gt;(100.0, TimeUnit.SI);</i><br>
- * we can now write <br>
- * <i>Time value = new Time(100.0, TimeUnit.SI);</i><br>
+ * Easy access methods for the Absolute Time DoubleScalar. Instead of:
+ * 
+ * <pre>
+ * DoubleScalar.Abs&lt;TimeUnit&gt; value = new DoubleScalar.Abs&lt;TimeUnit&gt;(100.0, TimeUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * Time value = new Time(100.0, TimeUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -70,6 +78,68 @@ public class Time extends TypedDoubleScalarAbs<TimeUnit, Time, Duration>
     public static Time interpolate(final Time zero, final Time one, final double ratio)
     {
         return new Time(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
+     * Return the maximum value of two absolute scalars.
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @return the maximum value of two absolute scalars
+     */
+    public static Time max(final Time a1, final Time a2)
+    {
+        return (a1.gt(a2)) ? a1 : a2;
+    }
+
+    /**
+     * Return the maximum value of more than two absolute scalars.
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @param an the other scalars
+     * @return the maximum value of more than two absolute scalars
+     */
+    public static Time max(final Time a1, final Time a2, final Time... an)
+    {
+        Time maxa = (a1.gt(a2)) ? a1 : a2;
+        for (Time a : an)
+        {
+            if (a.gt(maxa))
+            {
+                maxa = a;
+            }
+        }
+        return maxa;
+    }
+
+    /**
+     * Return the minimum value of two absolute scalars.
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @return the minimum value of two absolute scalars
+     */
+    public static Time min(final Time a1, final Time a2)
+    {
+        return (a1.lt(a2)) ? a1 : a2;
+    }
+
+    /**
+     * Return the minimum value of more than two absolute scalars.
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @param an the other scalars
+     * @return the minimum value of more than two absolute scalars
+     */
+    public static Time min(final Time a1, final Time a2, final Time... an)
+    {
+        Time mina = (a1.lt(a2)) ? a1 : a2;
+        for (Time a : an)
+        {
+            if (a.lt(mina))
+            {
+                mina = a;
+            }
+        }
+        return mina;
     }
 
 }

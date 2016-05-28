@@ -4,14 +4,22 @@ import org.djunits.unit.AngleSolidUnit;
 import org.djunits.unit.DimensionlessUnit;
 
 /**
- * Easy access methods for the AngleSolid FloatScalar, which is relative by definition. An example is Speed. Instead of <br>
- * <i>FloatScalar.Rel&lt;AngleSolidUnit&gt; value = new FloatScalar.Rel&lt;AngleSolidUnit&gt;(100.0, AngleSolidUnit.SI);</i><br>
- * we can now write <br>
- * <i>FloatAngleSolid value = new FloatAngleSolid(100.0, AngleSolidUnit.SI);</i><br>
+ * Easy access methods for the AngleSolid FloatScalar, which is relative by definition. An example is Speed. Instead of:
+ * 
+ * <pre>
+ * FloatScalar.Rel&lt;AngleSolidUnit&gt; value = new FloatScalar.Rel&lt;AngleSolidUnit&gt;(100.0, AngleSolidUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * FloatAngleSolid value = new FloatAngleSolid(100.0, AngleSolidUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -73,6 +81,68 @@ public class FloatAngleSolid extends TypedFloatScalarRel<AngleSolidUnit, FloatAn
     public static FloatAngleSolid interpolate(final FloatAngleSolid zero, final FloatAngleSolid one, final float ratio)
     {
         return new FloatAngleSolid(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
+     * Return the maximum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two relative scalars
+     */
+    public static FloatAngleSolid max(final FloatAngleSolid r1, final FloatAngleSolid r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two relative scalars
+     */
+    public static FloatAngleSolid max(final FloatAngleSolid r1, final FloatAngleSolid r2, final FloatAngleSolid... rn)
+    {
+        FloatAngleSolid maxr = (r1.gt(r2)) ? r1 : r2;
+        for (FloatAngleSolid r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two relative scalars
+     */
+    public static FloatAngleSolid min(final FloatAngleSolid r1, final FloatAngleSolid r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two relative scalars
+     */
+    public static FloatAngleSolid min(final FloatAngleSolid r1, final FloatAngleSolid r2, final FloatAngleSolid... rn)
+    {
+        FloatAngleSolid minr = (r1.lt(r2)) ? r1 : r2;
+        for (FloatAngleSolid r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**

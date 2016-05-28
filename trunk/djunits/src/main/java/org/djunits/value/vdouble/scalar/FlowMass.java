@@ -7,14 +7,22 @@ import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.MassUnit;
 
 /**
- * Easy access methods for the FlowMass DoubleScalar, which is relative by definition. Instead of <br>
- * <i>DoubleScalar.Rel&lt;FlowMassUnit&gt; value = new DoubleScalar.Rel&lt;FlowMassUnit&gt;(100.0, FlowMassUnit.SI);</i><br>
- * we can now write <br>
- * <i>FlowMass value = new FlowMass(100.0, FlowMassUnit.SI);</i><br>
+ * Easy access methods for the FlowMass DoubleScalar, which is relative by definition. Instead of:
+ * 
+ * <pre>
+ * DoubleScalar.Rel&lt;FlowMassUnit&gt; value = new DoubleScalar.Rel&lt;FlowMassUnit&gt;(100.0, FlowMassUnit.SI);
+ * </pre>
+ * 
+ * we can now write:
+ * 
+ * <pre>
+ * FlowMass value = new FlowMass(100.0, FlowMassUnit.SI);
+ * </pre>
+ * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2015 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -66,6 +74,68 @@ public class FlowMass extends TypedDoubleScalarRel<FlowMassUnit, FlowMass>
     public static FlowMass interpolate(final FlowMass zero, final FlowMass one, final double ratio)
     {
         return new FlowMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
+     * Return the maximum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the maximum value of two relative scalars
+     */
+    public static FlowMass max(final FlowMass r1, final FlowMass r2)
+    {
+        return (r1.gt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the maximum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the maximum value of more than two relative scalars
+     */
+    public static FlowMass max(final FlowMass r1, final FlowMass r2, final FlowMass... rn)
+    {
+        FlowMass maxr = (r1.gt(r2)) ? r1 : r2;
+        for (FlowMass r : rn)
+        {
+            if (r.gt(maxr))
+            {
+                maxr = r;
+            }
+        }
+        return maxr;
+    }
+
+    /**
+     * Return the minimum value of two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @return the minimum value of two relative scalars
+     */
+    public static FlowMass min(final FlowMass r1, final FlowMass r2)
+    {
+        return (r1.lt(r2)) ? r1 : r2;
+    }
+
+    /**
+     * Return the minimum value of more than two relative scalars.
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
+     * @return the minimum value of more than two relative scalars
+     */
+    public static FlowMass min(final FlowMass r1, final FlowMass r2, final FlowMass... rn)
+    {
+        FlowMass minr = (r1.lt(r2)) ? r1 : r2;
+        for (FlowMass r : rn)
+        {
+            if (r.lt(minr))
+            {
+                minr = r;
+            }
+        }
+        return minr;
     }
 
     /**
