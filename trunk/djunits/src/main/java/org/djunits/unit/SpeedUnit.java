@@ -7,7 +7,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
  * According to <a href="http://en.wikipedia.org/wiki/Velocity">Wikipedia</a>: Speed describes only how fast an object is
- * moving, whereas velocity gives both how fast and in what direction the object is moving.
+ * moving, whereas speed gives both how fast and in what direction the object is moving.
  * <p>
  * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -27,7 +27,7 @@ public class SpeedUnit extends LinearUnit<SpeedUnit>
     /** The unit of time for the speed unit, e.g., second. */
     private final TimeUnit timeUnit;
 
-    /** The SI unit for velocity is m/s. */
+    /** The SI unit for speed is m/s. */
     public static final SpeedUnit SI;
 
     /** m/s. */
