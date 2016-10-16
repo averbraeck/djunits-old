@@ -214,7 +214,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Abs<LengthUnit> left = new FloatScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        FloatScalar.Abs<?> result = FloatScalar.plus(left, right);
+        FloatScalar.Abs<LengthUnit> result = FloatScalar.plus(left, right);
         assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(),
             result.getSI(), 0.001f);
     }
@@ -230,7 +230,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Abs<LengthUnit> left = new FloatScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        FloatScalar.Abs<?> result = FloatScalar.minus(left, right);
+        FloatScalar.Abs<LengthUnit> result = FloatScalar.minus(left, right);
         assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(),
             result.getSI(), 0.001f);
     }
@@ -448,7 +448,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Rel<LengthUnit> left = new FloatScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        FloatScalar.Rel<?> result = FloatScalar.plus(left, right);
+        FloatScalar.Rel<LengthUnit> result = FloatScalar.plus(left, right);
         assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(),
             result.getSI(), 0.001f);
     }
@@ -464,7 +464,7 @@ public class FloatScalarTest
         float rightValue = 234.5f;
         FloatScalar.Rel<LengthUnit> left = new FloatScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         FloatScalar.Rel<LengthUnit> right = new FloatScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        FloatScalar.Rel<?> result = FloatScalar.minus(left, right);
+        FloatScalar.Rel<LengthUnit> result = FloatScalar.minus(left, right);
         assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(),
             result.getSI(), 0.001f);
     }
