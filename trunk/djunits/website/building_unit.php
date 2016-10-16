@@ -82,7 +82,7 @@ public class JerkUnit extends LinearUnit&lt;JerkUnit&gt;
 
     <pre class="highlight">
 private final LengthUnit lengthUnit;
-private final TimeUnit lengthUnit;
+private final TimeUnit timeUnit;
 public static final JerkUnit SI;
 public static final JerkUnit M_PER_S3;
 public static final JerkUnit CM_PER_S3;
@@ -108,7 +108,7 @@ static
     "centimeter per cubed second", "cm/s^3", UnitSystem.SI_BASE); 
   FT_PER_S3 = new JerkUnit(LengthUnit.FOOT, TimeUnit.SECOND, 
     "foot per cubed second", "ft/s^3", UnitSystem.IMPERIAL);
-  JERK = new JerkUnit("jerk, "jerk", UnitSystem.OTHER, SI, 0.3048);
+  JERK = new JerkUnit("jerk", "jerk", UnitSystem.OTHER, SI, 0.3048);
 }
 </pre>
 

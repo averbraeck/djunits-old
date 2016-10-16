@@ -37,7 +37,7 @@
 DoubleScalar.Rel&lt;JerkUnit&gt; jerk1 =
     new DoubleScalar.Rel&lt;&gt;(1.2, JerkUnit.SI);
 DoubleScalar.Rel&lt;JerkUnit&gt; jerk2 = jerk1.multiplyBy(2.0);
-double[] jv = new double[] {1, 2, 3, 4, 5}; 
+double[] sv = new double[] {1, 2, 3, 4, 5}; 
 DoubleVector.Rel&lt;JerkUnit&gt; jerkVector = 
     new DoubleVector.Rel&lt;JerkUnit&gt;(sv, 
     JerkUnit.SI, StorageType.DENSE);
@@ -48,7 +48,7 @@ DoubleVector.Rel&lt;JerkUnit&gt; jerkVector =
     <pre class="highlight">
 Jerk jerk1 = new Jerk(1.2, JerkUnit.SI);
 Jerk jerk2 = jerk1.multiplyBy(2.0);
-double[] jv = new double[] {1, 2, 3, 4, 5}; 
+double[] sv = new double[] {1, 2, 3, 4, 5}; 
 JerkVector jerkVector = 
     new JerkVector(sv, JerkUnit.SI, StorageType.DENSE);
 </pre>
@@ -85,7 +85,7 @@ public Jerk(final Jerk value)
 
     <pre class="highlight">
 @Override
-public final Jerk instantiateTypeRel(final double value, final JerkUnit unit)
+public final Jerk instantiateRel(final double value, final JerkUnit unit)
 {
     return new Jerk(value, unit);
 }
