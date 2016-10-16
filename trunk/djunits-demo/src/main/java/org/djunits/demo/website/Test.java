@@ -1,7 +1,10 @@
 package org.djunits.demo.website;
 
+import org.djunits.unit.LengthUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.LengthMatrix;
+import org.djunits.value.vdouble.matrix.MutableLengthMatrix;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.djunits.value.vdouble.vector.DoubleVector;
 
@@ -33,6 +36,10 @@ public class Test
         Jerk jjerk1 = new Jerk(1.2, JerkUnit.SI);
         Jerk jjerk2 = jjerk1.multiplyBy(2.0);
 
+        double[][] data = new double[1000][1000];
+        for (int i=0; i<1000; i++) { for (int j=0; j<1000; j++) {data[i][j] = 9*i + 2*j * 0.364; }}
+        MutableLengthMatrix lengthMatrix = new MutableLengthMatrix(data, LengthUnit.CENTIMETER, StorageType.DENSE);
+        lengthMatrix.round();
     }
 
 }
