@@ -31,7 +31,7 @@ import org.djunits.unit.SpeedUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatFrequency extends TypedFloatScalarRel<FrequencyUnit, FloatFrequency>
+public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatFrequency>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -70,7 +70,7 @@ public class FloatFrequency extends TypedFloatScalarRel<FrequencyUnit, FloatFreq
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatFrequency instantiateTypeRel(final float value, final FrequencyUnit unit)
+    public final FloatFrequency instantiateRel(final float value, final FrequencyUnit unit)
     {
         return new FloatFrequency(value, unit);
     }

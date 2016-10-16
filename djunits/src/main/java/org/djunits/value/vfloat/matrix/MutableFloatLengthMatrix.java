@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatLength;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatLengthMatrix extends
-        MutableTypedFloatMatrixRel<LengthUnit, FloatLengthMatrix, MutableFloatLengthMatrix, FloatLength>
+public class MutableFloatLengthMatrix
+        extends AbstractMutableFloatMatrixRel<LengthUnit, FloatLengthMatrix, MutableFloatLengthMatrix, FloatLength>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -65,6 +65,20 @@ public class MutableFloatLengthMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatLengthMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatLengthMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final MutableFloatLengthMatrix instantiateMutableType(final FloatMatrixData fmd, final LengthUnit unit)
     {
         return new MutableFloatLengthMatrix(fmd, unit);
@@ -72,9 +86,9 @@ public class MutableFloatLengthMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatLength get(final int row, final int column) throws ValueException
+    protected final FloatLength instantiateScalar(final float value, final LengthUnit unit)
     {
-        return new FloatLength(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatLength(value, unit);
     }
 
     /**

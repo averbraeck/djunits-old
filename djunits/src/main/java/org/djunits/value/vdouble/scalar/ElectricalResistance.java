@@ -8,8 +8,8 @@ import org.djunits.unit.ElectricalResistanceUnit;
  * Easy access methods for the ElectricalResistance DoubleScalar, which is relative by definition. Instead of:
  * 
  * <pre>
- * DoubleScalar.Rel&lt;ElectricalResistanceUnit&gt; value = new DoubleScalar.Rel&lt;ElectricalResistanceUnit&gt;(100.0,
- *         ElectricalResistanceUnit.SI);
+ * DoubleScalar.Rel&lt;ElectricalResistanceUnit&gt; value =
+ *         new DoubleScalar.Rel&lt;ElectricalResistanceUnit&gt;(100.0, ElectricalResistanceUnit.SI);
  * </pre>
  * 
  * we can now write:
@@ -29,7 +29,7 @@ import org.djunits.unit.ElectricalResistanceUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ElectricalResistance extends TypedDoubleScalarRel<ElectricalResistanceUnit, ElectricalResistance>
+public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResistanceUnit, ElectricalResistance>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -58,7 +58,7 @@ public class ElectricalResistance extends TypedDoubleScalarRel<ElectricalResista
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalResistance instantiateTypeRel(final double value, final ElectricalResistanceUnit unit)
+    public final ElectricalResistance instantiateRel(final double value, final ElectricalResistanceUnit unit)
     {
         return new ElectricalResistance(value, unit);
     }

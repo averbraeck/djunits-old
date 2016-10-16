@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatMass;
 
 /**
- * Immutable FloatMassVector, a vector of values with a MassUnit.
+ * Immutable Float FloatMassVector, a vector of values with a MassUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,15 +19,15 @@ import org.djunits.value.vfloat.scalar.FloatMass;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatMassVector extends TypedFloatVectorRel<MassUnit, FloatMassVector, MutableFloatMassVector, FloatMass>
+public class FloatMassVector extends AbstractFloatVectorRel<MassUnit, FloatMassVector, MutableFloatMassVector, FloatMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatMassVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatMassVector
-     * @param unit U; the unit of the new Relative Immutable FloatMassVector
+     * Construct a new Relative Immutable Float FloatMassVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatMassVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatMassVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -37,9 +37,9 @@ public class FloatMassVector extends TypedFloatVectorRel<MassUnit, FloatMassVect
     }
 
     /**
-     * Construct a new Relative Immutable FloatMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatMassVector
-     * @param unit U; the unit of the new Relative Immutable FloatMassVector
+     * Construct a new Relative Immutable Float FloatMassVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatMassVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatMassVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -49,7 +49,7 @@ public class FloatMassVector extends TypedFloatVectorRel<MassUnit, FloatMassVect
     }
 
     /**
-     * Construct a new Relative Immutable FloatMassVector.
+     * Construct a new Relative Immutable Float FloatMassVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float FloatMassVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -60,8 +60,8 @@ public class FloatMassVector extends TypedFloatVectorRel<MassUnit, FloatMassVect
     }
 
     /**
-     * Construct a new Relative Immutable FloatMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatMassVector
+     * Construct a new Relative Immutable Float FloatMassVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatMassVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -71,7 +71,7 @@ public class FloatMassVector extends TypedFloatVectorRel<MassUnit, FloatMassVect
     }
 
     /**
-     * Construct a new Relative Immutable FloatMassVector.
+     * Construct a new Relative Immutable Float FloatMassVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatMassVector
      * @param length the size of the vector
@@ -85,9 +85,9 @@ public class FloatMassVector extends TypedFloatVectorRel<MassUnit, FloatMassVect
     }
 
     /**
-     * Construct a new Relative Immutable FloatMassVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatMassVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatMassVector
+     * Construct a new Relative Immutable Float FloatMassVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatMassVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatMassVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -123,9 +123,27 @@ public class FloatMassVector extends TypedFloatVectorRel<MassUnit, FloatMassVect
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMass get(final int index) throws ValueException
+    protected final FloatMass instantiateScalar(final float value, final MassUnit unit)
     {
-        return new FloatMass(getInUnit(index, getUnit()), getUnit());
+        return new FloatMass(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatMassVector toDense()
+    {
+        return this.data.isDense() ? (FloatMassVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatMassVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatMassVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerLength;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatMoneyPerLengthMatrix
-        extends
-        TypedFloatMatrixRel<MoneyPerLengthUnit, FloatMoneyPerLengthMatrix, MutableFloatMoneyPerLengthMatrix, FloatMoneyPerLength>
+public class FloatMoneyPerLengthMatrix extends
+        AbstractFloatMatrixRel<MoneyPerLengthUnit, FloatMoneyPerLengthMatrix, MutableFloatMoneyPerLengthMatrix, FloatMoneyPerLength>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -59,6 +58,20 @@ public class FloatMoneyPerLengthMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final FloatMoneyPerLengthMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMoneyPerLengthMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatMoneyPerLengthMatrix instantiateType(final FloatMatrixData fmd, final MoneyPerLengthUnit unit)
     {
         return new FloatMoneyPerLengthMatrix(fmd, unit);
@@ -74,9 +87,9 @@ public class FloatMoneyPerLengthMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMoneyPerLength get(final int row, final int column) throws ValueException
+    protected final FloatMoneyPerLength instantiateScalar(final float value, final MoneyPerLengthUnit unit)
     {
-        return new FloatMoneyPerLength(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatMoneyPerLength(value, unit);
     }
 
 }

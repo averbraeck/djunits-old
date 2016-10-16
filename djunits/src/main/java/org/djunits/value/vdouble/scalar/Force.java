@@ -34,7 +34,7 @@ import org.djunits.unit.PressureUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Force extends TypedDoubleScalarRel<ForceUnit, Force>
+public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -63,7 +63,7 @@ public class Force extends TypedDoubleScalarRel<ForceUnit, Force>
 
     /** {@inheritDoc} */
     @Override
-    protected final Force instantiateTypeRel(final double value, final ForceUnit unit)
+    public final Force instantiateRel(final double value, final ForceUnit unit)
     {
         return new Force(value, unit);
     }

@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerVolume;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatMoneyPerVolumeMatrix
-        extends
-        TypedFloatMatrixRel<MoneyPerVolumeUnit, FloatMoneyPerVolumeMatrix, MutableFloatMoneyPerVolumeMatrix, FloatMoneyPerVolume>
+public class FloatMoneyPerVolumeMatrix extends
+        AbstractFloatMatrixRel<MoneyPerVolumeUnit, FloatMoneyPerVolumeMatrix, MutableFloatMoneyPerVolumeMatrix, FloatMoneyPerVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -59,6 +58,20 @@ public class FloatMoneyPerVolumeMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final FloatMoneyPerVolumeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMoneyPerVolumeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatMoneyPerVolumeMatrix instantiateType(final FloatMatrixData fmd, final MoneyPerVolumeUnit unit)
     {
         return new FloatMoneyPerVolumeMatrix(fmd, unit);
@@ -74,9 +87,9 @@ public class FloatMoneyPerVolumeMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMoneyPerVolume get(final int row, final int column) throws ValueException
+    protected final FloatMoneyPerVolume instantiateScalar(final float value, final MoneyPerVolumeUnit unit)
     {
-        return new FloatMoneyPerVolume(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatMoneyPerVolume(value, unit);
     }
 
 }

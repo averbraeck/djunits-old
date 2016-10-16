@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Density;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class DensityVector extends TypedDoubleVectorRel<DensityUnit, DensityVector, MutableDensityVector, Density>
+public class DensityVector extends AbstractDoubleVectorRel<DensityUnit, DensityVector, MutableDensityVector, Density>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -43,8 +43,7 @@ public class DensityVector extends TypedDoubleVectorRel<DensityUnit, DensityVect
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public DensityVector(final List<Double> values, final DensityUnit unit, final StorageType storageType)
-            throws ValueException
+    public DensityVector(final List<Double> values, final DensityUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -124,9 +123,27 @@ public class DensityVector extends TypedDoubleVectorRel<DensityUnit, DensityVect
 
     /** {@inheritDoc} */
     @Override
-    public final Density get(final int index) throws ValueException
+    protected final Density instantiateScalar(final double value, final DensityUnit unit)
     {
-        return new Density(getInUnit(index, getUnit()), getUnit());
+        return new Density(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final DensityVector toDense()
+    {
+        return this.data.isDense() ? (DensityVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final DensityVector toSparse()
+    {
+        return this.data.isSparse() ? (DensityVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

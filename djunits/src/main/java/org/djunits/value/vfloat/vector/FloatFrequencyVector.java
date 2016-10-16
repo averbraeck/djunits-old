@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatFrequency;
 
 /**
- * Immutable FloatFrequencyVector, a vector of values with a FrequencyUnit.
+ * Immutable Float FloatFrequencyVector, a vector of values with a FrequencyUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,16 +19,16 @@ import org.djunits.value.vfloat.scalar.FloatFrequency;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatFrequencyVector extends
-        TypedFloatVectorRel<FrequencyUnit, FloatFrequencyVector, MutableFloatFrequencyVector, FloatFrequency>
+public class FloatFrequencyVector
+        extends AbstractFloatVectorRel<FrequencyUnit, FloatFrequencyVector, MutableFloatFrequencyVector, FloatFrequency>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatFrequencyVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatFrequencyVector
-     * @param unit U; the unit of the new Relative Immutable FloatFrequencyVector
+     * Construct a new Relative Immutable Float FloatFrequencyVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatFrequencyVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatFrequencyVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class FloatFrequencyVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFrequencyVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatFrequencyVector
-     * @param unit U; the unit of the new Relative Immutable FloatFrequencyVector
+     * Construct a new Relative Immutable Float FloatFrequencyVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatFrequencyVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatFrequencyVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,7 +52,7 @@ public class FloatFrequencyVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFrequencyVector.
+     * Construct a new Relative Immutable Float FloatFrequencyVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
      *            FloatFrequencyVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
@@ -64,8 +64,8 @@ public class FloatFrequencyVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFrequencyVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatFrequencyVector
+     * Construct a new Relative Immutable Float FloatFrequencyVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatFrequencyVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -75,23 +75,23 @@ public class FloatFrequencyVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFrequencyVector.
+     * Construct a new Relative Immutable Float FloatFrequencyVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatFrequencyVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatFrequencyVector(final SortedMap<Integer, FloatFrequency> values, final int length, final StorageType storageType)
-            throws ValueException
+    public FloatFrequencyVector(final SortedMap<Integer, FloatFrequency> values, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatFrequencyVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatFrequencyVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatFrequencyVector
+     * Construct a new Relative Immutable Float FloatFrequencyVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatFrequencyVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatFrequencyVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -127,9 +127,27 @@ public class FloatFrequencyVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatFrequency get(final int index) throws ValueException
+    protected final FloatFrequency instantiateScalar(final float value, final FrequencyUnit unit)
     {
-        return new FloatFrequency(getInUnit(index, getUnit()), getUnit());
+        return new FloatFrequency(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatFrequencyVector toDense()
+    {
+        return this.data.isDense() ? (FloatFrequencyVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatFrequencyVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatFrequencyVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

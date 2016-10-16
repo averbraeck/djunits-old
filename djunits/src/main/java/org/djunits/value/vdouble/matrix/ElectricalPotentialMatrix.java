@@ -16,9 +16,8 @@ import org.djunits.value.vdouble.scalar.ElectricalPotential;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ElectricalPotentialMatrix
-        extends
-        TypedDoubleMatrixRel<ElectricalPotentialUnit, ElectricalPotentialMatrix, MutableElectricalPotentialMatrix, ElectricalPotential>
+public class ElectricalPotentialMatrix extends
+        AbstractDoubleMatrixRel<ElectricalPotentialUnit, ElectricalPotentialMatrix, MutableElectricalPotentialMatrix, ElectricalPotential>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -59,6 +58,20 @@ public class ElectricalPotentialMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final ElectricalPotentialMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final ElectricalPotentialMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final ElectricalPotentialMatrix instantiateType(final DoubleMatrixData dmd, final ElectricalPotentialUnit unit)
     {
         return new ElectricalPotentialMatrix(dmd, unit);
@@ -74,9 +87,9 @@ public class ElectricalPotentialMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalPotential get(final int row, final int column) throws ValueException
+    protected final ElectricalPotential instantiateScalar(final double value, final ElectricalPotentialUnit unit)
     {
-        return new ElectricalPotential(getInUnit(row, column, getUnit()), getUnit());
+        return new ElectricalPotential(value, unit);
     }
 
 }

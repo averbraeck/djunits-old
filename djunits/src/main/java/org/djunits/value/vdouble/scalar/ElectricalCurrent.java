@@ -30,7 +30,7 @@ import org.djunits.unit.PowerUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ElectricalCurrent extends TypedDoubleScalarRel<ElectricalCurrentUnit, ElectricalCurrent>
+public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrentUnit, ElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -59,7 +59,7 @@ public class ElectricalCurrent extends TypedDoubleScalarRel<ElectricalCurrentUni
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalCurrent instantiateTypeRel(final double value, final ElectricalCurrentUnit unit)
+    public final ElectricalCurrent instantiateRel(final double value, final ElectricalCurrentUnit unit)
     {
         return new ElectricalCurrent(value, unit);
     }

@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatFlowVolume;
 
 /**
- * Immutable FloatFlowVolumeVector, a vector of values with a FlowVolumeUnit.
+ * Immutable Float FloatFlowVolumeVector, a vector of values with a FlowVolumeUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,16 +19,16 @@ import org.djunits.value.vfloat.scalar.FloatFlowVolume;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatFlowVolumeVector extends
-        TypedFloatVectorRel<FlowVolumeUnit, FloatFlowVolumeVector, MutableFloatFlowVolumeVector, FloatFlowVolume>
+public class FloatFlowVolumeVector
+        extends AbstractFloatVectorRel<FlowVolumeUnit, FloatFlowVolumeVector, MutableFloatFlowVolumeVector, FloatFlowVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatFlowVolumeVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatFlowVolumeVector
-     * @param unit U; the unit of the new Relative Immutable FloatFlowVolumeVector
+     * Construct a new Relative Immutable Float FloatFlowVolumeVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatFlowVolumeVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatFlowVolumeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class FloatFlowVolumeVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFlowVolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatFlowVolumeVector
-     * @param unit U; the unit of the new Relative Immutable FloatFlowVolumeVector
+     * Construct a new Relative Immutable Float FloatFlowVolumeVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatFlowVolumeVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatFlowVolumeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,7 +52,7 @@ public class FloatFlowVolumeVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFlowVolumeVector.
+     * Construct a new Relative Immutable Float FloatFlowVolumeVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
      *            FloatFlowVolumeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
@@ -64,8 +64,8 @@ public class FloatFlowVolumeVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFlowVolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatFlowVolumeVector
+     * Construct a new Relative Immutable Float FloatFlowVolumeVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatFlowVolumeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -75,7 +75,7 @@ public class FloatFlowVolumeVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFlowVolumeVector.
+     * Construct a new Relative Immutable Float FloatFlowVolumeVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatFlowVolumeVector
      * @param length the size of the vector
@@ -89,9 +89,9 @@ public class FloatFlowVolumeVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFlowVolumeVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatFlowVolumeVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatFlowVolumeVector
+     * Construct a new Relative Immutable Float FloatFlowVolumeVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatFlowVolumeVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatFlowVolumeVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -127,9 +127,27 @@ public class FloatFlowVolumeVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatFlowVolume get(final int index) throws ValueException
+    protected final FloatFlowVolume instantiateScalar(final float value, final FlowVolumeUnit unit)
     {
-        return new FloatFlowVolume(getInUnit(index, getUnit()), getUnit());
+        return new FloatFlowVolume(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatFlowVolumeVector toDense()
+    {
+        return this.data.isDense() ? (FloatFlowVolumeVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatFlowVolumeVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatFlowVolumeVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

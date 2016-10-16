@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.FlowVolume;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFlowVolumeVector extends
-        MutableTypedDoubleVectorRel<FlowVolumeUnit, FlowVolumeVector, MutableFlowVolumeVector, FlowVolume>
+public class MutableFlowVolumeVector
+        extends AbstractMutableDoubleVectorRel<FlowVolumeUnit, FlowVolumeVector, MutableFlowVolumeVector, FlowVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -127,9 +127,27 @@ public class MutableFlowVolumeVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FlowVolume get(final int index) throws ValueException
+    protected final FlowVolume instantiateScalar(final double value, final FlowVolumeUnit unit)
     {
-        return new FlowVolume(getInUnit(index, getUnit()), getUnit());
+        return new FlowVolume(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableFlowVolumeVector toDense()
+    {
+        return this.data.isDense() ? (MutableFlowVolumeVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableFlowVolumeVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFlowVolumeVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

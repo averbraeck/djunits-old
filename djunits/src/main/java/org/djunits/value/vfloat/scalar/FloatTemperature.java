@@ -28,7 +28,7 @@ import org.djunits.unit.TemperatureUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatTemperature extends TypedFloatScalarRel<TemperatureUnit, FloatTemperature>
+public class FloatTemperature extends AbstractFloatScalarRel<TemperatureUnit, FloatTemperature>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -67,7 +67,7 @@ public class FloatTemperature extends TypedFloatScalarRel<TemperatureUnit, Float
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatTemperature instantiateTypeRel(final float value, final TemperatureUnit unit)
+    public final FloatTemperature instantiateRel(final float value, final TemperatureUnit unit)
     {
         return new FloatTemperature(value, unit);
     }
@@ -78,7 +78,7 @@ public class FloatTemperature extends TypedFloatScalarRel<TemperatureUnit, Float
      * @param unit the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
-    protected final FloatAbsoluteTemperature instantiateTypeAbs(final float value, final TemperatureUnit unit)
+    public final FloatAbsoluteTemperature instantiateAbs(final float value, final TemperatureUnit unit)
     {
         return new FloatAbsoluteTemperature(value, unit);
     }
@@ -102,8 +102,8 @@ public class FloatTemperature extends TypedFloatScalarRel<TemperatureUnit, Float
      */
     public final FloatAbsoluteTemperature plus(final FloatAbsoluteTemperature v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit()) : instantiateTypeAbs(
-                this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**

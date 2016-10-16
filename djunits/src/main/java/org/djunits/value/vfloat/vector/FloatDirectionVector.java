@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatDirection;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatDirectionVector extends
-        TypedFloatVectorAbs<AngleUnit, FloatDirectionVector, FloatAngleVector, MutableFloatDirectionVector, FloatDirection>
+        AbstractFloatVectorAbs<AngleUnit, FloatDirectionVector, FloatAngleVector, MutableFloatDirectionVector, FloatDirection>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -32,8 +32,7 @@ public class FloatDirectionVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatDirectionVector(final float[] values, final AngleUnit unit, final StorageType storageType)
-            throws ValueException
+    public FloatDirectionVector(final float[] values, final AngleUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -81,8 +80,8 @@ public class FloatDirectionVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public FloatDirectionVector(final SortedMap<Integer, FloatDirection> values, final int length, final StorageType storageType)
-            throws ValueException
+    public FloatDirectionVector(final SortedMap<Integer, FloatDirection> values, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -134,14 +133,32 @@ public class FloatDirectionVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDirection get(final int index) throws ValueException
+    protected final FloatDirection instantiateScalar(final float value, final AngleUnit unit)
     {
-        return new FloatDirection(getInUnit(index, getUnit()), getUnit());
+        return new FloatDirection(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatDirectionVector toDense()
+    {
+        return this.data.isDense() ? (FloatDirectionVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatDirectionVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatDirectionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
 
     /**
      * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute FloatDirection vector.
+     * @return a relative version of this absolute Direction vector.
      */
     public final FloatAngleVector toRel()
     {

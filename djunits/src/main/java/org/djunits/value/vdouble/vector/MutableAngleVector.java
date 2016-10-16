@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Angle;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableAngleVector extends MutableTypedDoubleVectorRel<AngleUnit, AngleVector, MutableAngleVector, Angle>
+public class MutableAngleVector extends AbstractMutableDoubleVectorRel<AngleUnit, AngleVector, MutableAngleVector, Angle>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -125,9 +125,27 @@ public class MutableAngleVector extends MutableTypedDoubleVectorRel<AngleUnit, A
 
     /** {@inheritDoc} */
     @Override
-    public final Angle get(final int index) throws ValueException
+    protected final Angle instantiateScalar(final double value, final AngleUnit unit)
     {
-        return new Angle(getInUnit(index, getUnit()), getUnit());
+        return new Angle(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableAngleVector toDense()
+    {
+        return this.data.isDense() ? (MutableAngleVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableAngleVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableAngleVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**

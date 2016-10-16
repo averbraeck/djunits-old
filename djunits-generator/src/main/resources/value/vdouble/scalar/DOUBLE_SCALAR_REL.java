@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.Acceleration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class %Type% extends TypedDoubleScalarRel<%Type%Unit, %Type%>
+public class %Type% extends AbstractDoubleScalarRel<%Type%Unit, %Type%> %DIMLESS%
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -49,7 +49,7 @@ public class %Type% extends TypedDoubleScalarRel<%Type%Unit, %Type%>
 
     /** {@inheritDoc} */
     @Override
-    protected final %Type% instantiateTypeRel(final double value, final %Type%Unit unit)
+    public final %Type% instantiateRel(final double value, final %Type%Unit unit)
     {
         return new %Type%(value, unit);
     }

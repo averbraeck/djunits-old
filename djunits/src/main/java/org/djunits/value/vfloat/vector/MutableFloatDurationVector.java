@@ -19,8 +19,8 @@ import org.djunits.value.vfloat.scalar.FloatDuration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatDurationVector extends
-        MutableTypedFloatVectorRel<TimeUnit, FloatDurationVector, MutableFloatDurationVector, FloatDuration>
+public class MutableFloatDurationVector
+        extends AbstractMutableFloatVectorRel<TimeUnit, FloatDurationVector, MutableFloatDurationVector, FloatDuration>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -127,14 +127,33 @@ public class MutableFloatDurationVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDuration get(final int index) throws ValueException
+    protected final FloatDuration instantiateScalar(final float value, final TimeUnit unit)
     {
-        return new FloatDuration(getInUnit(index, getUnit()), getUnit());
+        return new FloatDuration(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatDurationVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatDurationVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatDurationVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatDurationVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**
      * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative FloatDuration vector.
+     * @return an absolute version of this relative Duration vector.
      */
     public final MutableFloatTimeVector toAbs()
     {

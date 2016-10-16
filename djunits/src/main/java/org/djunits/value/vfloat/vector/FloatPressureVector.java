@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatPressure;
 
 /**
- * Immutable FloatPressureVector, a vector of values with a PressureUnit.
+ * Immutable Float FloatPressureVector, a vector of values with a PressureUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,16 +19,16 @@ import org.djunits.value.vfloat.scalar.FloatPressure;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatPressureVector extends
-        TypedFloatVectorRel<PressureUnit, FloatPressureVector, MutableFloatPressureVector, FloatPressure>
+public class FloatPressureVector
+        extends AbstractFloatVectorRel<PressureUnit, FloatPressureVector, MutableFloatPressureVector, FloatPressure>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatPressureVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatPressureVector
-     * @param unit U; the unit of the new Relative Immutable FloatPressureVector
+     * Construct a new Relative Immutable Float FloatPressureVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatPressureVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatPressureVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class FloatPressureVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatPressureVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatPressureVector
-     * @param unit U; the unit of the new Relative Immutable FloatPressureVector
+     * Construct a new Relative Immutable Float FloatPressureVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatPressureVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatPressureVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,7 +52,7 @@ public class FloatPressureVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatPressureVector.
+     * Construct a new Relative Immutable Float FloatPressureVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
      *            FloatPressureVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
@@ -64,8 +64,8 @@ public class FloatPressureVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatPressureVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatPressureVector
+     * Construct a new Relative Immutable Float FloatPressureVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatPressureVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -75,7 +75,7 @@ public class FloatPressureVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatPressureVector.
+     * Construct a new Relative Immutable Float FloatPressureVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatPressureVector
      * @param length the size of the vector
@@ -89,9 +89,9 @@ public class FloatPressureVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatPressureVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatPressureVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatPressureVector
+     * Construct a new Relative Immutable Float FloatPressureVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatPressureVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatPressureVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -127,9 +127,27 @@ public class FloatPressureVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPressure get(final int index) throws ValueException
+    protected final FloatPressure instantiateScalar(final float value, final PressureUnit unit)
     {
-        return new FloatPressure(getInUnit(index, getUnit()), getUnit());
+        return new FloatPressure(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatPressureVector toDense()
+    {
+        return this.data.isDense() ? (FloatPressureVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatPressureVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatPressureVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

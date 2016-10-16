@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import org.djunits.unit.scale.Scale;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.vdouble.scalar.DoubleScalar;
+import org.djunits.value.vdouble.scalar.DoubleScalarInterface;
 
 /**
  * Stores the data for a DoubleMatrix and carries out basic operations.
@@ -73,21 +73,14 @@ abstract class DoubleMatrixData
         {
             case DENSE:
                 double[] valuesSI = new double[rows * cols];
-                IntStream
-                        .range(0, values.length)
-                        .parallel()
-                        .forEach(
-                                r -> IntStream.range(0, cols).forEach(
-                                        c -> valuesSI[r * cols + c] = scale.toStandardUnit(values[r][c])));
+                IntStream.range(0, values.length).parallel().forEach(r -> IntStream.range(0, cols)
+                        .forEach(c -> valuesSI[r * cols + c] = scale.toStandardUnit(values[r][c])));
                 return new DoubleMatrixDataDense(valuesSI, rows, cols);
 
             case SPARSE:
                 double[][] matrixSI = new double[rows][cols];
-                IntStream
-                        .range(0, values.length)
-                        .parallel()
-                        .forEach(
-                                r -> IntStream.range(0, cols).forEach(c -> matrixSI[r][c] = scale.toStandardUnit(values[r][c])));
+                IntStream.range(0, values.length).parallel().forEach(
+                        r -> IntStream.range(0, cols).forEach(c -> matrixSI[r][c] = scale.toStandardUnit(values[r][c])));
                 return DoubleMatrixDataSparse.instantiate(matrixSI);
 
             default:
@@ -102,7 +95,7 @@ abstract class DoubleMatrixData
      * @return the DoubleMatrixData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
-    public static DoubleMatrixData instantiate(final DoubleScalar<?>[][] values, final StorageType storageType)
+    public static DoubleMatrixData instantiate(final DoubleScalarInterface[][] values, final StorageType storageType)
             throws ValueException
     {
         if (values == null)
@@ -268,12 +261,8 @@ abstract class DoubleMatrixData
     {
         checkSizes(right);
         double[] dm = new double[this.rows * this.cols];
-        IntStream
-                .range(0, this.rows)
-                .parallel()
-                .forEach(
-                        r -> IntStream.range(0, this.cols)
-                                .forEach(c -> dm[r * this.cols + c] = getSI(r, c) + right.getSI(r, c)));
+        IntStream.range(0, this.rows).parallel().forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) + right.getSI(r, c)));
         if (this instanceof DoubleMatrixDataSparse && right instanceof DoubleMatrixDataSparse)
         {
             return new DoubleMatrixDataDense(dm, this.rows, this.cols).toSparse();
@@ -308,12 +297,8 @@ abstract class DoubleMatrixData
     {
         checkSizes(right);
         double[] dm = new double[this.rows * this.cols];
-        IntStream
-                .range(0, this.rows)
-                .parallel()
-                .forEach(
-                        r -> IntStream.range(0, this.cols)
-                                .forEach(c -> dm[r * this.cols + c] = getSI(r, c) - right.getSI(r, c)));
+        IntStream.range(0, this.rows).parallel().forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) - right.getSI(r, c)));
         if (this instanceof DoubleMatrixDataSparse && right instanceof DoubleMatrixDataSparse)
         {
             return new DoubleMatrixDataDense(dm, this.rows, this.cols).toSparse();
@@ -348,12 +333,8 @@ abstract class DoubleMatrixData
     {
         checkSizes(right);
         double[] dm = new double[this.rows * this.cols];
-        IntStream
-                .range(0, this.rows)
-                .parallel()
-                .forEach(
-                        r -> IntStream.range(0, this.cols)
-                                .forEach(c -> dm[r * this.cols + c] = getSI(r, c) * right.getSI(r, c)));
+        IntStream.range(0, this.rows).parallel().forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) * right.getSI(r, c)));
         if (this instanceof DoubleMatrixDataDense && right instanceof DoubleMatrixDataDense)
         {
             return new DoubleMatrixDataDense(dm, this.rows, this.cols);
@@ -389,12 +370,8 @@ abstract class DoubleMatrixData
     {
         checkSizes(right);
         double[] dm = new double[this.rows * this.cols];
-        IntStream
-                .range(0, this.rows)
-                .parallel()
-                .forEach(
-                        r -> IntStream.range(0, this.cols)
-                                .forEach(c -> dm[r * this.cols + c] = getSI(r, c) / right.getSI(r, c)));
+        IntStream.range(0, this.rows).parallel().forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) / right.getSI(r, c)));
         if (this instanceof DoubleMatrixDataDense && right instanceof DoubleMatrixDataDense)
         {
             return new DoubleMatrixDataDense(dm, this.rows, this.cols);

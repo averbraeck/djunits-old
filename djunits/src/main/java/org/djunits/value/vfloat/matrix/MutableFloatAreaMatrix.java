@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatArea;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatAreaMatrix extends
-        MutableTypedFloatMatrixRel<AreaUnit, FloatAreaMatrix, MutableFloatAreaMatrix, FloatArea>
+public class MutableFloatAreaMatrix
+        extends AbstractMutableFloatMatrixRel<AreaUnit, FloatAreaMatrix, MutableFloatAreaMatrix, FloatArea>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -57,6 +57,20 @@ public class MutableFloatAreaMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatAreaMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatAreaMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatAreaMatrix instantiateType(final FloatMatrixData fmd, final AreaUnit unit)
     {
         return new FloatAreaMatrix(fmd, unit);
@@ -71,9 +85,9 @@ public class MutableFloatAreaMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatArea get(final int row, final int column) throws ValueException
+    protected final FloatArea instantiateScalar(final float value, final AreaUnit unit)
     {
-        return new FloatArea(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatArea(value, unit);
     }
 
 }

@@ -19,9 +19,8 @@ import org.djunits.value.vdouble.scalar.AbsoluteTemperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class AbsoluteTemperatureVector
-        extends
-        TypedDoubleVectorAbs<TemperatureUnit, AbsoluteTemperatureVector, TemperatureVector, MutableAbsoluteTemperatureVector, AbsoluteTemperature>
+public class AbsoluteTemperatureVector extends
+        AbstractDoubleVectorAbs<TemperatureUnit, AbsoluteTemperatureVector, TemperatureVector, MutableAbsoluteTemperatureVector, AbsoluteTemperature>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -138,9 +137,27 @@ public class AbsoluteTemperatureVector
 
     /** {@inheritDoc} */
     @Override
-    public final AbsoluteTemperature get(final int index) throws ValueException
+    protected final AbsoluteTemperature instantiateScalar(final double value, final TemperatureUnit unit)
     {
-        return new AbsoluteTemperature(getInUnit(index, getUnit()), getUnit());
+        return new AbsoluteTemperature(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final AbsoluteTemperatureVector toDense()
+    {
+        return this.data.isDense() ? (AbsoluteTemperatureVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final AbsoluteTemperatureVector toSparse()
+    {
+        return this.data.isSparse() ? (AbsoluteTemperatureVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
 
     /**

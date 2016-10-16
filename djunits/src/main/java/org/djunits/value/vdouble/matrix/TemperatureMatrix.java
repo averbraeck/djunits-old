@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.Temperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class TemperatureMatrix extends
-        TypedDoubleMatrixRel<TemperatureUnit, TemperatureMatrix, MutableTemperatureMatrix, Temperature>
+public class TemperatureMatrix
+        extends AbstractDoubleMatrixRel<TemperatureUnit, TemperatureMatrix, MutableTemperatureMatrix, Temperature>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -59,6 +59,20 @@ public class TemperatureMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final TemperatureMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final TemperatureMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final TemperatureMatrix instantiateType(final DoubleMatrixData dmd, final TemperatureUnit unit)
     {
         return new TemperatureMatrix(dmd, unit);
@@ -73,9 +87,9 @@ public class TemperatureMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final Temperature get(final int row, final int column) throws ValueException
+    protected final Temperature instantiateScalar(final double value, final TemperatureUnit unit)
     {
-        return new Temperature(getInUnit(row, column, getUnit()), getUnit());
+        return new Temperature(value, unit);
     }
 
     /**

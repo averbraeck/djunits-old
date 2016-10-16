@@ -28,7 +28,7 @@ import org.djunits.unit.MoneyUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerTime extends TypedDoubleScalarRel<MoneyPerTimeUnit, MoneyPerTime>
+public class MoneyPerTime extends AbstractDoubleScalarRel<MoneyPerTimeUnit, MoneyPerTime>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -54,7 +54,7 @@ public class MoneyPerTime extends TypedDoubleScalarRel<MoneyPerTimeUnit, MoneyPe
 
     /** {@inheritDoc} */
     @Override
-    protected final MoneyPerTime instantiateTypeRel(final double value, final MoneyPerTimeUnit unit)
+    public final MoneyPerTime instantiateRel(final double value, final MoneyPerTimeUnit unit)
     {
         return new MoneyPerTime(value, unit);
     }

@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.MoneyPerArea;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerAreaVector extends
-        TypedDoubleVectorRel<MoneyPerAreaUnit, MoneyPerAreaVector, MutableMoneyPerAreaVector, MoneyPerArea>
+public class MoneyPerAreaVector
+        extends AbstractDoubleVectorRel<MoneyPerAreaUnit, MoneyPerAreaVector, MutableMoneyPerAreaVector, MoneyPerArea>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -127,9 +127,27 @@ public class MoneyPerAreaVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final MoneyPerArea get(final int index) throws ValueException
+    protected final MoneyPerArea instantiateScalar(final double value, final MoneyPerAreaUnit unit)
     {
-        return new MoneyPerArea(getInUnit(index, getUnit()), getUnit());
+        return new MoneyPerArea(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MoneyPerAreaVector toDense()
+    {
+        return this.data.isDense() ? (MoneyPerAreaVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MoneyPerAreaVector toSparse()
+    {
+        return this.data.isSparse() ? (MoneyPerAreaVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

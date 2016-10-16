@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Power;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class PowerVector extends TypedDoubleVectorRel<PowerUnit, PowerVector, MutablePowerVector, Power>
+public class PowerVector extends AbstractDoubleVectorRel<PowerUnit, PowerVector, MutablePowerVector, Power>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -123,9 +123,27 @@ public class PowerVector extends TypedDoubleVectorRel<PowerUnit, PowerVector, Mu
 
     /** {@inheritDoc} */
     @Override
-    public final Power get(final int index) throws ValueException
+    protected final Power instantiateScalar(final double value, final PowerUnit unit)
     {
-        return new Power(getInUnit(index, getUnit()), getUnit());
+        return new Power(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final PowerVector toDense()
+    {
+        return this.data.isDense() ? (PowerVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final PowerVector toSparse()
+    {
+        return this.data.isSparse() ? (PowerVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

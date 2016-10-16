@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatTime;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatTimeMatrix extends
-        MutableTypedFloatMatrixAbs<TimeUnit, FloatTimeMatrix, FloatDurationMatrix, MutableFloatTimeMatrix, FloatTime>
+public class MutableFloatTimeMatrix
+        extends AbstractMutableFloatMatrixAbs<TimeUnit, FloatTimeMatrix, FloatDurationMatrix, MutableFloatTimeMatrix, FloatTime>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -58,6 +58,20 @@ public class MutableFloatTimeMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatTimeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatTimeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatTimeMatrix instantiateTypeAbs(final FloatMatrixData fmd, final TimeUnit unit)
     {
         return new FloatTimeMatrix(fmd, unit);
@@ -79,9 +93,9 @@ public class MutableFloatTimeMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatTime get(final int row, final int column) throws ValueException
+    protected final FloatTime instantiateScalar(final float value, final TimeUnit unit)
     {
-        return new FloatTime(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatTime(value, unit);
     }
 
     /**

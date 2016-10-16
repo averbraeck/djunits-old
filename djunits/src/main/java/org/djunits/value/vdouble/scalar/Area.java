@@ -33,7 +33,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Area extends TypedDoubleScalarRel<AreaUnit, Area>
+public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -62,7 +62,7 @@ public class Area extends TypedDoubleScalarRel<AreaUnit, Area>
 
     /** {@inheritDoc} */
     @Override
-    protected final Area instantiateTypeRel(final double value, final AreaUnit unit)
+    public final Area instantiateRel(final double value, final AreaUnit unit)
     {
         return new Area(value, unit);
     }

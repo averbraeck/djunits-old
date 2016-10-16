@@ -33,7 +33,7 @@ import org.djunits.unit.MoneyUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatMoney extends TypedFloatScalarRel<MoneyUnit, FloatMoney>
+public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -69,7 +69,7 @@ public class FloatMoney extends TypedFloatScalarRel<MoneyUnit, FloatMoney>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatMoney instantiateTypeRel(final float value, final MoneyUnit unit)
+    public final FloatMoney instantiateRel(final float value, final MoneyUnit unit)
     {
         return new FloatMoney(value, unit);
     }

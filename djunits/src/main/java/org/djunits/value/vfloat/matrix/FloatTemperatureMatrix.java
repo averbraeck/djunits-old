@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatTemperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatTemperatureMatrix extends
-        TypedFloatMatrixRel<TemperatureUnit, FloatTemperatureMatrix, MutableFloatTemperatureMatrix, FloatTemperature>
+public class FloatTemperatureMatrix
+        extends AbstractFloatMatrixRel<TemperatureUnit, FloatTemperatureMatrix, MutableFloatTemperatureMatrix, FloatTemperature>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -59,6 +59,20 @@ public class FloatTemperatureMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatTemperatureMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatTemperatureMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatTemperatureMatrix instantiateType(final FloatMatrixData fmd, final TemperatureUnit unit)
     {
         return new FloatTemperatureMatrix(fmd, unit);
@@ -73,9 +87,9 @@ public class FloatTemperatureMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatTemperature get(final int row, final int column) throws ValueException
+    protected final FloatTemperature instantiateScalar(final float value, final TemperatureUnit unit)
     {
-        return new FloatTemperature(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatTemperature(value, unit);
     }
 
     /**

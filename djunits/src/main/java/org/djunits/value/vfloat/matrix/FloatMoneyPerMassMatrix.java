@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerMass;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatMoneyPerMassMatrix extends
-        TypedFloatMatrixRel<MoneyPerMassUnit, FloatMoneyPerMassMatrix, MutableFloatMoneyPerMassMatrix, FloatMoneyPerMass>
+        AbstractFloatMatrixRel<MoneyPerMassUnit, FloatMoneyPerMassMatrix, MutableFloatMoneyPerMassMatrix, FloatMoneyPerMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class FloatMoneyPerMassMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatMoneyPerMassMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMoneyPerMassMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatMoneyPerMassMatrix instantiateType(final FloatMatrixData fmd, final MoneyPerMassUnit unit)
     {
         return new FloatMoneyPerMassMatrix(fmd, unit);
@@ -65,16 +79,17 @@ public class FloatMoneyPerMassMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatMoneyPerMassMatrix instantiateMutableType(final FloatMatrixData fmd, final MoneyPerMassUnit unit)
+    protected final MutableFloatMoneyPerMassMatrix instantiateMutableType(final FloatMatrixData fmd,
+            final MoneyPerMassUnit unit)
     {
         return new MutableFloatMoneyPerMassMatrix(fmd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMoneyPerMass get(final int row, final int column) throws ValueException
+    protected final FloatMoneyPerMass instantiateScalar(final float value, final MoneyPerMassUnit unit)
     {
-        return new FloatMoneyPerMass(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatMoneyPerMass(value, unit);
     }
 
 }

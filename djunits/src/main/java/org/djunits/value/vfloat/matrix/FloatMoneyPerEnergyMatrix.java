@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerEnergy;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatMoneyPerEnergyMatrix
-        extends
-        TypedFloatMatrixRel<MoneyPerEnergyUnit, FloatMoneyPerEnergyMatrix, MutableFloatMoneyPerEnergyMatrix, FloatMoneyPerEnergy>
+public class FloatMoneyPerEnergyMatrix extends
+        AbstractFloatMatrixRel<MoneyPerEnergyUnit, FloatMoneyPerEnergyMatrix, MutableFloatMoneyPerEnergyMatrix, FloatMoneyPerEnergy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -59,6 +58,20 @@ public class FloatMoneyPerEnergyMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final FloatMoneyPerEnergyMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMoneyPerEnergyMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatMoneyPerEnergyMatrix instantiateType(final FloatMatrixData fmd, final MoneyPerEnergyUnit unit)
     {
         return new FloatMoneyPerEnergyMatrix(fmd, unit);
@@ -74,9 +87,9 @@ public class FloatMoneyPerEnergyMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMoneyPerEnergy get(final int row, final int column) throws ValueException
+    protected final FloatMoneyPerEnergy instantiateScalar(final float value, final MoneyPerEnergyUnit unit)
     {
-        return new FloatMoneyPerEnergy(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatMoneyPerEnergy(value, unit);
     }
 
 }

@@ -28,7 +28,7 @@ import org.djunits.unit.TemperatureUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Temperature extends TypedDoubleScalarRel<TemperatureUnit, Temperature>
+public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temperature>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -57,7 +57,7 @@ public class Temperature extends TypedDoubleScalarRel<TemperatureUnit, Temperatu
 
     /** {@inheritDoc} */
     @Override
-    protected final Temperature instantiateTypeRel(final double value, final TemperatureUnit unit)
+    public final Temperature instantiateRel(final double value, final TemperatureUnit unit)
     {
         return new Temperature(value, unit);
     }
@@ -68,7 +68,7 @@ public class Temperature extends TypedDoubleScalarRel<TemperatureUnit, Temperatu
      * @param unit the unit
      * @return A a new absolute instance of the DoubleScalar of the right type
      */
-    protected final AbsoluteTemperature instantiateTypeAbs(final double value, final TemperatureUnit unit)
+    public final AbsoluteTemperature instantiateAbs(final double value, final TemperatureUnit unit)
     {
         return new AbsoluteTemperature(value, unit);
     }
@@ -92,8 +92,8 @@ public class Temperature extends TypedDoubleScalarRel<TemperatureUnit, Temperatu
      */
     public final AbsoluteTemperature plus(final AbsoluteTemperature v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit()) : instantiateTypeAbs(
-                this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**

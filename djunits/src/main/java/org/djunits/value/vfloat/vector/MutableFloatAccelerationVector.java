@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatAcceleration;
 
 /**
- * Mutable FloatAccelerationVector, a vector of values with a AccelerationUnit.
+ * Mutable Float AccelerationVector, a vector of values with a AccelerationUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,17 +19,16 @@ import org.djunits.value.vfloat.scalar.FloatAcceleration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatAccelerationVector
-        extends
-        MutableTypedFloatVectorRel<AccelerationUnit, FloatAccelerationVector, MutableFloatAccelerationVector, FloatAcceleration>
+public class MutableFloatAccelerationVector extends
+        AbstractMutableFloatVectorRel<AccelerationUnit, FloatAccelerationVector, MutableFloatAccelerationVector, FloatAcceleration>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable Float AccelerationVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float AccelerationVector
+     * @param unit U; the unit of the new Relative Immutable Float AccelerationVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -40,9 +39,9 @@ public class MutableFloatAccelerationVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable Float AccelerationVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float AccelerationVector
+     * @param unit U; the unit of the new Relative Immutable Float AccelerationVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -53,21 +52,20 @@ public class MutableFloatAccelerationVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
+     * Construct a new Relative Immutable Float AccelerationVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatAccelerationVector
+     *            AccelerationVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatAccelerationVector(final FloatAcceleration[] values, final StorageType storageType)
-            throws ValueException
+    public MutableFloatAccelerationVector(final FloatAcceleration[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAccelerationVector
+     * Construct a new Relative Immutable Float AccelerationVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float AccelerationVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -78,9 +76,9 @@ public class MutableFloatAccelerationVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
+     * Construct a new Relative Immutable Float AccelerationVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatAccelerationVector
+     *            AccelerationVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -92,15 +90,15 @@ public class MutableFloatAccelerationVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatAccelerationVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatAccelerationVector
+     * Construct a new Relative Immutable Float AccelerationVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float AccelerationVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float AccelerationVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatAccelerationVector(final SortedMap<Integer, Float> values, final AccelerationUnit unit,
-            final int length, final StorageType storageType) throws ValueException
+    public MutableFloatAccelerationVector(final SortedMap<Integer, Float> values, final AccelerationUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -123,16 +121,37 @@ public class MutableFloatAccelerationVector
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatAccelerationVector instantiateMutableType(final FloatVectorData dvd, final AccelerationUnit unit)
+    protected final MutableFloatAccelerationVector instantiateMutableType(final FloatVectorData dvd,
+            final AccelerationUnit unit)
     {
         return new MutableFloatAccelerationVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAcceleration get(final int index) throws ValueException
+    protected final FloatAcceleration instantiateScalar(final float value, final AccelerationUnit unit)
     {
-        return new FloatAcceleration(getInUnit(index, getUnit()), getUnit());
+        return new FloatAcceleration(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatAccelerationVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatAccelerationVector) this
+                : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatAccelerationVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatAccelerationVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

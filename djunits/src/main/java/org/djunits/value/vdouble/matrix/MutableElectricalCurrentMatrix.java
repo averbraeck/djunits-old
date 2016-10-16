@@ -16,9 +16,8 @@ import org.djunits.value.vdouble.scalar.ElectricalCurrent;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableElectricalCurrentMatrix
-        extends
-        MutableTypedDoubleMatrixRel<ElectricalCurrentUnit, ElectricalCurrentMatrix, MutableElectricalCurrentMatrix, ElectricalCurrent>
+public class MutableElectricalCurrentMatrix extends
+        AbstractMutableDoubleMatrixRel<ElectricalCurrentUnit, ElectricalCurrentMatrix, MutableElectricalCurrentMatrix, ElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -60,6 +59,20 @@ public class MutableElectricalCurrentMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableElectricalCurrentMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableElectricalCurrentMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final ElectricalCurrentMatrix instantiateType(final DoubleMatrixData dmd, final ElectricalCurrentUnit unit)
     {
         return new ElectricalCurrentMatrix(dmd, unit);
@@ -75,9 +88,9 @@ public class MutableElectricalCurrentMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalCurrent get(final int row, final int column) throws ValueException
+    protected final ElectricalCurrent instantiateScalar(final double value, final ElectricalCurrentUnit unit)
     {
-        return new ElectricalCurrent(getInUnit(row, column, getUnit()), getUnit());
+        return new ElectricalCurrent(value, unit);
     }
 
 }

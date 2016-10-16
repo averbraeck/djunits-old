@@ -35,7 +35,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatLength extends TypedFloatScalarRel<LengthUnit, FloatLength>
+public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -74,7 +74,7 @@ public class FloatLength extends TypedFloatScalarRel<LengthUnit, FloatLength>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatLength instantiateTypeRel(final float value, final LengthUnit unit)
+    public final FloatLength instantiateRel(final float value, final LengthUnit unit)
     {
         return new FloatLength(value, unit);
     }
@@ -85,7 +85,7 @@ public class FloatLength extends TypedFloatScalarRel<LengthUnit, FloatLength>
      * @param unit the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
-    protected final FloatPosition instantiateTypeAbs(final float value, final LengthUnit unit)
+    public final FloatPosition instantiateAbs(final float value, final LengthUnit unit)
     {
         return new FloatPosition(value, unit);
     }
@@ -109,8 +109,8 @@ public class FloatLength extends TypedFloatScalarRel<LengthUnit, FloatLength>
      */
     public final FloatPosition plus(final FloatPosition v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit()) : instantiateTypeAbs(
-                this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**

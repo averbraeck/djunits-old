@@ -60,7 +60,7 @@ public class FloatMatrixDenseTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; dm should be Absolute; if false; dm should be Relative
      */
-    private static void checkContentsAndType(final FloatMatrix<?> dm, final float[][] reference,
+    private static void checkContentsAndType(final AbstractFloatMatrix<?, ?> dm, final float[][] reference,
         final double precision, final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("FloatMatrix should not be null", null != dm);
@@ -124,7 +124,7 @@ public class FloatMatrixDenseTest
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
-            assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
+            assertTrue("toString result starts with \"Mutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
         catch (ValueException ve)
@@ -1175,7 +1175,7 @@ public class FloatMatrixDenseTest
          * @param function FloatToFloat; encapsulated function that converts one inputValue to an outputValue
          */
         public static void tester(final float[][] inputValues, final String operation,
-            final FloatMatrix<?> actualResult, final double precision, final FloatToFloat function)
+            final AbstractFloatMatrix<?, ?> actualResult, final double precision, final FloatToFloat function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {

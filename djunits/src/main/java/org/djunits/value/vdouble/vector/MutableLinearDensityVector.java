@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.LinearDensity;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableLinearDensityVector extends
-        MutableTypedDoubleVectorRel<LinearDensityUnit, LinearDensityVector, MutableLinearDensityVector, LinearDensity>
+        AbstractMutableDoubleVectorRel<LinearDensityUnit, LinearDensityVector, MutableLinearDensityVector, LinearDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -127,9 +127,28 @@ public class MutableLinearDensityVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final LinearDensity get(final int index) throws ValueException
+    protected final LinearDensity instantiateScalar(final double value, final LinearDensityUnit unit)
     {
-        return new LinearDensity(getInUnit(index, getUnit()), getUnit());
+        return new LinearDensity(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableLinearDensityVector toDense()
+    {
+        return this.data.isDense() ? (MutableLinearDensityVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableLinearDensityVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableLinearDensityVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

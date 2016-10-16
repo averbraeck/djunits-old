@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.FlowVolume;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FlowVolumeMatrix extends
-        TypedDoubleMatrixRel<FlowVolumeUnit, FlowVolumeMatrix, MutableFlowVolumeMatrix, FlowVolume>
+public class FlowVolumeMatrix
+        extends AbstractDoubleMatrixRel<FlowVolumeUnit, FlowVolumeMatrix, MutableFlowVolumeMatrix, FlowVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class FlowVolumeMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FlowVolumeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FlowVolumeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FlowVolumeMatrix instantiateType(final DoubleMatrixData dmd, final FlowVolumeUnit unit)
     {
         return new FlowVolumeMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class FlowVolumeMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FlowVolume get(final int row, final int column) throws ValueException
+    protected final FlowVolume instantiateScalar(final double value, final FlowVolumeUnit unit)
     {
-        return new FlowVolume(getInUnit(row, column, getUnit()), getUnit());
+        return new FlowVolume(value, unit);
     }
 
 }

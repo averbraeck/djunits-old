@@ -19,9 +19,8 @@ import org.djunits.value.vdouble.scalar.ElectricalResistance;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ElectricalResistanceVector
-        extends
-        TypedDoubleVectorRel<ElectricalResistanceUnit, ElectricalResistanceVector, MutableElectricalResistanceVector, ElectricalResistance>
+public class ElectricalResistanceVector extends
+        AbstractDoubleVectorRel<ElectricalResistanceUnit, ElectricalResistanceVector, MutableElectricalResistanceVector, ElectricalResistance>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -130,9 +129,27 @@ public class ElectricalResistanceVector
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalResistance get(final int index) throws ValueException
+    protected final ElectricalResistance instantiateScalar(final double value, final ElectricalResistanceUnit unit)
     {
-        return new ElectricalResistance(getInUnit(index, getUnit()), getUnit());
+        return new ElectricalResistance(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final ElectricalResistanceVector toDense()
+    {
+        return this.data.isDense() ? (ElectricalResistanceVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final ElectricalResistanceVector toSparse()
+    {
+        return this.data.isSparse() ? (ElectricalResistanceVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

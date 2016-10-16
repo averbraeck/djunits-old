@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.Dimensionless;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class DimensionlessVector extends
-        TypedDoubleVectorRel<DimensionlessUnit, DimensionlessVector, MutableDimensionlessVector, Dimensionless>
+public class DimensionlessVector
+        extends AbstractDoubleVectorRel<DimensionlessUnit, DimensionlessVector, MutableDimensionlessVector, Dimensionless>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -127,9 +127,27 @@ public class DimensionlessVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final Dimensionless get(final int index) throws ValueException
+    protected final Dimensionless instantiateScalar(final double value, final DimensionlessUnit unit)
     {
-        return new Dimensionless(getInUnit(index, getUnit()), getUnit());
+        return new Dimensionless(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final DimensionlessVector toDense()
+    {
+        return this.data.isDense() ? (DimensionlessVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final DimensionlessVector toSparse()
+    {
+        return this.data.isSparse() ? (DimensionlessVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

@@ -33,7 +33,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatMass extends TypedFloatScalarRel<MassUnit, FloatMass>
+public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -72,7 +72,7 @@ public class FloatMass extends TypedFloatScalarRel<MassUnit, FloatMass>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatMass instantiateTypeRel(final float value, final MassUnit unit)
+    public final FloatMass instantiateRel(final float value, final MassUnit unit)
     {
         return new FloatMass(value, unit);
     }

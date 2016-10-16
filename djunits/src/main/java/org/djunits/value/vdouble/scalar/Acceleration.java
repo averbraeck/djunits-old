@@ -30,7 +30,7 @@ import org.djunits.unit.SpeedUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Acceleration extends TypedDoubleScalarRel<AccelerationUnit, Acceleration>
+public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acceleration>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -59,7 +59,7 @@ public class Acceleration extends TypedDoubleScalarRel<AccelerationUnit, Acceler
 
     /** {@inheritDoc} */
     @Override
-    protected final Acceleration instantiateTypeRel(final double value, final AccelerationUnit unit)
+    public final Acceleration instantiateRel(final double value, final AccelerationUnit unit)
     {
         return new Acceleration(value, unit);
     }

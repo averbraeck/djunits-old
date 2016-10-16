@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatFrequency;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatFrequencyMatrix extends
-        MutableTypedFloatMatrixRel<FrequencyUnit, FloatFrequencyMatrix, MutableFloatFrequencyMatrix, FloatFrequency>
+public class MutableFloatFrequencyMatrix
+        extends AbstractMutableFloatMatrixRel<FrequencyUnit, FloatFrequencyMatrix, MutableFloatFrequencyMatrix, FloatFrequency>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableFloatFrequencyMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatFrequencyMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatFrequencyMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatFrequencyMatrix instantiateType(final FloatMatrixData fmd, final FrequencyUnit unit)
     {
         return new FloatFrequencyMatrix(fmd, unit);
@@ -72,9 +86,9 @@ public class MutableFloatFrequencyMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatFrequency get(final int row, final int column) throws ValueException
+    protected final FloatFrequency instantiateScalar(final float value, final FrequencyUnit unit)
     {
-        return new FloatFrequency(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatFrequency(value, unit);
     }
 
 }

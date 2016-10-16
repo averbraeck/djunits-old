@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatEnergy;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatEnergyMatrix extends
-        TypedFloatMatrixRel<EnergyUnit, FloatEnergyMatrix, MutableFloatEnergyMatrix, FloatEnergy>
+public class FloatEnergyMatrix
+        extends AbstractFloatMatrixRel<EnergyUnit, FloatEnergyMatrix, MutableFloatEnergyMatrix, FloatEnergy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -29,8 +29,7 @@ public class FloatEnergyMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatEnergyMatrix(final float[][] values, final EnergyUnit unit, final StorageType storageType)
-            throws ValueException
+    public FloatEnergyMatrix(final float[][] values, final EnergyUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,6 +57,20 @@ public class FloatEnergyMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatEnergyMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatEnergyMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatEnergyMatrix instantiateType(final FloatMatrixData fmd, final EnergyUnit unit)
     {
         return new FloatEnergyMatrix(fmd, unit);
@@ -72,9 +85,9 @@ public class FloatEnergyMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatEnergy get(final int row, final int column) throws ValueException
+    protected final FloatEnergy instantiateScalar(final float value, final EnergyUnit unit)
     {
-        return new FloatEnergy(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatEnergy(value, unit);
     }
 
 }

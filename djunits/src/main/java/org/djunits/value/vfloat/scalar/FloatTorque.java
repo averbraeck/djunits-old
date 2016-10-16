@@ -33,7 +33,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatTorque extends TypedFloatScalarRel<TorqueUnit, FloatTorque>
+public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -72,7 +72,7 @@ public class FloatTorque extends TypedFloatScalarRel<TorqueUnit, FloatTorque>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatTorque instantiateTypeRel(final float value, final TorqueUnit unit)
+    public final FloatTorque instantiateRel(final float value, final TorqueUnit unit)
     {
         return new FloatTorque(value, unit);
     }

@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatDensity;
 
 /**
- * Immutable FloatDensityVector, a vector of values with a DensityUnit.
+ * Immutable Float FloatDensityVector, a vector of values with a DensityUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,29 +19,28 @@ import org.djunits.value.vfloat.scalar.FloatDensity;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatDensityVector extends
-        TypedFloatVectorRel<DensityUnit, FloatDensityVector, MutableFloatDensityVector, FloatDensity>
+public class FloatDensityVector
+        extends AbstractFloatVectorRel<DensityUnit, FloatDensityVector, MutableFloatDensityVector, FloatDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatDensityVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatDensityVector
-     * @param unit U; the unit of the new Relative Immutable FloatDensityVector
+     * Construct a new Relative Immutable Float FloatDensityVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatDensityVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatDensityVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatDensityVector(final float[] values, final DensityUnit unit, final StorageType storageType)
-            throws ValueException
+    public FloatDensityVector(final float[] values, final DensityUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatDensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatDensityVector
-     * @param unit U; the unit of the new Relative Immutable FloatDensityVector
+     * Construct a new Relative Immutable Float FloatDensityVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatDensityVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatDensityVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,7 +51,7 @@ public class FloatDensityVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatDensityVector.
+     * Construct a new Relative Immutable Float FloatDensityVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
      *            FloatDensityVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
@@ -64,8 +63,8 @@ public class FloatDensityVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatDensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatDensityVector
+     * Construct a new Relative Immutable Float FloatDensityVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatDensityVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -75,7 +74,7 @@ public class FloatDensityVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatDensityVector.
+     * Construct a new Relative Immutable Float FloatDensityVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatDensityVector
      * @param length the size of the vector
@@ -89,9 +88,9 @@ public class FloatDensityVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatDensityVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatDensityVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatDensityVector
+     * Construct a new Relative Immutable Float FloatDensityVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatDensityVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatDensityVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -127,9 +126,27 @@ public class FloatDensityVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDensity get(final int index) throws ValueException
+    protected final FloatDensity instantiateScalar(final float value, final DensityUnit unit)
     {
-        return new FloatDensity(getInUnit(index, getUnit()), getUnit());
+        return new FloatDensity(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatDensityVector toDense()
+    {
+        return this.data.isDense() ? (FloatDensityVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatDensityVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatDensityVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

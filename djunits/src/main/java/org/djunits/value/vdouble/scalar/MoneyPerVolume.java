@@ -28,7 +28,7 @@ import org.djunits.unit.MoneyUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerVolume extends TypedDoubleScalarRel<MoneyPerVolumeUnit, MoneyPerVolume>
+public class MoneyPerVolume extends AbstractDoubleScalarRel<MoneyPerVolumeUnit, MoneyPerVolume>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -54,7 +54,7 @@ public class MoneyPerVolume extends TypedDoubleScalarRel<MoneyPerVolumeUnit, Mon
 
     /** {@inheritDoc} */
     @Override
-    protected final MoneyPerVolume instantiateTypeRel(final double value, final MoneyPerVolumeUnit unit)
+    public final MoneyPerVolume instantiateRel(final double value, final MoneyPerVolumeUnit unit)
     {
         return new MoneyPerVolume(value, unit);
     }

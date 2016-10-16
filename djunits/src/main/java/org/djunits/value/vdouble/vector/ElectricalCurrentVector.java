@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.ElectricalCurrent;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class ElectricalCurrentVector extends
-        TypedDoubleVectorRel<ElectricalCurrentUnit, ElectricalCurrentVector, MutableElectricalCurrentVector, ElectricalCurrent>
+        AbstractDoubleVectorRel<ElectricalCurrentUnit, ElectricalCurrentVector, MutableElectricalCurrentVector, ElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -128,9 +128,27 @@ public class ElectricalCurrentVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalCurrent get(final int index) throws ValueException
+    protected final ElectricalCurrent instantiateScalar(final double value, final ElectricalCurrentUnit unit)
     {
-        return new ElectricalCurrent(getInUnit(index, getUnit()), getUnit());
+        return new ElectricalCurrent(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final ElectricalCurrentVector toDense()
+    {
+        return this.data.isDense() ? (ElectricalCurrentVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final ElectricalCurrentVector toSparse()
+    {
+        return this.data.isSparse() ? (ElectricalCurrentVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

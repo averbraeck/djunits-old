@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalCurrent;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatElectricalCurrentMatrix
-        extends
-        MutableTypedFloatMatrixRel<ElectricalCurrentUnit, FloatElectricalCurrentMatrix, MutableFloatElectricalCurrentMatrix, FloatElectricalCurrent>
+public class MutableFloatElectricalCurrentMatrix extends
+        AbstractMutableFloatMatrixRel<ElectricalCurrentUnit, FloatElectricalCurrentMatrix, MutableFloatElectricalCurrentMatrix, FloatElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -60,6 +59,20 @@ public class MutableFloatElectricalCurrentMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatElectricalCurrentMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatElectricalCurrentMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatElectricalCurrentMatrix instantiateType(final FloatMatrixData fmd, final ElectricalCurrentUnit unit)
     {
         return new FloatElectricalCurrentMatrix(fmd, unit);
@@ -75,9 +88,9 @@ public class MutableFloatElectricalCurrentMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatElectricalCurrent get(final int row, final int column) throws ValueException
+    protected final FloatElectricalCurrent instantiateScalar(final float value, final ElectricalCurrentUnit unit)
     {
-        return new FloatElectricalCurrent(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatElectricalCurrent(value, unit);
     }
 
 }

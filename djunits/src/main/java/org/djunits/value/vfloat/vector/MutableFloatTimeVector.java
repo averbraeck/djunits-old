@@ -19,8 +19,8 @@ import org.djunits.value.vfloat.scalar.FloatTime;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatTimeVector extends
-        MutableTypedFloatVectorAbs<TimeUnit, FloatTimeVector, FloatDurationVector, MutableFloatTimeVector, FloatTime>
+public class MutableFloatTimeVector
+        extends AbstractMutableFloatVectorAbs<TimeUnit, FloatTimeVector, FloatDurationVector, MutableFloatTimeVector, FloatTime>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -133,14 +133,32 @@ public class MutableFloatTimeVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatTime get(final int index) throws ValueException
+    protected final FloatTime instantiateScalar(final float value, final TimeUnit unit)
     {
-        return new FloatTime(getInUnit(index, getUnit()), getUnit());
+        return new FloatTime(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatTimeVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatTimeVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatTimeVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatTimeVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**
      * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute FloatTime vector.
+     * @return a relative version of this absolute Time vector.
      */
     public final MutableFloatDurationVector toRel()
     {

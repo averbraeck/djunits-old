@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.AngleSolid;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class AngleSolidMatrix extends
-        TypedDoubleMatrixRel<AngleSolidUnit, AngleSolidMatrix, MutableAngleSolidMatrix, AngleSolid>
+public class AngleSolidMatrix
+        extends AbstractDoubleMatrixRel<AngleSolidUnit, AngleSolidMatrix, MutableAngleSolidMatrix, AngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class AngleSolidMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final AngleSolidMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final AngleSolidMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final AngleSolidMatrix instantiateType(final DoubleMatrixData dmd, final AngleSolidUnit unit)
     {
         return new AngleSolidMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class AngleSolidMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final AngleSolid get(final int row, final int column) throws ValueException
+    protected final AngleSolid instantiateScalar(final double value, final AngleSolidUnit unit)
     {
-        return new AngleSolid(getInUnit(row, column, getUnit()), getUnit());
+        return new AngleSolid(value, unit);
     }
 
 }

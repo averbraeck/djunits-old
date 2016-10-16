@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.*;
  */
 public class MutableFloat%TypeAbs%Vector
     extends
-    MutableTypedFloatVectorAbs<%TypeUnit%, Float%TypeAbs%Vector, Float%TypeRel%Vector, MutableFloat%TypeAbs%Vector, Float%TypeAbs%>
+    AbstractMutableFloatVectorAbs<%TypeUnit%, Float%TypeAbs%Vector, Float%TypeRel%Vector, MutableFloat%TypeAbs%Vector, Float%TypeAbs%>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -125,22 +125,39 @@ public class MutableFloat%TypeAbs%Vector
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloat%TypeAbs%Vector
-        instantiateMutableType(final FloatVectorData dvd, final %TypeUnit% unit)
+    protected final MutableFloat%TypeAbs%Vector instantiateMutableType(final FloatVectorData dvd, final %TypeUnit% unit)
     {
         return new MutableFloat%TypeAbs%Vector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final Float%TypeAbs% get(final int index) throws ValueException
+    protected final Float%TypeAbs% instantiateScalar(final float value, final %TypeUnit% unit)
     {
-        return new Float%TypeAbs%(getInUnit(index, getUnit()), getUnit());
+        return new Float%TypeAbs%(value, unit);
+    }
+    
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloat%TypeAbs%Vector toDense()
+    {
+        return this.data.isDense() ? (MutableFloat%TypeAbs%Vector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloat%TypeAbs%Vector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloat%TypeAbs%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
     
     /**
      * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute Float%TypeAbs% vector.
+     * @return a relative version of this absolute %TypeAbs% vector.
      */
     public final MutableFloat%TypeRel%Vector toRel()
     {

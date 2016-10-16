@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Speed;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableSpeedVector extends MutableTypedDoubleVectorRel<SpeedUnit, SpeedVector, MutableSpeedVector, Speed>
+public class MutableSpeedVector extends AbstractMutableDoubleVectorRel<SpeedUnit, SpeedVector, MutableSpeedVector, Speed>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -124,9 +124,27 @@ public class MutableSpeedVector extends MutableTypedDoubleVectorRel<SpeedUnit, S
 
     /** {@inheritDoc} */
     @Override
-    public final Speed get(final int index) throws ValueException
+    protected final Speed instantiateScalar(final double value, final SpeedUnit unit)
     {
-        return new Speed(getInUnit(index, getUnit()), getUnit());
+        return new Speed(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableSpeedVector toDense()
+    {
+        return this.data.isDense() ? (MutableSpeedVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableSpeedVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableSpeedVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

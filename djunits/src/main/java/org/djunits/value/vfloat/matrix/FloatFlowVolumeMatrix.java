@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatFlowVolume;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatFlowVolumeMatrix extends
-        TypedFloatMatrixRel<FlowVolumeUnit, FloatFlowVolumeMatrix, MutableFloatFlowVolumeMatrix, FloatFlowVolume>
+public class FloatFlowVolumeMatrix
+        extends AbstractFloatMatrixRel<FlowVolumeUnit, FloatFlowVolumeMatrix, MutableFloatFlowVolumeMatrix, FloatFlowVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class FloatFlowVolumeMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatFlowVolumeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatFlowVolumeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatFlowVolumeMatrix instantiateType(final FloatMatrixData fmd, final FlowVolumeUnit unit)
     {
         return new FloatFlowVolumeMatrix(fmd, unit);
@@ -72,9 +86,9 @@ public class FloatFlowVolumeMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatFlowVolume get(final int row, final int column) throws ValueException
+    protected final FloatFlowVolume instantiateScalar(final float value, final FlowVolumeUnit unit)
     {
-        return new FloatFlowVolume(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatFlowVolume(value, unit);
     }
 
 }

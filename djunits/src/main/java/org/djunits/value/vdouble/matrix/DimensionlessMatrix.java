@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.Dimensionless;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class DimensionlessMatrix extends
-        TypedDoubleMatrixRel<DimensionlessUnit, DimensionlessMatrix, MutableDimensionlessMatrix, Dimensionless>
+public class DimensionlessMatrix
+        extends AbstractDoubleMatrixRel<DimensionlessUnit, DimensionlessMatrix, MutableDimensionlessMatrix, Dimensionless>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class DimensionlessMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final DimensionlessMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final DimensionlessMatrix instantiateType(final DoubleMatrixData dmd, final DimensionlessUnit unit)
     {
         return new DimensionlessMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class DimensionlessMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final Dimensionless get(final int row, final int column) throws ValueException
+    protected final Dimensionless instantiateScalar(final double value, final DimensionlessUnit unit)
     {
-        return new Dimensionless(getInUnit(row, column, getUnit()), getUnit());
+        return new Dimensionless(value, unit);
     }
 
 }

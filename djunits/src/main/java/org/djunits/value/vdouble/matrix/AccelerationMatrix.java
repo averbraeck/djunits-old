@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.Acceleration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class AccelerationMatrix extends
-        TypedDoubleMatrixRel<AccelerationUnit, AccelerationMatrix, MutableAccelerationMatrix, Acceleration>
+public class AccelerationMatrix
+        extends AbstractDoubleMatrixRel<AccelerationUnit, AccelerationMatrix, MutableAccelerationMatrix, Acceleration>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class AccelerationMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final AccelerationMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final AccelerationMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final AccelerationMatrix instantiateType(final DoubleMatrixData dmd, final AccelerationUnit unit)
     {
         return new AccelerationMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class AccelerationMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final Acceleration get(final int row, final int column) throws ValueException
+    protected final Acceleration instantiateScalar(final double value, final AccelerationUnit unit)
     {
-        return new Acceleration(getInUnit(row, column, getUnit()), getUnit());
+        return new Acceleration(value, unit);
     }
 
 }

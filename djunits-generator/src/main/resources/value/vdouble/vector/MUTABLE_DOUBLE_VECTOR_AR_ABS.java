@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.*;
  */
 public class Mutable%TypeAbs%Vector
         extends
-        MutableTypedDoubleVectorAbs<%TypeUnit%, %TypeAbs%Vector, %TypeRel%Vector, Mutable%TypeAbs%Vector, %TypeAbs%>
+        AbstractMutableDoubleVectorAbs<%TypeUnit%, %TypeAbs%Vector, %TypeRel%Vector, Mutable%TypeAbs%Vector, %TypeAbs%>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -125,17 +125,34 @@ public class Mutable%TypeAbs%Vector
 
     /** {@inheritDoc} */
     @Override
-    protected final Mutable%TypeAbs%Vector
-        instantiateMutableType(final DoubleVectorData dvd, final %TypeUnit% unit)
+    protected final Mutable%TypeAbs%Vector instantiateMutableType(final DoubleVectorData dvd, final %TypeUnit% unit)
     {
         return new Mutable%TypeAbs%Vector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TypeAbs% get(final int index) throws ValueException
+    protected final %TypeAbs% instantiateScalar(final double value, final %TypeUnit% unit)
     {
-        return new %TypeAbs%(getInUnit(index, getUnit()), getUnit());
+        return new %TypeAbs%(value, unit);
+    }
+    
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final Mutable%TypeAbs%Vector toDense()
+    {
+        return this.data.isDense() ? (Mutable%TypeAbs%Vector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final Mutable%TypeAbs%Vector toSparse()
+    {
+        return this.data.isSparse() ? (Mutable%TypeAbs%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
     
     /**

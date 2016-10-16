@@ -2,10 +2,9 @@ package org.djunits.value.vfloat.vector;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.ValueException;
-import org.djunits.value.vfloat.scalar.FloatScalar;
 
 /**
- * Interface for the FloatVector classes.
+ * Interface for the Immutable and Mutable FloatVector classes.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -56,26 +55,28 @@ public interface FloatVectorInterface<U extends Unit<U>>
     float getInUnit(int index, U targetUnit) throws ValueException;
 
     /**
-     * Retrieve the value stored at a specified index as a FloatScalar.
-     * @param index int; index of the value to retrieve
-     * @return FloatScalar&lt;U&gt;; the strongly typed value of the selected cell
-     * @throws ValueException when index out of range (index &lt; 0 or index &gt;= size())
+     * return a mutable version of this vector.
+     * @return a mutable version of this vector
      */
-    FloatScalar<U> get(int index) throws ValueException;
+    MutableFloatVectorInterface<U> mutable();
+    
+    /**
+     * return a sparse version of this vector.
+     * @return a sparse version of this vector
+     */
+    FloatVectorInterface<U> toSparse();
+    
+    /**
+     * return a dense version of this vector.
+     * @return a dense version of this vector
+     */
+    FloatVectorInterface<U> toDense();
 
     /**
      * Compute the sum of all values of this vector.
      * @return float; the sum of all values of this vector
      */
     float zSum();
-
-    /**
-     * Create a mutable version of this FloatVector. <br>
-     * The mutable version is created with a shallow copy of the data and the internal copyOnWrite flag set. The first operation
-     * in the mutable version that modifies the data shall trigger a deep copy of the data.
-     * @return MutableFloatVector&lt;U&gt;; mutable version of this FloatVector
-     */
-    MutableFloatVectorInterface<U> mutable();
 
     /**
      * Create a float[] array filled with the values in the standard SI unit.
@@ -124,17 +125,5 @@ public interface FloatVectorInterface<U extends Unit<U>>
      * @return String; printable string with the vector contents
      */
     String toString(final U displayUnit, final boolean verbose, final boolean withUnit);
-
-    /**
-     * Create a dense version of this FloatVector. <br>
-     * @return MutableFloatVector&lt;U&gt;; dense version of this FloatVector
-     */
-    FloatVectorInterface<U> toDense();
-
-    /**
-     * Create a sparse version of this FloatVector. <br>
-     * @return MutableFloatVector&lt;U&gt;; sparse version of this FloatVector
-     */
-    FloatVectorInterface<U> toSparse();
 
 }

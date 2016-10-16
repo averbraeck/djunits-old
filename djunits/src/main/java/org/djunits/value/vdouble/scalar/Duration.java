@@ -35,7 +35,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Duration extends TypedDoubleScalarRel<TimeUnit, Duration>
+public class Duration extends AbstractDoubleScalarRel<TimeUnit, Duration>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -64,7 +64,7 @@ public class Duration extends TypedDoubleScalarRel<TimeUnit, Duration>
 
     /** {@inheritDoc} */
     @Override
-    protected final Duration instantiateTypeRel(final double value, final TimeUnit unit)
+    public final Duration instantiateRel(final double value, final TimeUnit unit)
     {
         return new Duration(value, unit);
     }
@@ -75,7 +75,7 @@ public class Duration extends TypedDoubleScalarRel<TimeUnit, Duration>
      * @param unit the unit
      * @return A a new absolute instance of the DoubleScalar of the right type
      */
-    protected final Time instantiateTypeAbs(final double value, final TimeUnit unit)
+    public final Time instantiateAbs(final double value, final TimeUnit unit)
     {
         return new Time(value, unit);
     }
@@ -99,8 +99,8 @@ public class Duration extends TypedDoubleScalarRel<TimeUnit, Duration>
      */
     public final Time plus(final Time v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit()) : instantiateTypeAbs(
-                this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**

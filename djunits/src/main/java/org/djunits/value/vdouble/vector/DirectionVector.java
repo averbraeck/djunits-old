@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.Direction;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class DirectionVector extends
-        TypedDoubleVectorAbs<AngleUnit, DirectionVector, AngleVector, MutableDirectionVector, Direction>
+public class DirectionVector
+        extends AbstractDoubleVectorAbs<AngleUnit, DirectionVector, AngleVector, MutableDirectionVector, Direction>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -44,8 +44,7 @@ public class DirectionVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public DirectionVector(final List<Double> values, final AngleUnit unit, final StorageType storageType)
-            throws ValueException
+    public DirectionVector(final List<Double> values, final AngleUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -133,9 +132,27 @@ public class DirectionVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final Direction get(final int index) throws ValueException
+    protected final Direction instantiateScalar(final double value, final AngleUnit unit)
     {
-        return new Direction(getInUnit(index, getUnit()), getUnit());
+        return new Direction(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final DirectionVector toDense()
+    {
+        return this.data.isDense() ? (DirectionVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final DirectionVector toSparse()
+    {
+        return this.data.isSparse() ? (DirectionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
 
     /**

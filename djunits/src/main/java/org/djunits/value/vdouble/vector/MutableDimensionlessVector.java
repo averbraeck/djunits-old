@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.value.MathFunctionsDimensionless;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.DoubleMathFunctions;
 import org.djunits.value.vdouble.scalar.Dimensionless;
 
 /**
@@ -19,9 +21,9 @@ import org.djunits.value.vdouble.scalar.Dimensionless;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableDimensionlessVector
-        extends
-        MutableTypedDoubleVectorDimensionless<DimensionlessUnit, DimensionlessVector, MutableDimensionlessVector, Dimensionless>
+public class MutableDimensionlessVector extends
+        AbstractMutableDoubleVectorRel<DimensionlessUnit, DimensionlessVector, MutableDimensionlessVector, Dimensionless>
+        implements MathFunctionsDimensionless<MutableDimensionlessVector>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -128,9 +130,180 @@ public class MutableDimensionlessVector
 
     /** {@inheritDoc} */
     @Override
-    public final Dimensionless get(final int index) throws ValueException
+    protected final Dimensionless instantiateScalar(final double value, final DimensionlessUnit unit)
     {
-        return new Dimensionless(getInUnit(index, getUnit()), getUnit());
+        return new Dimensionless(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableDimensionlessVector toDense()
+    {
+        return this.data.isDense() ? (MutableDimensionlessVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableDimensionlessVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableDimensionlessVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector acos()
+    {
+        assign(DoubleMathFunctions.ACOS);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector asin()
+    {
+        assign(DoubleMathFunctions.ASIN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector atan()
+    {
+        assign(DoubleMathFunctions.ATAN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector cbrt()
+    {
+        assign(DoubleMathFunctions.CBRT);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector cos()
+    {
+        assign(DoubleMathFunctions.COS);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector cosh()
+    {
+        assign(DoubleMathFunctions.COSH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector exp()
+    {
+        assign(DoubleMathFunctions.EXP);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector expm1()
+    {
+        assign(DoubleMathFunctions.EXPM1);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector log()
+    {
+        assign(DoubleMathFunctions.LOG);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector log10()
+    {
+        assign(DoubleMathFunctions.LOG10);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector log1p()
+    {
+        assign(DoubleMathFunctions.LOG1P);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector pow(final double x)
+    {
+        assign(DoubleMathFunctions.POW((float) x));
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector signum()
+    {
+        assign(DoubleMathFunctions.SIGNUM);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector sin()
+    {
+        assign(DoubleMathFunctions.SIN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector sinh()
+    {
+        assign(DoubleMathFunctions.SINH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector sqrt()
+    {
+        assign(DoubleMathFunctions.SQRT);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector tan()
+    {
+        assign(DoubleMathFunctions.TAN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector tanh()
+    {
+        assign(DoubleMathFunctions.TANH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableDimensionlessVector inv()
+    {
+        assign(DoubleMathFunctions.INV);
+        return this;
     }
 
 }

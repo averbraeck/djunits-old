@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Force;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ForceMatrix extends TypedDoubleMatrixRel<ForceUnit, ForceMatrix, MutableForceMatrix, Force>
+public class ForceMatrix extends AbstractDoubleMatrixRel<ForceUnit, ForceMatrix, MutableForceMatrix, Force>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -55,6 +55,20 @@ public class ForceMatrix extends TypedDoubleMatrixRel<ForceUnit, ForceMatrix, Mu
 
     /** {@inheritDoc} */
     @Override
+    public final ForceMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final ForceMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final ForceMatrix instantiateType(final DoubleMatrixData dmd, final ForceUnit unit)
     {
         return new ForceMatrix(dmd, unit);
@@ -69,9 +83,9 @@ public class ForceMatrix extends TypedDoubleMatrixRel<ForceUnit, ForceMatrix, Mu
 
     /** {@inheritDoc} */
     @Override
-    public final Force get(final int row, final int column) throws ValueException
+    protected final Force instantiateScalar(final double value, final ForceUnit unit)
     {
-        return new Force(getInUnit(row, column, getUnit()), getUnit());
+        return new Force(value, unit);
     }
 
 }

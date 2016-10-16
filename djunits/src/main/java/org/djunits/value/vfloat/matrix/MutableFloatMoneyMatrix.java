@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatMoney;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatMoneyMatrix extends
-        MutableTypedFloatMatrixRel<MoneyUnit, FloatMoneyMatrix, MutableFloatMoneyMatrix, FloatMoney>
+public class MutableFloatMoneyMatrix
+        extends AbstractMutableFloatMatrixRel<MoneyUnit, FloatMoneyMatrix, MutableFloatMoneyMatrix, FloatMoney>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableFloatMoneyMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatMoneyMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatMoneyMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatMoneyMatrix instantiateType(final FloatMatrixData fmd, final MoneyUnit unit)
     {
         return new FloatMoneyMatrix(fmd, unit);
@@ -72,9 +86,9 @@ public class MutableFloatMoneyMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMoney get(final int row, final int column) throws ValueException
+    protected final FloatMoney instantiateScalar(final float value, final MoneyUnit unit)
     {
-        return new FloatMoney(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatMoney(value, unit);
     }
 
 }

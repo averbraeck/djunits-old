@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerVolume;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatMoneyPerVolumeMatrix
-        extends
-        MutableTypedFloatMatrixRel<MoneyPerVolumeUnit, FloatMoneyPerVolumeMatrix, MutableFloatMoneyPerVolumeMatrix, FloatMoneyPerVolume>
+public class MutableFloatMoneyPerVolumeMatrix extends
+        AbstractMutableFloatMatrixRel<MoneyPerVolumeUnit, FloatMoneyPerVolumeMatrix, MutableFloatMoneyPerVolumeMatrix, FloatMoneyPerVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,8 +29,8 @@ public class MutableFloatMoneyPerVolumeMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatMoneyPerVolumeMatrix(final float[][] values, final MoneyPerVolumeUnit unit, final StorageType storageType)
-            throws ValueException
+    public MutableFloatMoneyPerVolumeMatrix(final float[][] values, final MoneyPerVolumeUnit unit,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -60,6 +59,20 @@ public class MutableFloatMoneyPerVolumeMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatMoneyPerVolumeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatMoneyPerVolumeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatMoneyPerVolumeMatrix instantiateType(final FloatMatrixData fmd, final MoneyPerVolumeUnit unit)
     {
         return new FloatMoneyPerVolumeMatrix(fmd, unit);
@@ -75,9 +88,9 @@ public class MutableFloatMoneyPerVolumeMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMoneyPerVolume get(final int row, final int column) throws ValueException
+    protected final FloatMoneyPerVolume instantiateScalar(final float value, final MoneyPerVolumeUnit unit)
     {
-        return new FloatMoneyPerVolume(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatMoneyPerVolume(value, unit);
     }
 
 }

@@ -29,7 +29,7 @@ import org.djunits.unit.TimeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatElectricalCharge extends TypedFloatScalarRel<ElectricalChargeUnit, FloatElectricalCharge>
+public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChargeUnit, FloatElectricalCharge>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -68,7 +68,7 @@ public class FloatElectricalCharge extends TypedFloatScalarRel<ElectricalChargeU
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalCharge instantiateTypeRel(final float value, final ElectricalChargeUnit unit)
+    public final FloatElectricalCharge instantiateRel(final float value, final ElectricalChargeUnit unit)
     {
         return new FloatElectricalCharge(value, unit);
     }
@@ -83,7 +83,8 @@ public class FloatElectricalCharge extends TypedFloatScalarRel<ElectricalChargeU
     public static FloatElectricalCharge interpolate(final FloatElectricalCharge zero, final FloatElectricalCharge one,
             final float ratio)
     {
-        return new FloatElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
+                zero.getUnit());
     }
 
     /**

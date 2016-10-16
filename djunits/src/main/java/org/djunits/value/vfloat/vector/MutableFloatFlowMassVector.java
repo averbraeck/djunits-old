@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatFlowMass;
 
 /**
- * Mutable FloatFlowMassVector, a vector of values with a FlowMassUnit.
+ * Mutable Float FlowMassVector, a vector of values with a FlowMassUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,16 +19,16 @@ import org.djunits.value.vfloat.scalar.FloatFlowMass;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatFlowMassVector extends
-        MutableTypedFloatVectorRel<FlowMassUnit, FloatFlowMassVector, MutableFloatFlowMassVector, FloatFlowMass>
+public class MutableFloatFlowMassVector
+        extends AbstractMutableFloatVectorRel<FlowMassUnit, FloatFlowMassVector, MutableFloatFlowMassVector, FloatFlowMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatFlowMassVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatFlowMassVector
-     * @param unit U; the unit of the new Relative Immutable FloatFlowMassVector
+     * Construct a new Relative Immutable Float FlowMassVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float FlowMassVector
+     * @param unit U; the unit of the new Relative Immutable Float FlowMassVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class MutableFloatFlowMassVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFlowMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatFlowMassVector
-     * @param unit U; the unit of the new Relative Immutable FloatFlowMassVector
+     * Construct a new Relative Immutable Float FlowMassVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FlowMassVector
+     * @param unit U; the unit of the new Relative Immutable Float FlowMassVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,9 +52,8 @@ public class MutableFloatFlowMassVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFlowMassVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatFlowMassVector
+     * Construct a new Relative Immutable Float FlowMassVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float FlowMassVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -64,8 +63,8 @@ public class MutableFloatFlowMassVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFlowMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatFlowMassVector
+     * Construct a new Relative Immutable Float FlowMassVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FlowMassVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -75,9 +74,9 @@ public class MutableFloatFlowMassVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFlowMassVector.
+     * Construct a new Relative Immutable Float FlowMassVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatFlowMassVector
+     *            FlowMassVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -89,9 +88,9 @@ public class MutableFloatFlowMassVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatFlowMassVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatFlowMassVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatFlowMassVector
+     * Construct a new Relative Immutable Float FlowMassVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FlowMassVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float FlowMassVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -127,9 +126,28 @@ public class MutableFloatFlowMassVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatFlowMass get(final int index) throws ValueException
+    protected final FloatFlowMass instantiateScalar(final float value, final FlowMassUnit unit)
     {
-        return new FloatFlowMass(getInUnit(index, getUnit()), getUnit());
+        return new FloatFlowMass(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatFlowMassVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatFlowMassVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatFlowMassVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatFlowMassVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

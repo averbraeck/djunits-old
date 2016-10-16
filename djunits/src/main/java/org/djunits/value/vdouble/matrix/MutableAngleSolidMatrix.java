@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.AngleSolid;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableAngleSolidMatrix extends
-        MutableTypedDoubleMatrixRel<AngleSolidUnit, AngleSolidMatrix, MutableAngleSolidMatrix, AngleSolid>
+public class MutableAngleSolidMatrix
+        extends AbstractMutableDoubleMatrixRel<AngleSolidUnit, AngleSolidMatrix, MutableAngleSolidMatrix, AngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableAngleSolidMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableAngleSolidMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableAngleSolidMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final AngleSolidMatrix instantiateType(final DoubleMatrixData dmd, final AngleSolidUnit unit)
     {
         return new AngleSolidMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class MutableAngleSolidMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final AngleSolid get(final int row, final int column) throws ValueException
+    protected final AngleSolid instantiateScalar(final double value, final AngleSolidUnit unit)
     {
-        return new AngleSolid(getInUnit(row, column, getUnit()), getUnit());
+        return new AngleSolid(value, unit);
     }
 
 }

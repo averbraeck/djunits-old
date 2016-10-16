@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.Acceleration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class AccelerationVector extends
-        TypedDoubleVectorRel<AccelerationUnit, AccelerationVector, MutableAccelerationVector, Acceleration>
+public class AccelerationVector
+        extends AbstractDoubleVectorRel<AccelerationUnit, AccelerationVector, MutableAccelerationVector, Acceleration>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -127,9 +127,27 @@ public class AccelerationVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final Acceleration get(final int index) throws ValueException
+    protected final Acceleration instantiateScalar(final double value, final AccelerationUnit unit)
     {
-        return new Acceleration(getInUnit(index, getUnit()), getUnit());
+        return new Acceleration(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final AccelerationVector toDense()
+    {
+        return this.data.isDense() ? (AccelerationVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final AccelerationVector toSparse()
+    {
+        return this.data.isSparse() ? (AccelerationVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

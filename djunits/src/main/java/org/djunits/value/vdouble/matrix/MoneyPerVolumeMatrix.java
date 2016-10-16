@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.MoneyPerVolume;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerVolumeMatrix extends
-        TypedDoubleMatrixRel<MoneyPerVolumeUnit, MoneyPerVolumeMatrix, MutableMoneyPerVolumeMatrix, MoneyPerVolume>
+public class MoneyPerVolumeMatrix
+        extends AbstractDoubleMatrixRel<MoneyPerVolumeUnit, MoneyPerVolumeMatrix, MutableMoneyPerVolumeMatrix, MoneyPerVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MoneyPerVolumeMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MoneyPerVolumeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MoneyPerVolumeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final MoneyPerVolumeMatrix instantiateType(final DoubleMatrixData dmd, final MoneyPerVolumeUnit unit)
     {
         return new MoneyPerVolumeMatrix(dmd, unit);
@@ -65,16 +79,17 @@ public class MoneyPerVolumeMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerVolumeMatrix instantiateMutableType(final DoubleMatrixData dmd, final MoneyPerVolumeUnit unit)
+    protected final MutableMoneyPerVolumeMatrix instantiateMutableType(final DoubleMatrixData dmd,
+            final MoneyPerVolumeUnit unit)
     {
         return new MutableMoneyPerVolumeMatrix(dmd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MoneyPerVolume get(final int row, final int column) throws ValueException
+    protected final MoneyPerVolume instantiateScalar(final double value, final MoneyPerVolumeUnit unit)
     {
-        return new MoneyPerVolume(getInUnit(row, column, getUnit()), getUnit());
+        return new MoneyPerVolume(value, unit);
     }
 
 }

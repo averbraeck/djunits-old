@@ -12,8 +12,8 @@ import org.djunits.unit.Unit;
  * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version 26 jun, 2015 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> the unit of the values in the constructor and for display
@@ -73,4 +73,5 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
         return this instanceof Relative;
     }
 
+    // No hashcode or equals -- has to be implemented on a deeper level
 }

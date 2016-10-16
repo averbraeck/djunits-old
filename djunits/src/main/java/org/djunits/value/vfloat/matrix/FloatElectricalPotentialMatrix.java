@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalPotential;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatElectricalPotentialMatrix
-        extends
-        TypedFloatMatrixRel<ElectricalPotentialUnit, FloatElectricalPotentialMatrix, MutableFloatElectricalPotentialMatrix, FloatElectricalPotential>
+public class FloatElectricalPotentialMatrix extends
+        AbstractFloatMatrixRel<ElectricalPotentialUnit, FloatElectricalPotentialMatrix, MutableFloatElectricalPotentialMatrix, FloatElectricalPotential>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -60,7 +59,22 @@ public class FloatElectricalPotentialMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalPotentialMatrix instantiateType(final FloatMatrixData fmd, final ElectricalPotentialUnit unit)
+    public final FloatElectricalPotentialMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatElectricalPotentialMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatElectricalPotentialMatrix instantiateType(final FloatMatrixData fmd,
+            final ElectricalPotentialUnit unit)
     {
         return new FloatElectricalPotentialMatrix(fmd, unit);
     }
@@ -75,9 +89,9 @@ public class FloatElectricalPotentialMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatElectricalPotential get(final int row, final int column) throws ValueException
+    protected final FloatElectricalPotential instantiateScalar(final float value, final ElectricalPotentialUnit unit)
     {
-        return new FloatElectricalPotential(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatElectricalPotential(value, unit);
     }
 
 }

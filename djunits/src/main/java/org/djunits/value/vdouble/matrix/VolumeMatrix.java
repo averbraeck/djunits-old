@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Volume;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class VolumeMatrix extends TypedDoubleMatrixRel<VolumeUnit, VolumeMatrix, MutableVolumeMatrix, Volume>
+public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, VolumeMatrix, MutableVolumeMatrix, Volume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -55,6 +55,20 @@ public class VolumeMatrix extends TypedDoubleMatrixRel<VolumeUnit, VolumeMatrix,
 
     /** {@inheritDoc} */
     @Override
+    public final VolumeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final VolumeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final VolumeMatrix instantiateType(final DoubleMatrixData dmd, final VolumeUnit unit)
     {
         return new VolumeMatrix(dmd, unit);
@@ -69,9 +83,9 @@ public class VolumeMatrix extends TypedDoubleMatrixRel<VolumeUnit, VolumeMatrix,
 
     /** {@inheritDoc} */
     @Override
-    public final Volume get(final int row, final int column) throws ValueException
+    protected final Volume instantiateScalar(final double value, final VolumeUnit unit)
     {
-        return new Volume(getInUnit(row, column, getUnit()), getUnit());
+        return new Volume(value, unit);
     }
 
 }

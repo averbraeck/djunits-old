@@ -2,7 +2,6 @@ package org.djunits.value.vdouble.matrix;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.ValueException;
-import org.djunits.value.vdouble.scalar.DoubleScalar;
 
 /**
  * Interface for the Immutable and Mutable DoubleMatrix classes.
@@ -68,16 +67,6 @@ public interface DoubleMatrixInterface<U extends Unit<U>>
     double getInUnit(int row, int column, U targetUnit) throws ValueException;
 
     /**
-     * Retrieve the value stored at a specified row and column as a DoubleScalar.
-     * @param row int; row of the value to retrieve
-     * @param column int; column of the value to retrieve
-     * @return DoubleScalar&lt;U&gt;; the strongly typed value of the selected cell
-     * @throws ValueException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
-     *             columns())
-     */
-    DoubleScalar<U> get(int row, int column) throws ValueException;
-
-    /**
      * Compute the sum of all values of this matrix.
      * @return double; the sum of all values of this matrix
      */
@@ -89,14 +78,6 @@ public interface DoubleMatrixInterface<U extends Unit<U>>
      * @throws ValueException when matrix is neither sparse, nor dense, or not square
      */
     double determinant() throws ValueException;
-
-    /**
-     * Create a mutable version of this DoubleMatrix. <br>
-     * The mutable version is created with a shallow copy of the data and the internal copyOnWrite flag set. The first operation
-     * in the mutable version that modifies the data shall trigger a deep copy of the data.
-     * @return MutableDoubleMatrix&lt;U&gt;; mutable version of this DoubleMatrix
-     */
-    MutableDoubleMatrixInterface<U> mutable();
 
     /**
      * Create a dense double[][] array filled with the values in the standard SI unit.

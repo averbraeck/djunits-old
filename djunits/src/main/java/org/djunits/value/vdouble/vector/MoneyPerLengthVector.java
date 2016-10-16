@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.MoneyPerLength;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerLengthVector extends
-        TypedDoubleVectorRel<MoneyPerLengthUnit, MoneyPerLengthVector, MutableMoneyPerLengthVector, MoneyPerLength>
+public class MoneyPerLengthVector
+        extends AbstractDoubleVectorRel<MoneyPerLengthUnit, MoneyPerLengthVector, MutableMoneyPerLengthVector, MoneyPerLength>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -82,8 +82,8 @@ public class MoneyPerLengthVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MoneyPerLengthVector(final SortedMap<Integer, MoneyPerLength> values, final int length, final StorageType storageType)
-            throws ValueException
+    public MoneyPerLengthVector(final SortedMap<Integer, MoneyPerLength> values, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -120,16 +120,35 @@ public class MoneyPerLengthVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerLengthVector instantiateMutableType(final DoubleVectorData dvd, final MoneyPerLengthUnit unit)
+    protected final MutableMoneyPerLengthVector instantiateMutableType(final DoubleVectorData dvd,
+            final MoneyPerLengthUnit unit)
     {
         return new MutableMoneyPerLengthVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MoneyPerLength get(final int index) throws ValueException
+    protected final MoneyPerLength instantiateScalar(final double value, final MoneyPerLengthUnit unit)
     {
-        return new MoneyPerLength(getInUnit(index, getUnit()), getUnit());
+        return new MoneyPerLength(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MoneyPerLengthVector toDense()
+    {
+        return this.data.isDense() ? (MoneyPerLengthVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MoneyPerLengthVector toSparse()
+    {
+        return this.data.isSparse() ? (MoneyPerLengthVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

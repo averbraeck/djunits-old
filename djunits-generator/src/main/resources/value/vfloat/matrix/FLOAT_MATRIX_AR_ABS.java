@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.*;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class Float%TypeAbs%Matrix extends
-        TypedFloatMatrixAbs<%TypeUnit%, Float%TypeAbs%Matrix, Float%TypeRel%Matrix, MutableFloat%TypeAbs%Matrix, Float%TypeAbs%>
+        AbstractFloatMatrixAbs<%TypeUnit%, Float%TypeAbs%Matrix, Float%TypeRel%Matrix, MutableFloat%TypeAbs%Matrix, Float%TypeAbs%>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -60,6 +60,20 @@ public class Float%TypeAbs%Matrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final Float%TypeAbs%Matrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Float%TypeAbs%Matrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final Float%TypeAbs%Matrix instantiateTypeAbs(final FloatMatrixData fmd, final %TypeUnit% unit)
     {
         return new Float%TypeAbs%Matrix(fmd, unit);
@@ -79,12 +93,12 @@ public class Float%TypeAbs%Matrix extends
     {
         return new MutableFloat%TypeAbs%Matrix(fmd, unit);
     }
-
+    
     /** {@inheritDoc} */
     @Override
-    public final Float%TypeAbs% get(final int row, final int column) throws ValueException
+    protected final Float%TypeAbs% instantiateScalar(final float value, final %TypeUnit% unit)
     {
-        return new Float%TypeAbs%(getInUnit(row, column, getUnit()), getUnit());
+        return new Float%TypeAbs%(value, unit);
     }
     
     /**

@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.FlowMass;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FlowMassMatrix extends TypedDoubleMatrixRel<FlowMassUnit, FlowMassMatrix, MutableFlowMassMatrix, FlowMass>
+public class FlowMassMatrix extends AbstractDoubleMatrixRel<FlowMassUnit, FlowMassMatrix, MutableFlowMassMatrix, FlowMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -28,8 +28,7 @@ public class FlowMassMatrix extends TypedDoubleMatrixRel<FlowMassUnit, FlowMassM
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FlowMassMatrix(final double[][] values, final FlowMassUnit unit, final StorageType storageType)
-            throws ValueException
+    public FlowMassMatrix(final double[][] values, final FlowMassUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -57,6 +56,20 @@ public class FlowMassMatrix extends TypedDoubleMatrixRel<FlowMassUnit, FlowMassM
 
     /** {@inheritDoc} */
     @Override
+    public final FlowMassMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FlowMassMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FlowMassMatrix instantiateType(final DoubleMatrixData dmd, final FlowMassUnit unit)
     {
         return new FlowMassMatrix(dmd, unit);
@@ -71,9 +84,9 @@ public class FlowMassMatrix extends TypedDoubleMatrixRel<FlowMassUnit, FlowMassM
 
     /** {@inheritDoc} */
     @Override
-    public final FlowMass get(final int row, final int column) throws ValueException
+    protected final FlowMass instantiateScalar(final double value, final FlowMassUnit unit)
     {
-        return new FlowMass(getInUnit(row, column, getUnit()), getUnit());
+        return new FlowMass(value, unit);
     }
 
 }

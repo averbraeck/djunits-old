@@ -33,7 +33,7 @@ import org.djunits.unit.TimeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatEnergy extends TypedFloatScalarRel<EnergyUnit, FloatEnergy>
+public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -72,7 +72,7 @@ public class FloatEnergy extends TypedFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatEnergy instantiateTypeRel(final float value, final EnergyUnit unit)
+    public final FloatEnergy instantiateRel(final float value, final EnergyUnit unit)
     {
         return new FloatEnergy(value, unit);
     }

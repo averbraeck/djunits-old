@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerArea;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatMoneyPerAreaMatrix extends
-        TypedFloatMatrixRel<MoneyPerAreaUnit, FloatMoneyPerAreaMatrix, MutableFloatMoneyPerAreaMatrix, FloatMoneyPerArea>
+        AbstractFloatMatrixRel<MoneyPerAreaUnit, FloatMoneyPerAreaMatrix, MutableFloatMoneyPerAreaMatrix, FloatMoneyPerArea>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class FloatMoneyPerAreaMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatMoneyPerAreaMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMoneyPerAreaMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatMoneyPerAreaMatrix instantiateType(final FloatMatrixData fmd, final MoneyPerAreaUnit unit)
     {
         return new FloatMoneyPerAreaMatrix(fmd, unit);
@@ -65,16 +79,17 @@ public class FloatMoneyPerAreaMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatMoneyPerAreaMatrix instantiateMutableType(final FloatMatrixData fmd, final MoneyPerAreaUnit unit)
+    protected final MutableFloatMoneyPerAreaMatrix instantiateMutableType(final FloatMatrixData fmd,
+            final MoneyPerAreaUnit unit)
     {
         return new MutableFloatMoneyPerAreaMatrix(fmd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMoneyPerArea get(final int row, final int column) throws ValueException
+    protected final FloatMoneyPerArea instantiateScalar(final float value, final MoneyPerAreaUnit unit)
     {
-        return new FloatMoneyPerArea(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatMoneyPerArea(value, unit);
     }
 
 }

@@ -1,8 +1,10 @@
 package org.djunits.value.vfloat.matrix;
 
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.value.MathFunctionsDimensionless;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.FloatMathFunctions;
 import org.djunits.value.vfloat.scalar.FloatDimensionless;
 
 /**
@@ -16,9 +18,9 @@ import org.djunits.value.vfloat.scalar.FloatDimensionless;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatDimensionlessMatrix
-        extends
-        MutableTypedFloatMatrixDimensionless<DimensionlessUnit, FloatDimensionlessMatrix, MutableFloatDimensionlessMatrix, FloatDimensionless>
+public class MutableFloatDimensionlessMatrix extends
+        AbstractMutableFloatMatrixRel<DimensionlessUnit, FloatDimensionlessMatrix, MutableFloatDimensionlessMatrix, FloatDimensionless>
+        implements MathFunctionsDimensionless<MutableFloatDimensionlessMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -60,6 +62,20 @@ public class MutableFloatDimensionlessMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatDimensionlessMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatDimensionlessMatrix instantiateType(final FloatMatrixData fmd, final DimensionlessUnit unit)
     {
         return new FloatDimensionlessMatrix(fmd, unit);
@@ -75,9 +91,161 @@ public class MutableFloatDimensionlessMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDimensionless get(final int row, final int column) throws ValueException
+    protected final FloatDimensionless instantiateScalar(final float value, final DimensionlessUnit unit)
     {
-        return new FloatDimensionless(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatDimensionless(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix acos()
+    {
+        assign(FloatMathFunctions.ACOS);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix asin()
+    {
+        assign(FloatMathFunctions.ASIN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix atan()
+    {
+        assign(FloatMathFunctions.ATAN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix cbrt()
+    {
+        assign(FloatMathFunctions.CBRT);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix cos()
+    {
+        assign(FloatMathFunctions.COS);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix cosh()
+    {
+        assign(FloatMathFunctions.COSH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix exp()
+    {
+        assign(FloatMathFunctions.EXP);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix expm1()
+    {
+        assign(FloatMathFunctions.EXPM1);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix log()
+    {
+        assign(FloatMathFunctions.LOG);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix log10()
+    {
+        assign(FloatMathFunctions.LOG10);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix log1p()
+    {
+        assign(FloatMathFunctions.LOG1P);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix pow(final double x)
+    {
+        assign(FloatMathFunctions.POW((float) x));
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix signum()
+    {
+        assign(FloatMathFunctions.SIGNUM);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix sin()
+    {
+        assign(FloatMathFunctions.SIN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix sinh()
+    {
+        assign(FloatMathFunctions.SINH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix sqrt()
+    {
+        assign(FloatMathFunctions.SQRT);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix tan()
+    {
+        assign(FloatMathFunctions.TAN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix tanh()
+    {
+        assign(FloatMathFunctions.TANH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDimensionlessMatrix inv()
+    {
+        assign(FloatMathFunctions.INV);
+        return this;
     }
 
 }

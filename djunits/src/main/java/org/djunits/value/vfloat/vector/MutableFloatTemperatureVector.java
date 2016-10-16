@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatTemperature;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatTemperatureVector extends
-        MutableTypedFloatVectorRel<TemperatureUnit, FloatTemperatureVector, MutableFloatTemperatureVector, FloatTemperature>
+        AbstractMutableFloatVectorRel<TemperatureUnit, FloatTemperatureVector, MutableFloatTemperatureVector, FloatTemperature>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -128,14 +128,34 @@ public class MutableFloatTemperatureVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatTemperature get(final int index) throws ValueException
+    protected final FloatTemperature instantiateScalar(final float value, final TemperatureUnit unit)
     {
-        return new FloatTemperature(getInUnit(index, getUnit()), getUnit());
+        return new FloatTemperature(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatTemperatureVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatTemperatureVector) this
+                : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatTemperatureVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatTemperatureVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**
      * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative FloatTemperature vector.
+     * @return an absolute version of this relative Temperature vector.
      */
     public final MutableFloatAbsoluteTemperatureVector toAbs()
     {

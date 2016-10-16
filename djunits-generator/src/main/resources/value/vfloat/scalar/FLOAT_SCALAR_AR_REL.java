@@ -19,7 +19,7 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Float%TypeRel% extends TypedFloatScalarRel<%TypeUnit%, Float%TypeRel%>
+public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeUnit%, Float%TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -58,7 +58,7 @@ public class Float%TypeRel% extends TypedFloatScalarRel<%TypeUnit%, Float%TypeRe
 
     /** {@inheritDoc} */
     @Override
-    protected final Float%TypeRel% instantiateTypeRel(final float value, final %TypeUnit% unit)
+    public final Float%TypeRel% instantiateRel(final float value, final %TypeUnit% unit)
     {
         return new Float%TypeRel%(value, unit);
     }
@@ -69,7 +69,7 @@ public class Float%TypeRel% extends TypedFloatScalarRel<%TypeUnit%, Float%TypeRe
      * @param unit the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
-    protected final Float%TypeAbs% instantiateTypeAbs(final float value, final %TypeUnit% unit)
+    public final Float%TypeAbs% instantiateAbs(final float value, final %TypeUnit% unit)
     {
         return new Float%TypeAbs%(value, unit);
     }
@@ -94,8 +94,8 @@ public class Float%TypeRel% extends TypedFloatScalarRel<%TypeUnit%, Float%TypeRe
      */
     public final Float%TypeAbs% plus(final Float%TypeAbs% v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit())
-            : instantiateTypeAbs(this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
+            : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**

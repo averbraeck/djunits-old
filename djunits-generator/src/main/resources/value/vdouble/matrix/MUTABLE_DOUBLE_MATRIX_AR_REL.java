@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Mutable%TypeRel%Matrix extends MutableTypedDoubleMatrixRel<%TypeUnit%, %TypeRel%Matrix, Mutable%TypeRel%Matrix, %TypeRel%>
+public class Mutable%TypeRel%Matrix extends AbstractMutableDoubleMatrixRel<%TypeUnit%, %TypeRel%Matrix, Mutable%TypeRel%Matrix, %TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -59,6 +59,20 @@ public class Mutable%TypeRel%Matrix extends MutableTypedDoubleMatrixRel<%TypeUni
 
     /** {@inheritDoc} */
     @Override
+    public final Mutable%TypeRel%Matrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Mutable%TypeRel%Matrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final %TypeRel%Matrix instantiateType(final DoubleMatrixData dmd, final %TypeUnit% unit)
     {
         return new %TypeRel%Matrix(dmd, unit);
@@ -74,9 +88,9 @@ public class Mutable%TypeRel%Matrix extends MutableTypedDoubleMatrixRel<%TypeUni
 
     /** {@inheritDoc} */
     @Override
-    public final %TypeRel% get(final int row, final int column) throws ValueException
+    protected final %TypeRel% instantiateScalar(final double value, final %TypeUnit% unit)
     {
-        return new %TypeRel%(getInUnit(row, column, getUnit()), getUnit());
+        return new %TypeRel%(value, unit);
     }
     
     /**

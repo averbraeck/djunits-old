@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatDirection;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatDirectionMatrix extends
-        TypedFloatMatrixAbs<AngleUnit, FloatDirectionMatrix, FloatAngleMatrix, MutableFloatDirectionMatrix, FloatDirection>
+        AbstractFloatMatrixAbs<AngleUnit, FloatDirectionMatrix, FloatAngleMatrix, MutableFloatDirectionMatrix, FloatDirection>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -58,6 +58,20 @@ public class FloatDirectionMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatDirectionMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDirectionMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatDirectionMatrix instantiateTypeAbs(final FloatMatrixData fmd, final AngleUnit unit)
     {
         return new FloatDirectionMatrix(fmd, unit);
@@ -79,9 +93,9 @@ public class FloatDirectionMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDirection get(final int row, final int column) throws ValueException
+    protected final FloatDirection instantiateScalar(final float value, final AngleUnit unit)
     {
-        return new FloatDirection(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatDirection(value, unit);
     }
 
     /**

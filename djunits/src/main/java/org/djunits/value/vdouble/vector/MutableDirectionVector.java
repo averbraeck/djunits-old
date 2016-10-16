@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.Direction;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableDirectionVector extends
-        MutableTypedDoubleVectorAbs<AngleUnit, DirectionVector, AngleVector, MutableDirectionVector, Direction>
+public class MutableDirectionVector
+        extends AbstractMutableDoubleVectorAbs<AngleUnit, DirectionVector, AngleVector, MutableDirectionVector, Direction>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -134,9 +134,27 @@ public class MutableDirectionVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final Direction get(final int index) throws ValueException
+    protected final Direction instantiateScalar(final double value, final AngleUnit unit)
     {
-        return new Direction(getInUnit(index, getUnit()), getUnit());
+        return new Direction(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableDirectionVector toDense()
+    {
+        return this.data.isDense() ? (MutableDirectionVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableDirectionVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableDirectionVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**

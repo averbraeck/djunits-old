@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.Position;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class PositionMatrix extends
-        TypedDoubleMatrixAbs<LengthUnit, PositionMatrix, LengthMatrix, MutablePositionMatrix, Position>
+public class PositionMatrix
+        extends AbstractDoubleMatrixAbs<LengthUnit, PositionMatrix, LengthMatrix, MutablePositionMatrix, Position>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -57,6 +57,20 @@ public class PositionMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final PositionMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final PositionMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final PositionMatrix instantiateTypeAbs(final DoubleMatrixData dmd, final LengthUnit unit)
     {
         return new PositionMatrix(dmd, unit);
@@ -78,9 +92,9 @@ public class PositionMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final Position get(final int row, final int column) throws ValueException
+    protected final Position instantiateScalar(final double value, final LengthUnit unit)
     {
-        return new Position(getInUnit(row, column, getUnit()), getUnit());
+        return new Position(value, unit);
     }
 
     /**

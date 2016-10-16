@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatPosition;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatPositionMatrix extends
-        TypedFloatMatrixAbs<LengthUnit, FloatPositionMatrix, FloatLengthMatrix, MutableFloatPositionMatrix, FloatPosition>
+        AbstractFloatMatrixAbs<LengthUnit, FloatPositionMatrix, FloatLengthMatrix, MutableFloatPositionMatrix, FloatPosition>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -58,6 +58,20 @@ public class FloatPositionMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatPositionMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatPositionMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatPositionMatrix instantiateTypeAbs(final FloatMatrixData fmd, final LengthUnit unit)
     {
         return new FloatPositionMatrix(fmd, unit);
@@ -79,9 +93,9 @@ public class FloatPositionMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPosition get(final int row, final int column) throws ValueException
+    protected final FloatPosition instantiateScalar(final float value, final LengthUnit unit)
     {
-        return new FloatPosition(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatPosition(value, unit);
     }
 
     /**

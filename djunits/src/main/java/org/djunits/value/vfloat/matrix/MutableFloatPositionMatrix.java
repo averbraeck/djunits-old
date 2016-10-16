@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatPosition;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatPositionMatrix
-        extends
-        MutableTypedFloatMatrixAbs<LengthUnit, FloatPositionMatrix, FloatLengthMatrix, MutableFloatPositionMatrix, FloatPosition>
+public class MutableFloatPositionMatrix extends
+        AbstractMutableFloatMatrixAbs<LengthUnit, FloatPositionMatrix, FloatLengthMatrix, MutableFloatPositionMatrix, FloatPosition>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -59,6 +58,20 @@ public class MutableFloatPositionMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatPositionMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatPositionMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatPositionMatrix instantiateTypeAbs(final FloatMatrixData fmd, final LengthUnit unit)
     {
         return new FloatPositionMatrix(fmd, unit);
@@ -80,9 +93,9 @@ public class MutableFloatPositionMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPosition get(final int row, final int column) throws ValueException
+    protected final FloatPosition instantiateScalar(final float value, final LengthUnit unit)
     {
-        return new FloatPosition(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatPosition(value, unit);
     }
 
     /**

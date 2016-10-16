@@ -28,7 +28,7 @@ import org.djunits.unit.MoneyUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatMoneyPerMass extends TypedFloatScalarRel<MoneyPerMassUnit, FloatMoneyPerMass>
+public class FloatMoneyPerMass extends AbstractFloatScalarRel<MoneyPerMassUnit, FloatMoneyPerMass>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -64,7 +64,7 @@ public class FloatMoneyPerMass extends TypedFloatScalarRel<MoneyPerMassUnit, Flo
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatMoneyPerMass instantiateTypeRel(final float value, final MoneyPerMassUnit unit)
+    public final FloatMoneyPerMass instantiateRel(final float value, final MoneyPerMassUnit unit)
     {
         return new FloatMoneyPerMass(value, unit);
     }

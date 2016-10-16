@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Speed;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableSpeedMatrix extends MutableTypedDoubleMatrixRel<SpeedUnit, SpeedMatrix, MutableSpeedMatrix, Speed>
+public class MutableSpeedMatrix extends AbstractMutableDoubleMatrixRel<SpeedUnit, SpeedMatrix, MutableSpeedMatrix, Speed>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -56,6 +56,20 @@ public class MutableSpeedMatrix extends MutableTypedDoubleMatrixRel<SpeedUnit, S
 
     /** {@inheritDoc} */
     @Override
+    public final MutableSpeedMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableSpeedMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final SpeedMatrix instantiateType(final DoubleMatrixData dmd, final SpeedUnit unit)
     {
         return new SpeedMatrix(dmd, unit);
@@ -70,9 +84,9 @@ public class MutableSpeedMatrix extends MutableTypedDoubleMatrixRel<SpeedUnit, S
 
     /** {@inheritDoc} */
     @Override
-    public final Speed get(final int row, final int column) throws ValueException
+    protected final Speed instantiateScalar(final double value, final SpeedUnit unit)
     {
-        return new Speed(getInUnit(row, column, getUnit()), getUnit());
+        return new Speed(value, unit);
     }
 
 }

@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.Duration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableDurationVector extends
-        MutableTypedDoubleVectorRel<TimeUnit, DurationVector, MutableDurationVector, Duration>
+public class MutableDurationVector
+        extends AbstractMutableDoubleVectorRel<TimeUnit, DurationVector, MutableDurationVector, Duration>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -127,9 +127,27 @@ public class MutableDurationVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final Duration get(final int index) throws ValueException
+    protected final Duration instantiateScalar(final double value, final TimeUnit unit)
     {
-        return new Duration(getInUnit(index, getUnit()), getUnit());
+        return new Duration(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableDurationVector toDense()
+    {
+        return this.data.isDense() ? (MutableDurationVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableDurationVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableDurationVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**

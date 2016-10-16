@@ -28,7 +28,7 @@ import org.djunits.unit.DimensionlessUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Angle extends TypedDoubleScalarRel<AngleUnit, Angle>
+public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -57,7 +57,7 @@ public class Angle extends TypedDoubleScalarRel<AngleUnit, Angle>
 
     /** {@inheritDoc} */
     @Override
-    protected final Angle instantiateTypeRel(final double value, final AngleUnit unit)
+    public final Angle instantiateRel(final double value, final AngleUnit unit)
     {
         return new Angle(value, unit);
     }
@@ -68,7 +68,7 @@ public class Angle extends TypedDoubleScalarRel<AngleUnit, Angle>
      * @param unit the unit
      * @return A a new absolute instance of the DoubleScalar of the right type
      */
-    protected final Direction instantiateTypeAbs(final double value, final AngleUnit unit)
+    public final Direction instantiateAbs(final double value, final AngleUnit unit)
     {
         return new Direction(value, unit);
     }
@@ -92,8 +92,8 @@ public class Angle extends TypedDoubleScalarRel<AngleUnit, Angle>
      */
     public final Direction plus(final Direction v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit()) : instantiateTypeAbs(
-                this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**

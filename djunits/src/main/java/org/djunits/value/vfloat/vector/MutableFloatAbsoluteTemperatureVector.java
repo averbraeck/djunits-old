@@ -19,9 +19,8 @@ import org.djunits.value.vfloat.scalar.FloatAbsoluteTemperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatAbsoluteTemperatureVector
-        extends
-        MutableTypedFloatVectorAbs<TemperatureUnit, FloatAbsoluteTemperatureVector, FloatTemperatureVector, MutableFloatAbsoluteTemperatureVector, FloatAbsoluteTemperature>
+public class MutableFloatAbsoluteTemperatureVector extends
+        AbstractMutableFloatVectorAbs<TemperatureUnit, FloatAbsoluteTemperatureVector, FloatTemperatureVector, MutableFloatAbsoluteTemperatureVector, FloatAbsoluteTemperature>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -33,8 +32,8 @@ public class MutableFloatAbsoluteTemperatureVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatAbsoluteTemperatureVector(final float[] values, final TemperatureUnit unit, final StorageType storageType)
-            throws ValueException
+    public MutableFloatAbsoluteTemperatureVector(final float[] values, final TemperatureUnit unit,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -139,14 +138,34 @@ public class MutableFloatAbsoluteTemperatureVector
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAbsoluteTemperature get(final int index) throws ValueException
+    protected final FloatAbsoluteTemperature instantiateScalar(final float value, final TemperatureUnit unit)
     {
-        return new FloatAbsoluteTemperature(getInUnit(index, getUnit()), getUnit());
+        return new FloatAbsoluteTemperature(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatAbsoluteTemperatureVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatAbsoluteTemperatureVector) this
+                : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatAbsoluteTemperatureVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatAbsoluteTemperatureVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**
      * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute FloatAbsoluteTemperature vector.
+     * @return a relative version of this absolute AbsoluteTemperature vector.
      */
     public final MutableFloatTemperatureVector toRel()
     {

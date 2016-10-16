@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatVolume;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatVolumeMatrix extends
-        TypedFloatMatrixRel<VolumeUnit, FloatVolumeMatrix, MutableFloatVolumeMatrix, FloatVolume>
+public class FloatVolumeMatrix
+        extends AbstractFloatMatrixRel<VolumeUnit, FloatVolumeMatrix, MutableFloatVolumeMatrix, FloatVolume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -29,8 +29,7 @@ public class FloatVolumeMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatVolumeMatrix(final float[][] values, final VolumeUnit unit, final StorageType storageType)
-            throws ValueException
+    public FloatVolumeMatrix(final float[][] values, final VolumeUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,6 +57,20 @@ public class FloatVolumeMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatVolumeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatVolumeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatVolumeMatrix instantiateType(final FloatMatrixData fmd, final VolumeUnit unit)
     {
         return new FloatVolumeMatrix(fmd, unit);
@@ -72,9 +85,9 @@ public class FloatVolumeMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatVolume get(final int row, final int column) throws ValueException
+    protected final FloatVolume instantiateScalar(final float value, final VolumeUnit unit)
     {
-        return new FloatVolume(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatVolume(value, unit);
     }
 
 }

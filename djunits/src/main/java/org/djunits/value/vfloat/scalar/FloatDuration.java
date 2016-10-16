@@ -35,7 +35,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatDuration extends TypedFloatScalarRel<TimeUnit, FloatDuration>
+public class FloatDuration extends AbstractFloatScalarRel<TimeUnit, FloatDuration>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -74,7 +74,7 @@ public class FloatDuration extends TypedFloatScalarRel<TimeUnit, FloatDuration>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDuration instantiateTypeRel(final float value, final TimeUnit unit)
+    public final FloatDuration instantiateRel(final float value, final TimeUnit unit)
     {
         return new FloatDuration(value, unit);
     }
@@ -85,7 +85,7 @@ public class FloatDuration extends TypedFloatScalarRel<TimeUnit, FloatDuration>
      * @param unit the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
-    protected final FloatTime instantiateTypeAbs(final float value, final TimeUnit unit)
+    public final FloatTime instantiateAbs(final float value, final TimeUnit unit)
     {
         return new FloatTime(value, unit);
     }
@@ -109,8 +109,8 @@ public class FloatDuration extends TypedFloatScalarRel<TimeUnit, FloatDuration>
      */
     public final FloatTime plus(final FloatTime v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit()) : instantiateTypeAbs(
-                this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**

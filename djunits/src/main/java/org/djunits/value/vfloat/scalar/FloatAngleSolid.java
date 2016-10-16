@@ -27,7 +27,7 @@ import org.djunits.unit.DimensionlessUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatAngleSolid extends TypedFloatScalarRel<AngleSolidUnit, FloatAngleSolid>
+public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, FloatAngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -66,7 +66,7 @@ public class FloatAngleSolid extends TypedFloatScalarRel<AngleSolidUnit, FloatAn
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatAngleSolid instantiateTypeRel(final float value, final AngleSolidUnit unit)
+    public final FloatAngleSolid instantiateRel(final float value, final AngleSolidUnit unit)
     {
         return new FloatAngleSolid(value, unit);
     }

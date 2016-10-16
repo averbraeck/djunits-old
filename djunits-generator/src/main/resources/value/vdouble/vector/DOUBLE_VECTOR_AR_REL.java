@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class %TypeRel%Vector extends TypedDoubleVectorRel<%TypeUnit%, %TypeRel%Vector, Mutable%TypeRel%Vector, %TypeRel%>
+public class %TypeRel%Vector extends AbstractDoubleVectorRel<%TypeUnit%, %TypeRel%Vector, Mutable%TypeRel%Vector, %TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -124,11 +124,29 @@ public class %TypeRel%Vector extends TypedDoubleVectorRel<%TypeUnit%, %TypeRel%V
 
     /** {@inheritDoc} */
     @Override
-    public final %TypeRel% get(final int index) throws ValueException
+    protected final %TypeRel% instantiateScalar(final double value, final %TypeUnit% unit)
     {
-        return new %TypeRel%(getInUnit(index, getUnit()), getUnit());
+        return new %TypeRel%(value, unit);
     }
     
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final %TypeRel%Vector toDense()
+    {
+        return this.data.isDense() ? (%TypeRel%Vector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final %TypeRel%Vector toSparse()
+    {
+        return this.data.isSparse() ? (%TypeRel%Vector) this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
     /**
      * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
      * @return an absolute version of this relative %TypeRel% vector.

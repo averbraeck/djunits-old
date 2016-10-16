@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.MoneyPerTime;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerTimeVector extends
-        TypedDoubleVectorRel<MoneyPerTimeUnit, MoneyPerTimeVector, MutableMoneyPerTimeVector, MoneyPerTime>
+public class MoneyPerTimeVector
+        extends AbstractDoubleVectorRel<MoneyPerTimeUnit, MoneyPerTimeVector, MutableMoneyPerTimeVector, MoneyPerTime>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -127,9 +127,27 @@ public class MoneyPerTimeVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final MoneyPerTime get(final int index) throws ValueException
+    protected final MoneyPerTime instantiateScalar(final double value, final MoneyPerTimeUnit unit)
     {
-        return new MoneyPerTime(getInUnit(index, getUnit()), getUnit());
+        return new MoneyPerTime(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MoneyPerTimeVector toDense()
+    {
+        return this.data.isDense() ? (MoneyPerTimeVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MoneyPerTimeVector toSparse()
+    {
+        return this.data.isSparse() ? (MoneyPerTimeVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

@@ -32,7 +32,7 @@ import org.djunits.unit.PowerUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatElectricalPotential extends TypedFloatScalarRel<ElectricalPotentialUnit, FloatElectricalPotential>
+public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalPotentialUnit, FloatElectricalPotential>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -71,7 +71,7 @@ public class FloatElectricalPotential extends TypedFloatScalarRel<ElectricalPote
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalPotential instantiateTypeRel(final float value, final ElectricalPotentialUnit unit)
+    public final FloatElectricalPotential instantiateRel(final float value, final ElectricalPotentialUnit unit)
     {
         return new FloatElectricalPotential(value, unit);
     }

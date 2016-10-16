@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatForce;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatForceMatrix extends
-        MutableTypedFloatMatrixRel<ForceUnit, FloatForceMatrix, MutableFloatForceMatrix, FloatForce>
+public class MutableFloatForceMatrix
+        extends AbstractMutableFloatMatrixRel<ForceUnit, FloatForceMatrix, MutableFloatForceMatrix, FloatForce>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableFloatForceMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatForceMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatForceMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatForceMatrix instantiateType(final FloatMatrixData fmd, final ForceUnit unit)
     {
         return new FloatForceMatrix(fmd, unit);
@@ -72,9 +86,9 @@ public class MutableFloatForceMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatForce get(final int row, final int column) throws ValueException
+    protected final FloatForce instantiateScalar(final float value, final ForceUnit unit)
     {
-        return new FloatForce(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatForce(value, unit);
     }
 
 }

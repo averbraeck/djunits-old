@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Time;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class TimeMatrix extends TypedDoubleMatrixAbs<TimeUnit, TimeMatrix, DurationMatrix, MutableTimeMatrix, Time>
+public class TimeMatrix extends AbstractDoubleMatrixAbs<TimeUnit, TimeMatrix, DurationMatrix, MutableTimeMatrix, Time>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -57,6 +57,20 @@ public class TimeMatrix extends TypedDoubleMatrixAbs<TimeUnit, TimeMatrix, Durat
 
     /** {@inheritDoc} */
     @Override
+    public final TimeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final TimeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final TimeMatrix instantiateTypeAbs(final DoubleMatrixData dmd, final TimeUnit unit)
     {
         return new TimeMatrix(dmd, unit);
@@ -78,9 +92,9 @@ public class TimeMatrix extends TypedDoubleMatrixAbs<TimeUnit, TimeMatrix, Durat
 
     /** {@inheritDoc} */
     @Override
-    public final Time get(final int row, final int column) throws ValueException
+    protected final Time instantiateScalar(final double value, final TimeUnit unit)
     {
-        return new Time(getInUnit(row, column, getUnit()), getUnit());
+        return new Time(value, unit);
     }
 
     /**

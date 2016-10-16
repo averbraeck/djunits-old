@@ -19,7 +19,7 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class %TypeAbs% extends TypedDoubleScalarAbs<%TypeUnit%, %TypeAbs%, %TypeRel%>
+public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeUnit%, %TypeAbs%, %TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -48,14 +48,14 @@ public class %TypeAbs% extends TypedDoubleScalarAbs<%TypeUnit%, %TypeAbs%, %Type
 
     /** {@inheritDoc} */
     @Override
-    protected final %TypeAbs% instantiateTypeAbs(final double value, final %TypeUnit% unit)
+    public final %TypeAbs% instantiateAbs(final double value, final %TypeUnit% unit)
     {
         return new %TypeAbs%(value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final %TypeRel% instantiateTypeRel(final double value, final %TypeUnit% unit)
+    public final %TypeRel% instantiateRel(final double value, final %TypeUnit% unit)
     {
         return new %TypeRel%(value, unit);
     }

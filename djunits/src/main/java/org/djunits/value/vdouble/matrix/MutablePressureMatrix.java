@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.Pressure;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutablePressureMatrix extends
-        MutableTypedDoubleMatrixRel<PressureUnit, PressureMatrix, MutablePressureMatrix, Pressure>
+public class MutablePressureMatrix
+        extends AbstractMutableDoubleMatrixRel<PressureUnit, PressureMatrix, MutablePressureMatrix, Pressure>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutablePressureMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutablePressureMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutablePressureMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final PressureMatrix instantiateType(final DoubleMatrixData dmd, final PressureUnit unit)
     {
         return new PressureMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class MutablePressureMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final Pressure get(final int row, final int column) throws ValueException
+    protected final Pressure instantiateScalar(final double value, final PressureUnit unit)
     {
-        return new Pressure(getInUnit(row, column, getUnit()), getUnit());
+        return new Pressure(value, unit);
     }
 
 }

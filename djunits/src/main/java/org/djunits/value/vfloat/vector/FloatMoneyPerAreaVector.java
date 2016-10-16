@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatMoneyPerArea;
 
 /**
- * Immutable FloatMoneyPerAreaVector, a vector of values with a MoneyPerAreaUnit.
+ * Immutable Float FloatMoneyPerAreaVector, a vector of values with a MoneyPerAreaUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -20,15 +20,15 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerArea;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatMoneyPerAreaVector extends
-        TypedFloatVectorRel<MoneyPerAreaUnit, FloatMoneyPerAreaVector, MutableFloatMoneyPerAreaVector, FloatMoneyPerArea>
+        AbstractFloatVectorRel<MoneyPerAreaUnit, FloatMoneyPerAreaVector, MutableFloatMoneyPerAreaVector, FloatMoneyPerArea>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerAreaVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatMoneyPerAreaVector
-     * @param unit U; the unit of the new Relative Immutable FloatMoneyPerAreaVector
+     * Construct a new Relative Immutable Float FloatMoneyPerAreaVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatMoneyPerAreaVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatMoneyPerAreaVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class FloatMoneyPerAreaVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerAreaVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatMoneyPerAreaVector
-     * @param unit U; the unit of the new Relative Immutable FloatMoneyPerAreaVector
+     * Construct a new Relative Immutable Float FloatMoneyPerAreaVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatMoneyPerAreaVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatMoneyPerAreaVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,7 +52,7 @@ public class FloatMoneyPerAreaVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerAreaVector.
+     * Construct a new Relative Immutable Float FloatMoneyPerAreaVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
      *            FloatMoneyPerAreaVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
@@ -64,8 +64,8 @@ public class FloatMoneyPerAreaVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerAreaVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatMoneyPerAreaVector
+     * Construct a new Relative Immutable Float FloatMoneyPerAreaVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatMoneyPerAreaVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -75,7 +75,7 @@ public class FloatMoneyPerAreaVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerAreaVector.
+     * Construct a new Relative Immutable Float FloatMoneyPerAreaVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatMoneyPerAreaVector
      * @param length the size of the vector
@@ -89,9 +89,9 @@ public class FloatMoneyPerAreaVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerAreaVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatMoneyPerAreaVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatMoneyPerAreaVector
+     * Construct a new Relative Immutable Float FloatMoneyPerAreaVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatMoneyPerAreaVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatMoneyPerAreaVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -120,16 +120,35 @@ public class FloatMoneyPerAreaVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatMoneyPerAreaVector instantiateMutableType(final FloatVectorData dvd, final MoneyPerAreaUnit unit)
+    protected final MutableFloatMoneyPerAreaVector instantiateMutableType(final FloatVectorData dvd,
+            final MoneyPerAreaUnit unit)
     {
         return new MutableFloatMoneyPerAreaVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMoneyPerArea get(final int index) throws ValueException
+    protected final FloatMoneyPerArea instantiateScalar(final float value, final MoneyPerAreaUnit unit)
     {
-        return new FloatMoneyPerArea(getInUnit(index, getUnit()), getUnit());
+        return new FloatMoneyPerArea(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatMoneyPerAreaVector toDense()
+    {
+        return this.data.isDense() ? (FloatMoneyPerAreaVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatMoneyPerAreaVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatMoneyPerAreaVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

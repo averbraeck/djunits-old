@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.FlowMass;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFlowMassMatrix extends
-        MutableTypedDoubleMatrixRel<FlowMassUnit, FlowMassMatrix, MutableFlowMassMatrix, FlowMass>
+public class MutableFlowMassMatrix
+        extends AbstractMutableDoubleMatrixRel<FlowMassUnit, FlowMassMatrix, MutableFlowMassMatrix, FlowMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableFlowMassMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFlowMassMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFlowMassMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FlowMassMatrix instantiateType(final DoubleMatrixData dmd, final FlowMassUnit unit)
     {
         return new FlowMassMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class MutableFlowMassMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FlowMass get(final int row, final int column) throws ValueException
+    protected final FlowMass instantiateScalar(final double value, final FlowMassUnit unit)
     {
-        return new FlowMass(getInUnit(row, column, getUnit()), getUnit());
+        return new FlowMass(value, unit);
     }
 
 }

@@ -22,12 +22,12 @@ import org.djunits.unit.LengthUnit;
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
- * $LastChangedDate: 2016-04-23 21:28:04 +0200 (Sat, 23 Apr 2016) $, @version $Revision: 191 $, by $Author: averbraeck $,
+ * $LastChangedDate: 2016-05-28 14:25:52 +0200 (Sat, 28 May 2016) $, @version $Revision: 202 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatPosition extends TypedFloatScalarAbs<LengthUnit, FloatPosition, FloatLength>
+public class FloatPosition extends AbstractFloatScalarAbs<LengthUnit, FloatPosition, FloatLength>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -66,14 +66,14 @@ public class FloatPosition extends TypedFloatScalarAbs<LengthUnit, FloatPosition
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatPosition instantiateTypeAbs(final float value, final LengthUnit unit)
+    public final FloatPosition instantiateAbs(final float value, final LengthUnit unit)
     {
         return new FloatPosition(value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatLength instantiateTypeRel(final float value, final LengthUnit unit)
+    public final FloatLength instantiateRel(final float value, final LengthUnit unit)
     {
         return new FloatLength(value, unit);
     }

@@ -74,4 +74,6 @@ public abstract class AbstractValue<U extends Unit<U>> implements Value<U>, Seri
         return this instanceof Relative;
     }
 
+    // No hashcode or equals -- has to be implemented on a deeper level
+
 }

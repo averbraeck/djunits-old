@@ -22,12 +22,12 @@ import org.djunits.unit.AngleUnit;
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
- * $LastChangedDate: 2016-04-23 21:28:04 +0200 (Sat, 23 Apr 2016) $, @version $Revision: 191 $, by $Author: averbraeck $,
+ * $LastChangedDate: 2016-05-28 14:25:52 +0200 (Sat, 28 May 2016) $, @version $Revision: 202 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatDirection extends TypedFloatScalarAbs<AngleUnit, FloatDirection, FloatAngle>
+public class FloatDirection extends AbstractFloatScalarAbs<AngleUnit, FloatDirection, FloatAngle>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -66,14 +66,14 @@ public class FloatDirection extends TypedFloatScalarAbs<AngleUnit, FloatDirectio
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDirection instantiateTypeAbs(final float value, final AngleUnit unit)
+    public final FloatDirection instantiateAbs(final float value, final AngleUnit unit)
     {
         return new FloatDirection(value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatAngle instantiateTypeRel(final float value, final AngleUnit unit)
+    public final FloatAngle instantiateRel(final float value, final AngleUnit unit)
     {
         return new FloatAngle(value, unit);
     }

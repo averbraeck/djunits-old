@@ -16,9 +16,8 @@ import org.djunits.value.vdouble.scalar.ElectricalResistance;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ElectricalResistanceMatrix
-        extends
-        TypedDoubleMatrixRel<ElectricalResistanceUnit, ElectricalResistanceMatrix, MutableElectricalResistanceMatrix, ElectricalResistance>
+public class ElectricalResistanceMatrix extends
+        AbstractDoubleMatrixRel<ElectricalResistanceUnit, ElectricalResistanceMatrix, MutableElectricalResistanceMatrix, ElectricalResistance>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -60,6 +59,20 @@ public class ElectricalResistanceMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final ElectricalResistanceMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final ElectricalResistanceMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final ElectricalResistanceMatrix instantiateType(final DoubleMatrixData dmd, final ElectricalResistanceUnit unit)
     {
         return new ElectricalResistanceMatrix(dmd, unit);
@@ -75,9 +88,9 @@ public class ElectricalResistanceMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalResistance get(final int row, final int column) throws ValueException
+    protected final ElectricalResistance instantiateScalar(final double value, final ElectricalResistanceUnit unit)
     {
-        return new ElectricalResistance(getInUnit(row, column, getUnit()), getUnit());
+        return new ElectricalResistance(value, unit);
     }
 
 }

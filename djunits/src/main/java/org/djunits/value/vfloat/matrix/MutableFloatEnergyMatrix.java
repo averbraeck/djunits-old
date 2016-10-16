@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatEnergy;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatEnergyMatrix extends
-        MutableTypedFloatMatrixRel<EnergyUnit, FloatEnergyMatrix, MutableFloatEnergyMatrix, FloatEnergy>
+public class MutableFloatEnergyMatrix
+        extends AbstractMutableFloatMatrixRel<EnergyUnit, FloatEnergyMatrix, MutableFloatEnergyMatrix, FloatEnergy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableFloatEnergyMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatEnergyMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatEnergyMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatEnergyMatrix instantiateType(final FloatMatrixData fmd, final EnergyUnit unit)
     {
         return new FloatEnergyMatrix(fmd, unit);
@@ -72,9 +86,9 @@ public class MutableFloatEnergyMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatEnergy get(final int row, final int column) throws ValueException
+    protected final FloatEnergy instantiateScalar(final float value, final EnergyUnit unit)
     {
-        return new FloatEnergy(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatEnergy(value, unit);
     }
 
 }

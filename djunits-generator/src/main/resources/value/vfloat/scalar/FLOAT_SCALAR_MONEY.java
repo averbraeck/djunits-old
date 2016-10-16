@@ -19,7 +19,7 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Float%Type% extends TypedFloatScalarRel<%Type%Unit, Float%Type%>
+public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -55,7 +55,7 @@ public class Float%Type% extends TypedFloatScalarRel<%Type%Unit, Float%Type%>
 
     /** {@inheritDoc} */
     @Override
-    protected final Float%Type% instantiateTypeRel(final float value, final %Type%Unit unit)
+    public final Float%Type% instantiateRel(final float value, final %Type%Unit unit)
     {
         return new Float%Type%(value, unit);
     }

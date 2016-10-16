@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.MoneyPerTime;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableMoneyPerTimeVector extends
-        MutableTypedDoubleVectorRel<MoneyPerTimeUnit, MoneyPerTimeVector, MutableMoneyPerTimeVector, MoneyPerTime>
+public class MutableMoneyPerTimeVector
+        extends AbstractMutableDoubleVectorRel<MoneyPerTimeUnit, MoneyPerTimeVector, MutableMoneyPerTimeVector, MoneyPerTime>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -127,9 +127,28 @@ public class MutableMoneyPerTimeVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final MoneyPerTime get(final int index) throws ValueException
+    protected final MoneyPerTime instantiateScalar(final double value, final MoneyPerTimeUnit unit)
     {
-        return new MoneyPerTime(getInUnit(index, getUnit()), getUnit());
+        return new MoneyPerTime(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableMoneyPerTimeVector toDense()
+    {
+        return this.data.isDense() ? (MutableMoneyPerTimeVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableMoneyPerTimeVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableMoneyPerTimeVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

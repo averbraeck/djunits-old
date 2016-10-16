@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Energy;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableEnergyMatrix extends MutableTypedDoubleMatrixRel<EnergyUnit, EnergyMatrix, MutableEnergyMatrix, Energy>
+public class MutableEnergyMatrix extends AbstractMutableDoubleMatrixRel<EnergyUnit, EnergyMatrix, MutableEnergyMatrix, Energy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -56,6 +56,20 @@ public class MutableEnergyMatrix extends MutableTypedDoubleMatrixRel<EnergyUnit,
 
     /** {@inheritDoc} */
     @Override
+    public final MutableEnergyMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableEnergyMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final EnergyMatrix instantiateType(final DoubleMatrixData dmd, final EnergyUnit unit)
     {
         return new EnergyMatrix(dmd, unit);
@@ -70,9 +84,9 @@ public class MutableEnergyMatrix extends MutableTypedDoubleMatrixRel<EnergyUnit,
 
     /** {@inheritDoc} */
     @Override
-    public final Energy get(final int row, final int column) throws ValueException
+    protected final Energy instantiateScalar(final double value, final EnergyUnit unit)
     {
-        return new Energy(getInUnit(row, column, getUnit()), getUnit());
+        return new Energy(value, unit);
     }
 
 }

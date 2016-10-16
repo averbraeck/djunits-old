@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Money;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableMoneyMatrix extends MutableTypedDoubleMatrixRel<MoneyUnit, MoneyMatrix, MutableMoneyMatrix, Money>
+public class MutableMoneyMatrix extends AbstractMutableDoubleMatrixRel<MoneyUnit, MoneyMatrix, MutableMoneyMatrix, Money>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -56,6 +56,20 @@ public class MutableMoneyMatrix extends MutableTypedDoubleMatrixRel<MoneyUnit, M
 
     /** {@inheritDoc} */
     @Override
+    public final MutableMoneyMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableMoneyMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final MoneyMatrix instantiateType(final DoubleMatrixData dmd, final MoneyUnit unit)
     {
         return new MoneyMatrix(dmd, unit);
@@ -70,9 +84,9 @@ public class MutableMoneyMatrix extends MutableTypedDoubleMatrixRel<MoneyUnit, M
 
     /** {@inheritDoc} */
     @Override
-    public final Money get(final int row, final int column) throws ValueException
+    protected final Money instantiateScalar(final double value, final MoneyUnit unit)
     {
-        return new Money(getInUnit(row, column, getUnit()), getUnit());
+        return new Money(value, unit);
     }
 
 }

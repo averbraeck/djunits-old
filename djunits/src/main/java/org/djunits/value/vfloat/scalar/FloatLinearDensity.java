@@ -31,7 +31,7 @@ import org.djunits.unit.MoneyPerLengthUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatLinearDensity extends TypedFloatScalarRel<LinearDensityUnit, FloatLinearDensity>
+public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit, FloatLinearDensity>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -70,7 +70,7 @@ public class FloatLinearDensity extends TypedFloatScalarRel<LinearDensityUnit, F
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatLinearDensity instantiateTypeRel(final float value, final LinearDensityUnit unit)
+    public final FloatLinearDensity instantiateRel(final float value, final LinearDensityUnit unit)
     {
         return new FloatLinearDensity(value, unit);
     }

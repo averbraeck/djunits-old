@@ -27,7 +27,7 @@ import org.djunits.unit.TimeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatTime extends TypedFloatScalarAbs<TimeUnit, FloatTime, FloatDuration>
+public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, FloatDuration>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -66,14 +66,14 @@ public class FloatTime extends TypedFloatScalarAbs<TimeUnit, FloatTime, FloatDur
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatTime instantiateTypeAbs(final float value, final TimeUnit unit)
+    public final FloatTime instantiateAbs(final float value, final TimeUnit unit)
     {
         return new FloatTime(value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDuration instantiateTypeRel(final float value, final TimeUnit unit)
+    public final FloatDuration instantiateRel(final float value, final TimeUnit unit)
     {
         return new FloatDuration(value, unit);
     }

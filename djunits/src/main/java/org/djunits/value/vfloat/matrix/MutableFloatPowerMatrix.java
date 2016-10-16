@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatPower;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatPowerMatrix extends
-        MutableTypedFloatMatrixRel<PowerUnit, FloatPowerMatrix, MutableFloatPowerMatrix, FloatPower>
+public class MutableFloatPowerMatrix
+        extends AbstractMutableFloatMatrixRel<PowerUnit, FloatPowerMatrix, MutableFloatPowerMatrix, FloatPower>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableFloatPowerMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatPowerMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatPowerMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatPowerMatrix instantiateType(final FloatMatrixData fmd, final PowerUnit unit)
     {
         return new FloatPowerMatrix(fmd, unit);
@@ -72,9 +86,9 @@ public class MutableFloatPowerMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPower get(final int row, final int column) throws ValueException
+    protected final FloatPower instantiateScalar(final float value, final PowerUnit unit)
     {
-        return new FloatPower(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatPower(value, unit);
     }
 
 }

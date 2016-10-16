@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Volume;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class VolumeVector extends TypedDoubleVectorRel<VolumeUnit, VolumeVector, MutableVolumeVector, Volume>
+public class VolumeVector extends AbstractDoubleVectorRel<VolumeUnit, VolumeVector, MutableVolumeVector, Volume>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -123,9 +123,27 @@ public class VolumeVector extends TypedDoubleVectorRel<VolumeUnit, VolumeVector,
 
     /** {@inheritDoc} */
     @Override
-    public final Volume get(final int index) throws ValueException
+    protected final Volume instantiateScalar(final double value, final VolumeUnit unit)
     {
-        return new Volume(getInUnit(index, getUnit()), getUnit());
+        return new Volume(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final VolumeVector toDense()
+    {
+        return this.data.isDense() ? (VolumeVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final VolumeVector toSparse()
+    {
+        return this.data.isSparse() ? (VolumeVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

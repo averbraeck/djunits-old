@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Duration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class DurationMatrix extends TypedDoubleMatrixRel<TimeUnit, DurationMatrix, MutableDurationMatrix, Duration>
+public class DurationMatrix extends AbstractDoubleMatrixRel<TimeUnit, DurationMatrix, MutableDurationMatrix, Duration>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -57,6 +57,20 @@ public class DurationMatrix extends TypedDoubleMatrixRel<TimeUnit, DurationMatri
 
     /** {@inheritDoc} */
     @Override
+    public final DurationMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DurationMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final DurationMatrix instantiateType(final DoubleMatrixData dmd, final TimeUnit unit)
     {
         return new DurationMatrix(dmd, unit);
@@ -71,9 +85,9 @@ public class DurationMatrix extends TypedDoubleMatrixRel<TimeUnit, DurationMatri
 
     /** {@inheritDoc} */
     @Override
-    public final Duration get(final int row, final int column) throws ValueException
+    protected final Duration instantiateScalar(final double value, final TimeUnit unit)
     {
-        return new Duration(getInUnit(row, column, getUnit()), getUnit());
+        return new Duration(value, unit);
     }
 
     /**

@@ -33,7 +33,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Mass extends TypedDoubleScalarRel<MassUnit, Mass>
+public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -62,7 +62,7 @@ public class Mass extends TypedDoubleScalarRel<MassUnit, Mass>
 
     /** {@inheritDoc} */
     @Override
-    protected final Mass instantiateTypeRel(final double value, final MassUnit unit)
+    public final Mass instantiateRel(final double value, final MassUnit unit)
     {
         return new Mass(value, unit);
     }

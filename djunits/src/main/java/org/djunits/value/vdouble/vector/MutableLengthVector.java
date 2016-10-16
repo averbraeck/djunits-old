@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Length;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableLengthVector extends MutableTypedDoubleVectorRel<LengthUnit, LengthVector, MutableLengthVector, Length>
+public class MutableLengthVector extends AbstractMutableDoubleVectorRel<LengthUnit, LengthVector, MutableLengthVector, Length>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -126,9 +126,27 @@ public class MutableLengthVector extends MutableTypedDoubleVectorRel<LengthUnit,
 
     /** {@inheritDoc} */
     @Override
-    public final Length get(final int index) throws ValueException
+    protected final Length instantiateScalar(final double value, final LengthUnit unit)
     {
-        return new Length(getInUnit(index, getUnit()), getUnit());
+        return new Length(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableLengthVector toDense()
+    {
+        return this.data.isDense() ? (MutableLengthVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableLengthVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableLengthVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**

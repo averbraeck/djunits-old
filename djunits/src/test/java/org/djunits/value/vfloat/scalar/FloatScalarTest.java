@@ -32,7 +32,7 @@ public class FloatScalarTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; fs should be Absolute; if false; fs should be Relative
      */
-    private static void checkContentsAndType(final FloatScalar<?> fs, final float reference, final float precision,
+    private static void checkContentsAndType(final AbstractFloatScalar<?, ?> fs, final float reference, final float precision,
         final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("FloatScalar should not be null", null != fs);
@@ -522,7 +522,7 @@ public class FloatScalarTest
          * @param precision double; expected accuracy
          * @param function FloatToFloat; encapsulated function that converts one inputValue to an outputValue
          */
-        public static void tester(final float inputValue, final String operation, final FloatScalar<?> actualResult,
+        public static void tester(final float inputValue, final String operation, final AbstractFloatScalar<?, ?> actualResult,
             final double precision, final FloatToFloat function)
         {
             float expectedResult = function.function(inputValue);

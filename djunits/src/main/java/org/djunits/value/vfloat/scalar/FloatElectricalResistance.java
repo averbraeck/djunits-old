@@ -9,8 +9,8 @@ import org.djunits.unit.ElectricalResistanceUnit;
  * of:
  * 
  * <pre>
- * FloatScalar.Rel&lt;ElectricalResistanceUnit&gt; value = new FloatScalar.Rel&lt;ElectricalResistanceUnit&gt;(100.0,
- *         ElectricalResistanceUnit.SI);
+ * FloatScalar.Rel&lt;ElectricalResistanceUnit&gt; value =
+ *         new FloatScalar.Rel&lt;ElectricalResistanceUnit&gt;(100.0, ElectricalResistanceUnit.SI);
  * </pre>
  * 
  * we can now write:
@@ -30,7 +30,7 @@ import org.djunits.unit.ElectricalResistanceUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatElectricalResistance extends TypedFloatScalarRel<ElectricalResistanceUnit, FloatElectricalResistance>
+public class FloatElectricalResistance extends AbstractFloatScalarRel<ElectricalResistanceUnit, FloatElectricalResistance>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -69,7 +69,7 @@ public class FloatElectricalResistance extends TypedFloatScalarRel<ElectricalRes
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalResistance instantiateTypeRel(final float value, final ElectricalResistanceUnit unit)
+    public final FloatElectricalResistance instantiateRel(final float value, final ElectricalResistanceUnit unit)
     {
         return new FloatElectricalResistance(value, unit);
     }

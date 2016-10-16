@@ -28,7 +28,7 @@ import org.djunits.unit.MoneyUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerEnergy extends TypedDoubleScalarRel<MoneyPerEnergyUnit, MoneyPerEnergy>
+public class MoneyPerEnergy extends AbstractDoubleScalarRel<MoneyPerEnergyUnit, MoneyPerEnergy>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -54,7 +54,7 @@ public class MoneyPerEnergy extends TypedDoubleScalarRel<MoneyPerEnergyUnit, Mon
 
     /** {@inheritDoc} */
     @Override
-    protected final MoneyPerEnergy instantiateTypeRel(final double value, final MoneyPerEnergyUnit unit)
+    public final MoneyPerEnergy instantiateRel(final double value, final MoneyPerEnergyUnit unit)
     {
         return new MoneyPerEnergy(value, unit);
     }

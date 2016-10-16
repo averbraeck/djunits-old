@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Area;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class AreaVector extends TypedDoubleVectorRel<AreaUnit, AreaVector, MutableAreaVector, Area>
+public class AreaVector extends AbstractDoubleVectorRel<AreaUnit, AreaVector, MutableAreaVector, Area>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -122,9 +122,27 @@ public class AreaVector extends TypedDoubleVectorRel<AreaUnit, AreaVector, Mutab
 
     /** {@inheritDoc} */
     @Override
-    public final Area get(final int index) throws ValueException
+    protected final Area instantiateScalar(final double value, final AreaUnit unit)
     {
-        return new Area(getInUnit(index, getUnit()), getUnit());
+        return new Area(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final AreaVector toDense()
+    {
+        return this.data.isDense() ? (AreaVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final AreaVector toSparse()
+    {
+        return this.data.isSparse() ? (AreaVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

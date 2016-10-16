@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatPressure;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatPressureMatrix extends
-        MutableTypedFloatMatrixRel<PressureUnit, FloatPressureMatrix, MutableFloatPressureMatrix, FloatPressure>
+public class MutableFloatPressureMatrix
+        extends AbstractMutableFloatMatrixRel<PressureUnit, FloatPressureMatrix, MutableFloatPressureMatrix, FloatPressure>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableFloatPressureMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatPressureMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatPressureMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatPressureMatrix instantiateType(final FloatMatrixData fmd, final PressureUnit unit)
     {
         return new FloatPressureMatrix(fmd, unit);
@@ -72,9 +86,9 @@ public class MutableFloatPressureMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPressure get(final int row, final int column) throws ValueException
+    protected final FloatPressure instantiateScalar(final float value, final PressureUnit unit)
     {
-        return new FloatPressure(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatPressure(value, unit);
     }
 
 }

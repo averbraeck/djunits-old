@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Money;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyVector extends TypedDoubleVectorRel<MoneyUnit, MoneyVector, MutableMoneyVector, Money>
+public class MoneyVector extends AbstractDoubleVectorRel<MoneyUnit, MoneyVector, MutableMoneyVector, Money>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -123,9 +123,27 @@ public class MoneyVector extends TypedDoubleVectorRel<MoneyUnit, MoneyVector, Mu
 
     /** {@inheritDoc} */
     @Override
-    public final Money get(final int index) throws ValueException
+    protected final Money instantiateScalar(final double value, final MoneyUnit unit)
     {
-        return new Money(getInUnit(index, getUnit()), getUnit());
+        return new Money(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MoneyVector toDense()
+    {
+        return this.data.isDense() ? (MoneyVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MoneyVector toSparse()
+    {
+        return this.data.isSparse() ? (MoneyVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

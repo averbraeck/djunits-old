@@ -33,7 +33,7 @@ import org.djunits.unit.SpeedUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatPower extends TypedFloatScalarRel<PowerUnit, FloatPower>
+public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -72,7 +72,7 @@ public class FloatPower extends TypedFloatScalarRel<PowerUnit, FloatPower>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatPower instantiateTypeRel(final float value, final PowerUnit unit)
+    public final FloatPower instantiateRel(final float value, final PowerUnit unit)
     {
         return new FloatPower(value, unit);
     }

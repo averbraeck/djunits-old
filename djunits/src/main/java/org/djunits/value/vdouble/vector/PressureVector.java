@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Pressure;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class PressureVector extends TypedDoubleVectorRel<PressureUnit, PressureVector, MutablePressureVector, Pressure>
+public class PressureVector extends AbstractDoubleVectorRel<PressureUnit, PressureVector, MutablePressureVector, Pressure>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -124,9 +124,27 @@ public class PressureVector extends TypedDoubleVectorRel<PressureUnit, PressureV
 
     /** {@inheritDoc} */
     @Override
-    public final Pressure get(final int index) throws ValueException
+    protected final Pressure instantiateScalar(final double value, final PressureUnit unit)
     {
-        return new Pressure(getInUnit(index, getUnit()), getUnit());
+        return new Pressure(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final PressureVector toDense()
+    {
+        return this.data.isDense() ? (PressureVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final PressureVector toSparse()
+    {
+        return this.data.isSparse() ? (PressureVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

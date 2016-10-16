@@ -28,7 +28,7 @@ import org.djunits.unit.DimensionlessUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatAngle extends TypedFloatScalarRel<AngleUnit, FloatAngle>
+public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -67,7 +67,7 @@ public class FloatAngle extends TypedFloatScalarRel<AngleUnit, FloatAngle>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatAngle instantiateTypeRel(final float value, final AngleUnit unit)
+    public final FloatAngle instantiateRel(final float value, final AngleUnit unit)
     {
         return new FloatAngle(value, unit);
     }
@@ -78,7 +78,7 @@ public class FloatAngle extends TypedFloatScalarRel<AngleUnit, FloatAngle>
      * @param unit the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
-    protected final FloatDirection instantiateTypeAbs(final float value, final AngleUnit unit)
+    public final FloatDirection instantiateAbs(final float value, final AngleUnit unit)
     {
         return new FloatDirection(value, unit);
     }
@@ -102,8 +102,8 @@ public class FloatAngle extends TypedFloatScalarRel<AngleUnit, FloatAngle>
      */
     public final FloatDirection plus(final FloatDirection v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit()) : instantiateTypeAbs(
-                this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**

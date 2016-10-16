@@ -1,16 +1,12 @@
 package org.djunits.value.vfloat.matrix;
 
 import org.djunits.unit.Unit;
-import org.djunits.value.Absolute;
 import org.djunits.value.FunctionsAbs;
 import org.djunits.value.FunctionsRel;
 import org.djunits.value.MathFunctionsAbs;
 import org.djunits.value.MathFunctionsRel;
-import org.djunits.value.Relative;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.ValueUtil;
-import org.djunits.value.vfloat.FloatFunction;
 import org.djunits.value.vfloat.FloatMathFunctions;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 
@@ -26,54 +22,17 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
  * initial version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
- * @param <U> Unit; the unit of this MutableFloatMatrix
  */
-public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<U> implements MutableFloatMatrixInterface<U>
+public abstract class MutableFloatMatrix
 {
-    /**  */
-    private static final long serialVersionUID = 20151003L;
-
-    /**
-     * Construct a new MutableFloatMatrix.
-     * @param unit U; the unit of the new MutableFloatMatrix
-     */
-    protected MutableFloatMatrix(final U unit)
-    {
-        super(unit);
-    }
-
-    /** If set, any modification of the data must be preceded by replacing the data with a local copy. */
-    private boolean copyOnWrite = false;
-
-    /**
-     * Retrieve the value of the copyOnWrite flag.
-     * @return boolean
-     */
-    private boolean isCopyOnWrite()
-    {
-        return this.copyOnWrite;
-    }
-
-    /**
-     * Change the copyOnWrite flag.
-     * @param copyOnWrite boolean; the new value for the copyOnWrite flag
-     */
-    final void setCopyOnWrite(final boolean copyOnWrite)
-    {
-        this.copyOnWrite = copyOnWrite;
-    }
-
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
-
     /**
      * ABSOLUTE implementation of MutableFloatVector.
      * @param <U> Unit the unit for which this Vector will be created
      */
-    public static class Abs<U extends Unit<U>> extends MutableFloatMatrix<U> implements Absolute,
-            MathFunctionsAbs<MutableFloatMatrix.Abs<U>>, FloatMathFunctions<MutableFloatMatrix.Abs<U>>,
-            FunctionsAbs<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
+    public static class Abs<U extends Unit<U>> extends
+            AbstractMutableFloatMatrixAbs<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>, MutableFloatMatrix.Abs<U>, FloatScalar.Abs<U>>
+            implements MathFunctionsAbs<MutableFloatMatrix.Abs<U>>, FunctionsAbs<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>,
+            FloatMathFunctions<MutableFloatMatrix.Abs<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -87,9 +46,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
          */
         public Abs(final float[][] values, final U unit, final StorageType storageType) throws ValueException
         {
-            super(unit);
-            ensureRectangularAndNonEmpty(values);
-            this.data = FloatMatrixData.instantiate(values, unit.getScale(), storageType);
+            super(values, unit, storageType);
         }
 
         /**
@@ -100,8 +57,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
          */
         public Abs(final FloatScalar.Abs<U>[][] values, final StorageType storageType) throws ValueException
         {
-            super(checkUnit(values));
-            this.data = FloatMatrixData.instantiate(values, storageType);
+            super(values, storageType);
         }
 
         /**
@@ -111,36 +67,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
          */
         Abs(final FloatMatrixData data, final U unit)
         {
-            super(unit);
-            this.data = data.copy();
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Abs<U> immutable()
-        {
-            setCopyOnWrite(true);
-            return instantiateAbs(getData(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public MutableFloatMatrix.Abs<U> mutable()
-        {
-            setCopyOnWrite(true);
-            final MutableFloatMatrix.Abs<U> result = MutableFloatMatrix.instantiateMutableAbs(getData(), getUnit());
-            result.setCopyOnWrite(true);
-            return result;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Abs<U> copy()
-        {
-            return mutable();
+            super(data, unit);
         }
 
         /** {@inheritDoc} */
@@ -148,7 +75,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @SuppressWarnings("designforextension")
         public MutableFloatMatrix.Abs<U> toDense()
         {
-            return this.data.isDense() ? this : instantiateMutableAbs(this.data.toDense(), getUnit());
+            return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
         }
 
         /** {@inheritDoc} */
@@ -156,229 +83,46 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
         @SuppressWarnings("designforextension")
         public MutableFloatMatrix.Abs<U> toSparse()
         {
-            return this.data.isSparse() ? this : instantiateMutableAbs(this.data.toSparse(), getUnit());
+            return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public FloatScalar.Abs<U> get(final int row, final int column) throws ValueException
+        protected final FloatMatrix.Abs<U> instantiateTypeAbs(final FloatMatrixData dmd, final U unit)
         {
-            return new FloatScalar.Abs<U>(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Increment the value by the supplied value and return the changed vector.
-         * @param increment FloatMatrix.Rel&lt;U&gt;; amount by which the value is incremented
-         * @return the changed MutableFloatMatrix.Abs&lt;U&gt;
-         * @throws ValueException when the size of increment is not identical to the size of this
-         */
-        public final MutableFloatMatrix.Abs<U> incrementBy(final FloatMatrix.Rel<U> increment) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.incrementBy(increment.getData());
-            return this;
-        }
-
-        /**
-         * Increment the value by the supplied value and return the changed vector.
-         * @param increment FloatScalar.Rel&lt;U&gt;; amount by which the value is incremented
-         * @return the changed MutableFloatMatrix.Abs&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Abs<U> incrementBy(final FloatScalar.Rel<U> increment)
-        {
-            return incrementBy(increment.si);
-        }
-
-        /**
-         * Increment the value by the supplied constant and return the changed vector.
-         * @param increment amount by which the value is incremented
-         * @return the changed MutableFloatMatrix.Abs&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Abs<U> incrementBy(final float increment)
-        {
-            checkCopyOnWrite();
-            this.data.incrementBy(increment);
-            return this;
-        }
-
-        /**
-         * Decrement the value by the supplied value and return the changed vector.
-         * @param decrement FloatMatrix.Rel&lt;U&gt;; amount by which the value is decremented
-         * @return the changed MutableFloatMatrix.Abs&lt;U&gt;
-         * @throws ValueException when the size of increment is not identical to the size of this
-         */
-        public final MutableFloatMatrix.Abs<U> decrementBy(final FloatMatrix.Rel<U> decrement) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.decrementBy(decrement.getData());
-            return this;
-        }
-
-        /**
-         * Decrement the value by the supplied value and return the changed vector.
-         * @param decrement FloatScalar.Rel&lt;U&gt;; amount by which the value is decremented
-         * @return the changed MutableFloatMatrix.Abs&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Abs<U> decrementBy(final FloatScalar.Rel<U> decrement)
-        {
-            return decrementBy(decrement.si);
-        }
-
-        /**
-         * Decrement the value by the supplied constant and return the changed vector.
-         * @param decrement amount by which the value is decremented
-         * @return the changed MutableFloatMatrix.Abs&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Abs<U> decrementBy(final float decrement)
-        {
-            checkCopyOnWrite();
-            this.data.decrementBy(decrement);
-            return this;
-        }
-
-        /**
-         * Multiply the values in the vector by the supplied values and return the changed vector.
-         * @param factors FloatMatrix.Rel&lt;U&gt;; amounts by which the value is multiplied
-         * @return the changed MutableFloatMatrix.Abs&lt;U&gt;
-         * @throws ValueException when the size of the factors is not identical to the size of this
-         */
-        public final MutableFloatMatrix.Abs<U> multiplyBy(final FloatMatrix.Rel<U> factors) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.multiplyBy(factors.getData());
-            return this;
-        }
-
-        /**
-         * Multiply the values in the vector by the supplied value and return the changed vector.
-         * @param factor FloatScalar.Rel&lt;U&gt;; amount by which the values in the vector are multiplied
-         * @return the changed MutableFloatMatrix.Abs&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Abs<U> multiplyBy(final FloatScalar.Rel<U> factor)
-        {
-            return multiplyBy(factor.si);
+            return new FloatMatrix.Abs<U>(dmd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Abs<U> multiplyBy(final float factor)
+        protected final FloatMatrix.Rel<U> instantiateTypeRel(final FloatMatrixData dmd, final U unit)
         {
-            checkCopyOnWrite();
-            this.data.multiplyBy(factor);
-            return this;
-        }
-
-        /**
-         * Divide the values in the vector by the supplied values and return the changed vector.
-         * @param factors FloatMatrix.Rel&lt;U&gt;; amounts by which the value is divided
-         * @return the changed MutableFloatMatrix.Abs&lt;U&gt;
-         * @throws ValueException when the size of the factors is not identical to the size of this
-         */
-        public final MutableFloatMatrix.Abs<U> divideBy(final FloatMatrix.Rel<U> factors) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.divideBy(factors.getData());
-            return this;
+            return new FloatMatrix.Rel<U>(dmd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Abs<U> divideBy(final float factor)
+        protected final MutableFloatMatrix.Abs<U> instantiateMutableType(final FloatMatrixData dmd, final U unit)
         {
-            this.data.divideBy(factor);
-            return this;
-        }
-
-        /**
-         * Divide the values in the vector by the supplied value and return the changed vector.
-         * @param factor FloatScalar.Rel&lt;U&gt;; amount by which the values in the vector are divided
-         * @return the changed MutableFloatMatrix.Abs&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Abs<U> divideBy(final FloatScalar.Rel<U> factor)
-        {
-            return divideBy(factor.si);
+            return new MutableFloatMatrix.Abs<U>(dmd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Abs<U> plus(final FloatMatrix.Rel<U> rel) throws ValueException
+        protected final FloatScalar.Abs<U> instantiateScalar(final float value, final U unit)
         {
-            return instantiateAbs(this.getData().plus(rel.getData()), getUnit());
+            return new FloatScalar.Abs<U>(value, unit);
         }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Abs<U> minus(final FloatMatrix.Rel<U> rel) throws ValueException
-        {
-            return instantiateAbs(this.getData().minus(rel.getData()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Rel<U> minus(final FloatMatrix.Abs<U> abs) throws ValueException
-        {
-            return instantiateRel(this.getData().minus(abs.getData()), getUnit());
-        }
-
-        /**********************************************************************************/
-        /********************************** MATH METHODS **********************************/
-        /**********************************************************************************/
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Abs<U> ceil()
-        {
-            assign(FloatMathFunctions.CEIL);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Abs<U> floor()
-        {
-            assign(FloatMathFunctions.FLOOR);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Abs<U> rint()
-        {
-            assign(FloatMathFunctions.RINT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Abs<U> round()
-        {
-            assign(FloatMathFunctions.ROUND);
-            return this;
-        }
-
     }
-
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
 
     /**
      * RELATIVE implementation of MutableFloatMatrix.
      * @param <U> Unit the unit for which this Matrix will be created
      */
-    public static class Rel<U extends Unit<U>> extends MutableFloatMatrix<U> implements Relative,
-            MathFunctionsRel<MutableFloatMatrix.Rel<U>>, FloatMathFunctions<MutableFloatMatrix.Rel<U>>,
-            FunctionsRel<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
+    public static class Rel<U extends Unit<U>>
+            extends AbstractMutableFloatMatrixRel<U, FloatMatrix.Rel<U>, MutableFloatMatrix.Rel<U>, FloatScalar.Rel<U>>
+            implements MathFunctionsRel<MutableFloatMatrix.Rel<U>>, FunctionsRel<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>,
+            FloatMathFunctions<MutableFloatMatrix.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -392,21 +136,18 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
          */
         public Rel(final float[][] values, final U unit, final StorageType storageType) throws ValueException
         {
-            super(unit);
-            ensureRectangularAndNonEmpty(values);
-            this.data = FloatMatrixData.instantiate(values, unit.getScale(), storageType);
+            super(values, unit, storageType);
         }
 
         /**
          * Construct a new Relative Mutable FloatMatrix.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable FloatMatrix
+         * @param values FloatScalar.Abs&lt;U&gt;[][]; the values of the entries in the new Relative Mutable FloatMatrix
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Rel(final FloatScalar.Rel<U>[][] values, final StorageType storageType) throws ValueException
         {
-            super(checkUnit(values));
-            this.data = FloatMatrixData.instantiate(values, storageType);
+            super(values, storageType);
         }
 
         /**
@@ -416,36 +157,7 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
          */
         Rel(final FloatMatrixData data, final U unit)
         {
-            super(unit);
-            this.data = data.copy();
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Rel<U> immutable()
-        {
-            setCopyOnWrite(true);
-            return instantiateRel(getData(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public MutableFloatMatrix.Rel<U> mutable()
-        {
-            setCopyOnWrite(true);
-            final MutableFloatMatrix.Rel<U> result = new MutableFloatMatrix.Rel<U>(getData(), getUnit());
-            result.setCopyOnWrite(true);
-            return result;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Rel<U> copy()
-        {
-            return mutable();
+            super(data, unit);
         }
 
         /** {@inheritDoc} */
@@ -466,320 +178,30 @@ public abstract class MutableFloatMatrix<U extends Unit<U>> extends FloatMatrix<
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public FloatScalar.Rel<U> get(final int row, final int column) throws ValueException
+        public final FloatMatrix.Abs<U> plus(final FloatMatrix.Abs<U> abs) throws ValueException
         {
-            return new FloatScalar.Rel<U>(getInUnit(row, column, getUnit()), getUnit());
-        }
-
-        /**
-         * Increment the value by the supplied value and return the changed vector.
-         * @param increment FloatMatrix.Rel&lt;U&gt;; amount by which the value is incremented
-         * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-         * @throws ValueException when the size of increment is not identical to the size of this
-         */
-        public final MutableFloatMatrix.Rel<U> incrementBy(final FloatMatrix.Rel<U> increment) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.incrementBy(increment.getData());
-            return this;
-        }
-
-        /**
-         * Increment the value by the supplied value and return the changed vector.
-         * @param increment FloatScalar.Rel&lt;U&gt;; amount by which the value is incremented
-         * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Rel<U> incrementBy(final FloatScalar.Rel<U> increment)
-        {
-            return incrementBy(increment.si);
-        }
-
-        /**
-         * Increment the value by the supplied constant and return the changed vector.
-         * @param increment amount by which the value is incremented
-         * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Rel<U> incrementBy(final float increment)
-        {
-            checkCopyOnWrite();
-            this.data.incrementBy(increment);
-            return this;
-        }
-
-        /**
-         * Decrement the value by the supplied value and return the changed vector.
-         * @param decrement FloatMatrix.Rel&lt;U&gt;; amount by which the value is decremented
-         * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-         * @throws ValueException when the size of increment is not identical to the size of this
-         */
-        public final MutableFloatMatrix.Rel<U> decrementBy(final FloatMatrix.Rel<U> decrement) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.decrementBy(decrement.getData());
-            return this;
-        }
-
-        /**
-         * Decrement the value by the supplied value and return the changed vector.
-         * @param decrement FloatScalar.Rel&lt;U&gt;; amount by which the value is decremented
-         * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Rel<U> decrementBy(final FloatScalar.Rel<U> decrement)
-        {
-            return decrementBy(decrement.si);
-        }
-
-        /**
-         * Decrement the value by the supplied constant and return the changed vector.
-         * @param decrement amount by which the value is decremented
-         * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Rel<U> decrementBy(final float decrement)
-        {
-            checkCopyOnWrite();
-            this.data.decrementBy(decrement);
-            return this;
-        }
-
-        /**
-         * Multiply the values in the vector by the supplied values and return the changed vector.
-         * @param factors FloatMatrix.Rel&lt;U&gt;; amounts by which the value is multiplied
-         * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-         * @throws ValueException when the size of the factors is not identical to the size of this
-         */
-        public final MutableFloatMatrix.Rel<U> multiplyBy(final FloatMatrix.Rel<U> factors) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.multiplyBy(factors.getData());
-            return this;
-        }
-
-        /**
-         * Multiply the values in the vector by the supplied value and return the changed vector.
-         * @param factor FloatScalar.Rel&lt;U&gt;; amount by which the values in the vector are multiplied
-         * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Rel<U> multiplyBy(final FloatScalar.Rel<U> factor)
-        {
-            return multiplyBy(factor.si);
+            return new FloatMatrix.Abs<U>(this.getData().plus(abs.getData()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Rel<U> multiplyBy(final float factor)
+        protected final FloatMatrix.Rel<U> instantiateType(final FloatMatrixData dmd, final U unit)
         {
-            checkCopyOnWrite();
-            this.data.multiplyBy(factor);
-            return this;
-        }
-
-        /**
-         * Divide the values in the vector by the supplied values and return the changed vector.
-         * @param factors FloatMatrix.Rel&lt;U&gt;; amounts by which the value is divided
-         * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-         * @throws ValueException when the size of the factors is not identical to the size of this
-         */
-        public final MutableFloatMatrix.Rel<U> divideBy(final FloatMatrix.Rel<U> factors) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.divideBy(factors.getData());
-            return this;
+            return new FloatMatrix.Rel<U>(dmd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Rel<U> divideBy(final float factor)
+        protected final MutableFloatMatrix.Rel<U> instantiateMutableType(final FloatMatrixData dmd, final U unit)
         {
-            this.data.divideBy(factor);
-            return this;
-        }
-
-        /**
-         * Divide the values in the vector by the supplied value and return the changed vector.
-         * @param factor FloatScalar.Rel&lt;U&gt;; amount by which the values in the vector are divided
-         * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-         */
-        public final MutableFloatMatrix.Rel<U> divideBy(final FloatScalar.Rel<U> factor)
-        {
-            return divideBy(factor.si);
+            return new MutableFloatMatrix.Rel<U>(dmd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Rel<U> plus(final FloatMatrix.Rel<U> rel) throws ValueException
+        protected final FloatScalar.Rel<U> instantiateScalar(final float value, final U unit)
         {
-            return instantiateRel(this.getData().plus(rel.getData()), getUnit());
+            return new FloatScalar.Rel<U>(value, unit);
         }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Abs<U> plus(final FloatMatrix.Abs<U> abs) throws ValueException
-        {
-            return instantiateAbs(this.getData().plus(abs.getData()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Rel<U> minus(final FloatMatrix.Rel<U> rel) throws ValueException
-        {
-            return instantiateRel(this.getData().minus(rel.getData()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Rel<U> times(final FloatMatrix.Rel<U> rel) throws ValueException
-        {
-            return instantiateRel(this.getData().times(rel.getData()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Rel<U> divide(final FloatMatrix.Rel<U> rel) throws ValueException
-        {
-            return instantiateRel(this.getData().divide(rel.getData()), getUnit());
-        }
-
-        /**********************************************************************************/
-        /********************************** MATH METHODS **********************************/
-        /**********************************************************************************/
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Rel<U> abs()
-        {
-            assign(FloatMathFunctions.ABS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Rel<U> ceil()
-        {
-            assign(FloatMathFunctions.CEIL);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Rel<U> floor()
-        {
-            assign(FloatMathFunctions.FLOOR);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Rel<U> rint()
-        {
-            assign(FloatMathFunctions.RINT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableFloatMatrix.Rel<U> round()
-        {
-            assign(FloatMathFunctions.ROUND);
-            return this;
-        }
-
-    }
-
-    /**********************************************************************************/
-    /******************************** ABS + REL METHODS *******************************/
-    /**********************************************************************************/
-
-    /**
-     * Instantiate a matrix based on the type of data.
-     * @param dmData the FloatMatrixData
-     * @param unit the unit to use
-     * @param <U> the unit
-     * @return an instantiated vector
-     */
-    static <U extends Unit<U>> MutableFloatMatrix.Abs<U> instantiateMutableAbs(final FloatMatrixData dmData, final U unit)
-    {
-        return new MutableFloatMatrix.Abs<U>(dmData, unit);
-    }
-
-    /**
-     * Check the copyOnWrite flag and, if it is set, make a deep copy of the data and clear the flag.
-     */
-    protected final void checkCopyOnWrite()
-    {
-        if (isCopyOnWrite())
-        {
-            this.data = this.data.copy();
-            setCopyOnWrite(false);
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void setSI(final int row, final int column, final float valueSI) throws ValueException
-    {
-        checkIndex(row, column);
-        checkCopyOnWrite();
-        this.data.setSI(row, column, valueSI);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void set(final int row, final int column, final FloatScalar<U> value) throws ValueException
-    {
-        setSI(row, column, value.getSI());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void setInUnit(final int row, final int column, final float value, final U valueUnit) throws ValueException
-    {
-        setSI(row, column, (float) ValueUtil.expressAsSIUnit(value, valueUnit));
-    }
-
-    /**
-     * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
-     * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a dense
-     * dataset if necessary.
-     * @param floatFunction the function to apply
-     */
-    public final void assign(final FloatFunction floatFunction)
-    {
-        checkCopyOnWrite();
-        if (this.data instanceof FloatMatrixDataDense)
-        {
-            ((FloatMatrixDataDense) this.data).assign(floatFunction);
-        }
-        else
-        {
-            FloatMatrixDataDense dvmd = ((FloatMatrixDataSparse) this.data).toDense();
-            dvmd.assign(floatFunction);
-            this.data = dvmd.toSparse();
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void normalize() throws ValueException
-    {
-        float sum = zSum();
-        if (0 == sum)
-        {
-            throw new ValueException("zSum is 0; cannot normalize");
-        }
-        checkCopyOnWrite();
-        this.data.divideBy(sum);
     }
 }

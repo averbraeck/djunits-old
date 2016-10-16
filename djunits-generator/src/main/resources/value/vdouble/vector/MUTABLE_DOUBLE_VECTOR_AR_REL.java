@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Mutable%TypeRel%Vector extends MutableTypedDoubleVectorRel<%TypeUnit%, %TypeRel%Vector, Mutable%TypeRel%Vector, %TypeRel%>
+public class Mutable%TypeRel%Vector extends AbstractMutableDoubleVectorRel<%TypeUnit%, %TypeRel%Vector, Mutable%TypeRel%Vector, %TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -106,7 +106,7 @@ public class Mutable%TypeRel%Vector extends MutableTypedDoubleVectorRel<%TypeUni
     {
         super(data, unit);
     }
-
+    
     /** {@inheritDoc} */
     @Override
     protected final %TypeRel%Vector instantiateType(final DoubleVectorData dvd, final %TypeUnit% unit)
@@ -116,17 +116,34 @@ public class Mutable%TypeRel%Vector extends MutableTypedDoubleVectorRel<%TypeUni
 
     /** {@inheritDoc} */
     @Override
-    protected final Mutable%TypeRel%Vector
-        instantiateMutableType(final DoubleVectorData dvd, final %TypeUnit% unit)
+    protected final Mutable%TypeRel%Vector instantiateMutableType(final DoubleVectorData dvd, final %TypeUnit% unit)
     {
         return new Mutable%TypeRel%Vector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TypeRel% get(final int index) throws ValueException
+    protected final %TypeRel% instantiateScalar(final double value, final %TypeUnit% unit)
     {
-        return new %TypeRel%(getInUnit(index, getUnit()), getUnit());
+        return new %TypeRel%(value, unit);
+    }
+    
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final Mutable%TypeRel%Vector toDense()
+    {
+        return this.data.isDense() ? (Mutable%TypeRel%Vector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final Mutable%TypeRel%Vector toSparse()
+    {
+        return this.data.isSparse() ? (Mutable%TypeRel%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
     
     /**

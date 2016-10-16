@@ -19,9 +19,8 @@ import org.djunits.value.vdouble.scalar.ElectricalPotential;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableElectricalPotentialVector
-        extends
-        MutableTypedDoubleVectorRel<ElectricalPotentialUnit, ElectricalPotentialVector, MutableElectricalPotentialVector, ElectricalPotential>
+public class MutableElectricalPotentialVector extends
+        AbstractMutableDoubleVectorRel<ElectricalPotentialUnit, ElectricalPotentialVector, MutableElectricalPotentialVector, ElectricalPotential>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -131,9 +130,29 @@ public class MutableElectricalPotentialVector
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalPotential get(final int index) throws ValueException
+    protected final ElectricalPotential instantiateScalar(final double value, final ElectricalPotentialUnit unit)
     {
-        return new ElectricalPotential(getInUnit(index, getUnit()), getUnit());
+        return new ElectricalPotential(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableElectricalPotentialVector toDense()
+    {
+        return this.data.isDense() ? (MutableElectricalPotentialVector) this
+                : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableElectricalPotentialVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableElectricalPotentialVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

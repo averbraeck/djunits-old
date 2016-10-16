@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Mass;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MassMatrix extends TypedDoubleMatrixRel<MassUnit, MassMatrix, MutableMassMatrix, Mass>
+public class MassMatrix extends AbstractDoubleMatrixRel<MassUnit, MassMatrix, MutableMassMatrix, Mass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -55,6 +55,20 @@ public class MassMatrix extends TypedDoubleMatrixRel<MassUnit, MassMatrix, Mutab
 
     /** {@inheritDoc} */
     @Override
+    public final MassMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MassMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final MassMatrix instantiateType(final DoubleMatrixData dmd, final MassUnit unit)
     {
         return new MassMatrix(dmd, unit);
@@ -69,9 +83,9 @@ public class MassMatrix extends TypedDoubleMatrixRel<MassUnit, MassMatrix, Mutab
 
     /** {@inheritDoc} */
     @Override
-    public final Mass get(final int row, final int column) throws ValueException
+    protected final Mass instantiateScalar(final double value, final MassUnit unit)
     {
-        return new Mass(getInUnit(row, column, getUnit()), getUnit());
+        return new Mass(value, unit);
     }
 
 }
