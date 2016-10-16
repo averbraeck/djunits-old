@@ -218,7 +218,7 @@ public class DoubleScalarTest
         double rightValue = 234.5;
         DoubleScalar.Abs<LengthUnit> left = new DoubleScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         DoubleScalar.Rel<LengthUnit> right = new DoubleScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        DoubleScalar.Abs<?> result = DoubleScalar.plus(left, right);
+        DoubleScalar.Abs<LengthUnit> result = DoubleScalar.plus(left, right);
         assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(),
             result.getSI(), 0.001);
     }
@@ -234,7 +234,7 @@ public class DoubleScalarTest
         double rightValue = 234.5;
         DoubleScalar.Abs<LengthUnit> left = new DoubleScalar.Abs<LengthUnit>(leftValue, LengthUnit.MILE);
         DoubleScalar.Rel<LengthUnit> right = new DoubleScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        DoubleScalar.Abs<?> result = DoubleScalar.minus(left, right);
+        DoubleScalar.Abs<LengthUnit> result = DoubleScalar.minus(left, right);
         assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(),
             result.getSI(), 0.001);
     }
@@ -456,7 +456,7 @@ public class DoubleScalarTest
         double rightValue = 234.5;
         DoubleScalar.Rel<LengthUnit> left = new DoubleScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         DoubleScalar.Rel<LengthUnit> right = new DoubleScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        DoubleScalar.Rel<?> result = DoubleScalar.plus(left, right);
+        DoubleScalar.Rel<LengthUnit> result = DoubleScalar.plus(left, right);
         assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(),
             result.getSI(), 0.001);
     }
@@ -472,7 +472,7 @@ public class DoubleScalarTest
         double rightValue = 234.5;
         DoubleScalar.Rel<LengthUnit> left = new DoubleScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         DoubleScalar.Rel<LengthUnit> right = new DoubleScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        DoubleScalar.Rel<?> result = DoubleScalar.minus(left, right);
+        DoubleScalar.Rel<LengthUnit> result = DoubleScalar.minus(left, right);
         assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(),
             result.getSI(), 0.001);
     }

@@ -2,6 +2,21 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="2.00.00" date="2016-10-16" description="Major upgrade of type hierarchy">
+      <action dev="averbraeck" type="update">
+        A major upgrade has been made to the type hierarchy. Instead of the TypedXXX template functions,
+        abstract classes and interfaces have been introduced that are more natural to implement and have
+        faster execution than the typed templates. 
+      </action>
+      <action dev="averbraeck" type="update">
+        The DoubleScalar, DoubleVector, DoubleMatrix classes are not at the root of the typed classes
+        anymore. Rather, they are an implementation of the Abstract classes, next to the typed classes
+        in the type hierarchy. So a Length does not extend a DoubleScalar.Rel&lt;LengthUnit&gt; anymore.
+        Rather, Length and DoubleScalar.Rel&lt;LengthUnit&gt; both extend AbstractDoubleScalarRel.
+        Same for the Float classes.
+      </action>
+    </release>
+
     <release version="1.03.01" date="2016-05-28" description="Min and max functions added for scalars">
       <action dev="averbraeck" type="add">
         min and max functions have been added for scalars, for combinations of abs,
