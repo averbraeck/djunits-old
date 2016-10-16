@@ -27,6 +27,11 @@
   bodyStart ("vector_classes");
   ?>
 
+    <h2>Class diagram for the Scalar classes</h2>
+    <p>The below class diagram shows the relationships between the main classes that make up the DoubleScalars. Several examples of implemented 
+	  classes and their relations are shown.</p>
+    <br /> <img src="abs-rel-dimless.png" alt="DoubleScalar class diagram" /> <br />
+
     <h2>Class diagram for the Vector classes</h2>
     <p>The below class diagram shows the relationships between the main classes that make up the DoubleVector. As an example, the relationships of the
       relative AreaVector and MutableAreaVector are shown.</p>
