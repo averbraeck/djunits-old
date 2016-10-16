@@ -33,7 +33,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatArea extends TypedFloatScalarRel<AreaUnit, FloatArea>
+public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -72,7 +72,7 @@ public class FloatArea extends TypedFloatScalarRel<AreaUnit, FloatArea>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatArea instantiateTypeRel(final float value, final AreaUnit unit)
+    public final FloatArea instantiateRel(final float value, final AreaUnit unit)
     {
         return new FloatArea(value, unit);
     }

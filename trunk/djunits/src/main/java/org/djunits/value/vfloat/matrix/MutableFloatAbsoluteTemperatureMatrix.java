@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatAbsoluteTemperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatAbsoluteTemperatureMatrix
-        extends
-        MutableTypedFloatMatrixAbs<TemperatureUnit, FloatAbsoluteTemperatureMatrix, FloatTemperatureMatrix, MutableFloatAbsoluteTemperatureMatrix, FloatAbsoluteTemperature>
+public class MutableFloatAbsoluteTemperatureMatrix extends
+        AbstractMutableFloatMatrixAbs<TemperatureUnit, FloatAbsoluteTemperatureMatrix, FloatTemperatureMatrix, MutableFloatAbsoluteTemperatureMatrix, FloatAbsoluteTemperature>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -61,6 +60,20 @@ public class MutableFloatAbsoluteTemperatureMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatAbsoluteTemperatureMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatAbsoluteTemperatureMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatAbsoluteTemperatureMatrix instantiateTypeAbs(final FloatMatrixData fmd, final TemperatureUnit unit)
     {
         return new FloatAbsoluteTemperatureMatrix(fmd, unit);
@@ -83,9 +96,9 @@ public class MutableFloatAbsoluteTemperatureMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAbsoluteTemperature get(final int row, final int column) throws ValueException
+    protected final FloatAbsoluteTemperature instantiateScalar(final float value, final TemperatureUnit unit)
     {
-        return new FloatAbsoluteTemperature(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatAbsoluteTemperature(value, unit);
     }
 
     /**

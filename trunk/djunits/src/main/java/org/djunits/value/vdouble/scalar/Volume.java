@@ -34,7 +34,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Volume extends TypedDoubleScalarRel<VolumeUnit, Volume>
+public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -63,7 +63,7 @@ public class Volume extends TypedDoubleScalarRel<VolumeUnit, Volume>
 
     /** {@inheritDoc} */
     @Override
-    protected final Volume instantiateTypeRel(final double value, final VolumeUnit unit)
+    public final Volume instantiateRel(final double value, final VolumeUnit unit)
     {
         return new Volume(value, unit);
     }

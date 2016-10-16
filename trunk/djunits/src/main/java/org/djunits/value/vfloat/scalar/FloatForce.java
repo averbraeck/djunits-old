@@ -34,7 +34,7 @@ import org.djunits.unit.PressureUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatForce extends TypedFloatScalarRel<ForceUnit, FloatForce>
+public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -73,7 +73,7 @@ public class FloatForce extends TypedFloatScalarRel<ForceUnit, FloatForce>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatForce instantiateTypeRel(final float value, final ForceUnit unit)
+    public final FloatForce instantiateRel(final float value, final ForceUnit unit)
     {
         return new FloatForce(value, unit);
     }

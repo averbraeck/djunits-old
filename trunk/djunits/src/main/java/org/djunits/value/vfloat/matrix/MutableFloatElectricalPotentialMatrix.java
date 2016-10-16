@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalPotential;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatElectricalPotentialMatrix
-        extends
-        MutableTypedFloatMatrixRel<ElectricalPotentialUnit, FloatElectricalPotentialMatrix, MutableFloatElectricalPotentialMatrix, FloatElectricalPotential>
+public class MutableFloatElectricalPotentialMatrix extends
+        AbstractMutableFloatMatrixRel<ElectricalPotentialUnit, FloatElectricalPotentialMatrix, MutableFloatElectricalPotentialMatrix, FloatElectricalPotential>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -60,7 +59,22 @@ public class MutableFloatElectricalPotentialMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalPotentialMatrix instantiateType(final FloatMatrixData fmd, final ElectricalPotentialUnit unit)
+    public final MutableFloatElectricalPotentialMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatElectricalPotentialMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatElectricalPotentialMatrix instantiateType(final FloatMatrixData fmd,
+            final ElectricalPotentialUnit unit)
     {
         return new FloatElectricalPotentialMatrix(fmd, unit);
     }
@@ -75,9 +89,9 @@ public class MutableFloatElectricalPotentialMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatElectricalPotential get(final int row, final int column) throws ValueException
+    protected final FloatElectricalPotential instantiateScalar(final float value, final ElectricalPotentialUnit unit)
     {
-        return new FloatElectricalPotential(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatElectricalPotential(value, unit);
     }
 
 }

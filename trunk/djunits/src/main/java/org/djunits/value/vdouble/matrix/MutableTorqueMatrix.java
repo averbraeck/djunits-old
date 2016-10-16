@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Torque;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableTorqueMatrix extends MutableTypedDoubleMatrixRel<TorqueUnit, TorqueMatrix, MutableTorqueMatrix, Torque>
+public class MutableTorqueMatrix extends AbstractMutableDoubleMatrixRel<TorqueUnit, TorqueMatrix, MutableTorqueMatrix, Torque>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -56,6 +56,20 @@ public class MutableTorqueMatrix extends MutableTypedDoubleMatrixRel<TorqueUnit,
 
     /** {@inheritDoc} */
     @Override
+    public final MutableTorqueMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableTorqueMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final TorqueMatrix instantiateType(final DoubleMatrixData dmd, final TorqueUnit unit)
     {
         return new TorqueMatrix(dmd, unit);
@@ -70,9 +84,9 @@ public class MutableTorqueMatrix extends MutableTypedDoubleMatrixRel<TorqueUnit,
 
     /** {@inheritDoc} */
     @Override
-    public final Torque get(final int row, final int column) throws ValueException
+    protected final Torque instantiateScalar(final double value, final TorqueUnit unit)
     {
-        return new Torque(getInUnit(row, column, getUnit()), getUnit());
+        return new Torque(value, unit);
     }
 
 }

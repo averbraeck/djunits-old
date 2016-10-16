@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.Frequency;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFrequencyMatrix extends
-        MutableTypedDoubleMatrixRel<FrequencyUnit, FrequencyMatrix, MutableFrequencyMatrix, Frequency>
+public class MutableFrequencyMatrix
+        extends AbstractMutableDoubleMatrixRel<FrequencyUnit, FrequencyMatrix, MutableFrequencyMatrix, Frequency>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableFrequencyMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFrequencyMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFrequencyMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FrequencyMatrix instantiateType(final DoubleMatrixData dmd, final FrequencyUnit unit)
     {
         return new FrequencyMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class MutableFrequencyMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final Frequency get(final int row, final int column) throws ValueException
+    protected final Frequency instantiateScalar(final double value, final FrequencyUnit unit)
     {
-        return new Frequency(getInUnit(row, column, getUnit()), getUnit());
+        return new Frequency(value, unit);
     }
 
 }

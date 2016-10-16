@@ -28,7 +28,7 @@ import org.djunits.unit.MoneyUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatMoneyPerLength extends TypedFloatScalarRel<MoneyPerLengthUnit, FloatMoneyPerLength>
+public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUnit, FloatMoneyPerLength>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -64,7 +64,7 @@ public class FloatMoneyPerLength extends TypedFloatScalarRel<MoneyPerLengthUnit,
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatMoneyPerLength instantiateTypeRel(final float value, final MoneyPerLengthUnit unit)
+    public final FloatMoneyPerLength instantiateRel(final float value, final MoneyPerLengthUnit unit)
     {
         return new FloatMoneyPerLength(value, unit);
     }

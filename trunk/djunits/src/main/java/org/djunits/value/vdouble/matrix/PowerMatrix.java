@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Power;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class PowerMatrix extends TypedDoubleMatrixRel<PowerUnit, PowerMatrix, MutablePowerMatrix, Power>
+public class PowerMatrix extends AbstractDoubleMatrixRel<PowerUnit, PowerMatrix, MutablePowerMatrix, Power>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -55,6 +55,20 @@ public class PowerMatrix extends TypedDoubleMatrixRel<PowerUnit, PowerMatrix, Mu
 
     /** {@inheritDoc} */
     @Override
+    public final PowerMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final PowerMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final PowerMatrix instantiateType(final DoubleMatrixData dmd, final PowerUnit unit)
     {
         return new PowerMatrix(dmd, unit);
@@ -69,9 +83,9 @@ public class PowerMatrix extends TypedDoubleMatrixRel<PowerUnit, PowerMatrix, Mu
 
     /** {@inheritDoc} */
     @Override
-    public final Power get(final int row, final int column) throws ValueException
+    protected final Power instantiateScalar(final double value, final PowerUnit unit)
     {
-        return new Power(getInUnit(row, column, getUnit()), getUnit());
+        return new Power(value, unit);
     }
 
 }

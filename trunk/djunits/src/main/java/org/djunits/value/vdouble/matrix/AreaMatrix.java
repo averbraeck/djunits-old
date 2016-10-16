@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Area;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class AreaMatrix extends TypedDoubleMatrixRel<AreaUnit, AreaMatrix, MutableAreaMatrix, Area>
+public class AreaMatrix extends AbstractDoubleMatrixRel<AreaUnit, AreaMatrix, MutableAreaMatrix, Area>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -55,6 +55,20 @@ public class AreaMatrix extends TypedDoubleMatrixRel<AreaUnit, AreaMatrix, Mutab
 
     /** {@inheritDoc} */
     @Override
+    public final AreaMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final AreaMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final AreaMatrix instantiateType(final DoubleMatrixData dmd, final AreaUnit unit)
     {
         return new AreaMatrix(dmd, unit);
@@ -69,9 +83,9 @@ public class AreaMatrix extends TypedDoubleMatrixRel<AreaUnit, AreaMatrix, Mutab
 
     /** {@inheritDoc} */
     @Override
-    public final Area get(final int row, final int column) throws ValueException
+    protected final Area instantiateScalar(final double value, final AreaUnit unit)
     {
-        return new Area(getInUnit(row, column, getUnit()), getUnit());
+        return new Area(value, unit);
     }
 
 }

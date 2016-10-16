@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatDuration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatDurationMatrix extends
-        TypedFloatMatrixRel<TimeUnit, FloatDurationMatrix, MutableFloatDurationMatrix, FloatDuration>
+public class FloatDurationMatrix
+        extends AbstractFloatMatrixRel<TimeUnit, FloatDurationMatrix, MutableFloatDurationMatrix, FloatDuration>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -29,8 +29,7 @@ public class FloatDurationMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatDurationMatrix(final float[][] values, final TimeUnit unit, final StorageType storageType)
-            throws ValueException
+    public FloatDurationMatrix(final float[][] values, final TimeUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,6 +57,20 @@ public class FloatDurationMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatDurationMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDurationMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatDurationMatrix instantiateType(final FloatMatrixData fmd, final TimeUnit unit)
     {
         return new FloatDurationMatrix(fmd, unit);
@@ -72,9 +85,9 @@ public class FloatDurationMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDuration get(final int row, final int column) throws ValueException
+    protected final FloatDuration instantiateScalar(final float value, final TimeUnit unit)
     {
-        return new FloatDuration(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatDuration(value, unit);
     }
 
     /**

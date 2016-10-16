@@ -27,7 +27,7 @@ import org.djunits.unit.TimeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Time extends TypedDoubleScalarAbs<TimeUnit, Time, Duration>
+public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, Duration>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -56,14 +56,14 @@ public class Time extends TypedDoubleScalarAbs<TimeUnit, Time, Duration>
 
     /** {@inheritDoc} */
     @Override
-    protected final Time instantiateTypeAbs(final double value, final TimeUnit unit)
+    public final Time instantiateAbs(final double value, final TimeUnit unit)
     {
         return new Time(value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Duration instantiateTypeRel(final double value, final TimeUnit unit)
+    public final Duration instantiateRel(final double value, final TimeUnit unit)
     {
         return new Duration(value, unit);
     }

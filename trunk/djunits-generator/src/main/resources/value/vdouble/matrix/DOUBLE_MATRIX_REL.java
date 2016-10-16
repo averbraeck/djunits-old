@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.*;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class %Type%Matrix extends
-    TypedDoubleMatrixRel<%Type%Unit, %Type%Matrix, Mutable%Type%Matrix, %Type%>
+AbstractDoubleMatrixRel<%Type%Unit, %Type%Matrix, Mutable%Type%Matrix, %Type%>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -61,6 +61,20 @@ public class %Type%Matrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final %Type%Matrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final %Type%Matrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final %Type%Matrix instantiateType(final DoubleMatrixData dmd, final %Type%Unit unit)
     {
         return new %Type%Matrix(dmd, unit);
@@ -75,10 +89,11 @@ public class %Type%Matrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final %Type% get(final int row, final int column) throws ValueException
+    protected final %Type% instantiateScalar(final double value, final %Type%Unit unit)
     {
-        return new %Type%(getInUnit(row, column, getUnit()), getUnit());
+        return new %Type%(value, unit);
     }
+
 
     
 %FORMULAS%%Type%%

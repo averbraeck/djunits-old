@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Time;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class TimeVector extends TypedDoubleVectorAbs<TimeUnit, TimeVector, DurationVector, MutableTimeVector, Time>
+public class TimeVector extends AbstractDoubleVectorAbs<TimeUnit, TimeVector, DurationVector, MutableTimeVector, Time>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -130,9 +130,27 @@ public class TimeVector extends TypedDoubleVectorAbs<TimeUnit, TimeVector, Durat
 
     /** {@inheritDoc} */
     @Override
-    public final Time get(final int index) throws ValueException
+    protected final Time instantiateScalar(final double value, final TimeUnit unit)
     {
-        return new Time(getInUnit(index, getUnit()), getUnit());
+        return new Time(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final TimeVector toDense()
+    {
+        return this.data.isDense() ? (TimeVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final TimeVector toSparse()
+    {
+        return this.data.isSparse() ? (TimeVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
 
     /**

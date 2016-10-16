@@ -27,7 +27,7 @@ import org.djunits.unit.DimensionlessUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class AngleSolid extends TypedDoubleScalarRel<AngleSolidUnit, AngleSolid>
+public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -56,7 +56,7 @@ public class AngleSolid extends TypedDoubleScalarRel<AngleSolidUnit, AngleSolid>
 
     /** {@inheritDoc} */
     @Override
-    protected final AngleSolid instantiateTypeRel(final double value, final AngleSolidUnit unit)
+    public final AngleSolid instantiateRel(final double value, final AngleSolidUnit unit)
     {
         return new AngleSolid(value, unit);
     }

@@ -19,8 +19,8 @@ import org.djunits.value.vfloat.scalar.FloatAngle;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatAngleVector extends
-        MutableTypedFloatVectorRel<AngleUnit, FloatAngleVector, MutableFloatAngleVector, FloatAngle>
+public class MutableFloatAngleVector
+        extends AbstractMutableFloatVectorRel<AngleUnit, FloatAngleVector, MutableFloatAngleVector, FloatAngle>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -126,14 +126,32 @@ public class MutableFloatAngleVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAngle get(final int index) throws ValueException
+    protected final FloatAngle instantiateScalar(final float value, final AngleUnit unit)
     {
-        return new FloatAngle(getInUnit(index, getUnit()), getUnit());
+        return new FloatAngle(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatAngleVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatAngleVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatAngleVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatAngleVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**
      * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative FloatAngle vector.
+     * @return an absolute version of this relative Angle vector.
      */
     public final MutableFloatDirectionVector toAbs()
     {

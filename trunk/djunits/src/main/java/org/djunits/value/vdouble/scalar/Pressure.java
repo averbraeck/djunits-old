@@ -29,7 +29,7 @@ import org.djunits.unit.PressureUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Pressure extends TypedDoubleScalarRel<PressureUnit, Pressure>
+public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -58,7 +58,7 @@ public class Pressure extends TypedDoubleScalarRel<PressureUnit, Pressure>
 
     /** {@inheritDoc} */
     @Override
-    protected final Pressure instantiateTypeRel(final double value, final PressureUnit unit)
+    public final Pressure instantiateRel(final double value, final PressureUnit unit)
     {
         return new Pressure(value, unit);
     }

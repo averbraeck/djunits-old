@@ -27,7 +27,7 @@ import org.djunits.unit.TemperatureUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class AbsoluteTemperature extends TypedDoubleScalarAbs<TemperatureUnit, AbsoluteTemperature, Temperature>
+public class AbsoluteTemperature extends AbstractDoubleScalarAbs<TemperatureUnit, AbsoluteTemperature, Temperature>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -56,14 +56,14 @@ public class AbsoluteTemperature extends TypedDoubleScalarAbs<TemperatureUnit, A
 
     /** {@inheritDoc} */
     @Override
-    protected final AbsoluteTemperature instantiateTypeAbs(final double value, final TemperatureUnit unit)
+    public final AbsoluteTemperature instantiateAbs(final double value, final TemperatureUnit unit)
     {
         return new AbsoluteTemperature(value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Temperature instantiateTypeRel(final double value, final TemperatureUnit unit)
+    public final Temperature instantiateRel(final double value, final TemperatureUnit unit)
     {
         return new Temperature(value, unit);
     }

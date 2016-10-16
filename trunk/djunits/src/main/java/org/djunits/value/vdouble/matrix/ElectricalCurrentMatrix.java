@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.ElectricalCurrent;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class ElectricalCurrentMatrix extends
-        TypedDoubleMatrixRel<ElectricalCurrentUnit, ElectricalCurrentMatrix, MutableElectricalCurrentMatrix, ElectricalCurrent>
+        AbstractDoubleMatrixRel<ElectricalCurrentUnit, ElectricalCurrentMatrix, MutableElectricalCurrentMatrix, ElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class ElectricalCurrentMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final ElectricalCurrentMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final ElectricalCurrentMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final ElectricalCurrentMatrix instantiateType(final DoubleMatrixData dmd, final ElectricalCurrentUnit unit)
     {
         return new ElectricalCurrentMatrix(dmd, unit);
@@ -73,9 +87,9 @@ public class ElectricalCurrentMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalCurrent get(final int row, final int column) throws ValueException
+    protected final ElectricalCurrent instantiateScalar(final double value, final ElectricalCurrentUnit unit)
     {
-        return new ElectricalCurrent(getInUnit(row, column, getUnit()), getUnit());
+        return new ElectricalCurrent(value, unit);
     }
 
 }

@@ -33,7 +33,7 @@ import org.djunits.unit.MoneyUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Money extends TypedDoubleScalarRel<MoneyUnit, Money>
+public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -59,7 +59,7 @@ public class Money extends TypedDoubleScalarRel<MoneyUnit, Money>
 
     /** {@inheritDoc} */
     @Override
-    protected final Money instantiateTypeRel(final double value, final MoneyUnit unit)
+    public final Money instantiateRel(final double value, final MoneyUnit unit)
     {
         return new Money(value, unit);
     }

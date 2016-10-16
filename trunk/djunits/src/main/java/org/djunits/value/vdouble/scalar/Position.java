@@ -27,7 +27,7 @@ import org.djunits.unit.LengthUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Position extends TypedDoubleScalarAbs<LengthUnit, Position, Length>
+public class Position extends AbstractDoubleScalarAbs<LengthUnit, Position, Length>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -56,14 +56,14 @@ public class Position extends TypedDoubleScalarAbs<LengthUnit, Position, Length>
 
     /** {@inheritDoc} */
     @Override
-    protected final Position instantiateTypeAbs(final double value, final LengthUnit unit)
+    public final Position instantiateAbs(final double value, final LengthUnit unit)
     {
         return new Position(value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Length instantiateTypeRel(final double value, final LengthUnit unit)
+    public final Length instantiateRel(final double value, final LengthUnit unit)
     {
         return new Length(value, unit);
     }

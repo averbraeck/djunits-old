@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalCharge;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatElectricalChargeMatrix
-        extends
-        MutableTypedFloatMatrixRel<ElectricalChargeUnit, FloatElectricalChargeMatrix, MutableFloatElectricalChargeMatrix, FloatElectricalCharge>
+public class MutableFloatElectricalChargeMatrix extends
+        AbstractMutableFloatMatrixRel<ElectricalChargeUnit, FloatElectricalChargeMatrix, MutableFloatElectricalChargeMatrix, FloatElectricalCharge>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -60,6 +59,20 @@ public class MutableFloatElectricalChargeMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatElectricalChargeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatElectricalChargeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatElectricalChargeMatrix instantiateType(final FloatMatrixData fmd, final ElectricalChargeUnit unit)
     {
         return new FloatElectricalChargeMatrix(fmd, unit);
@@ -75,9 +88,9 @@ public class MutableFloatElectricalChargeMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatElectricalCharge get(final int row, final int column) throws ValueException
+    protected final FloatElectricalCharge instantiateScalar(final float value, final ElectricalChargeUnit unit)
     {
-        return new FloatElectricalCharge(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatElectricalCharge(value, unit);
     }
 
 }

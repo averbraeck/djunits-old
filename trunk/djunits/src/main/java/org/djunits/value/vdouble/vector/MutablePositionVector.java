@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.Position;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutablePositionVector extends
-        MutableTypedDoubleVectorAbs<LengthUnit, PositionVector, LengthVector, MutablePositionVector, Position>
+public class MutablePositionVector
+        extends AbstractMutableDoubleVectorAbs<LengthUnit, PositionVector, LengthVector, MutablePositionVector, Position>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -134,9 +134,27 @@ public class MutablePositionVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final Position get(final int index) throws ValueException
+    protected final Position instantiateScalar(final double value, final LengthUnit unit)
     {
-        return new Position(getInUnit(index, getUnit()), getUnit());
+        return new Position(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutablePositionVector toDense()
+    {
+        return this.data.isDense() ? (MutablePositionVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutablePositionVector toSparse()
+    {
+        return this.data.isSparse() ? (MutablePositionVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**

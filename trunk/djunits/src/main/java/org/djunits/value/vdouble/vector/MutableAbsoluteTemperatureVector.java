@@ -19,9 +19,8 @@ import org.djunits.value.vdouble.scalar.AbsoluteTemperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableAbsoluteTemperatureVector
-        extends
-        MutableTypedDoubleVectorAbs<TemperatureUnit, AbsoluteTemperatureVector, TemperatureVector, MutableAbsoluteTemperatureVector, AbsoluteTemperature>
+public class MutableAbsoluteTemperatureVector extends
+        AbstractMutableDoubleVectorAbs<TemperatureUnit, AbsoluteTemperatureVector, TemperatureVector, MutableAbsoluteTemperatureVector, AbsoluteTemperature>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -46,8 +45,8 @@ public class MutableAbsoluteTemperatureVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableAbsoluteTemperatureVector(final List<Double> values, final TemperatureUnit unit, final StorageType storageType)
-            throws ValueException
+    public MutableAbsoluteTemperatureVector(final List<Double> values, final TemperatureUnit unit,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -139,9 +138,29 @@ public class MutableAbsoluteTemperatureVector
 
     /** {@inheritDoc} */
     @Override
-    public final AbsoluteTemperature get(final int index) throws ValueException
+    protected final AbsoluteTemperature instantiateScalar(final double value, final TemperatureUnit unit)
     {
-        return new AbsoluteTemperature(getInUnit(index, getUnit()), getUnit());
+        return new AbsoluteTemperature(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableAbsoluteTemperatureVector toDense()
+    {
+        return this.data.isDense() ? (MutableAbsoluteTemperatureVector) this
+                : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableAbsoluteTemperatureVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableAbsoluteTemperatureVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**

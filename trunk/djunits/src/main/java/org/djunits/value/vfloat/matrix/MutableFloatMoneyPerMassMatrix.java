@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerMass;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatMoneyPerMassMatrix
-        extends
-        MutableTypedFloatMatrixRel<MoneyPerMassUnit, FloatMoneyPerMassMatrix, MutableFloatMoneyPerMassMatrix, FloatMoneyPerMass>
+public class MutableFloatMoneyPerMassMatrix extends
+        AbstractMutableFloatMatrixRel<MoneyPerMassUnit, FloatMoneyPerMassMatrix, MutableFloatMoneyPerMassMatrix, FloatMoneyPerMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -60,6 +59,20 @@ public class MutableFloatMoneyPerMassMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatMoneyPerMassMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatMoneyPerMassMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatMoneyPerMassMatrix instantiateType(final FloatMatrixData fmd, final MoneyPerMassUnit unit)
     {
         return new FloatMoneyPerMassMatrix(fmd, unit);
@@ -67,16 +80,17 @@ public class MutableFloatMoneyPerMassMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatMoneyPerMassMatrix instantiateMutableType(final FloatMatrixData fmd, final MoneyPerMassUnit unit)
+    protected final MutableFloatMoneyPerMassMatrix instantiateMutableType(final FloatMatrixData fmd,
+            final MoneyPerMassUnit unit)
     {
         return new MutableFloatMoneyPerMassMatrix(fmd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMoneyPerMass get(final int row, final int column) throws ValueException
+    protected final FloatMoneyPerMass instantiateScalar(final float value, final MoneyPerMassUnit unit)
     {
-        return new FloatMoneyPerMass(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatMoneyPerMass(value, unit);
     }
 
 }

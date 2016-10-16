@@ -163,39 +163,31 @@ public class FloatMatrixDataDense extends FloatMatrixData
     @Override
     public final void incrementBy(final FloatMatrixData right) throws ValueException
     {
-        IntStream
-                .range(0, this.rows)
-                .parallel()
-                .forEach(r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right.getSI(r, c)));
+        IntStream.range(0, this.rows).parallel().forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right.getSI(r, c)));
     }
 
     /** {@inheritDoc} */
     @Override
     public final void decrementBy(final FloatMatrixData right) throws ValueException
     {
-        IntStream
-                .range(0, this.rows)
-                .parallel()
-                .forEach(r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right.getSI(r, c)));
+        IntStream.range(0, this.rows).parallel().forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right.getSI(r, c)));
     }
 
     /** {@inheritDoc} */
     @Override
     public final void multiplyBy(final FloatMatrixData right) throws ValueException
     {
-        IntStream
-                .range(0, this.rows)
-                .parallel()
-                .forEach(r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] *= right.getSI(r, c)));
+        IntStream.range(0, this.rows).parallel().forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] *= right.getSI(r, c)));
     }
 
     /** {@inheritDoc} */
     @Override
     public final void divideBy(final FloatMatrixData right) throws ValueException
     {
-        IntStream
-                .range(0, this.rows)
-                .parallel()
-                .forEach(r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
+        IntStream.range(0, this.rows).parallel().forEach(
+                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
     }
 }

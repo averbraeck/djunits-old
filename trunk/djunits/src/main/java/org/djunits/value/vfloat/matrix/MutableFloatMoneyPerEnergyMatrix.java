@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerEnergy;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatMoneyPerEnergyMatrix
-        extends
-        MutableTypedFloatMatrixRel<MoneyPerEnergyUnit, FloatMoneyPerEnergyMatrix, MutableFloatMoneyPerEnergyMatrix, FloatMoneyPerEnergy>
+public class MutableFloatMoneyPerEnergyMatrix extends
+        AbstractMutableFloatMatrixRel<MoneyPerEnergyUnit, FloatMoneyPerEnergyMatrix, MutableFloatMoneyPerEnergyMatrix, FloatMoneyPerEnergy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -30,8 +29,8 @@ public class MutableFloatMoneyPerEnergyMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatMoneyPerEnergyMatrix(final float[][] values, final MoneyPerEnergyUnit unit, final StorageType storageType)
-            throws ValueException
+    public MutableFloatMoneyPerEnergyMatrix(final float[][] values, final MoneyPerEnergyUnit unit,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -60,6 +59,20 @@ public class MutableFloatMoneyPerEnergyMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatMoneyPerEnergyMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatMoneyPerEnergyMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatMoneyPerEnergyMatrix instantiateType(final FloatMatrixData fmd, final MoneyPerEnergyUnit unit)
     {
         return new FloatMoneyPerEnergyMatrix(fmd, unit);
@@ -75,9 +88,9 @@ public class MutableFloatMoneyPerEnergyMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMoneyPerEnergy get(final int row, final int column) throws ValueException
+    protected final FloatMoneyPerEnergy instantiateScalar(final float value, final MoneyPerEnergyUnit unit)
     {
-        return new FloatMoneyPerEnergy(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatMoneyPerEnergy(value, unit);
     }
 
 }

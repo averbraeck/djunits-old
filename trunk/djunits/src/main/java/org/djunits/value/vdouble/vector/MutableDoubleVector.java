@@ -4,17 +4,8 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.Unit;
-import org.djunits.value.Absolute;
-import org.djunits.value.FunctionsAbs;
-import org.djunits.value.FunctionsRel;
-import org.djunits.value.MathFunctionsAbs;
-import org.djunits.value.MathFunctionsRel;
-import org.djunits.value.Relative;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.ValueUtil;
-import org.djunits.value.vdouble.DoubleFunction;
-import org.djunits.value.vdouble.DoubleMathFunctions;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 
 /**
@@ -29,57 +20,18 @@ import org.djunits.value.vdouble.scalar.DoubleScalar;
  * initial version 30 Oct, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
- * @param <U> Unit; the unit of this MutableDoubleVector
  */
-public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVector<U> implements MutableDoubleVectorInterface<U>
+public abstract class MutableDoubleVector
 {
-    /**  */
-    private static final long serialVersionUID = 20151003L;
-
     /**
-     * Construct a new MutableDoubleVector.
-     * @param unit U; the unit of the new MutableDoubleVector
+     * Absolute Immutable DoubleVector.
+     * @param <U> Unit
      */
-    protected MutableDoubleVector(final U unit)
-    {
-        super(unit);
-    }
-
-    /** If set, any modification of the data must be preceded by replacing the data with a local copy. */
-    private boolean copyOnWrite = false;
-
-    /**
-     * Retrieve the value of the copyOnWrite flag.
-     * @return boolean
-     */
-    private boolean isCopyOnWrite()
-    {
-        return this.copyOnWrite;
-    }
-
-    /**
-     * Change the copyOnWrite flag.
-     * @param copyOnWrite boolean; the new value for the copyOnWrite flag
-     */
-    final void setCopyOnWrite(final boolean copyOnWrite)
-    {
-        this.copyOnWrite = copyOnWrite;
-    }
-
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
-
-    /**
-     * ABSOLUTE implementation of MutableDoubleVector.
-     * @param <U> Unit the unit for which this Vector will be created
-     */
-    public static class Abs<U extends Unit<U>> extends MutableDoubleVector<U> implements Absolute,
-            MathFunctionsAbs<MutableDoubleVector.Abs<U>>, FunctionsAbs<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>,
-            DoubleMathFunctions<MutableDoubleVector.Abs<U>>
+    public static class Abs<U extends Unit<U>> extends
+            AbstractMutableDoubleVectorAbs<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>, MutableDoubleVector.Abs<U>, DoubleScalar.Abs<U>>
     {
         /**  */
-        private static final long serialVersionUID = 20151003L;
+        private static final long serialVersionUID = 20150626L;
 
         /**
          * Construct a new Absolute Mutable DoubleVector.
@@ -90,8 +42,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          */
         public Abs(final double[] values, final U unit, final StorageType storageType) throws ValueException
         {
-            super(unit);
-            this.data = DoubleVectorData.instantiate(values, unit.getScale(), storageType);
+            super(values, unit, storageType);
         }
 
         /**
@@ -103,54 +54,48 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          */
         public Abs(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
         {
-            super(unit);
-            this.data = DoubleVectorData.instantiate(values, unit.getScale(), storageType);
+            super(values, unit, storageType);
         }
 
         /**
          * Construct a new Absolute Mutable DoubleVector.
-         * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Mutable DoubleVector
+         * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable DoubleVector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Abs(final DoubleScalar.Abs<U>[] values, final StorageType storageType) throws ValueException
         {
-            super(checkUnit(values));
-            this.data = DoubleVectorData.instantiate(values, storageType);
+            super(values, storageType);
         }
 
         /**
          * Construct a new Absolute Mutable DoubleVector.
          * @param values List; the values of the entries in the new Absolute Mutable DoubleVector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends DoubleScalar.Abs<U>> Abs(final List<S> values, final StorageType storageType) throws ValueException
+        public Abs(final List<DoubleScalar.Abs<U>> values, final StorageType storageType) throws ValueException
         {
-            super(checkUnit(values));
-            this.data = DoubleVectorData.instantiateLD(values, storageType);
+            super(values, storageType);
         }
 
         /**
-         * Construct a new Relative Mutable DoubleVector.
-         * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable DoubleVector
+         * Construct a new Absolute Mutable DoubleVector.
+         * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable DoubleVector
          * @param length the size of the vector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends DoubleScalar.Abs<U>> Abs(final SortedMap<Integer, S> values, final int length,
-                final StorageType storageType) throws ValueException
+        public Abs(final SortedMap<Integer, DoubleScalar.Abs<U>> values, final int length, final StorageType storageType)
+                throws ValueException
         {
-            super(checkUnit(values));
-            this.data = DoubleVectorData.instantiateMD(values, length, storageType);
+            super(values, length, storageType);
         }
 
         /**
-         * Construct a new Relative Mutable DoubleVector.
-         * @param values Map; the map of indexes to values of the Relative Sparse Mutable DoubleVector
-         * @param unit U; the unit of the new Relative Sparse Mutable DoubleVector
+         * Construct a new Absolute Mutable DoubleVector.
+         * @param values Map; the map of indexes to values of the Absolute Sparse Mutable DoubleVector
+         * @param unit U; the unit of the new Absolute Sparse Mutable DoubleVector
          * @param length the size of the vector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
@@ -158,8 +103,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         public Abs(final SortedMap<Integer, Double> values, final U unit, final int length, final StorageType storageType)
                 throws ValueException
         {
-            super(unit);
-            this.data = DoubleVectorData.instantiate(values, length, unit.getScale(), storageType);
+            super(values, unit, length, storageType);
         }
 
         /**
@@ -167,279 +111,69 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @param data an internal data object
          * @param unit the unit
          */
-        Abs(final DoubleVectorData data, final U unit)
+        public Abs(final DoubleVectorData data, final U unit)
         {
-            super(unit);
-            this.data = data.copy();
+            super(data, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public DoubleVector.Abs<U> immutable()
+        protected final DoubleVector.Abs<U> instantiateTypeAbs(final DoubleVectorData dvd, final U unit)
         {
-            setCopyOnWrite(true);
-            return instantiateAbs(getData(), getUnit());
+            return new DoubleVector.Abs<U>(dvd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public MutableDoubleVector.Abs<U> mutable()
+        protected final DoubleVector.Rel<U> instantiateTypeRel(final DoubleVectorData dvd, final U unit)
         {
-            setCopyOnWrite(true);
-            final MutableDoubleVector.Abs<U> result = MutableDoubleVector.instantiateMutableAbs(getData(), getUnit());
-            result.setCopyOnWrite(true);
-            return result;
+            return new DoubleVector.Rel<U>(dvd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> copy()
+        protected final MutableDoubleVector.Abs<U> instantiateMutableType(final DoubleVectorData dvd, final U unit)
         {
-            return mutable();
+            return new MutableDoubleVector.Abs<U>(dvd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public MutableDoubleVector.Abs<U> toDense()
+        protected final DoubleScalar.Abs<U> instantiateScalar(final double value, final U unit)
         {
-            return this.data.isDense() ? this : instantiateMutableAbs(this.data.toDense(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public MutableDoubleVector.Abs<U> toSparse()
-        {
-            return this.data.isSparse() ? this : instantiateMutableAbs(this.data.toSparse(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Abs<U> get(final int index) throws ValueException
-        {
-            return new DoubleScalar.Abs<U>(getInUnit(index, getUnit()), getUnit());
+            return new DoubleScalar.Abs<U>(value, unit);
         }
 
         /**
-         * Increment the value by the supplied value and return the changed vector.
-         * @param increment DoubleVector.Rel&lt;U&gt;; amount by which the value is incremented
-         * @return the changed MutableDoubleVector.Abs&lt;U&gt;
-         * @throws ValueException when the size of increment is not identical to the size of this
+         * Create a dense version of this DoubleVector.
+         * @return the dense version of this DoubleVector
          */
-        public final MutableDoubleVector.Abs<U> incrementBy(final DoubleVector.Rel<U> increment) throws ValueException
+        public final MutableDoubleVector.Abs<U> toDense()
         {
-            checkCopyOnWrite();
-            this.data.incrementBy(increment.getData());
-            return this;
+            return this.data.isDense() ? (MutableDoubleVector.Abs<U>) this
+                    : instantiateMutableType(this.data.toDense(), getUnit());
         }
 
         /**
-         * Increment the value by the supplied value and return the changed vector.
-         * @param increment DoubleScalar.Rel&lt;U&gt;; amount by which the value is incremented
-         * @return the changed MutableDoubleVector.Abs&lt;U&gt;
+         * Create a sparse version of this DoubleVector.
+         * @return the sparse version of this DoubleVector
          */
-        public final MutableDoubleVector.Abs<U> incrementBy(final DoubleScalar.Rel<U> increment)
+        public final MutableDoubleVector.Abs<U> toSparse()
         {
-            return incrementBy(increment.si);
+            return this.data.isSparse() ? (MutableDoubleVector.Abs<U>) this
+                    : instantiateMutableType(this.data.toSparse(), getUnit());
         }
-
-        /**
-         * Increment the value by the supplied constant and return the changed vector.
-         * @param increment amount by which the value is incremented
-         * @return the changed MutableDoubleVector.Abs&lt;U&gt;
-         */
-        public final MutableDoubleVector.Abs<U> incrementBy(final double increment)
-        {
-            checkCopyOnWrite();
-            this.data.incrementBy(increment);
-            return this;
-        }
-
-        /**
-         * Decrement the value by the supplied value and return the changed vector.
-         * @param decrement DoubleVector.Rel&lt;U&gt;; amount by which the value is decremented
-         * @return the changed MutableDoubleVector.Abs&lt;U&gt;
-         * @throws ValueException when the size of increment is not identical to the size of this
-         */
-        public final MutableDoubleVector.Abs<U> decrementBy(final DoubleVector.Rel<U> decrement) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.decrementBy(decrement.getData());
-            return this;
-        }
-
-        /**
-         * Decrement the value by the supplied value and return the changed vector.
-         * @param decrement DoubleScalar.Rel&lt;U&gt;; amount by which the value is decremented
-         * @return the changed MutableDoubleVector.Abs&lt;U&gt;
-         */
-        public final MutableDoubleVector.Abs<U> decrementBy(final DoubleScalar.Rel<U> decrement)
-        {
-            return decrementBy(decrement.si);
-        }
-
-        /**
-         * Decrement the value by the supplied constant and return the changed vector.
-         * @param decrement amount by which the value is decremented
-         * @return the changed MutableDoubleVector.Abs&lt;U&gt;
-         */
-        public final MutableDoubleVector.Abs<U> decrementBy(final double decrement)
-        {
-            checkCopyOnWrite();
-            this.data.decrementBy(decrement);
-            return this;
-        }
-
-        /**
-         * Multiply the values in the vector by the supplied values and return the changed vector.
-         * @param factors DoubleVector.Rel&lt;U&gt;; amounts by which the value is multiplied
-         * @return the changed MutableDoubleVector.Abs&lt;U&gt;
-         * @throws ValueException when the size of the factors is not identical to the size of this
-         */
-        public final MutableDoubleVector.Abs<U> multiplyBy(final DoubleVector.Rel<U> factors) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.multiplyBy(factors.getData());
-            return this;
-        }
-
-        /**
-         * Multiply the values in the vector by the supplied value and return the changed vector.
-         * @param factor DoubleScalar.Rel&lt;U&gt;; amount by which the values in the vector are multiplied
-         * @return the changed MutableDoubleVector.Abs&lt;U&gt;
-         */
-        public final MutableDoubleVector.Abs<U> multiplyBy(final DoubleScalar.Rel<U> factor)
-        {
-            return multiplyBy(factor.si);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> multiplyBy(final double factor)
-        {
-            checkCopyOnWrite();
-            this.data.multiplyBy(factor);
-            return this;
-        }
-
-        /**
-         * Divide the values in the vector by the supplied values and return the changed vector.
-         * @param factors DoubleVector.Rel&lt;U&gt;; amounts by which the value is divided
-         * @return the changed MutableDoubleVector.Abs&lt;U&gt;
-         * @throws ValueException when the size of the factors is not identical to the size of this
-         */
-        public final MutableDoubleVector.Abs<U> divideBy(final DoubleVector.Rel<U> factors) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.divideBy(factors.getData());
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> divideBy(final double factor)
-        {
-            this.data.divideBy(factor);
-            return this;
-        }
-
-        /**
-         * Divide the values in the vector by the supplied value and return the changed vector.
-         * @param factor DoubleScalar.Rel&lt;U&gt;; amount by which the values in the vector are divided
-         * @return the changed MutableDoubleVector.Abs&lt;U&gt;
-         */
-        public final MutableDoubleVector.Abs<U> divideBy(final DoubleScalar.Rel<U> factor)
-        {
-            return divideBy(factor.si);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public DoubleVector.Abs<U> plus(final DoubleVector.Rel<U> rel) throws ValueException
-        {
-            return instantiateAbs(this.getData().plus(rel.getData()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public DoubleVector.Abs<U> minus(final DoubleVector.Rel<U> rel) throws ValueException
-        {
-            return instantiateAbs(this.getData().minus(rel.getData()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public DoubleVector.Rel<U> minus(final DoubleVector.Abs<U> abs) throws ValueException
-        {
-            return instantiateRel(this.getData().minus(abs.getData()), getUnit());
-        }
-
-        /**********************************************************************************/
-        /********************************** MATH METHODS **********************************/
-        /**********************************************************************************/
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> ceil()
-        {
-            assign(DoubleMathFunctions.CEIL);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> floor()
-        {
-            assign(DoubleMathFunctions.FLOOR);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> rint()
-        {
-            assign(DoubleMathFunctions.RINT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Abs<U> round()
-        {
-            assign(DoubleMathFunctions.ROUND);
-            return this;
-        }
-
     }
 
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
-
     /**
-     * RELATIVE implementation of MutableDoubleVector.
-     * @param <U> Unit the unit for which this Vector will be created
+     * Relative Immutable DoubleVector.
+     * @param <U> Unit
      */
-    public static class Rel<U extends Unit<U>> extends MutableDoubleVector<U> implements Relative,
-            MathFunctionsRel<MutableDoubleVector.Rel<U>>, FunctionsRel<U, DoubleVector.Abs<U>, DoubleVector.Rel<U>>,
-            DoubleMathFunctions<MutableDoubleVector.Rel<U>>
+    public static class Rel<U extends Unit<U>>
+            extends AbstractMutableDoubleVectorRel<U, DoubleVector.Rel<U>, MutableDoubleVector.Rel<U>, DoubleScalar.Rel<U>>
     {
         /**  */
-        private static final long serialVersionUID = 20151003L;
+        private static final long serialVersionUID = 20150626L;
 
         /**
          * Construct a new Relative Mutable DoubleVector.
@@ -450,8 +184,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          */
         public Rel(final double[] values, final U unit, final StorageType storageType) throws ValueException
         {
-            super(unit);
-            this.data = DoubleVectorData.instantiate(values, unit.getScale(), storageType);
+            super(values, unit, storageType);
         }
 
         /**
@@ -463,8 +196,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          */
         public Rel(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
         {
-            super(unit);
-            this.data = DoubleVectorData.instantiate(values, unit.getScale(), storageType);
+            super(values, unit, storageType);
         }
 
         /**
@@ -475,21 +207,18 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          */
         public Rel(final DoubleScalar.Rel<U>[] values, final StorageType storageType) throws ValueException
         {
-            super(checkUnit(values));
-            this.data = DoubleVectorData.instantiate(values, storageType);
+            super(values, storageType);
         }
 
         /**
          * Construct a new Relative Mutable DoubleVector.
          * @param values List; the values of the entries in the new Relative Mutable DoubleVector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends DoubleScalar.Rel<U>> Rel(final List<S> values, final StorageType storageType) throws ValueException
+        public Rel(final List<DoubleScalar.Rel<U>> values, final StorageType storageType) throws ValueException
         {
-            super(checkUnit(values));
-            this.data = DoubleVectorData.instantiateLD(values, storageType);
+            super(values, storageType);
         }
 
         /**
@@ -497,14 +226,12 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable DoubleVector
          * @param length the size of the vector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
-         * @param <S> the Scalar type used
          * @throws ValueException when values has zero entries
          */
-        public <S extends DoubleScalar.Rel<U>> Rel(final SortedMap<Integer, S> values, final int length,
-                final StorageType storageType) throws ValueException
+        public Rel(final SortedMap<Integer, DoubleScalar.Rel<U>> values, final int length, final StorageType storageType)
+                throws ValueException
         {
-            super(checkUnit(values));
-            this.data = DoubleVectorData.instantiateMD(values, length, storageType);
+            super(values, length, storageType);
         }
 
         /**
@@ -518,8 +245,7 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
         public Rel(final SortedMap<Integer, Double> values, final U unit, final int length, final StorageType storageType)
                 throws ValueException
         {
-            super(unit);
-            this.data = DoubleVectorData.instantiate(values, length, unit.getScale(), storageType);
+            super(values, unit, length, storageType);
         }
 
         /**
@@ -527,371 +253,52 @@ public abstract class MutableDoubleVector<U extends Unit<U>> extends DoubleVecto
          * @param data an internal data object
          * @param unit the unit
          */
-        Rel(final DoubleVectorData data, final U unit)
+        public Rel(final DoubleVectorData data, final U unit)
         {
-            super(unit);
-            this.data = data.copy();
+            super(data, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public DoubleVector.Rel<U> immutable()
+        protected final DoubleVector.Rel<U> instantiateType(final DoubleVectorData dvd, final U unit)
         {
-            setCopyOnWrite(true);
-            return instantiateRel(getData(), getUnit());
+            return new DoubleVector.Rel<U>(dvd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public MutableDoubleVector.Rel<U> mutable()
+        protected final MutableDoubleVector.Rel<U> instantiateMutableType(final DoubleVectorData dvd, final U unit)
         {
-            setCopyOnWrite(true);
-            final MutableDoubleVector.Rel<U> result = new MutableDoubleVector.Rel<U>(getData(), getUnit());
-            result.setCopyOnWrite(true);
-            return result;
+            return new MutableDoubleVector.Rel<U>(dvd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> copy()
+        protected final DoubleScalar.Rel<U> instantiateScalar(final double value, final U unit)
         {
-            return mutable();
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public MutableDoubleVector.Rel<U> toDense()
-        {
-            return this.data.isDense() ? this : new MutableDoubleVector.Rel<U>(this.data.toDense(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public MutableDoubleVector.Rel<U> toSparse()
-        {
-            return this.data.isSparse() ? this : new MutableDoubleVector.Rel<U>(this.data.toSparse(), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public DoubleScalar.Rel<U> get(final int index) throws ValueException
-        {
-            return new DoubleScalar.Rel<U>(getInUnit(index, getUnit()), getUnit());
+            return new DoubleScalar.Rel<U>(value, unit);
         }
 
         /**
-         * Increment the value by the supplied value and return the changed vector.
-         * @param increment DoubleVector.Rel&lt;U&gt;; amount by which the value is incremented
-         * @return the changed MutableDoubleVector.Rel&lt;U&gt;
-         * @throws ValueException when the size of increment is not identical to the size of this
+         * Create a dense version of this DoubleVector.
+         * @return the dense version of this DoubleVector
          */
-        public final MutableDoubleVector.Rel<U> incrementBy(final DoubleVector.Rel<U> increment) throws ValueException
+        public final MutableDoubleVector.Rel<U> toDense()
         {
-            checkCopyOnWrite();
-            this.data.incrementBy(increment.getData());
-            return this;
+            return this.data.isDense() ? (MutableDoubleVector.Rel<U>) this
+                    : instantiateMutableType(this.data.toDense(), getUnit());
         }
 
         /**
-         * Increment the value by the supplied value and return the changed vector.
-         * @param increment DoubleScalar.Rel&lt;U&gt;; amount by which the value is incremented
-         * @return the changed MutableDoubleVector.Rel&lt;U&gt;
+         * Create a sparse version of this DoubleVector.
+         * @return the sparse version of this DoubleVector
          */
-        public final MutableDoubleVector.Rel<U> incrementBy(final DoubleScalar.Rel<U> increment)
+        public final MutableDoubleVector.Rel<U> toSparse()
         {
-            return incrementBy(increment.si);
+            return this.data.isSparse() ? (MutableDoubleVector.Rel<U>) this
+                    : instantiateMutableType(this.data.toSparse(), getUnit());
         }
 
-        /**
-         * Increment the value by the supplied constant and return the changed vector.
-         * @param increment amount by which the value is incremented
-         * @return the changed MutableDoubleVector.Rel&lt;U&gt;
-         */
-        public final MutableDoubleVector.Rel<U> incrementBy(final double increment)
-        {
-            checkCopyOnWrite();
-            this.data.incrementBy(increment);
-            return this;
-        }
-
-        /**
-         * Decrement the value by the supplied value and return the changed vector.
-         * @param decrement DoubleVector.Rel&lt;U&gt;; amount by which the value is decremented
-         * @return the changed MutableDoubleVector.Rel&lt;U&gt;
-         * @throws ValueException when the size of increment is not identical to the size of this
-         */
-        public final MutableDoubleVector.Rel<U> decrementBy(final DoubleVector.Rel<U> decrement) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.decrementBy(decrement.getData());
-            return this;
-        }
-
-        /**
-         * Decrement the value by the supplied value and return the changed vector.
-         * @param decrement DoubleScalar.Rel&lt;U&gt;; amount by which the value is decremented
-         * @return the changed MutableDoubleVector.Rel&lt;U&gt;
-         */
-        public final MutableDoubleVector.Rel<U> decrementBy(final DoubleScalar.Rel<U> decrement)
-        {
-            return decrementBy(decrement.si);
-        }
-
-        /**
-         * Decrement the value by the supplied constant and return the changed vector.
-         * @param decrement amount by which the value is decremented
-         * @return the changed MutableDoubleVector.Rel&lt;U&gt;
-         */
-        public final MutableDoubleVector.Rel<U> decrementBy(final double decrement)
-        {
-            checkCopyOnWrite();
-            this.data.decrementBy(decrement);
-            return this;
-        }
-
-        /**
-         * Multiply the values in the vector by the supplied values and return the changed vector.
-         * @param factors DoubleVector.Rel&lt;U&gt;; amounts by which the value is multiplied
-         * @return the changed MutableDoubleVector.Rel&lt;U&gt;
-         * @throws ValueException when the size of the factors is not identical to the size of this
-         */
-        public final MutableDoubleVector.Rel<U> multiplyBy(final DoubleVector.Rel<U> factors) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.multiplyBy(factors.getData());
-            return this;
-        }
-
-        /**
-         * Multiply the values in the vector by the supplied value and return the changed vector.
-         * @param factor DoubleScalar.Rel&lt;U&gt;; amount by which the values in the vector are multiplied
-         * @return the changed MutableDoubleVector.Rel&lt;U&gt;
-         */
-        public final MutableDoubleVector.Rel<U> multiplyBy(final DoubleScalar.Rel<U> factor)
-        {
-            return multiplyBy(factor.si);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> multiplyBy(final double factor)
-        {
-            checkCopyOnWrite();
-            this.data.multiplyBy(factor);
-            return this;
-        }
-
-        /**
-         * Divide the values in the vector by the supplied values and return the changed vector.
-         * @param factors DoubleVector.Rel&lt;U&gt;; amounts by which the value is divided
-         * @return the changed MutableDoubleVector.Rel&lt;U&gt;
-         * @throws ValueException when the size of the factors is not identical to the size of this
-         */
-        public final MutableDoubleVector.Rel<U> divideBy(final DoubleVector.Rel<U> factors) throws ValueException
-        {
-            checkCopyOnWrite();
-            this.data.divideBy(factors.getData());
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> divideBy(final double factor)
-        {
-            this.data.divideBy(factor);
-            return this;
-        }
-
-        /**
-         * Divide the values in the vector by the supplied value and return the changed vector.
-         * @param factor DoubleScalar.Rel&lt;U&gt;; amount by which the values in the vector are divided
-         * @return the changed MutableDoubleVector.Rel&lt;U&gt;
-         */
-        public final MutableDoubleVector.Rel<U> divideBy(final DoubleScalar.Rel<U> factor)
-        {
-            return divideBy(factor.si);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public DoubleVector.Rel<U> plus(final DoubleVector.Rel<U> rel) throws ValueException
-        {
-            return instantiateRel(this.getData().plus(rel.getData()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public DoubleVector.Abs<U> plus(final DoubleVector.Abs<U> abs) throws ValueException
-        {
-            return instantiateAbs(this.getData().plus(abs.getData()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public DoubleVector.Rel<U> minus(final DoubleVector.Rel<U> rel) throws ValueException
-        {
-            return instantiateRel(this.getData().minus(rel.getData()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public DoubleVector.Rel<U> times(final DoubleVector.Rel<U> rel) throws ValueException
-        {
-            return instantiateRel(this.getData().times(rel.getData()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public DoubleVector.Rel<U> divide(final DoubleVector.Rel<U> rel) throws ValueException
-        {
-            return instantiateRel(this.getData().divide(rel.getData()), getUnit());
-        }
-
-        /**********************************************************************************/
-        /********************************** MATH METHODS **********************************/
-        /**********************************************************************************/
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> abs()
-        {
-            assign(DoubleMathFunctions.ABS);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> ceil()
-        {
-            assign(DoubleMathFunctions.CEIL);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> floor()
-        {
-            assign(DoubleMathFunctions.FLOOR);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> rint()
-        {
-            assign(DoubleMathFunctions.RINT);
-            return this;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("checkstyle:designforextension")
-        public MutableDoubleVector.Rel<U> round()
-        {
-            assign(DoubleMathFunctions.ROUND);
-            return this;
-        }
     }
 
-    /**********************************************************************************/
-    /******************************** ABS + REL METHODS *******************************/
-    /**********************************************************************************/
-
-    /**
-     * Instantiate a vector based on the type of data.
-     * @param dvData the DoubleVectorData
-     * @param unit the unit to use
-     * @param <U> the unit
-     * @return an instantiated vector
-     */
-    static <U extends Unit<U>> MutableDoubleVector.Abs<U> instantiateMutableAbs(final DoubleVectorData dvData, final U unit)
-    {
-        return new MutableDoubleVector.Abs<U>(dvData, unit);
-    }
-
-    /**
-     * Check the copyOnWrite flag and, if it is set, make a deep copy of the data and clear the flag.
-     */
-    protected final void checkCopyOnWrite()
-    {
-        if (isCopyOnWrite())
-        {
-            this.data = this.data.copy();
-            setCopyOnWrite(false);
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void setSI(final int index, final double valueSI) throws ValueException
-    {
-        checkIndex(index);
-        checkCopyOnWrite();
-        this.data.setSI(index, valueSI);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void set(final int index, final DoubleScalar<U> value) throws ValueException
-    {
-        setSI(index, value.getSI());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void setInUnit(final int index, final double value, final U valueUnit) throws ValueException
-    {
-        setSI(index, ValueUtil.expressAsSIUnit(value, valueUnit));
-    }
-
-    /**
-     * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
-     * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a sparse
-     * dataset if necessary.
-     * @param doubleFunction the function to apply
-     */
-    public final void assign(final DoubleFunction doubleFunction)
-    {
-        checkCopyOnWrite();
-        if (this.data instanceof DoubleVectorDataDense)
-        {
-            ((DoubleVectorDataDense) this.data).assign(doubleFunction);
-        }
-        else
-        {
-            DoubleVectorDataDense dvdd = ((DoubleVectorDataSparse) this.data).toDense();
-            dvdd.assign(doubleFunction);
-            this.data = dvdd.toSparse();
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void normalize() throws ValueException
-    {
-        double sum = zSum();
-        if (0 == sum)
-        {
-            throw new ValueException("zSum is 0; cannot normalize");
-        }
-        checkCopyOnWrite();
-        this.data.divideBy(sum);
-    }
 }

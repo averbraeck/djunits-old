@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Length;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableLengthMatrix extends MutableTypedDoubleMatrixRel<LengthUnit, LengthMatrix, MutableLengthMatrix, Length>
+public class MutableLengthMatrix extends AbstractMutableDoubleMatrixRel<LengthUnit, LengthMatrix, MutableLengthMatrix, Length>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -57,6 +57,20 @@ public class MutableLengthMatrix extends MutableTypedDoubleMatrixRel<LengthUnit,
 
     /** {@inheritDoc} */
     @Override
+    public final MutableLengthMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableLengthMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final LengthMatrix instantiateType(final DoubleMatrixData dmd, final LengthUnit unit)
     {
         return new LengthMatrix(dmd, unit);
@@ -71,9 +85,9 @@ public class MutableLengthMatrix extends MutableTypedDoubleMatrixRel<LengthUnit,
 
     /** {@inheritDoc} */
     @Override
-    public final Length get(final int row, final int column) throws ValueException
+    protected final Length instantiateScalar(final double value, final LengthUnit unit)
     {
-        return new Length(getInUnit(row, column, getUnit()), getUnit());
+        return new Length(value, unit);
     }
 
     /**

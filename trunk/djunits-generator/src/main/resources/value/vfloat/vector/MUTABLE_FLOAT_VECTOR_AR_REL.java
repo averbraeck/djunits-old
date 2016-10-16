@@ -19,7 +19,7 @@ import org.djunits.value.vfloat.scalar.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloat%TypeRel%Vector extends MutableTypedFloatVectorRel<%TypeUnit%, Float%TypeRel%Vector, MutableFloat%TypeRel%Vector, Float%TypeRel%>
+public class MutableFloat%TypeRel%Vector extends AbstractMutableFloatVectorRel<%TypeUnit%, Float%TypeRel%Vector, MutableFloat%TypeRel%Vector, Float%TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -116,22 +116,39 @@ public class MutableFloat%TypeRel%Vector extends MutableTypedFloatVectorRel<%Typ
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloat%TypeRel%Vector
-        instantiateMutableType(final FloatVectorData dvd, final %TypeUnit% unit)
+    protected final MutableFloat%TypeRel%Vector instantiateMutableType(final FloatVectorData dvd, final %TypeUnit% unit)
     {
         return new MutableFloat%TypeRel%Vector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final Float%TypeRel% get(final int index) throws ValueException
+    protected final Float%TypeRel% instantiateScalar(final float value, final %TypeUnit% unit)
     {
-        return new Float%TypeRel%(getInUnit(index, getUnit()), getUnit());
+        return new Float%TypeRel%(value, unit);
+    }
+    
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloat%TypeRel%Vector toDense()
+    {
+        return this.data.isDense() ? (MutableFloat%TypeRel%Vector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloat%TypeRel%Vector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloat%TypeRel%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
     
     /**
      * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative Float%TypeRel% vector.
+     * @return an absolute version of this relative %TypeRel% vector.
      */
     public final MutableFloat%TypeAbs%Vector toAbs()
     {

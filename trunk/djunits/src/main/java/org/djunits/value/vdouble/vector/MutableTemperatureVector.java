@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.Temperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableTemperatureVector extends
-        MutableTypedDoubleVectorRel<TemperatureUnit, TemperatureVector, MutableTemperatureVector, Temperature>
+public class MutableTemperatureVector
+        extends AbstractMutableDoubleVectorRel<TemperatureUnit, TemperatureVector, MutableTemperatureVector, Temperature>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -127,9 +127,27 @@ public class MutableTemperatureVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final Temperature get(final int index) throws ValueException
+    protected final Temperature instantiateScalar(final double value, final TemperatureUnit unit)
     {
-        return new Temperature(getInUnit(index, getUnit()), getUnit());
+        return new Temperature(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableTemperatureVector toDense()
+    {
+        return this.data.isDense() ? (MutableTemperatureVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableTemperatureVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableTemperatureVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**

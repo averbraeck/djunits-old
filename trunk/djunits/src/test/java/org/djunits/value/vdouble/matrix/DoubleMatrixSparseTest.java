@@ -60,7 +60,7 @@ public class DoubleMatrixSparseTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; dm should be Absolute; if false; dm should be Relative
      */
-    private static void checkContentsAndType(final DoubleMatrix<?> dm, final double[][] reference,
+    private static void checkContentsAndType(final AbstractDoubleMatrix<?, ?> dm, final double[][] reference,
         final double precision, final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("DoubleMatrix should not be null", null != dm);
@@ -626,7 +626,7 @@ public class DoubleMatrixSparseTest
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
-            assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
+            assertTrue("toString result starts with \"Mutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Sparse\"", result.contains("Sparse"));
         }
         catch (ValueException ve)
@@ -1181,7 +1181,7 @@ public class DoubleMatrixSparseTest
          * @param function DoubleToDouble; encapsulated function that converts one inputValue to an outputValue
          */
         public static void tester(final double[][] inputValues, final String operation,
-            final DoubleMatrix<?> actualResult, final double precision, final DoubleToDouble function)
+            final AbstractDoubleMatrix<?, ?> actualResult, final double precision, final DoubleToDouble function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {

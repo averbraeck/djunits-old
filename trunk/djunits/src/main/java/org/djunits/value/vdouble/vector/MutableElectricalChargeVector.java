@@ -19,9 +19,8 @@ import org.djunits.value.vdouble.scalar.ElectricalCharge;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableElectricalChargeVector
-        extends
-        MutableTypedDoubleVectorRel<ElectricalChargeUnit, ElectricalChargeVector, MutableElectricalChargeVector, ElectricalCharge>
+public class MutableElectricalChargeVector extends
+        AbstractMutableDoubleVectorRel<ElectricalChargeUnit, ElectricalChargeVector, MutableElectricalChargeVector, ElectricalCharge>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -130,9 +129,29 @@ public class MutableElectricalChargeVector
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalCharge get(final int index) throws ValueException
+    protected final ElectricalCharge instantiateScalar(final double value, final ElectricalChargeUnit unit)
     {
-        return new ElectricalCharge(getInUnit(index, getUnit()), getUnit());
+        return new ElectricalCharge(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableElectricalChargeVector toDense()
+    {
+        return this.data.isDense() ? (MutableElectricalChargeVector) this
+                : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableElectricalChargeVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableElectricalChargeVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.Direction;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class DirectionMatrix extends
-        TypedDoubleMatrixAbs<AngleUnit, DirectionMatrix, AngleMatrix, MutableDirectionMatrix, Direction>
+public class DirectionMatrix
+        extends AbstractDoubleMatrixAbs<AngleUnit, DirectionMatrix, AngleMatrix, MutableDirectionMatrix, Direction>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -57,6 +57,20 @@ public class DirectionMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final DirectionMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DirectionMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final DirectionMatrix instantiateTypeAbs(final DoubleMatrixData dmd, final AngleUnit unit)
     {
         return new DirectionMatrix(dmd, unit);
@@ -78,9 +92,9 @@ public class DirectionMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final Direction get(final int row, final int column) throws ValueException
+    protected final Direction instantiateScalar(final double value, final AngleUnit unit)
     {
-        return new Direction(getInUnit(row, column, getUnit()), getUnit());
+        return new Direction(value, unit);
     }
 
     /**

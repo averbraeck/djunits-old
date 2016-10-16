@@ -30,7 +30,7 @@ import org.djunits.unit.MassUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatFlowMass extends TypedFloatScalarRel<FlowMassUnit, FloatFlowMass>
+public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlowMass>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -69,7 +69,7 @@ public class FloatFlowMass extends TypedFloatScalarRel<FlowMassUnit, FloatFlowMa
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatFlowMass instantiateTypeRel(final float value, final FlowMassUnit unit)
+    public final FloatFlowMass instantiateRel(final float value, final FlowMassUnit unit)
     {
         return new FloatFlowMass(value, unit);
     }

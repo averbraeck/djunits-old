@@ -30,7 +30,7 @@ import org.djunits.unit.PowerUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatElectricalCurrent extends TypedFloatScalarRel<ElectricalCurrentUnit, FloatElectricalCurrent>
+public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCurrentUnit, FloatElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -69,7 +69,7 @@ public class FloatElectricalCurrent extends TypedFloatScalarRel<ElectricalCurren
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalCurrent instantiateTypeRel(final float value, final ElectricalCurrentUnit unit)
+    public final FloatElectricalCurrent instantiateRel(final float value, final ElectricalCurrentUnit unit)
     {
         return new FloatElectricalCurrent(value, unit);
     }

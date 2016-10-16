@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Force;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableForceVector extends MutableTypedDoubleVectorRel<ForceUnit, ForceVector, MutableForceVector, Force>
+public class MutableForceVector extends AbstractMutableDoubleVectorRel<ForceUnit, ForceVector, MutableForceVector, Force>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -124,9 +124,27 @@ public class MutableForceVector extends MutableTypedDoubleVectorRel<ForceUnit, F
 
     /** {@inheritDoc} */
     @Override
-    public final Force get(final int index) throws ValueException
+    protected final Force instantiateScalar(final double value, final ForceUnit unit)
     {
-        return new Force(getInUnit(index, getUnit()), getUnit());
+        return new Force(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableForceVector toDense()
+    {
+        return this.data.isDense() ? (MutableForceVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableForceVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableForceVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

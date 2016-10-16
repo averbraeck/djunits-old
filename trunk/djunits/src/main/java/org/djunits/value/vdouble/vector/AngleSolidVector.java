@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.AngleSolid;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class AngleSolidVector extends
-        TypedDoubleVectorRel<AngleSolidUnit, AngleSolidVector, MutableAngleSolidVector, AngleSolid>
+public class AngleSolidVector
+        extends AbstractDoubleVectorRel<AngleSolidUnit, AngleSolidVector, MutableAngleSolidVector, AngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -127,9 +127,27 @@ public class AngleSolidVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final AngleSolid get(final int index) throws ValueException
+    protected final AngleSolid instantiateScalar(final double value, final AngleSolidUnit unit)
     {
-        return new AngleSolid(getInUnit(index, getUnit()), getUnit());
+        return new AngleSolid(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final AngleSolidVector toDense()
+    {
+        return this.data.isDense() ? (AngleSolidVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final AngleSolidVector toSparse()
+    {
+        return this.data.isSparse() ? (AngleSolidVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

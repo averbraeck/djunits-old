@@ -33,7 +33,7 @@ import org.djunits.unit.TimeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Energy extends TypedDoubleScalarRel<EnergyUnit, Energy>
+public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -62,7 +62,7 @@ public class Energy extends TypedDoubleScalarRel<EnergyUnit, Energy>
 
     /** {@inheritDoc} */
     @Override
-    protected final Energy instantiateTypeRel(final double value, final EnergyUnit unit)
+    public final Energy instantiateRel(final double value, final EnergyUnit unit)
     {
         return new Energy(value, unit);
     }

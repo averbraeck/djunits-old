@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatElectricalResistance;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatElectricalResistanceMatrix
-        extends
-        MutableTypedFloatMatrixRel<ElectricalResistanceUnit, FloatElectricalResistanceMatrix, MutableFloatElectricalResistanceMatrix, FloatElectricalResistance>
+public class MutableFloatElectricalResistanceMatrix extends
+        AbstractMutableFloatMatrixRel<ElectricalResistanceUnit, FloatElectricalResistanceMatrix, MutableFloatElectricalResistanceMatrix, FloatElectricalResistance>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -60,6 +59,20 @@ public class MutableFloatElectricalResistanceMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatElectricalResistanceMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatElectricalResistanceMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatElectricalResistanceMatrix instantiateType(final FloatMatrixData fmd,
             final ElectricalResistanceUnit unit)
     {
@@ -76,9 +89,9 @@ public class MutableFloatElectricalResistanceMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatElectricalResistance get(final int row, final int column) throws ValueException
+    protected final FloatElectricalResistance instantiateScalar(final float value, final ElectricalResistanceUnit unit)
     {
-        return new FloatElectricalResistance(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatElectricalResistance(value, unit);
     }
 
 }

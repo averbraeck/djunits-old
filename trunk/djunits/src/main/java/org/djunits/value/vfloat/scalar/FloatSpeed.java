@@ -34,7 +34,7 @@ import org.djunits.unit.TimeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatSpeed extends TypedFloatScalarRel<SpeedUnit, FloatSpeed>
+public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -73,7 +73,7 @@ public class FloatSpeed extends TypedFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatSpeed instantiateTypeRel(final float value, final SpeedUnit unit)
+    public final FloatSpeed instantiateRel(final float value, final SpeedUnit unit)
     {
         return new FloatSpeed(value, unit);
     }

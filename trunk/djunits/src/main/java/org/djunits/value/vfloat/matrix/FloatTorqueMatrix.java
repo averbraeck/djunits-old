@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatTorque;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatTorqueMatrix extends
-        TypedFloatMatrixRel<TorqueUnit, FloatTorqueMatrix, MutableFloatTorqueMatrix, FloatTorque>
+public class FloatTorqueMatrix
+        extends AbstractFloatMatrixRel<TorqueUnit, FloatTorqueMatrix, MutableFloatTorqueMatrix, FloatTorque>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -29,8 +29,7 @@ public class FloatTorqueMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatTorqueMatrix(final float[][] values, final TorqueUnit unit, final StorageType storageType)
-            throws ValueException
+    public FloatTorqueMatrix(final float[][] values, final TorqueUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,6 +57,20 @@ public class FloatTorqueMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatTorqueMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatTorqueMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatTorqueMatrix instantiateType(final FloatMatrixData fmd, final TorqueUnit unit)
     {
         return new FloatTorqueMatrix(fmd, unit);
@@ -72,9 +85,9 @@ public class FloatTorqueMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatTorque get(final int row, final int column) throws ValueException
+    protected final FloatTorque instantiateScalar(final float value, final TorqueUnit unit)
     {
-        return new FloatTorque(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatTorque(value, unit);
     }
 
 }

@@ -19,7 +19,7 @@ import org.djunits.value.vfloat.scalar.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Float%TypeRel%Matrix extends TypedFloatMatrixRel<%TypeUnit%, Float%TypeRel%Matrix, MutableFloat%TypeRel%Matrix, Float%TypeRel%>
+public class Float%TypeRel%Matrix extends AbstractFloatMatrixRel<%TypeUnit%, Float%TypeRel%Matrix, MutableFloat%TypeRel%Matrix, Float%TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -59,6 +59,20 @@ public class Float%TypeRel%Matrix extends TypedFloatMatrixRel<%TypeUnit%, Float%
 
     /** {@inheritDoc} */
     @Override
+    public final Float%TypeRel%Matrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final Float%TypeRel%Matrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final Float%TypeRel%Matrix instantiateType(final FloatMatrixData fmd, final %TypeUnit% unit)
     {
         return new Float%TypeRel%Matrix(fmd, unit);
@@ -74,9 +88,9 @@ public class Float%TypeRel%Matrix extends TypedFloatMatrixRel<%TypeUnit%, Float%
 
     /** {@inheritDoc} */
     @Override
-    public final Float%TypeRel% get(final int row, final int column) throws ValueException
+    protected final Float%TypeRel% instantiateScalar(final float value, final %TypeUnit% unit)
     {
-        return new Float%TypeRel%(getInUnit(row, column, getUnit()), getUnit());
+        return new Float%TypeRel%(value, unit);
     }
     
     /**

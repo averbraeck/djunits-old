@@ -16,9 +16,8 @@ import org.djunits.value.vdouble.scalar.AbsoluteTemperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableAbsoluteTemperatureMatrix
-        extends
-        MutableTypedDoubleMatrixAbs<TemperatureUnit, AbsoluteTemperatureMatrix, TemperatureMatrix, MutableAbsoluteTemperatureMatrix, AbsoluteTemperature>
+public class MutableAbsoluteTemperatureMatrix extends
+        AbstractMutableDoubleMatrixAbs<TemperatureUnit, AbsoluteTemperatureMatrix, TemperatureMatrix, MutableAbsoluteTemperatureMatrix, AbsoluteTemperature>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -61,6 +60,20 @@ public class MutableAbsoluteTemperatureMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableAbsoluteTemperatureMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableAbsoluteTemperatureMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final AbsoluteTemperatureMatrix instantiateTypeAbs(final DoubleMatrixData dmd, final TemperatureUnit unit)
     {
         return new AbsoluteTemperatureMatrix(dmd, unit);
@@ -83,9 +96,9 @@ public class MutableAbsoluteTemperatureMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final AbsoluteTemperature get(final int row, final int column) throws ValueException
+    protected final AbsoluteTemperature instantiateScalar(final double value, final TemperatureUnit unit)
     {
-        return new AbsoluteTemperature(getInUnit(row, column, getUnit()), getUnit());
+        return new AbsoluteTemperature(value, unit);
     }
 
     /**

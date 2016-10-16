@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatDimensionless;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatDimensionlessMatrix extends
-        TypedFloatMatrixRel<DimensionlessUnit, FloatDimensionlessMatrix, MutableFloatDimensionlessMatrix, FloatDimensionless>
+        AbstractFloatMatrixRel<DimensionlessUnit, FloatDimensionlessMatrix, MutableFloatDimensionlessMatrix, FloatDimensionless>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class FloatDimensionlessMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatDimensionlessMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatDimensionlessMatrix instantiateType(final FloatMatrixData fmd, final DimensionlessUnit unit)
     {
         return new FloatDimensionlessMatrix(fmd, unit);
@@ -73,9 +87,9 @@ public class FloatDimensionlessMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDimensionless get(final int row, final int column) throws ValueException
+    protected final FloatDimensionless instantiateScalar(final float value, final DimensionlessUnit unit)
     {
-        return new FloatDimensionless(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatDimensionless(value, unit);
     }
 
 }

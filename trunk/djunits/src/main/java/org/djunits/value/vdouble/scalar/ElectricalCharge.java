@@ -29,7 +29,7 @@ import org.djunits.unit.TimeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ElectricalCharge extends TypedDoubleScalarRel<ElectricalChargeUnit, ElectricalCharge>
+public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUnit, ElectricalCharge>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -58,7 +58,7 @@ public class ElectricalCharge extends TypedDoubleScalarRel<ElectricalChargeUnit,
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalCharge instantiateTypeRel(final double value, final ElectricalChargeUnit unit)
+    public final ElectricalCharge instantiateRel(final double value, final ElectricalChargeUnit unit)
     {
         return new ElectricalCharge(value, unit);
     }

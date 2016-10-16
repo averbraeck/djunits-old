@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatArea;
 
 /**
- * Immutable FloatAreaVector, a vector of values with a AreaUnit.
+ * Immutable Float FloatAreaVector, a vector of values with a AreaUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,15 +19,15 @@ import org.djunits.value.vfloat.scalar.FloatArea;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatAreaVector extends TypedFloatVectorRel<AreaUnit, FloatAreaVector, MutableFloatAreaVector, FloatArea>
+public class FloatAreaVector extends AbstractFloatVectorRel<AreaUnit, FloatAreaVector, MutableFloatAreaVector, FloatArea>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatAreaVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatAreaVector
-     * @param unit U; the unit of the new Relative Immutable FloatAreaVector
+     * Construct a new Relative Immutable Float FloatAreaVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatAreaVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatAreaVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -37,9 +37,9 @@ public class FloatAreaVector extends TypedFloatVectorRel<AreaUnit, FloatAreaVect
     }
 
     /**
-     * Construct a new Relative Immutable FloatAreaVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAreaVector
-     * @param unit U; the unit of the new Relative Immutable FloatAreaVector
+     * Construct a new Relative Immutable Float FloatAreaVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatAreaVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatAreaVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -49,7 +49,7 @@ public class FloatAreaVector extends TypedFloatVectorRel<AreaUnit, FloatAreaVect
     }
 
     /**
-     * Construct a new Relative Immutable FloatAreaVector.
+     * Construct a new Relative Immutable Float FloatAreaVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float FloatAreaVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -60,8 +60,8 @@ public class FloatAreaVector extends TypedFloatVectorRel<AreaUnit, FloatAreaVect
     }
 
     /**
-     * Construct a new Relative Immutable FloatAreaVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAreaVector
+     * Construct a new Relative Immutable Float FloatAreaVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatAreaVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -71,7 +71,7 @@ public class FloatAreaVector extends TypedFloatVectorRel<AreaUnit, FloatAreaVect
     }
 
     /**
-     * Construct a new Relative Immutable FloatAreaVector.
+     * Construct a new Relative Immutable Float FloatAreaVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatAreaVector
      * @param length the size of the vector
@@ -85,9 +85,9 @@ public class FloatAreaVector extends TypedFloatVectorRel<AreaUnit, FloatAreaVect
     }
 
     /**
-     * Construct a new Relative Immutable FloatAreaVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatAreaVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatAreaVector
+     * Construct a new Relative Immutable Float FloatAreaVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatAreaVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatAreaVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -123,9 +123,27 @@ public class FloatAreaVector extends TypedFloatVectorRel<AreaUnit, FloatAreaVect
 
     /** {@inheritDoc} */
     @Override
-    public final FloatArea get(final int index) throws ValueException
+    protected final FloatArea instantiateScalar(final float value, final AreaUnit unit)
     {
-        return new FloatArea(getInUnit(index, getUnit()), getUnit());
+        return new FloatArea(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatAreaVector toDense()
+    {
+        return this.data.isDense() ? (FloatAreaVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatAreaVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatAreaVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

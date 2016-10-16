@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.AngleSolid;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableAngleSolidVector extends
-        MutableTypedDoubleVectorRel<AngleSolidUnit, AngleSolidVector, MutableAngleSolidVector, AngleSolid>
+public class MutableAngleSolidVector
+        extends AbstractMutableDoubleVectorRel<AngleSolidUnit, AngleSolidVector, MutableAngleSolidVector, AngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -127,9 +127,27 @@ public class MutableAngleSolidVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final AngleSolid get(final int index) throws ValueException
+    protected final AngleSolid instantiateScalar(final double value, final AngleSolidUnit unit)
     {
-        return new AngleSolid(getInUnit(index, getUnit()), getUnit());
+        return new AngleSolid(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableAngleSolidVector toDense()
+    {
+        return this.data.isDense() ? (MutableAngleSolidVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableAngleSolidVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableAngleSolidVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

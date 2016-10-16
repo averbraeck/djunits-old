@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatAbsoluteTemperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatAbsoluteTemperatureMatrix
-        extends
-        TypedFloatMatrixAbs<TemperatureUnit, FloatAbsoluteTemperatureMatrix, FloatTemperatureMatrix, MutableFloatAbsoluteTemperatureMatrix, FloatAbsoluteTemperature>
+public class FloatAbsoluteTemperatureMatrix extends
+        AbstractFloatMatrixAbs<TemperatureUnit, FloatAbsoluteTemperatureMatrix, FloatTemperatureMatrix, MutableFloatAbsoluteTemperatureMatrix, FloatAbsoluteTemperature>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -61,6 +60,20 @@ public class FloatAbsoluteTemperatureMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final FloatAbsoluteTemperatureMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatAbsoluteTemperatureMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatAbsoluteTemperatureMatrix instantiateTypeAbs(final FloatMatrixData fmd, final TemperatureUnit unit)
     {
         return new FloatAbsoluteTemperatureMatrix(fmd, unit);
@@ -83,9 +96,9 @@ public class FloatAbsoluteTemperatureMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAbsoluteTemperature get(final int row, final int column) throws ValueException
+    protected final FloatAbsoluteTemperature instantiateScalar(final float value, final TemperatureUnit unit)
     {
-        return new FloatAbsoluteTemperature(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatAbsoluteTemperature(value, unit);
     }
 
     /**

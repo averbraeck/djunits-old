@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatMoneyPerTime;
 
 /**
- * Mutable FloatMoneyPerTimeVector, a vector of values with a MoneyPerTimeUnit.
+ * Mutable Float MoneyPerTimeVector, a vector of values with a MoneyPerTimeUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,17 +19,16 @@ import org.djunits.value.vfloat.scalar.FloatMoneyPerTime;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatMoneyPerTimeVector
-        extends
-        MutableTypedFloatVectorRel<MoneyPerTimeUnit, FloatMoneyPerTimeVector, MutableFloatMoneyPerTimeVector, FloatMoneyPerTime>
+public class MutableFloatMoneyPerTimeVector extends
+        AbstractMutableFloatVectorRel<MoneyPerTimeUnit, FloatMoneyPerTimeVector, MutableFloatMoneyPerTimeVector, FloatMoneyPerTime>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerTimeVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatMoneyPerTimeVector
-     * @param unit U; the unit of the new Relative Immutable FloatMoneyPerTimeVector
+     * Construct a new Relative Immutable Float MoneyPerTimeVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float MoneyPerTimeVector
+     * @param unit U; the unit of the new Relative Immutable Float MoneyPerTimeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -40,9 +39,9 @@ public class MutableFloatMoneyPerTimeVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerTimeVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatMoneyPerTimeVector
-     * @param unit U; the unit of the new Relative Immutable FloatMoneyPerTimeVector
+     * Construct a new Relative Immutable Float MoneyPerTimeVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float MoneyPerTimeVector
+     * @param unit U; the unit of the new Relative Immutable Float MoneyPerTimeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -53,21 +52,20 @@ public class MutableFloatMoneyPerTimeVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerTimeVector.
+     * Construct a new Relative Immutable Float MoneyPerTimeVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatMoneyPerTimeVector
+     *            MoneyPerTimeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatMoneyPerTimeVector(final FloatMoneyPerTime[] values, final StorageType storageType)
-            throws ValueException
+    public MutableFloatMoneyPerTimeVector(final FloatMoneyPerTime[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerTimeVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatMoneyPerTimeVector
+     * Construct a new Relative Immutable Float MoneyPerTimeVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float MoneyPerTimeVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -78,9 +76,9 @@ public class MutableFloatMoneyPerTimeVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerTimeVector.
+     * Construct a new Relative Immutable Float MoneyPerTimeVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatMoneyPerTimeVector
+     *            MoneyPerTimeVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -92,15 +90,15 @@ public class MutableFloatMoneyPerTimeVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatMoneyPerTimeVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatMoneyPerTimeVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatMoneyPerTimeVector
+     * Construct a new Relative Immutable Float MoneyPerTimeVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float MoneyPerTimeVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float MoneyPerTimeVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatMoneyPerTimeVector(final SortedMap<Integer, Float> values, final MoneyPerTimeUnit unit,
-            final int length, final StorageType storageType) throws ValueException
+    public MutableFloatMoneyPerTimeVector(final SortedMap<Integer, Float> values, final MoneyPerTimeUnit unit, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
     }
@@ -123,16 +121,37 @@ public class MutableFloatMoneyPerTimeVector
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatMoneyPerTimeVector instantiateMutableType(final FloatVectorData dvd, final MoneyPerTimeUnit unit)
+    protected final MutableFloatMoneyPerTimeVector instantiateMutableType(final FloatVectorData dvd,
+            final MoneyPerTimeUnit unit)
     {
         return new MutableFloatMoneyPerTimeVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMoneyPerTime get(final int index) throws ValueException
+    protected final FloatMoneyPerTime instantiateScalar(final float value, final MoneyPerTimeUnit unit)
     {
-        return new FloatMoneyPerTime(getInUnit(index, getUnit()), getUnit());
+        return new FloatMoneyPerTime(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatMoneyPerTimeVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatMoneyPerTimeVector) this
+                : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatMoneyPerTimeVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatMoneyPerTimeVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

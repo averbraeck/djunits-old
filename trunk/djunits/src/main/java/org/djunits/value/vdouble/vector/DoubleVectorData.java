@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import org.djunits.unit.scale.Scale;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.vdouble.scalar.DoubleScalar;
+import org.djunits.value.vdouble.scalar.DoubleScalarInterface;
 
 /**
  * Stores the data for a DoubleVector and carries out basic operations.
@@ -97,8 +97,8 @@ abstract class DoubleVectorData
                 return new DoubleVectorDataDense(values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).toArray());
 
             case SPARSE:
-                return DoubleVectorDataSparse.instantiate(values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d))
-                        .toArray());
+                return DoubleVectorDataSparse
+                        .instantiate(values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).toArray());
 
             default:
                 throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
@@ -112,7 +112,7 @@ abstract class DoubleVectorData
      * @return the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
-    public static DoubleVectorData instantiate(final DoubleScalar<?>[] values, final StorageType storageType)
+    public static DoubleVectorData instantiate(final DoubleScalarInterface[] values, final StorageType storageType)
             throws ValueException
     {
         if (values == null)
@@ -142,8 +142,8 @@ abstract class DoubleVectorData
      * @return the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
-    public static DoubleVectorData instantiateLD(final List<? extends DoubleScalar<?>> values, final StorageType storageType)
-            throws ValueException
+    public static DoubleVectorData instantiateLD(final List<? extends DoubleScalarInterface> values,
+            final StorageType storageType) throws ValueException
     {
         if (values == null)
         {
@@ -174,7 +174,7 @@ abstract class DoubleVectorData
      * @return the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
-    public static <S extends DoubleScalar<?>> DoubleVectorData instantiateMD(final SortedMap<Integer, S> values,
+    public static <S extends DoubleScalarInterface> DoubleVectorData instantiateMD(final SortedMap<Integer, S> values,
             final int length, final StorageType storageType) throws ValueException
     {
         if (values == null)
@@ -223,9 +223,8 @@ abstract class DoubleVectorData
         {
             case DENSE:
             {
-                double[] valuesSI =
-                        values.keySet().parallelStream().mapToDouble(index -> scale.toStandardUnit(values.get(index)))
-                                .toArray();
+                double[] valuesSI = values.keySet().parallelStream()
+                        .mapToDouble(index -> scale.toStandardUnit(values.get(index))).toArray();
                 return new DoubleVectorDataDense(valuesSI);
             }
 

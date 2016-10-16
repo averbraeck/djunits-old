@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatLength;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatLengthMatrix extends
-        TypedFloatMatrixRel<LengthUnit, FloatLengthMatrix, MutableFloatLengthMatrix, FloatLength>
+public class FloatLengthMatrix
+        extends AbstractFloatMatrixRel<LengthUnit, FloatLengthMatrix, MutableFloatLengthMatrix, FloatLength>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -29,8 +29,7 @@ public class FloatLengthMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatLengthMatrix(final float[][] values, final LengthUnit unit, final StorageType storageType)
-            throws ValueException
+    public FloatLengthMatrix(final float[][] values, final LengthUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -58,6 +57,20 @@ public class FloatLengthMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatLengthMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatLengthMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatLengthMatrix instantiateType(final FloatMatrixData fmd, final LengthUnit unit)
     {
         return new FloatLengthMatrix(fmd, unit);
@@ -72,9 +85,9 @@ public class FloatLengthMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatLength get(final int row, final int column) throws ValueException
+    protected final FloatLength instantiateScalar(final float value, final LengthUnit unit)
     {
-        return new FloatLength(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatLength(value, unit);
     }
 
     /**

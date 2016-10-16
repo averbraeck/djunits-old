@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.*;
  */
 public class MutableFloat%TypeAbs%Matrix
         extends
-        MutableTypedFloatMatrixAbs<%TypeUnit%, Float%TypeAbs%Matrix, Float%TypeRel%Matrix, MutableFloat%TypeAbs%Matrix, Float%TypeAbs%>
+        AbstractMutableFloatMatrixAbs<%TypeUnit%, Float%TypeAbs%Matrix, Float%TypeRel%Matrix, MutableFloat%TypeAbs%Matrix, Float%TypeAbs%>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -61,6 +61,20 @@ public class MutableFloat%TypeAbs%Matrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloat%TypeAbs%Matrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloat%TypeAbs%Matrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final Float%TypeAbs%Matrix instantiateTypeAbs(final FloatMatrixData fmd, final %TypeUnit% unit)
     {
         return new Float%TypeAbs%Matrix(fmd, unit);
@@ -83,9 +97,9 @@ public class MutableFloat%TypeAbs%Matrix
 
     /** {@inheritDoc} */
     @Override
-    public final Float%TypeAbs% get(final int row, final int column) throws ValueException
+    protected final Float%TypeAbs% instantiateScalar(final float value, final %TypeUnit% unit)
     {
-        return new Float%TypeAbs%(getInUnit(row, column, getUnit()), getUnit());
+        return new Float%TypeAbs%(value, unit);
     }
     
     /**

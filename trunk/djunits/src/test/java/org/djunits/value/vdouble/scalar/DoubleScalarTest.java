@@ -32,7 +32,7 @@ public class DoubleScalarTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; ds should be Absolute; if false; ds should be Relative
      */
-    private static void checkContentsAndType(final DoubleScalar<?> ds, final double reference, final double precision,
+    private static void checkContentsAndType(final AbstractDoubleScalar<?, ?> ds, final double reference, final double precision,
         final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("DoubleScalar should not be null", null != ds);
@@ -530,7 +530,7 @@ public class DoubleScalarTest
          * @param precision double; expected accuracy
          * @param function DoubleToDouble; encapsulated function that converts one inputValue to an outputValue
          */
-        public static void tester(final double inputValue, final String operation, final DoubleScalar<?> actualResult,
+        public static void tester(final double inputValue, final String operation, final AbstractDoubleScalar<?, ?> actualResult,
             final double precision, final DoubleToDouble function)
         {
             double expectedResult = function.function(inputValue);

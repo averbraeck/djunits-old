@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatAngleSolid;
 
 /**
- * Mutable FloatAngleSolidVector, a vector of values with a AngleSolidUnit.
+ * Mutable Float AngleSolidVector, a vector of values with a AngleSolidUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -20,15 +20,15 @@ import org.djunits.value.vfloat.scalar.FloatAngleSolid;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatAngleSolidVector extends
-        MutableTypedFloatVectorRel<AngleSolidUnit, FloatAngleSolidVector, MutableFloatAngleSolidVector, FloatAngleSolid>
+        AbstractMutableFloatVectorRel<AngleSolidUnit, FloatAngleSolidVector, MutableFloatAngleSolidVector, FloatAngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatAngleSolidVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatAngleSolidVector
-     * @param unit U; the unit of the new Relative Immutable FloatAngleSolidVector
+     * Construct a new Relative Immutable Float AngleSolidVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float AngleSolidVector
+     * @param unit U; the unit of the new Relative Immutable Float AngleSolidVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class MutableFloatAngleSolidVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatAngleSolidVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAngleSolidVector
-     * @param unit U; the unit of the new Relative Immutable FloatAngleSolidVector
+     * Construct a new Relative Immutable Float AngleSolidVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float AngleSolidVector
+     * @param unit U; the unit of the new Relative Immutable Float AngleSolidVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,9 +52,8 @@ public class MutableFloatAngleSolidVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatAngleSolidVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatAngleSolidVector
+     * Construct a new Relative Immutable Float AngleSolidVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float AngleSolidVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -64,21 +63,20 @@ public class MutableFloatAngleSolidVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatAngleSolidVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatAngleSolidVector
+     * Construct a new Relative Immutable Float AngleSolidVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float AngleSolidVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatAngleSolidVector(final List<FloatAngleSolid> values, final StorageType storageType)
-            throws ValueException
+    public MutableFloatAngleSolidVector(final List<FloatAngleSolid> values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatAngleSolidVector.
+     * Construct a new Relative Immutable Float AngleSolidVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatAngleSolidVector
+     *            AngleSolidVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -90,9 +88,9 @@ public class MutableFloatAngleSolidVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatAngleSolidVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatAngleSolidVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatAngleSolidVector
+     * Construct a new Relative Immutable Float AngleSolidVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float AngleSolidVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float AngleSolidVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -128,9 +126,29 @@ public class MutableFloatAngleSolidVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAngleSolid get(final int index) throws ValueException
+    protected final FloatAngleSolid instantiateScalar(final float value, final AngleSolidUnit unit)
     {
-        return new FloatAngleSolid(getInUnit(index, getUnit()), getUnit());
+        return new FloatAngleSolid(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatAngleSolidVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatAngleSolidVector) this
+                : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatAngleSolidVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatAngleSolidVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.MoneyPerLength;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerLengthMatrix extends
-        TypedDoubleMatrixRel<MoneyPerLengthUnit, MoneyPerLengthMatrix, MutableMoneyPerLengthMatrix, MoneyPerLength>
+public class MoneyPerLengthMatrix
+        extends AbstractDoubleMatrixRel<MoneyPerLengthUnit, MoneyPerLengthMatrix, MutableMoneyPerLengthMatrix, MoneyPerLength>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MoneyPerLengthMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MoneyPerLengthMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MoneyPerLengthMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final MoneyPerLengthMatrix instantiateType(final DoubleMatrixData dmd, final MoneyPerLengthUnit unit)
     {
         return new MoneyPerLengthMatrix(dmd, unit);
@@ -65,16 +79,17 @@ public class MoneyPerLengthMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerLengthMatrix instantiateMutableType(final DoubleMatrixData dmd, final MoneyPerLengthUnit unit)
+    protected final MutableMoneyPerLengthMatrix instantiateMutableType(final DoubleMatrixData dmd,
+            final MoneyPerLengthUnit unit)
     {
         return new MutableMoneyPerLengthMatrix(dmd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MoneyPerLength get(final int row, final int column) throws ValueException
+    protected final MoneyPerLength instantiateScalar(final double value, final MoneyPerLengthUnit unit)
     {
-        return new MoneyPerLength(getInUnit(row, column, getUnit()), getUnit());
+        return new MoneyPerLength(value, unit);
     }
 
 }

@@ -52,7 +52,7 @@ public class FloatVectorDenseTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; dv should be Absolute; if false; dv should be Relative
      */
-    private static void checkContentsAndType(final FloatVector<?> dv, final float[] reference, final double precision,
+    private static void checkContentsAndType(final AbstractFloatVector<?, ?> dv, final float[] reference, final double precision,
         final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("FloatVector should not be null", null != dv);
@@ -935,7 +935,7 @@ public class FloatVectorDenseTest
          * @param precision double; expected accuracy
          * @param function FloatToFloat; encapsulated function that converts one inputValue to an outputValue
          */
-        public static void tester(final float[] inputValues, final String operation, final FloatVector<?> actualResult,
+        public static void tester(final float[] inputValues, final String operation, final AbstractFloatVector<?, ?> actualResult,
             final double precision, final FloatToFloat function)
         {
             for (int i = 0; i < inputValues.length; i++)

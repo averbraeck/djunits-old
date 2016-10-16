@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.MoneyPerMass;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerMassMatrix extends
-        TypedDoubleMatrixRel<MoneyPerMassUnit, MoneyPerMassMatrix, MutableMoneyPerMassMatrix, MoneyPerMass>
+public class MoneyPerMassMatrix
+        extends AbstractDoubleMatrixRel<MoneyPerMassUnit, MoneyPerMassMatrix, MutableMoneyPerMassMatrix, MoneyPerMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MoneyPerMassMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MoneyPerMassMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MoneyPerMassMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final MoneyPerMassMatrix instantiateType(final DoubleMatrixData dmd, final MoneyPerMassUnit unit)
     {
         return new MoneyPerMassMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class MoneyPerMassMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final MoneyPerMass get(final int row, final int column) throws ValueException
+    protected final MoneyPerMass instantiateScalar(final double value, final MoneyPerMassUnit unit)
     {
-        return new MoneyPerMass(getInUnit(row, column, getUnit()), getUnit());
+        return new MoneyPerMass(value, unit);
     }
 
 }

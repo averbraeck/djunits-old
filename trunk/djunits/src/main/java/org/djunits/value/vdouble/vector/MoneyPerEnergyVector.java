@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.MoneyPerEnergy;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerEnergyVector extends
-        TypedDoubleVectorRel<MoneyPerEnergyUnit, MoneyPerEnergyVector, MutableMoneyPerEnergyVector, MoneyPerEnergy>
+public class MoneyPerEnergyVector
+        extends AbstractDoubleVectorRel<MoneyPerEnergyUnit, MoneyPerEnergyVector, MutableMoneyPerEnergyVector, MoneyPerEnergy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -82,8 +82,8 @@ public class MoneyPerEnergyVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MoneyPerEnergyVector(final SortedMap<Integer, MoneyPerEnergy> values, final int length, final StorageType storageType)
-            throws ValueException
+    public MoneyPerEnergyVector(final SortedMap<Integer, MoneyPerEnergy> values, final int length,
+            final StorageType storageType) throws ValueException
     {
         super(values, length, storageType);
     }
@@ -120,16 +120,35 @@ public class MoneyPerEnergyVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerEnergyVector instantiateMutableType(final DoubleVectorData dvd, final MoneyPerEnergyUnit unit)
+    protected final MutableMoneyPerEnergyVector instantiateMutableType(final DoubleVectorData dvd,
+            final MoneyPerEnergyUnit unit)
     {
         return new MutableMoneyPerEnergyVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MoneyPerEnergy get(final int index) throws ValueException
+    protected final MoneyPerEnergy instantiateScalar(final double value, final MoneyPerEnergyUnit unit)
     {
-        return new MoneyPerEnergy(getInUnit(index, getUnit()), getUnit());
+        return new MoneyPerEnergy(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MoneyPerEnergyVector toDense()
+    {
+        return this.data.isDense() ? (MoneyPerEnergyVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MoneyPerEnergyVector toSparse()
+    {
+        return this.data.isSparse() ? (MoneyPerEnergyVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

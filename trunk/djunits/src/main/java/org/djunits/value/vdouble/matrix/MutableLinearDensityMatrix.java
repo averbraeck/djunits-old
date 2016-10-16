@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.LinearDensity;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableLinearDensityMatrix extends
-        MutableTypedDoubleMatrixRel<LinearDensityUnit, LinearDensityMatrix, MutableLinearDensityMatrix, LinearDensity>
+        AbstractMutableDoubleMatrixRel<LinearDensityUnit, LinearDensityMatrix, MutableLinearDensityMatrix, LinearDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableLinearDensityMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableLinearDensityMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableLinearDensityMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final LinearDensityMatrix instantiateType(final DoubleMatrixData dmd, final LinearDensityUnit unit)
     {
         return new LinearDensityMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class MutableLinearDensityMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final LinearDensity get(final int row, final int column) throws ValueException
+    protected final LinearDensity instantiateScalar(final double value, final LinearDensityUnit unit)
     {
-        return new LinearDensity(getInUnit(row, column, getUnit()), getUnit());
+        return new LinearDensity(value, unit);
     }
 
 }

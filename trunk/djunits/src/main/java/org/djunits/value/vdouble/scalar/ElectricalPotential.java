@@ -10,8 +10,8 @@ import org.djunits.unit.PowerUnit;
  * Easy access methods for the ElectricalPotential DoubleScalar, which is relative by definition. Instead of:
  * 
  * <pre>
- * DoubleScalar.Rel&lt;ElectricalPotentialUnit&gt; value = new DoubleScalar.Rel&lt;ElectricalPotentialUnit&gt;(100.0,
- *         ElectricalPotentialUnit.SI);
+ * DoubleScalar.Rel&lt;ElectricalPotentialUnit&gt; value =
+ *         new DoubleScalar.Rel&lt;ElectricalPotentialUnit&gt;(100.0, ElectricalPotentialUnit.SI);
  * </pre>
  * 
  * we can now write:
@@ -31,7 +31,7 @@ import org.djunits.unit.PowerUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class ElectricalPotential extends TypedDoubleScalarRel<ElectricalPotentialUnit, ElectricalPotential>
+public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPotentialUnit, ElectricalPotential>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -60,7 +60,7 @@ public class ElectricalPotential extends TypedDoubleScalarRel<ElectricalPotentia
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalPotential instantiateTypeRel(final double value, final ElectricalPotentialUnit unit)
+    public final ElectricalPotential instantiateRel(final double value, final ElectricalPotentialUnit unit)
     {
         return new ElectricalPotential(value, unit);
     }

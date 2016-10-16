@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Torque;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class TorqueVector extends TypedDoubleVectorRel<TorqueUnit, TorqueVector, MutableTorqueVector, Torque>
+public class TorqueVector extends AbstractDoubleVectorRel<TorqueUnit, TorqueVector, MutableTorqueVector, Torque>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -123,9 +123,27 @@ public class TorqueVector extends TypedDoubleVectorRel<TorqueUnit, TorqueVector,
 
     /** {@inheritDoc} */
     @Override
-    public final Torque get(final int index) throws ValueException
+    protected final Torque instantiateScalar(final double value, final TorqueUnit unit)
     {
-        return new Torque(getInUnit(index, getUnit()), getUnit());
+        return new Torque(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final TorqueVector toDense()
+    {
+        return this.data.isDense() ? (TorqueVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final TorqueVector toSparse()
+    {
+        return this.data.isSparse() ? (TorqueVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

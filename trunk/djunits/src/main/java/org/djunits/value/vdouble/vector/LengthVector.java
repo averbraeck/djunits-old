@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Length;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class LengthVector extends TypedDoubleVectorRel<LengthUnit, LengthVector, MutableLengthVector, Length>
+public class LengthVector extends AbstractDoubleVectorRel<LengthUnit, LengthVector, MutableLengthVector, Length>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -124,9 +124,27 @@ public class LengthVector extends TypedDoubleVectorRel<LengthUnit, LengthVector,
 
     /** {@inheritDoc} */
     @Override
-    public final Length get(final int index) throws ValueException
+    protected final Length instantiateScalar(final double value, final LengthUnit unit)
     {
-        return new Length(getInUnit(index, getUnit()), getUnit());
+        return new Length(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final LengthVector toDense()
+    {
+        return this.data.isDense() ? (LengthVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final LengthVector toSparse()
+    {
+        return this.data.isSparse() ? (LengthVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
     /**

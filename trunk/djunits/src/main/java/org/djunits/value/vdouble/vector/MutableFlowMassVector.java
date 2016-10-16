@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.FlowMass;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFlowMassVector extends
-        MutableTypedDoubleVectorRel<FlowMassUnit, FlowMassVector, MutableFlowMassVector, FlowMass>
+public class MutableFlowMassVector
+        extends AbstractMutableDoubleVectorRel<FlowMassUnit, FlowMassVector, MutableFlowMassVector, FlowMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -126,9 +126,27 @@ public class MutableFlowMassVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FlowMass get(final int index) throws ValueException
+    protected final FlowMass instantiateScalar(final double value, final FlowMassUnit unit)
     {
-        return new FlowMass(getInUnit(index, getUnit()), getUnit());
+        return new FlowMass(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableFlowMassVector toDense()
+    {
+        return this.data.isDense() ? (MutableFlowMassVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableFlowMassVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFlowMassVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

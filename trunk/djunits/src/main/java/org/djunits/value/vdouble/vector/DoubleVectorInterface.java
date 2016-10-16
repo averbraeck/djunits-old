@@ -2,7 +2,7 @@ package org.djunits.value.vdouble.vector;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.ValueException;
-import org.djunits.value.vdouble.scalar.DoubleScalar;
+import org.djunits.value.vdouble.scalar.AbstractDoubleScalar;
 
 /**
  * Interface for the Immutable and Mutable DoubleVector classes.
@@ -31,6 +31,14 @@ public interface DoubleVectorInterface<U extends Unit<U>>
     int cardinality();
 
     /**
+     * Retrieve a value from the vector.
+     * @param index the index to retrieve the value at
+     * @return the value as a DoubleScalar
+     * @throws ValueException in case index is out of bounds
+     */
+    AbstractDoubleScalar<U, ?> get(final int index) throws ValueException;
+    
+    /**
      * Retrieve the value stored at a specified position in the standard SI unit.
      * @param index int; index of the value to retrieve
      * @return double; value at position index in the standard SI unit
@@ -56,26 +64,28 @@ public interface DoubleVectorInterface<U extends Unit<U>>
     double getInUnit(int index, U targetUnit) throws ValueException;
 
     /**
-     * Retrieve the value stored at a specified index as a DoubleScalar.
-     * @param index int; index of the value to retrieve
-     * @return DoubleScalar&lt;U&gt;; the strongly typed value of the selected cell
-     * @throws ValueException when index out of range (index &lt; 0 or index &gt;= size())
+     * return a mutable version of this vector.
+     * @return a mutable version of this vector
      */
-    DoubleScalar<U> get(int index) throws ValueException;
-
+    MutableDoubleVectorInterface<U> mutable();
+    
     /**
+     * return a sparse version of this vector.
+     * @return a sparse version of this vector
+     */
+    DoubleVectorInterface<U> toSparse();
+    
+    /**
+     * return a dense version of this vector.
+     * @return a dense version of this vector
+     */
+    DoubleVectorInterface<U> toDense();
+    
+    /** 
      * Compute the sum of all values of this vector.
      * @return double; the sum of all values of this vector
      */
     double zSum();
-
-    /**
-     * Create a mutable version of this DoubleVector. <br>
-     * The mutable version is created with a shallow copy of the data and the internal copyOnWrite flag set. The first operation
-     * in the mutable version that modifies the data shall trigger a deep copy of the data.
-     * @return MutableDoubleVector&lt;U&gt;; mutable version of this DoubleVector
-     */
-    MutableDoubleVectorInterface<U> mutable();
 
     /**
      * Create a double[] array filled with the values in the standard SI unit.
@@ -124,17 +134,5 @@ public interface DoubleVectorInterface<U extends Unit<U>>
      * @return String; printable string with the vector contents
      */
     String toString(final U displayUnit, final boolean verbose, final boolean withUnit);
-
-    /**
-     * Create a dense version of this DoubleVector. <br>
-     * @return DoubleVector&lt;U&gt;; dense version of this DoubleVector
-     */
-    DoubleVectorInterface<U> toDense();
-
-    /**
-     * Create a sparse version of this DoubleVector. <br>
-     * @return DoubleVector&lt;U&gt;; sparse version of this DoubleVector
-     */
-    DoubleVectorInterface<U> toSparse();
 
 }

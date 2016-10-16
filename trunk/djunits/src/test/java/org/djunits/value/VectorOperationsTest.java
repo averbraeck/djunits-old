@@ -18,13 +18,17 @@ import org.djunits.unit.UNITS;
 import org.djunits.unit.Unit;
 import org.djunits.unit.unitsystem.UnitSystem;
 import org.djunits.util.ClassUtil;
+import org.djunits.value.vdouble.scalar.AbstractDoubleScalar;
 import org.djunits.value.vdouble.scalar.Area;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.djunits.value.vdouble.scalar.Length;
+import org.djunits.value.vdouble.vector.AbstractDoubleVector;
 import org.djunits.value.vdouble.vector.DoubleVector;
 import org.djunits.value.vdouble.vector.DoubleVectorInterface;
 import org.djunits.value.vdouble.vector.MutableDoubleVectorInterface;
+import org.djunits.value.vfloat.scalar.AbstractFloatScalar;
 import org.djunits.value.vfloat.scalar.FloatScalar;
+import org.djunits.value.vfloat.vector.AbstractFloatVector;
 import org.djunits.value.vfloat.vector.FloatVector;
 import org.djunits.value.vfloat.vector.FloatVectorInterface;
 import org.djunits.value.vfloat.vector.MutableFloatVectorInterface;
@@ -473,21 +477,21 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         double result = Double.NaN;
         if (doubleType)
         {
-            if (!(o instanceof DoubleVector))
+            if (!(o instanceof DoubleVectorInterface))
             {
                 fail("object is not a DoubleVector");
             }
-            DoubleVector<?> dv = (DoubleVector<?>) o;
+            AbstractDoubleVector<?, ?> dv = (AbstractDoubleVector<?, ?>) o;
             result = dv.getSI(index);
             assertEquals("StorageType", storageType, dv.getStorageType());
         }
         else
         {
-            if (!(o instanceof FloatVector))
+            if (!(o instanceof FloatVectorInterface))
             {
                 fail("object is not a FloatVector");
             }
-            FloatVector<?> fv = (FloatVector<?>) o;
+            AbstractFloatVector<?, ?> fv = (AbstractFloatVector<?, ?>) o;
             result = fv.getSI(index);
             assertEquals("StorageType", storageType, fv.getStorageType());
         }
@@ -775,20 +779,20 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                         storageType }, doubleType);
         if (doubleType)
         {
-            DoubleVector<?> dv = (DoubleVector<?>) vector;
+            AbstractDoubleVector<?, ?> dv = (AbstractDoubleVector<?, ?>) vector;
             for (int i = 0; i < doubleValue.length; i++)
             {
-                DoubleScalar<?> ds = dv.get(i);
+                AbstractDoubleScalar<?, ?> ds = dv.get(i);
                 double got = ds.getSI();
                 assertEquals("get returns expected value", doubleValue[i], got, 0.0001);
             }
         }
         else
         {
-            FloatVector<?> fv = (FloatVector<?>) vector;
+            AbstractFloatVector<?, ?> fv = (AbstractFloatVector<?, ?>) vector;
             for (int i = 0; i < doubleValue.length; i++)
             {
-                FloatScalar<?> fs = fv.get(i);
+                AbstractFloatScalar<?, ?> fs = fv.get(i);
                 float got = fs.getSI();
                 assertEquals("get returns expected value", doubleValue[i], got, 0.0001);
             }
@@ -896,6 +900,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             Class<?> argumentClass = doubleType ? double.class : float.class;
             Method incrementBy = ClassUtil.resolveMethod(vectorClass, "incrementBy", new Class<?>[] { argumentClass });
             incrementBy = ClassUtil.resolveMethod(vectorClass, "incrementBy", new Class<?>[] { argumentClass });
+            incrementBy.setAccessible(true);
             // System.out.print(paramsToString(incrementBy.getParameterTypes()));
             // System.out.println("type of value is " + value.getClass());
             // System.out.println("type of difference is " + difference.getClass());
@@ -921,6 +926,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
                             storageType }, doubleType);
             Method decrementBy = ClassUtil.resolveMethod(vectorClass, "decrementBy", new Class<?>[] { argumentClass });
+            decrementBy.setAccessible(true);
             if (doubleType)
             {
                 result = decrementBy.invoke(left, new Object[] { doubleDifference });
@@ -1446,6 +1452,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             Method set =
                     ClassUtil.resolveMethod(vectorClass, "setSI", new Class[] { int.class,
                             doubleType ? double.class : float.class });
+            set.setAccessible(true);
             for (int pivot2 = 0; pivot2 < zDoubleValues.length; pivot2++)
             {
                 for (int pivot = 0; pivot < zDoubleValues.length; pivot++)
@@ -1656,16 +1663,16 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         if (doubleType)
         {
             double[] zeroValue = { 1.23456, 2.45678 };
-            // DoubleVector<?> zero =
+            // AbstractDoubleVector<?, ?> zero =
             // abs ? (DoubleVector.Abs<?>) constructor.newInstance(zeroValue,
             // getSIUnitInstance(getUnitClass(vectorClass)), storageType) : (DoubleVector.Rel<?>) constructor
             // .newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)), storageType);
-            DoubleVector<?> zero =
-                    (DoubleVector<?>) constructor.newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)),
+            AbstractDoubleVector<?, ?> zero =
+                    (AbstractDoubleVector<?, ?>) constructor.newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)),
                             storageType);
             double[] oneValue = { 3.45678, 4.678901 };
-            DoubleVector<?> one =
-                    (DoubleVector<?>) constructor.newInstance(oneValue, getSIUnitInstance(getUnitClass(vectorClass)),
+            AbstractDoubleVector<?, ?> one =
+                    (AbstractDoubleVector<?, ?>) constructor.newInstance(oneValue, getSIUnitInstance(getUnitClass(vectorClass)),
                             storageType);
             for (double ratio : new double[] { -5, -1, 0, 0.3, 1, 2, 10 })
             {
@@ -1677,20 +1684,20 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 // TODO: interpolate is not yet generated by the code generator ...
                 // Method interpolate = ClassUtil.resolveMethod(vectorClass, "interpolate", vectorClass, vectorClass,
                 // double.class);
-                // DoubleScalar<?> result;
-                // result = (DoubleScalar<?>) interpolate.invoke(null, zero, one, ratio);
+                // AbstractDoubleScalar<?, ?> result;
+                // result = (AbstractDoubleScalar<?, ?>) interpolate.invoke(null, zero, one, ratio);
                 // verifyAbsRelPrecisionAndValues(abs, doubleType, result, expectedResult, 0.01);
             }
         }
         else
         {
             float[] zeroValue = { 1.23456f, 2.45678f };
-            FloatVector<?> zero =
-                    (FloatVector<?>) constructor.newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)),
+            AbstractFloatVector<?, ?> zero =
+                    (AbstractFloatVector<?, ?>) constructor.newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)),
                             storageType);
             float[] oneValue = { 3.45678f, 4.678901f };
-            FloatVector<?> one =
-                    (FloatVector<?>) constructor.newInstance(oneValue, getSIUnitInstance(getUnitClass(vectorClass)),
+            AbstractFloatVector<?, ?> one =
+                    (AbstractFloatVector<?, ?>) constructor.newInstance(oneValue, getSIUnitInstance(getUnitClass(vectorClass)),
                             storageType);
             for (float ratio : new float[] { -5, -1, 0, 0.3f, 1, 2, 10 })
             {
@@ -1701,8 +1708,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
                 // Method interpolate = ClassUtil.resolveMethod(vectorClass, "interpolate", vectorClass, vectorClass,
                 // float.class);
-                // FloatScalar<?> result;
-                // result = (FloatScalar<?>) interpolate.invoke(null, zero, one, ratio);
+                // AbstractFloatScalar<?, ?> result;
+                // result = (AbstractFloatScalar<?, ?>) interpolate.invoke(null, zero, one, ratio);
                 // verifyAbsRelPrecisionAndValues(abs, doubleType, storageType, result, expectedResult, 0.01);
             }
         }

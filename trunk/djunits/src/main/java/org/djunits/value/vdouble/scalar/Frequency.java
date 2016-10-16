@@ -31,7 +31,7 @@ import org.djunits.unit.SpeedUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Frequency extends TypedDoubleScalarRel<FrequencyUnit, Frequency>
+public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -60,7 +60,7 @@ public class Frequency extends TypedDoubleScalarRel<FrequencyUnit, Frequency>
 
     /** {@inheritDoc} */
     @Override
-    protected final Frequency instantiateTypeRel(final double value, final FrequencyUnit unit)
+    public final Frequency instantiateRel(final double value, final FrequencyUnit unit)
     {
         return new Frequency(value, unit);
     }

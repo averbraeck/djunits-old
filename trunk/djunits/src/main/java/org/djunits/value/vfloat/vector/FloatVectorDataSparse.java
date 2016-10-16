@@ -121,9 +121,8 @@ public class FloatVectorDataSparse extends FloatVectorData
     public static FloatVectorDataSparse instantiate(final float[] valuesSI)
     {
         // determine number of non-null cells
-        int length =
-                (int) IntStream.range(0, valuesSI.length).parallel().mapToDouble(i -> valuesSI[i]).filter(f -> f != 0.0f)
-                        .count();
+        int length = (int) IntStream.range(0, valuesSI.length).parallel().mapToDouble(i -> valuesSI[i]).filter(f -> f != 0.0f)
+                .count();
         float[] sparseSI = new float[length];
         int[] indices = new int[length];
 

@@ -33,7 +33,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Torque extends TypedDoubleScalarRel<TorqueUnit, Torque>
+public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -62,7 +62,7 @@ public class Torque extends TypedDoubleScalarRel<TorqueUnit, Torque>
 
     /** {@inheritDoc} */
     @Override
-    protected final Torque instantiateTypeRel(final double value, final TorqueUnit unit)
+    public final Torque instantiateRel(final double value, final TorqueUnit unit)
     {
         return new Torque(value, unit);
     }

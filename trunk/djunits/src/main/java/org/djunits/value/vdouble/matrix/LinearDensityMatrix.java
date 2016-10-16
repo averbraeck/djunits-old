@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.LinearDensity;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class LinearDensityMatrix extends
-        TypedDoubleMatrixRel<LinearDensityUnit, LinearDensityMatrix, MutableLinearDensityMatrix, LinearDensity>
+public class LinearDensityMatrix
+        extends AbstractDoubleMatrixRel<LinearDensityUnit, LinearDensityMatrix, MutableLinearDensityMatrix, LinearDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class LinearDensityMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final LinearDensityMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final LinearDensityMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final LinearDensityMatrix instantiateType(final DoubleMatrixData dmd, final LinearDensityUnit unit)
     {
         return new LinearDensityMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class LinearDensityMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final LinearDensity get(final int row, final int column) throws ValueException
+    protected final LinearDensity instantiateScalar(final double value, final LinearDensityUnit unit)
     {
-        return new LinearDensity(getInUnit(row, column, getUnit()), getUnit());
+        return new LinearDensity(value, unit);
     }
 
 }

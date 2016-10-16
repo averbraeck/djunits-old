@@ -2,7 +2,6 @@ package org.djunits.value.vfloat.matrix;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.ValueException;
-import org.djunits.value.vfloat.scalar.FloatScalar;
 
 /**
  * Interface for the Immutable and Mutable FloatMatrix classes.
@@ -68,16 +67,6 @@ public interface FloatMatrixInterface<U extends Unit<U>>
     float getInUnit(int row, int column, U targetUnit) throws ValueException;
 
     /**
-     * Retrieve the value stored at a specified row and column as a FloatScalar.
-     * @param row int; row of the value to retrieve
-     * @param column int; column of the value to retrieve
-     * @return FloatScalar&lt;U&gt;; the strongly typed value of the selected cell
-     * @throws ValueException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
-     *             columns())
-     */
-    FloatScalar<U> get(int row, int column) throws ValueException;
-
-    /**
      * Compute the sum of all values of this matrix.
      * @return float; the sum of all values of this matrix
      */
@@ -89,14 +78,6 @@ public interface FloatMatrixInterface<U extends Unit<U>>
      * @throws ValueException when matrix is neither sparse, nor dense, or not square
      */
     float determinant() throws ValueException;
-
-    /**
-     * Create a mutable version of this FloatMatrix. <br>
-     * The mutable version is created with a shallow copy of the data and the internal copyOnWrite flag set. The first operation
-     * in the mutable version that modifies the data shall trigger a deep copy of the data.
-     * @return MutableFloatMatrix&lt;U&gt;; mutable version of this FloatMatrix
-     */
-    MutableFloatMatrixInterface<U> mutable();
 
     /**
      * Create a dense float[][] array filled with the values in the standard SI unit.

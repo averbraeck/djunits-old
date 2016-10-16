@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.*;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class Float%TypeAbs%Vector extends
-    TypedFloatVectorAbs<%TypeUnit%, Float%TypeAbs%Vector, Float%TypeRel%Vector, MutableFloat%TypeAbs%Vector, Float%TypeAbs%>
+    AbstractFloatVectorAbs<%TypeUnit%, Float%TypeAbs%Vector, Float%TypeRel%Vector, MutableFloat%TypeAbs%Vector, Float%TypeAbs%>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -132,19 +132,38 @@ public class Float%TypeAbs%Vector extends
 
     /** {@inheritDoc} */
     @Override
-    public final Float%TypeAbs% get(final int index) throws ValueException
+    protected final Float%TypeAbs% instantiateScalar(final float value, final %TypeUnit% unit)
     {
-        return new Float%TypeAbs%(getInUnit(index, getUnit()), getUnit());
+        return new Float%TypeAbs%(value, unit);
+    }
+    
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final Float%TypeAbs%Vector toDense()
+    {
+        return this.data.isDense() ? (Float%TypeAbs%Vector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final Float%TypeAbs%Vector toSparse()
+    {
+        return this.data.isSparse() ? (Float%TypeAbs%Vector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
     
     /**
      * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute Float%TypeAbs% vector.
+     * @return a relative version of this absolute %TypeAbs% vector.
      */
     public final Float%TypeRel%Vector toRel()
     {
         return new Float%TypeRel%Vector(getData(), getUnit());
     }
+    
         
 %FORMULAS%%TypeAbs%%
 }

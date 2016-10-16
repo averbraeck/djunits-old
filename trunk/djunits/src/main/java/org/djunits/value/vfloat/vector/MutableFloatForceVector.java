@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatForce;
 
 /**
- * Mutable FloatForceVector, a vector of values with a ForceUnit.
+ * Mutable Float ForceVector, a vector of values with a ForceUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,16 +19,16 @@ import org.djunits.value.vfloat.scalar.FloatForce;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatForceVector extends
-        MutableTypedFloatVectorRel<ForceUnit, FloatForceVector, MutableFloatForceVector, FloatForce>
+public class MutableFloatForceVector
+        extends AbstractMutableFloatVectorRel<ForceUnit, FloatForceVector, MutableFloatForceVector, FloatForce>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatForceVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatForceVector
-     * @param unit U; the unit of the new Relative Immutable FloatForceVector
+     * Construct a new Relative Immutable Float ForceVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float ForceVector
+     * @param unit U; the unit of the new Relative Immutable Float ForceVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class MutableFloatForceVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatForceVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatForceVector
-     * @param unit U; the unit of the new Relative Immutable FloatForceVector
+     * Construct a new Relative Immutable Float ForceVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float ForceVector
+     * @param unit U; the unit of the new Relative Immutable Float ForceVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,8 +52,8 @@ public class MutableFloatForceVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatForceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float FloatForceVector
+     * Construct a new Relative Immutable Float ForceVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float ForceVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -63,8 +63,8 @@ public class MutableFloatForceVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatForceVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatForceVector
+     * Construct a new Relative Immutable Float ForceVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float ForceVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -74,9 +74,8 @@ public class MutableFloatForceVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatForceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatForceVector
+     * Construct a new Relative Immutable Float ForceVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float ForceVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -88,9 +87,9 @@ public class MutableFloatForceVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatForceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatForceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatForceVector
+     * Construct a new Relative Immutable Float ForceVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float ForceVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float ForceVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -126,9 +125,27 @@ public class MutableFloatForceVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatForce get(final int index) throws ValueException
+    protected final FloatForce instantiateScalar(final float value, final ForceUnit unit)
     {
-        return new FloatForce(getInUnit(index, getUnit()), getUnit());
+        return new FloatForce(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatForceVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatForceVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatForceVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatForceVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

@@ -19,9 +19,8 @@ import org.djunits.value.vfloat.scalar.FloatPosition;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatPositionVector
-        extends
-        MutableTypedFloatVectorAbs<LengthUnit, FloatPositionVector, FloatLengthVector, MutableFloatPositionVector, FloatPosition>
+public class MutableFloatPositionVector extends
+        AbstractMutableFloatVectorAbs<LengthUnit, FloatPositionVector, FloatLengthVector, MutableFloatPositionVector, FloatPosition>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -135,14 +134,33 @@ public class MutableFloatPositionVector
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPosition get(final int index) throws ValueException
+    protected final FloatPosition instantiateScalar(final float value, final LengthUnit unit)
     {
-        return new FloatPosition(getInUnit(index, getUnit()), getUnit());
+        return new FloatPosition(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatPositionVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatPositionVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatPositionVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatPositionVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**
      * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute FloatPosition vector.
+     * @return a relative version of this absolute Position vector.
      */
     public final MutableFloatLengthVector toRel()
     {

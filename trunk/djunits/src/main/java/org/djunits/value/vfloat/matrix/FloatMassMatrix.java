@@ -16,7 +16,7 @@ import org.djunits.value.vfloat.scalar.FloatMass;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatMassMatrix extends TypedFloatMatrixRel<MassUnit, FloatMassMatrix, MutableFloatMassMatrix, FloatMass>
+public class FloatMassMatrix extends AbstractFloatMatrixRel<MassUnit, FloatMassMatrix, MutableFloatMassMatrix, FloatMass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -55,6 +55,20 @@ public class FloatMassMatrix extends TypedFloatMatrixRel<MassUnit, FloatMassMatr
 
     /** {@inheritDoc} */
     @Override
+    public final FloatMassMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMassMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatMassMatrix instantiateType(final FloatMatrixData fmd, final MassUnit unit)
     {
         return new FloatMassMatrix(fmd, unit);
@@ -69,9 +83,9 @@ public class FloatMassMatrix extends TypedFloatMatrixRel<MassUnit, FloatMassMatr
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMass get(final int row, final int column) throws ValueException
+    protected final FloatMass instantiateScalar(final float value, final MassUnit unit)
     {
-        return new FloatMass(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatMass(value, unit);
     }
 
 }

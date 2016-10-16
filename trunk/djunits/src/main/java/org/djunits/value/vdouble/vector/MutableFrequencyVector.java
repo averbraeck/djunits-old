@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.Frequency;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFrequencyVector extends
-        MutableTypedDoubleVectorRel<FrequencyUnit, FrequencyVector, MutableFrequencyVector, Frequency>
+public class MutableFrequencyVector
+        extends AbstractMutableDoubleVectorRel<FrequencyUnit, FrequencyVector, MutableFrequencyVector, Frequency>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -126,9 +126,27 @@ public class MutableFrequencyVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final Frequency get(final int index) throws ValueException
+    protected final Frequency instantiateScalar(final double value, final FrequencyUnit unit)
     {
-        return new Frequency(getInUnit(index, getUnit()), getUnit());
+        return new Frequency(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableFrequencyVector toDense()
+    {
+        return this.data.isDense() ? (MutableFrequencyVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableFrequencyVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFrequencyVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

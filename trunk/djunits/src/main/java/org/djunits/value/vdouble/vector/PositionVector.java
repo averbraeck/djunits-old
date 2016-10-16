@@ -19,8 +19,8 @@ import org.djunits.value.vdouble.scalar.Position;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class PositionVector extends
-        TypedDoubleVectorAbs<LengthUnit, PositionVector, LengthVector, MutablePositionVector, Position>
+public class PositionVector
+        extends AbstractDoubleVectorAbs<LengthUnit, PositionVector, LengthVector, MutablePositionVector, Position>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -44,8 +44,7 @@ public class PositionVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public PositionVector(final List<Double> values, final LengthUnit unit, final StorageType storageType)
-            throws ValueException
+    public PositionVector(final List<Double> values, final LengthUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -133,9 +132,27 @@ public class PositionVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final Position get(final int index) throws ValueException
+    protected final Position instantiateScalar(final double value, final LengthUnit unit)
     {
-        return new Position(getInUnit(index, getUnit()), getUnit());
+        return new Position(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final PositionVector toDense()
+    {
+        return this.data.isDense() ? (PositionVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final PositionVector toSparse()
+    {
+        return this.data.isSparse() ? (PositionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
 
     /**

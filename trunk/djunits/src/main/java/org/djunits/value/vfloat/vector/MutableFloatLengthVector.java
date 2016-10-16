@@ -19,8 +19,8 @@ import org.djunits.value.vfloat.scalar.FloatLength;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatLengthVector extends
-        MutableTypedFloatVectorRel<LengthUnit, FloatLengthVector, MutableFloatLengthVector, FloatLength>
+public class MutableFloatLengthVector
+        extends AbstractMutableFloatVectorRel<LengthUnit, FloatLengthVector, MutableFloatLengthVector, FloatLength>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -126,14 +126,32 @@ public class MutableFloatLengthVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatLength get(final int index) throws ValueException
+    protected final FloatLength instantiateScalar(final float value, final LengthUnit unit)
     {
-        return new FloatLength(getInUnit(index, getUnit()), getUnit());
+        return new FloatLength(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatLengthVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatLengthVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatLengthVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatLengthVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
     /**
      * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative FloatLength vector.
+     * @return an absolute version of this relative Length vector.
      */
     public final MutableFloatPositionVector toAbs()
     {

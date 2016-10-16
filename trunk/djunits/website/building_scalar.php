@@ -55,15 +55,15 @@ JerkVector jerkVector =
 
     <p>The next sections will explain how to quickly build a new Relative Scalar type, and a new Scalar type that has an absolute and a relative subtype.</p>
 
-    <h2>Extending a Relative ScalarType from the Typed Scalar Template</h2>
-    <p>A number of Typed classes have been created that help to quickly instantiate new Scalar, Vector, and Matrix classes. For the Scalar class, these are
-      TypedDoubleScalarAbs and TypedDoubleScalarRel. The TypedDoubleScalarRel class takes two generic arguments: the unit, and the name of the class itself. The
-      2nd parameter might seem strange, as the definition looks to be self-referential. The way it is used is that in the methods of the Typed class, the
+    <h2>Extending a Relative ScalarType from the Abstract Scalar Template</h2>
+    <p>A number of Abstract classes have been created that help to quickly instantiate new Scalar, Vector, and Matrix classes. For the Scalar class, these are
+      AbstractDoubleScalarAbs and AbstractDoubleScalarRel. The AbstractDoubleScalarRel class takes two generic arguments: the unit, and the name of the class itself. The
+      2nd parameter might seem strange, as the definition looks to be self-referential. The way it is used is that in the methods of the Abstract class, the
       generics argument is used to indicate the return type and argument of methods that refer to the defined scalar type. So the first line of the new Jerk
       scalar is:</p>
 
     <pre class="highlight">
-public class Jerk extends TypedDoubleScalarRel&lt;JerkUnit, Jerk&gt;
+public class Jerk extends AbstractDoubleScalarRel&lt;JerkUnit, Jerk&gt;
 </pre>
 
     <p>The next lines define two constructors, one that takes a double argument, and one that takes another Jerk scalar:</p>
@@ -80,7 +80,7 @@ public Jerk(final Jerk value)
 }
 </pre>
 
-    <p>Another method that has to be implemented is the instantiateTypeRel method. This method is used by the Typed superclass to instantiate new scalar
+    <p>Another method that has to be implemented is the instantiateTypeRel method. This method is used by the Abstract superclass to instantiate new scalar
       instances of the right type:</p>
 
     <pre class="highlight">

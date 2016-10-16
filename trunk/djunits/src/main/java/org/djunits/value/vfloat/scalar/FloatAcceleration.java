@@ -30,7 +30,7 @@ import org.djunits.unit.SpeedUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatAcceleration extends TypedFloatScalarRel<AccelerationUnit, FloatAcceleration>
+public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, FloatAcceleration>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -69,7 +69,7 @@ public class FloatAcceleration extends TypedFloatScalarRel<AccelerationUnit, Flo
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatAcceleration instantiateTypeRel(final float value, final AccelerationUnit unit)
+    public final FloatAcceleration instantiateRel(final float value, final AccelerationUnit unit)
     {
         return new FloatAcceleration(value, unit);
     }

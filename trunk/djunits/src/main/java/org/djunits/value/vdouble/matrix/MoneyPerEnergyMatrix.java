@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.MoneyPerEnergy;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerEnergyMatrix extends
-        TypedDoubleMatrixRel<MoneyPerEnergyUnit, MoneyPerEnergyMatrix, MutableMoneyPerEnergyMatrix, MoneyPerEnergy>
+public class MoneyPerEnergyMatrix
+        extends AbstractDoubleMatrixRel<MoneyPerEnergyUnit, MoneyPerEnergyMatrix, MutableMoneyPerEnergyMatrix, MoneyPerEnergy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MoneyPerEnergyMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MoneyPerEnergyMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MoneyPerEnergyMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final MoneyPerEnergyMatrix instantiateType(final DoubleMatrixData dmd, final MoneyPerEnergyUnit unit)
     {
         return new MoneyPerEnergyMatrix(dmd, unit);
@@ -65,16 +79,17 @@ public class MoneyPerEnergyMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMoneyPerEnergyMatrix instantiateMutableType(final DoubleMatrixData dmd, final MoneyPerEnergyUnit unit)
+    protected final MutableMoneyPerEnergyMatrix instantiateMutableType(final DoubleMatrixData dmd,
+            final MoneyPerEnergyUnit unit)
     {
         return new MutableMoneyPerEnergyMatrix(dmd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MoneyPerEnergy get(final int row, final int column) throws ValueException
+    protected final MoneyPerEnergy instantiateScalar(final double value, final MoneyPerEnergyUnit unit)
     {
-        return new MoneyPerEnergy(getInUnit(row, column, getUnit()), getUnit());
+        return new MoneyPerEnergy(value, unit);
     }
 
 }

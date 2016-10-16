@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.*;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class %TypeAbs%Matrix extends
-        TypedDoubleMatrixAbs<%TypeUnit%, %TypeAbs%Matrix, %TypeRel%Matrix, Mutable%TypeAbs%Matrix, %TypeAbs%>
+        AbstractDoubleMatrixAbs<%TypeUnit%, %TypeAbs%Matrix, %TypeRel%Matrix, Mutable%TypeAbs%Matrix, %TypeAbs%>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -60,6 +60,20 @@ public class %TypeAbs%Matrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final %TypeAbs%Matrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final %TypeAbs%Matrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final %TypeAbs%Matrix instantiateTypeAbs(final DoubleMatrixData dmd, final %TypeUnit% unit)
     {
         return new %TypeAbs%Matrix(dmd, unit);
@@ -82,9 +96,9 @@ public class %TypeAbs%Matrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final %TypeAbs% get(final int row, final int column) throws ValueException
+    protected final %TypeAbs% instantiateScalar(final double value, final %TypeUnit% unit)
     {
-        return new %TypeAbs%(getInUnit(row, column, getUnit()), getUnit());
+        return new %TypeAbs%(value, unit);
     }
     
     /**

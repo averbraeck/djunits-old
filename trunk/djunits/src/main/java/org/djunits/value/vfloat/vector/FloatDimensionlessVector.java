@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatDimensionless;
 
 /**
- * Immutable FloatDimensionlessVector, a vector of values with a DimensionlessUnit.
+ * Immutable Float FloatDimensionlessVector, a vector of values with a DimensionlessUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -20,15 +20,15 @@ import org.djunits.value.vfloat.scalar.FloatDimensionless;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatDimensionlessVector extends
-        TypedFloatVectorRel<DimensionlessUnit, FloatDimensionlessVector, MutableFloatDimensionlessVector, FloatDimensionless>
+        AbstractFloatVectorRel<DimensionlessUnit, FloatDimensionlessVector, MutableFloatDimensionlessVector, FloatDimensionless>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatDimensionlessVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatDimensionlessVector
-     * @param unit U; the unit of the new Relative Immutable FloatDimensionlessVector
+     * Construct a new Relative Immutable Float FloatDimensionlessVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatDimensionlessVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class FloatDimensionlessVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatDimensionlessVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatDimensionlessVector
-     * @param unit U; the unit of the new Relative Immutable FloatDimensionlessVector
+     * Construct a new Relative Immutable Float FloatDimensionlessVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatDimensionlessVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,7 +52,7 @@ public class FloatDimensionlessVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatDimensionlessVector.
+     * Construct a new Relative Immutable Float FloatDimensionlessVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
      *            FloatDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
@@ -64,8 +64,8 @@ public class FloatDimensionlessVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatDimensionlessVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatDimensionlessVector
+     * Construct a new Relative Immutable Float FloatDimensionlessVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatDimensionlessVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -75,7 +75,7 @@ public class FloatDimensionlessVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatDimensionlessVector.
+     * Construct a new Relative Immutable Float FloatDimensionlessVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatDimensionlessVector
      * @param length the size of the vector
@@ -89,9 +89,9 @@ public class FloatDimensionlessVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatDimensionlessVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatDimensionlessVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatDimensionlessVector
+     * Construct a new Relative Immutable Float FloatDimensionlessVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatDimensionlessVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatDimensionlessVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -128,9 +128,27 @@ public class FloatDimensionlessVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDimensionless get(final int index) throws ValueException
+    protected final FloatDimensionless instantiateScalar(final float value, final DimensionlessUnit unit)
     {
-        return new FloatDimensionless(getInUnit(index, getUnit()), getUnit());
+        return new FloatDimensionless(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatDimensionlessVector toDense()
+    {
+        return this.data.isDense() ? (FloatDimensionlessVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatDimensionlessVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatDimensionlessVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

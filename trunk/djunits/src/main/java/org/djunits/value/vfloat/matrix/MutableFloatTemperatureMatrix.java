@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatTemperature;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatTemperatureMatrix extends
-        MutableTypedFloatMatrixRel<TemperatureUnit, FloatTemperatureMatrix, MutableFloatTemperatureMatrix, FloatTemperature>
+        AbstractMutableFloatMatrixRel<TemperatureUnit, FloatTemperatureMatrix, MutableFloatTemperatureMatrix, FloatTemperature>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -41,8 +41,7 @@ public class MutableFloatTemperatureMatrix extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableFloatTemperatureMatrix(final FloatTemperature[][] values, final StorageType storageType)
-            throws ValueException
+    public MutableFloatTemperatureMatrix(final FloatTemperature[][] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -66,6 +65,20 @@ public class MutableFloatTemperatureMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatTemperatureMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatTemperatureMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final MutableFloatTemperatureMatrix instantiateMutableType(final FloatMatrixData fmd, final TemperatureUnit unit)
     {
         return new MutableFloatTemperatureMatrix(fmd, unit);
@@ -73,9 +86,9 @@ public class MutableFloatTemperatureMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatTemperature get(final int row, final int column) throws ValueException
+    protected final FloatTemperature instantiateScalar(final float value, final TemperatureUnit unit)
     {
-        return new FloatTemperature(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatTemperature(value, unit);
     }
 
     /**

@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Mass;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableMassVector extends MutableTypedDoubleVectorRel<MassUnit, MassVector, MutableMassVector, Mass>
+public class MutableMassVector extends AbstractMutableDoubleVectorRel<MassUnit, MassVector, MutableMassVector, Mass>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -123,9 +123,27 @@ public class MutableMassVector extends MutableTypedDoubleVectorRel<MassUnit, Mas
 
     /** {@inheritDoc} */
     @Override
-    public final Mass get(final int index) throws ValueException
+    protected final Mass instantiateScalar(final double value, final MassUnit unit)
     {
-        return new Mass(getInUnit(index, getUnit()), getUnit());
+        return new Mass(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableMassVector toDense()
+    {
+        return this.data.isDense() ? (MutableMassVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableMassVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableMassVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

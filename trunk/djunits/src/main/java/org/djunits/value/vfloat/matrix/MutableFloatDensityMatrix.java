@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatDensity;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatDensityMatrix extends
-        MutableTypedFloatMatrixRel<DensityUnit, FloatDensityMatrix, MutableFloatDensityMatrix, FloatDensity>
+public class MutableFloatDensityMatrix
+        extends AbstractMutableFloatMatrixRel<DensityUnit, FloatDensityMatrix, MutableFloatDensityMatrix, FloatDensity>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableFloatDensityMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatDensityMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDensityMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatDensityMatrix instantiateType(final FloatMatrixData fmd, final DensityUnit unit)
     {
         return new FloatDensityMatrix(fmd, unit);
@@ -72,9 +86,9 @@ public class MutableFloatDensityMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDensity get(final int row, final int column) throws ValueException
+    protected final FloatDensity instantiateScalar(final float value, final DensityUnit unit)
     {
-        return new FloatDensity(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatDensity(value, unit);
     }
 
 }

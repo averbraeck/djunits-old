@@ -34,7 +34,7 @@ import org.djunits.unit.TimeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Speed extends TypedDoubleScalarRel<SpeedUnit, Speed>
+public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -63,7 +63,7 @@ public class Speed extends TypedDoubleScalarRel<SpeedUnit, Speed>
 
     /** {@inheritDoc} */
     @Override
-    protected final Speed instantiateTypeRel(final double value, final SpeedUnit unit)
+    public final Speed instantiateRel(final double value, final SpeedUnit unit)
     {
         return new Speed(value, unit);
     }

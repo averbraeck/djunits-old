@@ -28,7 +28,7 @@ import org.djunits.unit.MassUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatDensity extends TypedFloatScalarRel<DensityUnit, FloatDensity>
+public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensity>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -67,7 +67,7 @@ public class FloatDensity extends TypedFloatScalarRel<DensityUnit, FloatDensity>
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDensity instantiateTypeRel(final float value, final DensityUnit unit)
+    public final FloatDensity instantiateRel(final float value, final DensityUnit unit)
     {
         return new FloatDensity(value, unit);
     }

@@ -33,7 +33,7 @@ import org.djunits.unit.SpeedUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Power extends TypedDoubleScalarRel<PowerUnit, Power>
+public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -62,7 +62,7 @@ public class Power extends TypedDoubleScalarRel<PowerUnit, Power>
 
     /** {@inheritDoc} */
     @Override
-    protected final Power instantiateTypeRel(final double value, final PowerUnit unit)
+    public final Power instantiateRel(final double value, final PowerUnit unit)
     {
         return new Power(value, unit);
     }

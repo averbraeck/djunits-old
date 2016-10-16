@@ -19,7 +19,7 @@ import org.djunits.value.vfloat.scalar.FloatAngle;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatAngleVector extends TypedFloatVectorRel<AngleUnit, FloatAngleVector, MutableFloatAngleVector, FloatAngle>
+public class FloatAngleVector extends AbstractFloatVectorRel<AngleUnit, FloatAngleVector, MutableFloatAngleVector, FloatAngle>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -43,8 +43,7 @@ public class FloatAngleVector extends TypedFloatVectorRel<AngleUnit, FloatAngleV
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatAngleVector(final List<Float> values, final AngleUnit unit, final StorageType storageType)
-            throws ValueException
+    public FloatAngleVector(final List<Float> values, final AngleUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -124,14 +123,32 @@ public class FloatAngleVector extends TypedFloatVectorRel<AngleUnit, FloatAngleV
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAngle get(final int index) throws ValueException
+    protected final FloatAngle instantiateScalar(final float value, final AngleUnit unit)
     {
-        return new FloatAngle(getInUnit(index, getUnit()), getUnit());
+        return new FloatAngle(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatAngleVector toDense()
+    {
+        return this.data.isDense() ? (FloatAngleVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatAngleVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatAngleVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
     /**
      * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative FloatAngle vector.
+     * @return an absolute version of this relative Angle vector.
      */
     public final FloatDirectionVector toAbs()
     {

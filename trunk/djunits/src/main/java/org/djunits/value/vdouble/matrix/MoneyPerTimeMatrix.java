@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.MoneyPerTime;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerTimeMatrix extends
-        TypedDoubleMatrixRel<MoneyPerTimeUnit, MoneyPerTimeMatrix, MutableMoneyPerTimeMatrix, MoneyPerTime>
+public class MoneyPerTimeMatrix
+        extends AbstractDoubleMatrixRel<MoneyPerTimeUnit, MoneyPerTimeMatrix, MutableMoneyPerTimeMatrix, MoneyPerTime>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MoneyPerTimeMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MoneyPerTimeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MoneyPerTimeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final MoneyPerTimeMatrix instantiateType(final DoubleMatrixData dmd, final MoneyPerTimeUnit unit)
     {
         return new MoneyPerTimeMatrix(dmd, unit);
@@ -72,9 +86,9 @@ public class MoneyPerTimeMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final MoneyPerTime get(final int row, final int column) throws ValueException
+    protected final MoneyPerTime instantiateScalar(final double value, final MoneyPerTimeUnit unit)
     {
-        return new MoneyPerTime(getInUnit(row, column, getUnit()), getUnit());
+        return new MoneyPerTime(value, unit);
     }
 
 }

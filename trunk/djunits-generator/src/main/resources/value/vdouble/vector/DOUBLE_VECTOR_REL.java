@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.*;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class %Type%Vector extends
-    TypedDoubleVectorRel<%Type%Unit, %Type%Vector, Mutable%Type%Vector, %Type%>
+    AbstractDoubleVectorRel<%Type%Unit, %Type%Vector, Mutable%Type%Vector, %Type%>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -127,11 +127,29 @@ public class %Type%Vector extends
 
     /** {@inheritDoc} */
     @Override
-    public final %Type% get(final int index) throws ValueException
+    protected final %Type% instantiateScalar(final double value, final %Type%Unit unit)
     {
-        return new %Type%(getInUnit(index, getUnit()), getUnit());
+        return new %Type%(value, unit);
     }
     
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final %Type%Vector toDense()
+    {
+        return this.data.isDense() ? (%Type%Vector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final %Type%Vector toSparse()
+    {
+        return this.data.isSparse() ? (%Type%Vector) this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
 %FORMULAS%%Type%%
 }
 

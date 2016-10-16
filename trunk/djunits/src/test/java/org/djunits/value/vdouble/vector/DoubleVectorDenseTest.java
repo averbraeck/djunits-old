@@ -52,7 +52,7 @@ public class DoubleVectorDenseTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; dv should be Absolute; if false; dv should be Relative
      */
-    private static void checkContentsAndType(final DoubleVector<?> dv, final double[] reference,
+    private static void checkContentsAndType(final AbstractDoubleVector<?, ?> dv, final double[] reference,
         final double precision, final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("DoubleVector should not be null", null != dv);
@@ -940,7 +940,7 @@ public class DoubleVectorDenseTest
          * @param function DoubleToDouble; encapsulated function that converts one inputValue to an outputValue
          */
         public static void tester(final double[] inputValues, final String operation,
-            final DoubleVector<?> actualResult, final double precision, final DoubleToDouble function)
+            final AbstractDoubleVector<?, ?> actualResult, final double precision, final DoubleToDouble function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {

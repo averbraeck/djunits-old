@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatPosition;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatPositionVector extends
-        TypedFloatVectorAbs<LengthUnit, FloatPositionVector, FloatLengthVector, MutableFloatPositionVector, FloatPosition>
+        AbstractFloatVectorAbs<LengthUnit, FloatPositionVector, FloatLengthVector, MutableFloatPositionVector, FloatPosition>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -32,8 +32,7 @@ public class FloatPositionVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatPositionVector(final float[] values, final LengthUnit unit, final StorageType storageType)
-            throws ValueException
+    public FloatPositionVector(final float[] values, final LengthUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -134,14 +133,32 @@ public class FloatPositionVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPosition get(final int index) throws ValueException
+    protected final FloatPosition instantiateScalar(final float value, final LengthUnit unit)
     {
-        return new FloatPosition(getInUnit(index, getUnit()), getUnit());
+        return new FloatPosition(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatPositionVector toDense()
+    {
+        return this.data.isDense() ? (FloatPositionVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatPositionVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatPositionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
 
     /**
      * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute FloatPosition vector.
+     * @return a relative version of this absolute Position vector.
      */
     public final FloatLengthVector toRel()
     {

@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.ElectricalCharge;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class ElectricalChargeMatrix extends
-        TypedDoubleMatrixRel<ElectricalChargeUnit, ElectricalChargeMatrix, MutableElectricalChargeMatrix, ElectricalCharge>
+        AbstractDoubleMatrixRel<ElectricalChargeUnit, ElectricalChargeMatrix, MutableElectricalChargeMatrix, ElectricalCharge>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class ElectricalChargeMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final ElectricalChargeMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final ElectricalChargeMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final ElectricalChargeMatrix instantiateType(final DoubleMatrixData dmd, final ElectricalChargeUnit unit)
     {
         return new ElectricalChargeMatrix(dmd, unit);
@@ -73,9 +87,9 @@ public class ElectricalChargeMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalCharge get(final int row, final int column) throws ValueException
+    protected final ElectricalCharge instantiateScalar(final double value, final ElectricalChargeUnit unit)
     {
-        return new ElectricalCharge(getInUnit(row, column, getUnit()), getUnit());
+        return new ElectricalCharge(value, unit);
     }
 
 }

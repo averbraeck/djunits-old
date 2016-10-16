@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatEnergy;
 
 /**
- * Mutable FloatEnergyVector, a vector of values with a EnergyUnit.
+ * Mutable Float EnergyVector, a vector of values with a EnergyUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,16 +19,16 @@ import org.djunits.value.vfloat.scalar.FloatEnergy;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatEnergyVector extends
-        MutableTypedFloatVectorRel<EnergyUnit, FloatEnergyVector, MutableFloatEnergyVector, FloatEnergy>
+public class MutableFloatEnergyVector
+        extends AbstractMutableFloatVectorRel<EnergyUnit, FloatEnergyVector, MutableFloatEnergyVector, FloatEnergy>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatEnergyVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatEnergyVector
-     * @param unit U; the unit of the new Relative Immutable FloatEnergyVector
+     * Construct a new Relative Immutable Float EnergyVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float EnergyVector
+     * @param unit U; the unit of the new Relative Immutable Float EnergyVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class MutableFloatEnergyVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatEnergyVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatEnergyVector
-     * @param unit U; the unit of the new Relative Immutable FloatEnergyVector
+     * Construct a new Relative Immutable Float EnergyVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float EnergyVector
+     * @param unit U; the unit of the new Relative Immutable Float EnergyVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,8 +52,8 @@ public class MutableFloatEnergyVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatEnergyVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float FloatEnergyVector
+     * Construct a new Relative Immutable Float EnergyVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float EnergyVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -63,8 +63,8 @@ public class MutableFloatEnergyVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatEnergyVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatEnergyVector
+     * Construct a new Relative Immutable Float EnergyVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float EnergyVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -74,9 +74,8 @@ public class MutableFloatEnergyVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatEnergyVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatEnergyVector
+     * Construct a new Relative Immutable Float EnergyVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float EnergyVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -88,9 +87,9 @@ public class MutableFloatEnergyVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatEnergyVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatEnergyVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatEnergyVector
+     * Construct a new Relative Immutable Float EnergyVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float EnergyVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float EnergyVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -126,9 +125,27 @@ public class MutableFloatEnergyVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatEnergy get(final int index) throws ValueException
+    protected final FloatEnergy instantiateScalar(final float value, final EnergyUnit unit)
     {
-        return new FloatEnergy(getInUnit(index, getUnit()), getUnit());
+        return new FloatEnergy(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatEnergyVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatEnergyVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatEnergyVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatEnergyVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

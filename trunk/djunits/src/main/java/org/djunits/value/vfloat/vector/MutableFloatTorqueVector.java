@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatTorque;
 
 /**
- * Mutable FloatTorqueVector, a vector of values with a TorqueUnit.
+ * Mutable Float TorqueVector, a vector of values with a TorqueUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,16 +19,16 @@ import org.djunits.value.vfloat.scalar.FloatTorque;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatTorqueVector extends
-        MutableTypedFloatVectorRel<TorqueUnit, FloatTorqueVector, MutableFloatTorqueVector, FloatTorque>
+public class MutableFloatTorqueVector
+        extends AbstractMutableFloatVectorRel<TorqueUnit, FloatTorqueVector, MutableFloatTorqueVector, FloatTorque>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatTorqueVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatTorqueVector
-     * @param unit U; the unit of the new Relative Immutable FloatTorqueVector
+     * Construct a new Relative Immutable Float TorqueVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float TorqueVector
+     * @param unit U; the unit of the new Relative Immutable Float TorqueVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class MutableFloatTorqueVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatTorqueVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatTorqueVector
-     * @param unit U; the unit of the new Relative Immutable FloatTorqueVector
+     * Construct a new Relative Immutable Float TorqueVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float TorqueVector
+     * @param unit U; the unit of the new Relative Immutable Float TorqueVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,8 +52,8 @@ public class MutableFloatTorqueVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatTorqueVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float FloatTorqueVector
+     * Construct a new Relative Immutable Float TorqueVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float TorqueVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -63,8 +63,8 @@ public class MutableFloatTorqueVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatTorqueVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatTorqueVector
+     * Construct a new Relative Immutable Float TorqueVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float TorqueVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -74,9 +74,8 @@ public class MutableFloatTorqueVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatTorqueVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatTorqueVector
+     * Construct a new Relative Immutable Float TorqueVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float TorqueVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -88,9 +87,9 @@ public class MutableFloatTorqueVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatTorqueVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatTorqueVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatTorqueVector
+     * Construct a new Relative Immutable Float TorqueVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float TorqueVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float TorqueVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -126,9 +125,27 @@ public class MutableFloatTorqueVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatTorque get(final int index) throws ValueException
+    protected final FloatTorque instantiateScalar(final float value, final TorqueUnit unit)
     {
-        return new FloatTorque(getInUnit(index, getUnit()), getUnit());
+        return new FloatTorque(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatTorqueVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatTorqueVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatTorqueVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatTorqueVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

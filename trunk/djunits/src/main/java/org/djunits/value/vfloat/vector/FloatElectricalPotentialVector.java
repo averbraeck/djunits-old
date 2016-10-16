@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatElectricalPotential;
 
 /**
- * Immutable FloatElectricalPotentialVector, a vector of values with a ElectricalPotentialUnit.
+ * Immutable Float FloatElectricalPotentialVector, a vector of values with a ElectricalPotentialUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,17 +19,16 @@ import org.djunits.value.vfloat.scalar.FloatElectricalPotential;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatElectricalPotentialVector
-        extends
-        TypedFloatVectorRel<ElectricalPotentialUnit, FloatElectricalPotentialVector, MutableFloatElectricalPotentialVector, FloatElectricalPotential>
+public class FloatElectricalPotentialVector extends
+        AbstractFloatVectorRel<ElectricalPotentialUnit, FloatElectricalPotentialVector, MutableFloatElectricalPotentialVector, FloatElectricalPotential>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatElectricalPotentialVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatElectricalPotentialVector
-     * @param unit U; the unit of the new Relative Immutable FloatElectricalPotentialVector
+     * Construct a new Relative Immutable Float FloatElectricalPotentialVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatElectricalPotentialVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatElectricalPotentialVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -40,9 +39,9 @@ public class FloatElectricalPotentialVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatElectricalPotentialVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatElectricalPotentialVector
-     * @param unit U; the unit of the new Relative Immutable FloatElectricalPotentialVector
+     * Construct a new Relative Immutable Float FloatElectricalPotentialVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatElectricalPotentialVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatElectricalPotentialVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -53,7 +52,7 @@ public class FloatElectricalPotentialVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatElectricalPotentialVector.
+     * Construct a new Relative Immutable Float FloatElectricalPotentialVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalPotentialVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
@@ -66,8 +65,8 @@ public class FloatElectricalPotentialVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatElectricalPotentialVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatElectricalPotentialVector
+     * Construct a new Relative Immutable Float FloatElectricalPotentialVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatElectricalPotentialVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -78,7 +77,7 @@ public class FloatElectricalPotentialVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatElectricalPotentialVector.
+     * Construct a new Relative Immutable Float FloatElectricalPotentialVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatElectricalPotentialVector
      * @param length the size of the vector
@@ -92,9 +91,9 @@ public class FloatElectricalPotentialVector
     }
 
     /**
-     * Construct a new Relative Immutable FloatElectricalPotentialVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatElectricalPotentialVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatElectricalPotentialVector
+     * Construct a new Relative Immutable Float FloatElectricalPotentialVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatElectricalPotentialVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatElectricalPotentialVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -116,7 +115,8 @@ public class FloatElectricalPotentialVector
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalPotentialVector instantiateType(final FloatVectorData dvd, final ElectricalPotentialUnit unit)
+    protected final FloatElectricalPotentialVector instantiateType(final FloatVectorData dvd,
+            final ElectricalPotentialUnit unit)
     {
         return new FloatElectricalPotentialVector(dvd, unit);
     }
@@ -131,9 +131,27 @@ public class FloatElectricalPotentialVector
 
     /** {@inheritDoc} */
     @Override
-    public final FloatElectricalPotential get(final int index) throws ValueException
+    protected final FloatElectricalPotential instantiateScalar(final float value, final ElectricalPotentialUnit unit)
     {
-        return new FloatElectricalPotential(getInUnit(index, getUnit()), getUnit());
+        return new FloatElectricalPotential(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatElectricalPotentialVector toDense()
+    {
+        return this.data.isDense() ? (FloatElectricalPotentialVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatElectricalPotentialVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatElectricalPotentialVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

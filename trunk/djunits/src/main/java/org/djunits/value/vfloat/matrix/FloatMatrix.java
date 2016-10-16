@@ -1,21 +1,11 @@
 package org.djunits.value.vfloat.matrix;
 
-import java.io.Serializable;
-
 import org.djunits.unit.Unit;
-import org.djunits.value.Absolute;
-import org.djunits.value.AbstractValue;
 import org.djunits.value.FunctionsAbs;
 import org.djunits.value.FunctionsRel;
-import org.djunits.value.Relative;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.ValueUtil;
-import org.djunits.value.formatter.Format;
 import org.djunits.value.vfloat.scalar.FloatScalar;
-import org.ojalgo.access.Access2D.Factory;
-import org.ojalgo.matrix.BasicMatrix;
-import org.ojalgo.matrix.PrimitiveMatrix;
 
 /**
  * Immutable FloatMatrix.
@@ -29,53 +19,16 @@ import org.ojalgo.matrix.PrimitiveMatrix;
  * initial version 26 jun, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
- * @param <U> Unit; the unit of this FloatMatrix
  */
-public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> implements Serializable, FloatMatrixInterface<U>
+public abstract class FloatMatrix
 {
-    /**  */
-    private static final long serialVersionUID = 20151003L;
-
-    /** The stored data as an object, can be sparse or dense. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected FloatMatrixData data;
-
-    /**
-     * @return the internal data -- can only be used within package and by subclasses.
-     */
-    protected final FloatMatrixData getData()
-    {
-        return this.data;
-    }
-
-    /**
-     * Construct a new Immutable FloatMatrix.
-     * @param unit U; the unit of the new FloatMatrix
-     */
-    protected FloatMatrix(final U unit)
-    {
-        super(unit);
-    }
-
-    /**
-     * Return the StorageType (DENSE, SPARSE, etc.) for the stored Vector.
-     * @return the StorageType (DENSE, SPARSE, etc.) for the stored Vector
-     */
-    public final StorageType getStorageType()
-    {
-        return this.data.getStorageType();
-    }
-
-    /* ============================================================================================ */
-    /* ================================= ABSOLUTE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
-
     /**
      * ABSOLUTE implementation of FloatMatrix.
      * @param <U> Unit the unit for which this Matrix will be created
      */
-    public static class Abs<U extends Unit<U>> extends FloatMatrix<U> implements Absolute,
-            FunctionsAbs<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
+    public static class Abs<U extends Unit<U>> extends
+            AbstractFloatMatrixAbs<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>, MutableFloatMatrix.Abs<U>, FloatScalar.Abs<U>>
+            implements FunctionsAbs<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
     {
         /**  */
         private static final long serialVersionUID = 20151003L;
@@ -89,9 +42,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
          */
         public Abs(final float[][] values, final U unit, final StorageType storageType) throws ValueException
         {
-            super(unit);
-            ensureRectangularAndNonEmpty(values);
-            this.data = FloatMatrixData.instantiate(values, unit.getScale(), storageType);
+            super(values, unit, storageType);
         }
 
         /**
@@ -102,8 +53,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
          */
         public Abs(final FloatScalar.Abs<U>[][] values, final StorageType storageType) throws ValueException
         {
-            super(checkUnit(values));
-            this.data = FloatMatrixData.instantiate(values, storageType);
+            super(values, storageType);
         }
 
         /**
@@ -113,16 +63,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
          */
         Abs(final FloatMatrixData data, final U unit)
         {
-            super(unit);
-            this.data = data.copy();
-        }
-
-        /** {@inheritDoc} */
-        @SuppressWarnings("checkstyle:designforextension")
-        @Override
-        public MutableFloatMatrix.Abs<U> mutable()
-        {
-            return MutableFloatMatrix.instantiateMutableAbs(getData(), getUnit());
+            super(data, unit);
         }
 
         /** {@inheritDoc} */
@@ -130,7 +71,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         @SuppressWarnings("designforextension")
         public FloatMatrix.Abs<U> toDense()
         {
-            return this.data.isDense() ? this : instantiateAbs(this.data.toDense(), getUnit());
+            return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
         }
 
         /** {@inheritDoc} */
@@ -138,52 +79,46 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         @SuppressWarnings("designforextension")
         public FloatMatrix.Abs<U> toSparse()
         {
-            return this.data.isSparse() ? this : instantiateAbs(this.data.toSparse(), getUnit());
+            return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public FloatScalar.Abs<U> get(final int row, final int column) throws ValueException
+        protected final FloatMatrix.Abs<U> instantiateTypeAbs(final FloatMatrixData dmd, final U unit)
         {
-            return new FloatScalar.Abs<U>(getInUnit(row, column, getUnit()), getUnit());
+            return new FloatMatrix.Abs<U>(dmd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Abs<U> plus(final FloatMatrix.Rel<U> rel) throws ValueException
+        protected final FloatMatrix.Rel<U> instantiateTypeRel(final FloatMatrixData dmd, final U unit)
         {
-            return instantiateAbs(this.getData().plus(rel.getData()), getUnit());
+            return new FloatMatrix.Rel<U>(dmd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Abs<U> minus(final FloatMatrix.Rel<U> rel) throws ValueException
+        protected final MutableFloatMatrix.Abs<U> instantiateMutableType(final FloatMatrixData dmd, final U unit)
         {
-            return instantiateAbs(this.getData().minus(rel.getData()), getUnit());
+            return new MutableFloatMatrix.Abs<U>(dmd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Rel<U> minus(final FloatMatrix.Abs<U> abs) throws ValueException
+        protected final FloatScalar.Abs<U> instantiateScalar(final float value, final U unit)
         {
-            return instantiateRel(this.getData().minus(abs.getData()), getUnit());
+            return new FloatScalar.Abs<U>(value, unit);
         }
     }
-
-    /* ============================================================================================ */
-    /* ================================= RELATIVE IMPLEMENTATION ================================== */
-    /* ============================================================================================ */
 
     /**
      * RELATIVE implementation of FloatMatrix.
      * @param <U> Unit the unit for which this Matrix will be created
      */
-    public static class Rel<U extends Unit<U>> extends FloatMatrix<U> implements Relative,
-            FunctionsRel<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
+    public static class Rel<U extends Unit<U>>
+            extends AbstractFloatMatrixRel<U, FloatMatrix.Rel<U>, MutableFloatMatrix.Rel<U>, FloatScalar.Rel<U>>
+            implements FunctionsRel<U, FloatMatrix.Abs<U>, FloatMatrix.Rel<U>>
+
     {
         /** */
         private static final long serialVersionUID = 20151003L;
@@ -197,21 +132,18 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
          */
         public Rel(final float[][] values, final U unit, final StorageType storageType) throws ValueException
         {
-            super(unit);
-            ensureRectangularAndNonEmpty(values);
-            this.data = FloatMatrixData.instantiate(values, unit.getScale(), storageType);
+            super(values, unit, storageType);
         }
 
         /**
          * Construct a new Relative Immutable FloatMatrix.
-         * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable FloatMatrix
+         * @param values FloatScalar.Abs&lt;U&gt;[][]; the values of the entries in the new Relative Immutable FloatMatrix
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Rel(final FloatScalar.Rel<U>[][] values, final StorageType storageType) throws ValueException
         {
-            super(checkUnit(values));
-            this.data = FloatMatrixData.instantiate(values, storageType);
+            super(values, storageType);
         }
 
         /**
@@ -221,16 +153,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
          */
         Rel(final FloatMatrixData data, final U unit)
         {
-            super(unit);
-            this.data = data.copy();
-        }
-
-        /** {@inheritDoc} */
-        @SuppressWarnings("checkstyle:designforextension")
-        @Override
-        public MutableFloatMatrix.Rel<U> mutable()
-        {
-            return new MutableFloatMatrix.Rel<U>(getData(), getUnit());
+            super(data, unit);
         }
 
         /** {@inheritDoc} */
@@ -238,7 +161,7 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         @SuppressWarnings("designforextension")
         public FloatMatrix.Rel<U> toDense()
         {
-            return this.data.isDense() ? this : instantiateRel(this.data.toDense(), getUnit());
+            return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
         }
 
         /** {@inheritDoc} */
@@ -246,146 +169,36 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         @SuppressWarnings("designforextension")
         public FloatMatrix.Rel<U> toSparse()
         {
-            return this.data.isSparse() ? this : instantiateRel(this.data.toSparse(), getUnit());
+            return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public FloatScalar.Rel<U> get(final int row, final int column) throws ValueException
+        public final FloatMatrix.Abs<U> plus(final FloatMatrix.Abs<U> abs) throws ValueException
         {
-            return new FloatScalar.Rel<U>(getInUnit(row, column, getUnit()), getUnit());
+            return new FloatMatrix.Abs<U>(this.getData().plus(abs.getData()), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Rel<U> plus(final FloatMatrix.Rel<U> rel) throws ValueException
+        protected final FloatMatrix.Rel<U> instantiateType(final FloatMatrixData dmd, final U unit)
         {
-            return instantiateRel(this.getData().plus(rel.getData()), getUnit());
+            return new FloatMatrix.Rel<U>(dmd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public FloatMatrix.Abs<U> plus(final FloatMatrix.Abs<U> abs) throws ValueException
+        protected final MutableFloatMatrix.Rel<U> instantiateMutableType(final FloatMatrixData dmd, final U unit)
         {
-            return instantiateAbs(this.getData().plus(abs.getData()), getUnit());
+            return new MutableFloatMatrix.Rel<U>(dmd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        @SuppressWarnings("designforextension")
-        public final FloatMatrix.Rel<U> minus(final FloatMatrix.Rel<U> rel) throws ValueException
+        protected final FloatScalar.Rel<U> instantiateScalar(final float value, final U unit)
         {
-            return instantiateRel(this.getData().minus(rel.getData()), getUnit());
+            return new FloatScalar.Rel<U>(value, unit);
         }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public final FloatMatrix.Rel<U> times(final FloatMatrix.Rel<U> rel) throws ValueException
-        {
-            return instantiateRel(this.getData().times(rel.getData()), getUnit());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        @SuppressWarnings("designforextension")
-        public final FloatMatrix.Rel<U> divide(final FloatMatrix.Rel<U> rel) throws ValueException
-        {
-            return instantiateRel(this.getData().divide(rel.getData()), getUnit());
-        }
-    }
-
-    /* ============================================================================================ */
-    /* ============================= STATIC CONSTRUCTOR HELP METHODS ============================== */
-    /* ============================================================================================ */
-
-    /**
-     * Check that a provided array can be used to create some descendant of a FloatMatrix, and return the Unit.
-     * @param dsArray the array to check and get the unit for
-     * @param <U> the unit
-     * @return the unit of the object
-     * @throws ValueException when the array is null, has length equal to 0, or has first entry with length equal to 0
-     */
-    static <U extends Unit<U>> U checkUnit(final FloatScalar<U>[][] dsArray) throws ValueException
-    {
-        ensureRectangularAndNonEmpty(dsArray);
-        return dsArray[0][0].getUnit();
-    }
-
-    /**
-     * Check that a 2D array of float is not null and rectangular; i.e. all rows have the same length.
-     * @param values float[][]; the 2D array to check
-     * @throws ValueException when not all rows have the same length
-     */
-    protected static void ensureRectangularAndNonEmpty(final float[][] values) throws ValueException
-    {
-        if (null == values)
-        {
-            throw new ValueException("Cannot create a FloatVector or MutableFloatVector from a null array of float[][]");
-        }
-        if (values.length > 0 && null == values[0])
-        {
-            throw new ValueException("Creating FloatVector or MutableFloatVector: Row 0 is null");
-        }
-        for (int row = values.length; --row >= 1;)
-        {
-            if (null == values[row] || values[0].length != values[row].length)
-            {
-                throw new ValueException("Creating FloatVector or MutableFloatVector: Lengths of rows are not all the same");
-            }
-        }
-    }
-
-    /**
-     * Check that a 2D array of FloatScalar&lt;?&gt; is rectangular; i.e. all rows have the same length and is non empty.
-     * @param values FloatScalar&lt;?&gt;[][]; the 2D array to check
-     * @throws ValueException when values is not rectangular, or contains no data
-     */
-    protected static void ensureRectangularAndNonEmpty(final FloatScalar<?>[][] values) throws ValueException
-    {
-        if (null == values)
-        {
-            throw new ValueException("Cannot create a FloatVector or MutableFloatVector from an empty array of FloatScalar");
-        }
-        if (0 == values.length || 0 == values[0].length)
-        {
-            throw new ValueException("Creating FloatVector or MutableFloatVector: "
-                    + "Cannot determine unit for FloatMatrix from an empty array of FloatScalar");
-        }
-        for (int row = values.length; --row >= 1;)
-        {
-            if (values[0].length != values[row].length)
-            {
-                throw new ValueException("Creating FloatVector or MutableFloatVector: Lengths of rows are not all the same");
-            }
-        }
-    }
-
-    /**
-     * Instantiate a vector based on the type of data.
-     * @param dmData the FloatMatrixData
-     * @param unit the unit to use
-     * @param <U> the unit
-     * @return an instantiated vector
-     */
-    static <U extends Unit<U>> FloatMatrix.Rel<U> instantiateRel(final FloatMatrixData dmData, final U unit)
-    {
-        return new FloatMatrix.Rel<U>(dmData, unit);
-    }
-
-    /**
-     * Instantiate a vector based on the type of data.
-     * @param dmData the FloatMatrixData
-     * @param unit the unit to use
-     * @param <U> the unit
-     * @return an instantiated vector
-     */
-    static <U extends Unit<U>> FloatMatrix.Abs<U> instantiateAbs(final FloatMatrixData dmData, final U unit)
-    {
-        return new FloatMatrix.Abs<U>(dmData, unit);
     }
 
     /* ============================================================================================ */
@@ -492,266 +305,4 @@ public abstract class FloatMatrix<U extends Unit<U>> extends AbstractValue<U> im
         return left.mutable().divide(right);
     }
 
-    /* ============================================================================================ */
-    /* ================================== GENERIC MATRIX METHODS ================================== */
-    /* ============================================================================================ */
-
-    /**
-     * Create a float[][] array filled with the values in the standard SI unit.
-     * @return float[][]; array of values in the standard SI unit
-     */
-    public final float[][] getValuesSI()
-    {
-        return this.data.getDenseMatrixSI();
-    }
-
-    /**
-     * Create a float[][] array filled with the values in the original unit.
-     * @return float[][]; the values in the original unit
-     */
-    public final float[][] getValuesInUnit()
-    {
-        return getValuesInUnit(getUnit());
-    }
-
-    /**
-     * Create a float[][] array filled with the values converted into a specified unit.
-     * @param targetUnit U; the unit into which the values are converted for use
-     * @return float[][]; the values converted into the specified unit
-     */
-    public final float[][] getValuesInUnit(final U targetUnit)
-    {
-        float[][] values = getValuesSI();
-        for (int row = rows(); --row >= 0;)
-        {
-            for (int column = columns(); --column >= 0;)
-            {
-                values[row][column] = (float) ValueUtil.expressAsUnit(values[row][column], targetUnit);
-            }
-        }
-        return values;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int rows()
-    {
-        return this.data.rows();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int columns()
-    {
-        return this.data.cols();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final float getSI(final int row, final int column) throws ValueException
-    {
-        checkIndex(row, column);
-        return this.data.getSI(row, column);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final float getInUnit(final int row, final int column) throws ValueException
-    {
-        return (float) expressAsSpecifiedUnit(getSI(row, column));
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final float getInUnit(final int row, final int column, final U targetUnit) throws ValueException
-    {
-        return (float) ValueUtil.expressAsUnit(getSI(row, column), targetUnit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final float zSum()
-    {
-        return this.data.zSum();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int cardinality()
-    {
-        return this.data.cardinality();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String toString()
-    {
-        return toString(getUnit(), false, true);
-    }
-
-    /**
-     * Print this FloatMatrix with the values expressed in the specified unit.
-     * @param displayUnit U; the unit into which the values are converted for display
-     * @return String; printable string with the matrix contents expressed in the specified unit
-     */
-    public final String toString(final U displayUnit)
-    {
-        return toString(displayUnit, false, true);
-    }
-
-    /**
-     * Print this FloatMatrix with optional type and unit information.
-     * @param verbose boolean; if true; include type info; if false; exclude type info
-     * @param withUnit boolean; if true; include the unit; of false; exclude the unit
-     * @return String; printable string with the matrix contents
-     */
-    public final String toString(final boolean verbose, final boolean withUnit)
-    {
-        return toString(getUnit(), verbose, withUnit);
-    }
-
-    /**
-     * Print this FloatMatrix with the values expressed in the specified unit.
-     * @param displayUnit U; the unit into which the values are converted for display
-     * @param verbose boolean; if true; include type info; if false; exclude type info
-     * @param withUnit boolean; if true; include the unit; of false; exclude the unit
-     * @return String; printable string with the matrix contents
-     */
-    public final String toString(final U displayUnit, final boolean verbose, final boolean withUnit)
-    {
-        StringBuffer buf = new StringBuffer();
-        if (verbose)
-        {
-            String ab = this instanceof Absolute ? "Abs " : this instanceof Relative ? "Rel " : "??? ";
-            String ds = this.data.isDense() ? "Dense  " : this.data.isSparse() ? "Sparse " : "?????? ";
-            if (this instanceof MutableFloatMatrix)
-            {
-                buf.append("Mutable   " + ab + ds);
-            }
-            else
-            {
-                buf.append("Immutable " + ab + ds);
-            }
-        }
-        for (int row = 0; row < rows(); row++)
-        {
-            buf.append("\r\n\t");
-            for (int column = 0; column < columns(); column++)
-            {
-                try
-                {
-                    float f = (float) ValueUtil.expressAsUnit(getSI(row, column), displayUnit);
-                    buf.append(" " + Format.format(f));
-                }
-                catch (ValueException ve)
-                {
-                    buf.append(" " + "********************".substring(0, Format.DEFAULTSIZE));
-                }
-            }
-        }
-        buf.append("\n");
-        if (withUnit)
-        {
-            buf.append(displayUnit.getAbbreviation());
-        }
-        return buf.toString();
-    }
-
-    /**
-     * Centralized size equality check.
-     * @param other FloatMatrix&lt;?&gt;; other FloatMatrix
-     * @throws ValueException when other is null, or matrices have unequal size
-     */
-    protected final void checkSize(final FloatMatrix<?> other) throws ValueException
-    {
-        if (null == other)
-        {
-            throw new ValueException("other is null");
-        }
-        if (rows() != other.rows() || columns() != other.columns())
-        {
-            throw new ValueException("The matrices have different sizes: " + rows() + "x" + columns() + " != " + other.rows()
-                    + "x" + other.columns());
-        }
-    }
-
-    /**
-     * Centralized size equality check.
-     * @param other float[][]; array of float
-     * @throws ValueException when matrices have unequal size
-     */
-    protected final void checkSize(final float[][] other) throws ValueException
-    {
-        ensureRectangularAndNonEmpty(other);
-        final int otherColumns = other[0].length;
-        if (rows() != other.length || columns() != otherColumns)
-        {
-            throw new ValueException("The matrix and the array have different sizes: " + rows() + "x" + columns() + " != "
-                    + other.length + "x" + otherColumns);
-        }
-    }
-
-    /**
-     * Check that provided row and column indices are valid.
-     * @param row int; the row value to check
-     * @param column int; the column value to check
-     * @throws ValueException when row or column is invalid
-     */
-    protected final void checkIndex(final int row, final int column) throws ValueException
-    {
-        if (row < 0 || row >= rows() || column < 0 || column >= columns())
-        {
-            throw new ValueException("index out of range (valid range is 0.." + (rows() - 1) + ", 0.." + (columns() - 1)
-                    + ", got " + row + ", " + column + ")");
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final float determinant() throws ValueException
-    {
-        try
-        {
-            final Factory<PrimitiveMatrix> matrixFactory = PrimitiveMatrix.FACTORY;
-            final BasicMatrix m = matrixFactory.rows(this.data.getDoubleDenseMatrixSI());
-            return (float) m.getDeterminant().doubleValue();
-        }
-        catch (IllegalArgumentException exception)
-        {
-            throw new ValueException(exception); // Matrix must be square
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((this.data == null) ? 0 : this.data.hashCode());
-        return result;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
-    public boolean equals(final Object obj)
-    {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        FloatMatrix<?> other = (FloatMatrix<?>) obj;
-        if (this.data == null)
-        {
-            if (other.data != null)
-                return false;
-        }
-        else if (!this.data.equals(other.data))
-            return false;
-        return true;
-    }
 }

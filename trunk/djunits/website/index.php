@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>DJUNITS - Delft Java UNIT System, version 1.03</title>
+<title>DJUNITS - Delft Java UNIT System, version 2.00</title>
 <meta name="Author" content="Peter Knoppers, p.knoppers@tudelft.nl" />
 <meta name="Author" content="Alexander Verbraeck, a.verbraeck@tudelft.nl" />
 <meta name="Description" content="Delft Java Unit System" />

@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.*;
 
 /**
- * Mutable Float%Type%Vector, a vector of values with a %Type%Unit. 
+ * Mutable Float %Type%Vector, a vector of values with a %Type%Unit. 
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -20,15 +20,15 @@ import org.djunits.value.vfloat.scalar.*;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloat%Type%Vector extends
-    MutableTypedFloatVectorRel<%Type%Unit, Float%Type%Vector, MutableFloat%Type%Vector, Float%Type%>
+    AbstractMutableFloatVectorRel<%Type%Unit, Float%Type%Vector, MutableFloat%Type%Vector, Float%Type%> %DIMLESS%
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Float%Type%Vector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float%Type%Vector
-     * @param unit U; the unit of the new Relative Immutable Float%Type%Vector
+     * Construct a new Relative Immutable Float %Type%Vector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float %Type%Vector
+     * @param unit U; the unit of the new Relative Immutable Float %Type%Vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class MutableFloat%Type%Vector extends
     }
 
     /**
-     * Construct a new Relative Immutable Float%Type%Vector.
-     * @param values List; the values of the entries in the new Relative Immutable Float%Type%Vector
-     * @param unit U; the unit of the new Relative Immutable Float%Type%Vector
+     * Construct a new Relative Immutable Float %Type%Vector.
+     * @param values List; the values of the entries in the new Relative Immutable Float %Type%Vector
+     * @param unit U; the unit of the new Relative Immutable Float %Type%Vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,9 +52,9 @@ public class MutableFloat%Type%Vector extends
     }
 
     /**
-     * Construct a new Relative Immutable Float%Type%Vector.
+     * Construct a new Relative Immutable Float %Type%Vector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            Float%Type%Vector
+     *            %Type%Vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -64,8 +64,8 @@ public class MutableFloat%Type%Vector extends
     }
 
     /**
-     * Construct a new Relative Immutable Float%Type%Vector.
-     * @param values List; the values of the entries in the new Relative Immutable Float%Type%Vector
+     * Construct a new Relative Immutable Float %Type%Vector.
+     * @param values List; the values of the entries in the new Relative Immutable Float %Type%Vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -75,9 +75,9 @@ public class MutableFloat%Type%Vector extends
     }
 
     /**
-     * Construct a new Relative Immutable Float%Type%Vector.
+     * Construct a new Relative Immutable Float %Type%Vector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            Float%Type%Vector
+     *            %Type%Vector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -89,9 +89,9 @@ public class MutableFloat%Type%Vector extends
     }
 
     /**
-     * Construct a new Relative Immutable Float%Type%Vector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float%Type%Vector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float%Type%Vector
+     * Construct a new Relative Immutable Float %Type%Vector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float %Type%Vector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float %Type%Vector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -127,12 +127,32 @@ public class MutableFloat%Type%Vector extends
 
     /** {@inheritDoc} */
     @Override
-    public final Float%Type% get(final int index) throws ValueException
+    protected final Float%Type% instantiateScalar(final float value, final %Type%Unit unit)
     {
-        return new Float%Type%(getInUnit(index, getUnit()), getUnit());
+        return new Float%Type%(value, unit);
     }
+    
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloat%Type%Vector toDense()
+    {
+        return this.data.isDense() ? (MutableFloat%Type%Vector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloat%Type%Vector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloat%Type%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
 
 %FORMULAS%%Type%%
 
 }
+
 

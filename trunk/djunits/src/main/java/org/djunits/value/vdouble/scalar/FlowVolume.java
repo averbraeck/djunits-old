@@ -31,7 +31,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FlowVolume extends TypedDoubleScalarRel<FlowVolumeUnit, FlowVolume>
+public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolume>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -60,7 +60,7 @@ public class FlowVolume extends TypedDoubleScalarRel<FlowVolumeUnit, FlowVolume>
 
     /** {@inheritDoc} */
     @Override
-    protected final FlowVolume instantiateTypeRel(final double value, final FlowVolumeUnit unit)
+    public final FlowVolume instantiateRel(final double value, final FlowVolumeUnit unit)
     {
         return new FlowVolume(value, unit);
     }

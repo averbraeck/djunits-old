@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatSpeed;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatSpeedMatrix extends
-        MutableTypedFloatMatrixRel<SpeedUnit, FloatSpeedMatrix, MutableFloatSpeedMatrix, FloatSpeed>
+public class MutableFloatSpeedMatrix
+        extends AbstractMutableFloatMatrixRel<SpeedUnit, FloatSpeedMatrix, MutableFloatSpeedMatrix, FloatSpeed>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class MutableFloatSpeedMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatSpeedMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatSpeedMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatSpeedMatrix instantiateType(final FloatMatrixData fmd, final SpeedUnit unit)
     {
         return new FloatSpeedMatrix(fmd, unit);
@@ -72,9 +86,9 @@ public class MutableFloatSpeedMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatSpeed get(final int row, final int column) throws ValueException
+    protected final FloatSpeed instantiateScalar(final float value, final SpeedUnit unit)
     {
-        return new FloatSpeed(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatSpeed(value, unit);
     }
 
 }

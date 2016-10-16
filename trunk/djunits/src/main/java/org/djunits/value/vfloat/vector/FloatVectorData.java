@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import org.djunits.unit.scale.Scale;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.vfloat.scalar.FloatScalar;
+import org.djunits.value.vfloat.scalar.FloatScalarInterface;
 
 /**
  * Stores the data for a FloatVector and carries out basic operations.
@@ -114,7 +114,7 @@ abstract class FloatVectorData
      * @return the FloatVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
-    public static FloatVectorData instantiate(final FloatScalar<?>[] values, final StorageType storageType)
+    public static FloatVectorData instantiate(final FloatScalarInterface[] values, final StorageType storageType)
             throws ValueException
     {
         if (values == null)
@@ -145,8 +145,8 @@ abstract class FloatVectorData
      * @return the FloatVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
-    public static FloatVectorData instantiateLD(final List<? extends FloatScalar<?>> values, final StorageType storageType)
-            throws ValueException
+    public static FloatVectorData instantiateLD(final List<? extends FloatScalarInterface> values,
+            final StorageType storageType) throws ValueException
     {
         if (values == null)
         {
@@ -178,7 +178,7 @@ abstract class FloatVectorData
      * @return the FloatVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
-    public static <S extends FloatScalar<?>> FloatVectorData instantiateMD(final SortedMap<Integer, S> values,
+    public static <S extends FloatScalarInterface> FloatVectorData instantiateMD(final SortedMap<Integer, S> values,
             final int length, final StorageType storageType) throws ValueException
     {
         if (values == null)

@@ -27,7 +27,7 @@ import org.djunits.unit.AngleUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Direction extends TypedDoubleScalarAbs<AngleUnit, Direction, Angle>
+public class Direction extends AbstractDoubleScalarAbs<AngleUnit, Direction, Angle>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -56,14 +56,14 @@ public class Direction extends TypedDoubleScalarAbs<AngleUnit, Direction, Angle>
 
     /** {@inheritDoc} */
     @Override
-    protected final Direction instantiateTypeAbs(final double value, final AngleUnit unit)
+    public final Direction instantiateAbs(final double value, final AngleUnit unit)
     {
         return new Direction(value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Angle instantiateTypeRel(final double value, final AngleUnit unit)
+    public final Angle instantiateRel(final double value, final AngleUnit unit)
     {
         return new Angle(value, unit);
     }

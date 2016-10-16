@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatPower;
 
 /**
- * Mutable FloatPowerVector, a vector of values with a PowerUnit.
+ * Mutable Float PowerVector, a vector of values with a PowerUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,16 +19,16 @@ import org.djunits.value.vfloat.scalar.FloatPower;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatPowerVector extends
-        MutableTypedFloatVectorRel<PowerUnit, FloatPowerVector, MutableFloatPowerVector, FloatPower>
+public class MutableFloatPowerVector
+        extends AbstractMutableFloatVectorRel<PowerUnit, FloatPowerVector, MutableFloatPowerVector, FloatPower>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatPowerVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatPowerVector
-     * @param unit U; the unit of the new Relative Immutable FloatPowerVector
+     * Construct a new Relative Immutable Float PowerVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float PowerVector
+     * @param unit U; the unit of the new Relative Immutable Float PowerVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -39,9 +39,9 @@ public class MutableFloatPowerVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatPowerVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatPowerVector
-     * @param unit U; the unit of the new Relative Immutable FloatPowerVector
+     * Construct a new Relative Immutable Float PowerVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float PowerVector
+     * @param unit U; the unit of the new Relative Immutable Float PowerVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -52,8 +52,8 @@ public class MutableFloatPowerVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatPowerVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float FloatPowerVector
+     * Construct a new Relative Immutable Float PowerVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float PowerVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -63,8 +63,8 @@ public class MutableFloatPowerVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatPowerVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatPowerVector
+     * Construct a new Relative Immutable Float PowerVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float PowerVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -74,9 +74,8 @@ public class MutableFloatPowerVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatPowerVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatPowerVector
+     * Construct a new Relative Immutable Float PowerVector.
+     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float PowerVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -88,9 +87,9 @@ public class MutableFloatPowerVector extends
     }
 
     /**
-     * Construct a new Relative Immutable FloatPowerVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatPowerVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatPowerVector
+     * Construct a new Relative Immutable Float PowerVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float PowerVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float PowerVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -126,9 +125,27 @@ public class MutableFloatPowerVector extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPower get(final int index) throws ValueException
+    protected final FloatPower instantiateScalar(final float value, final PowerUnit unit)
     {
-        return new FloatPower(getInUnit(index, getUnit()), getUnit());
+        return new FloatPower(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final MutableFloatPowerVector toDense()
+    {
+        return this.data.isDense() ? (MutableFloatPowerVector) this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final MutableFloatPowerVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableFloatPowerVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

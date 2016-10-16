@@ -19,9 +19,8 @@ import org.djunits.value.vdouble.scalar.ElectricalCurrent;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableElectricalCurrentVector
-        extends
-        MutableTypedDoubleVectorRel<ElectricalCurrentUnit, ElectricalCurrentVector, MutableElectricalCurrentVector, ElectricalCurrent>
+public class MutableElectricalCurrentVector extends
+        AbstractMutableDoubleVectorRel<ElectricalCurrentUnit, ElectricalCurrentVector, MutableElectricalCurrentVector, ElectricalCurrent>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -33,8 +32,8 @@ public class MutableElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableElectricalCurrentVector(final double[] values, final ElectricalCurrentUnit unit, final StorageType storageType)
-            throws ValueException
+    public MutableElectricalCurrentVector(final double[] values, final ElectricalCurrentUnit unit,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -59,8 +58,7 @@ public class MutableElectricalCurrentVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
-    public MutableElectricalCurrentVector(final ElectricalCurrent[] values, final StorageType storageType)
-            throws ValueException
+    public MutableElectricalCurrentVector(final ElectricalCurrent[] values, final StorageType storageType) throws ValueException
     {
         super(values, storageType);
     }
@@ -131,9 +129,29 @@ public class MutableElectricalCurrentVector
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalCurrent get(final int index) throws ValueException
+    protected final ElectricalCurrent instantiateScalar(final double value, final ElectricalCurrentUnit unit)
     {
-        return new ElectricalCurrent(getInUnit(index, getUnit()), getUnit());
+        return new ElectricalCurrent(value, unit);
+    }
+
+    /**
+     * Create a dense version of this DoubleVector.
+     * @return the dense version of this DoubleVector
+     */
+    public final MutableElectricalCurrentVector toDense()
+    {
+        return this.data.isDense() ? (MutableElectricalCurrentVector) this
+                : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this DoubleVector.
+     * @return the sparse version of this DoubleVector
+     */
+    public final MutableElectricalCurrentVector toSparse()
+    {
+        return this.data.isSparse() ? (MutableElectricalCurrentVector) this
+                : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
 }

@@ -35,7 +35,7 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Length extends TypedDoubleScalarRel<LengthUnit, Length>
+public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -64,7 +64,7 @@ public class Length extends TypedDoubleScalarRel<LengthUnit, Length>
 
     /** {@inheritDoc} */
     @Override
-    protected final Length instantiateTypeRel(final double value, final LengthUnit unit)
+    public final Length instantiateRel(final double value, final LengthUnit unit)
     {
         return new Length(value, unit);
     }
@@ -75,7 +75,7 @@ public class Length extends TypedDoubleScalarRel<LengthUnit, Length>
      * @param unit the unit
      * @return A a new absolute instance of the DoubleScalar of the right type
      */
-    protected final Position instantiateTypeAbs(final double value, final LengthUnit unit)
+    public final Position instantiateAbs(final double value, final LengthUnit unit)
     {
         return new Position(value, unit);
     }
@@ -99,8 +99,8 @@ public class Length extends TypedDoubleScalarRel<LengthUnit, Length>
      */
     public final Position plus(final Position v)
     {
-        return getUnit().equals(v.getUnit()) ? instantiateTypeAbs(getInUnit() + v.getInUnit(), getUnit()) : instantiateTypeAbs(
-                this.si + v.si, getUnit().getStandardUnit());
+        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
+                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }
 
     /**

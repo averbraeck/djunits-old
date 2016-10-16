@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatAcceleration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatAccelerationMatrix
-        extends
-        MutableTypedFloatMatrixRel<AccelerationUnit, FloatAccelerationMatrix, MutableFloatAccelerationMatrix, FloatAcceleration>
+public class MutableFloatAccelerationMatrix extends
+        AbstractMutableFloatMatrixRel<AccelerationUnit, FloatAccelerationMatrix, MutableFloatAccelerationMatrix, FloatAcceleration>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -60,6 +59,20 @@ public class MutableFloatAccelerationMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatAccelerationMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatAccelerationMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatAccelerationMatrix instantiateType(final FloatMatrixData fmd, final AccelerationUnit unit)
     {
         return new FloatAccelerationMatrix(fmd, unit);
@@ -67,16 +80,17 @@ public class MutableFloatAccelerationMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatAccelerationMatrix instantiateMutableType(final FloatMatrixData fmd, final AccelerationUnit unit)
+    protected final MutableFloatAccelerationMatrix instantiateMutableType(final FloatMatrixData fmd,
+            final AccelerationUnit unit)
     {
         return new MutableFloatAccelerationMatrix(fmd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAcceleration get(final int row, final int column) throws ValueException
+    protected final FloatAcceleration instantiateScalar(final float value, final AccelerationUnit unit)
     {
-        return new FloatAcceleration(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatAcceleration(value, unit);
     }
 
 }

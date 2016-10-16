@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Pressure;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class PressureMatrix extends TypedDoubleMatrixRel<PressureUnit, PressureMatrix, MutablePressureMatrix, Pressure>
+public class PressureMatrix extends AbstractDoubleMatrixRel<PressureUnit, PressureMatrix, MutablePressureMatrix, Pressure>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -28,8 +28,7 @@ public class PressureMatrix extends TypedDoubleMatrixRel<PressureUnit, PressureM
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public PressureMatrix(final double[][] values, final PressureUnit unit, final StorageType storageType)
-            throws ValueException
+    public PressureMatrix(final double[][] values, final PressureUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -57,6 +56,20 @@ public class PressureMatrix extends TypedDoubleMatrixRel<PressureUnit, PressureM
 
     /** {@inheritDoc} */
     @Override
+    public final PressureMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final PressureMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final PressureMatrix instantiateType(final DoubleMatrixData dmd, final PressureUnit unit)
     {
         return new PressureMatrix(dmd, unit);
@@ -71,9 +84,9 @@ public class PressureMatrix extends TypedDoubleMatrixRel<PressureUnit, PressureM
 
     /** {@inheritDoc} */
     @Override
-    public final Pressure get(final int row, final int column) throws ValueException
+    protected final Pressure instantiateScalar(final double value, final PressureUnit unit)
     {
-        return new Pressure(getInUnit(row, column, getUnit()), getUnit());
+        return new Pressure(value, unit);
     }
 
 }

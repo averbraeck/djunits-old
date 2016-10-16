@@ -16,9 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatDirection;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloatDirectionMatrix
-        extends
-        MutableTypedFloatMatrixAbs<AngleUnit, FloatDirectionMatrix, FloatAngleMatrix, MutableFloatDirectionMatrix, FloatDirection>
+public class MutableFloatDirectionMatrix extends
+        AbstractMutableFloatMatrixAbs<AngleUnit, FloatDirectionMatrix, FloatAngleMatrix, MutableFloatDirectionMatrix, FloatDirection>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -59,6 +58,20 @@ public class MutableFloatDirectionMatrix
 
     /** {@inheritDoc} */
     @Override
+    public final MutableFloatDirectionMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatDirectionMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatDirectionMatrix instantiateTypeAbs(final FloatMatrixData fmd, final AngleUnit unit)
     {
         return new FloatDirectionMatrix(fmd, unit);
@@ -80,9 +93,9 @@ public class MutableFloatDirectionMatrix
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDirection get(final int row, final int column) throws ValueException
+    protected final FloatDirection instantiateScalar(final float value, final AngleUnit unit)
     {
-        return new FloatDirection(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatDirection(value, unit);
     }
 
     /**

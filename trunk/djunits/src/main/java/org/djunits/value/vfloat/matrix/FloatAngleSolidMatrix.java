@@ -16,8 +16,8 @@ import org.djunits.value.vfloat.scalar.FloatAngleSolid;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatAngleSolidMatrix extends
-        TypedFloatMatrixRel<AngleSolidUnit, FloatAngleSolidMatrix, MutableFloatAngleSolidMatrix, FloatAngleSolid>
+public class FloatAngleSolidMatrix
+        extends AbstractFloatMatrixRel<AngleSolidUnit, FloatAngleSolidMatrix, MutableFloatAngleSolidMatrix, FloatAngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class FloatAngleSolidMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatAngleSolidMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatAngleSolidMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatAngleSolidMatrix instantiateType(final FloatMatrixData fmd, final AngleSolidUnit unit)
     {
         return new FloatAngleSolidMatrix(fmd, unit);
@@ -72,9 +86,9 @@ public class FloatAngleSolidMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAngleSolid get(final int row, final int column) throws ValueException
+    protected final FloatAngleSolid instantiateScalar(final float value, final AngleSolidUnit unit)
     {
-        return new FloatAngleSolid(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatAngleSolid(value, unit);
     }
 
 }

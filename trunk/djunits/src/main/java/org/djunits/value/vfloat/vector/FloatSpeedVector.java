@@ -9,7 +9,7 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatSpeed;
 
 /**
- * Immutable FloatSpeedVector, a vector of values with a SpeedUnit.
+ * Immutable Float FloatSpeedVector, a vector of values with a SpeedUnit.
  * <p>
  * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,15 +19,15 @@ import org.djunits.value.vfloat.scalar.FloatSpeed;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatSpeedVector extends TypedFloatVectorRel<SpeedUnit, FloatSpeedVector, MutableFloatSpeedVector, FloatSpeed>
+public class FloatSpeedVector extends AbstractFloatVectorRel<SpeedUnit, FloatSpeedVector, MutableFloatSpeedVector, FloatSpeed>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatSpeedVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatSpeedVector
-     * @param unit U; the unit of the new Relative Immutable FloatSpeedVector
+     * Construct a new Relative Immutable Float FloatSpeedVector.
+     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatSpeedVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatSpeedVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -37,20 +37,19 @@ public class FloatSpeedVector extends TypedFloatVectorRel<SpeedUnit, FloatSpeedV
     }
 
     /**
-     * Construct a new Relative Immutable FloatSpeedVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatSpeedVector
-     * @param unit U; the unit of the new Relative Immutable FloatSpeedVector
+     * Construct a new Relative Immutable Float FloatSpeedVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatSpeedVector
+     * @param unit U; the unit of the new Relative Immutable Float FloatSpeedVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatSpeedVector(final List<Float> values, final SpeedUnit unit, final StorageType storageType)
-            throws ValueException
+    public FloatSpeedVector(final List<Float> values, final SpeedUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
 
     /**
-     * Construct a new Relative Immutable FloatSpeedVector.
+     * Construct a new Relative Immutable Float FloatSpeedVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float FloatSpeedVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
@@ -61,8 +60,8 @@ public class FloatSpeedVector extends TypedFloatVectorRel<SpeedUnit, FloatSpeedV
     }
 
     /**
-     * Construct a new Relative Immutable FloatSpeedVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatSpeedVector
+     * Construct a new Relative Immutable Float FloatSpeedVector.
+     * @param values List; the values of the entries in the new Relative Immutable Float FloatSpeedVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -72,7 +71,7 @@ public class FloatSpeedVector extends TypedFloatVectorRel<SpeedUnit, FloatSpeedV
     }
 
     /**
-     * Construct a new Relative Immutable FloatSpeedVector.
+     * Construct a new Relative Immutable Float FloatSpeedVector.
      * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatSpeedVector
      * @param length the size of the vector
@@ -86,9 +85,9 @@ public class FloatSpeedVector extends TypedFloatVectorRel<SpeedUnit, FloatSpeedV
     }
 
     /**
-     * Construct a new Relative Immutable FloatSpeedVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatSpeedVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatSpeedVector
+     * Construct a new Relative Immutable Float FloatSpeedVector.
+     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatSpeedVector
+     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatSpeedVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
@@ -124,9 +123,27 @@ public class FloatSpeedVector extends TypedFloatVectorRel<SpeedUnit, FloatSpeedV
 
     /** {@inheritDoc} */
     @Override
-    public final FloatSpeed get(final int index) throws ValueException
+    protected final FloatSpeed instantiateScalar(final float value, final SpeedUnit unit)
     {
-        return new FloatSpeed(getInUnit(index, getUnit()), getUnit());
+        return new FloatSpeed(value, unit);
+    }
+
+    /**
+     * Create a dense version of this FloatVector.
+     * @return the dense version of this FloatVector
+     */
+    public final FloatSpeedVector toDense()
+    {
+        return this.data.isDense() ? (FloatSpeedVector) this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /**
+     * Create a sparse version of this FloatVector.
+     * @return the sparse version of this FloatVector
+     */
+    public final FloatSpeedVector toSparse()
+    {
+        return this.data.isSparse() ? (FloatSpeedVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
 }

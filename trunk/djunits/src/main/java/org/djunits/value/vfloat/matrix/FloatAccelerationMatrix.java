@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatAcceleration;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatAccelerationMatrix extends
-        TypedFloatMatrixRel<AccelerationUnit, FloatAccelerationMatrix, MutableFloatAccelerationMatrix, FloatAcceleration>
+        AbstractFloatMatrixRel<AccelerationUnit, FloatAccelerationMatrix, MutableFloatAccelerationMatrix, FloatAcceleration>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -58,6 +58,20 @@ public class FloatAccelerationMatrix extends
 
     /** {@inheritDoc} */
     @Override
+    public final FloatAccelerationMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatAccelerationMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
     protected final FloatAccelerationMatrix instantiateType(final FloatMatrixData fmd, final AccelerationUnit unit)
     {
         return new FloatAccelerationMatrix(fmd, unit);
@@ -65,16 +79,17 @@ public class FloatAccelerationMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatAccelerationMatrix instantiateMutableType(final FloatMatrixData fmd, final AccelerationUnit unit)
+    protected final MutableFloatAccelerationMatrix instantiateMutableType(final FloatMatrixData fmd,
+            final AccelerationUnit unit)
     {
         return new MutableFloatAccelerationMatrix(fmd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAcceleration get(final int row, final int column) throws ValueException
+    protected final FloatAcceleration instantiateScalar(final float value, final AccelerationUnit unit)
     {
-        return new FloatAcceleration(getInUnit(row, column, getUnit()), getUnit());
+        return new FloatAcceleration(value, unit);
     }
 
 }
