@@ -99,6 +99,10 @@ public class Duration extends AbstractDoubleScalarRel<TimeUnit, Duration>
      */
     public final Time plus(final Time v)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
                 : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }

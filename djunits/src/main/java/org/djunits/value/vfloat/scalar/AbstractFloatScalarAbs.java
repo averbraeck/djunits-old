@@ -35,7 +35,7 @@ public abstract class AbstractFloatScalarAbs<U extends Unit<U>, A extends Abstra
      */
     public AbstractFloatScalarAbs(final float value, final U unit)
     {
-        super(unit, unit.equals(unit.getStandardUnit()) ? value : (float) ValueUtil.expressAsSIUnit(value, unit));
+        super(unit, unit.isBaseSIUnit() ? value : (float) ValueUtil.expressAsSIUnit(value, unit));
     }
 
     /**
@@ -71,6 +71,10 @@ public abstract class AbstractFloatScalarAbs<U extends Unit<U>, A extends Abstra
      */
     public final A plus(final R increment)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateAbs(this.si + increment.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(increment.getUnit()) ? instantiateAbs(getInUnit() + increment.getInUnit(), getUnit())
                 : instantiateAbs(this.si + increment.si, getUnit().getStandardUnit());
     }
@@ -83,6 +87,10 @@ public abstract class AbstractFloatScalarAbs<U extends Unit<U>, A extends Abstra
      */
     public final A minus(final R decrement)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateAbs(this.si - decrement.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(decrement.getUnit()) ? instantiateAbs(getInUnit() - decrement.getInUnit(), getUnit())
                 : instantiateAbs(this.si - decrement.si, getUnit().getStandardUnit());
     }
@@ -95,6 +103,10 @@ public abstract class AbstractFloatScalarAbs<U extends Unit<U>, A extends Abstra
      */
     public final R minus(final A decrement)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateRel(this.si - decrement.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(decrement.getUnit()) ? instantiateRel(getInUnit() - decrement.getInUnit(), getUnit())
                 : instantiateRel(this.si - decrement.si, getUnit().getStandardUnit());
     }

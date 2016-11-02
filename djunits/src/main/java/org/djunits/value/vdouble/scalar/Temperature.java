@@ -92,6 +92,10 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
      */
     public final AbsoluteTemperature plus(final AbsoluteTemperature v)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
                 : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }

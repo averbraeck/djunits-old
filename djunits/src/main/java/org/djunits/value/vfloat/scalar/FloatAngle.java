@@ -102,6 +102,10 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
      */
     public final FloatDirection plus(final FloatDirection v)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
                 : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }

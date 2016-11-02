@@ -30,6 +30,9 @@ abstract class DoubleVectorData
     /** the data type. */
     private final StorageType storageType;
 
+    /** threshold to do parallel execution. */
+    protected static final int PARALLEL_THRESHOLD = 1000;
+
     /**
      * @param storageType the data type.
      */
@@ -59,8 +62,18 @@ abstract class DoubleVectorData
             throw new ValueException("DoubleVectorData.instantiate: double[] values is null");
         }
 
-        double[] valuesSI = new double[values.length];
-        IntStream.range(0, values.length).parallel().forEach(i -> valuesSI[i] = scale.toStandardUnit(values[i]));
+        double[] valuesSI = scale.isBaseSIScale() ? values : new double[values.length];
+        if (!scale.isBaseSIScale())
+        {
+            if (values.length > PARALLEL_THRESHOLD)
+            {
+                IntStream.range(0, values.length).parallel().forEach(i -> valuesSI[i] = scale.toStandardUnit(values[i]));
+            }
+            else
+            {
+                IntStream.range(0, values.length).forEach(i -> valuesSI[i] = scale.toStandardUnit(values[i]));
+            }
+        }
 
         switch (storageType)
         {
@@ -91,14 +104,37 @@ abstract class DoubleVectorData
             throw new ValueException("DoubleVectorData.instantiate: List<Double> values is null");
         }
 
+        double[] valuesSI;
+        if (values.size() > PARALLEL_THRESHOLD)
+        {
+            if (scale.isBaseSIScale())
+            {
+                valuesSI = values.parallelStream().mapToDouble(d -> d).toArray();
+            }
+            else
+            {
+                valuesSI = values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).toArray();
+            }
+        }
+        else
+        {
+            if (scale.isBaseSIScale())
+            {
+                valuesSI = values.stream().mapToDouble(d -> d).toArray();
+            }
+            else
+            {
+                valuesSI = values.stream().mapToDouble(d -> scale.toStandardUnit(d)).toArray();
+            }
+        }
+
         switch (storageType)
         {
             case DENSE:
-                return new DoubleVectorDataDense(values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).toArray());
+                return new DoubleVectorDataDense(valuesSI);
 
             case SPARSE:
-                return DoubleVectorDataSparse
-                        .instantiate(values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).toArray());
+                return DoubleVectorDataSparse.instantiate(valuesSI);
 
             default:
                 throw new ValueException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
@@ -120,7 +156,15 @@ abstract class DoubleVectorData
             throw new ValueException("DoubleVectorData.instantiate: DoubleScalar[] values is null");
         }
 
-        double[] valuesSI = Arrays.stream(values).parallel().mapToDouble(s -> s.getSI()).toArray();
+        double[] valuesSI;
+        if (values.length > PARALLEL_THRESHOLD)
+        {
+            valuesSI = Arrays.stream(values).parallel().mapToDouble(s -> s.getSI()).toArray();
+        }
+        else
+        {
+            valuesSI = Arrays.stream(values).mapToDouble(s -> s.getSI()).toArray();
+        }
 
         switch (storageType)
         {

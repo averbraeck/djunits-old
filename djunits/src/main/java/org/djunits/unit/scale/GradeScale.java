@@ -51,4 +51,11 @@ public class GradeScale implements Scale
         return this.conversionFactorToGrade;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final boolean isBaseSIScale()
+    {
+        return this.conversionFactorToGrade == 1.0;
+    }
+
 }

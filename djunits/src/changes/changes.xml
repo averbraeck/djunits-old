@@ -2,6 +2,26 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="2.01.00" date="2016-11-01" description="Increased speed of instantiation">
+      <action dev="averbraeck" type="update">
+        Several changes have been made to increase the speed of instantiation of scalars. Especially
+        the need to use espessAsUnit(...) when the unit is the SI-unit has been decreased. This
+        leads to a major speed improvement of the use of scalars.
+      </action>
+      <action dev="averbraeck" type="update">
+        A start has been made to increase the speed of instantiation of vectors. Further speed
+        improvements will be made in the next version.
+      </action>
+      <action dev="averbraeck" type="add">
+        The Unit has a new method 'boolean isBaseSIUnit()' to help determine the need for conversion
+        of a value into a standard (usually SI) unit.
+      </action>
+      <action dev="averbraeck" type="add">
+        The Scale has a new method 'boolean isBaseSIScale()' to help determine the need for conversion
+        of a value into a standard (usually SI) unit.
+      </action>
+    </release>
+
     <release version="2.00.00" date="2016-10-16" description="Major upgrade of type hierarchy">
       <action dev="averbraeck" type="update">
         A major upgrade has been made to the type hierarchy. Instead of the TypedXXX template functions,

@@ -22,8 +22,7 @@ import org.djunits.value.vdouble.DoubleMathFunctions;
  * @param <R> the Relative class for reference purposes
  */
 public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>>
-        extends AbstractDoubleScalar<U, R>
-        implements Relative, MathFunctionsRel<R>, DoubleMathFunctions<R>
+        extends AbstractDoubleScalar<U, R> implements Relative, MathFunctionsRel<R>, DoubleMathFunctions<R>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -35,7 +34,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
      */
     public AbstractDoubleScalarRel(final double value, final U unit)
     {
-        super(unit, unit.equals(unit.getStandardUnit()) ? value : ValueUtil.expressAsSIUnit(value, unit));
+        super(unit, unit.isBaseSIUnit() ? value : ValueUtil.expressAsSIUnit(value, unit));
     }
 
     /**
@@ -63,6 +62,10 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
      */
     public final R plus(final R increment)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateRel(this.si + increment.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(increment.getUnit()) ? instantiateRel(getInUnit() + increment.getInUnit(), getUnit())
                 : instantiateRel(this.si + increment.si, getUnit().getStandardUnit());
     }
@@ -75,6 +78,10 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
      */
     public final R minus(final R decrement)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateRel(this.si - decrement.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(decrement.getUnit()) ? instantiateRel(getInUnit() - decrement.getInUnit(), getUnit())
                 : instantiateRel(this.si - decrement.si, getUnit().getStandardUnit());
     }

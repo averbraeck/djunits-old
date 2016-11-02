@@ -72,6 +72,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
 
     /** Has this class been initialized? */
     private static boolean initialized = false;
+    
+    /** Standard (SI) unit or not? */
+    private boolean baseSIUnit;
 
     /** The array of the names of the standard units. */
     public static final String[] STANDARD_UNITS = new String[] { "AccelerationUnit", "AngleSolidUnit", "AngleUnit", "AreaUnit",
@@ -110,10 +113,11 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    public Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+    protected Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final boolean standardUnit)
     {
         this.scale = StandardScale.SCALE;
+        this.baseSIUnit = true;
         if (standardUnit)
         {
             this.nameKey = nameOrNameKey;
@@ -159,6 +163,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     {
         this(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
         this.scale = scale;
+        this.baseSIUnit = scale.isBaseSIScale();
     }
 
     /**
@@ -342,6 +347,15 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     public final SICoefficients getSICoefficients()
     {
         return this.siCoefficients;
+    }
+
+    /**
+     * Determine whether this unit is the standard unit.
+     * @return boolean; whether this is the standard unit or not
+     */
+    public final boolean isBaseSIUnit()
+    {
+        return this.baseSIUnit;
     }
 
     /**

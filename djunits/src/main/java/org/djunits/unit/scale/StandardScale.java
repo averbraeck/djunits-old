@@ -38,4 +38,11 @@ public class StandardScale extends LinearScale
         return value;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final boolean isBaseSIScale()
+    {
+        return true;
+    }
+
 }
