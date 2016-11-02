@@ -65,4 +65,11 @@ public class OffsetLinearScale implements Scale
         return this.offsetToStandardUnit;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final boolean isBaseSIScale()
+    {
+        return this.conversionFactorToStandardUnit == 1.0 && this.offsetToStandardUnit == 0.0;
+    }
+
 }

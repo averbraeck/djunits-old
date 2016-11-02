@@ -21,4 +21,3 @@ public interface FloatScalarInterface
     float getSI();
 
 }
-

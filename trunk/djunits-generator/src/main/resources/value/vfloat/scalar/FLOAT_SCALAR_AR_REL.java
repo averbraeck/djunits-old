@@ -94,6 +94,10 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeUnit%, Float%Typ
      */
     public final Float%TypeAbs% plus(final Float%TypeAbs% v)
     {
+        if (getUnit().isStandardUnit())
+        {
+            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
             : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }

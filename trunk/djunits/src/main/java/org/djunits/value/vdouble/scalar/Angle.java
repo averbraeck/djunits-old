@@ -92,6 +92,10 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
      */
     public final Direction plus(final Direction v)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
                 : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }

@@ -46,6 +46,10 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
     @Override
     public final double expressAsSIUnit(final double value)
     {
+        if (this.unit.isBaseSIUnit())
+        {
+            return value;
+        }
         return ValueUtil.expressAsSIUnit(value, this.unit);
     }
 
@@ -56,6 +60,10 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
      */
     protected final double expressAsSpecifiedUnit(final double value)
     {
+        if (this.unit.isBaseSIUnit())
+        {
+            return value;
+        }
         return ValueUtil.expressAsUnit(value, this.unit);
     }
 

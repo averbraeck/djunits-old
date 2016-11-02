@@ -84,6 +84,10 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeUnit%, %TypeRel%>
      */
     public final %TypeAbs% plus(final %TypeAbs% v)
     {
+        if (getUnit().isStandardUnit())
+        {
+            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
             : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }

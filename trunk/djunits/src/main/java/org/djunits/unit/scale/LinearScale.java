@@ -55,4 +55,12 @@ public class LinearScale implements Scale
         return this.conversionFactorToStandardUnit;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("checkstyle:designforextension")
+    public boolean isBaseSIScale()
+    {
+        return this.conversionFactorToStandardUnit == 1.0;
+    }
+
 }

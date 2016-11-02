@@ -99,6 +99,10 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
      */
     public final Position plus(final Position v)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
                 : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }

@@ -22,7 +22,7 @@ import org.djunits.unit.LengthUnit;
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
- * $LastChangedDate: 2016-05-28 14:25:52 +0200 (Sat, 28 May 2016) $, @version $Revision: 202 $, by $Author: averbraeck $,
+ * $LastChangedDate: 2016-10-16 14:09:04 +0200 (Sun, 16 Oct 2016) $, @version $Revision: 206 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>

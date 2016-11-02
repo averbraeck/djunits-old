@@ -102,6 +102,10 @@ public class FloatTemperature extends AbstractFloatScalarRel<TemperatureUnit, Fl
      */
     public final FloatAbsoluteTemperature plus(final FloatAbsoluteTemperature v)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
                 : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }

@@ -109,6 +109,10 @@ public class FloatDuration extends AbstractFloatScalarRel<TimeUnit, FloatDuratio
      */
     public final FloatTime plus(final FloatTime v)
     {
+        if (getUnit().isBaseSIUnit())
+        {
+            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
+        }
         return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
                 : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
     }
