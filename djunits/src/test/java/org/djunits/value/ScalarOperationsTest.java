@@ -802,7 +802,7 @@ public class ScalarOperationsTest
         if (null != compatibleRight)
         {
             result = minus.invoke(left, compatibleRight);
-            assertEquals("Result of minus with compatible arg", -6 * value,
+            assertEquals("Result of minus with compatible arg for " + left + " and " + compatibleRight, -6 * value,
                     verifyAbsRelPrecisionAndExtractSI(false, doubleType, result), 0.01);
         }
         if (scalarClass.getName().contains("$Rel") || scalarClass.getName().contains("$Abs"))
