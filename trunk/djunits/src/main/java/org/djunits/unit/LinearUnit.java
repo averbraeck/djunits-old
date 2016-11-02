@@ -58,20 +58,11 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
     protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final U referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
-
-        // as it can happen that this method is called for the standard unit (when it is still null) we have to catch
-        // the null pointer for the reference unit here.
-        if (referenceUnit == null)
-        {
-            this.scale = new StandardScale();
-        }
-        else
-        {
-            this.scale =
-                    new LinearScale(referenceUnit.getScale().getConversionFactorToStandardUnit()
-                            * conversionFactorToReferenceUnit);
-        }
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem,
+                referenceUnit == null ? StandardScale.SCALE
+                        : new LinearScale(
+                                referenceUnit.getScale().getConversionFactorToStandardUnit() * conversionFactorToReferenceUnit),
+                standardUnit);
     }
 
     /**
