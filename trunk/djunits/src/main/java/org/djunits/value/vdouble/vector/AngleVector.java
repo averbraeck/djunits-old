@@ -129,19 +129,15 @@ public class AngleVector extends AbstractDoubleVectorRel<AngleUnit, AngleVector,
         return new Angle(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final AngleVector toDense()
     {
         return this.data.isDense() ? (AngleVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final AngleVector toSparse()
     {
         return this.data.isSparse() ? (AngleVector) this : instantiateType(this.data.toSparse(), getUnit());

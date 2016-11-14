@@ -199,6 +199,18 @@ public interface FloatMathFunctions<T>
     };
 
     /**
+     * Function that returns <tt>-a</tt>.
+     */
+    FloatFunction NEG = new FloatFunction()
+    {
+        @Override
+        public float apply(final float a)
+        {
+            return -a;
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.pow(a, b)</tt>.
      * @param b power parameter
      * @return power function

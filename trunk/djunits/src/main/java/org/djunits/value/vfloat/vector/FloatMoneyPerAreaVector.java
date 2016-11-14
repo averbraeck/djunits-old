@@ -133,19 +133,15 @@ public class FloatMoneyPerAreaVector extends
         return new FloatMoneyPerArea(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMoneyPerAreaVector toDense()
     {
         return this.data.isDense() ? (FloatMoneyPerAreaVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMoneyPerAreaVector toSparse()
     {
         return this.data.isSparse() ? (FloatMoneyPerAreaVector) this : instantiateType(this.data.toSparse(), getUnit());

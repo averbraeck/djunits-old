@@ -134,19 +134,15 @@ public class ElectricalResistanceVector extends
         return new ElectricalResistance(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final ElectricalResistanceVector toDense()
     {
         return this.data.isDense() ? (ElectricalResistanceVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final ElectricalResistanceVector toSparse()
     {
         return this.data.isSparse() ? (ElectricalResistanceVector) this : instantiateType(this.data.toSparse(), getUnit());

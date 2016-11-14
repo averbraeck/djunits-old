@@ -22,6 +22,5 @@ public interface MutableDoubleVectorInterface<U extends Unit<U>> extends DoubleV
      * @return an immutable version of this vector
      */
     DoubleVectorInterface<U> immutable();
-    
-}
 
+}

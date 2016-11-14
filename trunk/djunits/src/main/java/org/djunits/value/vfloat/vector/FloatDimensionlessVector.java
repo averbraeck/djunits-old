@@ -133,19 +133,15 @@ public class FloatDimensionlessVector extends
         return new FloatDimensionless(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatDimensionlessVector toDense()
     {
         return this.data.isDense() ? (FloatDimensionlessVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatDimensionlessVector toSparse()
     {
         return this.data.isSparse() ? (FloatDimensionlessVector) this : instantiateType(this.data.toSparse(), getUnit());

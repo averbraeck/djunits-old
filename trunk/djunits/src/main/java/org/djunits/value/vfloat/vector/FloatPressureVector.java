@@ -132,19 +132,15 @@ public class FloatPressureVector
         return new FloatPressure(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatPressureVector toDense()
     {
         return this.data.isDense() ? (FloatPressureVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatPressureVector toSparse()
     {
         return this.data.isSparse() ? (FloatPressureVector) this : instantiateType(this.data.toSparse(), getUnit());

@@ -25,7 +25,7 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalar;
  * @param <T> the type
  */
 public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractFloatVector<U, T>> extends AbstractValue<U>
-implements FloatVectorInterface<U>
+        implements FloatVectorInterface<U>
 {
     /** */
     private static final long serialVersionUID = 20151015L;
@@ -70,29 +70,22 @@ implements FloatVectorInterface<U>
      */
     public abstract AbstractFloatScalar<U, ?> get(final int index) throws ValueException;
 
-    /**
-     * Create a float[] array filled with the values in the standard SI unit.
-     * @return float[]; array of values in the standard SI unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final float[] getValuesSI()
     {
         return this.data.getDenseVectorSI();
     }
 
-    /**
-     * Create a float[] array filled with the values in the original unit.
-     * @return float[]; the values in the original unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final float[] getValuesInUnit()
     {
         return getValuesInUnit(getUnit());
     }
 
-    /**
-     * Create a float[] array filled with the values converted into a specified unit.
-     * @param targetUnit U; the unit into which the values are converted for use
-     * @return float[]; the values converted into the specified unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final float[] getValuesInUnit(final U targetUnit)
     {
         float[] values = getValuesSI();
@@ -166,34 +159,22 @@ implements FloatVectorInterface<U>
         return toString(getUnit(), false, true);
     }
 
-    /**
-     * Print this FloatVector with the values expressed in the specified unit.
-     * @param displayUnit U; the unit into which the values are converted for display
-     * @return String; printable string with the vector contents expressed in the specified unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final String toString(final U displayUnit)
     {
         return toString(displayUnit, false, true);
     }
 
-    /**
-     * Print this FloatVector with optional type and unit information.
-     * @param verbose boolean; if true; include type info; if false; exclude type info
-     * @param withUnit boolean; if true; include the unit; of false; exclude the unit
-     * @return String; printable string with the vector contents
-     */
+    /** {@inheritDoc} */
+    @Override
     public final String toString(final boolean verbose, final boolean withUnit)
     {
         return toString(getUnit(), verbose, withUnit);
     }
 
-    /**
-     * Print this FloatVector with the values expressed in the specified unit.
-     * @param displayUnit U; the unit into which the values are converted for display
-     * @param verbose boolean; if true; include type info; if false; exclude type info
-     * @param withUnit boolean; if true; include the unit; of false; exclude the unit
-     * @return String; printable string with the vector contents
-     */
+    /** {@inheritDoc} */
+    @Override
     public final String toString(final U displayUnit, final boolean verbose, final boolean withUnit)
     {
         StringBuffer buf = new StringBuffer();
@@ -297,4 +278,3 @@ implements FloatVectorInterface<U>
     }
 
 }
-

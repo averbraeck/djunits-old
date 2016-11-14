@@ -130,19 +130,15 @@ public class FloatTorqueVector
         return new FloatTorque(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatTorqueVector toDense()
     {
         return this.data.isDense() ? (FloatTorqueVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatTorqueVector toSparse()
     {
         return this.data.isSparse() ? (FloatTorqueVector) this : instantiateType(this.data.toSparse(), getUnit());

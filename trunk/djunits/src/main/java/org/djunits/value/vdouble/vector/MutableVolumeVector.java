@@ -130,19 +130,15 @@ public class MutableVolumeVector extends AbstractMutableDoubleVectorRel<VolumeUn
         return new Volume(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableVolumeVector toDense()
     {
         return this.data.isDense() ? (MutableVolumeVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableVolumeVector toSparse()
     {
         return this.data.isSparse() ? (MutableVolumeVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

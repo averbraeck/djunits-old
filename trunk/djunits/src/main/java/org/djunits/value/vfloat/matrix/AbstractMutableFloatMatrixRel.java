@@ -315,6 +315,15 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("unchecked")
+    public final MR neg()
+    {
+        assign(FloatMathFunctions.NEG);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("unchecked")
     public final MR rint()
     {
         assign(FloatMathFunctions.RINT);

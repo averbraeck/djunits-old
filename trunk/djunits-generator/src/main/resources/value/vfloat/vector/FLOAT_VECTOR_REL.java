@@ -132,19 +132,15 @@ public class Float%Type%Vector extends
         return new Float%Type%(value, unit);
     }
     
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Float%Type%Vector toDense()
     {
         return this.data.isDense() ? (Float%Type%Vector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Float%Type%Vector toSparse()
     {
         return this.data.isSparse() ? (Float%Type%Vector) this : instantiateType(this.data.toSparse(), getUnit());

@@ -37,7 +37,7 @@ public interface DoubleVectorInterface<U extends Unit<U>>
      * @throws ValueException in case index is out of bounds
      */
     AbstractDoubleScalar<U, ?> get(final int index) throws ValueException;
-    
+
     /**
      * Retrieve the value stored at a specified position in the standard SI unit.
      * @param index int; index of the value to retrieve
@@ -68,20 +68,20 @@ public interface DoubleVectorInterface<U extends Unit<U>>
      * @return a mutable version of this vector
      */
     MutableDoubleVectorInterface<U> mutable();
-    
+
     /**
      * return a sparse version of this vector.
      * @return a sparse version of this vector
      */
     DoubleVectorInterface<U> toSparse();
-    
+
     /**
      * return a dense version of this vector.
      * @return a dense version of this vector
      */
     DoubleVectorInterface<U> toDense();
-    
-    /** 
+
+    /**
      * Compute the sum of all values of this vector.
      * @return double; the sum of all values of this vector
      */
@@ -109,6 +109,7 @@ public interface DoubleVectorInterface<U extends Unit<U>>
     /**
      * @return a String with the Vector, non-verbose, with the unit attached.
      */
+    @Override
     String toString();
 
     /**

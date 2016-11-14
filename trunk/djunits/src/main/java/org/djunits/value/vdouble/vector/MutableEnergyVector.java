@@ -130,19 +130,15 @@ public class MutableEnergyVector extends AbstractMutableDoubleVectorRel<EnergyUn
         return new Energy(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableEnergyVector toDense()
     {
         return this.data.isDense() ? (MutableEnergyVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableEnergyVector toSparse()
     {
         return this.data.isSparse() ? (MutableEnergyVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

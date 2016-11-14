@@ -131,19 +131,15 @@ public class MutableDensityVector
         return new Density(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableDensityVector toDense()
     {
         return this.data.isDense() ? (MutableDensityVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableDensityVector toSparse()
     {
         return this.data.isSparse() ? (MutableDensityVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

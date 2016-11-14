@@ -139,20 +139,16 @@ public class MutableFloatDirectionVector extends
         return new FloatDirection(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatDirectionVector toDense()
     {
         return this.data.isDense() ? (MutableFloatDirectionVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatDirectionVector toSparse()
     {
         return this.data.isSparse() ? (MutableFloatDirectionVector) this

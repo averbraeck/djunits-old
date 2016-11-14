@@ -135,19 +135,15 @@ public class FloatElectricalCurrentVector extends
         return new FloatElectricalCurrent(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatElectricalCurrentVector toDense()
     {
         return this.data.isDense() ? (FloatElectricalCurrentVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatElectricalCurrentVector toSparse()
     {
         return this.data.isSparse() ? (FloatElectricalCurrentVector) this : instantiateType(this.data.toSparse(), getUnit());

@@ -143,20 +143,16 @@ public class MutableAbsoluteTemperatureVector extends
         return new AbsoluteTemperature(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableAbsoluteTemperatureVector toDense()
     {
         return this.data.isDense() ? (MutableAbsoluteTemperatureVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableAbsoluteTemperatureVector toSparse()
     {
         return this.data.isSparse() ? (MutableAbsoluteTemperatureVector) this

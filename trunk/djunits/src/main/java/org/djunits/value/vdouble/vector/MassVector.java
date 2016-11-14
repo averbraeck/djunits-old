@@ -127,19 +127,15 @@ public class MassVector extends AbstractDoubleVectorRel<MassUnit, MassVector, Mu
         return new Mass(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MassVector toDense()
     {
         return this.data.isDense() ? (MassVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MassVector toSparse()
     {
         return this.data.isSparse() ? (MassVector) this : instantiateType(this.data.toSparse(), getUnit());

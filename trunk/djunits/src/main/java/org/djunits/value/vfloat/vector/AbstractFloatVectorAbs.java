@@ -26,9 +26,7 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarAbs;
  * @param <MA> the mutable absolute vector type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractFloatVectorAbs<U extends Unit<U>, A extends AbstractFloatVectorAbs<U, A, R, MA, S>, 
-        R extends AbstractFloatVectorRel<U, R, ?, ?>, MA extends AbstractMutableFloatVectorAbs<U, A, R, MA, S>, 
-        S extends AbstractFloatScalarAbs<U, S, ?>>
+abstract class AbstractFloatVectorAbs<U extends Unit<U>, A extends AbstractFloatVectorAbs<U, A, R, MA, S>, R extends AbstractFloatVectorRel<U, R, ?, ?>, MA extends AbstractMutableFloatVectorAbs<U, A, R, MA, S>, S extends AbstractFloatScalarAbs<U, S, ?>>
         extends AbstractFloatVector<U, A> implements Absolute, Serializable
 {
     /** */
@@ -123,6 +121,7 @@ abstract class AbstractFloatVectorAbs<U extends Unit<U>, A extends AbstractFloat
      * in the mutable version that modifies the data shall trigger a deep copy of the data.
      * @return MA; mutable version of this FloatVector
      */
+    @Override
     public MA mutable()
     {
         return instantiateMutableType(getData(), getUnit());

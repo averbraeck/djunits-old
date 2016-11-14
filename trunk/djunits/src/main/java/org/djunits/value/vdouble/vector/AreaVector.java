@@ -127,19 +127,15 @@ public class AreaVector extends AbstractDoubleVectorRel<AreaUnit, AreaVector, Mu
         return new Area(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final AreaVector toDense()
     {
         return this.data.isDense() ? (AreaVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final AreaVector toSparse()
     {
         return this.data.isSparse() ? (AreaVector) this : instantiateType(this.data.toSparse(), getUnit());

@@ -15,8 +15,8 @@ import org.junit.Test;
  * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * @version $Revision$, $LastChangedDate$, by $Author$, initial
- *          version 11 sep. 2015 <br>
+ * @version $Revision$, $LastChangedDate$, by $Author$,
+ *          initial version 11 sep. 2015 <br>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class EngineeringFormatterTest
@@ -24,14 +24,14 @@ public class EngineeringFormatterTest
 
     /**
      * See if we can increase the code coverage to include the private constructor.
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
+     * @throws InstantiationException on reflection error
+     * @throws IllegalAccessException on reflection error
+     * @throws IllegalArgumentException on reflection error
+     * @throws InvocationTargetException on reflection error
      */
     @Test
-    public void constructorTest() throws InstantiationException, IllegalAccessException, IllegalArgumentException,
-        InvocationTargetException
+    public final void constructorTest()
+            throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
         Constructor<?>[] cons = EngineeringFormatter.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
@@ -42,7 +42,7 @@ public class EngineeringFormatterTest
      * Run ulpTest with both values of the parameter.
      */
     @Test
-    public void ulpTest()
+    public final void ulpTest()
     {
         EngineeringFormatter.setUpperCaseFormat(true);
         Locale.setDefault(Locale.US); // Uses a dot as radix symbol
@@ -57,9 +57,9 @@ public class EngineeringFormatterTest
     }
 
     /**
-     * Test cleverly chosen values plus and minus one ULP
+     * Test cleverly chosen values plus and minus one ULP.
      */
-    public void doULPTest()
+    public final void doULPTest()
     {
         System.out.println("");
         System.out.println("Convert a strategically chosen set of values plus or minus one ULP:");
@@ -71,10 +71,9 @@ public class EngineeringFormatterTest
         values.add(Double.MIN_VALUE);
         values.add(Double.MAX_VALUE);
         values.add(Double.POSITIVE_INFINITY);
-        int[] powers =
-            {-100, -99, 98, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 99,
-                100, 101, 102};
-        double[] bases = {1.0 / 3, 2.0 / 3, 1};
+        int[] powers = { -100, -99, 98, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 99,
+                100, 101, 102 };
+        double[] bases = { 1.0 / 3, 2.0 / 3, 1 };
         for (int power : powers)
         {
             for (double base : bases)
@@ -96,7 +95,7 @@ public class EngineeringFormatterTest
      * Run widthTest with both values of the parameter.
      */
     @Test
-    public void widthTest()
+    public final void widthTest()
     {
         EngineeringFormatter.setUpperCaseFormat(true);
         Locale.setDefault(Locale.US); // Uses a dot as radix symbol
@@ -113,7 +112,7 @@ public class EngineeringFormatterTest
     /**
      * Check that values are formatted at optimal precision when the room is varied.
      */
-    public void doWidthTest()
+    public final void doWidthTest()
     {
         System.out.println("");
         System.out.println("That that rounding and zero-filling are performed to fill the available room:");
@@ -121,9 +120,9 @@ public class EngineeringFormatterTest
         {
             double d = 5.0 / 9 * Math.pow(10, exp);
             System.out.print(String.format("%30.30s: ", d));
-            for (int sign : new int[]{1, -1})
+            for (int sign : new int[] { 1, -1 })
             {
-                for (int digits : new int[]{10, 12, 14, 24})
+                for (int digits : new int[] { 10, 12, 14, 24 })
                 {
                     System.out.print("   |" + convertAndVerify(d * sign, digits) + "|");
                 }
@@ -143,8 +142,8 @@ public class EngineeringFormatterTest
         String plain = convertAndVerify(d, width);
         String minusULP = Double.isFinite(d) ? convertAndVerify(d - Math.ulp(d), width) : plain;
         String plusULP = Double.isFinite(d) ? convertAndVerify(d + Math.ulp(d), width) : plain;
-        System.out.print(String.format(" %s|%s|   |%s|   |%s|%s ", minusULP.equals(plain) || 0 == d ? "   " : "***",
-            minusULP, plain, plusULP, plusULP.equals(plain) || 0 == d ? "   " : "***"));
+        System.out.print(String.format(" %s|%s|   |%s|   |%s|%s ", minusULP.equals(plain) || 0 == d ? "   " : "***", minusULP,
+                plain, plusULP, plusULP.equals(plain) || 0 == d ? "   " : "***"));
     }
 
     /**
@@ -153,7 +152,7 @@ public class EngineeringFormatterTest
      * @param room int; width of the output of convert
      * @return String; the converted value
      */
-    public static String convertAndVerify(double val, int room)
+    public static String convertAndVerify(final double val, final int room)
     {
         String result = EngineeringFormatter.format(val, room);
         verifyResult(val, result, room);
@@ -215,12 +214,12 @@ public class EngineeringFormatterTest
         if (parsedValue < value - margin)
         {
             System.err.println("Too small: " + text + " -> " + parsedValue + " << " + value + " margin is " + margin
-                + " error is " + (parsedValue - value));
+                    + " error is " + (parsedValue - value));
         }
         if (parsedValue > value + margin)
         {
             System.err.println("Too big: " + text + " -> " + parsedValue + " >> " + value + " margin is " + margin
-                + " error is " + (parsedValue - value));
+                    + " error is " + (parsedValue - value));
         }
     }
 

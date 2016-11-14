@@ -142,19 +142,15 @@ public class AbsoluteTemperatureVector extends
         return new AbsoluteTemperature(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final AbsoluteTemperatureVector toDense()
     {
         return this.data.isDense() ? (AbsoluteTemperatureVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final AbsoluteTemperatureVector toSparse()
     {
         return this.data.isSparse() ? (AbsoluteTemperatureVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());

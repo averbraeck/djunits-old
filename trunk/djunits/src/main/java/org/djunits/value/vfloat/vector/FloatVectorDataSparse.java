@@ -39,9 +39,8 @@ public class FloatVectorDataSparse extends FloatVectorData
         this.size = size;
     }
 
-    /**
-     * @return a dense variant of the data.
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatVectorDataDense toDense()
     {
         float[] denseSI = new float[this.size];

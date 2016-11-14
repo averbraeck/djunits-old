@@ -128,19 +128,15 @@ public class FloatForceVector extends AbstractFloatVectorRel<ForceUnit, FloatFor
         return new FloatForce(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatForceVector toDense()
     {
         return this.data.isDense() ? (FloatForceVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatForceVector toSparse()
     {
         return this.data.isSparse() ? (FloatForceVector) this : instantiateType(this.data.toSparse(), getUnit());

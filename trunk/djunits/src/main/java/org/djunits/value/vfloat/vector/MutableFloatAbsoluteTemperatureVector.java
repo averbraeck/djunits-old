@@ -143,20 +143,16 @@ public class MutableFloatAbsoluteTemperatureVector extends
         return new FloatAbsoluteTemperature(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatAbsoluteTemperatureVector toDense()
     {
         return this.data.isDense() ? (MutableFloatAbsoluteTemperatureVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatAbsoluteTemperatureVector toSparse()
     {
         return this.data.isSparse() ? (MutableFloatAbsoluteTemperatureVector) this

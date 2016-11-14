@@ -132,19 +132,15 @@ public class FlowVolumeVector
         return new FlowVolume(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FlowVolumeVector toDense()
     {
         return this.data.isDense() ? (FlowVolumeVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FlowVolumeVector toSparse()
     {
         return this.data.isSparse() ? (FlowVolumeVector) this : instantiateType(this.data.toSparse(), getUnit());

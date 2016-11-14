@@ -128,19 +128,15 @@ public class EnergyVector extends AbstractDoubleVectorRel<EnergyUnit, EnergyVect
         return new Energy(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final EnergyVector toDense()
     {
         return this.data.isDense() ? (EnergyVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final EnergyVector toSparse()
     {
         return this.data.isSparse() ? (EnergyVector) this : instantiateType(this.data.toSparse(), getUnit());

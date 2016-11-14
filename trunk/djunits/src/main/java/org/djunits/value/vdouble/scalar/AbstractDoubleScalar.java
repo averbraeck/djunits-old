@@ -115,10 +115,8 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
         return new Double(this.si).compareTo(o.si);
     }
 
-    /**
-     * Retrieve the value in the original unit.
-     * @return double
-     */
+    /** {@inheritDoc} */
+    @Override
     public final double getInUnit()
     {
         return expressAsSpecifiedUnit(getSI());

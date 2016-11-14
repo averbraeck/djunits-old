@@ -131,19 +131,15 @@ public class MutableFlowMassVector
         return new FlowMass(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFlowMassVector toDense()
     {
         return this.data.isDense() ? (MutableFlowMassVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFlowMassVector toSparse()
     {
         return this.data.isSparse() ? (MutableFlowMassVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

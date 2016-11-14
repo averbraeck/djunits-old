@@ -39,9 +39,8 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         this.size = size;
     }
 
-    /**
-     * @return a dense variant of the data.
-     */
+    /** {@inheritDoc} */
+    @Override
     public final DoubleVectorDataDense toDense()
     {
         double[] denseSI = new double[this.size];

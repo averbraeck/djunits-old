@@ -132,19 +132,15 @@ public class MoneyPerAreaVector
         return new MoneyPerArea(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MoneyPerAreaVector toDense()
     {
         return this.data.isDense() ? (MoneyPerAreaVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MoneyPerAreaVector toSparse()
     {
         return this.data.isSparse() ? (MoneyPerAreaVector) this : instantiateType(this.data.toSparse(), getUnit());

@@ -130,19 +130,15 @@ public class MutableAngleVector extends AbstractMutableDoubleVectorRel<AngleUnit
         return new Angle(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableAngleVector toDense()
     {
         return this.data.isDense() ? (MutableAngleVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableAngleVector toSparse()
     {
         return this.data.isSparse() ? (MutableAngleVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

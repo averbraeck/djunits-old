@@ -129,19 +129,15 @@ public class FrequencyVector extends AbstractDoubleVectorRel<FrequencyUnit, Freq
         return new Frequency(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FrequencyVector toDense()
     {
         return this.data.isDense() ? (FrequencyVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FrequencyVector toSparse()
     {
         return this.data.isSparse() ? (FrequencyVector) this : instantiateType(this.data.toSparse(), getUnit());

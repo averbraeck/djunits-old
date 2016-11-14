@@ -27,10 +27,9 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarRel;
  * @param <MR> the mutable vector type
  * @param <S> the scalar type
  */
-abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends AbstractDoubleVectorRel<U, R, MR, S>, 
-        MR extends AbstractMutableDoubleVectorRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
-        extends AbstractDoubleVectorRel<U, R, MR, S> implements MathFunctionsRel<MR>, DoubleMathFunctions<MR>, 
-        MutableDoubleVectorInterface<U>
+abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends AbstractDoubleVectorRel<U, R, MR, S>, MR extends AbstractMutableDoubleVectorRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
+        extends AbstractDoubleVectorRel<U, R, MR, S>
+        implements MathFunctionsRel<MR>, DoubleMathFunctions<MR>, MutableDoubleVectorInterface<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -153,6 +152,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
      * Create a immutable version of this MutableDoubleVector. <br>
      * @return DoubleVector&lt;U&gt;; mutable version of this MutableDoubleVector
      */
+    @Override
     public R immutable()
     {
         setCopyOnWrite(true);
@@ -362,6 +362,15 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
     public final MR floor()
     {
         assign(DoubleMathFunctions.FLOOR);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("unchecked")
+    public final MR neg()
+    {
+        assign(DoubleMathFunctions.NEG);
         return (MR) this;
     }
 

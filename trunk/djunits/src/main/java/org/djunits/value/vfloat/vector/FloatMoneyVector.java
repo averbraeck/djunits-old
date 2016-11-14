@@ -128,19 +128,15 @@ public class FloatMoneyVector extends AbstractFloatVectorRel<MoneyUnit, FloatMon
         return new FloatMoney(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMoneyVector toDense()
     {
         return this.data.isDense() ? (FloatMoneyVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMoneyVector toSparse()
     {
         return this.data.isSparse() ? (FloatMoneyVector) this : instantiateType(this.data.toSparse(), getUnit());

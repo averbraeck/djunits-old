@@ -23,13 +23,11 @@ import org.djunits.value.vdouble.scalar.Area;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.djunits.value.vdouble.scalar.Length;
 import org.djunits.value.vdouble.vector.AbstractDoubleVector;
-import org.djunits.value.vdouble.vector.DoubleVector;
 import org.djunits.value.vdouble.vector.DoubleVectorInterface;
 import org.djunits.value.vdouble.vector.MutableDoubleVectorInterface;
 import org.djunits.value.vfloat.scalar.AbstractFloatScalar;
 import org.djunits.value.vfloat.scalar.FloatScalar;
 import org.djunits.value.vfloat.vector.AbstractFloatVector;
-import org.djunits.value.vfloat.vector.FloatVector;
 import org.djunits.value.vfloat.vector.FloatVectorInterface;
 import org.djunits.value.vfloat.vector.MutableFloatVectorInterface;
 import org.junit.Assert;
@@ -57,9 +55,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
 
     /** The classes that are just relative (name = class name). */
     public static final String[] CLASSNAMES_REL = new String[] { "Angle", "Acceleration", "AngleSolid", "Area", "Density",
-            "Dimensionless", "Duration", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential",
-            "ElectricalResistance", "Energy", "FlowMass", "FlowVolume", "Force", "Frequency", "Length", "LinearDensity",
-            "Mass", "Power", "Pressure", "Speed", "Temperature", "Torque", "Volume" };
+            "Dimensionless", "Duration", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance",
+            "Energy", "FlowMass", "FlowVolume", "Force", "Frequency", "Length", "LinearDensity", "Mass", "Power", "Pressure",
+            "Speed", "Temperature", "Torque", "Volume" };
 
     /** The money classes that are just relative (name = class name); these classes don't have an si field. */
     public static final String[] CLASSNAMES_MONEY = new String[] { "Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",
@@ -72,16 +70,16 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
-     * @throws ClassNotFoundException
-     * @throws IllegalArgumentException
-     * @throws SecurityException
-     * @throws ValueException
+     * @throws ClassNotFoundException on reflection error
+     * @throws IllegalArgumentException on reflection error
+     * @throws SecurityException on reflection error
+     * @throws ValueException when index out of range
      */
     @SuppressWarnings("static-method")
     @Test
-    public final void vectorOperationsTest() throws NoSuchMethodException, InstantiationException, IllegalAccessException,
-            InvocationTargetException, NoSuchFieldException, SecurityException, IllegalArgumentException,
-            ClassNotFoundException, ValueException
+    public final void vectorOperationsTest()
+            throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
+            NoSuchFieldException, SecurityException, IllegalArgumentException, ClassNotFoundException, ValueException
     {
         doubleOrFloatScalarOperationsTest(true); // Double precision versions
         doubleOrFloatScalarOperationsTest(false); // Float versions
@@ -95,14 +93,14 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws IllegalAccessException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
      * @throws NoSuchMethodException on class or method resolving error
-     * @throws ClassNotFoundException
-     * @throws IllegalArgumentException
-     * @throws SecurityException
-     * @throws ValueException
+     * @throws ClassNotFoundException on reflection error
+     * @throws IllegalArgumentException on reflection error
+     * @throws SecurityException on reflection error
+     * @throws ValueException when index out of range
      */
-    private void doubleOrFloatScalarOperationsTest(final boolean doubleType) throws NoSuchMethodException,
-            InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchFieldException, SecurityException,
-            IllegalArgumentException, ClassNotFoundException, ValueException
+    private void doubleOrFloatScalarOperationsTest(final boolean doubleType)
+            throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
+            NoSuchFieldException, SecurityException, IllegalArgumentException, ClassNotFoundException, ValueException
     {
         final String upperVectorType = "Vector";
         final String floatPrefix = doubleType ? "" : "Float";
@@ -116,17 +114,15 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 {
                     String vectorNameAbs = CLASSNAMES_ABS[i];
                     Class<?> vectorClassAbs = null;
-                    String classNameAbs =
-                            "org.djunits.value.v" + doubleOrFloat + ".vector." + (mutable ? "Mutable" : "") + floatPrefix
-                                    + vectorNameAbs + upperVectorType;
+                    String classNameAbs = "org.djunits.value.v" + doubleOrFloat + ".vector." + (mutable ? "Mutable" : "")
+                            + floatPrefix + vectorNameAbs + upperVectorType;
                     System.out.println("Looking up class " + classNameAbs);
                     vectorClassAbs = Class.forName(classNameAbs);
                     Class<?> vectorClassRel = null;
 
                     String vectorNameRel = CLASSNAMES_ABS_REL[i];
-                    String classNameRel =
-                            "org.djunits.value.v" + doubleOrFloat + ".vector." + (mutable ? "Mutable" : "") + floatPrefix
-                                    + vectorNameRel + upperVectorType;
+                    String classNameRel = "org.djunits.value.v" + doubleOrFloat + ".vector." + (mutable ? "Mutable" : "")
+                            + floatPrefix + vectorNameRel + upperVectorType;
                     vectorClassRel = Class.forName(classNameRel);
 
                     testMethods(vectorClassAbs, true, doubleType, storageType, mutable);
@@ -138,9 +134,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 for (String vectorName : CLASSNAMES_REL)
                 {
                     String vectorClassName = (doubleType ? "" : "Float") + vectorName;
-                    String fullClassName =
-                            "org.djunits.value.v" + doubleOrFloat + ".vector." + (mutable ? "Mutable" : "") + vectorClassName
-                                    + "Vector";
+                    String fullClassName = "org.djunits.value.v" + doubleOrFloat + ".vector." + (mutable ? "Mutable" : "")
+                            + vectorClassName + "Vector";
                     Class<?> vectorClass = null;
                     vectorClass = Class.forName(fullClassName);
                     testMethods(vectorClass, false, doubleType, storageType, mutable);
@@ -149,9 +144,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 for (String vectorName : CLASSNAMES_MONEY)
                 {
                     String vectorClassName = doubleType ? vectorName : "Float" + vectorName;
-                    String fullClassName =
-                            "org.djunits.value.v" + doubleOrFloat + ".vector." + (mutable ? "Mutable" : "") + vectorClassName
-                                    + "Vector";
+                    String fullClassName = "org.djunits.value.v" + doubleOrFloat + ".vector." + (mutable ? "Mutable" : "")
+                            + vectorClassName + "Vector";
                     Class<?> vectorClass = null;
                     vectorClass = Class.forName(fullClassName);
                     testMethods(vectorClass, false, doubleType, storageType, mutable);
@@ -166,26 +160,25 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @param isAbs boolean; if true; the scalarClassAbsRel must be aAsolute; if false; the scalarClassAbsRel must be Relative
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
      * @param storageType StorageType; DENSE or SPARSE
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws NoSuchFieldException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws ValueException
+     * @throws SecurityException on reflection error
+     * @throws NoSuchMethodException on reflection error
+     * @throws NoSuchFieldException on reflection error
+     * @throws InvocationTargetException on reflection error
+     * @throws IllegalArgumentException on reflection error
+     * @throws IllegalAccessException on reflection error
+     * @throws InstantiationException on reflection error
+     * @throws ValueException when index out of range
      */
-    private void testAbsRelConversion(final Class<?> vectorClass, boolean isAbs, boolean doubleType, StorageType storageType)
-            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-            IllegalArgumentException, InvocationTargetException, NoSuchFieldException, ValueException
+    private void testAbsRelConversion(final Class<?> vectorClass, final boolean isAbs, final boolean doubleType,
+            final StorageType storageType) throws NoSuchMethodException, SecurityException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException, ValueException
     {
         double[] doubleInValue = { 1.23456, 2.34567, 3.45678 };
         float[] floatInValue = { 1.23456f, 2.34567f, 3.45678f };
         Object inValue = doubleType ? doubleInValue : floatInValue;
         // System.out.println("Looking for constructor of " + vectorClassAbsRel.getName());
-        Object from =
-                findAndExecuteConstructor(vectorClass, new Object[] { inValue, getSIUnitInstance(getUnitClass(vectorClass)),
-                        storageType }, doubleType);
+        Object from = findAndExecuteConstructor(vectorClass,
+                new Object[] { inValue, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
         // System.out.println("Looking for method " + (isAbs ? "toRel" : "toAbs"));
         Method method = vectorClass.getMethod(isAbs ? "toRel" : "toAbs");
         Object result = method.invoke(from);
@@ -206,11 +199,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws InstantiationException on class or method resolving error
      * @throws NoSuchMethodException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
-     * @throws ClassNotFoundException
-     * @throws ValueException
+     * @throws ClassNotFoundException on reflection error
+     * @throws ValueException whhen index out of range
      */
     private void testMethods(final Class<?> vectorClassAbsRel, final boolean isAbs, final boolean doubleType,
-            StorageType storageType, boolean mutable) throws NoSuchMethodException, InstantiationException,
+            final StorageType storageType, final boolean mutable) throws NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
         // System.out.print(listMethods(vectorClassAbsRel, "multiplyBy", "\t"));
@@ -245,15 +238,15 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws IllegalAccessException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
-     * @throws ClassNotFoundException
-     * @throws ValueException
-     * @throws IllegalArgumentException
-     * @throws SecurityException
+     * @throws ClassNotFoundException on reflection error
+     * @throws ValueException on reflection error
+     * @throws IllegalArgumentException on reflection error
+     * @throws SecurityException when index out of range
      */
     private void testMultiplyByOrDivideByMethod(final Class<?> vectorClass, final Method method, final boolean multiply,
-            final boolean doubleType, boolean abs, StorageType storageType) throws NoSuchMethodException,
-            InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchFieldException,
-            ClassNotFoundException, SecurityException, IllegalArgumentException, ValueException
+            final boolean doubleType, final boolean abs, final StorageType storageType)
+            throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
+            NoSuchFieldException, ClassNotFoundException, SecurityException, IllegalArgumentException, ValueException
     {
         // System.out.println(method.getName() + paramsToString(method.getParameterTypes()));
         Class<?>[] parTypes = method.getParameterTypes();
@@ -446,10 +439,10 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @param got the (DoubleVector?) object
      * @param expected double[] or float[] with expected values
      * @param precision double; maximum error of the results
-     * @throws ValueException
+     * @throws ValueException when index out of range
      */
-    private void verifyAbsRelPrecisionAndValues(final boolean abs, final boolean doubleType, StorageType storageType,
-            final Object got, final Object expected, double precision) throws ValueException
+    private void verifyAbsRelPrecisionAndValues(final boolean abs, final boolean doubleType, final StorageType storageType,
+            final Object got, final Object expected, final double precision) throws ValueException
     {
         int size = doubleType ? ((double[]) expected).length : ((float[]) expected).length;
         int refSize = doubleType ? ((double[]) expected).length : ((float[]) expected).length;
@@ -469,10 +462,10 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @param o the (DoubleScalar?) object
      * @param index int; the index of the value to return
      * @return double; the SI value
-     * @throws ValueException
+     * @throws ValueException when index out of range
      */
-    private double verifyAbsRelPrecisionAndExtractSI(final boolean abs, final boolean doubleType, StorageType storageType,
-            final Object o, int index) throws ValueException
+    private double verifyAbsRelPrecisionAndExtractSI(final boolean abs, final boolean doubleType, final StorageType storageType,
+            final Object o, final int index) throws ValueException
     {
         double result = Double.NaN;
         if (doubleType)
@@ -527,12 +520,12 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws IllegalAccessException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
-     * @throws ClassNotFoundException
-     * @throws ValueException
+     * @throws ClassNotFoundException on class or method resolving error
+     * @throws ValueException when index out of range
      */
-    private void testConstructors(final Class<?> vectorClass, final boolean abs, final boolean doubleType, boolean mutable,
-            StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
-            InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
+    private void testConstructors(final Class<?> vectorClass, final boolean abs, final boolean doubleType,
+            final boolean mutable, final StorageType storageType) throws NoSuchMethodException, InstantiationException,
+            IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
         double[] doubleValue = { 1.23456, 2.34567, 3.45678 };
         float[] floatValue = { 1.23456f, 2.34567f, 3.45678f };
@@ -589,8 +582,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             {
                 map.put(i, doubleValue[i]);
             }
-            findAndTestConstructor(vectorClass, new Object[] { map, getSIUnitInstance(getUnitClass(vectorClass)),
-                    doubleValue.length, storageType }, abs, doubleType, storageType, value);
+            findAndTestConstructor(vectorClass,
+                    new Object[] { map, getSIUnitInstance(getUnitClass(vectorClass)), doubleValue.length, storageType }, abs,
+                    doubleType, storageType, value);
         }
         else
         {
@@ -631,8 +625,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             {
                 map.put(i, floatValue[i]);
             }
-            findAndTestConstructor(vectorClass, new Object[] { map, getSIUnitInstance(getUnitClass(vectorClass)),
-                    floatValue.length, storageType }, abs, doubleType, storageType, value);
+            findAndTestConstructor(vectorClass,
+                    new Object[] { map, getSIUnitInstance(getUnitClass(vectorClass)), floatValue.length, storageType }, abs,
+                    doubleType, storageType, value);
         }
     }
 
@@ -641,7 +636,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @param params Class&lt;?&gt;[]; the class array
      * @return String
      */
-    private String paramsToString(Class<?>[] params)
+    private String paramsToString(final Class<?>[] params)
     {
         StringBuilder result = new StringBuilder();
         result.append("(");
@@ -661,13 +656,13 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @param args Object[]; arguments to provide to the constructor
      * @param doubleType boolean; if true; the args argument is array of double; of false; the args argument is array of float
      * @return constructed object
-     * @throws NoSuchMethodException
-     * @throws SecurityException
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
-     * @throws ValueException
+     * @throws NoSuchMethodException on reflection error
+     * @throws SecurityException on reflection error
+     * @throws InstantiationException on reflection error
+     * @throws IllegalAccessException on reflection error
+     * @throws IllegalArgumentException on reflection error
+     * @throws InvocationTargetException on reflection error
+     * @throws ValueException when index out of range
      */
     private Object findAndExecuteConstructor(final Class<?> vectorClass, final Object[] args, final boolean doubleType)
             throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
@@ -708,10 +703,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 // System.out.println(" MATCH");
                 constructor = c;
             }
-            else
-            {
-                // System.out.println("");
-            }
         }
         // Constructor<?> constructor = vectorClass.getConstructor(parameterTypes);
         if (null == constructor)
@@ -735,16 +726,16 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @param doubleType boolean; if true; the args argument is array of double; of false; the args argument is array of float
      * @param expectedStorageType StorageType; the expected Storage type (DENSE or SPARSE)
      * @param expectedResult Object; either array of double, or array of float
-     * @throws NoSuchMethodException
-     * @throws SecurityException
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
-     * @throws ValueException
+     * @throws NoSuchMethodException on class or method resolving error
+     * @throws SecurityException on class or method resolving error
+     * @throws InstantiationException on class or method resolving error
+     * @throws IllegalAccessException on class or method resolving error
+     * @throws IllegalArgumentException on class or method resolving error
+     * @throws InvocationTargetException on class or method resolving error
+     * @throws ValueException when index out of range
      */
     private void findAndTestConstructor(final Class<?> vectorClass, final Object[] args, final boolean abs,
-            final boolean doubleType, StorageType expectedStorageType, final Object expectedResult)
+            final boolean doubleType, final StorageType expectedStorageType, final Object expectedResult)
             throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, ValueException
     {
@@ -764,19 +755,18 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws IllegalAccessException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
-     * @throws ClassNotFoundException
-     * @throws ValueException
+     * @throws ClassNotFoundException on class or method resolving error
+     * @throws ValueException when index out of range
      */
-    private void testGet(final Class<?> vectorClass, final boolean abs, final boolean doubleType, boolean mutable,
-            StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
+    private void testGet(final Class<?> vectorClass, final boolean abs, final boolean doubleType, final boolean mutable,
+            final StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
         double[] doubleValue = { 1.23456, 2.34567, 3.45678 };
         float[] floatValue = { 1.23456f, 2.34567f, 3.45678f };
         Object value = doubleType ? doubleValue : floatValue;
-        Object vector =
-                findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                        storageType }, doubleType);
+        Object vector = findAndExecuteConstructor(vectorClass,
+                new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
         if (doubleType)
         {
             AbstractDoubleVector<?, ?> dv = (AbstractDoubleVector<?, ?>) vector;
@@ -810,19 +800,19 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws IllegalAccessException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
-     * @throws ClassNotFoundException
-     * @throws ValueException
+     * @throws ClassNotFoundException on class or method resolving error
+     * @throws ValueException when index out of range
      */
-    private void testUnaryMethods(final Class<?> vectorClass, final boolean abs, final boolean doubleType, boolean mutable,
-            StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
+    private void testUnaryMethods(final Class<?> vectorClass, final boolean abs, final boolean doubleType,
+            final boolean mutable,
+            final StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
         double[] doubleValue = { 1.23456, -2.34567, 3.45678 };
         float[] floatValue = { 1.23456f, -2.34567f, 3.45678f };
         Object value = doubleType ? doubleValue : floatValue;
-        Object left =
-                findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                        storageType }, doubleType);
+        Object left = findAndExecuteConstructor(vectorClass,
+                new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
         Object result;
         if (doubleType)
         {
@@ -915,16 +905,17 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             for (int i = 0; i < doubleValue.length; i++)
             {
                 double resultElement = verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i);
-                assertEquals("value check result", doubleType ? (doubleValue[i] + doubleDifference)
-                        : (floatValue[i] + floatDifference), resultElement, 0.00001);
+                assertEquals("value check result",
+                        doubleType ? (doubleValue[i] + doubleDifference) : (floatValue[i] + floatDifference), resultElement,
+                        0.00001);
                 // Check that original is also modified
                 double originalElement = verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i);
-                assertEquals("value check original", doubleType ? (doubleValue[i] + doubleDifference)
-                        : (floatValue[i] + floatDifference), originalElement, 0.00001);
+                assertEquals("value check original",
+                        doubleType ? (doubleValue[i] + doubleDifference) : (floatValue[i] + floatDifference), originalElement,
+                        0.00001);
             }
-            left =
-                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, doubleType);
+            left = findAndExecuteConstructor(vectorClass,
+                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
             Method decrementBy = ClassUtil.resolveMethod(vectorClass, "decrementBy", new Class<?>[] { argumentClass });
             decrementBy.setAccessible(true);
             if (doubleType)
@@ -938,34 +929,34 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             for (int i = 0; i < doubleValue.length; i++)
             {
                 double resultElement = verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i);
-                assertEquals("value check", doubleType ? (doubleValue[i] - doubleDifference)
-                        : (floatValue[i] - floatDifference), resultElement, 0.00001);
+                assertEquals("value check",
+                        doubleType ? (doubleValue[i] - doubleDifference) : (floatValue[i] - floatDifference), resultElement,
+                        0.00001);
                 // Check that original is also modified
                 double originalElement = verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i);
-                assertEquals("value check original", doubleType ? (doubleValue[i] - doubleDifference)
-                        : (floatValue[i] - floatDifference), originalElement, 0.00001);
+                assertEquals("value check original",
+                        doubleType ? (doubleValue[i] - doubleDifference) : (floatValue[i] - floatDifference), originalElement,
+                        0.00001);
             }
 
-            left =
-                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, doubleType);
+            left = findAndExecuteConstructor(vectorClass,
+                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
             Method mathMethod = ClassUtil.resolveMethod(vectorClass, "ceil", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
             for (int i = 0; i < doubleValue.length; i++)
             {
-                assertEquals("Result of operation", doubleType ? Math.ceil(doubleValue[i])
-                        : ((float) Math.ceil(doubleValue[i])),
+                assertEquals("Result of operation",
+                        doubleType ? Math.ceil(doubleValue[i]) : ((float) Math.ceil(doubleValue[i])),
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i), 0.01);
                 // Check that original is also modified
-                assertEquals("Result of operation", doubleType ? Math.ceil(doubleValue[i])
-                        : ((float) Math.ceil(doubleValue[i])),
+                assertEquals("Result of operation",
+                        doubleType ? Math.ceil(doubleValue[i]) : ((float) Math.ceil(doubleValue[i])),
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
             }
 
-            left =
-                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, doubleType);
+            left = findAndExecuteConstructor(vectorClass,
+                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
             mathMethod = ClassUtil.resolveMethod(vectorClass, "floor", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
@@ -980,26 +971,24 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
             }
 
-            left =
-                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, doubleType);
+            left = findAndExecuteConstructor(vectorClass,
+                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
             mathMethod = ClassUtil.resolveMethod(vectorClass, "rint", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
             for (int i = 0; i < doubleValue.length; i++)
             {
-                assertEquals("Result of operation", doubleType ? Math.rint(doubleValue[i])
-                        : ((float) Math.rint(doubleValue[i])),
+                assertEquals("Result of operation",
+                        doubleType ? Math.rint(doubleValue[i]) : ((float) Math.rint(doubleValue[i])),
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, i), 0.01);
                 // Check that original is also modified
-                assertEquals("Result of operation", doubleType ? Math.rint(doubleValue[i])
-                        : ((float) Math.rint(doubleValue[i])),
+                assertEquals("Result of operation",
+                        doubleType ? Math.rint(doubleValue[i]) : ((float) Math.rint(doubleValue[i])),
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
             }
 
-            left =
-                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, doubleType);
+            left = findAndExecuteConstructor(vectorClass,
+                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
             mathMethod = ClassUtil.resolveMethod(vectorClass, "round", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
@@ -1016,9 +1005,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
 
             if (!abs)
             {
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "abs", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1036,9 +1024,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
 
             if (vectorClass.getName().contains("Dimensionless"))
             {
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "acos", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1053,9 +1040,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "asin", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1070,9 +1056,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "atan", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1087,9 +1072,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "cbrt", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1104,9 +1088,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "cos", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1121,9 +1104,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "cosh", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1138,9 +1120,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "exp", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1155,9 +1136,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "expm1", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1172,9 +1152,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "log", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1189,9 +1168,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "log10", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1206,9 +1184,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "log1p", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1223,9 +1200,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "signum", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1240,9 +1216,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "sin", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1257,9 +1232,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "sinh", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1274,9 +1248,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "sqrt", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1291,9 +1264,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "tan", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1308,9 +1280,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "tanh", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1325,9 +1296,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "inv", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1342,9 +1312,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
 
                 for (double power : new double[] { -3, -Math.PI, -1, -0.5, 0, 0.5, 1, Math.PI, 3 })
                 {
-                    left =
-                            findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                    getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                    left = findAndExecuteConstructor(vectorClass,
+                            new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                     mathMethod = ClassUtil.resolveMethod(vectorClass, "pow", new Class[] { double.class });
                     mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                     result = mathMethod.invoke(left, power);
@@ -1360,9 +1329,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     }
                 }
 
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "normalize", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 mathMethod.invoke(left);
@@ -1380,9 +1348,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 double[] doubleZeroZSum = { -4, 4, -1, 1, 0 };
                 float[] floatZeroZSum = { -4, 4, -1, 1, 0 };
                 Object zeroZSumValue = doubleType ? doubleZeroZSum : floatZeroZSum;
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { zeroZSumValue,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { zeroZSumValue, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 try
                 {
                     mathMethod.invoke(left);
@@ -1400,9 +1367,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             }
         }
 
-        left =
-                findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                        storageType }, doubleType);
+        left = findAndExecuteConstructor(vectorClass,
+                new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
         if (mutable)
         {
             Method multiplyBy =
@@ -1424,9 +1390,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 assertEquals("Result of operation", doubleValue[i] * Math.PI,
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
             }
-            left =
-                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, doubleType);
+            left = findAndExecuteConstructor(vectorClass,
+                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
             Method divideBy =
                     ClassUtil.resolveMethod(vectorClass, "divideBy", new Class[] { doubleType ? double.class : float.class });
             divideBy.setAccessible(true); // FIXME this should not be necessary
@@ -1449,9 +1414,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             double[] zDoubleValues = { 0, 0, 0, 0, 0, 0, 0 };
             float[] zFloatValues = { 0, 0, 0, 0, 0, 0, 0 };
             Object zValues = doubleType ? zDoubleValues : zFloatValues;
-            Method set =
-                    ClassUtil.resolveMethod(vectorClass, "setSI", new Class[] { int.class,
-                            doubleType ? double.class : float.class });
+            Method set = ClassUtil.resolveMethod(vectorClass, "setSI",
+                    new Class[] { int.class, doubleType ? double.class : float.class });
             set.setAccessible(true);
             for (int pivot2 = 0; pivot2 < zDoubleValues.length; pivot2++)
             {
@@ -1461,10 +1425,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     {
                         continue;
                     }
-                    left =
-                            findAndExecuteConstructor(vectorClass, new Object[] { zValues,
-                                    getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
-                    // System.out.println("initial " + pivot + ", " + pivot2 + "     " + left);
+                    left = findAndExecuteConstructor(vectorClass,
+                            new Object[] { zValues, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                    // System.out.println("initial " + pivot + ", " + pivot2 + " " + left);
                     if (doubleType)
                     {
                         set.invoke(left, new Object[] { pivot, Math.PI * (pivot + 1) });
@@ -1473,7 +1436,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     {
                         set.invoke(left, new Object[] { pivot, (float) (Math.PI * (pivot + 1)) });
                     }
-                    // System.out.println("after one set    " + left);
+                    // System.out.println("after one set " + left);
                     for (int i = 0; i < zDoubleValues.length; i++)
                     {
                         assertEquals("after one set, i=" + i, i == pivot ? Math.PI * (pivot + 1) : 0,
@@ -1490,9 +1453,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     // System.out.println("after second set " + left);
                     for (int i = 0; i < zDoubleValues.length; i++)
                     {
-                        assertEquals("after second set, i=" + i, i == pivot ? Math.PI * (pivot + 1) : i == pivot2 ? Math.PI
-                                * (pivot2 + 20) : 0, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i),
-                                0.01);
+                        assertEquals("after second set, i=" + i,
+                                i == pivot ? Math.PI * (pivot + 1) : i == pivot2 ? Math.PI * (pivot2 + 20) : 0,
+                                verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                     }
                     for (int i = 0; i < zDoubleValues.length; i++)
                     {
@@ -1509,11 +1472,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             set.invoke(left, new Object[] { i, (float) (i + 1) });
                         }
                     }
-                    // System.out.println("after fill       " + left);
+                    // System.out.println("after fill " + left);
                     for (int i = 0; i < zDoubleValues.length; i++)
                     {
-                        assertEquals("after all set i=" + i + " pivot=" + pivot + ", pivot2=" + pivot2, i == pivot ? Math.PI
-                                * (pivot + 1) : i == pivot2 ? Math.PI * (pivot2 + 20) : i + 1,
+                        assertEquals("after all set i=" + i + " pivot=" + pivot + ", pivot2=" + pivot2,
+                                i == pivot ? Math.PI * (pivot + 1) : i == pivot2 ? Math.PI * (pivot2 + 20) : i + 1,
                                 verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                     }
                 }
@@ -1551,9 +1514,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         }
         if (null != compatibleRight)
         {
-            left =
-                    findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType }, doubleType);
+            left = findAndExecuteConstructor(vectorClass,
+                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
             // System.out.print(listMethods(vectorClass, "plus", "\t"));
             // System.out.println("Mutable is " + mutable);
             if (!mutable)
@@ -1561,9 +1523,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
               // System.out.println("Type of right is " + compatibleRight.getClass());
                 if (!abs)
                 {
-                    Method plus =
-                            ClassUtil.resolveMethod(vectorClass, "plus", new Class<?>[] { compatibleRight.getClass()
-                                    .getSuperclass() });
+                    Method plus = ClassUtil.resolveMethod(vectorClass, "plus",
+                            new Class<?>[] { compatibleRight.getClass().getSuperclass() });
                     plus.setAccessible(true);
                     result = plus.invoke(left, compatibleRight);
                     for (int i = 0; i < doubleValue.length; i++)
@@ -1576,9 +1537,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 {
                     // System.out.print(listMethods(vectorClass, "plus", "\t"));
                     // System.out.println("Type of rel is " + compatibleRel.getClass());
-                    Method plus =
-                            ClassUtil.resolveMethod(vectorClass, "plus", new Class<?>[] { compatibleRel.getClass()
-                                    .getSuperclass() });
+                    Method plus = ClassUtil.resolveMethod(vectorClass, "plus",
+                            new Class<?>[] { compatibleRel.getClass().getSuperclass() });
                     plus.setAccessible(true);
                     result = plus.invoke(left, compatibleRel);
                     for (int i = 0; i < doubleValue.length; i++)
@@ -1589,9 +1549,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
             }
         }
-        left =
-                findAndExecuteConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)),
-                        storageType }, doubleType);
+        left = findAndExecuteConstructor(vectorClass,
+                new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
         if (!mutable)
         {
             // System.out.print(listMethods(vectorClass, "minus", "\t"));
@@ -1600,14 +1559,13 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             result = minus.invoke(left, left);
             for (int i = 0; i < doubleValue.length; i++)
             {
-                assertEquals("Result of minus", 0,
-                        verifyAbsRelPrecisionAndExtractSI(false, doubleType, storageType, result, i), 0.01);
+                assertEquals("Result of minus", 0, verifyAbsRelPrecisionAndExtractSI(false, doubleType, storageType, result, i),
+                        0.01);
             }
             if (null != compatibleRight)
             {
-                left =
-                        findAndExecuteConstructor(vectorClass, new Object[] { value,
-                                getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                left = findAndExecuteConstructor(vectorClass,
+                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
                 result = minus.invoke(left, compatibleRight);
                 for (int i = 0; i < doubleValue.length; i++)
                 {
@@ -1625,15 +1583,15 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @param prefix String; prefix for each line in the result;
      * @return String
      */
-    public String listMethods(final Class<?> theClass, final String name, final String prefix)
+    public final String listMethods(final Class<?> theClass, final String name, final String prefix)
     {
         StringBuilder result = new StringBuilder();
         for (Method m : theClass.getMethods())
         {
             if (null == name || name.equals(m.getName()))
             {
-                result.append(prefix + m.getName() + paramsToString(m.getParameterTypes()) + " -> " + m.getReturnType()
-                        + "\r\n");
+                result.append(
+                        prefix + m.getName() + paramsToString(m.getParameterTypes()) + " -> " + m.getReturnType() + "\r\n");
             }
         }
         return result.toString();
@@ -1650,16 +1608,15 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws InvocationTargetException on class or method resolving error
      * @throws IllegalAccessException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
-     * @throws ValueException
+     * @throws ValueException when index out of range
      */
     private void testInterpolateMethod(final Class<?> vectorClass, final boolean abs, final boolean doubleType,
-            StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
+            final StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ValueException
     {
         // System.out.println("class name is " + vectorClass.getName());
-        Constructor<?> constructor =
-                vectorClass.getConstructor(doubleType ? double[].class : float[].class, getUnitClass(vectorClass),
-                        StorageType.class);
+        Constructor<?> constructor = vectorClass.getConstructor(doubleType ? double[].class : float[].class,
+                getUnitClass(vectorClass), StorageType.class);
         if (doubleType)
         {
             double[] zeroValue = { 1.23456, 2.45678 };
@@ -1667,13 +1624,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             // abs ? (DoubleVector.Abs<?>) constructor.newInstance(zeroValue,
             // getSIUnitInstance(getUnitClass(vectorClass)), storageType) : (DoubleVector.Rel<?>) constructor
             // .newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)), storageType);
-            AbstractDoubleVector<?, ?> zero =
-                    (AbstractDoubleVector<?, ?>) constructor.newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType);
+            AbstractDoubleVector<?, ?> zero = (AbstractDoubleVector<?, ?>) constructor.newInstance(zeroValue,
+                    getSIUnitInstance(getUnitClass(vectorClass)), storageType);
             double[] oneValue = { 3.45678, 4.678901 };
-            AbstractDoubleVector<?, ?> one =
-                    (AbstractDoubleVector<?, ?>) constructor.newInstance(oneValue, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType);
+            AbstractDoubleVector<?, ?> one = (AbstractDoubleVector<?, ?>) constructor.newInstance(oneValue,
+                    getSIUnitInstance(getUnitClass(vectorClass)), storageType);
             for (double ratio : new double[] { -5, -1, 0, 0.3, 1, 2, 10 })
             {
                 double[] expectedResult = new double[zeroValue.length];
@@ -1692,13 +1647,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         else
         {
             float[] zeroValue = { 1.23456f, 2.45678f };
-            AbstractFloatVector<?, ?> zero =
-                    (AbstractFloatVector<?, ?>) constructor.newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType);
+            AbstractFloatVector<?, ?> zero = (AbstractFloatVector<?, ?>) constructor.newInstance(zeroValue,
+                    getSIUnitInstance(getUnitClass(vectorClass)), storageType);
             float[] oneValue = { 3.45678f, 4.678901f };
-            AbstractFloatVector<?, ?> one =
-                    (AbstractFloatVector<?, ?>) constructor.newInstance(oneValue, getSIUnitInstance(getUnitClass(vectorClass)),
-                            storageType);
+            AbstractFloatVector<?, ?> one = (AbstractFloatVector<?, ?>) constructor.newInstance(oneValue,
+                    getSIUnitInstance(getUnitClass(vectorClass)), storageType);
             for (float ratio : new float[] { -5, -1, 0, 0.3f, 1, 2, 10 })
             {
                 float[] expectedResult = new float[zeroValue.length];
@@ -1719,9 +1672,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * Various small experiments are done here. <br>
      * Prove (?) that order of items does not change in Arrays.stream(a).parallel().toArray().
      * @param args String[]; command line arguments; not used
-     * @throws ValueException
+     * @throws ValueException when index out of range
      */
-    public static void main(String[] args) throws ValueException
+    public static void main(final String[] args) throws ValueException
     {
         Length l = new Length(3, METER);
         Length w = new Length(2, METER);

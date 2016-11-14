@@ -20,4 +20,10 @@ public interface MathFunctionsRel<T> extends MathFunctionsAbs<T>
      * @return T; the modified T
      */
     T abs();
+
+    /**
+     * Set the value(s) to the minus value.
+     * @return T; the modified T
+     */
+    T neg();
 }

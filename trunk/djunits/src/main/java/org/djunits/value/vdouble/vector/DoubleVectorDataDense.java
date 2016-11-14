@@ -38,9 +38,8 @@ public class DoubleVectorDataDense extends DoubleVectorData
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] = doubleFunction.apply(this.vectorSI[i]));
     }
 
-    /**
-     * @return a sparse variant of the data.
-     */
+    /** {@inheritDoc} */
+    @Override
     public final DoubleVectorDataSparse toSparse()
     {
         return DoubleVectorDataSparse.instantiate(this.vectorSI);

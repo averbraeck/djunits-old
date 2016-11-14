@@ -136,19 +136,15 @@ public class FloatElectricalPotentialVector extends
         return new FloatElectricalPotential(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatElectricalPotentialVector toDense()
     {
         return this.data.isDense() ? (FloatElectricalPotentialVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatElectricalPotentialVector toSparse()
     {
         return this.data.isSparse() ? (FloatElectricalPotentialVector) this : instantiateType(this.data.toSparse(), getUnit());

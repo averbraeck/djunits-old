@@ -131,19 +131,15 @@ public class FloatDurationVector
         return new FloatDuration(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatDurationVector toDense()
     {
         return this.data.isDense() ? (FloatDurationVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatDurationVector toSparse()
     {
         return this.data.isSparse() ? (FloatDurationVector) this : instantiateType(this.data.toSparse(), getUnit());

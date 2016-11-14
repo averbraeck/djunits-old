@@ -131,19 +131,15 @@ public class MutablePressureVector
         return new Pressure(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutablePressureVector toDense()
     {
         return this.data.isDense() ? (MutablePressureVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutablePressureVector toSparse()
     {
         return this.data.isSparse() ? (MutablePressureVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

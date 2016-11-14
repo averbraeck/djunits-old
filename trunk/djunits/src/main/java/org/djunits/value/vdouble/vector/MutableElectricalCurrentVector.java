@@ -134,20 +134,16 @@ public class MutableElectricalCurrentVector extends
         return new ElectricalCurrent(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableElectricalCurrentVector toDense()
     {
         return this.data.isDense() ? (MutableElectricalCurrentVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableElectricalCurrentVector toSparse()
     {
         return this.data.isSparse() ? (MutableElectricalCurrentVector) this

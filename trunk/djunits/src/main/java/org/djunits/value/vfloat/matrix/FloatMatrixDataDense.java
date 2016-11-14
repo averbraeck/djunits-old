@@ -74,9 +74,8 @@ public class FloatMatrixDataDense extends FloatMatrixData
                 .forEach(i -> this.matrixSI[i] = floatFunction.apply(this.matrixSI[i]));
     }
 
-    /**
-     * @return a sparse variant of the data.
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMatrixDataSparse toSparse()
     {
         int length = cardinality();

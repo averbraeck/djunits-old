@@ -130,19 +130,15 @@ public class MutableFloatForceVector
         return new FloatForce(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatForceVector toDense()
     {
         return this.data.isDense() ? (MutableFloatForceVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatForceVector toSparse()
     {
         return this.data.isSparse() ? (MutableFloatForceVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

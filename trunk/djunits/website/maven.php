@@ -38,12 +38,12 @@
   &lt;dependency&gt;
     &lt;groupId&gt;org.djunits&lt;/groupId&gt;
     &lt;artifactId&gt;djunits&lt;/artifactId&gt;
-    &lt;version&gt;2.00.00&lt;/version&gt;
+    &lt;version&gt;2.01.01&lt;/version&gt;
   &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </pre>
 
-    <p>Of course, the version number (1.02.06 in the above example) needs to be replaced with the version that one wants to include in the project.</p>
+    <p>Of course, the version number (2.01.01 in the above example) needs to be replaced with the version that one wants to include in the project.</p>
     <p>Right now, the DJUNITS files are kept on a server at TU Delft, and are not yet made available on Maven Central. Therefore, the repository location
       has to be specified separately in the Maven POM-file:</p>
 

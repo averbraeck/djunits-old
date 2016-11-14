@@ -137,19 +137,15 @@ public class MutableFloat%TypeAbs%Vector
         return new Float%TypeAbs%(value, unit);
     }
     
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloat%TypeAbs%Vector toDense()
     {
         return this.data.isDense() ? (MutableFloat%TypeAbs%Vector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloat%TypeAbs%Vector toSparse()
     {
         return this.data.isSparse() ? (MutableFloat%TypeAbs%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());

@@ -129,19 +129,15 @@ public class MutableMoneyVector extends AbstractMutableDoubleVectorRel<MoneyUnit
         return new Money(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyVector toDense()
     {
         return this.data.isDense() ? (MutableMoneyVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyVector toSparse()
     {
         return this.data.isSparse() ? (MutableMoneyVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

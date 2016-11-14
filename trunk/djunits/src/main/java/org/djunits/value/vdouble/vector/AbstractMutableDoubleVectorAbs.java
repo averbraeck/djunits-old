@@ -28,11 +28,9 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarAbs;
  * @param <MA> the mutable absolute vector type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractMutableDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoubleVectorAbs<U, A, R, MA, S>, 
-        R extends AbstractDoubleVectorRel<U, R, ?, ?>, MA extends AbstractMutableDoubleVectorAbs<U, A, R, MA, S>, 
-        S extends AbstractDoubleScalarAbs<U, S, ?>>
-        extends AbstractDoubleVectorAbs<U, A, R, MA, S> implements MathFunctionsAbs<MA>, DoubleMathFunctions<MA>, 
-        MutableDoubleVectorInterface<U>
+abstract class AbstractMutableDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoubleVectorAbs<U, A, R, MA, S>, R extends AbstractDoubleVectorRel<U, R, ?, ?>, MA extends AbstractMutableDoubleVectorAbs<U, A, R, MA, S>, S extends AbstractDoubleScalarAbs<U, S, ?>>
+        extends AbstractDoubleVectorAbs<U, A, R, MA, S>
+        implements MathFunctionsAbs<MA>, DoubleMathFunctions<MA>, MutableDoubleVectorInterface<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -155,6 +153,7 @@ abstract class AbstractMutableDoubleVectorAbs<U extends Unit<U>, A extends Abstr
      * Create a immutable version of this MutableDoubleVector. <br>
      * @return DoubleVector&lt;U&gt;; mutable version of this MutableDoubleVector
      */
+    @Override
     public A immutable()
     {
         setCopyOnWrite(true);

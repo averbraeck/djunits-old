@@ -128,19 +128,15 @@ public class FloatAngleVector extends AbstractFloatVectorRel<AngleUnit, FloatAng
         return new FloatAngle(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatAngleVector toDense()
     {
         return this.data.isDense() ? (FloatAngleVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatAngleVector toSparse()
     {
         return this.data.isSparse() ? (FloatAngleVector) this : instantiateType(this.data.toSparse(), getUnit());

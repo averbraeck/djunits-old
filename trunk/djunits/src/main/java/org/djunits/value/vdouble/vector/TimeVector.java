@@ -135,19 +135,15 @@ public class TimeVector extends AbstractDoubleVectorAbs<TimeUnit, TimeVector, Du
         return new Time(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final TimeVector toDense()
     {
         return this.data.isDense() ? (TimeVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final TimeVector toSparse()
     {
         return this.data.isSparse() ? (TimeVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());

@@ -135,20 +135,16 @@ public class MutableFloatElectricalChargeVector extends
         return new FloatElectricalCharge(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatElectricalChargeVector toDense()
     {
         return this.data.isDense() ? (MutableFloatElectricalChargeVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatElectricalChargeVector toSparse()
     {
         return this.data.isSparse() ? (MutableFloatElectricalChargeVector) this

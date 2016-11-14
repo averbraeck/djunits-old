@@ -139,19 +139,15 @@ public class MutablePositionVector
         return new Position(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutablePositionVector toDense()
     {
         return this.data.isDense() ? (MutablePositionVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutablePositionVector toSparse()
     {
         return this.data.isSparse() ? (MutablePositionVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

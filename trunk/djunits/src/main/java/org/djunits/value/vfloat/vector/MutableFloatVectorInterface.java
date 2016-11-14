@@ -22,6 +22,5 @@ public interface MutableFloatVectorInterface<U extends Unit<U>> extends FloatVec
      * @return an immutable version of this vector
      */
     FloatVectorInterface<U> immutable();
-    
-}
 
+}

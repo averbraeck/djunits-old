@@ -71,7 +71,7 @@ public class UnitTest
      * Test all constructors for UnitException.
      */
     @Test
-    public void unitExceptionTest()
+    public final void unitExceptionTest()
     {
         String message = "MessageString";
         Exception e = new UnitException(message);

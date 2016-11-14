@@ -25,8 +25,7 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarRel;
  * @param <MR> the mutable relative vector type
  * @param <S> the relative scalar type
  */
-abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloatVectorRel<U, R, MR, S>, 
-        MR extends AbstractMutableFloatVectorRel<U, R, MR, S>, S extends AbstractFloatScalarRel<U, S>>
+abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloatVectorRel<U, R, MR, S>, MR extends AbstractMutableFloatVectorRel<U, R, MR, S>, S extends AbstractFloatScalarRel<U, S>>
         extends AbstractFloatVector<U, R> implements Relative, Serializable
 {
     /** */
@@ -121,6 +120,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * in the mutable version that modifies the data shall trigger a deep copy of the data.
      * @return MR; mutable version of this FloatVector
      */
+    @Override
     public MR mutable()
     {
         return instantiateMutableType(getData(), getUnit());

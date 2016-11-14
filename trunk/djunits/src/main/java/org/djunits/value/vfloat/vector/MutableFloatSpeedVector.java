@@ -130,19 +130,15 @@ public class MutableFloatSpeedVector
         return new FloatSpeed(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatSpeedVector toDense()
     {
         return this.data.isDense() ? (MutableFloatSpeedVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatSpeedVector toSparse()
     {
         return this.data.isSparse() ? (MutableFloatSpeedVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

@@ -144,9 +144,8 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         }
     }
 
-    /**
-     * @return a dense variant of the data.
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMatrixDataDense toDense()
     {
         float[] denseSI = new float[this.rows * this.cols];

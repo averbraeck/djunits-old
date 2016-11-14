@@ -2,6 +2,16 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="2.01.01" date="2016-11-14" description="neg() function added; cleaned up code">
+      <action dev="averbraeck" type="add">
+        A neg() function has been added to the Scalar, MutableVector and MutableMatrix classes.
+        The neg functions changes the value(s) to minus the value(s). OTS-216.
+      </action>
+      <action dev="averbraeck" type="update">
+        Code has been cleaned for @Override and open warnings for formatting of comments.
+      </action>
+    </release>
+  
     <release version="2.01.00" date="2016-11-01" description="Increased speed of instantiation">
       <action dev="averbraeck" type="update">
         Several changes have been made to increase the speed of instantiation of scalars. Especially

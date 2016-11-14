@@ -138,19 +138,15 @@ public class FloatDirectionVector extends
         return new FloatDirection(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatDirectionVector toDense()
     {
         return this.data.isDense() ? (FloatDirectionVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatDirectionVector toSparse()
     {
         return this.data.isSparse() ? (FloatDirectionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());

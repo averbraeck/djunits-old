@@ -15,7 +15,7 @@ function bodyStart ($pageName)
         echo "  <table width=\"100%\" cellpadding=\"0\">\n";
         echo "    <tr style=\"line-height:1px; height:60px\">\n";
         echo "      <td style=\"background-color: #0094FE\">\n";
-        echo "        <p style=\"font-color:BLACK; font-size:30px\"> <b>&nbsp;DJUNITS - Delft Java UNIT System version 2.00 &nbsp;</b>\n";
+        echo "        <p style=\"font-color:BLACK; font-size:30px\"> <b>&nbsp;DJUNITS - Delft Java UNIT System version 2.01 &nbsp;</b>\n";
         echo "        </p>\n";
         echo "      </td>\n";
         echo "    </tr>\n";

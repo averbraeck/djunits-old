@@ -27,10 +27,9 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarRel;
  * @param <MR> the mutable vector type
  * @param <S> the scalar type
  */
-abstract class AbstractMutableFloatVectorRel<U extends Unit<U>, R extends AbstractFloatVectorRel<U, R, MR, S>, 
-        MR extends AbstractMutableFloatVectorRel<U, R, MR, S>, S extends AbstractFloatScalarRel<U, S>>
-        extends AbstractFloatVectorRel<U, R, MR, S> implements MathFunctionsRel<MR>, FloatMathFunctions<MR>, 
-        MutableFloatVectorInterface<U>
+abstract class AbstractMutableFloatVectorRel<U extends Unit<U>, R extends AbstractFloatVectorRel<U, R, MR, S>, MR extends AbstractMutableFloatVectorRel<U, R, MR, S>, S extends AbstractFloatScalarRel<U, S>>
+        extends AbstractFloatVectorRel<U, R, MR, S>
+        implements MathFunctionsRel<MR>, FloatMathFunctions<MR>, MutableFloatVectorInterface<U>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -153,6 +152,7 @@ abstract class AbstractMutableFloatVectorRel<U extends Unit<U>, R extends Abstra
      * Create a immutable version of this MutableFloatVector. <br>
      * @return FloatVector&lt;U&gt;; mutable version of this MutableFloatVector
      */
+    @Override
     public R immutable()
     {
         setCopyOnWrite(true);
@@ -362,6 +362,15 @@ abstract class AbstractMutableFloatVectorRel<U extends Unit<U>, R extends Abstra
     public final MR floor()
     {
         assign(FloatMathFunctions.FLOOR);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("unchecked")
+    public final MR neg()
+    {
+        assign(FloatMathFunctions.NEG);
         return (MR) this;
     }
 

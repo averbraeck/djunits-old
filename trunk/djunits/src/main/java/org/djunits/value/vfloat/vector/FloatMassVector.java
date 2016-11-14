@@ -128,19 +128,15 @@ public class FloatMassVector extends AbstractFloatVectorRel<MassUnit, FloatMassV
         return new FloatMass(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMassVector toDense()
     {
         return this.data.isDense() ? (FloatMassVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMassVector toSparse()
     {
         return this.data.isSparse() ? (FloatMassVector) this : instantiateType(this.data.toSparse(), getUnit());

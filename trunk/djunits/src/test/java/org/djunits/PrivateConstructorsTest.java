@@ -26,10 +26,10 @@ public class PrivateConstructorsTest
     /**
      * Call a the private zero-argument constructor of the specified class.
      * @param clas Class; the class
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
+     * @throws InstantiationException on reflection error
+     * @throws IllegalAccessException on reflection error
+     * @throws IllegalArgumentException on reflection error
+     * @throws InvocationTargetException on reflection error
      */
     private void callPrivateConstructor(final Class<?> clas) throws InstantiationException, IllegalAccessException,
         IllegalArgumentException, InvocationTargetException
@@ -41,13 +41,13 @@ public class PrivateConstructorsTest
 
     /**
      * Increase the code coverage by including the private constructor. <br>
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
+     * @throws InstantiationException on reflection error
+     * @throws IllegalAccessException on reflection error
+     * @throws IllegalArgumentException on reflection error
+     * @throws InvocationTargetException on reflection error
      */
     @Test
-    public void privateConstructorTest() throws InstantiationException, IllegalAccessException,
+    public final void privateConstructorTest() throws InstantiationException, IllegalAccessException,
         IllegalArgumentException, InvocationTargetException
     {
         callPrivateConstructor(Format.class);

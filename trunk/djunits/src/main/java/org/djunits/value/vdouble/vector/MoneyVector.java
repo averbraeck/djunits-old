@@ -128,19 +128,15 @@ public class MoneyVector extends AbstractDoubleVectorRel<MoneyUnit, MoneyVector,
         return new Money(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MoneyVector toDense()
     {
         return this.data.isDense() ? (MoneyVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MoneyVector toSparse()
     {
         return this.data.isSparse() ? (MoneyVector) this : instantiateType(this.data.toSparse(), getUnit());

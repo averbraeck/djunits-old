@@ -142,19 +142,15 @@ public abstract class DoubleVector
             return new DoubleScalar.Abs<U>(value, unit);
         }
 
-        /**
-         * Create a dense version of this DoubleVector.
-         * @return the dense version of this DoubleVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final DoubleVector.Abs<U> toDense()
         {
             return this.data.isDense() ? (DoubleVector.Abs<U>) this : instantiateTypeAbs(this.data.toDense(), getUnit());
         }
 
-        /**
-         * Create a sparse version of this DoubleVector.
-         * @return the sparse version of this DoubleVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final DoubleVector.Abs<U> toSparse()
         {
             return this.data.isSparse() ? (DoubleVector.Abs<U>) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
@@ -276,19 +272,15 @@ public abstract class DoubleVector
             return new DoubleScalar.Rel<U>(value, unit);
         }
 
-        /**
-         * Create a dense version of this DoubleVector.
-         * @return the dense version of this DoubleVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final DoubleVector.Rel<U> toDense()
         {
             return this.data.isDense() ? (DoubleVector.Rel<U>) this : instantiateType(this.data.toDense(), getUnit());
         }
 
-        /**
-         * Create a sparse version of this DoubleVector.
-         * @return the sparse version of this DoubleVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final DoubleVector.Rel<U> toSparse()
         {
             return this.data.isSparse() ? (DoubleVector.Rel<U>) this : instantiateType(this.data.toSparse(), getUnit());

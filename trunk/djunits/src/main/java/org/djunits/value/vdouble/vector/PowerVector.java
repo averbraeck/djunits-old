@@ -128,19 +128,15 @@ public class PowerVector extends AbstractDoubleVectorRel<PowerUnit, PowerVector,
         return new Power(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final PowerVector toDense()
     {
         return this.data.isDense() ? (PowerVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final PowerVector toSparse()
     {
         return this.data.isSparse() ? (PowerVector) this : instantiateType(this.data.toSparse(), getUnit());

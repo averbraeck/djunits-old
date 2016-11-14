@@ -139,19 +139,15 @@ public class MutableDirectionVector
         return new Direction(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableDirectionVector toDense()
     {
         return this.data.isDense() ? (MutableDirectionVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableDirectionVector toSparse()
     {
         return this.data.isSparse() ? (MutableDirectionVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

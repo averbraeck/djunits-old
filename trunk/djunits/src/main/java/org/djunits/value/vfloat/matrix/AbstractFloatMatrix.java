@@ -64,29 +64,22 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
         return this.data.getStorageType();
     }
 
-    /**
-     * Create a float[][] array filled with the values in the standard SI unit.
-     * @return float[][]; array of values in the standard SI unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final float[][] getValuesSI()
     {
         return this.data.getDenseMatrixSI();
     }
 
-    /**
-     * Create a float[][] array filled with the values in the original unit.
-     * @return float[][]; the values in the original unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final float[][] getValuesInUnit()
     {
         return getValuesInUnit(getUnit());
     }
 
-    /**
-     * Create a float[][] array filled with the values converted into a specified unit.
-     * @param targetUnit U; the unit into which the values are converted for use
-     * @return float[][]; the values converted into the specified unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final float[][] getValuesInUnit(final U targetUnit)
     {
         float[][] values = getValuesSI();
@@ -157,34 +150,22 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
         return toString(getUnit(), false, true);
     }
 
-    /**
-     * Print this FloatMatrix with the values expressed in the specified unit.
-     * @param displayUnit U; the unit into which the values are converted for display
-     * @return String; printable string with the matrix contents expressed in the specified unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final String toString(final U displayUnit)
     {
         return toString(displayUnit, false, true);
     }
 
-    /**
-     * Print this FloatMatrix with optional type and unit information.
-     * @param verbose boolean; if true; include type info; if false; exclude type info
-     * @param withUnit boolean; if true; include the unit; of false; exclude the unit
-     * @return String; printable string with the matrix contents
-     */
+    /** {@inheritDoc} */
+    @Override
     public final String toString(final boolean verbose, final boolean withUnit)
     {
         return toString(getUnit(), verbose, withUnit);
     }
 
-    /**
-     * Print this FloatMatrix with the values expressed in the specified unit.
-     * @param displayUnit U; the unit into which the values are converted for display
-     * @param verbose boolean; if true; include type info; if false; exclude type info
-     * @param withUnit boolean; if true; include the unit; of false; exclude the unit
-     * @return String; printable string with the matrix contents
-     */
+    /** {@inheritDoc} */
+    @Override
     public final String toString(final U displayUnit, final boolean verbose, final boolean withUnit)
     {
         StringBuffer buf = new StringBuffer();
