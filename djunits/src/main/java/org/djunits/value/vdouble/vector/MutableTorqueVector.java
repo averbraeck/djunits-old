@@ -130,19 +130,15 @@ public class MutableTorqueVector extends AbstractMutableDoubleVectorRel<TorqueUn
         return new Torque(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableTorqueVector toDense()
     {
         return this.data.isDense() ? (MutableTorqueVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableTorqueVector toSparse()
     {
         return this.data.isSparse() ? (MutableTorqueVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

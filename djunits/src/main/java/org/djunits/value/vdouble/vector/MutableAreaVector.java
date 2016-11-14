@@ -128,19 +128,15 @@ public class MutableAreaVector extends AbstractMutableDoubleVectorRel<AreaUnit, 
         return new Area(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableAreaVector toDense()
     {
         return this.data.isDense() ? (MutableAreaVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableAreaVector toSparse()
     {
         return this.data.isSparse() ? (MutableAreaVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

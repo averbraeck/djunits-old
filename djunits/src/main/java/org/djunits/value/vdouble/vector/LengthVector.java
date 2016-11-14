@@ -129,19 +129,15 @@ public class LengthVector extends AbstractDoubleVectorRel<LengthUnit, LengthVect
         return new Length(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final LengthVector toDense()
     {
         return this.data.isDense() ? (LengthVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final LengthVector toSparse()
     {
         return this.data.isSparse() ? (LengthVector) this : instantiateType(this.data.toSparse(), getUnit());

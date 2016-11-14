@@ -82,6 +82,12 @@ public interface MathFunctionsDimensionless<T>
     T log1p();
 
     /**
+     * Set the value(s) to the minus value.
+     * @return T; the modified T
+     */
+    T neg();
+
+    /**
      * Set the value(s) to the value(s) raised to the power of the argument.
      * @param x double; the value to use as the power
      * @return T; the modified T

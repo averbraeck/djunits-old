@@ -129,19 +129,15 @@ public class MutablePowerVector extends AbstractMutableDoubleVectorRel<PowerUnit
         return new Power(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutablePowerVector toDense()
     {
         return this.data.isDense() ? (MutablePowerVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutablePowerVector toSparse()
     {
         return this.data.isSparse() ? (MutablePowerVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

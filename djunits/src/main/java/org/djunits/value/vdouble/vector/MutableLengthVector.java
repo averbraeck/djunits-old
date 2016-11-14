@@ -131,19 +131,15 @@ public class MutableLengthVector extends AbstractMutableDoubleVectorRel<LengthUn
         return new Length(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableLengthVector toDense()
     {
         return this.data.isDense() ? (MutableLengthVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableLengthVector toSparse()
     {
         return this.data.isSparse() ? (MutableLengthVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

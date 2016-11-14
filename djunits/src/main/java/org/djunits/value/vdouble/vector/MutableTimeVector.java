@@ -137,19 +137,15 @@ public class MutableTimeVector
         return new Time(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableTimeVector toDense()
     {
         return this.data.isDense() ? (MutableTimeVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableTimeVector toSparse()
     {
         return this.data.isSparse() ? (MutableTimeVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

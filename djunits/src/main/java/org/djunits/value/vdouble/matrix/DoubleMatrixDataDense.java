@@ -74,9 +74,8 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
                 .forEach(i -> this.matrixSI[i] = doubleFunction.apply(this.matrixSI[i]));
     }
 
-    /**
-     * @return a sparse variant of the data.
-     */
+    /** {@inheritDoc} */
+    @Override
     public final DoubleMatrixDataSparse toSparse()
     {
         int length = cardinality();

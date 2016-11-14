@@ -199,6 +199,18 @@ public interface DoubleMathFunctions<T>
     };
 
     /**
+     * Function that returns <tt>-a</tt>.
+     */
+    DoubleFunction NEG = new DoubleFunction()
+    {
+        @Override
+        public double apply(final double a)
+        {
+            return -a;
+        }
+    };
+
+    /**
      * Function that returns <tt>Math.pow(a, b)</tt>.
      * @param b power parameter
      * @return power function

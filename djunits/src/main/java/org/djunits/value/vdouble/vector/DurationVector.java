@@ -129,19 +129,15 @@ public class DurationVector extends AbstractDoubleVectorRel<TimeUnit, DurationVe
         return new Duration(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final DurationVector toDense()
     {
         return this.data.isDense() ? (DurationVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final DurationVector toSparse()
     {
         return this.data.isSparse() ? (DurationVector) this : instantiateType(this.data.toSparse(), getUnit());

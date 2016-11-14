@@ -135,20 +135,16 @@ public class MutableElectricalResistanceVector extends
         return new ElectricalResistance(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableElectricalResistanceVector toDense()
     {
         return this.data.isDense() ? (MutableElectricalResistanceVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableElectricalResistanceVector toSparse()
     {
         return this.data.isSparse() ? (MutableElectricalResistanceVector) this

@@ -129,19 +129,15 @@ public class MutableForceVector extends AbstractMutableDoubleVectorRel<ForceUnit
         return new Force(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableForceVector toDense()
     {
         return this.data.isDense() ? (MutableForceVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableForceVector toSparse()
     {
         return this.data.isSparse() ? (MutableForceVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

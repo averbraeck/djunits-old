@@ -129,19 +129,15 @@ public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMa
         return new FlowMass(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FlowMassVector toDense()
     {
         return this.data.isDense() ? (FlowMassVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FlowMassVector toSparse()
     {
         return this.data.isSparse() ? (FlowMassVector) this : instantiateType(this.data.toSparse(), getUnit());

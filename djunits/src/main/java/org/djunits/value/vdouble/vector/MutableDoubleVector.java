@@ -144,20 +144,16 @@ public abstract class MutableDoubleVector
             return new DoubleScalar.Abs<U>(value, unit);
         }
 
-        /**
-         * Create a dense version of this DoubleVector.
-         * @return the dense version of this DoubleVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final MutableDoubleVector.Abs<U> toDense()
         {
             return this.data.isDense() ? (MutableDoubleVector.Abs<U>) this
                     : instantiateMutableType(this.data.toDense(), getUnit());
         }
 
-        /**
-         * Create a sparse version of this DoubleVector.
-         * @return the sparse version of this DoubleVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final MutableDoubleVector.Abs<U> toSparse()
         {
             return this.data.isSparse() ? (MutableDoubleVector.Abs<U>) this
@@ -279,20 +275,16 @@ public abstract class MutableDoubleVector
             return new DoubleScalar.Rel<U>(value, unit);
         }
 
-        /**
-         * Create a dense version of this DoubleVector.
-         * @return the dense version of this DoubleVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final MutableDoubleVector.Rel<U> toDense()
         {
             return this.data.isDense() ? (MutableDoubleVector.Rel<U>) this
                     : instantiateMutableType(this.data.toDense(), getUnit());
         }
 
-        /**
-         * Create a sparse version of this DoubleVector.
-         * @return the sparse version of this DoubleVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final MutableDoubleVector.Rel<U> toSparse()
         {
             return this.data.isSparse() ? (MutableDoubleVector.Rel<U>) this

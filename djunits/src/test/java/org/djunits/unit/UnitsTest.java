@@ -20,7 +20,7 @@ public class UnitsTest implements UNITS
      * If this runs, all the static fields in the UNTIS.java interface were initialized with no errors.
      */
     @Test
-    public void testUnits()
+    public final void testUnits()
     {
         // Accessing any static field causes the class to be loaded and all units defined therein to be initialized.
         assertTrue("It exists", METER_PER_SECOND_2 != null);

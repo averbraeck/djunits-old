@@ -137,19 +137,15 @@ public class Mutable%TypeAbs%Vector
         return new %TypeAbs%(value, unit);
     }
     
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Mutable%TypeAbs%Vector toDense()
     {
         return this.data.isDense() ? (Mutable%TypeAbs%Vector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Mutable%TypeAbs%Vector toSparse()
     {
         return this.data.isSparse() ? (Mutable%TypeAbs%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());

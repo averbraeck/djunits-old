@@ -133,19 +133,15 @@ public class MoneyPerVolumeVector
         return new MoneyPerVolume(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MoneyPerVolumeVector toDense()
     {
         return this.data.isDense() ? (MoneyPerVolumeVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MoneyPerVolumeVector toSparse()
     {
         return this.data.isSparse() ? (MoneyPerVolumeVector) this : instantiateType(this.data.toSparse(), getUnit());

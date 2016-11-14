@@ -126,6 +126,15 @@ public interface FloatMathFunctionsDimensionless<T> extends MathFunctionsDimensi
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
+    default T neg()
+    {
+        assign(FloatMathFunctions.NEG);
+        return (T) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
     default T pow(final double x)
     {
         assign(FloatMathFunctions.POW((float) x));

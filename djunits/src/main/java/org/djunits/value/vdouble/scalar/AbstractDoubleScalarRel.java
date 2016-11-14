@@ -133,6 +133,14 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
+    public R neg()
+    {
+        return instantiateRel(-getInUnit(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("checkstyle:designforextension")
     public R multiplyBy(final double constant)
     {
         return instantiateRel(getInUnit() * constant, getUnit());

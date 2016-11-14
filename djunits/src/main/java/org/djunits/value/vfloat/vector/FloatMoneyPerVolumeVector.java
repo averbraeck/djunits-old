@@ -134,19 +134,15 @@ public class FloatMoneyPerVolumeVector extends
         return new FloatMoneyPerVolume(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMoneyPerVolumeVector toDense()
     {
         return this.data.isDense() ? (FloatMoneyPerVolumeVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMoneyPerVolumeVector toSparse()
     {
         return this.data.isSparse() ? (FloatMoneyPerVolumeVector) this : instantiateType(this.data.toSparse(), getUnit());

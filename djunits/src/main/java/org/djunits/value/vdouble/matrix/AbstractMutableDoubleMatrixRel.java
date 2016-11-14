@@ -315,6 +315,15 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("unchecked")
+    public final MR neg()
+    {
+        assign(DoubleMathFunctions.NEG);
+        return (MR) this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("unchecked")
     public final MR rint()
     {
         assign(DoubleMathFunctions.RINT);

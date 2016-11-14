@@ -131,19 +131,15 @@ public class MutableFrequencyVector
         return new Frequency(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFrequencyVector toDense()
     {
         return this.data.isDense() ? (MutableFrequencyVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFrequencyVector toSparse()
     {
         return this.data.isSparse() ? (MutableFrequencyVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

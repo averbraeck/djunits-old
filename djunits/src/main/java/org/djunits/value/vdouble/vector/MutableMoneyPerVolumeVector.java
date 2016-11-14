@@ -133,20 +133,16 @@ public class MutableMoneyPerVolumeVector extends
         return new MoneyPerVolume(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyPerVolumeVector toDense()
     {
         return this.data.isDense() ? (MutableMoneyPerVolumeVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyPerVolumeVector toSparse()
     {
         return this.data.isSparse() ? (MutableMoneyPerVolumeVector) this

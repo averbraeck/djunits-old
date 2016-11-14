@@ -132,19 +132,15 @@ public class MutableAngleSolidVector
         return new AngleSolid(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableAngleSolidVector toDense()
     {
         return this.data.isDense() ? (MutableAngleSolidVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableAngleSolidVector toSparse()
     {
         return this.data.isSparse() ? (MutableAngleSolidVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

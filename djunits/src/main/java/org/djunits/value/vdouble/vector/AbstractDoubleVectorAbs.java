@@ -26,9 +26,7 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarAbs;
  * @param <MA> the mutable absolute vector type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoubleVectorAbs<U, A, R, MA, S>, 
-        R extends AbstractDoubleVectorRel<U, R, ?, ?>, MA extends AbstractMutableDoubleVectorAbs<U, A, R, MA, S>,
-        S extends AbstractDoubleScalarAbs<U, S, ?>>
+abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoubleVectorAbs<U, A, R, MA, S>, R extends AbstractDoubleVectorRel<U, R, ?, ?>, MA extends AbstractMutableDoubleVectorAbs<U, A, R, MA, S>, S extends AbstractDoubleScalarAbs<U, S, ?>>
         extends AbstractDoubleVector<U, A> implements Absolute, Serializable
 {
     /** */
@@ -123,6 +121,7 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
      * in the mutable version that modifies the data shall trigger a deep copy of the data.
      * @return MA; mutable version of this DoubleVector
      */
+    @Override
     public MA mutable()
     {
         return instantiateMutableType(getData(), getUnit());

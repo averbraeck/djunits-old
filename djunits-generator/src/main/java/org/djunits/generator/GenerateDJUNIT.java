@@ -314,6 +314,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = java.replace("%DIMLESS%", "");
             java = formulas(java, "DoubleScalar => " + type, "");
             out.print(java);
             out.close();
@@ -409,6 +410,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = java.replace("%DIMLESS%", "");
             java = formulas(java, "FloatScalar => " + type, "Float");
             out.print(java);
             out.close();
@@ -441,7 +443,6 @@ public class GenerateDJUNIT
                 return ret;
             }
             String type = ret.substring(pos, end);
-            String pType = prefix + type;
             if (!formulas.containsKey(type))
             {
                 System.err.println("Formulas in FORMULAS.txt does not contain entry for type " + errorType);
@@ -578,6 +579,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "DoubleVector => " + type, "");
             out.print(java);
             out.close();
@@ -596,6 +598,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "MutableDoubleVector => " + type, "Mutable");
             out.print(java);
             out.close();
@@ -733,6 +736,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "FloatVector => " + fType, "");
             out.print(java);
             out.close();
@@ -752,6 +756,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
             out.print(java);
             out.close();
@@ -785,7 +790,6 @@ public class GenerateDJUNIT
                 return ret;
             }
             String type = ret.substring(pos, end);
-            String pType = prefix + type;
             if (!formulas.containsKey(type))
             {
                 System.err.println("Formulas in FORMULAS.txt does not contain entry for type " + errorType);
@@ -922,6 +926,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "DoubleMatrix => " + type, "");
             out.print(java);
             out.close();
@@ -940,6 +945,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "MutableDoubleMatrix => " + type, "Mutable");
             out.print(java);
             out.close();
@@ -1077,6 +1083,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "FloatMatrix => " + fType, "");
             out.print(java);
             out.close();
@@ -1096,6 +1103,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
+            java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
             out.print(java);
             out.close();

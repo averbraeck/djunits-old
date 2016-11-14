@@ -128,19 +128,15 @@ public class FloatSpeedVector extends AbstractFloatVectorRel<SpeedUnit, FloatSpe
         return new FloatSpeed(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatSpeedVector toDense()
     {
         return this.data.isDense() ? (FloatSpeedVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatSpeedVector toSparse()
     {
         return this.data.isSparse() ? (FloatSpeedVector) this : instantiateType(this.data.toSparse(), getUnit());

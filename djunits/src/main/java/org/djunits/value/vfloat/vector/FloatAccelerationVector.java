@@ -133,19 +133,15 @@ public class FloatAccelerationVector extends
         return new FloatAcceleration(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatAccelerationVector toDense()
     {
         return this.data.isDense() ? (FloatAccelerationVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatAccelerationVector toSparse()
     {
         return this.data.isSparse() ? (FloatAccelerationVector) this : instantiateType(this.data.toSparse(), getUnit());

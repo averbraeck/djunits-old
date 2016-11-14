@@ -69,7 +69,7 @@ public class FieldSignature implements Serializable
     /**
      * @return Returns the value of the field descriptor
      */
-    public String getStringValue()
+    public final String getStringValue()
     {
         return this.value;
     }
@@ -78,20 +78,20 @@ public class FieldSignature implements Serializable
      * @return Returns the value of the field descriptor
      * @throws ClassNotFoundException if the class cannot be found.
      */
-    public Class<?> getClassValue() throws ClassNotFoundException
+    public final Class<?> getClassValue() throws ClassNotFoundException
     {
         return FieldSignature.toClass(this.value);
     }
 
     /** {@inheritDoc} */
     @Override
-    public String toString()
+    public final String toString()
     {
         return this.value;
     }
 
     /**
-     * converts an array of fields to its descriptor
+     * converts an array of fields to its descriptor.
      * @param classes the classes to represent
      * @return String the descriptor String
      */
@@ -106,7 +106,7 @@ public class FieldSignature implements Serializable
     }
 
     /**
-     * converts a field to its descriptor
+     * converts a field to its descriptor.
      * @param clazz the clazz to represent
      * @return String the descriptor String
      */
@@ -156,7 +156,7 @@ public class FieldSignature implements Serializable
     }
 
     /**
-     * converts a fieldDescriptor to its class representation
+     * converts a fieldDescriptor to its class representation.
      * @param descriptor the descriptor
      * @return Class the class
      * @throws ClassNotFoundException on failure

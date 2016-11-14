@@ -133,20 +133,16 @@ public class MutableMoneyPerLengthVector extends
         return new MoneyPerLength(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyPerLengthVector toDense()
     {
         return this.data.isDense() ? (MutableMoneyPerLengthVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyPerLengthVector toSparse()
     {
         return this.data.isSparse() ? (MutableMoneyPerLengthVector) this

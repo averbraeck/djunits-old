@@ -133,20 +133,16 @@ public class MutableMoneyPerEnergyVector extends
         return new MoneyPerEnergy(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyPerEnergyVector toDense()
     {
         return this.data.isDense() ? (MutableMoneyPerEnergyVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyPerEnergyVector toSparse()
     {
         return this.data.isSparse() ? (MutableMoneyPerEnergyVector) this

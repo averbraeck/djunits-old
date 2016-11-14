@@ -128,19 +128,15 @@ public class DensityVector extends AbstractDoubleVectorRel<DensityUnit, DensityV
         return new Density(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final DensityVector toDense()
     {
         return this.data.isDense() ? (DensityVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final DensityVector toSparse()
     {
         return this.data.isSparse() ? (DensityVector) this : instantiateType(this.data.toSparse(), getUnit());

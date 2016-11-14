@@ -28,9 +28,8 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarAbs;
  * @param <MA> the mutable absolute vector type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractMutableFloatVectorAbs<U extends Unit<U>, A extends AbstractFloatVectorAbs<U, A, R, MA, S>, 
-        R extends AbstractFloatVectorRel<U, R, ?, ?>, MA extends AbstractMutableFloatVectorAbs<U, A, R, MA, S>, 
-        S extends AbstractFloatScalarAbs<U, S, ?>> extends AbstractFloatVectorAbs<U, A, R, MA, S> 
+abstract class AbstractMutableFloatVectorAbs<U extends Unit<U>, A extends AbstractFloatVectorAbs<U, A, R, MA, S>, R extends AbstractFloatVectorRel<U, R, ?, ?>, MA extends AbstractMutableFloatVectorAbs<U, A, R, MA, S>, S extends AbstractFloatScalarAbs<U, S, ?>>
+        extends AbstractFloatVectorAbs<U, A, R, MA, S>
         implements MathFunctionsAbs<MA>, FloatMathFunctions<MA>, MutableFloatVectorInterface<U>
 {
     /** */
@@ -154,6 +153,7 @@ abstract class AbstractMutableFloatVectorAbs<U extends Unit<U>, A extends Abstra
      * Create a immutable version of this MutableFloatVector. <br>
      * @return FloatVector&lt;U&gt;; mutable version of this MutableFloatVector
      */
+    @Override
     public A immutable()
     {
         setCopyOnWrite(true);

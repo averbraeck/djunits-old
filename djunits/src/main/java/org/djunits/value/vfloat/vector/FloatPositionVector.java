@@ -138,19 +138,15 @@ public class FloatPositionVector extends
         return new FloatPosition(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatPositionVector toDense()
     {
         return this.data.isDense() ? (FloatPositionVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatPositionVector toSparse()
     {
         return this.data.isSparse() ? (FloatPositionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());

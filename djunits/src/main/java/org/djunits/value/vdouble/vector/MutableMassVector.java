@@ -128,19 +128,15 @@ public class MutableMassVector extends AbstractMutableDoubleVectorRel<MassUnit, 
         return new Mass(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMassVector toDense()
     {
         return this.data.isDense() ? (MutableMassVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMassVector toSparse()
     {
         return this.data.isSparse() ? (MutableMassVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

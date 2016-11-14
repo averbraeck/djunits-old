@@ -101,6 +101,7 @@ public interface DoubleMatrixInterface<U extends Unit<U>>
     /**
      * @return a String with the Matrix, non-verbose, with the unit attached.
      */
+    @Override
     String toString();
 
     /**

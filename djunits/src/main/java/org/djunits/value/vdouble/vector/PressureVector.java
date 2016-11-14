@@ -129,19 +129,15 @@ public class PressureVector extends AbstractDoubleVectorRel<PressureUnit, Pressu
         return new Pressure(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final PressureVector toDense()
     {
         return this.data.isDense() ? (PressureVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final PressureVector toSparse()
     {
         return this.data.isSparse() ? (PressureVector) this : instantiateType(this.data.toSparse(), getUnit());

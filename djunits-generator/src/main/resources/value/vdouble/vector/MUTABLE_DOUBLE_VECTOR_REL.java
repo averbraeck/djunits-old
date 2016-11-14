@@ -132,19 +132,15 @@ public class Mutable%Type%Vector extends
         return new %Type%(value, unit);
     }
     
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Mutable%Type%Vector toDense()
     {
         return this.data.isDense() ? (Mutable%Type%Vector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Mutable%Type%Vector toSparse()
     {
         return this.data.isSparse() ? (Mutable%Type%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());

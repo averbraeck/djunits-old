@@ -133,19 +133,15 @@ public class ElectricalChargeVector extends
         return new ElectricalCharge(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final ElectricalChargeVector toDense()
     {
         return this.data.isDense() ? (ElectricalChargeVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final ElectricalChargeVector toSparse()
     {
         return this.data.isSparse() ? (ElectricalChargeVector) this : instantiateType(this.data.toSparse(), getUnit());

@@ -126,6 +126,15 @@ public interface DoubleMathFunctionsDimensionless<T> extends MathFunctionsDimens
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
+    default T neg()
+    {
+        assign(DoubleMathFunctions.NEG);
+        return (T) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
     default T pow(final double x)
     {
         assign(DoubleMathFunctions.POW((float) x));

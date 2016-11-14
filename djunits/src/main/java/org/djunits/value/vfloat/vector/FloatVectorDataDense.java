@@ -38,9 +38,8 @@ public class FloatVectorDataDense extends FloatVectorData
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] = floatFunction.apply(this.vectorSI[i]));
     }
 
-    /**
-     * @return a sparse variant of the data.
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatVectorDataSparse toSparse()
     {
         return FloatVectorDataSparse.instantiate(this.vectorSI);

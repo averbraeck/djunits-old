@@ -129,19 +129,15 @@ public class %TypeRel%Vector extends AbstractDoubleVectorRel<%TypeUnit%, %TypeRe
         return new %TypeRel%(value, unit);
     }
     
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final %TypeRel%Vector toDense()
     {
         return this.data.isDense() ? (%TypeRel%Vector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final %TypeRel%Vector toSparse()
     {
         return this.data.isSparse() ? (%TypeRel%Vector) this : instantiateType(this.data.toSparse(), getUnit());

@@ -136,19 +136,15 @@ public class FloatElectricalResistanceVector extends
         return new FloatElectricalResistance(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatElectricalResistanceVector toDense()
     {
         return this.data.isDense() ? (FloatElectricalResistanceVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatElectricalResistanceVector toSparse()
     {
         return this.data.isSparse() ? (FloatElectricalResistanceVector) this : instantiateType(this.data.toSparse(), getUnit());

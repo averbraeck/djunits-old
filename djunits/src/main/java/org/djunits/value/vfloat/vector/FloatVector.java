@@ -142,19 +142,15 @@ public abstract class FloatVector
             return new FloatScalar.Abs<U>(value, unit);
         }
 
-        /**
-         * Create a dense version of this FloatVector.
-         * @return the dense version of this FloatVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final FloatVector.Abs<U> toDense()
         {
             return this.data.isDense() ? (FloatVector.Abs<U>) this : instantiateTypeAbs(this.data.toDense(), getUnit());
         }
 
-        /**
-         * Create a sparse version of this FloatVector.
-         * @return the sparse version of this FloatVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final FloatVector.Abs<U> toSparse()
         {
             return this.data.isSparse() ? (FloatVector.Abs<U>) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
@@ -276,19 +272,15 @@ public abstract class FloatVector
             return new FloatScalar.Rel<U>(value, unit);
         }
 
-        /**
-         * Create a dense version of this FloatVector.
-         * @return the dense version of this FloatVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final FloatVector.Rel<U> toDense()
         {
             return this.data.isDense() ? (FloatVector.Rel<U>) this : instantiateType(this.data.toDense(), getUnit());
         }
 
-        /**
-         * Create a sparse version of this FloatVector.
-         * @return the sparse version of this FloatVector
-         */
+        /** {@inheritDoc} */
+        @Override
         public final FloatVector.Rel<U> toSparse()
         {
             return this.data.isSparse() ? (FloatVector.Rel<U>) this : instantiateType(this.data.toSparse(), getUnit());

@@ -132,19 +132,15 @@ public class MutableLinearDensityVector extends
         return new LinearDensity(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableLinearDensityVector toDense()
     {
         return this.data.isDense() ? (MutableLinearDensityVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableLinearDensityVector toSparse()
     {
         return this.data.isSparse() ? (MutableLinearDensityVector) this

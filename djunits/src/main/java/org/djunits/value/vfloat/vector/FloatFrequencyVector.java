@@ -132,19 +132,15 @@ public class FloatFrequencyVector
         return new FloatFrequency(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatFrequencyVector toDense()
     {
         return this.data.isDense() ? (FloatFrequencyVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatFrequencyVector toSparse()
     {
         return this.data.isSparse() ? (FloatFrequencyVector) this : instantiateType(this.data.toSparse(), getUnit());

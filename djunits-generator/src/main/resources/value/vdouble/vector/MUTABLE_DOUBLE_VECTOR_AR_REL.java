@@ -128,19 +128,15 @@ public class Mutable%TypeRel%Vector extends AbstractMutableDoubleVectorRel<%Type
         return new %TypeRel%(value, unit);
     }
     
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Mutable%TypeRel%Vector toDense()
     {
         return this.data.isDense() ? (Mutable%TypeRel%Vector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Mutable%TypeRel%Vector toSparse()
     {
         return this.data.isSparse() ? (Mutable%TypeRel%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());

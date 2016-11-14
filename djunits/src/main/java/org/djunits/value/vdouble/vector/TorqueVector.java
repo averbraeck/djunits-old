@@ -128,19 +128,15 @@ public class TorqueVector extends AbstractDoubleVectorRel<TorqueUnit, TorqueVect
         return new Torque(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final TorqueVector toDense()
     {
         return this.data.isDense() ? (TorqueVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final TorqueVector toSparse()
     {
         return this.data.isSparse() ? (TorqueVector) this : instantiateType(this.data.toSparse(), getUnit());

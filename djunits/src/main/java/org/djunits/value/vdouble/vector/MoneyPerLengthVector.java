@@ -133,19 +133,15 @@ public class MoneyPerLengthVector
         return new MoneyPerLength(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MoneyPerLengthVector toDense()
     {
         return this.data.isDense() ? (MoneyPerLengthVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MoneyPerLengthVector toSparse()
     {
         return this.data.isSparse() ? (MoneyPerLengthVector) this : instantiateType(this.data.toSparse(), getUnit());

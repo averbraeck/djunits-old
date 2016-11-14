@@ -61,29 +61,22 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, T extends Abstract
         return this.data.getStorageType();
     }
 
-    /**
-     * Create a double[] array filled with the values in the standard SI unit.
-     * @return double[]; array of values in the standard SI unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final double[] getValuesSI()
     {
         return this.data.getDenseVectorSI();
     }
 
-    /**
-     * Create a double[] array filled with the values in the original unit.
-     * @return double[]; the values in the original unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final double[] getValuesInUnit()
     {
         return getValuesInUnit(getUnit());
     }
 
-    /**
-     * Create a double[] array filled with the values converted into a specified unit.
-     * @param targetUnit U; the unit into which the values are converted for use
-     * @return double[]; the values converted into the specified unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final double[] getValuesInUnit(final U targetUnit)
     {
         double[] values = getValuesSI();
@@ -157,34 +150,22 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, T extends Abstract
         return toString(getUnit(), false, true);
     }
 
-    /**
-     * Print this DoubleVector with the values expressed in the specified unit.
-     * @param displayUnit U; the unit into which the values are converted for display
-     * @return String; printable string with the vector contents expressed in the specified unit
-     */
+    /** {@inheritDoc} */
+    @Override
     public final String toString(final U displayUnit)
     {
         return toString(displayUnit, false, true);
     }
 
-    /**
-     * Print this DoubleVector with optional type and unit information.
-     * @param verbose boolean; if true; include type info; if false; exclude type info
-     * @param withUnit boolean; if true; include the unit; of false; exclude the unit
-     * @return String; printable string with the vector contents
-     */
+    /** {@inheritDoc} */
+    @Override
     public final String toString(final boolean verbose, final boolean withUnit)
     {
         return toString(getUnit(), verbose, withUnit);
     }
 
-    /**
-     * Print this DoubleVector with the values expressed in the specified unit.
-     * @param displayUnit U; the unit into which the values are converted for display
-     * @param verbose boolean; if true; include type info; if false; exclude type info
-     * @param withUnit boolean; if true; include the unit; of false; exclude the unit
-     * @return String; printable string with the vector contents
-     */
+    /** {@inheritDoc} */
+    @Override
     public final String toString(final U displayUnit, final boolean verbose, final boolean withUnit)
     {
         StringBuffer buf = new StringBuffer();

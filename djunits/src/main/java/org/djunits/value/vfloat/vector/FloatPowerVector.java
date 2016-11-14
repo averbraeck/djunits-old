@@ -128,19 +128,15 @@ public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPow
         return new FloatPower(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatPowerVector toDense()
     {
         return this.data.isDense() ? (FloatPowerVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatPowerVector toSparse()
     {
         return this.data.isSparse() ? (FloatPowerVector) this : instantiateType(this.data.toSparse(), getUnit());

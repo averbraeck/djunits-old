@@ -134,19 +134,15 @@ public class ElectricalPotentialVector extends
         return new ElectricalPotential(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final ElectricalPotentialVector toDense()
     {
         return this.data.isDense() ? (ElectricalPotentialVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final ElectricalPotentialVector toSparse()
     {
         return this.data.isSparse() ? (ElectricalPotentialVector) this : instantiateType(this.data.toSparse(), getUnit());

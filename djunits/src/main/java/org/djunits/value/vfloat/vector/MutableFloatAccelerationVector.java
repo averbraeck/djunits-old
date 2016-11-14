@@ -134,20 +134,16 @@ public class MutableFloatAccelerationVector extends
         return new FloatAcceleration(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatAccelerationVector toDense()
     {
         return this.data.isDense() ? (MutableFloatAccelerationVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatAccelerationVector toSparse()
     {
         return this.data.isSparse() ? (MutableFloatAccelerationVector) this

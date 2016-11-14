@@ -137,19 +137,15 @@ public class %TypeAbs%Vector extends
         return new %TypeAbs%(value, unit);
     }
     
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final %TypeAbs%Vector toDense()
     {
         return this.data.isDense() ? (%TypeAbs%Vector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final %TypeAbs%Vector toSparse()
     {
         return this.data.isSparse() ? (%TypeAbs%Vector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());

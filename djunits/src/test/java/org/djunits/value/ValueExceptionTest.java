@@ -22,7 +22,7 @@ public class ValueExceptionTest
      * Test all constructors for ValueException.
      */
     @Test
-    public void valueExceptionTest()
+    public final void valueExceptionTest()
     {
         String message = "MessageString";
         Exception e = new ValueException(message);

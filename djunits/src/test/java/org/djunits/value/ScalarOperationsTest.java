@@ -60,9 +60,9 @@ public class ScalarOperationsTest
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
-     * @throws ClassNotFoundException
-     * @throws IllegalArgumentException
-     * @throws SecurityException
+     * @throws ClassNotFoundException on reflection error
+     * @throws IllegalArgumentException on reflection error
+     * @throws SecurityException on reflection error
      */
     @SuppressWarnings("static-method")
     @Test
@@ -81,9 +81,9 @@ public class ScalarOperationsTest
      * @throws IllegalAccessException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
      * @throws NoSuchMethodException on class or method resolving error
-     * @throws ClassNotFoundException
-     * @throws IllegalArgumentException
-     * @throws SecurityException
+     * @throws ClassNotFoundException on reflection error
+     * @throws IllegalArgumentException on reflection error
+     * @throws SecurityException on reflection error
      */
     private void doubleOrFloatScalarOperationsTest(final boolean doubleType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
@@ -164,15 +164,15 @@ public class ScalarOperationsTest
      * @param scalarClassAbs abs class to test
      * @param scalarClassRel rel class to test
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws NoSuchFieldException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
+     * @throws SecurityException on reflection error
+     * @throws NoSuchMethodException on reflection error
+     * @throws NoSuchFieldException on reflection error
+     * @throws InvocationTargetException on reflection error
+     * @throws IllegalArgumentException on reflection error
+     * @throws IllegalAccessException on reflection error
+     * @throws InstantiationException on reflection error
      */
-    private void testAbsRelConversion(final Class<?> scalarClassAbs, final Class<?> scalarClassRel, boolean doubleType)
+    private void testAbsRelConversion(final Class<?> scalarClassAbs, final Class<?> scalarClassRel, final boolean doubleType)
             throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, NoSuchFieldException
     {
@@ -207,7 +207,7 @@ public class ScalarOperationsTest
      * @throws InstantiationException on class or method resolving error
      * @throws NoSuchMethodException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
-     * @throws ClassNotFoundException
+     * @throws ClassNotFoundException on reflection error
      */
     private void testMethods(final Class<?> scalarClassAbsRel, final boolean isAbs, final boolean doubleType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,

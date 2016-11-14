@@ -134,19 +134,15 @@ public class FloatMoneyPerLengthVector extends
         return new FloatMoneyPerLength(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMoneyPerLengthVector toDense()
     {
         return this.data.isDense() ? (FloatMoneyPerLengthVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatMoneyPerLengthVector toSparse()
     {
         return this.data.isSparse() ? (FloatMoneyPerLengthVector) this : instantiateType(this.data.toSparse(), getUnit());

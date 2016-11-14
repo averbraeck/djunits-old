@@ -133,19 +133,15 @@ public class MoneyPerEnergyVector
         return new MoneyPerEnergy(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MoneyPerEnergyVector toDense()
     {
         return this.data.isDense() ? (MoneyPerEnergyVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MoneyPerEnergyVector toSparse()
     {
         return this.data.isSparse() ? (MoneyPerEnergyVector) this : instantiateType(this.data.toSparse(), getUnit());

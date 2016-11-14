@@ -132,19 +132,15 @@ public class MutableMoneyPerTimeVector
         return new MoneyPerTime(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyPerTimeVector toDense()
     {
         return this.data.isDense() ? (MutableMoneyPerTimeVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyPerTimeVector toSparse()
     {
         return this.data.isSparse() ? (MutableMoneyPerTimeVector) this

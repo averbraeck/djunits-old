@@ -133,19 +133,15 @@ public class TemperatureVector
         return new Temperature(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final TemperatureVector toDense()
     {
         return this.data.isDense() ? (TemperatureVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final TemperatureVector toSparse()
     {
         return this.data.isSparse() ? (TemperatureVector) this : instantiateType(this.data.toSparse(), getUnit());

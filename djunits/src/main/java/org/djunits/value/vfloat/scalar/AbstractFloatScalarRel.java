@@ -133,6 +133,14 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
+    public R neg()
+    {
+        return instantiateRel(-getInUnit(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("checkstyle:designforextension")
     public R multiplyBy(final float constant)
     {
         return instantiateRel(getInUnit() * constant, getUnit());

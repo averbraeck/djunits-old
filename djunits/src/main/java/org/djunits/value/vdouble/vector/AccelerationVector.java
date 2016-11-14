@@ -132,19 +132,15 @@ public class AccelerationVector
         return new Acceleration(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final AccelerationVector toDense()
     {
         return this.data.isDense() ? (AccelerationVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final AccelerationVector toSparse()
     {
         return this.data.isSparse() ? (AccelerationVector) this : instantiateType(this.data.toSparse(), getUnit());

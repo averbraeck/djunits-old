@@ -130,19 +130,15 @@ public class MutableFloatEnergyVector
         return new FloatEnergy(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatEnergyVector toDense()
     {
         return this.data.isDense() ? (MutableFloatEnergyVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatEnergyVector toSparse()
     {
         return this.data.isSparse() ? (MutableFloatEnergyVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

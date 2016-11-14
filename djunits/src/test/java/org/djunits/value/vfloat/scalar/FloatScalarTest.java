@@ -122,7 +122,7 @@ public class FloatScalarTest
     }
 
     /**
-     * Test the relational operations
+     * Test the relational operations.
      */
     @SuppressWarnings("static-method")
     @Test

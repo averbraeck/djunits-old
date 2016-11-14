@@ -132,19 +132,15 @@ public class FloatAngleSolidVector
         return new FloatAngleSolid(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatAngleSolidVector toDense()
     {
         return this.data.isDense() ? (FloatAngleSolidVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatAngleSolidVector toSparse()
     {
         return this.data.isSparse() ? (FloatAngleSolidVector) this : instantiateType(this.data.toSparse(), getUnit());

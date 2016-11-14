@@ -132,19 +132,15 @@ public class AngleSolidVector
         return new AngleSolid(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final AngleSolidVector toDense()
     {
         return this.data.isDense() ? (AngleSolidVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final AngleSolidVector toSparse()
     {
         return this.data.isSparse() ? (AngleSolidVector) this : instantiateType(this.data.toSparse(), getUnit());

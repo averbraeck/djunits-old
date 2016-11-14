@@ -130,19 +130,15 @@ public class MutableFloatVolumeVector
         return new FloatVolume(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatVolumeVector toDense()
     {
         return this.data.isDense() ? (MutableFloatVolumeVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatVolumeVector toSparse()
     {
         return this.data.isSparse() ? (MutableFloatVolumeVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

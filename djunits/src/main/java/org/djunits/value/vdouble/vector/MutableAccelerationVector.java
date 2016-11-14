@@ -132,19 +132,15 @@ public class MutableAccelerationVector
         return new Acceleration(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableAccelerationVector toDense()
     {
         return this.data.isDense() ? (MutableAccelerationVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableAccelerationVector toSparse()
     {
         return this.data.isSparse() ? (MutableAccelerationVector) this

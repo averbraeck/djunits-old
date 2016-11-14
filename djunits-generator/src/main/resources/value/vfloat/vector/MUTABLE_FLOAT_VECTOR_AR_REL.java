@@ -128,19 +128,15 @@ public class MutableFloat%TypeRel%Vector extends AbstractMutableFloatVectorRel<%
         return new Float%TypeRel%(value, unit);
     }
     
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloat%TypeRel%Vector toDense()
     {
         return this.data.isDense() ? (MutableFloat%TypeRel%Vector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloat%TypeRel%Vector toSparse()
     {
         return this.data.isSparse() ? (MutableFloat%TypeRel%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());

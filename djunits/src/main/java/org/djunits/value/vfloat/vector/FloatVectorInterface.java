@@ -59,13 +59,13 @@ public interface FloatVectorInterface<U extends Unit<U>>
      * @return a mutable version of this vector
      */
     MutableFloatVectorInterface<U> mutable();
-    
+
     /**
      * return a sparse version of this vector.
      * @return a sparse version of this vector
      */
     FloatVectorInterface<U> toSparse();
-    
+
     /**
      * return a dense version of this vector.
      * @return a dense version of this vector
@@ -100,6 +100,7 @@ public interface FloatVectorInterface<U extends Unit<U>>
     /**
      * @return a String with the Vector, non-verbose, with the unit attached.
      */
+    @Override
     String toString();
 
     /**

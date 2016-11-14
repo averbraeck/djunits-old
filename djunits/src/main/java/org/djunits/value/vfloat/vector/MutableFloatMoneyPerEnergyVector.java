@@ -135,20 +135,16 @@ public class MutableFloatMoneyPerEnergyVector extends
         return new FloatMoneyPerEnergy(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatMoneyPerEnergyVector toDense()
     {
         return this.data.isDense() ? (MutableFloatMoneyPerEnergyVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatMoneyPerEnergyVector toSparse()
     {
         return this.data.isSparse() ? (MutableFloatMoneyPerEnergyVector) this

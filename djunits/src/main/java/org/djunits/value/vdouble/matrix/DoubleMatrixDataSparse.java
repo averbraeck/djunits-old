@@ -145,9 +145,8 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         }
     }
 
-    /**
-     * @return a dense variant of the data.
-     */
+    /** {@inheritDoc} */
+    @Override
     public final DoubleMatrixDataDense toDense()
     {
         double[] denseSI = new double[this.rows * this.cols];

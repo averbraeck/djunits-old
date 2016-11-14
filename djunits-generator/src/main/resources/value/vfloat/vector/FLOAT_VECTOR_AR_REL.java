@@ -129,19 +129,15 @@ public class Float%TypeRel%Vector extends AbstractFloatVectorRel<%TypeUnit%, Flo
         return new Float%TypeRel%(value, unit);
     }
     
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Float%TypeRel%Vector toDense()
     {
         return this.data.isDense() ? (Float%TypeRel%Vector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Float%TypeRel%Vector toSparse()
     {
         return this.data.isSparse() ? (Float%TypeRel%Vector) this : instantiateType(this.data.toSparse(), getUnit());

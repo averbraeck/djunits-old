@@ -135,19 +135,15 @@ public class MutableDimensionlessVector extends
         return new Dimensionless(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableDimensionlessVector toDense()
     {
         return this.data.isDense() ? (MutableDimensionlessVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableDimensionlessVector toSparse()
     {
         return this.data.isSparse() ? (MutableDimensionlessVector) this

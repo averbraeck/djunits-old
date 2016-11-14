@@ -138,20 +138,16 @@ public class MutableFloatDimensionlessVector extends
         return new FloatDimensionless(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatDimensionlessVector toDense()
     {
         return this.data.isDense() ? (MutableFloatDimensionlessVector) this
                 : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatDimensionlessVector toSparse()
     {
         return this.data.isSparse() ? (MutableFloatDimensionlessVector) this

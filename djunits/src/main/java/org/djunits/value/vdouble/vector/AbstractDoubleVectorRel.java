@@ -25,8 +25,7 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarRel;
  * @param <MR> the mutable relative vector type
  * @param <S> the relative scalar type
  */
-abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoubleVectorRel<U, R, MR, S>, 
-        MR extends AbstractMutableDoubleVectorRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>> 
+abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoubleVectorRel<U, R, MR, S>, MR extends AbstractMutableDoubleVectorRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
         extends AbstractDoubleVector<U, R> implements Relative, Serializable
 {
     /** */
@@ -121,6 +120,7 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
      * in the mutable version that modifies the data shall trigger a deep copy of the data.
      * @return MR; mutable version of this DoubleVector
      */
+    @Override
     public MR mutable()
     {
         return instantiateMutableType(getData(), getUnit());

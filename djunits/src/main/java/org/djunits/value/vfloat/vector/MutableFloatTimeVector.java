@@ -138,19 +138,15 @@ public class MutableFloatTimeVector
         return new FloatTime(value, unit);
     }
 
-    /**
-     * Create a dense version of this FloatVector.
-     * @return the dense version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatTimeVector toDense()
     {
         return this.data.isDense() ? (MutableFloatTimeVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this FloatVector.
-     * @return the sparse version of this FloatVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableFloatTimeVector toSparse()
     {
         return this.data.isSparse() ? (MutableFloatTimeVector) this : instantiateMutableType(this.data.toSparse(), getUnit());

@@ -132,19 +132,15 @@ public class LinearDensityVector
         return new LinearDensity(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final LinearDensityVector toDense()
     {
         return this.data.isDense() ? (LinearDensityVector) this : instantiateType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final LinearDensityVector toSparse()
     {
         return this.data.isSparse() ? (LinearDensityVector) this : instantiateType(this.data.toSparse(), getUnit());

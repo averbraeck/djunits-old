@@ -132,19 +132,15 @@ public class MutableMoneyPerMassVector
         return new MoneyPerMass(value, unit);
     }
 
-    /**
-     * Create a dense version of this DoubleVector.
-     * @return the dense version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyPerMassVector toDense()
     {
         return this.data.isDense() ? (MutableMoneyPerMassVector) this : instantiateMutableType(this.data.toDense(), getUnit());
     }
 
-    /**
-     * Create a sparse version of this DoubleVector.
-     * @return the sparse version of this DoubleVector
-     */
+    /** {@inheritDoc} */
+    @Override
     public final MutableMoneyPerMassVector toSparse()
     {
         return this.data.isSparse() ? (MutableMoneyPerMassVector) this
