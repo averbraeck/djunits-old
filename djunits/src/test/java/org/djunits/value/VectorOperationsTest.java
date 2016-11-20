@@ -43,7 +43,7 @@ import org.junit.Test;
  * version Sep 14, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
- * @param <TypedDoubleVectorAbs>
+ * @param <TypedDoubleVectorAbs> Type of the object to perform the test on
  */
 public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
 {

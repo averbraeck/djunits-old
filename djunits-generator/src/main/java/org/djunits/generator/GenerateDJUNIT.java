@@ -50,7 +50,7 @@ public class GenerateDJUNIT
 
     /**
      * Read the types from the file /TYPES_ABS_REL.txt.
-     * @throws IOException
+     * @throws IOException on I/O error
      */
     private static void readAbsRelTypes() throws IOException
     {
@@ -70,7 +70,7 @@ public class GenerateDJUNIT
 
     /**
      * Read the types from the file /TYPES_REL.txt.
-     * @throws IOException
+     * @throws IOException on I/O error
      */
     private static void readRelTypes() throws IOException
     {
@@ -90,7 +90,7 @@ public class GenerateDJUNIT
 
     /**
      * Read the types from the file /TYPES_MONEY.txt.
-     * @throws IOException
+     * @throws IOException on I/O error
      */
     private static void readMoneyTypes() throws IOException
     {
@@ -110,7 +110,7 @@ public class GenerateDJUNIT
 
     /**
      * Read the formulas from the file /FORMULAS.txt.
-     * @throws IOException
+     * @throws IOException on I/O error
      */
     private static void readFormulas() throws IOException
     {
@@ -231,8 +231,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Abs + Rel classes in value.vdouble.scalar.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateDoubleScalarAbsRel() throws IOException, URISyntaxException
     {
@@ -260,8 +260,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Rel classes in value.vdouble.scalar.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateDoubleScalarRel() throws IOException, URISyntaxException
     {
@@ -296,8 +296,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Money classes in value.vdouble.scalar.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateDoubleScalarMoney() throws IOException, URISyntaxException
     {
@@ -324,8 +324,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Abs + Rel classes in value.vfloat.scalar.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateFloatScalarAbsRel() throws IOException, URISyntaxException
     {
@@ -354,8 +354,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Rel classes in value.vfloat.scalar.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateFloatScalarRel() throws IOException, URISyntaxException
     {
@@ -391,8 +391,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Money classes in value.vfloat.scalar.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateFloatScalarMoney() throws IOException, URISyntaxException
     {
@@ -461,8 +461,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Abs + Rel classes in value.vdouble.vector.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateDoubleVectorAbsRel() throws IOException, URISyntaxException
     {
@@ -507,8 +507,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Rel classes in value.vdouble.vector.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateDoubleVectorRel() throws IOException, URISyntaxException
     {
@@ -561,8 +561,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Money classes in value.vdouble.vector.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateDoubleVectorMoney() throws IOException, URISyntaxException
     {
@@ -613,8 +613,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Abs + Rel classes in value.vfloat.vector.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateFloatVectorAbsRel() throws IOException, URISyntaxException
     {
@@ -661,8 +661,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Rel classes in value.vfloat.vector.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateFloatVectorRel() throws IOException, URISyntaxException
     {
@@ -717,8 +717,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Money classes in value.vfloat.vector.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateFloatVectorMoney() throws IOException, URISyntaxException
     {
@@ -808,8 +808,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Abs + Rel classes in value.vdouble.matrix.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateDoubleMatrixAbsRel() throws IOException, URISyntaxException
     {
@@ -854,8 +854,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Rel classes in value.vdouble.matrix.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateDoubleMatrixRel() throws IOException, URISyntaxException
     {
@@ -908,8 +908,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Money classes in value.vdouble.matrix.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateDoubleMatrixMoney() throws IOException, URISyntaxException
     {
@@ -960,8 +960,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Abs + Rel classes in value.vfloat.matrix.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateFloatMatrixAbsRel() throws IOException, URISyntaxException
     {
@@ -1008,8 +1008,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Rel classes in value.vfloat.matrix.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateFloatMatrixRel() throws IOException, URISyntaxException
     {
@@ -1064,8 +1064,8 @@ public class GenerateDJUNIT
 
     /**
      * Generate all Money classes in value.vfloat.matrix.
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     private static void generateFloatMatrixMoney() throws IOException, URISyntaxException
     {
@@ -1122,7 +1122,7 @@ public class GenerateDJUNIT
      * See https://weblogs.java.net/blog/kohsuke/archive/2007/04/how_to_convert.html and
      * http://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file and
      * http://stackoverflow.com/questions/3153337/get-current-working-directory-in-java
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException in case file could not be found
      */
     private static void makeAndCleanAbsolutePath() throws FileNotFoundException
     {
@@ -1184,9 +1184,9 @@ public class GenerateDJUNIT
     }
 
     /**
-     * @param args
-     * @throws IOException
-     * @throws URISyntaxException
+     * @param args args, should be blank
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on thhe file system
      */
     public static void main(String[] args) throws IOException, URISyntaxException
     {
