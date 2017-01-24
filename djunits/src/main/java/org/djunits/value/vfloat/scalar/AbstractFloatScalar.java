@@ -107,11 +107,65 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
         return this.si != o.si;
     }
 
+    /**
+     * Test if this Relative FloatScalar is less than 0.0.
+     * @return boolean
+     */
+    public final boolean lt0()
+    {
+        return this.si < 0.0f;
+    }
+
+    /**
+     * Test if this Relative FloatScalar is less than or equal to 0.0.
+     * @return boolean
+     */
+    public final boolean le0()
+    {
+        return this.si <= 0.0f;
+    }
+
+    /**
+     * Test if this Relative FloatScalar is greater than or equal to 0.0.
+     * @return boolean
+     */
+    public final boolean gt0()
+    {
+        return this.si > 0.0f;
+    }
+
+    /**
+     * Test if this Relative FloatScalar is greater than 0.0.
+     * @return boolean
+     */
+    public final boolean ge0()
+    {
+        return this.si >= 0.0f;
+    }
+
+    /**
+     * Test if this Relative FloatScalar is equal to 0.0.
+     * @return boolean
+     */
+    public final boolean eq0()
+    {
+        return this.si == 0.0f;
+    }
+
+    /**
+     * Test if this Relative FloatScalar is not equal to 0.0.
+     * @return boolean
+     */
+    public final boolean ne0()
+    {
+        return this.si != 0.0f;
+    }
+
     /** {@inheritDoc} */
     @Override
     public final int compareTo(final T o)
     {
-        return new Float(this.si).compareTo(o.si);
+        return Float.compare(this.si, o.si);
     }
 
     /**
