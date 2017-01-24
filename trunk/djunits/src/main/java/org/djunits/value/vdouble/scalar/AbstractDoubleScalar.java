@@ -107,12 +107,66 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
         return this.si != o.si;
     }
 
+    /**
+     * Test if this DoubleScalar is less than 0.0.
+     * @return boolean
+     */
+    public final boolean lt0()
+    {
+        return this.si < 0.0;
+    }
+
+    /**
+     * Test if this DoubleScalar is less than or equal to 0.0.
+     * @return boolean
+     */
+    public final boolean le0()
+    {
+        return this.si <= 0.0;
+    }
+
+    /**
+     * Test if this DoubleScalar is greater than or equal to 0.0.
+     * @return boolean
+     */
+    public final boolean gt0()
+    {
+        return this.si > 0.0;
+    }
+
+    /**
+     * Test if this DoubleScalar is greater than 0.0.
+     * @return boolean
+     */
+    public final boolean ge0()
+    {
+        return this.si >= 0.0;
+    }
+
+    /**
+     * Test if this DoubleScalar is equal to 0.0.
+     * @return boolean
+     */
+    public final boolean eq0()
+    {
+        return this.si == 0.0;
+    }
+
+    /**
+     * Test if this DoubleScalar is not equal to 0.0.
+     * @return boolean
+     */
+    public final boolean ne0()
+    {
+        return this.si != 0.0;
+    }
+
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
     public final int compareTo(final T o)
     {
-        return new Double(this.si).compareTo(o.si);
+        return Double.compare(this.si, o.si);
     }
 
     /** {@inheritDoc} */

@@ -72,7 +72,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
 
     /** Has this class been initialized? */
     private static boolean initialized = false;
-    
+
     /** Standard (SI) unit or not? */
     private boolean baseSIUnit;
 
@@ -83,6 +83,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
             "LengthUnit", "LinearDensityUnit", "MassUnit", "MoneyUnit", "MoneyPerAreaUnit", "MoneyPerEnergyUnit",
             "MoneyPerLengthUnit", "MoneyPerMassUnit", "MoneyPerTimeUnit", "MoneyPerVolumeUnit", "PowerUnit", "PressureUnit",
             "SpeedUnit", "TemperatureUnit", "TimeUnit", "TorqueUnit", "VolumeUnit" };
+
+    /** the cached hashcode. */
+    private final int cachedHashCode;
 
     /** Force all units to be loaded. */
     private static void initialize()
@@ -133,6 +136,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
             this.abbreviation = abbreviationOrAbbreviationKey;
         }
         this.unitSystem = unitSystem;
+        this.cachedHashCode = generateHashCode();
         try
         {
             addUnit(this);
@@ -422,10 +426,11 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         return getAbbreviation();
     }
 
-    /** {@inheritDoc} */
-    @SuppressWarnings("checkstyle:designforextension")
-    @Override
-    public int hashCode()
+    /**
+     * Generate a hashCode for caching.
+     * @return a hashCode that is consistent with the equals() method.
+     */
+    public final int generateHashCode()
     {
         final int prime = 31;
         int result = 1;
@@ -434,6 +439,14 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
         result = prime * result + ((this.nameKey == null) ? 0 : this.nameKey.hashCode());
         return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:designforextension")
+    @Override
+    public int hashCode()
+    {
+        return this.cachedHashCode;
     }
 
     /** {@inheritDoc} */
