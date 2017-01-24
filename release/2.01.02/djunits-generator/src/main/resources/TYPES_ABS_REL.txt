@@ -1,0 +1,4 @@
+Direction,Angle,AngleUnit
+Position,Length,LengthUnit
+AbsoluteTemperature,Temperature,TemperatureUnit
+Time,Duration,TimeUnit
