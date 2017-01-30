@@ -38,6 +38,22 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     /** constant with value zero. */
     public static final FlowMass ZERO = new FlowMass(0.0, FlowMassUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FlowMass NaN = new FlowMass(Double.NaN, FlowMassUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FlowMass POSITIVE_INFINITY = new FlowMass(Double.POSITIVE_INFINITY, FlowMassUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FlowMass NEGATIVE_INFINITY = new FlowMass(Double.NEGATIVE_INFINITY, FlowMassUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FlowMass POS_MAXVALUE = new FlowMass(Double.MAX_VALUE, FlowMassUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FlowMass NEG_MAXVALUE = new FlowMass(-Double.MAX_VALUE, FlowMassUnit.SI);
+
     /**
      * Construct FlowMass scalar.
      * @param value double value
@@ -62,6 +78,16 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     public final FlowMass instantiateRel(final double value, final FlowMassUnit unit)
     {
         return new FlowMass(value, unit);
+    }
+
+    /**
+     * Construct FlowMass scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FlowMass createSI(final double value)
+    {
+        return new FlowMass(value, FlowMassUnit.SI);
     }
 
     /**

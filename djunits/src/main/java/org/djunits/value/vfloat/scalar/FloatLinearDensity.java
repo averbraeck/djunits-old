@@ -39,6 +39,24 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
     /** constant with value zero. */
     public static final FloatLinearDensity ZERO = new FloatLinearDensity(0.0f, LinearDensityUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatLinearDensity NaN = new FloatLinearDensity(Float.NaN, LinearDensityUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatLinearDensity POSITIVE_INFINITY =
+            new FloatLinearDensity(Float.POSITIVE_INFINITY, LinearDensityUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatLinearDensity NEGATIVE_INFINITY =
+            new FloatLinearDensity(Float.NEGATIVE_INFINITY, LinearDensityUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatLinearDensity POS_MAXVALUE = new FloatLinearDensity(Float.MAX_VALUE, LinearDensityUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatLinearDensity NEG_MAXVALUE = new FloatLinearDensity(-Float.MAX_VALUE, LinearDensityUnit.SI);
+
     /**
      * Construct FloatLinearDensity scalar.
      * @param value float value
@@ -73,6 +91,16 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
     public final FloatLinearDensity instantiateRel(final float value, final LinearDensityUnit unit)
     {
         return new FloatLinearDensity(value, unit);
+    }
+
+    /**
+     * Construct FloatLinearDensity scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatLinearDensity createSI(final float value)
+    {
+        return new FloatLinearDensity(value, LinearDensityUnit.SI);
     }
 
     /**

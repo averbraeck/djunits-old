@@ -358,4 +358,3 @@ public interface UNITS
     VolumeUnit QUART_US_FLUID    = VolumeUnit.QUART_US_FLUID;
     
 }
-

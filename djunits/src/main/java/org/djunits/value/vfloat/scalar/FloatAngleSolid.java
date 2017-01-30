@@ -35,6 +35,22 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
     /** constant with value zero. */
     public static final FloatAngleSolid ZERO = new FloatAngleSolid(0.0f, AngleSolidUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatAngleSolid NaN = new FloatAngleSolid(Float.NaN, AngleSolidUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatAngleSolid POSITIVE_INFINITY = new FloatAngleSolid(Float.POSITIVE_INFINITY, AngleSolidUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatAngleSolid NEGATIVE_INFINITY = new FloatAngleSolid(Float.NEGATIVE_INFINITY, AngleSolidUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatAngleSolid POS_MAXVALUE = new FloatAngleSolid(Float.MAX_VALUE, AngleSolidUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatAngleSolid NEG_MAXVALUE = new FloatAngleSolid(-Float.MAX_VALUE, AngleSolidUnit.SI);
+
     /**
      * Construct FloatAngleSolid scalar.
      * @param value float value
@@ -69,6 +85,16 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
     public final FloatAngleSolid instantiateRel(final float value, final AngleSolidUnit unit)
     {
         return new FloatAngleSolid(value, unit);
+    }
+
+    /**
+     * Construct FloatAngleSolid scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatAngleSolid createSI(final float value)
+    {
+        return new FloatAngleSolid(value, AngleSolidUnit.SI);
     }
 
     /**

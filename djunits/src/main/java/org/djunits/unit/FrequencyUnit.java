@@ -72,8 +72,8 @@ public class FrequencyUnit extends LinearUnit<FrequencyUnit>
         GIGAHERTZ = new FrequencyUnit("FrequencyUnit.gigahertz", "FrequencyUnit.GHz", SI_DERIVED, HERTZ, 1.0E9, true);
         TERAHERTZ = new FrequencyUnit("FrequencyUnit.terahertz", "FrequencyUnit.THz", SI_DERIVED, HERTZ, 1.0E12, true);
         RPM = new FrequencyUnit("FrequencyUnit.revolutions_per_minute", "FrequencyUnit.rpm", OTHER, HERTZ, 1.0 / 60.0, true);
-        PER_MILLISECOND =
-                new FrequencyUnit(TimeUnit.MILLISECOND, "FrequencyUnit.per_millisecond", "FrequencyUnit.1/ms", SI_DERIVED, true);
+        PER_MILLISECOND = new FrequencyUnit(TimeUnit.MILLISECOND, "FrequencyUnit.per_millisecond", "FrequencyUnit.1/ms",
+                SI_DERIVED, true);
         PER_SECOND = new FrequencyUnit(TimeUnit.SECOND, "FrequencyUnit.per_second", "FrequencyUnit.1/s", SI_DERIVED, true);
         PER_MINUTE = new FrequencyUnit(TimeUnit.MINUTE, "FrequencyUnit.per_minute", "FrequencyUnit.1/min", SI_ACCEPTED, true);
         PER_HOUR = new FrequencyUnit(TimeUnit.HOUR, "FrequencyUnit.per_hour", "FrequencyUnit.1/h", SI_ACCEPTED, true);
@@ -93,8 +93,8 @@ public class FrequencyUnit extends LinearUnit<FrequencyUnit>
     private FrequencyUnit(final TimeUnit timeUnit, final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
             final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, HERTZ, 1.0 / timeUnit
-                .getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, HERTZ,
+                1.0 / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.timeUnit = timeUnit;
     }
 

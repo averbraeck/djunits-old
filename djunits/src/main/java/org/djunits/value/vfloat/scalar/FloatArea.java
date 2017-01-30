@@ -41,6 +41,22 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
     /** constant with value zero. */
     public static final FloatArea ZERO = new FloatArea(0.0f, AreaUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatArea NaN = new FloatArea(Float.NaN, AreaUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatArea POSITIVE_INFINITY = new FloatArea(Float.POSITIVE_INFINITY, AreaUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatArea NEGATIVE_INFINITY = new FloatArea(Float.NEGATIVE_INFINITY, AreaUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatArea POS_MAXVALUE = new FloatArea(Float.MAX_VALUE, AreaUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatArea NEG_MAXVALUE = new FloatArea(-Float.MAX_VALUE, AreaUnit.SI);
+
     /**
      * Construct FloatArea scalar.
      * @param value float value
@@ -75,6 +91,16 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
     public final FloatArea instantiateRel(final float value, final AreaUnit unit)
     {
         return new FloatArea(value, unit);
+    }
+
+    /**
+     * Construct FloatArea scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatArea createSI(final float value)
+    {
+        return new FloatArea(value, AreaUnit.SI);
     }
 
     /**

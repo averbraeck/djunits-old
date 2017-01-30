@@ -39,6 +39,22 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
     /** constant with value zero. */
     public static final FlowVolume ZERO = new FlowVolume(0.0, FlowVolumeUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FlowVolume NaN = new FlowVolume(Double.NaN, FlowVolumeUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FlowVolume POSITIVE_INFINITY = new FlowVolume(Double.POSITIVE_INFINITY, FlowVolumeUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FlowVolume NEGATIVE_INFINITY = new FlowVolume(Double.NEGATIVE_INFINITY, FlowVolumeUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FlowVolume POS_MAXVALUE = new FlowVolume(Double.MAX_VALUE, FlowVolumeUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FlowVolume NEG_MAXVALUE = new FlowVolume(-Double.MAX_VALUE, FlowVolumeUnit.SI);
+
     /**
      * Construct FlowVolume scalar.
      * @param value double value
@@ -63,6 +79,16 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
     public final FlowVolume instantiateRel(final double value, final FlowVolumeUnit unit)
     {
         return new FlowVolume(value, unit);
+    }
+
+    /**
+     * Construct FlowVolume scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FlowVolume createSI(final double value)
+    {
+        return new FlowVolume(value, FlowVolumeUnit.SI);
     }
 
     /**

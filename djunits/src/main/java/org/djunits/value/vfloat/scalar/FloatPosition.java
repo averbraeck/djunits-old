@@ -35,6 +35,22 @@ public class FloatPosition extends AbstractFloatScalarAbs<LengthUnit, FloatPosit
     /** constant with value zero. */
     public static final FloatPosition ZERO = new FloatPosition(0.0f, LengthUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatPosition NaN = new FloatPosition(Float.NaN, LengthUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatPosition POSITIVE_INFINITY = new FloatPosition(Float.POSITIVE_INFINITY, LengthUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatPosition NEGATIVE_INFINITY = new FloatPosition(Float.NEGATIVE_INFINITY, LengthUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatPosition POS_MAXVALUE = new FloatPosition(Float.MAX_VALUE, LengthUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatPosition NEG_MAXVALUE = new FloatPosition(-Float.MAX_VALUE, LengthUnit.SI);
+
     /**
      * Construct FloatPosition scalar.
      * @param value float value
@@ -76,6 +92,16 @@ public class FloatPosition extends AbstractFloatScalarAbs<LengthUnit, FloatPosit
     public final FloatLength instantiateRel(final float value, final LengthUnit unit)
     {
         return new FloatLength(value, unit);
+    }
+
+    /**
+     * Construct FloatPosition scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatPosition createSI(final float value)
+    {
+        return new FloatPosition(value, LengthUnit.SI);
     }
 
     /**

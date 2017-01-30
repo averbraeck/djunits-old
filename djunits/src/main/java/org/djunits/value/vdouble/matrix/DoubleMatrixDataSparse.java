@@ -243,8 +243,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     {
         // determine number of non-null cells
         AtomicInteger atomicLength = new AtomicInteger(0);
-        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c -> 
-        {
+        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c -> {
             if (valuesSI[r][c] != 0.0)
             {
                 atomicLength.incrementAndGet();

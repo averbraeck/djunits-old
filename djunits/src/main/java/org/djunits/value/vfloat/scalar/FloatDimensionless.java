@@ -67,6 +67,24 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     /** constant with value zero. */
     public static final FloatDimensionless ZERO = new FloatDimensionless(0.0f, DimensionlessUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatDimensionless NaN = new FloatDimensionless(Float.NaN, DimensionlessUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatDimensionless POSITIVE_INFINITY =
+            new FloatDimensionless(Float.POSITIVE_INFINITY, DimensionlessUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatDimensionless NEGATIVE_INFINITY =
+            new FloatDimensionless(Float.NEGATIVE_INFINITY, DimensionlessUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatDimensionless POS_MAXVALUE = new FloatDimensionless(Float.MAX_VALUE, DimensionlessUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatDimensionless NEG_MAXVALUE = new FloatDimensionless(-Float.MAX_VALUE, DimensionlessUnit.SI);
+
     /**
      * Construct FloatDimensionless scalar.
      * @param value float value
@@ -101,6 +119,16 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     public final FloatDimensionless instantiateRel(final float value, final DimensionlessUnit unit)
     {
         return new FloatDimensionless(value, unit);
+    }
+
+    /**
+     * Construct FloatDimensionless scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatDimensionless createSI(final float value)
+    {
+        return new FloatDimensionless(value, DimensionlessUnit.SI);
     }
 
     /**

@@ -65,8 +65,8 @@ public class MoneyPerMassUnit extends LinearUnit<MoneyPerMassUnit>
     private MoneyPerMassUnit(final MoneyUnit moneyUnit, final MassUnit massUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerMassUnit, moneyUnit
-                .getConversionFactorToStandardUnit() / massUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerMassUnit,
+                moneyUnit.getConversionFactorToStandardUnit() / massUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.massUnit = massUnit;
     }
@@ -138,9 +138,8 @@ public class MoneyPerMassUnit extends LinearUnit<MoneyPerMassUnit>
     {
         try
         {
-            standardMoneyPerMassUnit =
-                    new MoneyPerMassUnit(standardMoneyUnit, MassUnit.KILOGRAM, standardMoneyUnit.getName() + " per kilogram",
-                            standardMoneyUnit.getAbbreviation() + "/kg");
+            standardMoneyPerMassUnit = new MoneyPerMassUnit(standardMoneyUnit, MassUnit.KILOGRAM,
+                    standardMoneyUnit.getName() + " per kilogram", standardMoneyUnit.getAbbreviation() + "/kg");
         }
         catch (Exception e)
         {

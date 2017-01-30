@@ -42,6 +42,22 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
     /** constant with value zero. */
     public static final FloatSpeed ZERO = new FloatSpeed(0.0f, SpeedUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatSpeed NaN = new FloatSpeed(Float.NaN, SpeedUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatSpeed POSITIVE_INFINITY = new FloatSpeed(Float.POSITIVE_INFINITY, SpeedUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatSpeed NEGATIVE_INFINITY = new FloatSpeed(Float.NEGATIVE_INFINITY, SpeedUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatSpeed POS_MAXVALUE = new FloatSpeed(Float.MAX_VALUE, SpeedUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatSpeed NEG_MAXVALUE = new FloatSpeed(-Float.MAX_VALUE, SpeedUnit.SI);
+
     /**
      * Construct FloatSpeed scalar.
      * @param value float value
@@ -76,6 +92,16 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
     public final FloatSpeed instantiateRel(final float value, final SpeedUnit unit)
     {
         return new FloatSpeed(value, unit);
+    }
+
+    /**
+     * Construct FloatSpeed scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatSpeed createSI(final float value)
+    {
+        return new FloatSpeed(value, SpeedUnit.SI);
     }
 
     /**

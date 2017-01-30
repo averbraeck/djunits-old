@@ -27,7 +27,7 @@ public interface Scale
      * @return the corresponding value in the given unit
      */
     double fromStandardUnit(final double value);
-    
+
     /**
      * Return whether this is a base (SI) scale.
      * @return boolean; whether this is a base (SI) scale or not

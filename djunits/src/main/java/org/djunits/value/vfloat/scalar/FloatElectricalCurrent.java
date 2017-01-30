@@ -38,6 +38,26 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     /** constant with value zero. */
     public static final FloatElectricalCurrent ZERO = new FloatElectricalCurrent(0.0f, ElectricalCurrentUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatElectricalCurrent NaN = new FloatElectricalCurrent(Float.NaN, ElectricalCurrentUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatElectricalCurrent POSITIVE_INFINITY =
+            new FloatElectricalCurrent(Float.POSITIVE_INFINITY, ElectricalCurrentUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatElectricalCurrent NEGATIVE_INFINITY =
+            new FloatElectricalCurrent(Float.NEGATIVE_INFINITY, ElectricalCurrentUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatElectricalCurrent POS_MAXVALUE =
+            new FloatElectricalCurrent(Float.MAX_VALUE, ElectricalCurrentUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatElectricalCurrent NEG_MAXVALUE =
+            new FloatElectricalCurrent(-Float.MAX_VALUE, ElectricalCurrentUnit.SI);
+
     /**
      * Construct FloatElectricalCurrent scalar.
      * @param value float value
@@ -72,6 +92,16 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     public final FloatElectricalCurrent instantiateRel(final float value, final ElectricalCurrentUnit unit)
     {
         return new FloatElectricalCurrent(value, unit);
+    }
+
+    /**
+     * Construct FloatElectricalCurrent scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatElectricalCurrent createSI(final float value)
+    {
+        return new FloatElectricalCurrent(value, ElectricalCurrentUnit.SI);
     }
 
     /**

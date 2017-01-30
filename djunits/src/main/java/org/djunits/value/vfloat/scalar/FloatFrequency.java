@@ -39,6 +39,22 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
     /** constant with value zero. */
     public static final FloatFrequency ZERO = new FloatFrequency(0.0f, FrequencyUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatFrequency NaN = new FloatFrequency(Float.NaN, FrequencyUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatFrequency POSITIVE_INFINITY = new FloatFrequency(Float.POSITIVE_INFINITY, FrequencyUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatFrequency NEGATIVE_INFINITY = new FloatFrequency(Float.NEGATIVE_INFINITY, FrequencyUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatFrequency POS_MAXVALUE = new FloatFrequency(Float.MAX_VALUE, FrequencyUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatFrequency NEG_MAXVALUE = new FloatFrequency(-Float.MAX_VALUE, FrequencyUnit.SI);
+
     /**
      * Construct FloatFrequency scalar.
      * @param value float value
@@ -73,6 +89,16 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
     public final FloatFrequency instantiateRel(final float value, final FrequencyUnit unit)
     {
         return new FloatFrequency(value, unit);
+    }
+
+    /**
+     * Construct FloatFrequency scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatFrequency createSI(final float value)
+    {
+        return new FloatFrequency(value, FrequencyUnit.SI);
     }
 
     /**

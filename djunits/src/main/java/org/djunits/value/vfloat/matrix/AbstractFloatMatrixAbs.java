@@ -24,10 +24,8 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarAbs;
  * @param <MA> the mutable absolute matrix type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractFloatMatrixAbs<U extends Unit<U>, A extends AbstractFloatMatrixAbs<U, A, R, MA, S>, 
-        R extends AbstractFloatMatrixRel<U, R, ?, ?>, MA extends AbstractMutableFloatMatrixAbs<U, A, R, MA, S>, 
-        S extends AbstractFloatScalarAbs<U, S, ?>>
-        extends AbstractFloatMatrix<U, A>  implements FloatMatrixInterface<U>, Absolute, Serializable
+abstract class AbstractFloatMatrixAbs<U extends Unit<U>, A extends AbstractFloatMatrixAbs<U, A, R, MA, S>, R extends AbstractFloatMatrixRel<U, R, ?, ?>, MA extends AbstractMutableFloatMatrixAbs<U, A, R, MA, S>, S extends AbstractFloatScalarAbs<U, S, ?>>
+        extends AbstractFloatMatrix<U, A> implements FloatMatrixInterface<U>, Absolute, Serializable
 {
     /** */
     private static final long serialVersionUID = 20151006L;

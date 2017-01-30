@@ -41,6 +41,22 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     /** constant with value zero. */
     public static final Energy ZERO = new Energy(0.0, EnergyUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Energy NaN = new Energy(Double.NaN, EnergyUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Energy POSITIVE_INFINITY = new Energy(Double.POSITIVE_INFINITY, EnergyUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Energy NEGATIVE_INFINITY = new Energy(Double.NEGATIVE_INFINITY, EnergyUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Energy POS_MAXVALUE = new Energy(Double.MAX_VALUE, EnergyUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Energy NEG_MAXVALUE = new Energy(-Double.MAX_VALUE, EnergyUnit.SI);
+
     /**
      * Construct Energy scalar.
      * @param value double value
@@ -65,6 +81,16 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     public final Energy instantiateRel(final double value, final EnergyUnit unit)
     {
         return new Energy(value, unit);
+    }
+
+    /**
+     * Construct Energy scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Energy createSI(final double value)
+    {
+        return new Energy(value, EnergyUnit.SI);
     }
 
     /**

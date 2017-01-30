@@ -35,6 +35,22 @@ public class FloatDirection extends AbstractFloatScalarAbs<AngleUnit, FloatDirec
     /** constant with value zero. */
     public static final FloatDirection ZERO = new FloatDirection(0.0f, AngleUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatDirection NaN = new FloatDirection(Float.NaN, AngleUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatDirection POSITIVE_INFINITY = new FloatDirection(Float.POSITIVE_INFINITY, AngleUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatDirection NEGATIVE_INFINITY = new FloatDirection(Float.NEGATIVE_INFINITY, AngleUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatDirection POS_MAXVALUE = new FloatDirection(Float.MAX_VALUE, AngleUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatDirection NEG_MAXVALUE = new FloatDirection(-Float.MAX_VALUE, AngleUnit.SI);
+
     /**
      * Construct FloatDirection scalar.
      * @param value float value
@@ -76,6 +92,16 @@ public class FloatDirection extends AbstractFloatScalarAbs<AngleUnit, FloatDirec
     public final FloatAngle instantiateRel(final float value, final AngleUnit unit)
     {
         return new FloatAngle(value, unit);
+    }
+
+    /**
+     * Construct FloatDirection scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatDirection createSI(final float value)
+    {
+        return new FloatDirection(value, AngleUnit.SI);
     }
 
     /**

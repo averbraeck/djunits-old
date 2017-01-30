@@ -41,6 +41,22 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
     /** constant with value zero. */
     public static final Mass ZERO = new Mass(0.0, MassUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Mass NaN = new Mass(Double.NaN, MassUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Mass POSITIVE_INFINITY = new Mass(Double.POSITIVE_INFINITY, MassUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Mass NEGATIVE_INFINITY = new Mass(Double.NEGATIVE_INFINITY, MassUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Mass POS_MAXVALUE = new Mass(Double.MAX_VALUE, MassUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Mass NEG_MAXVALUE = new Mass(-Double.MAX_VALUE, MassUnit.SI);
+
     /**
      * Construct Mass scalar.
      * @param value double value
@@ -65,6 +81,16 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
     public final Mass instantiateRel(final double value, final MassUnit unit)
     {
         return new Mass(value, unit);
+    }
+
+    /**
+     * Construct Mass scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Mass createSI(final double value)
+    {
+        return new Mass(value, MassUnit.SI);
     }
 
     /**

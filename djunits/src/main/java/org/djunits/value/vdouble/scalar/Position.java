@@ -35,6 +35,22 @@ public class Position extends AbstractDoubleScalarAbs<LengthUnit, Position, Leng
     /** constant with value zero. */
     public static final Position ZERO = new Position(0.0, LengthUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Position NaN = new Position(Double.NaN, LengthUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Position POSITIVE_INFINITY = new Position(Double.POSITIVE_INFINITY, LengthUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Position NEGATIVE_INFINITY = new Position(Double.NEGATIVE_INFINITY, LengthUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Position POS_MAXVALUE = new Position(Double.MAX_VALUE, LengthUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Position NEG_MAXVALUE = new Position(-Double.MAX_VALUE, LengthUnit.SI);
+
     /**
      * Construct Position scalar.
      * @param value double value
@@ -66,6 +82,16 @@ public class Position extends AbstractDoubleScalarAbs<LengthUnit, Position, Leng
     public final Length instantiateRel(final double value, final LengthUnit unit)
     {
         return new Length(value, unit);
+    }
+
+    /**
+     * Construct %TypeAbsl% scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Position createSI(final double value)
+    {
+        return new Position(value, LengthUnit.SI);
     }
 
     /**

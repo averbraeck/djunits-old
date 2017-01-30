@@ -35,6 +35,22 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Float
     /** constant with value zero. */
     public static final FloatTime ZERO = new FloatTime(0.0f, TimeUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatTime NaN = new FloatTime(Float.NaN, TimeUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatTime POSITIVE_INFINITY = new FloatTime(Float.POSITIVE_INFINITY, TimeUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatTime NEGATIVE_INFINITY = new FloatTime(Float.NEGATIVE_INFINITY, TimeUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatTime POS_MAXVALUE = new FloatTime(Float.MAX_VALUE, TimeUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatTime NEG_MAXVALUE = new FloatTime(-Float.MAX_VALUE, TimeUnit.SI);
+
     /**
      * Construct FloatTime scalar.
      * @param value float value
@@ -76,6 +92,16 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Float
     public final FloatDuration instantiateRel(final float value, final TimeUnit unit)
     {
         return new FloatDuration(value, unit);
+    }
+
+    /**
+     * Construct FloatTime scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatTime createSI(final float value)
+    {
+        return new FloatTime(value, TimeUnit.SI);
     }
 
     /**

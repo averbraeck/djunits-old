@@ -90,8 +90,8 @@ public class AreaUnit extends LinearUnit<AreaUnit>
     private AreaUnit(final LengthUnit lengthUnit, final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
             final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, SQUARE_METER, lengthUnit
-                .getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, SQUARE_METER,
+                lengthUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.lengthUnit = lengthUnit;
     }
 

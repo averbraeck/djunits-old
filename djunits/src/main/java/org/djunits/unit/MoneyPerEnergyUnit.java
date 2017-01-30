@@ -72,8 +72,8 @@ public class MoneyPerEnergyUnit extends LinearUnit<MoneyPerEnergyUnit>
     private MoneyPerEnergyUnit(final MoneyUnit moneyUnit, final EnergyUnit energyUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerEnergyUnit, moneyUnit
-                .getConversionFactorToStandardUnit() / energyUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerEnergyUnit,
+                moneyUnit.getConversionFactorToStandardUnit() / energyUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.energyUnit = energyUnit;
     }
@@ -146,9 +146,8 @@ public class MoneyPerEnergyUnit extends LinearUnit<MoneyPerEnergyUnit>
     {
         try
         {
-            standardMoneyPerEnergyUnit =
-                    new MoneyPerEnergyUnit(standardMoneyUnit, EnergyUnit.KILOWATT_HOUR, standardMoneyUnit.getName()
-                            + " per kilowatthour", standardMoneyUnit.getAbbreviation() + "/kWh");
+            standardMoneyPerEnergyUnit = new MoneyPerEnergyUnit(standardMoneyUnit, EnergyUnit.KILOWATT_HOUR,
+                    standardMoneyUnit.getName() + " per kilowatthour", standardMoneyUnit.getAbbreviation() + "/kWh");
         }
         catch (Exception e)
         {

@@ -47,9 +47,8 @@ public class TemperatureUnit extends Unit<TemperatureUnit>
         KELVIN = SI;
         DEGREE_CELSIUS =
                 new TemperatureUnit("TemperatureUnit.degree_Celsius", "TemperatureUnit.dgC", SI_DERIVED, 1.0, 273.15, true);
-        DEGREE_FAHRENHEIT =
-                new TemperatureUnit("TemperatureUnit.degree_Fahrenheit", "TemperatureUnit.dgF", IMPERIAL, 5.0 / 9.0, 459.67,
-                        true);
+        DEGREE_FAHRENHEIT = new TemperatureUnit("TemperatureUnit.degree_Fahrenheit", "TemperatureUnit.dgF", IMPERIAL, 5.0 / 9.0,
+                459.67, true);
         DEGREE_RANKINE =
                 new TemperatureUnit("TemperatureUnit.degree_Rankine", "TemperatureUnit.dgR", OTHER, 5.0 / 9.0, 0.0, true);
         DEGREE_REAUMUR =
@@ -66,12 +65,11 @@ public class TemperatureUnit extends Unit<TemperatureUnit>
      * @param offsetToKelvin the offsetToKelvin to add to convert to the standard (e.g., SI) unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private TemperatureUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final UnitSystem unitSystem, final double conversionFactorToStandardUnit, final double offsetToKelvin,
-            final boolean standardUnit)
+    private TemperatureUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final double conversionFactorToStandardUnit, final double offsetToKelvin, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, new OffsetLinearScale(conversionFactorToStandardUnit,
-                offsetToKelvin), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem,
+                new OffsetLinearScale(conversionFactorToStandardUnit, offsetToKelvin), standardUnit);
     }
 
     /**

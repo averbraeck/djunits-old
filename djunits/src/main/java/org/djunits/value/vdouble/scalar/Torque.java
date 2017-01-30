@@ -41,6 +41,22 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
     /** constant with value zero. */
     public static final Torque ZERO = new Torque(0.0, TorqueUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Torque NaN = new Torque(Double.NaN, TorqueUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Torque POSITIVE_INFINITY = new Torque(Double.POSITIVE_INFINITY, TorqueUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Torque NEGATIVE_INFINITY = new Torque(Double.NEGATIVE_INFINITY, TorqueUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Torque POS_MAXVALUE = new Torque(Double.MAX_VALUE, TorqueUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Torque NEG_MAXVALUE = new Torque(-Double.MAX_VALUE, TorqueUnit.SI);
+
     /**
      * Construct Torque scalar.
      * @param value double value
@@ -65,6 +81,16 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
     public final Torque instantiateRel(final double value, final TorqueUnit unit)
     {
         return new Torque(value, unit);
+    }
+
+    /**
+     * Construct Torque scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Torque createSI(final double value)
+    {
+        return new Torque(value, TorqueUnit.SI);
     }
 
     /**

@@ -36,6 +36,22 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
     /** constant with value zero. */
     public static final Angle ZERO = new Angle(0.0, AngleUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Angle NaN = new Angle(Double.NaN, AngleUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Angle POSITIVE_INFINITY = new Angle(Double.POSITIVE_INFINITY, AngleUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Angle NEGATIVE_INFINITY = new Angle(Double.NEGATIVE_INFINITY, AngleUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Angle POS_MAXVALUE = new Angle(Double.MAX_VALUE, AngleUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Angle NEG_MAXVALUE = new Angle(-Double.MAX_VALUE, AngleUnit.SI);
+
     /**
      * Construct Angle scalar.
      * @param value double value
@@ -71,6 +87,16 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
     public final Direction instantiateAbs(final double value, final AngleUnit unit)
     {
         return new Direction(value, unit);
+    }
+
+    /**
+     * Construct Angle scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Angle createSI(final double value)
+    {
+        return new Angle(value, AngleUnit.SI);
     }
 
     /**

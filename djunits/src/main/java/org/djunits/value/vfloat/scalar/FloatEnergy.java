@@ -41,6 +41,22 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
     /** constant with value zero. */
     public static final FloatEnergy ZERO = new FloatEnergy(0.0f, EnergyUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatEnergy NaN = new FloatEnergy(Float.NaN, EnergyUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatEnergy POSITIVE_INFINITY = new FloatEnergy(Float.POSITIVE_INFINITY, EnergyUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatEnergy NEGATIVE_INFINITY = new FloatEnergy(Float.NEGATIVE_INFINITY, EnergyUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatEnergy POS_MAXVALUE = new FloatEnergy(Float.MAX_VALUE, EnergyUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatEnergy NEG_MAXVALUE = new FloatEnergy(-Float.MAX_VALUE, EnergyUnit.SI);
+
     /**
      * Construct FloatEnergy scalar.
      * @param value float value
@@ -75,6 +91,16 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
     public final FloatEnergy instantiateRel(final float value, final EnergyUnit unit)
     {
         return new FloatEnergy(value, unit);
+    }
+
+    /**
+     * Construct FloatEnergy scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatEnergy createSI(final float value)
+    {
+        return new FloatEnergy(value, EnergyUnit.SI);
     }
 
     /**

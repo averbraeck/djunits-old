@@ -38,6 +38,22 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
     /** constant with value zero. */
     public static final Acceleration ZERO = new Acceleration(0.0, AccelerationUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Acceleration NaN = new Acceleration(Double.NaN, AccelerationUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Acceleration POSITIVE_INFINITY = new Acceleration(Double.POSITIVE_INFINITY, AccelerationUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Acceleration NEGATIVE_INFINITY = new Acceleration(Double.NEGATIVE_INFINITY, AccelerationUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Acceleration POS_MAXVALUE = new Acceleration(Double.MAX_VALUE, AccelerationUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Acceleration NEG_MAXVALUE = new Acceleration(-Double.MAX_VALUE, AccelerationUnit.SI);
+
     /**
      * Construct Acceleration scalar.
      * @param value double value
@@ -62,6 +78,16 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
     public final Acceleration instantiateRel(final double value, final AccelerationUnit unit)
     {
         return new Acceleration(value, unit);
+    }
+
+    /**
+     * Construct Acceleration scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Acceleration createSI(final double value)
+    {
+        return new Acceleration(value, AccelerationUnit.SI);
     }
 
     /**

@@ -95,19 +95,15 @@ public class VolumeUnit extends LinearUnit<VolumeUnit>
         CUBIC_YARD = new VolumeUnit(LengthUnit.YARD, "VolumeUnit.cubic_yard", "VolumeUnit.yd^3", IMPERIAL, true);
         GALLON_US_FLUID = new VolumeUnit("VolumeUnit.gallon_(US)", "VolumeUnit.gal(US)", US_CUSTOMARY, CUBIC_INCH, 231.0, true);
         GALLON_IMP = new VolumeUnit("VolumeUnit.gallon_(imp)", "VolumeUnit.gal(imp)", IMPERIAL, LITER, 4.5409, true);
-        OUNCE_US_FLUID =
-                new VolumeUnit("VolumeUnit.ounce_(fluid_US)", "VolumeUnit.US_fl_oz", US_CUSTOMARY, GALLON_US_FLUID,
-                        1.0 / 128.0, true);
-        OUNCE_IMP_FLUID =
-                new VolumeUnit("VolumeUnit.ounce_(fluid_imperial)", "VolumeUnit.fl_oz_(imp)", IMPERIAL, GALLON_IMP,
-                        1.0 / 160.0, true);
-        PINT_US_FLUID =
-                new VolumeUnit("VolumeUnit.pint_(US_fluid)", "VolumeUnit.pt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID, 1.0 / 8.0,
-                        true);
+        OUNCE_US_FLUID = new VolumeUnit("VolumeUnit.ounce_(fluid_US)", "VolumeUnit.US_fl_oz", US_CUSTOMARY, GALLON_US_FLUID,
+                1.0 / 128.0, true);
+        OUNCE_IMP_FLUID = new VolumeUnit("VolumeUnit.ounce_(fluid_imperial)", "VolumeUnit.fl_oz_(imp)", IMPERIAL, GALLON_IMP,
+                1.0 / 160.0, true);
+        PINT_US_FLUID = new VolumeUnit("VolumeUnit.pint_(US_fluid)", "VolumeUnit.pt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID,
+                1.0 / 8.0, true);
         PINT_IMP = new VolumeUnit("VolumeUnit.pint_(imperial)", "VolumeUnit.pt_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 8.0, true);
-        QUART_US_FLUID =
-                new VolumeUnit("VolumeUnit.quart_(US_fluid)", "VolumeUnit.qt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID, 1.0 / 4.0,
-                        true);
+        QUART_US_FLUID = new VolumeUnit("VolumeUnit.quart_(US_fluid)", "VolumeUnit.qt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID,
+                1.0 / 4.0, true);
         QUART_IMP = new VolumeUnit("VolumeUnit.quart_(imperial)", "VolumeUnit.qt_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 4.0, true);
     }
 
@@ -123,8 +119,8 @@ public class VolumeUnit extends LinearUnit<VolumeUnit>
     private VolumeUnit(final LengthUnit lengthUnit, final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
             final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, CUBIC_METER, Math.pow(
-                lengthUnit.getConversionFactorToStandardUnit(), 3), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, CUBIC_METER,
+                Math.pow(lengthUnit.getConversionFactorToStandardUnit(), 3), standardUnit);
         this.lengthUnit = lengthUnit;
     }
 
@@ -166,8 +162,8 @@ public class VolumeUnit extends LinearUnit<VolumeUnit>
      * @param referenceUnit the unit to convert to
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
-    public VolumeUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final VolumeUnit referenceUnit, final double conversionFactorToReferenceUnit)
+    public VolumeUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final VolumeUnit referenceUnit,
+            final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

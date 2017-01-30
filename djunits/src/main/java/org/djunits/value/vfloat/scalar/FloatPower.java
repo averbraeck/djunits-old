@@ -41,6 +41,22 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
     /** constant with value zero. */
     public static final FloatPower ZERO = new FloatPower(0.0f, PowerUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatPower NaN = new FloatPower(Float.NaN, PowerUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatPower POSITIVE_INFINITY = new FloatPower(Float.POSITIVE_INFINITY, PowerUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatPower NEGATIVE_INFINITY = new FloatPower(Float.NEGATIVE_INFINITY, PowerUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatPower POS_MAXVALUE = new FloatPower(Float.MAX_VALUE, PowerUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatPower NEG_MAXVALUE = new FloatPower(-Float.MAX_VALUE, PowerUnit.SI);
+
     /**
      * Construct FloatPower scalar.
      * @param value float value
@@ -75,6 +91,16 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
     public final FloatPower instantiateRel(final float value, final PowerUnit unit)
     {
         return new FloatPower(value, unit);
+    }
+
+    /**
+     * Construct FloatPower scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatPower createSI(final float value)
+    {
+        return new FloatPower(value, PowerUnit.SI);
     }
 
     /**

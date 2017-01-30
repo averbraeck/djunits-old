@@ -38,6 +38,24 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
     /** constant with value zero. */
     public static final ElectricalCurrent ZERO = new ElectricalCurrent(0.0, ElectricalCurrentUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final ElectricalCurrent NaN = new ElectricalCurrent(Double.NaN, ElectricalCurrentUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final ElectricalCurrent POSITIVE_INFINITY =
+            new ElectricalCurrent(Double.POSITIVE_INFINITY, ElectricalCurrentUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final ElectricalCurrent NEGATIVE_INFINITY =
+            new ElectricalCurrent(Double.NEGATIVE_INFINITY, ElectricalCurrentUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final ElectricalCurrent POS_MAXVALUE = new ElectricalCurrent(Double.MAX_VALUE, ElectricalCurrentUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final ElectricalCurrent NEG_MAXVALUE = new ElectricalCurrent(-Double.MAX_VALUE, ElectricalCurrentUnit.SI);
+
     /**
      * Construct ElectricalCurrent scalar.
      * @param value double value
@@ -62,6 +80,16 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
     public final ElectricalCurrent instantiateRel(final double value, final ElectricalCurrentUnit unit)
     {
         return new ElectricalCurrent(value, unit);
+    }
+
+    /**
+     * Construct ElectricalCurrent scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final ElectricalCurrent createSI(final double value)
+    {
+        return new ElectricalCurrent(value, ElectricalCurrentUnit.SI);
     }
 
     /**

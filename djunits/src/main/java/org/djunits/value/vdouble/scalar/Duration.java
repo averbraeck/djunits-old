@@ -43,6 +43,22 @@ public class Duration extends AbstractDoubleScalarRel<TimeUnit, Duration>
     /** constant with value zero. */
     public static final Duration ZERO = new Duration(0.0, TimeUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Duration NaN = new Duration(Double.NaN, TimeUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Duration POSITIVE_INFINITY = new Duration(Double.POSITIVE_INFINITY, TimeUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Duration NEGATIVE_INFINITY = new Duration(Double.NEGATIVE_INFINITY, TimeUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Duration POS_MAXVALUE = new Duration(Double.MAX_VALUE, TimeUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Duration NEG_MAXVALUE = new Duration(-Double.MAX_VALUE, TimeUnit.SI);
+
     /**
      * Construct Duration scalar.
      * @param value double value
@@ -78,6 +94,16 @@ public class Duration extends AbstractDoubleScalarRel<TimeUnit, Duration>
     public final Time instantiateAbs(final double value, final TimeUnit unit)
     {
         return new Time(value, unit);
+    }
+
+    /**
+     * Construct Duration scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Duration createSI(final double value)
+    {
+        return new Duration(value, TimeUnit.SI);
     }
 
     /**

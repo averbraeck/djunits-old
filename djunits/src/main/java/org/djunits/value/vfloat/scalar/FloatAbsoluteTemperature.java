@@ -36,6 +36,26 @@ public class FloatAbsoluteTemperature
     /** constant with value zero. */
     public static final FloatAbsoluteTemperature ZERO = new FloatAbsoluteTemperature(0.0f, TemperatureUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatAbsoluteTemperature NaN = new FloatAbsoluteTemperature(Float.NaN, TemperatureUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatAbsoluteTemperature POSITIVE_INFINITY =
+            new FloatAbsoluteTemperature(Float.POSITIVE_INFINITY, TemperatureUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatAbsoluteTemperature NEGATIVE_INFINITY =
+            new FloatAbsoluteTemperature(Float.NEGATIVE_INFINITY, TemperatureUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatAbsoluteTemperature POS_MAXVALUE =
+            new FloatAbsoluteTemperature(Float.MAX_VALUE, TemperatureUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatAbsoluteTemperature NEG_MAXVALUE =
+            new FloatAbsoluteTemperature(-Float.MAX_VALUE, TemperatureUnit.SI);
+
     /**
      * Construct FloatAbsoluteTemperature scalar.
      * @param value float value
@@ -77,6 +97,16 @@ public class FloatAbsoluteTemperature
     public final FloatTemperature instantiateRel(final float value, final TemperatureUnit unit)
     {
         return new FloatTemperature(value, unit);
+    }
+
+    /**
+     * Construct FloatAbsoluteTemperature scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatAbsoluteTemperature createSI(final float value)
+    {
+        return new FloatAbsoluteTemperature(value, TemperatureUnit.SI);
     }
 
     /**

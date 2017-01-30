@@ -37,6 +37,26 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
     /** constant with value zero. */
     public static final FloatElectricalCharge ZERO = new FloatElectricalCharge(0.0f, ElectricalChargeUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatElectricalCharge NaN = new FloatElectricalCharge(Float.NaN, ElectricalChargeUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatElectricalCharge POSITIVE_INFINITY =
+            new FloatElectricalCharge(Float.POSITIVE_INFINITY, ElectricalChargeUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatElectricalCharge NEGATIVE_INFINITY =
+            new FloatElectricalCharge(Float.NEGATIVE_INFINITY, ElectricalChargeUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatElectricalCharge POS_MAXVALUE =
+            new FloatElectricalCharge(Float.MAX_VALUE, ElectricalChargeUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatElectricalCharge NEG_MAXVALUE =
+            new FloatElectricalCharge(-Float.MAX_VALUE, ElectricalChargeUnit.SI);
+
     /**
      * Construct FloatElectricalCharge scalar.
      * @param value float value
@@ -71,6 +91,16 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
     public final FloatElectricalCharge instantiateRel(final float value, final ElectricalChargeUnit unit)
     {
         return new FloatElectricalCharge(value, unit);
+    }
+
+    /**
+     * Construct FloatElectricalCharge scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatElectricalCharge createSI(final float value)
+    {
+        return new FloatElectricalCharge(value, ElectricalChargeUnit.SI);
     }
 
     /**

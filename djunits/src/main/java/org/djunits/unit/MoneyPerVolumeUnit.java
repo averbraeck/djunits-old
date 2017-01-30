@@ -62,8 +62,8 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
     private MoneyPerVolumeUnit(final MoneyUnit moneyUnit, final VolumeUnit volumeUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerVolumeUnit, moneyUnit
-                .getConversionFactorToStandardUnit() / volumeUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerVolumeUnit,
+                moneyUnit.getConversionFactorToStandardUnit() / volumeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.volumeUnit = volumeUnit;
     }
@@ -136,9 +136,8 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
     {
         try
         {
-            standardMoneyPerVolumeUnit =
-                    new MoneyPerVolumeUnit(standardMoneyUnit, VolumeUnit.CUBIC_METER, standardMoneyUnit.getName()
-                            + " per cubic meter", standardMoneyUnit.getAbbreviation() + "/m^3");
+            standardMoneyPerVolumeUnit = new MoneyPerVolumeUnit(standardMoneyUnit, VolumeUnit.CUBIC_METER,
+                    standardMoneyUnit.getName() + " per cubic meter", standardMoneyUnit.getAbbreviation() + "/m^3");
         }
         catch (Exception e)
         {

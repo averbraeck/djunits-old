@@ -36,6 +36,22 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
     /** constant with value zero. */
     public static final FloatDensity ZERO = new FloatDensity(0.0f, DensityUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatDensity NaN = new FloatDensity(Float.NaN, DensityUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatDensity POSITIVE_INFINITY = new FloatDensity(Float.POSITIVE_INFINITY, DensityUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatDensity NEGATIVE_INFINITY = new FloatDensity(Float.NEGATIVE_INFINITY, DensityUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatDensity POS_MAXVALUE = new FloatDensity(Float.MAX_VALUE, DensityUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatDensity NEG_MAXVALUE = new FloatDensity(-Float.MAX_VALUE, DensityUnit.SI);
+
     /**
      * Construct FloatDensity scalar.
      * @param value float value
@@ -70,6 +86,16 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
     public final FloatDensity instantiateRel(final float value, final DensityUnit unit)
     {
         return new FloatDensity(value, unit);
+    }
+
+    /**
+     * Construct FloatDensity scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatDensity createSI(final float value)
+    {
+        return new FloatDensity(value, DensityUnit.SI);
     }
 
     /**

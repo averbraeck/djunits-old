@@ -35,6 +35,22 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, Duration>
     /** constant with value zero. */
     public static final Time ZERO = new Time(0.0, TimeUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Time NaN = new Time(Double.NaN, TimeUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Time POSITIVE_INFINITY = new Time(Double.POSITIVE_INFINITY, TimeUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Time NEGATIVE_INFINITY = new Time(Double.NEGATIVE_INFINITY, TimeUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Time POS_MAXVALUE = new Time(Double.MAX_VALUE, TimeUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Time NEG_MAXVALUE = new Time(-Double.MAX_VALUE, TimeUnit.SI);
+
     /**
      * Construct Time scalar.
      * @param value double value
@@ -66,6 +82,16 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, Duration>
     public final Duration instantiateRel(final double value, final TimeUnit unit)
     {
         return new Duration(value, unit);
+    }
+
+    /**
+     * Construct %TypeAbsl% scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Time createSI(final double value)
+    {
+        return new Time(value, TimeUnit.SI);
     }
 
     /**

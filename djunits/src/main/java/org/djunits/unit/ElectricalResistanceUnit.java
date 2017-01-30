@@ -48,20 +48,15 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
 
     static
     {
-        SI =
-                new ElectricalResistanceUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE,
-                        TimeUnit.SECOND, "ElectricalResistanceUnit.ohm_(name)", "ElectricalResistanceUnit.ohm", SI_DERIVED,
-                        true);
+        SI = new ElectricalResistanceUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND,
+                "ElectricalResistanceUnit.ohm_(name)", "ElectricalResistanceUnit.ohm", SI_DERIVED, true);
         OHM = SI;
-        MILLIOHM =
-                new ElectricalResistanceUnit("ElectricalResistanceUnit.milli_ohm", "ElectricalResistanceUnit.m_ohm",
-                        SI_DERIVED, OHM, 0.001, true);
-        KILOOHM =
-                new ElectricalResistanceUnit("ElectricalResistanceUnit.kilo_ohm", "ElectricalResistanceUnit.k_ohm", SI_DERIVED,
-                        OHM, 1000.0, true);
-        MEGAOHM =
-                new ElectricalResistanceUnit("ElectricalResistanceUnit.mega_ohm", "ElectricalResistanceUnit.M_ohm", SI_DERIVED,
-                        OHM, 1E06, true);
+        MILLIOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.milli_ohm", "ElectricalResistanceUnit.m_ohm",
+                SI_DERIVED, OHM, 0.001, true);
+        KILOOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.kilo_ohm", "ElectricalResistanceUnit.k_ohm",
+                SI_DERIVED, OHM, 1000.0, true);
+        MEGAOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.mega_ohm", "ElectricalResistanceUnit.M_ohm",
+                SI_DERIVED, OHM, 1E06, true);
     }
 
     /**
@@ -81,12 +76,13 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
             final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, OHM, massUnit.getConversionFactorToStandardUnit()
-                * lengthUnit.getConversionFactorToStandardUnit()
-                * lengthUnit.getConversionFactorToStandardUnit()
-                / (electricalCurrentUnit.getConversionFactorToStandardUnit()
-                        * electricalCurrentUnit.getConversionFactorToStandardUnit() * Math.pow(
-                        timeUnit.getConversionFactorToStandardUnit(), 3.0)), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, OHM,
+                massUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
+                        * lengthUnit.getConversionFactorToStandardUnit()
+                        / (electricalCurrentUnit.getConversionFactorToStandardUnit()
+                                * electricalCurrentUnit.getConversionFactorToStandardUnit()
+                                * Math.pow(timeUnit.getConversionFactorToStandardUnit(), 3.0)),
+                standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.electricalCurrentUnit = electricalCurrentUnit;
@@ -124,8 +120,10 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
             final ElectricalCurrentUnit electricalCurrentUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, OHM, electricalPotentialUnit
-                .getConversionFactorToStandardUnit() / electricalCurrentUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, OHM,
+                electricalPotentialUnit.getConversionFactorToStandardUnit()
+                        / electricalCurrentUnit.getConversionFactorToStandardUnit(),
+                standardUnit);
         this.massUnit = electricalPotentialUnit.getMassUnit();
         this.lengthUnit = electricalPotentialUnit.getLengthUnit();
         this.electricalCurrentUnit = electricalCurrentUnit;

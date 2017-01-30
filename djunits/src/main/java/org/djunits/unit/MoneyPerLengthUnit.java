@@ -60,8 +60,8 @@ public class MoneyPerLengthUnit extends LinearUnit<MoneyPerLengthUnit>
     private MoneyPerLengthUnit(final MoneyUnit moneyUnit, final LengthUnit lengthUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerLengthUnit, moneyUnit
-                .getConversionFactorToStandardUnit() / lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerLengthUnit,
+                moneyUnit.getConversionFactorToStandardUnit() / lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.lengthUnit = lengthUnit;
     }
@@ -134,9 +134,8 @@ public class MoneyPerLengthUnit extends LinearUnit<MoneyPerLengthUnit>
     {
         try
         {
-            standardMoneyPerLengthUnit =
-                    new MoneyPerLengthUnit(standardMoneyUnit, LengthUnit.METER, standardMoneyUnit.getName() + " per meter",
-                            standardMoneyUnit.getAbbreviation() + "/m");
+            standardMoneyPerLengthUnit = new MoneyPerLengthUnit(standardMoneyUnit, LengthUnit.METER,
+                    standardMoneyUnit.getName() + " per meter", standardMoneyUnit.getAbbreviation() + "/m");
         }
         catch (Exception e)
         {

@@ -36,6 +36,22 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
     /** constant with value zero. */
     public static final Temperature ZERO = new Temperature(0.0, TemperatureUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Temperature NaN = new Temperature(Double.NaN, TemperatureUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Temperature POSITIVE_INFINITY = new Temperature(Double.POSITIVE_INFINITY, TemperatureUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Temperature NEGATIVE_INFINITY = new Temperature(Double.NEGATIVE_INFINITY, TemperatureUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Temperature POS_MAXVALUE = new Temperature(Double.MAX_VALUE, TemperatureUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Temperature NEG_MAXVALUE = new Temperature(-Double.MAX_VALUE, TemperatureUnit.SI);
+
     /**
      * Construct Temperature scalar.
      * @param value double value
@@ -71,6 +87,16 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
     public final AbsoluteTemperature instantiateAbs(final double value, final TemperatureUnit unit)
     {
         return new AbsoluteTemperature(value, unit);
+    }
+
+    /**
+     * Construct Temperature scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Temperature createSI(final double value)
+    {
+        return new Temperature(value, TemperatureUnit.SI);
     }
 
     /**

@@ -36,13 +36,11 @@ public class DensityUnit extends LinearUnit<DensityUnit>
 
     static
     {
-        SI =
-                new DensityUnit(MassUnit.KILOGRAM, LengthUnit.METER, "DensityUnit.kilogram_per_cubic_meter",
-                        "DensityUnit.kg/m^3", SI_DERIVED, true);
+        SI = new DensityUnit(MassUnit.KILOGRAM, LengthUnit.METER, "DensityUnit.kilogram_per_cubic_meter", "DensityUnit.kg/m^3",
+                SI_DERIVED, true);
         KG_PER_METER_3 = SI;
-        GRAM_PER_CENTIMETER_3 =
-                new DensityUnit(MassUnit.GRAM, LengthUnit.CENTIMETER, "DensityUnit.gram_per_cubic_centimeter",
-                        "DensityUnit.g/cm^3", SI_DERIVED, true);
+        GRAM_PER_CENTIMETER_3 = new DensityUnit(MassUnit.GRAM, LengthUnit.CENTIMETER, "DensityUnit.gram_per_cubic_centimeter",
+                "DensityUnit.g/cm^3", SI_DERIVED, true);
     }
 
     /**
@@ -58,8 +56,8 @@ public class DensityUnit extends LinearUnit<DensityUnit>
     private DensityUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, KG_PER_METER_3, massUnit
-                .getConversionFactorToStandardUnit() / Math.pow(lengthUnit.getConversionFactorToStandardUnit(), 3.0),
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, KG_PER_METER_3,
+                massUnit.getConversionFactorToStandardUnit() / Math.pow(lengthUnit.getConversionFactorToStandardUnit(), 3.0),
                 standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;

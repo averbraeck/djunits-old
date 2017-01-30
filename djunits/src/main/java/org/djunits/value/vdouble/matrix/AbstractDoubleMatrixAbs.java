@@ -24,9 +24,7 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarAbs;
  * @param <MA> the mutable absolute matrix type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoubleMatrixAbs<U, A, R, MA, S>, 
-        R extends AbstractDoubleMatrixRel<U, R, ?, ?>, MA extends AbstractMutableDoubleMatrixAbs<U, A, R, MA, S>, 
-        S extends AbstractDoubleScalarAbs<U, S, ?>>
+abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoubleMatrixAbs<U, A, R, MA, S>, R extends AbstractDoubleMatrixRel<U, R, ?, ?>, MA extends AbstractMutableDoubleMatrixAbs<U, A, R, MA, S>, S extends AbstractDoubleScalarAbs<U, S, ?>>
         extends AbstractDoubleMatrix<U, A> implements Absolute, Serializable
 {
     /** */

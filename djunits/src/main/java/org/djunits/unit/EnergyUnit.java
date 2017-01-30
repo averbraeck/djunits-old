@@ -117,23 +117,19 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
 
     static
     {
-        SI =
-                new EnergyUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "EnergyUnit.Joule", "EnergyUnit.J",
-                        SI_DERIVED, true);
+        SI = new EnergyUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "EnergyUnit.Joule", "EnergyUnit.J",
+                SI_DERIVED, true);
         JOULE = SI;
         KILOJOULE = new EnergyUnit("EnergyUnit.kilojoule", "EnergyUnit.kJ", SI_BASE, JOULE, 1000.0, true);
         MEGAJOULE = new EnergyUnit("EnergyUnit.megajoule", "EnergyUnit.MJ", SI_BASE, JOULE, 1E9, true);
-        FOOT_POUND_FORCE =
-                new EnergyUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "EnergyUnit.foot_pound-force", "EnergyUnit.ft.lbf",
-                        IMPERIAL, true);
-        INCH_POUND_FORCE =
-                new EnergyUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "EnergyUnit.inch_pound-force", "EnergyUnit.in.lbf",
-                        IMPERIAL, true);
+        FOOT_POUND_FORCE = new EnergyUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "EnergyUnit.foot_pound-force",
+                "EnergyUnit.ft.lbf", IMPERIAL, true);
+        INCH_POUND_FORCE = new EnergyUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "EnergyUnit.inch_pound-force",
+                "EnergyUnit.in.lbf", IMPERIAL, true);
         BTU_ISO =
                 new EnergyUnit("EnergyUnit.British_thermal_unit_(ISO)", "EnergyUnit.BTU(ISO)", IMPERIAL, JOULE, 1.0545E3, true);
-        BTU_IT =
-                new EnergyUnit("EnergyUnit.British_thermal_unit_(International_Table)", "EnergyUnit.BTU(IT)", IMPERIAL, JOULE,
-                        1.05505585262E3, true);
+        BTU_IT = new EnergyUnit("EnergyUnit.British_thermal_unit_(International_Table)", "EnergyUnit.BTU(IT)", IMPERIAL, JOULE,
+                1.05505585262E3, true);
         CALORIE_IT =
                 new EnergyUnit("EnergyUnit.calorie_(International_Table)", "EnergyUnit.cal(IT)", OTHER, JOULE, 4.1868, true);
         KILOCALORIE = new EnergyUnit("EnergyUnit.kilocalorie", "EnergyUnit.kcal", OTHER, CALORIE_IT, 1000.0, true);
@@ -178,9 +174,11 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, JOULE, massUnit.getConversionFactorToStandardUnit()
-                * lengthUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
-                / (timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, JOULE,
+                massUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
+                        * lengthUnit.getConversionFactorToStandardUnit()
+                        / (timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()),
+                standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.timeUnit = timeUnit;
@@ -214,8 +212,8 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
     private EnergyUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, JOULE, forceUnit.getConversionFactorToStandardUnit()
-                * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, JOULE,
+                forceUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = forceUnit.getMassUnit();
         this.lengthUnit = forceUnit.getLengthUnit();
         this.timeUnit = forceUnit.getTimeUnit();
@@ -263,8 +261,8 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
      * @param referenceUnit the unit to convert to
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
-    public EnergyUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final EnergyUnit referenceUnit, final double conversionFactorToReferenceUnit)
+    public EnergyUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final EnergyUnit referenceUnit,
+            final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

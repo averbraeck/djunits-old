@@ -38,6 +38,24 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
     /** constant with value zero. */
     public static final FloatAcceleration ZERO = new FloatAcceleration(0.0f, AccelerationUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatAcceleration NaN = new FloatAcceleration(Float.NaN, AccelerationUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatAcceleration POSITIVE_INFINITY =
+            new FloatAcceleration(Float.POSITIVE_INFINITY, AccelerationUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatAcceleration NEGATIVE_INFINITY =
+            new FloatAcceleration(Float.NEGATIVE_INFINITY, AccelerationUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatAcceleration POS_MAXVALUE = new FloatAcceleration(Float.MAX_VALUE, AccelerationUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatAcceleration NEG_MAXVALUE = new FloatAcceleration(-Float.MAX_VALUE, AccelerationUnit.SI);
+
     /**
      * Construct FloatAcceleration scalar.
      * @param value float value
@@ -72,6 +90,16 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
     public final FloatAcceleration instantiateRel(final float value, final AccelerationUnit unit)
     {
         return new FloatAcceleration(value, unit);
+    }
+
+    /**
+     * Construct FloatAcceleration scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatAcceleration createSI(final float value)
+    {
+        return new FloatAcceleration(value, AccelerationUnit.SI);
     }
 
     /**

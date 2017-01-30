@@ -38,6 +38,26 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     /** constant with value zero. */
     public static final FloatElectricalResistance ZERO = new FloatElectricalResistance(0.0f, ElectricalResistanceUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatElectricalResistance NaN = new FloatElectricalResistance(Float.NaN, ElectricalResistanceUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatElectricalResistance POSITIVE_INFINITY =
+            new FloatElectricalResistance(Float.POSITIVE_INFINITY, ElectricalResistanceUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatElectricalResistance NEGATIVE_INFINITY =
+            new FloatElectricalResistance(Float.NEGATIVE_INFINITY, ElectricalResistanceUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatElectricalResistance POS_MAXVALUE =
+            new FloatElectricalResistance(Float.MAX_VALUE, ElectricalResistanceUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatElectricalResistance NEG_MAXVALUE =
+            new FloatElectricalResistance(-Float.MAX_VALUE, ElectricalResistanceUnit.SI);
+
     /**
      * Construct FloatElectricalResistance scalar.
      * @param value float value
@@ -72,6 +92,16 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     public final FloatElectricalResistance instantiateRel(final float value, final ElectricalResistanceUnit unit)
     {
         return new FloatElectricalResistance(value, unit);
+    }
+
+    /**
+     * Construct FloatElectricalResistance scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatElectricalResistance createSI(final float value)
+    {
+        return new FloatElectricalResistance(value, ElectricalResistanceUnit.SI);
     }
 
     /**

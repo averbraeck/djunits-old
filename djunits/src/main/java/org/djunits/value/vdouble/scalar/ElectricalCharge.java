@@ -37,6 +37,24 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
     /** constant with value zero. */
     public static final ElectricalCharge ZERO = new ElectricalCharge(0.0, ElectricalChargeUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final ElectricalCharge NaN = new ElectricalCharge(Double.NaN, ElectricalChargeUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final ElectricalCharge POSITIVE_INFINITY =
+            new ElectricalCharge(Double.POSITIVE_INFINITY, ElectricalChargeUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final ElectricalCharge NEGATIVE_INFINITY =
+            new ElectricalCharge(Double.NEGATIVE_INFINITY, ElectricalChargeUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final ElectricalCharge POS_MAXVALUE = new ElectricalCharge(Double.MAX_VALUE, ElectricalChargeUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final ElectricalCharge NEG_MAXVALUE = new ElectricalCharge(-Double.MAX_VALUE, ElectricalChargeUnit.SI);
+
     /**
      * Construct ElectricalCharge scalar.
      * @param value double value
@@ -61,6 +79,16 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
     public final ElectricalCharge instantiateRel(final double value, final ElectricalChargeUnit unit)
     {
         return new ElectricalCharge(value, unit);
+    }
+
+    /**
+     * Construct ElectricalCharge scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final ElectricalCharge createSI(final double value)
+    {
+        return new ElectricalCharge(value, ElectricalChargeUnit.SI);
     }
 
     /**

@@ -59,8 +59,8 @@ public class MoneyPerTimeUnit extends LinearUnit<MoneyPerTimeUnit>
     private MoneyPerTimeUnit(final MoneyUnit moneyUnit, final TimeUnit timeUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerTimeUnit, moneyUnit
-                .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerTimeUnit,
+                moneyUnit.getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.timeUnit = timeUnit;
     }
@@ -132,9 +132,8 @@ public class MoneyPerTimeUnit extends LinearUnit<MoneyPerTimeUnit>
     {
         try
         {
-            standardMoneyPerTimeUnit =
-                    new MoneyPerTimeUnit(standardMoneyUnit, TimeUnit.HOUR, standardMoneyUnit.getName() + " per hour",
-                            standardMoneyUnit.getAbbreviation() + "/h");
+            standardMoneyPerTimeUnit = new MoneyPerTimeUnit(standardMoneyUnit, TimeUnit.HOUR,
+                    standardMoneyUnit.getName() + " per hour", standardMoneyUnit.getAbbreviation() + "/h");
         }
         catch (Exception e)
         {

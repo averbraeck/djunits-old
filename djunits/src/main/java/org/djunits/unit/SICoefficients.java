@@ -7,8 +7,8 @@ import java.util.EnumMap;
  * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Jun 15, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Jun 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class SICoefficients
@@ -121,7 +121,7 @@ public class SICoefficients
      *            <td>kg | m | s | A | K | cd | mol</td>
      *            </tr>
      *            </table>
-     * <br>
+     *            <br>
      *            White space can appear anywhere in a coefficientString. <br>
      *            If "integer" does not fit in an Integer, the resulting coefficient will be very wrong.
      * @return an instance of SICoefficients
