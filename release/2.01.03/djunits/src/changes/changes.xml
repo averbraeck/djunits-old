@@ -1,0 +1,108 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <body>
+
+    <release version="2.01.03" date="2017-01-30" description="createSI() method added to scalars; scalar constants added">
+      <action dev="averbraeck" type="update">
+        Scalars with the exception of Money scalars can now be created with e.g., Length len = Length.createSI(5.0). OTS-297.
+      </action>
+      <action dev="averbraeck" type="update">
+        Constants NaN, POSITIVI_INFINITY, NEGATIVE_INFINITY, POS_MAXVALUE and NEG_MAXVALUE have been added to scalars,
+        with the exception of Money scalars. OTS-298.
+      </action>
+    </release>
+
+    <release version="2.01.02" date="2017-01-24" description="Small changes to AbstractDoubleScalar and AbstractFloatScalar">
+      <action dev="averbraeck" type="update">
+        hashCode of Units are cached, as these are calculated in every compare of scalars. OTS-289.
+      </action>
+      <action dev="averbraeck" type="update">
+        AbstractDoubleScalar.compareTo and AbstractFloatScalar.compareTo should use static compare method. OTS-290.
+      </action>
+      <action dev="averbraeck" type="add">
+        Add eq0, ne0, gt0, lt0, ge0, and le0 methods to DoubleScalars and FloatScalars. OTS-293.
+      </action>
+    </release>
+  
+    <release version="2.01.01" date="2016-11-14" description="neg() function added; cleaned up code">
+      <action dev="averbraeck" type="add">
+        A neg() function has been added to the Scalar, MutableVector and MutableMatrix classes.
+        The neg functions changes the value(s) to minus the value(s). OTS-216.
+      </action>
+      <action dev="averbraeck" type="update">
+        Code has been cleaned for @Override and open warnings for formatting of comments.
+      </action>
+    </release>
+  
+    <release version="2.01.00" date="2016-11-01" description="Increased speed of instantiation">
+      <action dev="averbraeck" type="update">
+        Several changes have been made to increase the speed of instantiation of scalars. Especially
+        the need to use espessAsUnit(...) when the unit is the SI-unit has been decreased. This
+        leads to a major speed improvement of the use of scalars.
+      </action>
+      <action dev="averbraeck" type="update">
+        A start has been made to increase the speed of instantiation of vectors. Further speed
+        improvements will be made in the next version.
+      </action>
+      <action dev="averbraeck" type="add">
+        The Unit has a new method 'boolean isBaseSIUnit()' to help determine the need for conversion
+        of a value into a standard (usually SI) unit.
+      </action>
+      <action dev="averbraeck" type="add">
+        The Scale has a new method 'boolean isBaseSIScale()' to help determine the need for conversion
+        of a value into a standard (usually SI) unit.
+      </action>
+    </release>
+
+    <release version="2.00.00" date="2016-10-16" description="Major upgrade of type hierarchy">
+      <action dev="averbraeck" type="update">
+        A major upgrade has been made to the type hierarchy. Instead of the TypedXXX template functions,
+        abstract classes and interfaces have been introduced that are more natural to implement and have
+        faster execution than the typed templates. 
+      </action>
+      <action dev="averbraeck" type="update">
+        The DoubleScalar, DoubleVector, DoubleMatrix classes are not at the root of the typed classes
+        anymore. Rather, they are an implementation of the Abstract classes, next to the typed classes
+        in the type hierarchy. So a Length does not extend a DoubleScalar.Rel&lt;LengthUnit&gt; anymore.
+        Rather, Length and DoubleScalar.Rel&lt;LengthUnit&gt; both extend AbstractDoubleScalarRel.
+        Same for the Float classes.
+      </action>
+    </release>
+
+    <release version="1.03.01" date="2016-05-28" description="Min and max functions added for scalars">
+      <action dev="averbraeck" type="add">
+        min and max functions have been added for scalars, for combinations of abs,
+        rel, dimensionless, money, and float.
+      </action>
+      <action dev="averbraeck" type="update">
+        Copyright notice has been extended to 2016.
+      </action>
+    </release>
+
+    <release version="1.03.00" date="2016-04-23" description="Abs and Rel for detailed versions removed">
+      <action dev="averbraeck" type="update">
+        The following changes have been made:
+        Time.Abs, Time.Rel --) Time, Duration (TimeUnit)
+        Length.Abs, Length.Rel --) Position, Length (LengthUnit)
+        Temperature.Abs, Temperature.Rel --) AbsoluteTemperature, Temperature (TemperatureUnit)
+        Angle.Abs, Angle.Rel --) Direction, Angle (AngleUnit)
+      </action>
+    </release>
+
+    <release version="1.02.06" date="2015-12-23" description="Dependency on reflections package removed">
+      <action dev="averbraeck" type="update">
+        DJUNITS is no longer dependent on 'reflections'. Instead, the 'Unit' class
+        now defines an array of standard units that exist in the package. This list is also used in the unit tests (it
+        is public static final).
+      </action>
+    </release>
+
+    <release version="1.02.05" date="2015-12-22" description="ZERO constants for scalars">
+      <action dev="averbraeck" type="add">
+        Added ZERO constants for double and float scalars, with the exception of
+        Money scalars.
+      </action>
+    </release>
+
+  </body>
+</document>
