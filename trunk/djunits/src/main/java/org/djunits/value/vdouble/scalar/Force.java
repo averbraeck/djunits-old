@@ -42,6 +42,22 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
     /** constant with value zero. */
     public static final Force ZERO = new Force(0.0, ForceUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Force NaN = new Force(Double.NaN, ForceUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Force POSITIVE_INFINITY = new Force(Double.POSITIVE_INFINITY, ForceUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Force NEGATIVE_INFINITY = new Force(Double.NEGATIVE_INFINITY, ForceUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Force POS_MAXVALUE = new Force(Double.MAX_VALUE, ForceUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Force NEG_MAXVALUE = new Force(-Double.MAX_VALUE, ForceUnit.SI);
+
     /**
      * Construct Force scalar.
      * @param value double value
@@ -66,6 +82,16 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
     public final Force instantiateRel(final double value, final ForceUnit unit)
     {
         return new Force(value, unit);
+    }
+
+    /**
+     * Construct Force scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Force createSI(final double value)
+    {
+        return new Force(value, ForceUnit.SI);
     }
 
     /**

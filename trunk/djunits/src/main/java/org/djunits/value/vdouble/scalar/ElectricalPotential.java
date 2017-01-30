@@ -39,6 +39,26 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
     /** constant with value zero. */
     public static final ElectricalPotential ZERO = new ElectricalPotential(0.0, ElectricalPotentialUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final ElectricalPotential NaN = new ElectricalPotential(Double.NaN, ElectricalPotentialUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final ElectricalPotential POSITIVE_INFINITY =
+            new ElectricalPotential(Double.POSITIVE_INFINITY, ElectricalPotentialUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final ElectricalPotential NEGATIVE_INFINITY =
+            new ElectricalPotential(Double.NEGATIVE_INFINITY, ElectricalPotentialUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final ElectricalPotential POS_MAXVALUE =
+            new ElectricalPotential(Double.MAX_VALUE, ElectricalPotentialUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final ElectricalPotential NEG_MAXVALUE =
+            new ElectricalPotential(-Double.MAX_VALUE, ElectricalPotentialUnit.SI);
+
     /**
      * Construct ElectricalPotential scalar.
      * @param value double value
@@ -63,6 +83,16 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
     public final ElectricalPotential instantiateRel(final double value, final ElectricalPotentialUnit unit)
     {
         return new ElectricalPotential(value, unit);
+    }
+
+    /**
+     * Construct ElectricalPotential scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final ElectricalPotential createSI(final double value)
+    {
+        return new ElectricalPotential(value, ElectricalPotentialUnit.SI);
     }
 
     /**

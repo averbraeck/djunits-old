@@ -39,6 +39,22 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
     /** constant with value zero. */
     public static final LinearDensity ZERO = new LinearDensity(0.0, LinearDensityUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final LinearDensity NaN = new LinearDensity(Double.NaN, LinearDensityUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final LinearDensity POSITIVE_INFINITY = new LinearDensity(Double.POSITIVE_INFINITY, LinearDensityUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final LinearDensity NEGATIVE_INFINITY = new LinearDensity(Double.NEGATIVE_INFINITY, LinearDensityUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final LinearDensity POS_MAXVALUE = new LinearDensity(Double.MAX_VALUE, LinearDensityUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final LinearDensity NEG_MAXVALUE = new LinearDensity(-Double.MAX_VALUE, LinearDensityUnit.SI);
+
     /**
      * Construct LinearDensity scalar.
      * @param value double value
@@ -63,6 +79,16 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
     public final LinearDensity instantiateRel(final double value, final LinearDensityUnit unit)
     {
         return new LinearDensity(value, unit);
+    }
+
+    /**
+     * Construct LinearDensity scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final LinearDensity createSI(final double value)
+    {
+        return new LinearDensity(value, LinearDensityUnit.SI);
     }
 
     /**

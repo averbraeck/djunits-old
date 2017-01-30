@@ -43,6 +43,22 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
     /** constant with value zero. */
     public static final FloatLength ZERO = new FloatLength(0.0f, LengthUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatLength NaN = new FloatLength(Float.NaN, LengthUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatLength POSITIVE_INFINITY = new FloatLength(Float.POSITIVE_INFINITY, LengthUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatLength NEGATIVE_INFINITY = new FloatLength(Float.NEGATIVE_INFINITY, LengthUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatLength POS_MAXVALUE = new FloatLength(Float.MAX_VALUE, LengthUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatLength NEG_MAXVALUE = new FloatLength(-Float.MAX_VALUE, LengthUnit.SI);
+
     /**
      * Construct FloatLength scalar.
      * @param value float value
@@ -77,6 +93,16 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
     public final FloatLength instantiateRel(final float value, final LengthUnit unit)
     {
         return new FloatLength(value, unit);
+    }
+
+    /**
+     * Construct FloatLength scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatLength createSI(final float value)
+    {
+        return new FloatLength(value, LengthUnit.SI);
     }
 
     /**

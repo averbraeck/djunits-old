@@ -36,6 +36,22 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
     /** constant with value zero. */
     public static final Density ZERO = new Density(0.0, DensityUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Density NaN = new Density(Double.NaN, DensityUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Density POSITIVE_INFINITY = new Density(Double.POSITIVE_INFINITY, DensityUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Density NEGATIVE_INFINITY = new Density(Double.NEGATIVE_INFINITY, DensityUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Density POS_MAXVALUE = new Density(Double.MAX_VALUE, DensityUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Density NEG_MAXVALUE = new Density(-Double.MAX_VALUE, DensityUnit.SI);
+
     /**
      * Construct Density scalar.
      * @param value double value
@@ -60,6 +76,16 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
     public final Density instantiateRel(final double value, final DensityUnit unit)
     {
         return new Density(value, unit);
+    }
+
+    /**
+     * Construct Density scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Density createSI(final double value)
+    {
+        return new Density(value, DensityUnit.SI);
     }
 
     /**

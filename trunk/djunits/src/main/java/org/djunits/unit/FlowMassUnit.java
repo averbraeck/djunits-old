@@ -37,13 +37,11 @@ public class FlowMassUnit extends LinearUnit<FlowMassUnit>
 
     static
     {
-        SI =
-                new FlowMassUnit(MassUnit.KILOGRAM, TimeUnit.SECOND, "FlowMassUnit.kilogram_per_second", "FlowMassUnit.kg/s",
-                        SI_DERIVED, true);
+        SI = new FlowMassUnit(MassUnit.KILOGRAM, TimeUnit.SECOND, "FlowMassUnit.kilogram_per_second", "FlowMassUnit.kg/s",
+                SI_DERIVED, true);
         KILOGRAM_PER_SECOND = SI;
-        POUND_PER_SECOND =
-                new FlowMassUnit(MassUnit.POUND, TimeUnit.SECOND, "FlowMassUnit.pound_per_second", "FlowMassUnit.lb/s",
-                        IMPERIAL, true);
+        POUND_PER_SECOND = new FlowMassUnit(MassUnit.POUND, TimeUnit.SECOND, "FlowMassUnit.pound_per_second",
+                "FlowMassUnit.lb/s", IMPERIAL, true);
     }
 
     /**
@@ -59,8 +57,8 @@ public class FlowMassUnit extends LinearUnit<FlowMassUnit>
     private FlowMassUnit(final MassUnit massUnit, final TimeUnit timeUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, KILOGRAM_PER_SECOND, massUnit
-                .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, KILOGRAM_PER_SECOND,
+                massUnit.getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = massUnit;
         this.timeUnit = timeUnit;
     }

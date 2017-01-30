@@ -25,8 +25,7 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarRel;
  * @param <MR> the mutable matrix type
  * @param <S> the scalar type
  */
-abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoubleMatrixRel<U, R, MR, S>, 
-        MR extends AbstractMutableDoubleMatrixRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
+abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoubleMatrixRel<U, R, MR, S>, MR extends AbstractMutableDoubleMatrixRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
         extends AbstractDoubleMatrixRel<U, R, MR, S> implements Mutable, MathFunctionsRel<MR>, DoubleMathFunctions<MR>
 {
     /** */

@@ -36,6 +36,22 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
     /** constant with value zero. */
     public static final FloatAngle ZERO = new FloatAngle(0.0f, AngleUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatAngle NaN = new FloatAngle(Float.NaN, AngleUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatAngle POSITIVE_INFINITY = new FloatAngle(Float.POSITIVE_INFINITY, AngleUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatAngle NEGATIVE_INFINITY = new FloatAngle(Float.NEGATIVE_INFINITY, AngleUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatAngle POS_MAXVALUE = new FloatAngle(Float.MAX_VALUE, AngleUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatAngle NEG_MAXVALUE = new FloatAngle(-Float.MAX_VALUE, AngleUnit.SI);
+
     /**
      * Construct FloatAngle scalar.
      * @param value float value
@@ -70,6 +86,16 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
     public final FloatAngle instantiateRel(final float value, final AngleUnit unit)
     {
         return new FloatAngle(value, unit);
+    }
+
+    /**
+     * Construct FloatAngle scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatAngle createSI(final float value)
+    {
+        return new FloatAngle(value, AngleUnit.SI);
     }
 
     /**

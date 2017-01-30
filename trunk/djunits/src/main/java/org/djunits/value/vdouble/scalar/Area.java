@@ -41,6 +41,22 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
     /** constant with value zero. */
     public static final Area ZERO = new Area(0.0, AreaUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Area NaN = new Area(Double.NaN, AreaUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Area POSITIVE_INFINITY = new Area(Double.POSITIVE_INFINITY, AreaUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Area NEGATIVE_INFINITY = new Area(Double.NEGATIVE_INFINITY, AreaUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Area POS_MAXVALUE = new Area(Double.MAX_VALUE, AreaUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Area NEG_MAXVALUE = new Area(-Double.MAX_VALUE, AreaUnit.SI);
+
     /**
      * Construct Area scalar.
      * @param value double value
@@ -65,6 +81,16 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
     public final Area instantiateRel(final double value, final AreaUnit unit)
     {
         return new Area(value, unit);
+    }
+
+    /**
+     * Construct Area scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Area createSI(final double value)
+    {
+        return new Area(value, AreaUnit.SI);
     }
 
     /**

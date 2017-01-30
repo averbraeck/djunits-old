@@ -38,6 +38,22 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
     /** constant with value zero. */
     public static final FloatFlowMass ZERO = new FloatFlowMass(0.0f, FlowMassUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatFlowMass NaN = new FloatFlowMass(Float.NaN, FlowMassUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatFlowMass POSITIVE_INFINITY = new FloatFlowMass(Float.POSITIVE_INFINITY, FlowMassUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatFlowMass NEGATIVE_INFINITY = new FloatFlowMass(Float.NEGATIVE_INFINITY, FlowMassUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatFlowMass POS_MAXVALUE = new FloatFlowMass(Float.MAX_VALUE, FlowMassUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatFlowMass NEG_MAXVALUE = new FloatFlowMass(-Float.MAX_VALUE, FlowMassUnit.SI);
+
     /**
      * Construct FloatFlowMass scalar.
      * @param value float value
@@ -72,6 +88,16 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
     public final FloatFlowMass instantiateRel(final float value, final FlowMassUnit unit)
     {
         return new FloatFlowMass(value, unit);
+    }
+
+    /**
+     * Construct FloatFlowMass scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatFlowMass createSI(final float value)
+    {
+        return new FloatFlowMass(value, FlowMassUnit.SI);
     }
 
     /**

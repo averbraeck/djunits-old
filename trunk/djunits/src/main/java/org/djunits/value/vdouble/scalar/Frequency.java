@@ -39,6 +39,22 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
     /** constant with value zero. */
     public static final Frequency ZERO = new Frequency(0.0, FrequencyUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Frequency NaN = new Frequency(Double.NaN, FrequencyUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Frequency POSITIVE_INFINITY = new Frequency(Double.POSITIVE_INFINITY, FrequencyUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Frequency NEGATIVE_INFINITY = new Frequency(Double.NEGATIVE_INFINITY, FrequencyUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Frequency POS_MAXVALUE = new Frequency(Double.MAX_VALUE, FrequencyUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Frequency NEG_MAXVALUE = new Frequency(-Double.MAX_VALUE, FrequencyUnit.SI);
+
     /**
      * Construct Frequency scalar.
      * @param value double value
@@ -63,6 +79,16 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
     public final Frequency instantiateRel(final double value, final FrequencyUnit unit)
     {
         return new Frequency(value, unit);
+    }
+
+    /**
+     * Construct Frequency scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Frequency createSI(final double value)
+    {
+        return new Frequency(value, FrequencyUnit.SI);
     }
 
     /**

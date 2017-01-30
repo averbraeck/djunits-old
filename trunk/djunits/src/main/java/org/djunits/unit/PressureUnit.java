@@ -88,20 +88,18 @@ public class PressureUnit extends LinearUnit<PressureUnit>
 
     static
     {
-        SI =
-                new PressureUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "PressureUnit.pascal",
-                        "PressureUnit.Pa", SI_DERIVED, true);
+        SI = new PressureUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "PressureUnit.pascal", "PressureUnit.Pa",
+                SI_DERIVED, true);
         PASCAL = SI;
         HECTOPASCAL = new PressureUnit("PressureUnit.hectopascal", "PressureUnit.hPa", SI_DERIVED, PASCAL, 100.0, true);
         KILOPASCAL = new PressureUnit("PressureUnit.kilopascal", "PressureUnit.kPa", SI_DERIVED, PASCAL, 1000.0, true);
         ATMOSPHERE_STANDARD =
                 new PressureUnit("PressureUnit.atmosphere_(standard)", "PressureUnit.atm", OTHER, PASCAL, 101325.0, true);
         TORR = new PressureUnit("PressureUnit.torr", "PressureUnit.Torr", OTHER, ATMOSPHERE_STANDARD, 1.0 / 760.0, true);
-        ATMOSPHERE_TECHNICAL =
-                new PressureUnit(ForceUnit.KILOGRAM_FORCE, AreaUnit.SQUARE_CENTIMETER, "PressureUnit.atmosphere_(technical)",
-                        "PressureUnit.at", OTHER, true);
-        BARYE =
-                new PressureUnit(ForceUnit.DYNE, AreaUnit.SQUARE_CENTIMETER, "PressureUnit.barye", "PressureUnit.Ba", CGS, true);
+        ATMOSPHERE_TECHNICAL = new PressureUnit(ForceUnit.KILOGRAM_FORCE, AreaUnit.SQUARE_CENTIMETER,
+                "PressureUnit.atmosphere_(technical)", "PressureUnit.at", OTHER, true);
+        BARYE = new PressureUnit(ForceUnit.DYNE, AreaUnit.SQUARE_CENTIMETER, "PressureUnit.barye", "PressureUnit.Ba", CGS,
+                true);
         BAR = new PressureUnit("PressureUnit.bar_(full)", "PressureUnit.bar", OTHER, PASCAL, 1E5, true);
         MILLIBAR = new PressureUnit("PressureUnit.millibar", "PressureUnit.mbar", OTHER, PressureUnit.BAR, 0.001, true);
         CENTIMETER_MERCURY =
@@ -110,18 +108,14 @@ public class PressureUnit extends LinearUnit<PressureUnit>
                 new PressureUnit("PressureUnit.millimeter_mercury", "PressureUnit.mmHg", OTHER, PASCAL, 133.3224, true);
         FOOT_MERCURY = new PressureUnit("PressureUnit.foot_mercury", "PressureUnit.ftHg", IMPERIAL, PASCAL, 40.63666E3, true);
         INCH_MERCURY = new PressureUnit("PressureUnit.inch_mercury", "PressureUnit.inHg", IMPERIAL, PASCAL, 3.386389E3, true);
-        KGF_PER_SQUARE_MM =
-                new PressureUnit(ForceUnit.KILOGRAM_FORCE, AreaUnit.SQUARE_MILLIMETER,
-                        "PressureUnit.kilogram-force_per_square_millimeter", "PressureUnit.kgf/mm^2", OTHER, true);
-        POUND_PER_SQUARE_FOOT =
-                new PressureUnit(ForceUnit.POUND_FORCE, AreaUnit.SQUARE_FOOT, "PressureUnit.pound_per_square_foot",
-                        "PressureUnit.lbf/ft^2", IMPERIAL, true);
-        POUND_PER_SQUARE_INCH =
-                new PressureUnit(ForceUnit.POUND_FORCE, AreaUnit.SQUARE_INCH, "PressureUnit.pound_per_square_inch",
-                        "PressureUnit.lbf/in^2", IMPERIAL, true);
-        PIEZE =
-                new PressureUnit(MassUnit.TONNE, LengthUnit.METER, TimeUnit.SECOND, "PressureUnit.pieze", "PressureUnit.pz",
-                        MTS, true);
+        KGF_PER_SQUARE_MM = new PressureUnit(ForceUnit.KILOGRAM_FORCE, AreaUnit.SQUARE_MILLIMETER,
+                "PressureUnit.kilogram-force_per_square_millimeter", "PressureUnit.kgf/mm^2", OTHER, true);
+        POUND_PER_SQUARE_FOOT = new PressureUnit(ForceUnit.POUND_FORCE, AreaUnit.SQUARE_FOOT,
+                "PressureUnit.pound_per_square_foot", "PressureUnit.lbf/ft^2", IMPERIAL, true);
+        POUND_PER_SQUARE_INCH = new PressureUnit(ForceUnit.POUND_FORCE, AreaUnit.SQUARE_INCH,
+                "PressureUnit.pound_per_square_inch", "PressureUnit.lbf/in^2", IMPERIAL, true);
+        PIEZE = new PressureUnit(MassUnit.TONNE, LengthUnit.METER, TimeUnit.SECOND, "PressureUnit.pieze", "PressureUnit.pz",
+                MTS, true);
     }
 
     /**
@@ -139,9 +133,10 @@ public class PressureUnit extends LinearUnit<PressureUnit>
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, PASCAL, massUnit.getConversionFactorToStandardUnit()
-                / (lengthUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit() * timeUnit
-                        .getConversionFactorToStandardUnit()), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, PASCAL,
+                massUnit.getConversionFactorToStandardUnit() / (lengthUnit.getConversionFactorToStandardUnit()
+                        * timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()),
+                standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.timeUnit = timeUnit;
@@ -175,8 +170,8 @@ public class PressureUnit extends LinearUnit<PressureUnit>
     private PressureUnit(final ForceUnit forceUnit, final AreaUnit areaUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, PASCAL, forceUnit.getConversionFactorToStandardUnit()
-                / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, PASCAL,
+                forceUnit.getConversionFactorToStandardUnit() / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = forceUnit.getMassUnit();
         this.lengthUnit = forceUnit.getLengthUnit();
         this.timeUnit = forceUnit.getTimeUnit();

@@ -49,9 +49,8 @@ public class SpeedUnit extends LinearUnit<SpeedUnit>
     {
         SI = new SpeedUnit(LengthUnit.METER, TimeUnit.SECOND, "SpeedUnit.meter_per_second", "SpeedUnit.m/s", SI_DERIVED, true);
         METER_PER_SECOND = SI;
-        KM_PER_HOUR =
-                new SpeedUnit(LengthUnit.KILOMETER, TimeUnit.HOUR, "SpeedUnit.kilometer_per_hour", "SpeedUnit.km/h",
-                        SI_DERIVED, true);
+        KM_PER_HOUR = new SpeedUnit(LengthUnit.KILOMETER, TimeUnit.HOUR, "SpeedUnit.kilometer_per_hour", "SpeedUnit.km/h",
+                SI_DERIVED, true);
         MILE_PER_HOUR =
                 new SpeedUnit(LengthUnit.MILE, TimeUnit.HOUR, "SpeedUnit.mile_per_hour", "SpeedUnit.mph", IMPERIAL, true);
         FOOT_PER_SECOND =
@@ -72,8 +71,8 @@ public class SpeedUnit extends LinearUnit<SpeedUnit>
     private SpeedUnit(final LengthUnit lengthUnit, final TimeUnit timeUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, METER_PER_SECOND, lengthUnit
-                .getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, METER_PER_SECOND,
+                lengthUnit.getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.lengthUnit = lengthUnit;
         this.timeUnit = timeUnit;
     }

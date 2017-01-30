@@ -41,6 +41,22 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
     /** constant with value zero. */
     public static final FloatMass ZERO = new FloatMass(0.0f, MassUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatMass NaN = new FloatMass(Float.NaN, MassUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatMass POSITIVE_INFINITY = new FloatMass(Float.POSITIVE_INFINITY, MassUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatMass NEGATIVE_INFINITY = new FloatMass(Float.NEGATIVE_INFINITY, MassUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatMass POS_MAXVALUE = new FloatMass(Float.MAX_VALUE, MassUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatMass NEG_MAXVALUE = new FloatMass(-Float.MAX_VALUE, MassUnit.SI);
+
     /**
      * Construct FloatMass scalar.
      * @param value float value
@@ -75,6 +91,16 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
     public final FloatMass instantiateRel(final float value, final MassUnit unit)
     {
         return new FloatMass(value, unit);
+    }
+
+    /**
+     * Construct FloatMass scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatMass createSI(final float value)
+    {
+        return new FloatMass(value, MassUnit.SI);
     }
 
     /**

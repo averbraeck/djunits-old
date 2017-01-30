@@ -28,6 +28,22 @@ public class %Type% extends AbstractDoubleScalarRel<%Type%Unit, %Type%> %DIMLESS
     /** constant with value zero. */
     public static final %Type% ZERO = new %Type%(0.0, %Type%Unit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final %Type% NaN = new %Type%(Double.NaN, %Type%Unit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final %Type% POSITIVE_INFINITY = new %Type%(Double.POSITIVE_INFINITY, %Type%Unit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final %Type% NEGATIVE_INFINITY = new %Type%(Double.NEGATIVE_INFINITY, %Type%Unit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final %Type% POS_MAXVALUE = new %Type%(Double.MAX_VALUE, %Type%Unit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final %Type% NEG_MAXVALUE = new %Type%(-Double.MAX_VALUE, %Type%Unit.SI);
+
     /**
      * Construct %Type% scalar.
      * @param value double value
@@ -54,6 +70,16 @@ public class %Type% extends AbstractDoubleScalarRel<%Type%Unit, %Type%> %DIMLESS
         return new %Type%(value, unit);
     }
 
+    /**
+     * Construct %Type% scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final %Type% createSI(final double value)
+    {
+        return new %Type%(value, %Type%Unit.SI);
+    }
+    
     /**
      * Interpolate between two values.
      * @param zero the low value
@@ -130,4 +156,5 @@ public class %Type% extends AbstractDoubleScalarRel<%Type%Unit, %Type%> %DIMLESS
 
 %FORMULAS%%Type%%
 }
+
 

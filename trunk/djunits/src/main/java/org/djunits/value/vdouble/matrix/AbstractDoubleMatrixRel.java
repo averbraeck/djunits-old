@@ -23,8 +23,7 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarRel;
  * @param <MR> the mutable relative matrix type
  * @param <S> the relative scalar type
  */
-abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoubleMatrixRel<U, R, MR, S>, 
-        MR extends AbstractMutableDoubleMatrixRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
+abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoubleMatrixRel<U, R, MR, S>, MR extends AbstractMutableDoubleMatrixRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
         extends AbstractDoubleMatrix<U, R> implements Relative, Serializable
 {
     /** */

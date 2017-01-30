@@ -42,6 +42,22 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
     /** constant with value zero. */
     public static final FloatForce ZERO = new FloatForce(0.0f, ForceUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatForce NaN = new FloatForce(Float.NaN, ForceUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatForce POSITIVE_INFINITY = new FloatForce(Float.POSITIVE_INFINITY, ForceUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatForce NEGATIVE_INFINITY = new FloatForce(Float.NEGATIVE_INFINITY, ForceUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatForce POS_MAXVALUE = new FloatForce(Float.MAX_VALUE, ForceUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatForce NEG_MAXVALUE = new FloatForce(-Float.MAX_VALUE, ForceUnit.SI);
+
     /**
      * Construct FloatForce scalar.
      * @param value float value
@@ -76,6 +92,16 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
     public final FloatForce instantiateRel(final float value, final ForceUnit unit)
     {
         return new FloatForce(value, unit);
+    }
+
+    /**
+     * Construct FloatForce scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatForce createSI(final float value)
+    {
+        return new FloatForce(value, ForceUnit.SI);
     }
 
     /**

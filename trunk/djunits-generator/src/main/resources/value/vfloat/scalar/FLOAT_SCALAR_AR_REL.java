@@ -27,6 +27,22 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeUnit%, Float%Typ
     /** constant with value zero. */
     public static final Float%TypeRel% ZERO = new Float%TypeRel%(0.0f, %TypeUnit%.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Float%TypeRel% NaN = new Float%TypeRel%(Float.NaN, %TypeUnit%.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Float%TypeRel% POSITIVE_INFINITY = new Float%TypeRel%(Float.POSITIVE_INFINITY, %TypeUnit%.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Float%TypeRel% NEGATIVE_INFINITY = new Float%TypeRel%(Float.NEGATIVE_INFINITY, %TypeUnit%.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Float%TypeRel% POS_MAXVALUE = new Float%TypeRel%(Float.MAX_VALUE, %TypeUnit%.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Float%TypeRel% NEG_MAXVALUE = new Float%TypeRel%(-Float.MAX_VALUE, %TypeUnit%.SI);
+
     /**
      * Construct Float%TypeRel% scalar.
      * @param value float value
@@ -64,6 +80,16 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeUnit%, Float%Typ
     }
 
     /**
+     * Construct Float%TypeRel% scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Float%TypeRel% createSI(final float value)
+    {
+        return new Float%TypeRel%(value, %TypeUnit%.SI);
+    }
+
+    /**
      * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
      * @param value the float value
      * @param unit the unit
@@ -94,7 +120,7 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeUnit%, Float%Typ
      */
     public final Float%TypeAbs% plus(final Float%TypeAbs% v)
     {
-        if (getUnit().isStandardUnit())
+        if (getUnit().isBaseSIUnit())
         {
             return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
         }

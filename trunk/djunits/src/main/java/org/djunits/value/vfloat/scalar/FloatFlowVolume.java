@@ -39,6 +39,22 @@ public class FloatFlowVolume extends AbstractFloatScalarRel<FlowVolumeUnit, Floa
     /** constant with value zero. */
     public static final FloatFlowVolume ZERO = new FloatFlowVolume(0.0f, FlowVolumeUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatFlowVolume NaN = new FloatFlowVolume(Float.NaN, FlowVolumeUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatFlowVolume POSITIVE_INFINITY = new FloatFlowVolume(Float.POSITIVE_INFINITY, FlowVolumeUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatFlowVolume NEGATIVE_INFINITY = new FloatFlowVolume(Float.NEGATIVE_INFINITY, FlowVolumeUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatFlowVolume POS_MAXVALUE = new FloatFlowVolume(Float.MAX_VALUE, FlowVolumeUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatFlowVolume NEG_MAXVALUE = new FloatFlowVolume(-Float.MAX_VALUE, FlowVolumeUnit.SI);
+
     /**
      * Construct FloatFlowVolume scalar.
      * @param value float value
@@ -73,6 +89,16 @@ public class FloatFlowVolume extends AbstractFloatScalarRel<FlowVolumeUnit, Floa
     public final FloatFlowVolume instantiateRel(final float value, final FlowVolumeUnit unit)
     {
         return new FloatFlowVolume(value, unit);
+    }
+
+    /**
+     * Construct FloatFlowVolume scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatFlowVolume createSI(final float value)
+    {
+        return new FloatFlowVolume(value, FlowVolumeUnit.SI);
     }
 
     /**

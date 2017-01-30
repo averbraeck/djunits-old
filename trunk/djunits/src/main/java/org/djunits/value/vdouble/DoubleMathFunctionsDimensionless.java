@@ -23,7 +23,7 @@ public interface DoubleMathFunctionsDimensionless<T> extends MathFunctionsDimens
      * @param doubleFunction the function to apply
      */
     void assign(final DoubleFunction doubleFunction);
-    
+
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
@@ -205,4 +205,3 @@ public interface DoubleMathFunctionsDimensionless<T> extends MathFunctionsDimens
     }
 
 }
-

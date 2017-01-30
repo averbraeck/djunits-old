@@ -42,6 +42,22 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
     /** constant with value zero. */
     public static final Speed ZERO = new Speed(0.0, SpeedUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Speed NaN = new Speed(Double.NaN, SpeedUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Speed POSITIVE_INFINITY = new Speed(Double.POSITIVE_INFINITY, SpeedUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Speed NEGATIVE_INFINITY = new Speed(Double.NEGATIVE_INFINITY, SpeedUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Speed POS_MAXVALUE = new Speed(Double.MAX_VALUE, SpeedUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Speed NEG_MAXVALUE = new Speed(-Double.MAX_VALUE, SpeedUnit.SI);
+
     /**
      * Construct Speed scalar.
      * @param value double value
@@ -66,6 +82,16 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
     public final Speed instantiateRel(final double value, final SpeedUnit unit)
     {
         return new Speed(value, unit);
+    }
+
+    /**
+     * Construct Speed scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Speed createSI(final double value)
+    {
+        return new Speed(value, SpeedUnit.SI);
     }
 
     /**

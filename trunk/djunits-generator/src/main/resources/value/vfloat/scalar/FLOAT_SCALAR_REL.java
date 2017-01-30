@@ -27,6 +27,22 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
     /** constant with value zero. */
     public static final Float%Type% ZERO = new Float%Type%(0.0f, %Type%Unit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Float%Type% NaN = new Float%Type%(Float.NaN, %Type%Unit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Float%Type% POSITIVE_INFINITY = new Float%Type%(Float.POSITIVE_INFINITY, %Type%Unit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Float%Type% NEGATIVE_INFINITY = new Float%Type%(Float.NEGATIVE_INFINITY, %Type%Unit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Float%Type% POS_MAXVALUE = new Float%Type%(Float.MAX_VALUE, %Type%Unit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Float%Type% NEG_MAXVALUE = new Float%Type%(-Float.MAX_VALUE, %Type%Unit.SI);
+
     /**
      * Construct Float%Type% scalar.
      * @param value float value
@@ -61,6 +77,16 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
     public final Float%Type% instantiateRel(final float value, final %Type%Unit unit)
     {
         return new Float%Type%(value, unit);
+    }
+
+    /**
+     * Construct Float%Type% scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Float%Type% createSI(final float value)
+    {
+        return new Float%Type%(value, %Type%Unit.SI);
     }
 
     /**

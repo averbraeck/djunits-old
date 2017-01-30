@@ -42,6 +42,22 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
     /** constant with value zero. */
     public static final Volume ZERO = new Volume(0.0, VolumeUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Volume NaN = new Volume(Double.NaN, VolumeUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Volume POSITIVE_INFINITY = new Volume(Double.POSITIVE_INFINITY, VolumeUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Volume NEGATIVE_INFINITY = new Volume(Double.NEGATIVE_INFINITY, VolumeUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Volume POS_MAXVALUE = new Volume(Double.MAX_VALUE, VolumeUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Volume NEG_MAXVALUE = new Volume(-Double.MAX_VALUE, VolumeUnit.SI);
+
     /**
      * Construct Volume scalar.
      * @param value double value
@@ -66,6 +82,16 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
     public final Volume instantiateRel(final double value, final VolumeUnit unit)
     {
         return new Volume(value, unit);
+    }
+
+    /**
+     * Construct Volume scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Volume createSI(final double value)
+    {
+        return new Volume(value, VolumeUnit.SI);
     }
 
     /**

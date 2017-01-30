@@ -37,6 +37,22 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
     /** constant with value zero. */
     public static final FloatPressure ZERO = new FloatPressure(0.0f, PressureUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatPressure NaN = new FloatPressure(Float.NaN, PressureUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatPressure POSITIVE_INFINITY = new FloatPressure(Float.POSITIVE_INFINITY, PressureUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatPressure NEGATIVE_INFINITY = new FloatPressure(Float.NEGATIVE_INFINITY, PressureUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatPressure POS_MAXVALUE = new FloatPressure(Float.MAX_VALUE, PressureUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatPressure NEG_MAXVALUE = new FloatPressure(-Float.MAX_VALUE, PressureUnit.SI);
+
     /**
      * Construct FloatPressure scalar.
      * @param value float value
@@ -71,6 +87,16 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
     public final FloatPressure instantiateRel(final float value, final PressureUnit unit)
     {
         return new FloatPressure(value, unit);
+    }
+
+    /**
+     * Construct FloatPressure scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatPressure createSI(final float value)
+    {
+        return new FloatPressure(value, PressureUnit.SI);
     }
 
     /**

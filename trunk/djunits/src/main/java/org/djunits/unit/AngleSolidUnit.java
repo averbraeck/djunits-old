@@ -32,9 +32,8 @@ public class AngleSolidUnit extends LinearUnit<AngleSolidUnit>
     {
         SI = new AngleSolidUnit("AngleSolidUnit.steradian", "AngleSolidUnit.sr", SI_DERIVED);
         STERADIAN = SI;
-        SQUARE_DEGREE =
-                new AngleSolidUnit("AngleSolidUnit.square_degree", "AngleSolidUnit.sq_deg", SI_DERIVED, STERADIAN,
-                        (Math.PI / 180.0) * (Math.PI / 180.0), true);
+        SQUARE_DEGREE = new AngleSolidUnit("AngleSolidUnit.square_degree", "AngleSolidUnit.sq_deg", SI_DERIVED, STERADIAN,
+                (Math.PI / 180.0) * (Math.PI / 180.0), true);
     }
 
     /**

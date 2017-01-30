@@ -41,6 +41,22 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
     /** constant with value zero. */
     public static final FloatTorque ZERO = new FloatTorque(0.0f, TorqueUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatTorque NaN = new FloatTorque(Float.NaN, TorqueUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatTorque POSITIVE_INFINITY = new FloatTorque(Float.POSITIVE_INFINITY, TorqueUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatTorque NEGATIVE_INFINITY = new FloatTorque(Float.NEGATIVE_INFINITY, TorqueUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatTorque POS_MAXVALUE = new FloatTorque(Float.MAX_VALUE, TorqueUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatTorque NEG_MAXVALUE = new FloatTorque(-Float.MAX_VALUE, TorqueUnit.SI);
+
     /**
      * Construct FloatTorque scalar.
      * @param value float value
@@ -75,6 +91,16 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
     public final FloatTorque instantiateRel(final float value, final TorqueUnit unit)
     {
         return new FloatTorque(value, unit);
+    }
+
+    /**
+     * Construct FloatTorque scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatTorque createSI(final float value)
+    {
+        return new FloatTorque(value, TorqueUnit.SI);
     }
 
     /**

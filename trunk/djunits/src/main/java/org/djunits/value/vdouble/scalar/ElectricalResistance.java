@@ -37,6 +37,26 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
     /** constant with value zero. */
     public static final ElectricalResistance ZERO = new ElectricalResistance(0.0, ElectricalResistanceUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final ElectricalResistance NaN = new ElectricalResistance(Double.NaN, ElectricalResistanceUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final ElectricalResistance POSITIVE_INFINITY =
+            new ElectricalResistance(Double.POSITIVE_INFINITY, ElectricalResistanceUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final ElectricalResistance NEGATIVE_INFINITY =
+            new ElectricalResistance(Double.NEGATIVE_INFINITY, ElectricalResistanceUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final ElectricalResistance POS_MAXVALUE =
+            new ElectricalResistance(Double.MAX_VALUE, ElectricalResistanceUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final ElectricalResistance NEG_MAXVALUE =
+            new ElectricalResistance(-Double.MAX_VALUE, ElectricalResistanceUnit.SI);
+
     /**
      * Construct ElectricalResistance scalar.
      * @param value double value
@@ -61,6 +81,16 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
     public final ElectricalResistance instantiateRel(final double value, final ElectricalResistanceUnit unit)
     {
         return new ElectricalResistance(value, unit);
+    }
+
+    /**
+     * Construct ElectricalResistance scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final ElectricalResistance createSI(final double value)
+    {
+        return new ElectricalResistance(value, ElectricalResistanceUnit.SI);
     }
 
     /**

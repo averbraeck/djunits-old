@@ -35,6 +35,22 @@ public class Direction extends AbstractDoubleScalarAbs<AngleUnit, Direction, Ang
     /** constant with value zero. */
     public static final Direction ZERO = new Direction(0.0, AngleUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Direction NaN = new Direction(Double.NaN, AngleUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Direction POSITIVE_INFINITY = new Direction(Double.POSITIVE_INFINITY, AngleUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Direction NEGATIVE_INFINITY = new Direction(Double.NEGATIVE_INFINITY, AngleUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Direction POS_MAXVALUE = new Direction(Double.MAX_VALUE, AngleUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Direction NEG_MAXVALUE = new Direction(-Double.MAX_VALUE, AngleUnit.SI);
+
     /**
      * Construct Direction scalar.
      * @param value double value
@@ -66,6 +82,16 @@ public class Direction extends AbstractDoubleScalarAbs<AngleUnit, Direction, Ang
     public final Angle instantiateRel(final double value, final AngleUnit unit)
     {
         return new Angle(value, unit);
+    }
+
+    /**
+     * Construct %TypeAbsl% scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Direction createSI(final double value)
+    {
+        return new Direction(value, AngleUnit.SI);
     }
 
     /**

@@ -41,6 +41,22 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
     /** constant with value zero. */
     public static final Power ZERO = new Power(0.0, PowerUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Power NaN = new Power(Double.NaN, PowerUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Power POSITIVE_INFINITY = new Power(Double.POSITIVE_INFINITY, PowerUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Power NEGATIVE_INFINITY = new Power(Double.NEGATIVE_INFINITY, PowerUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Power POS_MAXVALUE = new Power(Double.MAX_VALUE, PowerUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Power NEG_MAXVALUE = new Power(-Double.MAX_VALUE, PowerUnit.SI);
+
     /**
      * Construct Power scalar.
      * @param value double value
@@ -65,6 +81,16 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
     public final Power instantiateRel(final double value, final PowerUnit unit)
     {
         return new Power(value, unit);
+    }
+
+    /**
+     * Construct Power scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Power createSI(final double value)
+    {
+        return new Power(value, PowerUnit.SI);
     }
 
     /**

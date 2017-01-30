@@ -59,28 +59,21 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
 
     static
     {
-        SI =
-                new ElectricalPotentialUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND,
-                        "ElectricalPotentialUnit.volt", "ElectricalPotentialUnit.V", SI_DERIVED, true);
+        SI = new ElectricalPotentialUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND,
+                "ElectricalPotentialUnit.volt", "ElectricalPotentialUnit.V", SI_DERIVED, true);
         VOLT = SI;
-        MICROVOLT =
-                new ElectricalPotentialUnit("ElectricalPotentialUnit.microvolt", "ElectricalPotentialUnit.muV", SI_DERIVED,
-                        VOLT, 1.0E-6, true);
-        MILLIVOLT =
-                new ElectricalPotentialUnit("ElectricalPotentialUnit.millivolt", "ElectricalPotentialUnit.mV", SI_DERIVED,
-                        VOLT, 0.001, true);
-        KILOVOLT =
-                new ElectricalPotentialUnit("ElectricalPotentialUnit.kilovolt", "ElectricalPotentialUnit.kV", SI_DERIVED, VOLT,
-                        1000.0, true);
-        MEGAVOLT =
-                new ElectricalPotentialUnit("ElectricalPotentialUnit.megavolt", "ElectricalPotentialUnit.MV", SI_DERIVED, VOLT,
-                        1.0E6, true);
-        STATVOLT =
-                new ElectricalPotentialUnit("ElectricalPotentialUnit.statvolt", "ElectricalPotentialUnit.statV", CGS_ESU, VOLT,
-                        299.792458, true);
-        ABVOLT =
-                new ElectricalPotentialUnit("ElectricalPotentialUnit.abvolt", "ElectricalPotentialUnit.abV", CGS_EMU, VOLT,
-                        1.0E-8, true);
+        MICROVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.microvolt", "ElectricalPotentialUnit.muV", SI_DERIVED,
+                VOLT, 1.0E-6, true);
+        MILLIVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.millivolt", "ElectricalPotentialUnit.mV", SI_DERIVED,
+                VOLT, 0.001, true);
+        KILOVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.kilovolt", "ElectricalPotentialUnit.kV", SI_DERIVED,
+                VOLT, 1000.0, true);
+        MEGAVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.megavolt", "ElectricalPotentialUnit.MV", SI_DERIVED,
+                VOLT, 1.0E6, true);
+        STATVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.statvolt", "ElectricalPotentialUnit.statV", CGS_ESU,
+                VOLT, 299.792458, true);
+        ABVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.abvolt", "ElectricalPotentialUnit.abV", CGS_EMU, VOLT,
+                1.0E-8, true);
     }
 
     /**
@@ -101,11 +94,12 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
             final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, VOLT, massUnit.getConversionFactorToStandardUnit()
-                * lengthUnit.getConversionFactorToStandardUnit()
-                * lengthUnit.getConversionFactorToStandardUnit()
-                / (electricalCurrentUnit.getConversionFactorToStandardUnit() * Math.pow(
-                        timeUnit.getConversionFactorToStandardUnit(), 3.0)), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, VOLT,
+                massUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
+                        * lengthUnit.getConversionFactorToStandardUnit()
+                        / (electricalCurrentUnit.getConversionFactorToStandardUnit()
+                                * Math.pow(timeUnit.getConversionFactorToStandardUnit(), 3.0)),
+                standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.electricalCurrentUnit = electricalCurrentUnit;
@@ -145,8 +139,9 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, VOLT, powerUnit.getConversionFactorToStandardUnit()
-                / electricalCurrentUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, VOLT,
+                powerUnit.getConversionFactorToStandardUnit() / electricalCurrentUnit.getConversionFactorToStandardUnit(),
+                standardUnit);
         this.massUnit = powerUnit.getMassUnit();
         this.lengthUnit = powerUnit.getLengthUnit();
         this.electricalCurrentUnit = electricalCurrentUnit;

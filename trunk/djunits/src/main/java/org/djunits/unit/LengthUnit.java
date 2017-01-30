@@ -6,8 +6,8 @@ import static org.djunits.unit.unitsystem.UnitSystem.SI_BASE;
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
- * Standard length units. Several conversion factors have been taken from <a
- * href="http://en.wikipedia.org/wiki/Conversion_of_units">http://en.wikipedia.org/wiki/Conversion_of_units</a>.
+ * Standard length units. Several conversion factors have been taken from
+ * <a href="http://en.wikipedia.org/wiki/Conversion_of_units">http://en.wikipedia.org/wiki/Conversion_of_units</a>.
  * <p>
  * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -113,8 +113,8 @@ public class LengthUnit extends LinearUnit<LengthUnit>
      * @param referenceUnit the unit to convert to
      * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
-    public LengthUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final LengthUnit referenceUnit, final double conversionFactorToReferenceUnit)
+    public LengthUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final LengthUnit referenceUnit,
+            final double conversionFactorToReferenceUnit)
     {
         this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
     }

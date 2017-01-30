@@ -37,6 +37,22 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
     /** constant with value zero. */
     public static final Pressure ZERO = new Pressure(0.0, PressureUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Pressure NaN = new Pressure(Double.NaN, PressureUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Pressure POSITIVE_INFINITY = new Pressure(Double.POSITIVE_INFINITY, PressureUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Pressure NEGATIVE_INFINITY = new Pressure(Double.NEGATIVE_INFINITY, PressureUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Pressure POS_MAXVALUE = new Pressure(Double.MAX_VALUE, PressureUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Pressure NEG_MAXVALUE = new Pressure(-Double.MAX_VALUE, PressureUnit.SI);
+
     /**
      * Construct Pressure scalar.
      * @param value double value
@@ -61,6 +77,16 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
     public final Pressure instantiateRel(final double value, final PressureUnit unit)
     {
         return new Pressure(value, unit);
+    }
+
+    /**
+     * Construct Pressure scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Pressure createSI(final double value)
+    {
+        return new Pressure(value, PressureUnit.SI);
     }
 
     /**

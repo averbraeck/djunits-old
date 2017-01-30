@@ -67,6 +67,22 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
     /** constant with value zero. */
     public static final Dimensionless ZERO = new Dimensionless(0.0, DimensionlessUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Dimensionless NaN = new Dimensionless(Double.NaN, DimensionlessUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Dimensionless POSITIVE_INFINITY = new Dimensionless(Double.POSITIVE_INFINITY, DimensionlessUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Dimensionless NEGATIVE_INFINITY = new Dimensionless(Double.NEGATIVE_INFINITY, DimensionlessUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Dimensionless POS_MAXVALUE = new Dimensionless(Double.MAX_VALUE, DimensionlessUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Dimensionless NEG_MAXVALUE = new Dimensionless(-Double.MAX_VALUE, DimensionlessUnit.SI);
+
     /**
      * Construct Dimensionless scalar.
      * @param value double value
@@ -91,6 +107,16 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
     public final Dimensionless instantiateRel(final double value, final DimensionlessUnit unit)
     {
         return new Dimensionless(value, unit);
+    }
+
+    /**
+     * Construct Dimensionless scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Dimensionless createSI(final double value)
+    {
+        return new Dimensionless(value, DimensionlessUnit.SI);
     }
 
     /**

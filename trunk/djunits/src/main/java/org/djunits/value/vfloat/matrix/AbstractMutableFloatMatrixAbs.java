@@ -26,9 +26,7 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarAbs;
  * @param <MA> the mutable absolute matrix type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractMutableFloatMatrixAbs<U extends Unit<U>, A extends AbstractFloatMatrixAbs<U, A, R, MA, S>, 
-        R extends AbstractFloatMatrixRel<U, R, ?, ?>, MA extends AbstractMutableFloatMatrixAbs<U, A, R, MA, S>, 
-        S extends AbstractFloatScalarAbs<U, S, ?>>
+abstract class AbstractMutableFloatMatrixAbs<U extends Unit<U>, A extends AbstractFloatMatrixAbs<U, A, R, MA, S>, R extends AbstractFloatMatrixRel<U, R, ?, ?>, MA extends AbstractMutableFloatMatrixAbs<U, A, R, MA, S>, S extends AbstractFloatScalarAbs<U, S, ?>>
         extends AbstractFloatMatrixAbs<U, A, R, MA, S> implements Mutable, MathFunctionsAbs<MA>, FloatMathFunctions<MA>
 {
     /** */

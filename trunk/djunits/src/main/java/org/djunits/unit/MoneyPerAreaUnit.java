@@ -61,8 +61,8 @@ public class MoneyPerAreaUnit extends LinearUnit<MoneyPerAreaUnit>
     private MoneyPerAreaUnit(final MoneyUnit moneyUnit, final AreaUnit areaUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerAreaUnit, moneyUnit
-                .getConversionFactorToStandardUnit() / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerAreaUnit,
+                moneyUnit.getConversionFactorToStandardUnit() / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.areaUnit = areaUnit;
     }
@@ -134,9 +134,8 @@ public class MoneyPerAreaUnit extends LinearUnit<MoneyPerAreaUnit>
     {
         try
         {
-            standardMoneyPerAreaUnit =
-                    new MoneyPerAreaUnit(standardMoneyUnit, AreaUnit.SQUARE_METER, standardMoneyUnit.getName()
-                            + " per square meter", standardMoneyUnit.getAbbreviation() + "/m^2");
+            standardMoneyPerAreaUnit = new MoneyPerAreaUnit(standardMoneyUnit, AreaUnit.SQUARE_METER,
+                    standardMoneyUnit.getName() + " per square meter", standardMoneyUnit.getAbbreviation() + "/m^2");
         }
         catch (Exception e)
         {

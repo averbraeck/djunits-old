@@ -27,6 +27,22 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeUnit%, %TypeRel%>
     /** constant with value zero. */
     public static final %TypeRel% ZERO = new %TypeRel%(0.0, %TypeUnit%.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final %TypeRel% NaN = new %TypeRel%(Double.NaN, %TypeUnit%.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final %TypeRel% POSITIVE_INFINITY = new %TypeRel%(Double.POSITIVE_INFINITY, %TypeUnit%.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final %TypeRel% NEGATIVE_INFINITY = new %TypeRel%(Double.NEGATIVE_INFINITY, %TypeUnit%.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final %TypeRel% POS_MAXVALUE = new %TypeRel%(Double.MAX_VALUE, %TypeUnit%.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final %TypeRel% NEG_MAXVALUE = new %TypeRel%(-Double.MAX_VALUE, %TypeUnit%.SI);
+
     /**
      * Construct %TypeRel% scalar.
      * @param value double value
@@ -65,6 +81,16 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeUnit%, %TypeRel%>
     }
 
     /**
+     * Construct %TypeRel% scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final %TypeRel% createSI(final double value)
+    {
+        return new %TypeRel%(value, %TypeUnit%.SI);
+    }
+
+    /**
      * Interpolate between two values.
      * @param zero the low value
      * @param one the high value
@@ -84,7 +110,7 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeUnit%, %TypeRel%>
      */
     public final %TypeAbs% plus(final %TypeAbs% v)
     {
-        if (getUnit().isStandardUnit())
+        if (getUnit().isBaseSIUnit())
         {
             return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
         }
@@ -164,5 +190,6 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeUnit%, %TypeRel%>
     }
 
 %FORMULAS%%TypeRel%%
-    }
+    
 }
+

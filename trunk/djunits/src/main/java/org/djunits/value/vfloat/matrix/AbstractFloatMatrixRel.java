@@ -23,8 +23,7 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarRel;
  * @param <MR> the mutable relative matrix type
  * @param <S> the relative scalar type
  */
-abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloatMatrixRel<U, R, MR, S>, 
-        MR extends AbstractMutableFloatMatrixRel<U, R, MR, S>, S extends AbstractFloatScalarRel<U, S>>
+abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloatMatrixRel<U, R, MR, S>, MR extends AbstractMutableFloatMatrixRel<U, R, MR, S>, S extends AbstractFloatScalarRel<U, S>>
         extends AbstractFloatMatrix<U, R> implements FloatMatrixInterface<U>, Relative, Serializable
 {
     /** */

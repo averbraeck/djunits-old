@@ -40,6 +40,26 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
     /** constant with value zero. */
     public static final FloatElectricalPotential ZERO = new FloatElectricalPotential(0.0f, ElectricalPotentialUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final FloatElectricalPotential NaN = new FloatElectricalPotential(Float.NaN, ElectricalPotentialUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final FloatElectricalPotential POSITIVE_INFINITY =
+            new FloatElectricalPotential(Float.POSITIVE_INFINITY, ElectricalPotentialUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final FloatElectricalPotential NEGATIVE_INFINITY =
+            new FloatElectricalPotential(Float.NEGATIVE_INFINITY, ElectricalPotentialUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final FloatElectricalPotential POS_MAXVALUE =
+            new FloatElectricalPotential(Float.MAX_VALUE, ElectricalPotentialUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final FloatElectricalPotential NEG_MAXVALUE =
+            new FloatElectricalPotential(-Float.MAX_VALUE, ElectricalPotentialUnit.SI);
+
     /**
      * Construct FloatElectricalPotential scalar.
      * @param value float value
@@ -74,6 +94,16 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
     public final FloatElectricalPotential instantiateRel(final float value, final ElectricalPotentialUnit unit)
     {
         return new FloatElectricalPotential(value, unit);
+    }
+
+    /**
+     * Construct FloatElectricalPotential scalar.
+     * @param value float value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final FloatElectricalPotential createSI(final float value)
+    {
+        return new FloatElectricalPotential(value, ElectricalPotentialUnit.SI);
     }
 
     /**

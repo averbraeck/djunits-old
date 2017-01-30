@@ -43,6 +43,22 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
     /** constant with value zero. */
     public static final Length ZERO = new Length(0.0, LengthUnit.SI);
 
+    /** constant with value NaN. */
+    @SuppressWarnings("checkstyle:constantname")
+    public static final Length NaN = new Length(Double.NaN, LengthUnit.SI);
+
+    /** constant with value POSITIVE_INFINITY. */
+    public static final Length POSITIVE_INFINITY = new Length(Double.POSITIVE_INFINITY, LengthUnit.SI);
+
+    /** constant with value NEGATIVE_INFINITY. */
+    public static final Length NEGATIVE_INFINITY = new Length(Double.NEGATIVE_INFINITY, LengthUnit.SI);
+
+    /** constant with value MAX_VALUE. */
+    public static final Length POS_MAXVALUE = new Length(Double.MAX_VALUE, LengthUnit.SI);
+
+    /** constant with value -MAX_VALUE. */
+    public static final Length NEG_MAXVALUE = new Length(-Double.MAX_VALUE, LengthUnit.SI);
+
     /**
      * Construct Length scalar.
      * @param value double value
@@ -78,6 +94,16 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
     public final Position instantiateAbs(final double value, final LengthUnit unit)
     {
         return new Position(value, unit);
+    }
+
+    /**
+     * Construct Length scalar.
+     * @param value double value in SI units
+     * @return the new scalar with the SI value
+     */
+    public static final Length createSI(final double value)
+    {
+        return new Length(value, LengthUnit.SI);
     }
 
     /**

@@ -10,8 +10,8 @@ import org.djunits.unit.scale.Scale;
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
- * Standard angle unit. Several conversion factors have been taken from <a
- * href="http://en.wikipedia.org/wiki/Conversion_of_units">http://en.wikipedia.org/wiki/Conversion_of_units</a>.
+ * Standard angle unit. Several conversion factors have been taken from
+ * <a href="http://en.wikipedia.org/wiki/Conversion_of_units">http://en.wikipedia.org/wiki/Conversion_of_units</a>.
  * <p>
  * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -62,8 +62,8 @@ public class AngleUnit extends Unit<AngleUnit>
         GRAD = new AngleUnit("AngleUnit.gradian", "AngleUnit.grad", OTHER, RADIAN, 2.0 * Math.PI / 400.0, true);
         CENTESIMAL_ARCMINUTE =
                 new AngleUnit("AngleUnit.centesimal_arcminute", "AngleUnit.centesimal_arcmin", OTHER, GRAD, 1.0 / 100.0, true);
-        CENTESIMAL_ARCSECOND =
-                new AngleUnit("AngleUnit.centesimal_arcsecond", "AngleUnit.centesimal_arcsec", OTHER, GRAD, 1.0 / 10000.0, true);
+        CENTESIMAL_ARCSECOND = new AngleUnit("AngleUnit.centesimal_arcsecond", "AngleUnit.centesimal_arcsec", OTHER, GRAD,
+                1.0 / 10000.0, true);
         PERCENT = new AngleUnit("AngleUnit.percent", "AngleUnit.perc", OTHER, new GradeScale(0.01), true);
 
     }
@@ -92,9 +92,9 @@ public class AngleUnit extends Unit<AngleUnit>
     private AngleUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final AngleUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem,
-                new LinearScale(((LinearScale) referenceUnit.getScale()).getConversionFactorToStandardUnit()
-                        * conversionFactorToReferenceUnit), standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, new LinearScale(
+                ((LinearScale) referenceUnit.getScale()).getConversionFactorToStandardUnit() * conversionFactorToReferenceUnit),
+                standardUnit);
     }
 
     /**
