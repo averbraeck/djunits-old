@@ -2,8 +2,10 @@ package org.djunits.unit;
 
 import static org.djunits.unit.unitsystem.UnitSystem.IMPERIAL;
 import static org.djunits.unit.unitsystem.UnitSystem.MTS;
+import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.djunits.unit.unitsystem.UnitSystem.SI_ACCEPTED;
 import static org.djunits.unit.unitsystem.UnitSystem.SI_BASE;
+import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
 import static org.djunits.unit.unitsystem.UnitSystem.US_CUSTOMARY;
 
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -30,8 +32,35 @@ public class MassUnit extends LinearUnit<MassUnit>
     /** kilogram. */
     public static final MassUnit KILOGRAM;
 
+    /** femtogram. */
+    public static final MassUnit FEMTOGRAM;
+
+    /** picogram. */
+    public static final MassUnit PICOGRAM;
+
+    /** nanogram. */
+    public static final MassUnit NANOGRAM;
+
+    /** microgram. */
+    public static final MassUnit MICROGRAM;
+
+    /** milligram. */
+    public static final MassUnit MILLIGRAM;
+
     /** gram. */
     public static final MassUnit GRAM;
+
+    /** megagram. */
+    public static final MassUnit MEGAGRAM;
+
+    /** gigagram. */
+    public static final MassUnit GIGAGRAM;
+
+    /** teragram. */
+    public static final MassUnit TERAGRAM;
+
+    /** petagram. */
+    public static final MassUnit PETAGRAM;
 
     /** pound. */
     public static final MassUnit POUND;
@@ -54,11 +83,47 @@ public class MassUnit extends LinearUnit<MassUnit>
     /** dalton. */
     public static final MassUnit DALTON;
 
+    /** microelectronvolt. */
+    public static final MassUnit MICROELECTRONVOLT;
+
+    /** millielectronvolt. */
+    public static final MassUnit MILLIELECTRONVOLT;
+
+    /** electronvolt = 1.782661907E-36 kg. See http://physics.nist.gov/cuu/Constants/Table/allascii.txt. */
+    public static final MassUnit ELECTRONVOLT;
+
+    /** kiloelectronvolt. */
+    public static final MassUnit KILOELECTRONVOLT;
+
+    /** megaelectronvolt. */
+    public static final MassUnit MEGAELECTRONVOLT;
+
+    /** gigaelectronvolt. */
+    public static final MassUnit GIGAELECTRONVOLT;
+
+    /** teraelectronvolt. */
+    public static final MassUnit TERAELECTRONVOLT;
+
+    /** petaelectronvolt. */
+    public static final MassUnit PETAELECTRONVOLT;
+
+    /** exaelectronvolt. */
+    public static final MassUnit EXAELECTRONVOLT;
+
     static
     {
         SI = new MassUnit("MassUnit.kilogram", "MassUnit.kg", SI_BASE);
         KILOGRAM = SI;
         GRAM = new MassUnit("MassUnit.gram", "MassUnit.g", SI_BASE, KILOGRAM, 0.001, true);
+        FEMTOGRAM = new MassUnit("MassUnit.femtogram", "MassUnit.fg", SI_DERIVED, GRAM, 1.0E-15, true);
+        PICOGRAM = new MassUnit("MassUnit.picogram", "MassUnit.pg", SI_DERIVED, GRAM, 1.0E-12, true);
+        NANOGRAM = new MassUnit("MassUnit.nanogram", "MassUnit.ng", SI_DERIVED, GRAM, 1.0E-9, true);
+        MICROGRAM = new MassUnit("MassUnit.microgram", "MassUnit.mug", SI_DERIVED, GRAM, 1.0E-6, true);
+        MILLIGRAM = new MassUnit("MassUnit.milligram", "MassUnit.mg", SI_DERIVED, GRAM, 0.001, true);
+        MEGAGRAM = new MassUnit("MassUnit.megagram", "MassUnit.Mg", SI_DERIVED, GRAM, 1.0E6, true);
+        GIGAGRAM = new MassUnit("MassUnit.gigagram", "MassUnit.Gg", SI_DERIVED, GRAM, 1.0E9, true);
+        TERAGRAM = new MassUnit("MassUnit.teragram", "MassUnit.Tg", SI_DERIVED, GRAM, 1.0E12, true);
+        PETAGRAM = new MassUnit("MassUnit.petagram", "MassUnit.Pg", SI_DERIVED, GRAM, 1.0E15, true);
         POUND = new MassUnit("MassUnit.pound", "MassUnit.lb", IMPERIAL, KILOGRAM, 0.45359237, true);
         OUNCE = new MassUnit("MassUnit.ounce", "MassUnit.oz", IMPERIAL, POUND, 1.0 / 16.0, true);
         TON_LONG = new MassUnit("MassUnit.long_ton", "MassUnit.long_tn", IMPERIAL, POUND, 2240.0, true);
@@ -66,6 +131,15 @@ public class MassUnit extends LinearUnit<MassUnit>
         TON_METRIC = new MassUnit("MassUnit.metric_ton", "MassUnit.t", SI_ACCEPTED, KILOGRAM, 1000.0, true);
         TONNE = new MassUnit("MassUnit.tonne_(mts)", "MassUnit.t_(mts)", MTS, KILOGRAM, 1000.0, true);
         DALTON = new MassUnit("MassUnit.dalton", "MassUnit.Da", SI_ACCEPTED, KILOGRAM, 1.6605388628E-27, true);
+        ELECTRONVOLT = new MassUnit("MassUnit.electronvolt", "MassUnit.eV", OTHER, KILOGRAM, 1.782661907E-36, true);
+        MICROELECTRONVOLT = new MassUnit("MassUnit.microelectronvolt", "MassUnit.mueV", OTHER, ELECTRONVOLT, 1.0E-6, true);
+        MILLIELECTRONVOLT = new MassUnit("MassUnit.millielectronvolt", "MassUnit.meV", OTHER, ELECTRONVOLT, 1.0E-3, true);
+        KILOELECTRONVOLT = new MassUnit("MassUnit.kiloelectronvolt", "MassUnit.keV", OTHER, ELECTRONVOLT, 1.0E3, true);
+        MEGAELECTRONVOLT = new MassUnit("MassUnit.megaelectronvolt", "MassUnit.MeV", OTHER, ELECTRONVOLT, 1.0E6, true);
+        GIGAELECTRONVOLT = new MassUnit("MassUnit.gigaelectronvolt", "MassUnit.GeV", OTHER, ELECTRONVOLT, 1.0E9, true);
+        TERAELECTRONVOLT = new MassUnit("MassUnit.teraelectronvolt", "MassUnit.TeV", OTHER, ELECTRONVOLT, 1.0E12, true);
+        PETAELECTRONVOLT = new MassUnit("MassUnit.petaelectronvolt", "MassUnit.PeV", OTHER, ELECTRONVOLT, 1.0E15, true);
+        EXAELECTRONVOLT = new MassUnit("MassUnit.exaelectronvolt", "MassUnit.EeV", OTHER, ELECTRONVOLT, 1.0E18, true);
     }
 
     /**

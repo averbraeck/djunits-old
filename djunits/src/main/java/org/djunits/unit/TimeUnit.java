@@ -27,6 +27,21 @@ public class TimeUnit extends LinearUnit<TimeUnit>
     /** second. */
     public static final TimeUnit SECOND;
 
+    /** attosecond. */
+    public static final TimeUnit ATTOSECOND;
+
+    /** femtosecond. */
+    public static final TimeUnit FEMTOSECOND;
+
+    /** picosecond. */
+    public static final TimeUnit PICOSECOND;
+
+    /** nanosecond. */
+    public static final TimeUnit NANOSECOND;
+
+    /** microsecond. */
+    public static final TimeUnit MICROSECOND;
+
     /** millisecond. */
     public static final TimeUnit MILLISECOND;
 
@@ -46,7 +61,12 @@ public class TimeUnit extends LinearUnit<TimeUnit>
     {
         SI = new TimeUnit("TimeUnit.second", "TimeUnit.s", SI_BASE);
         SECOND = SI;
-        MILLISECOND = new TimeUnit("TimeUnit.millisecond", "TimeUnit.ms", SI_BASE, SECOND, 0.001, true);
+        ATTOSECOND = new TimeUnit("TimeUnit.attosecond", "TimeUnit.as", SI_BASE, SECOND, 1E-18, true);
+        FEMTOSECOND = new TimeUnit("TimeUnit.femtosecond", "TimeUnit.fs", SI_BASE, SECOND, 1E-15, true);
+        PICOSECOND = new TimeUnit("TimeUnit.picosecond", "TimeUnit.ps", SI_BASE, SECOND, 1E-12, true);
+        NANOSECOND = new TimeUnit("TimeUnit.nanosecond", "TimeUnit.ns", SI_BASE, SECOND, 1E-9, true);
+        MICROSECOND = new TimeUnit("TimeUnit.microsecond", "TimeUnit.mus", SI_BASE, SECOND, 1E-6, true);
+        MILLISECOND = new TimeUnit("TimeUnit.millisecond", "TimeUnit.ms", SI_BASE, SECOND, 1E-3, true);
         MINUTE = new TimeUnit("TimeUnit.minute", "TimeUnit.m", SI_ACCEPTED, SECOND, 60.0, true);
         HOUR = new TimeUnit("TimeUnit.hour", "TimeUnit.h", SI_ACCEPTED, MINUTE, 60.0, true);
         DAY = new TimeUnit("TimeUnit.day", "TimeUnit.d", SI_ACCEPTED, HOUR, 24.0, true);

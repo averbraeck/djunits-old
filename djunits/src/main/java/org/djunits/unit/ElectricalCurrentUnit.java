@@ -39,6 +39,9 @@ public class ElectricalCurrentUnit extends LinearUnit<ElectricalCurrentUnit>
     /** kiloampere. */
     public static final ElectricalCurrentUnit KILOAMPERE;
 
+    /** megaampere. */
+    public static final ElectricalCurrentUnit MEGAAMPERE;
+
     /** statampere (GCS ESU). */
     public static final ElectricalCurrentUnit STATAMPERE;
 
@@ -57,6 +60,8 @@ public class ElectricalCurrentUnit extends LinearUnit<ElectricalCurrentUnit>
                 AMPERE, 0.001, true);
         KILOAMPERE = new ElectricalCurrentUnit("ElectricalCurrentUnit.kiloampere", "ElectricalCurrentUnit.kA", SI_BASE, AMPERE,
                 1000.0, true);
+        MEGAAMPERE = new ElectricalCurrentUnit("ElectricalCurrentUnit.megaampere", "ElectricalCurrentUnit.MA", SI_BASE, AMPERE,
+                1.0E6, true);
         STATAMPERE = new ElectricalCurrentUnit("ElectricalCurrentUnit.statampere", "ElectricalCurrentUnit.statA", CGS_ESU,
                 AMPERE, 3.335641E-10, true);
         ABAMPERE = new ElectricalCurrentUnit("ElectricalCurrentUnit.abampere", "ElectricalCurrentUnit.abA", CGS_EMU, AMPERE,

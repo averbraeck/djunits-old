@@ -57,7 +57,7 @@ public class VolumeUnitTest extends AbstractLinearUnitTest<VolumeUnit>
         // Check conversion factor to standard unit for all remaining time units
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_CENTIMETER, 0.000001, 0.000000000001, "cubic centimeter",
             "cm^3");
-        checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_KM, 1e9, 1, "cubic kilometer", "km^3");
+        checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_KILOMETER, 1e9, 1, "cubic kilometer", "km^3");
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_MILE, 4.16818183e9, 1000, "cubic mile", "mi^3");
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_FOOT, 0.0283168, 0.0000001, "cubic foot", "ft^3");
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_INCH, 1.6387e-5, 1e-9, "cubic inch", "in^3");

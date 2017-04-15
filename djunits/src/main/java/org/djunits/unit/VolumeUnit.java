@@ -28,20 +28,47 @@ public class VolumeUnit extends LinearUnit<VolumeUnit>
     /** The SI unit for volume is m^3. */
     public static final VolumeUnit SI;
 
-    /** m^3. */
-    public static final VolumeUnit CUBIC_METER;
+    /** am^3. */
+    public static final VolumeUnit CUBIC_ATTOMETER;
 
-    /** dm^3. */
-    public static final VolumeUnit CUBIC_DECIMETER;
+    /** fm^3. */
+    public static final VolumeUnit CUBIC_FEMTOMETER;
 
-    /** liter. */
-    public static final VolumeUnit LITER;
+    /** pm^3. */
+    public static final VolumeUnit CUBIC_PICOMETER;
+
+    /** nm^3. */
+    public static final VolumeUnit CUBIC_NANOMETER;
+
+    /** &#181;m^3. */
+    public static final VolumeUnit CUBIC_MICROMETER;
+
+    /** mm^3. */
+    public static final VolumeUnit CUBIC_MILLIMETER;
 
     /** cm^3. */
     public static final VolumeUnit CUBIC_CENTIMETER;
 
+    /** dm^3. */
+    public static final VolumeUnit CUBIC_DECIMETER;
+
+    /** m^3. */
+    public static final VolumeUnit CUBIC_METER;
+
+    /** dam^3. */
+    public static final VolumeUnit CUBIC_DEKAMETER;
+
+    /** hm^3. */
+    public static final VolumeUnit CUBIC_HECTOMETER;
+
     /** km^3. */
-    public static final VolumeUnit CUBIC_KM;
+    public static final VolumeUnit CUBIC_KILOMETER;
+
+    /** Mm^3. */
+    public static final VolumeUnit CUBIC_MEGAMETER;
+
+    /** liter. */
+    public static final VolumeUnit LITER;
 
     /** mile^3. */
     public static final VolumeUnit CUBIC_MILE;
@@ -79,16 +106,41 @@ public class VolumeUnit extends LinearUnit<VolumeUnit>
     /** quart (imperial). */
     public static final VolumeUnit QUART_IMP;
 
+    /** Cubic lightyear. */
+    public static final VolumeUnit CUBIC_LIGHTYEAR;
+
+    /** Cubic Parsec. */
+    public static final VolumeUnit CUBIC_PARSEC;
+
     static
     {
         SI = new VolumeUnit(LengthUnit.METER, "VolumeUnit.cubic_meter", "VolumeUnit.m^3", SI_DERIVED, true);
         CUBIC_METER = SI;
-        CUBIC_DECIMETER =
-                new VolumeUnit(LengthUnit.DECIMETER, "VolumeUnit.cubic_decimeter", "VolumeUnit.dm^3", SI_DERIVED, true);
-        LITER = new VolumeUnit("VolumeUnit.liter", "VolumeUnit.L", SI_ACCEPTED, CUBIC_DECIMETER, 1.0, true);
+        CUBIC_ATTOMETER =
+                new VolumeUnit(LengthUnit.ATTOMETER, "VolumeUnit.cubic_attometer", "VolumeUnit.am^3", SI_DERIVED, true);
+        CUBIC_FEMTOMETER =
+                new VolumeUnit(LengthUnit.FEMTOMETER, "VolumeUnit.cubic_femtometer", "VolumeUnit.fm^3", SI_DERIVED, true);
+        CUBIC_PICOMETER =
+                new VolumeUnit(LengthUnit.PICOMETER, "VolumeUnit.cubic_picometer", "VolumeUnit.pm^3", SI_DERIVED, true);
+        CUBIC_NANOMETER =
+                new VolumeUnit(LengthUnit.NANOMETER, "VolumeUnit.cubic_nanometer", "VolumeUnit.nm^3", SI_DERIVED, true);
+        CUBIC_MICROMETER =
+                new VolumeUnit(LengthUnit.MICROMETER, "VolumeUnit.cubic_micrometer", "VolumeUnit.mum^3", SI_DERIVED, true);
+        CUBIC_MILLIMETER =
+                new VolumeUnit(LengthUnit.MILLIMETER, "VolumeUnit.cubic_millimeter", "VolumeUnit.mm^3", SI_DERIVED, true);
         CUBIC_CENTIMETER =
                 new VolumeUnit(LengthUnit.CENTIMETER, "VolumeUnit.cubic_centimeter", "VolumeUnit.cm^3", SI_DERIVED, true);
-        CUBIC_KM = new VolumeUnit(LengthUnit.KILOMETER, "VolumeUnit.cubic_kilometer", "VolumeUnit.km^3", SI_DERIVED, true);
+        CUBIC_DECIMETER =
+                new VolumeUnit(LengthUnit.DECIMETER, "VolumeUnit.cubic_decimeter", "VolumeUnit.dm^3", SI_DERIVED, true);
+        CUBIC_DEKAMETER =
+                new VolumeUnit(LengthUnit.DEKAMETER, "VolumeUnit.cubic_dekameter", "VolumeUnit.dam^3", SI_DERIVED, true);
+        CUBIC_HECTOMETER =
+                new VolumeUnit(LengthUnit.HECTOMETER, "VolumeUnit.cubic_hectometer", "VolumeUnit.hm^3", SI_DERIVED, true);
+        CUBIC_KILOMETER =
+                new VolumeUnit(LengthUnit.KILOMETER, "VolumeUnit.cubic_kilometer", "VolumeUnit.km^3", SI_DERIVED, true);
+        CUBIC_MEGAMETER =
+                new VolumeUnit(LengthUnit.MEGAMETER, "VolumeUnit.cubic_megameter", "VolumeUnit.Mm^3", SI_DERIVED, true);
+        LITER = new VolumeUnit("VolumeUnit.liter", "VolumeUnit.L", SI_ACCEPTED, CUBIC_DECIMETER, 1.0, true);
         CUBIC_MILE = new VolumeUnit(LengthUnit.MILE, "VolumeUnit.cubic_mile", "VolumeUnit.mi^3", IMPERIAL, true);
         CUBIC_FOOT = new VolumeUnit(LengthUnit.FOOT, "VolumeUnit.cubic_foot", "VolumeUnit.ft^3", IMPERIAL, true);
         CUBIC_INCH = new VolumeUnit(LengthUnit.INCH, "VolumeUnit.cubic_inch", "VolumeUnit.in^3", IMPERIAL, true);
@@ -105,6 +157,9 @@ public class VolumeUnit extends LinearUnit<VolumeUnit>
         QUART_US_FLUID = new VolumeUnit("VolumeUnit.quart_(US_fluid)", "VolumeUnit.qt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID,
                 1.0 / 4.0, true);
         QUART_IMP = new VolumeUnit("VolumeUnit.quart_(imperial)", "VolumeUnit.qt_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 4.0, true);
+        CUBIC_LIGHTYEAR =
+                new VolumeUnit(LengthUnit.LIGHTYEAR, "VolumeUnit.cubic_lightyear", "VolumeUnit.ly^3", SI_DERIVED, true);
+        CUBIC_PARSEC = new VolumeUnit(LengthUnit.PARSEC, "VolumeUnit.cubic_parsec", "VolumeUnit.pc^3", SI_DERIVED, true);
     }
 
     /**

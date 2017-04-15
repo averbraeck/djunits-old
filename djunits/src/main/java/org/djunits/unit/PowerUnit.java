@@ -35,10 +35,25 @@ public class PowerUnit extends LinearUnit<PowerUnit>
     /** The SI unit for power is watt. */
     public static final PowerUnit SI;
 
+    /** femtowatt. */
+    public static final PowerUnit FEMTOWATT;
+
+    /** picowatt. */
+    public static final PowerUnit PICOWATT;
+
+    /** nanowatt. */
+    public static final PowerUnit NANOWATT;
+
+    /** microwatt. */
+    public static final PowerUnit MICROWATT;
+
+    /** milliwatt. */
+    public static final PowerUnit MILLIWATT;
+
     /** watt. */
     public static final PowerUnit WATT;
 
-    /** kilowatt. */
+    /** kiloawatt. */
     public static final PowerUnit KILOWATT;
 
     /** megawatt. */
@@ -46,6 +61,12 @@ public class PowerUnit extends LinearUnit<PowerUnit>
 
     /** gigawatt. */
     public static final PowerUnit GIGAWATT;
+
+    /** terawatt. */
+    public static final PowerUnit TERAWATT;
+
+    /** petawatt. */
+    public static final PowerUnit PETAWATT;
 
     /** foot-pound-force per hour. */
     public static final PowerUnit FOOT_POUND_FORCE_PER_HOUR;
@@ -70,9 +91,16 @@ public class PowerUnit extends LinearUnit<PowerUnit>
         SI = new PowerUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "PowerUnit.watt", "PowerUnit.W", SI_DERIVED,
                 true);
         WATT = SI;
-        KILOWATT = new PowerUnit("PowerUnit.kilowatt", "PowerUnit.kW", SI_DERIVED, WATT, 1000.0, true);
+        FEMTOWATT = new PowerUnit("PowerUnit.femtowatt", "PowerUnit.fW", SI_DERIVED, WATT, 1.0E-15, true);
+        PICOWATT = new PowerUnit("PowerUnit.picowatt", "PowerUnit.pW", SI_DERIVED, WATT, 1.0E-12, true);
+        NANOWATT = new PowerUnit("PowerUnit.nanowatt", "PowerUnit.nW", SI_DERIVED, WATT, 1.0E-9, true);
+        MICROWATT = new PowerUnit("PowerUnit.microwatt", "PowerUnit.muW", SI_DERIVED, WATT, 1.0E-6, true);
+        MILLIWATT = new PowerUnit("PowerUnit.milliwatt", "PowerUnit.mW", SI_DERIVED, WATT, 1.0E-3, true);
+        KILOWATT = new PowerUnit("PowerUnit.kilowatt", "PowerUnit.kW", SI_DERIVED, WATT, 1.0E3, true);
         MEGAWATT = new PowerUnit("PowerUnit.megawatt", "PowerUnit.MW", SI_DERIVED, WATT, 1.0E6, true);
         GIGAWATT = new PowerUnit("PowerUnit.gigawatt", "PowerUnit.GW", SI_DERIVED, WATT, 1.0E9, true);
+        TERAWATT = new PowerUnit("PowerUnit.terawatt", "PowerUnit.TW", SI_DERIVED, WATT, 1.0E12, true);
+        PETAWATT = new PowerUnit("PowerUnit.petawatt", "PowerUnit.PW", SI_DERIVED, WATT, 1.0E15, true);
         FOOT_POUND_FORCE_PER_HOUR = new PowerUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, TimeUnit.HOUR,
                 "PowerUnit.foot_pound-force_per_hour", "PowerUnit.ft.lbf/h", IMPERIAL, true);
         FOOT_POUND_FORCE_PER_MINUTE = new PowerUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, TimeUnit.MINUTE,

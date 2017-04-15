@@ -33,14 +33,41 @@ public class SpeedUnit extends LinearUnit<SpeedUnit>
     /** m/s. */
     public static final SpeedUnit METER_PER_SECOND;
 
+    /** m/h. */
+    public static final SpeedUnit METER_PER_HOUR;
+
+    /** km/s. */
+    public static final SpeedUnit KM_PER_SECOND;
+
     /** km/h. */
     public static final SpeedUnit KM_PER_HOUR;
 
-    /** mile/h. */
-    public static final SpeedUnit MILE_PER_HOUR;
+    /** in/s. */
+    public static final SpeedUnit INCH_PER_SECOND;
+
+    /** in/min. */
+    public static final SpeedUnit INCH_PER_MINUTE;
+
+    /** in/h. */
+    public static final SpeedUnit INCH_PER_HOUR;
 
     /** ft/s. */
     public static final SpeedUnit FOOT_PER_SECOND;
+
+    /** ft/min. */
+    public static final SpeedUnit FOOT_PER_MINUTE;
+
+    /** ft/h. */
+    public static final SpeedUnit FOOT_PER_HOUR;
+
+    /** mile/s. */
+    public static final SpeedUnit MILE_PER_SECOND;
+
+    /** mile/min. */
+    public static final SpeedUnit MILE_PER_MINUTE;
+
+    /** mile/h. */
+    public static final SpeedUnit MILE_PER_HOUR;
 
     /** knot. */
     public static final SpeedUnit KNOT;
@@ -49,12 +76,30 @@ public class SpeedUnit extends LinearUnit<SpeedUnit>
     {
         SI = new SpeedUnit(LengthUnit.METER, TimeUnit.SECOND, "SpeedUnit.meter_per_second", "SpeedUnit.m/s", SI_DERIVED, true);
         METER_PER_SECOND = SI;
+        METER_PER_HOUR =
+                new SpeedUnit(LengthUnit.METER, TimeUnit.HOUR, "SpeedUnit.meter_per_hour", "SpeedUnit.m/h", SI_DERIVED, true);
+        KM_PER_SECOND = new SpeedUnit(LengthUnit.KILOMETER, TimeUnit.SECOND, "SpeedUnit.kilometer_per_second", "SpeedUnit.km/s",
+                SI_DERIVED, true);
         KM_PER_HOUR = new SpeedUnit(LengthUnit.KILOMETER, TimeUnit.HOUR, "SpeedUnit.kilometer_per_hour", "SpeedUnit.km/h",
                 SI_DERIVED, true);
-        MILE_PER_HOUR =
-                new SpeedUnit(LengthUnit.MILE, TimeUnit.HOUR, "SpeedUnit.mile_per_hour", "SpeedUnit.mph", IMPERIAL, true);
+        INCH_PER_SECOND =
+                new SpeedUnit(LengthUnit.INCH, TimeUnit.SECOND, "SpeedUnit.inch_per_second", "SpeedUnit.in/s", IMPERIAL, true);
+        INCH_PER_MINUTE = new SpeedUnit(LengthUnit.INCH, TimeUnit.MINUTE, "SpeedUnit.inch_per_minute", "SpeedUnit.in/min",
+                IMPERIAL, true);
+        INCH_PER_HOUR =
+                new SpeedUnit(LengthUnit.INCH, TimeUnit.HOUR, "SpeedUnit.inch_per_hour", "SpeedUnit.in/h", IMPERIAL, true);
         FOOT_PER_SECOND =
                 new SpeedUnit(LengthUnit.FOOT, TimeUnit.SECOND, "SpeedUnit.foot_per_second", "SpeedUnit.fps", IMPERIAL, true);
+        FOOT_PER_MINUTE = new SpeedUnit(LengthUnit.FOOT, TimeUnit.MINUTE, "SpeedUnit.foot_per_minute", "SpeedUnit.ft/min",
+                IMPERIAL, true);
+        FOOT_PER_HOUR =
+                new SpeedUnit(LengthUnit.FOOT, TimeUnit.HOUR, "SpeedUnit.foot_per_hour", "SpeedUnit.ft/h", IMPERIAL, true);
+        MILE_PER_SECOND =
+                new SpeedUnit(LengthUnit.MILE, TimeUnit.SECOND, "SpeedUnit.mile_per_second", "SpeedUnit.mi/s", IMPERIAL, true);
+        MILE_PER_MINUTE = new SpeedUnit(LengthUnit.MILE, TimeUnit.MINUTE, "SpeedUnit.mile_per_minute", "SpeedUnit.mi/min",
+                IMPERIAL, true);
+        MILE_PER_HOUR =
+                new SpeedUnit(LengthUnit.MILE, TimeUnit.HOUR, "SpeedUnit.mile_per_hour", "SpeedUnit.mph", IMPERIAL, true);
         KNOT = new SpeedUnit(LengthUnit.NAUTICAL_MILE, TimeUnit.HOUR, "SpeedUnit.knot", "SpeedUnit.kt", IMPERIAL, true);
     }
 

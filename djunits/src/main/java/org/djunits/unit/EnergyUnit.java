@@ -37,6 +37,18 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
     /** The SI unit for energy is Joule. */
     public static final EnergyUnit SI;
 
+    /** picojoule. */
+    public static final EnergyUnit PICOJOULE;
+
+    /** nanojoule. */
+    public static final EnergyUnit NANOJOULE;
+
+    /** microjoule. */
+    public static final EnergyUnit MICROJOULE;
+
+    /** millijoule. */
+    public static final EnergyUnit MILLIJOULE;
+
     /** Joule. */
     public static final EnergyUnit JOULE;
 
@@ -45,6 +57,15 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
 
     /** megajoule. */
     public static final EnergyUnit MEGAJOULE;
+
+    /** gigajoule. */
+    public static final EnergyUnit GIGAJOULE;
+
+    /** terajoule. */
+    public static final EnergyUnit TERAJOULE;
+
+    /** petajoule. */
+    public static final EnergyUnit PETAJOULE;
 
     /** foot-pound force. */
     public static final EnergyUnit FOOT_POUND_FORCE;
@@ -61,8 +82,26 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
     /** calorie (International Table). */
     public static final EnergyUnit CALORIE_IT;
 
+    /** calorie. */
+    public static final EnergyUnit CALORIE;
+
     /** kilocalorie. */
     public static final EnergyUnit KILOCALORIE;
+
+    /** femtowatt-hour. */
+    public static final EnergyUnit FEMTOWATT_HOUR;
+
+    /** picowatt-hour. */
+    public static final EnergyUnit PICOWATT_HOUR;
+
+    /** nanowatt-hour. */
+    public static final EnergyUnit NANOWATT_HOUR;
+
+    /** microwatt-hour. */
+    public static final EnergyUnit MICROWATT_HOUR;
+
+    /** milliwatt-hour. */
+    public static final EnergyUnit MILLIWATT_HOUR;
 
     /** watt-hour. */
     public static final EnergyUnit WATT_HOUR;
@@ -79,35 +118,35 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
     /** terawatt-hour. */
     public static final EnergyUnit TERAWATT_HOUR;
 
-    /** milliwatt-hour. */
-    public static final EnergyUnit MILLIWATT_HOUR;
-
-    /** microwatt-hour. */
-    public static final EnergyUnit MICROWATT_HOUR;
+    /** petawatt-hour. */
+    public static final EnergyUnit PETAWATT_HOUR;
 
     /** electronvolt. */
     public static final EnergyUnit ELECTRONVOLT;
 
+    /** micro-electronvolt. */
+    public static final EnergyUnit MICROELECTRONVOLT;
+
     /** milli-electronvolt. */
-    public static final EnergyUnit MILLI_ELECTRONVOLT;
+    public static final EnergyUnit MILLIELECTRONVOLT;
 
     /** kilo-electronvolt. */
-    public static final EnergyUnit KILO_ELECTRONVOLT;
+    public static final EnergyUnit KILOELECTRONVOLT;
 
     /** mega-electronvolt. */
-    public static final EnergyUnit MEGA_ELECTRONVOLT;
+    public static final EnergyUnit MEGAELECTRONVOLT;
 
     /** giga-electronvolt. */
-    public static final EnergyUnit GIGA_ELECTRONVOLT;
+    public static final EnergyUnit GIGAELECTRONVOLT;
 
     /** tera-electronvolt. */
-    public static final EnergyUnit TERA_ELECTRONVOLT;
+    public static final EnergyUnit TERAELECTRONVOLT;
 
     /** peta-electronvolt. */
-    public static final EnergyUnit PETA_ELECTRONVOLT;
+    public static final EnergyUnit PETAELECTRONVOLT;
 
     /** exa-electronvolt. */
-    public static final EnergyUnit EXA_ELECTRONVOLT;
+    public static final EnergyUnit EXAELECTRONVOLT;
 
     /** sthene-meter (mts). */
     public static final EnergyUnit STHENE_METER;
@@ -120,8 +159,15 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
         SI = new EnergyUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "EnergyUnit.Joule", "EnergyUnit.J",
                 SI_DERIVED, true);
         JOULE = SI;
+        PICOJOULE = new EnergyUnit("EnergyUnit.picojoule", "EnergyUnit.pJ", SI_BASE, JOULE, 1E-12, true);
+        NANOJOULE = new EnergyUnit("EnergyUnit.nanojoule", "EnergyUnit.nJ", SI_BASE, JOULE, 1E-9, true);
+        MICROJOULE = new EnergyUnit("EnergyUnit.microjoule", "EnergyUnit.muJ", SI_BASE, JOULE, 1E-6, true);
+        MILLIJOULE = new EnergyUnit("EnergyUnit.millijoule", "EnergyUnit.mJ", SI_BASE, JOULE, 1E-3, true);
         KILOJOULE = new EnergyUnit("EnergyUnit.kilojoule", "EnergyUnit.kJ", SI_BASE, JOULE, 1000.0, true);
         MEGAJOULE = new EnergyUnit("EnergyUnit.megajoule", "EnergyUnit.MJ", SI_BASE, JOULE, 1E9, true);
+        GIGAJOULE = new EnergyUnit("EnergyUnit.gigajoule", "EnergyUnit.GJ", SI_BASE, JOULE, 1E12, true);
+        TERAJOULE = new EnergyUnit("EnergyUnit.terajoule", "EnergyUnit.TJ", SI_BASE, JOULE, 1E15, true);
+        PETAJOULE = new EnergyUnit("EnergyUnit.petajoule", "EnergyUnit.PJ", SI_BASE, JOULE, 1E18, true);
         FOOT_POUND_FORCE = new EnergyUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "EnergyUnit.foot_pound-force",
                 "EnergyUnit.ft.lbf", IMPERIAL, true);
         INCH_POUND_FORCE = new EnergyUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "EnergyUnit.inch_pound-force",
@@ -132,28 +178,37 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
                 1.05505585262E3, true);
         CALORIE_IT =
                 new EnergyUnit("EnergyUnit.calorie_(International_Table)", "EnergyUnit.cal(IT)", OTHER, JOULE, 4.1868, true);
-        KILOCALORIE = new EnergyUnit("EnergyUnit.kilocalorie", "EnergyUnit.kcal", OTHER, CALORIE_IT, 1000.0, true);
+        CALORIE =
+                new EnergyUnit("EnergyUnit.calorie", "EnergyUnit.cal", OTHER, JOULE, 4.184, true);
+        KILOCALORIE =
+                new EnergyUnit("EnergyUnit.kilocalorie", "EnergyUnit.kcal", OTHER, CALORIE, 1000.0, true);
         WATT_HOUR = new EnergyUnit("EnergyUnit.watt-hour", "EnergyUnit.Wh", SI_DERIVED, JOULE, 3600.0, true);
+        FEMTOWATT_HOUR = new EnergyUnit("EnergyUnit.femtowatt-hour", "EnergyUnit.fWh", SI_DERIVED, WATT_HOUR, 1.0E-15, true);
+        PICOWATT_HOUR = new EnergyUnit("EnergyUnit.picowatt-hour", "EnergyUnit.pWh", SI_DERIVED, WATT_HOUR, 1.0E-12, true);
+        NANOWATT_HOUR = new EnergyUnit("EnergyUnit.nanowatt-hour", "EnergyUnit.nWh", SI_DERIVED, WATT_HOUR, 1.0E-9, true);
+        MICROWATT_HOUR = new EnergyUnit("EnergyUnit.microwatt-hour", "EnergyUnit.muWh", SI_DERIVED, WATT_HOUR, 1.0E-6, true);
+        MILLIWATT_HOUR = new EnergyUnit("EnergyUnit.milliwatt-hour", "EnergyUnit.mWh", SI_DERIVED, WATT_HOUR, 1.0E-3, true);
         KILOWATT_HOUR = new EnergyUnit("EnergyUnit.kilowatt-hour", "EnergyUnit.kWh", SI_DERIVED, WATT_HOUR, 1000.0, true);
         MEGAWATT_HOUR = new EnergyUnit("EnergyUnit.megawatt-hour", "EnergyUnit.MWh", SI_DERIVED, WATT_HOUR, 1.0E6, true);
         GIGAWATT_HOUR = new EnergyUnit("EnergyUnit.gigawatt-hour", "EnergyUnit.GWh", SI_DERIVED, WATT_HOUR, 1.0E9, true);
         TERAWATT_HOUR = new EnergyUnit("EnergyUnit.terawatt-hour", "EnergyUnit.TWh", SI_DERIVED, WATT_HOUR, 1.0E12, true);
-        MILLIWATT_HOUR = new EnergyUnit("EnergyUnit.milliwatt-hour", "EnergyUnit.mWh", SI_DERIVED, WATT_HOUR, 1.0E-3, true);
-        MICROWATT_HOUR = new EnergyUnit("EnergyUnit.microwatt-hour", "EnergyUnit.muWh", SI_DERIVED, WATT_HOUR, 1.0E-6, true);
+        PETAWATT_HOUR = new EnergyUnit("EnergyUnit.petawatt-hour", "EnergyUnit.PWh", SI_DERIVED, WATT_HOUR, 1.0E15, true);
         ELECTRONVOLT = new EnergyUnit("EnergyUnit.electronvolt", "EnergyUnit.eV", SI_ACCEPTED, JOULE, 1.602176565314E-19, true);
-        MILLI_ELECTRONVOLT =
+        MICROELECTRONVOLT =
+                new EnergyUnit("EnergyUnit.micro-electronvolt", "EnergyUnit.mueV", SI_ACCEPTED, ELECTRONVOLT, 1.0E-6, true);
+        MILLIELECTRONVOLT =
                 new EnergyUnit("EnergyUnit.milli-electronvolt", "EnergyUnit.meV", SI_ACCEPTED, ELECTRONVOLT, 1.0E-3, true);
-        KILO_ELECTRONVOLT =
+        KILOELECTRONVOLT =
                 new EnergyUnit("EnergyUnit.kilo-electronvolt", "EnergyUnit.keV", SI_ACCEPTED, ELECTRONVOLT, 1.0E3, true);
-        MEGA_ELECTRONVOLT =
+        MEGAELECTRONVOLT =
                 new EnergyUnit("EnergyUnit.mega-electronvolt", "EnergyUnit.MeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E6, true);
-        GIGA_ELECTRONVOLT =
+        GIGAELECTRONVOLT =
                 new EnergyUnit("EnergyUnit.giga-electronvolt", "EnergyUnit.GeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E9, true);
-        TERA_ELECTRONVOLT =
+        TERAELECTRONVOLT =
                 new EnergyUnit("EnergyUnit.tera-electronvolt", "EnergyUnit.TeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E12, true);
-        PETA_ELECTRONVOLT =
+        PETAELECTRONVOLT =
                 new EnergyUnit("EnergyUnit.peta-electronvolt", "EnergyUnit.PeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E15, true);
-        EXA_ELECTRONVOLT =
+        EXAELECTRONVOLT =
                 new EnergyUnit("EnergyUnit.exa-electronvolt", "EnergyUnit.EeV", SI_ACCEPTED, ELECTRONVOLT, 1.0E18, true);
         STHENE_METER = new EnergyUnit("EnergyUnit.sthene_meter", "EnergyUnit.sn.m", MTS, JOULE, 1000.0, true);
         ERG = new EnergyUnit("EnergyUnit.erg_(full)", "EnergyUnit.erg", CGS, JOULE, 1.0E-7, true);

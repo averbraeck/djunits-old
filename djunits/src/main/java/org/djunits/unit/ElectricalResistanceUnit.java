@@ -1,6 +1,8 @@
 package org.djunits.unit;
 
 import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
+import static org.djunits.unit.unitsystem.UnitSystem.CGS_EMU;
+import static org.djunits.unit.unitsystem.UnitSystem.CGS_ESU;
 
 import org.djunits.unit.unitsystem.UnitSystem;
 
@@ -37,6 +39,12 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
     /** Ohm. */
     public static final ElectricalResistanceUnit OHM;
 
+    /** nano-ohm. */
+    public static final ElectricalResistanceUnit NANOOHM;
+
+    /** micro-ohm. */
+    public static final ElectricalResistanceUnit MICROOHM;
+
     /** milli-ohm. */
     public static final ElectricalResistanceUnit MILLIOHM;
 
@@ -46,17 +54,36 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
     /** mega-ohm. */
     public static final ElectricalResistanceUnit MEGAOHM;
 
+    /** giga-ohm. */
+    public static final ElectricalResistanceUnit GIGAOHM;
+
+    /** ab-ohm. */
+    public static final ElectricalResistanceUnit ABOHM;
+
+    /** stat-ohm. */
+    public static final ElectricalResistanceUnit STATOHM;
+
     static
     {
         SI = new ElectricalResistanceUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND,
                 "ElectricalResistanceUnit.ohm_(name)", "ElectricalResistanceUnit.ohm", SI_DERIVED, true);
         OHM = SI;
+        NANOOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.nano_ohm", "ElectricalResistanceUnit.n_ohm",
+                SI_DERIVED, OHM, 1.0E-9, true);
+        MICROOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.micro_ohm", "ElectricalResistanceUnit.mu_ohm",
+                SI_DERIVED, OHM, 1.0E-6, true);
         MILLIOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.milli_ohm", "ElectricalResistanceUnit.m_ohm",
-                SI_DERIVED, OHM, 0.001, true);
+                SI_DERIVED, OHM, 1.0E-3, true);
         KILOOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.kilo_ohm", "ElectricalResistanceUnit.k_ohm",
-                SI_DERIVED, OHM, 1000.0, true);
+                SI_DERIVED, OHM, 1.0E3, true);
         MEGAOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.mega_ohm", "ElectricalResistanceUnit.M_ohm",
-                SI_DERIVED, OHM, 1E06, true);
+                SI_DERIVED, OHM, 1.0E06, true);
+        GIGAOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.giga_ohm", "ElectricalResistanceUnit.G_ohm",
+                SI_DERIVED, OHM, 1.0E9, true);
+        ABOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.ab_ohm", "ElectricalResistanceUnit.a_ohm",
+                CGS_EMU, OHM, 1.0E-9, true);
+        STATOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.stat_ohm", "ElectricalResistanceUnit.st_ohm",
+                CGS_ESU, OHM, 8.987551787E11, true);
     }
 
     /**

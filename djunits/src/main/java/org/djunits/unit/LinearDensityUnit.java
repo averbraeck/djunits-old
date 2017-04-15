@@ -1,6 +1,7 @@
 package org.djunits.unit;
 
 import static org.djunits.unit.unitsystem.UnitSystem.IMPERIAL;
+import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
 
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -26,6 +27,21 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
     /** The SI unit for objects per unit of distance is 1/meter. */
     public static final LinearDensityUnit SI;
 
+    /** 1/am. */
+    public static final LinearDensityUnit PER_ATTOMETER;
+
+    /** 1/fm. */
+    public static final LinearDensityUnit PER_FEMTOMETER;
+
+    /** 1/pm. */
+    public static final LinearDensityUnit PER_PICOMETER;
+
+    /** 1/nm. */
+    public static final LinearDensityUnit PER_NANOMETER;
+
+    /** 1/&#181;m. */
+    public static final LinearDensityUnit PER_MICROMETER;
+
     /** 1/meter. */
     public static final LinearDensityUnit PER_METER;
 
@@ -47,6 +63,9 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
     /** 1/kilometer. */
     public static final LinearDensityUnit PER_KILOMETER;
 
+    /** 1/megameter. */
+    public static final LinearDensityUnit PER_MEGAMETER;
+
     /** 1/foot (international) = 0.3048 m = 1/3 yd = 12 inches. */
     public static final LinearDensityUnit PER_FOOT;
 
@@ -62,10 +81,32 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
     /** 1/yard (international) = 0.9144 m = 3 ft = 36 in. */
     public static final LinearDensityUnit PER_YARD;
 
+    /** 1/Astronomical Unit. */
+    public static final LinearDensityUnit PER_ASTRONOMICAL_UNIT;
+
+    /** 1/Lightyear. */
+    public static final LinearDensityUnit PER_LIGHTYEAR;
+
+    /** 1/Parsec. */
+    public static final LinearDensityUnit PER_PARSEC;
+
+    /** 1/Angstrom. */
+    public static final LinearDensityUnit PER_ANGSTROM;
+
     static
     {
         SI = new LinearDensityUnit(LengthUnit.METER, "LinearDensityUnit.per_meter", "LinearDensityUnit./m", SI_DERIVED, true);
         PER_METER = SI;
+        PER_ATTOMETER = new LinearDensityUnit("LinearDensityUnit.per_attometer", "LinearDensityUnit./am", SI_DERIVED, PER_METER,
+                1.0E18, true);
+        PER_FEMTOMETER = new LinearDensityUnit("LinearDensityUnit.per_femtometer", "LinearDensityUnit./fm", SI_DERIVED,
+                PER_METER, 1.0E15, true);
+        PER_PICOMETER = new LinearDensityUnit("LinearDensityUnit.per_picometer", "LinearDensityUnit./pm", SI_DERIVED, PER_METER,
+                1.0E12, true);
+        PER_NANOMETER = new LinearDensityUnit("LinearDensityUnit.per_nanometer", "LinearDensityUnit./nm", SI_DERIVED, PER_METER,
+                1.0E9, true);
+        PER_MICROMETER = new LinearDensityUnit("LinearDensityUnit.per_micrometer", "LinearDensityUnit./mum", SI_DERIVED,
+                PER_METER, 1.0E6, true);
         PER_MILLIMETER = new LinearDensityUnit("LinearDensityUnit.per_millimeter", "LinearDensityUnit./mm", SI_DERIVED,
                 PER_METER, 1000.0, true);
         PER_CENTIMETER = new LinearDensityUnit("LinearDensityUnit.per_centimeter", "LinearDensityUnit./cm", SI_DERIVED,
@@ -78,6 +119,8 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
                 PER_METER, 0.01, true);
         PER_KILOMETER = new LinearDensityUnit("LinearDensityUnit.per_kilometer", "LinearDensityUnit./km", SI_DERIVED, PER_METER,
                 0.001, true);
+        PER_MEGAMETER = new LinearDensityUnit("LinearDensityUnit.per_megameter", "LinearDensityUnit./Mm", SI_DERIVED, PER_METER,
+                1.0E-6, true);
         PER_FOOT = new LinearDensityUnit("LinearDensityUnit.per_foot", "LinearDensityUnit./ft", IMPERIAL, PER_METER,
                 1.0 / 0.3048, true);
         PER_INCH = new LinearDensityUnit("LinearDensityUnit.per_inch", "LinearDensityUnit./in", IMPERIAL, PER_FOOT, 12.0, true);
@@ -87,6 +130,14 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
                 PER_METER, 1.0 / 1852.0, true);
         PER_YARD = new LinearDensityUnit("LinearDensityUnit.per_yard", "LinearDensityUnit./yd", IMPERIAL, PER_FOOT, 1.0 / 3.0,
                 true);
+        PER_ASTRONOMICAL_UNIT = new LinearDensityUnit("LinearDensityUnit.per_astronomicalUnit", "LinearDensityUnit./AU", OTHER,
+                PER_METER, 1.0 / 149597870700.0, true);
+        PER_LIGHTYEAR = new LinearDensityUnit("LinearDensityUnit.per_lightyear", "LinearDensityUnit./ly", OTHER, PER_METER,
+                1.0 / 9460730472580800.0, true);
+        PER_PARSEC = new LinearDensityUnit("LinearDensityUnit.per_parsec", "LinearDensityUnit./pc", OTHER, PER_LIGHTYEAR,
+                Math.PI / 648000.0, true);
+        PER_ANGSTROM = new LinearDensityUnit("LinearDensityUnit.per_angstrom", "LinearDensityUnit./A", OTHER, PER_METER,
+                1.0 / 1E-10, true);
     }
 
     /**
