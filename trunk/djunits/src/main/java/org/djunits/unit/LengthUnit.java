@@ -1,6 +1,7 @@
 package org.djunits.unit;
 
 import static org.djunits.unit.unitsystem.UnitSystem.IMPERIAL;
+import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.djunits.unit.unitsystem.UnitSystem.SI_BASE;
 
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -24,32 +25,53 @@ public class LengthUnit extends LinearUnit<LengthUnit>
     /** The SI unit for length is meter. */
     public static final LengthUnit SI;
 
-    /** meter. */
-    public static final LengthUnit METER;
+    /** am. */
+    public static final LengthUnit ATTOMETER;
 
-    /** millimeter. */
+    /** fm. */
+    public static final LengthUnit FEMTOMETER;
+
+    /** pm. */
+    public static final LengthUnit PICOMETER;
+
+    /** nm. */
+    public static final LengthUnit NANOMETER;
+
+    /** &#181;m. */
+    public static final LengthUnit MICROMETER;
+
+    /** mm. */
     public static final LengthUnit MILLIMETER;
 
-    /** centimeter. */
+    /** m. */
+    public static final LengthUnit METER;
+
+    /** cm. */
     public static final LengthUnit CENTIMETER;
 
-    /** decimeter. */
+    /** dm. */
     public static final LengthUnit DECIMETER;
 
-    /** decameter. */
+    /** dam. */
     public static final LengthUnit DEKAMETER;
 
-    /** hectometer. */
+    /** hm. */
     public static final LengthUnit HECTOMETER;
 
-    /** kilometer. */
+    /** km. */
     public static final LengthUnit KILOMETER;
+
+    /** Mm. */
+    public static final LengthUnit MEGAMETER;
+
+    /** inch (international) = 2.54 cm = 1/36 yd = 1/12 ft. */
+    public static final LengthUnit INCH;
 
     /** foot (international) = 0.3048 m = 1/3 yd = 12 inches. */
     public static final LengthUnit FOOT;
 
-    /** inch (international) = 2.54 cm = 1/36 yd = 1/12 ft. */
-    public static final LengthUnit INCH;
+    /** yard (international) = 0.9144 m = 3 ft = 36 in. */
+    public static final LengthUnit YARD;
 
     /** mile (international) = 5280 ft = 1760 yd. */
     public static final LengthUnit MILE;
@@ -57,24 +79,43 @@ public class LengthUnit extends LinearUnit<LengthUnit>
     /** nautical mile (international) = 1852 m. */
     public static final LengthUnit NAUTICAL_MILE;
 
-    /** yard (international) = 0.9144 m = 3 ft = 36 in. */
-    public static final LengthUnit YARD;
+    /** Astronomical Unit = 149,597,870,700 m. */
+    public static final LengthUnit ASTRONOMICAL_UNIT;
+
+    /** Lightyear = 9,460,730,472,580,800 m. */
+    public static final LengthUnit LIGHTYEAR;
+
+    /** Parsec = 648,000 / PI Pc. */
+    public static final LengthUnit PARSEC;
+
+    /** Angstrom = 10^-10 m. */
+    public static final LengthUnit ANGSTROM;
 
     static
     {
         SI = new LengthUnit("LengthUnit.meter", "LengthUnit.m", SI_BASE);
         METER = SI;
+        ATTOMETER = new LengthUnit("LengthUnit.attometer", "LengthUnit.mam", SI_BASE, METER, 1.0E-18, true);
+        FEMTOMETER = new LengthUnit("LengthUnit.femtometer", "LengthUnit.fm", SI_BASE, METER, 1.0E-15, true);
+        PICOMETER = new LengthUnit("LengthUnit.picometer", "LengthUnit.pm", SI_BASE, METER, 1.0E-12, true);
+        NANOMETER = new LengthUnit("LengthUnit.nanometer", "LengthUnit.nm", SI_BASE, METER, 1.0E-9, true);
+        MICROMETER = new LengthUnit("LengthUnit.micrometer", "LengthUnit.mum", SI_BASE, METER, 1.0E-6, true);
         MILLIMETER = new LengthUnit("LengthUnit.millimeter", "LengthUnit.mm", SI_BASE, METER, 0.001, true);
         CENTIMETER = new LengthUnit("LengthUnit.centimeter", "LengthUnit.cm", SI_BASE, METER, 0.01, true);
         DECIMETER = new LengthUnit("LengthUnit.decimeter", "LengthUnit.dm", SI_BASE, METER, 0.1, true);
         DEKAMETER = new LengthUnit("LengthUnit.dekameter", "LengthUnit.dam", SI_BASE, METER, 10.0, true);
         HECTOMETER = new LengthUnit("LengthUnit.hectometer", "LengthUnit.hm", SI_BASE, METER, 100.0, true);
         KILOMETER = new LengthUnit("LengthUnit.kilometer", "LengthUnit.km", SI_BASE, METER, 1000.0, true);
+        MEGAMETER = new LengthUnit("LengthUnit.megameter", "LengthUnit.Mm", SI_BASE, METER, 1000000.0, true);
         FOOT = new LengthUnit("LengthUnit.foot", "LengthUnit.ft", IMPERIAL, METER, 0.3048, true);
         INCH = new LengthUnit("LengthUnit.inch", "LengthUnit.in", IMPERIAL, FOOT, 1.0 / 12.0, true);
         MILE = new LengthUnit("LengthUnit.mile", "LengthUnit.mi", IMPERIAL, FOOT, 5280.0, true);
-        NAUTICAL_MILE = new LengthUnit("LengthUnit.nauticalMile", "LengthUnit.NM", IMPERIAL, METER, 1852.0, true);
         YARD = new LengthUnit("LengthUnit.yard", "LengthUnit.yd", IMPERIAL, FOOT, 3.0, true);
+        NAUTICAL_MILE = new LengthUnit("LengthUnit.nauticalMile", "LengthUnit.NM", IMPERIAL, METER, 1852.0, true);
+        ASTRONOMICAL_UNIT = new LengthUnit("LengthUnit.astronomicalUnit", "LengthUnit.AU", OTHER, METER, 149597870700.0, true);
+        LIGHTYEAR = new LengthUnit("LengthUnit.lightyear", "LengthUnit.ly", OTHER, METER, 9460730472580800.0, true);
+        PARSEC = new LengthUnit("LengthUnit.parsec", "LengthUnit.pc", OTHER, LIGHTYEAR, 648000 / Math.PI, true);
+        ANGSTROM = new LengthUnit("LengthUnit.angstrom", "LengthUnit.A", OTHER, METER, 1E-10, true);
     }
 
     /**

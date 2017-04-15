@@ -45,7 +45,7 @@ public class AreaUnitTest extends AbstractLinearUnitTest<AreaUnit>
     public final void conversions()
     {
         checkUnitRatioNameAndAbbreviation(AreaUnit.SQUARE_METER, 1, 0.00000001, "square meter", "m^2");
-        checkUnitRatioNameAndAbbreviation(AreaUnit.SQUARE_KM, 1000000, 0.05, "square kilometer", "km^2");
+        checkUnitRatioNameAndAbbreviation(AreaUnit.SQUARE_KILOMETER, 1000000, 0.05, "square kilometer", "km^2");
         checkUnitRatioNameAndAbbreviation(AreaUnit.SQUARE_MILE, 2589990, 2, "square mile", "mi^2");
         // Check two conversions between non-standard units
         assertEquals("one SQUARE MILE is 640 ACRE", 640,

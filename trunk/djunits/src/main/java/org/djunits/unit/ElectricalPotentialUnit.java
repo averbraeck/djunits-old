@@ -39,6 +39,9 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
     /** Volt. */
     public static final ElectricalPotentialUnit VOLT;
 
+    /** nanovolt. */
+    public static final ElectricalPotentialUnit NANOVOLT;
+
     /** microvolt. */
     public static final ElectricalPotentialUnit MICROVOLT;
 
@@ -51,6 +54,9 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
     /** megavolt. */
     public static final ElectricalPotentialUnit MEGAVOLT;
 
+    /** gigavolt. */
+    public static final ElectricalPotentialUnit GIGAVOLT;
+
     /** statvolt. */
     public static final ElectricalPotentialUnit STATVOLT;
 
@@ -62,6 +68,8 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
         SI = new ElectricalPotentialUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND,
                 "ElectricalPotentialUnit.volt", "ElectricalPotentialUnit.V", SI_DERIVED, true);
         VOLT = SI;
+        NANOVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.nanovolt", "ElectricalPotentialUnit.nV", SI_DERIVED,
+                VOLT, 1.0E-9, true);
         MICROVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.microvolt", "ElectricalPotentialUnit.muV", SI_DERIVED,
                 VOLT, 1.0E-6, true);
         MILLIVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.millivolt", "ElectricalPotentialUnit.mV", SI_DERIVED,
@@ -70,6 +78,8 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
                 VOLT, 1000.0, true);
         MEGAVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.megavolt", "ElectricalPotentialUnit.MV", SI_DERIVED,
                 VOLT, 1.0E6, true);
+        GIGAVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.gigavolt", "ElectricalPotentialUnit.GV", SI_DERIVED,
+                VOLT, 1.0E9, true);
         STATVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.statvolt", "ElectricalPotentialUnit.statV", CGS_ESU,
                 VOLT, 299.792458, true);
         ABVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.abvolt", "ElectricalPotentialUnit.abV", CGS_EMU, VOLT,

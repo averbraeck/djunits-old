@@ -27,17 +27,47 @@ public class AreaUnit extends LinearUnit<AreaUnit>
     /** The SI unit for area is m^2. */
     public static final AreaUnit SI;
 
+    /** am^2. */
+    public static final AreaUnit SQUARE_ATTOMETER;
+
+    /** fm^2. */
+    public static final AreaUnit SQUARE_FEMTOMETER;
+
+    /** pm^2. */
+    public static final AreaUnit SQUARE_PICOMETER;
+
+    /** nm^2. */
+    public static final AreaUnit SQUARE_NANOMETER;
+
+    /** &#181;m^2. */
+    public static final AreaUnit SQUARE_MICROMETER;
+
+    /** mm^2. */
+    public static final AreaUnit SQUARE_MILLIMETER;
+
     /** m^2. */
     public static final AreaUnit SQUARE_METER;
-
-    /** km^2. */
-    public static final AreaUnit SQUARE_KM;
 
     /** cm^2. */
     public static final AreaUnit SQUARE_CENTIMETER;
 
-    /** cm^2. */
-    public static final AreaUnit SQUARE_MILLIMETER;
+    /** dm^2. */
+    public static final AreaUnit SQUARE_DECIMETER;
+
+    /** dam^2. */
+    public static final AreaUnit SQUARE_DEKAMETER;
+
+    /** hm^2. */
+    public static final AreaUnit SQUARE_HECTOMETER;
+
+    /** km^2. */
+    public static final AreaUnit SQUARE_KILOMETER;
+
+    /** Mm^2. */
+    public static final AreaUnit SQUARE_MEGAMETER;
+
+    /** centiare. */
+    public static final AreaUnit CENTIARE;
 
     /** are. */
     public static final AreaUnit ARE;
@@ -47,6 +77,9 @@ public class AreaUnit extends LinearUnit<AreaUnit>
 
     /** mile^2. */
     public static final AreaUnit SQUARE_MILE;
+
+    /** Nautical mile^2. */
+    public static final AreaUnit SQUARE_NAUTICAL_MILE;
 
     /** ft^2. */
     public static final AreaUnit SQUARE_FOOT;
@@ -64,13 +97,28 @@ public class AreaUnit extends LinearUnit<AreaUnit>
     {
         SI = new AreaUnit(LengthUnit.METER, "AreaUnit.square_meter", "AreaUnit.m^2", SI_DERIVED, true);
         SQUARE_METER = SI;
-        SQUARE_KM = new AreaUnit(LengthUnit.KILOMETER, "AreaUnit.square_kilometer", "AreaUnit.km^2", SI_DERIVED, true);
-        SQUARE_CENTIMETER =
-                new AreaUnit(LengthUnit.CENTIMETER, "AreaUnit.square_centimeter", "AreaUnit.cm^2", SI_DERIVED, true);
+        SQUARE_ATTOMETER = new AreaUnit(LengthUnit.ATTOMETER, "AreaUnit.square_attometer", "AreaUnit.am^2", SI_DERIVED, true);
+        SQUARE_FEMTOMETER =
+                new AreaUnit(LengthUnit.FEMTOMETER, "AreaUnit.square_femtometer", "AreaUnit.fm^2", SI_DERIVED, true);
+        SQUARE_PICOMETER = new AreaUnit(LengthUnit.PICOMETER, "AreaUnit.square_picometer", "AreaUnit.pm^2", SI_DERIVED, true);
+        SQUARE_NANOMETER = new AreaUnit(LengthUnit.NANOMETER, "AreaUnit.square_nanometer", "AreaUnit.nm^2", SI_DERIVED, true);
+        SQUARE_MICROMETER =
+                new AreaUnit(LengthUnit.MICROMETER, "AreaUnit.square_micrometer", "AreaUnit.mum^2", SI_DERIVED, true);
         SQUARE_MILLIMETER =
                 new AreaUnit(LengthUnit.MILLIMETER, "AreaUnit.square_millimeter", "AreaUnit.mm^2", SI_DERIVED, true);
+        SQUARE_CENTIMETER =
+                new AreaUnit(LengthUnit.CENTIMETER, "AreaUnit.square_centimeter", "AreaUnit.cm^2", SI_DERIVED, true);
+        SQUARE_DECIMETER = new AreaUnit(LengthUnit.DECIMETER, "AreaUnit.square_decimeter", "AreaUnit.dm^2", SI_DERIVED, true);
+        SQUARE_DEKAMETER = new AreaUnit(LengthUnit.DEKAMETER, "AreaUnit.square_dekameter", "AreaUnit.dam^2", SI_DERIVED, true);
+        SQUARE_HECTOMETER =
+                new AreaUnit(LengthUnit.HECTOMETER, "AreaUnit.square_hectometer", "AreaUnit.hm^2", SI_DERIVED, true);
+        SQUARE_KILOMETER = new AreaUnit(LengthUnit.KILOMETER, "AreaUnit.square_kilometer", "AreaUnit.km^2", SI_DERIVED, true);
+        SQUARE_MEGAMETER = new AreaUnit(LengthUnit.MEGAMETER, "AreaUnit.square_megameter", "AreaUnit.Mm^2", SI_DERIVED, true);
+        CENTIARE = new AreaUnit("AreaUnit.centiare", "AreaUnit.ca", OTHER, SQUARE_METER, 1.0, true);
         ARE = new AreaUnit("AreaUnit.are", "AreaUnit.a", OTHER, SQUARE_METER, 100.0, true);
         HECTARE = new AreaUnit("AreaUnit.hectare", "AreaUnit.ha", OTHER, ARE, 100.0, true);
+        SQUARE_NAUTICAL_MILE =
+                new AreaUnit(LengthUnit.NAUTICAL_MILE, "AreaUnit.square_nautical_mile", "AreaUnit.Nmi^2", OTHER, true);
         SQUARE_MILE = new AreaUnit(LengthUnit.MILE, "AreaUnit.square_mile", "AreaUnit.mi^2", IMPERIAL, true);
         SQUARE_FOOT = new AreaUnit(LengthUnit.FOOT, "AreaUnit.square_foot", "AreaUnit.ft^2", IMPERIAL, true);
         SQUARE_INCH = new AreaUnit(LengthUnit.INCH, "AreaUnit.square_inch", "AreaUnit.in^2", IMPERIAL, true);

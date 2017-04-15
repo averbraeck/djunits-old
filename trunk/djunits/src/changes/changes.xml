@@ -2,6 +2,18 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="2.02.00" date="2017-04-17" description="Units added to create consistency">
+      <action dev="averbraeck" type="add">
+        For many Unit classes, standard units have been added to make the unit list more internally consistent. 
+      </action>
+      <action dev="averbraeck" type="update">
+        UNITS.java has been made consistent with the added units.
+      </action>
+      <action dev="averbraeck" type="add">
+        The UNITS.java content can be generate with the GenerateStaticUNITS program in djunits-generator.
+      </action>
+    </release>
+
     <release version="2.01.03" date="2017-01-30" description="createSI() method added to scalars; scalar constants added">
       <action dev="averbraeck" type="update">
         Scalars with the exception of Money scalars can now be created with e.g., Length len = Length.createSI(5.0). OTS-297.

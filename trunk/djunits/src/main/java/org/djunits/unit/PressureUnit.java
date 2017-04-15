@@ -173,7 +173,7 @@ public class PressureUnit extends LinearUnit<PressureUnit>
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, PASCAL,
                 forceUnit.getConversionFactorToStandardUnit() / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
         this.massUnit = forceUnit.getMassUnit();
-        this.lengthUnit = forceUnit.getLengthUnit();
+        this.lengthUnit = areaUnit.getLengthUnit();
         this.timeUnit = forceUnit.getTimeUnit();
     }
 

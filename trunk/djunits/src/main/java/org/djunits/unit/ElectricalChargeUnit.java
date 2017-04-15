@@ -35,8 +35,32 @@ public class ElectricalChargeUnit extends LinearUnit<ElectricalChargeUnit>
     /** Coulomb = A.s. */
     public static final ElectricalChargeUnit COULOMB;
 
+    /** picoCoulomb = pA.s. */
+    public static final ElectricalChargeUnit PICOCOULOMB;
+
+    /** nanoCoulomb = nA.s. */
+    public static final ElectricalChargeUnit NANOCOULOMB;
+
+    /** microCoulomb = muA.s. */
+    public static final ElectricalChargeUnit MICROCOULOMB;
+
+    /** milliCoulomb = mA.s. */
+    public static final ElectricalChargeUnit MILLICOULOMB;
+
     /** milliampere hour. */
     public static final ElectricalChargeUnit MILLIAMPERE_HOUR;
+
+    /** milliampere second. */
+    public static final ElectricalChargeUnit MILLIAMPERE_SECOND;
+
+    /** ampere hour. */
+    public static final ElectricalChargeUnit AMPERE_HOUR;
+
+    /** kiloampere hour. */
+    public static final ElectricalChargeUnit KILOAMPERE_HOUR;
+
+    /** megaampere hour. */
+    public static final ElectricalChargeUnit MEGAAMPERE_HOUR;
 
     /** Faraday. */
     public static final ElectricalChargeUnit FARADAY;
@@ -64,7 +88,23 @@ public class ElectricalChargeUnit extends LinearUnit<ElectricalChargeUnit>
         SI = new ElectricalChargeUnit(ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND, "ElectricalChargeUnit.coulomb",
                 "ElectricalChargeUnit.C", SI_DERIVED, true);
         COULOMB = SI;
+        PICOCOULOMB = new ElectricalChargeUnit("ElectricalChargeUnit.picocoulomb", "ElectricalChargeUnit.pC", SI_DERIVED,
+                COULOMB, 1.0E-12, true);
+        NANOCOULOMB = new ElectricalChargeUnit("ElectricalChargeUnit.nanocoulomb", "ElectricalChargeUnit.nC", SI_DERIVED,
+                COULOMB, 1.0E-9, true);
+        MICROCOULOMB = new ElectricalChargeUnit("ElectricalChargeUnit.microcoulomb", "ElectricalChargeUnit.muC", SI_DERIVED,
+                COULOMB, 1.0E-6, true);
+        MILLICOULOMB = new ElectricalChargeUnit("ElectricalChargeUnit.millicoulomb", "ElectricalChargeUnit.mC", SI_DERIVED,
+                COULOMB, 1.0E-3, true);
         MILLIAMPERE_HOUR = new ElectricalChargeUnit(ElectricalCurrentUnit.MILLIAMPERE, TimeUnit.HOUR,
+                "ElectricalChargeUnit.milliampere_hour", "ElectricalChargeUnit.mAh", SI_DERIVED, true);
+        AMPERE_HOUR = new ElectricalChargeUnit(ElectricalCurrentUnit.AMPERE, TimeUnit.HOUR, "ElectricalChargeUnit.ampere_hour",
+                "ElectricalChargeUnit.Ah", SI_DERIVED, true);
+        KILOAMPERE_HOUR = new ElectricalChargeUnit(ElectricalCurrentUnit.KILOAMPERE, TimeUnit.HOUR,
+                "ElectricalChargeUnit.kiloampere_hour", "ElectricalChargeUnit.kAh", SI_DERIVED, true);
+        MEGAAMPERE_HOUR = new ElectricalChargeUnit(ElectricalCurrentUnit.MEGAAMPERE, TimeUnit.HOUR,
+                "ElectricalChargeUnit.megaampere_hour", "ElectricalChargeUnit.MAh", SI_DERIVED, true);
+        MILLIAMPERE_SECOND = new ElectricalChargeUnit(ElectricalCurrentUnit.MILLIAMPERE, TimeUnit.SECOND,
                 "ElectricalChargeUnit.milliampere_hour", "ElectricalChargeUnit.mAh", SI_DERIVED, true);
         FARADAY = new ElectricalChargeUnit("ElectricalChargeUnit.faraday", "ElectricalChargeUnit.F", OTHER, COULOMB, 96485.3383,
                 true);

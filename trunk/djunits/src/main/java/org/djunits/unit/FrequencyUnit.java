@@ -45,6 +45,21 @@ public class FrequencyUnit extends LinearUnit<FrequencyUnit>
     /** Revolutions per minute = 1/60 Hz. */
     public static final FrequencyUnit RPM;
 
+    /** 1/attosecond. */
+    public static final FrequencyUnit PER_ATTOSECOND;
+
+    /** 1/femtosecond. */
+    public static final FrequencyUnit PER_FEMTOSECOND;
+
+    /** 1/picosecond. */
+    public static final FrequencyUnit PER_PICOSECOND;
+
+    /** 1/nanosecond. */
+    public static final FrequencyUnit PER_NANOSECOND;
+
+    /** 1/microsecond. */
+    public static final FrequencyUnit PER_MICROSECOND;
+
     /** 1/millisecond. */
     public static final FrequencyUnit PER_MILLISECOND;
 
@@ -72,6 +87,16 @@ public class FrequencyUnit extends LinearUnit<FrequencyUnit>
         GIGAHERTZ = new FrequencyUnit("FrequencyUnit.gigahertz", "FrequencyUnit.GHz", SI_DERIVED, HERTZ, 1.0E9, true);
         TERAHERTZ = new FrequencyUnit("FrequencyUnit.terahertz", "FrequencyUnit.THz", SI_DERIVED, HERTZ, 1.0E12, true);
         RPM = new FrequencyUnit("FrequencyUnit.revolutions_per_minute", "FrequencyUnit.rpm", OTHER, HERTZ, 1.0 / 60.0, true);
+        PER_ATTOSECOND =
+                new FrequencyUnit(TimeUnit.ATTOSECOND, "FrequencyUnit.per_attosecond", "FrequencyUnit.1/as", SI_DERIVED, true);
+        PER_FEMTOSECOND = new FrequencyUnit(TimeUnit.FEMTOSECOND, "FrequencyUnit.per_femtosecond", "FrequencyUnit.1/fs",
+                SI_DERIVED, true);
+        PER_PICOSECOND =
+                new FrequencyUnit(TimeUnit.PICOSECOND, "FrequencyUnit.per_picosecond", "FrequencyUnit.1/ps", SI_DERIVED, true);
+        PER_NANOSECOND =
+                new FrequencyUnit(TimeUnit.NANOSECOND, "FrequencyUnit.per_nanosecond", "FrequencyUnit.1/ns", SI_DERIVED, true);
+        PER_MICROSECOND = new FrequencyUnit(TimeUnit.MICROSECOND, "FrequencyUnit.per_microsecond", "FrequencyUnit.1/mus",
+                SI_DERIVED, true);
         PER_MILLISECOND = new FrequencyUnit(TimeUnit.MILLISECOND, "FrequencyUnit.per_millisecond", "FrequencyUnit.1/ms",
                 SI_DERIVED, true);
         PER_SECOND = new FrequencyUnit(TimeUnit.SECOND, "FrequencyUnit.per_second", "FrequencyUnit.1/s", SI_DERIVED, true);

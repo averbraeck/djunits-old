@@ -4,7 +4,7 @@
 
   <groupId>org.djunits</groupId>
   <artifactId>djunits</artifactId>
-  <version>2.01.03</version>
+  <version>2.02.00</version>
 
   <name>DJUNITS</name>
   <description>Delft Java UNIT System</description>
@@ -24,7 +24,7 @@
     <sonar.scm.disabled>true</sonar.scm.disabled>
 
     <djunits.version>${project.version}</djunits.version>
-    <joda-money.version>0.10.0</joda-money.version>
+    <joda-money.version>0.12</joda-money.version>
     <junit.version>4.11</junit.version>
     <ojalgo.version>38.2</ojalgo.version>
 

@@ -58,7 +58,7 @@ public class EnergyUnitTest extends AbstractLinearUnitTest<EnergyUnit>
             "British thermal unit (International Table)", "BTU(IT)");
         checkUnitRatioNameAndAbbreviation(EnergyUnit.CALORIE_IT, 4.1868, 0.00005, "calorie (International Table)",
             "cal(IT)");
-        checkUnitRatioNameAndAbbreviation(EnergyUnit.KILOCALORIE, 4186.8, 0.05, "kilocalorie", "kcal");
+        checkUnitRatioNameAndAbbreviation(EnergyUnit.KILOCALORIE, 4184, 0.05, "kilocalorie", "kcal");
         checkUnitRatioNameAndAbbreviation(EnergyUnit.KILOWATT_HOUR, 3600000, 0.1, "kilowatt-hour", "kWh");
     }
 
