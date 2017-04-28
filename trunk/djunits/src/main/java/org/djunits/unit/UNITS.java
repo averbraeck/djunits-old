@@ -8,7 +8,7 @@ package org.djunits.unit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -90,6 +90,22 @@ public interface UNITS
 
     DensityUnit KG_PER_METER_3        = DensityUnit.KG_PER_METER_3;
     DensityUnit GRAM_PER_CENTIMETER_3 = DensityUnit.GRAM_PER_CENTIMETER_3;
+
+    /****************************************************************************************************************/
+    /************************************************** DURATION ****************************************************/
+    /****************************************************************************************************************/
+
+    DurationUnit SECOND      = DurationUnit.SECOND;
+    DurationUnit ATTOSECOND  = DurationUnit.ATTOSECOND;
+    DurationUnit FEMTOSECOND = DurationUnit.FEMTOSECOND;
+    DurationUnit PICOSECOND  = DurationUnit.PICOSECOND;
+    DurationUnit NANOSECOND  = DurationUnit.NANOSECOND;
+    DurationUnit MICROSECOND = DurationUnit.MICROSECOND;
+    DurationUnit MILLISECOND = DurationUnit.MILLISECOND;
+    DurationUnit MINUTE      = DurationUnit.MINUTE;
+    DurationUnit HOUR        = DurationUnit.HOUR;
+    DurationUnit DAY         = DurationUnit.DAY;
+    DurationUnit WEEK        = DurationUnit.WEEK;
 
     /****************************************************************************************************************/
     /********************************************** ELECTRICALCHARGE ************************************************/
@@ -418,22 +434,6 @@ public interface UNITS
     TemperatureUnit DEGREE_FAHRENHEIT = TemperatureUnit.DEGREE_FAHRENHEIT;
     TemperatureUnit DEGREE_RANKINE    = TemperatureUnit.DEGREE_RANKINE;
     TemperatureUnit DEGREE_REAUMUR    = TemperatureUnit.DEGREE_REAUMUR;
-
-    /****************************************************************************************************************/
-    /**************************************************** TIME ******************************************************/
-    /****************************************************************************************************************/
-
-    TimeUnit SECOND      = TimeUnit.SECOND;
-    TimeUnit ATTOSECOND  = TimeUnit.ATTOSECOND;
-    TimeUnit FEMTOSECOND = TimeUnit.FEMTOSECOND;
-    TimeUnit PICOSECOND  = TimeUnit.PICOSECOND;
-    TimeUnit NANOSECOND  = TimeUnit.NANOSECOND;
-    TimeUnit MICROSECOND = TimeUnit.MICROSECOND;
-    TimeUnit MILLISECOND = TimeUnit.MILLISECOND;
-    TimeUnit MINUTE      = TimeUnit.MINUTE;
-    TimeUnit HOUR        = TimeUnit.HOUR;
-    TimeUnit DAY         = TimeUnit.DAY;
-    TimeUnit WEEK        = TimeUnit.WEEK;
 
     /****************************************************************************************************************/
     /*************************************************** TORQUE *****************************************************/

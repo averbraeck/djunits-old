@@ -2,10 +2,10 @@ package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.MoneyPerAreaUnit;
+import org.djunits.unit.MoneyPerDurationUnit;
 import org.djunits.unit.MoneyPerEnergyUnit;
 import org.djunits.unit.MoneyPerLengthUnit;
 import org.djunits.unit.MoneyPerMassUnit;
-import org.djunits.unit.MoneyPerTimeUnit;
 import org.djunits.unit.MoneyPerVolumeUnit;
 import org.djunits.unit.MoneyUnit;
 
@@ -25,7 +25,7 @@ import org.djunits.unit.MoneyUnit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -199,23 +199,23 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
     }
 
     /**
-     * Calculate the division of Money and Duration, which results in a MoneyPerTime scalar.
+     * Calculate the division of Money and Duration, which results in a MoneyPerDuration scalar.
      * @param v Money scalar
-     * @return MoneyPerTime scalar as a division of Money and Duration
+     * @return MoneyPerDuration scalar as a division of Money and Duration
      */
-    public final MoneyPerTime divideBy(final Duration v)
+    public final MoneyPerDuration divideBy(final Duration v)
     {
-        return new MoneyPerTime(this.si / v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+        return new MoneyPerDuration(this.si / v.si, MoneyPerDurationUnit.getStandardMoneyPerDurationUnit());
     }
 
     /**
-     * Calculate the multiplication of Money and Frequency, which results in a MoneyPerTime scalar.
+     * Calculate the multiplication of Money and Frequency, which results in a MoneyPerDuration scalar.
      * @param v Money scalar
-     * @return MoneyPerTime scalar as a multiplication of Money and Frequency
+     * @return MoneyPerDuration scalar as a multiplication of Money and Frequency
      */
-    public final MoneyPerTime multiplyBy(final Frequency v)
+    public final MoneyPerDuration multiplyBy(final Frequency v)
     {
-        return new MoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+        return new MoneyPerDuration(this.si * v.si, MoneyPerDurationUnit.getStandardMoneyPerDurationUnit());
     }
 
     /**

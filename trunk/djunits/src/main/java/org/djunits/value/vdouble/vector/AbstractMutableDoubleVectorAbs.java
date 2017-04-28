@@ -3,8 +3,10 @@ package org.djunits.value.vdouble.vector;
 import java.util.List;
 import java.util.SortedMap;
 
+import org.djunits.unit.AbsoluteLinearUnit;
 import org.djunits.unit.Unit;
 import org.djunits.value.MathFunctionsAbs;
+import org.djunits.value.Mutable;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
@@ -15,22 +17,25 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarAbs;
 /**
  * Absolute Mutable typed Vector.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
  * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
- * @param <U> the unit
+ * @param <AU> the absolute unit
+ * @param <RU> the relative unit
  * @param <A> the absolute vector type
  * @param <R> the relative vector type
  * @param <MA> the mutable absolute vector type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractMutableDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoubleVectorAbs<U, A, R, MA, S>, R extends AbstractDoubleVectorRel<U, R, ?, ?>, MA extends AbstractMutableDoubleVectorAbs<U, A, R, MA, S>, S extends AbstractDoubleScalarAbs<U, S, ?>>
-        extends AbstractDoubleVectorAbs<U, A, R, MA, S>
-        implements MathFunctionsAbs<MA>, DoubleMathFunctions<MA>, MutableDoubleVectorInterface<U>
+abstract class AbstractMutableDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
+        A extends AbstractDoubleVectorAbs<AU, RU, A, R, MA, S>, R extends AbstractDoubleVectorRel<RU, R, ?, ?>,
+        MA extends AbstractMutableDoubleVectorAbs<AU, RU, A, R, MA, S>, S extends AbstractDoubleScalarAbs<AU, S, RU, ?>>
+        extends AbstractDoubleVectorAbs<AU, RU, A, R, MA, S>
+        implements Mutable, MathFunctionsAbs<MA>, DoubleMathFunctions<MA>, MutableDoubleVectorInterface<AU>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -41,11 +46,11 @@ abstract class AbstractMutableDoubleVectorAbs<U extends Unit<U>, A extends Abstr
     /**
      * Construct a new Absolute Mutable DoubleVector.
      * @param values double[]; the values of the entries in the new Absolute Mutable DoubleVector
-     * @param unit U; the unit of the new Absolute Mutable DoubleVector
+     * @param unit AU; the unit of the new Absolute Mutable DoubleVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    AbstractMutableDoubleVectorAbs(final double[] values, final U unit, final StorageType storageType) throws ValueException
+    AbstractMutableDoubleVectorAbs(final double[] values, final AU unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -53,11 +58,12 @@ abstract class AbstractMutableDoubleVectorAbs<U extends Unit<U>, A extends Abstr
     /**
      * Construct a new Absolute Mutable DoubleVector.
      * @param values List; the values of the entries in the new Absolute Mutable DoubleVector
-     * @param unit U; the unit of the new Absolute Mutable DoubleVector
+     * @param unit AU; the unit of the new Absolute Mutable DoubleVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    AbstractMutableDoubleVectorAbs(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
+    AbstractMutableDoubleVectorAbs(final List<Double> values, final AU unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -100,12 +106,12 @@ abstract class AbstractMutableDoubleVectorAbs<U extends Unit<U>, A extends Abstr
     /**
      * Construct a new Absolute Mutable DoubleVector.
      * @param values Map; the map of indexes to values of the Absolute Sparse Mutable DoubleVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable DoubleVector
+     * @param unit AU; the unit of the new Absolute Sparse Mutable DoubleVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    AbstractMutableDoubleVectorAbs(final SortedMap<Integer, Double> values, final U unit, final int length,
+    AbstractMutableDoubleVectorAbs(final SortedMap<Integer, Double> values, final AU unit, final int length,
             final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -116,7 +122,7 @@ abstract class AbstractMutableDoubleVectorAbs<U extends Unit<U>, A extends Abstr
      * @param data an internal data object
      * @param unit the unit
      */
-    AbstractMutableDoubleVectorAbs(final DoubleVectorData data, final U unit)
+    AbstractMutableDoubleVectorAbs(final DoubleVectorData data, final AU unit)
     {
         super(data, unit);
     }
@@ -381,10 +387,10 @@ abstract class AbstractMutableDoubleVectorAbs<U extends Unit<U>, A extends Abstr
      * Replace the value at index by the supplied value which is expressed in a supplied (compatible) unit.
      * @param index int; index of the value to replace
      * @param value double; the value to store (which is expressed in valueUnit)
-     * @param valueUnit U; unit of the supplied value
+     * @param valueUnit AU; unit of the supplied value
      * @throws ValueException when index out of range (index &lt; 0 or index &gt;= size())
      */
-    public final void setInUnit(final int index, final double value, final U valueUnit) throws ValueException
+    public final void setInUnit(final int index, final double value, final AU valueUnit) throws ValueException
     {
         setSI(index, ValueUtil.expressAsSIUnit(value, valueUnit));
     }

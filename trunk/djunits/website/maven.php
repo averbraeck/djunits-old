@@ -38,7 +38,7 @@
   &lt;dependency&gt;
     &lt;groupId&gt;org.djunits&lt;/groupId&gt;
     &lt;artifactId&gt;djunits&lt;/artifactId&gt;
-    &lt;version&gt;2.01.01&lt;/version&gt;
+    &lt;version&gt;3.00.00&lt;/version&gt;
   &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </pre>

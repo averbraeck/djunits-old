@@ -1,72 +1,57 @@
 package org.djunits.value.vfloat.scalar;
 
 import org.djunits.unit.LengthUnit;
+import org.djunits.unit.PositionUnit;
 
 /**
  * Easy access methods for the Position FloatScalar. Instead of:
  * 
  * <pre>
- * FloatScalar.Abs&lt;LengthUnit&gt; value = new FloatScalar.Abs&lt;LengthUnit&gt;(100.0, LengthUnit.SI);
+ * FloatScalar.Abs&lt;PositionUnit&gt; value = new FloatScalar.Abs&lt;PositionUnit&gt;(100.0, PositionUnit.SI);
  * </pre>
  * 
  * we can now write:
  * 
  * <pre>
- * FloatPosition value = new FloatPosition(100.0, LengthUnit.SI);
+ * FloatPosition value = new FloatPosition(100.0, PositionUnit.SI);
  * </pre>
  * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
- * $LastChangedDate: 2016-10-16 14:09:04 +0200 (Sun, 16 Oct 2016) $, @version $Revision: 206 $, by $Author: averbraeck $,
+ * $LastChangedDate: 2017-01-30 14:23:11 +0100 (Mon, 30 Jan 2017) $, @version $Revision: 234 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatPosition extends AbstractFloatScalarAbs<LengthUnit, FloatPosition, FloatLength>
+public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPosition, LengthUnit, FloatLength>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final FloatPosition ZERO = new FloatPosition(0.0f, LengthUnit.SI);
-
-    /** constant with value NaN. */
-    @SuppressWarnings("checkstyle:constantname")
-    public static final FloatPosition NaN = new FloatPosition(Float.NaN, LengthUnit.SI);
-
-    /** constant with value POSITIVE_INFINITY. */
-    public static final FloatPosition POSITIVE_INFINITY = new FloatPosition(Float.POSITIVE_INFINITY, LengthUnit.SI);
-
-    /** constant with value NEGATIVE_INFINITY. */
-    public static final FloatPosition NEGATIVE_INFINITY = new FloatPosition(Float.NEGATIVE_INFINITY, LengthUnit.SI);
-
-    /** constant with value MAX_VALUE. */
-    public static final FloatPosition POS_MAXVALUE = new FloatPosition(Float.MAX_VALUE, LengthUnit.SI);
-
-    /** constant with value -MAX_VALUE. */
-    public static final FloatPosition NEG_MAXVALUE = new FloatPosition(-Float.MAX_VALUE, LengthUnit.SI);
+    public static final FloatPosition ZERO = new FloatPosition(0.0f, PositionUnit.BASE);
 
     /**
      * Construct FloatPosition scalar.
      * @param value float value
      * @param unit unit for the float value
      */
-    public FloatPosition(final float value, final LengthUnit unit)
+    public FloatPosition(final float value, final PositionUnit unit)
     {
         super(value, unit);
     }
 
     /**
      * Construct FloatPosition scalar using a double value.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
-    public FloatPosition(final double value, final LengthUnit unit)
+    public FloatPosition(final double value, final PositionUnit unit)
     {
         super((float) value, unit);
     }
@@ -82,7 +67,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<LengthUnit, FloatPosit
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPosition instantiateAbs(final float value, final LengthUnit unit)
+    public final FloatPosition instantiateAbs(final float value, final PositionUnit unit)
     {
         return new FloatPosition(value, unit);
     }
@@ -96,12 +81,12 @@ public class FloatPosition extends AbstractFloatScalarAbs<LengthUnit, FloatPosit
 
     /**
      * Construct FloatPosition scalar.
-     * @param value float value in SI units
-     * @return the new scalar with the SI value
+     * @param value float value in BASE units
+     * @return the new scalar with the BASE value
      */
     public static final FloatPosition createSI(final float value)
     {
-        return new FloatPosition(value, LengthUnit.SI);
+        return new FloatPosition(value, PositionUnit.BASE);
     }
 
     /**

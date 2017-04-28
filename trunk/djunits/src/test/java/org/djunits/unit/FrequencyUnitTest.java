@@ -12,11 +12,11 @@ import org.junit.Test;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Jun 6, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Jun 6, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FrequencyUnitTest extends AbstractLinearUnitTest<FrequencyUnit>
@@ -49,10 +49,10 @@ public class FrequencyUnitTest extends AbstractLinearUnitTest<FrequencyUnit>
         checkUnitRatioNameAndAbbreviation(FrequencyUnit.HERTZ, 1, 0.000001, "Hertz", "Hz");
         checkUnitRatioNameAndAbbreviation(FrequencyUnit.KILOHERTZ, 1000, 0.0001, "kilohertz", "kHz");
         // Check two conversions between non-standard units
-        assertEquals("one KILOHERTZ is 0.001 MEGAHERTZ", 0.001, getMultiplicationFactorTo(FrequencyUnit.KILOHERTZ,
-            FrequencyUnit.MEGAHERTZ), 0.00000000001);
-        assertEquals("one MEGAHERTZ is 1000 KILOHERTZ", 1000, getMultiplicationFactorTo(FrequencyUnit.MEGAHERTZ,
-            FrequencyUnit.KILOHERTZ), 0.0005);
+        assertEquals("one KILOHERTZ is 0.001 MEGAHERTZ", 0.001,
+                getMultiplicationFactorTo(FrequencyUnit.KILOHERTZ, FrequencyUnit.MEGAHERTZ), 0.00000000001);
+        assertEquals("one MEGAHERTZ is 1000 KILOHERTZ", 1000,
+                getMultiplicationFactorTo(FrequencyUnit.MEGAHERTZ, FrequencyUnit.KILOHERTZ), 0.0005);
         checkUnitRatioNameAndAbbreviation(FrequencyUnit.GIGAHERTZ, 1e9, 1e3, "gigahertz", "GHz");
         checkUnitRatioNameAndAbbreviation(FrequencyUnit.TERAHERTZ, 1e12, 1e6, "terahertz", "THz");
     }

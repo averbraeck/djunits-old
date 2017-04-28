@@ -36,7 +36,7 @@ import org.junit.Test;
 /**
  * Find all various methods and prove their correctness.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * $LastChangedDate: 2015-10-04 13:58:23 +0200 (Sun, 04 Oct 2015) $, @version $Revision: 84 $, by $Author: averbraeck $, initial
@@ -61,7 +61,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
 
     /** The money classes that are just relative (name = class name); these classes don't have an si field. */
     public static final String[] CLASSNAMES_MONEY = new String[] { "Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",
-            "MoneyPerMass", "MoneyPerTime", "MoneyPerVolume" };
+            "MoneyPerMass", "MoneyPerDuration", "MoneyPerVolume" };
 
     /**
      * Perform many tests on the double and float vector types.
@@ -152,38 +152,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
             }
         }
-    }
-
-    /**
-     * Test the toAbs or toRel method.
-     * @param vectorClass class to test
-     * @param isAbs boolean; if true; the scalarClassAbsRel must be aAsolute; if false; the scalarClassAbsRel must be Relative
-     * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
-     * @param storageType StorageType; DENSE or SPARSE
-     * @throws SecurityException on reflection error
-     * @throws NoSuchMethodException on reflection error
-     * @throws NoSuchFieldException on reflection error
-     * @throws InvocationTargetException on reflection error
-     * @throws IllegalArgumentException on reflection error
-     * @throws IllegalAccessException on reflection error
-     * @throws InstantiationException on reflection error
-     * @throws ValueException when index out of range
-     */
-    private void testAbsRelConversion(final Class<?> vectorClass, final boolean isAbs, final boolean doubleType,
-            final StorageType storageType) throws NoSuchMethodException, SecurityException, InstantiationException,
-            IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException, ValueException
-    {
-        double[] doubleInValue = { 1.23456, 2.34567, 3.45678 };
-        float[] floatInValue = { 1.23456f, 2.34567f, 3.45678f };
-        Object inValue = doubleType ? doubleInValue : floatInValue;
-        // System.out.println("Looking for constructor of " + vectorClassAbsRel.getName());
-        Object from = findAndExecuteConstructor(vectorClass,
-                new Object[] { inValue, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
-        // System.out.println("Looking for method " + (isAbs ? "toRel" : "toAbs"));
-        Method method = vectorClass.getMethod(isAbs ? "toRel" : "toAbs");
-        Object result = method.invoke(from);
-        verifyAbsRelPrecisionAndValues(!isAbs, doubleType, storageType, result, doubleType ? doubleInValue : floatInValue,
-                0.000001);
     }
 
     /**
@@ -399,7 +367,16 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             }
             return null;
         }
-        Field si = clas.getField("SI");
+        // TODO: Check for BASE field in absolutes, SI field in relatives
+        Field si = null;
+        try
+        {
+            si = clas.getField("SI");
+        }
+        catch (NoSuchFieldException nsfe)
+        {
+            si = clas.getField("BASE");
+        }
         return ((Unit<?>) si.get(clas));
     }
 
@@ -804,9 +781,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws ValueException when index out of range
      */
     private void testUnaryMethods(final Class<?> vectorClass, final boolean abs, final boolean doubleType,
-            final boolean mutable,
-            final StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
-            InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
+            final boolean mutable, final StorageType storageType) throws NoSuchMethodException, InstantiationException,
+            IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
         double[] doubleValue = { 1.23456, -2.34567, 3.45678 };
         float[] floatValue = { 1.23456f, -2.34567f, 3.45678f };
@@ -1484,8 +1460,10 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         }
         Object compatibleRight = null;
         Object compatibleRel = null;
+        // TODO: Probably we exclude too much here for the tests...
         if (!vectorClass.getName().contains("Money") && !vectorClass.getName().contains("Dimensionless")
-                && !vectorClass.getName().contains("Temperature"))
+                && !vectorClass.getName().contains("Temperature") && !vectorClass.getName().contains("Position")
+                && !vectorClass.getName().contains("Time") && !vectorClass.getName().contains("Direction"))
         {
             // Construct a new unit to test mixed unit plus and minus
             Class<?> unitClass = getUnitClass(vectorClass);

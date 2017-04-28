@@ -11,7 +11,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * The units of force.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -30,7 +30,7 @@ public class ForceUnit extends LinearUnit<ForceUnit>
     private final LengthUnit lengthUnit;
 
     /** the unit of time for the force unit, e.g., second. */
-    private final TimeUnit timeUnit;
+    private final DurationUnit durationUnit;
 
     /** The SI unit for force is Newton. */
     public static final ForceUnit SI;
@@ -58,10 +58,10 @@ public class ForceUnit extends LinearUnit<ForceUnit>
 
     static
     {
-        SI = new ForceUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "ForceUnit.newton", "ForceUnit.N", SI_DERIVED,
-                true);
+        SI = new ForceUnit(MassUnit.KILOGRAM, LengthUnit.METER, DurationUnit.SECOND, "ForceUnit.newton", "ForceUnit.N",
+                SI_DERIVED, true);
         NEWTON = SI;
-        DYNE = new ForceUnit(MassUnit.GRAM, LengthUnit.CENTIMETER, TimeUnit.SECOND, "ForceUnit.dyne", "ForceUnit.dyn", CGS,
+        DYNE = new ForceUnit(MassUnit.GRAM, LengthUnit.CENTIMETER, DurationUnit.SECOND, "ForceUnit.dyne", "ForceUnit.dyn", CGS,
                 true);
         KILOGRAM_FORCE = new ForceUnit(MassUnit.KILOGRAM, AccelerationUnit.STANDARD_GRAVITY, "ForceUnit.kilogram-force",
                 "ForceUnit.kgf", OTHER, true);
@@ -79,38 +79,37 @@ public class ForceUnit extends LinearUnit<ForceUnit>
      * Build a ForceUnit based on its constituent base units, e.g. a N = km.m/s^2.
      * @param massUnit the unit of mass for the force unit, e.g., kilogram
      * @param lengthUnit the unit of length for the force unit, e.g., meter
-     * @param timeUnit the unit of time for the force unit, e.g., second
+     * @param durationUnit the unit of time for the force unit, e.g., second
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private ForceUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+    private ForceUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
+            final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, NEWTON,
-                massUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
-                        / (timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()),
-                standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, NEWTON, massUnit.getScaleFactor()
+                * lengthUnit.getScaleFactor() / (durationUnit.getScaleFactor() * durationUnit.getScaleFactor()), standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
-        this.timeUnit = timeUnit;
+        this.durationUnit = durationUnit;
     }
 
     /**
      * Build a user-defined ForceUnit based on its constituent base units, e.g. a N = km.m/s^2.
      * @param massUnit the unit of mass for the force unit, e.g., kilogram
      * @param lengthUnit the unit of length for the force unit, e.g., meter
-     * @param timeUnit the unit of time for the force unit, e.g., second
+     * @param durationUnit the unit of time for the force unit, e.g., second
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public ForceUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit, final String name,
+    public ForceUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
     {
-        this(massUnit, lengthUnit, timeUnit, name, abbreviation, unitSystem, false);
+        this(massUnit, lengthUnit, durationUnit, name, abbreviation, unitSystem, false);
     }
 
     /**
@@ -127,11 +126,10 @@ public class ForceUnit extends LinearUnit<ForceUnit>
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, NEWTON,
-                massUnit.getConversionFactorToStandardUnit() * accelerationUnit.getConversionFactorToStandardUnit(),
-                standardUnit);
+                massUnit.getScaleFactor() * accelerationUnit.getScaleFactor(), standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = accelerationUnit.getLengthUnit();
-        this.timeUnit = accelerationUnit.getTimeUnit();
+        this.durationUnit = accelerationUnit.getDurationUnit();
     }
 
     /**
@@ -155,17 +153,17 @@ public class ForceUnit extends LinearUnit<ForceUnit>
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private ForceUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final ForceUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final ForceUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
                 standardUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
-        this.timeUnit = referenceUnit.getTimeUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**
@@ -174,12 +172,12 @@ public class ForceUnit extends LinearUnit<ForceUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public ForceUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final ForceUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+            final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**
@@ -199,11 +197,11 @@ public class ForceUnit extends LinearUnit<ForceUnit>
     }
 
     /**
-     * @return timeUnit
+     * @return durationUnit
      */
-    public final TimeUnit getTimeUnit()
+    public final DurationUnit getDurationUnit()
     {
-        return this.timeUnit;
+        return this.durationUnit;
     }
 
     /** {@inheritDoc} */

@@ -11,7 +11,7 @@ import org.djunits.value.vfloat.scalar.FloatScalarInterface;
 /**
  * Stores the data for a FloatMatrix and carries out basic operations.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
@@ -197,7 +197,7 @@ abstract class FloatMatrixData
      * @param col the column number to get the value for
      * @return the value at the [row, col] point
      */
-    public abstract float getSI(final int row, final int col);
+    public abstract float getSI(int row, int col);
 
     /**
      * Sets a value at the [row, col] point in the matrix.
@@ -205,7 +205,7 @@ abstract class FloatMatrixData
      * @param col the column number to set the value for
      * @param valueSI the value at the index
      */
-    public abstract void setSI(final int row, final int col, final float valueSI);
+    public abstract void setSI(int row, int col, float valueSI);
 
     /**
      * @return the number of non-zero cells.
@@ -283,7 +283,7 @@ abstract class FloatMatrixData
      * @param right the other data object to add
      * @throws ValueException if matrices have different lengths
      */
-    public abstract void incrementBy(final FloatMatrixData right) throws ValueException;
+    public abstract void incrementBy(FloatMatrixData right) throws ValueException;
 
     /**
      * Add a number to this matrix on a cell-by-cell basis.
@@ -319,7 +319,7 @@ abstract class FloatMatrixData
      * @param right the other data object to subtract
      * @throws ValueException if matrices have different lengths
      */
-    public abstract void decrementBy(final FloatMatrixData right) throws ValueException;
+    public abstract void decrementBy(FloatMatrixData right) throws ValueException;
 
     /**
      * Subtract a number from this matrix on a cell-by-cell basis.
@@ -356,7 +356,7 @@ abstract class FloatMatrixData
      * @param right the other data object to multiply with
      * @throws ValueException if matrices have different lengths
      */
-    public abstract void multiplyBy(final FloatMatrixData right) throws ValueException;
+    public abstract void multiplyBy(FloatMatrixData right) throws ValueException;
 
     /**
      * Multiply the values of this matrix with a number on a cell-by-cell basis.
@@ -393,7 +393,7 @@ abstract class FloatMatrixData
      * @param right the other data object to divide by
      * @throws ValueException if matrices have different lengths
      */
-    public abstract void divideBy(final FloatMatrixData right) throws ValueException;
+    public abstract void divideBy(FloatMatrixData right) throws ValueException;
 
     /**
      * Divide the values of this matrix by a number on a cell-by-cell basis.

@@ -13,7 +13,7 @@ import org.djunits.value.vfloat.scalar.FloatScalarInterface;
 /**
  * Stores the data for a FloatVector and carries out basic operations.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
@@ -303,14 +303,14 @@ abstract class FloatVectorData
      * @param index the index to get the value for
      * @return the value at the index
      */
-    public abstract float getSI(final int index);
+    public abstract float getSI(int index);
 
     /**
      * Sets a value at the index in the vector.
      * @param index the index to set the value for
      * @param valueSI the value at the index
      */
-    public abstract void setSI(final int index, final float valueSI);
+    public abstract void setSI(int index, float valueSI);
 
     /**
      * @return the number of non-zero cells.
@@ -382,7 +382,7 @@ abstract class FloatVectorData
      * @param right the other data object to add
      * @throws ValueException if vectors have different lengths
      */
-    public abstract void incrementBy(final FloatVectorData right) throws ValueException;
+    public abstract void incrementBy(FloatVectorData right) throws ValueException;
 
     /**
      * Add a number to this vector on a cell-by-cell basis.
@@ -417,7 +417,7 @@ abstract class FloatVectorData
      * @param right the other data object to subtract
      * @throws ValueException if vectors have different lengths
      */
-    public abstract void decrementBy(final FloatVectorData right) throws ValueException;
+    public abstract void decrementBy(FloatVectorData right) throws ValueException;
 
     /**
      * Subtract a number from this vector on a cell-by-cell basis.
@@ -453,7 +453,7 @@ abstract class FloatVectorData
      * @param right the other data object to multiply with
      * @throws ValueException if vectors have different lengths
      */
-    public abstract void multiplyBy(final FloatVectorData right) throws ValueException;
+    public abstract void multiplyBy(FloatVectorData right) throws ValueException;
 
     /**
      * Multiply the values of this vector with a number on a cell-by-cell basis.
@@ -489,7 +489,7 @@ abstract class FloatVectorData
      * @param right the other data object to divide by
      * @throws ValueException if vectors have different lengths
      */
-    public abstract void divideBy(final FloatVectorData right) throws ValueException;
+    public abstract void divideBy(FloatVectorData right) throws ValueException;
 
     /**
      * Divide the values of this vector by a number on a cell-by-cell basis.

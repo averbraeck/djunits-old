@@ -9,7 +9,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * The units of electrical potential (voltage).
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -31,7 +31,7 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
     private final ElectricalCurrentUnit electricalCurrentUnit;
 
     /** the unit of time for the electrical potential difference (voltage) unit, e.g., second. */
-    private final TimeUnit timeUnit;
+    private final DurationUnit durationUnit;
 
     /** The SI unit for electrical potential is Volt. */
     public static final ElectricalPotentialUnit SI;
@@ -65,7 +65,7 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
 
     static
     {
-        SI = new ElectricalPotentialUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND,
+        SI = new ElectricalPotentialUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, DurationUnit.SECOND,
                 "ElectricalPotentialUnit.volt", "ElectricalPotentialUnit.V", SI_DERIVED, true);
         VOLT = SI;
         NANOVOLT = new ElectricalPotentialUnit("ElectricalPotentialUnit.nanovolt", "ElectricalPotentialUnit.nV", SI_DERIVED,
@@ -92,7 +92,7 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
      * @param lengthUnit the unit of length for the electrical potential difference (voltage) unit, e.g., meter
      * @param electricalCurrentUnit the unit of electrical current for the electrical potential difference (voltage) unit, e.g.,
      *            Ampere
-     * @param timeUnit the unit of time for the electrical potential difference (voltage) unit, e.g., second
+     * @param durationUnit the unit of time for the electrical potential difference (voltage) unit, e.g., second
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
@@ -101,19 +101,17 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
      */
     @SuppressWarnings("checkstyle:parameternumber")
     private ElectricalPotentialUnit(final MassUnit massUnit, final LengthUnit lengthUnit,
-            final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit, final String nameOrNameKey,
+            final ElectricalCurrentUnit electricalCurrentUnit, final DurationUnit durationUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, VOLT,
-                massUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
-                        * lengthUnit.getConversionFactorToStandardUnit()
-                        / (electricalCurrentUnit.getConversionFactorToStandardUnit()
-                                * Math.pow(timeUnit.getConversionFactorToStandardUnit(), 3.0)),
+                massUnit.getScaleFactor() * lengthUnit.getScaleFactor() * lengthUnit.getScaleFactor()
+                        / (electricalCurrentUnit.getScaleFactor() * Math.pow(durationUnit.getScaleFactor(), 3.0)),
                 standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.electricalCurrentUnit = electricalCurrentUnit;
-        this.timeUnit = timeUnit;
+        this.durationUnit = durationUnit;
     }
 
     /**
@@ -122,16 +120,16 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
      * @param lengthUnit the unit of length for the electrical potential difference (voltage) unit, e.g., meter
      * @param electricalCurrentUnit the unit of electrical current for the electrical potential difference (voltage) unit, e.g.,
      *            Ampere
-     * @param timeUnit the unit of time for the electrical potential difference (voltage) unit, e.g., second
+     * @param durationUnit the unit of time for the electrical potential difference (voltage) unit, e.g., second
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
     public ElectricalPotentialUnit(final MassUnit massUnit, final LengthUnit lengthUnit,
-            final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit, final String name,
+            final ElectricalCurrentUnit electricalCurrentUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
     {
-        this(massUnit, lengthUnit, electricalCurrentUnit, timeUnit, name, abbreviation, unitSystem, false);
+        this(massUnit, lengthUnit, electricalCurrentUnit, durationUnit, name, abbreviation, unitSystem, false);
     }
 
     /**
@@ -150,12 +148,11 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
             final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, VOLT,
-                powerUnit.getConversionFactorToStandardUnit() / electricalCurrentUnit.getConversionFactorToStandardUnit(),
-                standardUnit);
+                powerUnit.getScaleFactor() / electricalCurrentUnit.getScaleFactor(), standardUnit);
         this.massUnit = powerUnit.getMassUnit();
         this.lengthUnit = powerUnit.getLengthUnit();
         this.electricalCurrentUnit = electricalCurrentUnit;
-        this.timeUnit = powerUnit.getTimeUnit();
+        this.durationUnit = powerUnit.getDurationUnit();
     }
 
     /**
@@ -180,19 +177,19 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private ElectricalPotentialUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final UnitSystem unitSystem, final ElectricalPotentialUnit referenceUnit,
-            final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final UnitSystem unitSystem, final ElectricalPotentialUnit referenceUnit, final double scaleFactorToReferenceUnit,
+            final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
                 standardUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
         this.electricalCurrentUnit = referenceUnit.getElectricalCurrentUnit();
-        this.timeUnit = referenceUnit.getTimeUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**
@@ -201,12 +198,12 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public ElectricalPotentialUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final ElectricalPotentialUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final ElectricalPotentialUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**
@@ -234,11 +231,11 @@ public class ElectricalPotentialUnit extends LinearUnit<ElectricalPotentialUnit>
     }
 
     /**
-     * @return timeUnit
+     * @return durationUnit
      */
-    public final TimeUnit getTimeUnit()
+    public final DurationUnit getDurationUnit()
     {
-        return this.timeUnit;
+        return this.durationUnit;
     }
 
     /** {@inheritDoc} */

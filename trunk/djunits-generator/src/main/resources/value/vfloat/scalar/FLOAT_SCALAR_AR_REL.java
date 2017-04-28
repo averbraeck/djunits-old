@@ -4,13 +4,13 @@ import org.djunits.unit.*;
 
 /**
  * Easy access methods for the %Type% FloatScalar. Instead of:
- * <pre>FloatScalar.Rel&lt;%TypeUnit%&gt; value = new FloatScalar.Rel&lt;%TypeUnit%&gt;(100.0, %TypeUnit%.SI);</pre>
+ * <pre>FloatScalar.Rel&lt;%TypeRelUnit%&gt; value = new FloatScalar.Rel&lt;%TypeRelUnit%&gt;(100.0, %TypeRelUnit%.SI);</pre>
  * we can now write:
- * <pre>Float%TypeRel% value = new Float%TypeRel%(100.0, %TypeUnit%.SI);</pre>
+ * <pre>Float%TypeRel% value = new Float%TypeRel%(100.0, %TypeRelUnit%.SI);</pre>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
  * unit used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -19,36 +19,36 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeUnit%, Float%TypeRel%>
+public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final Float%TypeRel% ZERO = new Float%TypeRel%(0.0f, %TypeUnit%.SI);
+    public static final Float%TypeRel% ZERO = new Float%TypeRel%(0.0f, %TypeRelUnit%.SI);
 
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
-    public static final Float%TypeRel% NaN = new Float%TypeRel%(Float.NaN, %TypeUnit%.SI);
+    public static final Float%TypeRel% NaN = new Float%TypeRel%(Float.NaN, %TypeRelUnit%.SI);
 
     /** constant with value POSITIVE_INFINITY. */
-    public static final Float%TypeRel% POSITIVE_INFINITY = new Float%TypeRel%(Float.POSITIVE_INFINITY, %TypeUnit%.SI);
+    public static final Float%TypeRel% POSITIVE_INFINITY = new Float%TypeRel%(Float.POSITIVE_INFINITY, %TypeRelUnit%.SI);
 
     /** constant with value NEGATIVE_INFINITY. */
-    public static final Float%TypeRel% NEGATIVE_INFINITY = new Float%TypeRel%(Float.NEGATIVE_INFINITY, %TypeUnit%.SI);
+    public static final Float%TypeRel% NEGATIVE_INFINITY = new Float%TypeRel%(Float.NEGATIVE_INFINITY, %TypeRelUnit%.SI);
 
     /** constant with value MAX_VALUE. */
-    public static final Float%TypeRel% POS_MAXVALUE = new Float%TypeRel%(Float.MAX_VALUE, %TypeUnit%.SI);
+    public static final Float%TypeRel% POS_MAXVALUE = new Float%TypeRel%(Float.MAX_VALUE, %TypeRelUnit%.SI);
 
     /** constant with value -MAX_VALUE. */
-    public static final Float%TypeRel% NEG_MAXVALUE = new Float%TypeRel%(-Float.MAX_VALUE, %TypeUnit%.SI);
+    public static final Float%TypeRel% NEG_MAXVALUE = new Float%TypeRel%(-Float.MAX_VALUE, %TypeRelUnit%.SI);
 
     /**
      * Construct Float%TypeRel% scalar.
      * @param value float value
      * @param unit unit for the float value
      */
-    public Float%TypeRel%(final float value, final %TypeUnit% unit)
+    public Float%TypeRel%(final float value, final %TypeRelUnit% unit)
     {
         super(value, unit);
     }
@@ -67,14 +67,14 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeUnit%, Float%Typ
      * @param value double value
      * @param unit unit for the resulting float value
      */
-    public Float%TypeRel%(final double value, final %TypeUnit% unit)
+    public Float%TypeRel%(final double value, final %TypeRelUnit% unit)
     {
         super((float) value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final Float%TypeRel% instantiateRel(final float value, final %TypeUnit% unit)
+    public final Float%TypeRel% instantiateRel(final float value, final %TypeRelUnit% unit)
     {
         return new Float%TypeRel%(value, unit);
     }
@@ -86,7 +86,7 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeUnit%, Float%Typ
      */
     public static final Float%TypeRel% createSI(final float value)
     {
-        return new Float%TypeRel%(value, %TypeUnit%.SI);
+        return new Float%TypeRel%(value, %TypeRelUnit%.SI);
     }
 
     /**
@@ -95,7 +95,7 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeUnit%, Float%Typ
      * @param unit the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
-    public final Float%TypeAbs% instantiateAbs(final float value, final %TypeUnit% unit)
+    public final Float%TypeAbs% instantiateAbs(final float value, final %TypeAbsUnit% unit)
     {
         return new Float%TypeAbs%(value, unit);
     }
@@ -120,21 +120,8 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeUnit%, Float%Typ
      */
     public final Float%TypeAbs% plus(final Float%TypeAbs% v)
     {
-        if (getUnit().isBaseSIUnit())
-        {
-            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-        }
-        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
-            : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-    }
-
-    /**
-     * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
-     * @return an absolute version of this %typerel% scalar.
-     */
-    public final Float%TypeAbs% toAbs()
-    {
-        return new Float%TypeAbs%(getInUnit(), getUnit());
+        %TypeAbsUnit% targetUnit = v.getUnit();
+        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**

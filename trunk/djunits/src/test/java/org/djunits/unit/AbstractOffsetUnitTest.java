@@ -6,11 +6,11 @@ import org.djunits.unit.scale.OffsetLinearScale;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Jun 6, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Jun 6, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <OU> Make the test specific for this sub class of OffsetUnit
  */
@@ -26,17 +26,16 @@ public class AbstractOffsetUnitTest<OU extends Unit<OU>> extends AbstractUnitTes
      * @param expectedAbbreviation String; expected abbreviation in the resources
      */
     protected final void checkUnitRatioOffsetNameAndAbbreviation(final OU ou, final double expectedRatio,
-        final double expectedOffset, final double precision, final String expectedName,
-        final String expectedAbbreviation)
+            final double expectedOffset, final double precision, final String expectedName, final String expectedAbbreviation)
     {
         OffsetLinearScale scale = (OffsetLinearScale) ou.getScale();
-        assertEquals(String.format("zero %s is about %f reference unit", ou.getNameKey(), expectedOffset),
-            expectedOffset, scale.getOffsetToStandardUnit(), precision);
+        assertEquals(String.format("zero %s is about %f reference unit", ou.getNameKey(), expectedOffset), expectedOffset,
+                scale.getOffsetToStandardUnit(), precision);
         assertEquals(String.format("one %s is about %f reference unit", ou.getNameKey(), expectedRatio), expectedRatio,
-            scale.getConversionFactorToStandardUnit(), precision);
+                scale.getConversionFactorToStandardUnit(), precision);
         assertEquals(String.format("Name of %s is %s", ou.getNameKey(), expectedName), expectedName, ou.getName());
-        assertEquals(String.format("Abbreviation of %s is %s", ou.getNameKey(), expectedAbbreviation),
-            expectedAbbreviation, ou.getAbbreviation());
+        assertEquals(String.format("Abbreviation of %s is %s", ou.getNameKey(), expectedAbbreviation), expectedAbbreviation,
+                ou.getAbbreviation());
     }
 
     /**

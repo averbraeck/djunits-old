@@ -1,26 +1,26 @@
 package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.DimensionlessUnit;
-import org.djunits.unit.MoneyPerTimeUnit;
+import org.djunits.unit.MoneyPerDurationUnit;
 import org.djunits.unit.MoneyUnit;
 
 /**
- * Easy access methods for the MoneyPerTime DoubleScalar, which is relative by definition. Instead of:
+ * Easy access methods for the MoneyPerDuration DoubleScalar, which is relative by definition. Instead of:
  * 
  * <pre>
- * DoubleScalar.Rel&lt;MoneyPerTimeUnit&gt; value = new DoubleScalar.Rel&lt;MoneyPerTimeUnit&gt;(100.0, MoneyPerTimeUnit.SI);
+ * DoubleScalar.Rel&lt;MoneyPerDurationUnit&gt; value = new DoubleScalar.Rel&lt;MoneyPerDurationUnit&gt;(100.0, MoneyPerDurationUnit.SI);
  * </pre>
  * 
  * we can now write:
  * 
  * <pre>
- * MoneyPerTime value = new MoneyPerTime(100.0, MoneyPerTimeUnit.SI);
+ * MoneyPerDuration value = new MoneyPerDuration(100.0, MoneyPerDurationUnit.SI);
  * </pre>
  * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -28,35 +28,35 @@ import org.djunits.unit.MoneyUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MoneyPerTime extends AbstractDoubleScalarRel<MoneyPerTimeUnit, MoneyPerTime>
+public class MoneyPerDuration extends AbstractDoubleScalarRel<MoneyPerDurationUnit, MoneyPerDuration>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
     /**
-     * Construct MoneyPerTime scalar.
+     * Construct MoneyPerDuration scalar.
      * @param value double value
      * @param unit unit for the double value
      */
-    public MoneyPerTime(final double value, final MoneyPerTimeUnit unit)
+    public MoneyPerDuration(final double value, final MoneyPerDurationUnit unit)
     {
         super(value, unit);
     }
 
     /**
-     * Construct MoneyPerTime scalar.
+     * Construct MoneyPerDuration scalar.
      * @param value Scalar from which to construct this instance
      */
-    public MoneyPerTime(final MoneyPerTime value)
+    public MoneyPerDuration(final MoneyPerDuration value)
     {
         super(value);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final MoneyPerTime instantiateRel(final double value, final MoneyPerTimeUnit unit)
+    public final MoneyPerDuration instantiateRel(final double value, final MoneyPerDurationUnit unit)
     {
-        return new MoneyPerTime(value, unit);
+        return new MoneyPerDuration(value, unit);
     }
 
     /**
@@ -66,9 +66,9 @@ public class MoneyPerTime extends AbstractDoubleScalarRel<MoneyPerTimeUnit, Mone
      * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static MoneyPerTime interpolate(final MoneyPerTime zero, final MoneyPerTime one, final double ratio)
+    public static MoneyPerDuration interpolate(final MoneyPerDuration zero, final MoneyPerDuration one, final double ratio)
     {
-        return new MoneyPerTime(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new MoneyPerDuration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**
@@ -77,7 +77,7 @@ public class MoneyPerTime extends AbstractDoubleScalarRel<MoneyPerTimeUnit, Mone
      * @param r2 the second scalar
      * @return the maximum value of two monetary scalars
      */
-    public static MoneyPerTime max(final MoneyPerTime r1, final MoneyPerTime r2)
+    public static MoneyPerDuration max(final MoneyPerDuration r1, final MoneyPerDuration r2)
     {
         return (r1.gt(r2)) ? r1 : r2;
     }
@@ -89,10 +89,10 @@ public class MoneyPerTime extends AbstractDoubleScalarRel<MoneyPerTimeUnit, Mone
      * @param rn the other scalars
      * @return the maximum value of more than two monetary scalars
      */
-    public static MoneyPerTime max(final MoneyPerTime r1, final MoneyPerTime r2, final MoneyPerTime... rn)
+    public static MoneyPerDuration max(final MoneyPerDuration r1, final MoneyPerDuration r2, final MoneyPerDuration... rn)
     {
-        MoneyPerTime maxr = (r1.gt(r2)) ? r1 : r2;
-        for (MoneyPerTime r : rn)
+        MoneyPerDuration maxr = (r1.gt(r2)) ? r1 : r2;
+        for (MoneyPerDuration r : rn)
         {
             if (r.gt(maxr))
             {
@@ -108,7 +108,7 @@ public class MoneyPerTime extends AbstractDoubleScalarRel<MoneyPerTimeUnit, Mone
      * @param r2 the second scalar
      * @return the minimum value of two monetary scalars
      */
-    public static MoneyPerTime min(final MoneyPerTime r1, final MoneyPerTime r2)
+    public static MoneyPerDuration min(final MoneyPerDuration r1, final MoneyPerDuration r2)
     {
         return (r1.lt(r2)) ? r1 : r2;
     }
@@ -120,10 +120,10 @@ public class MoneyPerTime extends AbstractDoubleScalarRel<MoneyPerTimeUnit, Mone
      * @param rn the other scalars
      * @return the minimum value of more than two monetary scalars
      */
-    public static MoneyPerTime min(final MoneyPerTime r1, final MoneyPerTime r2, final MoneyPerTime... rn)
+    public static MoneyPerDuration min(final MoneyPerDuration r1, final MoneyPerDuration r2, final MoneyPerDuration... rn)
     {
-        MoneyPerTime minr = (r1.lt(r2)) ? r1 : r2;
-        for (MoneyPerTime r : rn)
+        MoneyPerDuration minr = (r1.lt(r2)) ? r1 : r2;
+        for (MoneyPerDuration r : rn)
         {
             if (r.lt(minr))
             {
@@ -134,19 +134,19 @@ public class MoneyPerTime extends AbstractDoubleScalarRel<MoneyPerTimeUnit, Mone
     }
 
     /**
-     * Calculate the division of MoneyPerTime and MoneyPerTime, which results in a Dimensionless scalar.
-     * @param v MoneyPerTime scalar
-     * @return Dimensionless scalar as a division of MoneyPerTime and MoneyPerTime
+     * Calculate the division of MoneyPerDuration and MoneyPerDuration, which results in a Dimensionless scalar.
+     * @param v MoneyPerDuration scalar
+     * @return Dimensionless scalar as a division of MoneyPerDuration and MoneyPerDuration
      */
-    public final Dimensionless divideBy(final MoneyPerTime v)
+    public final Dimensionless divideBy(final MoneyPerDuration v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
 
     /**
-     * Calculate the multiplication of MoneyPerTime and Duration, which results in a Money scalar.
-     * @param v MoneyPerTime scalar
-     * @return Money scalar as a multiplication of MoneyPerTime and Duration
+     * Calculate the multiplication of MoneyPerDuration and Duration, which results in a Money scalar.
+     * @param v MoneyPerDuration scalar
+     * @return Money scalar as a multiplication of MoneyPerDuration and Duration
      */
     public final Money multiplyBy(final Duration v)
     {
@@ -154,9 +154,9 @@ public class MoneyPerTime extends AbstractDoubleScalarRel<MoneyPerTimeUnit, Mone
     }
 
     /**
-     * Calculate the division of MoneyPerTime and Frequency, which results in a Money scalar.
-     * @param v MoneyPerTime scalar
-     * @return Money scalar as a division of MoneyPerTime and Frequency
+     * Calculate the division of MoneyPerDuration and Frequency, which results in a Money scalar.
+     * @param v MoneyPerDuration scalar
+     * @return Money scalar as a division of MoneyPerDuration and Frequency
      */
     public final Money divideBy(final Frequency v)
     {

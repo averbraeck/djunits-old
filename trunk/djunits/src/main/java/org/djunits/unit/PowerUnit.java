@@ -11,7 +11,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * The units of power.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -30,7 +30,7 @@ public class PowerUnit extends LinearUnit<PowerUnit>
     private final LengthUnit lengthUnit;
 
     /** the unit of time for the power unit, e.g., second. */
-    private final TimeUnit timeUnit;
+    private final DurationUnit durationUnit;
 
     /** The SI unit for power is watt. */
     public static final PowerUnit SI;
@@ -88,8 +88,8 @@ public class PowerUnit extends LinearUnit<PowerUnit>
 
     static
     {
-        SI = new PowerUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "PowerUnit.watt", "PowerUnit.W", SI_DERIVED,
-                true);
+        SI = new PowerUnit(MassUnit.KILOGRAM, LengthUnit.METER, DurationUnit.SECOND, "PowerUnit.watt", "PowerUnit.W",
+                SI_DERIVED, true);
         WATT = SI;
         FEMTOWATT = new PowerUnit("PowerUnit.femtowatt", "PowerUnit.fW", SI_DERIVED, WATT, 1.0E-15, true);
         PICOWATT = new PowerUnit("PowerUnit.picowatt", "PowerUnit.pW", SI_DERIVED, WATT, 1.0E-12, true);
@@ -101,16 +101,16 @@ public class PowerUnit extends LinearUnit<PowerUnit>
         GIGAWATT = new PowerUnit("PowerUnit.gigawatt", "PowerUnit.GW", SI_DERIVED, WATT, 1.0E9, true);
         TERAWATT = new PowerUnit("PowerUnit.terawatt", "PowerUnit.TW", SI_DERIVED, WATT, 1.0E12, true);
         PETAWATT = new PowerUnit("PowerUnit.petawatt", "PowerUnit.PW", SI_DERIVED, WATT, 1.0E15, true);
-        FOOT_POUND_FORCE_PER_HOUR = new PowerUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, TimeUnit.HOUR,
+        FOOT_POUND_FORCE_PER_HOUR = new PowerUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, DurationUnit.HOUR,
                 "PowerUnit.foot_pound-force_per_hour", "PowerUnit.ft.lbf/h", IMPERIAL, true);
-        FOOT_POUND_FORCE_PER_MINUTE = new PowerUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, TimeUnit.MINUTE,
+        FOOT_POUND_FORCE_PER_MINUTE = new PowerUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, DurationUnit.MINUTE,
                 "PowerUnit.foot_pound-force_per_minute", "PowerUnit.ft.lbf/min", IMPERIAL, true);
-        FOOT_POUND_FORCE_PER_SECOND = new PowerUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, TimeUnit.SECOND,
+        FOOT_POUND_FORCE_PER_SECOND = new PowerUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, DurationUnit.SECOND,
                 "PowerUnit.foot_pound-force_per_second", "PowerUnit.ft.lbf/s", IMPERIAL, true);
         HORSEPOWER_METRIC = new PowerUnit("PowerUnit.horsepower_(metric)", "PowerUnit.hp", OTHER, WATT, 735.49875, true);
-        STHENE_METER_PER_SECOND = new PowerUnit(ForceUnit.STHENE, LengthUnit.METER, TimeUnit.SECOND,
+        STHENE_METER_PER_SECOND = new PowerUnit(ForceUnit.STHENE, LengthUnit.METER, DurationUnit.SECOND,
                 "PowerUnit.sthene-meter_per_second", "PowerUnit.sn.m/s", MTS, true);
-        ERG_PER_SECOND = new PowerUnit(ForceUnit.DYNE, LengthUnit.CENTIMETER, TimeUnit.SECOND, "PowerUnit.erg_per_second",
+        ERG_PER_SECOND = new PowerUnit(ForceUnit.DYNE, LengthUnit.CENTIMETER, DurationUnit.SECOND, "PowerUnit.erg_per_second",
                 "PowerUnit.erg/s", CGS, true);
     }
 
@@ -118,78 +118,75 @@ public class PowerUnit extends LinearUnit<PowerUnit>
      * Define a PowerUnit based on its constituent base units, e.g. a W = km.m^2/s^3.
      * @param massUnit the unit of mass for the power unit, e.g., kilogram
      * @param lengthUnit the unit of length for the power unit, e.g., meter
-     * @param timeUnit the unit of time for the power unit, e.g., second
+     * @param durationUnit the unit of time for the power unit, e.g., second
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private PowerUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+    private PowerUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
+            final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
+            final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, WATT,
-                massUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
-                        * lengthUnit.getConversionFactorToStandardUnit()
-                        / Math.pow(timeUnit.getConversionFactorToStandardUnit(), 3.0),
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, WATT, massUnit.getScaleFactor()
+                * lengthUnit.getScaleFactor() * lengthUnit.getScaleFactor() / Math.pow(durationUnit.getScaleFactor(), 3.0),
                 standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
-        this.timeUnit = timeUnit;
+        this.durationUnit = durationUnit;
     }
 
     /**
      * Define a user-defined PowerUnit based on its constituent base units, e.g. a W = km.m^2/s^3.
      * @param massUnit the unit of mass for the power unit, e.g., kilogram
      * @param lengthUnit the unit of length for the power unit, e.g., meter
-     * @param timeUnit the unit of time for the power unit, e.g., second
+     * @param durationUnit the unit of time for the power unit, e.g., second
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public PowerUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit, final String name,
+    public PowerUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
     {
-        this(massUnit, lengthUnit, timeUnit, name, abbreviation, unitSystem, false);
+        this(massUnit, lengthUnit, durationUnit, name, abbreviation, unitSystem, false);
     }
 
     /**
      * Define an PowerUnit based on a LengthUnit, a ForceUnit, and a TimeUnit, e.g. a W = N.m/s.
      * @param forceUnit the unit of force for the power unit, e.g., Newton
      * @param lengthUnit the unit of length for the power unit, e.g., meter
-     * @param timeUnit the unit of time for the power unit, e.g., second
+     * @param durationUnit the unit of time for the power unit, e.g., second
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private PowerUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit,
+    private PowerUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final boolean standardUnit)
     {
-        super(nameOrNameKey,
-                abbreviationOrAbbreviationKey, unitSystem, WATT, lengthUnit.getConversionFactorToStandardUnit()
-                        * forceUnit.getConversionFactorToStandardUnit() / timeUnit.getConversionFactorToStandardUnit(),
-                standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, WATT,
+                lengthUnit.getScaleFactor() * forceUnit.getScaleFactor() / durationUnit.getScaleFactor(), standardUnit);
         this.massUnit = forceUnit.getMassUnit();
         this.lengthUnit = forceUnit.getLengthUnit();
-        this.timeUnit = forceUnit.getTimeUnit();
+        this.durationUnit = forceUnit.getDurationUnit();
     }
 
     /**
      * Define a user-defined PowerUnit based on a LengthUnit, a ForceUnit, and a TimeUnit, e.g. a W = N.m/s.
      * @param lengthUnit the unit of length for the power unit, e.g., meter
      * @param forceUnit the unit of force for the power unit, e.g., Newton
-     * @param timeUnit the unit of time for the power unit, e.g., second
+     * @param durationUnit the unit of time for the power unit, e.g., second
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public PowerUnit(final LengthUnit lengthUnit, final ForceUnit forceUnit, final TimeUnit timeUnit, final String name,
+    public PowerUnit(final LengthUnit lengthUnit, final ForceUnit forceUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
     {
-        this(forceUnit, lengthUnit, timeUnit, name, abbreviation, unitSystem, false);
+        this(forceUnit, lengthUnit, durationUnit, name, abbreviation, unitSystem, false);
     }
 
     /**
@@ -199,17 +196,17 @@ public class PowerUnit extends LinearUnit<PowerUnit>
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private PowerUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final PowerUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final PowerUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
                 standardUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
-        this.timeUnit = referenceUnit.getTimeUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**
@@ -218,12 +215,12 @@ public class PowerUnit extends LinearUnit<PowerUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public PowerUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final PowerUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+            final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**
@@ -243,11 +240,11 @@ public class PowerUnit extends LinearUnit<PowerUnit>
     }
 
     /**
-     * @return timeUnit
+     * @return durationUnit
      */
-    public final TimeUnit getTimeUnit()
+    public final DurationUnit getDurationUnit()
     {
-        return this.timeUnit;
+        return this.durationUnit;
     }
 
     /** {@inheritDoc} */

@@ -27,7 +27,7 @@ import org.junit.Test;
 /**
  * Find all plus, minus, multiplyBy and divideBy operations and prove the type correctness.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -51,7 +51,7 @@ public class ScalarOperationsTest
 
     /** The money classes that are just relative (name = class name); these classes don't have an si field. */
     public static final String[] CLASSNAMES_MONEY = new String[] { "Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",
-            "MoneyPerMass", "MoneyPerTime", "MoneyPerVolume" };
+            "MoneyPerMass", "MoneyPerDuration", "MoneyPerVolume" };
 
     /**
      * Test constructor on the specified double scalar classes.
@@ -121,7 +121,6 @@ public class ScalarOperationsTest
             }
             testMethods(scalarClassAbs, true, doubleType);
             testMethods(scalarClassRel, false, doubleType);
-            testAbsRelConversion(scalarClassAbs, scalarClassRel, doubleType);
         }
 
         // get the interfaces such as org.djunits.value.vXXXX.scalar.Area
@@ -157,43 +156,6 @@ public class ScalarOperationsTest
             }
             testMethods(scalarClassMoney, false, doubleType);
         }
-    }
-
-    /**
-     * Test the toAbs or toRel method.
-     * @param scalarClassAbs abs class to test
-     * @param scalarClassRel rel class to test
-     * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
-     * @throws SecurityException on reflection error
-     * @throws NoSuchMethodException on reflection error
-     * @throws NoSuchFieldException on reflection error
-     * @throws InvocationTargetException on reflection error
-     * @throws IllegalArgumentException on reflection error
-     * @throws IllegalAccessException on reflection error
-     * @throws InstantiationException on reflection error
-     */
-    private void testAbsRelConversion(final Class<?> scalarClassAbs, final Class<?> scalarClassRel, final boolean doubleType)
-            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-            IllegalArgumentException, InvocationTargetException, NoSuchFieldException
-    {
-        double inValue = 1.23456;
-        Constructor<?> constructorAbs =
-                scalarClassAbs.getConstructor(doubleType ? double.class : float.class, getUnitClass(scalarClassAbs));
-        Object from = doubleType ? constructorAbs.newInstance(inValue, getSIUnitInstance(getUnitClass(scalarClassAbs)))
-                : constructorAbs.newInstance((float) inValue, getSIUnitInstance(getUnitClass(scalarClassAbs)));
-        Method method = scalarClassAbs.getMethod("toRel");
-        Object to = method.invoke(from);
-        double toValue = verifyAbsRelPrecisionAndExtractSI(false, doubleType, to);
-        assertEquals("Value after Abs -> Rel conversion should be equal to input value", inValue, toValue, 0.00001);
-
-        Constructor<?> constructorRel =
-                scalarClassRel.getConstructor(doubleType ? double.class : float.class, getUnitClass(scalarClassRel));
-        from = doubleType ? constructorRel.newInstance(inValue, getSIUnitInstance(getUnitClass(scalarClassRel)))
-                : constructorRel.newInstance((float) inValue, getSIUnitInstance(getUnitClass(scalarClassRel)));
-        method = scalarClassRel.getMethod("toAbs");
-        to = method.invoke(from);
-        toValue = verifyAbsRelPrecisionAndExtractSI(true, doubleType, to);
-        assertEquals("Value after Rel -> Abs conversion should be equal to input value", inValue, toValue, 0.00001);
     }
 
     /**
@@ -297,12 +259,12 @@ public class ScalarOperationsTest
         if (abs)
         {
             fail("Absolute types should not have a multiply or divide method");
-            AbstractDoubleScalarAbs<?, ?, ?> left = (AbstractDoubleScalarAbs<?, ?, ?>) constructor.newInstance(123d,
-                    getSIUnitInstance(getUnitClass(scalarClass)));
+            AbstractDoubleScalarAbs<?, ?, ?, ?> left = (AbstractDoubleScalarAbs<?, ?, ?, ?>) constructor.newInstance(123d,
+                    getSIUnitInstance(getUnitClass(scalarClass), abs));
             // System.out.println("constructed left: " + left);
             constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
-            AbstractDoubleScalarAbs<?, ?, ?> right = (AbstractDoubleScalarAbs<?, ?, ?>) constructor.newInstance(456d,
-                    getSIUnitInstance(getUnitClass(parameterClass)));
+            AbstractDoubleScalarAbs<?, ?, ?, ?> right = (AbstractDoubleScalarAbs<?, ?, ?, ?>) constructor.newInstance(456d,
+                    getSIUnitInstance(getUnitClass(parameterClass), abs));
             // System.out.println("constructed right: " + right);
             double expectedValue = multiply ? 123d * 456 : 123d / 456;
 
@@ -310,32 +272,27 @@ public class ScalarOperationsTest
             {
                 Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] { parameterClass });
                 Object result = multiplyMethod.invoke(left, right);
-                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?>) result).si;
+                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
                 Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] { parameterClass });
                 Object result = divideMethod.invoke(left, right);
-                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?>) result).si;
+                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
-            AbstractDoubleScalarAbs<?, ?, ?> result =
-                    multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
-            // System.out.println("result is " + result);
-            String resultCoefficients = result.getUnit().getSICoefficientsString();
-            assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
         }
         else
         {
             if (doubleType)
             {
                 AbstractDoubleScalarRel<?, ?> left = (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(123d,
-                        getSIUnitInstance(getUnitClass(scalarClass)));
+                        getSIUnitInstance(getUnitClass(scalarClass), abs));
                 // System.out.println("constructed left: " + left);
                 constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
                 AbstractDoubleScalarRel<?, ?> right = (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(456d,
-                        getSIUnitInstance(getUnitClass(parameterClass)));
+                        getSIUnitInstance(getUnitClass(parameterClass), abs));
                 // System.out.println("constructed right: " + right);
                 double expectedValue = multiply ? 123d * 456 : 123d / 456;
 
@@ -362,11 +319,11 @@ public class ScalarOperationsTest
             else
             {
                 AbstractFloatScalarRel<?, ?> left = (AbstractFloatScalarRel<?, ?>) constructor.newInstance(123f,
-                        getSIUnitInstance(getUnitClass(scalarClass)));
+                        getSIUnitInstance(getUnitClass(scalarClass), abs));
                 // System.out.println("constructed left: " + left);
                 constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
                 AbstractFloatScalarRel<?, ?> right = (AbstractFloatScalarRel<?, ?>) constructor.newInstance(456f,
-                        getSIUnitInstance(getUnitClass(parameterClass)));
+                        getSIUnitInstance(getUnitClass(parameterClass), abs));
                 // System.out.println("constructed right: " + right);
                 float expectedValue = multiply ? 123f * 456 : 123f / 456;
 
@@ -424,11 +381,13 @@ public class ScalarOperationsTest
     /**
      * Obtain the SI coefficient string of a DJUNITS class.
      * @param clas Class&lt;?&gt;; the DJUNITS class
+     * @param isAbs true when abs
      * @return String
      * @throws NoSuchFieldException on class or method resolving error
      * @throws IllegalAccessException on class or method resolving error
      */
-    private Unit<?> getSIUnitInstance(final Class<?> clas) throws NoSuchFieldException, IllegalAccessException
+    private Unit<?> getSIUnitInstance(final Class<?> clas, final boolean isAbs)
+            throws NoSuchFieldException, IllegalAccessException
     {
         if (clas.getName().contains("Money"))
         {
@@ -442,7 +401,7 @@ public class ScalarOperationsTest
             }
             return null;
         }
-        Field si = clas.getField("SI");
+        Field si = isAbs ? clas.getField("BASE") : clas.getField("SI");
         return ((Unit<?>) si.get(clas));
     }
 
@@ -535,10 +494,10 @@ public class ScalarOperationsTest
         if (doubleType)
         {
             left = abs
-                    ? (AbstractDoubleScalarAbs<?, ?, ?>) constructor.newInstance(value,
-                            getSIUnitInstance(getUnitClass(scalarClass)))
+                    ? (AbstractDoubleScalarAbs<?, ?, ?, ?>) constructor.newInstance(value,
+                            getSIUnitInstance(getUnitClass(scalarClass), abs))
                     : (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(value,
-                            getSIUnitInstance(getUnitClass(scalarClass)));
+                            getSIUnitInstance(getUnitClass(scalarClass), abs));
             // Find the constructor that takes an object of the current class as the single argument
             Constructor<?>[] constructors = scalarClass.getConstructors();
             for (Constructor<?> c : constructors)
@@ -555,10 +514,10 @@ public class ScalarOperationsTest
         else
         {
             left = abs
-                    ? (AbstractFloatScalarAbs<?, ?, ?>) constructor.newInstance((float) value,
-                            getSIUnitInstance(getUnitClass(scalarClass)))
+                    ? (AbstractFloatScalarAbs<?, ?, ?, ?>) constructor.newInstance((float) value,
+                            getSIUnitInstance(getUnitClass(scalarClass), abs))
                     : (AbstractFloatScalarRel<?, ?>) constructor.newInstance((float) value,
-                            getSIUnitInstance(getUnitClass(scalarClass)));
+                            getSIUnitInstance(getUnitClass(scalarClass), abs));
             // Find the constructor that takes an object of the current class as the single argument
             Constructor<?>[] constructors = scalarClass.getConstructors();
             for (Constructor<?> c : constructors)
@@ -699,8 +658,10 @@ public class ScalarOperationsTest
         }
 
         Object compatibleRight = null;
+        // TODO: Probably we exclude too much here for the tests...
         if (!scalarClass.getName().contains("Money") && !scalarClass.getName().contains("Dimensionless")
-                && !scalarClass.getName().contains("Temperature"))
+                && !scalarClass.getName().contains("Temperature") && !scalarClass.getName().contains("Position")
+                && !scalarClass.getName().contains("Time") && !scalarClass.getName().contains("Direction"))
         {
             // Construct a new unit to test mixed unit plus and minus
             Class<?> unitClass = getUnitClass(scalarClass);
@@ -715,12 +676,12 @@ public class ScalarOperationsTest
             // System.out.println("new unit prints like " + newUnit);
             if (doubleType)
             {
-                compatibleRight = abs ? (AbstractDoubleScalarAbs<?, ?, ?>) constructor.newInstance(value, newUnit)
+                compatibleRight = abs ? (AbstractDoubleScalarAbs<?, ?, ?, ?>) constructor.newInstance(value, newUnit)
                         : (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(value, newUnit);
             }
             else
             {
-                compatibleRight = abs ? (AbstractFloatScalarAbs<?, ?, ?>) constructor.newInstance((float) value, newUnit)
+                compatibleRight = abs ? (AbstractFloatScalarAbs<?, ?, ?, ?>) constructor.newInstance((float) value, newUnit)
                         : (AbstractFloatScalarRel<?, ?>) constructor.newInstance((float) value, newUnit);
             }
             // System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
@@ -767,12 +728,13 @@ public class ScalarOperationsTest
                     // System.out.println("unit is " + getUnitClass(absScalarClass));
                     if (doubleType)
                     {
-                        absOperand = absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
+                        absOperand =
+                                absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass), true));
                     }
                     else
                     {
                         absOperand = absScalarConstructor.newInstance((float) value,
-                                getSIUnitInstance(getUnitClass(absScalarClass)));
+                                getSIUnitInstance(getUnitClass(absScalarClass), true));
                     }
                     // abs plus rel yields abs
                     plus = ClassUtil.resolveMethod(absScalarClass, "plus", scalarClass);
@@ -816,11 +778,12 @@ public class ScalarOperationsTest
             // System.out.println("unit is " + getUnitClass(absScalarClass));
             if (doubleType)
             {
-                absOperand = absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass)));
+                absOperand = absScalarConstructor.newInstance(value, getSIUnitInstance(getUnitClass(absScalarClass), true));
             }
             else
             {
-                absOperand = absScalarConstructor.newInstance((float) value, getSIUnitInstance(getUnitClass(absScalarClass)));
+                absOperand =
+                        absScalarConstructor.newInstance((float) value, getSIUnitInstance(getUnitClass(absScalarClass), true));
             }
             minus = ClassUtil.resolveMethod(absScalarClass, "minus", scalarClass);
             result = minus.invoke(absOperand, left);
@@ -856,17 +819,19 @@ public class ScalarOperationsTest
         if (doubleType)
         {
             double zeroValue = 1.23456;
-            AbstractDoubleScalar<?, ?> zero = abs
-                    ? (AbstractDoubleScalarAbs<?, ?, ?>) constructor.newInstance(zeroValue,
-                            getSIUnitInstance(getUnitClass(scalarClass)))
-                    : (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(zeroValue,
-                            getSIUnitInstance(getUnitClass(scalarClass)));
+            AbstractDoubleScalar<?,
+                    ?> zero = abs
+                            ? (AbstractDoubleScalarAbs<?, ?, ?, ?>) constructor.newInstance(zeroValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs))
+                            : (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(zeroValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs));
             double oneValue = 3.45678;
-            AbstractDoubleScalar<?, ?> one = abs
-                    ? (AbstractDoubleScalarAbs<?, ?, ?>) constructor.newInstance(oneValue,
-                            getSIUnitInstance(getUnitClass(scalarClass)))
-                    : (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(oneValue,
-                            getSIUnitInstance(getUnitClass(scalarClass)));
+            AbstractDoubleScalar<?,
+                    ?> one = abs
+                            ? (AbstractDoubleScalarAbs<?, ?, ?, ?>) constructor.newInstance(oneValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs))
+                            : (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(oneValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs));
             for (double ratio : new double[] { -5, -1, 0, 0.3, 1, 2, 10 })
             {
                 double expectedResult = (1.0 - ratio) * zeroValue + ratio * oneValue;
@@ -881,17 +846,19 @@ public class ScalarOperationsTest
         else
         {
             float zeroValue = 1.23456f;
-            AbstractFloatScalar<?, ?> zero = abs
-                    ? (AbstractFloatScalarAbs<?, ?, ?>) constructor.newInstance(zeroValue,
-                            getSIUnitInstance(getUnitClass(scalarClass)))
-                    : (AbstractFloatScalarRel<?, ?>) constructor.newInstance(zeroValue,
-                            getSIUnitInstance(getUnitClass(scalarClass)));
+            AbstractFloatScalar<?,
+                    ?> zero = abs
+                            ? (AbstractFloatScalarAbs<?, ?, ?, ?>) constructor.newInstance(zeroValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs))
+                            : (AbstractFloatScalarRel<?, ?>) constructor.newInstance(zeroValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs));
             float oneValue = 3.45678f;
-            AbstractFloatScalar<?, ?> one = abs
-                    ? (AbstractFloatScalarAbs<?, ?, ?>) constructor.newInstance(oneValue,
-                            getSIUnitInstance(getUnitClass(scalarClass)))
-                    : (AbstractFloatScalarRel<?, ?>) constructor.newInstance(oneValue,
-                            getSIUnitInstance(getUnitClass(scalarClass)));
+            AbstractFloatScalar<?,
+                    ?> one = abs
+                            ? (AbstractFloatScalarAbs<?, ?, ?, ?>) constructor.newInstance(oneValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs))
+                            : (AbstractFloatScalarRel<?, ?>) constructor.newInstance(oneValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs));
             for (float ratio : new float[] { -5, -1, 0, 0.3f, 1, 2, 10 })
             {
                 float expectedResult = (1.0f - ratio) * zeroValue + ratio * oneValue;

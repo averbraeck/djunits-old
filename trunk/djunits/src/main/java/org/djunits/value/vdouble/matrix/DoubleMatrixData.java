@@ -11,7 +11,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalarInterface;
 /**
  * Stores the data for a DoubleMatrix and carries out basic operations.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
@@ -197,7 +197,7 @@ abstract class DoubleMatrixData
      * @param col the column number to get the value for
      * @return the value at the [row, col] point
      */
-    public abstract double getSI(final int row, final int col);
+    public abstract double getSI(int row, int col);
 
     /**
      * Sets a value at the [row, col] point in the matrix.
@@ -205,7 +205,7 @@ abstract class DoubleMatrixData
      * @param col the column number to set the value for
      * @param valueSI the value at the index
      */
-    public abstract void setSI(final int row, final int col, final double valueSI);
+    public abstract void setSI(int row, int col, double valueSI);
 
     /**
      * @return the number of non-zero cells.
@@ -275,7 +275,7 @@ abstract class DoubleMatrixData
      * @param right the other data object to add
      * @throws ValueException if matrices have different lengths
      */
-    public abstract void incrementBy(final DoubleMatrixData right) throws ValueException;
+    public abstract void incrementBy(DoubleMatrixData right) throws ValueException;
 
     /**
      * Add a number to this matrix on a cell-by-cell basis.
@@ -311,7 +311,7 @@ abstract class DoubleMatrixData
      * @param right the other data object to subtract
      * @throws ValueException if matrices have different lengths
      */
-    public abstract void decrementBy(final DoubleMatrixData right) throws ValueException;
+    public abstract void decrementBy(DoubleMatrixData right) throws ValueException;
 
     /**
      * Subtract a number from this matrix on a cell-by-cell basis.
@@ -348,7 +348,7 @@ abstract class DoubleMatrixData
      * @param right the other data object to multiply with
      * @throws ValueException if matrices have different lengths
      */
-    public abstract void multiplyBy(final DoubleMatrixData right) throws ValueException;
+    public abstract void multiplyBy(DoubleMatrixData right) throws ValueException;
 
     /**
      * Multiply the values of this matrix with a number on a cell-by-cell basis.
@@ -385,7 +385,7 @@ abstract class DoubleMatrixData
      * @param right the other data object to divide by
      * @throws ValueException if matrices have different lengths
      */
-    public abstract void divideBy(final DoubleMatrixData right) throws ValueException;
+    public abstract void divideBy(DoubleMatrixData right) throws ValueException;
 
     /**
      * Divide the values of this matrix by a number on a cell-by-cell basis.

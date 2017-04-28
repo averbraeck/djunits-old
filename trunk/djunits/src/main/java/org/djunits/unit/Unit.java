@@ -16,7 +16,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * stored with conversion factor 1.0, whereas kilometer is stored with a conversion factor 1000.0. This means that if we want to
  * express a length meter in kilometers, we have to <i>divide</i> by the conversion factor.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -77,12 +77,13 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     private boolean baseSIUnit;
 
     /** The array of the names of the standard units. */
-    public static final String[] STANDARD_UNITS = new String[] { "AccelerationUnit", "AngleSolidUnit", "AngleUnit", "AreaUnit",
-            "DensityUnit", "DimensionlessUnit", "ElectricalChargeUnit", "ElectricalCurrentUnit", "ElectricalPotentialUnit",
-            "ElectricalResistanceUnit", "EnergyUnit", "FlowMassUnit", "FlowVolumeUnit", "ForceUnit", "FrequencyUnit",
-            "LengthUnit", "LinearDensityUnit", "MassUnit", "MoneyUnit", "MoneyPerAreaUnit", "MoneyPerEnergyUnit",
-            "MoneyPerLengthUnit", "MoneyPerMassUnit", "MoneyPerTimeUnit", "MoneyPerVolumeUnit", "PowerUnit", "PressureUnit",
-            "SpeedUnit", "TemperatureUnit", "TimeUnit", "TorqueUnit", "VolumeUnit" };
+    public static final String[] STANDARD_UNITS = new String[] { "AbsoluteTemperatureUnit", "AccelerationUnit",
+            "AngleSolidUnit", "AngleUnit", "AreaUnit", "DensityUnit", "DimensionlessUnit", "DirectionUnit", "DurationUnit",
+            "ElectricalChargeUnit", "ElectricalCurrentUnit", "ElectricalPotentialUnit", "ElectricalResistanceUnit",
+            "EnergyUnit", "FlowMassUnit", "FlowVolumeUnit", "ForceUnit", "FrequencyUnit", "LengthUnit", "LinearDensityUnit",
+            "MassUnit", "MoneyUnit", "MoneyPerAreaUnit", "MoneyPerEnergyUnit", "MoneyPerLengthUnit", "MoneyPerMassUnit",
+            "MoneyPerDurationUnit", "MoneyPerVolumeUnit", "PositionUnit", "PowerUnit", "PressureUnit", "SpeedUnit",
+            "TemperatureUnit", "TimeUnit", "TorqueUnit", "VolumeUnit" };
 
     /** the cached hashcode. */
     private final int cachedHashCode;
@@ -289,7 +290,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
 
     /**
      * This method returns the name key, or null in case the name is hard coded.
-     * @return name key, e.g. TimeUnit.MetersPerSecond, or null for a user-defined unit
+     * @return name key, e.g. DurationUnit.MetersPerSecond, or null for a user-defined unit
      */
     public final String getNameKey()
     {
@@ -310,7 +311,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
 
     /**
      * This method returns the abbreviation key, or null in case the abbreviation is hard coded.
-     * @return abbreviation key, e.g. TimeUnit.m/s, or null for a user-defined unit
+     * @return abbreviation key, e.g. DurationUnit.m/s, or null for a user-defined unit
      */
     public final String getAbbreviationKey()
     {

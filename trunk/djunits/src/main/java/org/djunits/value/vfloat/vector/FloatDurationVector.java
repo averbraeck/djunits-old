@@ -3,7 +3,7 @@ package org.djunits.value.vfloat.vector;
 import java.util.List;
 import java.util.SortedMap;
 
-import org.djunits.unit.TimeUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatDuration;
@@ -11,7 +11,7 @@ import org.djunits.value.vfloat.scalar.FloatDuration;
 /**
  * Relative FloatDuration Vector.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.FloatDuration;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatDurationVector
-        extends AbstractFloatVectorRel<TimeUnit, FloatDurationVector, MutableFloatDurationVector, FloatDuration>
+        extends AbstractFloatVectorRel<DurationUnit, FloatDurationVector, MutableFloatDurationVector, FloatDuration>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -32,7 +32,8 @@ public class FloatDurationVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatDurationVector(final float[] values, final TimeUnit unit, final StorageType storageType) throws ValueException
+    public FloatDurationVector(final float[] values, final DurationUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,7 +45,7 @@ public class FloatDurationVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatDurationVector(final List<Float> values, final TimeUnit unit, final StorageType storageType)
+    public FloatDurationVector(final List<Float> values, final DurationUnit unit, final StorageType storageType)
             throws ValueException
     {
         super(values, unit, storageType);
@@ -94,7 +95,7 @@ public class FloatDurationVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatDurationVector(final SortedMap<Integer, Float> values, final TimeUnit unit, final int length,
+    public FloatDurationVector(final SortedMap<Integer, Float> values, final DurationUnit unit, final int length,
             final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -105,28 +106,28 @@ public class FloatDurationVector
      * @param data an internal data object
      * @param unit the unit
      */
-    FloatDurationVector(final FloatVectorData data, final TimeUnit unit)
+    FloatDurationVector(final FloatVectorData data, final DurationUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDurationVector instantiateType(final FloatVectorData dvd, final TimeUnit unit)
+    protected final FloatDurationVector instantiateType(final FloatVectorData dvd, final DurationUnit unit)
     {
         return new FloatDurationVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatDurationVector instantiateMutableType(final FloatVectorData dvd, final TimeUnit unit)
+    protected final MutableFloatDurationVector instantiateMutableType(final FloatVectorData dvd, final DurationUnit unit)
     {
         return new MutableFloatDurationVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDuration instantiateScalar(final float value, final TimeUnit unit)
+    protected final FloatDuration instantiateScalar(final float value, final DurationUnit unit)
     {
         return new FloatDuration(value, unit);
     }
@@ -143,15 +144,6 @@ public class FloatDurationVector
     public final FloatDurationVector toSparse()
     {
         return this.data.isSparse() ? (FloatDurationVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative Duration vector.
-     */
-    public final FloatTimeVector toAbs()
-    {
-        return new FloatTimeVector(getData(), getUnit());
     }
 
 }

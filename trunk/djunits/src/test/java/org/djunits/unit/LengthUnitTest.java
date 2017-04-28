@@ -12,11 +12,11 @@ import org.junit.Test;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Jun 4, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Jun 4, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class LengthUnitTest extends AbstractLinearUnitTest<LengthUnit>
@@ -50,10 +50,10 @@ public class LengthUnitTest extends AbstractLinearUnitTest<LengthUnit>
         checkUnitRatioNameAndAbbreviation(LengthUnit.MILE, 1609, 0.5, "mile", "mi");
         checkUnitRatioNameAndAbbreviation(LengthUnit.CENTIMETER, 0.01, 0.000000001, "centimeter", "cm");
         // Check two conversions between non-standard units
-        assertEquals("one MILE is about 160900 CENTIMETER", 160900, getMultiplicationFactorTo(LengthUnit.MILE,
-            LengthUnit.CENTIMETER), 50);
-        assertEquals("one CENTIMETER is about 0.000006215 MILE", 0.000006215, getMultiplicationFactorTo(
-            LengthUnit.CENTIMETER, LengthUnit.MILE), 0.000000002);
+        assertEquals("one MILE is about 160900 CENTIMETER", 160900,
+                getMultiplicationFactorTo(LengthUnit.MILE, LengthUnit.CENTIMETER), 50);
+        assertEquals("one CENTIMETER is about 0.000006215 MILE", 0.000006215,
+                getMultiplicationFactorTo(LengthUnit.CENTIMETER, LengthUnit.MILE), 0.000000002);
         // Check conversion factor to standard unit for all remaining distance units
         checkUnitRatioNameAndAbbreviation(LengthUnit.MILLIMETER, 0.001, 0.000000001, "millimeter", "mm");
         checkUnitRatioNameAndAbbreviation(LengthUnit.DECIMETER, 0.1, 0.000000001, "decimeter", "dm");

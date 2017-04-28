@@ -1,5 +1,6 @@
 package org.djunits.value.vdouble.matrix;
 
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
@@ -8,7 +9,7 @@ import org.djunits.value.vdouble.scalar.Time;
 /**
  * Mutable Time Matrix.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -17,7 +18,7 @@ import org.djunits.value.vdouble.scalar.Time;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableTimeMatrix
-        extends AbstractMutableDoubleMatrixAbs<TimeUnit, TimeMatrix, DurationMatrix, MutableTimeMatrix, Time>
+        extends AbstractMutableDoubleMatrixAbs<TimeUnit, DurationUnit, TimeMatrix, DurationMatrix, MutableTimeMatrix, Time>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -78,7 +79,7 @@ public class MutableTimeMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final DurationMatrix instantiateTypeRel(final DoubleMatrixData dmd, final TimeUnit unit)
+    protected final DurationMatrix instantiateTypeRel(final DoubleMatrixData dmd, final DurationUnit unit)
     {
         return new DurationMatrix(dmd, unit);
     }
@@ -95,15 +96,6 @@ public class MutableTimeMatrix
     protected final Time instantiateScalar(final double value, final TimeUnit unit)
     {
         return new Time(value, unit);
-    }
-
-    /**
-     * Translate the absolute matrix into a relative matrix (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute Time matrix.
-     */
-    public final MutableDurationMatrix toRel()
-    {
-        return new MutableDurationMatrix(getData(), getUnit());
     }
 
 }

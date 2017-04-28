@@ -1,6 +1,7 @@
 package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.ElectricalChargeUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.LengthUnit;
@@ -14,19 +15,19 @@ import org.djunits.unit.VolumeUnit;
  * Easy access methods for the Relative Duration DoubleScalar. Instead of:
  * 
  * <pre>
- * DoubleScalar&lt;TimeUnit&gt; value = new DoubleScalar&lt;TimeUnit&gt;(100.0, TimeUnit.SI);
+ * DoubleScalar&lt;DurationUnit&gt; value = new DoubleScalar&lt;DurationUnit&gt;(100.0, DurationUnit.SI);
  * </pre>
  * 
  * we can now write:
  * 
  * <pre>
- * Duration value = new Duration(100.0, TimeUnit.SI);
+ * Duration value = new Duration(100.0, DurationUnit.SI);
  * </pre>
  * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -35,36 +36,36 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Duration extends AbstractDoubleScalarRel<TimeUnit, Duration>
+public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final Duration ZERO = new Duration(0.0, TimeUnit.SI);
+    public static final Duration ZERO = new Duration(0.0, DurationUnit.SI);
 
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
-    public static final Duration NaN = new Duration(Double.NaN, TimeUnit.SI);
+    public static final Duration NaN = new Duration(Double.NaN, DurationUnit.SI);
 
     /** constant with value POSITIVE_INFINITY. */
-    public static final Duration POSITIVE_INFINITY = new Duration(Double.POSITIVE_INFINITY, TimeUnit.SI);
+    public static final Duration POSITIVE_INFINITY = new Duration(Double.POSITIVE_INFINITY, DurationUnit.SI);
 
     /** constant with value NEGATIVE_INFINITY. */
-    public static final Duration NEGATIVE_INFINITY = new Duration(Double.NEGATIVE_INFINITY, TimeUnit.SI);
+    public static final Duration NEGATIVE_INFINITY = new Duration(Double.NEGATIVE_INFINITY, DurationUnit.SI);
 
     /** constant with value MAX_VALUE. */
-    public static final Duration POS_MAXVALUE = new Duration(Double.MAX_VALUE, TimeUnit.SI);
+    public static final Duration POS_MAXVALUE = new Duration(Double.MAX_VALUE, DurationUnit.SI);
 
     /** constant with value -MAX_VALUE. */
-    public static final Duration NEG_MAXVALUE = new Duration(-Double.MAX_VALUE, TimeUnit.SI);
+    public static final Duration NEG_MAXVALUE = new Duration(-Double.MAX_VALUE, DurationUnit.SI);
 
     /**
      * Construct Duration scalar.
      * @param value double value
      * @param unit unit for the double value
      */
-    public Duration(final double value, final TimeUnit unit)
+    public Duration(final double value, final DurationUnit unit)
     {
         super(value, unit);
     }
@@ -80,7 +81,7 @@ public class Duration extends AbstractDoubleScalarRel<TimeUnit, Duration>
 
     /** {@inheritDoc} */
     @Override
-    public final Duration instantiateRel(final double value, final TimeUnit unit)
+    public final Duration instantiateRel(final double value, final DurationUnit unit)
     {
         return new Duration(value, unit);
     }
@@ -103,7 +104,7 @@ public class Duration extends AbstractDoubleScalarRel<TimeUnit, Duration>
      */
     public static final Duration createSI(final double value)
     {
-        return new Duration(value, TimeUnit.SI);
+        return new Duration(value, DurationUnit.SI);
     }
 
     /**
@@ -125,21 +126,8 @@ public class Duration extends AbstractDoubleScalarRel<TimeUnit, Duration>
      */
     public final Time plus(final Time v)
     {
-        if (getUnit().isBaseSIUnit())
-        {
-            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-        }
-        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
-                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-    }
-
-    /**
-     * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
-     * @return an absolute version of this duration scalar.
-     */
-    public final Time toAbs()
-    {
-        return new Time(getInUnit(), getUnit());
+        TimeUnit targetUnit = v.getUnit();
+        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**
@@ -285,11 +273,11 @@ public class Duration extends AbstractDoubleScalarRel<TimeUnit, Duration>
     }
 
     /**
-     * Calculate the multiplication of Duration and MoneyPerTime, which results in a Money scalar.
+     * Calculate the multiplication of Duration and MoneyPerDuration, which results in a Money scalar.
      * @param v Duration scalar
-     * @return Money scalar as a multiplication of Duration and MoneyPerTime
+     * @return Money scalar as a multiplication of Duration and MoneyPerDuration
      */
-    public final Money multiplyBy(final MoneyPerTime v)
+    public final Money multiplyBy(final MoneyPerDuration v)
     {
         return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
     }

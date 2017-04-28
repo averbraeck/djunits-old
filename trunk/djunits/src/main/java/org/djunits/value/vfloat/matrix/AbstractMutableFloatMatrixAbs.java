@@ -1,5 +1,6 @@
 package org.djunits.value.vfloat.matrix;
 
+import org.djunits.unit.AbsoluteLinearUnit;
 import org.djunits.unit.Unit;
 import org.djunits.value.MathFunctionsAbs;
 import org.djunits.value.Mutable;
@@ -13,21 +14,24 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarAbs;
 /**
  * Absolute Mutable typed Matrix.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
  * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
- * @param <U> the unit
+ * @param <AU> the absolute unit
+ * @param <RU> the relative unit
  * @param <A> the absolute matrix type
  * @param <R> the relative matrix type
  * @param <MA> the mutable absolute matrix type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractMutableFloatMatrixAbs<U extends Unit<U>, A extends AbstractFloatMatrixAbs<U, A, R, MA, S>, R extends AbstractFloatMatrixRel<U, R, ?, ?>, MA extends AbstractMutableFloatMatrixAbs<U, A, R, MA, S>, S extends AbstractFloatScalarAbs<U, S, ?>>
-        extends AbstractFloatMatrixAbs<U, A, R, MA, S> implements Mutable, MathFunctionsAbs<MA>, FloatMathFunctions<MA>
+abstract class AbstractMutableFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
+        A extends AbstractFloatMatrixAbs<AU, RU, A, R, MA, S>, R extends AbstractFloatMatrixRel<RU, R, ?, ?>,
+        MA extends AbstractMutableFloatMatrixAbs<AU, RU, A, R, MA, S>, S extends AbstractFloatScalarAbs<AU, S, RU, ?>>
+        extends AbstractFloatMatrixAbs<AU, RU, A, R, MA, S> implements Mutable, MathFunctionsAbs<MA>, FloatMathFunctions<MA>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -38,11 +42,11 @@ abstract class AbstractMutableFloatMatrixAbs<U extends Unit<U>, A extends Abstra
     /**
      * Construct a new Absolute Mutable FloatMatrix.
      * @param values float[][]; the values of the entries in the new Absolute Immutable FloatMatrix
-     * @param unit U; the unit of the new Absolute Immutable FloatMatrix
+     * @param unit AU; the unit of the new Absolute Immutable FloatMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    AbstractMutableFloatMatrixAbs(final float[][] values, final U unit, final StorageType storageType) throws ValueException
+    AbstractMutableFloatMatrixAbs(final float[][] values, final AU unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -63,7 +67,7 @@ abstract class AbstractMutableFloatMatrixAbs<U extends Unit<U>, A extends Abstra
      * @param data an internal data object
      * @param unit the unit
      */
-    AbstractMutableFloatMatrixAbs(final FloatMatrixData data, final U unit)
+    AbstractMutableFloatMatrixAbs(final FloatMatrixData data, final AU unit)
     {
         super(data, unit);
     }
@@ -333,7 +337,7 @@ abstract class AbstractMutableFloatMatrixAbs<U extends Unit<U>, A extends Abstra
      * @param valueUnit the unit of the value
      * @throws ValueException when the row/column is out of range
      */
-    public final void setInUnit(final int row, final int column, final float value, final U valueUnit) throws ValueException
+    public final void setInUnit(final int row, final int column, final float value, final AU valueUnit) throws ValueException
     {
         setSI(row, column, (float) ValueUtil.expressAsSIUnit(value, valueUnit));
     }

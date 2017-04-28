@@ -44,8 +44,8 @@
         persons doing the same task).<br />&nbsp;</li>
 
       <li><b>org.djunits.unit</b> where the unit classes are stored. Each unit has one or more constructors. A SpeedUnit can e.g. be created as a factor of
-        the standard, SI-based speed unit SpeedUnit.METER_PER_SECOND, or as a combination of a LengthUnit and a TimeUnit, e.g., LengthUnit.MILE and
-        TimeUnit.HOUR, leading to a SpeedUnit that indicates speed in miles per hour. Conversions take place automatically. The unit package also contains
+        the standard, SI-based speed unit SpeedUnit.METER_PER_SECOND, or as a combination of a LengthUnit and a DurationUnit, e.g., LengthUnit.MILE and
+        DurationUnit.HOUR, leading to a SpeedUnit that indicates speed in miles per hour. Conversions take place automatically. The unit package also contains
         difference 'scales' for units, such as the linear scale that is used in most units, the OffsetUnit scale that is used in e.g., Temperature, the
         PercentageUnit scale that is used in percentage angles, and the LogarithmicUnit scale that can be used in e.g., Decibels.<br />&nbsp;</li>
 
@@ -68,7 +68,7 @@
 
       <li><b>org.djunits.value.vdouble.scalar</b> provides two types of classes for double precision implementations. The first one is the generic
         DoubleScalar that can be instantiated with any unit in absolute or relative form through generalization: <br /> <pre>DoubleScalar.Rel&lt;NoiseUnit&gt; noise = <b>new</b> DoubleScalar.Rel&lt;&gt;(10.0, NoiseUnit.DECIBEL);</pre>
-          The second class of scalars are the predefined scalars such as Area, Temperature, Time, and Length. A number of these scalars have both an absolute
+          The second class of scalars are the predefined scalars such as Area, Temperature, Duration, and Length. A number of these scalars have both an absolute
           and a relative implementation. Time/Duration, Position/Length, AbsoluteTemperature/Temperature, and Direction/Angle have both an absolute and a 
           relative form. All other scalars are always relative. Each class has a multitude of mathematical operations
           that can be applied on the scalar, such as goniometric functions, logarithms, power functions, etc. Furthermore, many multiplications and divisions
@@ -82,7 +82,7 @@
         is:<br /> <pre>
 TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
 double[] value = new double[]{273.15, 290.4, 280.5, 279.1};
-DoubleVector.Abs&lt;TemperatureUnit&gt; dv 
+DoubleVector.Abs&lt;AbsoluteTemperatureUnit&gt; dv 
   = new DoubleVector.Abs&lt;&gt;(value, tempUnit, StorageType.DENSE);
 			</pre>Note that the vector is just defined as an absolute vector, independent of its (dense) implementation.<br />&nbsp; </li>
 
@@ -92,7 +92,7 @@ DoubleVector.Abs&lt;TemperatureUnit&gt; dv
 
       <li><b>org.djunits.value.vfloat.scalar</b> provides two types of classes for float implementations. The first one is the generic FloatScalar that can
         be instantiated with any unit in absolute or relative form through generalization: <br /> <pre>FloatScalar.Rel&lt;NoiseUnit&gt; noise = <b>new</b> FloatScalar.Rel&lt;&gt;(10.0f, NoiseUnit.DECIBEL);</pre>
-          The second class of scalars are the predefined scalars such as Area, Temperature, Time, and Length. A number of these scalars have both an absolute
+          The second class of scalars are the predefined scalars such as Area, Temperature, Duration, and Length. A number of these scalars have both an absolute
           and a relative implementation, indicated by adding '.Rel' or '.Abs' after the class name. Time/Duration, Position/Length, AbsoluteTemperature/Temperature, 
           and Direction/Angle have both an absolute and a relative form. All other scalars are always relative. Each class has a multitude of mathematical operations
           that can be applied on the scalar, such as goniometric functions, logarithms, power functions, etc. Furthermore, many multiplications and divisions

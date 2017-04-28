@@ -11,7 +11,7 @@ import org.djunits.value.vdouble.scalar.*;
 /**
  * Immutable Relative %TypeRel% Vector.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class %TypeRel%Vector extends AbstractDoubleVectorRel<%TypeUnit%, %TypeRel%Vector, Mutable%TypeRel%Vector, %TypeRel%>
+public class %TypeRel%Vector extends AbstractDoubleVectorRel<%TypeRelUnit%, %TypeRel%Vector, Mutable%TypeRel%Vector, %TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -31,7 +31,7 @@ public class %TypeRel%Vector extends AbstractDoubleVectorRel<%TypeUnit%, %TypeRe
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public %TypeRel%Vector(final double[] values, final %TypeUnit% unit, final StorageType storageType) throws ValueException
+    public %TypeRel%Vector(final double[] values, final %TypeRelUnit% unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -43,7 +43,7 @@ public class %TypeRel%Vector extends AbstractDoubleVectorRel<%TypeUnit%, %TypeRe
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public %TypeRel%Vector(final List<Double> values, final %TypeUnit% unit, final StorageType storageType) throws ValueException
+    public %TypeRel%Vector(final List<Double> values, final %TypeRelUnit% unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -91,7 +91,7 @@ public class %TypeRel%Vector extends AbstractDoubleVectorRel<%TypeUnit%, %TypeRe
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public %TypeRel%Vector(final SortedMap<Integer, Double> values, final %TypeUnit% unit, final int length,
+    public %TypeRel%Vector(final SortedMap<Integer, Double> values, final %TypeRelUnit% unit, final int length,
         final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -102,14 +102,14 @@ public class %TypeRel%Vector extends AbstractDoubleVectorRel<%TypeUnit%, %TypeRe
      * @param data an internal data object
      * @param unit the unit
      */
-    %TypeRel%Vector(final DoubleVectorData data, final %TypeUnit% unit)
+    %TypeRel%Vector(final DoubleVectorData data, final %TypeRelUnit% unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final %TypeRel%Vector instantiateType(final DoubleVectorData dvd, final %TypeUnit% unit)
+    protected final %TypeRel%Vector instantiateType(final DoubleVectorData dvd, final %TypeRelUnit% unit)
     {
         return new %TypeRel%Vector(dvd, unit);
     }
@@ -117,14 +117,14 @@ public class %TypeRel%Vector extends AbstractDoubleVectorRel<%TypeUnit%, %TypeRe
     /** {@inheritDoc} */
     @Override
     protected final Mutable%TypeRel%Vector
-        instantiateMutableType(final DoubleVectorData dvd, final %TypeUnit% unit)
+        instantiateMutableType(final DoubleVectorData dvd, final %TypeRelUnit% unit)
     {
         return new Mutable%TypeRel%Vector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final %TypeRel% instantiateScalar(final double value, final %TypeUnit% unit)
+    protected final %TypeRel% instantiateScalar(final double value, final %TypeRelUnit% unit)
     {
         return new %TypeRel%(value, unit);
     }
@@ -141,15 +141,6 @@ public class %TypeRel%Vector extends AbstractDoubleVectorRel<%TypeUnit%, %TypeRe
     public final %TypeRel%Vector toSparse()
     {
         return this.data.isSparse() ? (%TypeRel%Vector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative %TypeRel% vector.
-     */
-    public final %TypeAbs%Vector toAbs()
-    {
-        return new %TypeAbs%Vector(getData(), getUnit());
     }
         
 %FORMULAS%%TypeRel%%

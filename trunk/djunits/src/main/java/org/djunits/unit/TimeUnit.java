@@ -1,125 +1,120 @@
 package org.djunits.unit;
 
 import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
-import static org.djunits.unit.unitsystem.UnitSystem.SI_ACCEPTED;
-import static org.djunits.unit.unitsystem.UnitSystem.SI_BASE;
+
+import java.util.GregorianCalendar;
 
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
- * Standard time units.
+ * Standard absolute time units.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
  * initial version May 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class TimeUnit extends LinearUnit<TimeUnit>
+public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
 {
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** The SI unit for time is second. */
-    public static final TimeUnit SI;
+    /** The base unit for time with an artifical "zero" point. */
+    public static final TimeUnit BASE;
 
-    /** second. */
-    public static final TimeUnit SECOND;
+    /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in seconds. */
+    public static final TimeUnit EPOCH;
 
-    /** attosecond. */
-    public static final TimeUnit ATTOSECOND;
+    /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in seconds. */
+    public static final TimeUnit EPOCH_SECOND;
 
-    /** femtosecond. */
-    public static final TimeUnit FEMTOSECOND;
+    /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in microseconds. */
+    public static final TimeUnit EPOCH_MICROSECOND;
 
-    /** picosecond. */
-    public static final TimeUnit PICOSECOND;
+    /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in milliseconds. */
+    public static final TimeUnit EPOCH_MILLISECOND;
 
-    /** nanosecond. */
-    public static final TimeUnit NANOSECOND;
+    /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in minutes. */
+    public static final TimeUnit EPOCH_MINUTE;
 
-    /** microsecond. */
-    public static final TimeUnit MICROSECOND;
+    /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in hours. */
+    public static final TimeUnit EPOCH_HOUR;
 
-    /** millisecond. */
-    public static final TimeUnit MILLISECOND;
+    /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in days. */
+    public static final TimeUnit EPOCH_DAY;
 
-    /** minute. */
-    public static final TimeUnit MINUTE;
+    /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in weeks. */
+    public static final TimeUnit EPOCH_WEEK;
 
-    /** hour. */
-    public static final TimeUnit HOUR;
+    /** The Epoch with 0001-01-01 AD at 00:00 as the origin. */
+    public static final TimeUnit EPOCH_YEAR_1;
 
-    /** day. */
-    public static final TimeUnit DAY;
-
-    /** week. */
-    public static final TimeUnit WEEK;
+    /** The Epoch with J2000.0 as the origin, which is The Gregorian date January 1, 2000 at 12:00 GMT (noon). */
+    public static final TimeUnit EPOCH_J2000_1;
 
     static
     {
-        SI = new TimeUnit("TimeUnit.second", "TimeUnit.s", SI_BASE);
-        SECOND = SI;
-        ATTOSECOND = new TimeUnit("TimeUnit.attosecond", "TimeUnit.as", SI_BASE, SECOND, 1E-18, true);
-        FEMTOSECOND = new TimeUnit("TimeUnit.femtosecond", "TimeUnit.fs", SI_BASE, SECOND, 1E-15, true);
-        PICOSECOND = new TimeUnit("TimeUnit.picosecond", "TimeUnit.ps", SI_BASE, SECOND, 1E-12, true);
-        NANOSECOND = new TimeUnit("TimeUnit.nanosecond", "TimeUnit.ns", SI_BASE, SECOND, 1E-9, true);
-        MICROSECOND = new TimeUnit("TimeUnit.microsecond", "TimeUnit.mus", SI_BASE, SECOND, 1E-6, true);
-        MILLISECOND = new TimeUnit("TimeUnit.millisecond", "TimeUnit.ms", SI_BASE, SECOND, 1E-3, true);
-        MINUTE = new TimeUnit("TimeUnit.minute", "TimeUnit.m", SI_ACCEPTED, SECOND, 60.0, true);
-        HOUR = new TimeUnit("TimeUnit.hour", "TimeUnit.h", SI_ACCEPTED, MINUTE, 60.0, true);
-        DAY = new TimeUnit("TimeUnit.day", "TimeUnit.d", SI_ACCEPTED, HOUR, 24.0, true);
-        WEEK = new TimeUnit("TimeUnit.week", "TimeUnit.w", OTHER, DAY, 7.0, true);
+        BASE = new TimeUnit("TimeUnit.epoch.second", "TimeUnit.epoch.s", OTHER, 1.0, 0.0, true, DurationUnit.SECOND);
+        EPOCH = BASE;
+        EPOCH_SECOND = BASE;
+        EPOCH_MICROSECOND = new TimeUnit("TimeUnit.epoch.microsecond", "TimeUnit.epoch.mus", OTHER, 1E-6, 0.0, true,
+                DurationUnit.MICROSECOND);
+        EPOCH_MILLISECOND = new TimeUnit("TimeUnit.epoch.millisecond", "TimeUnit.epoch.ms", OTHER, 1E-3, 0.0, true,
+                DurationUnit.MILLISECOND);
+        EPOCH_MINUTE = new TimeUnit("TimeUnit.epoch.minute", "TimeUnit.epoch.m", OTHER, 60.0, 0.0, true, DurationUnit.MINUTE);
+        EPOCH_HOUR = new TimeUnit("TimeUnit.epoch.hour", "TimeUnit.epoch.h", OTHER, 3600.0, 0.0, true, DurationUnit.HOUR);
+        EPOCH_DAY = new TimeUnit("TimeUnit.epoch.day", "TimeUnit.epoch.d", OTHER, 3600 * 24.0, 0.0, true, DurationUnit.DAY);
+        EPOCH_WEEK =
+                new TimeUnit("TimeUnit.epoch.week", "TimeUnit.epoch.w", OTHER, 3600 * 24 * 7.0, 0.0, true, DurationUnit.WEEK);
+
+        double seconds00010101 = new GregorianCalendar(1, 0, 1, 0, 0, 0).getTimeInMillis() / 1000.0;
+        EPOCH_YEAR_1 =
+                new TimeUnit("TimeUnit.epoch_1", "TimeUnit.epoch_1", OTHER, 1.0, seconds00010101, false, DurationUnit.SECOND);
+        
+        double seconds20000101 = new GregorianCalendar(2000, 0, 1, 12, 0, 0).getTimeInMillis() / 1000.0;
+        EPOCH_J2000_1 = new TimeUnit("TimeUnit.epoch_j2000", "TimeUnit.epoch_j2000", OTHER, 1.0, seconds20000101, false,
+                DurationUnit.SECOND);
     }
 
     /**
-     * Build a standard TimeUnit.
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     */
-    private TimeUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
-    {
-        super(nameKey, abbreviationKey, unitSystem, true);
-    }
-
-    /**
-     * Build a TimeUnit with a conversion factor to another TimeUnit.
+     * Build a TimeUnit with a scale factor and offset to the base TimeUnit.
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactor multiply a value in this unit by the factor to convert to the given reference unit
+     * @param offset the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param relativeUnit the corresponding relative unit belonging to this absolute unit
      */
     private TimeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final TimeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final double scaleFactor, final double offset, final boolean standardUnit, final DurationUnit relativeUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-                standardUnit);
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, scaleFactor, offset, standardUnit, relativeUnit);
     }
 
     /**
-     * Build a user-defined TimeUnit with a conversion factor to another TimeUnit.
+     * Build a user-defined TimeUnit with a scale factor and offset to the base TimeUnit.
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactor multiply a value in this unit by the factor to convert to the given reference unit
+     * @param offset the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
+     * @param relativeUnit the corresponding relative unit belonging to this absolute unit
      */
-    public TimeUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final TimeUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+    public TimeUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final double scaleFactor,
+            final double offset, final DurationUnit relativeUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, unitSystem, scaleFactor, offset, false, relativeUnit);
     }
 
     /** {@inheritDoc} */
     @Override
     public final TimeUnit getStandardUnit()
     {
-        return SECOND;
+        return BASE;
     }
 
     /** {@inheritDoc} */
@@ -128,5 +123,4 @@ public class TimeUnit extends LinearUnit<TimeUnit>
     {
         return "s";
     }
-
 }

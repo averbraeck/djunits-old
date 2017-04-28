@@ -9,7 +9,7 @@ import org.junit.Test;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -17,8 +17,6 @@ import org.junit.Test;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://Hansvanlint.weblog.tudelft.nl">Hans van Lint</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
- * @author <a href="http://www.citg.tudelft.nl">Guus Tamminga</a>
- * @author <a href="http://www.citg.tudelft.nl">Yufei Yuan</a>
  */
 public class DefinesSITest
 {
@@ -51,12 +49,13 @@ public class DefinesSITest
             boolean foundSI = false;
             for (Field f : fields)
             {
-                if (f.getName().equals("SI"))
+                // TODO: Test for SI for relative classes; BASE for absolute classes
+                if (f.getName().equals("SI") || f.getName().equals("BASE"))
                 {
                     foundSI = true;
                 }
             }
-            assertTrue("Class " + className + " does not declare field SI", foundSI);
+            assertTrue("Class " + className + " does not declare field SI or BASE", foundSI);
         }
     }
 }

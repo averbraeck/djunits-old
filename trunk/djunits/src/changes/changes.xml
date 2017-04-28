@@ -2,6 +2,27 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.00.00" date="2017-04-27" description="Absolute units separate from relative units">
+      <action dev="averbraeck" type="add">
+        Abolute units and relative units have been separated. They are truly different. 
+      </action>
+      <action dev="averbraeck" type="update">
+        UNITS.java has been made consistent with the absolute/relative unit changes.
+      </action>
+      <action dev="averbraeck" type="update">
+        Unit tests have been made consistent with the absolute/relative unit changes.
+      </action>
+      <action dev="averbraeck" type="update">
+        Documentation has been made consistent with the absolute/relative unit changes.
+      </action>
+      <action dev="averbraeck" type="update">
+        OffsetLinearScale now extends LinearScale.
+      </action>
+      <action dev="averbraeck" type="update">
+        MoneyPerTimeUnit renamed to MoneyPerDurationUnit; same for all other types refering to MoneyPerTime.
+      </action>
+    </release>
+
     <release version="2.02.00" date="2017-04-17" description="Units added to create consistency">
       <action dev="averbraeck" type="add">
         For many Unit classes, standard units have been added to make the unit list more internally consistent. 

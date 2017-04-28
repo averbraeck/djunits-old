@@ -13,7 +13,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * Standard angle unit. Several conversion factors have been taken from
  * <a href="http://en.wikipedia.org/wiki/Conversion_of_units">http://en.wikipedia.org/wiki/Conversion_of_units</a>.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -86,14 +86,14 @@ public class AngleUnit extends Unit<AngleUnit>
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private AngleUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final AngleUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final AngleUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, new LinearScale(
-                ((LinearScale) referenceUnit.getScale()).getConversionFactorToStandardUnit() * conversionFactorToReferenceUnit),
+                ((LinearScale) referenceUnit.getScale()).getConversionFactorToStandardUnit() * scaleFactorToReferenceUnit),
                 standardUnit);
     }
 
@@ -103,12 +103,12 @@ public class AngleUnit extends Unit<AngleUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public AngleUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final AngleUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+            final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**

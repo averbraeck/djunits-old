@@ -10,7 +10,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * Standard length units. Several conversion factors have been taken from
  * <a href="http://en.wikipedia.org/wiki/Conversion_of_units">http://en.wikipedia.org/wiki/Conversion_of_units</a>.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -95,7 +95,7 @@ public class LengthUnit extends LinearUnit<LengthUnit>
     {
         SI = new LengthUnit("LengthUnit.meter", "LengthUnit.m", SI_BASE);
         METER = SI;
-        ATTOMETER = new LengthUnit("LengthUnit.attometer", "LengthUnit.mam", SI_BASE, METER, 1.0E-18, true);
+        ATTOMETER = new LengthUnit("LengthUnit.attometer", "LengthUnit.am", SI_BASE, METER, 1.0E-18, true);
         FEMTOMETER = new LengthUnit("LengthUnit.femtometer", "LengthUnit.fm", SI_BASE, METER, 1.0E-15, true);
         PICOMETER = new LengthUnit("LengthUnit.picometer", "LengthUnit.pm", SI_BASE, METER, 1.0E-12, true);
         NANOMETER = new LengthUnit("LengthUnit.nanometer", "LengthUnit.nm", SI_BASE, METER, 1.0E-9, true);
@@ -136,13 +136,13 @@ public class LengthUnit extends LinearUnit<LengthUnit>
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private LengthUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final LengthUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final LengthUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
                 standardUnit);
     }
 
@@ -152,12 +152,12 @@ public class LengthUnit extends LinearUnit<LengthUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public LengthUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final LengthUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+            final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /** {@inheritDoc} */

@@ -21,7 +21,7 @@ import org.junit.Test;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -33,7 +33,7 @@ public class UnitLocalizationsTest
     /**
      * Check that all defined units have all localizations.
      */
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public final void checkDefinedUnits()
     {
@@ -95,7 +95,7 @@ public class UnitLocalizationsTest
                         if (abbreviation.startsWith("!") && abbreviation.endsWith("!"))
                         {
                             errors.add(String.format("Missing translation for abbreviation %s to %s", abbreviationKey,
-                                localeName));
+                                    localeName));
                         }
                     }
                 }

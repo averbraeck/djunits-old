@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.AngleUnit;
+import org.djunits.unit.DirectionUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatDirection;
@@ -11,7 +12,7 @@ import org.djunits.value.vfloat.scalar.FloatDirection;
 /**
  * Absolute FloatDirection Vector.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -19,8 +20,8 @@ import org.djunits.value.vfloat.scalar.FloatDirection;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatDirectionVector extends
-        AbstractFloatVectorAbs<AngleUnit, FloatDirectionVector, FloatAngleVector, MutableFloatDirectionVector, FloatDirection>
+public class FloatDirectionVector extends AbstractFloatVectorAbs<DirectionUnit, AngleUnit, FloatDirectionVector,
+        FloatAngleVector, MutableFloatDirectionVector, FloatDirection>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -32,7 +33,8 @@ public class FloatDirectionVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatDirectionVector(final float[] values, final AngleUnit unit, final StorageType storageType) throws ValueException
+    public FloatDirectionVector(final float[] values, final DirectionUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,7 +46,7 @@ public class FloatDirectionVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatDirectionVector(final List<Float> values, final AngleUnit unit, final StorageType storageType)
+    public FloatDirectionVector(final List<Float> values, final DirectionUnit unit, final StorageType storageType)
             throws ValueException
     {
         super(values, unit, storageType);
@@ -94,7 +96,7 @@ public class FloatDirectionVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public FloatDirectionVector(final SortedMap<Integer, Float> values, final AngleUnit unit, final int length,
+    public FloatDirectionVector(final SortedMap<Integer, Float> values, final DirectionUnit unit, final int length,
             final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -105,14 +107,14 @@ public class FloatDirectionVector extends
      * @param data an internal data object
      * @param unit the unit
      */
-    FloatDirectionVector(final FloatVectorData data, final AngleUnit unit)
+    FloatDirectionVector(final FloatVectorData data, final DirectionUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDirectionVector instantiateTypeAbs(final FloatVectorData dvd, final AngleUnit unit)
+    protected final FloatDirectionVector instantiateTypeAbs(final FloatVectorData dvd, final DirectionUnit unit)
     {
         return new FloatDirectionVector(dvd, unit);
     }
@@ -126,14 +128,14 @@ public class FloatDirectionVector extends
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatDirectionVector instantiateMutableType(final FloatVectorData dvd, final AngleUnit unit)
+    protected final MutableFloatDirectionVector instantiateMutableType(final FloatVectorData dvd, final DirectionUnit unit)
     {
         return new MutableFloatDirectionVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDirection instantiateScalar(final float value, final AngleUnit unit)
+    protected final FloatDirection instantiateScalar(final float value, final DirectionUnit unit)
     {
         return new FloatDirection(value, unit);
     }
@@ -150,15 +152,6 @@ public class FloatDirectionVector extends
     public final FloatDirectionVector toSparse()
     {
         return this.data.isSparse() ? (FloatDirectionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute Direction vector.
-     */
-    public final FloatAngleVector toRel()
-    {
-        return new FloatAngleVector(getData(), getUnit());
     }
 
 }

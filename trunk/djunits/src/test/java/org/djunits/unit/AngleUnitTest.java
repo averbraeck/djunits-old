@@ -15,7 +15,7 @@ import org.junit.Test;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -52,14 +52,13 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
      * @param expectedAbbreviation String; expected abbreviation in the resources
      */
     protected final void checkUnitValueNameAndAbbreviation(final AngleUnit au, final double expectedValue,
-        final double precision, final String expectedName,
-        final String expectedAbbreviation)
+            final double precision, final String expectedName, final String expectedAbbreviation)
     {
         assertEquals(String.format("one %s is about %f reference unit", au.getNameKey(), expectedValue), expectedValue,
-            au.getScale().toStandardUnit(1.0), precision);
+                au.getScale().toStandardUnit(1.0), precision);
         assertEquals(String.format("Name of %s is %s", au.getNameKey(), expectedName), expectedName, au.getName());
-        assertEquals(String.format("Abbreviation of %s is %s", au.getNameKey(), expectedAbbreviation),
-            expectedAbbreviation, au.getAbbreviation());
+        assertEquals(String.format("Abbreviation of %s is %s", au.getNameKey(), expectedAbbreviation), expectedAbbreviation,
+                au.getAbbreviation());
     }
 
     /**
@@ -77,12 +76,9 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
         // assertEquals("one ARCMINUTE is about 0.0185 GRAD", 0.0185, getMultiplicationFactorTo(AngleUnit.ARCMINUTE,
         // AngleUnit.GRAD), 0.0001);
         // Check conversion factor to standard unit for all remaining time units
-        checkUnitValueNameAndAbbreviation(AngleUnit.CENTESIMAL_ARCMINUTE, 0.00015708, 0.0000001,
-            "centesimal arcminute", "\'");
-        checkUnitValueNameAndAbbreviation(AngleUnit.CENTESIMAL_ARCSECOND, 1.57079e-6, 0.1, "centesimal arcsecond",
-            "\"");
-        checkUnitValueNameAndAbbreviation(AngleUnit.PERCENT, 0.0099996667, 0.0001, "percent",
-                "%");
+        checkUnitValueNameAndAbbreviation(AngleUnit.CENTESIMAL_ARCMINUTE, 0.00015708, 0.0000001, "centesimal arcminute", "\'");
+        checkUnitValueNameAndAbbreviation(AngleUnit.CENTESIMAL_ARCSECOND, 1.57079e-6, 0.1, "centesimal arcsecond", "\"");
+        checkUnitValueNameAndAbbreviation(AngleUnit.PERCENT, 0.0099996667, 0.0001, "percent", "%");
     }
 
     /**
@@ -113,8 +109,6 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
             expected += 2 * Math.PI;
         }
         assertEquals("double normalize", expected, AngleUtil.normalize(input), margin);
-        DoubleScalar.Abs<AngleUnit> dsa = new DoubleScalar.Abs<AngleUnit>(input, AngleUnit.SI);
-        assertEquals("DoubleScalar.Abs normalize", expected, AngleUtil.normalize(dsa).getSI(), margin);
         DoubleScalar.Rel<AngleUnit> dsr = new DoubleScalar.Rel<AngleUnit>(input, AngleUnit.SI);
         assertEquals("DoubleScalar.Rel normalize", expected, AngleUtil.normalize(dsr).getSI(), margin);
     }
@@ -136,7 +130,7 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
             expected += 2 * Math.PI;
         }
         assertEquals("float normalize", expected, AngleUtil.normalize(input), margin);
-        FloatScalar.Abs<AngleUnit> fsa = new FloatScalar.Abs<AngleUnit>(input, AngleUnit.SI);
+        FloatScalar.Abs<DirectionUnit, AngleUnit> fsa = new FloatScalar.Abs<>(input, DirectionUnit.BASE);
         assertEquals("FloatScalar.Abs normalize", expected, AngleUtil.normalize(fsa).getSI(), margin);
         FloatScalar.Rel<AngleUnit> fsr = new FloatScalar.Rel<AngleUnit>(input, AngleUnit.SI);
         assertEquals("FloatScalar.Rek normalize", expected, AngleUtil.normalize(fsr).getSI(), margin);

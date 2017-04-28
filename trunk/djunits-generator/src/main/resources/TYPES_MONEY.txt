@@ -3,5 +3,5 @@ MoneyPerArea
 MoneyPerEnergy
 MoneyPerLength
 MoneyPerMass
-MoneyPerTime
+MoneyPerDuration
 MoneyPerVolume

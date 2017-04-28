@@ -8,7 +8,7 @@ import org.djunits.value.vfloat.scalar.FloatTemperature;
 /**
  * Mutable FloatTemperature Matrix.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -89,15 +89,6 @@ public class MutableFloatTemperatureMatrix extends
     protected final FloatTemperature instantiateScalar(final float value, final TemperatureUnit unit)
     {
         return new FloatTemperature(value, unit);
-    }
-
-    /**
-     * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative FloatTemperature matrix.
-     */
-    public final MutableFloatAbsoluteTemperatureMatrix toAbs()
-    {
-        return new MutableFloatAbsoluteTemperatureMatrix(getData(), getUnit());
     }
 
 }

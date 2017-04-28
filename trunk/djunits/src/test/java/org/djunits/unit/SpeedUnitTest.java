@@ -12,11 +12,11 @@ import org.junit.Test;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Jun 6, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Jun 6, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class SpeedUnitTest extends AbstractLinearUnitTest<SpeedUnit>
@@ -50,10 +50,10 @@ public class SpeedUnitTest extends AbstractLinearUnitTest<SpeedUnit>
         checkUnitRatioNameAndAbbreviation(SpeedUnit.KM_PER_HOUR, 0.277778, 0.000001, "kilometer per hour", "km/h");
         checkUnitRatioNameAndAbbreviation(SpeedUnit.MILE_PER_HOUR, 0.44704, 0.00001, "mile per hour", "mi/h");
         // Check two conversions between non-standard units
-        assertEquals("one KM PER HOUR is about 0.621371 MILE PER HOUR", 0.621371, getMultiplicationFactorTo(
-            SpeedUnit.KM_PER_HOUR, SpeedUnit.MILE_PER_HOUR), 0.0001);
-        assertEquals("one MILE PER HOUR is about 1.60934 KM PER HOUR", 1.60934, getMultiplicationFactorTo(
-            SpeedUnit.MILE_PER_HOUR, SpeedUnit.KM_PER_HOUR), 0.0001);
+        assertEquals("one KM PER HOUR is about 0.621371 MILE PER HOUR", 0.621371,
+                getMultiplicationFactorTo(SpeedUnit.KM_PER_HOUR, SpeedUnit.MILE_PER_HOUR), 0.0001);
+        assertEquals("one MILE PER HOUR is about 1.60934 KM PER HOUR", 1.60934,
+                getMultiplicationFactorTo(SpeedUnit.MILE_PER_HOUR, SpeedUnit.KM_PER_HOUR), 0.0001);
         // Check conversion factor to standard unit for all remaining time units
         checkUnitRatioNameAndAbbreviation(SpeedUnit.FOOT_PER_SECOND, 0.3048, 0.0001, "foot per second", "ft/s");
         checkUnitRatioNameAndAbbreviation(SpeedUnit.KNOT, 0.514444, 0.000001, "knot", "kt");

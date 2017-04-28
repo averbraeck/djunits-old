@@ -11,7 +11,7 @@ import org.djunits.value.vfloat.scalar.FloatTemperature;
 /**
  * Relative FloatTemperature Vector.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -144,15 +144,6 @@ public class FloatTemperatureVector
     public final FloatTemperatureVector toSparse()
     {
         return this.data.isSparse() ? (FloatTemperatureVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative Temperature vector.
-     */
-    public final FloatAbsoluteTemperatureVector toAbs()
-    {
-        return new FloatAbsoluteTemperatureVector(getData(), getUnit());
     }
 
 }

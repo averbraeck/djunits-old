@@ -1,6 +1,7 @@
 package org.djunits.value;
 
 import org.djunits.unit.AngleUnit;
+import org.djunits.unit.DirectionUnit;
 import org.djunits.value.vdouble.scalar.Angle;
 import org.djunits.value.vdouble.scalar.Direction;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
@@ -11,7 +12,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
 /**
  * Utilities for Angles, such as normalization between 0 and 2 * PI.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
@@ -56,10 +57,10 @@ public interface AngleUtil
      * @param angle original angle.
      * @return angle between 0 and 2 * PI.
      */
-    static DoubleScalar.Abs<AngleUnit> normalize(final DoubleScalar.Abs<AngleUnit> angle)
+    static DoubleScalar.Abs<DirectionUnit, AngleUnit> normalize(final DoubleScalar.Abs<DirectionUnit, AngleUnit> angle)
     {
         double normalized = angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
-        return new DoubleScalar.Abs<AngleUnit>(normalized, angle.getUnit());
+        return new DoubleScalar.Abs<>(normalized, angle.getUnit());
     }
 
     /**
@@ -78,10 +79,10 @@ public interface AngleUtil
      * @param angle original angle.
      * @return angle between 0 and 2 * PI.
      */
-    static FloatScalar.Abs<AngleUnit> normalize(final FloatScalar.Abs<AngleUnit> angle)
+    static FloatScalar.Abs<DirectionUnit, AngleUnit> normalize(final FloatScalar.Abs<DirectionUnit, AngleUnit> angle)
     {
         float normalized = (float) angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
-        return new FloatScalar.Abs<AngleUnit>(normalized, angle.getUnit());
+        return new FloatScalar.Abs<DirectionUnit, AngleUnit>(normalized, angle.getUnit());
     }
 
     /**

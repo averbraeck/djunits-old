@@ -2,6 +2,7 @@ package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.AngleUnit;
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.DirectionUnit;
 
 /**
  * Easy access methods for the Relative Angle DoubleScalar. Instead of:
@@ -19,7 +20,7 @@ import org.djunits.unit.DimensionlessUnit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -84,7 +85,7 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
      * @param unit the unit
      * @return A a new absolute instance of the DoubleScalar of the right type
      */
-    public final Direction instantiateAbs(final double value, final AngleUnit unit)
+    public final Direction instantiateAbs(final double value, final DirectionUnit unit)
     {
         return new Direction(value, unit);
     }
@@ -118,21 +119,8 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
      */
     public final Direction plus(final Direction v)
     {
-        if (getUnit().isBaseSIUnit())
-        {
-            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-        }
-        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
-                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-    }
-
-    /**
-     * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
-     * @return an absolute version of this angle scalar.
-     */
-    public final Direction toAbs()
-    {
-        return new Direction(getInUnit(), getUnit());
+        DirectionUnit targetUnit = v.getUnit();
+        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**

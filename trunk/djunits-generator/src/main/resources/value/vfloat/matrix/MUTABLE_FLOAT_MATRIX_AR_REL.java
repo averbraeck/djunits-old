@@ -11,7 +11,7 @@ import org.djunits.value.vfloat.scalar.*;
 /**
  * Mutable Float%TypeRel% Matrix.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -19,7 +19,7 @@ import org.djunits.value.vfloat.scalar.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableFloat%TypeRel%Matrix extends AbstractMutableFloatMatrixRel<%TypeUnit%, Float%TypeRel%Matrix, MutableFloat%TypeRel%Matrix, Float%TypeRel%>
+public class MutableFloat%TypeRel%Matrix extends AbstractMutableFloatMatrixRel<%TypeRelUnit%, Float%TypeRel%Matrix, MutableFloat%TypeRel%Matrix, Float%TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -31,7 +31,7 @@ public class MutableFloat%TypeRel%Matrix extends AbstractMutableFloatMatrixRel<%
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloat%TypeRel%Matrix(final float[][] values, final %TypeUnit% unit, final StorageType storageType) throws ValueException
+    public MutableFloat%TypeRel%Matrix(final float[][] values, final %TypeRelUnit% unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -52,14 +52,14 @@ public class MutableFloat%TypeRel%Matrix extends AbstractMutableFloatMatrixRel<%
      * @param data an internal data object
      * @param unit the unit
      */
-    MutableFloat%TypeRel%Matrix(final FloatMatrixData data, final %TypeUnit% unit)
+    MutableFloat%TypeRel%Matrix(final FloatMatrixData data, final %TypeRelUnit% unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Float%TypeRel%Matrix instantiateType(final FloatMatrixData fmd, final %TypeUnit% unit)
+    protected final Float%TypeRel%Matrix instantiateType(final FloatMatrixData fmd, final %TypeRelUnit% unit)
     {
         return new Float%TypeRel%Matrix(fmd, unit);
     }
@@ -81,25 +81,16 @@ public class MutableFloat%TypeRel%Matrix extends AbstractMutableFloatMatrixRel<%
     /** {@inheritDoc} */
     @Override
     protected final MutableFloat%TypeRel%Matrix
-        instantiateMutableType(final FloatMatrixData fmd, final %TypeUnit% unit)
+        instantiateMutableType(final FloatMatrixData fmd, final %TypeRelUnit% unit)
     {
         return new MutableFloat%TypeRel%Matrix(fmd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Float%TypeRel% instantiateScalar(final float value, final %TypeUnit% unit)
+    protected final Float%TypeRel% instantiateScalar(final float value, final %TypeRelUnit% unit)
     {
         return new Float%TypeRel%(value, unit);
-    }
-    
-    /**
-     * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative Float%TypeRel% matrix.
-     */
-    public final MutableFloat%TypeAbs%Matrix toAbs()
-    {
-        return new MutableFloat%TypeAbs%Matrix(getData(), getUnit());
     }
         
 %FORMULAS%%TypeRel%%

@@ -9,7 +9,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * Standard frequency unit based on time.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -22,7 +22,7 @@ public class FrequencyUnit extends LinearUnit<FrequencyUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** the actual time unit, e.g. second. */
-    private final TimeUnit timeUnit;
+    private final DurationUnit durationUnit;
 
     /** The SI unit for frequency is Hertz. */
     public static final FrequencyUnit SI;
@@ -80,59 +80,61 @@ public class FrequencyUnit extends LinearUnit<FrequencyUnit>
 
     static
     {
-        SI = new FrequencyUnit(TimeUnit.SECOND, "FrequencyUnit.Hertz", "FrequencyUnit.Hz", SI_DERIVED, true);
+        SI = new FrequencyUnit(DurationUnit.SECOND, "FrequencyUnit.Hertz", "FrequencyUnit.Hz", SI_DERIVED, true);
         HERTZ = SI;
         KILOHERTZ = new FrequencyUnit("FrequencyUnit.kilohertz", "FrequencyUnit.kHz", SI_DERIVED, HERTZ, 1000.0, true);
         MEGAHERTZ = new FrequencyUnit("FrequencyUnit.megahertz", "FrequencyUnit.MHz", SI_DERIVED, HERTZ, 1.0E6, true);
         GIGAHERTZ = new FrequencyUnit("FrequencyUnit.gigahertz", "FrequencyUnit.GHz", SI_DERIVED, HERTZ, 1.0E9, true);
         TERAHERTZ = new FrequencyUnit("FrequencyUnit.terahertz", "FrequencyUnit.THz", SI_DERIVED, HERTZ, 1.0E12, true);
         RPM = new FrequencyUnit("FrequencyUnit.revolutions_per_minute", "FrequencyUnit.rpm", OTHER, HERTZ, 1.0 / 60.0, true);
-        PER_ATTOSECOND =
-                new FrequencyUnit(TimeUnit.ATTOSECOND, "FrequencyUnit.per_attosecond", "FrequencyUnit.1/as", SI_DERIVED, true);
-        PER_FEMTOSECOND = new FrequencyUnit(TimeUnit.FEMTOSECOND, "FrequencyUnit.per_femtosecond", "FrequencyUnit.1/fs",
+        PER_ATTOSECOND = new FrequencyUnit(DurationUnit.ATTOSECOND, "FrequencyUnit.per_attosecond", "FrequencyUnit.1/as",
                 SI_DERIVED, true);
-        PER_PICOSECOND =
-                new FrequencyUnit(TimeUnit.PICOSECOND, "FrequencyUnit.per_picosecond", "FrequencyUnit.1/ps", SI_DERIVED, true);
-        PER_NANOSECOND =
-                new FrequencyUnit(TimeUnit.NANOSECOND, "FrequencyUnit.per_nanosecond", "FrequencyUnit.1/ns", SI_DERIVED, true);
-        PER_MICROSECOND = new FrequencyUnit(TimeUnit.MICROSECOND, "FrequencyUnit.per_microsecond", "FrequencyUnit.1/mus",
+        PER_FEMTOSECOND = new FrequencyUnit(DurationUnit.FEMTOSECOND, "FrequencyUnit.per_femtosecond", "FrequencyUnit.1/fs",
                 SI_DERIVED, true);
-        PER_MILLISECOND = new FrequencyUnit(TimeUnit.MILLISECOND, "FrequencyUnit.per_millisecond", "FrequencyUnit.1/ms",
+        PER_PICOSECOND = new FrequencyUnit(DurationUnit.PICOSECOND, "FrequencyUnit.per_picosecond", "FrequencyUnit.1/ps",
                 SI_DERIVED, true);
-        PER_SECOND = new FrequencyUnit(TimeUnit.SECOND, "FrequencyUnit.per_second", "FrequencyUnit.1/s", SI_DERIVED, true);
-        PER_MINUTE = new FrequencyUnit(TimeUnit.MINUTE, "FrequencyUnit.per_minute", "FrequencyUnit.1/min", SI_ACCEPTED, true);
-        PER_HOUR = new FrequencyUnit(TimeUnit.HOUR, "FrequencyUnit.per_hour", "FrequencyUnit.1/h", SI_ACCEPTED, true);
-        PER_DAY = new FrequencyUnit(TimeUnit.DAY, "FrequencyUnit.per_day", "FrequencyUnit.1/d", SI_ACCEPTED, true);
-        PER_WEEK = new FrequencyUnit(TimeUnit.WEEK, "FrequencyUnit.per_week", "FrequencyUnit.1/w", OTHER, true);
+        PER_NANOSECOND = new FrequencyUnit(DurationUnit.NANOSECOND, "FrequencyUnit.per_nanosecond", "FrequencyUnit.1/ns",
+                SI_DERIVED, true);
+        PER_MICROSECOND = new FrequencyUnit(DurationUnit.MICROSECOND, "FrequencyUnit.per_microsecond", "FrequencyUnit.1/mus",
+                SI_DERIVED, true);
+        PER_MILLISECOND = new FrequencyUnit(DurationUnit.MILLISECOND, "FrequencyUnit.per_millisecond", "FrequencyUnit.1/ms",
+                SI_DERIVED, true);
+        PER_SECOND = new FrequencyUnit(DurationUnit.SECOND, "FrequencyUnit.per_second", "FrequencyUnit.1/s", SI_DERIVED, true);
+        PER_MINUTE =
+                new FrequencyUnit(DurationUnit.MINUTE, "FrequencyUnit.per_minute", "FrequencyUnit.1/min", SI_ACCEPTED, true);
+        PER_HOUR = new FrequencyUnit(DurationUnit.HOUR, "FrequencyUnit.per_hour", "FrequencyUnit.1/h", SI_ACCEPTED, true);
+        PER_DAY = new FrequencyUnit(DurationUnit.DAY, "FrequencyUnit.per_day", "FrequencyUnit.1/d", SI_ACCEPTED, true);
+        PER_WEEK = new FrequencyUnit(DurationUnit.WEEK, "FrequencyUnit.per_week", "FrequencyUnit.1/w", OTHER, true);
     }
 
     /**
      * Define a FrequencyUnit based on time. You can define unit like "per second" (Hertz) here.
-     * @param timeUnit the unit of time for the frequency unit, e.g., second
+     * @param durationUnit the unit of time for the frequency unit, e.g., second
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private FrequencyUnit(final TimeUnit timeUnit, final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final UnitSystem unitSystem, final boolean standardUnit)
+    private FrequencyUnit(final DurationUnit durationUnit, final String nameOrNameKey,
+            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, HERTZ,
-                1.0 / timeUnit.getConversionFactorToStandardUnit(), standardUnit);
-        this.timeUnit = timeUnit;
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, HERTZ, 1.0 / durationUnit.getScaleFactor(),
+                standardUnit);
+        this.durationUnit = durationUnit;
     }
 
     /**
      * Define a user-defined FrequencyUnit based on time. You can define unit like "per fortnight" here.
-     * @param timeUnit the unit of time for the frequency unit, e.g., second
+     * @param durationUnit the unit of time for the frequency unit, e.g., second
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public FrequencyUnit(final TimeUnit timeUnit, final String name, final String abbreviation, final UnitSystem unitSystem)
+    public FrequencyUnit(final DurationUnit durationUnit, final String name, final String abbreviation,
+            final UnitSystem unitSystem)
     {
-        this(timeUnit, name, abbreviation, unitSystem, false);
+        this(durationUnit, name, abbreviation, unitSystem, false);
     }
 
     /**
@@ -142,15 +144,15 @@ public class FrequencyUnit extends LinearUnit<FrequencyUnit>
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private FrequencyUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final FrequencyUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final FrequencyUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
                 standardUnit);
-        this.timeUnit = referenceUnit.getTimeUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**
@@ -159,20 +161,20 @@ public class FrequencyUnit extends LinearUnit<FrequencyUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public FrequencyUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final FrequencyUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final FrequencyUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**
-     * @return timeUnit
+     * @return durationUnit
      */
-    public final TimeUnit getTimeUnit()
+    public final DurationUnit getDurationUnit()
     {
-        return this.timeUnit;
+        return this.durationUnit;
     }
 
     /** {@inheritDoc} */

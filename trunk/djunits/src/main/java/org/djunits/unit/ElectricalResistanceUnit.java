@@ -1,15 +1,15 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
 import static org.djunits.unit.unitsystem.UnitSystem.CGS_EMU;
 import static org.djunits.unit.unitsystem.UnitSystem.CGS_ESU;
+import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
 
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
  * The units of electrical resistance.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -31,7 +31,7 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
     private final ElectricalCurrentUnit electricalCurrentUnit;
 
     /** the unit of time for the electrical resistance unit, e.g., second. */
-    private final TimeUnit timeUnit;
+    private final DurationUnit durationUnit;
 
     /** The SI unit for electrical resistance is Ohm. */
     public static final ElectricalResistanceUnit SI;
@@ -65,8 +65,8 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
 
     static
     {
-        SI = new ElectricalResistanceUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, TimeUnit.SECOND,
-                "ElectricalResistanceUnit.ohm_(name)", "ElectricalResistanceUnit.ohm", SI_DERIVED, true);
+        SI = new ElectricalResistanceUnit(MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE,
+                DurationUnit.SECOND, "ElectricalResistanceUnit.ohm_(name)", "ElectricalResistanceUnit.ohm", SI_DERIVED, true);
         OHM = SI;
         NANOOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.nano_ohm", "ElectricalResistanceUnit.n_ohm",
                 SI_DERIVED, OHM, 1.0E-9, true);
@@ -80,10 +80,10 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
                 SI_DERIVED, OHM, 1.0E06, true);
         GIGAOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.giga_ohm", "ElectricalResistanceUnit.G_ohm",
                 SI_DERIVED, OHM, 1.0E9, true);
-        ABOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.ab_ohm", "ElectricalResistanceUnit.a_ohm",
-                CGS_EMU, OHM, 1.0E-9, true);
-        STATOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.stat_ohm", "ElectricalResistanceUnit.st_ohm",
-                CGS_ESU, OHM, 8.987551787E11, true);
+        ABOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.ab_ohm", "ElectricalResistanceUnit.a_ohm", CGS_EMU, OHM,
+                1.0E-9, true);
+        STATOHM = new ElectricalResistanceUnit("ElectricalResistanceUnit.stat_ohm", "ElectricalResistanceUnit.st_ohm", CGS_ESU,
+                OHM, 8.987551787E11, true);
     }
 
     /**
@@ -91,7 +91,7 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
      * @param massUnit the unit of mass for the electrical resistance unit, e.g., kilogram
      * @param lengthUnit the unit of length for the electrical resistance unit, e.g., meter
      * @param electricalCurrentUnit the unit of electrical current for the electrical resistance unit, e.g., Ampere
-     * @param timeUnit the unit of time for the electrical resistance unit, e.g., second
+     * @param durationUnit the unit of time for the electrical resistance unit, e.g., second
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
@@ -100,20 +100,18 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
      */
     @SuppressWarnings("checkstyle:parameternumber")
     private ElectricalResistanceUnit(final MassUnit massUnit, final LengthUnit lengthUnit,
-            final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit, final String nameOrNameKey,
+            final ElectricalCurrentUnit electricalCurrentUnit, final DurationUnit durationUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, OHM,
-                massUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
-                        * lengthUnit.getConversionFactorToStandardUnit()
-                        / (electricalCurrentUnit.getConversionFactorToStandardUnit()
-                                * electricalCurrentUnit.getConversionFactorToStandardUnit()
-                                * Math.pow(timeUnit.getConversionFactorToStandardUnit(), 3.0)),
+                massUnit.getScaleFactor() * lengthUnit.getScaleFactor()
+                        * lengthUnit.getScaleFactor() / (electricalCurrentUnit.getScaleFactor()
+                                * electricalCurrentUnit.getScaleFactor() * Math.pow(durationUnit.getScaleFactor(), 3.0)),
                 standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
         this.electricalCurrentUnit = electricalCurrentUnit;
-        this.timeUnit = timeUnit;
+        this.durationUnit = durationUnit;
     }
 
     /**
@@ -121,16 +119,16 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
      * @param massUnit the unit of mass for the electrical resistance unit, e.g., kilogram
      * @param lengthUnit the unit of length for the electrical resistance unit, e.g., meter
      * @param electricalCurrentUnit the unit of electrical current for the electrical resistance unit, e.g., Ampere
-     * @param timeUnit the unit of time for the electrical resistance unit, e.g., second
+     * @param durationUnit the unit of time for the electrical resistance unit, e.g., second
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
     public ElectricalResistanceUnit(final MassUnit massUnit, final LengthUnit lengthUnit,
-            final ElectricalCurrentUnit electricalCurrentUnit, final TimeUnit timeUnit, final String name,
+            final ElectricalCurrentUnit electricalCurrentUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
     {
-        this(massUnit, lengthUnit, electricalCurrentUnit, timeUnit, name, abbreviation, unitSystem, false);
+        this(massUnit, lengthUnit, electricalCurrentUnit, durationUnit, name, abbreviation, unitSystem, false);
     }
 
     /**
@@ -148,13 +146,11 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, OHM,
-                electricalPotentialUnit.getConversionFactorToStandardUnit()
-                        / electricalCurrentUnit.getConversionFactorToStandardUnit(),
-                standardUnit);
+                electricalPotentialUnit.getScaleFactor() / electricalCurrentUnit.getScaleFactor(), standardUnit);
         this.massUnit = electricalPotentialUnit.getMassUnit();
         this.lengthUnit = electricalPotentialUnit.getLengthUnit();
         this.electricalCurrentUnit = electricalCurrentUnit;
-        this.timeUnit = electricalPotentialUnit.getTimeUnit();
+        this.durationUnit = electricalPotentialUnit.getDurationUnit();
     }
 
     /**
@@ -180,19 +176,19 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private ElectricalResistanceUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final UnitSystem unitSystem, final ElectricalResistanceUnit referenceUnit,
-            final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final UnitSystem unitSystem, final ElectricalResistanceUnit referenceUnit, final double scaleFactorToReferenceUnit,
+            final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
                 standardUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
         this.electricalCurrentUnit = referenceUnit.getElectricalCurrentUnit();
-        this.timeUnit = referenceUnit.getTimeUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**
@@ -201,12 +197,12 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public ElectricalResistanceUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final ElectricalResistanceUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final ElectricalResistanceUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**
@@ -234,11 +230,11 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
     }
 
     /**
-     * @return timeUnit
+     * @return durationUnit
      */
-    public final TimeUnit getTimeUnit()
+    public final DurationUnit getDurationUnit()
     {
-        return this.timeUnit;
+        return this.durationUnit;
     }
 
     /** {@inheritDoc} */

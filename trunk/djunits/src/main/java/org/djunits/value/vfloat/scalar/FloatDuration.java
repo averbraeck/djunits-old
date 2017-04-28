@@ -1,6 +1,7 @@
 package org.djunits.value.vfloat.scalar;
 
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.ElectricalChargeUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.LengthUnit;
@@ -14,19 +15,19 @@ import org.djunits.unit.VolumeUnit;
  * Easy access methods for the %Type% FloatScalar. Instead of:
  * 
  * <pre>
- * FloatScalar.Rel&lt;TimeUnit&gt; value = new FloatScalar.Rel&lt;TimeUnit&gt;(100.0, TimeUnit.SI);
+ * FloatScalar.Rel&lt;DurationUnit&gt; value = new FloatScalar.Rel&lt;DurationUnit&gt;(100.0, DurationUnit.SI);
  * </pre>
  * 
  * we can now write:
  * 
  * <pre>
- * FloatDuration value = new FloatDuration(100.0, TimeUnit.SI);
+ * FloatDuration value = new FloatDuration(100.0, DurationUnit.SI);
  * </pre>
  * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -35,36 +36,36 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatDuration extends AbstractFloatScalarRel<TimeUnit, FloatDuration>
+public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDuration>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final FloatDuration ZERO = new FloatDuration(0.0f, TimeUnit.SI);
+    public static final FloatDuration ZERO = new FloatDuration(0.0f, DurationUnit.SI);
 
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
-    public static final FloatDuration NaN = new FloatDuration(Float.NaN, TimeUnit.SI);
+    public static final FloatDuration NaN = new FloatDuration(Float.NaN, DurationUnit.SI);
 
     /** constant with value POSITIVE_INFINITY. */
-    public static final FloatDuration POSITIVE_INFINITY = new FloatDuration(Float.POSITIVE_INFINITY, TimeUnit.SI);
+    public static final FloatDuration POSITIVE_INFINITY = new FloatDuration(Float.POSITIVE_INFINITY, DurationUnit.SI);
 
     /** constant with value NEGATIVE_INFINITY. */
-    public static final FloatDuration NEGATIVE_INFINITY = new FloatDuration(Float.NEGATIVE_INFINITY, TimeUnit.SI);
+    public static final FloatDuration NEGATIVE_INFINITY = new FloatDuration(Float.NEGATIVE_INFINITY, DurationUnit.SI);
 
     /** constant with value MAX_VALUE. */
-    public static final FloatDuration POS_MAXVALUE = new FloatDuration(Float.MAX_VALUE, TimeUnit.SI);
+    public static final FloatDuration POS_MAXVALUE = new FloatDuration(Float.MAX_VALUE, DurationUnit.SI);
 
     /** constant with value -MAX_VALUE. */
-    public static final FloatDuration NEG_MAXVALUE = new FloatDuration(-Float.MAX_VALUE, TimeUnit.SI);
+    public static final FloatDuration NEG_MAXVALUE = new FloatDuration(-Float.MAX_VALUE, DurationUnit.SI);
 
     /**
      * Construct FloatDuration scalar.
      * @param value float value
      * @param unit unit for the float value
      */
-    public FloatDuration(final float value, final TimeUnit unit)
+    public FloatDuration(final float value, final DurationUnit unit)
     {
         super(value, unit);
     }
@@ -83,14 +84,14 @@ public class FloatDuration extends AbstractFloatScalarRel<TimeUnit, FloatDuratio
      * @param value double value
      * @param unit unit for the resulting float value
      */
-    public FloatDuration(final double value, final TimeUnit unit)
+    public FloatDuration(final double value, final DurationUnit unit)
     {
         super((float) value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDuration instantiateRel(final float value, final TimeUnit unit)
+    public final FloatDuration instantiateRel(final float value, final DurationUnit unit)
     {
         return new FloatDuration(value, unit);
     }
@@ -102,7 +103,7 @@ public class FloatDuration extends AbstractFloatScalarRel<TimeUnit, FloatDuratio
      */
     public static final FloatDuration createSI(final float value)
     {
-        return new FloatDuration(value, TimeUnit.SI);
+        return new FloatDuration(value, DurationUnit.SI);
     }
 
     /**
@@ -135,21 +136,8 @@ public class FloatDuration extends AbstractFloatScalarRel<TimeUnit, FloatDuratio
      */
     public final FloatTime plus(final FloatTime v)
     {
-        if (getUnit().isBaseSIUnit())
-        {
-            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-        }
-        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
-                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-    }
-
-    /**
-     * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
-     * @return an absolute version of this duration scalar.
-     */
-    public final FloatTime toAbs()
-    {
-        return new FloatTime(getInUnit(), getUnit());
+        TimeUnit targetUnit = v.getUnit();
+        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**
@@ -296,11 +284,11 @@ public class FloatDuration extends AbstractFloatScalarRel<TimeUnit, FloatDuratio
     }
 
     /**
-     * Calculate the multiplication of FloatDuration and FloatMoneyPerTime, which results in a FloatMoney scalar.
+     * Calculate the multiplication of FloatDuration and FloatMoneyPerDuration, which results in a FloatMoney scalar.
      * @param v FloatDuration scalar
-     * @return FloatMoney scalar as a multiplication of FloatDuration and FloatMoneyPerTime
+     * @return FloatMoney scalar as a multiplication of FloatDuration and FloatMoneyPerDuration
      */
-    public final FloatMoney multiplyBy(final FloatMoneyPerTime v)
+    public final FloatMoney multiplyBy(final FloatMoneyPerDuration v)
     {
         return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
     }

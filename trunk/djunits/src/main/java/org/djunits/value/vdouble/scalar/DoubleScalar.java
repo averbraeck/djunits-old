@@ -1,5 +1,6 @@
 package org.djunits.value.vdouble.scalar;
 
+import org.djunits.unit.AbsoluteLinearUnit;
 import org.djunits.unit.SICoefficients;
 import org.djunits.unit.SIUnit;
 import org.djunits.unit.Unit;
@@ -7,7 +8,7 @@ import org.djunits.unit.Unit;
 /**
  * Immutable DoubleScalar, with Abs and Rel static subclasses.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -19,9 +20,11 @@ public abstract class DoubleScalar
 {
     /**
      * Absolute Immutable DoubleScalar.
-     * @param <U> Unit
+     * @param <AU> Absolute unit
+     * @param <RU> Relative unit
      */
-    public static class Abs<U extends Unit<U>> extends AbstractDoubleScalarAbs<U, DoubleScalar.Abs<U>, DoubleScalar.Rel<U>>
+    public static class Abs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>>
+            extends AbstractDoubleScalarAbs<AU, DoubleScalar.Abs<AU, RU>, RU, DoubleScalar.Rel<RU>>
     {
         /**  */
         private static final long serialVersionUID = 20150626L;
@@ -31,7 +34,7 @@ public abstract class DoubleScalar
          * @param value double; the value of the new Absolute Immutable DoubleScalar
          * @param unit U; the unit of the new Absolute Immutable DoubleScalar
          */
-        public Abs(final double value, final U unit)
+        public Abs(final double value, final AU unit)
         {
             super(value, unit);
         }
@@ -40,21 +43,21 @@ public abstract class DoubleScalar
          * Construct a new Absolute Immutable DoubleScalar from an existing Absolute Immutable DoubleScalar.
          * @param value DoubleScalar.Abs&lt;U&gt;; the reference
          */
-        public Abs(final DoubleScalar.Abs<U> value)
+        public Abs(final DoubleScalar.Abs<AU, RU> value)
         {
             super(value);
         }
 
         /** {@inheritDoc} */
         @Override
-        public final DoubleScalar.Abs<U> instantiateAbs(final double value, final U unit)
+        public final DoubleScalar.Abs<AU, RU> instantiateAbs(final double value, final AU unit)
         {
             return new DoubleScalar.Abs<>(value, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        public final DoubleScalar.Rel<U> instantiateRel(final double value, final U unit)
+        public final DoubleScalar.Rel<RU> instantiateRel(final double value, final RU unit)
         {
             return new DoubleScalar.Rel<>(value, unit);
         }
@@ -107,15 +110,16 @@ public abstract class DoubleScalar
      * unit of the left argument.
      * @param left A, an absolute typed DoubleScalar; the left argument
      * @param right R, a relative typed DoubleScalar; the right argument
-     * @param <U> Unit; the unit of the parameters and the result
+     * @param <AU> Unit; the absolute unit of the parameters and the result
+     * @param <RU> Unit; the relative unit of the parameters and the result
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
      * @return A, an absolute typed DoubleScalar; the sum of the values as an Absolute value
      */
-    public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>, A extends AbstractDoubleScalarAbs<U, A, R>> A plus(
-            final A left, final R right)
+    public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractDoubleScalarRel<RU, R>,
+            A extends AbstractDoubleScalarAbs<AU, A, RU, R>> A plus(final A left, final R right)
     {
-        return left.instantiateAbs(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
+        return left.plus(right);
     }
 
     /**
@@ -123,15 +127,16 @@ public abstract class DoubleScalar
      * unit of the left argument.
      * @param left A, an absolute typed DoubleScalar; the left argument
      * @param right R, a relative typed DoubleScalar; the right argument
-     * @param <U> Unit; the unit of the parameters and the result
+     * @param <AU> Unit; the absolute unit of the parameters and the result
+     * @param <RU> Unit; the relative unit of the parameters and the result
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
      * @return A, an absolute typed DoubleScalar; the sum of the values as an Absolute value
      */
-    public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>, A extends AbstractDoubleScalarAbs<U, A, R>> A plus(
-            final R left, final A right)
+    public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractDoubleScalarRel<RU, R>,
+            A extends AbstractDoubleScalarAbs<AU, A, RU, R>> A plus(final R left, final A right)
     {
-        return right.instantiateAbs(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
+        return right.plus(left);
     }
 
     /**
@@ -145,7 +150,7 @@ public abstract class DoubleScalar
      */
     public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>> R plus(final R left, final R right)
     {
-        return left.instantiateRel(left.getInUnit() + right.getInUnit(left.getUnit()), left.getUnit());
+        return left.plus(right);
     }
 
     /**
@@ -153,15 +158,16 @@ public abstract class DoubleScalar
      * be the unit of the left argument.
      * @param left A, an absolute typed DoubleScalar; the left value
      * @param right R, a relative typed DoubleScalar; the right value
-     * @param <U> Unit; the unit of the parameters and the result
+     * @param <AU> Unit; the absolute unit of the parameters and the result
+     * @param <RU> Unit; the relative unit of the parameters and the result
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
      * @return A, an absolute typed DoubleScalar; the resulting value as an absolute value
      */
-    public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>, A extends AbstractDoubleScalarAbs<U, A, R>> A minus(
-            final A left, final R right)
+    public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractDoubleScalarRel<RU, R>,
+            A extends AbstractDoubleScalarAbs<AU, A, RU, R>> A minus(final A left, final R right)
     {
-        return left.instantiateAbs(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
+        return left.minus(right);
     }
 
     /**
@@ -175,7 +181,7 @@ public abstract class DoubleScalar
      */
     public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>> R minus(final R left, final R right)
     {
-        return left.instantiateRel(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
+        return left.minus(right);
     }
 
     /**
@@ -183,29 +189,16 @@ public abstract class DoubleScalar
      * the unit of the first argument.
      * @param left A, an absolute typed DoubleScalar; value 1
      * @param right A, an absolute typed DoubleScalar; value 2
-     * @param <U> Unit; the unit of the parameters and the result
+     * @param <AU> Unit; the absolute unit of the parameters and the result
+     * @param <RU> Unit; the relative unit of the parameters and the result
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
      * @return R, a relative typed DoubleScalar; the difference of the two absolute values as a relative value
      */
-    public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>, A extends AbstractDoubleScalarAbs<U, A, R>> R minus(
-            final A left, final A right)
+    public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractDoubleScalarRel<RU, R>,
+            A extends AbstractDoubleScalarAbs<AU, A, RU, R>> R minus(final A left, final A right)
     {
-        return left.instantiateRel(left.getInUnit() - right.getInUnit(left.getUnit()), left.getUnit());
-    }
-
-    /**
-     * Multiply two values; the result is a new instance with a different (existing or generated) SI unit.
-     * @param left DoubleScalar.Abs&lt;?&gt;; the left operand
-     * @param right DoubleScalar.Abs&lt;?&gt;; the right operand
-     * @return DoubleScalar.Abs&lt;SIUnit&gt;; the product of the two values
-     */
-    public static DoubleScalar.Abs<SIUnit> multiply(final AbstractDoubleScalarAbs<?, ?, ?> left,
-            final AbstractDoubleScalarAbs<?, ?, ?> right)
-    {
-        SIUnit targetUnit = Unit.lookupOrCreateSIUnitWithSICoefficients(
-                SICoefficients.multiply(left.getUnit().getSICoefficients(), right.getUnit().getSICoefficients()).toString());
-        return new DoubleScalar.Abs<SIUnit>(left.getSI() * right.getSI(), targetUnit);
+        return left.minus(right);
     }
 
     /**
@@ -220,20 +213,6 @@ public abstract class DoubleScalar
         SIUnit targetUnit = Unit.lookupOrCreateSIUnitWithSICoefficients(
                 SICoefficients.multiply(left.getUnit().getSICoefficients(), right.getUnit().getSICoefficients()).toString());
         return new DoubleScalar.Rel<SIUnit>(left.getSI() * right.getSI(), targetUnit);
-    }
-
-    /**
-     * Divide two values; the result is a new instance with a different (existing or generated) SI unit.
-     * @param left DoubleScalar.Abs&lt;?&gt;; the left operand
-     * @param right DoubleScalar.Abs&lt;?&gt;; the right operand
-     * @return DoubleScalar.Abs&lt;SIUnit&gt;; the ratio of the two values
-     */
-    public static DoubleScalar.Abs<SIUnit> divide(final AbstractDoubleScalarAbs<?, ?, ?> left,
-            final AbstractDoubleScalarAbs<?, ?, ?> right)
-    {
-        SIUnit targetUnit = Unit.lookupOrCreateSIUnitWithSICoefficients(
-                SICoefficients.divide(left.getUnit().getSICoefficients(), right.getUnit().getSICoefficients()).toString());
-        return new DoubleScalar.Abs<SIUnit>(left.getSI() / right.getSI(), targetUnit);
     }
 
     /**
@@ -270,13 +249,14 @@ public abstract class DoubleScalar
      * @param zero the low value
      * @param one the high value
      * @param ratio the ratio between 0 and 1, inclusive
-     * @param <U> Unit; the unit of the parameters and the result
+     * @param <AU> Unit; the absolute unit of the parameters and the result
+     * @param <RU> Unit; the relative unit of the parameters and the result
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
      * @return a Scalar at the ratio between
      */
-    public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>, A extends AbstractDoubleScalarAbs<U, A, R>> A interpolate(
-            final A zero, final A one, final double ratio)
+    public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractDoubleScalarRel<RU, R>,
+            A extends AbstractDoubleScalarAbs<AU, A, RU, R>> A interpolate(final A zero, final A one, final double ratio)
     {
         return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }

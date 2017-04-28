@@ -1,24 +1,26 @@
 package org.djunits.value.vdouble.scalar;
 
+import org.djunits.unit.AbsoluteTemperatureUnit;
 import org.djunits.unit.TemperatureUnit;
 
 /**
  * Easy access methods for the Absolute AbsoluteTemperature DoubleScalar. Instead of:
  * 
  * <pre>
- * DoubleScalar.Abs&lt;TemperatureUnit&gt; value = new DoubleScalar.Abs&lt;TemperatureUnit&gt;(100.0, TemperatureUnit.SI);
+ * DoubleScalar.Abs&lt;AbsoluteTemperatureUnit&gt; value =
+ *         new DoubleScalar.Abs&lt;AbsoluteTemperatureUnit&gt;(100.0, AbsoluteTemperatureUnit.SI);
  * </pre>
  * 
  * we can now write:
  * 
  * <pre>
- * AbsoluteTemperature value = new AbsoluteTemperature(100.0, TemperatureUnit.SI);
+ * AbsoluteTemperature value = new AbsoluteTemperature(100.0, AbsoluteTemperatureUnit.BASE);
  * </pre>
  * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -27,38 +29,21 @@ import org.djunits.unit.TemperatureUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class AbsoluteTemperature extends AbstractDoubleScalarAbs<TemperatureUnit, AbsoluteTemperature, Temperature>
+public class AbsoluteTemperature
+        extends AbstractDoubleScalarAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, TemperatureUnit, Temperature>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final AbsoluteTemperature ZERO = new AbsoluteTemperature(0.0, TemperatureUnit.SI);
-
-    /** constant with value NaN. */
-    @SuppressWarnings("checkstyle:constantname")
-    public static final AbsoluteTemperature NaN = new AbsoluteTemperature(Double.NaN, TemperatureUnit.SI);
-
-    /** constant with value POSITIVE_INFINITY. */
-    public static final AbsoluteTemperature POSITIVE_INFINITY =
-            new AbsoluteTemperature(Double.POSITIVE_INFINITY, TemperatureUnit.SI);
-
-    /** constant with value NEGATIVE_INFINITY. */
-    public static final AbsoluteTemperature NEGATIVE_INFINITY =
-            new AbsoluteTemperature(Double.NEGATIVE_INFINITY, TemperatureUnit.SI);
-
-    /** constant with value MAX_VALUE. */
-    public static final AbsoluteTemperature POS_MAXVALUE = new AbsoluteTemperature(Double.MAX_VALUE, TemperatureUnit.SI);
-
-    /** constant with value -MAX_VALUE. */
-    public static final AbsoluteTemperature NEG_MAXVALUE = new AbsoluteTemperature(-Double.MAX_VALUE, TemperatureUnit.SI);
+    public static final AbsoluteTemperature ZERO = new AbsoluteTemperature(0.0, AbsoluteTemperatureUnit.BASE);
 
     /**
      * Construct AbsoluteTemperature scalar.
      * @param value double value
      * @param unit unit for the double value
      */
-    public AbsoluteTemperature(final double value, final TemperatureUnit unit)
+    public AbsoluteTemperature(final double value, final AbsoluteTemperatureUnit unit)
     {
         super(value, unit);
     }
@@ -74,7 +59,7 @@ public class AbsoluteTemperature extends AbstractDoubleScalarAbs<TemperatureUnit
 
     /** {@inheritDoc} */
     @Override
-    public final AbsoluteTemperature instantiateAbs(final double value, final TemperatureUnit unit)
+    public final AbsoluteTemperature instantiateAbs(final double value, final AbsoluteTemperatureUnit unit)
     {
         return new AbsoluteTemperature(value, unit);
     }
@@ -93,7 +78,7 @@ public class AbsoluteTemperature extends AbstractDoubleScalarAbs<TemperatureUnit
      */
     public static final AbsoluteTemperature createSI(final double value)
     {
-        return new AbsoluteTemperature(value, TemperatureUnit.SI);
+        return new AbsoluteTemperature(value, AbsoluteTemperatureUnit.BASE);
     }
 
     /**

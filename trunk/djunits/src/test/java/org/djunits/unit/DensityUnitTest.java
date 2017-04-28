@@ -12,11 +12,11 @@ import org.junit.Test;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Jun 5, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Jun 5, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class DensityUnitTest extends AbstractLinearUnitTest<DensityUnit>
@@ -46,13 +46,12 @@ public class DensityUnitTest extends AbstractLinearUnitTest<DensityUnit>
     @Test
     public final void conversions()
     {
-        checkUnitRatioNameAndAbbreviation(DensityUnit.KG_PER_METER_3, 1, 0.00000001, "kilogram per cubic meter",
-            "kg/m^3");
+        checkUnitRatioNameAndAbbreviation(DensityUnit.KG_PER_METER_3, 1, 0.00000001, "kilogram per cubic meter", "kg/m^3");
         checkUnitRatioNameAndAbbreviation(DensityUnit.GRAM_PER_CENTIMETER_3, 1000, 0.0001, "gram per cubic centimeter",
-            "g/cm^3");
+                "g/cm^3");
         // Check two conversions between two units
-        assertEquals("one KG PER CUBIC METER is 0.0001 GRAM PER CUBIC CENTIMETER", 0.001, getMultiplicationFactorTo(
-            DensityUnit.KG_PER_METER_3, DensityUnit.GRAM_PER_CENTIMETER_3), 0.000000001);
+        assertEquals("one KG PER CUBIC METER is 0.0001 GRAM PER CUBIC CENTIMETER", 0.001,
+                getMultiplicationFactorTo(DensityUnit.KG_PER_METER_3, DensityUnit.GRAM_PER_CENTIMETER_3), 0.000000001);
     }
 
     /**

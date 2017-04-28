@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.SortedMap;
 
+import org.djunits.unit.AbsoluteLinearUnit;
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
+import org.djunits.value.FunctionsAbs;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.AbstractDoubleScalarAbs;
@@ -13,21 +15,24 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarAbs;
 /**
  * Absolute Immutable typed vector.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
  * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
- * @param <U> the unit
+ * @param <AU> the absolute unit
+ * @param <RU> the relative unit
  * @param <A> the absolute vector type
  * @param <R> the relative vector type
  * @param <MA> the mutable absolute vector type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoubleVectorAbs<U, A, R, MA, S>, R extends AbstractDoubleVectorRel<U, R, ?, ?>, MA extends AbstractMutableDoubleVectorAbs<U, A, R, MA, S>, S extends AbstractDoubleScalarAbs<U, S, ?>>
-        extends AbstractDoubleVector<U, A> implements Absolute, Serializable
+abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
+        A extends AbstractDoubleVectorAbs<AU, RU, A, R, MA, S>, R extends AbstractDoubleVectorRel<RU, R, ?, ?>,
+        MA extends AbstractMutableDoubleVectorAbs<AU, RU, A, R, MA, S>, S extends AbstractDoubleScalarAbs<AU, S, RU, ?>>
+        extends AbstractDoubleVector<AU, A> implements FunctionsAbs<AU, RU, A, R>, Absolute, Serializable
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -35,11 +40,11 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
     /**
      * Construct a new Absolute Immutable DoubleVector.
      * @param values double[]; the values of the entries in the new Absolute Immutable DoubleVector
-     * @param unit U; the unit of the new Absolute Immutable DoubleVector
+     * @param unit AU; the unit of the new Absolute Immutable DoubleVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    AbstractDoubleVectorAbs(final double[] values, final U unit, final StorageType storageType) throws ValueException
+    AbstractDoubleVectorAbs(final double[] values, final AU unit, final StorageType storageType) throws ValueException
     {
         super(unit, DoubleVectorData.instantiate(values, unit.getScale(), storageType));
     }
@@ -47,11 +52,11 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
     /**
      * Construct a new Absolute Immutable DoubleVector.
      * @param values List; the values of the entries in the new Absolute Immutable DoubleVector
-     * @param unit U; the unit of the new Absolute Immutable DoubleVector
+     * @param unit AU; the unit of the new Absolute Immutable DoubleVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    AbstractDoubleVectorAbs(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
+    AbstractDoubleVectorAbs(final List<Double> values, final AU unit, final StorageType storageType) throws ValueException
     {
         super(unit, DoubleVectorData.instantiate(values, unit.getScale(), storageType));
     }
@@ -94,12 +99,12 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
     /**
      * Construct a new Absolute Immutable DoubleVector.
      * @param values Map; the map of indexes to values of the Absolute Sparse Mutable DoubleVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable DoubleVector
+     * @param unit AU; the unit of the new Absolute Sparse Mutable DoubleVector
      * @param length the size of the vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    AbstractDoubleVectorAbs(final SortedMap<Integer, Double> values, final U unit, final int length,
+    AbstractDoubleVectorAbs(final SortedMap<Integer, Double> values, final AU unit, final int length,
             final StorageType storageType) throws ValueException
     {
         super(unit, DoubleVectorData.instantiate(values, length, unit.getScale(), storageType));
@@ -110,7 +115,7 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
      * @param data an internal data object
      * @param unit the unit
      */
-    AbstractDoubleVectorAbs(final DoubleVectorData data, final U unit)
+    AbstractDoubleVectorAbs(final DoubleVectorData data, final AU unit)
     {
         super(unit, data.copy());
     }
@@ -133,7 +138,7 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
      * @param unit the unit
      * @return M the Mutable DoubleVector of the right type
      */
-    protected abstract A instantiateTypeAbs(final DoubleVectorData dvd, final U unit);
+    protected abstract A instantiateTypeAbs(DoubleVectorData dvd, AU unit);
 
     /**
      * Construct a new Relative Immutable DoubleVector of the right type. Each extending class must implement this method.
@@ -141,7 +146,7 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
      * @param unit the unit
      * @return M the Mutable DoubleVector of the right type
      */
-    protected abstract R instantiateTypeRel(final DoubleVectorData dvd, final U unit);
+    protected abstract R instantiateTypeRel(DoubleVectorData dvd, RU unit);
 
     /**
      * Construct a new Absolute Mutable DoubleVector of the right type. Each extending class must implement this method.
@@ -149,7 +154,7 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
      * @param unit the unit
      * @return M the Mutable DoubleVector of the right type
      */
-    protected abstract MA instantiateMutableType(final DoubleVectorData dvd, final U unit);
+    protected abstract MA instantiateMutableType(DoubleVectorData dvd, AU unit);
 
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
@@ -157,7 +162,7 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
      * @param unit the unit
      * @return S the Immutable DoubleScalar of the right type
      */
-    protected abstract S instantiateScalar(final double value, final U unit);
+    protected abstract S instantiateScalar(double value, AU unit);
 
     /** {@inheritDoc} */
     @Override
@@ -170,43 +175,25 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
     /**************************** TYPED CALCULATION METHODS ***************************/
     /**********************************************************************************/
 
-    /**
-     * Add a Relative value to this Absolute value for a vector or matrix. The addition is done value by value and the result is
-     * stored in a new Absolute value. If both operands are sparse, the result is a sparse vector or matrix, otherwise the
-     * result is a dense vector or matrix.
-     * @param rel the right operand
-     * @return the addition of this vector and the operand
-     * @throws ValueException in case this vector or matrix and the operand have a different size
-     */
+    /** {@inheritDoc} */
+    @Override
     public final A plus(final R rel) throws ValueException
     {
         return instantiateTypeAbs(this.getData().plus(rel.getData()), getUnit());
     }
 
-    /**
-     * Subtract a Relative value from this Absolute value for a vector or matrix. The subtraction is done value by value and the
-     * result is stored in a new Relative value. If both operands are sparse, the result is a sparse vector or matrix, otherwise
-     * the result is a dense vector or matrix.
-     * @param rel the right operand
-     * @return the subtraction of this vector and the operand
-     * @throws ValueException in case this vector or matrix and the operand have a different size
-     */
+    /** {@inheritDoc} */
+    @Override
     public A minus(final R rel) throws ValueException
     {
         return instantiateTypeAbs(this.getData().minus(rel.getData()), getUnit());
     }
 
-    /**
-     * Subtract an Absolute value from this Relative value for a vector or matrix. The subtraction is done value by value and
-     * the result is stored in a new Relative value. If both operands are sparse, the result is a sparse vector or matrix,
-     * otherwise the result is a dense vector or matrix.
-     * @param abs the right operand
-     * @return the subtraction of this vector and the operand
-     * @throws ValueException in case this vector or matrix and the operand have a different size
-     */
+    /** {@inheritDoc} */
+    @Override
     public R minus(final A abs) throws ValueException
     {
-        return instantiateTypeRel(this.getData().minus(abs.getData()), getUnit());
+        return instantiateTypeRel(this.getData().minus(abs.getData()), getUnit().getRelativeUnit());
     }
 
     /* ============================================================================================ */
@@ -216,12 +203,14 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
     /**
      * Check that a provided array can be used to create some descendant of a DoubleVector, and return the Unit.
      * @param dsArray the array to check and get the unit for
-     * @param <U> the unit
+     * @param <AU> the absolute unit
+     * @param <RU> the corresponding relative unit
      * @param <S> the scalar type
      * @return the unit of the object
      * @throws ValueException when the array has length equal to 0
      */
-    static <U extends Unit<U>, S extends AbstractDoubleScalarAbs<U, S, ?>> U checkUnit(final S[] dsArray) throws ValueException
+    static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
+            S extends AbstractDoubleScalarAbs<AU, S, RU, ?>> AU checkUnit(final S[] dsArray) throws ValueException
     {
         if (dsArray != null && dsArray.length > 0)
         {
@@ -234,13 +223,14 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
     /**
      * Check that a provided list can be used to create some descendant of a DoubleVector, and return the Unit.
      * @param dsList the list to check and get the unit for
-     * @param <U> the unit
+     * @param <AU> the absolute unit of the scalars in the list
+     * @param <RU> the corresponding relative unit
      * @param <S> the scalar in the list
      * @return the unit of the object
      * @throws ValueException when the array has length equal to 0
      */
-    static <U extends Unit<U>, S extends AbstractDoubleScalarAbs<U, S, ?>> U checkUnit(final List<S> dsList)
-            throws ValueException
+    static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
+            S extends AbstractDoubleScalarAbs<AU, S, RU, ?>> AU checkUnit(final List<S> dsList) throws ValueException
     {
         if (dsList != null && dsList.size() > 0)
         {
@@ -253,13 +243,15 @@ abstract class AbstractDoubleVectorAbs<U extends Unit<U>, A extends AbstractDoub
     /**
      * Check that a provided Map can be used to create some descendant of a DoubleVector.
      * @param dsMap the provided map
-     * @param <U> Unit; the unit of the DoubleScalar list
+     * @param <AU> the absolute unit of the scalars in the map
+     * @param <RU> the corresponding relative unit
      * @param <S> the scalar in the list
      * @return List the provided list
      * @throws ValueException when the list has size equal to 0
      */
-    static <U extends Unit<U>, S extends AbstractDoubleScalarAbs<U, S, ?>> U checkUnit(final SortedMap<Integer, S> dsMap)
-            throws ValueException
+    static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
+            S extends AbstractDoubleScalarAbs<AU, S, RU, ?>> AU checkUnit(final SortedMap<Integer, S> dsMap)
+                    throws ValueException
     {
         if (dsMap != null && dsMap.size() > 0)
         {

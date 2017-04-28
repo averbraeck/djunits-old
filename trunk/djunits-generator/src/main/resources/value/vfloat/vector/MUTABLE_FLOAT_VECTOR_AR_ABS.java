@@ -9,9 +9,9 @@ import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.*;
 
 /**
- * Mutable Absolute Float%TypeAbs% Vector a vector of values with a %TypeUnit%.
+ * Mutable Absolute Float%TypeAbs% Vector a vector of values with a %TypeAbsUnit%.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.*;
  */
 public class MutableFloat%TypeAbs%Vector
     extends
-    AbstractMutableFloatVectorAbs<%TypeUnit%, Float%TypeAbs%Vector, Float%TypeRel%Vector, MutableFloat%TypeAbs%Vector, Float%TypeAbs%>
+    AbstractMutableFloatVectorAbs<%TypeAbsUnit%, %TypeRelUnit%, Float%TypeAbs%Vector, Float%TypeRel%Vector, MutableFloat%TypeAbs%Vector, Float%TypeAbs%>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -33,7 +33,7 @@ public class MutableFloat%TypeAbs%Vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloat%TypeAbs%Vector(final float[] values, final %TypeUnit% unit, final StorageType storageType) throws ValueException
+    public MutableFloat%TypeAbs%Vector(final float[] values, final %TypeAbsUnit% unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,7 +45,7 @@ public class MutableFloat%TypeAbs%Vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloat%TypeAbs%Vector(final List<Float> values, final %TypeUnit% unit, final StorageType storageType) throws ValueException
+    public MutableFloat%TypeAbs%Vector(final List<Float> values, final %TypeAbsUnit% unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -93,7 +93,7 @@ public class MutableFloat%TypeAbs%Vector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloat%TypeAbs%Vector(final SortedMap<Integer, Float> values, final %TypeUnit% unit, final int length,
+    public MutableFloat%TypeAbs%Vector(final SortedMap<Integer, Float> values, final %TypeAbsUnit% unit, final int length,
         final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -104,35 +104,35 @@ public class MutableFloat%TypeAbs%Vector
      * @param data an internal data object
      * @param unit the unit
      */
-    MutableFloat%TypeAbs%Vector(final FloatVectorData data, final %TypeUnit% unit)
+    MutableFloat%TypeAbs%Vector(final FloatVectorData data, final %TypeAbsUnit% unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Float%TypeAbs%Vector instantiateTypeAbs(final FloatVectorData dvd, final %TypeUnit% unit)
+    protected final Float%TypeAbs%Vector instantiateTypeAbs(final FloatVectorData dvd, final %TypeAbsUnit% unit)
     {
         return new Float%TypeAbs%Vector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Float%TypeRel%Vector instantiateTypeRel(final FloatVectorData dvd, final %TypeUnit% unit)
+    protected final Float%TypeRel%Vector instantiateTypeRel(final FloatVectorData dvd, final %TypeRelUnit% unit)
     {
         return new Float%TypeRel%Vector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloat%TypeAbs%Vector instantiateMutableType(final FloatVectorData dvd, final %TypeUnit% unit)
+    protected final MutableFloat%TypeAbs%Vector instantiateMutableType(final FloatVectorData dvd, final %TypeAbsUnit% unit)
     {
         return new MutableFloat%TypeAbs%Vector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Float%TypeAbs% instantiateScalar(final float value, final %TypeUnit% unit)
+    protected final Float%TypeAbs% instantiateScalar(final float value, final %TypeAbsUnit% unit)
     {
         return new Float%TypeAbs%(value, unit);
     }
@@ -149,15 +149,6 @@ public class MutableFloat%TypeAbs%Vector
     public final MutableFloat%TypeAbs%Vector toSparse()
     {
         return this.data.isSparse() ? (MutableFloat%TypeAbs%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());
-    }
-    
-    /**
-     * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute %TypeAbs% vector.
-     */
-    public final MutableFloat%TypeRel%Vector toRel()
-    {
-        return new MutableFloat%TypeRel%Vector(getData(), getUnit());
     }
     
 %FORMULAS%%TypeAbs%%

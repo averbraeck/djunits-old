@@ -4,13 +4,13 @@ import org.djunits.unit.*;
 
 /**
  * Easy access methods for the %TypeAbs% FloatScalar. Instead of:
- * <pre>FloatScalar.Abs&lt;%TypeUnit%&gt; value = new FloatScalar.Abs&lt;%TypeUnit%&gt;(100.0, %TypeUnit%.SI);</pre>
+ * <pre>FloatScalar.Abs&lt;%TypeAbsUnit%&gt; value = new FloatScalar.Abs&lt;%TypeAbsUnit%&gt;(100.0, %TypeAbsUnit%.SI);</pre>
  * we can now write:
- * <pre>Float%TypeAbs% value = new Float%TypeAbs%(100.0, %TypeUnit%.SI);</pre>
+ * <pre>Float%TypeAbs% value = new Float%TypeAbs%(100.0, %TypeAbsUnit%.SI);</pre>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
  * unit used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -19,46 +19,30 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeUnit%, Float%TypeAbs%, Float%TypeRel%>
+public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeAbsUnit%, Float%TypeAbs%, %TypeRelUnit%, Float%TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final Float%TypeAbs% ZERO = new Float%TypeAbs%(0.0f, %TypeUnit%.SI);
-
-    /** constant with value NaN. */
-    @SuppressWarnings("checkstyle:constantname")
-    public static final Float%TypeAbs% NaN = new Float%TypeAbs%(Float.NaN, %TypeUnit%.SI);
-
-    /** constant with value POSITIVE_INFINITY. */
-    public static final Float%TypeAbs% POSITIVE_INFINITY = new Float%TypeAbs%(Float.POSITIVE_INFINITY, %TypeUnit%.SI);
-
-    /** constant with value NEGATIVE_INFINITY. */
-    public static final Float%TypeAbs% NEGATIVE_INFINITY = new Float%TypeAbs%(Float.NEGATIVE_INFINITY, %TypeUnit%.SI);
-
-    /** constant with value MAX_VALUE. */
-    public static final Float%TypeAbs% POS_MAXVALUE = new Float%TypeAbs%(Float.MAX_VALUE, %TypeUnit%.SI);
-
-    /** constant with value -MAX_VALUE. */
-    public static final Float%TypeAbs% NEG_MAXVALUE = new Float%TypeAbs%(-Float.MAX_VALUE, %TypeUnit%.SI);
+    public static final Float%TypeAbs% ZERO = new Float%TypeAbs%(0.0f, %TypeAbsUnit%.BASE);
 
     /**
      * Construct Float%TypeAbs% scalar.
      * @param value float value
      * @param unit unit for the float value
      */
-    public Float%TypeAbs%(final float value, final %TypeUnit% unit)
+    public Float%TypeAbs%(final float value, final %TypeAbsUnit% unit)
     {
         super(value, unit);
     }
 
     /**
      * Construct Float%TypeAbs% scalar using a double value.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
-    public Float%TypeAbs%(final double value, final %TypeUnit% unit)
+    public Float%TypeAbs%(final double value, final %TypeAbsUnit% unit)
     {
         super((float) value, unit);
     }
@@ -74,26 +58,26 @@ public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeUnit%, Float%Typ
 
     /** {@inheritDoc} */
     @Override
-    public final Float%TypeAbs% instantiateAbs(final float value, final %TypeUnit% unit)
+    public final Float%TypeAbs% instantiateAbs(final float value, final %TypeAbsUnit% unit)
     {
         return new Float%TypeAbs%(value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final Float%TypeRel% instantiateRel(final float value, final %TypeUnit% unit)
+    public final Float%TypeRel% instantiateRel(final float value, final %TypeRelUnit% unit)
     {
         return new Float%TypeRel%(value, unit);
     }
 
     /**
      * Construct Float%TypeAbs% scalar.
-     * @param value float value in SI units
-     * @return the new scalar with the SI value
+     * @param value float value in BASE units
+     * @return the new scalar with the BASE value
      */
     public static final Float%TypeAbs% createSI(final float value)
     {
-        return new Float%TypeAbs%(value, %TypeUnit%.SI);
+        return new Float%TypeAbs%(value, %TypeAbsUnit%.BASE);
     }
 
     /**

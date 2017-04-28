@@ -12,11 +12,11 @@ import org.junit.Test;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Jun 6, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Jun 6, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MassUnitTest extends AbstractLinearUnitTest<MassUnit>
@@ -51,8 +51,7 @@ public class MassUnitTest extends AbstractLinearUnitTest<MassUnit>
         checkUnitRatioNameAndAbbreviation(MassUnit.POUND, 0.453592, 0.000001, "pound", "lb");
         // Check two conversions between non-standard units
         assertEquals("one POUND is 16 OUNCE", 16, getMultiplicationFactorTo(MassUnit.POUND, MassUnit.OUNCE), 0.00001);
-        assertEquals("one OUNCE is 0.0625 POUND", 0.0625, getMultiplicationFactorTo(MassUnit.OUNCE, MassUnit.POUND),
-            0.000001);
+        assertEquals("one OUNCE is 0.0625 POUND", 0.0625, getMultiplicationFactorTo(MassUnit.OUNCE, MassUnit.POUND), 0.000001);
         // Check conversion factor to standard unit for all remaining time units
         checkUnitRatioNameAndAbbreviation(MassUnit.OUNCE, 0.0283495, 0.0000001, "ounce", "oz");
         checkUnitRatioNameAndAbbreviation(MassUnit.TON_LONG, 1016.046906, 0.00001, "long ton", "long tn");

@@ -3,6 +3,7 @@ package org.djunits.value.vfloat.vector;
 import java.util.List;
 import java.util.SortedMap;
 
+import org.djunits.unit.AbsoluteLinearUnit;
 import org.djunits.unit.Unit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
@@ -11,7 +12,7 @@ import org.djunits.value.vfloat.scalar.FloatScalar;
 /**
  * Immutable FloatVector.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -23,10 +24,11 @@ public abstract class FloatVector
 {
     /**
      * Absolute Immutable FloatVector.
-     * @param <U> Unit
+     * @param <AU> Absolute unit
+     * @param <RU> Relative unit
      */
-    public static class Abs<U extends Unit<U>> extends
-            AbstractFloatVectorAbs<U, FloatVector.Abs<U>, FloatVector.Rel<U>, MutableFloatVector.Abs<U>, FloatScalar.Abs<U>>
+    public static class Abs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>> extends AbstractFloatVectorAbs<AU, RU,
+            FloatVector.Abs<AU, RU>, FloatVector.Rel<RU>, MutableFloatVector.Abs<AU, RU>, FloatScalar.Abs<AU, RU>>
     {
         /**  */
         private static final long serialVersionUID = 20150626L;
@@ -34,11 +36,11 @@ public abstract class FloatVector
         /**
          * Construct a new Absolute Mutable FloatVector.
          * @param values float[]; the values of the entries in the new Absolute Mutable FloatVector
-         * @param unit U; the unit of the new Absolute Mutable FloatVector
+         * @param unit AU; the unit of the new Absolute Mutable FloatVector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Abs(final float[] values, final U unit, final StorageType storageType) throws ValueException
+        public Abs(final float[] values, final AU unit, final StorageType storageType) throws ValueException
         {
             super(values, unit, storageType);
         }
@@ -46,11 +48,11 @@ public abstract class FloatVector
         /**
          * Construct a new Absolute Mutable FloatVector.
          * @param values List; the values of the entries in the new Absolute Mutable FloatVector
-         * @param unit U; the unit of the new Absolute Mutable FloatVector
+         * @param unit AU; the unit of the new Absolute Mutable FloatVector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Abs(final List<Float> values, final U unit, final StorageType storageType) throws ValueException
+        public Abs(final List<Float> values, final AU unit, final StorageType storageType) throws ValueException
         {
             super(values, unit, storageType);
         }
@@ -61,7 +63,7 @@ public abstract class FloatVector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
-        public Abs(final FloatScalar.Abs<U>[] values, final StorageType storageType) throws ValueException
+        public Abs(final FloatScalar.Abs<AU, RU>[] values, final StorageType storageType) throws ValueException
         {
             super(values, storageType);
         }
@@ -72,7 +74,7 @@ public abstract class FloatVector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
-        public Abs(final List<FloatScalar.Abs<U>> values, final StorageType storageType) throws ValueException
+        public Abs(final List<FloatScalar.Abs<AU, RU>> values, final StorageType storageType) throws ValueException
         {
             super(values, storageType);
         }
@@ -84,7 +86,7 @@ public abstract class FloatVector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
-        public Abs(final SortedMap<Integer, FloatScalar.Abs<U>> values, final int length, final StorageType storageType)
+        public Abs(final SortedMap<Integer, FloatScalar.Abs<AU, RU>> values, final int length, final StorageType storageType)
                 throws ValueException
         {
             super(values, length, storageType);
@@ -93,12 +95,12 @@ public abstract class FloatVector
         /**
          * Construct a new Absolute Mutable FloatVector.
          * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatVector
-         * @param unit U; the unit of the new Absolute Sparse Mutable FloatVector
+         * @param unit AU; the unit of the new Absolute Sparse Mutable FloatVector
          * @param length the size of the vector
          * @param storageType the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
-        public Abs(final SortedMap<Integer, Float> values, final U unit, final int length, final StorageType storageType)
+        public Abs(final SortedMap<Integer, Float> values, final AU unit, final int length, final StorageType storageType)
                 throws ValueException
         {
             super(values, unit, length, storageType);
@@ -109,51 +111,51 @@ public abstract class FloatVector
          * @param data an internal data object
          * @param unit the unit
          */
-        public Abs(final FloatVectorData data, final U unit)
+        public Abs(final FloatVectorData data, final AU unit)
         {
             super(data, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        protected final FloatVector.Abs<U> instantiateTypeAbs(final FloatVectorData dvd, final U unit)
+        protected final FloatVector.Abs<AU, RU> instantiateTypeAbs(final FloatVectorData dvd, final AU unit)
         {
-            return new FloatVector.Abs<U>(dvd, unit);
+            return new FloatVector.Abs<AU, RU>(dvd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        protected final FloatVector.Rel<U> instantiateTypeRel(final FloatVectorData dvd, final U unit)
+        protected final FloatVector.Rel<RU> instantiateTypeRel(final FloatVectorData dvd, final RU unit)
         {
-            return new FloatVector.Rel<U>(dvd, unit);
+            return new FloatVector.Rel<RU>(dvd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        protected final MutableFloatVector.Abs<U> instantiateMutableType(final FloatVectorData dvd, final U unit)
+        protected final MutableFloatVector.Abs<AU, RU> instantiateMutableType(final FloatVectorData dvd, final AU unit)
         {
-            return new MutableFloatVector.Abs<U>(dvd, unit);
+            return new MutableFloatVector.Abs<AU, RU>(dvd, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        protected final FloatScalar.Abs<U> instantiateScalar(final float value, final U unit)
+        protected final FloatScalar.Abs<AU, RU> instantiateScalar(final float value, final AU unit)
         {
-            return new FloatScalar.Abs<U>(value, unit);
+            return new FloatScalar.Abs<AU, RU>(value, unit);
         }
 
         /** {@inheritDoc} */
         @Override
-        public final FloatVector.Abs<U> toDense()
+        public final FloatVector.Abs<AU, RU> toDense()
         {
-            return this.data.isDense() ? (FloatVector.Abs<U>) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+            return this.data.isDense() ? (FloatVector.Abs<AU, RU>) this : instantiateTypeAbs(this.data.toDense(), getUnit());
         }
 
         /** {@inheritDoc} */
         @Override
-        public final FloatVector.Abs<U> toSparse()
+        public final FloatVector.Abs<AU, RU> toSparse()
         {
-            return this.data.isSparse() ? (FloatVector.Abs<U>) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
+            return this.data.isSparse() ? (FloatVector.Abs<AU, RU>) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
         }
 
     }

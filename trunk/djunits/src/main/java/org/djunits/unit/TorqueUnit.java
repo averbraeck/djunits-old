@@ -9,7 +9,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * The units of torque (moment of force).
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -28,7 +28,7 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
     private final LengthUnit lengthUnit;
 
     /** The unit of time for the torque unit, e.g., second. */
-    private final TimeUnit timeUnit;
+    private final DurationUnit durationUnit;
 
     /** The SI unit for torque is Newton meter. */
     public static final TorqueUnit SI;
@@ -47,8 +47,8 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
 
     static
     {
-        SI = new TorqueUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "TorqueUnit.Newton_meter", "TorqueUnit.N.m",
-                SI_DERIVED, true);
+        SI = new TorqueUnit(MassUnit.KILOGRAM, LengthUnit.METER, DurationUnit.SECOND, "TorqueUnit.Newton_meter",
+                "TorqueUnit.N.m", SI_DERIVED, true);
         NEWTON_METER = SI;
         METER_KILOGRAM_FORCE = new TorqueUnit(ForceUnit.KILOGRAM_FORCE, LengthUnit.METER, "TorqueUnit.meter_kilogram-force",
                 "TorqueUnit.m.kgf", OTHER, true);
@@ -62,40 +62,39 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
      * Create a torque unit from mass, length and time units.
      * @param massUnit the unit of mass for the torque unit, e.g., kilogram
      * @param lengthUnit the unit of length for the torque unit, e.g., meter
-     * @param timeUnit the unit of time for the torque unit, e.g., second
+     * @param durationUnit the unit of time for the torque unit, e.g., second
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private TorqueUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit,
+    private TorqueUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, NEWTON_METER,
-                massUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
-                        * lengthUnit.getConversionFactorToStandardUnit()
-                        / (timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()),
+        super(nameOrNameKey,
+                abbreviationOrAbbreviationKey, unitSystem, NEWTON_METER, massUnit.getScaleFactor() * lengthUnit.getScaleFactor()
+                        * lengthUnit.getScaleFactor() / (durationUnit.getScaleFactor() * durationUnit.getScaleFactor()),
                 standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
-        this.timeUnit = timeUnit;
+        this.durationUnit = durationUnit;
     }
 
     /**
      * Create a user-defined torque unit from mass, length and time units.
      * @param massUnit the unit of mass for the torque unit, e.g., kilogram
      * @param lengthUnit the unit of length for the torque unit, e.g., meter
-     * @param timeUnit the unit of time for the torque unit, e.g., second
+     * @param durationUnit the unit of time for the torque unit, e.g., second
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public TorqueUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit, final String name,
+    public TorqueUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
     {
-        this(massUnit, lengthUnit, timeUnit, name, abbreviation, unitSystem, false);
+        this(massUnit, lengthUnit, durationUnit, name, abbreviation, unitSystem, false);
     }
 
     /**
@@ -112,10 +111,10 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, NEWTON_METER,
-                forceUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
+                forceUnit.getScaleFactor() * lengthUnit.getScaleFactor(), standardUnit);
         this.massUnit = forceUnit.getMassUnit();
         this.lengthUnit = forceUnit.getLengthUnit();
-        this.timeUnit = forceUnit.getTimeUnit();
+        this.durationUnit = forceUnit.getDurationUnit();
     }
 
     /**
@@ -139,17 +138,17 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private TorqueUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final TorqueUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final TorqueUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
                 standardUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
-        this.timeUnit = referenceUnit.getTimeUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**
@@ -158,12 +157,12 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public TorqueUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final TorqueUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+            final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**
@@ -183,11 +182,11 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
     }
 
     /**
-     * @return timeUnit
+     * @return durationUnit
      */
-    public final TimeUnit getTimeUnit()
+    public final DurationUnit getDurationUnit()
     {
-        return this.timeUnit;
+        return this.durationUnit;
     }
 
     /** {@inheritDoc} */
