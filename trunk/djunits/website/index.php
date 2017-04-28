@@ -215,7 +215,7 @@ System.out.println(diff.toString(SpeedUnit.<b>KM_PER_HOUR</b>, false, true));
       operations with known result type. For instance</p>
     <pre class="highlight">
 Speed speed = <b>new</b> Speed(50, SpeedUnit.<b>KM_PER_HOUR</b>);
-Duration duration = <b>new</b> Duration(0.5, TimeUnit.<b>HOUR</b>);
+Duration duration = <b>new</b> Duration(0.5, DurationUnit.<b>HOUR</b>);
 Length distance = speed.multiplyBy(duration);
 Acceleration acc0 = speed.divideBy(duration);
 Area area = distance.multiplyBy(distance);
