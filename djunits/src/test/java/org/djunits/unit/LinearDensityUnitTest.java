@@ -12,11 +12,11 @@ import org.junit.Test;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version 11 nov. 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version 11 nov. 2014 <br>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class LinearDensityUnitTest extends AbstractLinearUnitTest<LinearDensityUnit>
@@ -50,10 +50,10 @@ public class LinearDensityUnitTest extends AbstractLinearUnitTest<LinearDensityU
         checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_KILOMETER, 0.001, 0.0000001, "per kilometer", "1/km");
         checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_MILLIMETER, 1000, 0.01, "per millimeter", "1/mm");
         // Check two conversions between non-standard units
-        assertEquals("one per millimeter is 1000000 per kilometer", 1000000, getMultiplicationFactorTo(
-            LinearDensityUnit.PER_MILLIMETER, LinearDensityUnit.PER_KILOMETER), 0.1);
-        assertEquals("one per kilometer is 0.000001 per millimeter", 0.000001, getMultiplicationFactorTo(
-            LinearDensityUnit.PER_KILOMETER, LinearDensityUnit.PER_MILLIMETER), 0.00000005);
+        assertEquals("one per millimeter is 1000000 per kilometer", 1000000,
+                getMultiplicationFactorTo(LinearDensityUnit.PER_MILLIMETER, LinearDensityUnit.PER_KILOMETER), 0.1);
+        assertEquals("one per kilometer is 0.000001 per millimeter", 0.000001,
+                getMultiplicationFactorTo(LinearDensityUnit.PER_KILOMETER, LinearDensityUnit.PER_MILLIMETER), 0.00000005);
     }
 
     /**
@@ -62,8 +62,7 @@ public class LinearDensityUnitTest extends AbstractLinearUnitTest<LinearDensityU
     @Test
     public final void createLinearDensityUnit()
     {
-        LinearDensityUnit muLDU =
-            new LinearDensityUnit("PerInch", "/in", OTHER, LinearDensityUnit.PER_METER, 2.54 / 100);
+        LinearDensityUnit muLDU = new LinearDensityUnit("PerInch", "/in", OTHER, LinearDensityUnit.PER_METER, 2.54 / 100);
         assertTrue("Can create a new LinearDensityUnit", null != muLDU);
         checkUnitRatioNameAndAbbreviation(muLDU, 0.0254, 0.000001, "PerInch", "/in");
     }

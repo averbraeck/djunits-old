@@ -3,7 +3,7 @@ package org.djunits.value.vdouble.scalar;
 import org.djunits.unit.AccelerationUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.FrequencyUnit;
-import org.djunits.unit.MoneyPerTimeUnit;
+import org.djunits.unit.MoneyPerDurationUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
 
@@ -23,7 +23,7 @@ import org.djunits.unit.SpeedUnit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -216,13 +216,13 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
     }
 
     /**
-     * Calculate the multiplication of Frequency and Money, which results in a MoneyPerTime scalar.
+     * Calculate the multiplication of Frequency and Money, which results in a MoneyPerDuration scalar.
      * @param v Frequency scalar
-     * @return MoneyPerTime scalar as a multiplication of Frequency and Money
+     * @return MoneyPerDuration scalar as a multiplication of Frequency and Money
      */
-    public final MoneyPerTime multiplyBy(final Money v)
+    public final MoneyPerDuration multiplyBy(final Money v)
     {
-        return new MoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+        return new MoneyPerDuration(this.si * v.si, MoneyPerDurationUnit.getStandardMoneyPerDurationUnit());
     }
 
 }

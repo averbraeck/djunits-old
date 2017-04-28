@@ -1,6 +1,6 @@
 package org.djunits.value.vfloat.matrix;
 
-import org.djunits.unit.TimeUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatDuration;
@@ -8,7 +8,7 @@ import org.djunits.value.vfloat.scalar.FloatDuration;
 /**
  * Mutable FloatDuration Matrix.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.FloatDuration;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MutableFloatDurationMatrix
-        extends AbstractMutableFloatMatrixRel<TimeUnit, FloatDurationMatrix, MutableFloatDurationMatrix, FloatDuration>
+        extends AbstractMutableFloatMatrixRel<DurationUnit, FloatDurationMatrix, MutableFloatDurationMatrix, FloatDuration>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -29,7 +29,7 @@ public class MutableFloatDurationMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableFloatDurationMatrix(final float[][] values, final TimeUnit unit, final StorageType storageType)
+    public MutableFloatDurationMatrix(final float[][] values, final DurationUnit unit, final StorageType storageType)
             throws ValueException
     {
         super(values, unit, storageType);
@@ -51,14 +51,14 @@ public class MutableFloatDurationMatrix
      * @param data an internal data object
      * @param unit the unit
      */
-    MutableFloatDurationMatrix(final FloatMatrixData data, final TimeUnit unit)
+    MutableFloatDurationMatrix(final FloatMatrixData data, final DurationUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDurationMatrix instantiateType(final FloatMatrixData fmd, final TimeUnit unit)
+    protected final FloatDurationMatrix instantiateType(final FloatMatrixData fmd, final DurationUnit unit)
     {
         return new FloatDurationMatrix(fmd, unit);
     }
@@ -79,25 +79,16 @@ public class MutableFloatDurationMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatDurationMatrix instantiateMutableType(final FloatMatrixData fmd, final TimeUnit unit)
+    protected final MutableFloatDurationMatrix instantiateMutableType(final FloatMatrixData fmd, final DurationUnit unit)
     {
         return new MutableFloatDurationMatrix(fmd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDuration instantiateScalar(final float value, final TimeUnit unit)
+    protected final FloatDuration instantiateScalar(final float value, final DurationUnit unit)
     {
         return new FloatDuration(value, unit);
-    }
-
-    /**
-     * Translate the relative matrix into an absolute matrix (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative FloatDuration matrix.
-     */
-    public final MutableFloatTimeMatrix toAbs()
-    {
-        return new MutableFloatTimeMatrix(getData(), getUnit());
     }
 
 }

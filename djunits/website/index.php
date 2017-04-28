@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>DJUNITS - Delft Java UNIT System, version 2.02</title>
+<title>DJUNITS - Delft Java UNIT System, version 3.00</title>
 <meta name="Author" content="Peter Knoppers, p.knoppers@tudelft.nl" />
 <meta name="Author" content="Alexander Verbraeck, a.verbraeck@tudelft.nl" />
 <meta name="Description" content="Delft Java Unit System" />
@@ -62,7 +62,8 @@
       An Absolute value is a value measured from a standard reference. For geographical directions <i>North</i> and <i>East</i> should be Absolute values.
       Adding two absolute values together makes no sense. Subtracting one absolute value from another <i>does</i> make sense (and results in a Relative value).
       Subtracting <i>East</i> from <i>North</i> should result in an angle of &plusmn;90&deg; or &plusmn;&pi;/2 (depending on the unit used to express the
-      result).
+      result). This means that an absolute unit needs to have a description of that reference to make it useful. Scalars subtracted from each other need
+      to know their reference to be able to carry out the subtraction. 
     </p>
     <p>A Relative value expresses the difference between two (Absolute or Relative) values. The angle in the example above is a Relative value. Relative
       values can be added together and subtracted from each other (resulting in Relative values). Adding a Relative value to an Absolute value result in an
@@ -133,6 +134,7 @@
         <th>Quantity</th>
         <th>Absolute interpretation</th>
         <th>Absolute class</th>
+        <th>Unit</th>
         <th>Relative interpretation</th>
         <th>Relative class</th>
         <th>Unit</th>
@@ -141,6 +143,7 @@
         <th>Length</th>
         <td>Position</td>
         <td>Position</td>
+        <td>PositionUnit</td>
         <td>Distance</td>
         <td>Length</td>
         <td>LengthUnit</td>
@@ -149,7 +152,8 @@
         <th>Angle</th>
         <td>Direction or Slope</td>
         <td>Direction</td>
-        <td>Angle (difference in direction or slope)</td>
+        <td>DirectionUnit</td>
+        <td>Angle (direction/slope difference)</td>
         <td>Angle</td>
         <td>AngleUnit</td>
         </tr>
@@ -157,6 +161,7 @@
         <th>Temperature</th>
         <td>Temperature</td>
         <td>AbsoluteTemperature</td>
+        <td>AbsoluteTemperatureUnit</td>
         <td>Temperature difference</td>
         <td>Temperature</td>
         <td>TemperatureUnit</td>
@@ -165,9 +170,10 @@
         <th>Time</th>
         <td>Time (instant)</td>
         <td>Time</td>
-        <td>Duration</td>
-        <td>Duration</td>
         <td>TimeUnit</td>
+        <td>Duration</td>
+        <td>Duration</td>
+        <td>DurationUnit</td>
       </tr>
     </table>
     <p>The use of Absolute in relation to Temperature here may be confusing. In the table above, an absolute temperature is not necessarily expressed in

@@ -13,7 +13,7 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarRel;
 /**
  * Relative Mutable typed Matrix.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -25,7 +25,8 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarRel;
  * @param <MR> the mutable matrix type
  * @param <S> the scalar type
  */
-abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends AbstractFloatMatrixRel<U, R, MR, S>, MR extends AbstractMutableFloatMatrixRel<U, R, MR, S>, S extends AbstractFloatScalarRel<U, S>>
+abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends AbstractFloatMatrixRel<U, R, MR, S>,
+        MR extends AbstractMutableFloatMatrixRel<U, R, MR, S>, S extends AbstractFloatScalarRel<U, S>>
         extends AbstractFloatMatrixRel<U, R, MR, S> implements Mutable, MathFunctionsRel<MR>, FloatMathFunctions<MR>
 {
     /** */

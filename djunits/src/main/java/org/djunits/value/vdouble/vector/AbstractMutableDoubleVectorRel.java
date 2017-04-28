@@ -15,7 +15,7 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarRel;
 /**
  * Relative Mutable typed Vector.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -27,7 +27,8 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarRel;
  * @param <MR> the mutable vector type
  * @param <S> the scalar type
  */
-abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends AbstractDoubleVectorRel<U, R, MR, S>, MR extends AbstractMutableDoubleVectorRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
+abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends AbstractDoubleVectorRel<U, R, MR, S>,
+        MR extends AbstractMutableDoubleVectorRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
         extends AbstractDoubleVectorRel<U, R, MR, S>
         implements MathFunctionsRel<MR>, DoubleMathFunctions<MR>, MutableDoubleVectorInterface<U>
 {

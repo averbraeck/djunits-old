@@ -2,8 +2,10 @@ package org.djunits.value.vdouble.matrix;
 
 import java.io.Serializable;
 
+import org.djunits.unit.AbsoluteLinearUnit;
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
+import org.djunits.value.FunctionsAbs;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.AbstractDoubleScalarAbs;
@@ -11,21 +13,24 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarAbs;
 /**
  * Absolute Immutable typed matrix.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
  * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
- * @param <U> the unit
+ * @param <AU> the absolute unit
+ * @param <RU> the relative unit
  * @param <A> the absolute matrix type
  * @param <R> the relative matrix type
  * @param <MA> the mutable absolute matrix type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoubleMatrixAbs<U, A, R, MA, S>, R extends AbstractDoubleMatrixRel<U, R, ?, ?>, MA extends AbstractMutableDoubleMatrixAbs<U, A, R, MA, S>, S extends AbstractDoubleScalarAbs<U, S, ?>>
-        extends AbstractDoubleMatrix<U, A> implements Absolute, Serializable
+abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
+        A extends AbstractDoubleMatrixAbs<AU, RU, A, R, MA, S>, R extends AbstractDoubleMatrixRel<RU, R, ?, ?>,
+        MA extends AbstractMutableDoubleMatrixAbs<AU, RU, A, R, MA, S>, S extends AbstractDoubleScalarAbs<AU, S, RU, ?>>
+        extends AbstractDoubleMatrix<AU, A> implements FunctionsAbs<AU, RU, A, R>, Absolute, Serializable
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -33,11 +38,11 @@ abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoub
     /**
      * Construct a new Absolute Immutable DoubleMatrix.
      * @param values double[][]; the values of the entries in the new Absolute Immutable DoubleMatrix
-     * @param unit U; the unit of the new Absolute Immutable DoubleMatrix
+     * @param unit AU; the unit of the new Absolute Immutable DoubleMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    AbstractDoubleMatrixAbs(final double[][] values, final U unit, final StorageType storageType) throws ValueException
+    AbstractDoubleMatrixAbs(final double[][] values, final AU unit, final StorageType storageType) throws ValueException
     {
         super(unit, DoubleMatrixData.instantiate(ensureRectangularAndNonEmpty(values), unit.getScale(), storageType));
     }
@@ -58,7 +63,7 @@ abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoub
      * @param data an internal data object
      * @param unit the unit
      */
-    AbstractDoubleMatrixAbs(final DoubleMatrixData data, final U unit)
+    AbstractDoubleMatrixAbs(final DoubleMatrixData data, final AU unit)
     {
         super(unit, data.copy());
     }
@@ -80,7 +85,7 @@ abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoub
      * @param unit the unit
      * @return M the Mutable DoubleMatrix of the right type
      */
-    protected abstract A instantiateTypeAbs(final DoubleMatrixData dmd, final U unit);
+    protected abstract A instantiateTypeAbs(DoubleMatrixData dmd, AU unit);
 
     /**
      * Construct a new Relative Immutable DoubleMatrix of the right type. Each extending class must implement this method.
@@ -88,7 +93,7 @@ abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoub
      * @param unit the unit
      * @return M the Mutable DoubleMatrix of the right type
      */
-    protected abstract R instantiateTypeRel(final DoubleMatrixData dmd, final U unit);
+    protected abstract R instantiateTypeRel(DoubleMatrixData dmd, RU unit);
 
     /**
      * Construct a new Absolute Mutable DoubleMatrix of the right type. Each extending class must implement this method.
@@ -96,7 +101,7 @@ abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoub
      * @param unit the unit
      * @return M the Mutable DoubleMatrix of the right type
      */
-    protected abstract MA instantiateMutableType(final DoubleMatrixData dmd, final U unit);
+    protected abstract MA instantiateMutableType(DoubleMatrixData dmd, AU unit);
 
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
@@ -104,7 +109,7 @@ abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoub
      * @param unit the unit
      * @return S the Immutable DoubleScalar of the right type
      */
-    protected abstract S instantiateScalar(final double value, final U unit);
+    protected abstract S instantiateScalar(double value, AU unit);
 
     /**
      * Return the Scalar value at the index position.
@@ -124,43 +129,25 @@ abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoub
     /**************************** TYPED CALCULATION METHODS ***************************/
     /**********************************************************************************/
 
-    /**
-     * Add a Relative value to this Absolute value for a matrix or matrix. The addition is done value by value and the result is
-     * stored in a new Absolute value. If both operands are sparse, the result is a sparse matrix or matrix, otherwise the
-     * result is a dense matrix or matrix.
-     * @param rel the right operand
-     * @return the addition of this matrix and the operand
-     * @throws ValueException in case this matrix or matrix and the operand have a different size
-     */
+    /** {@inheritDoc} */
+    @Override
     public final A plus(final R rel) throws ValueException
     {
         return instantiateTypeAbs(this.getData().plus(rel.getData()), getUnit());
     }
 
-    /**
-     * Subtract a Relative value from this Absolute value for a matrix or matrix. The subtraction is done value by value and the
-     * result is stored in a new Relative value. If both operands are sparse, the result is a sparse matrix or matrix, otherwise
-     * the result is a dense matrix or matrix.
-     * @param rel the right operand
-     * @return the subtraction of this matrix and the operand
-     * @throws ValueException in case this matrix or matrix and the operand have a different size
-     */
+    /** {@inheritDoc} */
+    @Override
     public final A minus(final R rel) throws ValueException
     {
         return instantiateTypeAbs(this.getData().minus(rel.getData()), getUnit());
     }
 
-    /**
-     * Subtract an Absolute value from this Relative value for a matrix or matrix. The subtraction is done value by value and
-     * the result is stored in a new Relative value. If both operands are sparse, the result is a sparse matrix or matrix,
-     * otherwise the result is a dense matrix or matrix.
-     * @param abs the right operand
-     * @return the subtraction of this matrix and the operand
-     * @throws ValueException in case this matrix or matrix and the operand have a different size
-     */
+    /** {@inheritDoc} */
+    @Override
     public final R minus(final A abs) throws ValueException
     {
-        return instantiateTypeRel(this.getData().minus(abs.getData()), getUnit());
+        return instantiateTypeRel(this.getData().minus(abs.getData()), getUnit().getRelativeUnit());
     }
 
     /* ============================================================================================ */
@@ -170,13 +157,14 @@ abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoub
     /**
      * Check that a provided array can be used to create some descendant of a DoubleMatrix, and return the Unit.
      * @param dsArray the array to check and get the unit for
-     * @param <U> the unit
+     * @param <AU> the absolute unit
+     * @param <RU> the corresponding relative unit
      * @param <S> the scalar type
      * @return the unit of the object
      * @throws ValueException when the array is null, has length equal to 0, or has first entry with length equal to 0
      */
-    static <U extends Unit<U>, S extends AbstractDoubleScalarAbs<U, S, ?>> U checkUnit(final S[][] dsArray)
-            throws ValueException
+    static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
+            S extends AbstractDoubleScalarAbs<AU, S, RU, ?>> AU checkUnit(final S[][] dsArray) throws ValueException
     {
         ensureRectangularAndNonEmpty(dsArray);
         return dsArray[0][0].getUnit();
@@ -185,12 +173,14 @@ abstract class AbstractDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoub
     /**
      * Check that a 2D array of DoubleScalar&lt;?&gt; is rectangular; i.e. all rows have the same length and is non empty.
      * @param values DoubleScalar&lt;?&gt;[][]; the 2D array to check
-     * @param <U> the unit
+     * @param <AU> the absolute unit
+     * @param <RU> the corresponding relative unit
      * @param <S> the scalar type
      * @throws ValueException when values is not rectangular, or contains no data
      */
-    protected static <U extends Unit<U>, S extends AbstractDoubleScalarAbs<U, S, ?>> void ensureRectangularAndNonEmpty(
-            final S[][] values) throws ValueException
+    protected static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
+            S extends AbstractDoubleScalarAbs<AU, S, RU, ?>> void ensureRectangularAndNonEmpty(final S[][] values)
+                    throws ValueException
     {
         if (null == values)
         {

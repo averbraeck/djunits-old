@@ -13,7 +13,7 @@ import org.djunits.value.vdouble.scalar.DoubleScalarInterface;
 /**
  * Stores the data for a DoubleVector and carries out basic operations.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
@@ -338,14 +338,14 @@ abstract class DoubleVectorData
      * @param index the index to get the value for
      * @return the value at the index
      */
-    public abstract double getSI(final int index);
+    public abstract double getSI(int index);
 
     /**
      * Sets a value at the index in the vector.
      * @param index the index to set the value for
      * @param valueSI the value at the index
      */
-    public abstract void setSI(final int index, final double valueSI);
+    public abstract void setSI(int index, double valueSI);
 
     /**
      * @return the number of non-zero cells.
@@ -413,7 +413,7 @@ abstract class DoubleVectorData
      * @param right the other data object to add
      * @throws ValueException if vectors have different lengths
      */
-    public abstract void incrementBy(final DoubleVectorData right) throws ValueException;
+    public abstract void incrementBy(DoubleVectorData right) throws ValueException;
 
     /**
      * Add a number to this vector on a cell-by-cell basis.
@@ -447,7 +447,7 @@ abstract class DoubleVectorData
      * @param right the other data object to subtract
      * @throws ValueException if vectors have different lengths
      */
-    public abstract void decrementBy(final DoubleVectorData right) throws ValueException;
+    public abstract void decrementBy(DoubleVectorData right) throws ValueException;
 
     /**
      * Subtract a number from this vector on a cell-by-cell basis.
@@ -482,7 +482,7 @@ abstract class DoubleVectorData
      * @param right the other data object to multiply with
      * @throws ValueException if vectors have different lengths
      */
-    public abstract void multiplyBy(final DoubleVectorData right) throws ValueException;
+    public abstract void multiplyBy(DoubleVectorData right) throws ValueException;
 
     /**
      * Multiply the values of this vector with a number on a cell-by-cell basis.
@@ -517,7 +517,7 @@ abstract class DoubleVectorData
      * @param right the other data object to divide by
      * @throws ValueException if vectors have different lengths
      */
-    public abstract void divideBy(final DoubleVectorData right) throws ValueException;
+    public abstract void divideBy(DoubleVectorData right) throws ValueException;
 
     /**
      * Divide the values of this vector by a number on a cell-by-cell basis.

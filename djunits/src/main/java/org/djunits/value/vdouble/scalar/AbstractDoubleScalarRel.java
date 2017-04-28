@@ -10,8 +10,8 @@ import org.djunits.value.vdouble.DoubleMathFunctions;
  * The typed, abstract DoubleScalarRel class that forms the basis of all DoubleScalar definitions and extensions.<br>
  * Note: A relative scalar class can implement the toAbs() method if it has an absolute equivalent.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/current/license.html">OpenTrafficSim License</a>.
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
  * initial version Oct 13, 2016 <br>
@@ -52,7 +52,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
      * @param unit the unit
      * @return R a new relative instance of the DoubleScalar of the right type
      */
-    public abstract R instantiateRel(final double value, final U unit);
+    public abstract R instantiateRel(double value, U unit);
 
     /**
      * Increment the value by the supplied value and return the result. If the units are equal, the result is expressed in that

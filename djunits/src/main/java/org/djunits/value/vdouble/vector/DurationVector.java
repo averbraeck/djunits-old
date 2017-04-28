@@ -3,7 +3,7 @@ package org.djunits.value.vdouble.vector;
 import java.util.List;
 import java.util.SortedMap;
 
-import org.djunits.unit.TimeUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Duration;
@@ -11,7 +11,7 @@ import org.djunits.value.vdouble.scalar.Duration;
 /**
  * Immutable Relative Duration Vector.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.Duration;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class DurationVector extends AbstractDoubleVectorRel<TimeUnit, DurationVector, MutableDurationVector, Duration>
+public class DurationVector extends AbstractDoubleVectorRel<DurationUnit, DurationVector, MutableDurationVector, Duration>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -31,7 +31,7 @@ public class DurationVector extends AbstractDoubleVectorRel<TimeUnit, DurationVe
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public DurationVector(final double[] values, final TimeUnit unit, final StorageType storageType) throws ValueException
+    public DurationVector(final double[] values, final DurationUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -43,7 +43,8 @@ public class DurationVector extends AbstractDoubleVectorRel<TimeUnit, DurationVe
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public DurationVector(final List<Double> values, final TimeUnit unit, final StorageType storageType) throws ValueException
+    public DurationVector(final List<Double> values, final DurationUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -92,7 +93,7 @@ public class DurationVector extends AbstractDoubleVectorRel<TimeUnit, DurationVe
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public DurationVector(final SortedMap<Integer, Double> values, final TimeUnit unit, final int length,
+    public DurationVector(final SortedMap<Integer, Double> values, final DurationUnit unit, final int length,
             final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -103,28 +104,28 @@ public class DurationVector extends AbstractDoubleVectorRel<TimeUnit, DurationVe
      * @param data an internal data object
      * @param unit the unit
      */
-    DurationVector(final DoubleVectorData data, final TimeUnit unit)
+    DurationVector(final DoubleVectorData data, final DurationUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final DurationVector instantiateType(final DoubleVectorData dvd, final TimeUnit unit)
+    protected final DurationVector instantiateType(final DoubleVectorData dvd, final DurationUnit unit)
     {
         return new DurationVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableDurationVector instantiateMutableType(final DoubleVectorData dvd, final TimeUnit unit)
+    protected final MutableDurationVector instantiateMutableType(final DoubleVectorData dvd, final DurationUnit unit)
     {
         return new MutableDurationVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Duration instantiateScalar(final double value, final TimeUnit unit)
+    protected final Duration instantiateScalar(final double value, final DurationUnit unit)
     {
         return new Duration(value, unit);
     }
@@ -141,15 +142,6 @@ public class DurationVector extends AbstractDoubleVectorRel<TimeUnit, DurationVe
     public final DurationVector toSparse()
     {
         return this.data.isSparse() ? (DurationVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Translate the relative vector into an absolute vector (e.g., before or after a multiplication or division).
-     * @return an absolute version of this relative Duration vector.
-     */
-    public final TimeVector toAbs()
-    {
-        return new TimeVector(getData(), getUnit());
     }
 
 }

@@ -11,7 +11,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * for length). Unlike temperature in degrees Celsius which is <strong>not</strong> linearly related to the Kelvin (the SI unit
  * for temperature).
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
@@ -52,16 +52,16 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final U referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final U referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem,
                 referenceUnit == null ? StandardScale.SCALE
                         : new LinearScale(
-                                referenceUnit.getScale().getConversionFactorToStandardUnit() * conversionFactorToReferenceUnit),
+                                referenceUnit.getScale().getConversionFactorToStandardUnit() * scaleFactorToReferenceUnit),
                 standardUnit);
     }
 
@@ -85,7 +85,8 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
 
     /** {@inheritDoc} */
     @Override
-    public final LinearScale getScale()
+    @SuppressWarnings("checkstyle:designforextension")
+    public LinearScale getScale()
     {
         return (LinearScale) super.getScale();
     }
@@ -93,7 +94,7 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
     /**
      * @return the conversion factor to the standard unit (e.g., the SI unit)
      */
-    public final double getConversionFactorToStandardUnit()
+    public final double getScaleFactor()
     {
         return getScale().getConversionFactorToStandardUnit();
     }

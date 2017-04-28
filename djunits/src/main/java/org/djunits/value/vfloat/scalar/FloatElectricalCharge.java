@@ -1,9 +1,9 @@
 package org.djunits.value.vfloat.scalar;
 
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.ElectricalChargeUnit;
 import org.djunits.unit.ElectricalCurrentUnit;
-import org.djunits.unit.TimeUnit;
 
 /**
  * Easy access methods for the ElectricalCharge FloatScalar, which is relative by definition. An example is Speed. Instead of:
@@ -21,7 +21,7 @@ import org.djunits.unit.TimeUnit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -208,7 +208,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
      */
     public final FloatDuration divideBy(final FloatElectricalCurrent v)
     {
-        return new FloatDuration(this.si / v.si, TimeUnit.SI);
+        return new FloatDuration(this.si / v.si, DurationUnit.SI);
     }
 
 }

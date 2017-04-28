@@ -4,7 +4,7 @@ package org.djunits.value;
  * Interface to force a limited number of functions of Math to be implemented for relative values, in addition to those already
  * implemented for absolute values.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-10-04 20:48:33 +0200 (Sun, 04 Oct 2015) $, @version $Revision: 87 $, by $Author: averbraeck $, initial

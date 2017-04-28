@@ -11,7 +11,7 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarRel;
 /**
  * Relative Immutable typed matrix.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -23,7 +23,8 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarRel;
  * @param <MR> the mutable relative matrix type
  * @param <S> the relative scalar type
  */
-abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoubleMatrixRel<U, R, MR, S>, MR extends AbstractMutableDoubleMatrixRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
+abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoubleMatrixRel<U, R, MR, S>,
+        MR extends AbstractMutableDoubleMatrixRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
         extends AbstractDoubleMatrix<U, R> implements Relative, Serializable
 {
     /** */
@@ -79,7 +80,7 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
      * @param unit the unit
      * @return M the Mutable DoubleMatrix of the right type
      */
-    protected abstract R instantiateType(final DoubleMatrixData dmd, final U unit);
+    protected abstract R instantiateType(DoubleMatrixData dmd, U unit);
 
     /**
      * Construct a new Relative Mutable DoubleMatrix of the right type. Each extending class must implement this method.
@@ -87,7 +88,7 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
      * @param unit the unit
      * @return M the Mutable DoubleMatrix of the right type
      */
-    protected abstract MR instantiateMutableType(final DoubleMatrixData dmd, final U unit);
+    protected abstract MR instantiateMutableType(DoubleMatrixData dmd, U unit);
 
     /**
      * Construct a new Relative Immutable DoubleScalar of the right type. Each extending class must implement this method.
@@ -95,7 +96,7 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
      * @param unit the unit
      * @return S the Immutable DoubleScalar of the right type
      */
-    protected abstract S instantiateScalar(final double value, final U unit);
+    protected abstract S instantiateScalar(double value, U unit);
 
     /**
      * Return the Scalar value at the index position.
@@ -192,8 +193,8 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
      * @param <S> the scalar type
      * @throws ValueException when values is not rectangular, or contains no data
      */
-    protected static <U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>> void ensureRectangularAndNonEmpty(
-            final S[][] values) throws ValueException
+    protected static <U extends Unit<U>,
+            S extends AbstractDoubleScalarRel<U, S>> void ensureRectangularAndNonEmpty(final S[][] values) throws ValueException
     {
         if (null == values)
         {

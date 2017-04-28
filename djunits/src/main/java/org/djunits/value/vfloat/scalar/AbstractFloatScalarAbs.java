@@ -1,5 +1,6 @@
 package org.djunits.value.vfloat.scalar;
 
+import org.djunits.unit.AbsoluteLinearUnit;
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
 import org.djunits.value.MathFunctionsAbs;
@@ -10,20 +11,22 @@ import org.djunits.value.vfloat.FloatMathFunctions;
  * The typed, abstract FloatScalarAbs class that forms the basis of all FloatScalar definitions and extensions.<br>
  * Note: A relative scalar class can implement the toAbs() method if it has an absolute equivalent.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/current/license.html">OpenTrafficSim License</a>.
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
  * initial version Oct 13, 2016 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @author <a href="http://www.transport.citg.tudelft.nl">Wouter Schakel</a>
- * @param <U> the unit
+ * @param <AU> Absolute unit
+ * @param <RU> Relative unit
  * @param <A> the absolute class for reference
  * @param <R> the relative class for reference
  */
-public abstract class AbstractFloatScalarAbs<U extends Unit<U>, A extends AbstractFloatScalarAbs<U, A, R>, R extends AbstractFloatScalarRel<U, R>>
-        extends AbstractFloatScalar<U, A> implements Absolute, MathFunctionsAbs<A>, FloatMathFunctions<A>
+public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, RU>,
+        A extends AbstractFloatScalarAbs<AU, A, RU, R>, RU extends Unit<RU>, R extends AbstractFloatScalarRel<RU, R>>
+        extends AbstractFloatScalar<AU, A> implements Absolute, MathFunctionsAbs<A>, FloatMathFunctions<A>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -33,7 +36,7 @@ public abstract class AbstractFloatScalarAbs<U extends Unit<U>, A extends Abstra
      * @param value float; the value of the new Absolute Immutable FloatScalar
      * @param unit U; the unit of the new Absolute Immutable FloatScalar
      */
-    public AbstractFloatScalarAbs(final float value, final U unit)
+    public AbstractFloatScalarAbs(final float value, final AU unit)
     {
         super(unit, unit.isBaseSIUnit() ? value : (float) ValueUtil.expressAsSIUnit(value, unit));
     }
@@ -53,7 +56,7 @@ public abstract class AbstractFloatScalarAbs<U extends Unit<U>, A extends Abstra
      * @param unit the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
-    public abstract A instantiateAbs(final float value, final U unit);
+    public abstract A instantiateAbs(float value, AU unit);
 
     /**
      * Construct a new Relative Immutable FloatScalar of the right type. Each extending class must implement this method.
@@ -61,54 +64,40 @@ public abstract class AbstractFloatScalarAbs<U extends Unit<U>, A extends Abstra
      * @param unit the unit
      * @return R a new relative instance of the FloatScalar of the right type
      */
-    public abstract R instantiateRel(final float value, final U unit);
+    public abstract R instantiateRel(float value, RU unit);
 
     /**
-     * Increment the value by the supplied value and return the result. If the units are equal, the result is expressed in that
-     * unit. If the units are unequal, the result is expressed in the standard (often SI) unit.
+     * Increment the value by the supplied value and return the result using the current unit of the Absolute value.
      * @param increment R, a relative typed FloatScalar; amount by which the value is incremented
      * @return Absolute FloatScalar
      */
     public final A plus(final R increment)
     {
-        if (getUnit().isBaseSIUnit())
-        {
-            return instantiateAbs(this.si + increment.si, getUnit().getStandardUnit());
-        }
-        return getUnit().equals(increment.getUnit()) ? instantiateAbs(getInUnit() + increment.getInUnit(), getUnit())
-                : instantiateAbs(this.si + increment.si, getUnit().getStandardUnit());
+        AU targetUnit = getUnit();
+        return instantiateAbs(getInUnit() + increment.getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**
-     * Decrement the value by the supplied value and return the result. If the units are equal, the result is expressed in that
-     * unit. If the units are unequal, the result is expressed in the standard (often SI) unit.
+     * Decrement the value by the supplied value and return the result using the current unit of the Absolute value.
      * @param decrement R, a relative typed FloatScalar; amount by which the value is decremented
      * @return Absolute FloatScalar
      */
     public final A minus(final R decrement)
     {
-        if (getUnit().isBaseSIUnit())
-        {
-            return instantiateAbs(this.si - decrement.si, getUnit().getStandardUnit());
-        }
-        return getUnit().equals(decrement.getUnit()) ? instantiateAbs(getInUnit() - decrement.getInUnit(), getUnit())
-                : instantiateAbs(this.si - decrement.si, getUnit().getStandardUnit());
+        AU targetUnit = getUnit();
+        return instantiateAbs(getInUnit() - decrement.getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**
-     * Decrement the value by the supplied value and return the result. If the units are equal, the result is expressed in that
-     * unit. If the units are unequal, the result is expressed in the standard (often SI) unit.
+     * Decrement the value by the supplied value and return the result using the relative unit belonging to the unit of the
+     * Absolute value.
      * @param decrement A, an absolute typed FloatScalar; amount by which the value is decremented
      * @return Relative FloatScalar
      */
     public final R minus(final A decrement)
     {
-        if (getUnit().isBaseSIUnit())
-        {
-            return instantiateRel(this.si - decrement.si, getUnit().getStandardUnit());
-        }
-        return getUnit().equals(decrement.getUnit()) ? instantiateRel(getInUnit() - decrement.getInUnit(), getUnit())
-                : instantiateRel(this.si - decrement.si, getUnit().getStandardUnit());
+        RU targetUnit = getUnit().getRelativeUnit();
+        return instantiateRel(getInUnit() - decrement.getInUnit(getUnit()), targetUnit);
     }
 
     /**********************************************************************************/
@@ -161,15 +150,6 @@ public abstract class AbstractFloatScalarAbs<U extends Unit<U>, A extends Abstra
     public A divideBy(final float constant)
     {
         return instantiateAbs(getInUnit() / constant, getUnit());
-    }
-
-    /**
-     * Translate the absolute scalar into a relative scalar (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute length scalar.
-     */
-    public final R toRel()
-    {
-        return instantiateRel(getInUnit(), getUnit());
     }
 
 }

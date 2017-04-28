@@ -1,18 +1,18 @@
 package org.djunits.demo.examples;
 
 import org.djunits.unit.AccelerationUnit;
-import org.djunits.unit.AngleUnit;
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.DirectionUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.SpeedUnit;
-import org.djunits.unit.TimeUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Dimensionless;
+import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vdouble.scalar.Speed;
-import org.djunits.value.vdouble.scalar.Time;
 import org.djunits.value.vdouble.vector.DimensionlessVector;
+import org.djunits.value.vdouble.vector.DurationVector;
 import org.djunits.value.vdouble.vector.SpeedVector;
-import org.djunits.value.vdouble.vector.TimeVector;
 import org.djunits.value.vfloat.scalar.FloatAcceleration;
 import org.djunits.value.vfloat.scalar.FloatDirection;
 import org.djunits.value.vfloat.vector.FloatAccelerationVector;
@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.vector.FloatDirectionVector;
 /**
  * Tests for min and max.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
@@ -67,21 +67,21 @@ public final class MinAndMax
         System.out.println("max of " + fav + " = " + FloatAcceleration.max(fa1, fa2, fa3, fa4));
         System.out.println();
 
-        Time t1 = new Time(10.0, TimeUnit.MINUTE);
-        Time t2 = new Time(12.0, TimeUnit.MINUTE);
-        Time t3 = new Time(8.0, TimeUnit.MINUTE);
-        Time t4 = new Time(16.0, TimeUnit.MINUTE);
-        TimeVector tv = new TimeVector(new Time[] { t1, t2, t3, t4 }, StorageType.DENSE);
-        System.out.println("min of " + t1 + " and " + t2 + " = " + Time.min(t1, t2));
-        System.out.println("max of " + t1 + " and " + t2 + " = " + Time.max(t1, t2));
-        System.out.println("min of " + tv + " = " + Time.min(t1, t2, t3, t4));
-        System.out.println("max of " + tv + " = " + Time.max(t1, t2, t3, t4));
+        Duration t1 = new Duration(10.0, DurationUnit.MINUTE);
+        Duration t2 = new Duration(12.0, DurationUnit.MINUTE);
+        Duration t3 = new Duration(8.0, DurationUnit.MINUTE);
+        Duration t4 = new Duration(16.0, DurationUnit.MINUTE);
+        DurationVector tv = new DurationVector(new Duration[] { t1, t2, t3, t4 }, StorageType.DENSE);
+        System.out.println("min of " + t1 + " and " + t2 + " = " + Duration.min(t1, t2));
+        System.out.println("max of " + t1 + " and " + t2 + " = " + Duration.max(t1, t2));
+        System.out.println("min of " + tv + " = " + Duration.min(t1, t2, t3, t4));
+        System.out.println("max of " + tv + " = " + Duration.max(t1, t2, t3, t4));
         System.out.println();
 
-        FloatDirection fd1 = new FloatDirection(10.0, AngleUnit.DEGREE);
-        FloatDirection fd2 = new FloatDirection(12.0, AngleUnit.DEGREE);
-        FloatDirection fd3 = new FloatDirection(8.0, AngleUnit.DEGREE);
-        FloatDirection fd4 = new FloatDirection(16.0, AngleUnit.DEGREE);
+        FloatDirection fd1 = new FloatDirection(10.0, DirectionUnit.NORTH_DEGREE);
+        FloatDirection fd2 = new FloatDirection(12.0, DirectionUnit.NORTH_DEGREE);
+        FloatDirection fd3 = new FloatDirection(8.0, DirectionUnit.NORTH_DEGREE);
+        FloatDirection fd4 = new FloatDirection(16.0, DirectionUnit.NORTH_DEGREE);
         FloatDirectionVector fdv =
                 new FloatDirectionVector(new FloatDirection[] { fd1, fd2, fd3, fd4 }, StorageType.DENSE);
         System.out.println("min of " + fd1 + " and " + fd2 + " = " + FloatDirection.min(fd1, fd2));

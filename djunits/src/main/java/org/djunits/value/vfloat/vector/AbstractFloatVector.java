@@ -13,8 +13,8 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalar;
 /**
  * The most basic abstract class for the FloatVector.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/current/license.html">OpenTrafficSim License</a>.
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
  * initial version Oct 16, 2016 <br>
@@ -68,7 +68,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractF
      * @return the value as a FloatScalar
      * @throws ValueException in case index is out of bounds
      */
-    public abstract AbstractFloatScalar<U, ?> get(final int index) throws ValueException;
+    public abstract AbstractFloatScalar<U, ?> get(int index) throws ValueException;
 
     /** {@inheritDoc} */
     @Override

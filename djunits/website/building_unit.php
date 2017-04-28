@@ -30,22 +30,22 @@
     <h2>Adding a unit instance to an existing unit</h2>
 
     DJUNITS defines a sizable number of instantiated units that are ready to use, but not all. Therefore, extra instantiated units can be easily added. Suppose,
-    that a user would like to add a Furlong (an imperial length unit of one eighth of a mile, or 660 feet), a Fortnight (a time unit of 14 days), and a speed
-    unit that indicates the speed in Furlongs per Fortnight. Suppose that the user wants to make these three units available as public static constants in a
-    utility class. The code to do so looks as follows:
+    that a user would like to add a Furlong (an imperial length unit of one eighth of a mile, or 660 feet), a Fortnight (a duration unit of 14 days), and a speed
+    unit that indicates the speed in Furlongs per Fortnight. All three are relative units. Suppose that the user wants to make these three units available 
+    as public static constants in a utility class. The code to do so looks as follows:
 
     <pre class="highlight">
 public static LengthUnit FURLONG = new LengthUnit("Furlong", "fr", 
    UnitSystem.IMPERIAL, LengthUnit.FOOT, 660);
-public static TimeUnit FORTNIGHT = new TimeUnit("Fortnight", "fn", 
-   UnitSystem.OTHER, TimeUnit.DAY, 14);
+public static DurationUnit FORTNIGHT = new DurationUnit("Fortnight", "fn", 
+   UnitSystem.OTHER, DurationUnit.DAY, 14);
 public static SpeedUnit FURLONGS_PER_FORTNIGHT = new SpeedUnit(
    FURLONG, FORTNIGHT, "Furlongs per Fortnight", "fr/fn", UnitSystem.OTHER);
 </pre>
 
     The first two definitions use a constructor that define a unit with respect to another unit using a factor, as the LengthUnit has been defined with a
     LinearScale and as it has a constructor with a factor. It is no problem that the Furlong is defined with respect to a Foot; the factor to the SI unit will
-    be calculated as part of the constructor. The last definition uses the speed unit constructor that takes a length unit and a time unit, and constructs a
+    be calculated as part of the constructor. The last definition uses the speed unit constructor that takes a length unit and a duration unit, and constructs a
     speed unit from this. Again, the factor to map Furlongs per Fortnight to and from the SI unit meters per second, will be automatically calculated. These
     units can now be used in any piece of code, e.g.:
 
@@ -70,19 +70,19 @@ System.out.println(speed.toString(FURLONGS_PER_FORTNIGHT));
     <p>
       Every unit extends Unit with the defined unit as its generic; this ensures that the generic unit can do proper housekeeping, also for the units that are
       user-defined. Many units have a natural zero value and linear scales. These units extend the LinearUnit that provides a number of constructors with an
-      easy-to-use factor to create a linear scale with respect to the standard (SI) unit. The header of the user-defined unit for jerk, the rate of change of
-      acceleration (meter per second<sup>3</sup>) is therefore:
+      easy-to-use factor to create a linear scale with respect to the standard (SI) unit. Jerk is a relative unit. The header of the user-defined unit for 
+      jerk, the rate of change of acceleration (meter per second<sup>3</sup>) is therefore:
     </p>
     <pre class="highlight">
 public class JerkUnit extends LinearUnit&lt;JerkUnit&gt;
 </pre>
 
-    <p>Often, the unit(s) on which the new unit is based are stored as part of the unit. In this case, a length unit and a time unit. Furthermore, several
+    <p>Often, the unit(s) on which the new unit is based are stored as part of the unit. In this case, a length unit and a duration unit. Furthermore, several
       standard units are defined, among which the SI constant, if possible:</p>
 
     <pre class="highlight">
 private final LengthUnit lengthUnit;
-private final TimeUnit timeUnit;
+private final DurationUnit durationUnit;
 public static final JerkUnit SI;
 public static final JerkUnit M_PER_S3;
 public static final JerkUnit CM_PER_S3;
@@ -101,28 +101,28 @@ public static final JerkUnit JERK;
     <pre class="highlight">
 static 
 {
-  SI = new JerkUnit(LengthUnit.METER, TimeUnit.SECOND, 
+  SI = new JerkUnit(LengthUnit.METER, DurationUnit.SECOND, 
     "meter per cubed second", "m/s^3", UnitSystem.SI_BASE); 
   M_PER_S3 = SI;
-  CM_PER_S3 = new JerkUnit(LengthUnit.CENTIMETER, TimeUnit.SECOND, 
+  CM_PER_S3 = new JerkUnit(LengthUnit.CENTIMETER, DurationUnit.SECOND, 
     "centimeter per cubed second", "cm/s^3", UnitSystem.SI_BASE); 
-  FT_PER_S3 = new JerkUnit(LengthUnit.FOOT, TimeUnit.SECOND, 
+  FT_PER_S3 = new JerkUnit(LengthUnit.FOOT, DurationUnit.SECOND, 
     "foot per cubed second", "ft/s^3", UnitSystem.IMPERIAL);
   JERK = new JerkUnit("jerk", "jerk", UnitSystem.OTHER, SI, 0.3048);
 }
 </pre>
 
-    <p>The constructors are pretty straightforward; they define the unit either on the basis of the SI unit, or on the basis of a length unit and a time
+    <p>The constructors are pretty straightforward; they define the unit either on the basis of the SI unit, or on the basis of a length unit and a duration
       unit (the factor of which is cubed):</p>
 
     <pre class="highlight">
-public JerkUnit(final LengthUnit lengthUnit, final TimeUnit timeUnit, final String name,
+public JerkUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
          final String abbreviation, final UnitSystem unitSystem)
 {
   super(name, abbreviation, unitSystem, SI, lengthUnit.getConversionFactorToStandardUnit()
-          / Math.pow(timeUnit.getConversionFactorToStandardUnit(), 3.0), false);
+          / Math.pow(durationUnit.getConversionFactorToStandardUnit(), 3.0), false);
   this.lengthUnit = lengthUnit;
-  this.timeUnit = timeUnit;
+  this.durationUnit = durationUnit;
 }
 
  public JerkUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
@@ -131,7 +131,7 @@ public JerkUnit(final LengthUnit lengthUnit, final TimeUnit timeUnit, final Stri
   super(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
 	      false);
   this.lengthUnit = referenceUnit.getLengthUnit();
-  this.timeUnit = referenceUnit.getTimeUnit();
+  this.durationUnit = referenceUnit.getDurationUnit();
 }
 </pre>
 
@@ -142,12 +142,12 @@ public JerkUnit(final LengthUnit lengthUnit, final TimeUnit timeUnit, final Stri
       the (localized) strings for the name and abbreviation in the corresponding language locale files.
     </p>
 
-    <p>Finally, add the methods that are prescribed by Unit, and allow the user of the class to retrieve the length unit and time unit on which this class
+    <p>Finally, add the methods that are prescribed by Unit, and allow the user of the class to retrieve the length unit and duration unit on which this class
       has been based (if necessary):</p>
 
     <pre class="highlight">
 public final LengthUnit getLengthUnit() { return this.lengthUnit; }
-public final TimeUnit getTimeUnit() { return this.timeUnit; }
+public final DurationUnit getDurationUnit() { return this.durationUnit; }
 
 @Override
 public final JerkUnit getStandardUnit() { return SI; }

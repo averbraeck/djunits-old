@@ -11,7 +11,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * The units of pressure.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -30,7 +30,7 @@ public class PressureUnit extends LinearUnit<PressureUnit>
     private final LengthUnit lengthUnit;
 
     /** the unit of time for the pressure unit, e.g., second. */
-    private final TimeUnit timeUnit;
+    private final DurationUnit durationUnit;
 
     /** The SI unit for pressure is Pascal. */
     public static final PressureUnit SI;
@@ -88,8 +88,8 @@ public class PressureUnit extends LinearUnit<PressureUnit>
 
     static
     {
-        SI = new PressureUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "PressureUnit.pascal", "PressureUnit.Pa",
-                SI_DERIVED, true);
+        SI = new PressureUnit(MassUnit.KILOGRAM, LengthUnit.METER, DurationUnit.SECOND, "PressureUnit.pascal",
+                "PressureUnit.Pa", SI_DERIVED, true);
         PASCAL = SI;
         HECTOPASCAL = new PressureUnit("PressureUnit.hectopascal", "PressureUnit.hPa", SI_DERIVED, PASCAL, 100.0, true);
         KILOPASCAL = new PressureUnit("PressureUnit.kilopascal", "PressureUnit.kPa", SI_DERIVED, PASCAL, 1000.0, true);
@@ -114,7 +114,7 @@ public class PressureUnit extends LinearUnit<PressureUnit>
                 "PressureUnit.pound_per_square_foot", "PressureUnit.lbf/ft^2", IMPERIAL, true);
         POUND_PER_SQUARE_INCH = new PressureUnit(ForceUnit.POUND_FORCE, AreaUnit.SQUARE_INCH,
                 "PressureUnit.pound_per_square_inch", "PressureUnit.lbf/in^2", IMPERIAL, true);
-        PIEZE = new PressureUnit(MassUnit.TONNE, LengthUnit.METER, TimeUnit.SECOND, "PressureUnit.pieze", "PressureUnit.pz",
+        PIEZE = new PressureUnit(MassUnit.TONNE, LengthUnit.METER, DurationUnit.SECOND, "PressureUnit.pieze", "PressureUnit.pz",
                 MTS, true);
     }
 
@@ -122,39 +122,39 @@ public class PressureUnit extends LinearUnit<PressureUnit>
      * Construct a pressure unit from mass, length and time units, e.g., a Pascal = kg/m.s^2.
      * @param massUnit the unit of mass for the pressure unit, e.g., kilogram
      * @param lengthUnit the unit of length for the pressure unit, e.g., meter
-     * @param timeUnit the unit of time for the pressure unit, e.g., second
+     * @param durationUnit the unit of time for the pressure unit, e.g., second
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private PressureUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit,
+    private PressureUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, PASCAL,
-                massUnit.getConversionFactorToStandardUnit() / (lengthUnit.getConversionFactorToStandardUnit()
-                        * timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()),
+                massUnit.getScaleFactor()
+                        / (lengthUnit.getScaleFactor() * durationUnit.getScaleFactor() * durationUnit.getScaleFactor()),
                 standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
-        this.timeUnit = timeUnit;
+        this.durationUnit = durationUnit;
     }
 
     /**
      * Construct a user-defined pressure unit from mass, length and time units, e.g., a Pascal = kg/m.s^2.
      * @param massUnit the unit of mass for the pressure unit, e.g., kilogram
      * @param lengthUnit the unit of length for the pressure unit, e.g., meter
-     * @param timeUnit the unit of time for the pressure unit, e.g., second
+     * @param durationUnit the unit of time for the pressure unit, e.g., second
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public PressureUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit, final String name,
-            final String abbreviation, final UnitSystem unitSystem)
+    public PressureUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
+            final String name, final String abbreviation, final UnitSystem unitSystem)
     {
-        this(massUnit, lengthUnit, timeUnit, name, abbreviation, unitSystem, false);
+        this(massUnit, lengthUnit, durationUnit, name, abbreviation, unitSystem, false);
     }
 
     /**
@@ -171,10 +171,10 @@ public class PressureUnit extends LinearUnit<PressureUnit>
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, PASCAL,
-                forceUnit.getConversionFactorToStandardUnit() / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
+                forceUnit.getScaleFactor() / areaUnit.getScaleFactor(), standardUnit);
         this.massUnit = forceUnit.getMassUnit();
         this.lengthUnit = areaUnit.getLengthUnit();
-        this.timeUnit = forceUnit.getTimeUnit();
+        this.durationUnit = forceUnit.getDurationUnit();
     }
 
     /**
@@ -198,17 +198,17 @@ public class PressureUnit extends LinearUnit<PressureUnit>
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private PressureUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final PressureUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final PressureUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
                 standardUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
-        this.timeUnit = referenceUnit.getTimeUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**
@@ -217,12 +217,12 @@ public class PressureUnit extends LinearUnit<PressureUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public PressureUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final PressureUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final PressureUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**
@@ -242,11 +242,11 @@ public class PressureUnit extends LinearUnit<PressureUnit>
     }
 
     /**
-     * @return timeUnit
+     * @return durationUnit
      */
-    public final TimeUnit getTimeUnit()
+    public final DurationUnit getDurationUnit()
     {
-        return this.timeUnit;
+        return this.durationUnit;
     }
 
     /** {@inheritDoc} */

@@ -6,6 +6,7 @@ import org.djunits.unit.AngleUnit;
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DensityUnit;
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.ElectricalChargeUnit;
 import org.djunits.unit.ElectricalCurrentUnit;
 import org.djunits.unit.ElectricalPotentialUnit;
@@ -19,17 +20,16 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.MoneyPerAreaUnit;
+import org.djunits.unit.MoneyPerDurationUnit;
 import org.djunits.unit.MoneyPerEnergyUnit;
 import org.djunits.unit.MoneyPerLengthUnit;
 import org.djunits.unit.MoneyPerMassUnit;
-import org.djunits.unit.MoneyPerTimeUnit;
 import org.djunits.unit.MoneyPerVolumeUnit;
 import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.TemperatureUnit;
-import org.djunits.unit.TimeUnit;
 import org.djunits.unit.TorqueUnit;
 import org.djunits.unit.VolumeUnit;
 import org.djunits.value.MathFunctionsDimensionless;
@@ -50,7 +50,7 @@ import org.djunits.value.MathFunctionsDimensionless;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -567,13 +567,13 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
     }
 
     /**
-     * Calculate the multiplication of Dimensionless and MoneyPerTime, which results in a MoneyPerTime scalar.
+     * Calculate the multiplication of Dimensionless and MoneyPerDuration, which results in a MoneyPerDuration scalar.
      * @param v Dimensionless scalar
-     * @return MoneyPerTime scalar as a multiplication of Dimensionless and MoneyPerTime
+     * @return MoneyPerDuration scalar as a multiplication of Dimensionless and MoneyPerDuration
      */
-    public final MoneyPerTime multiplyBy(final MoneyPerTime v)
+    public final MoneyPerDuration multiplyBy(final MoneyPerDuration v)
     {
-        return new MoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+        return new MoneyPerDuration(this.si * v.si, MoneyPerDurationUnit.getStandardMoneyPerDurationUnit());
     }
 
     /**
@@ -633,7 +633,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      */
     public final Duration multiplyBy(final Duration v)
     {
-        return new Duration(this.si * v.si, TimeUnit.SI);
+        return new Duration(this.si * v.si, DurationUnit.SI);
     }
 
     /**
@@ -693,7 +693,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      */
     public final Duration divideBy(final Frequency v)
     {
-        return new Duration(this.si / v.si, TimeUnit.SI);
+        return new Duration(this.si / v.si, DurationUnit.SI);
     }
 
 }

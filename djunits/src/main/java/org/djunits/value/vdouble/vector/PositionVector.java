@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 
 import org.djunits.unit.LengthUnit;
+import org.djunits.unit.PositionUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Position;
@@ -11,7 +12,7 @@ import org.djunits.value.vdouble.scalar.Position;
 /**
  * Immutable Absolute Position Vector.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -20,7 +21,7 @@ import org.djunits.value.vdouble.scalar.Position;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class PositionVector
-        extends AbstractDoubleVectorAbs<LengthUnit, PositionVector, LengthVector, MutablePositionVector, Position>
+        extends AbstractDoubleVectorAbs<PositionUnit, LengthUnit, PositionVector, LengthVector, MutablePositionVector, Position>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -32,7 +33,7 @@ public class PositionVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public PositionVector(final double[] values, final LengthUnit unit, final StorageType storageType) throws ValueException
+    public PositionVector(final double[] values, final PositionUnit unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -44,7 +45,8 @@ public class PositionVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public PositionVector(final List<Double> values, final LengthUnit unit, final StorageType storageType) throws ValueException
+    public PositionVector(final List<Double> values, final PositionUnit unit, final StorageType storageType)
+            throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -93,7 +95,7 @@ public class PositionVector
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public PositionVector(final SortedMap<Integer, Double> values, final LengthUnit unit, final int length,
+    public PositionVector(final SortedMap<Integer, Double> values, final PositionUnit unit, final int length,
             final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -104,14 +106,14 @@ public class PositionVector
      * @param data an internal data object
      * @param unit the unit
      */
-    PositionVector(final DoubleVectorData data, final LengthUnit unit)
+    PositionVector(final DoubleVectorData data, final PositionUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final PositionVector instantiateTypeAbs(final DoubleVectorData dvd, final LengthUnit unit)
+    protected final PositionVector instantiateTypeAbs(final DoubleVectorData dvd, final PositionUnit unit)
     {
         return new PositionVector(dvd, unit);
     }
@@ -125,14 +127,14 @@ public class PositionVector
 
     /** {@inheritDoc} */
     @Override
-    protected final MutablePositionVector instantiateMutableType(final DoubleVectorData dvd, final LengthUnit unit)
+    protected final MutablePositionVector instantiateMutableType(final DoubleVectorData dvd, final PositionUnit unit)
     {
         return new MutablePositionVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Position instantiateScalar(final double value, final LengthUnit unit)
+    protected final Position instantiateScalar(final double value, final PositionUnit unit)
     {
         return new Position(value, unit);
     }
@@ -149,15 +151,6 @@ public class PositionVector
     public final PositionVector toSparse()
     {
         return this.data.isSparse() ? (PositionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute Position vector.
-     */
-    public final LengthVector toRel()
-    {
-        return new LengthVector(getData(), getUnit());
     }
 
 }

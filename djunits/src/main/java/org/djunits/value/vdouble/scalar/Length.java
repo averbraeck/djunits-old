@@ -2,12 +2,13 @@ package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MoneyUnit;
+import org.djunits.unit.PositionUnit;
 import org.djunits.unit.SpeedUnit;
-import org.djunits.unit.TimeUnit;
 import org.djunits.unit.VolumeUnit;
 
 /**
@@ -26,7 +27,7 @@ import org.djunits.unit.VolumeUnit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -91,7 +92,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
      * @param unit the unit
      * @return A a new absolute instance of the DoubleScalar of the right type
      */
-    public final Position instantiateAbs(final double value, final LengthUnit unit)
+    public final Position instantiateAbs(final double value, final PositionUnit unit)
     {
         return new Position(value, unit);
     }
@@ -125,21 +126,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
      */
     public final Position plus(final Position v)
     {
-        if (getUnit().isBaseSIUnit())
-        {
-            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-        }
-        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
-                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-    }
-
-    /**
-     * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
-     * @return an absolute version of this length scalar.
-     */
-    public final Position toAbs()
-    {
-        return new Position(getInUnit(), getUnit());
+        PositionUnit targetUnit = v.getUnit();
+        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**
@@ -291,7 +279,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
      */
     public final Duration divideBy(final Speed v)
     {
-        return new Duration(this.si / v.si, TimeUnit.SI);
+        return new Duration(this.si / v.si, DurationUnit.SI);
     }
 
     /**

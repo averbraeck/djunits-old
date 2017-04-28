@@ -1,5 +1,6 @@
 package org.djunits.value.vfloat.matrix;
 
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
@@ -8,7 +9,7 @@ import org.djunits.value.vfloat.scalar.FloatTime;
 /**
  * Immutable FloatTime Matrix.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -16,8 +17,8 @@ import org.djunits.value.vfloat.scalar.FloatTime;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatTimeMatrix
-        extends AbstractFloatMatrixAbs<TimeUnit, FloatTimeMatrix, FloatDurationMatrix, MutableFloatTimeMatrix, FloatTime>
+public class FloatTimeMatrix extends
+        AbstractFloatMatrixAbs<TimeUnit, DurationUnit, FloatTimeMatrix, FloatDurationMatrix, MutableFloatTimeMatrix, FloatTime>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -78,7 +79,7 @@ public class FloatTimeMatrix
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDurationMatrix instantiateTypeRel(final FloatMatrixData fmd, final TimeUnit unit)
+    protected final FloatDurationMatrix instantiateTypeRel(final FloatMatrixData fmd, final DurationUnit unit)
     {
         return new FloatDurationMatrix(fmd, unit);
     }
@@ -95,15 +96,6 @@ public class FloatTimeMatrix
     protected final FloatTime instantiateScalar(final float value, final TimeUnit unit)
     {
         return new FloatTime(value, unit);
-    }
-
-    /**
-     * Translate the absolute matrix into a relative matrix (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute FloatTime matrix.
-     */
-    public final FloatDurationMatrix toRel()
-    {
-        return new FloatDurationMatrix(getData(), getUnit());
     }
 
 }

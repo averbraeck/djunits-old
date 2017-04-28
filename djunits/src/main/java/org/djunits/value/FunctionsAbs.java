@@ -1,22 +1,25 @@
 package org.djunits.value;
 
+import org.djunits.unit.AbsoluteLinearUnit;
 import org.djunits.unit.Unit;
 
 /**
  * The functions to be implemented for absolute vectors and matrices.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
  * initial version Oct 6, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
- * @param <U> the Unit type
+ * @param <AU> Absolute unit
+ * @param <RU> Relative unit
  * @param <A> the absolute type
  * @param <R> the corresponding relative type
  */
-public interface FunctionsAbs<U extends Unit<U>, A extends Absolute & Value<U>, R extends Relative & Value<U>>
+public interface FunctionsAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, A extends Absolute & Value<AU>,
+        R extends Relative & Value<RU>>
 {
     /**
      * Add a Relative value to this Absolute value for a vector or matrix. The addition is done value by value and the result is

@@ -2,12 +2,12 @@ package org.djunits.value.vfloat.scalar;
 
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.FlowVolumeUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.MoneyUnit;
-import org.djunits.unit.TimeUnit;
 import org.djunits.unit.VolumeUnit;
 
 /**
@@ -26,7 +26,7 @@ import org.djunits.unit.VolumeUnit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -255,7 +255,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
      */
     public final FloatDuration divideBy(final FloatFlowVolume v)
     {
-        return new FloatDuration(this.si / v.si, TimeUnit.SI);
+        return new FloatDuration(this.si / v.si, DurationUnit.SI);
     }
 
     /**

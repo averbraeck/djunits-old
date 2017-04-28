@@ -1,5 +1,6 @@
 package org.djunits.value.vdouble.scalar;
 
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.TimeUnit;
 
 /**
@@ -12,13 +13,13 @@ import org.djunits.unit.TimeUnit;
  * we can now write:
  * 
  * <pre>
- * Time value = new Time(100.0, TimeUnit.SI);
+ * Time value = new Time(100.0, TimeUnit.BASE);
  * </pre>
  * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -27,29 +28,13 @@ import org.djunits.unit.TimeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, Duration>
+public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, Duration>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final Time ZERO = new Time(0.0, TimeUnit.SI);
-
-    /** constant with value NaN. */
-    @SuppressWarnings("checkstyle:constantname")
-    public static final Time NaN = new Time(Double.NaN, TimeUnit.SI);
-
-    /** constant with value POSITIVE_INFINITY. */
-    public static final Time POSITIVE_INFINITY = new Time(Double.POSITIVE_INFINITY, TimeUnit.SI);
-
-    /** constant with value NEGATIVE_INFINITY. */
-    public static final Time NEGATIVE_INFINITY = new Time(Double.NEGATIVE_INFINITY, TimeUnit.SI);
-
-    /** constant with value MAX_VALUE. */
-    public static final Time POS_MAXVALUE = new Time(Double.MAX_VALUE, TimeUnit.SI);
-
-    /** constant with value -MAX_VALUE. */
-    public static final Time NEG_MAXVALUE = new Time(-Double.MAX_VALUE, TimeUnit.SI);
+    public static final Time ZERO = new Time(0.0, TimeUnit.BASE);
 
     /**
      * Construct Time scalar.
@@ -79,7 +64,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, Duration>
 
     /** {@inheritDoc} */
     @Override
-    public final Duration instantiateRel(final double value, final TimeUnit unit)
+    public final Duration instantiateRel(final double value, final DurationUnit unit)
     {
         return new Duration(value, unit);
     }
@@ -91,7 +76,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, Duration>
      */
     public static final Time createSI(final double value)
     {
-        return new Time(value, TimeUnit.SI);
+        return new Time(value, TimeUnit.BASE);
     }
 
     /**

@@ -13,7 +13,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * The units of energy.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -32,7 +32,7 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
     private final LengthUnit lengthUnit;
 
     /** the unit of time for the energy unit, e.g., second. */
-    private final TimeUnit timeUnit;
+    private final DurationUnit durationUnit;
 
     /** The SI unit for energy is Joule. */
     public static final EnergyUnit SI;
@@ -156,7 +156,7 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
 
     static
     {
-        SI = new EnergyUnit(MassUnit.KILOGRAM, LengthUnit.METER, TimeUnit.SECOND, "EnergyUnit.Joule", "EnergyUnit.J",
+        SI = new EnergyUnit(MassUnit.KILOGRAM, LengthUnit.METER, DurationUnit.SECOND, "EnergyUnit.Joule", "EnergyUnit.J",
                 SI_DERIVED, true);
         JOULE = SI;
         PICOJOULE = new EnergyUnit("EnergyUnit.picojoule", "EnergyUnit.pJ", SI_BASE, JOULE, 1E-12, true);
@@ -178,10 +178,8 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
                 1.05505585262E3, true);
         CALORIE_IT =
                 new EnergyUnit("EnergyUnit.calorie_(International_Table)", "EnergyUnit.cal(IT)", OTHER, JOULE, 4.1868, true);
-        CALORIE =
-                new EnergyUnit("EnergyUnit.calorie", "EnergyUnit.cal", OTHER, JOULE, 4.184, true);
-        KILOCALORIE =
-                new EnergyUnit("EnergyUnit.kilocalorie", "EnergyUnit.kcal", OTHER, CALORIE, 1000.0, true);
+        CALORIE = new EnergyUnit("EnergyUnit.calorie", "EnergyUnit.cal", OTHER, JOULE, 4.184, true);
+        KILOCALORIE = new EnergyUnit("EnergyUnit.kilocalorie", "EnergyUnit.kcal", OTHER, CALORIE, 1000.0, true);
         WATT_HOUR = new EnergyUnit("EnergyUnit.watt-hour", "EnergyUnit.Wh", SI_DERIVED, JOULE, 3600.0, true);
         FEMTOWATT_HOUR = new EnergyUnit("EnergyUnit.femtowatt-hour", "EnergyUnit.fWh", SI_DERIVED, WATT_HOUR, 1.0E-15, true);
         PICOWATT_HOUR = new EnergyUnit("EnergyUnit.picowatt-hour", "EnergyUnit.pWh", SI_DERIVED, WATT_HOUR, 1.0E-12, true);
@@ -218,40 +216,39 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
      * Define an EnergyUnit based on its constituent base units, e.g. a J = km.m^2/s^2.
      * @param massUnit the unit of mass for the energy unit, e.g., kilogram
      * @param lengthUnit the unit of length for the energy unit, e.g., meter
-     * @param timeUnit the unit of time for the energy unit, e.g., second
+     * @param durationUnit the unit of time for the energy unit, e.g., second
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
-    private EnergyUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit,
+    private EnergyUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, JOULE,
-                massUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit()
-                        * lengthUnit.getConversionFactorToStandardUnit()
-                        / (timeUnit.getConversionFactorToStandardUnit() * timeUnit.getConversionFactorToStandardUnit()),
+        super(nameOrNameKey,
+                abbreviationOrAbbreviationKey, unitSystem, JOULE, massUnit.getScaleFactor() * lengthUnit.getScaleFactor()
+                        * lengthUnit.getScaleFactor() / (durationUnit.getScaleFactor() * durationUnit.getScaleFactor()),
                 standardUnit);
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
-        this.timeUnit = timeUnit;
+        this.durationUnit = durationUnit;
     }
 
     /**
      * Define a user-defined EnergyUnit based on its constituent base units, e.g. a J = km.m^2/s^2.
      * @param massUnit the unit of mass for the energy unit, e.g., kilogram
      * @param lengthUnit the unit of length for the energy unit, e.g., meter
-     * @param timeUnit the unit of time for the energy unit, e.g., second
+     * @param durationUnit the unit of time for the energy unit, e.g., second
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      */
-    public EnergyUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final TimeUnit timeUnit, final String name,
+    public EnergyUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
     {
-        this(massUnit, lengthUnit, timeUnit, name, abbreviation, unitSystem, false);
+        this(massUnit, lengthUnit, durationUnit, name, abbreviation, unitSystem, false);
     }
 
     /**
@@ -268,10 +265,10 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, JOULE,
-                forceUnit.getConversionFactorToStandardUnit() * lengthUnit.getConversionFactorToStandardUnit(), standardUnit);
+                forceUnit.getScaleFactor() * lengthUnit.getScaleFactor(), standardUnit);
         this.massUnit = forceUnit.getMassUnit();
         this.lengthUnit = forceUnit.getLengthUnit();
-        this.timeUnit = forceUnit.getTimeUnit();
+        this.durationUnit = forceUnit.getDurationUnit();
     }
 
     /**
@@ -295,17 +292,17 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
      *            otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private EnergyUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final EnergyUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final EnergyUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
                 standardUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
-        this.timeUnit = referenceUnit.getTimeUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**
@@ -314,12 +311,12 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
      * @param abbreviation the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public EnergyUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final EnergyUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+            final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**
@@ -339,11 +336,11 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
     }
 
     /**
-     * @return timeUnit
+     * @return durationUnit
      */
-    public final TimeUnit getTimeUnit()
+    public final DurationUnit getDurationUnit()
     {
-        return this.timeUnit;
+        return this.durationUnit;
     }
 
     /** {@inheritDoc} */

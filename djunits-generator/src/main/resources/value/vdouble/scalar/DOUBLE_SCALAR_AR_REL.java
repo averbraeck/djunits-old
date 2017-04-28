@@ -4,13 +4,13 @@ import org.djunits.unit.*;
 
 /**
  * Easy access methods for the Relative %TypeRel% DoubleScalar. Instead of:
- * <pre>DoubleScalar&lt;%TypeUnit%&gt; value = new DoubleScalar&lt;%TypeUnit%&gt;(100.0, %TypeUnit%.SI);</pre>
+ * <pre>DoubleScalar&lt;%TypeRelUnit%&gt; value = new DoubleScalar&lt;%TypeRelUnit%&gt;(100.0, %TypeRelUnit%.SI);</pre>
  * we can now write:
- * <pre>%TypeRel% value = new %TypeRel%(100.0, %TypeUnit%.SI);</pre>
+ * <pre>%TypeRel% value = new %TypeRel%(100.0, %TypeRelUnit%.SI);</pre>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
  * unit used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -19,36 +19,36 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class %TypeRel% extends AbstractDoubleScalarRel<%TypeUnit%, %TypeRel%>
+public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final %TypeRel% ZERO = new %TypeRel%(0.0, %TypeUnit%.SI);
+    public static final %TypeRel% ZERO = new %TypeRel%(0.0, %TypeRelUnit%.SI);
 
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
-    public static final %TypeRel% NaN = new %TypeRel%(Double.NaN, %TypeUnit%.SI);
+    public static final %TypeRel% NaN = new %TypeRel%(Double.NaN, %TypeRelUnit%.SI);
 
     /** constant with value POSITIVE_INFINITY. */
-    public static final %TypeRel% POSITIVE_INFINITY = new %TypeRel%(Double.POSITIVE_INFINITY, %TypeUnit%.SI);
+    public static final %TypeRel% POSITIVE_INFINITY = new %TypeRel%(Double.POSITIVE_INFINITY, %TypeRelUnit%.SI);
 
     /** constant with value NEGATIVE_INFINITY. */
-    public static final %TypeRel% NEGATIVE_INFINITY = new %TypeRel%(Double.NEGATIVE_INFINITY, %TypeUnit%.SI);
+    public static final %TypeRel% NEGATIVE_INFINITY = new %TypeRel%(Double.NEGATIVE_INFINITY, %TypeRelUnit%.SI);
 
     /** constant with value MAX_VALUE. */
-    public static final %TypeRel% POS_MAXVALUE = new %TypeRel%(Double.MAX_VALUE, %TypeUnit%.SI);
+    public static final %TypeRel% POS_MAXVALUE = new %TypeRel%(Double.MAX_VALUE, %TypeRelUnit%.SI);
 
     /** constant with value -MAX_VALUE. */
-    public static final %TypeRel% NEG_MAXVALUE = new %TypeRel%(-Double.MAX_VALUE, %TypeUnit%.SI);
+    public static final %TypeRel% NEG_MAXVALUE = new %TypeRel%(-Double.MAX_VALUE, %TypeRelUnit%.SI);
 
     /**
      * Construct %TypeRel% scalar.
      * @param value double value
      * @param unit unit for the double value
      */
-    public %TypeRel%(final double value, final %TypeUnit% unit)
+    public %TypeRel%(final double value, final %TypeRelUnit% unit)
     {
         super(value, unit);
     }
@@ -64,7 +64,7 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeUnit%, %TypeRel%>
 
     /** {@inheritDoc} */
     @Override
-    public final %TypeRel% instantiateRel(final double value, final %TypeUnit% unit)
+    public final %TypeRel% instantiateRel(final double value, final %TypeRelUnit% unit)
     {
         return new %TypeRel%(value, unit);
     }
@@ -75,7 +75,7 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeUnit%, %TypeRel%>
      * @param unit the unit
      * @return A a new absolute instance of the DoubleScalar of the right type
      */
-    public final %TypeAbs% instantiateAbs(final double value, final %TypeUnit% unit)
+    public final %TypeAbs% instantiateAbs(final double value, final %TypeAbsUnit% unit)
     {
         return new %TypeAbs%(value, unit);
     }
@@ -87,7 +87,7 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeUnit%, %TypeRel%>
      */
     public static final %TypeRel% createSI(final double value)
     {
-        return new %TypeRel%(value, %TypeUnit%.SI);
+        return new %TypeRel%(value, %TypeRelUnit%.SI);
     }
 
     /**
@@ -110,21 +110,8 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeUnit%, %TypeRel%>
      */
     public final %TypeAbs% plus(final %TypeAbs% v)
     {
-        if (getUnit().isBaseSIUnit())
-        {
-            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-        }
-        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
-            : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-    }
-
-    /**
-     * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
-     * @return an absolute version of this %typerel% scalar.
-     */
-    public final %TypeAbs% toAbs()
-    {
-        return new %TypeAbs%(getInUnit(), getUnit());
+        %TypeAbsUnit% targetUnit = v.getUnit();
+        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**

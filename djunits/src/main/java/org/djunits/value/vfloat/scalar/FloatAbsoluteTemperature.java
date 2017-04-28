@@ -1,77 +1,59 @@
 package org.djunits.value.vfloat.scalar;
 
+import org.djunits.unit.AbsoluteTemperatureUnit;
 import org.djunits.unit.TemperatureUnit;
 
 /**
  * Easy access methods for the AbsoluteTemperature FloatScalar. Instead of:
  * 
  * <pre>
- * FloatScalar.Abs&lt;TemperatureUnit&gt; value = new FloatScalar.Abs&lt;TemperatureUnit&gt;(100.0, TemperatureUnit.SI);
+ * FloatScalar.Abs&lt;AbsoluteTemperatureUnit&gt; value =
+ *         new FloatScalar.Abs&lt;AbsoluteTemperatureUnit&gt;(100.0, AbsoluteTemperatureUnit.SI);
  * </pre>
  * 
  * we can now write:
  * 
  * <pre>
- * FloatAbsoluteTemperature value = new FloatAbsoluteTemperature(100.0, TemperatureUnit.SI);
+ * FloatAbsoluteTemperature value = new FloatAbsoluteTemperature(100.0, AbsoluteTemperatureUnit.SI);
  * </pre>
  * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
- * $LastChangedDate: 2016-10-16 14:09:04 +0200 (Sun, 16 Oct 2016) $, @version $Revision: 206 $, by $Author: averbraeck $,
+ * $LastChangedDate: 2017-01-30 14:23:11 +0100 (Mon, 30 Jan 2017) $, @version $Revision: 234 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class FloatAbsoluteTemperature
-        extends AbstractFloatScalarAbs<TemperatureUnit, FloatAbsoluteTemperature, FloatTemperature>
+        extends AbstractFloatScalarAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, TemperatureUnit, FloatTemperature>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final FloatAbsoluteTemperature ZERO = new FloatAbsoluteTemperature(0.0f, TemperatureUnit.SI);
-
-    /** constant with value NaN. */
-    @SuppressWarnings("checkstyle:constantname")
-    public static final FloatAbsoluteTemperature NaN = new FloatAbsoluteTemperature(Float.NaN, TemperatureUnit.SI);
-
-    /** constant with value POSITIVE_INFINITY. */
-    public static final FloatAbsoluteTemperature POSITIVE_INFINITY =
-            new FloatAbsoluteTemperature(Float.POSITIVE_INFINITY, TemperatureUnit.SI);
-
-    /** constant with value NEGATIVE_INFINITY. */
-    public static final FloatAbsoluteTemperature NEGATIVE_INFINITY =
-            new FloatAbsoluteTemperature(Float.NEGATIVE_INFINITY, TemperatureUnit.SI);
-
-    /** constant with value MAX_VALUE. */
-    public static final FloatAbsoluteTemperature POS_MAXVALUE =
-            new FloatAbsoluteTemperature(Float.MAX_VALUE, TemperatureUnit.SI);
-
-    /** constant with value -MAX_VALUE. */
-    public static final FloatAbsoluteTemperature NEG_MAXVALUE =
-            new FloatAbsoluteTemperature(-Float.MAX_VALUE, TemperatureUnit.SI);
+    public static final FloatAbsoluteTemperature ZERO = new FloatAbsoluteTemperature(0.0f, AbsoluteTemperatureUnit.BASE);
 
     /**
      * Construct FloatAbsoluteTemperature scalar.
      * @param value float value
      * @param unit unit for the float value
      */
-    public FloatAbsoluteTemperature(final float value, final TemperatureUnit unit)
+    public FloatAbsoluteTemperature(final float value, final AbsoluteTemperatureUnit unit)
     {
         super(value, unit);
     }
 
     /**
      * Construct FloatAbsoluteTemperature scalar using a double value.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
-    public FloatAbsoluteTemperature(final double value, final TemperatureUnit unit)
+    public FloatAbsoluteTemperature(final double value, final AbsoluteTemperatureUnit unit)
     {
         super((float) value, unit);
     }
@@ -87,7 +69,7 @@ public class FloatAbsoluteTemperature
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAbsoluteTemperature instantiateAbs(final float value, final TemperatureUnit unit)
+    public final FloatAbsoluteTemperature instantiateAbs(final float value, final AbsoluteTemperatureUnit unit)
     {
         return new FloatAbsoluteTemperature(value, unit);
     }
@@ -101,12 +83,12 @@ public class FloatAbsoluteTemperature
 
     /**
      * Construct FloatAbsoluteTemperature scalar.
-     * @param value float value in SI units
-     * @return the new scalar with the SI value
+     * @param value float value in BASE units
+     * @return the new scalar with the BASE value
      */
     public static final FloatAbsoluteTemperature createSI(final float value)
     {
-        return new FloatAbsoluteTemperature(value, TemperatureUnit.SI);
+        return new FloatAbsoluteTemperature(value, AbsoluteTemperatureUnit.BASE);
     }
 
     /**

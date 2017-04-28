@@ -5,7 +5,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * MoneyPerVolumeUnit defines a unit for the cost or benefit per volume, e.g. the cost of a gallon of fuel.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -63,7 +63,7 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
             final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerVolumeUnit,
-                moneyUnit.getConversionFactorToStandardUnit() / volumeUnit.getConversionFactorToStandardUnit(), standardUnit);
+                moneyUnit.getScaleFactor() / volumeUnit.getScaleFactor(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.volumeUnit = volumeUnit;
     }
@@ -87,13 +87,13 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerVolumeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final MoneyPerVolumeUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final MoneyPerVolumeUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, conversionFactorToReferenceUnit,
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit,
                 standardUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.volumeUnit = referenceUnit.getVolumeUnit();
@@ -104,12 +104,12 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MoneyPerVolumeUnit(final String name, final String abbreviation, final MoneyPerVolumeUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+            final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**

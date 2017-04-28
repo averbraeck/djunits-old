@@ -39,7 +39,7 @@
 *Acceleration=Speed
 *Power=Energy
 *Speed=Length
-*MoneyPerTime=Money
+*MoneyPerDuration=Money
 
 %ElectricalCharge
 /ElectricalCharge=Dimensionless
@@ -105,7 +105,7 @@
 *Length=Speed
 *Speed=Acceleration
 *Energy=Power
-*Money=MoneyPerTime
+*Money=MoneyPerDuration
 
 %Length
 /Length=Dimensionless
@@ -143,8 +143,8 @@
 /Length=MoneyPerLength
 *LinearDensity=MoneyPerLength
 /Mass=MoneyPerMass
-/Duration=MoneyPerTime
-*Frequency=MoneyPerTime
+/Duration=MoneyPerDuration
+*Frequency=MoneyPerDuration
 /Volume=MoneyPerVolume
 
 %MoneyPerArea
@@ -164,8 +164,8 @@
 /MoneyPerMass=Dimensionless
 *Mass=Money
 
-%MoneyPerTime
-/MoneyPerTime=Dimensionless
+%MoneyPerDuration
+/MoneyPerDuration=Dimensionless
 *Duration=Money
 /Frequency=Money
 
@@ -255,7 +255,7 @@
 *MoneyPerEnergy=MoneyPerEnergy
 *MoneyPerLength=MoneyPerLength
 *MoneyPerMass=MoneyPerMass
-*MoneyPerTime=MoneyPerTime
+*MoneyPerDuration=MoneyPerDuration
 *MoneyPerVolume=MoneyPerVolume
 *Power=Power
 *Pressure=Pressure

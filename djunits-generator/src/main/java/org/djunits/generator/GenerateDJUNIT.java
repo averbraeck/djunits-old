@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -202,12 +202,11 @@ public class GenerateDJUNIT
             }
             ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 1, ret.length() - 1);
         }
-        ret = ret.replaceAll("DurationUnit", "TimeUnit");
         return ret;
     }
 
     /**
-     * Replace the %TypeAbs%, %TypeRel%, and %TypeUnit% tags in the java string.
+     * Replace the %TypeAbs%, %TypeRel%, %TypeAbsUnit%, and %TypeRelUnit% tags in the java string.
      * @param in the original java string
      * @param type the types: [abs, rel, unit]
      * @return the java string with replacements
@@ -216,16 +215,20 @@ public class GenerateDJUNIT
     {
         String typeAbs = type[0];
         String typeRel = type[1];
-        String typeUnit = type[2];
+        String typeAbsUnit = type[2];
+        String typeRelUnit = type[3];
         String java = in.replaceAll("%TypeAbs%", typeAbs);
         java = java.replaceAll("%typeabs%", typeAbs.toLowerCase());
         java = java.replaceAll("%TYPEABS%", typeAbs.toUpperCase());
         java = java.replaceAll("%TypeRel%", typeRel);
         java = java.replaceAll("%typerel%", typeRel.toLowerCase());
         java = java.replaceAll("%TYPEREL%", typeRel.toUpperCase());
-        java = java.replaceAll("%TypeUnit%", typeUnit);
-        java = java.replaceAll("%typeunit%", typeUnit.toLowerCase());
-        java = java.replaceAll("%TYPEUNIT%", typeUnit.toUpperCase());
+        java = java.replaceAll("%TypeAbsUnit%", typeAbsUnit);
+        java = java.replaceAll("%typeabsunit%", typeAbsUnit.toLowerCase());
+        java = java.replaceAll("%TYPEABSUNIT%", typeAbsUnit.toUpperCase());
+        java = java.replaceAll("%TypeRelUnit%", typeRelUnit);
+        java = java.replaceAll("%typerelunit%", typeRelUnit.toLowerCase());
+        java = java.replaceAll("%TYPERELUNIT%", typeRelUnit.toUpperCase());
         return java;
     }
 
@@ -451,7 +454,6 @@ public class GenerateDJUNIT
             String fStr = "";
             ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 1, ret.length() - 1);
         }
-        ret = ret.replaceAll("DurationUnit", "TimeUnit");
         return ret;
     }
 
@@ -798,7 +800,6 @@ public class GenerateDJUNIT
             String fStr = "";
             ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 1, ret.length() - 1);
         }
-        ret = ret.replaceAll("DurationUnit", "TimeUnit");
         return ret;
     }
 

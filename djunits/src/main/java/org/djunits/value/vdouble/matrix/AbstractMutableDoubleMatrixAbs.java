@@ -1,5 +1,6 @@
 package org.djunits.value.vdouble.matrix;
 
+import org.djunits.unit.AbsoluteLinearUnit;
 import org.djunits.unit.Unit;
 import org.djunits.value.MathFunctionsAbs;
 import org.djunits.value.Mutable;
@@ -13,21 +14,24 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarAbs;
 /**
  * Absolute Mutable typed Matrix.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
  * version Sep 5, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
- * @param <U> the unit
+ * @param <AU> the absolute unit
+ * @param <RU> the relative unit
  * @param <A> the absolute matrix type
  * @param <R> the relative matrix type
  * @param <MA> the mutable absolute matrix type
  * @param <S> the absolute scalar type
  */
-abstract class AbstractMutableDoubleMatrixAbs<U extends Unit<U>, A extends AbstractDoubleMatrixAbs<U, A, R, MA, S>, R extends AbstractDoubleMatrixRel<U, R, ?, ?>, MA extends AbstractMutableDoubleMatrixAbs<U, A, R, MA, S>, S extends AbstractDoubleScalarAbs<U, S, ?>>
-        extends AbstractDoubleMatrixAbs<U, A, R, MA, S> implements Mutable, MathFunctionsAbs<MA>, DoubleMathFunctions<MA>
+abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
+        A extends AbstractDoubleMatrixAbs<AU, RU, A, R, MA, S>, R extends AbstractDoubleMatrixRel<RU, R, ?, ?>,
+        MA extends AbstractMutableDoubleMatrixAbs<AU, RU, A, R, MA, S>, S extends AbstractDoubleScalarAbs<AU, S, RU, ?>>
+        extends AbstractDoubleMatrixAbs<AU, RU, A, R, MA, S> implements Mutable, MathFunctionsAbs<MA>, DoubleMathFunctions<MA>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -38,11 +42,11 @@ abstract class AbstractMutableDoubleMatrixAbs<U extends Unit<U>, A extends Abstr
     /**
      * Construct a new Absolute Mutable DoubleMatrix.
      * @param values double[][]; the values of the entries in the new Absolute Immutable DoubleMatrix
-     * @param unit U; the unit of the new Absolute Immutable DoubleMatrix
+     * @param unit AU; the unit of the new Absolute Immutable DoubleMatrix
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    AbstractMutableDoubleMatrixAbs(final double[][] values, final U unit, final StorageType storageType) throws ValueException
+    AbstractMutableDoubleMatrixAbs(final double[][] values, final AU unit, final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -63,7 +67,7 @@ abstract class AbstractMutableDoubleMatrixAbs<U extends Unit<U>, A extends Abstr
      * @param data an internal data object
      * @param unit the unit
      */
-    AbstractMutableDoubleMatrixAbs(final DoubleMatrixData data, final U unit)
+    AbstractMutableDoubleMatrixAbs(final DoubleMatrixData data, final AU unit)
     {
         super(data, unit);
     }
@@ -333,7 +337,7 @@ abstract class AbstractMutableDoubleMatrixAbs<U extends Unit<U>, A extends Abstr
      * @param valueUnit the unit of the value
      * @throws ValueException when the row/column is out of range
      */
-    public final void setInUnit(final int row, final int column, final double value, final U valueUnit) throws ValueException
+    public final void setInUnit(final int row, final int column, final double value, final AU valueUnit) throws ValueException
     {
         setSI(row, column, ValueUtil.expressAsSIUnit(value, valueUnit));
     }

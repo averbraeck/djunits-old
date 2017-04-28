@@ -12,11 +12,11 @@ import org.junit.Test;
  * Test the various private constructors. There is nothing to test about these, but the non-tested (almost) unreachable code
  * throws of the statistics of our test coverage.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * @version $Revision$, $LastChangedDate$, by $Author$, initial
- *          version 27 sep. 2015 <br>
+ * @version $Revision$, $LastChangedDate$, by $Author$,
+ *          initial version 27 sep. 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -31,8 +31,8 @@ public class PrivateConstructorsTest
      * @throws IllegalArgumentException on reflection error
      * @throws InvocationTargetException on reflection error
      */
-    private void callPrivateConstructor(final Class<?> clas) throws InstantiationException, IllegalAccessException,
-        IllegalArgumentException, InvocationTargetException
+    private void callPrivateConstructor(final Class<?> clas)
+            throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
         Constructor<?>[] cons = clas.getDeclaredConstructors();
         cons[0].setAccessible(true);
@@ -47,8 +47,8 @@ public class PrivateConstructorsTest
      * @throws InvocationTargetException on reflection error
      */
     @Test
-    public final void privateConstructorTest() throws InstantiationException, IllegalAccessException,
-        IllegalArgumentException, InvocationTargetException
+    public final void privateConstructorTest()
+            throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
         callPrivateConstructor(Format.class);
         callPrivateConstructor(Formatter.class);

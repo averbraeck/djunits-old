@@ -4,13 +4,13 @@ import org.djunits.unit.*;
 
 /**
  * Easy access methods for the Absolute %TypeAbs% DoubleScalar. Instead of:
- * <pre>DoubleScalar.Abs&lt;%TypeUnit%&gt; value = new DoubleScalar.Abs&lt;%TypeUnit%&gt;(100.0, %TypeUnit%.SI);</pre>
+ * <pre>DoubleScalar.Abs&lt;%TypeAbsUnit%&gt; value = new DoubleScalar.Abs&lt;%TypeAbsUnit%&gt;(100.0, %TypeAbsUnit%.SI);</pre>
  * we can now write:
- * <pre>%TypeAbs% value = new %TypeAbs%(100.0, %TypeUnit%.SI);</pre>
+ * <pre>%TypeAbs% value = new %TypeAbs%(100.0, %TypeAbsUnit%.BASE);</pre>
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
  * unit used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -19,36 +19,20 @@ import org.djunits.unit.*;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeUnit%, %TypeAbs%, %TypeRel%>
+public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%, %TypeRelUnit%, %TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final %TypeAbs% ZERO = new %TypeAbs%(0.0, %TypeUnit%.SI);
-
-    /** constant with value NaN. */
-    @SuppressWarnings("checkstyle:constantname")
-    public static final %TypeAbs% NaN = new %TypeAbs%(Double.NaN, %TypeUnit%.SI);
-
-    /** constant with value POSITIVE_INFINITY. */
-    public static final %TypeAbs% POSITIVE_INFINITY = new %TypeAbs%(Double.POSITIVE_INFINITY, %TypeUnit%.SI);
-
-    /** constant with value NEGATIVE_INFINITY. */
-    public static final %TypeAbs% NEGATIVE_INFINITY = new %TypeAbs%(Double.NEGATIVE_INFINITY, %TypeUnit%.SI);
-
-    /** constant with value MAX_VALUE. */
-    public static final %TypeAbs% POS_MAXVALUE = new %TypeAbs%(Double.MAX_VALUE, %TypeUnit%.SI);
-
-    /** constant with value -MAX_VALUE. */
-    public static final %TypeAbs% NEG_MAXVALUE = new %TypeAbs%(-Double.MAX_VALUE, %TypeUnit%.SI);
+    public static final %TypeAbs% ZERO = new %TypeAbs%(0.0, %TypeAbsUnit%.BASE);
 
     /**
      * Construct %TypeAbs% scalar.
      * @param value double value
      * @param unit unit for the double value
      */
-    public %TypeAbs%(final double value, final %TypeUnit% unit)
+    public %TypeAbs%(final double value, final %TypeAbsUnit% unit)
     {
         super(value, unit);
     }
@@ -64,14 +48,14 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeUnit%, %TypeAbs%, %T
 
     /** {@inheritDoc} */
     @Override
-    public final %TypeAbs% instantiateAbs(final double value, final %TypeUnit% unit)
+    public final %TypeAbs% instantiateAbs(final double value, final %TypeAbsUnit% unit)
     {
         return new %TypeAbs%(value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TypeRel% instantiateRel(final double value, final %TypeUnit% unit)
+    public final %TypeRel% instantiateRel(final double value, final %TypeRelUnit% unit)
     {
         return new %TypeRel%(value, unit);
     }
@@ -83,7 +67,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeUnit%, %TypeAbs%, %T
      */
     public static final %TypeAbs% createSI(final double value)
     {
-        return new %TypeAbs%(value, %TypeUnit%.SI);
+        return new %TypeAbs%(value, %TypeAbsUnit%.BASE);
     }
 
     /**

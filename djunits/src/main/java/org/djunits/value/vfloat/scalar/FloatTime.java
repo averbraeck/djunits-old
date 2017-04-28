@@ -1,5 +1,6 @@
 package org.djunits.value.vfloat.scalar;
 
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.TimeUnit;
 
 /**
@@ -18,7 +19,7 @@ import org.djunits.unit.TimeUnit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -27,29 +28,13 @@ import org.djunits.unit.TimeUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, FloatDuration>
+public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, DurationUnit, FloatDuration>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final FloatTime ZERO = new FloatTime(0.0f, TimeUnit.SI);
-
-    /** constant with value NaN. */
-    @SuppressWarnings("checkstyle:constantname")
-    public static final FloatTime NaN = new FloatTime(Float.NaN, TimeUnit.SI);
-
-    /** constant with value POSITIVE_INFINITY. */
-    public static final FloatTime POSITIVE_INFINITY = new FloatTime(Float.POSITIVE_INFINITY, TimeUnit.SI);
-
-    /** constant with value NEGATIVE_INFINITY. */
-    public static final FloatTime NEGATIVE_INFINITY = new FloatTime(Float.NEGATIVE_INFINITY, TimeUnit.SI);
-
-    /** constant with value MAX_VALUE. */
-    public static final FloatTime POS_MAXVALUE = new FloatTime(Float.MAX_VALUE, TimeUnit.SI);
-
-    /** constant with value -MAX_VALUE. */
-    public static final FloatTime NEG_MAXVALUE = new FloatTime(-Float.MAX_VALUE, TimeUnit.SI);
+    public static final FloatTime ZERO = new FloatTime(0.0f, TimeUnit.BASE);
 
     /**
      * Construct FloatTime scalar.
@@ -63,8 +48,8 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Float
 
     /**
      * Construct FloatTime scalar using a double value.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
     public FloatTime(final double value, final TimeUnit unit)
     {
@@ -89,19 +74,19 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Float
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDuration instantiateRel(final float value, final TimeUnit unit)
+    public final FloatDuration instantiateRel(final float value, final DurationUnit unit)
     {
         return new FloatDuration(value, unit);
     }
 
     /**
      * Construct FloatTime scalar.
-     * @param value float value in SI units
-     * @return the new scalar with the SI value
+     * @param value float value in BASE units
+     * @return the new scalar with the BASE value
      */
     public static final FloatTime createSI(final float value)
     {
-        return new FloatTime(value, TimeUnit.SI);
+        return new FloatTime(value, TimeUnit.BASE);
     }
 
     /**

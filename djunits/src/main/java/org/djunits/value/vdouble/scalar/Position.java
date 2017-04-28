@@ -1,24 +1,25 @@
 package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.LengthUnit;
+import org.djunits.unit.PositionUnit;
 
 /**
  * Easy access methods for the Absolute Position DoubleScalar. Instead of:
  * 
  * <pre>
- * DoubleScalar.Abs&lt;LengthUnit&gt; value = new DoubleScalar.Abs&lt;LengthUnit&gt;(100.0, LengthUnit.SI);
+ * DoubleScalar.Abs&lt;PositionUnit&gt; value = new DoubleScalar.Abs&lt;PositionUnit&gt;(100.0, PositionUnit.SI);
  * </pre>
  * 
  * we can now write:
  * 
  * <pre>
- * Position value = new Position(100.0, LengthUnit.SI);
+ * Position value = new Position(100.0, PositionUnit.BASE);
  * </pre>
  * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -27,36 +28,20 @@ import org.djunits.unit.LengthUnit;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Position extends AbstractDoubleScalarAbs<LengthUnit, Position, Length>
+public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, LengthUnit, Length>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** constant with value zero. */
-    public static final Position ZERO = new Position(0.0, LengthUnit.SI);
-
-    /** constant with value NaN. */
-    @SuppressWarnings("checkstyle:constantname")
-    public static final Position NaN = new Position(Double.NaN, LengthUnit.SI);
-
-    /** constant with value POSITIVE_INFINITY. */
-    public static final Position POSITIVE_INFINITY = new Position(Double.POSITIVE_INFINITY, LengthUnit.SI);
-
-    /** constant with value NEGATIVE_INFINITY. */
-    public static final Position NEGATIVE_INFINITY = new Position(Double.NEGATIVE_INFINITY, LengthUnit.SI);
-
-    /** constant with value MAX_VALUE. */
-    public static final Position POS_MAXVALUE = new Position(Double.MAX_VALUE, LengthUnit.SI);
-
-    /** constant with value -MAX_VALUE. */
-    public static final Position NEG_MAXVALUE = new Position(-Double.MAX_VALUE, LengthUnit.SI);
+    public static final Position ZERO = new Position(0.0, PositionUnit.BASE);
 
     /**
      * Construct Position scalar.
      * @param value double value
      * @param unit unit for the double value
      */
-    public Position(final double value, final LengthUnit unit)
+    public Position(final double value, final PositionUnit unit)
     {
         super(value, unit);
     }
@@ -72,7 +57,7 @@ public class Position extends AbstractDoubleScalarAbs<LengthUnit, Position, Leng
 
     /** {@inheritDoc} */
     @Override
-    public final Position instantiateAbs(final double value, final LengthUnit unit)
+    public final Position instantiateAbs(final double value, final PositionUnit unit)
     {
         return new Position(value, unit);
     }
@@ -91,7 +76,7 @@ public class Position extends AbstractDoubleScalarAbs<LengthUnit, Position, Leng
      */
     public static final Position createSI(final double value)
     {
-        return new Position(value, LengthUnit.SI);
+        return new Position(value, PositionUnit.BASE);
     }
 
     /**

@@ -2,13 +2,13 @@ package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.AccelerationUnit;
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.FlowVolumeUnit;
 import org.djunits.unit.ForceUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
-import org.djunits.unit.TimeUnit;
 
 /**
  * Easy access methods for the Speed DoubleScalar, which is relative by definition. Instead of:
@@ -26,7 +26,7 @@ import org.djunits.unit.TimeUnit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -265,7 +265,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      */
     public final Duration divideBy(final Acceleration v)
     {
-        return new Duration(this.si / v.si, TimeUnit.SI);
+        return new Duration(this.si / v.si, DurationUnit.SI);
     }
 
     /**

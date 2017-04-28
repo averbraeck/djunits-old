@@ -5,7 +5,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * MoneyPerAreaUnit defines a unit for the cost or benefit per area, e.g. the cost of land per hectare.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -62,7 +62,7 @@ public class MoneyPerAreaUnit extends LinearUnit<MoneyPerAreaUnit>
             final String abbreviationOrAbbreviationKey, final boolean standardUnit)
     {
         super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerAreaUnit,
-                moneyUnit.getConversionFactorToStandardUnit() / areaUnit.getConversionFactorToStandardUnit(), standardUnit);
+                moneyUnit.getScaleFactor() / areaUnit.getScaleFactor(), standardUnit);
         this.moneyUnit = moneyUnit;
         this.areaUnit = areaUnit;
     }
@@ -85,13 +85,13 @@ public class MoneyPerAreaUnit extends LinearUnit<MoneyPerAreaUnit>
      * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
      *            otherwise the abbreviation itself
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyPerAreaUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final MoneyPerAreaUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final MoneyPerAreaUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, conversionFactorToReferenceUnit,
+        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit,
                 standardUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.areaUnit = referenceUnit.getAreaUnit();
@@ -102,12 +102,12 @@ public class MoneyPerAreaUnit extends LinearUnit<MoneyPerAreaUnit>
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MoneyPerAreaUnit(final String name, final String abbreviation, final MoneyPerAreaUnit referenceUnit,
-            final double conversionFactorToReferenceUnit)
+            final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(name, abbreviation, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**

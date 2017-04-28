@@ -84,7 +84,7 @@ public final class ClassUtil
      * @throws NoSuchMethodException if the method cannot be resolved
      */
     public static Constructor<?> resolveConstructor(final Class<?> clazz, final Class<?> callerClass,
-        final Class<?>... parameterTypes) throws NoSuchMethodException
+            final Class<?>... parameterTypes) throws NoSuchMethodException
     {
         Constructor<?> constructor = ClassUtil.resolveConstructor(clazz, parameterTypes);
         if (ClassUtil.isVisible(constructor, callerClass.getClass()))
@@ -102,7 +102,7 @@ public final class ClassUtil
      * @throws NoSuchMethodException if the method cannot be resolved
      */
     public static Constructor<?> resolveConstructor(final Class<?> clazz, final Class<?>... parameterTypes)
-        throws NoSuchMethodException
+            throws NoSuchMethodException
     {
         try
         {
@@ -122,8 +122,8 @@ public final class ClassUtil
                 {
                     throw new NoSuchMethodException("class " + parentClass + " not found to resolve constructor");
                 }
-                return ClassUtil.resolveConstructor(parentClass, (Class<?>[]) ClassUtil.checkInput(parameterTypes,
-                    Class.class));
+                return ClassUtil.resolveConstructor(parentClass,
+                        (Class<?>[]) ClassUtil.checkInput(parameterTypes, Class.class));
             }
             throw new NoSuchMethodException("class " + clazz + " does not contain constructor");
         }
@@ -136,8 +136,7 @@ public final class ClassUtil
      * @return Constructor
      * @throws NoSuchMethodException on lookup failure
      */
-    public static Constructor<?> resolveConstructor(final Class<?> clazz, final Object[] arguments)
-        throws NoSuchMethodException
+    public static Constructor<?> resolveConstructor(final Class<?> clazz, final Object[] arguments) throws NoSuchMethodException
     {
         Class<?>[] parameterTypes = ClassUtil.getClass(arguments);
         String key = "CONSTRUCTOR:" + clazz + "@" + FieldSignature.toDescriptor(parameterTypes);
@@ -238,7 +237,7 @@ public final class ClassUtil
      * @throws NoSuchFieldException if the method cannot be resolved
      */
     public static Field resolveField(final Class<?> clazz, final Class<?> callerClass, final String name)
-        throws NoSuchFieldException
+            throws NoSuchFieldException
     {
         Field field = ClassUtil.resolveField(clazz, name);
         if (ClassUtil.isVisible(field, callerClass.getClass()))
@@ -300,7 +299,7 @@ public final class ClassUtil
      * @throws NoSuchMethodException on lookup failure
      */
     public static Method resolveMethod(final Class<?> clazz, final Class<?> callerClass, final String name,
-        final Class<?>... parameterTypes) throws NoSuchMethodException
+            final Class<?>... parameterTypes) throws NoSuchMethodException
     {
         Method method = ClassUtil.resolveMethod(clazz, name, parameterTypes);
         if (ClassUtil.isVisible(method, callerClass))
@@ -319,7 +318,7 @@ public final class ClassUtil
      * @throws NoSuchMethodException on lookup failure
      */
     public static Method resolveMethod(final Class<?> clazz, final String name, final Class<?>... parameterTypes)
-        throws NoSuchMethodException
+            throws NoSuchMethodException
     {
         try
         {
@@ -341,8 +340,8 @@ public final class ClassUtil
                 }
                 try
                 {
-                    return ClassUtil.resolveMethod(parentClass, name, (Class<?>[]) ClassUtil.checkInput(parameterTypes,
-                        Class.class));
+                    return ClassUtil.resolveMethod(parentClass, name,
+                            (Class<?>[]) ClassUtil.checkInput(parameterTypes, Class.class));
                 }
                 catch (NoSuchMethodException rmnsme)
                 {
@@ -386,7 +385,7 @@ public final class ClassUtil
      * @throws NoSuchMethodException on lookup failure
      */
     public static Method resolveMethod(final Object object, final String name, final Class<?>... parameterTypes)
-        throws NoSuchMethodException
+            throws NoSuchMethodException
     {
         if (object == null)
         {
@@ -404,7 +403,7 @@ public final class ClassUtil
      * @throws NoSuchMethodException on lookup failure
      */
     public static Method resolveMethod(final Object object, final String name, final Object[] arguments)
-        throws NoSuchMethodException
+            throws NoSuchMethodException
     {
         Class<?>[] parameterTypes = ClassUtil.getClass(arguments);
         String key = "METHOD:" + object.getClass() + "@" + name + "@" + FieldSignature.toDescriptor(parameterTypes);
@@ -779,7 +778,7 @@ public final class ClassUtil
      * @throws NoSuchMethodException if the method cannot be resolved
      */
     private static Constructor<?> resolveConstructorSuper(final Class<?> clazz, final Class<?>... parameterTypes)
-        throws NoSuchMethodException
+            throws NoSuchMethodException
     {
         String key = "CONSTRUCTOR:" + clazz + "@" + FieldSignature.toDescriptor(parameterTypes);
         try
@@ -813,7 +812,7 @@ public final class ClassUtil
      * @throws NoSuchMethodException on lookup failure
      */
     private static Method resolveMethodSuper(final Class<?> clazz, final String name, final Class<?>... parameterTypes)
-        throws NoSuchMethodException
+            throws NoSuchMethodException
     {
         String key = "METHOD:" + clazz + "@" + name + "@" + FieldSignature.toDescriptor(parameterTypes);
         try

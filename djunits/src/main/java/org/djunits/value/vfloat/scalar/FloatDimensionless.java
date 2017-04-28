@@ -6,6 +6,7 @@ import org.djunits.unit.AngleUnit;
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DensityUnit;
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.ElectricalChargeUnit;
 import org.djunits.unit.ElectricalCurrentUnit;
 import org.djunits.unit.ElectricalPotentialUnit;
@@ -19,17 +20,16 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.MoneyPerAreaUnit;
+import org.djunits.unit.MoneyPerDurationUnit;
 import org.djunits.unit.MoneyPerEnergyUnit;
 import org.djunits.unit.MoneyPerLengthUnit;
 import org.djunits.unit.MoneyPerMassUnit;
-import org.djunits.unit.MoneyPerTimeUnit;
 import org.djunits.unit.MoneyPerVolumeUnit;
 import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.TemperatureUnit;
-import org.djunits.unit.TimeUnit;
 import org.djunits.unit.TorqueUnit;
 import org.djunits.unit.VolumeUnit;
 import org.djunits.value.MathFunctionsDimensionless;
@@ -50,7 +50,7 @@ import org.djunits.value.MathFunctionsDimensionless;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -587,13 +587,14 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     }
 
     /**
-     * Calculate the multiplication of FloatDimensionless and FloatMoneyPerTime, which results in a FloatMoneyPerTime scalar.
+     * Calculate the multiplication of FloatDimensionless and FloatMoneyPerDuration, which results in a FloatMoneyPerDuration
+     * scalar.
      * @param v FloatDimensionless scalar
-     * @return FloatMoneyPerTime scalar as a multiplication of FloatDimensionless and FloatMoneyPerTime
+     * @return FloatMoneyPerDuration scalar as a multiplication of FloatDimensionless and FloatMoneyPerDuration
      */
-    public final FloatMoneyPerTime multiplyBy(final FloatMoneyPerTime v)
+    public final FloatMoneyPerDuration multiplyBy(final FloatMoneyPerDuration v)
     {
-        return new FloatMoneyPerTime(this.si * v.si, MoneyPerTimeUnit.getStandardMoneyPerTimeUnit());
+        return new FloatMoneyPerDuration(this.si * v.si, MoneyPerDurationUnit.getStandardMoneyPerDurationUnit());
     }
 
     /**
@@ -654,7 +655,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      */
     public final FloatDuration multiplyBy(final FloatDuration v)
     {
-        return new FloatDuration(this.si * v.si, TimeUnit.SI);
+        return new FloatDuration(this.si * v.si, DurationUnit.SI);
     }
 
     /**
@@ -714,7 +715,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      */
     public final FloatDuration divideBy(final FloatFrequency v)
     {
-        return new FloatDuration(this.si / v.si, TimeUnit.SI);
+        return new FloatDuration(this.si / v.si, DurationUnit.SI);
     }
 
 }

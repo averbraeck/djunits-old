@@ -3,6 +3,7 @@ package org.djunits.value.vdouble.vector;
 import java.util.List;
 import java.util.SortedMap;
 
+import org.djunits.unit.AbsoluteTemperatureUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
@@ -11,7 +12,7 @@ import org.djunits.value.vdouble.scalar.AbsoluteTemperature;
 /**
  * Mutable Absolute AbsoluteTemperature Vector.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -19,8 +20,8 @@ import org.djunits.value.vdouble.scalar.AbsoluteTemperature;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class MutableAbsoluteTemperatureVector extends
-        AbstractMutableDoubleVectorAbs<TemperatureUnit, AbsoluteTemperatureVector, TemperatureVector, MutableAbsoluteTemperatureVector, AbsoluteTemperature>
+public class MutableAbsoluteTemperatureVector extends AbstractMutableDoubleVectorAbs<AbsoluteTemperatureUnit, TemperatureUnit,
+        AbsoluteTemperatureVector, TemperatureVector, MutableAbsoluteTemperatureVector, AbsoluteTemperature>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -32,8 +33,8 @@ public class MutableAbsoluteTemperatureVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableAbsoluteTemperatureVector(final double[] values, final TemperatureUnit unit, final StorageType storageType)
-            throws ValueException
+    public MutableAbsoluteTemperatureVector(final double[] values, final AbsoluteTemperatureUnit unit,
+            final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
     }
@@ -45,7 +46,7 @@ public class MutableAbsoluteTemperatureVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableAbsoluteTemperatureVector(final List<Double> values, final TemperatureUnit unit,
+    public MutableAbsoluteTemperatureVector(final List<Double> values, final AbsoluteTemperatureUnit unit,
             final StorageType storageType) throws ValueException
     {
         super(values, unit, storageType);
@@ -98,7 +99,7 @@ public class MutableAbsoluteTemperatureVector extends
      * @param storageType the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
-    public MutableAbsoluteTemperatureVector(final SortedMap<Integer, Double> values, final TemperatureUnit unit,
+    public MutableAbsoluteTemperatureVector(final SortedMap<Integer, Double> values, final AbsoluteTemperatureUnit unit,
             final int length, final StorageType storageType) throws ValueException
     {
         super(values, unit, length, storageType);
@@ -109,14 +110,14 @@ public class MutableAbsoluteTemperatureVector extends
      * @param data an internal data object
      * @param unit the unit
      */
-    MutableAbsoluteTemperatureVector(final DoubleVectorData data, final TemperatureUnit unit)
+    MutableAbsoluteTemperatureVector(final DoubleVectorData data, final AbsoluteTemperatureUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final AbsoluteTemperatureVector instantiateTypeAbs(final DoubleVectorData dvd, final TemperatureUnit unit)
+    protected final AbsoluteTemperatureVector instantiateTypeAbs(final DoubleVectorData dvd, final AbsoluteTemperatureUnit unit)
     {
         return new AbsoluteTemperatureVector(dvd, unit);
     }
@@ -131,14 +132,14 @@ public class MutableAbsoluteTemperatureVector extends
     /** {@inheritDoc} */
     @Override
     protected final MutableAbsoluteTemperatureVector instantiateMutableType(final DoubleVectorData dvd,
-            final TemperatureUnit unit)
+            final AbsoluteTemperatureUnit unit)
     {
         return new MutableAbsoluteTemperatureVector(dvd, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final AbsoluteTemperature instantiateScalar(final double value, final TemperatureUnit unit)
+    protected final AbsoluteTemperature instantiateScalar(final double value, final AbsoluteTemperatureUnit unit)
     {
         return new AbsoluteTemperature(value, unit);
     }
@@ -157,15 +158,6 @@ public class MutableAbsoluteTemperatureVector extends
     {
         return this.data.isSparse() ? (MutableAbsoluteTemperatureVector) this
                 : instantiateMutableType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Translate the absolute vector into a relative vector (e.g., before or after a multiplication or division).
-     * @return a relative version of this absolute AbsoluteTemperature vector.
-     */
-    public final MutableTemperatureVector toRel()
-    {
-        return new MutableTemperatureVector(getData(), getUnit());
     }
 
 }

@@ -13,7 +13,7 @@ import java.net.URL;
  * of the file location that was found, or null in case it was not found. This class is copied from 
  * nl.tudelft.simulation.language.io.
  * <p>
- * Copyright (c) 2002-2016 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights
+ * Copyright (c) 2002-2017 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights
  * reserved.
  * <p>
  * See for project information <a href="http://www.simulation.tudelft.nl/">www.simulation.tudelft.nl</a>.

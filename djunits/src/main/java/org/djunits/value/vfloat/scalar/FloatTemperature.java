@@ -1,5 +1,6 @@
 package org.djunits.value.vfloat.scalar;
 
+import org.djunits.unit.AbsoluteTemperatureUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.TemperatureUnit;
 
@@ -19,7 +20,7 @@ import org.djunits.unit.TemperatureUnit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
@@ -104,7 +105,7 @@ public class FloatTemperature extends AbstractFloatScalarRel<TemperatureUnit, Fl
      * @param unit the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
-    public final FloatAbsoluteTemperature instantiateAbs(final float value, final TemperatureUnit unit)
+    public final FloatAbsoluteTemperature instantiateAbs(final float value, final AbsoluteTemperatureUnit unit)
     {
         return new FloatAbsoluteTemperature(value, unit);
     }
@@ -128,21 +129,8 @@ public class FloatTemperature extends AbstractFloatScalarRel<TemperatureUnit, Fl
      */
     public final FloatAbsoluteTemperature plus(final FloatAbsoluteTemperature v)
     {
-        if (getUnit().isBaseSIUnit())
-        {
-            return instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-        }
-        return getUnit().equals(v.getUnit()) ? instantiateAbs(getInUnit() + v.getInUnit(), getUnit())
-                : instantiateAbs(this.si + v.si, getUnit().getStandardUnit());
-    }
-
-    /**
-     * Translate the relative scalar into an absolute scalar (e.g., before or after a multiplication or division).
-     * @return an absolute version of this temperature scalar.
-     */
-    public final FloatAbsoluteTemperature toAbs()
-    {
-        return new FloatAbsoluteTemperature(getInUnit(), getUnit());
+        AbsoluteTemperatureUnit targetUnit = v.getUnit();
+        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**

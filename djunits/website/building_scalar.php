@@ -97,7 +97,7 @@ public final Jerk instantiateRel(final double value, final JerkUnit unit)
 
     <p>
       Often, extra methods are implemented for multiplication and division from the just defined type to other types. E.g., when we multiply the Jerk by a
-      (Relative) Time, we get an Acceleration. If we divide it by an Acceleration, we get a Frequency ([m/s<sup>3</sup>] / [m/s<sup>2</sup>] = [1/s]). These
+      (Relative) Duration, we get an Acceleration. If we divide it by an Acceleration, we get a Frequency ([m/s<sup>3</sup>] / [m/s<sup>2</sup>] = [1/s]). These
       methods can be defined as follows:
     </p>
 

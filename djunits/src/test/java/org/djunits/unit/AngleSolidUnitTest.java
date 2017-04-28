@@ -12,11 +12,11 @@ import org.junit.Test;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Jun 4, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Jun 4, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class AngleSolidUnitTest extends AbstractLinearUnitTest<AngleSolidUnit>
@@ -49,10 +49,10 @@ public class AngleSolidUnitTest extends AbstractLinearUnitTest<AngleSolidUnit>
         checkUnitRatioNameAndAbbreviation(AngleSolidUnit.STERADIAN, 1, 0.0000001, "steradian", "sr");
         checkUnitRatioNameAndAbbreviation(AngleSolidUnit.SQUARE_DEGREE, 1.0 / 3283, 0.0005, "square degree", "sq.deg");
         // Check two conversions between units
-        assertEquals("one STERADIAN is about 3283 SQUARE_DEGREE", 3283, getMultiplicationFactorTo(
-            AngleSolidUnit.STERADIAN, AngleSolidUnit.SQUARE_DEGREE), 0.5);
-        assertEquals("one SQUARE_DEGREE is about 0.0003045 STERADIAN", 0.0003045, getMultiplicationFactorTo(
-            AngleSolidUnit.SQUARE_DEGREE, AngleSolidUnit.STERADIAN), 0.0000005);
+        assertEquals("one STERADIAN is about 3283 SQUARE_DEGREE", 3283,
+                getMultiplicationFactorTo(AngleSolidUnit.STERADIAN, AngleSolidUnit.SQUARE_DEGREE), 0.5);
+        assertEquals("one SQUARE_DEGREE is about 0.0003045 STERADIAN", 0.0003045,
+                getMultiplicationFactorTo(AngleSolidUnit.SQUARE_DEGREE, AngleSolidUnit.STERADIAN), 0.0000005);
     }
 
     /**

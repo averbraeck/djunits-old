@@ -11,11 +11,11 @@ import org.junit.Test;
 
 /**
  * <p>
- * Copyright (c) 2013-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$, initial
- * version Jun 11, 2014 <br>
+ * $LastChangedDate$, @version $Revision$, by $Author$,
+ * initial version Jun 11, 2014 <br>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class UnitSystemLocalizationsTest
@@ -45,9 +45,8 @@ public class UnitSystemLocalizationsTest
             }
         }
         ArrayList<String> errors = new ArrayList<String>();
-        for (String localeName : AvailableLocalizations.availableLocalizations("localeunitsystem", this.getClass()
-            .getResource("").getPath()
-            + "../../../../../"))
+        for (String localeName : AvailableLocalizations.availableLocalizations("localeunitsystem",
+                this.getClass().getResource("").getPath() + "../../../../../"))
         {
             for (UnitSystem us : unitSystems)
             {
@@ -61,8 +60,7 @@ public class UnitSystemLocalizationsTest
                 String abbreviation = us.getAbbreviation();
                 if (abbreviation.startsWith("!") && abbreviation.endsWith("!"))
                 {
-                    errors.add(String.format("Missing translation for abbreviation %s to %s", abbreviationKey,
-                        localeName));
+                    errors.add(String.format("Missing translation for abbreviation %s to %s", abbreviationKey, localeName));
                 }
                 if (name.startsWith("!") && name.endsWith("!"))
                 {

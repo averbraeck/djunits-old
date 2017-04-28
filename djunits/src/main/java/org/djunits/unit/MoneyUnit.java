@@ -9,7 +9,7 @@ import org.joda.money.CurrencyUnit;
  * MoneyUnit defines a monetary unit, and wraps the joda money currency unit. At this time, conversion rates between monetary
  * units are not used. A standard monetary unit, defined as a static variable, can be set to be used in the code.
  * <p>
- * Copyright (c) 2015-2016 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
@@ -583,7 +583,7 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
         CurrencyUnit.registerCurrency("USN", 997, 2, new ArrayList<String>());
         CurrencyUnit.registerCurrency("UYI", 940, 0, new ArrayList<String>());
         CurrencyUnit.registerCurrency("XBT", -1, 8, new ArrayList<String>());
-        
+
         AED = new MoneyUnit(CurrencyUnit.getInstance("AED"), "MoneyUnit.AED", "MoneyUnit.AED", true);
         AFN = new MoneyUnit(CurrencyUnit.getInstance("AFN"), "MoneyUnit.AFN", "MoneyUnit.AFN", true);
         ALL = new MoneyUnit(CurrencyUnit.getInstance("ALL"), "MoneyUnit.ALL", "MoneyUnit.ALL", true);
@@ -799,13 +799,13 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
      * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
      * @param abbreviationKey the key to the locale file for the abbreviation of the unit
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
      */
     private MoneyUnit(final CurrencyUnit currencyUnit, final String nameOrNameKey, final String abbreviationKey,
-            final MoneyUnit referenceUnit, final double conversionFactorToReferenceUnit, final boolean standardUnit)
+            final MoneyUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
     {
-        super(nameOrNameKey, abbreviationKey, UnitSystem.OTHER, referenceUnit, conversionFactorToReferenceUnit, standardUnit);
+        super(nameOrNameKey, abbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit, standardUnit);
         this.currencyUnit = currencyUnit;
     }
 
@@ -815,12 +815,12 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
      * @param name the long name of the unit
      * @param abbreviation the abbreviation of the unit
      * @param referenceUnit the unit to convert to
-     * @param conversionFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
      */
     public MoneyUnit(final CurrencyUnit currencyUnit, final String name, final String abbreviation,
-            final MoneyUnit referenceUnit, final double conversionFactorToReferenceUnit)
+            final MoneyUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(currencyUnit, name, abbreviation, referenceUnit, conversionFactorToReferenceUnit, false);
+        this(currencyUnit, name, abbreviation, referenceUnit, scaleFactorToReferenceUnit, false);
     }
 
     /**
@@ -842,7 +842,7 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
         MoneyPerEnergyUnit.setStandardUnit(moneyUnit);
         MoneyPerLengthUnit.setStandardUnit(moneyUnit);
         MoneyPerMassUnit.setStandardUnit(moneyUnit);
-        MoneyPerTimeUnit.setStandardUnit(moneyUnit);
+        MoneyPerDurationUnit.setStandardUnit(moneyUnit);
         MoneyPerVolumeUnit.setStandardUnit(moneyUnit);
     }
 

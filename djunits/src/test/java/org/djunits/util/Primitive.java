@@ -63,8 +63,7 @@ public final class Primitive
      */
     public static Object cast(final Class<?> clazz, final Object object)
     {
-        if (clazz.isInstance(object) || !clazz.isPrimitive()
-            || (clazz.equals(Primitive.getPrimitive(object.getClass()))))
+        if (clazz.isInstance(object) || !clazz.isPrimitive() || (clazz.equals(Primitive.getPrimitive(object.getClass()))))
         {
             return object;
         }
