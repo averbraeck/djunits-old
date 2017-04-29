@@ -13,6 +13,7 @@ import org.djunits.unit.*;
  * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+##FLOATTIME##
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
  * initial version Sep 1, 2015 <br>

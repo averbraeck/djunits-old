@@ -19,6 +19,13 @@ import org.djunits.unit.TimeUnit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
+ * Note that when the offset of a stored absolute Time becomes large, precision of a float might not be enough for the required
+ * resolution of a Time. A float has around 7 significant digits (23 bit mantissa). This means that when we need to have a float
+ * time that is precise to microseconds, the Time value should not go above 2^22 = 4.0E6. This is <b>not</b> enough to store
+ * Epoch values that are in the order of magnitude of 2E12 ms! So feeding System.TimeInMillis() to a FloatTime with
+ * TimeUnit.BASE as its unit is not having the required precision. At best, a FloatTime can store TimeUnit.BASE or
+ * TimeUnit.EPOCH values with real calendar values with a precision of several minutes.
+ * <p>
  * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.

@@ -8,6 +8,8 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * Standard direction unit. Several conversion factors have been taken from
  * <a href="http://en.wikipedia.org/wiki/Conversion_of_units">http://en.wikipedia.org/wiki/Conversion_of_units</a>.
  * <p>
+ * Note that the Direction is <b>counter</b>clockwise.
+ * <p>
  * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
@@ -23,11 +25,17 @@ public class DirectionUnit extends AbsoluteLinearUnit<DirectionUnit, AngleUnit>
     /** The BASE unit for direction with an artificial origin. */
     public static final DirectionUnit BASE;
 
-    /** The unit for direction with an North as the origin and radians as the displacement. */
+    /** The unit for direction with North as the origin and radians as the displacement. */
     public static final DirectionUnit NORTH_RADIAN;
 
-    /** The unit for direction with an North as the origin and degrees as the displacement. */
+    /** The unit for direction with North as the origin and degrees as the displacement. */
     public static final DirectionUnit NORTH_DEGREE;
+
+    /** The unit for direction with East as the origin and radians as the displacement. */
+    public static final DirectionUnit EAST_RADIAN;
+
+    /** The unit for direction with East as the origin and degrees as the displacement. */
+    public static final DirectionUnit EAST_DEGREE;
 
     static
     {
@@ -36,6 +44,10 @@ public class DirectionUnit extends AbsoluteLinearUnit<DirectionUnit, AngleUnit>
                 AngleUnit.RADIAN);
         NORTH_DEGREE = new DirectionUnit("DirectionUnit.North(deg)", "DirectionUnit.North(degrees)", OTHER, Math.PI / 180.0,
                 0.0, false, AngleUnit.RADIAN);
+        EAST_RADIAN = new DirectionUnit("DirectionUnit.East(rad)", "DirectionUnit.East(radians)", OTHER, 1.0, -Math.PI / 2.0,
+                false, AngleUnit.RADIAN);
+        EAST_DEGREE = new DirectionUnit("DirectionUnit.East(deg)", "DirectionUnit.East(degrees)", OTHER, Math.PI / 180.0, -90.0,
+                false, AngleUnit.RADIAN);
     }
 
     /**

@@ -48,6 +48,12 @@ public class GenerateDJUNIT
     /** Map of types to formulas. */
     private static Map<String, List<String>> formulas = new HashMap<>();
 
+    /** Map of replacement tags to replacement string. */
+    private static Map<String, String> replaceMap = new HashMap<>();
+
+    /** Map of replacement tags to type for which the replacement has to be done. */
+    private static Map<String, String> replaceType = new HashMap<>();
+
     /**
      * Read the types from the file /TYPES_ABS_REL.txt.
      * @throws IOException on I/O error
@@ -143,6 +149,44 @@ public class GenerateDJUNIT
         bufferedReader.close();
     }
 
+    /**
+     * Read the replacement strings from the file /REPLACE.txt.
+     * @throws IOException on I/O error
+     */
+    private static void readReplace() throws IOException
+    {
+        URL typesURL = URLResource.getResource("/REPLACE.txt");
+        FileReader fileReader = new FileReader(new File(typesURL.getPath()));
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String tag = null;
+        String line = null;
+        String type = null;
+        String replacementLines = "";
+        while ((line = bufferedReader.readLine()) != null)
+        {
+            if (line.startsWith("##"))
+            {
+                if (tag != null)
+                {
+                    replaceMap.put(tag, replacementLines);
+                    replaceType.put(tag, type);
+                    tag = null;
+                }
+                else
+                {
+                    tag = line.trim();
+                    type = bufferedReader.readLine();
+                    replacementLines = "";
+                }
+            }
+            else
+            {
+                replacementLines += line + "\n";
+            }
+        }
+        bufferedReader.close();
+    }
+
     /****************************************************************************************************************/
     /********************************************* SCALAR ***********************************************************/
     /****************************************************************************************************************/
@@ -206,6 +250,26 @@ public class GenerateDJUNIT
     }
 
     /**
+     * Insert replacements based on REPLACCE.txt into the Java file.
+     * @param java the file
+     * @param type the type
+     * @return the file with replacements
+     */
+    private static String replace(String java, String type)
+    {
+        // replace the "replacement" tags
+        for (String tag : replaceMap.keySet())
+        {
+            String replacement = (replaceType.get(tag).equals(type)) ? replaceMap.get(tag) : "";
+            while (java.contains(tag))
+            {
+                java = java.replace(tag, replacement);
+            }
+        }
+        return java;
+    }
+
+    /**
      * Replace the %TypeAbs%, %TypeRel%, %TypeAbsUnit%, and %TypeRelUnit% tags in the java string.
      * @param in the original java string
      * @param type the types: [abs, rel, unit]
@@ -254,6 +318,7 @@ public class GenerateDJUNIT
                 String java = new String(scalarJava);
                 java = replaceAbsRel(java, type);
                 java = formulas(java, "DoubleScalar => " + type[i], "");
+                java = replace(java, type[i]);
                 out.print(java);
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + type[i] + ".java");
@@ -291,6 +356,7 @@ public class GenerateDJUNIT
             }
             java = java.replace("%DIMLESS%", "");
             java = formulas(java, "DoubleScalar => " + type, "");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
@@ -319,6 +385,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = java.replace("%DIMLESS%", "");
             java = formulas(java, "DoubleScalar => " + type, "");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
@@ -348,6 +415,7 @@ public class GenerateDJUNIT
                 String java = new String(scalarJava);
                 java = replaceAbsRel(java, type);
                 java = formulas(java, "FloatScalar => " + type[i], "Float");
+                java = replace(java, type[i]);
                 out.print(java);
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + fType + ".java");
@@ -386,6 +454,7 @@ public class GenerateDJUNIT
             }
             java = java.replace("%DIMLESS%", "");
             java = formulas(java, "FloatScalar => " + type, "Float");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + fType + ".java");
@@ -415,6 +484,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = java.replace("%DIMLESS%", "");
             java = formulas(java, "FloatScalar => " + type, "Float");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + fType + ".java");
@@ -483,6 +553,7 @@ public class GenerateDJUNIT
                 String java = new String(vectorJava);
                 java = replaceAbsRel(java, type);
                 java = formulasVector(java, "DoubleVector => " + type[i], "");
+                java = replace(java, type[i]);
                 out.print(java);
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + type[i] + "Vector.java");
@@ -500,6 +571,7 @@ public class GenerateDJUNIT
                 String java = new String(vectorJava);
                 java = replaceAbsRel(java, type);
                 java = formulasVector(java, "MutableDoubleVector => " + type[i], "Mutable");
+                java = replace(java, type[i]);
                 out.print(java);
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type[i] + "Vector.java");
@@ -528,6 +600,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = formulasVector(java, "DoubleVector => " + type, "");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
@@ -555,6 +628,7 @@ public class GenerateDJUNIT
             }
             java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "MutableDoubleVector => " + type, "Mutable");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
@@ -583,6 +657,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "DoubleVector => " + type, "");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
@@ -602,6 +677,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "MutableDoubleVector => " + type, "Mutable");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
@@ -636,6 +712,7 @@ public class GenerateDJUNIT
                 String java = new String(vectorJava);
                 java = replaceAbsRel(java, type);
                 java = formulasVector(java, "FloatVector => " + fType, "");
+                java = replace(java, type[i]);
                 out.print(java);
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
@@ -654,6 +731,7 @@ public class GenerateDJUNIT
                 String java = new String(vectorJava);
                 java = replaceAbsRel(java, type);
                 java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
+                java = replace(java, type[i]);
                 out.print(java);
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
@@ -683,6 +761,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = formulasVector(java, "FloatVector => " + fType, "");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
@@ -711,6 +790,7 @@ public class GenerateDJUNIT
             }
             java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
@@ -740,6 +820,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "FloatVector => " + fType, "");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
@@ -760,6 +841,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
@@ -829,6 +911,7 @@ public class GenerateDJUNIT
                 String java = new String(matrixJava);
                 java = replaceAbsRel(java, type);
                 java = formulasMatrix(java, "DoubleMatrix => " + type[i], "");
+                java = replace(java, type[i]);
                 out.print(java);
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + type[i] + "Matrix.java");
@@ -846,6 +929,7 @@ public class GenerateDJUNIT
                 String java = new String(matrixJava);
                 java = replaceAbsRel(java, type);
                 java = formulasMatrix(java, "MutableDoubleMatrix => " + type[i], "Mutable");
+                java = replace(java, type[i]);
                 out.print(java);
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type[i] + "Matrix.java");
@@ -874,6 +958,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = formulasMatrix(java, "DoubleMatrix => " + type, "");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
@@ -901,6 +986,7 @@ public class GenerateDJUNIT
             }
             java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "MutableDoubleMatrix => " + type, "Mutable");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
@@ -929,6 +1015,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "DoubleMatrix => " + type, "");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
@@ -948,6 +1035,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "MutableDoubleMatrix => " + type, "Mutable");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
@@ -982,6 +1070,7 @@ public class GenerateDJUNIT
                 String java = new String(matrixJava);
                 java = replaceAbsRel(java, type);
                 java = formulasMatrix(java, "FloatMatrix => " + fType, "");
+                java = replace(java, type[i]);
                 out.print(java);
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
@@ -1000,6 +1089,7 @@ public class GenerateDJUNIT
                 String java = new String(matrixJava);
                 java = replaceAbsRel(java, type);
                 java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
+                java = replace(java, type[i]);
                 out.print(java);
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
@@ -1029,6 +1119,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = formulasMatrix(java, "FloatMatrix => " + fType, "");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
@@ -1057,6 +1148,7 @@ public class GenerateDJUNIT
             }
             java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
@@ -1086,6 +1178,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "FloatMatrix => " + fType, "");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
@@ -1106,6 +1199,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
+            java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
@@ -1196,6 +1290,7 @@ public class GenerateDJUNIT
         readRelTypes();
         readMoneyTypes();
         readFormulas();
+        readReplace();
 
         generateDoubleScalarAbsRel();
         generateDoubleScalarRel();
