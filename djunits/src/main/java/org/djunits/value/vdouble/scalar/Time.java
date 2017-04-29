@@ -19,6 +19,12 @@ import org.djunits.unit.TimeUnit;
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
  * used are compatible.
  * <p>
+ * Note that when the offset of a stored absolute Time becomes large, precision of a double might not be enough for the required
+ * resolution of a Time. A double has around 16 significant digits (52 bit mantissa). This means that when we need to have a
+ * double Time with TimeUnit.BASE as its unit, the largest value where the ms precision is reached is 2^51 = 2.3E15, which is
+ * around 71000 years. This is sufficient to store a date in the 21st Century with a BASE or an Epoch offset precise to a
+ * microsecond.
+ * <p>
  * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.

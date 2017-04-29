@@ -2,6 +2,29 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.00.01" date="2017-04-29" description="Several absolute base units added">
+      <action dev="averbraeck" type="add">
+        For DirectionUnit, EAST_RADIAN and EAST_DEGREE have been added.
+      </action>
+      <action dev="averbraeck" type="add">
+        For TimeUnit, several BASE units with e.g., SECOND, MINUTE, HOUR, DAY, WEEK have been added.
+      </action>
+      <action dev="averbraeck" type="update">
+        In the TimeUnit, Time, and FloatTime classes a warning has been placed that indicates that precision is limited.
+        For floatTime it states: Note that when the offset of a stored absolute Time becomes large, precision of a float 
+        might not be enough for the required resolution of a Time. A float has around 7 significant digits (23 bit mantissa). 
+        This means that when we need to have a float time that is precise to microseconds, the Time value should not go 
+        above 2^22 = 4.0E6. This is not enough to store Epoch values that are in the order of magnitude of 2E12 ms! 
+        So feeding System.TimeInMillis() to a FloatTime with TimeUnit.BASE as its unit is not having the required precision. 
+        At best, a FloatTime can store TimeUnit.BASE or TimeUnit.EPOCH values with real calendar values with a precision of 
+        several minutes.
+      </action>
+      <action dev="averbraeck" type="add">
+        The GenerateUNITs has a replacement option that can insert the above precision warnings in the automatically generated 
+        Time and FloatTime (and other) classes. 
+      </action>
+    </release>
+  
     <release version="3.00.00" date="2017-04-27" description="Absolute units separate from relative units">
       <action dev="averbraeck" type="add">
         Abolute units and relative units have been separated. They are truly
