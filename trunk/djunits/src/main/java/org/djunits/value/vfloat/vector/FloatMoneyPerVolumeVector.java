@@ -148,4 +148,26 @@ public class FloatMoneyPerVolumeVector extends AbstractFloatVectorRel<MoneyPerVo
         return this.data.isSparse() ? (FloatMoneyPerVolumeVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatMoneyPerVolume Scalars from this vector.
+     * @return FloatMoneyPerVolume[]; an array of FloatMoneyPerVolume Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatMoneyPerVolume[] toArray()
+    {
+        FloatMoneyPerVolume[] array = new FloatMoneyPerVolume[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

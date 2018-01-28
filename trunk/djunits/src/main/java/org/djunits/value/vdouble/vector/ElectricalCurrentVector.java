@@ -147,4 +147,26 @@ public class ElectricalCurrentVector extends AbstractDoubleVectorRel<ElectricalC
         return this.data.isSparse() ? (ElectricalCurrentVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of ElectricalCurrent Scalars from this vector.
+     * @return ElectricalCurrent[]; an array of ElectricalCurrent Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public ElectricalCurrent[] toArray()
+    {
+        ElectricalCurrent[] array = new ElectricalCurrent[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

@@ -151,4 +151,26 @@ public class TimeVector
         return this.data.isSparse() ? (TimeVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Time Scalars from this vector.
+     * @return Time[]; an array of Time Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Time[] toArray()
+    {
+        Time[] array = new Time[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

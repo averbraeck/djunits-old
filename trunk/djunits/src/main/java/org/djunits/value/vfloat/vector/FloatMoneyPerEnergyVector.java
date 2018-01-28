@@ -148,4 +148,26 @@ public class FloatMoneyPerEnergyVector extends AbstractFloatVectorRel<MoneyPerEn
         return this.data.isSparse() ? (FloatMoneyPerEnergyVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatMoneyPerEnergy Scalars from this vector.
+     * @return FloatMoneyPerEnergy[]; an array of FloatMoneyPerEnergy Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatMoneyPerEnergy[] toArray()
+    {
+        FloatMoneyPerEnergy[] array = new FloatMoneyPerEnergy[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

@@ -144,4 +144,26 @@ public class MutableVolumeVector extends AbstractMutableDoubleVectorRel<VolumeUn
         return this.data.isSparse() ? (MutableVolumeVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Volume Scalars from this vector.
+     * @return Volume[]; an array of Volume Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Volume[] toArray()
+    {
+        Volume[] array = new Volume[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

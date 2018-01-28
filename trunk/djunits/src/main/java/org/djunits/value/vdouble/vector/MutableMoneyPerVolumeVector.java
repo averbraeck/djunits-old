@@ -149,4 +149,26 @@ public class MutableMoneyPerVolumeVector extends
                 : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of MoneyPerVolume Scalars from this vector.
+     * @return MoneyPerVolume[]; an array of MoneyPerVolume Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public MoneyPerVolume[] toArray()
+    {
+        MoneyPerVolume[] array = new MoneyPerVolume[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

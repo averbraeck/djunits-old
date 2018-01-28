@@ -144,4 +144,26 @@ public class MutableEnergyVector extends AbstractMutableDoubleVectorRel<EnergyUn
         return this.data.isSparse() ? (MutableEnergyVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Energy Scalars from this vector.
+     * @return Energy[]; an array of Energy Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Energy[] toArray()
+    {
+        Energy[] array = new Energy[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

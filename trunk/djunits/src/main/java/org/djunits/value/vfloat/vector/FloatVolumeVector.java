@@ -144,4 +144,26 @@ public class FloatVolumeVector
         return this.data.isSparse() ? (FloatVolumeVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatVolume Scalars from this vector.
+     * @return FloatVolume[]; an array of FloatVolume Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatVolume[] toArray()
+    {
+        FloatVolume[] array = new FloatVolume[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

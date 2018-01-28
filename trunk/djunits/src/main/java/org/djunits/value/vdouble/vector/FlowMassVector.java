@@ -143,4 +143,26 @@ public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMa
         return this.data.isSparse() ? (FlowMassVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FlowMass Scalars from this vector.
+     * @return FlowMass[]; an array of FlowMass Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FlowMass[] toArray()
+    {
+        FlowMass[] array = new FlowMass[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

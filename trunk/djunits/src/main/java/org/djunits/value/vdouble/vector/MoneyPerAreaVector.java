@@ -146,4 +146,26 @@ public class MoneyPerAreaVector
         return this.data.isSparse() ? (MoneyPerAreaVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of MoneyPerArea Scalars from this vector.
+     * @return MoneyPerArea[]; an array of MoneyPerArea Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public MoneyPerArea[] toArray()
+    {
+        MoneyPerArea[] array = new MoneyPerArea[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

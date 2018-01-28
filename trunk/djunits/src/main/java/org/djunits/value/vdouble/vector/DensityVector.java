@@ -142,4 +142,26 @@ public class DensityVector extends AbstractDoubleVectorRel<DensityUnit, DensityV
         return this.data.isSparse() ? (DensityVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Density Scalars from this vector.
+     * @return Density[]; an array of Density Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Density[] toArray()
+    {
+        Density[] array = new Density[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

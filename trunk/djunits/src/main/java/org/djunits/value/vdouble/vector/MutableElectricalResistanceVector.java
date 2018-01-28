@@ -151,4 +151,26 @@ public class MutableElectricalResistanceVector extends AbstractMutableDoubleVect
                 : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of ElectricalResistance Scalars from this vector.
+     * @return ElectricalResistance[]; an array of ElectricalResistance Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public ElectricalResistance[] toArray()
+    {
+        ElectricalResistance[] array = new ElectricalResistance[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

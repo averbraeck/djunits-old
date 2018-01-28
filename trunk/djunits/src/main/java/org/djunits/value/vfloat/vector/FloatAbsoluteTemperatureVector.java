@@ -160,4 +160,26 @@ public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<Absol
                 : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatAbsoluteTemperature Scalars from this vector.
+     * @return FloatAbsoluteTemperature[]; an array of FloatAbsoluteTemperature Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatAbsoluteTemperature[] toArray()
+    {
+        FloatAbsoluteTemperature[] array = new FloatAbsoluteTemperature[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

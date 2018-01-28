@@ -147,4 +147,26 @@ public class FloatAccelerationVector extends
         return this.data.isSparse() ? (FloatAccelerationVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatAcceleration Scalars from this vector.
+     * @return FloatAcceleration[]; an array of FloatAcceleration Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatAcceleration[] toArray()
+    {
+        FloatAcceleration[] array = new FloatAcceleration[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

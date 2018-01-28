@@ -144,4 +144,26 @@ public class MutableFloatMassVector
         return this.data.isSparse() ? (MutableFloatMassVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatMass Scalars from this vector.
+     * @return FloatMass[]; an array of FloatMass Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatMass[] toArray()
+    {
+        FloatMass[] array = new FloatMass[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

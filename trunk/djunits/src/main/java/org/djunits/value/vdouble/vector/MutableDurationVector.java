@@ -146,4 +146,26 @@ public class MutableDurationVector
         return this.data.isSparse() ? (MutableDurationVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Duration Scalars from this vector.
+     * @return Duration[]; an array of Duration Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Duration[] toArray()
+    {
+        Duration[] array = new Duration[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

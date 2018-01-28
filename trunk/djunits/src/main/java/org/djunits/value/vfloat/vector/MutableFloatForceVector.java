@@ -144,4 +144,26 @@ public class MutableFloatForceVector
         return this.data.isSparse() ? (MutableFloatForceVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatForce Scalars from this vector.
+     * @return FloatForce[]; an array of FloatForce Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatForce[] toArray()
+    {
+        FloatForce[] array = new FloatForce[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

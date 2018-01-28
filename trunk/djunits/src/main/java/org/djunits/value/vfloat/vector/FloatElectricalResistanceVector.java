@@ -150,4 +150,26 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
         return this.data.isSparse() ? (FloatElectricalResistanceVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatElectricalResistance Scalars from this vector.
+     * @return FloatElectricalResistance[]; an array of FloatElectricalResistance Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatElectricalResistance[] toArray()
+    {
+        FloatElectricalResistance[] array = new FloatElectricalResistance[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

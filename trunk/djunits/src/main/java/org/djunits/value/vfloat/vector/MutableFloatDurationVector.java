@@ -147,4 +147,26 @@ public class MutableFloatDurationVector
                 : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatDuration Scalars from this vector.
+     * @return FloatDuration[]; an array of FloatDuration Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatDuration[] toArray()
+    {
+        FloatDuration[] array = new FloatDuration[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

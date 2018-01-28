@@ -147,4 +147,26 @@ public class MutableLinearDensityVector extends
                 : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of LinearDensity Scalars from this vector.
+     * @return LinearDensity[]; an array of LinearDensity Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public LinearDensity[] toArray()
+    {
+        LinearDensity[] array = new LinearDensity[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

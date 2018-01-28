@@ -147,4 +147,26 @@ public class MoneyPerLengthVector
         return this.data.isSparse() ? (MoneyPerLengthVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of MoneyPerLength Scalars from this vector.
+     * @return MoneyPerLength[]; an array of MoneyPerLength Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public MoneyPerLength[] toArray()
+    {
+        MoneyPerLength[] array = new MoneyPerLength[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

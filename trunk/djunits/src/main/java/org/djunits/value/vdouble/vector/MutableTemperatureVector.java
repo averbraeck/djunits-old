@@ -146,4 +146,26 @@ public class MutableTemperatureVector
         return this.data.isSparse() ? (MutableTemperatureVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Temperature Scalars from this vector.
+     * @return Temperature[]; an array of Temperature Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Temperature[] toArray()
+    {
+        Temperature[] array = new Temperature[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

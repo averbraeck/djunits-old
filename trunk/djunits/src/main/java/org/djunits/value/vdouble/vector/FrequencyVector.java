@@ -143,4 +143,26 @@ public class FrequencyVector extends AbstractDoubleVectorRel<FrequencyUnit, Freq
         return this.data.isSparse() ? (FrequencyVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Frequency Scalars from this vector.
+     * @return Frequency[]; an array of Frequency Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Frequency[] toArray()
+    {
+        Frequency[] array = new Frequency[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

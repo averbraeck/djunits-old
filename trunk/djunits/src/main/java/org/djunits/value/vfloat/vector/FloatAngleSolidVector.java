@@ -146,4 +146,26 @@ public class FloatAngleSolidVector
         return this.data.isSparse() ? (FloatAngleSolidVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatAngleSolid Scalars from this vector.
+     * @return FloatAngleSolid[]; an array of FloatAngleSolid Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatAngleSolid[] toArray()
+    {
+        FloatAngleSolid[] array = new FloatAngleSolid[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

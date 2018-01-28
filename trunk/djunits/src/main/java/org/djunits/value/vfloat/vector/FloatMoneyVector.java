@@ -142,4 +142,26 @@ public class FloatMoneyVector extends AbstractFloatVectorRel<MoneyUnit, FloatMon
         return this.data.isSparse() ? (FloatMoneyVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatMoney Scalars from this vector.
+     * @return FloatMoney[]; an array of FloatMoney Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatMoney[] toArray()
+    {
+        FloatMoney[] array = new FloatMoney[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

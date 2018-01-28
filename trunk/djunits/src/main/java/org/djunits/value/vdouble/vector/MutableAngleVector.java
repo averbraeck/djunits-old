@@ -144,4 +144,26 @@ public class MutableAngleVector extends AbstractMutableDoubleVectorRel<AngleUnit
         return this.data.isSparse() ? (MutableAngleVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Angle Scalars from this vector.
+     * @return Angle[]; an array of Angle Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Angle[] toArray()
+    {
+        Angle[] array = new Angle[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }
