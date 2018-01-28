@@ -151,5 +151,28 @@ public class MutableFloat%TypeAbs%Vector
         return this.data.isSparse() ? (MutableFloat%TypeAbs%Vector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
     
+    
+    /**
+     * Return an array of Float%TypeAbs% Scalars from this vector.
+     * @return Float%TypeAbs%[]; an array of Float%TypeAbs% Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Float%TypeAbs%[] toArray()
+    {
+        Float%TypeAbs%[] array = new Float%TypeAbs%[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 %FORMULAS%%TypeAbs%%
 }
