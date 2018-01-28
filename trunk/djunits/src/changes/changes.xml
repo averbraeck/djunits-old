@@ -2,6 +2,30 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.00.02" date="2018-01-28" description="Iterator added to Vector and FloatVector">
+      <action dev="averbraeck" type="add">
+        Iterator added to Vector and FloatVector, so statements like "for (Speed s : speedVector)" are possible.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Bug for instantiateMD() and instantiate() on the basis of a sparse Map in FloatVector solved:
+      <![CDATA[
+<pre>
+  IntStream.range(0, values.size()).parallel().forEach(index -> valuesSI[index] 
+    = values.get(indices[index]).getSI());
+instead of
+  values.keySet().parallelStream().forEach(index -> valuesSI[index] 
+    = values.get(index).getSI());
+</pre>
+]]>    
+      </action>
+      <action dev="averbraeck" type="add">
+        VectorIteratorExample added to djunits-demo.
+      </action>
+      <action dev="averbraeck" type="update">
+        Copyright statement extended to 2018.
+      </action>
+    </release>
+
     <release version="3.00.01" date="2017-04-29" description="Several absolute base units added">
       <action dev="averbraeck" type="add">
         For DirectionUnit, EAST_RADIAN and EAST_DEGREE have been added.

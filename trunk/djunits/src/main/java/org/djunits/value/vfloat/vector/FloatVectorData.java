@@ -13,7 +13,7 @@ import org.djunits.value.vfloat.scalar.FloatScalarInterface;
 /**
  * Stores the data for a FloatVector and carries out basic operations.
  * <p>
- * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
@@ -199,7 +199,8 @@ abstract class FloatVectorData
             {
                 int[] indices = values.keySet().parallelStream().mapToInt(i -> i).toArray();
                 float[] valuesSI = new float[values.size()];
-                values.keySet().parallelStream().forEach(index -> valuesSI[index] = values.get(index).getSI());
+                IntStream.range(0, values.size()).parallel()
+                        .forEach(index -> valuesSI[index] = values.get(indices[index]).getSI());
                 return new FloatVectorDataSparse(valuesSI, indices, length);
             }
 
@@ -239,8 +240,8 @@ abstract class FloatVectorData
             {
                 int[] indices = values.keySet().parallelStream().mapToInt(i -> i).toArray();
                 float[] valuesSI = new float[values.size()];
-                values.keySet().parallelStream()
-                        .forEach(index -> valuesSI[index] = (float) scale.toStandardUnit(values.get(index)));
+                IntStream.range(0, values.size()).parallel()
+                        .forEach(index -> valuesSI[index] = (float) scale.toStandardUnit(values.get(indices[index])));
                 return new FloatVectorDataSparse(valuesSI, indices, length);
             }
 

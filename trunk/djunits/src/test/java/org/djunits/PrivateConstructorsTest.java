@@ -12,7 +12,7 @@ import org.junit.Test;
  * Test the various private constructors. There is nothing to test about these, but the non-tested (almost) unreachable code
  * throws of the statistics of our test coverage.
  * <p>
- * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @version $Revision$, $LastChangedDate$, by $Author$,

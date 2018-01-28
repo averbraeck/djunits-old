@@ -25,7 +25,7 @@ import org.djunits.unit.TimeUnit;
  * around 71000 years. This is sufficient to store a date in the 21st Century with a BASE or an Epoch offset precise to a
  * microsecond.
  * <p>
- * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
