@@ -143,5 +143,27 @@ public class Float%TypeRel%Vector extends AbstractFloatVectorRel<%TypeRelUnit%, 
         return this.data.isSparse() ? (Float%TypeRel%Vector) this : instantiateType(this.data.toSparse(), getUnit());
     }
     
+    /**
+     * Return an array of Float%TypeRel% Scalars from this vector.
+     * @return Float%TypeRel%[]; an array of Float%TypeRel% Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Float%TypeRel%[] toArray()
+    {
+        Float%TypeRel%[] array = new Float%TypeRel%[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 %FORMULAS%%TypeRel%%
 }

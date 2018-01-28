@@ -151,5 +151,27 @@ public class Float%TypeAbs%Vector extends
         return this.data.isSparse() ? (Float%TypeAbs%Vector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
         
+    /**
+     * Return an array of Float%TypeAbs% Scalars from this vector.
+     * @return Float%TypeAbs%[]; an array of Float%TypeAbs% Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Float%TypeAbs%[] toArray()
+    {
+        Float%TypeAbs%[] array = new Float%TypeAbs%[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 %FORMULAS%%TypeAbs%%
 }
