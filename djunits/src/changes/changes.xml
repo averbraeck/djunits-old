@@ -2,6 +2,15 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.00.03" date="2018-01-28" description="toArray() function added to Vector and FloatVector">
+      <action dev="averbraeck" type="add">
+        Typed Scalar[] toArray() function added for all vectors.
+      </action>
+      <action dev="averbraeck" type="add">
+        VectorToArrayExample added to djunits-demo.
+      </action>
+    </release>
+
     <release version="3.00.02" date="2018-01-28" description="Iterator added to Vector and FloatVector">
       <action dev="averbraeck" type="add">
         Iterator added to Vector and FloatVector, so statements like "for (Speed s : speedVector)" are possible.
@@ -19,10 +28,7 @@ instead of
 ]]>    
       </action>
       <action dev="averbraeck" type="add">
-        VectorIteratorExample and VectorToArrayExample added to djunits-demo.
-      </action>
-      <action dev="averbraeck" type="add">
-        Typed Scalar[] toArray() function added for all vectors.
+        VectorIteratorExample added to djunits-demo.
       </action>
       <action dev="averbraeck" type="update">
         Copyright statement extended to 2018.
