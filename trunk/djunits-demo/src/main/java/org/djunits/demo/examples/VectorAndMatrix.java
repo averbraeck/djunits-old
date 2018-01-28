@@ -6,11 +6,13 @@ import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vdouble.vector.DoubleVector;
+import org.djunits.value.vdouble.vector.DurationVector;
 
 /**
  * <p>
- * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
@@ -68,6 +70,10 @@ public final class VectorAndMatrix
         System.out.println(tva3);
         // XXX DoubleVector.Abs<TimeUnit, DurationUnit> dva4 = dvr.plus(dva);
         System.out.println();
+        
+        DurationVector dv = new DurationVector(new double[] {1.0,  2.0,  5.0, 10.0}, DurationUnit.MINUTE, StorageType.DENSE);
+        Duration d = dv.get(2);
+        System.out.println(d);
     }
 
 }
