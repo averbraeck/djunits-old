@@ -1,7 +1,9 @@
 package org.djunits.value.vfloat.vector;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.SortedMap;
 
 import org.djunits.unit.AbsoluteLinearUnit;
@@ -15,7 +17,7 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarAbs;
 /**
  * Absolute Immutable typed vector.
  * <p>
- * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
@@ -32,7 +34,7 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarAbs;
 abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
         A extends AbstractFloatVectorAbs<AU, RU, A, R, MA, S>, R extends AbstractFloatVectorRel<RU, R, ?, ?>,
         MA extends AbstractMutableFloatVectorAbs<AU, RU, A, R, MA, S>, S extends AbstractFloatScalarAbs<AU, S, RU, ?>>
-        extends AbstractFloatVector<AU, A> implements FunctionsAbs<AU, RU, A, R>, Absolute, Serializable
+        extends AbstractFloatVector<AU, A> implements FunctionsAbs<AU, RU, A, R>, Absolute, Serializable, Iterable<S>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -257,4 +259,64 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
         }
         throw new ValueException("Cannot create a FloatVector or MutableFloatVector from a null or empty Map of FloatScalar");
     }
+
+    /* ============================================================================================ */
+    /* =============================== ITERATOR METHODS AND CLASS ================================= */
+    /* ============================================================================================ */
+
+    /**
+     * Returns an iterator over the scalars in this vector in proper sequence.
+     * @return an iterator over the scalars in this vector in proper sequence
+     */
+    @Override
+    public Iterator<S> iterator()
+    {
+        return new Itr();
+    }
+
+    /**
+     * The iterator class is loosely based in AbstractList.Itr. It does not throw a ConcurrentModificationException, because the
+     * size of the vector does not change. Normal (non-mutable) vectors cannot change their size, nor their content. The only
+     * thing for the MutableVector that can change is its content, not its length.
+     */
+    protected class Itr implements Iterator<S>
+    {
+        /** index of next element to return. */
+        private int cursor = 0;
+
+        @Override
+        public boolean hasNext()
+        {
+            return this.cursor != size();
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public S next()
+        {
+            if (this.cursor >= size())
+            {
+                throw new NoSuchElementException();
+            }
+            try
+            {
+                int i = this.cursor;
+                S next = get(i);
+                this.cursor = i + 1;
+                return next;
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public void remove()
+        {
+            throw new RuntimeException("Remove function cannot be applied on fixed-size DJUNITS Vector");
+        }
+    }
+
 }

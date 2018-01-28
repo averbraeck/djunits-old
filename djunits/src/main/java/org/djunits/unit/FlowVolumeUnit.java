@@ -10,7 +10,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * The volume flow rate is the volume of fluid which passes through a given surface per unit of time (wikipedia).
  * <p>
- * Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,

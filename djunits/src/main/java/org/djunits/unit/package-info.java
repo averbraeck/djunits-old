@@ -4,7 +4,7 @@
  * The unit system ensures that quantities (lengths, temperatures, etc.) have a suitable unit and cannot be confused with
  * quantities in other units.
  * <p>
- * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
+ * Copyright (c) 2013-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
  * <p>
  * See for project information <a href="http://djunits.org/"> djunits.org</a>.
  * <p>
