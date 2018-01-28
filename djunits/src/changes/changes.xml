@@ -19,7 +19,7 @@ instead of
 ]]>    
       </action>
       <action dev="averbraeck" type="add">
-        VectorIteratorExample added to djunits-demo.
+        VectorIteratorExample and VectorToArrayExample added to djunits-demo.
       </action>
       <action dev="averbraeck" type="add">
         Typed Scalar[] toArray() function added for all vectors.
