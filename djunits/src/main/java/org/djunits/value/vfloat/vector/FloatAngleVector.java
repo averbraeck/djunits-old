@@ -142,4 +142,26 @@ public class FloatAngleVector extends AbstractFloatVectorRel<AngleUnit, FloatAng
         return this.data.isSparse() ? (FloatAngleVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatAngle Scalars from this vector.
+     * @return FloatAngle[]; an array of FloatAngle Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatAngle[] toArray()
+    {
+        FloatAngle[] array = new FloatAngle[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

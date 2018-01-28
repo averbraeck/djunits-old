@@ -144,4 +144,26 @@ public class MutableFloatPowerVector
         return this.data.isSparse() ? (MutableFloatPowerVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatPower Scalars from this vector.
+     * @return FloatPower[]; an array of FloatPower Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatPower[] toArray()
+    {
+        FloatPower[] array = new FloatPower[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

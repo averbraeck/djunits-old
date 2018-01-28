@@ -21,6 +21,9 @@ instead of
       <action dev="averbraeck" type="add">
         VectorIteratorExample added to djunits-demo.
       </action>
+      <action dev="averbraeck" type="add">
+        Typed Scalar[] toArray() function added for all vectors.
+      </action>
       <action dev="averbraeck" type="update">
         Copyright statement extended to 2018.
       </action>

@@ -146,4 +146,26 @@ public class FloatPressureVector
         return this.data.isSparse() ? (FloatPressureVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatPressure Scalars from this vector.
+     * @return FloatPressure[]; an array of FloatPressure Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatPressure[] toArray()
+    {
+        FloatPressure[] array = new FloatPressure[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

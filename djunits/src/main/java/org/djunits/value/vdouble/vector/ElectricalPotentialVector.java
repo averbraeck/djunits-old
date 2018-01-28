@@ -148,4 +148,26 @@ public class ElectricalPotentialVector extends AbstractDoubleVectorRel<Electrica
         return this.data.isSparse() ? (ElectricalPotentialVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of ElectricalPotential Scalars from this vector.
+     * @return ElectricalPotential[]; an array of ElectricalPotential Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public ElectricalPotential[] toArray()
+    {
+        ElectricalPotential[] array = new ElectricalPotential[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

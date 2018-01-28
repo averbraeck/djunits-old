@@ -144,4 +144,26 @@ public class MutableTorqueVector extends AbstractMutableDoubleVectorRel<TorqueUn
         return this.data.isSparse() ? (MutableTorqueVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Torque Scalars from this vector.
+     * @return Torque[]; an array of Torque Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Torque[] toArray()
+    {
+        Torque[] array = new Torque[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

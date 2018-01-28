@@ -143,4 +143,26 @@ public class PressureVector extends AbstractDoubleVectorRel<PressureUnit, Pressu
         return this.data.isSparse() ? (PressureVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Pressure Scalars from this vector.
+     * @return Pressure[]; an array of Pressure Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Pressure[] toArray()
+    {
+        Pressure[] array = new Pressure[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

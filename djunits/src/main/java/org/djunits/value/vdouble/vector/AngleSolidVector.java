@@ -146,4 +146,26 @@ public class AngleSolidVector
         return this.data.isSparse() ? (AngleSolidVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of AngleSolid Scalars from this vector.
+     * @return AngleSolid[]; an array of AngleSolid Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public AngleSolid[] toArray()
+    {
+        AngleSolid[] array = new AngleSolid[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

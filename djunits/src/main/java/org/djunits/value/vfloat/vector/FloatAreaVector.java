@@ -142,4 +142,26 @@ public class FloatAreaVector extends AbstractFloatVectorRel<AreaUnit, FloatAreaV
         return this.data.isSparse() ? (FloatAreaVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatArea Scalars from this vector.
+     * @return FloatArea[]; an array of FloatArea Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatArea[] toArray()
+    {
+        FloatArea[] array = new FloatArea[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

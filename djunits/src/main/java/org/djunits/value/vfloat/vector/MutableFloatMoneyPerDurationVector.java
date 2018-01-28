@@ -151,4 +151,26 @@ public class MutableFloatMoneyPerDurationVector extends AbstractMutableFloatVect
                 : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatMoneyPerDuration Scalars from this vector.
+     * @return FloatMoneyPerDuration[]; an array of FloatMoneyPerDuration Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatMoneyPerDuration[] toArray()
+    {
+        FloatMoneyPerDuration[] array = new FloatMoneyPerDuration[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

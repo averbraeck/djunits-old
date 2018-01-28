@@ -147,4 +147,26 @@ public class ElectricalChargeVector extends
         return this.data.isSparse() ? (ElectricalChargeVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of ElectricalCharge Scalars from this vector.
+     * @return ElectricalCharge[]; an array of ElectricalCharge Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public ElectricalCharge[] toArray()
+    {
+        ElectricalCharge[] array = new ElectricalCharge[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

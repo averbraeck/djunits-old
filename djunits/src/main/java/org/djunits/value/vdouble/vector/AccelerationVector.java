@@ -146,4 +146,26 @@ public class AccelerationVector
         return this.data.isSparse() ? (AccelerationVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Acceleration Scalars from this vector.
+     * @return Acceleration[]; an array of Acceleration Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Acceleration[] toArray()
+    {
+        Acceleration[] array = new Acceleration[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

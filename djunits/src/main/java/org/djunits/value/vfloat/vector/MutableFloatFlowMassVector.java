@@ -146,4 +146,26 @@ public class MutableFloatFlowMassVector
                 : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatFlowMass Scalars from this vector.
+     * @return FloatFlowMass[]; an array of FloatFlowMass Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatFlowMass[] toArray()
+    {
+        FloatFlowMass[] array = new FloatFlowMass[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

@@ -150,4 +150,26 @@ public class MutableMoneyPerDurationVector extends AbstractMutableDoubleVectorRe
                 : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of MoneyPerDuration Scalars from this vector.
+     * @return MoneyPerDuration[]; an array of MoneyPerDuration Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public MoneyPerDuration[] toArray()
+    {
+        MoneyPerDuration[] array = new MoneyPerDuration[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

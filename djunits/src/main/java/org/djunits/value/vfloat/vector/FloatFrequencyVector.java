@@ -146,4 +146,26 @@ public class FloatFrequencyVector
         return this.data.isSparse() ? (FloatFrequencyVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatFrequency Scalars from this vector.
+     * @return FloatFrequency[]; an array of FloatFrequency Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatFrequency[] toArray()
+    {
+        FloatFrequency[] array = new FloatFrequency[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

@@ -149,4 +149,26 @@ public class FloatElectricalCurrentVector extends AbstractFloatVectorRel<Electri
         return this.data.isSparse() ? (FloatElectricalCurrentVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatElectricalCurrent Scalars from this vector.
+     * @return FloatElectricalCurrent[]; an array of FloatElectricalCurrent Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatElectricalCurrent[] toArray()
+    {
+        FloatElectricalCurrent[] array = new FloatElectricalCurrent[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

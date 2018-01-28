@@ -153,4 +153,26 @@ public class DirectionVector extends
         return this.data.isSparse() ? (DirectionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Direction Scalars from this vector.
+     * @return Direction[]; an array of Direction Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Direction[] toArray()
+    {
+        Direction[] array = new Direction[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

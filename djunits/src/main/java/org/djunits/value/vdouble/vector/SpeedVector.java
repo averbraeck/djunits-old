@@ -142,4 +142,26 @@ public class SpeedVector extends AbstractDoubleVectorRel<SpeedUnit, SpeedVector,
         return this.data.isSparse() ? (SpeedVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Speed Scalars from this vector.
+     * @return Speed[]; an array of Speed Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Speed[] toArray()
+    {
+        Speed[] array = new Speed[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

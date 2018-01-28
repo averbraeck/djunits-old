@@ -144,4 +144,26 @@ public class MutableFloatSpeedVector
         return this.data.isSparse() ? (MutableFloatSpeedVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatSpeed Scalars from this vector.
+     * @return FloatSpeed[]; an array of FloatSpeed Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatSpeed[] toArray()
+    {
+        FloatSpeed[] array = new FloatSpeed[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

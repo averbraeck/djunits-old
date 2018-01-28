@@ -147,4 +147,26 @@ public class FloatLinearDensityVector extends
         return this.data.isSparse() ? (FloatLinearDensityVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatLinearDensity Scalars from this vector.
+     * @return FloatLinearDensity[]; an array of FloatLinearDensity Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatLinearDensity[] toArray()
+    {
+        FloatLinearDensity[] array = new FloatLinearDensity[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

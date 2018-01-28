@@ -145,4 +145,26 @@ public class MutableLengthVector extends AbstractMutableDoubleVectorRel<LengthUn
         return this.data.isSparse() ? (MutableLengthVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Length Scalars from this vector.
+     * @return Length[]; an array of Length Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Length[] toArray()
+    {
+        Length[] array = new Length[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

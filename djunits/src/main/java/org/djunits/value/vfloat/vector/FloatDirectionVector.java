@@ -154,4 +154,26 @@ public class FloatDirectionVector extends AbstractFloatVectorAbs<DirectionUnit, 
         return this.data.isSparse() ? (FloatDirectionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatDirection Scalars from this vector.
+     * @return FloatDirection[]; an array of FloatDirection Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatDirection[] toArray()
+    {
+        FloatDirection[] array = new FloatDirection[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

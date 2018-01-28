@@ -144,4 +144,26 @@ public class MutableFloatTorqueVector
         return this.data.isSparse() ? (MutableFloatTorqueVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatTorque Scalars from this vector.
+     * @return FloatTorque[]; an array of FloatTorque Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatTorque[] toArray()
+    {
+        FloatTorque[] array = new FloatTorque[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

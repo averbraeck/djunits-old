@@ -146,4 +146,26 @@ public class DimensionlessVector
         return this.data.isSparse() ? (DimensionlessVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Dimensionless Scalars from this vector.
+     * @return Dimensionless[]; an array of Dimensionless Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Dimensionless[] toArray()
+    {
+        Dimensionless[] array = new Dimensionless[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

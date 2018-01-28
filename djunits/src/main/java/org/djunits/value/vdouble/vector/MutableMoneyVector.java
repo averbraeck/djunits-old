@@ -143,4 +143,26 @@ public class MutableMoneyVector extends AbstractMutableDoubleVectorRel<MoneyUnit
         return this.data.isSparse() ? (MutableMoneyVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Money Scalars from this vector.
+     * @return Money[]; an array of Money Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Money[] toArray()
+    {
+        Money[] array = new Money[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

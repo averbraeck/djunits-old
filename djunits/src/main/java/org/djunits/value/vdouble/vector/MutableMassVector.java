@@ -142,4 +142,26 @@ public class MutableMassVector extends AbstractMutableDoubleVectorRel<MassUnit, 
         return this.data.isSparse() ? (MutableMassVector) this : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of Mass Scalars from this vector.
+     * @return Mass[]; an array of Mass Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public Mass[] toArray()
+    {
+        Mass[] array = new Mass[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

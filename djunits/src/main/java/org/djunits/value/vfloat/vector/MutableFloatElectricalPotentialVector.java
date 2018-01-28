@@ -152,4 +152,26 @@ public class MutableFloatElectricalPotentialVector extends AbstractMutableFloatV
                 : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatElectricalPotential Scalars from this vector.
+     * @return FloatElectricalPotential[]; an array of FloatElectricalPotential Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatElectricalPotential[] toArray()
+    {
+        FloatElectricalPotential[] array = new FloatElectricalPotential[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

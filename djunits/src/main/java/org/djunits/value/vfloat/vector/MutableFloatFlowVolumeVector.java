@@ -147,4 +147,26 @@ public class MutableFloatFlowVolumeVector extends
                 : instantiateMutableType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatFlowVolume Scalars from this vector.
+     * @return FloatFlowVolume[]; an array of FloatFlowVolume Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatFlowVolume[] toArray()
+    {
+        FloatFlowVolume[] array = new FloatFlowVolume[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

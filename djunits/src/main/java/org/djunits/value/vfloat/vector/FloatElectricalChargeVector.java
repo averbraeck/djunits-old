@@ -149,4 +149,26 @@ public class FloatElectricalChargeVector extends AbstractFloatVectorRel<Electric
         return this.data.isSparse() ? (FloatElectricalChargeVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of FloatElectricalCharge Scalars from this vector.
+     * @return FloatElectricalCharge[]; an array of FloatElectricalCharge Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public FloatElectricalCharge[] toArray()
+    {
+        FloatElectricalCharge[] array = new FloatElectricalCharge[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }

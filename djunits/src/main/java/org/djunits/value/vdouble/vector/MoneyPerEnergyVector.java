@@ -147,4 +147,26 @@ public class MoneyPerEnergyVector
         return this.data.isSparse() ? (MoneyPerEnergyVector) this : instantiateType(this.data.toSparse(), getUnit());
     }
 
+    /**
+     * Return an array of MoneyPerEnergy Scalars from this vector.
+     * @return MoneyPerEnergy[]; an array of MoneyPerEnergy Scalars from this vector
+     * @throws RuntimeException wrapping a ValueException on error getting one of the values
+     */
+    public MoneyPerEnergy[] toArray()
+    {
+        MoneyPerEnergy[] array = new MoneyPerEnergy[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            try
+            {
+                array[i] = get(i);
+            }
+            catch (ValueException exception)
+            {
+                throw new RuntimeException(exception);
+            }
+        }
+        return array;
+    }
+
 }
