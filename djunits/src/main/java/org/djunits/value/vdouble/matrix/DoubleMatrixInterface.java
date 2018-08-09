@@ -2,6 +2,7 @@ package org.djunits.value.vdouble.matrix;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.scalar.AbstractDoubleScalar;
 
 /**
  * Interface for the Immutable and Mutable DoubleMatrix classes.
@@ -34,6 +35,15 @@ public interface DoubleMatrixInterface<U extends Unit<U>>
      * @return int; the number of cells having non-zero value
      */
     int cardinality();
+
+    /**
+     * Retrieve a value from the matrix.
+     * @param row int; row of the value to retrieve
+     * @param column int; column of the value to retrieve
+     * @return the value as a DoubleScalar
+     * @throws ValueException in case row or column is out of bounds
+     */
+    AbstractDoubleScalar<U, ?> get(int row, int column) throws ValueException;
 
     /**
      * Retrieve the value stored at a specified row and column in the standard SI unit.
