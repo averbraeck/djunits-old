@@ -112,13 +112,8 @@ abstract class AbstractFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      */
     protected abstract S instantiateScalar(float value, AU unit);
 
-    /**
-     * Return the Scalar value at the index position.
-     * @param row the row position
-     * @param column the column position
-     * @return S the scalar
-     * @throws ValueException when index out of bounds
-     */
+    /** {@inheritDoc} */
+    @Override
     @SuppressWarnings("checkstyle:designforextension")
     public final S get(final int row, final int column) throws ValueException
     {
