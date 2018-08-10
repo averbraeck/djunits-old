@@ -53,7 +53,7 @@ public class AngleUnit extends Unit<AngleUnit>
 
     /** centesimal arcsecond. */
     public static final AngleUnit CENTESIMAL_ARCSECOND;
-
+    
     static
     {
         SI = new AngleUnit("AngleUnit.radian", "AngleUnit.rad", SI_DERIVED);
@@ -141,4 +141,58 @@ public class AngleUnit extends Unit<AngleUnit>
     {
         return "1";
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((getScale() == null) ? 0 : getScale().hashCode());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AngleUnit other = (AngleUnit) obj;
+        if (getScale() == null)
+        {
+            if (other.getScale() != null)
+                return false;
+        }
+        else if (!getScale().equals(other.getScale()))
+            return false;
+        return true;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equalsIgnoreNaming(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (getClass() != obj.getClass())
+            return false;
+        AngleUnit other = (AngleUnit) obj;
+        if (getScale() == null)
+        {
+            if (other.getScale() != null)
+                return false;
+        }
+        else if (!getScale().equals(other.getScale()))
+            return false;
+        return true;
+    }
+    
+    
 }

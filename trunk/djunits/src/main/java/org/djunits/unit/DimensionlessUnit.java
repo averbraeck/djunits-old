@@ -51,4 +51,16 @@ public final class DimensionlessUnit extends Unit<DimensionlessUnit>
         return "1";
     }
 
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equalsIgnoreNaming(final Object obj)
+    {
+        // Two DimensionlessUnit instances are always the same numerically, as they are unscaled. 
+        if (this == obj)
+            return true;
+        if (getClass() != obj.getClass())
+            return false;
+        return true;
+    }
 }

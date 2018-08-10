@@ -51,8 +51,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     private final UnitSystem unitSystem;
 
     /** The scale to use to convert between this unit and the standard (e.g., SI) unit. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected Scale scale;
+    private final Scale scale;
 
     /** SI unit information. */
     private SICoefficients siCoefficients;
@@ -166,9 +165,35 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     protected Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final Scale scale, final boolean standardUnit)
     {
-        this(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
         this.scale = scale;
         this.baseSIUnit = scale.isBaseSIScale();
+        if (standardUnit)
+        {
+            this.nameKey = nameOrNameKey;
+            this.abbreviationKey = abbreviationOrAbbreviationKey;
+            this.name = null;
+            this.abbreviation = null;
+        }
+        else
+        {
+            this.nameKey = null;
+            this.abbreviationKey = null;
+            this.name = nameOrNameKey;
+            this.abbreviation = abbreviationOrAbbreviationKey;
+        }
+        this.unitSystem = unitSystem;
+        this.cachedHashCode = generateHashCode();
+        try
+        {
+            addUnit(this);
+        }
+        catch (UnitException ue)
+        {
+            if (!standardUnit)
+            {
+                throw new RuntimeException(ue);
+            }
+        }
     }
 
     /**
@@ -492,5 +517,13 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
             return false;
         return true;
     }
+
+    /**
+     * Test if two units are the same, except for the name and abbreviation. This means for instance that for the MassUnits
+     * METRIC_TON and MEGAGRAM (both 1000 kg) equals(...) will yield false, but equalsIgnoreNaming will yield true.
+     * @param obj the object to compare with
+     * @return true if the two units are the same numerically, except for the naming and/or abbreviation
+     */
+    public abstract boolean equalsIgnoreNaming(Object obj);
 
 }

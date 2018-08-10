@@ -56,4 +56,14 @@ public class SIUnit extends Unit<SIUnit>
         return this.getAbbreviationKey().replace("SIUnit.", "");
     }
 
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equalsIgnoreNaming(final Object obj)
+    {
+        // naming is done with a normalized SI-String, which should be equal when te SI units are equal.
+        // Therefore, we can call the equals() method that compares class, name and abbreviation.
+        return equals(obj);
+    }
+
 }

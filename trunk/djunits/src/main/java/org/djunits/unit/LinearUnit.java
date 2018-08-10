@@ -104,9 +104,9 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
     public int hashCode()
     {
         final int prime = 31;
-        int result = getClass().getSimpleName().hashCode();
+        int result = super.hashCode();
         long temp;
-        temp = Double.doubleToLongBits(getScaleFactor());
+        temp = Double.doubleToLongBits(this.getScaleFactor());
         result = prime * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
@@ -115,6 +115,23 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
     @SuppressWarnings("checkstyle:needbraces")
     @Override
     public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        LinearUnit<?> other = (LinearUnit<?>) obj;
+        if (Double.doubleToLongBits(this.getScaleFactor()) != Double.doubleToLongBits(other.getScaleFactor()))
+            return false;
+        return true;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equalsIgnoreNaming(final Object obj)
     {
         if (this == obj)
             return true;

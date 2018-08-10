@@ -63,4 +63,34 @@ public class LinearScale implements Scale
         return this.conversionFactorToStandardUnit == 1.0;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        long temp;
+        temp = Double.doubleToLongBits(this.conversionFactorToStandardUnit);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        LinearScale other = (LinearScale) obj;
+        if (Double.doubleToLongBits(this.conversionFactorToStandardUnit) != Double
+                .doubleToLongBits(other.conversionFactorToStandardUnit))
+            return false;
+        return true;
+    }
+
 }

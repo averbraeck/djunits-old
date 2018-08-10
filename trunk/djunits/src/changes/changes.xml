@@ -3,13 +3,17 @@
   <body>
 
     <release version="3.00.05" date="2018-08-10" description="hashCodes for Units changed">
-      <action dev="averbraeck" type="fix">
-        hashCode and equal for the units worked on the basis of abbreviations and
-        names. This made a unit with Dutch names really different from the same unit with English names. Now, the units
-        that have the same 'scale factor' and/or offset, have the same hashCode. This means, for instance, that
-        although a TONNE, a METRIC_TON and a MEGAGRAM are three different MassUnits, equals() will now state that
-        they are the same, as each represents 1000 kg. This also means that hand-made units that correspond
-        numerically to an existing unit, will be considered equal.
+      <action dev="averbraeck" type="update">
+        hashCode and equal for the units worked only on the basis of abbreviations and names. 
+        For LinearUnit and AbsoluteLinearUnit, the scale has been added to hashCode and equals.
+      </action>
+      <action dev="averbraeck" type="add">
+        for equals() a unit with Dutch names is different from the same unit with English names. Now, the units
+        that have the same 'scale factor' and/or offset, have the same equalsIgnoreNaming(). 
+        This means, for instance, that although a METRIC_TON and a MEGAGRAM are different MassUnits, 
+        equalsIgnoreNaming() will now state that they are the same, as each represents 1000 kg. 
+        This also means that hand-made units that correspond numerically to an existing unit, 
+        will be considered equal according to equalsIgnoreNaming (but not to the equals method).
       </action>
     </release>
 
