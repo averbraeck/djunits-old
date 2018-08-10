@@ -868,4 +868,17 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
         return "1";
     }
 
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equalsIgnoreNaming(final Object obj)
+    {
+        // Different instances of money are always considered to be different.
+        if (this == obj)
+            return true;
+        if (getClass() != obj.getClass())
+            return false;
+        return false;
+    }
+
 }

@@ -60,4 +60,33 @@ public class OffsetLinearScale extends LinearScale implements Scale
         return getConversionFactorToStandardUnit() == 1.0 && this.offsetToStandardUnit == 0.0;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        long temp;
+        temp = Double.doubleToLongBits(this.offsetToStandardUnit);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        OffsetLinearScale other = (OffsetLinearScale) obj;
+        if (Double.doubleToLongBits(this.offsetToStandardUnit) != Double.doubleToLongBits(other.offsetToStandardUnit))
+            return false;
+        return true;
+    }
+    
 }

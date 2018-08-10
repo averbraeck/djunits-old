@@ -58,4 +58,33 @@ public class GradeScale implements Scale
         return this.conversionFactorToGrade == 1.0;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        long temp;
+        temp = Double.doubleToLongBits(this.conversionFactorToGrade);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        GradeScale other = (GradeScale) obj;
+        if (Double.doubleToLongBits(this.conversionFactorToGrade) != Double.doubleToLongBits(other.conversionFactorToGrade))
+            return false;
+        return true;
+    }
+
 }
