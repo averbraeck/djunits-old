@@ -170,4 +170,44 @@ public class MoneyPerMassUnit extends LinearUnit<MoneyPerMassUnit>
         return "1/kg";
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((this.massUnit == null) ? 0 : this.massUnit.hashCode());
+        result = prime * result + ((this.moneyUnit == null) ? 0 : this.moneyUnit.hashCode());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        MoneyPerMassUnit other = (MoneyPerMassUnit) obj;
+        if (this.massUnit == null)
+        {
+            if (other.massUnit != null)
+                return false;
+        }
+        else if (!this.massUnit.equals(other.massUnit))
+            return false;
+        if (this.moneyUnit == null)
+        {
+            if (other.moneyUnit != null)
+                return false;
+        }
+        else if (!this.moneyUnit.equals(other.moneyUnit))
+            return false;
+        return true;
+    }
+
 }

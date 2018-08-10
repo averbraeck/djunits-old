@@ -166,4 +166,44 @@ public class MoneyPerLengthUnit extends LinearUnit<MoneyPerLengthUnit>
         return "1/m";
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((this.lengthUnit == null) ? 0 : this.lengthUnit.hashCode());
+        result = prime * result + ((this.moneyUnit == null) ? 0 : this.moneyUnit.hashCode());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        MoneyPerLengthUnit other = (MoneyPerLengthUnit) obj;
+        if (this.lengthUnit == null)
+        {
+            if (other.lengthUnit != null)
+                return false;
+        }
+        else if (!this.lengthUnit.equals(other.lengthUnit))
+            return false;
+        if (this.moneyUnit == null)
+        {
+            if (other.moneyUnit != null)
+                return false;
+        }
+        else if (!this.moneyUnit.equals(other.moneyUnit))
+            return false;
+        return true;
+    }
+    
 }

@@ -168,4 +168,44 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
         return "1/m3";
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((this.moneyUnit == null) ? 0 : this.moneyUnit.hashCode());
+        result = prime * result + ((this.volumeUnit == null) ? 0 : this.volumeUnit.hashCode());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        MoneyPerVolumeUnit other = (MoneyPerVolumeUnit) obj;
+        if (this.moneyUnit == null)
+        {
+            if (other.moneyUnit != null)
+                return false;
+        }
+        else if (!this.moneyUnit.equals(other.moneyUnit))
+            return false;
+        if (this.volumeUnit == null)
+        {
+            if (other.volumeUnit != null)
+                return false;
+        }
+        else if (!this.volumeUnit.equals(other.volumeUnit))
+            return false;
+        return true;
+    }
+
 }

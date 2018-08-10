@@ -2,9 +2,21 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.00.05" date="2018-08-10" description="hashCodes for Units changed">
+      <action dev="averbraeck" type="fix">
+        hashCode and equal for the units worked on the basis of abbreviations and
+        names. This made a unit with Dutch names really different from the same unit with English names. Now, the units
+        that have the same 'scale factor' and/or offset, have the same hashCode. This means, for instance, that
+        although a TONNE, a METRIC_TON and a MEGAGRAM are three different MassUnits, equals() will now state that
+        they are the same, as each represents 1000 kg. This also means that hand-made units that correspond
+        numerically to an existing unit, will be considered equal.
+      </action>
+    </release>
+
     <release version="3.00.04" date="2018-08-09" description="get(r,c) added to Matrix interface">
       <action dev="averbraeck" type="add">
-        Matrix and FloatMatrix interface now have the get(r, c) function that was already implemented.
+        Matrix and FloatMatrix interface now have the get(r, c) function that was
+        already implemented.
       </action>
     </release>
 
@@ -19,7 +31,8 @@
 
     <release version="3.00.02" date="2018-01-28" description="Iterator added to Vector and FloatVector">
       <action dev="averbraeck" type="add">
-        Iterator added to Vector and FloatVector, so statements like "for (Speed s : speedVector)" are possible.
+        Iterator added to Vector and FloatVector, so statements like "for (Speed s :
+        speedVector)" are possible.
       </action>
       <action dev="averbraeck" type="fix">
         Bug for instantiateMD() and instantiate() on the basis of a sparse Map in FloatVector solved:
@@ -31,7 +44,7 @@ instead of
   values.keySet().parallelStream().forEach(index -> valuesSI[index] 
     = values.get(index).getSI());
 </pre>
-]]>    
+]]>
       </action>
       <action dev="averbraeck" type="add">
         VectorIteratorExample added to djunits-demo.
@@ -46,31 +59,44 @@ instead of
         For DirectionUnit, EAST_RADIAN and EAST_DEGREE have been added.
       </action>
       <action dev="averbraeck" type="add">
-        For TimeUnit, several BASE units with e.g., SECOND, MINUTE, HOUR, DAY, WEEK have been added.
+        For TimeUnit, several BASE units with e.g., SECOND, MINUTE, HOUR, DAY, WEEK
+        have been added.
       </action>
       <action dev="averbraeck" type="update">
-        In the TimeUnit, Time, and FloatTime classes a warning has been placed that indicates that precision is limited.
-        For floatTime it states: Note that when the offset of a stored absolute Time becomes large, precision of a float 
-        might not be enough for the required resolution of a Time. A float has around 7 significant digits (23 bit mantissa). 
-        This means that when we need to have a float time that is precise to microseconds, the Time value should not go 
-        above 2^22 = 4.0E6. This is not enough to store Epoch values that are in the order of magnitude of 2E12 ms! 
-        So feeding System.TimeInMillis() to a FloatTime with TimeUnit.BASE as its unit is not having the required precision. 
-        At best, a FloatTime can store TimeUnit.BASE or TimeUnit.EPOCH values with real calendar values with a precision of 
+        In the TimeUnit, Time, and FloatTime classes a warning has been placed that
+        indicates that precision is limited.
+        For floatTime it states: Note that when the offset of a stored absolute Time
+        becomes large, precision of a float
+        might not be enough for the required resolution of a Time. A float has around
+        7 significant digits (23 bit mantissa).
+        This means that when we need to have a float time that is precise to
+        microseconds, the Time value should not go
+        above 2^22 = 4.0E6. This is not enough to store Epoch values that are
+        in the order of magnitude of 2E12 ms!
+        So feeding System.TimeInMillis() to a FloatTime with TimeUnit.BASE as its
+        unit is not having the required precision.
+        At best, a FloatTime can store TimeUnit.BASE or TimeUnit.EPOCH values
+        with real calendar values with a precision
+        of
         several minutes.
       </action>
       <action dev="averbraeck" type="add">
-        The GenerateUNITs has a replacement option that can insert the above precision warnings in the automatically generated 
-        Time and FloatTime (and other) classes. 
+        The GenerateUNITs has a replacement option that can insert the above
+        precision warnings in the automatically generated
+        Time and FloatTime (and other) classes.
       </action>
     </release>
-  
+
     <release version="3.00.00" date="2017-04-27" description="Absolute units separate from relative units">
       <action dev="averbraeck" type="add">
         Abolute units and relative units have been separated. They are truly
-        different. In DJUNITS version 2, absolute and separate variables use the same unit. 
-        E.g., a Time and a Duration both use a TimeUnit. In classes that have to enforce that 
-        all components are of unit TimeUnit, Duration as well as Time can be used. This is not desirable. 
-        Therefore we need to split the TimeUnit, AngleUnit, LengthUnit and TemperatureUnit 
+        different. In DJUNITS version 2, absolute and separate variables use the same unit.
+        E.g., a Time and a Duration
+        both use a TimeUnit. In classes that have to enforce that
+        all components are of unit TimeUnit, Duration as well
+        as Time can be used. This is not desirable.
+        Therefore we need to split the TimeUnit, AngleUnit, LengthUnit and
+        TemperatureUnit
         into an absolute and a relative version.
       </action>
       <action dev="averbraeck" type="update">
@@ -92,8 +118,9 @@ instead of
       </action>
       <action dev="averbraeck" type="update">
         Removed the methods to multiply and divide absolute values with absolute
-        values. How can I multiply a position on this planet with another position on the planet? 
-        Or a time with another time? Just doesn't make sense, so removed the methods and the 
+        values. How can I multiply a position on this planet with another position on the planet?
+        Or a time with another
+        time? Just doesn't make sense, so removed the methods and the
         corresponding tests.
       </action>
       <action dev="averbraeck" type="update">

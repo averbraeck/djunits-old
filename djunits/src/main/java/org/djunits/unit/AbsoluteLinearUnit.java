@@ -76,4 +76,33 @@ public abstract class AbsoluteLinearUnit<AU extends LinearUnit<AU>, RU extends U
         return this.relativeUnit;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        long temp;
+        temp = Double.doubleToLongBits(getOffset());
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AbsoluteLinearUnit<?, ?> other = (AbsoluteLinearUnit<?, ?>) obj;
+        if (Double.doubleToLongBits(getOffset()) != Double.doubleToLongBits(other.getOffset()))
+            return false;
+        return true;
+    }
+
 }
