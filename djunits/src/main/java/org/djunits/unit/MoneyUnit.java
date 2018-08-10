@@ -26,6 +26,12 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
 
     /** The joda-money CurrencyUnit on which this djunits unit is based. */
     private final CurrencyUnit currencyUnit;
+    
+    /** the code number of the currency to identify it uniquely. */
+    private final int codeNumber;
+
+    /** the code string of the currency to identify it uniquely. */
+    private final String codeString;
 
     /** The currency 'AED' - United Arab Emirates dirham. */
     public static final MoneyUnit AED;
@@ -780,6 +786,8 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
     {
         super(nameOrNameKey, abbreviationKey, UnitSystem.OTHER, standardUnit);
         this.currencyUnit = currencyUnit;
+        this.codeNumber = currencyUnit.getNumericCode();
+        this.codeString = currencyUnit.getCode();
     }
 
     /**
@@ -807,6 +815,8 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
     {
         super(nameOrNameKey, abbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit, standardUnit);
         this.currencyUnit = currencyUnit;
+        this.codeNumber = currencyUnit.getNumericCode();
+        this.codeString = currencyUnit.getCode();
     }
 
     /**
@@ -868,17 +878,54 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
         return "1";
     }
 
+    
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + this.codeNumber;
+        result = prime * result + ((this.codeString == null) ? 0 : this.codeString.hashCode());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        MoneyUnit other = (MoneyUnit) obj;
+        if (this.codeNumber != other.codeNumber)
+            return false;
+        if (this.codeString == null)
+        {
+            if (other.codeString != null)
+                return false;
+        }
+        else if (!this.codeString.equals(other.codeString))
+            return false;
+        return true;
+    }
+
     /** {@inheritDoc} */
     @SuppressWarnings("checkstyle:needbraces")
     @Override
     public boolean equalsIgnoreNaming(final Object obj)
     {
-        // Different instances of money are always considered to be different.
+        // the difference lies in the codenumber.
         if (this == obj)
             return true;
         if (getClass() != obj.getClass())
             return false;
-        return false;
+        MoneyUnit other = (MoneyUnit) obj;
+        return (this.codeNumber == other.codeNumber);
     }
 
 }
