@@ -24,7 +24,7 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
 {
     /** */
     private static final long serialVersionUID = 20151011L;
-
+    
     /**
      * Build a standard linear unit and create the fields for a unit. If the parameter standardUnit is true, it is a standard
      * unit where name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined unit where
@@ -98,4 +98,33 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
     {
         return getScale().getConversionFactorToStandardUnit();
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = getClass().getSimpleName().hashCode();
+        long temp;
+        temp = Double.doubleToLongBits(getScaleFactor());
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (getClass() != obj.getClass())
+            return false;
+        LinearUnit<?> other = (LinearUnit<?>) obj;
+        if (Double.doubleToLongBits(getScaleFactor()) != Double.doubleToLongBits(other.getScaleFactor()))
+            return false;
+        return true;
+    }
+    
+    
 }

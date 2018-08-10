@@ -165,4 +165,44 @@ public class MoneyPerDurationUnit extends LinearUnit<MoneyPerDurationUnit>
         return "1/s";
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((this.durationUnit == null) ? 0 : this.durationUnit.hashCode());
+        result = prime * result + ((this.moneyUnit == null) ? 0 : this.moneyUnit.hashCode());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        MoneyPerDurationUnit other = (MoneyPerDurationUnit) obj;
+        if (this.durationUnit == null)
+        {
+            if (other.durationUnit != null)
+                return false;
+        }
+        else if (!this.durationUnit.equals(other.durationUnit))
+            return false;
+        if (this.moneyUnit == null)
+        {
+            if (other.moneyUnit != null)
+                return false;
+        }
+        else if (!this.moneyUnit.equals(other.moneyUnit))
+            return false;
+        return true;
+    }
+
 }

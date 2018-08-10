@@ -178,4 +178,44 @@ public class MoneyPerEnergyUnit extends LinearUnit<MoneyPerEnergyUnit>
         return "s2/kgm2";
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((this.energyUnit == null) ? 0 : this.energyUnit.hashCode());
+        result = prime * result + ((this.moneyUnit == null) ? 0 : this.moneyUnit.hashCode());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("checkstyle:needbraces")
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        MoneyPerEnergyUnit other = (MoneyPerEnergyUnit) obj;
+        if (this.energyUnit == null)
+        {
+            if (other.energyUnit != null)
+                return false;
+        }
+        else if (!this.energyUnit.equals(other.energyUnit))
+            return false;
+        if (this.moneyUnit == null)
+        {
+            if (other.moneyUnit != null)
+                return false;
+        }
+        else if (!this.moneyUnit.equals(other.moneyUnit))
+            return false;
+        return true;
+    }
+
 }
