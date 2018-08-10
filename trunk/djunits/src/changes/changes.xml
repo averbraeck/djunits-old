@@ -2,6 +2,13 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.00.06" date="2018-08-10" description="hashCode and equals for MoneyUnit changed">
+      <action dev="averbraeck" type="update">
+        hashCode and equal for the MoneyUnit added. equalsIgnoreNaming(...) works on the basis of 
+        the numeric code of the currency.
+      </action>
+    </release>
+
     <release version="3.00.05" date="2018-08-10" description="hashCodes for Units changed">
       <action dev="averbraeck" type="update">
         hashCode and equal for the units worked only on the basis of abbreviations and names. 
