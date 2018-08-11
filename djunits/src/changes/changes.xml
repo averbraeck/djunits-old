@@ -18,28 +18,50 @@
    FloatDensity fd =(FloatDensity.createSI(si);
    fd.setDisplayUnit(unit);
 </pre>
-]]> 
+]]>
+      </action>
+      <action dev="averbraeck" type="add">
+        For Scalar, FloatScalar, Vector, FloatVector, Matrix, and FloatMatrix, a generic instantiate method
+        is added to a utility class (e.g., DoubleScalarUtil), which instantiates values based on the unit
+        type it is provided with. So you can use:
+<![CDATA[
+<pre>
+  Acceleration = DoubleScalarUtil.instantiate(12960.0, AccelerationUnit.KM_PER_HOUR_2);
+</pre>
+]]>
+        but also with a more 'anonymous' unit:
+<![CDATA[
+<pre>
+  Unit<?> unitUSDm2 = new MoneyPerAreaUnit(MoneyUnit.USD, AreaUnit.SQUARE_METER, "USD/m2", "$/m2");
+  MoneyPerArea moneyPerArea = DoubleScalarUtil.instantiateAnonymous(10.0, unitUSDm2);
+</pre>
+]]>
+        This can be especially useful in data driven simulations where various types of data can be sent
+        through messages, and where the message contains the unit as well.
       </action>
     </release>
 
     <release version="3.00.06" date="2018-08-10" description="hashCode and equals for MoneyUnit changed">
       <action dev="averbraeck" type="update">
-        hashCode and equal for the MoneyUnit added. equalsIgnoreNaming(...) works on the basis of 
+        hashCode and equal for the MoneyUnit added. equalsIgnoreNaming(...) works on the basis of
         the numeric code of the currency.
       </action>
     </release>
 
     <release version="3.00.05" date="2018-08-10" description="hashCodes for Units changed">
       <action dev="averbraeck" type="update">
-        hashCode and equal for the units worked only on the basis of abbreviations and names. 
+        hashCode and equal for the units worked only on the basis of abbreviations
+        and names.
         For LinearUnit and AbsoluteLinearUnit, the scale has been added to hashCode and equals.
       </action>
       <action dev="averbraeck" type="add">
-        for equals() a unit with Dutch names is different from the same unit with English names. Now, the units
-        that have the same 'scale factor' and/or offset, have the same equalsIgnoreNaming(). 
-        This means, for instance, that although a METRIC_TON and a MEGAGRAM are different MassUnits, 
-        equalsIgnoreNaming() will now state that they are the same, as each represents 1000 kg. 
-        This also means that hand-made units that correspond numerically to an existing unit, 
+        for equals() a unit with Dutch names is different from the same unit with
+        English names. Now, the units
+        that have the same 'scale factor' and/or offset, have the same
+        equalsIgnoreNaming().
+        This means, for instance, that although a METRIC_TON and a MEGAGRAM are different MassUnits,
+        equalsIgnoreNaming() will now state that they are the same, as each represents 1000 kg.
+        This also means that hand-made units that correspond numerically to an existing unit,
         will be considered equal according to equalsIgnoreNaming (but not to the equals method).
       </action>
     </release>
