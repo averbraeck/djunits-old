@@ -24,8 +24,8 @@ public abstract class AbstractValue<U extends Unit<U>> implements Value<U>, Seri
     /**  */
     private static final long serialVersionUID = 20150626L;
 
-    /** The unit of this AbstractValue. */
-    private final U unit;
+    /** The display unit of this AbstractValue. */
+    private U unit;
 
     /**
      * Construct a new AbstractValue.
@@ -58,6 +58,13 @@ public abstract class AbstractValue<U extends Unit<U>> implements Value<U>, Seri
     protected final double expressAsSpecifiedUnit(final double value)
     {
         return ValueUtil.expressAsUnit(value, this.unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setDisplayUnit(final U newUnit)
+    {
+        this.unit = newUnit;
     }
 
     /** {@inheritDoc} */
