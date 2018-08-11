@@ -257,7 +257,7 @@ public final class DoubleMatrixUtil
             value = (S) mvalue.divideBy(((MoneyPerVolumeUnit) displayUnit).getScaleFactor()).immutable();
         }
         else
-            value = (S) instantiate(si, displayUnit.getStandardUnit(), storageType);
+            value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit(), storageType);
         ((AbstractDoubleMatrix) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }
