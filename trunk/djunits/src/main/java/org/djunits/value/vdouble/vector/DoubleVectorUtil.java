@@ -251,7 +251,7 @@ public final class DoubleVectorUtil
             value = (S) mvalue.divideBy(((MoneyPerVolumeUnit) displayUnit).getScaleFactor()).immutable();
         }
         else
-            value = (S) instantiate(si, displayUnit.getStandardUnit(), storageType);
+            value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit(), storageType);
         ((AbstractDoubleVector) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }

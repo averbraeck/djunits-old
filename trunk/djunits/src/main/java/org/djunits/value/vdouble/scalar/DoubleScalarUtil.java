@@ -220,7 +220,7 @@ public final class DoubleScalarUtil
             value = (S) new MoneyPerVolume(si / ((MoneyPerVolumeUnit) displayUnit).getScaleFactor(),
                     (MoneyPerVolumeUnit) displayUnit);
         else
-            value = (S) instantiate(si, displayUnit.getStandardUnit());
+            value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit());
         ((AbstractDoubleScalar) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }

@@ -251,7 +251,7 @@ public final class FloatVectorUtil
             value = (S) mvalue.divideBy((float) ((MoneyPerVolumeUnit) displayUnit).getScaleFactor()).immutable();
         }
         else
-            value = (S) instantiate(si, displayUnit.getStandardUnit(), storageType);
+            value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit(), storageType);
         ((AbstractFloatVector) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }

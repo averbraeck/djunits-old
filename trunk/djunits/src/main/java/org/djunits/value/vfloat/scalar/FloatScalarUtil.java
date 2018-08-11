@@ -219,7 +219,7 @@ public final class FloatScalarUtil
             value = (S) new FloatMoneyPerVolume(si / ((MoneyPerVolumeUnit) displayUnit).getScaleFactor(),
                     (MoneyPerVolumeUnit) displayUnit);
         else
-            value = (S) instantiate(si, displayUnit.getStandardUnit());
+            value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit());
         ((AbstractFloatScalar) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }
