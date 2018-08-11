@@ -23,8 +23,8 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
     /**  */
     private static final long serialVersionUID = 20150626L;
 
-    /** The unit of the Scalar. */
-    private final U unit;
+    /** The display unit of the Scalar. */
+    private U unit;
 
     /**
      * Construct a new Scalar.
@@ -65,6 +65,13 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
             return value;
         }
         return ValueUtil.expressAsUnit(value, this.unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setDisplayUnit(final U newUnit)
+    {
+        this.unit = newUnit;
     }
 
     /** {@inheritDoc} */

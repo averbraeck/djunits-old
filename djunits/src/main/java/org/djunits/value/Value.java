@@ -32,6 +32,12 @@ public interface Value<U extends Unit<U>>
     double expressAsSIUnit(double value);
 
     /**
+     * Set a new display unit for the value. Internally, the value will stay stored in the default or SI unit.
+     * @param newUnit U; the new display unit of this Value
+     */
+    void setDisplayUnit(U newUnit);
+
+    /**
      * Indicate whether this is an Absolute Value.
      * @return boolean
      */

@@ -2,6 +2,26 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.00.07" date="2018-08-11" description="setDisplayUnit method added to all value types">
+      <action dev="averbraeck" type="add">
+        All scalars, vectors and matrices now have a setDisplayUnit method. The unit is just for display purposes;
+        it used to be final, although the value is stored in the SI or standard unit. When a value was instantiated
+        using an SI value, but the display unit had to be different, methods like: 
+<![CDATA[
+<pre>
+   FloatDensity fd = new FloatDensity(FloatDensity.createSI(si).getInUnit(unit), unit);
+</pre>
+]]>
+        had to be used. Now this can easily been done as follows:
+<![CDATA[
+<pre>
+   FloatDensity fd =(FloatDensity.createSI(si);
+   fd.setDisplayUnit(unit);
+</pre>
+]]> 
+      </action>
+    </release>
+
     <release version="3.00.06" date="2018-08-10" description="hashCode and equals for MoneyUnit changed">
       <action dev="averbraeck" type="update">
         hashCode and equal for the MoneyUnit added. equalsIgnoreNaming(...) works on the basis of 
