@@ -35,8 +35,8 @@ public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUn
 
     /**
      * Construct FloatMoneyPerLength scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit MoneyPerLengthUnit; unit for the float value
      */
     public FloatMoneyPerLength(final float value, final MoneyPerLengthUnit unit)
     {
@@ -45,7 +45,7 @@ public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUn
 
     /**
      * Construct FloatMoneyPerLength scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatMoneyPerLength; Scalar from which to construct this instance
      */
     public FloatMoneyPerLength(final FloatMoneyPerLength value)
     {
@@ -54,8 +54,8 @@ public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUn
 
     /**
      * Construct FloatMoneyPerLength scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit MoneyPerLengthUnit; unit for the resulting float value
      */
     public FloatMoneyPerLength(final double value, final MoneyPerLengthUnit unit)
     {
@@ -71,9 +71,9 @@ public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUn
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatMoneyPerLength; the low value
+     * @param one FloatMoneyPerLength; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatMoneyPerLength interpolate(final FloatMoneyPerLength zero, final FloatMoneyPerLength one,
@@ -84,8 +84,8 @@ public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUn
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatMoneyPerLength; the first scalar
+     * @param r2 FloatMoneyPerLength; the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static FloatMoneyPerLength max(final FloatMoneyPerLength r1, final FloatMoneyPerLength r2)
@@ -95,9 +95,9 @@ public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUn
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatMoneyPerLength; the first scalar
+     * @param r2 FloatMoneyPerLength; the second scalar
+     * @param rn FloatMoneyPerLength...; the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static FloatMoneyPerLength max(final FloatMoneyPerLength r1, final FloatMoneyPerLength r2,
@@ -116,8 +116,8 @@ public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUn
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatMoneyPerLength; the first scalar
+     * @param r2 FloatMoneyPerLength; the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static FloatMoneyPerLength min(final FloatMoneyPerLength r1, final FloatMoneyPerLength r2)
@@ -127,9 +127,9 @@ public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUn
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatMoneyPerLength; the first scalar
+     * @param r2 FloatMoneyPerLength; the second scalar
+     * @param rn FloatMoneyPerLength...; the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static FloatMoneyPerLength min(final FloatMoneyPerLength r1, final FloatMoneyPerLength r2,
@@ -148,7 +148,7 @@ public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUn
 
     /**
      * Calculate the division of FloatMoneyPerLength and FloatMoneyPerLength, which results in a FloatDimensionless scalar.
-     * @param v FloatMoneyPerLength scalar
+     * @param v FloatMoneyPerLength; FloatMoneyPerLength scalar
      * @return FloatDimensionless scalar as a division of FloatMoneyPerLength and FloatMoneyPerLength
      */
     public final FloatDimensionless divideBy(final FloatMoneyPerLength v)
@@ -158,7 +158,7 @@ public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUn
 
     /**
      * Calculate the multiplication of FloatMoneyPerLength and FloatLength, which results in a FloatMoney scalar.
-     * @param v FloatMoneyPerLength scalar
+     * @param v FloatLength; FloatMoneyPerLength scalar
      * @return FloatMoney scalar as a multiplication of FloatMoneyPerLength and FloatLength
      */
     public final FloatMoney multiplyBy(final FloatLength v)
@@ -168,7 +168,7 @@ public class FloatMoneyPerLength extends AbstractFloatScalarRel<MoneyPerLengthUn
 
     /**
      * Calculate the division of FloatMoneyPerLength and FloatLinearDensity, which results in a FloatMoney scalar.
-     * @param v FloatMoneyPerLength scalar
+     * @param v FloatLinearDensity; FloatMoneyPerLength scalar
      * @return FloatMoney scalar as a division of FloatMoneyPerLength and FloatLinearDensity
      */
     public final FloatMoney divideBy(final FloatLinearDensity v)

@@ -35,8 +35,8 @@ public class MoneyPerVolume extends AbstractDoubleScalarRel<MoneyPerVolumeUnit, 
 
     /**
      * Construct MoneyPerVolume scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit MoneyPerVolumeUnit; unit for the double value
      */
     public MoneyPerVolume(final double value, final MoneyPerVolumeUnit unit)
     {
@@ -45,7 +45,7 @@ public class MoneyPerVolume extends AbstractDoubleScalarRel<MoneyPerVolumeUnit, 
 
     /**
      * Construct MoneyPerVolume scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value MoneyPerVolume; Scalar from which to construct this instance
      */
     public MoneyPerVolume(final MoneyPerVolume value)
     {
@@ -61,9 +61,9 @@ public class MoneyPerVolume extends AbstractDoubleScalarRel<MoneyPerVolumeUnit, 
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero MoneyPerVolume; the low value
+     * @param one MoneyPerVolume; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static MoneyPerVolume interpolate(final MoneyPerVolume zero, final MoneyPerVolume one, final double ratio)
@@ -73,8 +73,8 @@ public class MoneyPerVolume extends AbstractDoubleScalarRel<MoneyPerVolumeUnit, 
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 MoneyPerVolume; the first scalar
+     * @param r2 MoneyPerVolume; the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static MoneyPerVolume max(final MoneyPerVolume r1, final MoneyPerVolume r2)
@@ -84,9 +84,9 @@ public class MoneyPerVolume extends AbstractDoubleScalarRel<MoneyPerVolumeUnit, 
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 MoneyPerVolume; the first scalar
+     * @param r2 MoneyPerVolume; the second scalar
+     * @param rn MoneyPerVolume...; the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static MoneyPerVolume max(final MoneyPerVolume r1, final MoneyPerVolume r2, final MoneyPerVolume... rn)
@@ -104,8 +104,8 @@ public class MoneyPerVolume extends AbstractDoubleScalarRel<MoneyPerVolumeUnit, 
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 MoneyPerVolume; the first scalar
+     * @param r2 MoneyPerVolume; the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static MoneyPerVolume min(final MoneyPerVolume r1, final MoneyPerVolume r2)
@@ -115,9 +115,9 @@ public class MoneyPerVolume extends AbstractDoubleScalarRel<MoneyPerVolumeUnit, 
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 MoneyPerVolume; the first scalar
+     * @param r2 MoneyPerVolume; the second scalar
+     * @param rn MoneyPerVolume...; the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static MoneyPerVolume min(final MoneyPerVolume r1, final MoneyPerVolume r2, final MoneyPerVolume... rn)
@@ -135,7 +135,7 @@ public class MoneyPerVolume extends AbstractDoubleScalarRel<MoneyPerVolumeUnit, 
 
     /**
      * Calculate the division of MoneyPerVolume and MoneyPerVolume, which results in a Dimensionless scalar.
-     * @param v MoneyPerVolume scalar
+     * @param v MoneyPerVolume; MoneyPerVolume scalar
      * @return Dimensionless scalar as a division of MoneyPerVolume and MoneyPerVolume
      */
     public final Dimensionless divideBy(final MoneyPerVolume v)
@@ -145,7 +145,7 @@ public class MoneyPerVolume extends AbstractDoubleScalarRel<MoneyPerVolumeUnit, 
 
     /**
      * Calculate the multiplication of MoneyPerVolume and Volume, which results in a Money scalar.
-     * @param v MoneyPerVolume scalar
+     * @param v Volume; MoneyPerVolume scalar
      * @return Money scalar as a multiplication of MoneyPerVolume and Volume
      */
     public final Money multiplyBy(final Volume v)

@@ -31,7 +31,7 @@ abstract class FloatVectorData
     private final StorageType storageType;
 
     /**
-     * @param storageType the data type.
+     * @param storageType StorageType; the data type.
      */
     FloatVectorData(final StorageType storageType)
     {
@@ -45,9 +45,9 @@ abstract class FloatVectorData
 
     /**
      * Instantiate a FloatVectorData with the right data type.
-     * @param values the (SI) values to store
-     * @param scale the scale of the unit to use for conversion to SI
-     * @param storageType the data type to use
+     * @param values float[]; the (SI) values to store
+     * @param scale Scale; the scale of the unit to use for conversion to SI
+     * @param storageType StorageType; the data type to use
      * @return the FloatVectorData with the right data type
      * @throws ValueException when values are null, or storageType is null
      */
@@ -77,9 +77,9 @@ abstract class FloatVectorData
 
     /**
      * Instantiate a FloatVectorData with the right data type.
-     * @param values the values to store
-     * @param scale the scale of the unit to use for conversion to SI
-     * @param storageType the data type to use
+     * @param values List&lt;Float&gt;; the values to store
+     * @param scale Scale; the scale of the unit to use for conversion to SI
+     * @param storageType StorageType; the data type to use
      * @return the FloatVectorData with the right data type
      * @throws ValueException when list is null, or storageType is null
      */
@@ -109,8 +109,8 @@ abstract class FloatVectorData
 
     /**
      * Instantiate a FloatVectorData with the right data type.
-     * @param values the values to store
-     * @param storageType the data type to use
+     * @param values FloatScalarInterface[]; the values to store
+     * @param storageType StorageType; the data type to use
      * @return the FloatVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
@@ -140,8 +140,8 @@ abstract class FloatVectorData
 
     /**
      * Instantiate a FloatVectorData with the right data type.
-     * @param values the FloatScalar values to store
-     * @param storageType the data type to use
+     * @param values List&lt;? extends FloatScalarInterface&gt;; the FloatScalar values to store
+     * @param storageType StorageType; the data type to use
      * @return the FloatVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
@@ -171,9 +171,9 @@ abstract class FloatVectorData
 
     /**
      * Instantiate a FloatVectorData with the right data type.
-     * @param values the FloatScalar values to store
-     * @param length the length of the vector to pad with 0 after last entry in map
-     * @param storageType the data type to use
+     * @param values SortedMap&lt;Integer,S&gt;; the FloatScalar values to store
+     * @param length int; the length of the vector to pad with 0 after last entry in map
+     * @param storageType StorageType; the data type to use
      * @param <S> the scalar type to use
      * @return the FloatVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
@@ -211,10 +211,10 @@ abstract class FloatVectorData
 
     /**
      * Instantiate a FloatVectorData with the right data type.
-     * @param values the FloatScalar values to store
-     * @param length the length of the vector to pad with 0 after last entry in map
-     * @param scale the scale of the unit to use for conversion to SI
-     * @param storageType the data type to use
+     * @param values SortedMap&lt;Integer,Float&gt;; the FloatScalar values to store
+     * @param length int; the length of the vector to pad with 0 after last entry in map
+     * @param scale Scale; the scale of the unit to use for conversion to SI
+     * @param storageType StorageType; the data type to use
      * @return the FloatVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
@@ -301,15 +301,15 @@ abstract class FloatVectorData
     }
 
     /**
-     * @param index the index to get the value for
+     * @param index int; the index to get the value for
      * @return the value at the index
      */
     public abstract float getSI(int index);
 
     /**
      * Sets a value at the index in the vector.
-     * @param index the index to set the value for
-     * @param valueSI the value at the index
+     * @param index int; the index to set the value for
+     * @param valueSI float; the value at the index
      */
     public abstract void setSI(int index, float valueSI);
 
@@ -344,7 +344,7 @@ abstract class FloatVectorData
 
     /**
      * Check the sizes of this data object and the other data object.
-     * @param other the other data object
+     * @param other FloatVectorData; the other data object
      * @throws ValueException if vectors have different lengths
      */
     private void checkSizes(final FloatVectorData other) throws ValueException
@@ -362,7 +362,7 @@ abstract class FloatVectorData
     /**
      * Add two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
      * vector is returned.
-     * @param right the other data object to add
+     * @param right FloatVectorData; the other data object to add
      * @return the sum of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
@@ -380,14 +380,14 @@ abstract class FloatVectorData
 
     /**
      * Add a vector to this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
-     * @param right the other data object to add
+     * @param right FloatVectorData; the other data object to add
      * @throws ValueException if vectors have different lengths
      */
     public abstract void incrementBy(FloatVectorData right) throws ValueException;
 
     /**
      * Add a number to this vector on a cell-by-cell basis.
-     * @param valueSI the value to add
+     * @param valueSI float; the value to add
      */
     public void incrementBy(final float valueSI)
     {
@@ -397,7 +397,7 @@ abstract class FloatVectorData
     /**
      * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
      * vector is returned.
-     * @param right the other data object to subtract
+     * @param right FloatVectorData; the other data object to subtract
      * @return the sum of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
@@ -415,14 +415,14 @@ abstract class FloatVectorData
 
     /**
      * Subtract a vector from this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
-     * @param right the other data object to subtract
+     * @param right FloatVectorData; the other data object to subtract
      * @throws ValueException if vectors have different lengths
      */
     public abstract void decrementBy(FloatVectorData right) throws ValueException;
 
     /**
      * Subtract a number from this vector on a cell-by-cell basis.
-     * @param valueSI the value to subtract
+     * @param valueSI float; the value to subtract
      */
     public void decrementBy(final float valueSI)
     {
@@ -432,7 +432,7 @@ abstract class FloatVectorData
     /**
      * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
      * vector is returned.
-     * @param right the other data object to multiply with
+     * @param right FloatVectorData; the other data object to multiply with
      * @return the sum of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
@@ -451,14 +451,14 @@ abstract class FloatVectorData
     /**
      * Multiply a vector with the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the
      * same.
-     * @param right the other data object to multiply with
+     * @param right FloatVectorData; the other data object to multiply with
      * @throws ValueException if vectors have different lengths
      */
     public abstract void multiplyBy(FloatVectorData right) throws ValueException;
 
     /**
      * Multiply the values of this vector with a number on a cell-by-cell basis.
-     * @param valueSI the value to multiply with
+     * @param valueSI float; the value to multiply with
      */
     public void multiplyBy(final float valueSI)
     {
@@ -468,7 +468,7 @@ abstract class FloatVectorData
     /**
      * Divide two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
      * vector is returned.
-     * @param right the other data object to divide by
+     * @param right FloatVectorData; the other data object to divide by
      * @return the sum of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
@@ -487,14 +487,14 @@ abstract class FloatVectorData
     /**
      * Divide the values of a vector by the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense)
      * stays the same.
-     * @param right the other data object to divide by
+     * @param right FloatVectorData; the other data object to divide by
      * @throws ValueException if vectors have different lengths
      */
     public abstract void divideBy(FloatVectorData right) throws ValueException;
 
     /**
      * Divide the values of this vector by a number on a cell-by-cell basis.
-     * @param valueSI the value to multiply with
+     * @param valueSI float; the value to multiply with
      */
     public void divideBy(final float valueSI)
     {

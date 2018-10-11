@@ -38,7 +38,7 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
      * Construct a new Relative Immutable DoubleVector.
      * @param values double[]; the values of the entries in the new Relative Immutable DoubleVector
      * @param unit U; the unit of the new Relative Immutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractDoubleVectorRel(final double[] values, final U unit, final StorageType storageType) throws ValueException
@@ -48,9 +48,9 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Construct a new Relative Immutable DoubleVector.
-     * @param values List; the values of the entries in the new Relative Immutable DoubleVector
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable DoubleVector
      * @param unit U; the unit of the new Relative Immutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractDoubleVectorRel(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
@@ -60,8 +60,8 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Construct a new Relative Immutable DoubleVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values S[]; the values of the entries in the new Relative Immutable DoubleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractDoubleVectorRel(final S[] values, final StorageType storageType) throws ValueException
@@ -71,8 +71,8 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Construct a new Relative Immutable DoubleVector.
-     * @param values List; the values of the entries in the new Relative Immutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;S&gt;; the values of the entries in the new Relative Immutable DoubleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractDoubleVectorRel(final List<S> values, final StorageType storageType) throws ValueException
@@ -82,9 +82,9 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Construct a new Relative Immutable DoubleVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable DoubleVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, S&gt;; the values of the entries in the new Relative Sparse Mutable DoubleVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractDoubleVectorRel(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
@@ -95,10 +95,10 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Construct a new Relative Immutable DoubleVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable DoubleVector
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable DoubleVector
      * @param unit U; the unit of the new Relative Sparse Mutable DoubleVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractDoubleVectorRel(final SortedMap<Integer, Double> values, final U unit, final int length,
@@ -109,8 +109,8 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Construct a new Relative Immutable DoubleVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit U; the unit
      */
     AbstractDoubleVectorRel(final DoubleVectorData data, final U unit)
     {
@@ -131,24 +131,24 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Construct a new Relative Immutable DoubleVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
+     * @param dvd DoubleVectorData; an internal data object
+     * @param unit U; the unit
      * @return R the DoubleVector of the right type
      */
     protected abstract R instantiateType(DoubleVectorData dvd, U unit);
 
     /**
      * Construct a new Relative Mutable DoubleVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
+     * @param dvd DoubleVectorData; an internal data object
+     * @param unit U; the unit
      * @return MR the Mutable DoubleVector of the right type
      */
     protected abstract MR instantiateMutableType(DoubleVectorData dvd, U unit);
 
     /**
      * Construct a new Relative Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value the value
-     * @param unit the unit
+     * @param value double; the value
+     * @param unit U; the unit
      * @return S the Immutable DoubleScalar of the right type
      */
     protected abstract S instantiateScalar(double value, U unit);
@@ -168,7 +168,7 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
      * Add a Relative value to this Relative value for a vector or matrix. The addition is done value by value and store the
      * result in a new Relative value. If both operands are sparse, the result is a sparse vector or matrix, otherwise the
      * result is a dense vector or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the addition of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -181,7 +181,7 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
      * Subtract a Relative value from this Relative value for a vector or matrix. The subtraction is done value by value and
      * store the result in a new Relative value. If both operands are sparse, the result is a sparse vector or matrix, otherwise
      * the result is a dense vector or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the subtraction of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -194,7 +194,7 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
      * Multiply a Relative value with this Relative value for a vector or matrix. The multiplication is done value by value and
      * store the result in a new Relative value. If both operands are dense, the result is a dense vector or matrix, otherwise
      * the result is a sparse vector or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the multiplication of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -207,7 +207,7 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
      * Divide this Relative value by a Relative value for a vector or matrix. The division is done value by value and store the
      * result in a new Relative value. If both operands are dense, the result is a dense vector or matrix, otherwise the result
      * is a sparse vector or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the division of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -222,7 +222,7 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Check that a provided array can be used to create some descendant of a DoubleVector, and return the Unit.
-     * @param dsArray the array to check and get the unit for
+     * @param dsArray AbstractDoubleScalarRel&lt;U,S&gt;[]; the array to check and get the unit for
      * @param <U> the unit
      * @param <S> the scalar type
      * @return the unit of the object
@@ -241,7 +241,7 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Check that a provided list can be used to create some descendant of a DoubleVector, and return the Unit.
-     * @param dsList the list to check and get the unit for
+     * @param dsList List&lt;S&gt;; the list to check and get the unit for
      * @param <U> the unit
      * @param <S> the scalar in the list
      * @return the unit of the object
@@ -259,7 +259,7 @@ abstract class AbstractDoubleVectorRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Check that a provided Map can be used to create some descendant of a DoubleVector.
-     * @param dsMap the provided map
+     * @param dsMap SortedMap&lt;Integer,S&gt;; the provided map
      * @param <U> Unit; the unit of the DoubleScalar list
      * @param <S> the scalar in the list
      * @return List the provided list

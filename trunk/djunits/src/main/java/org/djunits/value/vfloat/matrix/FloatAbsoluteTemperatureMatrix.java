@@ -26,8 +26,8 @@ public class FloatAbsoluteTemperatureMatrix extends AbstractFloatMatrixAbs<Absol
     /**
      * Construct a new Absolute Immutable FloatAbsoluteTemperatureMatrix.
      * @param values float[][]; the values of the entries in the new Absolute Immutable FloatAbsoluteTemperatureMatrix
-     * @param unit U; the unit of the new Absolute Immutable FloatAbsoluteTemperatureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Immutable FloatAbsoluteTemperatureMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatAbsoluteTemperatureMatrix(final float[][] values, final AbsoluteTemperatureUnit unit,
@@ -38,9 +38,9 @@ public class FloatAbsoluteTemperatureMatrix extends AbstractFloatMatrixAbs<Absol
 
     /**
      * Construct a new Absolute Immutable FloatAbsoluteTemperatureMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable
+     * @param values FloatAbsoluteTemperature[][]; the values of the entries in the new Absolute Immutable
      *            FloatAbsoluteTemperatureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatAbsoluteTemperatureMatrix(final FloatAbsoluteTemperature[][] values, final StorageType storageType)
@@ -51,8 +51,8 @@ public class FloatAbsoluteTemperatureMatrix extends AbstractFloatMatrixAbs<Absol
 
     /**
      * Construct a new Absolute Immutable FloatAbsoluteTemperatureMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit AbsoluteTemperatureUnit; the unit
      */
     FloatAbsoluteTemperatureMatrix(final FloatMatrixData data, final AbsoluteTemperatureUnit unit)
     {

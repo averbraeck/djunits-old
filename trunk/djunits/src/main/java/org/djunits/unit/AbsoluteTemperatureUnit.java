@@ -56,14 +56,16 @@ public class AbsoluteTemperatureUnit extends AbsoluteLinearUnit<AbsoluteTemperat
 
     /**
      * Build a AbsoluteTemperatureUnit with a conversion factor and offset to Kelvin.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param conversionFactorToStandardUnit multiply by this number to convert to the standard unit
-     * @param offsetToStandardUnit the offsetToKelvin to add to convert to the standard (e.g., SI) unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
-     * @param relativeUnit the corresponding relative unit belonging to this absolute unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param conversionFactorToStandardUnit double; multiply by this number to convert to the standard unit
+     * @param offsetToStandardUnit double; the offsetToKelvin to add to convert to the standard (e.g., SI) unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
+     * @param relativeUnit TemperatureUnit; the corresponding relative unit belonging to this absolute unit
      */
     private AbsoluteTemperatureUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
             final UnitSystem unitSystem, final double conversionFactorToStandardUnit, final double offsetToStandardUnit,
@@ -75,12 +77,12 @@ public class AbsoluteTemperatureUnit extends AbsoluteLinearUnit<AbsoluteTemperat
 
     /**
      * Build a user-defined AbsoluteTemperatureUnit with a conversion factor and offset to Kelvin.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param conversionFactorToStandardUnit multiply by this number to convert to the standard unit
-     * @param offsetToKelvin the offsetToKelvin to add to convert to the standard (e.g., SI) unit
-     * @param relativeUnit the corresponding relative unit belonging to this absolute unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param conversionFactorToStandardUnit double; multiply by this number to convert to the standard unit
+     * @param offsetToKelvin double; the offsetToKelvin to add to convert to the standard (e.g., SI) unit
+     * @param relativeUnit TemperatureUnit; the corresponding relative unit belonging to this absolute unit
      */
     public AbsoluteTemperatureUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final double conversionFactorToStandardUnit, final double offsetToKelvin, final TemperatureUnit relativeUnit)

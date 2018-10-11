@@ -28,8 +28,8 @@ public class FloatElectricalCurrentVector extends AbstractFloatVectorRel<Electri
     /**
      * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatElectricalCurrentVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatElectricalCurrentVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalCurrentUnit; the unit of the new Relative Immutable Float FloatElectricalCurrentVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalCurrentVector(final float[] values, final ElectricalCurrentUnit unit, final StorageType storageType)
@@ -40,9 +40,10 @@ public class FloatElectricalCurrentVector extends AbstractFloatVectorRel<Electri
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatElectricalCurrentVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatElectricalCurrentVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatElectricalCurrentVector
+     * @param unit ElectricalCurrentUnit; the unit of the new Relative Immutable Float FloatElectricalCurrentVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalCurrentVector(final List<Float> values, final ElectricalCurrentUnit unit,
@@ -53,9 +54,9 @@ public class FloatElectricalCurrentVector extends AbstractFloatVectorRel<Electri
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalCurrent[]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalCurrentVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalCurrentVector(final FloatElectricalCurrent[] values, final StorageType storageType)
@@ -66,8 +67,9 @@ public class FloatElectricalCurrentVector extends AbstractFloatVectorRel<Electri
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatElectricalCurrentVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatElectricalCurrent&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatElectricalCurrentVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalCurrentVector(final List<FloatElectricalCurrent> values, final StorageType storageType)
@@ -78,10 +80,10 @@ public class FloatElectricalCurrentVector extends AbstractFloatVectorRel<Electri
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatElectricalCurrentVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatElectricalCurrent&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Float FloatElectricalCurrentVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalCurrentVector(final SortedMap<Integer, FloatElectricalCurrent> values, final int length,
@@ -92,10 +94,11 @@ public class FloatElectricalCurrentVector extends AbstractFloatVectorRel<Electri
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatElectricalCurrentVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatElectricalCurrentVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatElectricalCurrentVector
+     * @param unit ElectricalCurrentUnit; the unit of the new Relative Sparse Mutable Float FloatElectricalCurrentVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalCurrentVector(final SortedMap<Integer, Float> values, final ElectricalCurrentUnit unit,
@@ -105,8 +108,8 @@ public class FloatElectricalCurrentVector extends AbstractFloatVectorRel<Electri
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit ElectricalCurrentUnit; the unit
      */
     FloatElectricalCurrentVector(final FloatVectorData data, final ElectricalCurrentUnit unit)
     {

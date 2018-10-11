@@ -38,8 +38,8 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, T extends Abstract
 
     /**
      * Construct a new DoubleMatrix.
-     * @param unit the unit
-     * @param data an internal data object
+     * @param unit U; the unit
+     * @param data DoubleMatrixData; an internal data object
      */
     AbstractDoubleMatrix(final U unit, final DoubleMatrixData data)
     {
@@ -208,7 +208,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, T extends Abstract
 
     /**
      * Centralized size equality check.
-     * @param other DoubleMatrix&lt;?&gt;; other DoubleMatrix
+     * @param other AbstractDoubleMatrixRel&lt;?, ?, ?, ?&gt;; other DoubleMatrix
      * @throws ValueException when other is null, or matrices have unequal size
      */
     protected final void checkSize(final AbstractDoubleMatrixRel<?, ?, ?, ?> other) throws ValueException

@@ -28,8 +28,8 @@ public class MutableFloatMoneyVector
     /**
      * Construct a new Relative Immutable Float MoneyVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float MoneyVector
-     * @param unit U; the unit of the new Relative Immutable Float MoneyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyUnit; the unit of the new Relative Immutable Float MoneyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatMoneyVector(final float[] values, final MoneyUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatMoneyVector
 
     /**
      * Construct a new Relative Immutable Float MoneyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float MoneyVector
-     * @param unit U; the unit of the new Relative Immutable Float MoneyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float MoneyVector
+     * @param unit MoneyUnit; the unit of the new Relative Immutable Float MoneyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatMoneyVector(final List<Float> values, final MoneyUnit unit, final StorageType storageType)
@@ -53,8 +53,8 @@ public class MutableFloatMoneyVector
 
     /**
      * Construct a new Relative Immutable Float MoneyVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float MoneyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatMoney[]; the values of the entries in the new Relative Immutable Float MoneyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMoneyVector(final FloatMoney[] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ public class MutableFloatMoneyVector
 
     /**
      * Construct a new Relative Immutable Float MoneyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float MoneyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatMoney&gt;; the values of the entries in the new Relative Immutable Float MoneyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMoneyVector(final List<FloatMoney> values, final StorageType storageType) throws ValueException
@@ -75,9 +75,10 @@ public class MutableFloatMoneyVector
 
     /**
      * Construct a new Relative Immutable Float MoneyVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float MoneyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatMoney&gt;; the values of the entries in the new Relative Sparse Mutable Float
+     *            MoneyVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMoneyVector(final SortedMap<Integer, FloatMoney> values, final int length, final StorageType storageType)
@@ -88,10 +89,11 @@ public class MutableFloatMoneyVector
 
     /**
      * Construct a new Relative Immutable Float MoneyVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float MoneyVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float MoneyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            MoneyVector
+     * @param unit MoneyUnit; the unit of the new Relative Sparse Mutable Float MoneyVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatMoneyVector(final SortedMap<Integer, Float> values, final MoneyUnit unit, final int length,
@@ -101,8 +103,8 @@ public class MutableFloatMoneyVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit MoneyUnit; the unit
      */
     MutableFloatMoneyVector(final FloatVectorData data, final MoneyUnit unit)
     {

@@ -87,8 +87,8 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Construct FloatDimensionless scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit DimensionlessUnit; unit for the float value
      */
     public FloatDimensionless(final float value, final DimensionlessUnit unit)
     {
@@ -97,7 +97,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Construct FloatDimensionless scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatDimensionless; Scalar from which to construct this instance
      */
     public FloatDimensionless(final FloatDimensionless value)
     {
@@ -106,8 +106,8 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Construct FloatDimensionless scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit DimensionlessUnit; unit for the resulting float value
      */
     public FloatDimensionless(final double value, final DimensionlessUnit unit)
     {
@@ -123,7 +123,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Construct FloatDimensionless scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatDimensionless createSI(final float value)
@@ -133,9 +133,9 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatDimensionless; the low value
+     * @param one FloatDimensionless; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatDimensionless interpolate(final FloatDimensionless zero, final FloatDimensionless one, final float ratio)
@@ -145,8 +145,8 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatDimensionless; the first scalar
+     * @param r2 FloatDimensionless; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatDimensionless max(final FloatDimensionless r1, final FloatDimensionless r2)
@@ -156,9 +156,9 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatDimensionless; the first scalar
+     * @param r2 FloatDimensionless; the second scalar
+     * @param rn FloatDimensionless...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatDimensionless max(final FloatDimensionless r1, final FloatDimensionless r2,
@@ -177,8 +177,8 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatDimensionless; the first scalar
+     * @param r2 FloatDimensionless; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatDimensionless min(final FloatDimensionless r1, final FloatDimensionless r2)
@@ -188,9 +188,9 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatDimensionless; the first scalar
+     * @param r2 FloatDimensionless; the second scalar
+     * @param rn FloatDimensionless...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatDimensionless min(final FloatDimensionless r1, final FloatDimensionless r2,
@@ -342,7 +342,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the division of FloatDimensionless and FloatDimensionless, which results in a FloatDimensionless scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatDimensionless; FloatDimensionless scalar
      * @return FloatDimensionless scalar as a division of FloatDimensionless and FloatDimensionless
      */
     public final FloatDimensionless divideBy(final FloatDimensionless v)
@@ -352,7 +352,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatAcceleration, which results in a FloatAcceleration scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatAcceleration; FloatDimensionless scalar
      * @return FloatAcceleration scalar as a multiplication of FloatDimensionless and FloatAcceleration
      */
     public final FloatAcceleration multiplyBy(final FloatAcceleration v)
@@ -362,7 +362,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatAngle, which results in a FloatAngle scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatAngle; FloatDimensionless scalar
      * @return FloatAngle scalar as a multiplication of FloatDimensionless and FloatAngle
      */
     public final FloatAngle multiplyBy(final FloatAngle v)
@@ -372,7 +372,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatAngleSolid, which results in a FloatAngleSolid scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatAngleSolid; FloatDimensionless scalar
      * @return FloatAngleSolid scalar as a multiplication of FloatDimensionless and FloatAngleSolid
      */
     public final FloatAngleSolid multiplyBy(final FloatAngleSolid v)
@@ -382,7 +382,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatArea, which results in a FloatArea scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatArea; FloatDimensionless scalar
      * @return FloatArea scalar as a multiplication of FloatDimensionless and FloatArea
      */
     public final FloatArea multiplyBy(final FloatArea v)
@@ -392,7 +392,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatDensity, which results in a FloatDensity scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatDensity; FloatDimensionless scalar
      * @return FloatDensity scalar as a multiplication of FloatDimensionless and FloatDensity
      */
     public final FloatDensity multiplyBy(final FloatDensity v)
@@ -402,7 +402,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatDimensionless, which results in a FloatDimensionless scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatDimensionless; FloatDimensionless scalar
      * @return FloatDimensionless scalar as a multiplication of FloatDimensionless and FloatDimensionless
      */
     public final FloatDimensionless multiplyBy(final FloatDimensionless v)
@@ -413,7 +413,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     /**
      * Calculate the multiplication of FloatDimensionless and FloatElectricalCharge, which results in a FloatElectricalCharge
      * scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatElectricalCharge; FloatDimensionless scalar
      * @return FloatElectricalCharge scalar as a multiplication of FloatDimensionless and FloatElectricalCharge
      */
     public final FloatElectricalCharge multiplyBy(final FloatElectricalCharge v)
@@ -424,7 +424,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     /**
      * Calculate the multiplication of FloatDimensionless and FloatElectricalCurrent, which results in a FloatElectricalCurrent
      * scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatElectricalCurrent; FloatDimensionless scalar
      * @return FloatElectricalCurrent scalar as a multiplication of FloatDimensionless and FloatElectricalCurrent
      */
     public final FloatElectricalCurrent multiplyBy(final FloatElectricalCurrent v)
@@ -435,7 +435,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     /**
      * Calculate the multiplication of FloatDimensionless and FloatElectricalPotential, which results in a
      * FloatElectricalPotential scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatElectricalPotential; FloatDimensionless scalar
      * @return FloatElectricalPotential scalar as a multiplication of FloatDimensionless and FloatElectricalPotential
      */
     public final FloatElectricalPotential multiplyBy(final FloatElectricalPotential v)
@@ -446,7 +446,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     /**
      * Calculate the multiplication of FloatDimensionless and FloatElectricalResistance, which results in a
      * FloatElectricalResistance scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatElectricalResistance; FloatDimensionless scalar
      * @return FloatElectricalResistance scalar as a multiplication of FloatDimensionless and FloatElectricalResistance
      */
     public final FloatElectricalResistance multiplyBy(final FloatElectricalResistance v)
@@ -456,7 +456,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatEnergy, which results in a FloatEnergy scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatEnergy; FloatDimensionless scalar
      * @return FloatEnergy scalar as a multiplication of FloatDimensionless and FloatEnergy
      */
     public final FloatEnergy multiplyBy(final FloatEnergy v)
@@ -466,7 +466,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatFlowMass, which results in a FloatFlowMass scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatFlowMass; FloatDimensionless scalar
      * @return FloatFlowMass scalar as a multiplication of FloatDimensionless and FloatFlowMass
      */
     public final FloatFlowMass multiplyBy(final FloatFlowMass v)
@@ -476,7 +476,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatFlowVolume, which results in a FloatFlowVolume scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatFlowVolume; FloatDimensionless scalar
      * @return FloatFlowVolume scalar as a multiplication of FloatDimensionless and FloatFlowVolume
      */
     public final FloatFlowVolume multiplyBy(final FloatFlowVolume v)
@@ -486,7 +486,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatForce, which results in a FloatForce scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatForce; FloatDimensionless scalar
      * @return FloatForce scalar as a multiplication of FloatDimensionless and FloatForce
      */
     public final FloatForce multiplyBy(final FloatForce v)
@@ -496,7 +496,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatFrequency, which results in a FloatFrequency scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatFrequency; FloatDimensionless scalar
      * @return FloatFrequency scalar as a multiplication of FloatDimensionless and FloatFrequency
      */
     public final FloatFrequency multiplyBy(final FloatFrequency v)
@@ -506,7 +506,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatLength, which results in a FloatLength scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatLength; FloatDimensionless scalar
      * @return FloatLength scalar as a multiplication of FloatDimensionless and FloatLength
      */
     public final FloatLength multiplyBy(final FloatLength v)
@@ -516,7 +516,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatLinearDensity, which results in a FloatLinearDensity scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatLinearDensity; FloatDimensionless scalar
      * @return FloatLinearDensity scalar as a multiplication of FloatDimensionless and FloatLinearDensity
      */
     public final FloatLinearDensity multiplyBy(final FloatLinearDensity v)
@@ -526,7 +526,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatMass, which results in a FloatMass scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatMass; FloatDimensionless scalar
      * @return FloatMass scalar as a multiplication of FloatDimensionless and FloatMass
      */
     public final FloatMass multiplyBy(final FloatMass v)
@@ -536,7 +536,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatMoney, which results in a FloatMoney scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatMoney; FloatDimensionless scalar
      * @return FloatMoney scalar as a multiplication of FloatDimensionless and FloatMoney
      */
     public final FloatMoney multiplyBy(final FloatMoney v)
@@ -546,7 +546,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatMoneyPerArea, which results in a FloatMoneyPerArea scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatMoneyPerArea; FloatDimensionless scalar
      * @return FloatMoneyPerArea scalar as a multiplication of FloatDimensionless and FloatMoneyPerArea
      */
     public final FloatMoneyPerArea multiplyBy(final FloatMoneyPerArea v)
@@ -557,7 +557,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     /**
      * Calculate the multiplication of FloatDimensionless and FloatMoneyPerEnergy, which results in a FloatMoneyPerEnergy
      * scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatMoneyPerEnergy; FloatDimensionless scalar
      * @return FloatMoneyPerEnergy scalar as a multiplication of FloatDimensionless and FloatMoneyPerEnergy
      */
     public final FloatMoneyPerEnergy multiplyBy(final FloatMoneyPerEnergy v)
@@ -568,7 +568,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     /**
      * Calculate the multiplication of FloatDimensionless and FloatMoneyPerLength, which results in a FloatMoneyPerLength
      * scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatMoneyPerLength; FloatDimensionless scalar
      * @return FloatMoneyPerLength scalar as a multiplication of FloatDimensionless and FloatMoneyPerLength
      */
     public final FloatMoneyPerLength multiplyBy(final FloatMoneyPerLength v)
@@ -578,7 +578,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatMoneyPerMass, which results in a FloatMoneyPerMass scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatMoneyPerMass; FloatDimensionless scalar
      * @return FloatMoneyPerMass scalar as a multiplication of FloatDimensionless and FloatMoneyPerMass
      */
     public final FloatMoneyPerMass multiplyBy(final FloatMoneyPerMass v)
@@ -589,7 +589,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     /**
      * Calculate the multiplication of FloatDimensionless and FloatMoneyPerDuration, which results in a FloatMoneyPerDuration
      * scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatMoneyPerDuration; FloatDimensionless scalar
      * @return FloatMoneyPerDuration scalar as a multiplication of FloatDimensionless and FloatMoneyPerDuration
      */
     public final FloatMoneyPerDuration multiplyBy(final FloatMoneyPerDuration v)
@@ -600,7 +600,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     /**
      * Calculate the multiplication of FloatDimensionless and FloatMoneyPerVolume, which results in a FloatMoneyPerVolume
      * scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatMoneyPerVolume; FloatDimensionless scalar
      * @return FloatMoneyPerVolume scalar as a multiplication of FloatDimensionless and FloatMoneyPerVolume
      */
     public final FloatMoneyPerVolume multiplyBy(final FloatMoneyPerVolume v)
@@ -610,7 +610,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatPower, which results in a FloatPower scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatPower; FloatDimensionless scalar
      * @return FloatPower scalar as a multiplication of FloatDimensionless and FloatPower
      */
     public final FloatPower multiplyBy(final FloatPower v)
@@ -620,7 +620,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatPressure, which results in a FloatPressure scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatPressure; FloatDimensionless scalar
      * @return FloatPressure scalar as a multiplication of FloatDimensionless and FloatPressure
      */
     public final FloatPressure multiplyBy(final FloatPressure v)
@@ -630,7 +630,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatSpeed, which results in a FloatSpeed scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatSpeed; FloatDimensionless scalar
      * @return FloatSpeed scalar as a multiplication of FloatDimensionless and FloatSpeed
      */
     public final FloatSpeed multiplyBy(final FloatSpeed v)
@@ -640,7 +640,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatTemperature, which results in a FloatTemperature scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatTemperature; FloatDimensionless scalar
      * @return FloatTemperature scalar as a multiplication of FloatDimensionless and FloatTemperature
      */
     public final FloatTemperature multiplyBy(final FloatTemperature v)
@@ -650,7 +650,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatDuration, which results in a FloatDuration scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatDuration; FloatDimensionless scalar
      * @return FloatDuration scalar as a multiplication of FloatDimensionless and FloatDuration
      */
     public final FloatDuration multiplyBy(final FloatDuration v)
@@ -660,7 +660,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatTorque, which results in a FloatTorque scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatTorque; FloatDimensionless scalar
      * @return FloatTorque scalar as a multiplication of FloatDimensionless and FloatTorque
      */
     public final FloatTorque multiplyBy(final FloatTorque v)
@@ -670,7 +670,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the multiplication of FloatDimensionless and FloatVolume, which results in a FloatVolume scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatVolume; FloatDimensionless scalar
      * @return FloatVolume scalar as a multiplication of FloatDimensionless and FloatVolume
      */
     public final FloatVolume multiplyBy(final FloatVolume v)
@@ -680,7 +680,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the division of FloatDimensionless and FloatLength, which results in a FloatLinearDensity scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatLength; FloatDimensionless scalar
      * @return FloatLinearDensity scalar as a division of FloatDimensionless and FloatLength
      */
     public final FloatLinearDensity divideBy(final FloatLength v)
@@ -690,7 +690,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the division of FloatDimensionless and FloatLinearDensity, which results in a FloatLength scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatLinearDensity; FloatDimensionless scalar
      * @return FloatLength scalar as a division of FloatDimensionless and FloatLinearDensity
      */
     public final FloatLength divideBy(final FloatLinearDensity v)
@@ -700,7 +700,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the division of FloatDimensionless and FloatDuration, which results in a FloatFrequency scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatDuration; FloatDimensionless scalar
      * @return FloatFrequency scalar as a division of FloatDimensionless and FloatDuration
      */
     public final FloatFrequency divideBy(final FloatDuration v)
@@ -710,7 +710,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /**
      * Calculate the division of FloatDimensionless and FloatFrequency, which results in a FloatDuration scalar.
-     * @param v FloatDimensionless scalar
+     * @param v FloatFrequency; FloatDimensionless scalar
      * @return FloatDuration scalar as a division of FloatDimensionless and FloatFrequency
      */
     public final FloatDuration divideBy(final FloatFrequency v)

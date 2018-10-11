@@ -28,8 +28,8 @@ public class MutablePressureVector
     /**
      * Construct a new Relative Immutable Double PressureVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double PressureVector
-     * @param unit U; the unit of the new Relative Immutable Double PressureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit PressureUnit; the unit of the new Relative Immutable Double PressureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutablePressureVector(final double[] values, final PressureUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutablePressureVector
 
     /**
      * Construct a new Relative Immutable Double PressureVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double PressureVector
-     * @param unit U; the unit of the new Relative Immutable Double PressureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double PressureVector
+     * @param unit PressureUnit; the unit of the new Relative Immutable Double PressureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutablePressureVector(final List<Double> values, final PressureUnit unit, final StorageType storageType)
@@ -53,8 +53,8 @@ public class MutablePressureVector
 
     /**
      * Construct a new Relative Immutable Double PressureVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double PressureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Pressure[]; the values of the entries in the new Relative Immutable Double PressureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutablePressureVector(final Pressure[] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ public class MutablePressureVector
 
     /**
      * Construct a new Relative Immutable Double PressureVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double PressureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Pressure&gt;; the values of the entries in the new Relative Immutable Double PressureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutablePressureVector(final List<Pressure> values, final StorageType storageType) throws ValueException
@@ -75,10 +75,10 @@ public class MutablePressureVector
 
     /**
      * Construct a new Relative Immutable Double PressureVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Pressure&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            PressureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutablePressureVector(final SortedMap<Integer, Pressure> values, final int length, final StorageType storageType)
@@ -89,10 +89,11 @@ public class MutablePressureVector
 
     /**
      * Construct a new Relative Immutable Double PressureVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double PressureVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double PressureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            PressureVector
+     * @param unit PressureUnit; the unit of the new Relative Sparse Mutable Double PressureVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutablePressureVector(final SortedMap<Integer, Double> values, final PressureUnit unit, final int length,
@@ -102,8 +103,8 @@ public class MutablePressureVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit PressureUnit; the unit
      */
     MutablePressureVector(final DoubleVectorData data, final PressureUnit unit)
     {

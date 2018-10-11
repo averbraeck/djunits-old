@@ -28,8 +28,8 @@ public class MutableFloatAccelerationVector extends AbstractMutableFloatVectorRe
     /**
      * Construct a new Relative Immutable Float AccelerationVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float AccelerationVector
-     * @param unit U; the unit of the new Relative Immutable Float AccelerationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AccelerationUnit; the unit of the new Relative Immutable Float AccelerationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAccelerationVector(final float[] values, final AccelerationUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatAccelerationVector extends AbstractMutableFloatVectorRe
 
     /**
      * Construct a new Relative Immutable Float AccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float AccelerationVector
-     * @param unit U; the unit of the new Relative Immutable Float AccelerationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float AccelerationVector
+     * @param unit AccelerationUnit; the unit of the new Relative Immutable Float AccelerationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAccelerationVector(final List<Float> values, final AccelerationUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class MutableFloatAccelerationVector extends AbstractMutableFloatVectorRe
 
     /**
      * Construct a new Relative Immutable Float AccelerationVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            AccelerationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatAcceleration[]; the values of the entries in the new Relative Immutable Float AccelerationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAccelerationVector(final FloatAcceleration[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class MutableFloatAccelerationVector extends AbstractMutableFloatVectorRe
 
     /**
      * Construct a new Relative Immutable Float AccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float AccelerationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatAcceleration&gt;; the values of the entries in the new Relative Immutable Float
+     *            AccelerationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAccelerationVector(final List<FloatAcceleration> values, final StorageType storageType)
@@ -77,10 +77,10 @@ public class MutableFloatAccelerationVector extends AbstractMutableFloatVectorRe
 
     /**
      * Construct a new Relative Immutable Float AccelerationVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            AccelerationVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatAcceleration&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float AccelerationVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAccelerationVector(final SortedMap<Integer, FloatAcceleration> values, final int length,
@@ -91,10 +91,11 @@ public class MutableFloatAccelerationVector extends AbstractMutableFloatVectorRe
 
     /**
      * Construct a new Relative Immutable Float AccelerationVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float AccelerationVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float AccelerationVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            AccelerationVector
+     * @param unit AccelerationUnit; the unit of the new Relative Sparse Mutable Float AccelerationVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAccelerationVector(final SortedMap<Integer, Float> values, final AccelerationUnit unit, final int length,
@@ -104,8 +105,8 @@ public class MutableFloatAccelerationVector extends AbstractMutableFloatVectorRe
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit AccelerationUnit; the unit
      */
     MutableFloatAccelerationVector(final FloatVectorData data, final AccelerationUnit unit)
     {

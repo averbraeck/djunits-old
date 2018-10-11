@@ -28,11 +28,11 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /**
      * Create a vector with sparse data.
-     * @param matrixSI the data to store
-     * @param indices the index values of the Matrix, with <tt>index = row * cols + col</tt>
-     * @param length the length of the vector (padded with 0 after highest index in indices)
-     * @param rows the number of rows
-     * @param cols the number of columns
+     * @param matrixSI float[]; the data to store
+     * @param indices long[]; the index values of the Matrix, with &lt;tt&gt;index = row * cols + col&lt;/tt&gt;
+     * @param length int; the length of the vector (padded with 0 after highest index in indices)
+     * @param rows int; the number of rows
+     * @param cols int; the number of columns
      */
     public FloatMatrixDataSparse(final float[] matrixSI, final long[] indices, final int length, final int rows, final int cols)
     {
@@ -46,9 +46,9 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /**
      * Create a vector with sparse data from an internal vector with dense data.
-     * @param denseSI the dense data to store
-     * @param rows the number of rows
-     * @param cols the number of columns
+     * @param denseSI float[]; the dense data to store
+     * @param rows int; the number of rows
+     * @param cols int; the number of columns
      * @throws ValueException in case size is incorrect
      */
     public FloatMatrixDataSparse(final float[] denseSI, final int rows, final int cols) throws ValueException
@@ -69,7 +69,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /**
      * Create a vector with sparse data.
-     * @param dataSI the data to store
+     * @param dataSI float[][]; the data to store
      * @throws ValueException in case matrix is ragged
      */
     public FloatMatrixDataSparse(final float[][] dataSI) throws ValueException
@@ -91,9 +91,9 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     /**
      * Fill the sparse data structures matrixSI[] and indices[]. Note: output vectors have to be initialized at the right size.
      * Cannot be parallelized because of stateful and sequence-sensitive count.
-     * @param data the input data
-     * @param matrixSI the matrix data to write
-     * @param indices the indices to write
+     * @param data float[][]; the input data
+     * @param matrixSI float[]; the matrix data to write
+     * @param indices long[]; the indices to write
      * @throws ValueException in case matrix is ragged
      */
     @SuppressWarnings("checkstyle:finalparameters")
@@ -125,9 +125,9 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     /**
      * Fill the sparse data structures matrixSI[] and indices[]. Note: output vectors have to be initialized at the right size.
      * Cannot be parallelized because of stateful and sequence-sensitive count.
-     * @param data the input data
-     * @param matrixSI the matrix data to write
-     * @param indices the indices to write
+     * @param data float[]; the input data
+     * @param matrixSI float[]; the matrix data to write
+     * @param indices long[]; the indices to write
      */
     @SuppressWarnings("checkstyle:finalparameters")
     private static void fill(final float[] data, float[] matrixSI, long[] indices)
@@ -225,7 +225,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /**
      * Instantiate a FloatMatrixDataSparse from an array.
-     * @param valuesSI the (SI) values to store
+     * @param valuesSI float[][]; the (SI) values to store
      * @return the FloatMatrixDataSparse
      * @throws ValueException in case matrix is ragged
      */
@@ -242,7 +242,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /**
      * Calculate the number of non-zero values in this float[][] matrix.
-     * @param valuesSI the float[][] matrix
+     * @param valuesSI float[][]; the float[][] matrix
      * @return the number of non-zero values in this float[][] matrix
      */
     private static int nonZero(final float[][] valuesSI)
@@ -261,7 +261,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /**
      * Calculate the number of non-zero values in this float[] vector.
-     * @param valuesSI the float[] vector
+     * @param valuesSI float[]; the float[] vector
      * @return the number of non-zero values in this float[] vector
      */
     private static int nonZero(final float[] valuesSI)

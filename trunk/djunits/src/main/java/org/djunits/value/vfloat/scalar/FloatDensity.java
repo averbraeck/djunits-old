@@ -54,8 +54,8 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
 
     /**
      * Construct FloatDensity scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit DensityUnit; unit for the float value
      */
     public FloatDensity(final float value, final DensityUnit unit)
     {
@@ -64,7 +64,7 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
 
     /**
      * Construct FloatDensity scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatDensity; Scalar from which to construct this instance
      */
     public FloatDensity(final FloatDensity value)
     {
@@ -73,8 +73,8 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
 
     /**
      * Construct FloatDensity scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit DensityUnit; unit for the resulting float value
      */
     public FloatDensity(final double value, final DensityUnit unit)
     {
@@ -90,7 +90,7 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
 
     /**
      * Construct FloatDensity scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatDensity createSI(final float value)
@@ -100,9 +100,9 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatDensity; the low value
+     * @param one FloatDensity; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatDensity interpolate(final FloatDensity zero, final FloatDensity one, final float ratio)
@@ -112,8 +112,8 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatDensity; the first scalar
+     * @param r2 FloatDensity; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatDensity max(final FloatDensity r1, final FloatDensity r2)
@@ -123,9 +123,9 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatDensity; the first scalar
+     * @param r2 FloatDensity; the second scalar
+     * @param rn FloatDensity...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatDensity max(final FloatDensity r1, final FloatDensity r2, final FloatDensity... rn)
@@ -143,8 +143,8 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatDensity; the first scalar
+     * @param r2 FloatDensity; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatDensity min(final FloatDensity r1, final FloatDensity r2)
@@ -154,9 +154,9 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatDensity; the first scalar
+     * @param r2 FloatDensity; the second scalar
+     * @param rn FloatDensity...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatDensity min(final FloatDensity r1, final FloatDensity r2, final FloatDensity... rn)
@@ -174,7 +174,7 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
 
     /**
      * Calculate the division of FloatDensity and FloatDensity, which results in a FloatDimensionless scalar.
-     * @param v FloatDensity scalar
+     * @param v FloatDensity; FloatDensity scalar
      * @return FloatDimensionless scalar as a division of FloatDensity and FloatDensity
      */
     public final FloatDimensionless divideBy(final FloatDensity v)
@@ -184,7 +184,7 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
 
     /**
      * Calculate the multiplication of FloatDensity and FloatVolume, which results in a FloatMass scalar.
-     * @param v FloatDensity scalar
+     * @param v FloatVolume; FloatDensity scalar
      * @return FloatMass scalar as a multiplication of FloatDensity and FloatVolume
      */
     public final FloatMass multiplyBy(final FloatVolume v)

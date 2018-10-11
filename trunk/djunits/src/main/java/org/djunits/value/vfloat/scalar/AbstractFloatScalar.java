@@ -31,8 +31,8 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
     public final float si;
 
     /**
-     * @param unit the unit
-     * @param si the si value to store
+     * @param unit U; the unit
+     * @param si float; the si value to store
      */
     AbstractFloatScalar(final U unit, final float si)
     {

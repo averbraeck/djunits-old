@@ -26,8 +26,8 @@ public class MutableFloatPositionMatrix extends AbstractMutableFloatMatrixAbs<Po
     /**
      * Construct a new Absolute Mutable FloatPositionMatrix.
      * @param values float[][]; the values of the entries in the new Absolute Mutable FloatPositionMatrix
-     * @param unit U; the unit of the new Absolute Mutable FloatPositionMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit PositionUnit; the unit of the new Absolute Mutable FloatPositionMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatPositionMatrix(final float[][] values, final PositionUnit unit, final StorageType storageType)
@@ -38,8 +38,8 @@ public class MutableFloatPositionMatrix extends AbstractMutableFloatMatrixAbs<Po
 
     /**
      * Construct a new Absolute Mutable FloatPositionMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable FloatPositionMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatPosition[][]; the values of the entries in the new Absolute Mutable FloatPositionMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatPositionMatrix(final FloatPosition[][] values, final StorageType storageType) throws ValueException
@@ -49,8 +49,8 @@ public class MutableFloatPositionMatrix extends AbstractMutableFloatMatrixAbs<Po
 
     /**
      * Construct a new Absolute Mutable FloatPositionMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit PositionUnit; the unit
      */
     MutableFloatPositionMatrix(final FloatMatrixData data, final PositionUnit unit)
     {

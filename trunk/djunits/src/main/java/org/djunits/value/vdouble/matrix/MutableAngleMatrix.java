@@ -24,8 +24,8 @@ public class MutableAngleMatrix extends AbstractMutableDoubleMatrixRel<AngleUnit
     /**
      * Construct a new Relative Mutable Double AngleMatrix.
      * @param values double[][]; the values of the entries in the new Relative Mutable Double AngleMatrix
-     * @param unit U; the unit of the new Relative Mutable Double AngleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AngleUnit; the unit of the new Relative Mutable Double AngleMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAngleMatrix(final double[][] values, final AngleUnit unit, final StorageType storageType)
@@ -36,8 +36,8 @@ public class MutableAngleMatrix extends AbstractMutableDoubleMatrixRel<AngleUnit
 
     /**
      * Construct a new Relative Mutable Double AngleMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Mutable Double AngleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Angle[][]; the values of the entries in the new Relative Mutable Double AngleMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAngleMatrix(final Angle[][] values, final StorageType storageType) throws ValueException
@@ -47,8 +47,8 @@ public class MutableAngleMatrix extends AbstractMutableDoubleMatrixRel<AngleUnit
 
     /**
      * Construct a new Relative Mutable Double AngleMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit AngleUnit; the unit
      */
     MutableAngleMatrix(final DoubleMatrixData data, final AngleUnit unit)
     {

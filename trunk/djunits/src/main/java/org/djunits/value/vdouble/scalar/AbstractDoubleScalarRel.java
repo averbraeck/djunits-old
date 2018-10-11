@@ -48,8 +48,8 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Construct a new Relative Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value the double value
-     * @param unit the unit
+     * @param value double; the double value
+     * @param unit U; the unit
      * @return R a new relative instance of the DoubleScalar of the right type
      */
     public abstract R instantiateRel(double value, U unit);

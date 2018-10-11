@@ -60,8 +60,8 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Construct Volume scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit VolumeUnit; unit for the double value
      */
     public Volume(final double value, final VolumeUnit unit)
     {
@@ -70,7 +70,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Construct Volume scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Volume; Scalar from which to construct this instance
      */
     public Volume(final Volume value)
     {
@@ -86,7 +86,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Construct Volume scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Volume createSI(final double value)
@@ -96,9 +96,9 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Volume; the low value
+     * @param one Volume; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Volume interpolate(final Volume zero, final Volume one, final double ratio)
@@ -108,8 +108,8 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Volume; the first scalar
+     * @param r2 Volume; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Volume max(final Volume r1, final Volume r2)
@@ -119,9 +119,9 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Volume; the first scalar
+     * @param r2 Volume; the second scalar
+     * @param rn Volume...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Volume max(final Volume r1, final Volume r2, final Volume... rn)
@@ -139,8 +139,8 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Volume; the first scalar
+     * @param r2 Volume; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Volume min(final Volume r1, final Volume r2)
@@ -150,9 +150,9 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Volume; the first scalar
+     * @param r2 Volume; the second scalar
+     * @param rn Volume...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Volume min(final Volume r1, final Volume r2, final Volume... rn)
@@ -170,7 +170,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the division of Volume and Volume, which results in a Dimensionless scalar.
-     * @param v Volume scalar
+     * @param v Volume; Volume scalar
      * @return Dimensionless scalar as a division of Volume and Volume
      */
     public final Dimensionless divideBy(final Volume v)
@@ -180,7 +180,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the multiplication of Volume and Density, which results in a Mass scalar.
-     * @param v Volume scalar
+     * @param v Density; Volume scalar
      * @return Mass scalar as a multiplication of Volume and Density
      */
     public final Mass multiplyBy(final Density v)
@@ -190,7 +190,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the multiplication of Volume and Pressure, which results in a Energy scalar.
-     * @param v Volume scalar
+     * @param v Pressure; Volume scalar
      * @return Energy scalar as a multiplication of Volume and Pressure
      */
     public final Energy multiplyBy(final Pressure v)
@@ -200,7 +200,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the division of Volume and Length, which results in a Area scalar.
-     * @param v Volume scalar
+     * @param v Length; Volume scalar
      * @return Area scalar as a division of Volume and Length
      */
     public final Area divideBy(final Length v)
@@ -210,7 +210,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the division of Volume and Area, which results in a Length scalar.
-     * @param v Volume scalar
+     * @param v Area; Volume scalar
      * @return Length scalar as a division of Volume and Area
      */
     public final Length divideBy(final Area v)
@@ -220,7 +220,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the multiplication of Volume and LinearDensity, which results in a Area scalar.
-     * @param v Volume scalar
+     * @param v LinearDensity; Volume scalar
      * @return Area scalar as a multiplication of Volume and LinearDensity
      */
     public final Area multiplyBy(final LinearDensity v)
@@ -230,7 +230,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the division of Volume and Duration, which results in a FlowVolume scalar.
-     * @param v Volume scalar
+     * @param v Duration; Volume scalar
      * @return FlowVolume scalar as a division of Volume and Duration
      */
     public final FlowVolume divideBy(final Duration v)
@@ -240,7 +240,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the division of Volume and FlowVolume, which results in a Duration scalar.
-     * @param v Volume scalar
+     * @param v FlowVolume; Volume scalar
      * @return Duration scalar as a division of Volume and FlowVolume
      */
     public final Duration divideBy(final FlowVolume v)
@@ -250,7 +250,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the multiplication of Volume and MoneyPerVolume, which results in a Money scalar.
-     * @param v Volume scalar
+     * @param v MoneyPerVolume; Volume scalar
      * @return Money scalar as a multiplication of Volume and MoneyPerVolume
      */
     public final Money multiplyBy(final MoneyPerVolume v)

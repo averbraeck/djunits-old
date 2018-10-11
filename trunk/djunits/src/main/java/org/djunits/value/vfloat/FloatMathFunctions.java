@@ -212,7 +212,7 @@ public interface FloatMathFunctions<T>
 
     /**
      * Function that returns <tt>Math.pow(a, b)</tt>.
-     * @param b power parameter
+     * @param b float; power parameter
      * @return power function
      */
     @SuppressWarnings("checkstyle:methodname")
@@ -362,7 +362,7 @@ public interface FloatMathFunctions<T>
 
     /**
      * Function that returns <tt>a * b</tt>.
-     * @param b power parameter
+     * @param b float; power parameter
      * @return power function
      */
     @SuppressWarnings("checkstyle:methodname")
@@ -380,7 +380,7 @@ public interface FloatMathFunctions<T>
 
     /**
      * Function that returns <tt>a / b</tt>.
-     * @param b power parameter
+     * @param b float; power parameter
      * @return power function
      */
     @SuppressWarnings("checkstyle:methodname")

@@ -25,8 +25,8 @@ public class FloatFrequencyMatrix
     /**
      * Construct a new Relative Immutable FloatFrequencyMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatFrequencyMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatFrequencyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FrequencyUnit; the unit of the new Relative Immutable FloatFrequencyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatFrequencyMatrix(final float[][] values, final FrequencyUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class FloatFrequencyMatrix
 
     /**
      * Construct a new Relative Immutable FloatFrequencyMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatFrequencyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatFrequency[][]; the values of the entries in the new Relative Immutable Float FloatFrequencyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatFrequencyMatrix(final FloatFrequency[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class FloatFrequencyMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit FrequencyUnit; the unit
      */
     FloatFrequencyMatrix(final FloatMatrixData data, final FrequencyUnit unit)
     {

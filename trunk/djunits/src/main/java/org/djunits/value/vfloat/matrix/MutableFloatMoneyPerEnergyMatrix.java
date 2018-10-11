@@ -25,8 +25,8 @@ public class MutableFloatMoneyPerEnergyMatrix extends AbstractMutableFloatMatrix
     /**
      * Construct a new Relative Immutable FloatMoneyPerEnergyMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatMoneyPerEnergyMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatMoneyPerEnergyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerEnergyUnit; the unit of the new Relative Immutable FloatMoneyPerEnergyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatMoneyPerEnergyMatrix(final float[][] values, final MoneyPerEnergyUnit unit,
@@ -37,9 +37,9 @@ public class MutableFloatMoneyPerEnergyMatrix extends AbstractMutableFloatMatrix
 
     /**
      * Construct a new Relative Immutable FloatMoneyPerEnergyMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatMoneyPerEnergy[][]; the values of the entries in the new Relative Immutable Float
      *            FloatMoneyPerEnergyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMoneyPerEnergyMatrix(final FloatMoneyPerEnergy[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableFloatMoneyPerEnergyMatrix extends AbstractMutableFloatMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit MoneyPerEnergyUnit; the unit
      */
     MutableFloatMoneyPerEnergyMatrix(final FloatMatrixData data, final MoneyPerEnergyUnit unit)
     {

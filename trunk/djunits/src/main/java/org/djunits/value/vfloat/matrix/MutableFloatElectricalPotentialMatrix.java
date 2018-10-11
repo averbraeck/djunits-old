@@ -25,8 +25,8 @@ public class MutableFloatElectricalPotentialMatrix extends AbstractMutableFloatM
     /**
      * Construct a new Relative Immutable FloatElectricalPotentialMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatElectricalPotentialMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatElectricalPotentialMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalPotentialUnit; the unit of the new Relative Immutable FloatElectricalPotentialMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalPotentialMatrix(final float[][] values, final ElectricalPotentialUnit unit,
@@ -37,9 +37,9 @@ public class MutableFloatElectricalPotentialMatrix extends AbstractMutableFloatM
 
     /**
      * Construct a new Relative Immutable FloatElectricalPotentialMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalPotential[][]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalPotentialMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalPotentialMatrix(final FloatElectricalPotential[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableFloatElectricalPotentialMatrix extends AbstractMutableFloatM
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit ElectricalPotentialUnit; the unit
      */
     MutableFloatElectricalPotentialMatrix(final FloatMatrixData data, final ElectricalPotentialUnit unit)
     {

@@ -28,8 +28,8 @@ public class MutableTemperatureVector
     /**
      * Construct a new Relative Mutable Double TemperatureVector.
      * @param values double[]; the values of the entries in the new Relative Mutable Double TemperatureVector
-     * @param unit U; the unit of the new Relative Mutable Double TemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit TemperatureUnit; the unit of the new Relative Mutable Double TemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableTemperatureVector(final double[] values, final TemperatureUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableTemperatureVector
 
     /**
      * Construct a new Relative Mutable Double TemperatureVector.
-     * @param values List; the values of the entries in the new Relative Mutable Double TemperatureVector
-     * @param unit U; the unit of the new Relative Mutable Double TemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Mutable Double TemperatureVector
+     * @param unit TemperatureUnit; the unit of the new Relative Mutable Double TemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableTemperatureVector(final List<Double> values, final TemperatureUnit unit, final StorageType storageType)
@@ -53,8 +53,8 @@ public class MutableTemperatureVector
 
     /**
      * Construct a new Relative Mutable Double TemperatureVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable Double TemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Temperature[]; the values of the entries in the new Relative Mutable Double TemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableTemperatureVector(final Temperature[] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ public class MutableTemperatureVector
 
     /**
      * Construct a new Relative Mutable Double TemperatureVector.
-     * @param values List; the values of the entries in the new Relative Mutable Double TemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Temperature&gt;; the values of the entries in the new Relative Mutable Double TemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableTemperatureVector(final List<Temperature> values, final StorageType storageType) throws ValueException
@@ -75,10 +75,10 @@ public class MutableTemperatureVector
 
     /**
      * Construct a new Relative Mutable Double TemperatureVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Temperature&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            TemperatureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableTemperatureVector(final SortedMap<Integer, Temperature> values, final int length,
@@ -89,10 +89,11 @@ public class MutableTemperatureVector
 
     /**
      * Construct a new Relative Mutable Double TemperatureVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double TemperatureVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double TemperatureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            TemperatureVector
+     * @param unit TemperatureUnit; the unit of the new Relative Sparse Mutable Double TemperatureVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableTemperatureVector(final SortedMap<Integer, Double> values, final TemperatureUnit unit, final int length,
@@ -103,8 +104,8 @@ public class MutableTemperatureVector
 
     /**
      * Construct a new Relative Mutable Double TemperatureVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit TemperatureUnit; the unit
      */
     MutableTemperatureVector(final DoubleVectorData data, final TemperatureUnit unit)
     {

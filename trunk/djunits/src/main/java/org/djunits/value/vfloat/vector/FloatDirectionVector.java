@@ -29,8 +29,8 @@ public class FloatDirectionVector extends AbstractFloatVectorAbs<DirectionUnit, 
     /**
      * Construct a new Absolute Immutable FloatDirectionVector.
      * @param values float[]; the values of the entries in the new Absolute Immutable FloatDirectionVector
-     * @param unit U; the unit of the new Absolute Immutable FloatDirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DirectionUnit; the unit of the new Absolute Immutable FloatDirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatDirectionVector(final float[] values, final DirectionUnit unit, final StorageType storageType)
@@ -41,9 +41,9 @@ public class FloatDirectionVector extends AbstractFloatVectorAbs<DirectionUnit, 
 
     /**
      * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param values List; the values of the entries in the new Absolute Immutable FloatDirectionVector
-     * @param unit U; the unit of the new Absolute Immutable FloatDirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable FloatDirectionVector
+     * @param unit DirectionUnit; the unit of the new Absolute Immutable FloatDirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatDirectionVector(final List<Float> values, final DirectionUnit unit, final StorageType storageType)
@@ -54,8 +54,8 @@ public class FloatDirectionVector extends AbstractFloatVectorAbs<DirectionUnit, 
 
     /**
      * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Immutable FloatDirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatDirection[]; the values of the entries in the new Absolute Immutable FloatDirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatDirectionVector(final FloatDirection[] values, final StorageType storageType) throws ValueException
@@ -65,8 +65,8 @@ public class FloatDirectionVector extends AbstractFloatVectorAbs<DirectionUnit, 
 
     /**
      * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param values List; the values of the entries in the new Absolute Immutable FloatDirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatDirection&gt;; the values of the entries in the new Absolute Immutable FloatDirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatDirectionVector(final List<FloatDirection> values, final StorageType storageType) throws ValueException
@@ -76,10 +76,10 @@ public class FloatDirectionVector extends AbstractFloatVectorAbs<DirectionUnit, 
 
     /**
      * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable
+     * @param values SortedMap&lt;Integer, FloatDirection&gt;; the values of the entries in the new Absolute Sparse Mutable
      *            FloatDirectionVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatDirectionVector(final SortedMap<Integer, FloatDirection> values, final int length,
@@ -90,10 +90,11 @@ public class FloatDirectionVector extends AbstractFloatVectorAbs<DirectionUnit, 
 
     /**
      * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatDirectionVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable FloatDirectionVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Absolute Sparse Mutable
+     *            FloatDirectionVector
+     * @param unit DirectionUnit; the unit of the new Absolute Sparse Mutable FloatDirectionVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatDirectionVector(final SortedMap<Integer, Float> values, final DirectionUnit unit, final int length,
@@ -104,8 +105,8 @@ public class FloatDirectionVector extends AbstractFloatVectorAbs<DirectionUnit, 
 
     /**
      * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit DirectionUnit; the unit
      */
     FloatDirectionVector(final FloatVectorData data, final DirectionUnit unit)
     {

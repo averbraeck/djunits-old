@@ -31,7 +31,7 @@ public final class VectorAndMatrix
     }
 
     /**
-     * @param args args
+     * @param args String[]; args
      * @throws ValueException on error
      */
     public static void main(final String[] args) throws ValueException
@@ -70,8 +70,8 @@ public final class VectorAndMatrix
         System.out.println(tva3);
         // XXX DoubleVector.Abs<TimeUnit, DurationUnit> dva4 = dvr.plus(dva);
         System.out.println();
-        
-        DurationVector dv = new DurationVector(new double[] {1.0,  2.0,  5.0, 10.0}, DurationUnit.MINUTE, StorageType.DENSE);
+
+        DurationVector dv = new DurationVector(new double[] { 1.0, 2.0, 5.0, 10.0 }, DurationUnit.MINUTE, StorageType.DENSE);
         Duration d = dv.get(2);
         System.out.println(d);
     }

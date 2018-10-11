@@ -32,7 +32,7 @@ public abstract class DoubleScalar
         /**
          * Construct a new Absolute Immutable DoubleScalar.
          * @param value double; the value of the new Absolute Immutable DoubleScalar
-         * @param unit U; the unit of the new Absolute Immutable DoubleScalar
+         * @param unit AU; the unit of the new Absolute Immutable DoubleScalar
          */
         public Abs(final double value, final AU unit)
         {
@@ -41,7 +41,7 @@ public abstract class DoubleScalar
 
         /**
          * Construct a new Absolute Immutable DoubleScalar from an existing Absolute Immutable DoubleScalar.
-         * @param value DoubleScalar.Abs&lt;U&gt;; the reference
+         * @param value DoubleScalar.Abs&lt;AU, RU&gt;; the reference
          */
         public Abs(final DoubleScalar.Abs<AU, RU> value)
         {
@@ -203,8 +203,8 @@ public abstract class DoubleScalar
 
     /**
      * Multiply two values; the result is a new instance with a different (existing or generated) SI unit.
-     * @param left DoubleScalar.Rel&lt;?&gt;; the left operand
-     * @param right DoubleScalar.Rel&lt;?&gt;; the right operand
+     * @param left AbstractDoubleScalarRel&lt;?, ?&gt;; the left operand
+     * @param right AbstractDoubleScalarRel&lt;?, ?&gt;; the right operand
      * @return DoubleScalar.Rel&lt;SIUnit&gt;; the product of the two values
      */
     public static DoubleScalar.Rel<SIUnit> multiply(final AbstractDoubleScalarRel<?, ?> left,
@@ -217,8 +217,8 @@ public abstract class DoubleScalar
 
     /**
      * Divide two values; the result is a new instance with a different (existing or generated) SI unit.
-     * @param left DoubleScalar.Rel&lt;?&gt;; the left operand
-     * @param right DoubleScalar.Rel&lt;?&gt;; the right operand
+     * @param left AbstractDoubleScalarRel&lt;?, ?&gt;; the left operand
+     * @param right AbstractDoubleScalarRel&lt;?, ?&gt;; the right operand
      * @return DoubleScalar.Rel&lt;SIUnit&gt;; the ratio of the two values
      */
     public static DoubleScalar.Rel<SIUnit> divide(final AbstractDoubleScalarRel<?, ?> left,
@@ -231,9 +231,9 @@ public abstract class DoubleScalar
 
     /**
      * Interpolate between two values. Made to be able to call e.g., Area a = DoubleScalar.interpolate(a1, a2, 0.4);
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero R; the low value
+     * @param one R; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @param <U> Unit; the unit of the parameters and the result
      * @param <R> the relative type
      * @return a Scalar at the ratio between
@@ -246,9 +246,9 @@ public abstract class DoubleScalar
 
     /**
      * Interpolate between two values. Made to be able to call e.g., Time t = DoubleScalar.interpolate(t1, t2, 0.4);
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero A; the low value
+     * @param one A; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @param <AU> Unit; the absolute unit of the parameters and the result
      * @param <RU> Unit; the relative unit of the parameters and the result
      * @param <R> the relative type
@@ -263,8 +263,8 @@ public abstract class DoubleScalar
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 T; the first scalar
+     * @param r2 T; the second scalar
      * @param <U> Unit; the unit of the parameters and the result
      * @param <T> the argument and result type
      * @return the maximum value of two relative scalars
@@ -276,9 +276,9 @@ public abstract class DoubleScalar
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 T; the first scalar
+     * @param r2 T; the second scalar
+     * @param rn T...; the other scalars
      * @param <U> Unit; the unit of the parameters and the result
      * @param <T> the argument and result type
      * @return the maximum value of more than two relative scalars
@@ -299,8 +299,8 @@ public abstract class DoubleScalar
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 T; the first scalar
+     * @param r2 T; the second scalar
      * @param <U> Unit; the unit of the parameters and the result
      * @param <T> the argument and result type
      * @return the minimum value of two relative scalars
@@ -312,9 +312,9 @@ public abstract class DoubleScalar
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 T; the first scalar
+     * @param r2 T; the second scalar
+     * @param rn T...; the other scalars
      * @param <U> Unit; the unit of the parameters and the result
      * @param <T> the argument and result type
      * @return the minimum value of more than two relative scalars

@@ -35,8 +35,8 @@ public class MoneyPerEnergy extends AbstractDoubleScalarRel<MoneyPerEnergyUnit, 
 
     /**
      * Construct MoneyPerEnergy scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit MoneyPerEnergyUnit; unit for the double value
      */
     public MoneyPerEnergy(final double value, final MoneyPerEnergyUnit unit)
     {
@@ -45,7 +45,7 @@ public class MoneyPerEnergy extends AbstractDoubleScalarRel<MoneyPerEnergyUnit, 
 
     /**
      * Construct MoneyPerEnergy scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value MoneyPerEnergy; Scalar from which to construct this instance
      */
     public MoneyPerEnergy(final MoneyPerEnergy value)
     {
@@ -61,9 +61,9 @@ public class MoneyPerEnergy extends AbstractDoubleScalarRel<MoneyPerEnergyUnit, 
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero MoneyPerEnergy; the low value
+     * @param one MoneyPerEnergy; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static MoneyPerEnergy interpolate(final MoneyPerEnergy zero, final MoneyPerEnergy one, final double ratio)
@@ -73,8 +73,8 @@ public class MoneyPerEnergy extends AbstractDoubleScalarRel<MoneyPerEnergyUnit, 
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 MoneyPerEnergy; the first scalar
+     * @param r2 MoneyPerEnergy; the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static MoneyPerEnergy max(final MoneyPerEnergy r1, final MoneyPerEnergy r2)
@@ -84,9 +84,9 @@ public class MoneyPerEnergy extends AbstractDoubleScalarRel<MoneyPerEnergyUnit, 
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 MoneyPerEnergy; the first scalar
+     * @param r2 MoneyPerEnergy; the second scalar
+     * @param rn MoneyPerEnergy...; the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static MoneyPerEnergy max(final MoneyPerEnergy r1, final MoneyPerEnergy r2, final MoneyPerEnergy... rn)
@@ -104,8 +104,8 @@ public class MoneyPerEnergy extends AbstractDoubleScalarRel<MoneyPerEnergyUnit, 
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 MoneyPerEnergy; the first scalar
+     * @param r2 MoneyPerEnergy; the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static MoneyPerEnergy min(final MoneyPerEnergy r1, final MoneyPerEnergy r2)
@@ -115,9 +115,9 @@ public class MoneyPerEnergy extends AbstractDoubleScalarRel<MoneyPerEnergyUnit, 
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 MoneyPerEnergy; the first scalar
+     * @param r2 MoneyPerEnergy; the second scalar
+     * @param rn MoneyPerEnergy...; the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static MoneyPerEnergy min(final MoneyPerEnergy r1, final MoneyPerEnergy r2, final MoneyPerEnergy... rn)
@@ -135,7 +135,7 @@ public class MoneyPerEnergy extends AbstractDoubleScalarRel<MoneyPerEnergyUnit, 
 
     /**
      * Calculate the division of MoneyPerEnergy and MoneyPerEnergy, which results in a Dimensionless scalar.
-     * @param v MoneyPerEnergy scalar
+     * @param v MoneyPerEnergy; MoneyPerEnergy scalar
      * @return Dimensionless scalar as a division of MoneyPerEnergy and MoneyPerEnergy
      */
     public final Dimensionless divideBy(final MoneyPerEnergy v)
@@ -145,7 +145,7 @@ public class MoneyPerEnergy extends AbstractDoubleScalarRel<MoneyPerEnergyUnit, 
 
     /**
      * Calculate the multiplication of MoneyPerEnergy and Energy, which results in a Money scalar.
-     * @param v MoneyPerEnergy scalar
+     * @param v Energy; MoneyPerEnergy scalar
      * @return Money scalar as a multiplication of MoneyPerEnergy and Energy
      */
     public final Money multiplyBy(final Energy v)

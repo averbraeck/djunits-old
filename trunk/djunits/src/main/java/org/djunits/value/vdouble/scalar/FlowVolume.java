@@ -57,8 +57,8 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Construct FlowVolume scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit FlowVolumeUnit; unit for the double value
      */
     public FlowVolume(final double value, final FlowVolumeUnit unit)
     {
@@ -67,7 +67,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Construct FlowVolume scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FlowVolume; Scalar from which to construct this instance
      */
     public FlowVolume(final FlowVolume value)
     {
@@ -83,7 +83,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Construct FlowVolume scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final FlowVolume createSI(final double value)
@@ -93,9 +93,9 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FlowVolume; the low value
+     * @param one FlowVolume; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FlowVolume interpolate(final FlowVolume zero, final FlowVolume one, final double ratio)
@@ -105,8 +105,8 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FlowVolume; the first scalar
+     * @param r2 FlowVolume; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FlowVolume max(final FlowVolume r1, final FlowVolume r2)
@@ -116,9 +116,9 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FlowVolume; the first scalar
+     * @param r2 FlowVolume; the second scalar
+     * @param rn FlowVolume...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FlowVolume max(final FlowVolume r1, final FlowVolume r2, final FlowVolume... rn)
@@ -136,8 +136,8 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FlowVolume; the first scalar
+     * @param r2 FlowVolume; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FlowVolume min(final FlowVolume r1, final FlowVolume r2)
@@ -147,9 +147,9 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FlowVolume; the first scalar
+     * @param r2 FlowVolume; the second scalar
+     * @param rn FlowVolume...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FlowVolume min(final FlowVolume r1, final FlowVolume r2, final FlowVolume... rn)
@@ -167,7 +167,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the division of FlowVolume and FlowVolume, which results in a Dimensionless scalar.
-     * @param v FlowVolume scalar
+     * @param v FlowVolume; FlowVolume scalar
      * @return Dimensionless scalar as a division of FlowVolume and FlowVolume
      */
     public final Dimensionless divideBy(final FlowVolume v)
@@ -177,7 +177,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the multiplication of FlowVolume and Duration, which results in a Volume scalar.
-     * @param v FlowVolume scalar
+     * @param v Duration; FlowVolume scalar
      * @return Volume scalar as a multiplication of FlowVolume and Duration
      */
     public final Volume multiplyBy(final Duration v)
@@ -187,7 +187,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the division of FlowVolume and Frequency, which results in a Volume scalar.
-     * @param v FlowVolume scalar
+     * @param v Frequency; FlowVolume scalar
      * @return Volume scalar as a division of FlowVolume and Frequency
      */
     public final Volume divideBy(final Frequency v)
@@ -197,7 +197,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the division of FlowVolume and Volume, which results in a Frequency scalar.
-     * @param v FlowVolume scalar
+     * @param v Volume; FlowVolume scalar
      * @return Frequency scalar as a division of FlowVolume and Volume
      */
     public final Frequency divideBy(final Volume v)
@@ -207,7 +207,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the division of FlowVolume and Area, which results in a Speed scalar.
-     * @param v FlowVolume scalar
+     * @param v Area; FlowVolume scalar
      * @return Speed scalar as a division of FlowVolume and Area
      */
     public final Speed divideBy(final Area v)
@@ -217,7 +217,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the division of FlowVolume and Speed, which results in a Area scalar.
-     * @param v FlowVolume scalar
+     * @param v Speed; FlowVolume scalar
      * @return Area scalar as a division of FlowVolume and Speed
      */
     public final Area divideBy(final Speed v)

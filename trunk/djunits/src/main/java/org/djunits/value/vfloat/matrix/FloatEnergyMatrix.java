@@ -25,8 +25,8 @@ public class FloatEnergyMatrix
     /**
      * Construct a new Relative Immutable FloatEnergyMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatEnergyMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatEnergyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit EnergyUnit; the unit of the new Relative Immutable FloatEnergyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatEnergyMatrix(final float[][] values, final EnergyUnit unit, final StorageType storageType) throws ValueException
@@ -36,9 +36,8 @@ public class FloatEnergyMatrix
 
     /**
      * Construct a new Relative Immutable FloatEnergyMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatEnergyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatEnergy[][]; the values of the entries in the new Relative Immutable Float FloatEnergyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatEnergyMatrix(final FloatEnergy[][] values, final StorageType storageType) throws ValueException
@@ -47,8 +46,8 @@ public class FloatEnergyMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit EnergyUnit; the unit
      */
     FloatEnergyMatrix(final FloatMatrixData data, final EnergyUnit unit)
     {

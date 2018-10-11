@@ -62,8 +62,8 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct FloatLength scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit LengthUnit; unit for the float value
      */
     public FloatLength(final float value, final LengthUnit unit)
     {
@@ -72,7 +72,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct FloatLength scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatLength; Scalar from which to construct this instance
      */
     public FloatLength(final FloatLength value)
     {
@@ -81,8 +81,8 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct FloatLength scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit LengthUnit; unit for the resulting float value
      */
     public FloatLength(final double value, final LengthUnit unit)
     {
@@ -98,7 +98,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct FloatLength scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatLength createSI(final float value)
@@ -108,8 +108,8 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the float value
-     * @param unit the unit
+     * @param value float; the float value
+     * @param unit PositionUnit; the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
     public final FloatPosition instantiateAbs(final float value, final PositionUnit unit)
@@ -119,9 +119,9 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatLength; the low value
+     * @param one FloatLength; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatLength interpolate(final FloatLength zero, final FloatLength one, final float ratio)
@@ -131,7 +131,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
+     * @param v FloatPosition; the value to add
      * @return sum of this value and v as a new object
      */
     public final FloatPosition plus(final FloatPosition v)
@@ -142,8 +142,8 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatLength max(final FloatLength r1, final FloatLength r2)
@@ -153,9 +153,9 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
+     * @param rn FloatLength...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatLength max(final FloatLength r1, final FloatLength r2, final FloatLength... rn)
@@ -173,8 +173,8 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatLength min(final FloatLength r1, final FloatLength r2)
@@ -184,9 +184,9 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
+     * @param rn FloatLength...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatLength min(final FloatLength r1, final FloatLength r2, final FloatLength... rn)
@@ -204,7 +204,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Calculate the division of FloatLength and FloatLength, which results in a FloatDimensionless scalar.
-     * @param v FloatLength scalar
+     * @param v FloatLength; FloatLength scalar
      * @return FloatDimensionless scalar as a division of FloatLength and FloatLength
      */
     public final FloatDimensionless divideBy(final FloatLength v)
@@ -214,7 +214,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Calculate the multiplication of FloatLength and FloatLength, which results in a FloatArea scalar.
-     * @param v FloatLength scalar
+     * @param v FloatLength; FloatLength scalar
      * @return FloatArea scalar as a multiplication of FloatLength and FloatLength
      */
     public final FloatArea multiplyBy(final FloatLength v)
@@ -224,7 +224,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Calculate the division of FloatLength and FloatLinearDensity, which results in a FloatArea scalar.
-     * @param v FloatLength scalar
+     * @param v FloatLinearDensity; FloatLength scalar
      * @return FloatArea scalar as a division of FloatLength and FloatLinearDensity
      */
     public final FloatArea divideBy(final FloatLinearDensity v)
@@ -234,7 +234,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Calculate the division of FloatLength and FloatArea, which results in a FloatLinearDensity scalar.
-     * @param v FloatLength scalar
+     * @param v FloatArea; FloatLength scalar
      * @return FloatLinearDensity scalar as a division of FloatLength and FloatArea
      */
     public final FloatLinearDensity divideBy(final FloatArea v)
@@ -244,7 +244,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Calculate the multiplication of FloatLength and FloatArea, which results in a FloatVolume scalar.
-     * @param v FloatLength scalar
+     * @param v FloatArea; FloatLength scalar
      * @return FloatVolume scalar as a multiplication of FloatLength and FloatArea
      */
     public final FloatVolume multiplyBy(final FloatArea v)
@@ -254,7 +254,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Calculate the multiplication of FloatLength and FloatForce, which results in a FloatEnergy scalar.
-     * @param v FloatLength scalar
+     * @param v FloatForce; FloatLength scalar
      * @return FloatEnergy scalar as a multiplication of FloatLength and FloatForce
      */
     public final FloatEnergy multiplyBy(final FloatForce v)
@@ -264,7 +264,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Calculate the multiplication of FloatLength and FloatFrequency, which results in a FloatSpeed scalar.
-     * @param v FloatLength scalar
+     * @param v FloatFrequency; FloatLength scalar
      * @return FloatSpeed scalar as a multiplication of FloatLength and FloatFrequency
      */
     public final FloatSpeed multiplyBy(final FloatFrequency v)
@@ -274,7 +274,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Calculate the division of FloatLength and FloatDuration, which results in a FloatSpeed scalar.
-     * @param v FloatLength scalar
+     * @param v FloatDuration; FloatLength scalar
      * @return FloatSpeed scalar as a division of FloatLength and FloatDuration
      */
     public final FloatSpeed divideBy(final FloatDuration v)
@@ -284,7 +284,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Calculate the division of FloatLength and FloatSpeed, which results in a FloatDuration scalar.
-     * @param v FloatLength scalar
+     * @param v FloatSpeed; FloatLength scalar
      * @return FloatDuration scalar as a division of FloatLength and FloatSpeed
      */
     public final FloatDuration divideBy(final FloatSpeed v)
@@ -294,7 +294,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Calculate the multiplication of FloatLength and FloatMoneyPerLength, which results in a FloatMoney scalar.
-     * @param v FloatLength scalar
+     * @param v FloatMoneyPerLength; FloatLength scalar
      * @return FloatMoney scalar as a multiplication of FloatLength and FloatMoneyPerLength
      */
     public final FloatMoney multiplyBy(final FloatMoneyPerLength v)

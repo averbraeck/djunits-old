@@ -35,8 +35,8 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, T extends Abstract
 
     /**
      * Construct a new DoubleVector.
-     * @param unit the unit
-     * @param data an internal data object
+     * @param unit U; the unit
+     * @param data DoubleVectorData; an internal data object
      */
     AbstractDoubleVector(final U unit, final DoubleVectorData data)
     {
@@ -205,7 +205,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, T extends Abstract
 
     /**
      * Centralized size equality check.
-     * @param other DoubleVector&lt;?&gt;; other DoubleVector
+     * @param other AbstractDoubleVector&lt;U, ?&gt;; other DoubleVector
      * @throws ValueException when other is null, or vectors have unequal size
      */
     protected final void checkSize(final AbstractDoubleVector<U, ?> other) throws ValueException

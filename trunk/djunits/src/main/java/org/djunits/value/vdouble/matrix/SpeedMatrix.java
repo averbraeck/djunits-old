@@ -24,8 +24,8 @@ public class SpeedMatrix extends AbstractDoubleMatrixRel<SpeedUnit, SpeedMatrix,
     /**
      * Construct a new Relative Immutable Double SpeedMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double SpeedMatrix
-     * @param unit U; the unit of the new Relative Immutable Double SpeedMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit SpeedUnit; the unit of the new Relative Immutable Double SpeedMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public SpeedMatrix(final double[][] values, final SpeedUnit unit, final StorageType storageType) throws ValueException
@@ -35,8 +35,8 @@ public class SpeedMatrix extends AbstractDoubleMatrixRel<SpeedUnit, SpeedMatrix,
 
     /**
      * Construct a new Relative Immutable Double SpeedMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double SpeedMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Speed[][]; the values of the entries in the new Relative Immutable Double SpeedMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public SpeedMatrix(final Speed[][] values, final StorageType storageType) throws ValueException
@@ -45,8 +45,8 @@ public class SpeedMatrix extends AbstractDoubleMatrixRel<SpeedUnit, SpeedMatrix,
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit SpeedUnit; the unit
      */
     SpeedMatrix(final DoubleMatrixData data, final SpeedUnit unit)
     {

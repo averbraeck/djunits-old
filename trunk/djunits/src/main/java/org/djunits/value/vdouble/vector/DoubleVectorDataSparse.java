@@ -27,9 +27,9 @@ public class DoubleVectorDataSparse extends DoubleVectorData
 
     /**
      * Create a vector with sparse data.
-     * @param vectorSI the data to store
-     * @param indices the index values of the Vector
-     * @param size the length of the vector (padded with 0 after highest index in indices)
+     * @param vectorSI double[]; the data to store
+     * @param indices int[]; the index values of the Vector
+     * @param size int; the length of the vector (padded with 0 after highest index in indices)
      */
     public DoubleVectorDataSparse(final double[] vectorSI, final int[] indices, final int size)
     {
@@ -116,7 +116,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
 
     /**
      * Instantiate a DoubleVectorDataSparse from an array.
-     * @param valuesSI the (SI) values to store
+     * @param valuesSI double[]; the (SI) values to store
      * @return the DoubleVectorDataSparse
      */
     public static DoubleVectorDataSparse instantiate(final double[] valuesSI)

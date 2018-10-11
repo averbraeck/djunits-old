@@ -44,7 +44,7 @@ public abstract class MutableDoubleMatrix
          * Construct a new Absolute Mutable DoubleMatrix.
          * @param values double[][]; the values of the entries in the new Absolute Mutable DoubleMatrix
          * @param unit AU; the unit of the new Absolute Mutable DoubleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Abs(final double[][] values, final AU unit, final StorageType storageType) throws ValueException
@@ -54,8 +54,8 @@ public abstract class MutableDoubleMatrix
 
         /**
          * Construct a new Absolute Mutable DoubleMatrix.
-         * @param values DoubleScalar.Abs&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable DoubleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values DoubleScalar.Abs&lt;AU, RU&gt;[][]; the values of the entries in the new Absolute Mutable DoubleMatrix
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Abs(final DoubleScalar.Abs<AU, RU>[][] values, final StorageType storageType) throws ValueException
@@ -65,8 +65,8 @@ public abstract class MutableDoubleMatrix
 
         /**
          * Construct a new Absolute Mutable DoubleMatrix.
-         * @param data an internal data object
-         * @param unit the unit
+         * @param data DoubleMatrixData; an internal data object
+         * @param unit AU; the unit
          */
         Abs(final DoubleMatrixData data, final AU unit)
         {
@@ -133,7 +133,7 @@ public abstract class MutableDoubleMatrix
          * Construct a new Relative Mutable DoubleMatrix.
          * @param values double[][]; the values of the entries in the new Relative Mutable DoubleMatrix
          * @param unit U; the unit of the new Relative Mutable DoubleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Rel(final double[][] values, final U unit, final StorageType storageType) throws ValueException
@@ -143,8 +143,8 @@ public abstract class MutableDoubleMatrix
 
         /**
          * Construct a new Relative Mutable DoubleMatrix.
-         * @param values DoubleScalar.Abs&lt;U&gt;[][]; the values of the entries in the new Relative Mutable DoubleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Mutable DoubleMatrix
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Rel(final DoubleScalar.Rel<U>[][] values, final StorageType storageType) throws ValueException
@@ -154,8 +154,8 @@ public abstract class MutableDoubleMatrix
 
         /**
          * Construct a new Relative Mutable DoubleMatrix.
-         * @param data an internal data object
-         * @param unit the unit
+         * @param data DoubleMatrixData; an internal data object
+         * @param unit U; the unit
          */
         Rel(final DoubleMatrixData data, final U unit)
         {

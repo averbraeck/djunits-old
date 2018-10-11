@@ -16,14 +16,14 @@ public interface Scale
 {
     /**
      * Convert a value to an SI value using this scale.
-     * @param value the value to convert
+     * @param value double; the value to convert
      * @return the corresponding SI value
      */
     double toStandardUnit(double value);
 
     /**
      * Convert a value from an SI value to a value in the unit that uses this scale.
-     * @param value the value to convert
+     * @param value double; the value to convert
      * @return the corresponding value in the given unit
      */
     double fromStandardUnit(double value);

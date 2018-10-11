@@ -25,8 +25,8 @@ public class MutableMoneyPerLengthMatrix extends
     /**
      * Construct a new Relative Immutable Double MoneyPerLengthMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double MoneyPerLengthMatrix
-     * @param unit U; the unit of the new Relative Immutable Double MoneyPerLengthMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerLengthUnit; the unit of the new Relative Immutable Double MoneyPerLengthMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMoneyPerLengthMatrix(final double[][] values, final MoneyPerLengthUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableMoneyPerLengthMatrix extends
 
     /**
      * Construct a new Relative Immutable Double MoneyPerLengthMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            MoneyPerLengthMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values MoneyPerLength[][]; the values of the entries in the new Relative Immutable Double MoneyPerLengthMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableMoneyPerLengthMatrix(final MoneyPerLength[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableMoneyPerLengthMatrix extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit MoneyPerLengthUnit; the unit
      */
     MutableMoneyPerLengthMatrix(final DoubleMatrixData data, final MoneyPerLengthUnit unit)
     {

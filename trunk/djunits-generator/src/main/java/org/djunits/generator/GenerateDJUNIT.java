@@ -193,9 +193,9 @@ public class GenerateDJUNIT
 
     /**
      * Insert formulas based on FORMULAS.txt into the %FORMULAS% marker within the Java file.
-     * @param java the java file
-     * @param errorType the type for error messaging
-     * @param prefix e.g., Float for Float types, or blank for Double types
+     * @param java String; the java file
+     * @param errorType String; the type for error messaging
+     * @param prefix String; e.g., Float for Float types, or blank for Double types
      * @return the file with replacements
      */
     private static String formulas(String java, String errorType, String prefix)
@@ -251,8 +251,8 @@ public class GenerateDJUNIT
 
     /**
      * Insert replacements based on REPLACCE.txt into the Java file.
-     * @param java the file
-     * @param type the type
+     * @param java String; the file
+     * @param type String; the type
      * @return the file with replacements
      */
     private static String replace(String java, String type)
@@ -271,8 +271,8 @@ public class GenerateDJUNIT
 
     /**
      * Replace the %TypeAbs%, %TypeRel%, %TypeAbsUnit%, and %TypeRelUnit% tags in the java string.
-     * @param in the original java string
-     * @param type the types: [abs, rel, unit]
+     * @param in String; the original java string
+     * @param type String[]; the types: [abs, rel, unit]
      * @return the java string with replacements
      */
     private static String replaceAbsRel(final String in, final String[] type)
@@ -497,9 +497,9 @@ public class GenerateDJUNIT
 
     /**
      * Insert formulas based on FORMULAS.txt into the %FORMULAS% marker within the Java file.
-     * @param java the java file
-     * @param errorType the type for error messaging
-     * @param prefix e.g., Float for Float types, or blank for Double types
+     * @param java String; the java file
+     * @param errorType String; the type for error messaging
+     * @param prefix String; e.g., Float for Float types, or blank for Double types
      * @return the file with replacements
      */
     private static String formulasVector(String java, String errorType, String prefix)
@@ -855,9 +855,9 @@ public class GenerateDJUNIT
 
     /**
      * Insert formulas based on FORMULAS.txt into the %FORMULAS% marker within the Java file.
-     * @param java the java file
-     * @param errorType the type for error messaging
-     * @param prefix e.g., Float for Float types, or blank for Double types
+     * @param java String; the java file
+     * @param errorType String; the type for error messaging
+     * @param prefix String; e.g., Float for Float types, or blank for Double types
      * @return the file with replacements
      */
     private static String formulasMatrix(String java, String errorType, String prefix)
@@ -1257,7 +1257,7 @@ public class GenerateDJUNIT
      * By default File#delete fails for non-empty directories, it works like "rm". We need something a little more brutual -
      * this does the equivalent of "rm -r". From: http://stackoverflow.com/questions/779519/delete-files-recursively-in-java.
      * Note: USE CAREFULLY.
-     * @param path Root File Path
+     * @param path File; Root File Path
      * @return true iff the file and all sub files/directories have been removed
      * @throws FileNotFoundException on error (e.g., locked file)
      */
@@ -1279,7 +1279,7 @@ public class GenerateDJUNIT
     }
 
     /**
-     * @param args args, should be blank
+     * @param args String[]; args, should be blank
      * @throws IOException on I/O error
      * @throws URISyntaxException when file could not be found on thhe file system
      */

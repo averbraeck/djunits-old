@@ -776,10 +776,12 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
 
     /**
      * Define money unit.
-     * @param currencyUnit the joda-money CurrencyUnit on which this djunits unit is based
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param currencyUnit CurrencyUnit; the joda-money CurrencyUnit on which this djunits unit is based
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private MoneyUnit(final CurrencyUnit currencyUnit, final String nameOrNameKey, final String abbreviationKey,
             final boolean standardUnit)
@@ -792,9 +794,9 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
 
     /**
      * Build a user-defined money unit.
-     * @param currencyUnit the joda-money CurrencyUnit on which this djunits unit is based
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
+     * @param currencyUnit CurrencyUnit; the joda-money CurrencyUnit on which this djunits unit is based
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
      */
     public MoneyUnit(final CurrencyUnit currencyUnit, final String name, final String abbreviation)
     {
@@ -803,12 +805,15 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
 
     /**
      * Build a money unit based on another money unit with a conversion factor.
-     * @param currencyUnit the joda-money CurrencyUnit on which this djunits unit is based
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param currencyUnit CurrencyUnit; the joda-money CurrencyUnit on which this djunits unit is based
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
+     * @param referenceUnit MoneyUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private MoneyUnit(final CurrencyUnit currencyUnit, final String nameOrNameKey, final String abbreviationKey,
             final MoneyUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
@@ -821,11 +826,12 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
 
     /**
      * Build a user-defined money unit based on another money unit with a conversion factor.
-     * @param currencyUnit the joda-money CurrencyUnit on which this djunits unit is based
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param currencyUnit CurrencyUnit; the joda-money CurrencyUnit on which this djunits unit is based
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param referenceUnit MoneyUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public MoneyUnit(final CurrencyUnit currencyUnit, final String name, final String abbreviation,
             final MoneyUnit referenceUnit, final double scaleFactorToReferenceUnit)
@@ -843,7 +849,7 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
 
     /**
      * Set the standard money unit to be used.
-     * @param moneyUnit the new standard money unit.
+     * @param moneyUnit MoneyUnit; the new standard money unit.
      */
     public static final void setStandardUnit(final MoneyUnit moneyUnit)
     {

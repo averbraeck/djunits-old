@@ -60,8 +60,8 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Construct FloatVolume scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit VolumeUnit; unit for the float value
      */
     public FloatVolume(final float value, final VolumeUnit unit)
     {
@@ -70,7 +70,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Construct FloatVolume scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatVolume; Scalar from which to construct this instance
      */
     public FloatVolume(final FloatVolume value)
     {
@@ -79,8 +79,8 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Construct FloatVolume scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit VolumeUnit; unit for the resulting float value
      */
     public FloatVolume(final double value, final VolumeUnit unit)
     {
@@ -96,7 +96,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Construct FloatVolume scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatVolume createSI(final float value)
@@ -106,9 +106,9 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatVolume; the low value
+     * @param one FloatVolume; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatVolume interpolate(final FloatVolume zero, final FloatVolume one, final float ratio)
@@ -118,8 +118,8 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatVolume; the first scalar
+     * @param r2 FloatVolume; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatVolume max(final FloatVolume r1, final FloatVolume r2)
@@ -129,9 +129,9 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatVolume; the first scalar
+     * @param r2 FloatVolume; the second scalar
+     * @param rn FloatVolume...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatVolume max(final FloatVolume r1, final FloatVolume r2, final FloatVolume... rn)
@@ -149,8 +149,8 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatVolume; the first scalar
+     * @param r2 FloatVolume; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatVolume min(final FloatVolume r1, final FloatVolume r2)
@@ -160,9 +160,9 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatVolume; the first scalar
+     * @param r2 FloatVolume; the second scalar
+     * @param rn FloatVolume...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatVolume min(final FloatVolume r1, final FloatVolume r2, final FloatVolume... rn)
@@ -180,7 +180,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Calculate the division of FloatVolume and FloatVolume, which results in a FloatDimensionless scalar.
-     * @param v FloatVolume scalar
+     * @param v FloatVolume; FloatVolume scalar
      * @return FloatDimensionless scalar as a division of FloatVolume and FloatVolume
      */
     public final FloatDimensionless divideBy(final FloatVolume v)
@@ -190,7 +190,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Calculate the multiplication of FloatVolume and FloatDensity, which results in a FloatMass scalar.
-     * @param v FloatVolume scalar
+     * @param v FloatDensity; FloatVolume scalar
      * @return FloatMass scalar as a multiplication of FloatVolume and FloatDensity
      */
     public final FloatMass multiplyBy(final FloatDensity v)
@@ -200,7 +200,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Calculate the multiplication of FloatVolume and FloatPressure, which results in a FloatEnergy scalar.
-     * @param v FloatVolume scalar
+     * @param v FloatPressure; FloatVolume scalar
      * @return FloatEnergy scalar as a multiplication of FloatVolume and FloatPressure
      */
     public final FloatEnergy multiplyBy(final FloatPressure v)
@@ -210,7 +210,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Calculate the division of FloatVolume and FloatLength, which results in a FloatArea scalar.
-     * @param v FloatVolume scalar
+     * @param v FloatLength; FloatVolume scalar
      * @return FloatArea scalar as a division of FloatVolume and FloatLength
      */
     public final FloatArea divideBy(final FloatLength v)
@@ -220,7 +220,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Calculate the division of FloatVolume and FloatArea, which results in a FloatLength scalar.
-     * @param v FloatVolume scalar
+     * @param v FloatArea; FloatVolume scalar
      * @return FloatLength scalar as a division of FloatVolume and FloatArea
      */
     public final FloatLength divideBy(final FloatArea v)
@@ -230,7 +230,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Calculate the multiplication of FloatVolume and FloatLinearDensity, which results in a FloatArea scalar.
-     * @param v FloatVolume scalar
+     * @param v FloatLinearDensity; FloatVolume scalar
      * @return FloatArea scalar as a multiplication of FloatVolume and FloatLinearDensity
      */
     public final FloatArea multiplyBy(final FloatLinearDensity v)
@@ -240,7 +240,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Calculate the division of FloatVolume and FloatDuration, which results in a FloatFlowVolume scalar.
-     * @param v FloatVolume scalar
+     * @param v FloatDuration; FloatVolume scalar
      * @return FloatFlowVolume scalar as a division of FloatVolume and FloatDuration
      */
     public final FloatFlowVolume divideBy(final FloatDuration v)
@@ -250,7 +250,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Calculate the division of FloatVolume and FloatFlowVolume, which results in a FloatDuration scalar.
-     * @param v FloatVolume scalar
+     * @param v FloatFlowVolume; FloatVolume scalar
      * @return FloatDuration scalar as a division of FloatVolume and FloatFlowVolume
      */
     public final FloatDuration divideBy(final FloatFlowVolume v)
@@ -260,7 +260,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 
     /**
      * Calculate the multiplication of FloatVolume and FloatMoneyPerVolume, which results in a FloatMoney scalar.
-     * @param v FloatVolume scalar
+     * @param v FloatMoneyPerVolume; FloatVolume scalar
      * @return FloatMoney scalar as a multiplication of FloatVolume and FloatMoneyPerVolume
      */
     public final FloatMoney multiplyBy(final FloatMoneyPerVolume v)

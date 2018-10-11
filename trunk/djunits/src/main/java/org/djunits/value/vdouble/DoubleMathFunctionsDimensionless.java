@@ -20,7 +20,7 @@ public interface DoubleMathFunctionsDimensionless<T> extends MathFunctionsDimens
      * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
      * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a sparse
      * dataset if necessary.
-     * @param doubleFunction the function to apply
+     * @param doubleFunction DoubleFunction; the function to apply
      */
     void assign(DoubleFunction doubleFunction);
 

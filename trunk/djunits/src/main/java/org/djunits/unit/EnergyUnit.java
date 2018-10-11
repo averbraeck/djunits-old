@@ -214,14 +214,16 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
 
     /**
      * Define an EnergyUnit based on its constituent base units, e.g. a J = km.m^2/s^2.
-     * @param massUnit the unit of mass for the energy unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the energy unit, e.g., meter
-     * @param durationUnit the unit of time for the energy unit, e.g., second
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param massUnit MassUnit; the unit of mass for the energy unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the energy unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the energy unit, e.g., second
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private EnergyUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
@@ -238,12 +240,12 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
 
     /**
      * Define a user-defined EnergyUnit based on its constituent base units, e.g. a J = km.m^2/s^2.
-     * @param massUnit the unit of mass for the energy unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the energy unit, e.g., meter
-     * @param durationUnit the unit of time for the energy unit, e.g., second
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param massUnit MassUnit; the unit of mass for the energy unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the energy unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the energy unit, e.g., second
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public EnergyUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
@@ -253,13 +255,15 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
 
     /**
      * Define an EnergyUnit based on a LengthUnit and a ForceUnit, e.g. a J = N.m.
-     * @param forceUnit the unit of force for the energy unit, e.g., Newton
-     * @param lengthUnit the unit of length for the energy unit, e.g., Meter
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param forceUnit ForceUnit; the unit of force for the energy unit, e.g., Newton
+     * @param lengthUnit LengthUnit; the unit of length for the energy unit, e.g., Meter
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private EnergyUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
@@ -273,11 +277,11 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
 
     /**
      * Define a user-defined EnergyUnit based on a LengthUnit and a ForceUnit, e.g. a J = N.m.
-     * @param forceUnit the unit of force for the energy unit, e.g., Newton
-     * @param lengthUnit the unit of length for the energy unit, e.g., Meter
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param forceUnit ForceUnit; the unit of force for the energy unit, e.g., Newton
+     * @param lengthUnit LengthUnit; the unit of length for the energy unit, e.g., Meter
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public EnergyUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String name, final String abbreviation,
             final UnitSystem unitSystem)
@@ -287,13 +291,16 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
 
     /**
      * Build an EnergyUnit with a conversion factor to another EnergyUnit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit EnergyUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private EnergyUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final EnergyUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
@@ -307,11 +314,12 @@ public class EnergyUnit extends LinearUnit<EnergyUnit>
 
     /**
      * Build a user-defined EnergyUnit with a conversion factor to another EnergyUnit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit EnergyUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public EnergyUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final EnergyUnit referenceUnit,
             final double scaleFactorToReferenceUnit)

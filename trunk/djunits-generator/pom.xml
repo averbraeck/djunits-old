@@ -351,6 +351,11 @@
       <artifactId>djunits</artifactId>
       <version>${djunits.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.javaparser</groupId>
+      <artifactId>javaparser-core</artifactId>
+      <version>3.6.25</version>
+    </dependency>
   </dependencies>
 
   <repositories>

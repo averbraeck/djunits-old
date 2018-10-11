@@ -47,7 +47,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * Construct a new Absolute Mutable FloatVector.
      * @param values float[]; the values of the entries in the new Absolute Mutable FloatVector
      * @param unit AU; the unit of the new Absolute Mutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractMutableFloatVectorAbs(final float[] values, final AU unit, final StorageType storageType) throws ValueException
@@ -57,9 +57,9 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Construct a new Absolute Mutable FloatVector.
-     * @param values List; the values of the entries in the new Absolute Mutable FloatVector
+     * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Mutable FloatVector
      * @param unit AU; the unit of the new Absolute Mutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractMutableFloatVectorAbs(final List<Float> values, final AU unit, final StorageType storageType) throws ValueException
@@ -69,8 +69,8 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Construct a new Absolute Mutable FloatVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values S[]; the values of the entries in the new Absolute Mutable FloatVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractMutableFloatVectorAbs(final S[] values, final StorageType storageType) throws ValueException
@@ -80,8 +80,8 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Construct a new Absolute Mutable FloatVector.
-     * @param values List; the values of the entries in the new Absolute Mutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;S&gt;; the values of the entries in the new Absolute Mutable FloatVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractMutableFloatVectorAbs(final List<S> values, final StorageType storageType) throws ValueException
@@ -91,9 +91,9 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Construct a new Absolute Mutable FloatVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable FloatVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, S&gt;; the values of the entries in the new Absolute Sparse Mutable FloatVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractMutableFloatVectorAbs(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
@@ -104,10 +104,10 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Construct a new Absolute Mutable FloatVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatVector
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Absolute Sparse Mutable FloatVector
      * @param unit AU; the unit of the new Absolute Sparse Mutable FloatVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractMutableFloatVectorAbs(final SortedMap<Integer, Float> values, final AU unit, final int length,
@@ -118,8 +118,8 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Construct a new Absolute Mutable FloatVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit AU; the unit
      */
     AbstractMutableFloatVectorAbs(final FloatVectorData data, final AU unit)
     {
@@ -180,7 +180,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Increment the value by the supplied value and return the changed vector.
-     * @param increment FloatVector.Rel&lt;U&gt;; amount by which the value is incremented
+     * @param increment R; amount by which the value is incremented
      * @return the changed MutableFloatVector.Rel&lt;U&gt;
      * @throws ValueException when the size of increment is not identical to the size of this
      */
@@ -194,7 +194,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Increment the value by the supplied value and return the changed vector.
-     * @param increment FloatScalar.Rel&lt;U&gt;; amount by which the value is incremented
+     * @param increment S; amount by which the value is incremented
      * @return the changed MutableFloatVector.Rel&lt;U&gt;
      */
     public final MA incrementBy(final S increment)
@@ -204,7 +204,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Increment the value by the supplied constant and return the changed vector.
-     * @param increment amount by which the value is incremented
+     * @param increment float; amount by which the value is incremented
      * @return the changed MutableFloatVector.Rel&lt;U&gt;
      */
     @SuppressWarnings("unchecked")
@@ -217,7 +217,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Decrement the value by the supplied value and return the changed vector.
-     * @param decrement FloatVector.Rel&lt;U&gt;; amount by which the value is decremented
+     * @param decrement R; amount by which the value is decremented
      * @return the changed MutableFloatVector.Rel&lt;U&gt;
      * @throws ValueException when the size of increment is not identical to the size of this
      */
@@ -231,7 +231,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Decrement the value by the supplied value and return the changed vector.
-     * @param decrement FloatScalar.Rel&lt;U&gt;; amount by which the value is decremented
+     * @param decrement S; amount by which the value is decremented
      * @return the changed MutableFloatVector.Rel&lt;U&gt;
      */
     public final MA decrementBy(final S decrement)
@@ -241,7 +241,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Decrement the value by the supplied constant and return the changed vector.
-     * @param decrement amount by which the value is decremented
+     * @param decrement float; amount by which the value is decremented
      * @return the changed MutableFloatVector.Rel&lt;U&gt;
      */
     @SuppressWarnings("unchecked")
@@ -273,7 +273,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Multiply the values in the vector by the supplied values and return the changed vector.
-     * @param factors FloatVector.Rel&lt;U&gt;; amounts by which the value is multiplied
+     * @param factors R; amounts by which the value is multiplied
      * @return the changed MutableFloatVector.Rel&lt;U&gt;
      * @throws ValueException when the size of the factors is not identical to the size of this
      */
@@ -293,7 +293,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
      * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a sparse
      * dataset if necessary.
-     * @param floatFunction the function to apply
+     * @param floatFunction FloatFunction; the function to apply
      */
     public final void assign(final FloatFunction floatFunction)
     {
@@ -374,7 +374,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
     /**
      * Replace the value at index by the supplied value which is in a compatible unit.
      * @param index int; index of the value to replace
-     * @param value FloatScalar&lt;U&gt;; the strongly typed value to store
+     * @param value S; the strongly typed value to store
      * @throws ValueException when index out of range (index &lt; 0 or index &gt;= size())
      */
     public final void set(final int index, final S value) throws ValueException

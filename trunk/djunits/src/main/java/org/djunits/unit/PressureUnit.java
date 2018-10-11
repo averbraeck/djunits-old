@@ -120,14 +120,16 @@ public class PressureUnit extends LinearUnit<PressureUnit>
 
     /**
      * Construct a pressure unit from mass, length and time units, e.g., a Pascal = kg/m.s^2.
-     * @param massUnit the unit of mass for the pressure unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the pressure unit, e.g., meter
-     * @param durationUnit the unit of time for the pressure unit, e.g., second
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param massUnit MassUnit; the unit of mass for the pressure unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the pressure unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the pressure unit, e.g., second
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private PressureUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
@@ -144,12 +146,12 @@ public class PressureUnit extends LinearUnit<PressureUnit>
 
     /**
      * Construct a user-defined pressure unit from mass, length and time units, e.g., a Pascal = kg/m.s^2.
-     * @param massUnit the unit of mass for the pressure unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the pressure unit, e.g., meter
-     * @param durationUnit the unit of time for the pressure unit, e.g., second
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param massUnit MassUnit; the unit of mass for the pressure unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the pressure unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the pressure unit, e.g., second
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public PressureUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
             final String name, final String abbreviation, final UnitSystem unitSystem)
@@ -159,13 +161,15 @@ public class PressureUnit extends LinearUnit<PressureUnit>
 
     /**
      * Construct a pressure unit from force and area units, e.g. a Pascal = N/m^2.
-     * @param forceUnit the unit of force for the pressure unit, e.g., Newton
-     * @param areaUnit the unit of area for the pressure unit, e.g., m^2
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param forceUnit ForceUnit; the unit of force for the pressure unit, e.g., Newton
+     * @param areaUnit AreaUnit; the unit of area for the pressure unit, e.g., m^2
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private PressureUnit(final ForceUnit forceUnit, final AreaUnit areaUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
@@ -179,11 +183,11 @@ public class PressureUnit extends LinearUnit<PressureUnit>
 
     /**
      * Construct a user-defined pressure unit from force and area units, e.g. a Pascal = N/m^2.
-     * @param forceUnit the unit of force for the pressure unit, e.g., Newton
-     * @param areaUnit the unit of area for the pressure unit, e.g., m^2
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param forceUnit ForceUnit; the unit of force for the pressure unit, e.g., Newton
+     * @param areaUnit AreaUnit; the unit of area for the pressure unit, e.g., m^2
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public PressureUnit(final ForceUnit forceUnit, final AreaUnit areaUnit, final String name, final String abbreviation,
             final UnitSystem unitSystem)
@@ -193,13 +197,16 @@ public class PressureUnit extends LinearUnit<PressureUnit>
 
     /**
      * Build a PressureUnit with a conversion factor to another PressureUnit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit PressureUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private PressureUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final PressureUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
@@ -213,11 +220,12 @@ public class PressureUnit extends LinearUnit<PressureUnit>
 
     /**
      * Build a user-defined PressureUnit with a conversion factor to another PressureUnit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit PressureUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public PressureUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final PressureUnit referenceUnit, final double scaleFactorToReferenceUnit)

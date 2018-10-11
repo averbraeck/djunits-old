@@ -36,8 +36,8 @@ public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractF
 
     /**
      * Construct a new FloatVector.
-     * @param unit the unit
-     * @param data an internal data object
+     * @param unit U; the unit
+     * @param data FloatVectorData; an internal data object
      */
     AbstractFloatVector(final U unit, final FloatVectorData data)
     {
@@ -64,7 +64,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractF
 
     /**
      * Retrieve a value from the vector.
-     * @param index the index to retrieve the value at
+     * @param index int; the index to retrieve the value at
      * @return the value as a FloatScalar
      * @throws ValueException in case index is out of bounds
      */
@@ -214,7 +214,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractF
 
     /**
      * Centralized size equality check.
-     * @param other FloatVector&lt;?&gt;; other FloatVector
+     * @param other AbstractFloatVector&lt;U, ?&gt;; other FloatVector
      * @throws ValueException when other is null, or vectors have unequal size
      */
     protected final void checkSize(final AbstractFloatVector<U, ?> other) throws ValueException

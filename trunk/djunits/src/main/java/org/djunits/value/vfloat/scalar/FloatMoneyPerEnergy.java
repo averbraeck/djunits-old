@@ -35,8 +35,8 @@ public class FloatMoneyPerEnergy extends AbstractFloatScalarRel<MoneyPerEnergyUn
 
     /**
      * Construct FloatMoneyPerEnergy scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit MoneyPerEnergyUnit; unit for the float value
      */
     public FloatMoneyPerEnergy(final float value, final MoneyPerEnergyUnit unit)
     {
@@ -45,7 +45,7 @@ public class FloatMoneyPerEnergy extends AbstractFloatScalarRel<MoneyPerEnergyUn
 
     /**
      * Construct FloatMoneyPerEnergy scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatMoneyPerEnergy; Scalar from which to construct this instance
      */
     public FloatMoneyPerEnergy(final FloatMoneyPerEnergy value)
     {
@@ -54,8 +54,8 @@ public class FloatMoneyPerEnergy extends AbstractFloatScalarRel<MoneyPerEnergyUn
 
     /**
      * Construct FloatMoneyPerEnergy scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit MoneyPerEnergyUnit; unit for the resulting float value
      */
     public FloatMoneyPerEnergy(final double value, final MoneyPerEnergyUnit unit)
     {
@@ -71,9 +71,9 @@ public class FloatMoneyPerEnergy extends AbstractFloatScalarRel<MoneyPerEnergyUn
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatMoneyPerEnergy; the low value
+     * @param one FloatMoneyPerEnergy; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatMoneyPerEnergy interpolate(final FloatMoneyPerEnergy zero, final FloatMoneyPerEnergy one,
@@ -84,8 +84,8 @@ public class FloatMoneyPerEnergy extends AbstractFloatScalarRel<MoneyPerEnergyUn
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatMoneyPerEnergy; the first scalar
+     * @param r2 FloatMoneyPerEnergy; the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static FloatMoneyPerEnergy max(final FloatMoneyPerEnergy r1, final FloatMoneyPerEnergy r2)
@@ -95,9 +95,9 @@ public class FloatMoneyPerEnergy extends AbstractFloatScalarRel<MoneyPerEnergyUn
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatMoneyPerEnergy; the first scalar
+     * @param r2 FloatMoneyPerEnergy; the second scalar
+     * @param rn FloatMoneyPerEnergy...; the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static FloatMoneyPerEnergy max(final FloatMoneyPerEnergy r1, final FloatMoneyPerEnergy r2,
@@ -116,8 +116,8 @@ public class FloatMoneyPerEnergy extends AbstractFloatScalarRel<MoneyPerEnergyUn
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatMoneyPerEnergy; the first scalar
+     * @param r2 FloatMoneyPerEnergy; the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static FloatMoneyPerEnergy min(final FloatMoneyPerEnergy r1, final FloatMoneyPerEnergy r2)
@@ -127,9 +127,9 @@ public class FloatMoneyPerEnergy extends AbstractFloatScalarRel<MoneyPerEnergyUn
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatMoneyPerEnergy; the first scalar
+     * @param r2 FloatMoneyPerEnergy; the second scalar
+     * @param rn FloatMoneyPerEnergy...; the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static FloatMoneyPerEnergy min(final FloatMoneyPerEnergy r1, final FloatMoneyPerEnergy r2,
@@ -148,7 +148,7 @@ public class FloatMoneyPerEnergy extends AbstractFloatScalarRel<MoneyPerEnergyUn
 
     /**
      * Calculate the division of FloatMoneyPerEnergy and FloatMoneyPerEnergy, which results in a FloatDimensionless scalar.
-     * @param v FloatMoneyPerEnergy scalar
+     * @param v FloatMoneyPerEnergy; FloatMoneyPerEnergy scalar
      * @return FloatDimensionless scalar as a division of FloatMoneyPerEnergy and FloatMoneyPerEnergy
      */
     public final FloatDimensionless divideBy(final FloatMoneyPerEnergy v)
@@ -158,7 +158,7 @@ public class FloatMoneyPerEnergy extends AbstractFloatScalarRel<MoneyPerEnergyUn
 
     /**
      * Calculate the multiplication of FloatMoneyPerEnergy and FloatEnergy, which results in a FloatMoney scalar.
-     * @param v FloatMoneyPerEnergy scalar
+     * @param v FloatEnergy; FloatMoneyPerEnergy scalar
      * @return FloatMoney scalar as a multiplication of FloatMoneyPerEnergy and FloatEnergy
      */
     public final FloatMoney multiplyBy(final FloatEnergy v)

@@ -35,8 +35,8 @@ public class MoneyPerMass extends AbstractDoubleScalarRel<MoneyPerMassUnit, Mone
 
     /**
      * Construct MoneyPerMass scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit MoneyPerMassUnit; unit for the double value
      */
     public MoneyPerMass(final double value, final MoneyPerMassUnit unit)
     {
@@ -45,7 +45,7 @@ public class MoneyPerMass extends AbstractDoubleScalarRel<MoneyPerMassUnit, Mone
 
     /**
      * Construct MoneyPerMass scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value MoneyPerMass; Scalar from which to construct this instance
      */
     public MoneyPerMass(final MoneyPerMass value)
     {
@@ -61,9 +61,9 @@ public class MoneyPerMass extends AbstractDoubleScalarRel<MoneyPerMassUnit, Mone
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero MoneyPerMass; the low value
+     * @param one MoneyPerMass; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static MoneyPerMass interpolate(final MoneyPerMass zero, final MoneyPerMass one, final double ratio)
@@ -73,8 +73,8 @@ public class MoneyPerMass extends AbstractDoubleScalarRel<MoneyPerMassUnit, Mone
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 MoneyPerMass; the first scalar
+     * @param r2 MoneyPerMass; the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static MoneyPerMass max(final MoneyPerMass r1, final MoneyPerMass r2)
@@ -84,9 +84,9 @@ public class MoneyPerMass extends AbstractDoubleScalarRel<MoneyPerMassUnit, Mone
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 MoneyPerMass; the first scalar
+     * @param r2 MoneyPerMass; the second scalar
+     * @param rn MoneyPerMass...; the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static MoneyPerMass max(final MoneyPerMass r1, final MoneyPerMass r2, final MoneyPerMass... rn)
@@ -104,8 +104,8 @@ public class MoneyPerMass extends AbstractDoubleScalarRel<MoneyPerMassUnit, Mone
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 MoneyPerMass; the first scalar
+     * @param r2 MoneyPerMass; the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static MoneyPerMass min(final MoneyPerMass r1, final MoneyPerMass r2)
@@ -115,9 +115,9 @@ public class MoneyPerMass extends AbstractDoubleScalarRel<MoneyPerMassUnit, Mone
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 MoneyPerMass; the first scalar
+     * @param r2 MoneyPerMass; the second scalar
+     * @param rn MoneyPerMass...; the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static MoneyPerMass min(final MoneyPerMass r1, final MoneyPerMass r2, final MoneyPerMass... rn)
@@ -135,7 +135,7 @@ public class MoneyPerMass extends AbstractDoubleScalarRel<MoneyPerMassUnit, Mone
 
     /**
      * Calculate the division of MoneyPerMass and MoneyPerMass, which results in a Dimensionless scalar.
-     * @param v MoneyPerMass scalar
+     * @param v MoneyPerMass; MoneyPerMass scalar
      * @return Dimensionless scalar as a division of MoneyPerMass and MoneyPerMass
      */
     public final Dimensionless divideBy(final MoneyPerMass v)
@@ -145,7 +145,7 @@ public class MoneyPerMass extends AbstractDoubleScalarRel<MoneyPerMassUnit, Mone
 
     /**
      * Calculate the multiplication of MoneyPerMass and Mass, which results in a Money scalar.
-     * @param v MoneyPerMass scalar
+     * @param v Mass; MoneyPerMass scalar
      * @return Money scalar as a multiplication of MoneyPerMass and Mass
      */
     public final Money multiplyBy(final Mass v)

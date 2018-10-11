@@ -57,8 +57,8 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Construct LinearDensity scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit LinearDensityUnit; unit for the double value
      */
     public LinearDensity(final double value, final LinearDensityUnit unit)
     {
@@ -67,7 +67,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Construct LinearDensity scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value LinearDensity; Scalar from which to construct this instance
      */
     public LinearDensity(final LinearDensity value)
     {
@@ -83,7 +83,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Construct LinearDensity scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final LinearDensity createSI(final double value)
@@ -93,9 +93,9 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero LinearDensity; the low value
+     * @param one LinearDensity; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static LinearDensity interpolate(final LinearDensity zero, final LinearDensity one, final double ratio)
@@ -105,8 +105,8 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 LinearDensity; the first scalar
+     * @param r2 LinearDensity; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static LinearDensity max(final LinearDensity r1, final LinearDensity r2)
@@ -116,9 +116,9 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 LinearDensity; the first scalar
+     * @param r2 LinearDensity; the second scalar
+     * @param rn LinearDensity...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static LinearDensity max(final LinearDensity r1, final LinearDensity r2, final LinearDensity... rn)
@@ -136,8 +136,8 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 LinearDensity; the first scalar
+     * @param r2 LinearDensity; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static LinearDensity min(final LinearDensity r1, final LinearDensity r2)
@@ -147,9 +147,9 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 LinearDensity; the first scalar
+     * @param r2 LinearDensity; the second scalar
+     * @param rn LinearDensity...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static LinearDensity min(final LinearDensity r1, final LinearDensity r2, final LinearDensity... rn)
@@ -167,7 +167,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
-     * @param v LinearDensity scalar
+     * @param v LinearDensity; LinearDensity scalar
      * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
      */
     public final Dimensionless divideBy(final LinearDensity v)
@@ -177,7 +177,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
-     * @param v LinearDensity scalar
+     * @param v Area; LinearDensity scalar
      * @return Length scalar as a multiplication of LinearDensity and Area
      */
     public final Length multiplyBy(final Area v)
@@ -187,7 +187,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
-     * @param v LinearDensity scalar
+     * @param v Energy; LinearDensity scalar
      * @return Force scalar as a multiplication of LinearDensity and Energy
      */
     public final Force multiplyBy(final Energy v)
@@ -197,7 +197,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
-     * @param v LinearDensity scalar
+     * @param v Speed; LinearDensity scalar
      * @return Frequency scalar as a multiplication of LinearDensity and Speed
      */
     public final Frequency multiplyBy(final Speed v)
@@ -207,7 +207,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Money, which results in a MoneyPerLength scalar.
-     * @param v LinearDensity scalar
+     * @param v Money; LinearDensity scalar
      * @return MoneyPerLength scalar as a multiplication of LinearDensity and Money
      */
     public final MoneyPerLength multiplyBy(final Money v)

@@ -21,7 +21,7 @@ public class FloatVectorDataDense extends FloatVectorData
 {
     /**
      * Create a vector with dense data.
-     * @param vectorSI the data to store
+     * @param vectorSI float[]; the data to store
      */
     public FloatVectorDataDense(final float[] vectorSI)
     {
@@ -31,7 +31,7 @@ public class FloatVectorDataDense extends FloatVectorData
     }
 
     /**
-     * @param floatFunction the function to apply on the (mutable) data elements
+     * @param floatFunction FloatFunction; the function to apply on the (mutable) data elements
      */
     public final void assign(final FloatFunction floatFunction)
     {

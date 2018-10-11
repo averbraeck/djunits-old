@@ -28,8 +28,8 @@ public class MutableDimensionlessMatrix extends
     /**
      * Construct a new Relative Immutable Double DimensionlessMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double DimensionlessMatrix
-     * @param unit U; the unit of the new Relative Immutable Double DimensionlessMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DimensionlessUnit; the unit of the new Relative Immutable Double DimensionlessMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableDimensionlessMatrix(final double[][] values, final DimensionlessUnit unit, final StorageType storageType)
@@ -40,9 +40,8 @@ public class MutableDimensionlessMatrix extends
 
     /**
      * Construct a new Relative Immutable Double DimensionlessMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            DimensionlessMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Dimensionless[][]; the values of the entries in the new Relative Immutable Double DimensionlessMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableDimensionlessMatrix(final Dimensionless[][] values, final StorageType storageType) throws ValueException
@@ -51,8 +50,8 @@ public class MutableDimensionlessMatrix extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit DimensionlessUnit; the unit
      */
     MutableDimensionlessMatrix(final DoubleMatrixData data, final DimensionlessUnit unit)
     {

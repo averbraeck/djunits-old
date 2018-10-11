@@ -142,12 +142,14 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
 
     /**
      * Define a LinearDensityUnit based on length. You can define unit like "per meter" here.
-     * @param lengthUnit the unit of length for the linear density unit, e.g., meter
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param lengthUnit LengthUnit; the unit of length for the linear density unit, e.g., meter
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private LinearDensityUnit(final LengthUnit lengthUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
@@ -159,10 +161,10 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
 
     /**
      * Define a user-defined LinearDensityUnit based on length. You can define unit like "per furlong" here.
-     * @param lengthUnit the unit of length for the linear density unit, e.g., meter
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param lengthUnit LengthUnit; the unit of length for the linear density unit, e.g., meter
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public LinearDensityUnit(final LengthUnit lengthUnit, final String name, final String abbreviation,
             final UnitSystem unitSystem)
@@ -172,13 +174,16 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
 
     /**
      * Build a LinearDensityUnit with a conversion factor to another LinearDensityUnit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit LinearDensityUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private LinearDensityUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
             final UnitSystem unitSystem, final LinearDensityUnit referenceUnit, final double scaleFactorToReferenceUnit,
@@ -191,11 +196,12 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
 
     /**
      * Build a user-defined LinearDensityUnit with a conversion factor to another LinearDensityUnit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit LinearDensityUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public LinearDensityUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final LinearDensityUnit referenceUnit, final double scaleFactorToReferenceUnit)

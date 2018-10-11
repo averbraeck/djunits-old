@@ -52,12 +52,14 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
 
     /**
      * Build a money per volume unit from a money unit and an volume unit.
-     * @param moneyUnit the unit of money for the money per volume unit, e.g., EUR
-     * @param volumeUnit the unit of volume for the money per volume unit, e.g., m^3
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param moneyUnit MoneyUnit; the unit of money for the money per volume unit, e.g., EUR
+     * @param volumeUnit VolumeUnit; the unit of volume for the money per volume unit, e.g., m^3
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private MoneyPerVolumeUnit(final MoneyUnit moneyUnit, final VolumeUnit volumeUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final boolean standardUnit)
@@ -70,10 +72,10 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
 
     /**
      * Build a user-defined money per volume unit from a money unit and an volume unit.
-     * @param moneyUnit the unit of money for the money per volume unit, e.g., EUR
-     * @param volumeUnit the unit of volume for the money per volume unit, e.g., m^3
-     * @param name the key to the locale file for the long name of the unit
-     * @param abbreviation the key to the locale file for the abbreviation of the unit
+     * @param moneyUnit MoneyUnit; the unit of money for the money per volume unit, e.g., EUR
+     * @param volumeUnit VolumeUnit; the unit of volume for the money per volume unit, e.g., m^3
+     * @param name String; the key to the locale file for the long name of the unit
+     * @param abbreviation String; the key to the locale file for the abbreviation of the unit
      */
     public MoneyPerVolumeUnit(final MoneyUnit moneyUnit, final VolumeUnit volumeUnit, final String name,
             final String abbreviation)
@@ -83,12 +85,15 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
 
     /**
      * Build a MoneyPerVolumeUnit unit based on another MoneyPerVolumeUnit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param referenceUnit MoneyPerVolumeUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private MoneyPerVolumeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
             final MoneyPerVolumeUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
@@ -101,10 +106,11 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
 
     /**
      * Build a user-defined MoneyPerVolumeUnit with a conversion factor to another MoneyPerVolumeUnit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param referenceUnit MoneyPerVolumeUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public MoneyPerVolumeUnit(final String name, final String abbreviation, final MoneyPerVolumeUnit referenceUnit,
             final double scaleFactorToReferenceUnit)
@@ -130,7 +136,7 @@ public class MoneyPerVolumeUnit extends LinearUnit<MoneyPerVolumeUnit>
 
     /**
      * Set the standard MoneyPerVolumeUnit in case the standard MoneyUnit changes, as the standard money unit is flexible.
-     * @param standardMoneyUnit the new standard money unit.
+     * @param standardMoneyUnit MoneyUnit; the new standard money unit.
      */
     protected static void setStandardUnit(final MoneyUnit standardMoneyUnit)
     {

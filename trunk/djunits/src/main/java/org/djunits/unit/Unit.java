@@ -110,11 +110,13 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      * where name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined unit where the
      * localization files do not have an entry. If standardUnit is true, a UnitException is silently ignored; if standardUnit is
      * false a UnitException is thrown as a RunTimeException.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     protected Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final boolean standardUnit)
@@ -155,12 +157,14 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      * standard unit where name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined
      * unit where the localization files do not have an entry. If standardUnit is true, a UnitException is silently ignored; if
      * standardUnit is false a UnitException is thrown as a RunTimeException.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param scale the conversion scale to use for this unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param scale Scale; the conversion scale to use for this unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     protected Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final Scale scale, final boolean standardUnit)
@@ -207,7 +211,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
 
     /**
      * Add a unit to the overview collection of existing units, and resolve the coefficients.
-     * @param unit the unit to add. It will be stored in a set belonging to the simple class name String, e.g. "ForceUnit".
+     * @param unit Unit&lt;U&gt;; the unit to add. It will be stored in a set belonging to the simple class name String, e.g.
+     *            "ForceUnit".
      * @throws UnitException when parsing or normalizing the SI coefficient string fails.
      */
     private void addUnit(final Unit<U> unit) throws UnitException
@@ -255,7 +260,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     /**
      * Return a set of defined units for a given unit type.
      * @param <V> the unit type to use in this method.
-     * @param unitClass the class for which the units are requested, e.g. ForceUnit.class
+     * @param unitClass Class&lt;V&gt;; the class for which the units are requested, e.g. ForceUnit.class
      * @return the set of defined units belonging to the provided class. The empty set will be returned in case the unit type
      *         does not have any units.
      */
@@ -389,7 +394,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * @param normalizedSICoefficientsString the normalized string (e.g., kg.m/s2) to look up
+     * @param normalizedSICoefficientsString String; the normalized string (e.g., kg.m/s2) to look up
      * @return a set with the Units belonging to this string, or an empty set when it does not exist
      */
     public static Set<Unit<?>> lookupUnitWithSICoefficients(final String normalizedSICoefficientsString)
@@ -427,7 +432,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * @param normalizedSICoefficientsString the normalized string (e.g., kg.m/s2) to look up
+     * @param normalizedSICoefficientsString String; the normalized string (e.g., kg.m/s2) to look up
      * @return the Unit belonging to this string, or a new unit when it does not yet exist
      */
     public static SIUnit lookupOrCreateSIUnitWithSICoefficients(final String normalizedSICoefficientsString)
@@ -521,7 +526,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     /**
      * Test if two units are the same, except for the name and abbreviation. This means for instance that for the MassUnits
      * METRIC_TON and MEGAGRAM (both 1000 kg) equals(...) will yield false, but equalsIgnoreNaming will yield true.
-     * @param obj the object to compare with
+     * @param obj Object; the object to compare with
      * @return true if the two units are the same numerically, except for the naming and/or abbreviation
      */
     public abstract boolean equalsIgnoreNaming(Object obj);

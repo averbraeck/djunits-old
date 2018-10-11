@@ -24,8 +24,8 @@ public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, VolumeMatr
     /**
      * Construct a new Relative Immutable Double VolumeMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double VolumeMatrix
-     * @param unit U; the unit of the new Relative Immutable Double VolumeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit VolumeUnit; the unit of the new Relative Immutable Double VolumeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public VolumeMatrix(final double[][] values, final VolumeUnit unit, final StorageType storageType) throws ValueException
@@ -35,8 +35,8 @@ public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, VolumeMatr
 
     /**
      * Construct a new Relative Immutable Double VolumeMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double VolumeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Volume[][]; the values of the entries in the new Relative Immutable Double VolumeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public VolumeMatrix(final Volume[][] values, final StorageType storageType) throws ValueException
@@ -45,8 +45,8 @@ public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, VolumeMatr
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit VolumeUnit; the unit
      */
     VolumeMatrix(final DoubleMatrixData data, final VolumeUnit unit)
     {

@@ -28,8 +28,8 @@ public class MutableFloatElectricalPotentialVector extends AbstractMutableFloatV
     /**
      * Construct a new Relative Immutable Float ElectricalPotentialVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float ElectricalPotentialVector
-     * @param unit U; the unit of the new Relative Immutable Float ElectricalPotentialVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalPotentialUnit; the unit of the new Relative Immutable Float ElectricalPotentialVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalPotentialVector(final float[] values, final ElectricalPotentialUnit unit,
@@ -40,9 +40,9 @@ public class MutableFloatElectricalPotentialVector extends AbstractMutableFloatV
 
     /**
      * Construct a new Relative Immutable Float ElectricalPotentialVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float ElectricalPotentialVector
-     * @param unit U; the unit of the new Relative Immutable Float ElectricalPotentialVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float ElectricalPotentialVector
+     * @param unit ElectricalPotentialUnit; the unit of the new Relative Immutable Float ElectricalPotentialVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalPotentialVector(final List<Float> values, final ElectricalPotentialUnit unit,
@@ -53,9 +53,9 @@ public class MutableFloatElectricalPotentialVector extends AbstractMutableFloatV
 
     /**
      * Construct a new Relative Immutable Float ElectricalPotentialVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalPotential[]; the values of the entries in the new Relative Immutable Float
      *            ElectricalPotentialVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalPotentialVector(final FloatElectricalPotential[] values, final StorageType storageType)
@@ -66,8 +66,9 @@ public class MutableFloatElectricalPotentialVector extends AbstractMutableFloatV
 
     /**
      * Construct a new Relative Immutable Float ElectricalPotentialVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float ElectricalPotentialVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatElectricalPotential&gt;; the values of the entries in the new Relative Immutable Float
+     *            ElectricalPotentialVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalPotentialVector(final List<FloatElectricalPotential> values, final StorageType storageType)
@@ -78,10 +79,10 @@ public class MutableFloatElectricalPotentialVector extends AbstractMutableFloatV
 
     /**
      * Construct a new Relative Immutable Float ElectricalPotentialVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            ElectricalPotentialVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatElectricalPotential&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Float ElectricalPotentialVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalPotentialVector(final SortedMap<Integer, FloatElectricalPotential> values, final int length,
@@ -92,10 +93,11 @@ public class MutableFloatElectricalPotentialVector extends AbstractMutableFloatV
 
     /**
      * Construct a new Relative Immutable Float ElectricalPotentialVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float ElectricalPotentialVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float ElectricalPotentialVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            ElectricalPotentialVector
+     * @param unit ElectricalPotentialUnit; the unit of the new Relative Sparse Mutable Float ElectricalPotentialVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalPotentialVector(final SortedMap<Integer, Float> values, final ElectricalPotentialUnit unit,
@@ -105,8 +107,8 @@ public class MutableFloatElectricalPotentialVector extends AbstractMutableFloatV
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit ElectricalPotentialUnit; the unit
      */
     MutableFloatElectricalPotentialVector(final FloatVectorData data, final ElectricalPotentialUnit unit)
     {

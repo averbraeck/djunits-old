@@ -38,9 +38,9 @@ public class AngleSolidUnit extends LinearUnit<AngleSolidUnit>
 
     /**
      * Build a standard unit.
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param nameKey String; the key to the locale file for the long name of the unit
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     private AngleSolidUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
     {
@@ -49,13 +49,16 @@ public class AngleSolidUnit extends LinearUnit<AngleSolidUnit>
 
     /**
      * Construct a derived unit as a conversion from another unit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit AngleSolidUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private AngleSolidUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final AngleSolidUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
@@ -66,11 +69,12 @@ public class AngleSolidUnit extends LinearUnit<AngleSolidUnit>
 
     /**
      * Build a user-defined unit with a conversion factor to another unit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit AngleSolidUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public AngleSolidUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final AngleSolidUnit referenceUnit, final double scaleFactorToReferenceUnit)

@@ -60,14 +60,16 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
 
     /**
      * Create a torque unit from mass, length and time units.
-     * @param massUnit the unit of mass for the torque unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the torque unit, e.g., meter
-     * @param durationUnit the unit of time for the torque unit, e.g., second
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param massUnit MassUnit; the unit of mass for the torque unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the torque unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the torque unit, e.g., second
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private TorqueUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
@@ -84,12 +86,12 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
 
     /**
      * Create a user-defined torque unit from mass, length and time units.
-     * @param massUnit the unit of mass for the torque unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the torque unit, e.g., meter
-     * @param durationUnit the unit of time for the torque unit, e.g., second
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param massUnit MassUnit; the unit of mass for the torque unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the torque unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the torque unit, e.g., second
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public TorqueUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
@@ -99,13 +101,15 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
 
     /**
      * Create a torque unit from force and length units.
-     * @param forceUnit the unit of force for the torque unit, e.g., Newton
-     * @param lengthUnit the unit of length for the torque unit, e.g., meter
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param forceUnit ForceUnit; the unit of force for the torque unit, e.g., Newton
+     * @param lengthUnit LengthUnit; the unit of length for the torque unit, e.g., meter
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private TorqueUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
@@ -119,11 +123,11 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
 
     /**
      * Create a user-defined torque unit from force and length units.
-     * @param forceUnit the unit of force for the torque unit, e.g., Newton
-     * @param lengthUnit the unit of length for the torque unit, e.g., meter
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param forceUnit ForceUnit; the unit of force for the torque unit, e.g., Newton
+     * @param lengthUnit LengthUnit; the unit of length for the torque unit, e.g., meter
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public TorqueUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String name, final String abbreviation,
             final UnitSystem unitSystem)
@@ -133,13 +137,16 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
 
     /**
      * Construct a torque unit based on another torque unit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit TorqueUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private TorqueUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final TorqueUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
@@ -153,11 +160,12 @@ public class TorqueUnit extends LinearUnit<TorqueUnit>
 
     /**
      * Build a user-defined unit with a conversion factor to another unit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit TorqueUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public TorqueUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final TorqueUnit referenceUnit,
             final double scaleFactorToReferenceUnit)

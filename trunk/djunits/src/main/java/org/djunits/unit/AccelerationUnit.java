@@ -87,13 +87,15 @@ public class AccelerationUnit extends LinearUnit<AccelerationUnit>
 
     /**
      * Define acceleration unit based on length and time. You can define units like meter/second^2 here.
-     * @param lengthUnit the unit of length for the acceleration unit, e.g., meter
-     * @param durationUnit the unit of time for the acceleration unit, e.g., second
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param lengthUnit LengthUnit; the unit of length for the acceleration unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the acceleration unit, e.g., second
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private AccelerationUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
@@ -106,11 +108,11 @@ public class AccelerationUnit extends LinearUnit<AccelerationUnit>
 
     /**
      * Define user defined acceleration unit based on length and time. You can define units like meter/second^2 here.
-     * @param lengthUnit the unit of length for the acceleration unit, e.g., meter
-     * @param durationUnit the unit of time for the acceleration unit, e.g., second
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param lengthUnit LengthUnit; the unit of length for the acceleration unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the acceleration unit, e.g., second
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public AccelerationUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
@@ -120,13 +122,15 @@ public class AccelerationUnit extends LinearUnit<AccelerationUnit>
 
     /**
      * Define acceleration unit based on speed and time. You can define units like (mile/hour)/second here.
-     * @param speedUnit the unit of speed for the acceleration unit, e.g., knot
-     * @param durationUnit the unit of time for the acceleration unit, e.g., second
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param speedUnit SpeedUnit; the unit of speed for the acceleration unit, e.g., knot
+     * @param durationUnit DurationUnit; the unit of time for the acceleration unit, e.g., second
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private AccelerationUnit(final SpeedUnit speedUnit, final DurationUnit durationUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
@@ -139,11 +143,11 @@ public class AccelerationUnit extends LinearUnit<AccelerationUnit>
 
     /**
      * Define user-defined acceleration unit based on speed and time. You can define units like (mile/hour)/second here.
-     * @param speedUnit the unit of speed for the acceleration unit, e.g., knot
-     * @param durationUnit the unit of time for the acceleration unit, e.g., second
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param speedUnit SpeedUnit; the unit of speed for the acceleration unit, e.g., knot
+     * @param durationUnit DurationUnit; the unit of time for the acceleration unit, e.g., second
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public AccelerationUnit(final SpeedUnit speedUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
@@ -153,13 +157,16 @@ public class AccelerationUnit extends LinearUnit<AccelerationUnit>
 
     /**
      * Build a unit with a conversion factor to another unit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit AccelerationUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private AccelerationUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
             final UnitSystem unitSystem, final AccelerationUnit referenceUnit, final double scaleFactorToReferenceUnit,
@@ -173,11 +180,12 @@ public class AccelerationUnit extends LinearUnit<AccelerationUnit>
 
     /**
      * Build a user-defined unit with a conversion factor to another unit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit AccelerationUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public AccelerationUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final AccelerationUnit referenceUnit, final double scaleFactorToReferenceUnit)

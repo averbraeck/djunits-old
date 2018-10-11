@@ -43,7 +43,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
      * Construct a new Absolute Mutable DoubleMatrix.
      * @param values double[][]; the values of the entries in the new Absolute Immutable DoubleMatrix
      * @param unit AU; the unit of the new Absolute Immutable DoubleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractMutableDoubleMatrixAbs(final double[][] values, final AU unit, final StorageType storageType) throws ValueException
@@ -54,7 +54,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
     /**
      * Construct a new Absolute Mutable DoubleMatrix.
      * @param values S[][]; the values of the entries in the new Absolute Immutable DoubleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractMutableDoubleMatrixAbs(final S[][] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Construct a new Absolute Mutable DoubleMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit AU; the unit
      */
     AbstractMutableDoubleMatrixAbs(final DoubleMatrixData data, final AU unit)
     {
@@ -125,7 +125,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Increment the value by the supplied value and return the changed matrix.
-     * @param increment DoubleMatrix.Rel&lt;U&gt;; amount by which the value is incremented
+     * @param increment R; amount by which the value is incremented
      * @return the changed MutableDoubleMatrix.Rel&lt;U&gt;
      * @throws ValueException when the size of increment is not identical to the size of this
      */
@@ -139,7 +139,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Increment the value by the supplied value and return the changed matrix.
-     * @param increment DoubleScalar.Rel&lt;U&gt;; amount by which the value is incremented
+     * @param increment S; amount by which the value is incremented
      * @return the changed MutableDoubleMatrix.Rel&lt;U&gt;
      */
     public final MA incrementBy(final S increment)
@@ -149,7 +149,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Increment the value by the supplied constant and return the changed matrix.
-     * @param increment amount by which the value is incremented
+     * @param increment double; amount by which the value is incremented
      * @return the changed MutableDoubleMatrix.Rel&lt;U&gt;
      */
     @SuppressWarnings("unchecked")
@@ -162,7 +162,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Decrement the value by the supplied value and return the changed matrix.
-     * @param decrement DoubleMatrix.Rel&lt;U&gt;; amount by which the value is decremented
+     * @param decrement R; amount by which the value is decremented
      * @return the changed MutableDoubleMatrix.Rel&lt;U&gt;
      * @throws ValueException when the size of increment is not identical to the size of this
      */
@@ -176,7 +176,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Decrement the value by the supplied value and return the changed matrix.
-     * @param decrement DoubleScalar.Rel&lt;U&gt;; amount by which the value is decremented
+     * @param decrement S; amount by which the value is decremented
      * @return the changed MutableDoubleMatrix.Rel&lt;U&gt;
      */
     public final MA decrementBy(final S decrement)
@@ -186,7 +186,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Decrement the value by the supplied constant and return the changed matrix.
-     * @param decrement amount by which the value is decremented
+     * @param decrement double; amount by which the value is decremented
      * @return the changed MutableDoubleMatrix.Rel&lt;U&gt;
      */
     @SuppressWarnings("unchecked")
@@ -218,7 +218,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Multiply the values in the matrix by the supplied values and return the changed matrix.
-     * @param factors DoubleMatrix.Rel&lt;U&gt;; amounts by which the value is multiplied
+     * @param factors R; amounts by which the value is multiplied
      * @return the changed MutableDoubleMatrix.Rel&lt;U&gt;
      * @throws ValueException when the size of the factors is not identical to the size of this
      */
@@ -238,7 +238,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
      * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
      * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a sparse
      * dataset if necessary.
-     * @param doubleFunction the function to apply
+     * @param doubleFunction DoubleFunction; the function to apply
      */
     public final void assign(final DoubleFunction doubleFunction)
     {
@@ -305,9 +305,9 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Set the value for a cell in the matrix.
-     * @param row the row
-     * @param column the column
-     * @param valueSI the value, expressed in the SI unit
+     * @param row int; the row
+     * @param column int; the column
+     * @param valueSI double; the value, expressed in the SI unit
      * @throws ValueException when the row/column is out of range
      */
     public final void setSI(final int row, final int column, final double valueSI) throws ValueException
@@ -319,9 +319,9 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Set the value for a cell in the matrix.
-     * @param row the row
-     * @param column the column
-     * @param value the value
+     * @param row int; the row
+     * @param column int; the column
+     * @param value S; the value
      * @throws ValueException when the row/column is out of range
      */
     public final void set(final int row, final int column, final S value) throws ValueException
@@ -331,10 +331,10 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Set the value for a cell in the matrix.
-     * @param row the row
-     * @param column the column
-     * @param value the value, expressed in the given unit
-     * @param valueUnit the unit of the value
+     * @param row int; the row
+     * @param column int; the column
+     * @param value double; the value, expressed in the given unit
+     * @param valueUnit AU; the unit of the value
      * @throws ValueException when the row/column is out of range
      */
     public final void setInUnit(final int row, final int column, final double value, final AU valueUnit) throws ValueException

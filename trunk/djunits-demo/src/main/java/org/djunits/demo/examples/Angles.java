@@ -40,10 +40,9 @@ public class Angles
                 + ") Note: percentage almost 0");
         Angle a3 = new Angle(-45, AngleUnit.DEGREE);
         Angle normA3 = AngleUtil.normalize(a3);
-        System.out
-                .println("  -45\u0090: " + a3 + " (" + a3.toString(AngleUnit.RADIAN) + ", " + a3.toString(AngleUnit.PERCENT)
-                        + ") -> " + normA3 + " (" + normA3.toString(AngleUnit.RADIAN) + ", "
-                        + normA3.toString(AngleUnit.PERCENT) + ")");
+        System.out.println(
+                "  -45\u0090: " + a3 + " (" + a3.toString(AngleUnit.RADIAN) + ", " + a3.toString(AngleUnit.PERCENT) + ") -> "
+                        + normA3 + " (" + normA3.toString(AngleUnit.RADIAN) + ", " + normA3.toString(AngleUnit.PERCENT) + ")");
         System.out.println("");
         System.out.println("Angles expressed as percentage are always between -inf and +inf (-90\u00b0 and +90\u00b0, "
                 + "-\u03c0/2 and +\u03c0/2); even after normalization.");
@@ -60,5 +59,5 @@ public class Angles
         System.out.println("1000%: " + a6 + " (" + a6.toString(AngleUnit.DEGREE) + ", " + a6.toString(AngleUnit.RADIAN)
                 + ") -> " + normA6 + " (" + normA6.toString(AngleUnit.DEGREE) + ", " + normA6.toString(AngleUnit.RADIAN) + ")");
     }
-    
+
 }

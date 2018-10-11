@@ -48,8 +48,8 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
 
     /**
      * Construct a new Relative Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the float value
-     * @param unit the unit
+     * @param value float; the float value
+     * @param unit U; the unit
      * @return R a new relative instance of the FloatScalar of the right type
      */
     public abstract R instantiateRel(float value, U unit);

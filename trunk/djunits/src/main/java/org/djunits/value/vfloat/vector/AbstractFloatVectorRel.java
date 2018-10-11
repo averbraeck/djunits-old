@@ -38,7 +38,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * Construct a new Relative Immutable FloatVector.
      * @param values float[]; the values of the entries in the new Relative Immutable FloatVector
      * @param unit U; the unit of the new Relative Immutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractFloatVectorRel(final float[] values, final U unit, final StorageType storageType) throws ValueException
@@ -48,9 +48,9 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
 
     /**
      * Construct a new Relative Immutable FloatVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatVector
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable FloatVector
      * @param unit U; the unit of the new Relative Immutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractFloatVectorRel(final List<Float> values, final U unit, final StorageType storageType) throws ValueException
@@ -60,8 +60,8 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
 
     /**
      * Construct a new Relative Immutable FloatVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values S[]; the values of the entries in the new Relative Immutable FloatVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractFloatVectorRel(final S[] values, final StorageType storageType) throws ValueException
@@ -71,8 +71,8 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
 
     /**
      * Construct a new Relative Immutable FloatVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;S&gt;; the values of the entries in the new Relative Immutable FloatVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractFloatVectorRel(final List<S> values, final StorageType storageType) throws ValueException
@@ -82,9 +82,9 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
 
     /**
      * Construct a new Relative Immutable FloatVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable FloatVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, S&gt;; the values of the entries in the new Relative Sparse Mutable FloatVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractFloatVectorRel(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
@@ -95,10 +95,10 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
 
     /**
      * Construct a new Relative Immutable FloatVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatVector
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable FloatVector
      * @param unit U; the unit of the new Relative Sparse Mutable FloatVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractFloatVectorRel(final SortedMap<Integer, Float> values, final U unit, final int length,
@@ -109,8 +109,8 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
 
     /**
      * Construct a new Relative Immutable FloatVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit U; the unit
      */
     AbstractFloatVectorRel(final FloatVectorData data, final U unit)
     {
@@ -131,24 +131,24 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
 
     /**
      * Construct a new Relative Immutable FloatVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
+     * @param dvd FloatVectorData; an internal data object
+     * @param unit U; the unit
      * @return R the FloatVector of the right type
      */
     protected abstract R instantiateType(FloatVectorData dvd, U unit);
 
     /**
      * Construct a new Relative Mutable FloatVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
+     * @param dvd FloatVectorData; an internal data object
+     * @param unit U; the unit
      * @return MR the Mutable FloatVector of the right type
      */
     protected abstract MR instantiateMutableType(FloatVectorData dvd, U unit);
 
     /**
      * Construct a new Relative Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the value
-     * @param unit the unit
+     * @param value float; the value
+     * @param unit U; the unit
      * @return S the Immutable FloatScalar of the right type
      */
     protected abstract S instantiateScalar(float value, U unit);
@@ -168,7 +168,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * Add a Relative value to this Relative value for a vector or matrix. The addition is done value by value and store the
      * result in a new Relative value. If both operands are sparse, the result is a sparse vector or matrix, otherwise the
      * result is a dense vector or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the addition of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -181,7 +181,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * Subtract a Relative value from this Relative value for a vector or matrix. The subtraction is done value by value and
      * store the result in a new Relative value. If both operands are sparse, the result is a sparse vector or matrix, otherwise
      * the result is a dense vector or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the subtraction of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -194,7 +194,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * Multiply a Relative value with this Relative value for a vector or matrix. The multiplication is done value by value and
      * store the result in a new Relative value. If both operands are dense, the result is a dense vector or matrix, otherwise
      * the result is a sparse vector or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the multiplication of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -207,7 +207,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * Divide this Relative value by a Relative value for a vector or matrix. The division is done value by value and store the
      * result in a new Relative value. If both operands are dense, the result is a dense vector or matrix, otherwise the result
      * is a sparse vector or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the division of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -222,7 +222,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
 
     /**
      * Check that a provided array can be used to create some descendant of a FloatVector, and return the Unit.
-     * @param dsArray the array to check and get the unit for
+     * @param dsArray AbstractFloatScalarRel&lt;U,S&gt;[]; the array to check and get the unit for
      * @param <U> the unit
      * @param <S> the scalar type
      * @return the unit of the object
@@ -240,7 +240,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
 
     /**
      * Check that a provided list can be used to create some descendant of a FloatVector, and return the Unit.
-     * @param dsList the list to check and get the unit for
+     * @param dsList List&lt;S&gt;; the list to check and get the unit for
      * @param <U> the unit
      * @param <S> the scalar in the list
      * @return the unit of the object
@@ -257,7 +257,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
 
     /**
      * Check that a provided Map can be used to create some descendant of a FloatVector.
-     * @param dsMap the provided map
+     * @param dsMap SortedMap&lt;Integer,S&gt;; the provided map
      * @param <U> Unit; the unit of the FloatScalar list
      * @param <S> the scalar in the list
      * @return List the provided list

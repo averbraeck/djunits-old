@@ -36,7 +36,7 @@ public abstract class DoubleMatrix
          * Construct a new Absolute Immutable DoubleMatrix.
          * @param values double[][]; the values of the entries in the new Absolute Immutable DoubleMatrix
          * @param unit AU; the unit of the new Absolute Immutable DoubleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Abs(final double[][] values, final AU unit, final StorageType storageType) throws ValueException
@@ -46,8 +46,9 @@ public abstract class DoubleMatrix
 
         /**
          * Construct a new Absolute Immutable DoubleMatrix.
-         * @param values DoubleScalar.Abs&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable DoubleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values DoubleScalar.Abs&lt;AU, RU&gt;[][]; the values of the entries in the new Absolute Immutable
+         *            DoubleMatrix
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Abs(final DoubleScalar.Abs<AU, RU>[][] values, final StorageType storageType) throws ValueException
@@ -57,8 +58,8 @@ public abstract class DoubleMatrix
 
         /**
          * Construct a new Absolute Immutable DoubleMatrix.
-         * @param data an internal data object
-         * @param unit the unit
+         * @param data DoubleMatrixData; an internal data object
+         * @param unit AU; the unit
          */
         Abs(final DoubleMatrixData data, final AU unit)
         {
@@ -125,7 +126,7 @@ public abstract class DoubleMatrix
          * Construct a new Relative Immutable DoubleMatrix.
          * @param values double[][]; the values of the entries in the new Relative Immutable DoubleMatrix
          * @param unit U; the unit of the new Relative Immutable DoubleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Rel(final double[][] values, final U unit, final StorageType storageType) throws ValueException
@@ -135,8 +136,8 @@ public abstract class DoubleMatrix
 
         /**
          * Construct a new Relative Immutable DoubleMatrix.
-         * @param values DoubleScalar.Abs&lt;U&gt;[][]; the values of the entries in the new Relative Immutable DoubleMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable DoubleMatrix
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Rel(final DoubleScalar.Rel<U>[][] values, final StorageType storageType) throws ValueException
@@ -146,8 +147,8 @@ public abstract class DoubleMatrix
 
         /**
          * Construct a new Relative Immutable DoubleMatrix.
-         * @param data an internal data object
-         * @param unit the unit
+         * @param data DoubleMatrixData; an internal data object
+         * @param unit U; the unit
          */
         Rel(final DoubleMatrixData data, final U unit)
         {
@@ -198,8 +199,8 @@ public abstract class DoubleMatrix
 
     /**
      * Add the content of two matrices with a static method on a cell-by-cell basis; Abs + Rel = Abs.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left DoubleMatrix.Abs&lt;AU,RU&gt;; the first matrix
+     * @param right DoubleMatrix.Rel&lt;RU&gt;; the second matrix
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @return the sum of the two matrices
@@ -213,8 +214,8 @@ public abstract class DoubleMatrix
 
     /**
      * Add the content of two matrices with a static method on a cell-by-cell basis; Rel + Rel = Rel.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left DoubleMatrix.Rel&lt;U&gt;; the first matrix
+     * @param right DoubleMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the relative unit
      * @return the sum of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
@@ -227,8 +228,8 @@ public abstract class DoubleMatrix
 
     /**
      * Subtract the content of two matrices with a static method on a cell-by-cell basis; Abs - Rel = Abs.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left DoubleMatrix.Abs&lt;AU,RU&gt;; the first matrix
+     * @param right DoubleMatrix.Rel&lt;RU&gt;; the second matrix
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @return the difference of the two matrices
@@ -242,8 +243,8 @@ public abstract class DoubleMatrix
 
     /**
      * Subtract the content of two matrices with a static method on a cell-by-cell basis; Abs - Abs = Rel.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left DoubleMatrix.Abs&lt;AU,RU&gt;; the first matrix
+     * @param right DoubleMatrix.Abs&lt;AU,RU&gt;; the second matrix
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @return the difference of the two matrices
@@ -257,8 +258,8 @@ public abstract class DoubleMatrix
 
     /**
      * Subtract the content of two matrices with a static method on a cell-by-cell basis; Rel - Rel = Rel.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left DoubleMatrix.Rel&lt;U&gt;; the first matrix
+     * @param right DoubleMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the unit
      * @return the difference of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
@@ -272,8 +273,8 @@ public abstract class DoubleMatrix
     /**
      * Multiply the content of two matrices with a static method on a cell-by-cell basis; Rel * Rel = Rel. The unit is not
      * changed by this method.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left DoubleMatrix.Rel&lt;U&gt;; the first matrix
+     * @param right DoubleMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the unit
      * @return the cell-by-cell multiplication of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
@@ -287,8 +288,8 @@ public abstract class DoubleMatrix
     /**
      * Divide the content of two matrices with a static method on a cell-by-cell basis; Rel / Rel = Rel. The unit is not changed
      * by this method.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left DoubleMatrix.Rel&lt;U&gt;; the first matrix
+     * @param right DoubleMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the unit
      * @return the cell-by-cell division of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed

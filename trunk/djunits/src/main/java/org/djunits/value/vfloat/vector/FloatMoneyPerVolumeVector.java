@@ -28,8 +28,8 @@ public class FloatMoneyPerVolumeVector extends AbstractFloatVectorRel<MoneyPerVo
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerVolumeVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatMoneyPerVolumeVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatMoneyPerVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerVolumeUnit; the unit of the new Relative Immutable Float FloatMoneyPerVolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatMoneyPerVolumeVector(final float[] values, final MoneyPerVolumeUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class FloatMoneyPerVolumeVector extends AbstractFloatVectorRel<MoneyPerVo
 
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerVolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatMoneyPerVolumeVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatMoneyPerVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatMoneyPerVolumeVector
+     * @param unit MoneyPerVolumeUnit; the unit of the new Relative Immutable Float FloatMoneyPerVolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatMoneyPerVolumeVector(final List<Float> values, final MoneyPerVolumeUnit unit, final StorageType storageType)
@@ -53,9 +53,9 @@ public class FloatMoneyPerVolumeVector extends AbstractFloatVectorRel<MoneyPerVo
 
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerVolumeVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatMoneyPerVolume[]; the values of the entries in the new Relative Immutable Float
      *            FloatMoneyPerVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatMoneyPerVolumeVector(final FloatMoneyPerVolume[] values, final StorageType storageType) throws ValueException
@@ -65,8 +65,9 @@ public class FloatMoneyPerVolumeVector extends AbstractFloatVectorRel<MoneyPerVo
 
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerVolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatMoneyPerVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatMoneyPerVolume&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatMoneyPerVolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatMoneyPerVolumeVector(final List<FloatMoneyPerVolume> values, final StorageType storageType)
@@ -77,10 +78,10 @@ public class FloatMoneyPerVolumeVector extends AbstractFloatVectorRel<MoneyPerVo
 
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerVolumeVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatMoneyPerVolumeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatMoneyPerVolume&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float FloatMoneyPerVolumeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatMoneyPerVolumeVector(final SortedMap<Integer, FloatMoneyPerVolume> values, final int length,
@@ -91,10 +92,11 @@ public class FloatMoneyPerVolumeVector extends AbstractFloatVectorRel<MoneyPerVo
 
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerVolumeVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatMoneyPerVolumeVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatMoneyPerVolumeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatMoneyPerVolumeVector
+     * @param unit MoneyPerVolumeUnit; the unit of the new Relative Sparse Mutable Float FloatMoneyPerVolumeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatMoneyPerVolumeVector(final SortedMap<Integer, Float> values, final MoneyPerVolumeUnit unit, final int length,
@@ -104,8 +106,8 @@ public class FloatMoneyPerVolumeVector extends AbstractFloatVectorRel<MoneyPerVo
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit MoneyPerVolumeUnit; the unit
      */
     FloatMoneyPerVolumeVector(final FloatVectorData data, final MoneyPerVolumeUnit unit)
     {

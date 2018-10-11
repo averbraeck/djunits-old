@@ -28,8 +28,8 @@ public class ElectricalPotentialVector extends AbstractDoubleVectorRel<Electrica
     /**
      * Construct a new Relative Immutable Double ElectricalPotentialVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double ElectricalPotentialVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalPotentialVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalPotentialUnit; the unit of the new Relative Immutable Double ElectricalPotentialVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalPotentialVector(final double[] values, final ElectricalPotentialUnit unit, final StorageType storageType)
@@ -40,9 +40,10 @@ public class ElectricalPotentialVector extends AbstractDoubleVectorRel<Electrica
 
     /**
      * Construct a new Relative Immutable Double ElectricalPotentialVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalPotentialVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalPotentialVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double
+     *            ElectricalPotentialVector
+     * @param unit ElectricalPotentialUnit; the unit of the new Relative Immutable Double ElectricalPotentialVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalPotentialVector(final List<Double> values, final ElectricalPotentialUnit unit,
@@ -53,9 +54,9 @@ public class ElectricalPotentialVector extends AbstractDoubleVectorRel<Electrica
 
     /**
      * Construct a new Relative Immutable Double ElectricalPotentialVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
+     * @param values ElectricalPotential[]; the values of the entries in the new Relative Immutable Double
      *            ElectricalPotentialVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalPotentialVector(final ElectricalPotential[] values, final StorageType storageType) throws ValueException
@@ -65,8 +66,9 @@ public class ElectricalPotentialVector extends AbstractDoubleVectorRel<Electrica
 
     /**
      * Construct a new Relative Immutable Double ElectricalPotentialVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalPotentialVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;ElectricalPotential&gt;; the values of the entries in the new Relative Immutable Double
+     *            ElectricalPotentialVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalPotentialVector(final List<ElectricalPotential> values, final StorageType storageType)
@@ -77,10 +79,10 @@ public class ElectricalPotentialVector extends AbstractDoubleVectorRel<Electrica
 
     /**
      * Construct a new Relative Immutable Double ElectricalPotentialVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
-     *            ElectricalPotentialVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, ElectricalPotential&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Double ElectricalPotentialVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalPotentialVector(final SortedMap<Integer, ElectricalPotential> values, final int length,
@@ -91,10 +93,11 @@ public class ElectricalPotentialVector extends AbstractDoubleVectorRel<Electrica
 
     /**
      * Construct a new Relative Immutable Double ElectricalPotentialVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double ElectricalPotentialVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double ElectricalPotentialVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            ElectricalPotentialVector
+     * @param unit ElectricalPotentialUnit; the unit of the new Relative Sparse Mutable Double ElectricalPotentialVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalPotentialVector(final SortedMap<Integer, Double> values, final ElectricalPotentialUnit unit,
@@ -104,8 +107,8 @@ public class ElectricalPotentialVector extends AbstractDoubleVectorRel<Electrica
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit ElectricalPotentialUnit; the unit
      */
     ElectricalPotentialVector(final DoubleVectorData data, final ElectricalPotentialUnit unit)
     {

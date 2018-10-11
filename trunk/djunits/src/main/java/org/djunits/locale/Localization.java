@@ -37,7 +37,7 @@ public class Localization
     /**
      * Retrieve a string from a locale bundle. If retrieval fails the value of key string, surrounded by exclamation marks is
      * returned.
-     * @param key the key for the locale in the properties file
+     * @param key String; the key for the locale in the properties file
      * @return localized string, or, if a translation could not be found return the key surrounded by exclamation marks
      */
     public final String getString(final String key)

@@ -24,8 +24,8 @@ public class FloatAreaMatrix extends AbstractFloatMatrixRel<AreaUnit, FloatAreaM
     /**
      * Construct a new Relative Immutable FloatAreaMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatAreaMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatAreaMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AreaUnit; the unit of the new Relative Immutable FloatAreaMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatAreaMatrix(final float[][] values, final AreaUnit unit, final StorageType storageType) throws ValueException
@@ -35,8 +35,8 @@ public class FloatAreaMatrix extends AbstractFloatMatrixRel<AreaUnit, FloatAreaM
 
     /**
      * Construct a new Relative Immutable FloatAreaMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float FloatAreaMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatArea[][]; the values of the entries in the new Relative Immutable Float FloatAreaMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatAreaMatrix(final FloatArea[][] values, final StorageType storageType) throws ValueException
@@ -45,8 +45,8 @@ public class FloatAreaMatrix extends AbstractFloatMatrixRel<AreaUnit, FloatAreaM
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit AreaUnit; the unit
      */
     FloatAreaMatrix(final FloatMatrixData data, final AreaUnit unit)
     {

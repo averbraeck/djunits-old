@@ -16,7 +16,7 @@ public abstract class FloatFunction
 {
     /**
      * Applies a function to an argument.
-     * @param argument argument passed to the function.
+     * @param argument float; argument passed to the function.
      * @return the result of the function.
      */
     public abstract float apply(float argument);

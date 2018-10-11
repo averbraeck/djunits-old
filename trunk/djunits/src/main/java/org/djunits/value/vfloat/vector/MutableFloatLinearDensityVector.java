@@ -28,8 +28,8 @@ public class MutableFloatLinearDensityVector extends AbstractMutableFloatVectorR
     /**
      * Construct a new Relative Immutable Float LinearDensityVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float LinearDensityVector
-     * @param unit U; the unit of the new Relative Immutable Float LinearDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit LinearDensityUnit; the unit of the new Relative Immutable Float LinearDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatLinearDensityVector(final float[] values, final LinearDensityUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatLinearDensityVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float LinearDensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float LinearDensityVector
-     * @param unit U; the unit of the new Relative Immutable Float LinearDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float LinearDensityVector
+     * @param unit LinearDensityUnit; the unit of the new Relative Immutable Float LinearDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatLinearDensityVector(final List<Float> values, final LinearDensityUnit unit,
@@ -53,9 +53,8 @@ public class MutableFloatLinearDensityVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float LinearDensityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            LinearDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatLinearDensity[]; the values of the entries in the new Relative Immutable Float LinearDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatLinearDensityVector(final FloatLinearDensity[] values, final StorageType storageType)
@@ -66,8 +65,9 @@ public class MutableFloatLinearDensityVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float LinearDensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float LinearDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatLinearDensity&gt;; the values of the entries in the new Relative Immutable Float
+     *            LinearDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatLinearDensityVector(final List<FloatLinearDensity> values, final StorageType storageType)
@@ -78,10 +78,10 @@ public class MutableFloatLinearDensityVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float LinearDensityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            LinearDensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatLinearDensity&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float LinearDensityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatLinearDensityVector(final SortedMap<Integer, FloatLinearDensity> values, final int length,
@@ -92,10 +92,11 @@ public class MutableFloatLinearDensityVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float LinearDensityVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float LinearDensityVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float LinearDensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            LinearDensityVector
+     * @param unit LinearDensityUnit; the unit of the new Relative Sparse Mutable Float LinearDensityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatLinearDensityVector(final SortedMap<Integer, Float> values, final LinearDensityUnit unit,
@@ -105,8 +106,8 @@ public class MutableFloatLinearDensityVector extends AbstractMutableFloatVectorR
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit LinearDensityUnit; the unit
      */
     MutableFloatLinearDensityVector(final FloatVectorData data, final LinearDensityUnit unit)
     {

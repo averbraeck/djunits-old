@@ -32,8 +32,8 @@ public class MutableTimeMatrix
     /**
      * Construct a new Absolute Mutable Double TimeMatrix.
      * @param values double[][]; the values of the entries in the new Absolute Mutable Double TimeMatrix
-     * @param unit U; the unit of the new Absolute Mutable Double TimeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit TimeUnit; the unit of the new Absolute Mutable Double TimeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableTimeMatrix(final double[][] values, final TimeUnit unit, final StorageType storageType) throws ValueException
@@ -43,8 +43,8 @@ public class MutableTimeMatrix
 
     /**
      * Construct a new Absolute Mutable Double TimeMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable Double TimeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Time[][]; the values of the entries in the new Absolute Mutable Double TimeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableTimeMatrix(final Time[][] values, final StorageType storageType) throws ValueException
@@ -54,8 +54,8 @@ public class MutableTimeMatrix
 
     /**
      * Construct a new Absolute Mutable Double TimeMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit TimeUnit; the unit
      */
     MutableTimeMatrix(final DoubleMatrixData data, final TimeUnit unit)
     {

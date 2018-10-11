@@ -38,8 +38,8 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
 
     /**
      * Construct a new FloatMatrix.
-     * @param unit the unit
-     * @param data an internal data object
+     * @param unit U; the unit
+     * @param data FloatMatrixData; an internal data object
      */
     AbstractFloatMatrix(final U unit, final FloatMatrixData data)
     {
@@ -234,7 +234,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
 
     /**
      * Centralized size equality check.
-     * @param other FloatMatrix&lt;?&gt;; other FloatMatrix
+     * @param other AbstractFloatMatrixRel&lt;?, ?, ?, ?&gt;; other FloatMatrix
      * @throws ValueException when other is null, or matrices have unequal size
      */
     protected final void checkSize(final AbstractFloatMatrixRel<?, ?, ?, ?> other) throws ValueException

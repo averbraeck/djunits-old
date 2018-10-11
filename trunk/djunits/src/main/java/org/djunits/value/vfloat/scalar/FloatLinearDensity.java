@@ -59,8 +59,8 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Construct FloatLinearDensity scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit LinearDensityUnit; unit for the float value
      */
     public FloatLinearDensity(final float value, final LinearDensityUnit unit)
     {
@@ -69,7 +69,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Construct FloatLinearDensity scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatLinearDensity; Scalar from which to construct this instance
      */
     public FloatLinearDensity(final FloatLinearDensity value)
     {
@@ -78,8 +78,8 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Construct FloatLinearDensity scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit LinearDensityUnit; unit for the resulting float value
      */
     public FloatLinearDensity(final double value, final LinearDensityUnit unit)
     {
@@ -95,7 +95,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Construct FloatLinearDensity scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatLinearDensity createSI(final float value)
@@ -105,9 +105,9 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatLinearDensity; the low value
+     * @param one FloatLinearDensity; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatLinearDensity interpolate(final FloatLinearDensity zero, final FloatLinearDensity one, final float ratio)
@@ -117,8 +117,8 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatLinearDensity; the first scalar
+     * @param r2 FloatLinearDensity; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatLinearDensity max(final FloatLinearDensity r1, final FloatLinearDensity r2)
@@ -128,9 +128,9 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatLinearDensity; the first scalar
+     * @param r2 FloatLinearDensity; the second scalar
+     * @param rn FloatLinearDensity...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatLinearDensity max(final FloatLinearDensity r1, final FloatLinearDensity r2,
@@ -149,8 +149,8 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatLinearDensity; the first scalar
+     * @param r2 FloatLinearDensity; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatLinearDensity min(final FloatLinearDensity r1, final FloatLinearDensity r2)
@@ -160,9 +160,9 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatLinearDensity; the first scalar
+     * @param r2 FloatLinearDensity; the second scalar
+     * @param rn FloatLinearDensity...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatLinearDensity min(final FloatLinearDensity r1, final FloatLinearDensity r2,
@@ -181,7 +181,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Calculate the division of FloatLinearDensity and FloatLinearDensity, which results in a FloatDimensionless scalar.
-     * @param v FloatLinearDensity scalar
+     * @param v FloatLinearDensity; FloatLinearDensity scalar
      * @return FloatDimensionless scalar as a division of FloatLinearDensity and FloatLinearDensity
      */
     public final FloatDimensionless divideBy(final FloatLinearDensity v)
@@ -191,7 +191,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Calculate the multiplication of FloatLinearDensity and FloatArea, which results in a FloatLength scalar.
-     * @param v FloatLinearDensity scalar
+     * @param v FloatArea; FloatLinearDensity scalar
      * @return FloatLength scalar as a multiplication of FloatLinearDensity and FloatArea
      */
     public final FloatLength multiplyBy(final FloatArea v)
@@ -201,7 +201,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Calculate the multiplication of FloatLinearDensity and FloatEnergy, which results in a FloatForce scalar.
-     * @param v FloatLinearDensity scalar
+     * @param v FloatEnergy; FloatLinearDensity scalar
      * @return FloatForce scalar as a multiplication of FloatLinearDensity and FloatEnergy
      */
     public final FloatForce multiplyBy(final FloatEnergy v)
@@ -211,7 +211,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Calculate the multiplication of FloatLinearDensity and FloatSpeed, which results in a FloatFrequency scalar.
-     * @param v FloatLinearDensity scalar
+     * @param v FloatSpeed; FloatLinearDensity scalar
      * @return FloatFrequency scalar as a multiplication of FloatLinearDensity and FloatSpeed
      */
     public final FloatFrequency multiplyBy(final FloatSpeed v)
@@ -221,7 +221,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Calculate the multiplication of FloatLinearDensity and FloatMoney, which results in a FloatMoneyPerLength scalar.
-     * @param v FloatLinearDensity scalar
+     * @param v FloatMoney; FloatLinearDensity scalar
      * @return FloatMoneyPerLength scalar as a multiplication of FloatLinearDensity and FloatMoney
      */
     public final FloatMoneyPerLength multiplyBy(final FloatMoney v)

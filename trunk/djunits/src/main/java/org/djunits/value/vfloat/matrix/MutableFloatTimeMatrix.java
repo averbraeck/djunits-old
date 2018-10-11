@@ -26,8 +26,8 @@ public class MutableFloatTimeMatrix extends AbstractMutableFloatMatrixAbs<TimeUn
     /**
      * Construct a new Absolute Mutable FloatTimeMatrix.
      * @param values float[][]; the values of the entries in the new Absolute Mutable FloatTimeMatrix
-     * @param unit U; the unit of the new Absolute Mutable FloatTimeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit TimeUnit; the unit of the new Absolute Mutable FloatTimeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatTimeMatrix(final float[][] values, final TimeUnit unit, final StorageType storageType)
@@ -38,8 +38,8 @@ public class MutableFloatTimeMatrix extends AbstractMutableFloatMatrixAbs<TimeUn
 
     /**
      * Construct a new Absolute Mutable FloatTimeMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable FloatTimeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatTime[][]; the values of the entries in the new Absolute Mutable FloatTimeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatTimeMatrix(final FloatTime[][] values, final StorageType storageType) throws ValueException
@@ -49,8 +49,8 @@ public class MutableFloatTimeMatrix extends AbstractMutableFloatMatrixAbs<TimeUn
 
     /**
      * Construct a new Absolute Mutable FloatTimeMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit TimeUnit; the unit
      */
     MutableFloatTimeMatrix(final FloatMatrixData data, final TimeUnit unit)
     {

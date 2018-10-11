@@ -25,8 +25,8 @@ public class MutableElectricalPotentialMatrix extends AbstractMutableDoubleMatri
     /**
      * Construct a new Relative Immutable Double ElectricalPotentialMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double ElectricalPotentialMatrix
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalPotentialMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalPotentialUnit; the unit of the new Relative Immutable Double ElectricalPotentialMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalPotentialMatrix(final double[][] values, final ElectricalPotentialUnit unit,
@@ -37,9 +37,9 @@ public class MutableElectricalPotentialMatrix extends AbstractMutableDoubleMatri
 
     /**
      * Construct a new Relative Immutable Double ElectricalPotentialMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
+     * @param values ElectricalPotential[][]; the values of the entries in the new Relative Immutable Double
      *            ElectricalPotentialMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalPotentialMatrix(final ElectricalPotential[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableElectricalPotentialMatrix extends AbstractMutableDoubleMatri
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit ElectricalPotentialUnit; the unit
      */
     MutableElectricalPotentialMatrix(final DoubleMatrixData data, final ElectricalPotentialUnit unit)
     {

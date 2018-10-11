@@ -34,7 +34,7 @@ public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, R
     /**
      * Construct a new Absolute Immutable FloatScalar.
      * @param value float; the value of the new Absolute Immutable FloatScalar
-     * @param unit U; the unit of the new Absolute Immutable FloatScalar
+     * @param unit AU; the unit of the new Absolute Immutable FloatScalar
      */
     public AbstractFloatScalarAbs(final float value, final AU unit)
     {
@@ -52,16 +52,16 @@ public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, R
 
     /**
      * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the float value
-     * @param unit the unit
+     * @param value float; the float value
+     * @param unit AU; the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
     public abstract A instantiateAbs(float value, AU unit);
 
     /**
      * Construct a new Relative Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the float value
-     * @param unit the unit
+     * @param value float; the float value
+     * @param unit RU; the unit
      * @return R a new relative instance of the FloatScalar of the right type
      */
     public abstract R instantiateRel(float value, RU unit);

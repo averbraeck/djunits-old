@@ -24,8 +24,8 @@ public class MoneyMatrix extends AbstractDoubleMatrixRel<MoneyUnit, MoneyMatrix,
     /**
      * Construct a new Relative Immutable Double MoneyMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double MoneyMatrix
-     * @param unit U; the unit of the new Relative Immutable Double MoneyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyUnit; the unit of the new Relative Immutable Double MoneyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MoneyMatrix(final double[][] values, final MoneyUnit unit, final StorageType storageType) throws ValueException
@@ -35,8 +35,8 @@ public class MoneyMatrix extends AbstractDoubleMatrixRel<MoneyUnit, MoneyMatrix,
 
     /**
      * Construct a new Relative Immutable Double MoneyMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double MoneyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Money[][]; the values of the entries in the new Relative Immutable Double MoneyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MoneyMatrix(final Money[][] values, final StorageType storageType) throws ValueException
@@ -45,8 +45,8 @@ public class MoneyMatrix extends AbstractDoubleMatrixRel<MoneyUnit, MoneyMatrix,
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit MoneyUnit; the unit
      */
     MoneyMatrix(final DoubleMatrixData data, final MoneyUnit unit)
     {

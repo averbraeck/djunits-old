@@ -61,8 +61,8 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Construct ElectricalPotential scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit ElectricalPotentialUnit; unit for the double value
      */
     public ElectricalPotential(final double value, final ElectricalPotentialUnit unit)
     {
@@ -71,7 +71,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Construct ElectricalPotential scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value ElectricalPotential; Scalar from which to construct this instance
      */
     public ElectricalPotential(final ElectricalPotential value)
     {
@@ -87,7 +87,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Construct ElectricalPotential scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final ElectricalPotential createSI(final double value)
@@ -97,9 +97,9 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero ElectricalPotential; the low value
+     * @param one ElectricalPotential; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static ElectricalPotential interpolate(final ElectricalPotential zero, final ElectricalPotential one,
@@ -110,8 +110,8 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 ElectricalPotential; the first scalar
+     * @param r2 ElectricalPotential; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static ElectricalPotential max(final ElectricalPotential r1, final ElectricalPotential r2)
@@ -121,9 +121,9 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 ElectricalPotential; the first scalar
+     * @param r2 ElectricalPotential; the second scalar
+     * @param rn ElectricalPotential...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static ElectricalPotential max(final ElectricalPotential r1, final ElectricalPotential r2,
@@ -142,8 +142,8 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 ElectricalPotential; the first scalar
+     * @param r2 ElectricalPotential; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static ElectricalPotential min(final ElectricalPotential r1, final ElectricalPotential r2)
@@ -153,9 +153,9 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 ElectricalPotential; the first scalar
+     * @param r2 ElectricalPotential; the second scalar
+     * @param rn ElectricalPotential...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static ElectricalPotential min(final ElectricalPotential r1, final ElectricalPotential r2,
@@ -174,7 +174,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalPotential, which results in a Dimensionless scalar.
-     * @param v ElectricalPotential scalar
+     * @param v ElectricalPotential; ElectricalPotential scalar
      * @return Dimensionless scalar as a division of ElectricalPotential and ElectricalPotential
      */
     public final Dimensionless divideBy(final ElectricalPotential v)
@@ -184,7 +184,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the multiplication of ElectricalPotential and ElectricalCurrent, which results in a Power scalar.
-     * @param v ElectricalPotential scalar
+     * @param v ElectricalCurrent; ElectricalPotential scalar
      * @return Power scalar as a multiplication of ElectricalPotential and ElectricalCurrent
      */
     public final Power multiplyBy(final ElectricalCurrent v)
@@ -194,7 +194,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalCurrent, which results in a ElectricalResistance scalar.
-     * @param v ElectricalPotential scalar
+     * @param v ElectricalCurrent; ElectricalPotential scalar
      * @return ElectricalResistance scalar as a division of ElectricalPotential and ElectricalCurrent
      */
     public final ElectricalResistance divideBy(final ElectricalCurrent v)
@@ -204,7 +204,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalResistance, which results in a ElectricalCurrent scalar.
-     * @param v ElectricalPotential scalar
+     * @param v ElectricalResistance; ElectricalPotential scalar
      * @return ElectricalCurrent scalar as a division of ElectricalPotential and ElectricalResistance
      */
     public final ElectricalCurrent divideBy(final ElectricalResistance v)

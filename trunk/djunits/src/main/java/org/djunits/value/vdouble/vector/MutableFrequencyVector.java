@@ -28,8 +28,8 @@ public class MutableFrequencyVector
     /**
      * Construct a new Relative Immutable Double FrequencyVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double FrequencyVector
-     * @param unit U; the unit of the new Relative Immutable Double FrequencyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FrequencyUnit; the unit of the new Relative Immutable Double FrequencyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFrequencyVector(final double[] values, final FrequencyUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFrequencyVector
 
     /**
      * Construct a new Relative Immutable Double FrequencyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double FrequencyVector
-     * @param unit U; the unit of the new Relative Immutable Double FrequencyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double FrequencyVector
+     * @param unit FrequencyUnit; the unit of the new Relative Immutable Double FrequencyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFrequencyVector(final List<Double> values, final FrequencyUnit unit, final StorageType storageType)
@@ -53,8 +53,8 @@ public class MutableFrequencyVector
 
     /**
      * Construct a new Relative Immutable Double FrequencyVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double FrequencyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Frequency[]; the values of the entries in the new Relative Immutable Double FrequencyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFrequencyVector(final Frequency[] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ public class MutableFrequencyVector
 
     /**
      * Construct a new Relative Immutable Double FrequencyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double FrequencyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Frequency&gt;; the values of the entries in the new Relative Immutable Double FrequencyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFrequencyVector(final List<Frequency> values, final StorageType storageType) throws ValueException
@@ -75,10 +75,10 @@ public class MutableFrequencyVector
 
     /**
      * Construct a new Relative Immutable Double FrequencyVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Frequency&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            FrequencyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFrequencyVector(final SortedMap<Integer, Frequency> values, final int length, final StorageType storageType)
@@ -89,10 +89,11 @@ public class MutableFrequencyVector
 
     /**
      * Construct a new Relative Immutable Double FrequencyVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double FrequencyVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double FrequencyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            FrequencyVector
+     * @param unit FrequencyUnit; the unit of the new Relative Sparse Mutable Double FrequencyVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFrequencyVector(final SortedMap<Integer, Double> values, final FrequencyUnit unit, final int length,
@@ -102,8 +103,8 @@ public class MutableFrequencyVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit FrequencyUnit; the unit
      */
     MutableFrequencyVector(final DoubleVectorData data, final FrequencyUnit unit)
     {

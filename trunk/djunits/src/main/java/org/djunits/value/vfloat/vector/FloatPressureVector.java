@@ -28,8 +28,8 @@ public class FloatPressureVector
     /**
      * Construct a new Relative Immutable Float FloatPressureVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatPressureVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatPressureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit PressureUnit; the unit of the new Relative Immutable Float FloatPressureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatPressureVector(final float[] values, final PressureUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class FloatPressureVector
 
     /**
      * Construct a new Relative Immutable Float FloatPressureVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatPressureVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatPressureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatPressureVector
+     * @param unit PressureUnit; the unit of the new Relative Immutable Float FloatPressureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatPressureVector(final List<Float> values, final PressureUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class FloatPressureVector
 
     /**
      * Construct a new Relative Immutable Float FloatPressureVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatPressureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatPressure[]; the values of the entries in the new Relative Immutable Float FloatPressureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatPressureVector(final FloatPressure[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class FloatPressureVector
 
     /**
      * Construct a new Relative Immutable Float FloatPressureVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatPressureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatPressure&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatPressureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatPressureVector(final List<FloatPressure> values, final StorageType storageType) throws ValueException
@@ -76,10 +76,10 @@ public class FloatPressureVector
 
     /**
      * Construct a new Relative Immutable Float FloatPressureVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
+     * @param values SortedMap&lt;Integer, FloatPressure&gt;; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatPressureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatPressureVector(final SortedMap<Integer, FloatPressure> values, final int length, final StorageType storageType)
@@ -90,10 +90,11 @@ public class FloatPressureVector
 
     /**
      * Construct a new Relative Immutable Float FloatPressureVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatPressureVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatPressureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatPressureVector
+     * @param unit PressureUnit; the unit of the new Relative Sparse Mutable Float FloatPressureVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatPressureVector(final SortedMap<Integer, Float> values, final PressureUnit unit, final int length,
@@ -103,8 +104,8 @@ public class FloatPressureVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit PressureUnit; the unit
      */
     FloatPressureVector(final FloatVectorData data, final PressureUnit unit)
     {
