@@ -24,8 +24,8 @@ public class MassMatrix extends AbstractDoubleMatrixRel<MassUnit, MassMatrix, Mu
     /**
      * Construct a new Relative Immutable Double MassMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double MassMatrix
-     * @param unit U; the unit of the new Relative Immutable Double MassMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MassUnit; the unit of the new Relative Immutable Double MassMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MassMatrix(final double[][] values, final MassUnit unit, final StorageType storageType) throws ValueException
@@ -35,8 +35,8 @@ public class MassMatrix extends AbstractDoubleMatrixRel<MassUnit, MassMatrix, Mu
 
     /**
      * Construct a new Relative Immutable Double MassMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double MassMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Mass[][]; the values of the entries in the new Relative Immutable Double MassMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MassMatrix(final Mass[][] values, final StorageType storageType) throws ValueException
@@ -45,8 +45,8 @@ public class MassMatrix extends AbstractDoubleMatrixRel<MassUnit, MassMatrix, Mu
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit MassUnit; the unit
      */
     MassMatrix(final DoubleMatrixData data, final MassUnit unit)
     {

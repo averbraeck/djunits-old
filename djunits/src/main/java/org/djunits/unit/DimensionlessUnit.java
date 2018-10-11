@@ -28,9 +28,9 @@ public final class DimensionlessUnit extends Unit<DimensionlessUnit>
     }
 
     /**
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param nameKey String; the key to the locale file for the long name of the unit
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     private DimensionlessUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
     {
@@ -56,7 +56,7 @@ public final class DimensionlessUnit extends Unit<DimensionlessUnit>
     @Override
     public boolean equalsIgnoreNaming(final Object obj)
     {
-        // Two DimensionlessUnit instances are always the same numerically, as they are unscaled. 
+        // Two DimensionlessUnit instances are always the same numerically, as they are unscaled.
         if (this == obj)
             return true;
         if (getClass() != obj.getClass())

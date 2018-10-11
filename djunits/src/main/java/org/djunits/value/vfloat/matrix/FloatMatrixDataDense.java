@@ -21,9 +21,9 @@ public class FloatMatrixDataDense extends FloatMatrixData
 {
     /**
      * Create a matrix with dense data.
-     * @param matrixSI the data to store
-     * @param rows the number of rows
-     * @param cols the number of columns
+     * @param matrixSI float[]; the data to store
+     * @param rows int; the number of rows
+     * @param cols int; the number of columns
      * @throws ValueException in case <tt>rows * cols != matrixSI.length</tt>
      */
     public FloatMatrixDataDense(final float[] matrixSI, final int rows, final int cols) throws ValueException
@@ -41,7 +41,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /**
      * Create a matrix with dense data.
-     * @param matrixSI the data to store
+     * @param matrixSI float[][]; the data to store
      * @throws ValueException in case matrix is ragged
      */
     public FloatMatrixDataDense(final float[][] matrixSI) throws ValueException
@@ -66,7 +66,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
     }
 
     /**
-     * @param floatFunction the function to apply on the (mutable) data elements
+     * @param floatFunction FloatFunction; the function to apply on the (mutable) data elements
      */
     public final void assign(final FloatFunction floatFunction)
     {

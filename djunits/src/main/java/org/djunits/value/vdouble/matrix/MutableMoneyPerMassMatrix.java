@@ -25,8 +25,8 @@ public class MutableMoneyPerMassMatrix
     /**
      * Construct a new Relative Immutable Double MoneyPerMassMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double MoneyPerMassMatrix
-     * @param unit U; the unit of the new Relative Immutable Double MoneyPerMassMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerMassUnit; the unit of the new Relative Immutable Double MoneyPerMassMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMoneyPerMassMatrix(final double[][] values, final MoneyPerMassUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableMoneyPerMassMatrix
 
     /**
      * Construct a new Relative Immutable Double MoneyPerMassMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            MoneyPerMassMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values MoneyPerMass[][]; the values of the entries in the new Relative Immutable Double MoneyPerMassMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableMoneyPerMassMatrix(final MoneyPerMass[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableMoneyPerMassMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit MoneyPerMassUnit; the unit
      */
     MutableMoneyPerMassMatrix(final DoubleMatrixData data, final MoneyPerMassUnit unit)
     {

@@ -17,7 +17,8 @@ import org.djunits.value.vdouble.scalar.Volume;
  * Copyright (c) 2013-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * @version $Revision$, $LastChangedDate$, by $Author$, initial version 7 sep. 2015 <br>
+ * @version $Revision$, $LastChangedDate$, by $Author$,
+ *          initial version 7 sep. 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -28,7 +29,7 @@ public final class Currency implements UNITS
     {
         // utility constructor.
     }
-    
+
     /**
      * Create some scalar values to demonstrate conversion from and to related units.
      * @param args String[]; the command line arguments; not used

@@ -35,8 +35,8 @@ public class FloatMoneyPerDuration extends AbstractFloatScalarRel<MoneyPerDurati
 
     /**
      * Construct FloatMoneyPerDuration scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit MoneyPerDurationUnit; unit for the float value
      */
     public FloatMoneyPerDuration(final float value, final MoneyPerDurationUnit unit)
     {
@@ -45,7 +45,7 @@ public class FloatMoneyPerDuration extends AbstractFloatScalarRel<MoneyPerDurati
 
     /**
      * Construct FloatMoneyPerDuration scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatMoneyPerDuration; Scalar from which to construct this instance
      */
     public FloatMoneyPerDuration(final FloatMoneyPerDuration value)
     {
@@ -54,8 +54,8 @@ public class FloatMoneyPerDuration extends AbstractFloatScalarRel<MoneyPerDurati
 
     /**
      * Construct FloatMoneyPerDuration scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit MoneyPerDurationUnit; unit for the resulting float value
      */
     public FloatMoneyPerDuration(final double value, final MoneyPerDurationUnit unit)
     {
@@ -71,9 +71,9 @@ public class FloatMoneyPerDuration extends AbstractFloatScalarRel<MoneyPerDurati
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatMoneyPerDuration; the low value
+     * @param one FloatMoneyPerDuration; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatMoneyPerDuration interpolate(final FloatMoneyPerDuration zero, final FloatMoneyPerDuration one,
@@ -85,8 +85,8 @@ public class FloatMoneyPerDuration extends AbstractFloatScalarRel<MoneyPerDurati
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatMoneyPerDuration; the first scalar
+     * @param r2 FloatMoneyPerDuration; the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static FloatMoneyPerDuration max(final FloatMoneyPerDuration r1, final FloatMoneyPerDuration r2)
@@ -96,9 +96,9 @@ public class FloatMoneyPerDuration extends AbstractFloatScalarRel<MoneyPerDurati
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatMoneyPerDuration; the first scalar
+     * @param r2 FloatMoneyPerDuration; the second scalar
+     * @param rn FloatMoneyPerDuration...; the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static FloatMoneyPerDuration max(final FloatMoneyPerDuration r1, final FloatMoneyPerDuration r2,
@@ -117,8 +117,8 @@ public class FloatMoneyPerDuration extends AbstractFloatScalarRel<MoneyPerDurati
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatMoneyPerDuration; the first scalar
+     * @param r2 FloatMoneyPerDuration; the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static FloatMoneyPerDuration min(final FloatMoneyPerDuration r1, final FloatMoneyPerDuration r2)
@@ -128,9 +128,9 @@ public class FloatMoneyPerDuration extends AbstractFloatScalarRel<MoneyPerDurati
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatMoneyPerDuration; the first scalar
+     * @param r2 FloatMoneyPerDuration; the second scalar
+     * @param rn FloatMoneyPerDuration...; the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static FloatMoneyPerDuration min(final FloatMoneyPerDuration r1, final FloatMoneyPerDuration r2,
@@ -149,7 +149,7 @@ public class FloatMoneyPerDuration extends AbstractFloatScalarRel<MoneyPerDurati
 
     /**
      * Calculate the division of FloatMoneyPerDuration and FloatMoneyPerDuration, which results in a FloatDimensionless scalar.
-     * @param v FloatMoneyPerDuration scalar
+     * @param v FloatMoneyPerDuration; FloatMoneyPerDuration scalar
      * @return FloatDimensionless scalar as a division of FloatMoneyPerDuration and FloatMoneyPerDuration
      */
     public final FloatDimensionless divideBy(final FloatMoneyPerDuration v)
@@ -159,7 +159,7 @@ public class FloatMoneyPerDuration extends AbstractFloatScalarRel<MoneyPerDurati
 
     /**
      * Calculate the multiplication of FloatMoneyPerDuration and FloatDuration, which results in a FloatMoney scalar.
-     * @param v FloatMoneyPerDuration scalar
+     * @param v FloatDuration; FloatMoneyPerDuration scalar
      * @return FloatMoney scalar as a multiplication of FloatMoneyPerDuration and FloatDuration
      */
     public final FloatMoney multiplyBy(final FloatDuration v)
@@ -169,7 +169,7 @@ public class FloatMoneyPerDuration extends AbstractFloatScalarRel<MoneyPerDurati
 
     /**
      * Calculate the division of FloatMoneyPerDuration and FloatFrequency, which results in a FloatMoney scalar.
-     * @param v FloatMoneyPerDuration scalar
+     * @param v FloatFrequency; FloatMoneyPerDuration scalar
      * @return FloatMoney scalar as a division of FloatMoneyPerDuration and FloatFrequency
      */
     public final FloatMoney divideBy(final FloatFrequency v)

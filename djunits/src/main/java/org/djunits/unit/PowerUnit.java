@@ -116,14 +116,16 @@ public class PowerUnit extends LinearUnit<PowerUnit>
 
     /**
      * Define a PowerUnit based on its constituent base units, e.g. a W = km.m^2/s^3.
-     * @param massUnit the unit of mass for the power unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the power unit, e.g., meter
-     * @param durationUnit the unit of time for the power unit, e.g., second
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param massUnit MassUnit; the unit of mass for the power unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the power unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the power unit, e.g., second
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private PowerUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
@@ -139,12 +141,12 @@ public class PowerUnit extends LinearUnit<PowerUnit>
 
     /**
      * Define a user-defined PowerUnit based on its constituent base units, e.g. a W = km.m^2/s^3.
-     * @param massUnit the unit of mass for the power unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the power unit, e.g., meter
-     * @param durationUnit the unit of time for the power unit, e.g., second
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param massUnit MassUnit; the unit of mass for the power unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the power unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the power unit, e.g., second
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public PowerUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
@@ -154,14 +156,16 @@ public class PowerUnit extends LinearUnit<PowerUnit>
 
     /**
      * Define an PowerUnit based on a LengthUnit, a ForceUnit, and a TimeUnit, e.g. a W = N.m/s.
-     * @param forceUnit the unit of force for the power unit, e.g., Newton
-     * @param lengthUnit the unit of length for the power unit, e.g., meter
-     * @param durationUnit the unit of time for the power unit, e.g., second
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param forceUnit ForceUnit; the unit of force for the power unit, e.g., Newton
+     * @param lengthUnit LengthUnit; the unit of length for the power unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the power unit, e.g., second
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private PowerUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
@@ -176,12 +180,12 @@ public class PowerUnit extends LinearUnit<PowerUnit>
 
     /**
      * Define a user-defined PowerUnit based on a LengthUnit, a ForceUnit, and a TimeUnit, e.g. a W = N.m/s.
-     * @param lengthUnit the unit of length for the power unit, e.g., meter
-     * @param forceUnit the unit of force for the power unit, e.g., Newton
-     * @param durationUnit the unit of time for the power unit, e.g., second
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param lengthUnit LengthUnit; the unit of length for the power unit, e.g., meter
+     * @param forceUnit ForceUnit; the unit of force for the power unit, e.g., Newton
+     * @param durationUnit DurationUnit; the unit of time for the power unit, e.g., second
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public PowerUnit(final LengthUnit lengthUnit, final ForceUnit forceUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
@@ -191,13 +195,16 @@ public class PowerUnit extends LinearUnit<PowerUnit>
 
     /**
      * Build a PowerUnit with a conversion factor to another PowerUnit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit PowerUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private PowerUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final PowerUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
@@ -211,11 +218,12 @@ public class PowerUnit extends LinearUnit<PowerUnit>
 
     /**
      * Build a user-defined PowerUnit with a conversion factor to another PowerUnit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit PowerUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public PowerUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final PowerUnit referenceUnit,
             final double scaleFactorToReferenceUnit)

@@ -20,7 +20,7 @@ public interface FloatMathFunctionsDimensionless<T> extends MathFunctionsDimensi
      * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
      * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a sparse
      * dataset if necessary.
-     * @param floatFunction the function to apply
+     * @param floatFunction FloatFunction; the function to apply
      */
     void assign(FloatFunction floatFunction);
 

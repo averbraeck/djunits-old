@@ -35,14 +35,16 @@ public abstract class AbsoluteLinearUnit<AU extends LinearUnit<AU>, RU extends U
     private final RU relativeUnit;
 
     /**
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
      * @param unitSystem the unit system, e.g. SI or Imperial; often the unit system for an absolute unit will be OTHER
-     * @param scaleFactorToReferenceUnit multiply by this number to convert to the standard unit
-     * @param offsetToReferenceUnit the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
-     * @param relativeUnit the corresponding relative unit belonging to this absolute unit
+     * @param scaleFactorToReferenceUnit double; multiply by this number to convert to the standard unit
+     * @param offsetToReferenceUnit double; the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
+     * @param relativeUnit RU; the corresponding relative unit belonging to this absolute unit
      */
     protected AbsoluteLinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
             final UnitSystem unitSystem, final double scaleFactorToReferenceUnit, final double offsetToReferenceUnit,

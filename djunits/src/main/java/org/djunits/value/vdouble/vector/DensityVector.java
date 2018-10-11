@@ -27,8 +27,8 @@ public class DensityVector extends AbstractDoubleVectorRel<DensityUnit, DensityV
     /**
      * Construct a new Relative Immutable Double DensityVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double DensityVector
-     * @param unit U; the unit of the new Relative Immutable Double DensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DensityUnit; the unit of the new Relative Immutable Double DensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public DensityVector(final double[] values, final DensityUnit unit, final StorageType storageType) throws ValueException
@@ -38,9 +38,9 @@ public class DensityVector extends AbstractDoubleVectorRel<DensityUnit, DensityV
 
     /**
      * Construct a new Relative Immutable Double DensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double DensityVector
-     * @param unit U; the unit of the new Relative Immutable Double DensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double DensityVector
+     * @param unit DensityUnit; the unit of the new Relative Immutable Double DensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public DensityVector(final List<Double> values, final DensityUnit unit, final StorageType storageType) throws ValueException
@@ -50,8 +50,8 @@ public class DensityVector extends AbstractDoubleVectorRel<DensityUnit, DensityV
 
     /**
      * Construct a new Relative Immutable Double DensityVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double DensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Density[]; the values of the entries in the new Relative Immutable Double DensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public DensityVector(final Density[] values, final StorageType storageType) throws ValueException
@@ -61,8 +61,8 @@ public class DensityVector extends AbstractDoubleVectorRel<DensityUnit, DensityV
 
     /**
      * Construct a new Relative Immutable Double DensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double DensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Density&gt;; the values of the entries in the new Relative Immutable Double DensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public DensityVector(final List<Density> values, final StorageType storageType) throws ValueException
@@ -72,10 +72,10 @@ public class DensityVector extends AbstractDoubleVectorRel<DensityUnit, DensityV
 
     /**
      * Construct a new Relative Immutable Double DensityVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Density&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            DensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public DensityVector(final SortedMap<Integer, Density> values, final int length, final StorageType storageType)
@@ -86,10 +86,11 @@ public class DensityVector extends AbstractDoubleVectorRel<DensityUnit, DensityV
 
     /**
      * Construct a new Relative Immutable Double DensityVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double DensityVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double DensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            DensityVector
+     * @param unit DensityUnit; the unit of the new Relative Sparse Mutable Double DensityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public DensityVector(final SortedMap<Integer, Double> values, final DensityUnit unit, final int length,
@@ -99,8 +100,8 @@ public class DensityVector extends AbstractDoubleVectorRel<DensityUnit, DensityV
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit DensityUnit; the unit
      */
     DensityVector(final DoubleVectorData data, final DensityUnit unit)
     {

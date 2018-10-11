@@ -88,15 +88,18 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
 
     /**
      * Define an ElectricalResistanceUnit based on its constituent base units, e.g. an Ohm = km.m^2/A^2.s^3.
-     * @param massUnit the unit of mass for the electrical resistance unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the electrical resistance unit, e.g., meter
-     * @param electricalCurrentUnit the unit of electrical current for the electrical resistance unit, e.g., Ampere
-     * @param durationUnit the unit of time for the electrical resistance unit, e.g., second
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param massUnit MassUnit; the unit of mass for the electrical resistance unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the electrical resistance unit, e.g., meter
+     * @param electricalCurrentUnit ElectricalCurrentUnit; the unit of electrical current for the electrical resistance unit,
+     *            e.g., Ampere
+     * @param durationUnit DurationUnit; the unit of time for the electrical resistance unit, e.g., second
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     @SuppressWarnings("checkstyle:parameternumber")
     private ElectricalResistanceUnit(final MassUnit massUnit, final LengthUnit lengthUnit,
@@ -116,13 +119,14 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
 
     /**
      * Define a user-defined ElectricalResistanceUnit based on its constituent base units, e.g. an Ohm = km.m^2/A^2.s^3.
-     * @param massUnit the unit of mass for the electrical resistance unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the electrical resistance unit, e.g., meter
-     * @param electricalCurrentUnit the unit of electrical current for the electrical resistance unit, e.g., Ampere
-     * @param durationUnit the unit of time for the electrical resistance unit, e.g., second
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param massUnit MassUnit; the unit of mass for the electrical resistance unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the electrical resistance unit, e.g., meter
+     * @param electricalCurrentUnit ElectricalCurrentUnit; the unit of electrical current for the electrical resistance unit,
+     *            e.g., Ampere
+     * @param durationUnit DurationUnit; the unit of time for the electrical resistance unit, e.g., second
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public ElectricalResistanceUnit(final MassUnit massUnit, final LengthUnit lengthUnit,
             final ElectricalCurrentUnit electricalCurrentUnit, final DurationUnit durationUnit, final String name,
@@ -133,13 +137,17 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
 
     /**
      * Define an ElectricalResistanceUnit based on an electrical potential unit and an electrical current unit, e.g. Ohm = V/A.
-     * @param electricalPotentialUnit the unit of electrical potential difference for the electrical resistance unit, e.g., Volt
-     * @param electricalCurrentUnit the unit of electrical current for the electrical resistance unit, e.g., Ampere
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param electricalPotentialUnit ElectricalPotentialUnit; the unit of electrical potential difference for the electrical
+     *            resistance unit, e.g., Volt
+     * @param electricalCurrentUnit ElectricalCurrentUnit; the unit of electrical current for the electrical resistance unit,
+     *            e.g., Ampere
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private ElectricalResistanceUnit(final ElectricalPotentialUnit electricalPotentialUnit,
             final ElectricalCurrentUnit electricalCurrentUnit, final String nameOrNameKey,
@@ -156,11 +164,13 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
     /**
      * Define a user-defined ElectricalResistanceUnit based on an electrical potential unit and an electrical current unit, e.g.
      * Ohm = V/A.
-     * @param electricalPotentialUnit the unit of electrical potential difference for the electrical resistance unit, e.g., Volt
-     * @param electricalCurrentUnit the unit of electrical current for the electrical resistance unit, e.g., Ampere
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param electricalPotentialUnit ElectricalPotentialUnit; the unit of electrical potential difference for the electrical
+     *            resistance unit, e.g., Volt
+     * @param electricalCurrentUnit ElectricalCurrentUnit; the unit of electrical current for the electrical resistance unit,
+     *            e.g., Ampere
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public ElectricalResistanceUnit(final ElectricalPotentialUnit electricalPotentialUnit,
             final ElectricalCurrentUnit electricalCurrentUnit, final String name, final String abbreviation,
@@ -171,13 +181,16 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
 
     /**
      * Build a ElectricalResistanceUnit with a conversion factor to another ElectricalResistanceUnit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit ElectricalResistanceUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private ElectricalResistanceUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
             final UnitSystem unitSystem, final ElectricalResistanceUnit referenceUnit, final double scaleFactorToReferenceUnit,
@@ -193,11 +206,12 @@ public class ElectricalResistanceUnit extends LinearUnit<ElectricalResistanceUni
 
     /**
      * Build a user-defined ElectricalResistanceUnit with a conversion factor to another ElectricalResistanceUnit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit ElectricalResistanceUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public ElectricalResistanceUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final ElectricalResistanceUnit referenceUnit, final double scaleFactorToReferenceUnit)

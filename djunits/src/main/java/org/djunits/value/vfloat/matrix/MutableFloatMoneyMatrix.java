@@ -25,8 +25,8 @@ public class MutableFloatMoneyMatrix
     /**
      * Construct a new Relative Immutable FloatMoneyMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatMoneyMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatMoneyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyUnit; the unit of the new Relative Immutable FloatMoneyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatMoneyMatrix(final float[][] values, final MoneyUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableFloatMoneyMatrix
 
     /**
      * Construct a new Relative Immutable FloatMoneyMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatMoneyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatMoney[][]; the values of the entries in the new Relative Immutable Float FloatMoneyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMoneyMatrix(final FloatMoney[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableFloatMoneyMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit MoneyUnit; the unit
      */
     MutableFloatMoneyMatrix(final FloatMatrixData data, final MoneyUnit unit)
     {

@@ -59,8 +59,8 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Construct FloatElectricalCharge scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit ElectricalChargeUnit; unit for the float value
      */
     public FloatElectricalCharge(final float value, final ElectricalChargeUnit unit)
     {
@@ -69,7 +69,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Construct FloatElectricalCharge scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatElectricalCharge; Scalar from which to construct this instance
      */
     public FloatElectricalCharge(final FloatElectricalCharge value)
     {
@@ -78,8 +78,8 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Construct FloatElectricalCharge scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit ElectricalChargeUnit; unit for the resulting float value
      */
     public FloatElectricalCharge(final double value, final ElectricalChargeUnit unit)
     {
@@ -95,7 +95,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Construct FloatElectricalCharge scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatElectricalCharge createSI(final float value)
@@ -105,9 +105,9 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatElectricalCharge; the low value
+     * @param one FloatElectricalCharge; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalCharge interpolate(final FloatElectricalCharge zero, final FloatElectricalCharge one,
@@ -119,8 +119,8 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatElectricalCharge; the first scalar
+     * @param r2 FloatElectricalCharge; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatElectricalCharge max(final FloatElectricalCharge r1, final FloatElectricalCharge r2)
@@ -130,9 +130,9 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatElectricalCharge; the first scalar
+     * @param r2 FloatElectricalCharge; the second scalar
+     * @param rn FloatElectricalCharge...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatElectricalCharge max(final FloatElectricalCharge r1, final FloatElectricalCharge r2,
@@ -151,8 +151,8 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatElectricalCharge; the first scalar
+     * @param r2 FloatElectricalCharge; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatElectricalCharge min(final FloatElectricalCharge r1, final FloatElectricalCharge r2)
@@ -162,9 +162,9 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatElectricalCharge; the first scalar
+     * @param r2 FloatElectricalCharge; the second scalar
+     * @param rn FloatElectricalCharge...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatElectricalCharge min(final FloatElectricalCharge r1, final FloatElectricalCharge r2,
@@ -183,7 +183,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Calculate the division of FloatElectricalCharge and FloatElectricalCharge, which results in a FloatDimensionless scalar.
-     * @param v FloatElectricalCharge scalar
+     * @param v FloatElectricalCharge; FloatElectricalCharge scalar
      * @return FloatDimensionless scalar as a division of FloatElectricalCharge and FloatElectricalCharge
      */
     public final FloatDimensionless divideBy(final FloatElectricalCharge v)
@@ -193,7 +193,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Calculate the division of FloatElectricalCharge and FloatDuration, which results in a FloatElectricalCurrent scalar.
-     * @param v FloatElectricalCharge scalar
+     * @param v FloatDuration; FloatElectricalCharge scalar
      * @return FloatElectricalCurrent scalar as a division of FloatElectricalCharge and FloatDuration
      */
     public final FloatElectricalCurrent divideBy(final FloatDuration v)
@@ -203,7 +203,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Calculate the division of FloatElectricalCharge and FloatElectricalCurrent, which results in a FloatDuration scalar.
-     * @param v FloatElectricalCharge scalar
+     * @param v FloatElectricalCurrent; FloatElectricalCharge scalar
      * @return FloatDuration scalar as a division of FloatElectricalCharge and FloatElectricalCurrent
      */
     public final FloatDuration divideBy(final FloatElectricalCurrent v)

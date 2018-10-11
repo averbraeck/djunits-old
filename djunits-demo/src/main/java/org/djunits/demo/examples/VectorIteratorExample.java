@@ -36,7 +36,7 @@ public final class VectorIteratorExample
     }
 
     /**
-     * @param args the arguments for the main program, not used
+     * @param args String[]; the arguments for the main program, not used
      * @throws ValueException on vector error
      */
     public static void main(final String[] args) throws ValueException

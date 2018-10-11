@@ -31,8 +31,8 @@ public class MutableFloatDimensionlessVector extends AbstractMutableFloatVectorR
     /**
      * Construct a new Relative Immutable Float DimensionlessVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float DimensionlessVector
-     * @param unit U; the unit of the new Relative Immutable Float DimensionlessVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DimensionlessUnit; the unit of the new Relative Immutable Float DimensionlessVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDimensionlessVector(final float[] values, final DimensionlessUnit unit, final StorageType storageType)
@@ -43,9 +43,9 @@ public class MutableFloatDimensionlessVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float DimensionlessVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float DimensionlessVector
-     * @param unit U; the unit of the new Relative Immutable Float DimensionlessVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float DimensionlessVector
+     * @param unit DimensionlessUnit; the unit of the new Relative Immutable Float DimensionlessVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDimensionlessVector(final List<Float> values, final DimensionlessUnit unit,
@@ -56,9 +56,8 @@ public class MutableFloatDimensionlessVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float DimensionlessVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            DimensionlessVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatDimensionless[]; the values of the entries in the new Relative Immutable Float DimensionlessVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDimensionlessVector(final FloatDimensionless[] values, final StorageType storageType)
@@ -69,8 +68,9 @@ public class MutableFloatDimensionlessVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float DimensionlessVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float DimensionlessVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatDimensionless&gt;; the values of the entries in the new Relative Immutable Float
+     *            DimensionlessVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDimensionlessVector(final List<FloatDimensionless> values, final StorageType storageType)
@@ -81,10 +81,10 @@ public class MutableFloatDimensionlessVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float DimensionlessVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            DimensionlessVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatDimensionless&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float DimensionlessVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDimensionlessVector(final SortedMap<Integer, FloatDimensionless> values, final int length,
@@ -95,10 +95,11 @@ public class MutableFloatDimensionlessVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float DimensionlessVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float DimensionlessVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float DimensionlessVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            DimensionlessVector
+     * @param unit DimensionlessUnit; the unit of the new Relative Sparse Mutable Float DimensionlessVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDimensionlessVector(final SortedMap<Integer, Float> values, final DimensionlessUnit unit,
@@ -108,8 +109,8 @@ public class MutableFloatDimensionlessVector extends AbstractMutableFloatVectorR
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit DimensionlessUnit; the unit
      */
     MutableFloatDimensionlessVector(final FloatVectorData data, final DimensionlessUnit unit)
     {

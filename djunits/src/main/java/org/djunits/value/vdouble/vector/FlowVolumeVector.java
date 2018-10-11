@@ -28,8 +28,8 @@ public class FlowVolumeVector
     /**
      * Construct a new Relative Immutable Double FlowVolumeVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double FlowVolumeVector
-     * @param unit U; the unit of the new Relative Immutable Double FlowVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FlowVolumeUnit; the unit of the new Relative Immutable Double FlowVolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FlowVolumeVector(final double[] values, final FlowVolumeUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class FlowVolumeVector
 
     /**
      * Construct a new Relative Immutable Double FlowVolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double FlowVolumeVector
-     * @param unit U; the unit of the new Relative Immutable Double FlowVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double FlowVolumeVector
+     * @param unit FlowVolumeUnit; the unit of the new Relative Immutable Double FlowVolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FlowVolumeVector(final List<Double> values, final FlowVolumeUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class FlowVolumeVector
 
     /**
      * Construct a new Relative Immutable Double FlowVolumeVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            FlowVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FlowVolume[]; the values of the entries in the new Relative Immutable Double FlowVolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FlowVolumeVector(final FlowVolume[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,8 @@ public class FlowVolumeVector
 
     /**
      * Construct a new Relative Immutable Double FlowVolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double FlowVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FlowVolume&gt;; the values of the entries in the new Relative Immutable Double FlowVolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FlowVolumeVector(final List<FlowVolume> values, final StorageType storageType) throws ValueException
@@ -76,10 +75,10 @@ public class FlowVolumeVector
 
     /**
      * Construct a new Relative Immutable Double FlowVolumeVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, FlowVolume&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            FlowVolumeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FlowVolumeVector(final SortedMap<Integer, FlowVolume> values, final int length, final StorageType storageType)
@@ -90,10 +89,11 @@ public class FlowVolumeVector
 
     /**
      * Construct a new Relative Immutable Double FlowVolumeVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double FlowVolumeVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double FlowVolumeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            FlowVolumeVector
+     * @param unit FlowVolumeUnit; the unit of the new Relative Sparse Mutable Double FlowVolumeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FlowVolumeVector(final SortedMap<Integer, Double> values, final FlowVolumeUnit unit, final int length,
@@ -103,8 +103,8 @@ public class FlowVolumeVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit FlowVolumeUnit; the unit
      */
     FlowVolumeVector(final DoubleVectorData data, final FlowVolumeUnit unit)
     {

@@ -40,8 +40,8 @@ public class AbsoluteTemperature
 
     /**
      * Construct AbsoluteTemperature scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit AbsoluteTemperatureUnit; unit for the double value
      */
     public AbsoluteTemperature(final double value, final AbsoluteTemperatureUnit unit)
     {
@@ -50,7 +50,7 @@ public class AbsoluteTemperature
 
     /**
      * Construct AbsoluteTemperature scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value AbsoluteTemperature; Scalar from which to construct this instance
      */
     public AbsoluteTemperature(final AbsoluteTemperature value)
     {
@@ -73,7 +73,7 @@ public class AbsoluteTemperature
 
     /**
      * Construct %TypeAbsl% scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final AbsoluteTemperature createSI(final double value)
@@ -83,9 +83,9 @@ public class AbsoluteTemperature
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero AbsoluteTemperature; the low value
+     * @param one AbsoluteTemperature; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static AbsoluteTemperature interpolate(final AbsoluteTemperature zero, final AbsoluteTemperature one,
@@ -96,8 +96,8 @@ public class AbsoluteTemperature
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 AbsoluteTemperature; the first scalar
+     * @param a2 AbsoluteTemperature; the second scalar
      * @return the maximum value of two absolute scalars
      */
     public static AbsoluteTemperature max(final AbsoluteTemperature a1, final AbsoluteTemperature a2)
@@ -107,9 +107,9 @@ public class AbsoluteTemperature
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 AbsoluteTemperature; the first scalar
+     * @param a2 AbsoluteTemperature; the second scalar
+     * @param an AbsoluteTemperature...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static AbsoluteTemperature max(final AbsoluteTemperature a1, final AbsoluteTemperature a2,
@@ -128,8 +128,8 @@ public class AbsoluteTemperature
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 AbsoluteTemperature; the first scalar
+     * @param a2 AbsoluteTemperature; the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static AbsoluteTemperature min(final AbsoluteTemperature a1, final AbsoluteTemperature a2)
@@ -139,9 +139,9 @@ public class AbsoluteTemperature
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 AbsoluteTemperature; the first scalar
+     * @param a2 AbsoluteTemperature; the second scalar
+     * @param an AbsoluteTemperature...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static AbsoluteTemperature min(final AbsoluteTemperature a1, final AbsoluteTemperature a2,

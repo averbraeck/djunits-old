@@ -27,8 +27,8 @@ public class MutableEnergyVector extends AbstractMutableDoubleVectorRel<EnergyUn
     /**
      * Construct a new Relative Immutable Double EnergyVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double EnergyVector
-     * @param unit U; the unit of the new Relative Immutable Double EnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit EnergyUnit; the unit of the new Relative Immutable Double EnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableEnergyVector(final double[] values, final EnergyUnit unit, final StorageType storageType)
@@ -39,9 +39,9 @@ public class MutableEnergyVector extends AbstractMutableDoubleVectorRel<EnergyUn
 
     /**
      * Construct a new Relative Immutable Double EnergyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double EnergyVector
-     * @param unit U; the unit of the new Relative Immutable Double EnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double EnergyVector
+     * @param unit EnergyUnit; the unit of the new Relative Immutable Double EnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableEnergyVector(final List<Double> values, final EnergyUnit unit, final StorageType storageType)
@@ -52,8 +52,8 @@ public class MutableEnergyVector extends AbstractMutableDoubleVectorRel<EnergyUn
 
     /**
      * Construct a new Relative Immutable Double EnergyVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double EnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Energy[]; the values of the entries in the new Relative Immutable Double EnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableEnergyVector(final Energy[] values, final StorageType storageType) throws ValueException
@@ -63,8 +63,8 @@ public class MutableEnergyVector extends AbstractMutableDoubleVectorRel<EnergyUn
 
     /**
      * Construct a new Relative Immutable Double EnergyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double EnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Energy&gt;; the values of the entries in the new Relative Immutable Double EnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableEnergyVector(final List<Energy> values, final StorageType storageType) throws ValueException
@@ -74,10 +74,10 @@ public class MutableEnergyVector extends AbstractMutableDoubleVectorRel<EnergyUn
 
     /**
      * Construct a new Relative Immutable Double EnergyVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Energy&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            EnergyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableEnergyVector(final SortedMap<Integer, Energy> values, final int length, final StorageType storageType)
@@ -88,10 +88,11 @@ public class MutableEnergyVector extends AbstractMutableDoubleVectorRel<EnergyUn
 
     /**
      * Construct a new Relative Immutable Double EnergyVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double EnergyVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double EnergyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            EnergyVector
+     * @param unit EnergyUnit; the unit of the new Relative Sparse Mutable Double EnergyVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableEnergyVector(final SortedMap<Integer, Double> values, final EnergyUnit unit, final int length,
@@ -101,8 +102,8 @@ public class MutableEnergyVector extends AbstractMutableDoubleVectorRel<EnergyUn
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit EnergyUnit; the unit
      */
     MutableEnergyVector(final DoubleVectorData data, final EnergyUnit unit)
     {

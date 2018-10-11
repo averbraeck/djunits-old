@@ -28,8 +28,8 @@ public class FloatFlowMassVector
     /**
      * Construct a new Relative Immutable Float FloatFlowMassVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatFlowMassVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatFlowMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FlowMassUnit; the unit of the new Relative Immutable Float FloatFlowMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatFlowMassVector(final float[] values, final FlowMassUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class FloatFlowMassVector
 
     /**
      * Construct a new Relative Immutable Float FloatFlowMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatFlowMassVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatFlowMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatFlowMassVector
+     * @param unit FlowMassUnit; the unit of the new Relative Immutable Float FloatFlowMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatFlowMassVector(final List<Float> values, final FlowMassUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class FloatFlowMassVector
 
     /**
      * Construct a new Relative Immutable Float FloatFlowMassVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatFlowMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatFlowMass[]; the values of the entries in the new Relative Immutable Float FloatFlowMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatFlowMassVector(final FloatFlowMass[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class FloatFlowMassVector
 
     /**
      * Construct a new Relative Immutable Float FloatFlowMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatFlowMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatFlowMass&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatFlowMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatFlowMassVector(final List<FloatFlowMass> values, final StorageType storageType) throws ValueException
@@ -76,10 +76,10 @@ public class FloatFlowMassVector
 
     /**
      * Construct a new Relative Immutable Float FloatFlowMassVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
+     * @param values SortedMap&lt;Integer, FloatFlowMass&gt;; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatFlowMassVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatFlowMassVector(final SortedMap<Integer, FloatFlowMass> values, final int length, final StorageType storageType)
@@ -90,10 +90,11 @@ public class FloatFlowMassVector
 
     /**
      * Construct a new Relative Immutable Float FloatFlowMassVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatFlowMassVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatFlowMassVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatFlowMassVector
+     * @param unit FlowMassUnit; the unit of the new Relative Sparse Mutable Float FloatFlowMassVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatFlowMassVector(final SortedMap<Integer, Float> values, final FlowMassUnit unit, final int length,
@@ -103,8 +104,8 @@ public class FloatFlowMassVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit FlowMassUnit; the unit
      */
     FloatFlowMassVector(final FloatVectorData data, final FlowMassUnit unit)
     {

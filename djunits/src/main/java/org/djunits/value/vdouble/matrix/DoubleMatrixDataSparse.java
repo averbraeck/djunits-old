@@ -28,11 +28,11 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /**
      * Create a vector with sparse data.
-     * @param matrixSI the data to store
-     * @param indices the index values of the Matrix, with <tt>index = row * cols + col</tt>
-     * @param length the length of the vector (padded with 0 after highest index in indices)
-     * @param rows the number of rows
-     * @param cols the number of columns
+     * @param matrixSI double[]; the data to store
+     * @param indices long[]; the index values of the Matrix, with &lt;tt&gt;index = row * cols + col&lt;/tt&gt;
+     * @param length int; the length of the vector (padded with 0 after highest index in indices)
+     * @param rows int; the number of rows
+     * @param cols int; the number of columns
      */
     public DoubleMatrixDataSparse(final double[] matrixSI, final long[] indices, final int length, final int rows,
             final int cols)
@@ -47,9 +47,9 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /**
      * Create a vector with sparse data from an internal vector with dense data.
-     * @param denseSI the dense data to store
-     * @param rows the number of rows
-     * @param cols the number of columns
+     * @param denseSI double[]; the dense data to store
+     * @param rows int; the number of rows
+     * @param cols int; the number of columns
      * @throws ValueException in case size is incorrect
      */
     public DoubleMatrixDataSparse(final double[] denseSI, final int rows, final int cols) throws ValueException
@@ -70,7 +70,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /**
      * Create a vector with sparse data.
-     * @param dataSI the data to store
+     * @param dataSI double[][]; the data to store
      * @throws ValueException in case matrix is ragged
      */
     public DoubleMatrixDataSparse(final double[][] dataSI) throws ValueException
@@ -92,9 +92,9 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     /**
      * Fill the sparse data structures matrixSI[] and indices[]. Note: output vectors have to be initialized at the right size.
      * Cannot be parallelized because of stateful and sequence-sensitive count.
-     * @param data the input data
-     * @param matrixSI the matrix data to write
-     * @param indices the indices to write
+     * @param data double[][]; the input data
+     * @param matrixSI double[]; the matrix data to write
+     * @param indices long[]; the indices to write
      * @throws ValueException in case matrix is ragged
      */
     @SuppressWarnings("checkstyle:finalparameters")
@@ -126,9 +126,9 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     /**
      * Fill the sparse data structures matrixSI[] and indices[]. Note: output vectors have to be initialized at the right size.
      * Cannot be parallelized because of stateful and sequence-sensitive count.
-     * @param data the input data
-     * @param matrixSI the matrix data to write
-     * @param indices the indices to write
+     * @param data double[]; the input data
+     * @param matrixSI double[]; the matrix data to write
+     * @param indices long[]; the indices to write
      */
     @SuppressWarnings("checkstyle:finalparameters")
     private static void fill(final double[] data, double[] matrixSI, long[] indices)
@@ -219,7 +219,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /**
      * Instantiate a DoubleMatrixDataSparse from an array.
-     * @param valuesSI the (SI) values to store
+     * @param valuesSI double[][]; the (SI) values to store
      * @return the DoubleMatrixDataSparse
      * @throws ValueException in case matrix is ragged
      */
@@ -236,7 +236,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /**
      * Calculate the number of non-zero values in this double[][] matrix.
-     * @param valuesSI the double[][] matrix
+     * @param valuesSI double[][]; the double[][] matrix
      * @return the number of non-zero values in this double[][] matrix
      */
     private static int nonZero(final double[][] valuesSI)
@@ -255,7 +255,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /**
      * Calculate the number of non-zero values in this double[] vector.
-     * @param valuesSI the double[] vector
+     * @param valuesSI double[]; the double[] vector
      * @return the number of non-zero values in this double[] vector
      */
     private static int nonZero(final double[] valuesSI)

@@ -18,7 +18,8 @@ import org.djunits.value.vdouble.vector.DoubleVector;
  * Copyright (c) 2015-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * @version $Revision$, $LastChangedDate$, by $Author$, initial version 3 sep. 2015 <br>
+ * @version $Revision$, $LastChangedDate$, by $Author$,
+ *          initial version 3 sep. 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
@@ -29,7 +30,7 @@ public final class MultiplyAndDivide implements UNITS
     {
         // utility constructor.
     }
-    
+
     /**
      * Create some scalar values to demonstrate conversion from and to related units.
      * @param args String[]; the command line arguments; not used
@@ -51,9 +52,9 @@ public final class MultiplyAndDivide implements UNITS
         System.out.println("speed required to reach finish at " + finish + " in " + duration + " is "
                 + requiredSpeed.toString(KM_PER_HOUR));
         DoubleScalar.Rel<SpeedUnit> speed1 = new DoubleScalar.Rel<>(1.2, SpeedUnit.SI);
-        DoubleScalar.Rel<SpeedUnit> speed2 = speed1.multiplyBy(2.0); 
+        DoubleScalar.Rel<SpeedUnit> speed2 = speed1.multiplyBy(2.0);
         DoubleScalar.Rel<SpeedUnit> speed3 = speed1.multiplyBy(3.0);
-        double[] sv = new double[] {1, 2, 3, 4, 5}; 
+        double[] sv = new double[] { 1, 2, 3, 4, 5 };
         DoubleVector.Rel<SpeedUnit> speedVector = new DoubleVector.Rel<SpeedUnit>(sv, SpeedUnit.SI, StorageType.DENSE);
     }
 

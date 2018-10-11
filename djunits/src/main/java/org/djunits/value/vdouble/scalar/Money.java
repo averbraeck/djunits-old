@@ -40,8 +40,8 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Construct Money scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit MoneyUnit; unit for the double value
      */
     public Money(final double value, final MoneyUnit unit)
     {
@@ -50,7 +50,7 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Construct Money scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Money; Scalar from which to construct this instance
      */
     public Money(final Money value)
     {
@@ -66,9 +66,9 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Money; the low value
+     * @param one Money; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Money interpolate(final Money zero, final Money one, final double ratio)
@@ -78,8 +78,8 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Money; the first scalar
+     * @param r2 Money; the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static Money max(final Money r1, final Money r2)
@@ -89,9 +89,9 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Money; the first scalar
+     * @param r2 Money; the second scalar
+     * @param rn Money...; the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static Money max(final Money r1, final Money r2, final Money... rn)
@@ -109,8 +109,8 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Money; the first scalar
+     * @param r2 Money; the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static Money min(final Money r1, final Money r2)
@@ -120,9 +120,9 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Money; the first scalar
+     * @param r2 Money; the second scalar
+     * @param rn Money...; the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static Money min(final Money r1, final Money r2, final Money... rn)
@@ -140,7 +140,7 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Calculate the division of Money and Money, which results in a Dimensionless scalar.
-     * @param v Money scalar
+     * @param v Money; Money scalar
      * @return Dimensionless scalar as a division of Money and Money
      */
     public final Dimensionless divideBy(final Money v)
@@ -150,7 +150,7 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Calculate the division of Money and Area, which results in a MoneyPerArea scalar.
-     * @param v Money scalar
+     * @param v Area; Money scalar
      * @return MoneyPerArea scalar as a division of Money and Area
      */
     public final MoneyPerArea divideBy(final Area v)
@@ -160,7 +160,7 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Calculate the division of Money and Energy, which results in a MoneyPerEnergy scalar.
-     * @param v Money scalar
+     * @param v Energy; Money scalar
      * @return MoneyPerEnergy scalar as a division of Money and Energy
      */
     public final MoneyPerEnergy divideBy(final Energy v)
@@ -170,7 +170,7 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Calculate the division of Money and Length, which results in a MoneyPerLength scalar.
-     * @param v Money scalar
+     * @param v Length; Money scalar
      * @return MoneyPerLength scalar as a division of Money and Length
      */
     public final MoneyPerLength divideBy(final Length v)
@@ -180,7 +180,7 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Calculate the multiplication of Money and LinearDensity, which results in a MoneyPerLength scalar.
-     * @param v Money scalar
+     * @param v LinearDensity; Money scalar
      * @return MoneyPerLength scalar as a multiplication of Money and LinearDensity
      */
     public final MoneyPerLength multiplyBy(final LinearDensity v)
@@ -190,7 +190,7 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Calculate the division of Money and Mass, which results in a MoneyPerMass scalar.
-     * @param v Money scalar
+     * @param v Mass; Money scalar
      * @return MoneyPerMass scalar as a division of Money and Mass
      */
     public final MoneyPerMass divideBy(final Mass v)
@@ -200,7 +200,7 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Calculate the division of Money and Duration, which results in a MoneyPerDuration scalar.
-     * @param v Money scalar
+     * @param v Duration; Money scalar
      * @return MoneyPerDuration scalar as a division of Money and Duration
      */
     public final MoneyPerDuration divideBy(final Duration v)
@@ -210,7 +210,7 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Calculate the multiplication of Money and Frequency, which results in a MoneyPerDuration scalar.
-     * @param v Money scalar
+     * @param v Frequency; Money scalar
      * @return MoneyPerDuration scalar as a multiplication of Money and Frequency
      */
     public final MoneyPerDuration multiplyBy(final Frequency v)
@@ -220,7 +220,7 @@ public class Money extends AbstractDoubleScalarRel<MoneyUnit, Money>
 
     /**
      * Calculate the division of Money and Volume, which results in a MoneyPerVolume scalar.
-     * @param v Money scalar
+     * @param v Volume; Money scalar
      * @return MoneyPerVolume scalar as a division of Money and Volume
      */
     public final MoneyPerVolume divideBy(final Volume v)

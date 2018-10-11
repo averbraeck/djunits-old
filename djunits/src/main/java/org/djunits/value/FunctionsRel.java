@@ -25,7 +25,7 @@ public interface FunctionsRel<AU extends AbsoluteLinearUnit<AU, RU>, RU extends 
      * Add a Relative value to this Relative value for a vector or matrix. The addition is done value by value and the result is
      * stored in a new Relative value. If both operands are sparse, the result is a sparse vector or matrix, otherwise the
      * result is a dense vector or matrix.
-     * @param rel R the right operand
+     * @param rel R; R the right operand
      * @return A the sum of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -35,7 +35,7 @@ public interface FunctionsRel<AU extends AbsoluteLinearUnit<AU, RU>, RU extends 
      * Add an Absolute value to this Relative value for a vector or matrix. The addition is done value by value and the result
      * is stored in a new Absolute value. If both operands are sparse, the result is a sparse vector or matrix, otherwise the
      * result is a dense vector or matrix.
-     * @param abs A the right operand
+     * @param abs A; A the right operand
      * @return A the sum of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -45,7 +45,7 @@ public interface FunctionsRel<AU extends AbsoluteLinearUnit<AU, RU>, RU extends 
      * Subtract a Relative value from this Relative value for a vector or matrix. The subtraction is done value by value and the
      * result is stored in a new Relative value. If both operands are sparse, the result is a sparse vector or matrix, otherwise
      * the result is a dense vector or matrix.
-     * @param rel R the right operand
+     * @param rel R; R the right operand
      * @return A the sum of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -55,7 +55,7 @@ public interface FunctionsRel<AU extends AbsoluteLinearUnit<AU, RU>, RU extends 
      * Multiply a Relative value by this Relative value for a vector or matrix. The multiplication is done value by value and
      * the result is stored in a new Relative value. If both operands are dense, the result is a dense vector or matrix,
      * otherwise the result is a sparse vector or matrix.
-     * @param rel R the right operand
+     * @param rel R; R the right operand
      * @return A the sum of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
@@ -65,7 +65,7 @@ public interface FunctionsRel<AU extends AbsoluteLinearUnit<AU, RU>, RU extends 
      * Divide this Relative value by a Relative value for a vector or matrix. The division is done value by value and the result
      * is stored in a new Relative value. If both operands are dense, the result is a dense vector or matrix, otherwise the
      * result is a sparse vector or matrix.
-     * @param rel R the right operand
+     * @param rel R; R the right operand
      * @return A the sum of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */

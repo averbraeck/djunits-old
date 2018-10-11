@@ -25,8 +25,8 @@ public class FloatDurationMatrix
     /**
      * Construct a new Relative Immutable FloatDurationMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatDurationMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatDurationMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DurationUnit; the unit of the new Relative Immutable FloatDurationMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatDurationMatrix(final float[][] values, final DurationUnit unit, final StorageType storageType)
@@ -37,8 +37,8 @@ public class FloatDurationMatrix
 
     /**
      * Construct a new Relative Immutable FloatDurationMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable FloatDurationMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatDuration[][]; the values of the entries in the new Relative Immutable FloatDurationMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatDurationMatrix(final FloatDuration[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class FloatDurationMatrix
 
     /**
      * Construct a new Relative Immutable FloatDurationMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit DurationUnit; the unit
      */
     FloatDurationMatrix(final FloatMatrixData data, final DurationUnit unit)
     {

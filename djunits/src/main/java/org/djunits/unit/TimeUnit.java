@@ -145,14 +145,16 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
 
     /**
      * Build a TimeUnit with a scale factor and offset to the base TimeUnit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param scaleFactor multiply a value in this unit by the factor to convert to the given reference unit
-     * @param offset the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
-     * @param relativeUnit the corresponding relative unit belonging to this absolute unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param scaleFactor double; multiply a value in this unit by the factor to convert to the given reference unit
+     * @param offset double; the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
+     * @param relativeUnit DurationUnit; the corresponding relative unit belonging to this absolute unit
      */
     private TimeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final double scaleFactor, final double offset, final boolean standardUnit, final DurationUnit relativeUnit)
@@ -162,12 +164,12 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
 
     /**
      * Build a user-defined TimeUnit with a scale factor and offset to the base TimeUnit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param scaleFactor multiply a value in this unit by the factor to convert to the given reference unit
-     * @param offset the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
-     * @param relativeUnit the corresponding relative unit belonging to this absolute unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param scaleFactor double; multiply a value in this unit by the factor to convert to the given reference unit
+     * @param offset double; the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
+     * @param relativeUnit DurationUnit; the corresponding relative unit belonging to this absolute unit
      */
     public TimeUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final double scaleFactor,
             final double offset, final DurationUnit relativeUnit)

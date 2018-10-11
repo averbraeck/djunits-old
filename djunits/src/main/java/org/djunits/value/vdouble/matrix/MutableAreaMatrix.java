@@ -24,8 +24,8 @@ public class MutableAreaMatrix extends AbstractMutableDoubleMatrixRel<AreaUnit, 
     /**
      * Construct a new Relative Immutable Double AreaMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double AreaMatrix
-     * @param unit U; the unit of the new Relative Immutable Double AreaMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AreaUnit; the unit of the new Relative Immutable Double AreaMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAreaMatrix(final double[][] values, final AreaUnit unit, final StorageType storageType) throws ValueException
@@ -35,8 +35,8 @@ public class MutableAreaMatrix extends AbstractMutableDoubleMatrixRel<AreaUnit, 
 
     /**
      * Construct a new Relative Immutable Double AreaMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double AreaMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Area[][]; the values of the entries in the new Relative Immutable Double AreaMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAreaMatrix(final Area[][] values, final StorageType storageType) throws ValueException
@@ -45,8 +45,8 @@ public class MutableAreaMatrix extends AbstractMutableDoubleMatrixRel<AreaUnit, 
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit AreaUnit; the unit
      */
     MutableAreaMatrix(final DoubleMatrixData data, final AreaUnit unit)
     {

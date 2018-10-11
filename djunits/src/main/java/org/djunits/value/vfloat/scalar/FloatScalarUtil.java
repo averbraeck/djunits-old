@@ -61,8 +61,8 @@ public final class FloatScalarUtil
 
     /**
      * Instantiate the DoubleScalar based on its unit. Rigid check on types for the compiler.
-     * @param value the value
-     * @param unit the unit in which the value is expressed
+     * @param value float; the value
+     * @param unit U; the unit in which the value is expressed
      * @return an instantiated DoubleScalar with the value expressed in the unit
      * @param <U> the unit
      * @param <S> the return type
@@ -83,8 +83,8 @@ public final class FloatScalarUtil
      * MoneyPerArea mpa = DoubleScalarUtil.instantiateAnonymous(10.0, mlu);
      * </pre>
      * 
-     * @param value the value
-     * @param unit the unit in which the value is expressed
+     * @param value float; the value
+     * @param unit Unit&lt;?&gt;; the unit in which the value is expressed
      * @return an instantiated DoubleScalar with the value expressed in the unit
      * @param <S> the return type
      */
@@ -169,8 +169,8 @@ public final class FloatScalarUtil
 
     /**
      * Instantiate the DoubleScalar based on its unit.
-     * @param si the value in SI units
-     * @param displayUnit the unit in which the value is expressed
+     * @param si float; the value in SI units
+     * @param displayUnit U; the unit in which the value is expressed
      * @return an instantiated DoubleScalar with the value expressed in the unit
      * @param <U> the unit
      * @param <S> the return type
@@ -191,8 +191,8 @@ public final class FloatScalarUtil
      * MoneyPerArea mpa = DoubleScalarUtil.instantiateAnonymousSI(10.0, mlu);
      * </pre>
      * 
-     * @param si the value in SI units
-     * @param displayUnit the unit in which the value is expressed
+     * @param si float; the value in SI units
+     * @param displayUnit Unit&lt;?&gt;; the unit in which the value is expressed
      * @return an instantiated DoubleScalar with the value expressed in the unit
      * @param <S> the return type
      */

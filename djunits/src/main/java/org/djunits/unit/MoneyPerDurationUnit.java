@@ -49,12 +49,14 @@ public class MoneyPerDurationUnit extends LinearUnit<MoneyPerDurationUnit>
 
     /**
      * Build a money per time unit from a money unit and an time unit.
-     * @param moneyUnit the unit of money for the money per time unit, e.g., EUR
-     * @param durationUnit the unit of time for the money per time unit, e.g., hour
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param moneyUnit MoneyUnit; the unit of money for the money per time unit, e.g., EUR
+     * @param durationUnit DurationUnit; the unit of time for the money per time unit, e.g., hour
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private MoneyPerDurationUnit(final MoneyUnit moneyUnit, final DurationUnit durationUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final boolean standardUnit)
@@ -67,10 +69,10 @@ public class MoneyPerDurationUnit extends LinearUnit<MoneyPerDurationUnit>
 
     /**
      * Build a user-defined money per time unit from a money unit and an time unit.
-     * @param moneyUnit the unit of money for the money per time unit, e.g., EUR
-     * @param durationUnit the unit of time for the money per time unit, e.g., hour
-     * @param name the key to the locale file for the long name of the unit
-     * @param abbreviation the key to the locale file for the abbreviation of the unit
+     * @param moneyUnit MoneyUnit; the unit of money for the money per time unit, e.g., EUR
+     * @param durationUnit DurationUnit; the unit of time for the money per time unit, e.g., hour
+     * @param name String; the key to the locale file for the long name of the unit
+     * @param abbreviation String; the key to the locale file for the abbreviation of the unit
      */
     public MoneyPerDurationUnit(final MoneyUnit moneyUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation)
@@ -80,12 +82,15 @@ public class MoneyPerDurationUnit extends LinearUnit<MoneyPerDurationUnit>
 
     /**
      * Build a MoneyPerDurationUnit unit based on another MoneyPerDurationUnit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param referenceUnit MoneyPerDurationUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private MoneyPerDurationUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
             final MoneyPerDurationUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
@@ -98,10 +103,11 @@ public class MoneyPerDurationUnit extends LinearUnit<MoneyPerDurationUnit>
 
     /**
      * Build a user-defined MoneyPerDurationUnit with a conversion factor to another MoneyPerDurationUnit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param referenceUnit MoneyPerDurationUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public MoneyPerDurationUnit(final String name, final String abbreviation, final MoneyPerDurationUnit referenceUnit,
             final double scaleFactorToReferenceUnit)
@@ -127,7 +133,7 @@ public class MoneyPerDurationUnit extends LinearUnit<MoneyPerDurationUnit>
 
     /**
      * Set the standard MoneyPerDurationUnit in case the standard MoneyUnit changes, as the standard money unit is flexible.
-     * @param standardMoneyUnit the new standard money unit.
+     * @param standardMoneyUnit MoneyUnit; the new standard money unit.
      */
     protected static void setStandardUnit(final MoneyUnit standardMoneyUnit)
     {

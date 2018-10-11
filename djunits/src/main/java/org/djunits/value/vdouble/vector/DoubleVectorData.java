@@ -34,7 +34,7 @@ abstract class DoubleVectorData
     protected static final int PARALLEL_THRESHOLD = 1000;
 
     /**
-     * @param storageType the data type.
+     * @param storageType StorageType; the data type.
      */
     DoubleVectorData(final StorageType storageType)
     {
@@ -48,9 +48,9 @@ abstract class DoubleVectorData
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
-     * @param values the (SI) values to store
-     * @param scale the scale of the unit to use for conversion to SI
-     * @param storageType the data type to use
+     * @param values double[]; the (SI) values to store
+     * @param scale Scale; the scale of the unit to use for conversion to SI
+     * @param storageType StorageType; the data type to use
      * @return the DoubleVectorData with the right data type
      * @throws ValueException when values are null, or storageType is null
      */
@@ -90,9 +90,9 @@ abstract class DoubleVectorData
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
-     * @param values the values to store
-     * @param scale the scale of the unit to use for conversion to SI
-     * @param storageType the data type to use
+     * @param values List&lt;Double&gt;; the values to store
+     * @param scale Scale; the scale of the unit to use for conversion to SI
+     * @param storageType StorageType; the data type to use
      * @return the DoubleVectorData with the right data type
      * @throws ValueException when list is null, or storageType is null
      */
@@ -143,8 +143,8 @@ abstract class DoubleVectorData
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
-     * @param values the values to store
-     * @param storageType the data type to use
+     * @param values DoubleScalarInterface[]; the values to store
+     * @param storageType StorageType; the data type to use
      * @return the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
@@ -181,8 +181,8 @@ abstract class DoubleVectorData
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
-     * @param values the DoubleScalar values to store
-     * @param storageType the data type to use
+     * @param values List&lt;? extends DoubleScalarInterface&gt;; the DoubleScalar values to store
+     * @param storageType StorageType; the data type to use
      * @return the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
@@ -211,9 +211,9 @@ abstract class DoubleVectorData
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
-     * @param values the DoubleScalar values to store
-     * @param length the length of the vector to pad with 0 after last entry in map
-     * @param storageType the data type to use
+     * @param values SortedMap&lt;Integer,S&gt;; the DoubleScalar values to store
+     * @param length int; the length of the vector to pad with 0 after last entry in map
+     * @param storageType StorageType; the data type to use
      * @param <S> the scalar type to use
      * @return the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
@@ -248,10 +248,10 @@ abstract class DoubleVectorData
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
-     * @param values the DoubleScalar values to store
-     * @param length the length of the vector to pad with 0 after last entry in map
-     * @param scale the scale of the unit to use for conversion to SI
-     * @param storageType the data type to use
+     * @param values SortedMap&lt;Integer,Double&gt;; the DoubleScalar values to store
+     * @param length int; the length of the vector to pad with 0 after last entry in map
+     * @param scale Scale; the scale of the unit to use for conversion to SI
+     * @param storageType StorageType; the data type to use
      * @return the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
@@ -335,15 +335,15 @@ abstract class DoubleVectorData
     }
 
     /**
-     * @param index the index to get the value for
+     * @param index int; the index to get the value for
      * @return the value at the index
      */
     public abstract double getSI(int index);
 
     /**
      * Sets a value at the index in the vector.
-     * @param index the index to set the value for
-     * @param valueSI the value at the index
+     * @param index int; the index to set the value for
+     * @param valueSI double; the value at the index
      */
     public abstract void setSI(int index, double valueSI);
 
@@ -375,7 +375,7 @@ abstract class DoubleVectorData
 
     /**
      * Check the sizes of this data object and the other data object.
-     * @param other the other data object
+     * @param other DoubleVectorData; the other data object
      * @throws ValueException if vectors have different lengths
      */
     private void checkSizes(final DoubleVectorData other) throws ValueException
@@ -393,7 +393,7 @@ abstract class DoubleVectorData
     /**
      * Add two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
      * vector is returned.
-     * @param right the other data object to add
+     * @param right DoubleVectorData; the other data object to add
      * @return the sum of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
@@ -410,14 +410,14 @@ abstract class DoubleVectorData
 
     /**
      * Add a vector to this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
-     * @param right the other data object to add
+     * @param right DoubleVectorData; the other data object to add
      * @throws ValueException if vectors have different lengths
      */
     public abstract void incrementBy(DoubleVectorData right) throws ValueException;
 
     /**
      * Add a number to this vector on a cell-by-cell basis.
-     * @param valueSI the value to add
+     * @param valueSI double; the value to add
      */
     public void incrementBy(final double valueSI)
     {
@@ -427,7 +427,7 @@ abstract class DoubleVectorData
     /**
      * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
      * vector is returned.
-     * @param right the other data object to subtract
+     * @param right DoubleVectorData; the other data object to subtract
      * @return the sum of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
@@ -444,14 +444,14 @@ abstract class DoubleVectorData
 
     /**
      * Subtract a vector from this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
-     * @param right the other data object to subtract
+     * @param right DoubleVectorData; the other data object to subtract
      * @throws ValueException if vectors have different lengths
      */
     public abstract void decrementBy(DoubleVectorData right) throws ValueException;
 
     /**
      * Subtract a number from this vector on a cell-by-cell basis.
-     * @param valueSI the value to subtract
+     * @param valueSI double; the value to subtract
      */
     public void decrementBy(final double valueSI)
     {
@@ -461,7 +461,7 @@ abstract class DoubleVectorData
     /**
      * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
      * vector is returned.
-     * @param right the other data object to multiply with
+     * @param right DoubleVectorData; the other data object to multiply with
      * @return the sum of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
@@ -479,14 +479,14 @@ abstract class DoubleVectorData
     /**
      * Multiply a vector with the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the
      * same.
-     * @param right the other data object to multiply with
+     * @param right DoubleVectorData; the other data object to multiply with
      * @throws ValueException if vectors have different lengths
      */
     public abstract void multiplyBy(DoubleVectorData right) throws ValueException;
 
     /**
      * Multiply the values of this vector with a number on a cell-by-cell basis.
-     * @param valueSI the value to multiply with
+     * @param valueSI double; the value to multiply with
      */
     public void multiplyBy(final double valueSI)
     {
@@ -496,7 +496,7 @@ abstract class DoubleVectorData
     /**
      * Divide two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
      * vector is returned.
-     * @param right the other data object to divide by
+     * @param right DoubleVectorData; the other data object to divide by
      * @return the sum of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
@@ -514,14 +514,14 @@ abstract class DoubleVectorData
     /**
      * Divide the values of a vector by the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense)
      * stays the same.
-     * @param right the other data object to divide by
+     * @param right DoubleVectorData; the other data object to divide by
      * @throws ValueException if vectors have different lengths
      */
     public abstract void divideBy(DoubleVectorData right) throws ValueException;
 
     /**
      * Divide the values of this vector by a number on a cell-by-cell basis.
-     * @param valueSI the value to multiply with
+     * @param valueSI double; the value to multiply with
      */
     public void divideBy(final double valueSI)
     {

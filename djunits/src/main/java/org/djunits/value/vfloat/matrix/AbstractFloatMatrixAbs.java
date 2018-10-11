@@ -29,8 +29,8 @@ import org.djunits.value.vfloat.scalar.AbstractFloatScalarAbs;
  */
 abstract class AbstractFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
         A extends AbstractFloatMatrixAbs<AU, RU, A, R, MA, S>, R extends AbstractFloatMatrixRel<RU, R, ?, ?>,
-        MA extends AbstractMutableFloatMatrixAbs<AU, RU, A, R, MA, S>, S extends AbstractFloatScalarAbs<AU, S, RU, ?>>
-        extends AbstractFloatMatrix<AU, A> implements FunctionsAbs<AU, RU, A, R>, FloatMatrixInterface<AU>, Absolute, Serializable
+        MA extends AbstractMutableFloatMatrixAbs<AU, RU, A, R, MA, S>, S extends AbstractFloatScalarAbs<AU, S, RU, ?>> extends
+        AbstractFloatMatrix<AU, A> implements FunctionsAbs<AU, RU, A, R>, FloatMatrixInterface<AU>, Absolute, Serializable
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -39,7 +39,7 @@ abstract class AbstractFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * Construct a new Absolute Immutable FloatMatrix.
      * @param values float[][]; the values of the entries in the new Absolute Immutable FloatMatrix
      * @param unit AU; the unit of the new Absolute Immutable FloatMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractFloatMatrixAbs(final float[][] values, final AU unit, final StorageType storageType) throws ValueException
@@ -51,7 +51,7 @@ abstract class AbstractFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
     /**
      * Construct a new Absolute Immutable FloatMatrix.
      * @param values S[][]; the values of the entries in the new Absolute Immutable FloatMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractFloatMatrixAbs(final S[][] values, final StorageType storageType) throws ValueException
@@ -61,8 +61,8 @@ abstract class AbstractFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Construct a new Relative Immutable FloatMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit AU; the unit
      */
     AbstractFloatMatrixAbs(final FloatMatrixData data, final AU unit)
     {
@@ -82,32 +82,32 @@ abstract class AbstractFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Construct a new Absolute Immutable FloatMatrix of the right type. Each extending class must implement this method.
-     * @param dmd an internal data object
-     * @param unit the unit
+     * @param dmd FloatMatrixData; an internal data object
+     * @param unit AU; the unit
      * @return M the Mutable FloatMatrix of the right type
      */
     protected abstract A instantiateTypeAbs(FloatMatrixData dmd, AU unit);
 
     /**
      * Construct a new Relative Immutable FloatMatrix of the right type. Each extending class must implement this method.
-     * @param dmd an internal data object
-     * @param unit the unit
+     * @param dmd FloatMatrixData; an internal data object
+     * @param unit RU; the unit
      * @return M the Mutable FloatMatrix of the right type
      */
     protected abstract R instantiateTypeRel(FloatMatrixData dmd, RU unit);
 
     /**
      * Construct a new Absolute Mutable FloatMatrix of the right type. Each extending class must implement this method.
-     * @param dmd an internal data object
-     * @param unit the unit
+     * @param dmd FloatMatrixData; an internal data object
+     * @param unit AU; the unit
      * @return M the Mutable FloatMatrix of the right type
      */
     protected abstract MA instantiateMutableType(FloatMatrixData dmd, AU unit);
 
     /**
      * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the value
-     * @param unit the unit
+     * @param value float; the value
+     * @param unit AU; the unit
      * @return S the Immutable FloatScalar of the right type
      */
     protected abstract S instantiateScalar(float value, AU unit);
@@ -152,7 +152,7 @@ abstract class AbstractFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Check that a provided array can be used to create some descendant of a FloatMatrix, and return the Unit.
-     * @param dsArray the array to check and get the unit for
+     * @param dsArray S[][]; the array to check and get the unit for
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar type
@@ -168,7 +168,7 @@ abstract class AbstractFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Check that a 2D array of FloatScalar&lt;?&gt; is rectangular; i.e. all rows have the same length and is non empty.
-     * @param values FloatScalar&lt;?&gt;[][]; the 2D array to check
+     * @param values S[][]; the 2D array to check
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar type

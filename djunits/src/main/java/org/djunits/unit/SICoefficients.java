@@ -18,7 +18,7 @@ public class SICoefficients
 
     /**
      * Construct an instance of SICoefficients.
-     * @param coefficients the map with SI base units and corresponding coefficients
+     * @param coefficients EnumMap&lt;SI,Integer&gt;; the map with SI base units and corresponding coefficients
      */
     protected SICoefficients(final EnumMap<SI, Integer> coefficients)
     {
@@ -97,8 +97,8 @@ public class SICoefficients
     }
 
     /**
-     * @param coefficientString such as kgm/s2 or kg-2m^3/s2A or Kmmol3/Askcd4 or mol. <br>
-     *            The grammar of a coefficientString is:<br>
+     * @param coefficientString String; such as kgm/s2 or kg-2m^3/s2A or Kmmol3/Askcd4 or mol. &lt;br&gt; The grammar of a
+     *            coefficientString is:<br>
      *            <table summary="">
      *            <tr>
      *            <td>coefficientString</td>
@@ -217,8 +217,8 @@ public class SICoefficients
     }
 
     /**
-     * @param a the first set of coefficients
-     * @param b the second set of coefficients
+     * @param a SICoefficients; the first set of coefficients
+     * @param b SICoefficients; the second set of coefficients
      * @return the coefficients of a*b (coefficients are added)
      */
     public static SICoefficients multiply(final SICoefficients a, final SICoefficients b)
@@ -252,8 +252,8 @@ public class SICoefficients
     }
 
     /**
-     * @param a the first set of coefficients
-     * @param b the second set of coefficients
+     * @param a SICoefficients; the first set of coefficients
+     * @param b SICoefficients; the second set of coefficients
      * @return the coefficients of a/b (coefficients are subtracted)
      */
     public static SICoefficients divide(final SICoefficients a, final SICoefficients b)

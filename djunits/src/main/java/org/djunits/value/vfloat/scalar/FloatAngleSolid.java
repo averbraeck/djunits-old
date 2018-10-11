@@ -53,8 +53,8 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Construct FloatAngleSolid scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit AngleSolidUnit; unit for the float value
      */
     public FloatAngleSolid(final float value, final AngleSolidUnit unit)
     {
@@ -63,7 +63,7 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Construct FloatAngleSolid scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatAngleSolid; Scalar from which to construct this instance
      */
     public FloatAngleSolid(final FloatAngleSolid value)
     {
@@ -72,8 +72,8 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Construct FloatAngleSolid scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit AngleSolidUnit; unit for the resulting float value
      */
     public FloatAngleSolid(final double value, final AngleSolidUnit unit)
     {
@@ -89,7 +89,7 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Construct FloatAngleSolid scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatAngleSolid createSI(final float value)
@@ -99,9 +99,9 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatAngleSolid; the low value
+     * @param one FloatAngleSolid; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatAngleSolid interpolate(final FloatAngleSolid zero, final FloatAngleSolid one, final float ratio)
@@ -111,8 +111,8 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatAngleSolid; the first scalar
+     * @param r2 FloatAngleSolid; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatAngleSolid max(final FloatAngleSolid r1, final FloatAngleSolid r2)
@@ -122,9 +122,9 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatAngleSolid; the first scalar
+     * @param r2 FloatAngleSolid; the second scalar
+     * @param rn FloatAngleSolid...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatAngleSolid max(final FloatAngleSolid r1, final FloatAngleSolid r2, final FloatAngleSolid... rn)
@@ -142,8 +142,8 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatAngleSolid; the first scalar
+     * @param r2 FloatAngleSolid; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatAngleSolid min(final FloatAngleSolid r1, final FloatAngleSolid r2)
@@ -153,9 +153,9 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatAngleSolid; the first scalar
+     * @param r2 FloatAngleSolid; the second scalar
+     * @param rn FloatAngleSolid...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatAngleSolid min(final FloatAngleSolid r1, final FloatAngleSolid r2, final FloatAngleSolid... rn)
@@ -173,7 +173,7 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Calculate the division of FloatAngleSolid and FloatAngleSolid, which results in a FloatDimensionless scalar.
-     * @param v FloatAngleSolid scalar
+     * @param v FloatAngleSolid; FloatAngleSolid scalar
      * @return FloatDimensionless scalar as a division of FloatAngleSolid and FloatAngleSolid
      */
     public final FloatDimensionless divideBy(final FloatAngleSolid v)

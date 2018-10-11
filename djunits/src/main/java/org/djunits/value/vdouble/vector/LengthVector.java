@@ -27,8 +27,8 @@ public class LengthVector extends AbstractDoubleVectorRel<LengthUnit, LengthVect
     /**
      * Construct a new Relative Immutable Double LengthVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double LengthVector
-     * @param unit U; the unit of the new Relative Immutable Double LengthVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit LengthUnit; the unit of the new Relative Immutable Double LengthVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public LengthVector(final double[] values, final LengthUnit unit, final StorageType storageType) throws ValueException
@@ -38,9 +38,9 @@ public class LengthVector extends AbstractDoubleVectorRel<LengthUnit, LengthVect
 
     /**
      * Construct a new Relative Immutable Double LengthVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double LengthVector
-     * @param unit U; the unit of the new Relative Immutable Double LengthVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double LengthVector
+     * @param unit LengthUnit; the unit of the new Relative Immutable Double LengthVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public LengthVector(final List<Double> values, final LengthUnit unit, final StorageType storageType) throws ValueException
@@ -50,8 +50,8 @@ public class LengthVector extends AbstractDoubleVectorRel<LengthUnit, LengthVect
 
     /**
      * Construct a new Relative Immutable Double LengthVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double LengthVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Length[]; the values of the entries in the new Relative Immutable Double LengthVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public LengthVector(final Length[] values, final StorageType storageType) throws ValueException
@@ -61,8 +61,8 @@ public class LengthVector extends AbstractDoubleVectorRel<LengthUnit, LengthVect
 
     /**
      * Construct a new Relative Immutable Double LengthVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double LengthVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Length&gt;; the values of the entries in the new Relative Immutable Double LengthVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public LengthVector(final List<Length> values, final StorageType storageType) throws ValueException
@@ -72,10 +72,10 @@ public class LengthVector extends AbstractDoubleVectorRel<LengthUnit, LengthVect
 
     /**
      * Construct a new Relative Immutable Double LengthVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Length&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            LengthVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public LengthVector(final SortedMap<Integer, Length> values, final int length, final StorageType storageType)
@@ -86,10 +86,11 @@ public class LengthVector extends AbstractDoubleVectorRel<LengthUnit, LengthVect
 
     /**
      * Construct a new Relative Immutable Double LengthVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double LengthVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double LengthVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            LengthVector
+     * @param unit LengthUnit; the unit of the new Relative Sparse Mutable Double LengthVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public LengthVector(final SortedMap<Integer, Double> values, final LengthUnit unit, final int length,
@@ -100,8 +101,8 @@ public class LengthVector extends AbstractDoubleVectorRel<LengthUnit, LengthVect
 
     /**
      * Construct a new Relative Immutable Double LengthVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit LengthUnit; the unit
      */
     LengthVector(final DoubleVectorData data, final LengthUnit unit)
     {

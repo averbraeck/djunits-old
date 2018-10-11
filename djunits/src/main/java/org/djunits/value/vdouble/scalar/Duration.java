@@ -62,8 +62,8 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Construct Duration scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit DurationUnit; unit for the double value
      */
     public Duration(final double value, final DurationUnit unit)
     {
@@ -72,7 +72,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Construct Duration scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Duration; Scalar from which to construct this instance
      */
     public Duration(final Duration value)
     {
@@ -88,8 +88,8 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value the double value
-     * @param unit the unit
+     * @param value double; the double value
+     * @param unit TimeUnit; the unit
      * @return A a new absolute instance of the DoubleScalar of the right type
      */
     public final Time instantiateAbs(final double value, final TimeUnit unit)
@@ -99,7 +99,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Construct Duration scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Duration createSI(final double value)
@@ -109,9 +109,9 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Duration; the low value
+     * @param one Duration; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Duration interpolate(final Duration zero, final Duration one, final double ratio)
@@ -121,7 +121,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
+     * @param v Time; the value to add
      * @return sum of this value and v as a new object
      */
     public final Time plus(final Time v)
@@ -132,8 +132,8 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Duration; the first scalar
+     * @param r2 Duration; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Duration max(final Duration r1, final Duration r2)
@@ -143,9 +143,9 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Duration; the first scalar
+     * @param r2 Duration; the second scalar
+     * @param rn Duration...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Duration max(final Duration r1, final Duration r2, final Duration... rn)
@@ -163,8 +163,8 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Duration; the first scalar
+     * @param r2 Duration; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Duration min(final Duration r1, final Duration r2)
@@ -174,9 +174,9 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Duration; the first scalar
+     * @param r2 Duration; the second scalar
+     * @param rn Duration...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Duration min(final Duration r1, final Duration r2, final Duration... rn)
@@ -194,7 +194,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the division of Duration and Duration, which results in a Dimensionless scalar.
-     * @param v Duration scalar
+     * @param v Duration; Duration scalar
      * @return Dimensionless scalar as a division of Duration and Duration
      */
     public final Dimensionless divideBy(final Duration v)
@@ -204,7 +204,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and Frequency, which results in a Dimensionless scalar.
-     * @param v Duration scalar
+     * @param v Frequency; Duration scalar
      * @return Dimensionless scalar as a multiplication of Duration and Frequency
      */
     public final Dimensionless multiplyBy(final Frequency v)
@@ -214,7 +214,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and ElectricalCurrent, which results in a ElectricalCharge scalar.
-     * @param v Duration scalar
+     * @param v ElectricalCurrent; Duration scalar
      * @return ElectricalCharge scalar as a multiplication of Duration and ElectricalCurrent
      */
     public final ElectricalCharge multiplyBy(final ElectricalCurrent v)
@@ -224,7 +224,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and FlowMass, which results in a Mass scalar.
-     * @param v Duration scalar
+     * @param v FlowMass; Duration scalar
      * @return Mass scalar as a multiplication of Duration and FlowMass
      */
     public final Mass multiplyBy(final FlowMass v)
@@ -234,7 +234,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and FlowVolume, which results in a Volume scalar.
-     * @param v Duration scalar
+     * @param v FlowVolume; Duration scalar
      * @return Volume scalar as a multiplication of Duration and FlowVolume
      */
     public final Volume multiplyBy(final FlowVolume v)
@@ -244,7 +244,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and Acceleration, which results in a Speed scalar.
-     * @param v Duration scalar
+     * @param v Acceleration; Duration scalar
      * @return Speed scalar as a multiplication of Duration and Acceleration
      */
     public final Speed multiplyBy(final Acceleration v)
@@ -254,7 +254,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and Power, which results in a Energy scalar.
-     * @param v Duration scalar
+     * @param v Power; Duration scalar
      * @return Energy scalar as a multiplication of Duration and Power
      */
     public final Energy multiplyBy(final Power v)
@@ -264,7 +264,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and Speed, which results in a Length scalar.
-     * @param v Duration scalar
+     * @param v Speed; Duration scalar
      * @return Length scalar as a multiplication of Duration and Speed
      */
     public final Length multiplyBy(final Speed v)
@@ -274,7 +274,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and MoneyPerDuration, which results in a Money scalar.
-     * @param v Duration scalar
+     * @param v MoneyPerDuration; Duration scalar
      * @return Money scalar as a multiplication of Duration and MoneyPerDuration
      */
     public final Money multiplyBy(final MoneyPerDuration v)

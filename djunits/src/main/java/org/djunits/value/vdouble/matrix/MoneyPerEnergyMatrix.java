@@ -25,8 +25,8 @@ public class MoneyPerEnergyMatrix
     /**
      * Construct a new Relative Immutable Double MoneyPerEnergyMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double MoneyPerEnergyMatrix
-     * @param unit U; the unit of the new Relative Immutable Double MoneyPerEnergyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerEnergyUnit; the unit of the new Relative Immutable Double MoneyPerEnergyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MoneyPerEnergyMatrix(final double[][] values, final MoneyPerEnergyUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MoneyPerEnergyMatrix
 
     /**
      * Construct a new Relative Immutable Double MoneyPerEnergyMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            MoneyPerEnergyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values MoneyPerEnergy[][]; the values of the entries in the new Relative Immutable Double MoneyPerEnergyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MoneyPerEnergyMatrix(final MoneyPerEnergy[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MoneyPerEnergyMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit MoneyPerEnergyUnit; the unit
      */
     MoneyPerEnergyMatrix(final DoubleMatrixData data, final MoneyPerEnergyUnit unit)
     {

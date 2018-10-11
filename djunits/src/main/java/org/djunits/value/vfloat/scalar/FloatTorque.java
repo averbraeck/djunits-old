@@ -59,8 +59,8 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Construct FloatTorque scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit TorqueUnit; unit for the float value
      */
     public FloatTorque(final float value, final TorqueUnit unit)
     {
@@ -69,7 +69,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Construct FloatTorque scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatTorque; Scalar from which to construct this instance
      */
     public FloatTorque(final FloatTorque value)
     {
@@ -78,8 +78,8 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Construct FloatTorque scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit TorqueUnit; unit for the resulting float value
      */
     public FloatTorque(final double value, final TorqueUnit unit)
     {
@@ -95,7 +95,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Construct FloatTorque scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatTorque createSI(final float value)
@@ -105,9 +105,9 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatTorque; the low value
+     * @param one FloatTorque; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatTorque interpolate(final FloatTorque zero, final FloatTorque one, final float ratio)
@@ -117,8 +117,8 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatTorque; the first scalar
+     * @param r2 FloatTorque; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatTorque max(final FloatTorque r1, final FloatTorque r2)
@@ -128,9 +128,9 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatTorque; the first scalar
+     * @param r2 FloatTorque; the second scalar
+     * @param rn FloatTorque...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatTorque max(final FloatTorque r1, final FloatTorque r2, final FloatTorque... rn)
@@ -148,8 +148,8 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatTorque; the first scalar
+     * @param r2 FloatTorque; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatTorque min(final FloatTorque r1, final FloatTorque r2)
@@ -159,9 +159,9 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatTorque; the first scalar
+     * @param r2 FloatTorque; the second scalar
+     * @param rn FloatTorque...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatTorque min(final FloatTorque r1, final FloatTorque r2, final FloatTorque... rn)
@@ -179,7 +179,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Calculate the division of FloatTorque and FloatTorque, which results in a FloatDimensionless scalar.
-     * @param v FloatTorque scalar
+     * @param v FloatTorque; FloatTorque scalar
      * @return FloatDimensionless scalar as a division of FloatTorque and FloatTorque
      */
     public final FloatDimensionless divideBy(final FloatTorque v)
@@ -189,7 +189,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Calculate the division of FloatTorque and FloatForce, which results in a FloatLength scalar.
-     * @param v FloatTorque scalar
+     * @param v FloatForce; FloatTorque scalar
      * @return FloatLength scalar as a division of FloatTorque and FloatForce
      */
     public final FloatLength divideBy(final FloatForce v)
@@ -199,7 +199,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Calculate the division of FloatTorque and FloatLength, which results in a FloatForce scalar.
-     * @param v FloatTorque scalar
+     * @param v FloatLength; FloatTorque scalar
      * @return FloatForce scalar as a division of FloatTorque and FloatLength
      */
     public final FloatForce divideBy(final FloatLength v)
@@ -209,7 +209,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Calculate the multiplication of FloatTorque and FloatLinearDensity, which results in a FloatForce scalar.
-     * @param v FloatTorque scalar
+     * @param v FloatLinearDensity; FloatTorque scalar
      * @return FloatForce scalar as a multiplication of FloatTorque and FloatLinearDensity
      */
     public final FloatForce multiplyBy(final FloatLinearDensity v)
@@ -219,7 +219,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Calculate the division of FloatTorque and FloatDuration, which results in a FloatPower scalar.
-     * @param v FloatTorque scalar
+     * @param v FloatDuration; FloatTorque scalar
      * @return FloatPower scalar as a division of FloatTorque and FloatDuration
      */
     public final FloatPower divideBy(final FloatDuration v)
@@ -229,7 +229,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Calculate the division of FloatTorque and FloatPower, which results in a FloatDuration scalar.
-     * @param v FloatTorque scalar
+     * @param v FloatPower; FloatTorque scalar
      * @return FloatDuration scalar as a division of FloatTorque and FloatPower
      */
     public final FloatDuration divideBy(final FloatPower v)
@@ -239,7 +239,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Calculate the multiplication of FloatTorque and FloatFrequency, which results in a FloatPower scalar.
-     * @param v FloatTorque scalar
+     * @param v FloatFrequency; FloatTorque scalar
      * @return FloatPower scalar as a multiplication of FloatTorque and FloatFrequency
      */
     public final FloatPower multiplyBy(final FloatFrequency v)
@@ -249,7 +249,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Calculate the division of FloatTorque and FloatVolume, which results in a FloatPressure scalar.
-     * @param v FloatTorque scalar
+     * @param v FloatVolume; FloatTorque scalar
      * @return FloatPressure scalar as a division of FloatTorque and FloatVolume
      */
     public final FloatPressure divideBy(final FloatVolume v)
@@ -259,7 +259,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 
     /**
      * Calculate the division of FloatTorque and FloatPressure, which results in a FloatVolume scalar.
-     * @param v FloatTorque scalar
+     * @param v FloatPressure; FloatTorque scalar
      * @return FloatVolume scalar as a division of FloatTorque and FloatPressure
      */
     public final FloatVolume divideBy(final FloatPressure v)

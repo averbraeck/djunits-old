@@ -38,8 +38,8 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Construct Direction scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit DirectionUnit; unit for the double value
      */
     public Direction(final double value, final DirectionUnit unit)
     {
@@ -48,7 +48,7 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Construct Direction scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Direction; Scalar from which to construct this instance
      */
     public Direction(final Direction value)
     {
@@ -71,7 +71,7 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Construct %TypeAbsl% scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Direction createSI(final double value)
@@ -81,9 +81,9 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Direction; the low value
+     * @param one Direction; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Direction interpolate(final Direction zero, final Direction one, final double ratio)
@@ -93,8 +93,8 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
      * @return the maximum value of two absolute scalars
      */
     public static Direction max(final Direction a1, final Direction a2)
@@ -104,9 +104,9 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
+     * @param an Direction...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static Direction max(final Direction a1, final Direction a2, final Direction... an)
@@ -124,8 +124,8 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static Direction min(final Direction a1, final Direction a2)
@@ -135,9 +135,9 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
+     * @param an Direction...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static Direction min(final Direction a1, final Direction a2, final Direction... an)

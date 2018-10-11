@@ -60,8 +60,8 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Construct FloatSpeed scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit SpeedUnit; unit for the float value
      */
     public FloatSpeed(final float value, final SpeedUnit unit)
     {
@@ -70,7 +70,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Construct FloatSpeed scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatSpeed; Scalar from which to construct this instance
      */
     public FloatSpeed(final FloatSpeed value)
     {
@@ -79,8 +79,8 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Construct FloatSpeed scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit SpeedUnit; unit for the resulting float value
      */
     public FloatSpeed(final double value, final SpeedUnit unit)
     {
@@ -96,7 +96,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Construct FloatSpeed scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatSpeed createSI(final float value)
@@ -106,9 +106,9 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatSpeed; the low value
+     * @param one FloatSpeed; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatSpeed interpolate(final FloatSpeed zero, final FloatSpeed one, final float ratio)
@@ -118,8 +118,8 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatSpeed; the first scalar
+     * @param r2 FloatSpeed; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatSpeed max(final FloatSpeed r1, final FloatSpeed r2)
@@ -129,9 +129,9 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatSpeed; the first scalar
+     * @param r2 FloatSpeed; the second scalar
+     * @param rn FloatSpeed...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatSpeed max(final FloatSpeed r1, final FloatSpeed r2, final FloatSpeed... rn)
@@ -149,8 +149,8 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatSpeed; the first scalar
+     * @param r2 FloatSpeed; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatSpeed min(final FloatSpeed r1, final FloatSpeed r2)
@@ -160,9 +160,9 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatSpeed; the first scalar
+     * @param r2 FloatSpeed; the second scalar
+     * @param rn FloatSpeed...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatSpeed min(final FloatSpeed r1, final FloatSpeed r2, final FloatSpeed... rn)
@@ -180,7 +180,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Calculate the division of FloatSpeed and FloatSpeed, which results in a FloatDimensionless scalar.
-     * @param v FloatSpeed scalar
+     * @param v FloatSpeed; FloatSpeed scalar
      * @return FloatDimensionless scalar as a division of FloatSpeed and FloatSpeed
      */
     public final FloatDimensionless divideBy(final FloatSpeed v)
@@ -190,7 +190,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Calculate the multiplication of FloatSpeed and FloatArea, which results in a FloatFlowVolume scalar.
-     * @param v FloatSpeed scalar
+     * @param v FloatArea; FloatSpeed scalar
      * @return FloatFlowVolume scalar as a multiplication of FloatSpeed and FloatArea
      */
     public final FloatFlowVolume multiplyBy(final FloatArea v)
@@ -200,7 +200,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Calculate the multiplication of FloatSpeed and FloatForce, which results in a FloatPower scalar.
-     * @param v FloatSpeed scalar
+     * @param v FloatForce; FloatSpeed scalar
      * @return FloatPower scalar as a multiplication of FloatSpeed and FloatForce
      */
     public final FloatPower multiplyBy(final FloatForce v)
@@ -210,7 +210,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Calculate the multiplication of FloatSpeed and FloatFrequency, which results in a FloatAcceleration scalar.
-     * @param v FloatSpeed scalar
+     * @param v FloatFrequency; FloatSpeed scalar
      * @return FloatAcceleration scalar as a multiplication of FloatSpeed and FloatFrequency
      */
     public final FloatAcceleration multiplyBy(final FloatFrequency v)
@@ -220,7 +220,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Calculate the division of FloatSpeed and FloatLength, which results in a FloatFrequency scalar.
-     * @param v FloatSpeed scalar
+     * @param v FloatLength; FloatSpeed scalar
      * @return FloatFrequency scalar as a division of FloatSpeed and FloatLength
      */
     public final FloatFrequency divideBy(final FloatLength v)
@@ -230,7 +230,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Calculate the division of FloatSpeed and FloatFrequency, which results in a FloatLength scalar.
-     * @param v FloatSpeed scalar
+     * @param v FloatFrequency; FloatSpeed scalar
      * @return FloatLength scalar as a division of FloatSpeed and FloatFrequency
      */
     public final FloatLength divideBy(final FloatFrequency v)
@@ -240,7 +240,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Calculate the multiplication of FloatSpeed and FloatLinearDensity, which results in a FloatFrequency scalar.
-     * @param v FloatSpeed scalar
+     * @param v FloatLinearDensity; FloatSpeed scalar
      * @return FloatFrequency scalar as a multiplication of FloatSpeed and FloatLinearDensity
      */
     public final FloatFrequency multiplyBy(final FloatLinearDensity v)
@@ -250,7 +250,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Calculate the multiplication of FloatSpeed and FloatDuration, which results in a FloatLength scalar.
-     * @param v FloatSpeed scalar
+     * @param v FloatDuration; FloatSpeed scalar
      * @return FloatLength scalar as a multiplication of FloatSpeed and FloatDuration
      */
     public final FloatLength multiplyBy(final FloatDuration v)
@@ -260,7 +260,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Calculate the division of FloatSpeed and FloatDuration, which results in a FloatAcceleration scalar.
-     * @param v FloatSpeed scalar
+     * @param v FloatDuration; FloatSpeed scalar
      * @return FloatAcceleration scalar as a division of FloatSpeed and FloatDuration
      */
     public final FloatAcceleration divideBy(final FloatDuration v)
@@ -270,7 +270,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Calculate the division of FloatSpeed and FloatAcceleration, which results in a FloatDuration scalar.
-     * @param v FloatSpeed scalar
+     * @param v FloatAcceleration; FloatSpeed scalar
      * @return FloatDuration scalar as a division of FloatSpeed and FloatAcceleration
      */
     public final FloatDuration divideBy(final FloatAcceleration v)
@@ -280,7 +280,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 
     /**
      * Calculate the multiplication of FloatSpeed and FloatFlowMass, which results in a FloatForce scalar.
-     * @param v FloatSpeed scalar
+     * @param v FloatFlowMass; FloatSpeed scalar
      * @return FloatForce scalar as a multiplication of FloatSpeed and FloatFlowMass
      */
     public final FloatForce multiplyBy(final FloatFlowMass v)

@@ -25,8 +25,8 @@ public class MutableFloatTemperatureMatrix extends
     /**
      * Construct a new Relative Mutable FloatTemperatureMatrix.
      * @param values float[][]; the values of the entries in the new Relative Mutable FloatTemperatureMatrix
-     * @param unit U; the unit of the new Relative Mutable FloatTemperatureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit TemperatureUnit; the unit of the new Relative Mutable FloatTemperatureMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatTemperatureMatrix(final float[][] values, final TemperatureUnit unit, final StorageType storageType)
@@ -37,8 +37,8 @@ public class MutableFloatTemperatureMatrix extends
 
     /**
      * Construct a new Relative Mutable FloatTemperatureMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Mutable FloatTemperatureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatTemperature[][]; the values of the entries in the new Relative Mutable FloatTemperatureMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatTemperatureMatrix(final FloatTemperature[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class MutableFloatTemperatureMatrix extends
 
     /**
      * Construct a new Relative Mutable FloatTemperatureMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit TemperatureUnit; the unit
      */
     MutableFloatTemperatureMatrix(final FloatMatrixData data, final TemperatureUnit unit)
     {

@@ -77,8 +77,8 @@ public abstract class UnitSystem implements Serializable
     private static Localization localization = new Localization("localeunitsystem");
 
     /**
-     * @param abbreviationKey the abbreviation of the unit system, such as cgs
-     * @param nameKey the name of the unit system, such as centimeter-gram-second
+     * @param abbreviationKey String; the abbreviation of the unit system, such as cgs
+     * @param nameKey String; the name of the unit system, such as centimeter-gram-second
      */
     protected UnitSystem(final String abbreviationKey, final String nameKey)
     {

@@ -28,8 +28,8 @@ public class FloatTemperatureVector
     /**
      * Construct a new Relative Immutable FloatTemperatureVector.
      * @param values float[]; the values of the entries in the new Relative Immutable FloatTemperatureVector
-     * @param unit U; the unit of the new Relative Immutable FloatTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit TemperatureUnit; the unit of the new Relative Immutable FloatTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatTemperatureVector(final float[] values, final TemperatureUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class FloatTemperatureVector
 
     /**
      * Construct a new Relative Immutable FloatTemperatureVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatTemperatureVector
-     * @param unit U; the unit of the new Relative Immutable FloatTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable FloatTemperatureVector
+     * @param unit TemperatureUnit; the unit of the new Relative Immutable FloatTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatTemperatureVector(final List<Float> values, final TemperatureUnit unit, final StorageType storageType)
@@ -53,8 +53,8 @@ public class FloatTemperatureVector
 
     /**
      * Construct a new Relative Immutable FloatTemperatureVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable FloatTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatTemperature[]; the values of the entries in the new Relative Immutable FloatTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatTemperatureVector(final FloatTemperature[] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,9 @@ public class FloatTemperatureVector
 
     /**
      * Construct a new Relative Immutable FloatTemperatureVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatTemperature&gt;; the values of the entries in the new Relative Immutable
+     *            FloatTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatTemperatureVector(final List<FloatTemperature> values, final StorageType storageType) throws ValueException
@@ -75,10 +76,10 @@ public class FloatTemperatureVector
 
     /**
      * Construct a new Relative Immutable FloatTemperatureVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
+     * @param values SortedMap&lt;Integer, FloatTemperature&gt;; the values of the entries in the new Relative Sparse Mutable
      *            FloatTemperatureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatTemperatureVector(final SortedMap<Integer, FloatTemperature> values, final int length,
@@ -89,10 +90,11 @@ public class FloatTemperatureVector
 
     /**
      * Construct a new Relative Immutable FloatTemperatureVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatTemperatureVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatTemperatureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable
+     *            FloatTemperatureVector
+     * @param unit TemperatureUnit; the unit of the new Relative Sparse Mutable FloatTemperatureVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatTemperatureVector(final SortedMap<Integer, Float> values, final TemperatureUnit unit, final int length,
@@ -103,8 +105,8 @@ public class FloatTemperatureVector
 
     /**
      * Construct a new Relative Immutable FloatTemperatureVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit TemperatureUnit; the unit
      */
     FloatTemperatureVector(final FloatVectorData data, final TemperatureUnit unit)
     {

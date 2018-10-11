@@ -57,8 +57,8 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Construct FloatFrequency scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit FrequencyUnit; unit for the float value
      */
     public FloatFrequency(final float value, final FrequencyUnit unit)
     {
@@ -67,7 +67,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Construct FloatFrequency scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatFrequency; Scalar from which to construct this instance
      */
     public FloatFrequency(final FloatFrequency value)
     {
@@ -76,8 +76,8 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Construct FloatFrequency scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit FrequencyUnit; unit for the resulting float value
      */
     public FloatFrequency(final double value, final FrequencyUnit unit)
     {
@@ -93,7 +93,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Construct FloatFrequency scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatFrequency createSI(final float value)
@@ -103,9 +103,9 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatFrequency; the low value
+     * @param one FloatFrequency; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatFrequency interpolate(final FloatFrequency zero, final FloatFrequency one, final float ratio)
@@ -115,8 +115,8 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatFrequency; the first scalar
+     * @param r2 FloatFrequency; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatFrequency max(final FloatFrequency r1, final FloatFrequency r2)
@@ -126,9 +126,9 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatFrequency; the first scalar
+     * @param r2 FloatFrequency; the second scalar
+     * @param rn FloatFrequency...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatFrequency max(final FloatFrequency r1, final FloatFrequency r2, final FloatFrequency... rn)
@@ -146,8 +146,8 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatFrequency; the first scalar
+     * @param r2 FloatFrequency; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatFrequency min(final FloatFrequency r1, final FloatFrequency r2)
@@ -157,9 +157,9 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatFrequency; the first scalar
+     * @param r2 FloatFrequency; the second scalar
+     * @param rn FloatFrequency...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatFrequency min(final FloatFrequency r1, final FloatFrequency r2, final FloatFrequency... rn)
@@ -177,7 +177,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Calculate the division of FloatFrequency and FloatFrequency, which results in a FloatDimensionless scalar.
-     * @param v FloatFrequency scalar
+     * @param v FloatFrequency; FloatFrequency scalar
      * @return FloatDimensionless scalar as a division of FloatFrequency and FloatFrequency
      */
     public final FloatDimensionless divideBy(final FloatFrequency v)
@@ -187,7 +187,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Calculate the multiplication of FloatFrequency and FloatDuration, which results in a FloatDimensionless scalar.
-     * @param v FloatFrequency scalar
+     * @param v FloatDuration; FloatFrequency scalar
      * @return FloatDimensionless scalar as a multiplication of FloatFrequency and FloatDuration
      */
     public final FloatDimensionless multiplyBy(final FloatDuration v)
@@ -197,7 +197,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Calculate the multiplication of FloatFrequency and FloatLength, which results in a FloatSpeed scalar.
-     * @param v FloatFrequency scalar
+     * @param v FloatLength; FloatFrequency scalar
      * @return FloatSpeed scalar as a multiplication of FloatFrequency and FloatLength
      */
     public final FloatSpeed multiplyBy(final FloatLength v)
@@ -207,7 +207,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Calculate the multiplication of FloatFrequency and FloatSpeed, which results in a FloatAcceleration scalar.
-     * @param v FloatFrequency scalar
+     * @param v FloatSpeed; FloatFrequency scalar
      * @return FloatAcceleration scalar as a multiplication of FloatFrequency and FloatSpeed
      */
     public final FloatAcceleration multiplyBy(final FloatSpeed v)
@@ -217,7 +217,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Calculate the multiplication of FloatFrequency and FloatEnergy, which results in a FloatPower scalar.
-     * @param v FloatFrequency scalar
+     * @param v FloatEnergy; FloatFrequency scalar
      * @return FloatPower scalar as a multiplication of FloatFrequency and FloatEnergy
      */
     public final FloatPower multiplyBy(final FloatEnergy v)
@@ -227,7 +227,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Calculate the multiplication of FloatFrequency and FloatMoney, which results in a FloatMoneyPerDuration scalar.
-     * @param v FloatFrequency scalar
+     * @param v FloatMoney; FloatFrequency scalar
      * @return FloatMoneyPerDuration scalar as a multiplication of FloatFrequency and FloatMoney
      */
     public final FloatMoneyPerDuration multiplyBy(final FloatMoney v)

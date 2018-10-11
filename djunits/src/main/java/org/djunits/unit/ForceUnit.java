@@ -77,14 +77,16 @@ public class ForceUnit extends LinearUnit<ForceUnit>
 
     /**
      * Build a ForceUnit based on its constituent base units, e.g. a N = km.m/s^2.
-     * @param massUnit the unit of mass for the force unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the force unit, e.g., meter
-     * @param durationUnit the unit of time for the force unit, e.g., second
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param massUnit MassUnit; the unit of mass for the force unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the force unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the force unit, e.g., second
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private ForceUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
             final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
@@ -99,12 +101,12 @@ public class ForceUnit extends LinearUnit<ForceUnit>
 
     /**
      * Build a user-defined ForceUnit based on its constituent base units, e.g. a N = km.m/s^2.
-     * @param massUnit the unit of mass for the force unit, e.g., kilogram
-     * @param lengthUnit the unit of length for the force unit, e.g., meter
-     * @param durationUnit the unit of time for the force unit, e.g., second
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param massUnit MassUnit; the unit of mass for the force unit, e.g., kilogram
+     * @param lengthUnit LengthUnit; the unit of length for the force unit, e.g., meter
+     * @param durationUnit DurationUnit; the unit of time for the force unit, e.g., second
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public ForceUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
@@ -114,13 +116,15 @@ public class ForceUnit extends LinearUnit<ForceUnit>
 
     /**
      * Build a ForceUnit based on a MassUnit and an AccelerationUnit, i.e. based on F=m.a.
-     * @param massUnit the unit of mass for the force unit, e.g., kilogram
-     * @param accelerationUnit the unit of acceleration for the force unit, e.g., m/s^2
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param massUnit MassUnit; the unit of mass for the force unit, e.g., kilogram
+     * @param accelerationUnit AccelerationUnit; the unit of acceleration for the force unit, e.g., m/s^2
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private ForceUnit(final MassUnit massUnit, final AccelerationUnit accelerationUnit, final String nameOrNameKey,
             final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
@@ -134,11 +138,11 @@ public class ForceUnit extends LinearUnit<ForceUnit>
 
     /**
      * Build a user-defined ForceUnit based on a MassUnit and an AccelerationUnit, i.e. based on F=m.a.
-     * @param massUnit the unit of mass for the force unit, e.g., kilogram
-     * @param accelerationUnit the unit of acceleration for the force unit, e.g., m/s^2
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param massUnit MassUnit; the unit of mass for the force unit, e.g., kilogram
+     * @param accelerationUnit AccelerationUnit; the unit of acceleration for the force unit, e.g., m/s^2
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     public ForceUnit(final MassUnit massUnit, final AccelerationUnit accelerationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
@@ -148,13 +152,16 @@ public class ForceUnit extends LinearUnit<ForceUnit>
 
     /**
      * Build a ForceUnit with a conversion factor to another ForceUnit.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit ForceUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private ForceUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final ForceUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
@@ -168,11 +175,12 @@ public class ForceUnit extends LinearUnit<ForceUnit>
 
     /**
      * Build a user-defined ForceUnit with a conversion factor to another ForceUnit.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToReferenceUnit multiply a value in this unit by the factor to convert to the given reference unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit ForceUnit; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
+     *            unit
      */
     public ForceUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final ForceUnit referenceUnit,
             final double scaleFactorToReferenceUnit)

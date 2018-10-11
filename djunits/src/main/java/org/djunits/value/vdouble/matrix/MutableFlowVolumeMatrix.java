@@ -25,8 +25,8 @@ public class MutableFlowVolumeMatrix
     /**
      * Construct a new Relative Immutable Double FlowVolumeMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double FlowVolumeMatrix
-     * @param unit U; the unit of the new Relative Immutable Double FlowVolumeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FlowVolumeUnit; the unit of the new Relative Immutable Double FlowVolumeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFlowVolumeMatrix(final double[][] values, final FlowVolumeUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableFlowVolumeMatrix
 
     /**
      * Construct a new Relative Immutable Double FlowVolumeMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            FlowVolumeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FlowVolume[][]; the values of the entries in the new Relative Immutable Double FlowVolumeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFlowVolumeMatrix(final FlowVolume[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableFlowVolumeMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit FlowVolumeUnit; the unit
      */
     MutableFlowVolumeMatrix(final DoubleMatrixData data, final FlowVolumeUnit unit)
     {

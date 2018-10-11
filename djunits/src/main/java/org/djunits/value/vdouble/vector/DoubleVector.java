@@ -37,7 +37,7 @@ public abstract class DoubleVector
          * Construct a new Absolute Mutable DoubleVector.
          * @param values double[]; the values of the entries in the new Absolute Mutable DoubleVector
          * @param unit AU; the unit of the new Absolute Mutable DoubleVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Abs(final double[] values, final AU unit, final StorageType storageType) throws ValueException
@@ -47,9 +47,9 @@ public abstract class DoubleVector
 
         /**
          * Construct a new Absolute Mutable DoubleVector.
-         * @param values List; the values of the entries in the new Absolute Mutable DoubleVector
+         * @param values List&lt;Double&gt;; the values of the entries in the new Absolute Mutable DoubleVector
          * @param unit AU; the unit of the new Absolute Mutable DoubleVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Abs(final List<Double> values, final AU unit, final StorageType storageType) throws ValueException
@@ -59,8 +59,8 @@ public abstract class DoubleVector
 
         /**
          * Construct a new Absolute Mutable DoubleVector.
-         * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable DoubleVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values DoubleScalar.Abs&lt;AU, RU&gt;[]; the values of the entries in the new Absolute Mutable DoubleVector
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Abs(final DoubleScalar.Abs<AU, RU>[] values, final StorageType storageType) throws ValueException
@@ -70,8 +70,9 @@ public abstract class DoubleVector
 
         /**
          * Construct a new Absolute Mutable DoubleVector.
-         * @param values List; the values of the entries in the new Absolute Mutable DoubleVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values List&lt;DoubleScalar.Abs&lt;AU, RU&gt;&gt;; the values of the entries in the new Absolute Mutable
+         *            DoubleVector
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Abs(final List<DoubleScalar.Abs<AU, RU>> values, final StorageType storageType) throws ValueException
@@ -81,9 +82,10 @@ public abstract class DoubleVector
 
         /**
          * Construct a new Absolute Mutable DoubleVector.
-         * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable DoubleVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values SortedMap&lt;Integer, DoubleScalar.Abs&lt;AU, RU&gt;&gt;; the values of the entries in the new Absolute
+         *            Sparse Mutable DoubleVector
+         * @param length int; the size of the vector
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Abs(final SortedMap<Integer, DoubleScalar.Abs<AU, RU>> values, final int length, final StorageType storageType)
@@ -94,10 +96,11 @@ public abstract class DoubleVector
 
         /**
          * Construct a new Absolute Mutable DoubleVector.
-         * @param values Map; the map of indexes to values of the Absolute Sparse Mutable DoubleVector
+         * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Absolute Sparse Mutable
+         *            DoubleVector
          * @param unit AU; the unit of the new Absolute Sparse Mutable DoubleVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param length int; the size of the vector
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Abs(final SortedMap<Integer, Double> values, final AU unit, final int length, final StorageType storageType)
@@ -108,8 +111,8 @@ public abstract class DoubleVector
 
         /**
          * Construct a new Absolute Mutable DoubleVector.
-         * @param data an internal data object
-         * @param unit the unit
+         * @param data DoubleVectorData; an internal data object
+         * @param unit AU; the unit
          */
         public Abs(final DoubleVectorData data, final AU unit)
         {
@@ -174,7 +177,7 @@ public abstract class DoubleVector
          * Construct a new Relative Mutable DoubleVector.
          * @param values double[]; the values of the entries in the new Relative Mutable DoubleVector
          * @param unit U; the unit of the new Relative Mutable DoubleVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Rel(final double[] values, final U unit, final StorageType storageType) throws ValueException
@@ -184,9 +187,9 @@ public abstract class DoubleVector
 
         /**
          * Construct a new Relative Mutable DoubleVector.
-         * @param values List; the values of the entries in the new Relative Mutable DoubleVector
+         * @param values List&lt;Double&gt;; the values of the entries in the new Relative Mutable DoubleVector
          * @param unit U; the unit of the new Relative Mutable DoubleVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Rel(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
@@ -197,7 +200,7 @@ public abstract class DoubleVector
         /**
          * Construct a new Relative Mutable DoubleVector.
          * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable DoubleVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Rel(final DoubleScalar.Rel<U>[] values, final StorageType storageType) throws ValueException
@@ -207,8 +210,9 @@ public abstract class DoubleVector
 
         /**
          * Construct a new Relative Mutable DoubleVector.
-         * @param values List; the values of the entries in the new Relative Mutable DoubleVector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values List&lt;DoubleScalar.Rel&lt;U&gt;&gt;; the values of the entries in the new Relative Mutable
+         *            DoubleVector
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Rel(final List<DoubleScalar.Rel<U>> values, final StorageType storageType) throws ValueException
@@ -218,9 +222,10 @@ public abstract class DoubleVector
 
         /**
          * Construct a new Relative Mutable DoubleVector.
-         * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable DoubleVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values SortedMap&lt;Integer, DoubleScalar.Rel&lt;U&gt;&gt;; the values of the entries in the new Relative
+         *            Sparse Mutable DoubleVector
+         * @param length int; the size of the vector
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Rel(final SortedMap<Integer, DoubleScalar.Rel<U>> values, final int length, final StorageType storageType)
@@ -231,10 +236,11 @@ public abstract class DoubleVector
 
         /**
          * Construct a new Relative Mutable DoubleVector.
-         * @param values Map; the map of indexes to values of the Relative Sparse Mutable DoubleVector
+         * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable
+         *            DoubleVector
          * @param unit U; the unit of the new Relative Sparse Mutable DoubleVector
-         * @param length the size of the vector
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param length int; the size of the vector
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Rel(final SortedMap<Integer, Double> values, final U unit, final int length, final StorageType storageType)
@@ -245,8 +251,8 @@ public abstract class DoubleVector
 
         /**
          * Construct a new Relative Mutable DoubleVector.
-         * @param data an internal data object
-         * @param unit the unit
+         * @param data DoubleVectorData; an internal data object
+         * @param unit U; the unit
          */
         public Rel(final DoubleVectorData data, final U unit)
         {

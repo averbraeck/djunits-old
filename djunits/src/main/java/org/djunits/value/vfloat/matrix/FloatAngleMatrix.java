@@ -24,8 +24,8 @@ public class FloatAngleMatrix extends AbstractFloatMatrixRel<AngleUnit, FloatAng
     /**
      * Construct a new Relative Immutable FloatAngleMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatAngleMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatAngleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AngleUnit; the unit of the new Relative Immutable FloatAngleMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatAngleMatrix(final float[][] values, final AngleUnit unit, final StorageType storageType) throws ValueException
@@ -35,8 +35,8 @@ public class FloatAngleMatrix extends AbstractFloatMatrixRel<AngleUnit, FloatAng
 
     /**
      * Construct a new Relative Immutable FloatAngleMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable FloatAngleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatAngle[][]; the values of the entries in the new Relative Immutable FloatAngleMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatAngleMatrix(final FloatAngle[][] values, final StorageType storageType) throws ValueException
@@ -46,8 +46,8 @@ public class FloatAngleMatrix extends AbstractFloatMatrixRel<AngleUnit, FloatAng
 
     /**
      * Construct a new Relative Immutable FloatAngleMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit AngleUnit; the unit
      */
     FloatAngleMatrix(final FloatMatrixData data, final AngleUnit unit)
     {

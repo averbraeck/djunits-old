@@ -28,8 +28,8 @@ public class MutableFloatForceVector
     /**
      * Construct a new Relative Immutable Float ForceVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float ForceVector
-     * @param unit U; the unit of the new Relative Immutable Float ForceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ForceUnit; the unit of the new Relative Immutable Float ForceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatForceVector(final float[] values, final ForceUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatForceVector
 
     /**
      * Construct a new Relative Immutable Float ForceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float ForceVector
-     * @param unit U; the unit of the new Relative Immutable Float ForceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float ForceVector
+     * @param unit ForceUnit; the unit of the new Relative Immutable Float ForceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatForceVector(final List<Float> values, final ForceUnit unit, final StorageType storageType)
@@ -53,8 +53,8 @@ public class MutableFloatForceVector
 
     /**
      * Construct a new Relative Immutable Float ForceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float ForceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatForce[]; the values of the entries in the new Relative Immutable Float ForceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatForceVector(final FloatForce[] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ public class MutableFloatForceVector
 
     /**
      * Construct a new Relative Immutable Float ForceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float ForceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatForce&gt;; the values of the entries in the new Relative Immutable Float ForceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatForceVector(final List<FloatForce> values, final StorageType storageType) throws ValueException
@@ -75,9 +75,10 @@ public class MutableFloatForceVector
 
     /**
      * Construct a new Relative Immutable Float ForceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float ForceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatForce&gt;; the values of the entries in the new Relative Sparse Mutable Float
+     *            ForceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatForceVector(final SortedMap<Integer, FloatForce> values, final int length, final StorageType storageType)
@@ -88,10 +89,11 @@ public class MutableFloatForceVector
 
     /**
      * Construct a new Relative Immutable Float ForceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float ForceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float ForceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            ForceVector
+     * @param unit ForceUnit; the unit of the new Relative Sparse Mutable Float ForceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatForceVector(final SortedMap<Integer, Float> values, final ForceUnit unit, final int length,
@@ -101,8 +103,8 @@ public class MutableFloatForceVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit ForceUnit; the unit
      */
     MutableFloatForceVector(final FloatVectorData data, final ForceUnit unit)
     {

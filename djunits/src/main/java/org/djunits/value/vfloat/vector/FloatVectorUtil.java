@@ -63,9 +63,9 @@ public final class FloatVectorUtil
 
     /**
      * Instantiate the FloatVector based on its unit. Rigid check on types for the compiler.
-     * @param value the value
-     * @param unit the unit in which the value is expressed
-     * @param storageType whether the vector is SPARSE or DENSE
+     * @param value float[]; the value
+     * @param unit U; the unit in which the value is expressed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return an instantiated FloatVector with the value expressed in the unit
      * @param <U> the unit
      * @param <S> the return type
@@ -88,9 +88,9 @@ public final class FloatVectorUtil
      * MoneyPerArea mpa = FloatVectorUtil.instantiateAnonymous(10.0, mlu);
      * </pre>
      * 
-     * @param value the value
-     * @param unit the unit in which the value is expressed
-     * @param storageType whether the vector is SPARSE or DENSE
+     * @param value float[]; the value
+     * @param unit Unit&lt;?&gt;; the unit in which the value is expressed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return an instantiated FloatVector with the value expressed in the unit
      * @param <S> the return type
      * @throws ValueException on vector init error
@@ -177,9 +177,9 @@ public final class FloatVectorUtil
 
     /**
      * Instantiate the FloatVector based on its unit.
-     * @param si the value in SI units
-     * @param displayUnit the unit in which the value is expressed
-     * @param storageType whether the vector is SPARSE or DENSE
+     * @param si float[]; the value in SI units
+     * @param displayUnit U; the unit in which the value is expressed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return an instantiated FloatVector with the value expressed in the unit
      * @throws ValueException on vector init error
      * @param <U> the unit
@@ -202,9 +202,9 @@ public final class FloatVectorUtil
      * MoneyPerArea mpa = FloatVectorUtil.instantiateAnonymousSI(10.0, mlu);
      * </pre>
      * 
-     * @param si the value in SI units
-     * @param displayUnit the unit in which the value is expressed
-     * @param storageType whether the vector is SPARSE or DENSE
+     * @param si float[]; the value in SI units
+     * @param displayUnit Unit&lt;?&gt;; the unit in which the value is expressed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return an instantiated FloatVector with the value expressed in the unit
      * @throws ValueException on vector init error
      * @param <S> the return type

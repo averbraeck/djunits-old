@@ -23,8 +23,8 @@ public class Test
 {
 
     /**
-     * @param args args
-     * @throws ValueException on error 
+     * @param args String[]; args
+     * @throws ValueException on error
      */
     public static void main(final String[] args) throws ValueException
     {
@@ -32,12 +32,18 @@ public class Test
         DoubleScalar.Rel<JerkUnit> jerk2 = jerk1.multiplyBy(2.0);
         double[] sv = new double[] { 1, 2, 3, 4, 5 };
         DoubleVector.Rel<JerkUnit> jerkVector = new DoubleVector.Rel<JerkUnit>(sv, JerkUnit.SI, StorageType.DENSE);
-        
+
         Jerk jjerk1 = new Jerk(1.2, JerkUnit.SI);
         Jerk jjerk2 = jjerk1.multiplyBy(2.0);
 
         double[][] data = new double[1000][1000];
-        for (int i=0; i<1000; i++) { for (int j=0; j<1000; j++) {data[i][j] = 9*i + 2*j * 0.364; }}
+        for (int i = 0; i < 1000; i++)
+        {
+            for (int j = 0; j < 1000; j++)
+            {
+                data[i][j] = 9 * i + 2 * j * 0.364;
+            }
+        }
         MutableLengthMatrix lengthMatrix = new MutableLengthMatrix(data, LengthUnit.CENTIMETER, StorageType.DENSE);
         lengthMatrix.round();
     }

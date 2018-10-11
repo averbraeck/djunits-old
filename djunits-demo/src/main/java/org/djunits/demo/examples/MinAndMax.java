@@ -39,7 +39,7 @@ public final class MinAndMax
     }
 
     /**
-     * @param args the arguments for the main program, not used
+     * @param args String[]; the arguments for the main program, not used
      * @throws ValueException on vector error
      */
     public static void main(final String[] args) throws ValueException
@@ -82,8 +82,7 @@ public final class MinAndMax
         FloatDirection fd2 = new FloatDirection(12.0, DirectionUnit.NORTH_DEGREE);
         FloatDirection fd3 = new FloatDirection(8.0, DirectionUnit.NORTH_DEGREE);
         FloatDirection fd4 = new FloatDirection(16.0, DirectionUnit.NORTH_DEGREE);
-        FloatDirectionVector fdv =
-                new FloatDirectionVector(new FloatDirection[] { fd1, fd2, fd3, fd4 }, StorageType.DENSE);
+        FloatDirectionVector fdv = new FloatDirectionVector(new FloatDirection[] { fd1, fd2, fd3, fd4 }, StorageType.DENSE);
         System.out.println("min of " + fd1 + " and " + fd2 + " = " + FloatDirection.min(fd1, fd2));
         System.out.println("max of " + fd1 + " and " + fd2 + " = " + FloatDirection.max(fd1, fd2));
         System.out.println("min of " + fdv + " = " + FloatDirection.min(fd1, fd2, fd3, fd4));

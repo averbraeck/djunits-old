@@ -25,8 +25,8 @@ public class MutableFloatFlowMassMatrix
     /**
      * Construct a new Relative Immutable FloatFlowMassMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatFlowMassMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatFlowMassMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FlowMassUnit; the unit of the new Relative Immutable FloatFlowMassMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatFlowMassMatrix(final float[][] values, final FlowMassUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableFloatFlowMassMatrix
 
     /**
      * Construct a new Relative Immutable FloatFlowMassMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatFlowMassMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatFlowMass[][]; the values of the entries in the new Relative Immutable Float FloatFlowMassMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatFlowMassMatrix(final FloatFlowMass[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableFloatFlowMassMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit FlowMassUnit; the unit
      */
     MutableFloatFlowMassMatrix(final FloatMatrixData data, final FlowMassUnit unit)
     {

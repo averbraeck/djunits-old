@@ -37,7 +37,7 @@ abstract class FloatMatrixData
     private final StorageType storageType;
 
     /**
-     * @param storageType the data type.
+     * @param storageType StorageType; the data type.
      */
     FloatMatrixData(final StorageType storageType)
     {
@@ -51,9 +51,9 @@ abstract class FloatMatrixData
 
     /**
      * Instantiate a FloatMatrixData with the right data type.
-     * @param values the (SI) values to store
-     * @param scale the scale of the unit to use for conversion to SI
-     * @param storageType the data type to use
+     * @param values float[][]; the (SI) values to store
+     * @param scale Scale; the scale of the unit to use for conversion to SI
+     * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
      * @throws ValueException when values are null, or storageType is null
      */
@@ -90,8 +90,8 @@ abstract class FloatMatrixData
 
     /**
      * Instantiate a FloatMatrixData with the right data type.
-     * @param values the values to store
-     * @param storageType the data type to use
+     * @param values FloatScalarInterface[][]; the values to store
+     * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
@@ -193,17 +193,17 @@ abstract class FloatMatrixData
     }
 
     /**
-     * @param row the row number to get the value for
-     * @param col the column number to get the value for
+     * @param row int; the row number to get the value for
+     * @param col int; the column number to get the value for
      * @return the value at the [row, col] point
      */
     public abstract float getSI(int row, int col);
 
     /**
      * Sets a value at the [row, col] point in the matrix.
-     * @param row the row number to set the value for
-     * @param col the column number to set the value for
-     * @param valueSI the value at the index
+     * @param row int; the row number to set the value for
+     * @param col int; the column number to set the value for
+     * @param valueSI float; the value at the index
      */
     public abstract void setSI(int row, int col, float valueSI);
 
@@ -243,7 +243,7 @@ abstract class FloatMatrixData
 
     /**
      * Check the sizes of this data object and the other data object.
-     * @param other the other data object
+     * @param other FloatMatrixData; the other data object
      * @throws ValueException if matrices have different lengths
      */
     private void checkSizes(final FloatMatrixData other) throws ValueException
@@ -261,7 +261,7 @@ abstract class FloatMatrixData
     /**
      * Add two matrices on a cell-by-cell basis. If both matrices are sparse, a sparse matrix is returned, otherwise a dense
      * matrix is returned.
-     * @param right the other data object to add
+     * @param right FloatMatrixData; the other data object to add
      * @return the sum of this data object and the other data object
      * @throws ValueException if matrices have different lengths
      */
@@ -280,14 +280,14 @@ abstract class FloatMatrixData
 
     /**
      * Add a matrix to this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
-     * @param right the other data object to add
+     * @param right FloatMatrixData; the other data object to add
      * @throws ValueException if matrices have different lengths
      */
     public abstract void incrementBy(FloatMatrixData right) throws ValueException;
 
     /**
      * Add a number to this matrix on a cell-by-cell basis.
-     * @param valueSI the value to add
+     * @param valueSI float; the value to add
      */
     public void incrementBy(final float valueSI)
     {
@@ -297,7 +297,7 @@ abstract class FloatMatrixData
     /**
      * Subtract two matrices on a cell-by-cell basis. If both matrices are sparse, a sparse matrix is returned, otherwise a
      * dense matrix is returned.
-     * @param right the other data object to subtract
+     * @param right FloatMatrixData; the other data object to subtract
      * @return the sum of this data object and the other data object
      * @throws ValueException if matrices have different lengths
      */
@@ -316,14 +316,14 @@ abstract class FloatMatrixData
 
     /**
      * Subtract a matrix from this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
-     * @param right the other data object to subtract
+     * @param right FloatMatrixData; the other data object to subtract
      * @throws ValueException if matrices have different lengths
      */
     public abstract void decrementBy(FloatMatrixData right) throws ValueException;
 
     /**
      * Subtract a number from this matrix on a cell-by-cell basis.
-     * @param valueSI the value to subtract
+     * @param valueSI float; the value to subtract
      */
     public void decrementBy(final float valueSI)
     {
@@ -333,7 +333,7 @@ abstract class FloatMatrixData
     /**
      * Multiply two matrix on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
      * matrix is returned.
-     * @param right the other data object to multiply with
+     * @param right FloatMatrixData; the other data object to multiply with
      * @return the sum of this data object and the other data object
      * @throws ValueException if matrices have different lengths
      */
@@ -353,14 +353,14 @@ abstract class FloatMatrixData
     /**
      * Multiply a matrix with the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the
      * same.
-     * @param right the other data object to multiply with
+     * @param right FloatMatrixData; the other data object to multiply with
      * @throws ValueException if matrices have different lengths
      */
     public abstract void multiplyBy(FloatMatrixData right) throws ValueException;
 
     /**
      * Multiply the values of this matrix with a number on a cell-by-cell basis.
-     * @param valueSI the value to multiply with
+     * @param valueSI float; the value to multiply with
      */
     public void multiplyBy(final float valueSI)
     {
@@ -370,7 +370,7 @@ abstract class FloatMatrixData
     /**
      * Divide two matrices on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
      * matrix is returned.
-     * @param right the other data object to divide by
+     * @param right FloatMatrixData; the other data object to divide by
      * @return the sum of this data object and the other data object
      * @throws ValueException if matrices have different lengths
      */
@@ -390,14 +390,14 @@ abstract class FloatMatrixData
     /**
      * Divide the values of a matrix by the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense)
      * stays the same.
-     * @param right the other data object to divide by
+     * @param right FloatMatrixData; the other data object to divide by
      * @throws ValueException if matrices have different lengths
      */
     public abstract void divideBy(FloatMatrixData right) throws ValueException;
 
     /**
      * Divide the values of this matrix by a number on a cell-by-cell basis.
-     * @param valueSI the value to multiply with
+     * @param valueSI float; the value to multiply with
      */
     public void divideBy(final float valueSI)
     {

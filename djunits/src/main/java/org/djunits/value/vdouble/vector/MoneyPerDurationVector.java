@@ -28,8 +28,8 @@ public class MoneyPerDurationVector extends
     /**
      * Construct a new Relative Immutable Double MoneyPerDurationVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double MoneyPerDurationVector
-     * @param unit U; the unit of the new Relative Immutable Double MoneyPerDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerDurationUnit; the unit of the new Relative Immutable Double MoneyPerDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MoneyPerDurationVector(final double[] values, final MoneyPerDurationUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MoneyPerDurationVector extends
 
     /**
      * Construct a new Relative Immutable Double MoneyPerDurationVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double MoneyPerDurationVector
-     * @param unit U; the unit of the new Relative Immutable Double MoneyPerDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double MoneyPerDurationVector
+     * @param unit MoneyPerDurationUnit; the unit of the new Relative Immutable Double MoneyPerDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MoneyPerDurationVector(final List<Double> values, final MoneyPerDurationUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class MoneyPerDurationVector extends
 
     /**
      * Construct a new Relative Immutable Double MoneyPerDurationVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            MoneyPerDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values MoneyPerDuration[]; the values of the entries in the new Relative Immutable Double MoneyPerDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MoneyPerDurationVector(final MoneyPerDuration[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class MoneyPerDurationVector extends
 
     /**
      * Construct a new Relative Immutable Double MoneyPerDurationVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double MoneyPerDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;MoneyPerDuration&gt;; the values of the entries in the new Relative Immutable Double
+     *            MoneyPerDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MoneyPerDurationVector(final List<MoneyPerDuration> values, final StorageType storageType) throws ValueException
@@ -76,10 +76,10 @@ public class MoneyPerDurationVector extends
 
     /**
      * Construct a new Relative Immutable Double MoneyPerDurationVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
-     *            MoneyPerDurationVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, MoneyPerDuration&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Double MoneyPerDurationVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MoneyPerDurationVector(final SortedMap<Integer, MoneyPerDuration> values, final int length,
@@ -90,10 +90,11 @@ public class MoneyPerDurationVector extends
 
     /**
      * Construct a new Relative Immutable Double MoneyPerDurationVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double MoneyPerDurationVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double MoneyPerDurationVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            MoneyPerDurationVector
+     * @param unit MoneyPerDurationUnit; the unit of the new Relative Sparse Mutable Double MoneyPerDurationVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MoneyPerDurationVector(final SortedMap<Integer, Double> values, final MoneyPerDurationUnit unit, final int length,
@@ -103,8 +104,8 @@ public class MoneyPerDurationVector extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit MoneyPerDurationUnit; the unit
      */
     MoneyPerDurationVector(final DoubleVectorData data, final MoneyPerDurationUnit unit)
     {

@@ -43,7 +43,7 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * Construct a new Absolute Immutable FloatVector.
      * @param values float[]; the values of the entries in the new Absolute Immutable FloatVector
      * @param unit AU; the unit of the new Absolute Immutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractFloatVectorAbs(final float[] values, final AU unit, final StorageType storageType) throws ValueException
@@ -53,9 +53,9 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Construct a new Absolute Immutable FloatVector.
-     * @param values List; the values of the entries in the new Absolute Immutable FloatVector
+     * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable FloatVector
      * @param unit AU; the unit of the new Absolute Immutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractFloatVectorAbs(final List<Float> values, final AU unit, final StorageType storageType) throws ValueException
@@ -65,8 +65,8 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Construct a new Absolute Immutable FloatVector.
-     * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Immutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values S[]; the values of the entries in the new Absolute Immutable FloatVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractFloatVectorAbs(final S[] values, final StorageType storageType) throws ValueException
@@ -76,8 +76,8 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Construct a new Absolute Immutable FloatVector.
-     * @param values List; the values of the entries in the new Absolute Immutable FloatVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;S&gt;; the values of the entries in the new Absolute Immutable FloatVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractFloatVectorAbs(final List<S> values, final StorageType storageType) throws ValueException
@@ -87,9 +87,9 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Construct a new Absolute Immutable FloatVector.
-     * @param values FloatScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable FloatVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, S&gt;; the values of the entries in the new Absolute Sparse Mutable FloatVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractFloatVectorAbs(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
@@ -100,10 +100,10 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Construct a new Absolute Immutable FloatVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatVector
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Absolute Sparse Mutable FloatVector
      * @param unit AU; the unit of the new Absolute Sparse Mutable FloatVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractFloatVectorAbs(final SortedMap<Integer, Float> values, final AU unit, final int length,
@@ -114,8 +114,8 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Construct a new Relative Immutable FloatVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit AU; the unit
      */
     AbstractFloatVectorAbs(final FloatVectorData data, final AU unit)
     {
@@ -136,32 +136,32 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Construct a new Absolute Immutable FloatVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
+     * @param dvd FloatVectorData; an internal data object
+     * @param unit AU; the unit
      * @return M the Mutable FloatVector of the right type
      */
     protected abstract A instantiateTypeAbs(FloatVectorData dvd, AU unit);
 
     /**
      * Construct a new Relative Immutable FloatVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
+     * @param dvd FloatVectorData; an internal data object
+     * @param unit RU; the unit
      * @return M the Mutable FloatVector of the right type
      */
     protected abstract R instantiateTypeRel(FloatVectorData dvd, RU unit);
 
     /**
      * Construct a new Absolute Mutable FloatVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
+     * @param dvd FloatVectorData; an internal data object
+     * @param unit AU; the unit
      * @return M the Mutable FloatVector of the right type
      */
     protected abstract MA instantiateMutableType(FloatVectorData dvd, AU unit);
 
     /**
      * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the value
-     * @param unit the unit
+     * @param value float; the value
+     * @param unit AU; the unit
      * @return S the Immutable FloatScalar of the right type
      */
     protected abstract S instantiateScalar(float value, AU unit);
@@ -204,7 +204,7 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Check that a provided array can be used to create some descendant of a FloatVector, and return the Unit.
-     * @param dsArray the array to check and get the unit for
+     * @param dsArray S[]; the array to check and get the unit for
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar type
@@ -223,7 +223,7 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Check that a provided list can be used to create some descendant of a FloatVector, and return the Unit.
-     * @param dsList the list to check and get the unit for
+     * @param dsList List&lt;S&gt;; the list to check and get the unit for
      * @param <AU> the absolute unit of the scalars in the list
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar in the list
@@ -242,7 +242,7 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /**
      * Check that a provided Map can be used to create some descendant of a FloatVector.
-     * @param dsMap the provided map
+     * @param dsMap SortedMap&lt;Integer,S&gt;; the provided map
      * @param <AU> the absolute unit of the scalars in the map
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar in the list

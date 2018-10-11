@@ -43,7 +43,7 @@ public class DoubleScalarUtilTest
         dimensionless = DoubleScalarUtil.instantiateSI(10.0, DimensionlessUnit.SI);
         assertEquals("Dimensionless", 10.0, dimensionless.si, 0.0001d);
         assertSame("Dimensionless", DimensionlessUnit.SI, dimensionless.getUnit());
-        
+
         Acceleration acceleration = DoubleScalarUtil.instantiate(10.0, AccelerationUnit.SI);
         assertEquals("Acceleration", 10.0, acceleration.si, 0.0001d);
         acceleration = DoubleScalarUtil.instantiate(12960.0, AccelerationUnit.KM_PER_HOUR_2);
@@ -51,7 +51,7 @@ public class DoubleScalarUtilTest
         acceleration = DoubleScalarUtil.instantiateSI(10.0, AccelerationUnit.KM_PER_HOUR_2);
         assertEquals("Acceleration", 10.0, acceleration.si, 0.0001d);
         assertSame("Acceleration", AccelerationUnit.KM_PER_HOUR_2, acceleration.getUnit());
-        
+
         AngleSolid angleSolid = DoubleScalarUtil.instantiate(10.0, AngleSolidUnit.SI);
         assertEquals("AngleSolid", 10.0, angleSolid.si, 0.0001d);
         angleSolid = DoubleScalarUtil.instantiate(1.0, AngleSolidUnit.SQUARE_DEGREE);
@@ -59,7 +59,7 @@ public class DoubleScalarUtilTest
         angleSolid = DoubleScalarUtil.instantiateSI(10.0, AngleSolidUnit.SQUARE_DEGREE);
         assertEquals("AngleSolid", 10.0, angleSolid.si, 0.0001d);
         assertSame("AngleSolid", AngleSolidUnit.SQUARE_DEGREE, angleSolid.getUnit());
-        
+
         Angle angle = DoubleScalarUtil.instantiate(10.0, AngleUnit.SI);
         assertEquals("Angle", 10.0, angle.si, 0.0001d);
         angle = DoubleScalarUtil.instantiate(1.0, AngleUnit.DEGREE);
@@ -67,7 +67,7 @@ public class DoubleScalarUtilTest
         angle = DoubleScalarUtil.instantiateSI(10.0, AngleUnit.DEGREE);
         assertEquals("Angle", 10.0, angle.si, 0.0001d);
         assertSame("Angle", AngleUnit.DEGREE, angle.getUnit());
-       
+
         Direction direction = DoubleScalarUtil.instantiate(10.0, DirectionUnit.BASE);
         assertEquals("Direction", 10.0, direction.si, 0.0001d);
         direction = DoubleScalarUtil.instantiate(1.0, DirectionUnit.NORTH_DEGREE);
@@ -75,7 +75,7 @@ public class DoubleScalarUtilTest
         direction = DoubleScalarUtil.instantiateSI(10.0, DirectionUnit.NORTH_DEGREE);
         assertEquals("Direction", 10.0, direction.si, 0.0001d);
         assertSame("Direction", DirectionUnit.NORTH_DEGREE, direction.getUnit());
-       
+
         Area area = DoubleScalarUtil.instantiate(10.0, AreaUnit.SI);
         assertEquals("Area", 10.0, area.si, 0.0001d);
         area = DoubleScalarUtil.instantiate(1.0, AreaUnit.HECTARE);
@@ -84,9 +84,8 @@ public class DoubleScalarUtilTest
         assertEquals("Area", 10.0, area.si, 0.0001d);
         assertSame("Area", AreaUnit.HECTARE, area.getUnit());
 
-        
         // TODO: other base units
-        
+
         Money money = DoubleScalarUtil.instantiate(10.0, MoneyUnit.USD);
         assertEquals("Money", 10.0, money.si, 0.0001d);
         money = DoubleScalarUtil.instantiate(100.0, MoneyUnit.EUR);
@@ -94,7 +93,7 @@ public class DoubleScalarUtilTest
         money = DoubleScalarUtil.instantiateSI(10.0, MoneyUnit.EUR);
         assertEquals("Money", 10.0, money.si, 0.0001d);
         assertSame("Money", MoneyUnit.EUR, money.getUnit());
-        
+
         MoneyPerAreaUnit unitUSDm2 = new MoneyPerAreaUnit(MoneyUnit.USD, AreaUnit.SQUARE_METER, "USD/m2", "$/m2");
         MoneyPerAreaUnit unitEURha = new MoneyPerAreaUnit(MoneyUnit.EUR, AreaUnit.HECTARE, "EUR/ha", "EUR/ha");
         MoneyPerArea moneyPerArea = DoubleScalarUtil.instantiate(10.0, unitUSDm2);
@@ -115,8 +114,8 @@ public class DoubleScalarUtilTest
         assertEquals("MoneyPerEnerg", 10.0, moneyPerEnergy.si, 0.0001d);
         assertSame("MoneyPerEnerg", unitEURKJ, moneyPerEnergy.getUnit());
 
-   }
-    
+    }
+
     /**
      * Test the instantiation utility function of classes for anonymous units, also for the compiler.
      */
@@ -132,9 +131,9 @@ public class DoubleScalarUtilTest
         length = DoubleScalarUtil.instantiateAnonymousSI(10.0, unitKM);
         assertEquals("Length", 10.0, length.si, 0.0001d);
         assertSame("Length", unitKM, length.getUnit());
-        
+
         // TODO: other base units
-        
+
         Unit<?> unitUSD = MoneyUnit.USD;
         Unit<?> unitEUR = MoneyUnit.EUR;
         Money money = DoubleScalarUtil.instantiateAnonymous(10.0, unitUSD);
@@ -144,7 +143,7 @@ public class DoubleScalarUtilTest
         money = DoubleScalarUtil.instantiateAnonymousSI(10.0, unitEUR);
         assertEquals("Money", 10.0, money.si, 0.0001d);
         assertSame("Money", unitEUR, money.getUnit());
-        
+
         Unit<?> unitUSDm2 = new MoneyPerAreaUnit(MoneyUnit.USD, AreaUnit.SQUARE_METER, "USD/m2", "$/m2");
         Unit<?> unitEURha = new MoneyPerAreaUnit(MoneyUnit.EUR, AreaUnit.HECTARE, "EUR/ha", "EUR/ha");
         MoneyPerArea moneyPerArea = DoubleScalarUtil.instantiateAnonymous(10.0, unitUSDm2);
@@ -167,4 +166,3 @@ public class DoubleScalarUtilTest
 
     }
 }
-

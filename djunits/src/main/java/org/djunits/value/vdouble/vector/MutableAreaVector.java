@@ -27,8 +27,8 @@ public class MutableAreaVector extends AbstractMutableDoubleVectorRel<AreaUnit, 
     /**
      * Construct a new Relative Immutable Double AreaVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double AreaVector
-     * @param unit U; the unit of the new Relative Immutable Double AreaVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AreaUnit; the unit of the new Relative Immutable Double AreaVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAreaVector(final double[] values, final AreaUnit unit, final StorageType storageType) throws ValueException
@@ -38,9 +38,9 @@ public class MutableAreaVector extends AbstractMutableDoubleVectorRel<AreaUnit, 
 
     /**
      * Construct a new Relative Immutable Double AreaVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double AreaVector
-     * @param unit U; the unit of the new Relative Immutable Double AreaVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double AreaVector
+     * @param unit AreaUnit; the unit of the new Relative Immutable Double AreaVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAreaVector(final List<Double> values, final AreaUnit unit, final StorageType storageType)
@@ -51,8 +51,8 @@ public class MutableAreaVector extends AbstractMutableDoubleVectorRel<AreaUnit, 
 
     /**
      * Construct a new Relative Immutable Double AreaVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double AreaVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Area[]; the values of the entries in the new Relative Immutable Double AreaVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAreaVector(final Area[] values, final StorageType storageType) throws ValueException
@@ -62,8 +62,8 @@ public class MutableAreaVector extends AbstractMutableDoubleVectorRel<AreaUnit, 
 
     /**
      * Construct a new Relative Immutable Double AreaVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double AreaVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Area&gt;; the values of the entries in the new Relative Immutable Double AreaVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAreaVector(final List<Area> values, final StorageType storageType) throws ValueException
@@ -73,9 +73,10 @@ public class MutableAreaVector extends AbstractMutableDoubleVectorRel<AreaUnit, 
 
     /**
      * Construct a new Relative Immutable Double AreaVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double AreaVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Area&gt;; the values of the entries in the new Relative Sparse Mutable Double
+     *            AreaVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAreaVector(final SortedMap<Integer, Area> values, final int length, final StorageType storageType)
@@ -86,10 +87,11 @@ public class MutableAreaVector extends AbstractMutableDoubleVectorRel<AreaUnit, 
 
     /**
      * Construct a new Relative Immutable Double AreaVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double AreaVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double AreaVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            AreaVector
+     * @param unit AreaUnit; the unit of the new Relative Sparse Mutable Double AreaVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAreaVector(final SortedMap<Integer, Double> values, final AreaUnit unit, final int length,
@@ -99,8 +101,8 @@ public class MutableAreaVector extends AbstractMutableDoubleVectorRel<AreaUnit, 
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit AreaUnit; the unit
      */
     MutableAreaVector(final DoubleVectorData data, final AreaUnit unit)
     {

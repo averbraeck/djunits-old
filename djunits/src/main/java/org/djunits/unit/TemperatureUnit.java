@@ -56,9 +56,9 @@ public class TemperatureUnit extends LinearUnit<TemperatureUnit>
 
     /**
      * Build a standard TemperatureUnit.
-     * @param nameKey the key to the locale file for the long name of the unit
-     * @param abbreviationKey the key to the locale file for the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
+     * @param nameKey String; the key to the locale file for the long name of the unit
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
     private TemperatureUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
     {
@@ -67,13 +67,15 @@ public class TemperatureUnit extends LinearUnit<TemperatureUnit>
 
     /**
      * Build a TemperatureUnit with a conversion factor and offset to Kelvin.
-     * @param nameOrNameKey if standardUnit: the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviationOrAbbreviationKey if standardUnit: the key to the locale file for the abbreviation of the unit,
-     *            otherwise the abbreviation itself
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToStandardUnit multiply by this number to convert to the standard unit
-     * @param standardUnit indicates whether it is a standard unit with a definition in the locale, or a user-defined unit
+     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
+     *            name itself
+     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
+     *            unit, otherwise the abbreviation itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit TemperatureUnit; the unit to convert to
+     * @param scaleFactorToStandardUnit double; multiply by this number to convert to the standard unit
+     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     *            unit
      */
     private TemperatureUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
             final TemperatureUnit referenceUnit, final double scaleFactorToStandardUnit, final boolean standardUnit)
@@ -83,12 +85,12 @@ public class TemperatureUnit extends LinearUnit<TemperatureUnit>
 
     /**
      * Build a user-defined TemperatureUnit with a conversion factor and offset to Kelvin.
-     * @param name the long name of the unit
-     * @param abbreviation the abbreviation of the unit
-     * @param unitSystem the unit system, e.g. SI or Imperial
-     * @param referenceUnit the unit to convert to
-     * @param scaleFactorToStandardUnit multiply by this number to convert to the standard unit
-     * @param offsetToKelvin the offsetToKelvin to add to convert to the standard (e.g., SI) unit
+     * @param name String; the long name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit TemperatureUnit; the unit to convert to
+     * @param scaleFactorToStandardUnit double; multiply by this number to convert to the standard unit
+     * @param offsetToKelvin double; the offsetToKelvin to add to convert to the standard (e.g., SI) unit
      */
     public TemperatureUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final TemperatureUnit referenceUnit, final double scaleFactorToStandardUnit, final double offsetToKelvin)

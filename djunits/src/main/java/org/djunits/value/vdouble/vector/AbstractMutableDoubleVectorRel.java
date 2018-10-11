@@ -42,7 +42,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
      * Construct a new Relative Mutable DoubleVector.
      * @param values double[]; the values of the entries in the new Relative Mutable DoubleVector
      * @param unit U; the unit of the new Relative Mutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractMutableDoubleVectorRel(final double[] values, final U unit, final StorageType storageType) throws ValueException
@@ -52,9 +52,9 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Construct a new Relative Mutable DoubleVector.
-     * @param values List; the values of the entries in the new Relative Mutable DoubleVector
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Mutable DoubleVector
      * @param unit U; the unit of the new Relative Mutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractMutableDoubleVectorRel(final List<Double> values, final U unit, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Construct a new Relative Mutable DoubleVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values S[]; the values of the entries in the new Relative Mutable DoubleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractMutableDoubleVectorRel(final S[] values, final StorageType storageType) throws ValueException
@@ -75,8 +75,8 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Construct a new Relative Mutable DoubleVector.
-     * @param values List; the values of the entries in the new Relative Mutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;S&gt;; the values of the entries in the new Relative Mutable DoubleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractMutableDoubleVectorRel(final List<S> values, final StorageType storageType) throws ValueException
@@ -86,9 +86,9 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Construct a new Relative Mutable DoubleVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable DoubleVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, S&gt;; the values of the entries in the new Relative Sparse Mutable DoubleVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractMutableDoubleVectorRel(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
@@ -99,10 +99,10 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Construct a new Relative Mutable DoubleVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable DoubleVector
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable DoubleVector
      * @param unit U; the unit of the new Relative Sparse Mutable DoubleVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractMutableDoubleVectorRel(final SortedMap<Integer, Double> values, final U unit, final int length,
@@ -113,8 +113,8 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Construct a new Relative Mutable DoubleVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit U; the unit
      */
     AbstractMutableDoubleVectorRel(final DoubleVectorData data, final U unit)
     {
@@ -175,7 +175,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Increment the value by the supplied value and return the changed vector.
-     * @param increment DoubleVector.Rel&lt;U&gt;; amount by which the value is incremented
+     * @param increment R; amount by which the value is incremented
      * @return the changed MutableDoubleVector.Rel&lt;U&gt;
      * @throws ValueException when the size of increment is not identical to the size of this
      */
@@ -189,7 +189,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Increment the value by the supplied value and return the changed vector.
-     * @param increment DoubleScalar.Rel&lt;U&gt;; amount by which the value is incremented
+     * @param increment S; amount by which the value is incremented
      * @return the changed MutableDoubleVector.Rel&lt;U&gt;
      */
     public final MR incrementBy(final S increment)
@@ -199,7 +199,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Increment the value by the supplied constant and return the changed vector.
-     * @param increment amount by which the value is incremented
+     * @param increment double; amount by which the value is incremented
      * @return the changed MutableDoubleVector.Rel&lt;U&gt;
      */
     @SuppressWarnings("unchecked")
@@ -212,7 +212,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Decrement the value by the supplied value and return the changed vector.
-     * @param decrement DoubleVector.Rel&lt;U&gt;; amount by which the value is decremented
+     * @param decrement R; amount by which the value is decremented
      * @return the changed MutableDoubleVector.Rel&lt;U&gt;
      * @throws ValueException when the size of increment is not identical to the size of this
      */
@@ -226,7 +226,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Decrement the value by the supplied value and return the changed vector.
-     * @param decrement DoubleScalar.Rel&lt;U&gt;; amount by which the value is decremented
+     * @param decrement S; amount by which the value is decremented
      * @return the changed MutableDoubleVector.Rel&lt;U&gt;
      */
     public final MR decrementBy(final S decrement)
@@ -236,7 +236,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Decrement the value by the supplied constant and return the changed vector.
-     * @param decrement amount by which the value is decremented
+     * @param decrement double; amount by which the value is decremented
      * @return the changed MutableDoubleVector.Rel&lt;U&gt;
      */
     @SuppressWarnings("unchecked")
@@ -249,7 +249,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Multiply the values in the vector by the supplied values and return the changed vector.
-     * @param factors DoubleVector.Rel&lt;U&gt;; amounts by which the value is multiplied
+     * @param factors R; amounts by which the value is multiplied
      * @return the changed MutableDoubleVector.Rel&lt;U&gt;
      * @throws ValueException when the size of the factors is not identical to the size of this
      */
@@ -263,7 +263,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Multiply the values in the vector by the supplied value and return the changed vector.
-     * @param factor DoubleScalar.Rel&lt;U&gt;; amount by which the values in the vector are multiplied
+     * @param factor S; amount by which the values in the vector are multiplied
      * @return the changed MutableDoubleVector.Rel&lt;U&gt;
      */
     public final MR multiplyBy(final S factor)
@@ -283,7 +283,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Divide the values in the vector by the supplied values and return the changed vector.
-     * @param factors DoubleVector.Rel&lt;U&gt;; amounts by which the value is divided
+     * @param factors R; amounts by which the value is divided
      * @return the changed MutableDoubleVector.Rel&lt;U&gt;
      * @throws ValueException when the size of the factors is not identical to the size of this
      */
@@ -306,7 +306,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Divide the values in the vector by the supplied value and return the changed vector.
-     * @param factor DoubleScalar.Rel&lt;U&gt;; amount by which the values in the vector are divided
+     * @param factor S; amount by which the values in the vector are divided
      * @return the changed MutableDoubleVector.Rel&lt;U&gt;
      */
     public final MR divideBy(final S factor)
@@ -322,7 +322,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
      * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
      * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a sparse
      * dataset if necessary.
-     * @param doubleFunction the function to apply
+     * @param doubleFunction DoubleFunction; the function to apply
      */
     public final void assign(final DoubleFunction doubleFunction)
     {
@@ -421,7 +421,7 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
     /**
      * Replace the value at index by the supplied value which is in a compatible unit.
      * @param index int; index of the value to replace
-     * @param value DoubleScalar&lt;U&gt;; the strongly typed value to store
+     * @param value S; the strongly typed value to store
      * @throws ValueException when index out of range (index &lt; 0 or index &gt;= size())
      */
     public final void set(final int index, final S value) throws ValueException

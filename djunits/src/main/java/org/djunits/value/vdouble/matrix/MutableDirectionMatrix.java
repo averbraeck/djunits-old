@@ -26,8 +26,8 @@ public class MutableDirectionMatrix extends AbstractMutableDoubleMatrixAbs<Direc
     /**
      * Construct a new Absolute Mutable Double DirectionMatrix.
      * @param values double[][]; the values of the entries in the new Absolute Mutable Double DirectionMatrix
-     * @param unit U; the unit of the new Absolute Mutable Double DirectionMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DirectionUnit; the unit of the new Absolute Mutable Double DirectionMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableDirectionMatrix(final double[][] values, final DirectionUnit unit, final StorageType storageType)
@@ -38,8 +38,8 @@ public class MutableDirectionMatrix extends AbstractMutableDoubleMatrixAbs<Direc
 
     /**
      * Construct a new Absolute Mutable Double DirectionMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable Double DirectionMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Direction[][]; the values of the entries in the new Absolute Mutable Double DirectionMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableDirectionMatrix(final Direction[][] values, final StorageType storageType) throws ValueException
@@ -49,8 +49,8 @@ public class MutableDirectionMatrix extends AbstractMutableDoubleMatrixAbs<Direc
 
     /**
      * Construct a new Absolute Mutable Double DirectionMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit DirectionUnit; the unit
      */
     MutableDirectionMatrix(final DoubleMatrixData data, final DirectionUnit unit)
     {

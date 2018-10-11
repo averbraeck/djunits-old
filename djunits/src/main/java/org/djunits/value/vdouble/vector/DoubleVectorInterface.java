@@ -32,7 +32,7 @@ public interface DoubleVectorInterface<U extends Unit<U>>
 
     /**
      * Retrieve a value from the vector.
-     * @param index the index to retrieve the value at
+     * @param index int; the index to retrieve the value at
      * @return the value as a DoubleScalar
      * @throws ValueException in case index is out of bounds
      */

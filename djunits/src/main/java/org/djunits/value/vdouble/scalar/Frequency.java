@@ -57,8 +57,8 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Construct Frequency scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit FrequencyUnit; unit for the double value
      */
     public Frequency(final double value, final FrequencyUnit unit)
     {
@@ -67,7 +67,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Construct Frequency scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Frequency; Scalar from which to construct this instance
      */
     public Frequency(final Frequency value)
     {
@@ -83,7 +83,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Construct Frequency scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Frequency createSI(final double value)
@@ -93,9 +93,9 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Frequency; the low value
+     * @param one Frequency; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Frequency interpolate(final Frequency zero, final Frequency one, final double ratio)
@@ -105,8 +105,8 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Frequency; the first scalar
+     * @param r2 Frequency; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Frequency max(final Frequency r1, final Frequency r2)
@@ -116,9 +116,9 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Frequency; the first scalar
+     * @param r2 Frequency; the second scalar
+     * @param rn Frequency...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Frequency max(final Frequency r1, final Frequency r2, final Frequency... rn)
@@ -136,8 +136,8 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Frequency; the first scalar
+     * @param r2 Frequency; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Frequency min(final Frequency r1, final Frequency r2)
@@ -147,9 +147,9 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Frequency; the first scalar
+     * @param r2 Frequency; the second scalar
+     * @param rn Frequency...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Frequency min(final Frequency r1, final Frequency r2, final Frequency... rn)
@@ -167,7 +167,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the division of Frequency and Frequency, which results in a Dimensionless scalar.
-     * @param v Frequency scalar
+     * @param v Frequency; Frequency scalar
      * @return Dimensionless scalar as a division of Frequency and Frequency
      */
     public final Dimensionless divideBy(final Frequency v)
@@ -177,7 +177,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Duration, which results in a Dimensionless scalar.
-     * @param v Frequency scalar
+     * @param v Duration; Frequency scalar
      * @return Dimensionless scalar as a multiplication of Frequency and Duration
      */
     public final Dimensionless multiplyBy(final Duration v)
@@ -187,7 +187,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Length, which results in a Speed scalar.
-     * @param v Frequency scalar
+     * @param v Length; Frequency scalar
      * @return Speed scalar as a multiplication of Frequency and Length
      */
     public final Speed multiplyBy(final Length v)
@@ -197,7 +197,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Speed, which results in a Acceleration scalar.
-     * @param v Frequency scalar
+     * @param v Speed; Frequency scalar
      * @return Acceleration scalar as a multiplication of Frequency and Speed
      */
     public final Acceleration multiplyBy(final Speed v)
@@ -207,7 +207,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Energy, which results in a Power scalar.
-     * @param v Frequency scalar
+     * @param v Energy; Frequency scalar
      * @return Power scalar as a multiplication of Frequency and Energy
      */
     public final Power multiplyBy(final Energy v)
@@ -217,7 +217,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Money, which results in a MoneyPerDuration scalar.
-     * @param v Frequency scalar
+     * @param v Money; Frequency scalar
      * @return MoneyPerDuration scalar as a multiplication of Frequency and Money
      */
     public final MoneyPerDuration multiplyBy(final Money v)

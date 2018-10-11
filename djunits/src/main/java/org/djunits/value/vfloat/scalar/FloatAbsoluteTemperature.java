@@ -40,8 +40,8 @@ public class FloatAbsoluteTemperature
 
     /**
      * Construct FloatAbsoluteTemperature scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit AbsoluteTemperatureUnit; unit for the float value
      */
     public FloatAbsoluteTemperature(final float value, final AbsoluteTemperatureUnit unit)
     {
@@ -50,8 +50,8 @@ public class FloatAbsoluteTemperature
 
     /**
      * Construct FloatAbsoluteTemperature scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit AbsoluteTemperatureUnit; unit for the resulting float value
      */
     public FloatAbsoluteTemperature(final double value, final AbsoluteTemperatureUnit unit)
     {
@@ -60,7 +60,7 @@ public class FloatAbsoluteTemperature
 
     /**
      * Construct FloatAbsoluteTemperature scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatAbsoluteTemperature; Scalar from which to construct this instance
      */
     public FloatAbsoluteTemperature(final FloatAbsoluteTemperature value)
     {
@@ -83,7 +83,7 @@ public class FloatAbsoluteTemperature
 
     /**
      * Construct FloatAbsoluteTemperature scalar.
-     * @param value float value in BASE units
+     * @param value float; float value in BASE units
      * @return the new scalar with the BASE value
      */
     public static final FloatAbsoluteTemperature createSI(final float value)
@@ -93,9 +93,9 @@ public class FloatAbsoluteTemperature
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatAbsoluteTemperature; the low value
+     * @param one FloatAbsoluteTemperature; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatAbsoluteTemperature interpolate(final FloatAbsoluteTemperature zero, final FloatAbsoluteTemperature one,
@@ -107,8 +107,8 @@ public class FloatAbsoluteTemperature
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 FloatAbsoluteTemperature; the first scalar
+     * @param a2 FloatAbsoluteTemperature; the second scalar
      * @return the maximum value of two absolute scalars
      */
     public static FloatAbsoluteTemperature max(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2)
@@ -118,9 +118,9 @@ public class FloatAbsoluteTemperature
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 FloatAbsoluteTemperature; the first scalar
+     * @param a2 FloatAbsoluteTemperature; the second scalar
+     * @param an FloatAbsoluteTemperature...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static FloatAbsoluteTemperature max(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2,
@@ -139,8 +139,8 @@ public class FloatAbsoluteTemperature
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 FloatAbsoluteTemperature; the first scalar
+     * @param a2 FloatAbsoluteTemperature; the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static FloatAbsoluteTemperature min(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2)
@@ -150,9 +150,9 @@ public class FloatAbsoluteTemperature
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 FloatAbsoluteTemperature; the first scalar
+     * @param a2 FloatAbsoluteTemperature; the second scalar
+     * @param an FloatAbsoluteTemperature...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static FloatAbsoluteTemperature min(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2,

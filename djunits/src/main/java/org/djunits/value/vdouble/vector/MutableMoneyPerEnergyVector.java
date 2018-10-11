@@ -28,8 +28,8 @@ public class MutableMoneyPerEnergyVector extends
     /**
      * Construct a new Relative Immutable Double MoneyPerEnergyVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double MoneyPerEnergyVector
-     * @param unit U; the unit of the new Relative Immutable Double MoneyPerEnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerEnergyUnit; the unit of the new Relative Immutable Double MoneyPerEnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMoneyPerEnergyVector(final double[] values, final MoneyPerEnergyUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableMoneyPerEnergyVector extends
 
     /**
      * Construct a new Relative Immutable Double MoneyPerEnergyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double MoneyPerEnergyVector
-     * @param unit U; the unit of the new Relative Immutable Double MoneyPerEnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double MoneyPerEnergyVector
+     * @param unit MoneyPerEnergyUnit; the unit of the new Relative Immutable Double MoneyPerEnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMoneyPerEnergyVector(final List<Double> values, final MoneyPerEnergyUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class MutableMoneyPerEnergyVector extends
 
     /**
      * Construct a new Relative Immutable Double MoneyPerEnergyVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            MoneyPerEnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values MoneyPerEnergy[]; the values of the entries in the new Relative Immutable Double MoneyPerEnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableMoneyPerEnergyVector(final MoneyPerEnergy[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class MutableMoneyPerEnergyVector extends
 
     /**
      * Construct a new Relative Immutable Double MoneyPerEnergyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double MoneyPerEnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;MoneyPerEnergy&gt;; the values of the entries in the new Relative Immutable Double
+     *            MoneyPerEnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableMoneyPerEnergyVector(final List<MoneyPerEnergy> values, final StorageType storageType) throws ValueException
@@ -76,10 +76,10 @@ public class MutableMoneyPerEnergyVector extends
 
     /**
      * Construct a new Relative Immutable Double MoneyPerEnergyVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
-     *            MoneyPerEnergyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, MoneyPerEnergy&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Double MoneyPerEnergyVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableMoneyPerEnergyVector(final SortedMap<Integer, MoneyPerEnergy> values, final int length,
@@ -90,10 +90,11 @@ public class MutableMoneyPerEnergyVector extends
 
     /**
      * Construct a new Relative Immutable Double MoneyPerEnergyVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double MoneyPerEnergyVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double MoneyPerEnergyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            MoneyPerEnergyVector
+     * @param unit MoneyPerEnergyUnit; the unit of the new Relative Sparse Mutable Double MoneyPerEnergyVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMoneyPerEnergyVector(final SortedMap<Integer, Double> values, final MoneyPerEnergyUnit unit, final int length,
@@ -103,8 +104,8 @@ public class MutableMoneyPerEnergyVector extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit MoneyPerEnergyUnit; the unit
      */
     MutableMoneyPerEnergyVector(final DoubleVectorData data, final MoneyPerEnergyUnit unit)
     {

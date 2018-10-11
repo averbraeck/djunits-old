@@ -28,8 +28,8 @@ public class ElectricalResistanceVector extends AbstractDoubleVectorRel<Electric
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double ElectricalResistanceVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalResistanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable Double ElectricalResistanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalResistanceVector(final double[] values, final ElectricalResistanceUnit unit, final StorageType storageType)
@@ -40,9 +40,10 @@ public class ElectricalResistanceVector extends AbstractDoubleVectorRel<Electric
 
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalResistanceVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalResistanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double
+     *            ElectricalResistanceVector
+     * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable Double ElectricalResistanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalResistanceVector(final List<Double> values, final ElectricalResistanceUnit unit,
@@ -53,9 +54,9 @@ public class ElectricalResistanceVector extends AbstractDoubleVectorRel<Electric
 
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
+     * @param values ElectricalResistance[]; the values of the entries in the new Relative Immutable Double
      *            ElectricalResistanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalResistanceVector(final ElectricalResistance[] values, final StorageType storageType) throws ValueException
@@ -65,8 +66,9 @@ public class ElectricalResistanceVector extends AbstractDoubleVectorRel<Electric
 
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalResistanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;ElectricalResistance&gt;; the values of the entries in the new Relative Immutable Double
+     *            ElectricalResistanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalResistanceVector(final List<ElectricalResistance> values, final StorageType storageType)
@@ -77,10 +79,10 @@ public class ElectricalResistanceVector extends AbstractDoubleVectorRel<Electric
 
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
-     *            ElectricalResistanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, ElectricalResistance&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Double ElectricalResistanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalResistanceVector(final SortedMap<Integer, ElectricalResistance> values, final int length,
@@ -91,10 +93,11 @@ public class ElectricalResistanceVector extends AbstractDoubleVectorRel<Electric
 
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double ElectricalResistanceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double ElectricalResistanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            ElectricalResistanceVector
+     * @param unit ElectricalResistanceUnit; the unit of the new Relative Sparse Mutable Double ElectricalResistanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalResistanceVector(final SortedMap<Integer, Double> values, final ElectricalResistanceUnit unit,
@@ -104,8 +107,8 @@ public class ElectricalResistanceVector extends AbstractDoubleVectorRel<Electric
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit ElectricalResistanceUnit; the unit
      */
     ElectricalResistanceVector(final DoubleVectorData data, final ElectricalResistanceUnit unit)
     {

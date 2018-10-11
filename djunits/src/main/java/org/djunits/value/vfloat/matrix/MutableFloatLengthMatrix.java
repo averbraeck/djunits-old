@@ -25,8 +25,8 @@ public class MutableFloatLengthMatrix
     /**
      * Construct a new Relative Mutable FloatLengthMatrix.
      * @param values float[][]; the values of the entries in the new Relative Mutable FloatLengthMatrix
-     * @param unit U; the unit of the new Relative Mutable FloatLengthMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit LengthUnit; the unit of the new Relative Mutable FloatLengthMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatLengthMatrix(final float[][] values, final LengthUnit unit, final StorageType storageType)
@@ -37,8 +37,8 @@ public class MutableFloatLengthMatrix
 
     /**
      * Construct a new Relative Mutable FloatLengthMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Mutable FloatLengthMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatLength[][]; the values of the entries in the new Relative Mutable FloatLengthMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatLengthMatrix(final FloatLength[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class MutableFloatLengthMatrix
 
     /**
      * Construct a new Relative Mutable FloatLengthMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit LengthUnit; the unit
      */
     MutableFloatLengthMatrix(final FloatMatrixData data, final LengthUnit unit)
     {

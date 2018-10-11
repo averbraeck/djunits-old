@@ -43,7 +43,7 @@ abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
      * Construct a new Absolute Immutable DoubleVector.
      * @param values double[]; the values of the entries in the new Absolute Immutable DoubleVector
      * @param unit AU; the unit of the new Absolute Immutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractDoubleVectorAbs(final double[] values, final AU unit, final StorageType storageType) throws ValueException
@@ -53,9 +53,9 @@ abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Construct a new Absolute Immutable DoubleVector.
-     * @param values List; the values of the entries in the new Absolute Immutable DoubleVector
+     * @param values List&lt;Double&gt;; the values of the entries in the new Absolute Immutable DoubleVector
      * @param unit AU; the unit of the new Absolute Immutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractDoubleVectorAbs(final List<Double> values, final AU unit, final StorageType storageType) throws ValueException
@@ -65,8 +65,8 @@ abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Construct a new Absolute Immutable DoubleVector.
-     * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Immutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values S[]; the values of the entries in the new Absolute Immutable DoubleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractDoubleVectorAbs(final S[] values, final StorageType storageType) throws ValueException
@@ -76,8 +76,8 @@ abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Construct a new Absolute Immutable DoubleVector.
-     * @param values List; the values of the entries in the new Absolute Immutable DoubleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;S&gt;; the values of the entries in the new Absolute Immutable DoubleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractDoubleVectorAbs(final List<S> values, final StorageType storageType) throws ValueException
@@ -87,9 +87,9 @@ abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Construct a new Absolute Immutable DoubleVector.
-     * @param values DoubleScalar.Abs&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable DoubleVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, S&gt;; the values of the entries in the new Absolute Sparse Mutable DoubleVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractDoubleVectorAbs(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
@@ -100,10 +100,10 @@ abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Construct a new Absolute Immutable DoubleVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable DoubleVector
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Absolute Sparse Mutable DoubleVector
      * @param unit AU; the unit of the new Absolute Sparse Mutable DoubleVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractDoubleVectorAbs(final SortedMap<Integer, Double> values, final AU unit, final int length,
@@ -114,8 +114,8 @@ abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Construct a new Relative Immutable DoubleVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit AU; the unit
      */
     AbstractDoubleVectorAbs(final DoubleVectorData data, final AU unit)
     {
@@ -136,32 +136,32 @@ abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Construct a new Absolute Immutable DoubleVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
+     * @param dvd DoubleVectorData; an internal data object
+     * @param unit AU; the unit
      * @return M the Mutable DoubleVector of the right type
      */
     protected abstract A instantiateTypeAbs(DoubleVectorData dvd, AU unit);
 
     /**
      * Construct a new Relative Immutable DoubleVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
+     * @param dvd DoubleVectorData; an internal data object
+     * @param unit RU; the unit
      * @return M the Mutable DoubleVector of the right type
      */
     protected abstract R instantiateTypeRel(DoubleVectorData dvd, RU unit);
 
     /**
      * Construct a new Absolute Mutable DoubleVector of the right type. Each extending class must implement this method.
-     * @param dvd an internal data object
-     * @param unit the unit
+     * @param dvd DoubleVectorData; an internal data object
+     * @param unit AU; the unit
      * @return M the Mutable DoubleVector of the right type
      */
     protected abstract MA instantiateMutableType(DoubleVectorData dvd, AU unit);
 
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value the value
-     * @param unit the unit
+     * @param value double; the value
+     * @param unit AU; the unit
      * @return S the Immutable DoubleScalar of the right type
      */
     protected abstract S instantiateScalar(double value, AU unit);
@@ -204,7 +204,7 @@ abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Check that a provided array can be used to create some descendant of a DoubleVector, and return the Unit.
-     * @param dsArray the array to check and get the unit for
+     * @param dsArray S[]; the array to check and get the unit for
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar type
@@ -224,7 +224,7 @@ abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Check that a provided list can be used to create some descendant of a DoubleVector, and return the Unit.
-     * @param dsList the list to check and get the unit for
+     * @param dsList List&lt;S&gt;; the list to check and get the unit for
      * @param <AU> the absolute unit of the scalars in the list
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar in the list
@@ -244,7 +244,7 @@ abstract class AbstractDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Check that a provided Map can be used to create some descendant of a DoubleVector.
-     * @param dsMap the provided map
+     * @param dsMap SortedMap&lt;Integer,S&gt;; the provided map
      * @param <AU> the absolute unit of the scalars in the map
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar in the list

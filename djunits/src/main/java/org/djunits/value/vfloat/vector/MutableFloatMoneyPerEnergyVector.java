@@ -28,8 +28,8 @@ public class MutableFloatMoneyPerEnergyVector extends AbstractMutableFloatVector
     /**
      * Construct a new Relative Immutable Float MoneyPerEnergyVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float MoneyPerEnergyVector
-     * @param unit U; the unit of the new Relative Immutable Float MoneyPerEnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerEnergyUnit; the unit of the new Relative Immutable Float MoneyPerEnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatMoneyPerEnergyVector(final float[] values, final MoneyPerEnergyUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatMoneyPerEnergyVector extends AbstractMutableFloatVector
 
     /**
      * Construct a new Relative Immutable Float MoneyPerEnergyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float MoneyPerEnergyVector
-     * @param unit U; the unit of the new Relative Immutable Float MoneyPerEnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float MoneyPerEnergyVector
+     * @param unit MoneyPerEnergyUnit; the unit of the new Relative Immutable Float MoneyPerEnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatMoneyPerEnergyVector(final List<Float> values, final MoneyPerEnergyUnit unit,
@@ -53,9 +53,8 @@ public class MutableFloatMoneyPerEnergyVector extends AbstractMutableFloatVector
 
     /**
      * Construct a new Relative Immutable Float MoneyPerEnergyVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            MoneyPerEnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatMoneyPerEnergy[]; the values of the entries in the new Relative Immutable Float MoneyPerEnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMoneyPerEnergyVector(final FloatMoneyPerEnergy[] values, final StorageType storageType)
@@ -66,8 +65,9 @@ public class MutableFloatMoneyPerEnergyVector extends AbstractMutableFloatVector
 
     /**
      * Construct a new Relative Immutable Float MoneyPerEnergyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float MoneyPerEnergyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatMoneyPerEnergy&gt;; the values of the entries in the new Relative Immutable Float
+     *            MoneyPerEnergyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMoneyPerEnergyVector(final List<FloatMoneyPerEnergy> values, final StorageType storageType)
@@ -78,10 +78,10 @@ public class MutableFloatMoneyPerEnergyVector extends AbstractMutableFloatVector
 
     /**
      * Construct a new Relative Immutable Float MoneyPerEnergyVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            MoneyPerEnergyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatMoneyPerEnergy&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float MoneyPerEnergyVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMoneyPerEnergyVector(final SortedMap<Integer, FloatMoneyPerEnergy> values, final int length,
@@ -92,10 +92,11 @@ public class MutableFloatMoneyPerEnergyVector extends AbstractMutableFloatVector
 
     /**
      * Construct a new Relative Immutable Float MoneyPerEnergyVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float MoneyPerEnergyVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float MoneyPerEnergyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            MoneyPerEnergyVector
+     * @param unit MoneyPerEnergyUnit; the unit of the new Relative Sparse Mutable Float MoneyPerEnergyVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatMoneyPerEnergyVector(final SortedMap<Integer, Float> values, final MoneyPerEnergyUnit unit,
@@ -105,8 +106,8 @@ public class MutableFloatMoneyPerEnergyVector extends AbstractMutableFloatVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit MoneyPerEnergyUnit; the unit
      */
     MutableFloatMoneyPerEnergyVector(final FloatVectorData data, final MoneyPerEnergyUnit unit)
     {

@@ -28,8 +28,8 @@ public class MoneyPerMassVector
     /**
      * Construct a new Relative Immutable Double MoneyPerMassVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double MoneyPerMassVector
-     * @param unit U; the unit of the new Relative Immutable Double MoneyPerMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerMassUnit; the unit of the new Relative Immutable Double MoneyPerMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MoneyPerMassVector(final double[] values, final MoneyPerMassUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MoneyPerMassVector
 
     /**
      * Construct a new Relative Immutable Double MoneyPerMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double MoneyPerMassVector
-     * @param unit U; the unit of the new Relative Immutable Double MoneyPerMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double MoneyPerMassVector
+     * @param unit MoneyPerMassUnit; the unit of the new Relative Immutable Double MoneyPerMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MoneyPerMassVector(final List<Double> values, final MoneyPerMassUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class MoneyPerMassVector
 
     /**
      * Construct a new Relative Immutable Double MoneyPerMassVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            MoneyPerMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values MoneyPerMass[]; the values of the entries in the new Relative Immutable Double MoneyPerMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MoneyPerMassVector(final MoneyPerMass[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,8 @@ public class MoneyPerMassVector
 
     /**
      * Construct a new Relative Immutable Double MoneyPerMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double MoneyPerMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;MoneyPerMass&gt;; the values of the entries in the new Relative Immutable Double MoneyPerMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MoneyPerMassVector(final List<MoneyPerMass> values, final StorageType storageType) throws ValueException
@@ -76,10 +75,10 @@ public class MoneyPerMassVector
 
     /**
      * Construct a new Relative Immutable Double MoneyPerMassVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, MoneyPerMass&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            MoneyPerMassVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MoneyPerMassVector(final SortedMap<Integer, MoneyPerMass> values, final int length, final StorageType storageType)
@@ -90,10 +89,11 @@ public class MoneyPerMassVector
 
     /**
      * Construct a new Relative Immutable Double MoneyPerMassVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double MoneyPerMassVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double MoneyPerMassVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            MoneyPerMassVector
+     * @param unit MoneyPerMassUnit; the unit of the new Relative Sparse Mutable Double MoneyPerMassVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MoneyPerMassVector(final SortedMap<Integer, Double> values, final MoneyPerMassUnit unit, final int length,
@@ -103,8 +103,8 @@ public class MoneyPerMassVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit MoneyPerMassUnit; the unit
      */
     MoneyPerMassVector(final DoubleVectorData data, final MoneyPerMassUnit unit)
     {

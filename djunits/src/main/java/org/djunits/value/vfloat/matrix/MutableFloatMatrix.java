@@ -41,7 +41,7 @@ public abstract class MutableFloatMatrix
          * Construct a new Absolute Mutable FloatMatrix.
          * @param values float[][]; the values of the entries in the new Absolute Mutable FloatMatrix
          * @param unit AU; the unit of the new Absolute Mutable FloatMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Abs(final float[][] values, final AU unit, final StorageType storageType) throws ValueException
@@ -51,8 +51,8 @@ public abstract class MutableFloatMatrix
 
         /**
          * Construct a new Absolute Mutable FloatMatrix.
-         * @param values FloatScalar.Abs&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable FloatMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values FloatScalar.Abs&lt;AU, RU&gt;[][]; the values of the entries in the new Absolute Mutable FloatMatrix
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Abs(final FloatScalar.Abs<AU, RU>[][] values, final StorageType storageType) throws ValueException
@@ -62,8 +62,8 @@ public abstract class MutableFloatMatrix
 
         /**
          * Construct a new Absolute Mutable FloatMatrix.
-         * @param data an internal data object
-         * @param unit the unit
+         * @param data FloatMatrixData; an internal data object
+         * @param unit AU; the unit
          */
         Abs(final FloatMatrixData data, final AU unit)
         {
@@ -130,7 +130,7 @@ public abstract class MutableFloatMatrix
          * Construct a new Relative Mutable FloatMatrix.
          * @param values float[][]; the values of the entries in the new Relative Mutable FloatMatrix
          * @param unit U; the unit of the new Relative Mutable FloatMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Rel(final float[][] values, final U unit, final StorageType storageType) throws ValueException
@@ -140,8 +140,8 @@ public abstract class MutableFloatMatrix
 
         /**
          * Construct a new Relative Mutable FloatMatrix.
-         * @param values FloatScalar.Abs&lt;U&gt;[][]; the values of the entries in the new Relative Mutable FloatMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Mutable FloatMatrix
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Rel(final FloatScalar.Rel<U>[][] values, final StorageType storageType) throws ValueException
@@ -151,8 +151,8 @@ public abstract class MutableFloatMatrix
 
         /**
          * Construct a new Relative Mutable FloatMatrix.
-         * @param data an internal data object
-         * @param unit the unit
+         * @param data FloatMatrixData; an internal data object
+         * @param unit U; the unit
          */
         Rel(final FloatMatrixData data, final U unit)
         {

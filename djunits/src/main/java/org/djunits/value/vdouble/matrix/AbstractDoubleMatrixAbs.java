@@ -39,7 +39,7 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
      * Construct a new Absolute Immutable DoubleMatrix.
      * @param values double[][]; the values of the entries in the new Absolute Immutable DoubleMatrix
      * @param unit AU; the unit of the new Absolute Immutable DoubleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractDoubleMatrixAbs(final double[][] values, final AU unit, final StorageType storageType) throws ValueException
@@ -50,7 +50,7 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
     /**
      * Construct a new Absolute Immutable DoubleMatrix.
      * @param values S[][]; the values of the entries in the new Absolute Immutable DoubleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractDoubleMatrixAbs(final S[][] values, final StorageType storageType) throws ValueException
@@ -60,8 +60,8 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Construct a new Relative Immutable DoubleMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit AU; the unit
      */
     AbstractDoubleMatrixAbs(final DoubleMatrixData data, final AU unit)
     {
@@ -81,32 +81,32 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Construct a new Absolute Immutable DoubleMatrix of the right type. Each extending class must implement this method.
-     * @param dmd an internal data object
-     * @param unit the unit
+     * @param dmd DoubleMatrixData; an internal data object
+     * @param unit AU; the unit
      * @return M the Mutable DoubleMatrix of the right type
      */
     protected abstract A instantiateTypeAbs(DoubleMatrixData dmd, AU unit);
 
     /**
      * Construct a new Relative Immutable DoubleMatrix of the right type. Each extending class must implement this method.
-     * @param dmd an internal data object
-     * @param unit the unit
+     * @param dmd DoubleMatrixData; an internal data object
+     * @param unit RU; the unit
      * @return M the Mutable DoubleMatrix of the right type
      */
     protected abstract R instantiateTypeRel(DoubleMatrixData dmd, RU unit);
 
     /**
      * Construct a new Absolute Mutable DoubleMatrix of the right type. Each extending class must implement this method.
-     * @param dmd an internal data object
-     * @param unit the unit
+     * @param dmd DoubleMatrixData; an internal data object
+     * @param unit AU; the unit
      * @return M the Mutable DoubleMatrix of the right type
      */
     protected abstract MA instantiateMutableType(DoubleMatrixData dmd, AU unit);
 
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value the value
-     * @param unit the unit
+     * @param value double; the value
+     * @param unit AU; the unit
      * @return S the Immutable DoubleScalar of the right type
      */
     protected abstract S instantiateScalar(double value, AU unit);
@@ -151,7 +151,7 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Check that a provided array can be used to create some descendant of a DoubleMatrix, and return the Unit.
-     * @param dsArray the array to check and get the unit for
+     * @param dsArray S[][]; the array to check and get the unit for
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar type
@@ -167,7 +167,7 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /**
      * Check that a 2D array of DoubleScalar&lt;?&gt; is rectangular; i.e. all rows have the same length and is non empty.
-     * @param values DoubleScalar&lt;?&gt;[][]; the 2D array to check
+     * @param values S[][]; the 2D array to check
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar type

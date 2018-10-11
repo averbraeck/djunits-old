@@ -25,8 +25,8 @@ public class MutableAngleSolidMatrix
     /**
      * Construct a new Relative Immutable Double AngleSolidMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double AngleSolidMatrix
-     * @param unit U; the unit of the new Relative Immutable Double AngleSolidMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AngleSolidUnit; the unit of the new Relative Immutable Double AngleSolidMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAngleSolidMatrix(final double[][] values, final AngleSolidUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableAngleSolidMatrix
 
     /**
      * Construct a new Relative Immutable Double AngleSolidMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            AngleSolidMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values AngleSolid[][]; the values of the entries in the new Relative Immutable Double AngleSolidMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAngleSolidMatrix(final AngleSolid[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableAngleSolidMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit AngleSolidUnit; the unit
      */
     MutableAngleSolidMatrix(final DoubleMatrixData data, final AngleSolidUnit unit)
     {

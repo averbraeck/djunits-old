@@ -25,8 +25,8 @@ public class MoneyPerAreaMatrix
     /**
      * Construct a new Relative Immutable Double MoneyPerAreaMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double MoneyPerAreaMatrix
-     * @param unit U; the unit of the new Relative Immutable Double MoneyPerAreaMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerAreaUnit; the unit of the new Relative Immutable Double MoneyPerAreaMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MoneyPerAreaMatrix(final double[][] values, final MoneyPerAreaUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MoneyPerAreaMatrix
 
     /**
      * Construct a new Relative Immutable Double MoneyPerAreaMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            MoneyPerAreaMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values MoneyPerArea[][]; the values of the entries in the new Relative Immutable Double MoneyPerAreaMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MoneyPerAreaMatrix(final MoneyPerArea[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MoneyPerAreaMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit MoneyPerAreaUnit; the unit
      */
     MoneyPerAreaMatrix(final DoubleMatrixData data, final MoneyPerAreaUnit unit)
     {

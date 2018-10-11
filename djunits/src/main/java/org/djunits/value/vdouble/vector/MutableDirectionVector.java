@@ -29,8 +29,8 @@ public class MutableDirectionVector extends AbstractMutableDoubleVectorAbs<Direc
     /**
      * Construct a new Absolute Mutable Double DirectionVector.
      * @param values double[]; the values of the entries in the new Absolute Mutable Double DirectionVector
-     * @param unit U; the unit of the new Absolute Mutable Double DirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DirectionUnit; the unit of the new Absolute Mutable Double DirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableDirectionVector(final double[] values, final DirectionUnit unit, final StorageType storageType)
@@ -41,9 +41,9 @@ public class MutableDirectionVector extends AbstractMutableDoubleVectorAbs<Direc
 
     /**
      * Construct a new Absolute Mutable Double DirectionVector.
-     * @param values List; the values of the entries in the new Absolute Mutable Double DirectionVector
-     * @param unit U; the unit of the new Absolute Mutable Double DirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Absolute Mutable Double DirectionVector
+     * @param unit DirectionUnit; the unit of the new Absolute Mutable Double DirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableDirectionVector(final List<Double> values, final DirectionUnit unit, final StorageType storageType)
@@ -54,8 +54,8 @@ public class MutableDirectionVector extends AbstractMutableDoubleVectorAbs<Direc
 
     /**
      * Construct a new Absolute Mutable Double DirectionVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable Double DirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Direction[]; the values of the entries in the new Absolute Mutable Double DirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableDirectionVector(final Direction[] values, final StorageType storageType) throws ValueException
@@ -65,8 +65,8 @@ public class MutableDirectionVector extends AbstractMutableDoubleVectorAbs<Direc
 
     /**
      * Construct a new Absolute Mutable Double DirectionVector.
-     * @param values List; the values of the entries in the new Absolute Mutable Double DirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Direction&gt;; the values of the entries in the new Absolute Mutable Double DirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableDirectionVector(final List<Direction> values, final StorageType storageType) throws ValueException
@@ -76,10 +76,10 @@ public class MutableDirectionVector extends AbstractMutableDoubleVectorAbs<Direc
 
     /**
      * Construct a new Absolute Mutable Double DirectionVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Direction&gt;; the values of the entries in the new Absolute Sparse Mutable Double
      *            DirectionVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableDirectionVector(final SortedMap<Integer, Direction> values, final int length, final StorageType storageType)
@@ -90,10 +90,11 @@ public class MutableDirectionVector extends AbstractMutableDoubleVectorAbs<Direc
 
     /**
      * Construct a new Absolute Mutable Double DirectionVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable Double DirectionVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable Double DirectionVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Absolute Sparse Mutable Double
+     *            DirectionVector
+     * @param unit DirectionUnit; the unit of the new Absolute Sparse Mutable Double DirectionVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableDirectionVector(final SortedMap<Integer, Double> values, final DirectionUnit unit, final int length,
@@ -104,8 +105,8 @@ public class MutableDirectionVector extends AbstractMutableDoubleVectorAbs<Direc
 
     /**
      * Construct a new Absolute Mutable Double DirectionVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit DirectionUnit; the unit
      */
     MutableDirectionVector(final DoubleVectorData data, final DirectionUnit unit)
     {

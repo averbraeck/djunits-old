@@ -62,8 +62,8 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Construct FloatDuration scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit DurationUnit; unit for the float value
      */
     public FloatDuration(final float value, final DurationUnit unit)
     {
@@ -72,7 +72,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Construct FloatDuration scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatDuration; Scalar from which to construct this instance
      */
     public FloatDuration(final FloatDuration value)
     {
@@ -81,8 +81,8 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Construct FloatDuration scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit DurationUnit; unit for the resulting float value
      */
     public FloatDuration(final double value, final DurationUnit unit)
     {
@@ -98,7 +98,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Construct FloatDuration scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatDuration createSI(final float value)
@@ -108,8 +108,8 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the float value
-     * @param unit the unit
+     * @param value float; the float value
+     * @param unit TimeUnit; the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
     public final FloatTime instantiateAbs(final float value, final TimeUnit unit)
@@ -119,9 +119,9 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatDuration; the low value
+     * @param one FloatDuration; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatDuration interpolate(final FloatDuration zero, final FloatDuration one, final float ratio)
@@ -131,7 +131,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
+     * @param v FloatTime; the value to add
      * @return sum of this value and v as a new object
      */
     public final FloatTime plus(final FloatTime v)
@@ -142,8 +142,8 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatDuration; the first scalar
+     * @param r2 FloatDuration; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatDuration max(final FloatDuration r1, final FloatDuration r2)
@@ -153,9 +153,9 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatDuration; the first scalar
+     * @param r2 FloatDuration; the second scalar
+     * @param rn FloatDuration...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatDuration max(final FloatDuration r1, final FloatDuration r2, final FloatDuration... rn)
@@ -173,8 +173,8 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatDuration; the first scalar
+     * @param r2 FloatDuration; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatDuration min(final FloatDuration r1, final FloatDuration r2)
@@ -184,9 +184,9 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatDuration; the first scalar
+     * @param r2 FloatDuration; the second scalar
+     * @param rn FloatDuration...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatDuration min(final FloatDuration r1, final FloatDuration r2, final FloatDuration... rn)
@@ -204,7 +204,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Calculate the division of FloatDuration and FloatDuration, which results in a FloatDimensionless scalar.
-     * @param v FloatDuration scalar
+     * @param v FloatDuration; FloatDuration scalar
      * @return FloatDimensionless scalar as a division of FloatDuration and FloatDuration
      */
     public final FloatDimensionless divideBy(final FloatDuration v)
@@ -214,7 +214,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Calculate the multiplication of FloatDuration and FloatFrequency, which results in a FloatDimensionless scalar.
-     * @param v FloatDuration scalar
+     * @param v FloatFrequency; FloatDuration scalar
      * @return FloatDimensionless scalar as a multiplication of FloatDuration and FloatFrequency
      */
     public final FloatDimensionless multiplyBy(final FloatFrequency v)
@@ -225,7 +225,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
     /**
      * Calculate the multiplication of FloatDuration and FloatElectricalCurrent, which results in a FloatElectricalCharge
      * scalar.
-     * @param v FloatDuration scalar
+     * @param v FloatElectricalCurrent; FloatDuration scalar
      * @return FloatElectricalCharge scalar as a multiplication of FloatDuration and FloatElectricalCurrent
      */
     public final FloatElectricalCharge multiplyBy(final FloatElectricalCurrent v)
@@ -235,7 +235,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Calculate the multiplication of FloatDuration and FloatFlowMass, which results in a FloatMass scalar.
-     * @param v FloatDuration scalar
+     * @param v FloatFlowMass; FloatDuration scalar
      * @return FloatMass scalar as a multiplication of FloatDuration and FloatFlowMass
      */
     public final FloatMass multiplyBy(final FloatFlowMass v)
@@ -245,7 +245,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Calculate the multiplication of FloatDuration and FloatFlowVolume, which results in a FloatVolume scalar.
-     * @param v FloatDuration scalar
+     * @param v FloatFlowVolume; FloatDuration scalar
      * @return FloatVolume scalar as a multiplication of FloatDuration and FloatFlowVolume
      */
     public final FloatVolume multiplyBy(final FloatFlowVolume v)
@@ -255,7 +255,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Calculate the multiplication of FloatDuration and FloatAcceleration, which results in a FloatSpeed scalar.
-     * @param v FloatDuration scalar
+     * @param v FloatAcceleration; FloatDuration scalar
      * @return FloatSpeed scalar as a multiplication of FloatDuration and FloatAcceleration
      */
     public final FloatSpeed multiplyBy(final FloatAcceleration v)
@@ -265,7 +265,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Calculate the multiplication of FloatDuration and FloatPower, which results in a FloatEnergy scalar.
-     * @param v FloatDuration scalar
+     * @param v FloatPower; FloatDuration scalar
      * @return FloatEnergy scalar as a multiplication of FloatDuration and FloatPower
      */
     public final FloatEnergy multiplyBy(final FloatPower v)
@@ -275,7 +275,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Calculate the multiplication of FloatDuration and FloatSpeed, which results in a FloatLength scalar.
-     * @param v FloatDuration scalar
+     * @param v FloatSpeed; FloatDuration scalar
      * @return FloatLength scalar as a multiplication of FloatDuration and FloatSpeed
      */
     public final FloatLength multiplyBy(final FloatSpeed v)
@@ -285,7 +285,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Calculate the multiplication of FloatDuration and FloatMoneyPerDuration, which results in a FloatMoney scalar.
-     * @param v FloatDuration scalar
+     * @param v FloatMoneyPerDuration; FloatDuration scalar
      * @return FloatMoney scalar as a multiplication of FloatDuration and FloatMoneyPerDuration
      */
     public final FloatMoney multiplyBy(final FloatMoneyPerDuration v)

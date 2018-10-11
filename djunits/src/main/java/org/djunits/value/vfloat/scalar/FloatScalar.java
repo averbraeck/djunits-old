@@ -34,7 +34,7 @@ public abstract class FloatScalar
         /**
          * Construct a new Absolute Immutable FloatScalar.
          * @param value float; the value of the new Absolute Immutable FloatScalar
-         * @param unit U; the unit of the new Absolute Immutable FloatScalar
+         * @param unit AU; the unit of the new Absolute Immutable FloatScalar
          */
         public Abs(final float value, final AU unit)
         {
@@ -43,7 +43,7 @@ public abstract class FloatScalar
 
         /**
          * Construct a new Absolute Immutable FloatScalar from an existing Absolute Immutable FloatScalar.
-         * @param value FloatScalar.Abs&lt;U&gt;; the reference
+         * @param value FloatScalar.Abs&lt;AU, RU&gt;; the reference
          */
         public Abs(final FloatScalar.Abs<AU, RU> value)
         {
@@ -237,8 +237,8 @@ public abstract class FloatScalar
 
     /**
      * Multiply two values; the result is a new instance with a different (existing or generated) SI unit.
-     * @param left FloatScalar.Rel&lt;?&gt;; the left operand
-     * @param right FloatScalar.Rel&lt;?&gt;; the right operand
+     * @param left AbstractFloatScalarRel&lt;?, ?&gt;; the left operand
+     * @param right AbstractFloatScalarRel&lt;?, ?&gt;; the right operand
      * @return FloatScalar.Rel&lt;SIUnit&gt;; the product of the two values
      */
     public static FloatScalar.Rel<SIUnit> multiply(final AbstractFloatScalarRel<?, ?> left,
@@ -251,8 +251,8 @@ public abstract class FloatScalar
 
     /**
      * Divide two values; the result is a new instance with a different (existing or generated) SI unit.
-     * @param left FloatScalar.Rel&lt;?&gt;; the left operand
-     * @param right FloatScalar.Rel&lt;?&gt;; the right operand
+     * @param left AbstractFloatScalarRel&lt;?, ?&gt;; the left operand
+     * @param right AbstractFloatScalarRel&lt;?, ?&gt;; the right operand
      * @return FloatScalar.Rel&lt;SIUnit&gt;; the ratio of the two values
      */
     public static FloatScalar.Rel<SIUnit> divide(final AbstractFloatScalarRel<?, ?> left,
@@ -265,8 +265,8 @@ public abstract class FloatScalar
 
     /**
      * Interpolate between or extrapolate over two values.
-     * @param zero FloatScalar.Abs&lt;U&gt;; zero reference (returned when ratio == 0)
-     * @param one FloatScalar.Abs&lt;U&gt;; one reference (returned when ratio == 1)
+     * @param zero FloatScalar.Abs&lt;AU, RU&gt;; zero reference (returned when ratio == 0)
+     * @param one FloatScalar.Abs&lt;AU, RU&gt;; one reference (returned when ratio == 1)
      * @param ratio float; the ratio that determines where between (or outside) zero and one the result lies
      * @param <AU> Unit; the absolute unit of the parameter and the result
      * @param <RU> Unit; the relative unit belonging to the absolute unit

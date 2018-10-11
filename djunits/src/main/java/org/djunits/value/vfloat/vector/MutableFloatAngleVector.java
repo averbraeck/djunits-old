@@ -28,8 +28,8 @@ public class MutableFloatAngleVector
     /**
      * Construct a new Relative Mutable FloatAngleVector.
      * @param values float[]; the values of the entries in the new Relative Mutable FloatAngleVector
-     * @param unit U; the unit of the new Relative Mutable FloatAngleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AngleUnit; the unit of the new Relative Mutable FloatAngleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAngleVector(final float[] values, final AngleUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatAngleVector
 
     /**
      * Construct a new Relative Mutable FloatAngleVector.
-     * @param values List; the values of the entries in the new Relative Mutable FloatAngleVector
-     * @param unit U; the unit of the new Relative Mutable FloatAngleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Mutable FloatAngleVector
+     * @param unit AngleUnit; the unit of the new Relative Mutable FloatAngleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAngleVector(final List<Float> values, final AngleUnit unit, final StorageType storageType)
@@ -53,8 +53,8 @@ public class MutableFloatAngleVector
 
     /**
      * Construct a new Relative Mutable FloatAngleVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable FloatAngleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatAngle[]; the values of the entries in the new Relative Mutable FloatAngleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAngleVector(final FloatAngle[] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ public class MutableFloatAngleVector
 
     /**
      * Construct a new Relative Mutable FloatAngleVector.
-     * @param values List; the values of the entries in the new Relative Mutable FloatAngleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatAngle&gt;; the values of the entries in the new Relative Mutable FloatAngleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAngleVector(final List<FloatAngle> values, final StorageType storageType) throws ValueException
@@ -75,9 +75,10 @@ public class MutableFloatAngleVector
 
     /**
      * Construct a new Relative Mutable FloatAngleVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable FloatAngleVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatAngle&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            FloatAngleVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAngleVector(final SortedMap<Integer, FloatAngle> values, final int length, final StorageType storageType)
@@ -88,10 +89,11 @@ public class MutableFloatAngleVector
 
     /**
      * Construct a new Relative Mutable FloatAngleVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatAngleVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatAngleVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable
+     *            FloatAngleVector
+     * @param unit AngleUnit; the unit of the new Relative Sparse Mutable FloatAngleVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAngleVector(final SortedMap<Integer, Float> values, final AngleUnit unit, final int length,
@@ -102,8 +104,8 @@ public class MutableFloatAngleVector
 
     /**
      * Construct a new Relative Mutable FloatAngleVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit AngleUnit; the unit
      */
     MutableFloatAngleVector(final FloatVectorData data, final AngleUnit unit)
     {

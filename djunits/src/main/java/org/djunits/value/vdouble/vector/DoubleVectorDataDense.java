@@ -21,7 +21,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
 {
     /**
      * Create a vector with dense data.
-     * @param vectorSI the data to store
+     * @param vectorSI double[]; the data to store
      */
     public DoubleVectorDataDense(final double[] vectorSI)
     {
@@ -31,7 +31,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
     }
 
     /**
-     * @param doubleFunction the function to apply on the (mutable) data elements
+     * @param doubleFunction DoubleFunction; the function to apply on the (mutable) data elements
      */
     public final void assign(final DoubleFunction doubleFunction)
     {

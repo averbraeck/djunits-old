@@ -25,8 +25,8 @@ public class FloatMoneyPerLengthMatrix extends AbstractFloatMatrixRel<MoneyPerLe
     /**
      * Construct a new Relative Immutable FloatMoneyPerLengthMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatMoneyPerLengthMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatMoneyPerLengthMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerLengthUnit; the unit of the new Relative Immutable FloatMoneyPerLengthMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatMoneyPerLengthMatrix(final float[][] values, final MoneyPerLengthUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class FloatMoneyPerLengthMatrix extends AbstractFloatMatrixRel<MoneyPerLe
 
     /**
      * Construct a new Relative Immutable FloatMoneyPerLengthMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatMoneyPerLength[][]; the values of the entries in the new Relative Immutable Float
      *            FloatMoneyPerLengthMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatMoneyPerLengthMatrix(final FloatMoneyPerLength[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class FloatMoneyPerLengthMatrix extends AbstractFloatMatrixRel<MoneyPerLe
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit MoneyPerLengthUnit; the unit
      */
     FloatMoneyPerLengthMatrix(final FloatMatrixData data, final MoneyPerLengthUnit unit)
     {

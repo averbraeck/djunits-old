@@ -25,8 +25,8 @@ public class MutableMoneyPerDurationMatrix extends AbstractMutableDoubleMatrixRe
     /**
      * Construct a new Relative Immutable Double MoneyPerDurationMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double MoneyPerDurationMatrix
-     * @param unit U; the unit of the new Relative Immutable Double MoneyPerDurationMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerDurationUnit; the unit of the new Relative Immutable Double MoneyPerDurationMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMoneyPerDurationMatrix(final double[][] values, final MoneyPerDurationUnit unit,
@@ -37,9 +37,8 @@ public class MutableMoneyPerDurationMatrix extends AbstractMutableDoubleMatrixRe
 
     /**
      * Construct a new Relative Immutable Double MoneyPerDurationMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            MoneyPerDurationMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values MoneyPerDuration[][]; the values of the entries in the new Relative Immutable Double MoneyPerDurationMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableMoneyPerDurationMatrix(final MoneyPerDuration[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableMoneyPerDurationMatrix extends AbstractMutableDoubleMatrixRe
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit MoneyPerDurationUnit; the unit
      */
     MutableMoneyPerDurationMatrix(final DoubleMatrixData data, final MoneyPerDurationUnit unit)
     {

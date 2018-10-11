@@ -28,8 +28,8 @@ public class MutableFloatDimensionlessMatrix extends AbstractMutableFloatMatrixR
     /**
      * Construct a new Relative Immutable FloatDimensionlessMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatDimensionlessMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatDimensionlessMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DimensionlessUnit; the unit of the new Relative Immutable FloatDimensionlessMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDimensionlessMatrix(final float[][] values, final DimensionlessUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatDimensionlessMatrix extends AbstractMutableFloatMatrixR
 
     /**
      * Construct a new Relative Immutable FloatDimensionlessMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatDimensionless[][]; the values of the entries in the new Relative Immutable Float
      *            FloatDimensionlessMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDimensionlessMatrix(final FloatDimensionless[][] values, final StorageType storageType)
@@ -52,8 +52,8 @@ public class MutableFloatDimensionlessMatrix extends AbstractMutableFloatMatrixR
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit DimensionlessUnit; the unit
      */
     MutableFloatDimensionlessMatrix(final FloatMatrixData data, final DimensionlessUnit unit)
     {

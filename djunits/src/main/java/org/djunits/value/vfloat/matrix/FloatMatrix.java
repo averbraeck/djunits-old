@@ -36,7 +36,7 @@ public abstract class FloatMatrix
          * Construct a new Absolute Immutable FloatMatrix.
          * @param values float[][]; the values of the entries in the new Absolute Immutable FloatMatrix
          * @param unit AU; the unit of the new Absolute Immutable FloatMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Abs(final float[][] values, final AU unit, final StorageType storageType) throws ValueException
@@ -46,8 +46,8 @@ public abstract class FloatMatrix
 
         /**
          * Construct a new Absolute Immutable FloatMatrix.
-         * @param values FloatScalar.Abs&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable FloatMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values FloatScalar.Abs&lt;AU, RU&gt;[][]; the values of the entries in the new Absolute Immutable FloatMatrix
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Abs(final FloatScalar.Abs<AU, RU>[][] values, final StorageType storageType) throws ValueException
@@ -57,8 +57,8 @@ public abstract class FloatMatrix
 
         /**
          * Construct a new Absolute Immutable FloatMatrix.
-         * @param data an internal data object
-         * @param unit the unit
+         * @param data FloatMatrixData; an internal data object
+         * @param unit AU; the unit
          */
         Abs(final FloatMatrixData data, final AU unit)
         {
@@ -124,7 +124,7 @@ public abstract class FloatMatrix
          * Construct a new Relative Immutable FloatMatrix.
          * @param values float[][]; the values of the entries in the new Relative Immutable FloatMatrix
          * @param unit U; the unit of the new Relative Immutable FloatMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values is null
          */
         public Rel(final float[][] values, final U unit, final StorageType storageType) throws ValueException
@@ -134,8 +134,8 @@ public abstract class FloatMatrix
 
         /**
          * Construct a new Relative Immutable FloatMatrix.
-         * @param values FloatScalar.Abs&lt;U&gt;[][]; the values of the entries in the new Relative Immutable FloatMatrix
-         * @param storageType the data type to use (e.g., DENSE or SPARSE)
+         * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable FloatMatrix
+         * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
          * @throws ValueException when values has zero entries
          */
         public Rel(final FloatScalar.Rel<U>[][] values, final StorageType storageType) throws ValueException
@@ -145,8 +145,8 @@ public abstract class FloatMatrix
 
         /**
          * Construct a new Relative Immutable FloatMatrix.
-         * @param data an internal data object
-         * @param unit the unit
+         * @param data FloatMatrixData; an internal data object
+         * @param unit U; the unit
          */
         Rel(final FloatMatrixData data, final U unit)
         {
@@ -197,8 +197,8 @@ public abstract class FloatMatrix
 
     /**
      * Add the content of two matrices with a static method on a cell-by-cell basis; Abs + Rel = Abs.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left FloatMatrix.Abs&lt;AU,RU&gt;; the first matrix
+     * @param right FloatMatrix.Rel&lt;RU&gt;; the second matrix
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @return the sum of the two matrices
@@ -212,8 +212,8 @@ public abstract class FloatMatrix
 
     /**
      * Add the content of two matrices with a static method on a cell-by-cell basis; Rel + Rel = Rel.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left FloatMatrix.Rel&lt;U&gt;; the first matrix
+     * @param right FloatMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the relative unit
      * @return the sum of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
@@ -226,8 +226,8 @@ public abstract class FloatMatrix
 
     /**
      * Subtract the content of two matrices with a static method on a cell-by-cell basis; Abs - Rel = Abs.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left FloatMatrix.Abs&lt;AU,RU&gt;; the first matrix
+     * @param right FloatMatrix.Rel&lt;RU&gt;; the second matrix
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @return the difference of the two matrices
@@ -241,8 +241,8 @@ public abstract class FloatMatrix
 
     /**
      * Subtract the content of two matrices with a static method on a cell-by-cell basis; Abs - Abs = Rel.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left FloatMatrix.Abs&lt;AU,RU&gt;; the first matrix
+     * @param right FloatMatrix.Abs&lt;AU,RU&gt;; the second matrix
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @return the difference of the two matrices
@@ -256,8 +256,8 @@ public abstract class FloatMatrix
 
     /**
      * Subtract the content of two matrices with a static method on a cell-by-cell basis; Rel - Rel = Rel.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left FloatMatrix.Rel&lt;U&gt;; the first matrix
+     * @param right FloatMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the unit
      * @return the difference of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
@@ -271,8 +271,8 @@ public abstract class FloatMatrix
     /**
      * Multiply the content of two matrices with a static method on a cell-by-cell basis; Rel * Rel = Rel. The unit is not
      * changed by this method.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left FloatMatrix.Rel&lt;U&gt;; the first matrix
+     * @param right FloatMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the unit
      * @return the cell-by-cell multiplication of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
@@ -286,8 +286,8 @@ public abstract class FloatMatrix
     /**
      * Divide the content of two matrices with a static method on a cell-by-cell basis; Rel / Rel = Rel. The unit is not changed
      * by this method.
-     * @param left the first matrix
-     * @param right the second matrix
+     * @param left FloatMatrix.Rel&lt;U&gt;; the first matrix
+     * @param right FloatMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the unit
      * @return the cell-by-cell division of the two matrices
      * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed

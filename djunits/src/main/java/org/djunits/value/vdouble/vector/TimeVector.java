@@ -29,8 +29,8 @@ public class TimeVector
     /**
      * Construct a new Absolute Immutable Double TimeVector.
      * @param values double[]; the values of the entries in the new Absolute Immutable Double TimeVector
-     * @param unit U; the unit of the new Absolute Immutable Double TimeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit TimeUnit; the unit of the new Absolute Immutable Double TimeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public TimeVector(final double[] values, final TimeUnit unit, final StorageType storageType) throws ValueException
@@ -40,9 +40,9 @@ public class TimeVector
 
     /**
      * Construct a new Absolute Immutable Double TimeVector.
-     * @param values List; the values of the entries in the new Absolute Immutable Double TimeVector
-     * @param unit U; the unit of the new Absolute Immutable Double TimeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Absolute Immutable Double TimeVector
+     * @param unit TimeUnit; the unit of the new Absolute Immutable Double TimeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public TimeVector(final List<Double> values, final TimeUnit unit, final StorageType storageType) throws ValueException
@@ -52,8 +52,8 @@ public class TimeVector
 
     /**
      * Construct a new Absolute Immutable Double TimeVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Immutable Double TimeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Time[]; the values of the entries in the new Absolute Immutable Double TimeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public TimeVector(final Time[] values, final StorageType storageType) throws ValueException
@@ -63,8 +63,8 @@ public class TimeVector
 
     /**
      * Construct a new Absolute Immutable Double TimeVector.
-     * @param values List; the values of the entries in the new Absolute Immutable Double TimeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Time&gt;; the values of the entries in the new Absolute Immutable Double TimeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public TimeVector(final List<Time> values, final StorageType storageType) throws ValueException
@@ -74,9 +74,10 @@ public class TimeVector
 
     /**
      * Construct a new Absolute Immutable Double TimeVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable Double TimeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Time&gt;; the values of the entries in the new Absolute Sparse Mutable Double
+     *            TimeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public TimeVector(final SortedMap<Integer, Time> values, final int length, final StorageType storageType)
@@ -87,10 +88,11 @@ public class TimeVector
 
     /**
      * Construct a new Absolute Immutable Double TimeVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable Double TimeVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable Double TimeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Absolute Sparse Mutable Double
+     *            TimeVector
+     * @param unit TimeUnit; the unit of the new Absolute Sparse Mutable Double TimeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public TimeVector(final SortedMap<Integer, Double> values, final TimeUnit unit, final int length,
@@ -101,8 +103,8 @@ public class TimeVector
 
     /**
      * Construct a new Absolute Immutable Double TimeVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit TimeUnit; the unit
      */
     TimeVector(final DoubleVectorData data, final TimeUnit unit)
     {

@@ -21,9 +21,9 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
 {
     /**
      * Create a matrix with dense data.
-     * @param matrixSI the data to store
-     * @param rows the number of rows
-     * @param cols the number of columns
+     * @param matrixSI double[]; the data to store
+     * @param rows int; the number of rows
+     * @param cols int; the number of columns
      * @throws ValueException in case <tt>rows * cols != matrixSI.length</tt>
      */
     public DoubleMatrixDataDense(final double[] matrixSI, final int rows, final int cols) throws ValueException
@@ -41,7 +41,7 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
 
     /**
      * Create a matrix with dense data.
-     * @param matrixSI the data to store
+     * @param matrixSI double[][]; the data to store
      * @throws ValueException in case matrix is ragged
      */
     public DoubleMatrixDataDense(final double[][] matrixSI) throws ValueException
@@ -66,7 +66,7 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
     }
 
     /**
-     * @param doubleFunction the function to apply on the (mutable) data elements
+     * @param doubleFunction DoubleFunction; the function to apply on the (mutable) data elements
      */
     public final void assign(final DoubleFunction doubleFunction)
     {

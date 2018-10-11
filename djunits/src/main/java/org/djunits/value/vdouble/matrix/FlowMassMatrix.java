@@ -24,8 +24,8 @@ public class FlowMassMatrix extends AbstractDoubleMatrixRel<FlowMassUnit, FlowMa
     /**
      * Construct a new Relative Immutable Double FlowMassMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double FlowMassMatrix
-     * @param unit U; the unit of the new Relative Immutable Double FlowMassMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FlowMassUnit; the unit of the new Relative Immutable Double FlowMassMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FlowMassMatrix(final double[][] values, final FlowMassUnit unit, final StorageType storageType) throws ValueException
@@ -35,9 +35,8 @@ public class FlowMassMatrix extends AbstractDoubleMatrixRel<FlowMassUnit, FlowMa
 
     /**
      * Construct a new Relative Immutable Double FlowMassMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            FlowMassMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FlowMass[][]; the values of the entries in the new Relative Immutable Double FlowMassMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FlowMassMatrix(final FlowMass[][] values, final StorageType storageType) throws ValueException
@@ -46,8 +45,8 @@ public class FlowMassMatrix extends AbstractDoubleMatrixRel<FlowMassUnit, FlowMa
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit FlowMassUnit; the unit
      */
     FlowMassMatrix(final DoubleMatrixData data, final FlowMassUnit unit)
     {

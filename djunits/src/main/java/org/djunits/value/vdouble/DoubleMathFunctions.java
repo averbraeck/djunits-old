@@ -212,7 +212,7 @@ public interface DoubleMathFunctions<T>
 
     /**
      * Function that returns <tt>Math.pow(a, b)</tt>.
-     * @param b power parameter
+     * @param b double; power parameter
      * @return power function
      */
     @SuppressWarnings("checkstyle:methodname")
@@ -338,7 +338,7 @@ public interface DoubleMathFunctions<T>
 
     /**
      * Function that returns <tt>a * b</tt>.
-     * @param b power parameter
+     * @param b double; power parameter
      * @return power function
      */
     @SuppressWarnings("checkstyle:methodname")
@@ -356,7 +356,7 @@ public interface DoubleMathFunctions<T>
 
     /**
      * Function that returns <tt>a / b</tt>.
-     * @param b power parameter
+     * @param b double; power parameter
      * @return power function
      */
     @SuppressWarnings("checkstyle:methodname")

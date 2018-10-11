@@ -25,8 +25,8 @@ public class ElectricalChargeMatrix extends
     /**
      * Construct a new Relative Immutable Double ElectricalChargeMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double ElectricalChargeMatrix
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalChargeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalChargeUnit; the unit of the new Relative Immutable Double ElectricalChargeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalChargeMatrix(final double[][] values, final ElectricalChargeUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class ElectricalChargeMatrix extends
 
     /**
      * Construct a new Relative Immutable Double ElectricalChargeMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            ElectricalChargeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values ElectricalCharge[][]; the values of the entries in the new Relative Immutable Double ElectricalChargeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalChargeMatrix(final ElectricalCharge[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class ElectricalChargeMatrix extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit ElectricalChargeUnit; the unit
      */
     ElectricalChargeMatrix(final DoubleMatrixData data, final ElectricalChargeUnit unit)
     {

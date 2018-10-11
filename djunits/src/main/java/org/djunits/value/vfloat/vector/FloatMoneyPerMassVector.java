@@ -28,8 +28,8 @@ public class FloatMoneyPerMassVector extends
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerMassVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatMoneyPerMassVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatMoneyPerMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MoneyPerMassUnit; the unit of the new Relative Immutable Float FloatMoneyPerMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatMoneyPerMassVector(final float[] values, final MoneyPerMassUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class FloatMoneyPerMassVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatMoneyPerMassVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatMoneyPerMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatMoneyPerMassVector
+     * @param unit MoneyPerMassUnit; the unit of the new Relative Immutable Float FloatMoneyPerMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatMoneyPerMassVector(final List<Float> values, final MoneyPerMassUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class FloatMoneyPerMassVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerMassVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatMoneyPerMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatMoneyPerMass[]; the values of the entries in the new Relative Immutable Float FloatMoneyPerMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatMoneyPerMassVector(final FloatMoneyPerMass[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class FloatMoneyPerMassVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatMoneyPerMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatMoneyPerMass&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatMoneyPerMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatMoneyPerMassVector(final List<FloatMoneyPerMass> values, final StorageType storageType) throws ValueException
@@ -76,10 +76,10 @@ public class FloatMoneyPerMassVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerMassVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatMoneyPerMassVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatMoneyPerMass&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float FloatMoneyPerMassVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatMoneyPerMassVector(final SortedMap<Integer, FloatMoneyPerMass> values, final int length,
@@ -90,10 +90,11 @@ public class FloatMoneyPerMassVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatMoneyPerMassVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatMoneyPerMassVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatMoneyPerMassVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatMoneyPerMassVector
+     * @param unit MoneyPerMassUnit; the unit of the new Relative Sparse Mutable Float FloatMoneyPerMassVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatMoneyPerMassVector(final SortedMap<Integer, Float> values, final MoneyPerMassUnit unit, final int length,
@@ -103,8 +104,8 @@ public class FloatMoneyPerMassVector extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit MoneyPerMassUnit; the unit
      */
     FloatMoneyPerMassVector(final FloatVectorData data, final MoneyPerMassUnit unit)
     {

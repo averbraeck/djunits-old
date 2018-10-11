@@ -19,11 +19,11 @@ public final class ShowDisplayUnit
     /** */
     private ShowDisplayUnit()
     {
-        // Utility class 
+        // Utility class
     }
 
     /**
-     * @param args args (blank)
+     * @param args String[]; args (blank)
      */
     public static void main(final String[] args)
     {
@@ -37,4 +37,3 @@ public final class ShowDisplayUnit
     }
 
 }
-

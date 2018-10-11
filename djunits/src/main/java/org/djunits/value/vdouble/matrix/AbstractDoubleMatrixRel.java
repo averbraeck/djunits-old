@@ -34,7 +34,7 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
      * Construct a new Relative Immutable DoubleMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable DoubleMatrix
      * @param unit U; the unit of the new Relative Immutable DoubleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     AbstractDoubleMatrixRel(final double[][] values, final U unit, final StorageType storageType) throws ValueException
@@ -45,7 +45,7 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
     /**
      * Construct a new Relative Immutable DoubleMatrix.
      * @param values S[][]; the values of the entries in the new Relative Immutable DoubleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     AbstractDoubleMatrixRel(final S[][] values, final StorageType storageType) throws ValueException
@@ -55,8 +55,8 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Construct a new Relative Immutable DoubleMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit U; the unit
      */
     AbstractDoubleMatrixRel(final DoubleMatrixData data, final U unit)
     {
@@ -76,24 +76,24 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Construct a new Relative Immutable DoubleMatrix of the right type. Each extending class must implement this method.
-     * @param dmd an internal data object
-     * @param unit the unit
+     * @param dmd DoubleMatrixData; an internal data object
+     * @param unit U; the unit
      * @return M the Mutable DoubleMatrix of the right type
      */
     protected abstract R instantiateType(DoubleMatrixData dmd, U unit);
 
     /**
      * Construct a new Relative Mutable DoubleMatrix of the right type. Each extending class must implement this method.
-     * @param dmd an internal data object
-     * @param unit the unit
+     * @param dmd DoubleMatrixData; an internal data object
+     * @param unit U; the unit
      * @return M the Mutable DoubleMatrix of the right type
      */
     protected abstract MR instantiateMutableType(DoubleMatrixData dmd, U unit);
 
     /**
      * Construct a new Relative Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value the value
-     * @param unit the unit
+     * @param value double; the value
+     * @param unit U; the unit
      * @return S the Immutable DoubleScalar of the right type
      */
     protected abstract S instantiateScalar(double value, U unit);
@@ -115,7 +115,7 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
      * Add a Relative value to this Relative value for a matrix or matrix. The addition is done value by value and store the
      * result in a new Relative value. If both operands are sparse, the result is a sparse matrix or matrix, otherwise the
      * result is a dense matrix or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the addition of this matrix and the operand
      * @throws ValueException in case this matrix or matrix and the operand have a different size
      */
@@ -128,7 +128,7 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
      * Subtract a Relative value from this Relative value for a matrix or matrix. The subtraction is done value by value and
      * store the result in a new Relative value. If both operands are sparse, the result is a sparse matrix or matrix, otherwise
      * the result is a dense matrix or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the subtraction of this matrix and the operand
      * @throws ValueException in case this matrix or matrix and the operand have a different size
      */
@@ -141,7 +141,7 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
      * Multiply a Relative value with this Relative value for a matrix or matrix. The multiplication is done value by value and
      * store the result in a new Relative value. If both operands are dense, the result is a dense matrix or matrix, otherwise
      * the result is a sparse matrix or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the multiplication of this matrix and the operand
      * @throws ValueException in case this matrix or matrix and the operand have a different size
      */
@@ -154,7 +154,7 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
      * Divide this Relative value by a Relative value for a matrix or matrix. The division is done value by value and store the
      * result in a new Relative value. If both operands are dense, the result is a dense matrix or matrix, otherwise the result
      * is a sparse matrix or matrix.
-     * @param rel the right operand
+     * @param rel R; the right operand
      * @return the division of this matrix and the operand
      * @throws ValueException in case this matrix or matrix and the operand have a different size
      */
@@ -169,7 +169,7 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Check that a provided array can be used to create some descendant of a DoubleMatrix, and return the Unit.
-     * @param dsArray the array to check and get the unit for
+     * @param dsArray S[][]; the array to check and get the unit for
      * @param <U> the unit
      * @param <S> the scalar type
      * @return the unit of the object
@@ -183,7 +183,7 @@ abstract class AbstractDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoub
 
     /**
      * Check that a 2D array of DoubleScalar&lt;?&gt; is rectangular; i.e. all rows have the same length and is non empty.
-     * @param values DoubleScalar&lt;?&gt;[][]; the 2D array to check
+     * @param values S[][]; the 2D array to check
      * @param <U> the unit
      * @param <S> the scalar type
      * @throws ValueException when values is not rectangular, or contains no data
