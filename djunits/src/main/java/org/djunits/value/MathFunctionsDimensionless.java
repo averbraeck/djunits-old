@@ -4,7 +4,7 @@ package org.djunits.value;
  * Interface to force most functions of Math, which have not yet been implemented by MathFunctionsRel, to be implemented, with
  * the exception of toRadians() and toDegrees() -- these functions are available for angles.
  * <p>
- * Copyright (c) 2015-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2015-10-04 20:48:33 +0200 (Sun, 04 Oct 2015) $, @version $Revision: 87 $, by $Author: averbraeck $, initial

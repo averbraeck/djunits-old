@@ -29,7 +29,7 @@
 
     <h2>Maven use</h2>
     <p>
-      Maven is one of the easiest ways to include DJUNITS in a Java project. The Maven files for DJUNITS reside at <a href="http://djunits.org/maven">http://djunits.org/maven</a>.
+      Maven is one of the easiest ways to include DJUNITS in a Java project. The Maven files for DJUNITS reside at <a href="https://djunits.org/maven">https://djunits.org/maven</a>.
       When a POM-file is created for the project, the following snippet needs to be included to include DJUNITS:
     </p>
 
@@ -38,12 +38,12 @@
   &lt;dependency&gt;
     &lt;groupId&gt;org.djunits&lt;/groupId&gt;
     &lt;artifactId&gt;djunits&lt;/artifactId&gt;
-    &lt;version&gt;3.00.00&lt;/version&gt;
+    &lt;version&gt;3.00.07&lt;/version&gt;
   &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </pre>
 
-    <p>Of course, the version number (2.01.01 in the above example) needs to be replaced with the version that one wants to include in the project.</p>
+    <p>Of course, the version number (3.00.07 in the above example) needs to be replaced with the version that one wants to include in the project.</p>
     <p>Right now, the DJUNITS files are kept on a server at TU Delft, and are not yet made available on Maven Central. Therefore, the repository location
       has to be specified separately in the Maven POM-file:</p>
 
@@ -52,7 +52,7 @@
   &lt;repository&gt;
     &lt;name&gt;djunits Public Repository&lt;/name&gt;
     &lt;id&gt;djunits&lt;/id&gt;
-    &lt;url&gt;http://djunits.org/maven&lt;/url&gt;
+    &lt;url&gt;https://djunits.org/maven&lt;/url&gt;
   &lt;/repository&gt;
 &lt;/repositories&gt;
 </pre>
@@ -69,12 +69,7 @@
   </div>
 
   <!-- ======== Footer ======== -->
-
-  <div id="footer">
-    <hr />
-    Copyright &copy; 2015-2017, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br /> DJUNITS uses a BSD-style
-    license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
-  </div>
+  <?php include ('./footer.php'); ?>
 
 </body>
 </html>

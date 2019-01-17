@@ -172,12 +172,7 @@ public final String getSICoefficientsString() { return "m/s3"; }
   </div>
 
   <!-- ======== Footer ======== -->
-
-  <div id="footer">
-    <hr />
-    Copyright &copy; 2015-2017, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br />DJUNITS uses a BSD-style
-    license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
-  </div>
+  <?php include ('./footer.php'); ?>
 
 </body>
 </html>

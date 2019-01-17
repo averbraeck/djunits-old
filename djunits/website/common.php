@@ -26,7 +26,7 @@ function bodyStart ($pageName)
         echo "  <div id=\"sidebar\">\n";
         echo "    <div>\n";
         echo "      <p class=\"title\">\n";
-        echo "        <a href=\"index.html\">DJUNITS</a>\n";
+        echo "        <a href=\"index.php\">DJUNITS</a>\n";
         echo "      </p>\n";
         echo "      <ul>\n";
         highlightItem("Overview", "index" == $pageName, "index.php");
@@ -36,6 +36,9 @@ function bodyStart ($pageName)
         highlightItem("Building a scalar", "building_scalar" == $pageName, "building_scalar.php");
         highlightItem("Vectors and matrices", "vectors_matrices" == $pageName, "vectors_matrices.php");
         highlightItem("Class diagrams", "vector_classes" == $pageName, "vector_classes.php");
+        echo "         <br>\n";
+        echo "         <li><i><a href=\"https://djunits.org/docs/current/index.html\" target=\"_blank\">Documentation</a></i></li>\n";
+        echo "         <li><i><a href=\"https://djunits.org/docs/current/apidocs/index.html\" target=\"_blank\">JavaDocs</a></i></li>\n";
         echo "      </ul>\n";
         echo "    </div>\n";
         echo "  </div>\n";

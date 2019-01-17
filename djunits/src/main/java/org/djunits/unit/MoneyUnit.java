@@ -9,7 +9,7 @@ import org.joda.money.CurrencyUnit;
  * MoneyUnit defines a monetary unit, and wraps the joda money currency unit. At this time, conversion rates between monetary
  * units are not used. A standard monetary unit, defined as a static variable, can be set to be used in the code.
  * <p>
- * Copyright (c) 2015-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,

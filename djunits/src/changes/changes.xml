@@ -2,11 +2,14 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="3.00.08" date="2018-XX-XX" description="javadoc">
+    <release version="3.00.08" date="2019-01-17" description="javadoc">
       <action dev="averbraeck" type="add">
         The ParamComments utility class has been added to the djunits-generator project. 
         It adds or updates the type for each parameter in the javadoc of all java files in 
         /src/main/java in all or in selected projects in the workspace.
+      </action>
+      <action dev="averbraeck" type="update">
+        Copyright message changed to 2019.
       </action>
     </release>
  
