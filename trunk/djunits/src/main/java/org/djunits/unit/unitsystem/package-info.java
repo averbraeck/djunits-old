@@ -1,7 +1,7 @@
 /**
  * Classes for the unit system, such as SI, SI-derived, Imperial.
  * <p>
- * Copyright (c) 2013-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
+ * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
  * <p>
  * See for project information <a href="http://djunits.org/"> djunits.org</a>.
  * <p>

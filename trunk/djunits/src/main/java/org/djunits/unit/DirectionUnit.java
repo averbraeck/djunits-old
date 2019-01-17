@@ -10,7 +10,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * <p>
  * Note that the Direction is <b>counter</b>clockwise.
  * <p>
- * Copyright (c) 2015-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2017-01-30 14:23:11 +0100 (Mon, 30 Jan 2017) $, @version $Revision: 234 $, by $Author: averbraeck $,

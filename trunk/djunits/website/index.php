@@ -46,14 +46,14 @@
     </ul>
     <h2>Origin</h2>
     <p>
-      DJUNITS was developed at the <a href="http://www.tudelft.nl">Delft University of Technology</a> as part of the <a href="http://www.opentrafficsim.org/">Open
+      DJUNITS was developed at the <a href="https://www.tudelft.nl" target="_blank">Delft University of Technology</a> as part of the <a href="https://www.opentrafficsim.org/">Open
         Traffic Simulator</a> project (started in 2014).
     </p>
     <p>In August 2015 it became obvious that the units and values classes developed for the Open Traffic Simulator were sufficiently mature to be used in
       other projects.</p>
     <p>
-      The main authors/contributors of the DJUNITS project are <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a> and <a
-        href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>.
+      The main authors/contributors of the DJUNITS project are <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a> and <a
+        href="https://www.tudelft.nl/pknoppers" target="_blank">Peter Knoppers</a>.
     </p>
 
     <h2>Absolute and Relative values</h2>
@@ -248,7 +248,7 @@ Volume vol = area.multiplyBy(distance);
       classes are FloatSpeedVector and FloatSpeedMatrix.</p>
 
     <h2>Extensions</h2>
-    <p>Several extensions are planned on a short notice:</p>
+    <p>Several extensions are planned:</p>
     <ul>
       <li>Typed vectors and matrices, so a LengthMatrix can be multiplied with the inverse of a DurationMatrix (units in 1/s) to give a SpeedMatrix.
         This can be cell-cell multiplication (n x m matrix 'times' an n x m matrix yielding an n x m matrix) or real matrix multiplication (n x m matrix times
@@ -264,18 +264,13 @@ Volume vol = area.multiplyBy(distance);
     </ul>
 
     <h2>Documentations and test reports</h2>
-    DJUNITS documentation and test reports for the current version can be found at <a href="http://djunits.org/docs/current" target="_blank">djunits.org/docs/current</a>
-    and the API can be found at <a href="http://djunits.org/docs/current/apidocs/index.html" target="_blank">http://djunits.org/docs/current/apidocs/index.html</a>.
+    DJUNITS documentation and test reports for the current version can be found at <a href="https://djunits.org/docs/current" target="_blank">https://djunits.org/docs/current</a>
+    and the API can be found at <a href="https://djunits.org/docs/current/apidocs/index.html" target="_blank">https://djunits.org/docs/current/apidocs/index.html</a>.
     <p>&nbsp;</p>
   </div>
 
   <!-- ======== Footer ======== -->
-
-  <div id="footer">
-    <hr />
-    Copyright &copy; 2015-2017, Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br /> DJUNITS uses a BSD-style
-    license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
-  </div>
+  <?php include ('./footer.php'); ?>
 
 </body>
 </html>

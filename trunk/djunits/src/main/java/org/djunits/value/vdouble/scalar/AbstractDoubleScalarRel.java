@@ -10,7 +10,7 @@ import org.djunits.value.vdouble.DoubleMathFunctions;
  * The typed, abstract DoubleScalarRel class that forms the basis of all DoubleScalar definitions and extensions.<br>
  * Note: A relative scalar class can implement the toAbs() method if it has an absolute equivalent.
  * <p>
- * Copyright (c) 2013-2018 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
@@ -84,6 +84,21 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
         }
         return getUnit().equals(decrement.getUnit()) ? instantiateRel(getInUnit() - decrement.getInUnit(), getUnit())
                 : instantiateRel(this.si - decrement.si, getUnit().getStandardUnit());
+    }
+
+    /**
+     * Interpolate between two values.
+     * @param zero Duration; the low value
+     * @param one Duration; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @return a Scalar at the ratio between
+     * @param <U> the unit
+     * @param <R> the Relative class for reference purposes
+     */
+    public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>> R interpolate(final R zero, final R one,
+            final double ratio)
+    {
+        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
     /**********************************************************************************/
