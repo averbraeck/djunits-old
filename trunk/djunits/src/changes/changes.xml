@@ -2,6 +2,20 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.00.09" date="2019-02-27" description="valueOf and stringOf">
+      <action dev="averbraeck" type="add">
+        Scalar has been provided with a stringOf(Scalar) method, and all absolute and relative 
+        scalars have been provided with a valueOf(String) method.
+      </action>
+      <action dev="averbraeck" type="add">
+        The generators have been adapted to create the valueOf(...) code for all absolute and 
+        relative scalar classes, both Double and Float.
+      </action>
+      <action dev="averbraeck" type="add">
+        A small demo for valueOf and stringOf has called Parsing has been added to djunits-demo.
+      </action>
+    </release>
+
     <release version="3.00.08" date="2019-01-17" description="javadoc">
       <action dev="averbraeck" type="add">
         The ParamComments utility class has been added to the djunits-generator project. 
