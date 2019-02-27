@@ -6,6 +6,7 @@ import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MoneyPerLengthUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the LinearDensity DoubleScalar, which is relative by definition. Instead of:
@@ -57,8 +58,8 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Construct LinearDensity scalar.
-     * @param value double; double value
-     * @param unit LinearDensityUnit; unit for the double value
+     * @param value double value
+     * @param unit unit for the double value
      */
     public LinearDensity(final double value, final LinearDensityUnit unit)
     {
@@ -67,7 +68,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Construct LinearDensity scalar.
-     * @param value LinearDensity; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public LinearDensity(final LinearDensity value)
     {
@@ -83,7 +84,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Construct LinearDensity scalar.
-     * @param value double; double value in SI units
+     * @param value double value in SI units
      * @return the new scalar with the SI value
      */
     public static final LinearDensity createSI(final double value)
@@ -93,9 +94,9 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Interpolate between two values.
-     * @param zero LinearDensity; the low value
-     * @param one LinearDensity; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static LinearDensity interpolate(final LinearDensity zero, final LinearDensity one, final double ratio)
@@ -105,8 +106,8 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 LinearDensity; the first scalar
-     * @param r2 LinearDensity; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static LinearDensity max(final LinearDensity r1, final LinearDensity r2)
@@ -116,9 +117,9 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 LinearDensity; the first scalar
-     * @param r2 LinearDensity; the second scalar
-     * @param rn LinearDensity...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static LinearDensity max(final LinearDensity r1, final LinearDensity r2, final LinearDensity... rn)
@@ -136,8 +137,8 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 LinearDensity; the first scalar
-     * @param r2 LinearDensity; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static LinearDensity min(final LinearDensity r1, final LinearDensity r2)
@@ -147,9 +148,9 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 LinearDensity; the first scalar
-     * @param r2 LinearDensity; the second scalar
-     * @param rn LinearDensity...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static LinearDensity min(final LinearDensity r1, final LinearDensity r2, final LinearDensity... rn)
@@ -166,8 +167,47 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
     }
 
     /**
+     * Returns a LinearDensity representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a LinearDensity
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static LinearDensity valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing LinearDensity -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (LinearDensityUnit unit : Unit.getUnits(LinearDensityUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    double d = Double.parseDouble(valueString);
+                    return new LinearDensity(d, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing LinearDensity from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing LinearDensity from " + text);
+    }
+
+    /**
      * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
-     * @param v LinearDensity; LinearDensity scalar
+     * @param v LinearDensity scalar
      * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
      */
     public final Dimensionless divideBy(final LinearDensity v)
@@ -177,7 +217,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
-     * @param v Area; LinearDensity scalar
+     * @param v LinearDensity scalar
      * @return Length scalar as a multiplication of LinearDensity and Area
      */
     public final Length multiplyBy(final Area v)
@@ -187,7 +227,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
-     * @param v Energy; LinearDensity scalar
+     * @param v LinearDensity scalar
      * @return Force scalar as a multiplication of LinearDensity and Energy
      */
     public final Force multiplyBy(final Energy v)
@@ -197,7 +237,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
-     * @param v Speed; LinearDensity scalar
+     * @param v LinearDensity scalar
      * @return Frequency scalar as a multiplication of LinearDensity and Speed
      */
     public final Frequency multiplyBy(final Speed v)
@@ -207,7 +247,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Money, which results in a MoneyPerLength scalar.
-     * @param v Money; LinearDensity scalar
+     * @param v LinearDensity scalar
      * @return MoneyPerLength scalar as a multiplication of LinearDensity and Money
      */
     public final MoneyPerLength multiplyBy(final Money v)

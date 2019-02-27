@@ -7,6 +7,7 @@ import org.djunits.unit.ForceUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MoneyUnit;
+import org.djunits.unit.Unit;
 import org.djunits.unit.VolumeUnit;
 
 /**
@@ -59,8 +60,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Construct Area scalar.
-     * @param value double; double value
-     * @param unit AreaUnit; unit for the double value
+     * @param value double value
+     * @param unit unit for the double value
      */
     public Area(final double value, final AreaUnit unit)
     {
@@ -69,7 +70,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Construct Area scalar.
-     * @param value Area; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public Area(final Area value)
     {
@@ -85,7 +86,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Construct Area scalar.
-     * @param value double; double value in SI units
+     * @param value double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Area createSI(final double value)
@@ -95,9 +96,9 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Interpolate between two values.
-     * @param zero Area; the low value
-     * @param one Area; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Area interpolate(final Area zero, final Area one, final double ratio)
@@ -107,8 +108,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 Area; the first scalar
-     * @param r2 Area; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Area max(final Area r1, final Area r2)
@@ -118,9 +119,9 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 Area; the first scalar
-     * @param r2 Area; the second scalar
-     * @param rn Area...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Area max(final Area r1, final Area r2, final Area... rn)
@@ -138,8 +139,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 Area; the first scalar
-     * @param r2 Area; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Area min(final Area r1, final Area r2)
@@ -149,9 +150,9 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 Area; the first scalar
-     * @param r2 Area; the second scalar
-     * @param rn Area...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Area min(final Area r1, final Area r2, final Area... rn)
@@ -168,8 +169,47 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
     }
 
     /**
+     * Returns a Area representation of a textual representation of a value with a unit. The String representation that can be
+     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a Area
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static Area valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing Area -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (AreaUnit unit : Unit.getUnits(AreaUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    double d = Double.parseDouble(valueString);
+                    return new Area(d, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing Area from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing Area from " + text);
+    }
+
+    /**
      * Calculate the division of Area and Area, which results in a Dimensionless scalar.
-     * @param v Area; Area scalar
+     * @param v Area scalar
      * @return Dimensionless scalar as a division of Area and Area
      */
     public final Dimensionless divideBy(final Area v)
@@ -179,7 +219,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Length, which results in a Volume scalar.
-     * @param v Length; Area scalar
+     * @param v Area scalar
      * @return Volume scalar as a multiplication of Area and Length
      */
     public final Volume multiplyBy(final Length v)
@@ -189,7 +229,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and LinearDensity, which results in a Volume scalar.
-     * @param v LinearDensity; Area scalar
+     * @param v Area scalar
      * @return Volume scalar as a division of Area and LinearDensity
      */
     public final Volume divideBy(final LinearDensity v)
@@ -199,7 +239,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and Volume, which results in a LinearDensity scalar.
-     * @param v Volume; Area scalar
+     * @param v Area scalar
      * @return LinearDensity scalar as a division of Area and Volume
      */
     public final LinearDensity divideBy(final Volume v)
@@ -209,7 +249,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and Length, which results in a Length scalar.
-     * @param v Length; Area scalar
+     * @param v Area scalar
      * @return Length scalar as a division of Area and Length
      */
     public final Length divideBy(final Length v)
@@ -219,7 +259,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and LinearDensity, which results in a Length scalar.
-     * @param v LinearDensity; Area scalar
+     * @param v Area scalar
      * @return Length scalar as a multiplication of Area and LinearDensity
      */
     public final Length multiplyBy(final LinearDensity v)
@@ -229,7 +269,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Speed, which results in a FlowVolume scalar.
-     * @param v Speed; Area scalar
+     * @param v Area scalar
      * @return FlowVolume scalar as a multiplication of Area and Speed
      */
     public final FlowVolume multiplyBy(final Speed v)
@@ -239,7 +279,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Pressure, which results in a Force scalar.
-     * @param v Pressure; Area scalar
+     * @param v Area scalar
      * @return Force scalar as a multiplication of Area and Pressure
      */
     public final Force multiplyBy(final Pressure v)
@@ -249,7 +289,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and MoneyPerArea, which results in a Money scalar.
-     * @param v MoneyPerArea; Area scalar
+     * @param v Area scalar
      * @return Money scalar as a multiplication of Area and MoneyPerArea
      */
     public final Money multiplyBy(final MoneyPerArea v)

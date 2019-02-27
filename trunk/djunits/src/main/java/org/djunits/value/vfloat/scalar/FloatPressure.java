@@ -4,6 +4,7 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.ForceUnit;
 import org.djunits.unit.PressureUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the Pressure FloatScalar, which is relative by definition. An example is Speed. Instead of:
@@ -55,8 +56,8 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Construct FloatPressure scalar.
-     * @param value float; float value
-     * @param unit PressureUnit; unit for the float value
+     * @param value float value
+     * @param unit unit for the float value
      */
     public FloatPressure(final float value, final PressureUnit unit)
     {
@@ -65,7 +66,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Construct FloatPressure scalar.
-     * @param value FloatPressure; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatPressure(final FloatPressure value)
     {
@@ -74,8 +75,8 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Construct FloatPressure scalar using a double value.
-     * @param value double; double value
-     * @param unit PressureUnit; unit for the resulting float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
     public FloatPressure(final double value, final PressureUnit unit)
     {
@@ -91,7 +92,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Construct FloatPressure scalar.
-     * @param value float; float value in SI units
+     * @param value float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatPressure createSI(final float value)
@@ -101,9 +102,9 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Interpolate between two values.
-     * @param zero FloatPressure; the low value
-     * @param one FloatPressure; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatPressure interpolate(final FloatPressure zero, final FloatPressure one, final float ratio)
@@ -113,8 +114,8 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatPressure; the first scalar
-     * @param r2 FloatPressure; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatPressure max(final FloatPressure r1, final FloatPressure r2)
@@ -124,9 +125,9 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatPressure; the first scalar
-     * @param r2 FloatPressure; the second scalar
-     * @param rn FloatPressure...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatPressure max(final FloatPressure r1, final FloatPressure r2, final FloatPressure... rn)
@@ -144,8 +145,8 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatPressure; the first scalar
-     * @param r2 FloatPressure; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatPressure min(final FloatPressure r1, final FloatPressure r2)
@@ -155,9 +156,9 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatPressure; the first scalar
-     * @param r2 FloatPressure; the second scalar
-     * @param rn FloatPressure...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatPressure min(final FloatPressure r1, final FloatPressure r2, final FloatPressure... rn)
@@ -174,8 +175,47 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
     }
 
     /**
+     * Returns a FloatPressure representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a FloatPressure
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static FloatPressure valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing FloatPressure -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (PressureUnit unit : Unit.getUnits(PressureUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    float f = Float.parseFloat(valueString);
+                    return new FloatPressure(f, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing FloatPressure from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing FloatPressure from " + text);
+    }
+
+    /**
      * Calculate the division of FloatPressure and FloatPressure, which results in a FloatDimensionless scalar.
-     * @param v FloatPressure; FloatPressure scalar
+     * @param v FloatPressure scalar
      * @return FloatDimensionless scalar as a division of FloatPressure and FloatPressure
      */
     public final FloatDimensionless divideBy(final FloatPressure v)
@@ -185,7 +225,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Calculate the multiplication of FloatPressure and FloatArea, which results in a FloatForce scalar.
-     * @param v FloatArea; FloatPressure scalar
+     * @param v FloatPressure scalar
      * @return FloatForce scalar as a multiplication of FloatPressure and FloatArea
      */
     public final FloatForce multiplyBy(final FloatArea v)
@@ -195,7 +235,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Calculate the multiplication of FloatPressure and FloatVolume, which results in a FloatEnergy scalar.
-     * @param v FloatVolume; FloatPressure scalar
+     * @param v FloatPressure scalar
      * @return FloatEnergy scalar as a multiplication of FloatPressure and FloatVolume
      */
     public final FloatEnergy multiplyBy(final FloatVolume v)

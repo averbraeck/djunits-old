@@ -35,8 +35,8 @@ public class FloatMoneyPerMass extends AbstractFloatScalarRel<MoneyPerMassUnit, 
 
     /**
      * Construct FloatMoneyPerMass scalar.
-     * @param value float; float value
-     * @param unit MoneyPerMassUnit; unit for the float value
+     * @param value float value
+     * @param unit unit for the float value
      */
     public FloatMoneyPerMass(final float value, final MoneyPerMassUnit unit)
     {
@@ -45,7 +45,7 @@ public class FloatMoneyPerMass extends AbstractFloatScalarRel<MoneyPerMassUnit, 
 
     /**
      * Construct FloatMoneyPerMass scalar.
-     * @param value FloatMoneyPerMass; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatMoneyPerMass(final FloatMoneyPerMass value)
     {
@@ -54,8 +54,8 @@ public class FloatMoneyPerMass extends AbstractFloatScalarRel<MoneyPerMassUnit, 
 
     /**
      * Construct FloatMoneyPerMass scalar using a double value.
-     * @param value double; double value
-     * @param unit MoneyPerMassUnit; unit for the resulting float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
     public FloatMoneyPerMass(final double value, final MoneyPerMassUnit unit)
     {
@@ -71,9 +71,9 @@ public class FloatMoneyPerMass extends AbstractFloatScalarRel<MoneyPerMassUnit, 
 
     /**
      * Interpolate between two values.
-     * @param zero FloatMoneyPerMass; the low value
-     * @param one FloatMoneyPerMass; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatMoneyPerMass interpolate(final FloatMoneyPerMass zero, final FloatMoneyPerMass one, final float ratio)
@@ -83,8 +83,8 @@ public class FloatMoneyPerMass extends AbstractFloatScalarRel<MoneyPerMassUnit, 
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 FloatMoneyPerMass; the first scalar
-     * @param r2 FloatMoneyPerMass; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static FloatMoneyPerMass max(final FloatMoneyPerMass r1, final FloatMoneyPerMass r2)
@@ -94,9 +94,9 @@ public class FloatMoneyPerMass extends AbstractFloatScalarRel<MoneyPerMassUnit, 
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 FloatMoneyPerMass; the first scalar
-     * @param r2 FloatMoneyPerMass; the second scalar
-     * @param rn FloatMoneyPerMass...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static FloatMoneyPerMass max(final FloatMoneyPerMass r1, final FloatMoneyPerMass r2, final FloatMoneyPerMass... rn)
@@ -114,8 +114,8 @@ public class FloatMoneyPerMass extends AbstractFloatScalarRel<MoneyPerMassUnit, 
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 FloatMoneyPerMass; the first scalar
-     * @param r2 FloatMoneyPerMass; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static FloatMoneyPerMass min(final FloatMoneyPerMass r1, final FloatMoneyPerMass r2)
@@ -125,9 +125,9 @@ public class FloatMoneyPerMass extends AbstractFloatScalarRel<MoneyPerMassUnit, 
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 FloatMoneyPerMass; the first scalar
-     * @param r2 FloatMoneyPerMass; the second scalar
-     * @param rn FloatMoneyPerMass...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static FloatMoneyPerMass min(final FloatMoneyPerMass r1, final FloatMoneyPerMass r2, final FloatMoneyPerMass... rn)
@@ -145,7 +145,7 @@ public class FloatMoneyPerMass extends AbstractFloatScalarRel<MoneyPerMassUnit, 
 
     /**
      * Calculate the division of FloatMoneyPerMass and FloatMoneyPerMass, which results in a FloatDimensionless scalar.
-     * @param v FloatMoneyPerMass; FloatMoneyPerMass scalar
+     * @param v FloatMoneyPerMass scalar
      * @return FloatDimensionless scalar as a division of FloatMoneyPerMass and FloatMoneyPerMass
      */
     public final FloatDimensionless divideBy(final FloatMoneyPerMass v)
@@ -155,7 +155,7 @@ public class FloatMoneyPerMass extends AbstractFloatScalarRel<MoneyPerMassUnit, 
 
     /**
      * Calculate the multiplication of FloatMoneyPerMass and FloatMass, which results in a FloatMoney scalar.
-     * @param v FloatMass; FloatMoneyPerMass scalar
+     * @param v FloatMoneyPerMass scalar
      * @return FloatMoney scalar as a multiplication of FloatMoneyPerMass and FloatMass
      */
     public final FloatMoney multiplyBy(final FloatMass v)

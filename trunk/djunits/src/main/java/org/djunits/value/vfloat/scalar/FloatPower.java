@@ -8,6 +8,7 @@ import org.djunits.unit.ForceUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the Power FloatScalar, which is relative by definition. An example is Speed. Instead of:
@@ -59,8 +60,8 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Construct FloatPower scalar.
-     * @param value float; float value
-     * @param unit PowerUnit; unit for the float value
+     * @param value float value
+     * @param unit unit for the float value
      */
     public FloatPower(final float value, final PowerUnit unit)
     {
@@ -69,7 +70,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Construct FloatPower scalar.
-     * @param value FloatPower; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatPower(final FloatPower value)
     {
@@ -78,8 +79,8 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Construct FloatPower scalar using a double value.
-     * @param value double; double value
-     * @param unit PowerUnit; unit for the resulting float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
     public FloatPower(final double value, final PowerUnit unit)
     {
@@ -95,7 +96,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Construct FloatPower scalar.
-     * @param value float; float value in SI units
+     * @param value float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatPower createSI(final float value)
@@ -105,9 +106,9 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Interpolate between two values.
-     * @param zero FloatPower; the low value
-     * @param one FloatPower; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatPower interpolate(final FloatPower zero, final FloatPower one, final float ratio)
@@ -117,8 +118,8 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatPower; the first scalar
-     * @param r2 FloatPower; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatPower max(final FloatPower r1, final FloatPower r2)
@@ -128,9 +129,9 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatPower; the first scalar
-     * @param r2 FloatPower; the second scalar
-     * @param rn FloatPower...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatPower max(final FloatPower r1, final FloatPower r2, final FloatPower... rn)
@@ -148,8 +149,8 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatPower; the first scalar
-     * @param r2 FloatPower; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatPower min(final FloatPower r1, final FloatPower r2)
@@ -159,9 +160,9 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatPower; the first scalar
-     * @param r2 FloatPower; the second scalar
-     * @param rn FloatPower...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatPower min(final FloatPower r1, final FloatPower r2, final FloatPower... rn)
@@ -178,8 +179,47 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
     }
 
     /**
+     * Returns a FloatPower representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a FloatPower
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static FloatPower valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing FloatPower -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (PowerUnit unit : Unit.getUnits(PowerUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    float f = Float.parseFloat(valueString);
+                    return new FloatPower(f, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing FloatPower from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing FloatPower from " + text);
+    }
+
+    /**
      * Calculate the division of FloatPower and FloatPower, which results in a FloatDimensionless scalar.
-     * @param v FloatPower; FloatPower scalar
+     * @param v FloatPower scalar
      * @return FloatDimensionless scalar as a division of FloatPower and FloatPower
      */
     public final FloatDimensionless divideBy(final FloatPower v)
@@ -189,7 +229,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Calculate the multiplication of FloatPower and FloatDuration, which results in a FloatEnergy scalar.
-     * @param v FloatDuration; FloatPower scalar
+     * @param v FloatPower scalar
      * @return FloatEnergy scalar as a multiplication of FloatPower and FloatDuration
      */
     public final FloatEnergy multiplyBy(final FloatDuration v)
@@ -199,7 +239,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Calculate the division of FloatPower and FloatFrequency, which results in a FloatEnergy scalar.
-     * @param v FloatFrequency; FloatPower scalar
+     * @param v FloatPower scalar
      * @return FloatEnergy scalar as a division of FloatPower and FloatFrequency
      */
     public final FloatEnergy divideBy(final FloatFrequency v)
@@ -209,7 +249,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Calculate the division of FloatPower and FloatEnergy, which results in a FloatFrequency scalar.
-     * @param v FloatEnergy; FloatPower scalar
+     * @param v FloatPower scalar
      * @return FloatFrequency scalar as a division of FloatPower and FloatEnergy
      */
     public final FloatFrequency divideBy(final FloatEnergy v)
@@ -219,7 +259,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Calculate the division of FloatPower and FloatSpeed, which results in a FloatForce scalar.
-     * @param v FloatSpeed; FloatPower scalar
+     * @param v FloatPower scalar
      * @return FloatForce scalar as a division of FloatPower and FloatSpeed
      */
     public final FloatForce divideBy(final FloatSpeed v)
@@ -229,7 +269,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Calculate the division of FloatPower and FloatForce, which results in a FloatSpeed scalar.
-     * @param v FloatForce; FloatPower scalar
+     * @param v FloatPower scalar
      * @return FloatSpeed scalar as a division of FloatPower and FloatForce
      */
     public final FloatSpeed divideBy(final FloatForce v)
@@ -239,7 +279,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Calculate the division of FloatPower and FloatElectricalPotential, which results in a FloatElectricalCurrent scalar.
-     * @param v FloatElectricalPotential; FloatPower scalar
+     * @param v FloatPower scalar
      * @return FloatElectricalCurrent scalar as a division of FloatPower and FloatElectricalPotential
      */
     public final FloatElectricalCurrent divideBy(final FloatElectricalPotential v)
@@ -249,7 +289,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Calculate the division of FloatPower and FloatElectricalCurrent, which results in a FloatElectricalPotential scalar.
-     * @param v FloatElectricalCurrent; FloatPower scalar
+     * @param v FloatPower scalar
      * @return FloatElectricalPotential scalar as a division of FloatPower and FloatElectricalCurrent
      */
     public final FloatElectricalPotential divideBy(final FloatElectricalCurrent v)

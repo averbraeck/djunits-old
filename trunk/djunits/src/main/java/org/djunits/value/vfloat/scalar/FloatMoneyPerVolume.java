@@ -35,8 +35,8 @@ public class FloatMoneyPerVolume extends AbstractFloatScalarRel<MoneyPerVolumeUn
 
     /**
      * Construct FloatMoneyPerVolume scalar.
-     * @param value float; float value
-     * @param unit MoneyPerVolumeUnit; unit for the float value
+     * @param value float value
+     * @param unit unit for the float value
      */
     public FloatMoneyPerVolume(final float value, final MoneyPerVolumeUnit unit)
     {
@@ -45,7 +45,7 @@ public class FloatMoneyPerVolume extends AbstractFloatScalarRel<MoneyPerVolumeUn
 
     /**
      * Construct FloatMoneyPerVolume scalar.
-     * @param value FloatMoneyPerVolume; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatMoneyPerVolume(final FloatMoneyPerVolume value)
     {
@@ -54,8 +54,8 @@ public class FloatMoneyPerVolume extends AbstractFloatScalarRel<MoneyPerVolumeUn
 
     /**
      * Construct FloatMoneyPerVolume scalar using a double value.
-     * @param value double; double value
-     * @param unit MoneyPerVolumeUnit; unit for the resulting float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
     public FloatMoneyPerVolume(final double value, final MoneyPerVolumeUnit unit)
     {
@@ -71,9 +71,9 @@ public class FloatMoneyPerVolume extends AbstractFloatScalarRel<MoneyPerVolumeUn
 
     /**
      * Interpolate between two values.
-     * @param zero FloatMoneyPerVolume; the low value
-     * @param one FloatMoneyPerVolume; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatMoneyPerVolume interpolate(final FloatMoneyPerVolume zero, final FloatMoneyPerVolume one,
@@ -84,8 +84,8 @@ public class FloatMoneyPerVolume extends AbstractFloatScalarRel<MoneyPerVolumeUn
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 FloatMoneyPerVolume; the first scalar
-     * @param r2 FloatMoneyPerVolume; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static FloatMoneyPerVolume max(final FloatMoneyPerVolume r1, final FloatMoneyPerVolume r2)
@@ -95,9 +95,9 @@ public class FloatMoneyPerVolume extends AbstractFloatScalarRel<MoneyPerVolumeUn
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 FloatMoneyPerVolume; the first scalar
-     * @param r2 FloatMoneyPerVolume; the second scalar
-     * @param rn FloatMoneyPerVolume...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static FloatMoneyPerVolume max(final FloatMoneyPerVolume r1, final FloatMoneyPerVolume r2,
@@ -116,8 +116,8 @@ public class FloatMoneyPerVolume extends AbstractFloatScalarRel<MoneyPerVolumeUn
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 FloatMoneyPerVolume; the first scalar
-     * @param r2 FloatMoneyPerVolume; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static FloatMoneyPerVolume min(final FloatMoneyPerVolume r1, final FloatMoneyPerVolume r2)
@@ -127,9 +127,9 @@ public class FloatMoneyPerVolume extends AbstractFloatScalarRel<MoneyPerVolumeUn
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 FloatMoneyPerVolume; the first scalar
-     * @param r2 FloatMoneyPerVolume; the second scalar
-     * @param rn FloatMoneyPerVolume...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static FloatMoneyPerVolume min(final FloatMoneyPerVolume r1, final FloatMoneyPerVolume r2,
@@ -148,7 +148,7 @@ public class FloatMoneyPerVolume extends AbstractFloatScalarRel<MoneyPerVolumeUn
 
     /**
      * Calculate the division of FloatMoneyPerVolume and FloatMoneyPerVolume, which results in a FloatDimensionless scalar.
-     * @param v FloatMoneyPerVolume; FloatMoneyPerVolume scalar
+     * @param v FloatMoneyPerVolume scalar
      * @return FloatDimensionless scalar as a division of FloatMoneyPerVolume and FloatMoneyPerVolume
      */
     public final FloatDimensionless divideBy(final FloatMoneyPerVolume v)
@@ -158,7 +158,7 @@ public class FloatMoneyPerVolume extends AbstractFloatScalarRel<MoneyPerVolumeUn
 
     /**
      * Calculate the multiplication of FloatMoneyPerVolume and FloatVolume, which results in a FloatMoney scalar.
-     * @param v FloatVolume; FloatMoneyPerVolume scalar
+     * @param v FloatMoneyPerVolume scalar
      * @return FloatMoney scalar as a multiplication of FloatMoneyPerVolume and FloatVolume
      */
     public final FloatMoney multiplyBy(final FloatVolume v)

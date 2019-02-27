@@ -88,5 +88,17 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
         return this instanceof Relative;
     }
 
+    /**
+     * Returns a String representation of the scalar value that can be parsed back into its scalar type. The String
+     * representation is the double value in the unit, followed by the official abbreviation of the unit without spaces.
+     * @param value Scalar&lt;U&gt;; the value to parse into a String
+     * @param <U> the unit type for the scalar
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     */
+    public static <U extends Unit<U>> String stringOf(final Scalar<U> value)
+    {
+        return value.expressAsSpecifiedUnit(value.doubleValue()) + value.getUnit().getAbbreviation();
+    }
+
     // No hashcode or equals -- has to be implemented on a deeper level
 }

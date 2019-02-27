@@ -88,7 +88,7 @@ public final class DoubleScalarUtil
      * @return an instantiated DoubleScalar with the value expressed in the unit
      * @param <S> the return type
      */
-    @SuppressWarnings({ "unchecked", "checkstyle:needbraces" })
+    @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
     public static <S extends AbstractDoubleScalar<?, S>> S instantiateAnonymous(final double value, final Unit<?> unit)
     {
         if (unit instanceof DimensionlessUnit)
@@ -197,7 +197,7 @@ public final class DoubleScalarUtil
      * @return an instantiated DoubleScalar with the value expressed in the unit
      * @param <S> the return type
      */
-    @SuppressWarnings({ "unchecked", "checkstyle:needbraces", "cast", "rawtypes" })
+    @SuppressWarnings({"unchecked", "checkstyle:needbraces", "cast", "rawtypes"})
     public static <S extends AbstractDoubleScalar<?, S>> S instantiateAnonymousSI(final double si, final Unit<?> displayUnit)
     {
         S value;

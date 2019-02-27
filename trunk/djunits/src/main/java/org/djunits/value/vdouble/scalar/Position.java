@@ -2,6 +2,7 @@ package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.PositionUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the Absolute Position DoubleScalar. Instead of:
@@ -38,8 +39,8 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Construct Position scalar.
-     * @param value double; double value
-     * @param unit PositionUnit; unit for the double value
+     * @param value double value
+     * @param unit unit for the double value
      */
     public Position(final double value, final PositionUnit unit)
     {
@@ -48,7 +49,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Construct Position scalar.
-     * @param value Position; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public Position(final Position value)
     {
@@ -71,7 +72,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Construct %TypeAbsl% scalar.
-     * @param value double; double value in SI units
+     * @param value double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Position createSI(final double value)
@@ -81,9 +82,9 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Interpolate between two values.
-     * @param zero Position; the low value
-     * @param one Position; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Position interpolate(final Position zero, final Position one, final double ratio)
@@ -93,8 +94,8 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 Position; the first scalar
-     * @param a2 Position; the second scalar
+     * @param a1 the first scalar
+     * @param a2 the second scalar
      * @return the maximum value of two absolute scalars
      */
     public static Position max(final Position a1, final Position a2)
@@ -104,9 +105,9 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 Position; the first scalar
-     * @param a2 Position; the second scalar
-     * @param an Position...; the other scalars
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @param an the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static Position max(final Position a1, final Position a2, final Position... an)
@@ -124,8 +125,8 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 Position; the first scalar
-     * @param a2 Position; the second scalar
+     * @param a1 the first scalar
+     * @param a2 the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static Position min(final Position a1, final Position a2)
@@ -135,9 +136,9 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 Position; the first scalar
-     * @param a2 Position; the second scalar
-     * @param an Position...; the other scalars
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @param an the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static Position min(final Position a1, final Position a2, final Position... an)
@@ -151,6 +152,45 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
             }
         }
         return mina;
+    }
+
+    /**
+     * Returns a Position representation of a textual representation of a value with a unit. The String representation that can
+     * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a Position
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static Position valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing Position -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (PositionUnit unit : Unit.getUnits(PositionUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    double d = Double.parseDouble(valueString);
+                    return new Position(d, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing Position from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing Position from " + text);
     }
 
 }

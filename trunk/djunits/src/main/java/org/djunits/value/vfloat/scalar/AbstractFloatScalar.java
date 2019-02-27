@@ -283,7 +283,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({ "checkstyle:designforextension", "checkstyle:needbraces", "unchecked" })
+    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces", "unchecked"})
     public boolean equals(final Object obj)
     {
         if (this == obj)

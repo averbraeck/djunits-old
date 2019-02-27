@@ -35,8 +35,8 @@ public class FloatMoneyPerArea extends AbstractFloatScalarRel<MoneyPerAreaUnit, 
 
     /**
      * Construct FloatMoneyPerArea scalar.
-     * @param value float; float value
-     * @param unit MoneyPerAreaUnit; unit for the float value
+     * @param value float value
+     * @param unit unit for the float value
      */
     public FloatMoneyPerArea(final float value, final MoneyPerAreaUnit unit)
     {
@@ -45,7 +45,7 @@ public class FloatMoneyPerArea extends AbstractFloatScalarRel<MoneyPerAreaUnit, 
 
     /**
      * Construct FloatMoneyPerArea scalar.
-     * @param value FloatMoneyPerArea; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatMoneyPerArea(final FloatMoneyPerArea value)
     {
@@ -54,8 +54,8 @@ public class FloatMoneyPerArea extends AbstractFloatScalarRel<MoneyPerAreaUnit, 
 
     /**
      * Construct FloatMoneyPerArea scalar using a double value.
-     * @param value double; double value
-     * @param unit MoneyPerAreaUnit; unit for the resulting float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
     public FloatMoneyPerArea(final double value, final MoneyPerAreaUnit unit)
     {
@@ -71,9 +71,9 @@ public class FloatMoneyPerArea extends AbstractFloatScalarRel<MoneyPerAreaUnit, 
 
     /**
      * Interpolate between two values.
-     * @param zero FloatMoneyPerArea; the low value
-     * @param one FloatMoneyPerArea; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatMoneyPerArea interpolate(final FloatMoneyPerArea zero, final FloatMoneyPerArea one, final float ratio)
@@ -83,8 +83,8 @@ public class FloatMoneyPerArea extends AbstractFloatScalarRel<MoneyPerAreaUnit, 
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 FloatMoneyPerArea; the first scalar
-     * @param r2 FloatMoneyPerArea; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static FloatMoneyPerArea max(final FloatMoneyPerArea r1, final FloatMoneyPerArea r2)
@@ -94,9 +94,9 @@ public class FloatMoneyPerArea extends AbstractFloatScalarRel<MoneyPerAreaUnit, 
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 FloatMoneyPerArea; the first scalar
-     * @param r2 FloatMoneyPerArea; the second scalar
-     * @param rn FloatMoneyPerArea...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static FloatMoneyPerArea max(final FloatMoneyPerArea r1, final FloatMoneyPerArea r2, final FloatMoneyPerArea... rn)
@@ -114,8 +114,8 @@ public class FloatMoneyPerArea extends AbstractFloatScalarRel<MoneyPerAreaUnit, 
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 FloatMoneyPerArea; the first scalar
-     * @param r2 FloatMoneyPerArea; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static FloatMoneyPerArea min(final FloatMoneyPerArea r1, final FloatMoneyPerArea r2)
@@ -125,9 +125,9 @@ public class FloatMoneyPerArea extends AbstractFloatScalarRel<MoneyPerAreaUnit, 
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 FloatMoneyPerArea; the first scalar
-     * @param r2 FloatMoneyPerArea; the second scalar
-     * @param rn FloatMoneyPerArea...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static FloatMoneyPerArea min(final FloatMoneyPerArea r1, final FloatMoneyPerArea r2, final FloatMoneyPerArea... rn)
@@ -145,7 +145,7 @@ public class FloatMoneyPerArea extends AbstractFloatScalarRel<MoneyPerAreaUnit, 
 
     /**
      * Calculate the division of FloatMoneyPerArea and FloatMoneyPerArea, which results in a FloatDimensionless scalar.
-     * @param v FloatMoneyPerArea; FloatMoneyPerArea scalar
+     * @param v FloatMoneyPerArea scalar
      * @return FloatDimensionless scalar as a division of FloatMoneyPerArea and FloatMoneyPerArea
      */
     public final FloatDimensionless divideBy(final FloatMoneyPerArea v)
@@ -155,7 +155,7 @@ public class FloatMoneyPerArea extends AbstractFloatScalarRel<MoneyPerAreaUnit, 
 
     /**
      * Calculate the multiplication of FloatMoneyPerArea and FloatArea, which results in a FloatMoney scalar.
-     * @param v FloatArea; FloatMoneyPerArea scalar
+     * @param v FloatMoneyPerArea scalar
      * @return FloatMoney scalar as a multiplication of FloatMoneyPerArea and FloatArea
      */
     public final FloatMoney multiplyBy(final FloatArea v)
