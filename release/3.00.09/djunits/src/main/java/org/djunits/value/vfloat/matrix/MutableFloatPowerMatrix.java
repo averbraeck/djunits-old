@@ -1,0 +1,93 @@
+package org.djunits.value.vfloat.matrix;
+
+import org.djunits.unit.PowerUnit;
+import org.djunits.value.StorageType;
+import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.scalar.FloatPower;
+
+/**
+ * Mutable FloatPowerMatrix, a matrix of values with a PowerUnit.
+ * <p>
+ * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * </p>
+ * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
+ * initial version Oct 9, 2015 <br>
+ * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ */
+public class MutableFloatPowerMatrix
+        extends AbstractMutableFloatMatrixRel<PowerUnit, FloatPowerMatrix, MutableFloatPowerMatrix, FloatPower>
+{
+    /** */
+    private static final long serialVersionUID = 20151109L;
+
+    /**
+     * Construct a new Relative Immutable FloatPowerMatrix.
+     * @param values float[][]; the values of the entries in the new Relative Immutable FloatPowerMatrix
+     * @param unit PowerUnit; the unit of the new Relative Immutable FloatPowerMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values is null
+     */
+    public MutableFloatPowerMatrix(final float[][] values, final PowerUnit unit, final StorageType storageType)
+            throws ValueException
+    {
+        super(values, unit, storageType);
+    }
+
+    /**
+     * Construct a new Relative Immutable FloatPowerMatrix.
+     * @param values FloatPower[][]; the values of the entries in the new Relative Immutable Float FloatPowerMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
+     * @throws ValueException when values has zero entries
+     */
+    public MutableFloatPowerMatrix(final FloatPower[][] values, final StorageType storageType) throws ValueException
+    {
+        super(values, storageType);
+    }
+
+    /**
+     * @param data FloatMatrixData; an internal data object
+     * @param unit PowerUnit; the unit
+     */
+    MutableFloatPowerMatrix(final FloatMatrixData data, final PowerUnit unit)
+    {
+        super(data, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatPowerMatrix toDense()
+    {
+        return this.data.isDense() ? this : instantiateMutableType(this.data.toDense(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final MutableFloatPowerMatrix toSparse()
+    {
+        return this.data.isSparse() ? this : instantiateMutableType(this.data.toSparse(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatPowerMatrix instantiateType(final FloatMatrixData fmd, final PowerUnit unit)
+    {
+        return new FloatPowerMatrix(fmd, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final MutableFloatPowerMatrix instantiateMutableType(final FloatMatrixData fmd, final PowerUnit unit)
+    {
+        return new MutableFloatPowerMatrix(fmd, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final FloatPower instantiateScalar(final float value, final PowerUnit unit)
+    {
+        return new FloatPower(value, unit);
+    }
+
+}
