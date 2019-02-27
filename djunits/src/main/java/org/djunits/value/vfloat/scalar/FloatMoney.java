@@ -40,8 +40,8 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Construct FloatMoney scalar.
-     * @param value float; float value
-     * @param unit MoneyUnit; unit for the float value
+     * @param value float value
+     * @param unit unit for the float value
      */
     public FloatMoney(final float value, final MoneyUnit unit)
     {
@@ -50,7 +50,7 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Construct FloatMoney scalar.
-     * @param value FloatMoney; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatMoney(final FloatMoney value)
     {
@@ -59,8 +59,8 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Construct FloatMoney scalar using a double value.
-     * @param value double; double value
-     * @param unit MoneyUnit; unit for the resulting float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
     public FloatMoney(final double value, final MoneyUnit unit)
     {
@@ -76,9 +76,9 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Interpolate between two values.
-     * @param zero FloatMoney; the low value
-     * @param one FloatMoney; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatMoney interpolate(final FloatMoney zero, final FloatMoney one, final float ratio)
@@ -88,8 +88,8 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 FloatMoney; the first scalar
-     * @param r2 FloatMoney; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static FloatMoney max(final FloatMoney r1, final FloatMoney r2)
@@ -99,9 +99,9 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 FloatMoney; the first scalar
-     * @param r2 FloatMoney; the second scalar
-     * @param rn FloatMoney...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static FloatMoney max(final FloatMoney r1, final FloatMoney r2, final FloatMoney... rn)
@@ -119,8 +119,8 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 FloatMoney; the first scalar
-     * @param r2 FloatMoney; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static FloatMoney min(final FloatMoney r1, final FloatMoney r2)
@@ -130,9 +130,9 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 FloatMoney; the first scalar
-     * @param r2 FloatMoney; the second scalar
-     * @param rn FloatMoney...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static FloatMoney min(final FloatMoney r1, final FloatMoney r2, final FloatMoney... rn)
@@ -150,7 +150,7 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Calculate the division of FloatMoney and FloatMoney, which results in a FloatDimensionless scalar.
-     * @param v FloatMoney; FloatMoney scalar
+     * @param v FloatMoney scalar
      * @return FloatDimensionless scalar as a division of FloatMoney and FloatMoney
      */
     public final FloatDimensionless divideBy(final FloatMoney v)
@@ -160,7 +160,7 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Calculate the division of FloatMoney and FloatArea, which results in a FloatMoneyPerArea scalar.
-     * @param v FloatArea; FloatMoney scalar
+     * @param v FloatMoney scalar
      * @return FloatMoneyPerArea scalar as a division of FloatMoney and FloatArea
      */
     public final FloatMoneyPerArea divideBy(final FloatArea v)
@@ -170,7 +170,7 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Calculate the division of FloatMoney and FloatEnergy, which results in a FloatMoneyPerEnergy scalar.
-     * @param v FloatEnergy; FloatMoney scalar
+     * @param v FloatMoney scalar
      * @return FloatMoneyPerEnergy scalar as a division of FloatMoney and FloatEnergy
      */
     public final FloatMoneyPerEnergy divideBy(final FloatEnergy v)
@@ -180,7 +180,7 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Calculate the division of FloatMoney and FloatLength, which results in a FloatMoneyPerLength scalar.
-     * @param v FloatLength; FloatMoney scalar
+     * @param v FloatMoney scalar
      * @return FloatMoneyPerLength scalar as a division of FloatMoney and FloatLength
      */
     public final FloatMoneyPerLength divideBy(final FloatLength v)
@@ -190,7 +190,7 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Calculate the multiplication of FloatMoney and FloatLinearDensity, which results in a FloatMoneyPerLength scalar.
-     * @param v FloatLinearDensity; FloatMoney scalar
+     * @param v FloatMoney scalar
      * @return FloatMoneyPerLength scalar as a multiplication of FloatMoney and FloatLinearDensity
      */
     public final FloatMoneyPerLength multiplyBy(final FloatLinearDensity v)
@@ -200,7 +200,7 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Calculate the division of FloatMoney and FloatMass, which results in a FloatMoneyPerMass scalar.
-     * @param v FloatMass; FloatMoney scalar
+     * @param v FloatMoney scalar
      * @return FloatMoneyPerMass scalar as a division of FloatMoney and FloatMass
      */
     public final FloatMoneyPerMass divideBy(final FloatMass v)
@@ -210,7 +210,7 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Calculate the division of FloatMoney and FloatDuration, which results in a FloatMoneyPerDuration scalar.
-     * @param v FloatDuration; FloatMoney scalar
+     * @param v FloatMoney scalar
      * @return FloatMoneyPerDuration scalar as a division of FloatMoney and FloatDuration
      */
     public final FloatMoneyPerDuration divideBy(final FloatDuration v)
@@ -220,7 +220,7 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Calculate the multiplication of FloatMoney and FloatFrequency, which results in a FloatMoneyPerDuration scalar.
-     * @param v FloatFrequency; FloatMoney scalar
+     * @param v FloatMoney scalar
      * @return FloatMoneyPerDuration scalar as a multiplication of FloatMoney and FloatFrequency
      */
     public final FloatMoneyPerDuration multiplyBy(final FloatFrequency v)
@@ -230,7 +230,7 @@ public class FloatMoney extends AbstractFloatScalarRel<MoneyUnit, FloatMoney>
 
     /**
      * Calculate the division of FloatMoney and FloatVolume, which results in a FloatMoneyPerVolume scalar.
-     * @param v FloatVolume; FloatMoney scalar
+     * @param v FloatMoney scalar
      * @return FloatMoneyPerVolume scalar as a division of FloatMoney and FloatVolume
      */
     public final FloatMoneyPerVolume divideBy(final FloatVolume v)

@@ -2,6 +2,7 @@ package org.djunits.value.vdouble.scalar;
 
 import org.djunits.unit.AbsoluteTemperatureUnit;
 import org.djunits.unit.TemperatureUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the Absolute AbsoluteTemperature DoubleScalar. Instead of:
@@ -40,8 +41,8 @@ public class AbsoluteTemperature
 
     /**
      * Construct AbsoluteTemperature scalar.
-     * @param value double; double value
-     * @param unit AbsoluteTemperatureUnit; unit for the double value
+     * @param value double value
+     * @param unit unit for the double value
      */
     public AbsoluteTemperature(final double value, final AbsoluteTemperatureUnit unit)
     {
@@ -50,7 +51,7 @@ public class AbsoluteTemperature
 
     /**
      * Construct AbsoluteTemperature scalar.
-     * @param value AbsoluteTemperature; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public AbsoluteTemperature(final AbsoluteTemperature value)
     {
@@ -73,7 +74,7 @@ public class AbsoluteTemperature
 
     /**
      * Construct %TypeAbsl% scalar.
-     * @param value double; double value in SI units
+     * @param value double value in SI units
      * @return the new scalar with the SI value
      */
     public static final AbsoluteTemperature createSI(final double value)
@@ -83,9 +84,9 @@ public class AbsoluteTemperature
 
     /**
      * Interpolate between two values.
-     * @param zero AbsoluteTemperature; the low value
-     * @param one AbsoluteTemperature; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static AbsoluteTemperature interpolate(final AbsoluteTemperature zero, final AbsoluteTemperature one,
@@ -96,8 +97,8 @@ public class AbsoluteTemperature
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 AbsoluteTemperature; the first scalar
-     * @param a2 AbsoluteTemperature; the second scalar
+     * @param a1 the first scalar
+     * @param a2 the second scalar
      * @return the maximum value of two absolute scalars
      */
     public static AbsoluteTemperature max(final AbsoluteTemperature a1, final AbsoluteTemperature a2)
@@ -107,9 +108,9 @@ public class AbsoluteTemperature
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 AbsoluteTemperature; the first scalar
-     * @param a2 AbsoluteTemperature; the second scalar
-     * @param an AbsoluteTemperature...; the other scalars
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @param an the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static AbsoluteTemperature max(final AbsoluteTemperature a1, final AbsoluteTemperature a2,
@@ -128,8 +129,8 @@ public class AbsoluteTemperature
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 AbsoluteTemperature; the first scalar
-     * @param a2 AbsoluteTemperature; the second scalar
+     * @param a1 the first scalar
+     * @param a2 the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static AbsoluteTemperature min(final AbsoluteTemperature a1, final AbsoluteTemperature a2)
@@ -139,9 +140,9 @@ public class AbsoluteTemperature
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 AbsoluteTemperature; the first scalar
-     * @param a2 AbsoluteTemperature; the second scalar
-     * @param an AbsoluteTemperature...; the other scalars
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @param an the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static AbsoluteTemperature min(final AbsoluteTemperature a1, final AbsoluteTemperature a2,
@@ -156,6 +157,45 @@ public class AbsoluteTemperature
             }
         }
         return mina;
+    }
+
+    /**
+     * Returns a AbsoluteTemperature representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a AbsoluteTemperature
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static AbsoluteTemperature valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing AbsoluteTemperature -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (AbsoluteTemperatureUnit unit : Unit.getUnits(AbsoluteTemperatureUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    double d = Double.parseDouble(valueString);
+                    return new AbsoluteTemperature(d, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing AbsoluteTemperature from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing AbsoluteTemperature from " + text);
     }
 
 }

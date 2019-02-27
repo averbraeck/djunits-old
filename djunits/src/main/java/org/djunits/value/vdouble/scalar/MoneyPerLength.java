@@ -35,8 +35,8 @@ public class MoneyPerLength extends AbstractDoubleScalarRel<MoneyPerLengthUnit, 
 
     /**
      * Construct MoneyPerLength scalar.
-     * @param value double; double value
-     * @param unit MoneyPerLengthUnit; unit for the double value
+     * @param value double value
+     * @param unit unit for the double value
      */
     public MoneyPerLength(final double value, final MoneyPerLengthUnit unit)
     {
@@ -45,7 +45,7 @@ public class MoneyPerLength extends AbstractDoubleScalarRel<MoneyPerLengthUnit, 
 
     /**
      * Construct MoneyPerLength scalar.
-     * @param value MoneyPerLength; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public MoneyPerLength(final MoneyPerLength value)
     {
@@ -61,9 +61,9 @@ public class MoneyPerLength extends AbstractDoubleScalarRel<MoneyPerLengthUnit, 
 
     /**
      * Interpolate between two values.
-     * @param zero MoneyPerLength; the low value
-     * @param one MoneyPerLength; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static MoneyPerLength interpolate(final MoneyPerLength zero, final MoneyPerLength one, final double ratio)
@@ -73,8 +73,8 @@ public class MoneyPerLength extends AbstractDoubleScalarRel<MoneyPerLengthUnit, 
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 MoneyPerLength; the first scalar
-     * @param r2 MoneyPerLength; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static MoneyPerLength max(final MoneyPerLength r1, final MoneyPerLength r2)
@@ -84,9 +84,9 @@ public class MoneyPerLength extends AbstractDoubleScalarRel<MoneyPerLengthUnit, 
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 MoneyPerLength; the first scalar
-     * @param r2 MoneyPerLength; the second scalar
-     * @param rn MoneyPerLength...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static MoneyPerLength max(final MoneyPerLength r1, final MoneyPerLength r2, final MoneyPerLength... rn)
@@ -104,8 +104,8 @@ public class MoneyPerLength extends AbstractDoubleScalarRel<MoneyPerLengthUnit, 
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 MoneyPerLength; the first scalar
-     * @param r2 MoneyPerLength; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static MoneyPerLength min(final MoneyPerLength r1, final MoneyPerLength r2)
@@ -115,9 +115,9 @@ public class MoneyPerLength extends AbstractDoubleScalarRel<MoneyPerLengthUnit, 
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 MoneyPerLength; the first scalar
-     * @param r2 MoneyPerLength; the second scalar
-     * @param rn MoneyPerLength...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static MoneyPerLength min(final MoneyPerLength r1, final MoneyPerLength r2, final MoneyPerLength... rn)
@@ -135,7 +135,7 @@ public class MoneyPerLength extends AbstractDoubleScalarRel<MoneyPerLengthUnit, 
 
     /**
      * Calculate the division of MoneyPerLength and MoneyPerLength, which results in a Dimensionless scalar.
-     * @param v MoneyPerLength; MoneyPerLength scalar
+     * @param v MoneyPerLength scalar
      * @return Dimensionless scalar as a division of MoneyPerLength and MoneyPerLength
      */
     public final Dimensionless divideBy(final MoneyPerLength v)
@@ -145,7 +145,7 @@ public class MoneyPerLength extends AbstractDoubleScalarRel<MoneyPerLengthUnit, 
 
     /**
      * Calculate the multiplication of MoneyPerLength and Length, which results in a Money scalar.
-     * @param v Length; MoneyPerLength scalar
+     * @param v MoneyPerLength scalar
      * @return Money scalar as a multiplication of MoneyPerLength and Length
      */
     public final Money multiplyBy(final Length v)
@@ -155,7 +155,7 @@ public class MoneyPerLength extends AbstractDoubleScalarRel<MoneyPerLengthUnit, 
 
     /**
      * Calculate the division of MoneyPerLength and LinearDensity, which results in a Money scalar.
-     * @param v LinearDensity; MoneyPerLength scalar
+     * @param v MoneyPerLength scalar
      * @return Money scalar as a division of MoneyPerLength and LinearDensity
      */
     public final Money divideBy(final LinearDensity v)

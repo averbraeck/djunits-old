@@ -8,6 +8,7 @@ import org.djunits.unit.ForceUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the Power DoubleScalar, which is relative by definition. Instead of:
@@ -59,8 +60,8 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Construct Power scalar.
-     * @param value double; double value
-     * @param unit PowerUnit; unit for the double value
+     * @param value double value
+     * @param unit unit for the double value
      */
     public Power(final double value, final PowerUnit unit)
     {
@@ -69,7 +70,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Construct Power scalar.
-     * @param value Power; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public Power(final Power value)
     {
@@ -85,7 +86,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Construct Power scalar.
-     * @param value double; double value in SI units
+     * @param value double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Power createSI(final double value)
@@ -95,9 +96,9 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Interpolate between two values.
-     * @param zero Power; the low value
-     * @param one Power; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Power interpolate(final Power zero, final Power one, final double ratio)
@@ -107,8 +108,8 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 Power; the first scalar
-     * @param r2 Power; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Power max(final Power r1, final Power r2)
@@ -118,9 +119,9 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 Power; the first scalar
-     * @param r2 Power; the second scalar
-     * @param rn Power...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Power max(final Power r1, final Power r2, final Power... rn)
@@ -138,8 +139,8 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 Power; the first scalar
-     * @param r2 Power; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Power min(final Power r1, final Power r2)
@@ -149,9 +150,9 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 Power; the first scalar
-     * @param r2 Power; the second scalar
-     * @param rn Power...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Power min(final Power r1, final Power r2, final Power... rn)
@@ -168,8 +169,47 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
     }
 
     /**
+     * Returns a Power representation of a textual representation of a value with a unit. The String representation that can be
+     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a Power
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static Power valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing Power -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (PowerUnit unit : Unit.getUnits(PowerUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    double d = Double.parseDouble(valueString);
+                    return new Power(d, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing Power from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing Power from " + text);
+    }
+
+    /**
      * Calculate the division of Power and Power, which results in a Dimensionless scalar.
-     * @param v Power; Power scalar
+     * @param v Power scalar
      * @return Dimensionless scalar as a division of Power and Power
      */
     public final Dimensionless divideBy(final Power v)
@@ -179,7 +219,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the multiplication of Power and Duration, which results in a Energy scalar.
-     * @param v Duration; Power scalar
+     * @param v Power scalar
      * @return Energy scalar as a multiplication of Power and Duration
      */
     public final Energy multiplyBy(final Duration v)
@@ -189,7 +229,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Frequency, which results in a Energy scalar.
-     * @param v Frequency; Power scalar
+     * @param v Power scalar
      * @return Energy scalar as a division of Power and Frequency
      */
     public final Energy divideBy(final Frequency v)
@@ -199,7 +239,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Energy, which results in a Frequency scalar.
-     * @param v Energy; Power scalar
+     * @param v Power scalar
      * @return Frequency scalar as a division of Power and Energy
      */
     public final Frequency divideBy(final Energy v)
@@ -209,7 +249,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Speed, which results in a Force scalar.
-     * @param v Speed; Power scalar
+     * @param v Power scalar
      * @return Force scalar as a division of Power and Speed
      */
     public final Force divideBy(final Speed v)
@@ -219,7 +259,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Force, which results in a Speed scalar.
-     * @param v Force; Power scalar
+     * @param v Power scalar
      * @return Speed scalar as a division of Power and Force
      */
     public final Speed divideBy(final Force v)
@@ -229,7 +269,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
-     * @param v ElectricalPotential; Power scalar
+     * @param v Power scalar
      * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
      */
     public final ElectricalCurrent divideBy(final ElectricalPotential v)
@@ -239,7 +279,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
-     * @param v ElectricalCurrent; Power scalar
+     * @param v Power scalar
      * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
      */
     public final ElectricalPotential divideBy(final ElectricalCurrent v)

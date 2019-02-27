@@ -5,6 +5,7 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.ForceUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.SpeedUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the Acceleration DoubleScalar, which is relative by definition. Instead of:
@@ -56,8 +57,8 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Construct Acceleration scalar.
-     * @param value double; double value
-     * @param unit AccelerationUnit; unit for the double value
+     * @param value double value
+     * @param unit unit for the double value
      */
     public Acceleration(final double value, final AccelerationUnit unit)
     {
@@ -66,7 +67,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Construct Acceleration scalar.
-     * @param value Acceleration; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public Acceleration(final Acceleration value)
     {
@@ -82,7 +83,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Construct Acceleration scalar.
-     * @param value double; double value in SI units
+     * @param value double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Acceleration createSI(final double value)
@@ -92,9 +93,9 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Interpolate between two values.
-     * @param zero Acceleration; the low value
-     * @param one Acceleration; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Acceleration interpolate(final Acceleration zero, final Acceleration one, final double ratio)
@@ -104,8 +105,8 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 Acceleration; the first scalar
-     * @param r2 Acceleration; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Acceleration max(final Acceleration r1, final Acceleration r2)
@@ -115,9 +116,9 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 Acceleration; the first scalar
-     * @param r2 Acceleration; the second scalar
-     * @param rn Acceleration...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Acceleration max(final Acceleration r1, final Acceleration r2, final Acceleration... rn)
@@ -135,8 +136,8 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 Acceleration; the first scalar
-     * @param r2 Acceleration; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Acceleration min(final Acceleration r1, final Acceleration r2)
@@ -146,9 +147,9 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 Acceleration; the first scalar
-     * @param r2 Acceleration; the second scalar
-     * @param rn Acceleration...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Acceleration min(final Acceleration r1, final Acceleration r2, final Acceleration... rn)
@@ -165,8 +166,47 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
     }
 
     /**
+     * Returns a Acceleration representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a Acceleration
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static Acceleration valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing Acceleration -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (AccelerationUnit unit : Unit.getUnits(AccelerationUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    double d = Double.parseDouble(valueString);
+                    return new Acceleration(d, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing Acceleration from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing Acceleration from " + text);
+    }
+
+    /**
      * Calculate the division of Acceleration and Acceleration, which results in a Dimensionless scalar.
-     * @param v Acceleration; Acceleration scalar
+     * @param v Acceleration scalar
      * @return Dimensionless scalar as a division of Acceleration and Acceleration
      */
     public final Dimensionless divideBy(final Acceleration v)
@@ -176,7 +216,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the multiplication of Acceleration and Mass, which results in a Force scalar.
-     * @param v Mass; Acceleration scalar
+     * @param v Acceleration scalar
      * @return Force scalar as a multiplication of Acceleration and Mass
      */
     public final Force multiplyBy(final Mass v)
@@ -186,7 +226,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the multiplication of Acceleration and Duration, which results in a Speed scalar.
-     * @param v Duration; Acceleration scalar
+     * @param v Acceleration scalar
      * @return Speed scalar as a multiplication of Acceleration and Duration
      */
     public final Speed multiplyBy(final Duration v)
@@ -196,7 +236,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Frequency, which results in a Speed scalar.
-     * @param v Frequency; Acceleration scalar
+     * @param v Acceleration scalar
      * @return Speed scalar as a division of Acceleration and Frequency
      */
     public final Speed divideBy(final Frequency v)
@@ -206,7 +246,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Speed, which results in a Frequency scalar.
-     * @param v Speed; Acceleration scalar
+     * @param v Acceleration scalar
      * @return Frequency scalar as a division of Acceleration and Speed
      */
     public final Frequency divideBy(final Speed v)

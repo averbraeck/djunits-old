@@ -2,6 +2,7 @@ package org.djunits.value.vfloat.scalar;
 
 import org.djunits.unit.AngleSolidUnit;
 import org.djunits.unit.DimensionlessUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the AngleSolid FloatScalar, which is relative by definition. An example is Speed. Instead of:
@@ -53,8 +54,8 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Construct FloatAngleSolid scalar.
-     * @param value float; float value
-     * @param unit AngleSolidUnit; unit for the float value
+     * @param value float value
+     * @param unit unit for the float value
      */
     public FloatAngleSolid(final float value, final AngleSolidUnit unit)
     {
@@ -63,7 +64,7 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Construct FloatAngleSolid scalar.
-     * @param value FloatAngleSolid; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatAngleSolid(final FloatAngleSolid value)
     {
@@ -72,8 +73,8 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Construct FloatAngleSolid scalar using a double value.
-     * @param value double; double value
-     * @param unit AngleSolidUnit; unit for the resulting float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
     public FloatAngleSolid(final double value, final AngleSolidUnit unit)
     {
@@ -89,7 +90,7 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Construct FloatAngleSolid scalar.
-     * @param value float; float value in SI units
+     * @param value float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatAngleSolid createSI(final float value)
@@ -99,9 +100,9 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Interpolate between two values.
-     * @param zero FloatAngleSolid; the low value
-     * @param one FloatAngleSolid; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatAngleSolid interpolate(final FloatAngleSolid zero, final FloatAngleSolid one, final float ratio)
@@ -111,8 +112,8 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatAngleSolid; the first scalar
-     * @param r2 FloatAngleSolid; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatAngleSolid max(final FloatAngleSolid r1, final FloatAngleSolid r2)
@@ -122,9 +123,9 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatAngleSolid; the first scalar
-     * @param r2 FloatAngleSolid; the second scalar
-     * @param rn FloatAngleSolid...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatAngleSolid max(final FloatAngleSolid r1, final FloatAngleSolid r2, final FloatAngleSolid... rn)
@@ -142,8 +143,8 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatAngleSolid; the first scalar
-     * @param r2 FloatAngleSolid; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatAngleSolid min(final FloatAngleSolid r1, final FloatAngleSolid r2)
@@ -153,9 +154,9 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatAngleSolid; the first scalar
-     * @param r2 FloatAngleSolid; the second scalar
-     * @param rn FloatAngleSolid...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatAngleSolid min(final FloatAngleSolid r1, final FloatAngleSolid r2, final FloatAngleSolid... rn)
@@ -172,8 +173,47 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
     }
 
     /**
+     * Returns a FloatAngleSolid representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a FloatAngleSolid
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static FloatAngleSolid valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing FloatAngleSolid -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (AngleSolidUnit unit : Unit.getUnits(AngleSolidUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    float f = Float.parseFloat(valueString);
+                    return new FloatAngleSolid(f, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing FloatAngleSolid from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing FloatAngleSolid from " + text);
+    }
+
+    /**
      * Calculate the division of FloatAngleSolid and FloatAngleSolid, which results in a FloatDimensionless scalar.
-     * @param v FloatAngleSolid; FloatAngleSolid scalar
+     * @param v FloatAngleSolid scalar
      * @return FloatDimensionless scalar as a division of FloatAngleSolid and FloatAngleSolid
      */
     public final FloatDimensionless divideBy(final FloatAngleSolid v)

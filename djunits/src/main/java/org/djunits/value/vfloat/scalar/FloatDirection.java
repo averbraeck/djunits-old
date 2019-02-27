@@ -2,6 +2,7 @@ package org.djunits.value.vfloat.scalar;
 
 import org.djunits.unit.AngleUnit;
 import org.djunits.unit.DirectionUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the Direction FloatScalar. Instead of:
@@ -23,7 +24,7 @@ import org.djunits.unit.DirectionUnit;
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
- * $LastChangedDate: 2017-01-30 14:23:11 +0100 (Mon, 30 Jan 2017) $, @version $Revision: 234 $, by $Author: averbraeck $,
+ * $LastChangedDate: 2019-01-18 00:35:01 +0100 (Fri, 18 Jan 2019) $, @version $Revision: 324 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
@@ -38,8 +39,8 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Construct FloatDirection scalar.
-     * @param value float; float value
-     * @param unit DirectionUnit; unit for the float value
+     * @param value float value
+     * @param unit unit for the float value
      */
     public FloatDirection(final float value, final DirectionUnit unit)
     {
@@ -48,8 +49,8 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Construct FloatDirection scalar using a double value.
-     * @param value double; double value
-     * @param unit DirectionUnit; unit for the resulting float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
     public FloatDirection(final double value, final DirectionUnit unit)
     {
@@ -58,7 +59,7 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Construct FloatDirection scalar.
-     * @param value FloatDirection; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatDirection(final FloatDirection value)
     {
@@ -81,7 +82,7 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Construct FloatDirection scalar.
-     * @param value float; float value in BASE units
+     * @param value float value in BASE units
      * @return the new scalar with the BASE value
      */
     public static final FloatDirection createSI(final float value)
@@ -91,9 +92,9 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Interpolate between two values.
-     * @param zero FloatDirection; the low value
-     * @param one FloatDirection; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatDirection interpolate(final FloatDirection zero, final FloatDirection one, final float ratio)
@@ -103,8 +104,8 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 FloatDirection; the first scalar
-     * @param a2 FloatDirection; the second scalar
+     * @param a1 the first scalar
+     * @param a2 the second scalar
      * @return the maximum value of two absolute scalars
      */
     public static FloatDirection max(final FloatDirection a1, final FloatDirection a2)
@@ -114,9 +115,9 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 FloatDirection; the first scalar
-     * @param a2 FloatDirection; the second scalar
-     * @param an FloatDirection...; the other scalars
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @param an the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static FloatDirection max(final FloatDirection a1, final FloatDirection a2, final FloatDirection... an)
@@ -134,8 +135,8 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 FloatDirection; the first scalar
-     * @param a2 FloatDirection; the second scalar
+     * @param a1 the first scalar
+     * @param a2 the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static FloatDirection min(final FloatDirection a1, final FloatDirection a2)
@@ -145,9 +146,9 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 FloatDirection; the first scalar
-     * @param a2 FloatDirection; the second scalar
-     * @param an FloatDirection...; the other scalars
+     * @param a1 the first scalar
+     * @param a2 the second scalar
+     * @param an the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static FloatDirection min(final FloatDirection a1, final FloatDirection a2, final FloatDirection... an)
@@ -161,6 +162,45 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
             }
         }
         return mina;
+    }
+
+    /**
+     * Returns a FloatDirection representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a FloatDirection
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static FloatDirection valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing FloatDirection -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (DirectionUnit unit : Unit.getUnits(DirectionUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    float f = Float.parseFloat(valueString);
+                    return new FloatDirection(f, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing FloatDirection from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing FloatDirection from " + text);
     }
 
 }

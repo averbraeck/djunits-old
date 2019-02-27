@@ -3,6 +3,7 @@ package org.djunits.value.vdouble.scalar;
 import org.djunits.unit.AngleUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.DirectionUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the Relative Angle DoubleScalar. Instead of:
@@ -55,8 +56,8 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Construct Angle scalar.
-     * @param value double; double value
-     * @param unit AngleUnit; unit for the double value
+     * @param value double value
+     * @param unit unit for the double value
      */
     public Angle(final double value, final AngleUnit unit)
     {
@@ -65,7 +66,7 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Construct Angle scalar.
-     * @param value Angle; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public Angle(final Angle value)
     {
@@ -81,8 +82,8 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value double; the double value
-     * @param unit DirectionUnit; the unit
+     * @param value the double value
+     * @param unit the unit
      * @return A a new absolute instance of the DoubleScalar of the right type
      */
     public final Direction instantiateAbs(final double value, final DirectionUnit unit)
@@ -92,7 +93,7 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Construct Angle scalar.
-     * @param value double; double value in SI units
+     * @param value double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Angle createSI(final double value)
@@ -102,9 +103,9 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Interpolate between two values.
-     * @param zero Angle; the low value
-     * @param one Angle; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Angle interpolate(final Angle zero, final Angle one, final double ratio)
@@ -114,7 +115,7 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v Direction; the value to add
+     * @param v the value to add
      * @return sum of this value and v as a new object
      */
     public final Direction plus(final Direction v)
@@ -125,8 +126,8 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 Angle; the first scalar
-     * @param r2 Angle; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Angle max(final Angle r1, final Angle r2)
@@ -136,9 +137,9 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 Angle; the first scalar
-     * @param r2 Angle; the second scalar
-     * @param rn Angle...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Angle max(final Angle r1, final Angle r2, final Angle... rn)
@@ -156,8 +157,8 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 Angle; the first scalar
-     * @param r2 Angle; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Angle min(final Angle r1, final Angle r2)
@@ -167,9 +168,9 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 Angle; the first scalar
-     * @param r2 Angle; the second scalar
-     * @param rn Angle...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Angle min(final Angle r1, final Angle r2, final Angle... rn)
@@ -186,8 +187,47 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
     }
 
     /**
+     * Returns a Angle representation of a textual representation of a value with a unit. The String representation that can be
+     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a Angle
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static Angle valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing Angle -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (AngleUnit unit : Unit.getUnits(AngleUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    double d = Double.parseDouble(valueString);
+                    return new Angle(d, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing Angle from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing Angle from " + text);
+    }
+
+    /**
      * Calculate the division of Angle and Angle, which results in a Dimensionless scalar.
-     * @param v Angle; Angle scalar
+     * @param v Angle scalar
      * @return Dimensionless scalar as a division of Angle and Angle
      */
     public final Dimensionless divideBy(final Angle v)

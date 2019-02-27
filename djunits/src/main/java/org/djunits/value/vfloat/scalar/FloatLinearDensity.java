@@ -6,6 +6,7 @@ import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MoneyPerLengthUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the LinearDensity FloatScalar, which is relative by definition. An example is Speed. Instead of:
@@ -59,8 +60,8 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Construct FloatLinearDensity scalar.
-     * @param value float; float value
-     * @param unit LinearDensityUnit; unit for the float value
+     * @param value float value
+     * @param unit unit for the float value
      */
     public FloatLinearDensity(final float value, final LinearDensityUnit unit)
     {
@@ -69,7 +70,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Construct FloatLinearDensity scalar.
-     * @param value FloatLinearDensity; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatLinearDensity(final FloatLinearDensity value)
     {
@@ -78,8 +79,8 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Construct FloatLinearDensity scalar using a double value.
-     * @param value double; double value
-     * @param unit LinearDensityUnit; unit for the resulting float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
     public FloatLinearDensity(final double value, final LinearDensityUnit unit)
     {
@@ -95,7 +96,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Construct FloatLinearDensity scalar.
-     * @param value float; float value in SI units
+     * @param value float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatLinearDensity createSI(final float value)
@@ -105,9 +106,9 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Interpolate between two values.
-     * @param zero FloatLinearDensity; the low value
-     * @param one FloatLinearDensity; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatLinearDensity interpolate(final FloatLinearDensity zero, final FloatLinearDensity one, final float ratio)
@@ -117,8 +118,8 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatLinearDensity; the first scalar
-     * @param r2 FloatLinearDensity; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatLinearDensity max(final FloatLinearDensity r1, final FloatLinearDensity r2)
@@ -128,9 +129,9 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatLinearDensity; the first scalar
-     * @param r2 FloatLinearDensity; the second scalar
-     * @param rn FloatLinearDensity...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatLinearDensity max(final FloatLinearDensity r1, final FloatLinearDensity r2,
@@ -149,8 +150,8 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatLinearDensity; the first scalar
-     * @param r2 FloatLinearDensity; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatLinearDensity min(final FloatLinearDensity r1, final FloatLinearDensity r2)
@@ -160,9 +161,9 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatLinearDensity; the first scalar
-     * @param r2 FloatLinearDensity; the second scalar
-     * @param rn FloatLinearDensity...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatLinearDensity min(final FloatLinearDensity r1, final FloatLinearDensity r2,
@@ -180,8 +181,47 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
     }
 
     /**
+     * Returns a FloatLinearDensity representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a FloatLinearDensity
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static FloatLinearDensity valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing FloatLinearDensity -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (LinearDensityUnit unit : Unit.getUnits(LinearDensityUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    float f = Float.parseFloat(valueString);
+                    return new FloatLinearDensity(f, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing FloatLinearDensity from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing FloatLinearDensity from " + text);
+    }
+
+    /**
      * Calculate the division of FloatLinearDensity and FloatLinearDensity, which results in a FloatDimensionless scalar.
-     * @param v FloatLinearDensity; FloatLinearDensity scalar
+     * @param v FloatLinearDensity scalar
      * @return FloatDimensionless scalar as a division of FloatLinearDensity and FloatLinearDensity
      */
     public final FloatDimensionless divideBy(final FloatLinearDensity v)
@@ -191,7 +231,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Calculate the multiplication of FloatLinearDensity and FloatArea, which results in a FloatLength scalar.
-     * @param v FloatArea; FloatLinearDensity scalar
+     * @param v FloatLinearDensity scalar
      * @return FloatLength scalar as a multiplication of FloatLinearDensity and FloatArea
      */
     public final FloatLength multiplyBy(final FloatArea v)
@@ -201,7 +241,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Calculate the multiplication of FloatLinearDensity and FloatEnergy, which results in a FloatForce scalar.
-     * @param v FloatEnergy; FloatLinearDensity scalar
+     * @param v FloatLinearDensity scalar
      * @return FloatForce scalar as a multiplication of FloatLinearDensity and FloatEnergy
      */
     public final FloatForce multiplyBy(final FloatEnergy v)
@@ -211,7 +251,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Calculate the multiplication of FloatLinearDensity and FloatSpeed, which results in a FloatFrequency scalar.
-     * @param v FloatSpeed; FloatLinearDensity scalar
+     * @param v FloatLinearDensity scalar
      * @return FloatFrequency scalar as a multiplication of FloatLinearDensity and FloatSpeed
      */
     public final FloatFrequency multiplyBy(final FloatSpeed v)
@@ -221,7 +261,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
 
     /**
      * Calculate the multiplication of FloatLinearDensity and FloatMoney, which results in a FloatMoneyPerLength scalar.
-     * @param v FloatMoney; FloatLinearDensity scalar
+     * @param v FloatLinearDensity scalar
      * @return FloatMoneyPerLength scalar as a multiplication of FloatLinearDensity and FloatMoney
      */
     public final FloatMoneyPerLength multiplyBy(final FloatMoney v)

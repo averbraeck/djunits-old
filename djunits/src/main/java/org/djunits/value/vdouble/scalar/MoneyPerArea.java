@@ -35,8 +35,8 @@ public class MoneyPerArea extends AbstractDoubleScalarRel<MoneyPerAreaUnit, Mone
 
     /**
      * Construct MoneyPerArea scalar.
-     * @param value double; double value
-     * @param unit MoneyPerAreaUnit; unit for the double value
+     * @param value double value
+     * @param unit unit for the double value
      */
     public MoneyPerArea(final double value, final MoneyPerAreaUnit unit)
     {
@@ -45,7 +45,7 @@ public class MoneyPerArea extends AbstractDoubleScalarRel<MoneyPerAreaUnit, Mone
 
     /**
      * Construct MoneyPerArea scalar.
-     * @param value MoneyPerArea; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public MoneyPerArea(final MoneyPerArea value)
     {
@@ -61,9 +61,9 @@ public class MoneyPerArea extends AbstractDoubleScalarRel<MoneyPerAreaUnit, Mone
 
     /**
      * Interpolate between two values.
-     * @param zero MoneyPerArea; the low value
-     * @param one MoneyPerArea; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static MoneyPerArea interpolate(final MoneyPerArea zero, final MoneyPerArea one, final double ratio)
@@ -73,8 +73,8 @@ public class MoneyPerArea extends AbstractDoubleScalarRel<MoneyPerAreaUnit, Mone
 
     /**
      * Return the maximum value of two monetary scalars.
-     * @param r1 MoneyPerArea; the first scalar
-     * @param r2 MoneyPerArea; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two monetary scalars
      */
     public static MoneyPerArea max(final MoneyPerArea r1, final MoneyPerArea r2)
@@ -84,9 +84,9 @@ public class MoneyPerArea extends AbstractDoubleScalarRel<MoneyPerAreaUnit, Mone
 
     /**
      * Return the maximum value of more than two monetary scalars.
-     * @param r1 MoneyPerArea; the first scalar
-     * @param r2 MoneyPerArea; the second scalar
-     * @param rn MoneyPerArea...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two monetary scalars
      */
     public static MoneyPerArea max(final MoneyPerArea r1, final MoneyPerArea r2, final MoneyPerArea... rn)
@@ -104,8 +104,8 @@ public class MoneyPerArea extends AbstractDoubleScalarRel<MoneyPerAreaUnit, Mone
 
     /**
      * Return the minimum value of two monetary scalars.
-     * @param r1 MoneyPerArea; the first scalar
-     * @param r2 MoneyPerArea; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two monetary scalars
      */
     public static MoneyPerArea min(final MoneyPerArea r1, final MoneyPerArea r2)
@@ -115,9 +115,9 @@ public class MoneyPerArea extends AbstractDoubleScalarRel<MoneyPerAreaUnit, Mone
 
     /**
      * Return the minimum value of more than two monetary scalars.
-     * @param r1 MoneyPerArea; the first scalar
-     * @param r2 MoneyPerArea; the second scalar
-     * @param rn MoneyPerArea...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two monetary scalars
      */
     public static MoneyPerArea min(final MoneyPerArea r1, final MoneyPerArea r2, final MoneyPerArea... rn)
@@ -135,7 +135,7 @@ public class MoneyPerArea extends AbstractDoubleScalarRel<MoneyPerAreaUnit, Mone
 
     /**
      * Calculate the division of MoneyPerArea and MoneyPerArea, which results in a Dimensionless scalar.
-     * @param v MoneyPerArea; MoneyPerArea scalar
+     * @param v MoneyPerArea scalar
      * @return Dimensionless scalar as a division of MoneyPerArea and MoneyPerArea
      */
     public final Dimensionless divideBy(final MoneyPerArea v)
@@ -145,7 +145,7 @@ public class MoneyPerArea extends AbstractDoubleScalarRel<MoneyPerAreaUnit, Mone
 
     /**
      * Calculate the multiplication of MoneyPerArea and Area, which results in a Money scalar.
-     * @param v Area; MoneyPerArea scalar
+     * @param v MoneyPerArea scalar
      * @return Money scalar as a multiplication of MoneyPerArea and Area
      */
     public final Money multiplyBy(final Area v)

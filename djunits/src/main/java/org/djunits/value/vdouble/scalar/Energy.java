@@ -8,6 +8,7 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the Energy DoubleScalar, which is relative by definition. Instead of:
@@ -59,8 +60,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Construct Energy scalar.
-     * @param value double; double value
-     * @param unit EnergyUnit; unit for the double value
+     * @param value double value
+     * @param unit unit for the double value
      */
     public Energy(final double value, final EnergyUnit unit)
     {
@@ -69,7 +70,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Construct Energy scalar.
-     * @param value Energy; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public Energy(final Energy value)
     {
@@ -85,7 +86,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Construct Energy scalar.
-     * @param value double; double value in SI units
+     * @param value double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Energy createSI(final double value)
@@ -95,9 +96,9 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Interpolate between two values.
-     * @param zero Energy; the low value
-     * @param one Energy; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Energy interpolate(final Energy zero, final Energy one, final double ratio)
@@ -107,8 +108,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 Energy; the first scalar
-     * @param r2 Energy; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Energy max(final Energy r1, final Energy r2)
@@ -118,9 +119,9 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 Energy; the first scalar
-     * @param r2 Energy; the second scalar
-     * @param rn Energy...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Energy max(final Energy r1, final Energy r2, final Energy... rn)
@@ -138,8 +139,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 Energy; the first scalar
-     * @param r2 Energy; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Energy min(final Energy r1, final Energy r2)
@@ -149,9 +150,9 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 Energy; the first scalar
-     * @param r2 Energy; the second scalar
-     * @param rn Energy...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Energy min(final Energy r1, final Energy r2, final Energy... rn)
@@ -168,8 +169,47 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     }
 
     /**
+     * Returns a Energy representation of a textual representation of a value with a unit. The String representation that can be
+     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a Energy
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static Energy valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing Energy -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (EnergyUnit unit : Unit.getUnits(EnergyUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    double d = Double.parseDouble(valueString);
+                    return new Energy(d, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing Energy from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing Energy from " + text);
+    }
+
+    /**
      * Calculate the division of Energy and Energy, which results in a Dimensionless scalar.
-     * @param v Energy; Energy scalar
+     * @param v Energy scalar
      * @return Dimensionless scalar as a division of Energy and Energy
      */
     public final Dimensionless divideBy(final Energy v)
@@ -179,7 +219,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Force, which results in a Length scalar.
-     * @param v Force; Energy scalar
+     * @param v Energy scalar
      * @return Length scalar as a division of Energy and Force
      */
     public final Length divideBy(final Force v)
@@ -189,7 +229,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Length, which results in a Force scalar.
-     * @param v Length; Energy scalar
+     * @param v Energy scalar
      * @return Force scalar as a division of Energy and Length
      */
     public final Force divideBy(final Length v)
@@ -199,7 +239,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the multiplication of Energy and LinearDensity, which results in a Force scalar.
-     * @param v LinearDensity; Energy scalar
+     * @param v Energy scalar
      * @return Force scalar as a multiplication of Energy and LinearDensity
      */
     public final Force multiplyBy(final LinearDensity v)
@@ -209,7 +249,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Duration, which results in a Power scalar.
-     * @param v Duration; Energy scalar
+     * @param v Energy scalar
      * @return Power scalar as a division of Energy and Duration
      */
     public final Power divideBy(final Duration v)
@@ -219,7 +259,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Power, which results in a Duration scalar.
-     * @param v Power; Energy scalar
+     * @param v Energy scalar
      * @return Duration scalar as a division of Energy and Power
      */
     public final Duration divideBy(final Power v)
@@ -229,7 +269,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Volume, which results in a Pressure scalar.
-     * @param v Volume; Energy scalar
+     * @param v Energy scalar
      * @return Pressure scalar as a division of Energy and Volume
      */
     public final Pressure divideBy(final Volume v)
@@ -239,7 +279,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the multiplication of Energy and Frequency, which results in a Power scalar.
-     * @param v Frequency; Energy scalar
+     * @param v Energy scalar
      * @return Power scalar as a multiplication of Energy and Frequency
      */
     public final Power multiplyBy(final Frequency v)
@@ -249,7 +289,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the multiplication of Energy and MoneyPerEnergy, which results in a Money scalar.
-     * @param v MoneyPerEnergy; Energy scalar
+     * @param v Energy scalar
      * @return Money scalar as a multiplication of Energy and MoneyPerEnergy
      */
     public final Money multiplyBy(final MoneyPerEnergy v)

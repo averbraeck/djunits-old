@@ -284,7 +284,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({ "checkstyle:designforextension", "checkstyle:needbraces", "unchecked" })
+    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces", "unchecked"})
     public boolean equals(final Object obj)
     {
         if (this == obj)

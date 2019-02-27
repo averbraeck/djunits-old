@@ -5,6 +5,7 @@ import org.djunits.unit.ElectricalChargeUnit;
 import org.djunits.unit.ElectricalCurrentUnit;
 import org.djunits.unit.ElectricalPotentialUnit;
 import org.djunits.unit.PowerUnit;
+import org.djunits.unit.Unit;
 
 /**
  * Easy access methods for the ElectricalCurrent FloatScalar, which is relative by definition. An example is Speed. Instead of:
@@ -60,8 +61,8 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Construct FloatElectricalCurrent scalar.
-     * @param value float; float value
-     * @param unit ElectricalCurrentUnit; unit for the float value
+     * @param value float value
+     * @param unit unit for the float value
      */
     public FloatElectricalCurrent(final float value, final ElectricalCurrentUnit unit)
     {
@@ -70,7 +71,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Construct FloatElectricalCurrent scalar.
-     * @param value FloatElectricalCurrent; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatElectricalCurrent(final FloatElectricalCurrent value)
     {
@@ -79,8 +80,8 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Construct FloatElectricalCurrent scalar using a double value.
-     * @param value double; double value
-     * @param unit ElectricalCurrentUnit; unit for the resulting float value
+     * @param value double value
+     * @param unit unit for the resulting float value
      */
     public FloatElectricalCurrent(final double value, final ElectricalCurrentUnit unit)
     {
@@ -96,7 +97,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Construct FloatElectricalCurrent scalar.
-     * @param value float; float value in SI units
+     * @param value float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatElectricalCurrent createSI(final float value)
@@ -106,9 +107,9 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Interpolate between two values.
-     * @param zero FloatElectricalCurrent; the low value
-     * @param one FloatElectricalCurrent; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalCurrent interpolate(final FloatElectricalCurrent zero, final FloatElectricalCurrent one,
@@ -120,8 +121,8 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatElectricalCurrent; the first scalar
-     * @param r2 FloatElectricalCurrent; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatElectricalCurrent max(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2)
@@ -131,9 +132,9 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatElectricalCurrent; the first scalar
-     * @param r2 FloatElectricalCurrent; the second scalar
-     * @param rn FloatElectricalCurrent...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatElectricalCurrent max(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2,
@@ -152,8 +153,8 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatElectricalCurrent; the first scalar
-     * @param r2 FloatElectricalCurrent; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatElectricalCurrent min(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2)
@@ -163,9 +164,9 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatElectricalCurrent; the first scalar
-     * @param r2 FloatElectricalCurrent; the second scalar
-     * @param rn FloatElectricalCurrent...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatElectricalCurrent min(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2,
@@ -183,9 +184,48 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     }
 
     /**
+     * Returns a FloatElectricalCurrent representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not necessary, between the value and the unit.
+     * @param text String; the textual representation to parse into a FloatElectricalCurrent
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     */
+    public static FloatElectricalCurrent valueOf(final String text) throws IllegalArgumentException
+    {
+        if (text == null || text.length() == 0)
+        {
+            throw new IllegalArgumentException("Error parsing FloatElectricalCurrent -- null or empty argument");
+        }
+        int index = text.length() - 1;
+        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        {
+            index--;
+        }
+        try
+        {
+            String unitString = text.substring(index + 1).trim();
+            String valueString = text.substring(0, index + 1).trim();
+            for (ElectricalCurrentUnit unit : Unit.getUnits(ElectricalCurrentUnit.class))
+            {
+                if (unitString.equals(unit.getAbbreviation()))
+                {
+                    float f = Float.parseFloat(valueString);
+                    return new FloatElectricalCurrent(f, unit);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing FloatElectricalCurrent from " + text, exception);
+        }
+        throw new IllegalArgumentException("Error parsing FloatElectricalCurrent from " + text);
+    }
+
+    /**
      * Calculate the division of FloatElectricalCurrent and FloatElectricalCurrent, which results in a FloatDimensionless
      * scalar.
-     * @param v FloatElectricalCurrent; FloatElectricalCurrent scalar
+     * @param v FloatElectricalCurrent scalar
      * @return FloatDimensionless scalar as a division of FloatElectricalCurrent and FloatElectricalCurrent
      */
     public final FloatDimensionless divideBy(final FloatElectricalCurrent v)
@@ -196,7 +236,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     /**
      * Calculate the multiplication of FloatElectricalCurrent and FloatElectricalPotential, which results in a FloatPower
      * scalar.
-     * @param v FloatElectricalPotential; FloatElectricalCurrent scalar
+     * @param v FloatElectricalCurrent scalar
      * @return FloatPower scalar as a multiplication of FloatElectricalCurrent and FloatElectricalPotential
      */
     public final FloatPower multiplyBy(final FloatElectricalPotential v)
@@ -207,7 +247,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     /**
      * Calculate the multiplication of FloatElectricalCurrent and FloatDuration, which results in a FloatElectricalCharge
      * scalar.
-     * @param v FloatDuration; FloatElectricalCurrent scalar
+     * @param v FloatElectricalCurrent scalar
      * @return FloatElectricalCharge scalar as a multiplication of FloatElectricalCurrent and FloatDuration
      */
     public final FloatElectricalCharge multiplyBy(final FloatDuration v)
@@ -218,7 +258,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     /**
      * Calculate the multiplication of FloatElectricalCurrent and FloatElectricalResistance, which results in a
      * FloatElectricalPotential scalar.
-     * @param v FloatElectricalResistance; FloatElectricalCurrent scalar
+     * @param v FloatElectricalCurrent scalar
      * @return FloatElectricalPotential scalar as a multiplication of FloatElectricalCurrent and FloatElectricalResistance
      */
     public final FloatElectricalPotential multiplyBy(final FloatElectricalResistance v)
