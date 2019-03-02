@@ -23,7 +23,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * initial version Apr 27, 2017 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @param <AU> the absolute unit.
- * @param <RU> the correcponding relative unit
+ * @param <RU> the corresponding relative unit
  */
 public abstract class AbsoluteLinearUnit<AU extends LinearUnit<AU>, RU extends Unit<RU>> extends LinearUnit<AU>
         implements AbsoluteUnit
@@ -35,23 +35,33 @@ public abstract class AbsoluteLinearUnit<AU extends LinearUnit<AU>, RU extends U
     private final RU relativeUnit;
 
     /**
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * Build a standard unit with an absolute linear scale and create the fields for that unit.
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem the unit system, e.g. SI or Imperial; often the unit system for an absolute unit will be OTHER
      * @param scaleFactorToReferenceUnit double; multiply by this number to convert to the standard unit
      * @param offsetToReferenceUnit double; the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      * @param relativeUnit RU; the corresponding relative unit belonging to this absolute unit
      */
-    protected AbsoluteLinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final UnitSystem unitSystem, final double scaleFactorToReferenceUnit, final double offsetToReferenceUnit,
-            final boolean standardUnit, final RU relativeUnit)
+    protected AbsoluteLinearUnit(final String abbreviationKey, final UnitSystem unitSystem,
+            final double scaleFactorToReferenceUnit, final double offsetToReferenceUnit, final RU relativeUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem,
-                new OffsetLinearScale(scaleFactorToReferenceUnit, offsetToReferenceUnit), standardUnit);
+        super(abbreviationKey, unitSystem, new OffsetLinearScale(scaleFactorToReferenceUnit, offsetToReferenceUnit));
+        this.relativeUnit = relativeUnit;
+    }
+
+    /**
+     * Build a user-defined unit with an absolute linear scale and create the fields for that unit.
+     * @param name String; the unit name
+     * @param abbreviation String; the unit abbreviation
+     * @param unitSystem the unit system, e.g. SI or Imperial; often the unit system for an absolute unit will be OTHER
+     * @param scaleFactorToReferenceUnit double; multiply by this number to convert to the standard unit
+     * @param offsetToReferenceUnit double; the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
+     * @param relativeUnit RU; the corresponding relative unit belonging to this absolute unit
+     */
+    protected AbsoluteLinearUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
+            final double scaleFactorToReferenceUnit, final double offsetToReferenceUnit, final RU relativeUnit)
+    {
+        super(name, abbreviation, unitSystem, new OffsetLinearScale(scaleFactorToReferenceUnit, offsetToReferenceUnit));
         this.relativeUnit = relativeUnit;
     }
 

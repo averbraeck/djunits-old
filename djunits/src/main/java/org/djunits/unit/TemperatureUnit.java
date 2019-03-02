@@ -42,45 +42,35 @@ public class TemperatureUnit extends LinearUnit<TemperatureUnit>
 
     static
     {
-        SI = new TemperatureUnit("TemperatureUnit.kelvin", "TemperatureUnit.K", SI_BASE);
+        SI = new TemperatureUnit("TemperatureUnit.K", SI_BASE);
         KELVIN = SI;
-        DEGREE_CELSIUS =
-                new TemperatureUnit("TemperatureUnit.degree_Celsius", "TemperatureUnit.dgC", SI_DERIVED, KELVIN, 1.0, true);
-        DEGREE_FAHRENHEIT = new TemperatureUnit("TemperatureUnit.degree_Fahrenheit", "TemperatureUnit.dgF", IMPERIAL, KELVIN,
-                5.0 / 9.0, true);
-        DEGREE_RANKINE =
-                new TemperatureUnit("TemperatureUnit.degree_Rankine", "TemperatureUnit.dgR", OTHER, KELVIN, 5.0 / 9.0, true);
-        DEGREE_REAUMUR =
-                new TemperatureUnit("TemperatureUnit.degree_Reaumur", "TemperatureUnit.dgRe", OTHER, KELVIN, 4.0 / 5.0, true);
+        DEGREE_CELSIUS = new TemperatureUnit("TemperatureUnit.dgC", SI_DERIVED, KELVIN, 1.0);
+        DEGREE_FAHRENHEIT = new TemperatureUnit("TemperatureUnit.dgF", IMPERIAL, KELVIN, 5.0 / 9.0);
+        DEGREE_RANKINE = new TemperatureUnit("TemperatureUnit.dgR", OTHER, KELVIN, 5.0 / 9.0);
+        DEGREE_REAUMUR = new TemperatureUnit("TemperatureUnit.dgRe", OTHER, KELVIN, 4.0 / 5.0);
     }
 
     /**
      * Build a standard TemperatureUnit.
-     * @param nameKey String; the key to the locale file for the long name of the unit
      * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
-    private TemperatureUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
+    private TemperatureUnit(final String abbreviationKey, final UnitSystem unitSystem)
     {
-        super(nameKey, abbreviationKey, unitSystem, true);
+        super(abbreviationKey, unitSystem);
     }
 
     /**
-     * Build a TemperatureUnit with a conversion factor and offset to Kelvin.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * Build a standard TemperatureUnit with a conversion factor and offset to Kelvin.
+     * @param abbreviationKey String; the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit TemperatureUnit; the unit to convert to
      * @param scaleFactorToStandardUnit double; multiply by this number to convert to the standard unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private TemperatureUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final TemperatureUnit referenceUnit, final double scaleFactorToStandardUnit, final boolean standardUnit)
+    private TemperatureUnit(final String abbreviationKey, final UnitSystem unitSystem, final TemperatureUnit referenceUnit,
+            final double scaleFactorToStandardUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToStandardUnit, standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToStandardUnit);
     }
 
     /**
@@ -95,7 +85,7 @@ public class TemperatureUnit extends LinearUnit<TemperatureUnit>
     public TemperatureUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final TemperatureUnit referenceUnit, final double scaleFactorToStandardUnit, final double offsetToKelvin)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToStandardUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToStandardUnit);
     }
 
     /** {@inheritDoc} */

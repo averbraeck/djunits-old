@@ -26,68 +26,79 @@ public abstract class LinearUnit<U extends LinearUnit<U>> extends Unit<U>
     private static final long serialVersionUID = 20151011L;
 
     /**
-     * Build a standard linear unit and create the fields for a unit. If the parameter standardUnit is true, it is a standard
-     * unit where name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined unit where
-     * the localization files do not have an entry. If standardUnit is true, a UnitException is silently ignored; if
-     * standardUnit is false a UnitException is thrown as a RunTimeException.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * Build a standard unit with a linear scale and create the fields for that unit. For a standard unit, a UnitException is
+     * silently ignored.
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    public LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final boolean standardUnit)
+    public LinearUnit(final String abbreviationKey, final UnitSystem unitSystem)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, standardUnit);
+        super(abbreviationKey, unitSystem);
     }
 
     /**
-     * Build a unit with a linear conversion factor to another unit. If the parameter standardUnit is true, it is a standard
-     * unit where name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined unit where
-     * the localization files do not have an entry. If standardUnit is true, a UnitException is silently ignored; if
-     * standardUnit is false a UnitException is thrown as a RunTimeException.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * Build a standard unit with a linear conversion factor to another unit.
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit U; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final U referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    protected LinearUnit(final String abbreviationKey, final UnitSystem unitSystem, final U referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem,
-                referenceUnit == null ? StandardScale.SCALE
-                        : new LinearScale(
-                                referenceUnit.getScale().getConversionFactorToStandardUnit() * scaleFactorToReferenceUnit),
-                standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit == null ? StandardScale.SCALE
+                : new LinearScale(referenceUnit.getScale().getConversionFactorToStandardUnit() * scaleFactorToReferenceUnit));
     }
 
     /**
-     * Build a unit with a specific conversion scale to/from the standard unit. If the parameter standardUnit is true, it is a
-     * standard unit where name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined
-     * unit where the localization files do not have an entry. If standardUnit is true, a UnitException is silently ignored; if
-     * standardUnit is false a UnitException is thrown as a RunTimeException.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * Build a standard unit with a specific conversion scale to/from the standard unit.
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param scale Scale; the conversion scale to use for this unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
+     */
+    protected LinearUnit(final String abbreviationKey, final UnitSystem unitSystem, final Scale scale)
+    {
+        super(abbreviationKey, unitSystem, scale);
+    }
+
+    /**
+     * Build a user-defined unit with a linear scale and create the fields for that unit.
+     * @param name String; the name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     */
+    public LinearUnit(final String name, final String abbreviation, final UnitSystem unitSystem)
+    {
+        super(name, abbreviation, unitSystem);
+    }
+
+    /**
+     * Build a user-defined unit with a linear conversion factor to another unit.
+     * @param name String; the name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param referenceUnit U; the unit to convert to
+     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
      */
-    protected LinearUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final Scale scale, final boolean standardUnit)
+    protected LinearUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final U referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, scale, standardUnit);
+        super(name, abbreviation, unitSystem, referenceUnit == null ? StandardScale.SCALE
+                : new LinearScale(referenceUnit.getScale().getConversionFactorToStandardUnit() * scaleFactorToReferenceUnit));
+    }
+
+    /**
+     * Build a user-defined unit with a specific conversion scale to/from the standard unit.
+     * @param name String; the name of the unit
+     * @param abbreviation String; the abbreviation of the unit
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param scale Scale; the conversion scale to use for this unit
+     */
+    protected LinearUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final Scale scale)
+    {
+        super(name, abbreviation, unitSystem, scale);
     }
 
     /** {@inheritDoc} */

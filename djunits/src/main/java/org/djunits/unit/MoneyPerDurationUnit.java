@@ -40,10 +40,10 @@ public class MoneyPerDurationUnit extends LinearUnit<MoneyPerDurationUnit>
 
     static
     {
-        EUR_PER_HOUR = new MoneyPerDurationUnit(MoneyUnit.EUR, DurationUnit.HOUR, "EUR per hour", "\u20AC/h", false);
-        EUR_PER_DAY = new MoneyPerDurationUnit(MoneyUnit.EUR, DurationUnit.DAY, "EUR per day", "\u20AC/day", false);
-        USD_PER_HOUR = new MoneyPerDurationUnit(MoneyUnit.USD, DurationUnit.HOUR, "USD per hour", "US$/h", false);
-        USD_PER_DAY = new MoneyPerDurationUnit(MoneyUnit.USD, DurationUnit.DAY, "USD per day", "US$/day", false);
+        EUR_PER_HOUR = new MoneyPerDurationUnit(MoneyUnit.EUR, DurationUnit.HOUR, "EUR/h", "\u20AC/h");
+        EUR_PER_DAY = new MoneyPerDurationUnit(MoneyUnit.EUR, DurationUnit.DAY, "EUR/day", "\u20AC/day");
+        USD_PER_HOUR = new MoneyPerDurationUnit(MoneyUnit.USD, DurationUnit.HOUR, "US$/h", "US$/h");
+        USD_PER_DAY = new MoneyPerDurationUnit(MoneyUnit.USD, DurationUnit.DAY, "US$/day", "US$/day");
         standardMoneyPerDurationUnit = EUR_PER_HOUR;
     }
 
@@ -51,18 +51,12 @@ public class MoneyPerDurationUnit extends LinearUnit<MoneyPerDurationUnit>
      * Build a money per time unit from a money unit and an time unit.
      * @param moneyUnit MoneyUnit; the unit of money for the money per time unit, e.g., EUR
      * @param durationUnit DurationUnit; the unit of time for the money per time unit, e.g., hour
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      */
-    private MoneyPerDurationUnit(final MoneyUnit moneyUnit, final DurationUnit durationUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final boolean standardUnit)
+    private MoneyPerDurationUnit(final MoneyUnit moneyUnit, final DurationUnit durationUnit, final String abbreviationKey)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerDurationUnit,
-                moneyUnit.getScaleFactor() / durationUnit.getScaleFactor(), standardUnit);
+        super(abbreviationKey, UnitSystem.OTHER, standardMoneyPerDurationUnit,
+                moneyUnit.getScaleFactor() / durationUnit.getScaleFactor());
         this.moneyUnit = moneyUnit;
         this.durationUnit = durationUnit;
     }
@@ -77,26 +71,23 @@ public class MoneyPerDurationUnit extends LinearUnit<MoneyPerDurationUnit>
     public MoneyPerDurationUnit(final MoneyUnit moneyUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation)
     {
-        this(moneyUnit, durationUnit, name, abbreviation, false);
+        super(name, abbreviation, UnitSystem.OTHER, standardMoneyPerDurationUnit,
+                moneyUnit.getScaleFactor() / durationUnit.getScaleFactor());
+        this.moneyUnit = moneyUnit;
+        this.durationUnit = durationUnit;
     }
 
     /**
      * Build a MoneyPerDurationUnit unit based on another MoneyPerDurationUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param referenceUnit MoneyPerDurationUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private MoneyPerDurationUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final MoneyPerDurationUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private MoneyPerDurationUnit(final String abbreviationKey, final MoneyPerDurationUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.durationUnit = referenceUnit.getDurationUnit();
     }
@@ -112,7 +103,9 @@ public class MoneyPerDurationUnit extends LinearUnit<MoneyPerDurationUnit>
     public MoneyPerDurationUnit(final String name, final String abbreviation, final MoneyPerDurationUnit referenceUnit,
             final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit);
+        this.moneyUnit = referenceUnit.getMoneyUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**

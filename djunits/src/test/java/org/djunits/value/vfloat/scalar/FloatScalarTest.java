@@ -47,7 +47,6 @@ public class FloatScalarTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringAbsTest()
     {
@@ -63,7 +62,6 @@ public class FloatScalarTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void basicsAbsTest()
     {
@@ -104,7 +102,6 @@ public class FloatScalarTest
     /**
      * Test the equals method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void equalsAbsTest()
     {
@@ -133,7 +130,6 @@ public class FloatScalarTest
     /**
      * Test the relational operations.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void relOpAbsTest()
     {
@@ -168,7 +164,6 @@ public class FloatScalarTest
     /**
      * Test the Math functions.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void mathFunctionsTestAbsTest()
     {
@@ -219,7 +214,6 @@ public class FloatScalarTest
     /**
      * Test plus(FloatScalarAbs, FloatScalarRel).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfAbsAndRelTest()
     {
@@ -236,7 +230,6 @@ public class FloatScalarTest
     /**
      * Test minus(FloatScalarAbs, FloatScalarRel).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfAbsAndRelTest()
     {
@@ -253,7 +246,6 @@ public class FloatScalarTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringRelTest()
     {
@@ -268,7 +260,6 @@ public class FloatScalarTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void basicsRelTest()
     {
@@ -303,7 +294,6 @@ public class FloatScalarTest
     /**
      * Test the equals method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void equalsRelTest()
     {
@@ -330,7 +320,6 @@ public class FloatScalarTest
     /**
      * Test the relational operations.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void relOpRelTest()
     {
@@ -361,7 +350,6 @@ public class FloatScalarTest
     /**
      * Test the Math functions.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void mathFunctionsTestRelTest()
     {
@@ -421,7 +409,6 @@ public class FloatScalarTest
     /**
      * Test plus(FloatScalarRel, FloatScalarRel).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfRelAndRelTest()
     {
@@ -437,7 +424,6 @@ public class FloatScalarTest
     /**
      * Test minus(FloatScalarRel, FloatScalarRel).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfRelAndRelTest()
     {
@@ -453,7 +439,6 @@ public class FloatScalarTest
     /**
      * Test multiply(FloatScalarRel, FloatScalarRel).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binarymultiplyOfRelAndRelTest()
     {
@@ -469,7 +454,6 @@ public class FloatScalarTest
     /**
      * Test divide(FloatScalarRel, FloatScalarRel).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binarydivideOfRelAndRelTest()
     {

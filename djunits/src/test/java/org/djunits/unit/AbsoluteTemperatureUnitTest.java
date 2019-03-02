@@ -24,7 +24,6 @@ public class AbsoluteTemperatureUnitTest extends AbstractOffsetUnitTest<Absolute
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.
      */
-    @SuppressWarnings("static-method")
     @Before
     public final void setup()
     {
@@ -46,7 +45,7 @@ public class AbsoluteTemperatureUnitTest extends AbstractOffsetUnitTest<Absolute
     @Test
     public final void conversions()
     {
-        checkUnitRatioOffsetNameAndAbbreviation(AbsoluteTemperatureUnit.KELVIN, 1, 0, 0.00000001, "kelvin", "K");
+        checkUnitRatioOffsetNameAndAbbreviation(AbsoluteTemperatureUnit.KELVIN, 1, 0, 0.00000001, "Kelvin", "K");
         checkUnitRatioOffsetNameAndAbbreviation(AbsoluteTemperatureUnit.DEGREE_CELSIUS, 1, 273.15, 0.000001, "degree Celsius",
                 "\u00B0C");
         checkUnitRatioOffsetNameAndAbbreviation(AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT, 5. / 9., 459.67, 0.00001,

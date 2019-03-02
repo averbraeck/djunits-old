@@ -24,7 +24,6 @@ public class PowerUnitTest extends AbstractLinearUnitTest<PowerUnit>
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.
      */
-    @SuppressWarnings("static-method")
     @Before
     public final void setup()
     {
@@ -32,7 +31,7 @@ public class PowerUnitTest extends AbstractLinearUnitTest<PowerUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
+     * Verify the result of some getKey methods.
      */
     @Test
     public final void keys()

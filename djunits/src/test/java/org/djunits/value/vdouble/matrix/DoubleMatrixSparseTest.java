@@ -87,7 +87,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringAbsTest()
     {
@@ -112,7 +111,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringMutableAbsTest()
     {
@@ -220,7 +218,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test conversion to mutable equivalent and back.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toMutableAndBackAbsTest()
     {
@@ -268,7 +265,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test the equals method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void equalsAbsTest()
     {
@@ -297,7 +293,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test the Math functions.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void mathFunctionsTestAbsTest()
     {
@@ -359,7 +354,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test plus(DoubleMatrixAbs.Sparse, DoubleMatrixRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfAbsSparseAndRelDenseTest()
     {
@@ -390,7 +384,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test minus(DoubleMatrixAbs.Sparse, DoubleMatrixRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfAbsSparseAndRelDenseTest()
     {
@@ -421,7 +414,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test plus(DoubleMatrixAbs.Sparse, DoubleMatrixRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfAbsSparseAndRelSparseTest()
     {
@@ -452,7 +444,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test minus(DoubleMatrixAbs.Sparse, DoubleMatrixRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfAbsSparseAndRelSparseTest()
     {
@@ -483,7 +474,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test that malformed or mismatching arrays throw a ValueException.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void sizeCheckAbsTest()
     {
@@ -569,7 +559,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test the det method that computes and returns the determinant.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void determinantAbsTest()
     {
@@ -595,7 +584,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringRelTest()
     {
@@ -619,7 +607,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringMutableRelTest()
     {
@@ -718,7 +705,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test conversion to mutable equivalent and back.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toMutableAndBackRelTest()
     {
@@ -764,7 +750,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test the equals method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void equalsRelTest()
     {
@@ -792,7 +777,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test the Math functions.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void mathFunctionsTestRelTest()
     {
@@ -864,7 +848,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test plus(DoubleMatrixRel.Sparse, DoubleMatrixRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfRelSparseAndRelDenseTest()
     {
@@ -895,7 +878,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test minus(DoubleMatrixRel.Sparse, DoubleMatrixRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfRelSparseAndRelDenseTest()
     {
@@ -926,7 +908,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test times(DoubleMatrixRel.Sparse, DoubleMatrixRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binarytimesOfRelSparseAndRelDenseTest()
     {
@@ -957,7 +938,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test plus(DoubleMatrixRel.Sparse, DoubleMatrixRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfRelSparseAndRelSparseTest()
     {
@@ -988,7 +968,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test minus(DoubleMatrixRel.Sparse, DoubleMatrixRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfRelSparseAndRelSparseTest()
     {
@@ -1019,7 +998,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test times(DoubleMatrixRel.Sparse, DoubleMatrixRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binarytimesOfRelSparseAndRelSparseTest()
     {
@@ -1050,7 +1028,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test that malformed or mismatching arrays throw a ValueException.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void sizeCheckRelTest()
     {
@@ -1131,7 +1108,6 @@ public class DoubleMatrixSparseTest
     /**
      * Test the det method that computes and returns the determinant.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void determinantRelTest()
     {

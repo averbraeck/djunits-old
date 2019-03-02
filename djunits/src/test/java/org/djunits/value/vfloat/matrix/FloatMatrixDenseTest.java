@@ -87,7 +87,6 @@ public class FloatMatrixDenseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringAbsTest()
     {
@@ -112,7 +111,6 @@ public class FloatMatrixDenseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringMutableAbsTest()
     {
@@ -220,7 +218,6 @@ public class FloatMatrixDenseTest
     /**
      * Test conversion to mutable equivalent and back.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toMutableAndBackAbsTest()
     {
@@ -268,7 +265,6 @@ public class FloatMatrixDenseTest
     /**
      * Test the equals method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void equalsAbsTest()
     {
@@ -297,7 +293,6 @@ public class FloatMatrixDenseTest
     /**
      * Test the Math functions.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void mathFunctionsTestAbsTest()
     {
@@ -359,7 +354,6 @@ public class FloatMatrixDenseTest
     /**
      * Test plus(FloatMatrixAbs.Dense, FloatMatrixRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfAbsDenseAndRelDenseTest()
     {
@@ -389,7 +383,6 @@ public class FloatMatrixDenseTest
     /**
      * Test minus(FloatMatrixAbs.Dense, FloatMatrixRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfAbsDenseAndRelDenseTest()
     {
@@ -419,7 +412,6 @@ public class FloatMatrixDenseTest
     /**
      * Test plus(FloatMatrixAbs.Dense, FloatMatrixRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfAbsDenseAndRelSparseTest()
     {
@@ -450,7 +442,6 @@ public class FloatMatrixDenseTest
     /**
      * Test minus(FloatMatrixAbs.Dense, FloatMatrixRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfAbsDenseAndRelSparseTest()
     {
@@ -481,7 +472,6 @@ public class FloatMatrixDenseTest
     /**
      * Test that malformed or mismatching arrays throw a ValueException.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void sizeCheckAbsTest()
     {
@@ -567,7 +557,6 @@ public class FloatMatrixDenseTest
     /**
      * Test the det method that computes and returns the determinant.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void determinantAbsTest()
     {
@@ -593,7 +582,6 @@ public class FloatMatrixDenseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringRelTest()
     {
@@ -617,7 +605,6 @@ public class FloatMatrixDenseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringMutableRelTest()
     {
@@ -716,7 +703,6 @@ public class FloatMatrixDenseTest
     /**
      * Test conversion to mutable equivalent and back.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toMutableAndBackRelTest()
     {
@@ -762,7 +748,6 @@ public class FloatMatrixDenseTest
     /**
      * Test the equals method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void equalsRelTest()
     {
@@ -789,7 +774,6 @@ public class FloatMatrixDenseTest
     /**
      * Test the Math functions.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void mathFunctionsTestRelTest()
     {
@@ -861,7 +845,6 @@ public class FloatMatrixDenseTest
     /**
      * Test plus(FloatMatrixRel.Dense, FloatMatrixRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfRelDenseAndRelDenseTest()
     {
@@ -890,7 +873,6 @@ public class FloatMatrixDenseTest
     /**
      * Test minus(FloatMatrixRel.Dense, FloatMatrixRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfRelDenseAndRelDenseTest()
     {
@@ -919,7 +901,6 @@ public class FloatMatrixDenseTest
     /**
      * Test times(FloatMatrixRel.Dense, FloatMatrixRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binarytimesOfRelDenseAndRelDenseTest()
     {
@@ -948,7 +929,6 @@ public class FloatMatrixDenseTest
     /**
      * Test plus(FloatMatrixRel.Dense, FloatMatrixRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfRelDenseAndRelSparseTest()
     {
@@ -978,7 +958,6 @@ public class FloatMatrixDenseTest
     /**
      * Test minus(FloatMatrixRel.Dense, FloatMatrixRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfRelDenseAndRelSparseTest()
     {
@@ -1008,7 +987,6 @@ public class FloatMatrixDenseTest
     /**
      * Test times(FloatMatrixRel.Dense, FloatMatrixRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binarytimesOfRelDenseAndRelSparseTest()
     {
@@ -1038,7 +1016,6 @@ public class FloatMatrixDenseTest
     /**
      * Test that malformed or mismatching arrays throw a ValueException.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void sizeCheckRelTest()
     {
@@ -1119,7 +1096,6 @@ public class FloatMatrixDenseTest
     /**
      * Test the det method that computes and returns the determinant.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void determinantRelTest()
     {

@@ -46,6 +46,6 @@ public final class Currency implements UNITS
         Mass totalWeight = volume.multiplyBy(density);
         System.out.println("weight of " + volume + " is " + totalWeight); // prints 45.000kg
         Money totalCost = startupCost.plus(totalWeight.multiplyBy(costPerKG));
-        System.out.println("total cost " + totalCost); // prints 1000.000�
+        System.out.println("total cost " + totalCost); // prints 1000.000EUR
     }
 }

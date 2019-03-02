@@ -42,7 +42,6 @@ public class SICoefficientsTest
     /**
      * Test the create method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void parser()
     {
@@ -97,7 +96,6 @@ public class SICoefficientsTest
     /**
      * Test the multiply method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void multiply()
     {
@@ -136,7 +134,6 @@ public class SICoefficientsTest
     /**
      * Test the divide method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void divide()
     {

@@ -25,11 +25,11 @@ public abstract class AbstractLinearUnitTest<U extends LinearUnit<U>> extends Ab
     protected final void checkUnitRatioNameAndAbbreviation(final U u, final double expectedRatio, final double precision,
             final String expectedName, final String expectedAbbreviation)
     {
-        assertEquals(String.format("one %s is about %f reference unit", u.getNameKey(), expectedRatio), expectedRatio,
+        assertEquals(String.format("one %s is about %f reference unit", u.getAbbreviationKey(), expectedRatio), expectedRatio,
                 u.getScaleFactor(), precision);
-        assertEquals(String.format("Name of %s is %s", u.getNameKey(), expectedName), expectedName, u.getName());
-        assertEquals(String.format("Abbreviation of %s is %s", u.getNameKey(), expectedAbbreviation), expectedAbbreviation,
-                u.getAbbreviation());
+        assertEquals(String.format("Name of %s is %s", u.getAbbreviationKey(), expectedName), expectedName, u.getName());
+        assertEquals(String.format("Abbreviation of %s is %s", u.getAbbreviationKey(), expectedAbbreviation),
+                expectedAbbreviation, u.getAbbreviation());
     }
 
     /**

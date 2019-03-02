@@ -29,12 +29,12 @@ public class AbstractOffsetUnitTest<OU extends Unit<OU>> extends AbstractUnitTes
             final double expectedOffset, final double precision, final String expectedName, final String expectedAbbreviation)
     {
         OffsetLinearScale scale = (OffsetLinearScale) ou.getScale();
-        assertEquals(String.format("zero %s is about %f reference unit", ou.getNameKey(), expectedOffset), expectedOffset,
+        assertEquals(String.format("zero %s is about %f reference unit", ou.getAbbreviationKey(), expectedOffset), expectedOffset,
                 scale.getOffsetToStandardUnit(), precision);
-        assertEquals(String.format("one %s is about %f reference unit", ou.getNameKey(), expectedRatio), expectedRatio,
+        assertEquals(String.format("one %s is about %f reference unit", ou.getAbbreviationKey(), expectedRatio), expectedRatio,
                 scale.getConversionFactorToStandardUnit(), precision);
-        assertEquals(String.format("Name of %s is %s", ou.getNameKey(), expectedName), expectedName, ou.getName());
-        assertEquals(String.format("Abbreviation of %s is %s", ou.getNameKey(), expectedAbbreviation), expectedAbbreviation,
+        assertEquals(String.format("Name of %s is %s", ou.getAbbreviationKey(), expectedName), expectedName, ou.getName());
+        assertEquals(String.format("Abbreviation of %s is %s", ou.getAbbreviationKey(), expectedAbbreviation), expectedAbbreviation,
                 ou.getAbbreviation());
     }
 

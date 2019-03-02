@@ -75,7 +75,6 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws SecurityException on reflection error
      * @throws ValueException when index out of range
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void vectorOperationsTest()
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,

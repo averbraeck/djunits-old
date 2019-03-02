@@ -23,18 +23,7 @@ public class SIUnit extends Unit<SIUnit>
      */
     public SIUnit(final String siCoefficientString)
     {
-        super(siCoefficientString, siCoefficientString, UnitSystem.SI_DERIVED, true);
-    }
-
-    /**
-     * Create an arbitrary SI unit based on a coefficient string, such as m3/cd2.
-     * @param siCoefficientString String; textual description of the unit.
-     * @param standardUnit boolean; if true; the new unit is standard and there should be localization info; if false;
-     *            localization will not be available
-     */
-    public SIUnit(final String siCoefficientString, final boolean standardUnit)
-    {
-        super(siCoefficientString, siCoefficientString, UnitSystem.SI_DERIVED, standardUnit);
+        super(siCoefficientString, siCoefficientString, UnitSystem.SI_DERIVED);
     }
 
     /** {@inheritDoc} */

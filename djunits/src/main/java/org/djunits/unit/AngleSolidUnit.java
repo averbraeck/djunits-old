@@ -30,41 +30,34 @@ public class AngleSolidUnit extends LinearUnit<AngleSolidUnit>
 
     static
     {
-        SI = new AngleSolidUnit("AngleSolidUnit.steradian", "AngleSolidUnit.sr", SI_DERIVED);
+        SI = new AngleSolidUnit("AngleSolidUnit.sr", SI_DERIVED);
         STERADIAN = SI;
-        SQUARE_DEGREE = new AngleSolidUnit("AngleSolidUnit.square_degree", "AngleSolidUnit.sq_deg", SI_DERIVED, STERADIAN,
-                (Math.PI / 180.0) * (Math.PI / 180.0), true);
+        SQUARE_DEGREE =
+                new AngleSolidUnit("AngleSolidUnit.sq_deg", SI_DERIVED, STERADIAN, (Math.PI / 180.0) * (Math.PI / 180.0));
     }
 
     /**
      * Build a standard unit.
-     * @param nameKey String; the key to the locale file for the long name of the unit
      * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
-    private AngleSolidUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
+    private AngleSolidUnit(final String abbreviationKey, final UnitSystem unitSystem)
     {
-        super(nameKey, abbreviationKey, unitSystem, true);
+        super(abbreviationKey, unitSystem);
     }
 
     /**
      * Construct a derived unit as a conversion from another unit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit AngleSolidUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private AngleSolidUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final AngleSolidUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private AngleSolidUnit(final String abbreviationKey, final UnitSystem unitSystem, final AngleSolidUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
     }
 
     /**
@@ -79,7 +72,7 @@ public class AngleSolidUnit extends LinearUnit<AngleSolidUnit>
     public AngleSolidUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final AngleSolidUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
     }
 
     /** {@inheritDoc} */

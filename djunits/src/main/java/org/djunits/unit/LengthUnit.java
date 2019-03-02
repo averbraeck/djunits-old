@@ -93,60 +93,53 @@ public class LengthUnit extends LinearUnit<LengthUnit>
 
     static
     {
-        SI = new LengthUnit("LengthUnit.meter", "LengthUnit.m", SI_BASE);
+        SI = new LengthUnit("LengthUnit.m", SI_BASE);
         METER = SI;
-        ATTOMETER = new LengthUnit("LengthUnit.attometer", "LengthUnit.am", SI_BASE, METER, 1.0E-18, true);
-        FEMTOMETER = new LengthUnit("LengthUnit.femtometer", "LengthUnit.fm", SI_BASE, METER, 1.0E-15, true);
-        PICOMETER = new LengthUnit("LengthUnit.picometer", "LengthUnit.pm", SI_BASE, METER, 1.0E-12, true);
-        NANOMETER = new LengthUnit("LengthUnit.nanometer", "LengthUnit.nm", SI_BASE, METER, 1.0E-9, true);
-        MICROMETER = new LengthUnit("LengthUnit.micrometer", "LengthUnit.mum", SI_BASE, METER, 1.0E-6, true);
-        MILLIMETER = new LengthUnit("LengthUnit.millimeter", "LengthUnit.mm", SI_BASE, METER, 0.001, true);
-        CENTIMETER = new LengthUnit("LengthUnit.centimeter", "LengthUnit.cm", SI_BASE, METER, 0.01, true);
-        DECIMETER = new LengthUnit("LengthUnit.decimeter", "LengthUnit.dm", SI_BASE, METER, 0.1, true);
-        DEKAMETER = new LengthUnit("LengthUnit.dekameter", "LengthUnit.dam", SI_BASE, METER, 10.0, true);
-        HECTOMETER = new LengthUnit("LengthUnit.hectometer", "LengthUnit.hm", SI_BASE, METER, 100.0, true);
-        KILOMETER = new LengthUnit("LengthUnit.kilometer", "LengthUnit.km", SI_BASE, METER, 1000.0, true);
-        MEGAMETER = new LengthUnit("LengthUnit.megameter", "LengthUnit.Mm", SI_BASE, METER, 1000000.0, true);
-        FOOT = new LengthUnit("LengthUnit.foot", "LengthUnit.ft", IMPERIAL, METER, 0.3048, true);
-        INCH = new LengthUnit("LengthUnit.inch", "LengthUnit.in", IMPERIAL, FOOT, 1.0 / 12.0, true);
-        MILE = new LengthUnit("LengthUnit.mile", "LengthUnit.mi", IMPERIAL, FOOT, 5280.0, true);
-        YARD = new LengthUnit("LengthUnit.yard", "LengthUnit.yd", IMPERIAL, FOOT, 3.0, true);
-        NAUTICAL_MILE = new LengthUnit("LengthUnit.nauticalMile", "LengthUnit.NM", IMPERIAL, METER, 1852.0, true);
-        ASTRONOMICAL_UNIT = new LengthUnit("LengthUnit.astronomicalUnit", "LengthUnit.AU", OTHER, METER, 149597870700.0, true);
-        LIGHTYEAR = new LengthUnit("LengthUnit.lightyear", "LengthUnit.ly", OTHER, METER, 9460730472580800.0, true);
-        PARSEC = new LengthUnit("LengthUnit.parsec", "LengthUnit.pc", OTHER, LIGHTYEAR, 648000 / Math.PI, true);
-        ANGSTROM = new LengthUnit("LengthUnit.angstrom", "LengthUnit.A", OTHER, METER, 1E-10, true);
+        ATTOMETER = new LengthUnit("LengthUnit.am", SI_BASE, METER, 1.0E-18);
+        FEMTOMETER = new LengthUnit("LengthUnit.fm", SI_BASE, METER, 1.0E-15);
+        PICOMETER = new LengthUnit("LengthUnit.pm", SI_BASE, METER, 1.0E-12);
+        NANOMETER = new LengthUnit("LengthUnit.nm", SI_BASE, METER, 1.0E-9);
+        MICROMETER = new LengthUnit("LengthUnit.mum", SI_BASE, METER, 1.0E-6);
+        MILLIMETER = new LengthUnit("LengthUnit.mm", SI_BASE, METER, 0.001);
+        CENTIMETER = new LengthUnit("LengthUnit.cm", SI_BASE, METER, 0.01);
+        DECIMETER = new LengthUnit("LengthUnit.dm", SI_BASE, METER, 0.1);
+        DEKAMETER = new LengthUnit("LengthUnit.dam", SI_BASE, METER, 10.0);
+        HECTOMETER = new LengthUnit("LengthUnit.hm", SI_BASE, METER, 100.0);
+        KILOMETER = new LengthUnit("LengthUnit.km", SI_BASE, METER, 1000.0);
+        MEGAMETER = new LengthUnit("LengthUnit.Mm", SI_BASE, METER, 1000000.0);
+        FOOT = new LengthUnit("LengthUnit.ft", IMPERIAL, METER, 0.3048);
+        INCH = new LengthUnit("LengthUnit.in", IMPERIAL, FOOT, 1.0 / 12.0);
+        MILE = new LengthUnit("LengthUnit.mi", IMPERIAL, FOOT, 5280.0);
+        YARD = new LengthUnit("LengthUnit.yd", IMPERIAL, FOOT, 3.0);
+        NAUTICAL_MILE = new LengthUnit("LengthUnit.NM", IMPERIAL, METER, 1852.0);
+        ASTRONOMICAL_UNIT = new LengthUnit("LengthUnit.AU", OTHER, METER, 149597870700.0);
+        LIGHTYEAR = new LengthUnit("LengthUnit.ly", OTHER, METER, 9460730472580800.0);
+        PARSEC = new LengthUnit("LengthUnit.pc", OTHER, LIGHTYEAR, 648000 / Math.PI);
+        ANGSTROM = new LengthUnit("LengthUnit.A", OTHER, METER, 1E-10);
     }
 
     /**
      * Build a standard LengthUnit.
-     * @param nameKey String; the key to the locale file for the long name of the unit
      * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
-    private LengthUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
+    private LengthUnit(final String abbreviationKey, final UnitSystem unitSystem)
     {
-        super(nameKey, abbreviationKey, unitSystem, true);
+        super(abbreviationKey, unitSystem);
     }
 
     /**
      * Build a LengthUnit with a conversion factor to another LengthUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit LengthUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private LengthUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final LengthUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private LengthUnit(final String abbreviationKey, final UnitSystem unitSystem, final LengthUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
     }
 
     /**
@@ -161,7 +154,7 @@ public class LengthUnit extends LinearUnit<LengthUnit>
     public LengthUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final LengthUnit referenceUnit,
             final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
     }
 
     /** {@inheritDoc} */

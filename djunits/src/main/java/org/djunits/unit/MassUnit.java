@@ -112,65 +112,58 @@ public class MassUnit extends LinearUnit<MassUnit>
 
     static
     {
-        SI = new MassUnit("MassUnit.kilogram", "MassUnit.kg", SI_BASE);
+        SI = new MassUnit("MassUnit.kg", SI_BASE);
         KILOGRAM = SI;
-        GRAM = new MassUnit("MassUnit.gram", "MassUnit.g", SI_BASE, KILOGRAM, 0.001, true);
-        FEMTOGRAM = new MassUnit("MassUnit.femtogram", "MassUnit.fg", SI_DERIVED, GRAM, 1.0E-15, true);
-        PICOGRAM = new MassUnit("MassUnit.picogram", "MassUnit.pg", SI_DERIVED, GRAM, 1.0E-12, true);
-        NANOGRAM = new MassUnit("MassUnit.nanogram", "MassUnit.ng", SI_DERIVED, GRAM, 1.0E-9, true);
-        MICROGRAM = new MassUnit("MassUnit.microgram", "MassUnit.mug", SI_DERIVED, GRAM, 1.0E-6, true);
-        MILLIGRAM = new MassUnit("MassUnit.milligram", "MassUnit.mg", SI_DERIVED, GRAM, 0.001, true);
-        MEGAGRAM = new MassUnit("MassUnit.megagram", "MassUnit.Mg", SI_DERIVED, GRAM, 1.0E6, true);
-        GIGAGRAM = new MassUnit("MassUnit.gigagram", "MassUnit.Gg", SI_DERIVED, GRAM, 1.0E9, true);
-        TERAGRAM = new MassUnit("MassUnit.teragram", "MassUnit.Tg", SI_DERIVED, GRAM, 1.0E12, true);
-        PETAGRAM = new MassUnit("MassUnit.petagram", "MassUnit.Pg", SI_DERIVED, GRAM, 1.0E15, true);
-        POUND = new MassUnit("MassUnit.pound", "MassUnit.lb", IMPERIAL, KILOGRAM, 0.45359237, true);
-        OUNCE = new MassUnit("MassUnit.ounce", "MassUnit.oz", IMPERIAL, POUND, 1.0 / 16.0, true);
-        TON_LONG = new MassUnit("MassUnit.long_ton", "MassUnit.long_tn", IMPERIAL, POUND, 2240.0, true);
-        TON_SHORT = new MassUnit("MassUnit.short_ton", "MassUnit.sh_tn", US_CUSTOMARY, POUND, 2000.0, true);
-        TON_METRIC = new MassUnit("MassUnit.metric_ton", "MassUnit.t", SI_ACCEPTED, KILOGRAM, 1000.0, true);
-        TONNE = new MassUnit("MassUnit.tonne_(mts)", "MassUnit.t_(mts)", MTS, KILOGRAM, 1000.0, true);
-        DALTON = new MassUnit("MassUnit.dalton", "MassUnit.Da", SI_ACCEPTED, KILOGRAM, 1.6605388628E-27, true);
-        ELECTRONVOLT = new MassUnit("MassUnit.electronvolt", "MassUnit.eV", OTHER, KILOGRAM, 1.782661907E-36, true);
-        MICROELECTRONVOLT = new MassUnit("MassUnit.microelectronvolt", "MassUnit.mueV", OTHER, ELECTRONVOLT, 1.0E-6, true);
-        MILLIELECTRONVOLT = new MassUnit("MassUnit.millielectronvolt", "MassUnit.meV", OTHER, ELECTRONVOLT, 1.0E-3, true);
-        KILOELECTRONVOLT = new MassUnit("MassUnit.kiloelectronvolt", "MassUnit.keV", OTHER, ELECTRONVOLT, 1.0E3, true);
-        MEGAELECTRONVOLT = new MassUnit("MassUnit.megaelectronvolt", "MassUnit.MeV", OTHER, ELECTRONVOLT, 1.0E6, true);
-        GIGAELECTRONVOLT = new MassUnit("MassUnit.gigaelectronvolt", "MassUnit.GeV", OTHER, ELECTRONVOLT, 1.0E9, true);
-        TERAELECTRONVOLT = new MassUnit("MassUnit.teraelectronvolt", "MassUnit.TeV", OTHER, ELECTRONVOLT, 1.0E12, true);
-        PETAELECTRONVOLT = new MassUnit("MassUnit.petaelectronvolt", "MassUnit.PeV", OTHER, ELECTRONVOLT, 1.0E15, true);
-        EXAELECTRONVOLT = new MassUnit("MassUnit.exaelectronvolt", "MassUnit.EeV", OTHER, ELECTRONVOLT, 1.0E18, true);
+        GRAM = new MassUnit("MassUnit.g", SI_BASE, KILOGRAM, 0.001);
+        FEMTOGRAM = new MassUnit("MassUnit.fg", SI_DERIVED, GRAM, 1.0E-15);
+        PICOGRAM = new MassUnit("MassUnit.pg", SI_DERIVED, GRAM, 1.0E-12);
+        NANOGRAM = new MassUnit("MassUnit.ng", SI_DERIVED, GRAM, 1.0E-9);
+        MICROGRAM = new MassUnit("MassUnit.mug", SI_DERIVED, GRAM, 1.0E-6);
+        MILLIGRAM = new MassUnit("MassUnit.mg", SI_DERIVED, GRAM, 0.001);
+        MEGAGRAM = new MassUnit("MassUnit.Mg", SI_DERIVED, GRAM, 1.0E6);
+        GIGAGRAM = new MassUnit("MassUnit.Gg", SI_DERIVED, GRAM, 1.0E9);
+        TERAGRAM = new MassUnit("MassUnit.Tg", SI_DERIVED, GRAM, 1.0E12);
+        PETAGRAM = new MassUnit("MassUnit.Pg", SI_DERIVED, GRAM, 1.0E15);
+        POUND = new MassUnit("MassUnit.lb", IMPERIAL, KILOGRAM, 0.45359237);
+        OUNCE = new MassUnit("MassUnit.oz", IMPERIAL, POUND, 1.0 / 16.0);
+        TON_LONG = new MassUnit("MassUnit.long_tn", IMPERIAL, POUND, 2240.0);
+        TON_SHORT = new MassUnit("MassUnit.sh_tn", US_CUSTOMARY, POUND, 2000.0);
+        TON_METRIC = new MassUnit("MassUnit.t", SI_ACCEPTED, KILOGRAM, 1000.0);
+        TONNE = new MassUnit("MassUnit.t_(mts)", MTS, KILOGRAM, 1000.0);
+        DALTON = new MassUnit("MassUnit.Da", SI_ACCEPTED, KILOGRAM, 1.6605388628E-27);
+        ELECTRONVOLT = new MassUnit("MassUnit.eV", OTHER, KILOGRAM, 1.782661907E-36);
+        MICROELECTRONVOLT = new MassUnit("MassUnit.mueV", OTHER, ELECTRONVOLT, 1.0E-6);
+        MILLIELECTRONVOLT = new MassUnit("MassUnit.meV", OTHER, ELECTRONVOLT, 1.0E-3);
+        KILOELECTRONVOLT = new MassUnit("MassUnit.keV", OTHER, ELECTRONVOLT, 1.0E3);
+        MEGAELECTRONVOLT = new MassUnit("MassUnit.MeV", OTHER, ELECTRONVOLT, 1.0E6);
+        GIGAELECTRONVOLT = new MassUnit("MassUnit.GeV", OTHER, ELECTRONVOLT, 1.0E9);
+        TERAELECTRONVOLT = new MassUnit("MassUnit.TeV", OTHER, ELECTRONVOLT, 1.0E12);
+        PETAELECTRONVOLT = new MassUnit("MassUnit.PeV", OTHER, ELECTRONVOLT, 1.0E15);
+        EXAELECTRONVOLT = new MassUnit("MassUnit.EeV", OTHER, ELECTRONVOLT, 1.0E18);
     }
 
     /**
      * Build a standard MassUnit.
-     * @param nameKey String; the key to the locale file for the long name of the unit
      * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
-    private MassUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
+    private MassUnit(final String abbreviationKey, final UnitSystem unitSystem)
     {
-        super(nameKey, abbreviationKey, unitSystem, true);
+        super(abbreviationKey, unitSystem);
     }
 
     /**
      * Build a MassUnit with a conversion factor to another MassUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit MassUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private MassUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final MassUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private MassUnit(final String abbreviationKey, final UnitSystem unitSystem, final MassUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
     }
 
     /**
@@ -185,7 +178,7 @@ public class MassUnit extends LinearUnit<MassUnit>
     public MassUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final MassUnit referenceUnit,
             final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
     }
 
     /** {@inheritDoc} */

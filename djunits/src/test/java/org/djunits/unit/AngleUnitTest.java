@@ -27,7 +27,6 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.
      */
-    @SuppressWarnings("static-method")
     @Before
     public final void setup()
     {
@@ -54,11 +53,11 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
     protected final void checkUnitValueNameAndAbbreviation(final AngleUnit au, final double expectedValue,
             final double precision, final String expectedName, final String expectedAbbreviation)
     {
-        assertEquals(String.format("one %s is about %f reference unit", au.getNameKey(), expectedValue), expectedValue,
+        assertEquals(String.format("one %s is about %f reference unit", au.getAbbreviationKey(), expectedValue), expectedValue,
                 au.getScale().toStandardUnit(1.0), precision);
-        assertEquals(String.format("Name of %s is %s", au.getNameKey(), expectedName), expectedName, au.getName());
-        assertEquals(String.format("Abbreviation of %s is %s", au.getNameKey(), expectedAbbreviation), expectedAbbreviation,
-                au.getAbbreviation());
+        assertEquals(String.format("Name of %s is %s", au.getAbbreviationKey(), expectedName), expectedName, au.getName());
+        assertEquals(String.format("Abbreviation of %s is %s", au.getAbbreviationKey(), expectedAbbreviation),
+                expectedAbbreviation, au.getAbbreviation());
     }
 
     /**

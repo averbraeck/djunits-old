@@ -114,52 +114,43 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
 
     static
     {
-        BASE = new TimeUnit("TimeUnit.epoch.second", "TimeUnit.epoch.s", OTHER, 1.0, 0.0, true, DurationUnit.SECOND);
+        BASE = new TimeUnit("TimeUnit.epoch.s", OTHER, 1.0, 0.0, DurationUnit.SECOND);
         EPOCH = BASE;
         EPOCH_SECOND = BASE;
         BASE_SECOND = EPOCH_SECOND;
-        EPOCH_MICROSECOND = new TimeUnit("TimeUnit.epoch.microsecond", "TimeUnit.epoch.mus", OTHER, 1E-6, 0.0, true,
-                DurationUnit.MICROSECOND);
+        EPOCH_MICROSECOND = new TimeUnit("TimeUnit.epoch.mus", OTHER, 1E-6, 0.0, DurationUnit.MICROSECOND);
         BASE_MICROSECOND = EPOCH_MICROSECOND;
-        EPOCH_MILLISECOND = new TimeUnit("TimeUnit.epoch.millisecond", "TimeUnit.epoch.ms", OTHER, 1E-3, 0.0, true,
-                DurationUnit.MILLISECOND);
+        EPOCH_MILLISECOND = new TimeUnit("TimeUnit.epoch.ms", OTHER, 1E-3, 0.0, DurationUnit.MILLISECOND);
         BASE_MILLISECOND = EPOCH_MILLISECOND;
-        EPOCH_MINUTE = new TimeUnit("TimeUnit.epoch.minute", "TimeUnit.epoch.m", OTHER, 60.0, 0.0, true, DurationUnit.MINUTE);
+        EPOCH_MINUTE = new TimeUnit("TimeUnit.epoch.m", OTHER, 60.0, 0.0, DurationUnit.MINUTE);
         BASE_MINUTE = EPOCH_MINUTE;
-        EPOCH_HOUR = new TimeUnit("TimeUnit.epoch.hour", "TimeUnit.epoch.h", OTHER, 3600.0, 0.0, true, DurationUnit.HOUR);
+        EPOCH_HOUR = new TimeUnit("TimeUnit.epoch.h", OTHER, 3600.0, 0.0, DurationUnit.HOUR);
         BASE_HOUR = EPOCH_HOUR;
-        EPOCH_DAY = new TimeUnit("TimeUnit.epoch.day", "TimeUnit.epoch.d", OTHER, 3600 * 24.0, 0.0, true, DurationUnit.DAY);
+        EPOCH_DAY = new TimeUnit("TimeUnit.epoch.d", OTHER, 3600 * 24.0, 0.0, DurationUnit.DAY);
         BASE_DAY = EPOCH_DAY;
-        EPOCH_WEEK =
-                new TimeUnit("TimeUnit.epoch.week", "TimeUnit.epoch.w", OTHER, 3600 * 24 * 7.0, 0.0, true, DurationUnit.WEEK);
+        EPOCH_WEEK = new TimeUnit("TimeUnit.epoch.w", OTHER, 3600 * 24 * 7.0, 0.0, DurationUnit.WEEK);
         BASE_WEEK = EPOCH_WEEK;
 
         double seconds00010101 = new GregorianCalendar(1, 0, 1, 0, 0, 0).getTimeInMillis() / 1000.0;
-        EPOCH_YEAR_1 =
-                new TimeUnit("TimeUnit.epoch_1", "TimeUnit.epoch_1", OTHER, 1.0, seconds00010101, false, DurationUnit.SECOND);
+        EPOCH_YEAR_1 = new TimeUnit("TimeUnit.epoch_1", "TimeUnit.epoch_1", OTHER, 1.0, seconds00010101, DurationUnit.SECOND);
 
         double seconds20000101 = new GregorianCalendar(2000, 0, 1, 12, 0, 0).getTimeInMillis() / 1000.0;
-        EPOCH_J2000_1 = new TimeUnit("TimeUnit.epoch_j2000", "TimeUnit.epoch_j2000", OTHER, 1.0, seconds20000101, false,
-                DurationUnit.SECOND);
+        EPOCH_J2000_1 =
+                new TimeUnit("TimeUnit.epoch_j2000", "TimeUnit.epoch_j2000", OTHER, 1.0, seconds20000101, DurationUnit.SECOND);
     }
 
     /**
      * Build a TimeUnit with a scale factor and offset to the base TimeUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param scaleFactor double; multiply a value in this unit by the factor to convert to the given reference unit
      * @param offset double; the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      * @param relativeUnit DurationUnit; the corresponding relative unit belonging to this absolute unit
      */
-    private TimeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final double scaleFactor, final double offset, final boolean standardUnit, final DurationUnit relativeUnit)
+    private TimeUnit(final String abbreviationKey, final UnitSystem unitSystem, final double scaleFactor, final double offset,
+            final DurationUnit relativeUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, scaleFactor, offset, standardUnit, relativeUnit);
+        super(abbreviationKey, unitSystem, scaleFactor, offset, relativeUnit);
     }
 
     /**
@@ -174,7 +165,7 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
     public TimeUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final double scaleFactor,
             final double offset, final DurationUnit relativeUnit)
     {
-        this(name, abbreviation, unitSystem, scaleFactor, offset, false, relativeUnit);
+        super(name, abbreviation, unitSystem, scaleFactor, offset, relativeUnit);
     }
 
     /** {@inheritDoc} */

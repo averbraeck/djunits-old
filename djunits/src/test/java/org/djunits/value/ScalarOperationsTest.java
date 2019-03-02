@@ -64,7 +64,6 @@ public class ScalarOperationsTest
      * @throws IllegalArgumentException on reflection error
      * @throws SecurityException on reflection error
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void scalarOperationsTest() throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, SecurityException, IllegalArgumentException, ClassNotFoundException
