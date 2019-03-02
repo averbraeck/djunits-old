@@ -1,7 +1,8 @@
 package org.djunits.value.vdouble.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.unit.*;
-import org.djunits.value.vdouble.scalar.Acceleration;
 
 /**
  * Easy access methods for the %Type% DoubleScalar, which is relative by definition. Instead of:
