@@ -1,5 +1,7 @@
 package org.djunits.value.vfloat.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.value.Relative;
 import org.djunits.unit.*;
 
@@ -178,27 +180,27 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
         {
             throw new IllegalArgumentException("Error parsing Float%Type% -- null or empty argument");
         }
-        int index = text.length() - 1;
-        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
         {
-            index--;
-        }
-        try
-        {
-            String unitString = text.substring(index + 1).trim();
-            String valueString = text.substring(0, index + 1).trim();
-            for (%Type%Unit unit : Unit.getUnits(%Type%Unit.class))
+            int index = matcher.end();
+            try
             {
-                if (unitString.equals(unit.getAbbreviation()))
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                for (%Type%Unit unit : Unit.getUnits(%Type%Unit.class))
                 {
-                    float f = Float.parseFloat(valueString);
-                    return new Float%Type%(f, unit);
+                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
+                    {
+                        float f = Float.parseFloat(valueString);
+                        return new Float%Type%(f, unit);
+                    }
                 }
             }
-        }
-        catch (Exception exception)
-        {
-            throw new IllegalArgumentException("Error parsing Float%Type% from " + text, exception);
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing Float%Type% from " + text, exception);
+            }
         }
         throw new IllegalArgumentException("Error parsing Float%Type% from " + text);
     }
