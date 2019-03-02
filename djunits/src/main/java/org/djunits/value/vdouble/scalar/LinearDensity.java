@@ -1,5 +1,7 @@
 package org.djunits.value.vdouble.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.ForceUnit;
 import org.djunits.unit.FrequencyUnit;
@@ -180,27 +182,27 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
         {
             throw new IllegalArgumentException("Error parsing LinearDensity -- null or empty argument");
         }
-        int index = text.length() - 1;
-        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
         {
-            index--;
-        }
-        try
-        {
-            String unitString = text.substring(index + 1).trim();
-            String valueString = text.substring(0, index + 1).trim();
-            for (LinearDensityUnit unit : Unit.getUnits(LinearDensityUnit.class))
+            int index = matcher.end();
+            try
             {
-                if (unitString.equals(unit.getAbbreviation()))
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                for (LinearDensityUnit unit : Unit.getUnits(LinearDensityUnit.class))
                 {
-                    double d = Double.parseDouble(valueString);
-                    return new LinearDensity(d, unit);
+                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
+                    {
+                        double d = Double.parseDouble(valueString);
+                        return new LinearDensity(d, unit);
+                    }
                 }
             }
-        }
-        catch (Exception exception)
-        {
-            throw new IllegalArgumentException("Error parsing LinearDensity from " + text, exception);
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing LinearDensity from " + text, exception);
+            }
         }
         throw new IllegalArgumentException("Error parsing LinearDensity from " + text);
     }

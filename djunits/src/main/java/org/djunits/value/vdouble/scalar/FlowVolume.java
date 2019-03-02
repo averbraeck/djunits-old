@@ -1,5 +1,7 @@
 package org.djunits.value.vdouble.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.FlowVolumeUnit;
@@ -180,27 +182,27 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
         {
             throw new IllegalArgumentException("Error parsing FlowVolume -- null or empty argument");
         }
-        int index = text.length() - 1;
-        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
         {
-            index--;
-        }
-        try
-        {
-            String unitString = text.substring(index + 1).trim();
-            String valueString = text.substring(0, index + 1).trim();
-            for (FlowVolumeUnit unit : Unit.getUnits(FlowVolumeUnit.class))
+            int index = matcher.end();
+            try
             {
-                if (unitString.equals(unit.getAbbreviation()))
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                for (FlowVolumeUnit unit : Unit.getUnits(FlowVolumeUnit.class))
                 {
-                    double d = Double.parseDouble(valueString);
-                    return new FlowVolume(d, unit);
+                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
+                    {
+                        double d = Double.parseDouble(valueString);
+                        return new FlowVolume(d, unit);
+                    }
                 }
             }
-        }
-        catch (Exception exception)
-        {
-            throw new IllegalArgumentException("Error parsing FlowVolume from " + text, exception);
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing FlowVolume from " + text, exception);
+            }
         }
         throw new IllegalArgumentException("Error parsing FlowVolume from " + text);
     }

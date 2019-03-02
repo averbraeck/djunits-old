@@ -1,5 +1,7 @@
 package org.djunits.value.vdouble.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.unit.AngleUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.DirectionUnit;
@@ -200,27 +202,27 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
         {
             throw new IllegalArgumentException("Error parsing Angle -- null or empty argument");
         }
-        int index = text.length() - 1;
-        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
         {
-            index--;
-        }
-        try
-        {
-            String unitString = text.substring(index + 1).trim();
-            String valueString = text.substring(0, index + 1).trim();
-            for (AngleUnit unit : Unit.getUnits(AngleUnit.class))
+            int index = matcher.end();
+            try
             {
-                if (unitString.equals(unit.getAbbreviation()))
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                for (AngleUnit unit : Unit.getUnits(AngleUnit.class))
                 {
-                    double d = Double.parseDouble(valueString);
-                    return new Angle(d, unit);
+                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
+                    {
+                        double d = Double.parseDouble(valueString);
+                        return new Angle(d, unit);
+                    }
                 }
             }
-        }
-        catch (Exception exception)
-        {
-            throw new IllegalArgumentException("Error parsing Angle from " + text, exception);
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing Angle from " + text, exception);
+            }
         }
         throw new IllegalArgumentException("Error parsing Angle from " + text);
     }

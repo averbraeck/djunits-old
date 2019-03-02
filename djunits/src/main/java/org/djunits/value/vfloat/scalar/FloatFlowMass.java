@@ -1,5 +1,7 @@
 package org.djunits.value.vfloat.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.FlowMassUnit;
 import org.djunits.unit.ForceUnit;
@@ -189,27 +191,27 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
         {
             throw new IllegalArgumentException("Error parsing FloatFlowMass -- null or empty argument");
         }
-        int index = text.length() - 1;
-        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
         {
-            index--;
-        }
-        try
-        {
-            String unitString = text.substring(index + 1).trim();
-            String valueString = text.substring(0, index + 1).trim();
-            for (FlowMassUnit unit : Unit.getUnits(FlowMassUnit.class))
+            int index = matcher.end();
+            try
             {
-                if (unitString.equals(unit.getAbbreviation()))
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                for (FlowMassUnit unit : Unit.getUnits(FlowMassUnit.class))
                 {
-                    float f = Float.parseFloat(valueString);
-                    return new FloatFlowMass(f, unit);
+                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
+                    {
+                        float f = Float.parseFloat(valueString);
+                        return new FloatFlowMass(f, unit);
+                    }
                 }
             }
-        }
-        catch (Exception exception)
-        {
-            throw new IllegalArgumentException("Error parsing FloatFlowMass from " + text, exception);
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing FloatFlowMass from " + text, exception);
+            }
         }
         throw new IllegalArgumentException("Error parsing FloatFlowMass from " + text);
     }

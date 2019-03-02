@@ -1,5 +1,7 @@
 package org.djunits.value.vfloat.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.FlowVolumeUnit;
@@ -192,27 +194,27 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
         {
             throw new IllegalArgumentException("Error parsing FloatArea -- null or empty argument");
         }
-        int index = text.length() - 1;
-        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
         {
-            index--;
-        }
-        try
-        {
-            String unitString = text.substring(index + 1).trim();
-            String valueString = text.substring(0, index + 1).trim();
-            for (AreaUnit unit : Unit.getUnits(AreaUnit.class))
+            int index = matcher.end();
+            try
             {
-                if (unitString.equals(unit.getAbbreviation()))
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                for (AreaUnit unit : Unit.getUnits(AreaUnit.class))
                 {
-                    float f = Float.parseFloat(valueString);
-                    return new FloatArea(f, unit);
+                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
+                    {
+                        float f = Float.parseFloat(valueString);
+                        return new FloatArea(f, unit);
+                    }
                 }
             }
-        }
-        catch (Exception exception)
-        {
-            throw new IllegalArgumentException("Error parsing FloatArea from " + text, exception);
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing FloatArea from " + text, exception);
+            }
         }
         throw new IllegalArgumentException("Error parsing FloatArea from " + text);
     }

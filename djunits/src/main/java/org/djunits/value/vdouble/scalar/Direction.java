@@ -1,5 +1,7 @@
 package org.djunits.value.vdouble.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.unit.AngleUnit;
 import org.djunits.unit.DirectionUnit;
 import org.djunits.unit.Unit;
@@ -168,27 +170,27 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
         {
             throw new IllegalArgumentException("Error parsing Direction -- null or empty argument");
         }
-        int index = text.length() - 1;
-        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
         {
-            index--;
-        }
-        try
-        {
-            String unitString = text.substring(index + 1).trim();
-            String valueString = text.substring(0, index + 1).trim();
-            for (DirectionUnit unit : Unit.getUnits(DirectionUnit.class))
+            int index = matcher.end();
+            try
             {
-                if (unitString.equals(unit.getAbbreviation()))
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                for (DirectionUnit unit : Unit.getUnits(DirectionUnit.class))
                 {
-                    double d = Double.parseDouble(valueString);
-                    return new Direction(d, unit);
+                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
+                    {
+                        double d = Double.parseDouble(valueString);
+                        return new Direction(d, unit);
+                    }
                 }
             }
-        }
-        catch (Exception exception)
-        {
-            throw new IllegalArgumentException("Error parsing Direction from " + text, exception);
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing Direction from " + text, exception);
+            }
         }
         throw new IllegalArgumentException("Error parsing Direction from " + text);
     }

@@ -84,22 +84,11 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     /** the cached hashcode. */
     private final int cachedHashCode;
 
-    /** Localization information. */
-    private static Localization localization;
-
     /** The default locale. */
-    private static final Localization DEFAULT_LOCALIZATION = new Localization("localeunit");
+    private static Localization localization = new Localization("localeunit");
 
     /** The cached default locale information. */
     private String[] cachedDefaultLocaleInfo;
-
-    /**
-     * Make sure there is a default locale for e.g., a standard XML representation of the unit names and abbreviations.
-     */
-    static
-    {
-        localization = DEFAULT_LOCALIZATION;
-    }
 
     /**
      * Force all units to be loaded so we can use static lookup functions for the standard units.
@@ -133,7 +122,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         this.abbreviationKey = abbreviationKey;
         this.name = null;
         this.abbreviation = null;
-        this.cachedDefaultLocaleInfo = DEFAULT_LOCALIZATION.getString(this.abbreviationKey).split("\\|");
+        this.cachedDefaultLocaleInfo = localization.getDefaultString(this.abbreviationKey).split("\\|");
         this.unitSystem = unitSystem;
         this.cachedHashCode = generateHashCode();
         try
@@ -161,7 +150,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         this.abbreviationKey = abbreviationKey;
         this.name = null;
         this.abbreviation = null;
-        this.cachedDefaultLocaleInfo = DEFAULT_LOCALIZATION.getString(this.abbreviationKey).split("\\|");
+        this.cachedDefaultLocaleInfo = localization.getDefaultString(this.abbreviationKey).split("\\|");
         this.unitSystem = unitSystem;
         this.cachedHashCode = generateHashCode();
         try
@@ -343,7 +332,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         {
             return this.name;
         }
-        if (localization.equals(DEFAULT_LOCALIZATION))
+        if (localization.isDefault())
         {
             return getDefaultLocaleName();
         }
@@ -364,6 +353,10 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      */
     public final String getDefaultLocaleName()
     {
+        if (this.name != null)
+        {
+            return this.name;
+        }
         if (this.cachedDefaultLocaleInfo.length >= 2)
         {
             return this.cachedDefaultLocaleInfo[1].trim();
@@ -384,7 +377,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         {
             return this.abbreviation;
         }
-        if (localization.equals(DEFAULT_LOCALIZATION))
+        if (localization.isDefault())
         {
             return getDefaultLocaleAbbreviation();
         }
@@ -401,6 +394,10 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      */
     public final String getDefaultLocaleAbbreviation()
     {
+        if (this.abbreviation != null)
+        {
+            return this.abbreviation;
+        }
         if (this.cachedDefaultLocaleInfo.length >= 1)
         {
             return this.cachedDefaultLocaleInfo[0].trim();
@@ -428,7 +425,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         {
             return Arrays.asList(new String[] {this.abbreviation});
         }
-        if (localization.equals(DEFAULT_LOCALIZATION))
+        if (localization.isDefault())
         {
             return getDefaultLocaleTextualRepresentations();
         }
@@ -456,6 +453,10 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      */
     public final List<String> getDefaultLocaleTextualRepresentations()
     {
+        if (this.abbreviation != null)
+        {
+            return Arrays.asList(new String[] {this.abbreviation});
+        }
         if (this.cachedDefaultLocaleInfo.length >= 3)
         {
             List<String> textList = new ArrayList<>();
@@ -483,7 +484,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         {
             return this.abbreviation;
         }
-        if (localization.equals(DEFAULT_LOCALIZATION))
+        if (localization.isDefault())
         {
             return getDefaultLocaleTextualRepresentation();
         }
@@ -506,6 +507,10 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      */
     public final String getDefaultLocaleTextualRepresentation()
     {
+        if (this.abbreviation != null)
+        {
+            return this.abbreviation;
+        }
         if (this.cachedDefaultLocaleInfo.length >= 3)
         {
             return this.cachedDefaultLocaleInfo[2].trim();
