@@ -1,14 +1,10 @@
 package org.djunits.locale;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
-import org.djunits.locale.DefaultLocale;
-import org.djunits.unit.AbsoluteTemperatureUnit;
-import org.djunits.unit.unitsystem.UnitSystem;
-import org.junit.Before;
+import org.djunits.unit.DurationUnit;
 import org.junit.Test;
 
 /**
@@ -22,22 +18,29 @@ import org.junit.Test;
 public class LocaleTest
 {
     /**
-     * Set the locale to "en" before the tests, so we know what default texts should be retrieved from the resources.
-     */
-    @Before
-    public final void setup()
-    {
-        DefaultLocale.setLocale(new Locale("en"));
-    }
-    
-    /**
-     * Verify the result of some get*Key methods.
+     * Verify the result of localization. The defaults should stay in English, while the 'normal' abbreviations and names should
+     * be translated.
      */
     @Test
-    public final void keys()
+    public final void testLocalization()
     {
-        //
+        DefaultLocale.setLocale(new Locale("en"));
+        assertEquals("h", DurationUnit.HOUR.getAbbreviation());
+        assertEquals("h", DurationUnit.HOUR.getDefaultLocaleAbbreviation());
+        assertEquals("hour", DurationUnit.HOUR.getName());
+        assertEquals("hour", DurationUnit.HOUR.getDefaultLocaleName());
+
+        DefaultLocale.setLocale(new Locale("nl"));
+        assertEquals("u", DurationUnit.HOUR.getAbbreviation());
+        assertEquals("h", DurationUnit.HOUR.getDefaultLocaleAbbreviation());
+        assertEquals("uur", DurationUnit.HOUR.getName());
+        assertEquals("hour", DurationUnit.HOUR.getDefaultLocaleName());
+
+        DefaultLocale.setLocale(new Locale("en"));
+        assertEquals("h", DurationUnit.HOUR.getAbbreviation());
+        assertEquals("h", DurationUnit.HOUR.getDefaultLocaleAbbreviation());
+        assertEquals("hour", DurationUnit.HOUR.getName());
+        assertEquals("hour", DurationUnit.HOUR.getDefaultLocaleName());
     }
 
 }
-

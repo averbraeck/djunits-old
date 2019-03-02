@@ -1,5 +1,7 @@
 package org.djunits.value.vfloat.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.unit.AccelerationUnit;
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DimensionlessUnit;
@@ -193,27 +195,27 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
         {
             throw new IllegalArgumentException("Error parsing FloatForce -- null or empty argument");
         }
-        int index = text.length() - 1;
-        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
         {
-            index--;
-        }
-        try
-        {
-            String unitString = text.substring(index + 1).trim();
-            String valueString = text.substring(0, index + 1).trim();
-            for (ForceUnit unit : Unit.getUnits(ForceUnit.class))
+            int index = matcher.end();
+            try
             {
-                if (unitString.equals(unit.getAbbreviation()))
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                for (ForceUnit unit : Unit.getUnits(ForceUnit.class))
                 {
-                    float f = Float.parseFloat(valueString);
-                    return new FloatForce(f, unit);
+                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
+                    {
+                        float f = Float.parseFloat(valueString);
+                        return new FloatForce(f, unit);
+                    }
                 }
             }
-        }
-        catch (Exception exception)
-        {
-            throw new IllegalArgumentException("Error parsing FloatForce from " + text, exception);
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing FloatForce from " + text, exception);
+            }
         }
         throw new IllegalArgumentException("Error parsing FloatForce from " + text);
     }

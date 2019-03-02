@@ -1,6 +1,7 @@
 package org.djunits.value;
 
 import java.io.Serializable;
+import java.util.regex.Pattern;
 
 import org.djunits.unit.Unit;
 
@@ -25,7 +26,17 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
 
     /** The display unit of the Scalar. */
     private U unit;
-
+    
+    /** Number pattern regex to be used in valueOf() method. */
+    protected static final Pattern NUMBER_PATTERN; 
+    
+    /** Compile number pattern regex to be used in valueOf() method of derived classes. */
+    static
+    {
+        String regex = "[+-]?\\d+\\.?\\d*([Ee][+-]?\\d+)?";
+        NUMBER_PATTERN = Pattern.compile(regex);
+    }
+    
     /**
      * Construct a new Scalar.
      * @param unit U; the unit of the new Scalar
@@ -90,7 +101,8 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
 
     /**
      * Returns a String representation of the scalar value that can be parsed back into its scalar type. The String
-     * representation is the double value in the unit, followed by the official abbreviation of the unit without spaces.
+     * representation is the double value in the unit, followed by the official abbreviation of the unit without spaces, in the
+     * current locale.
      * @param value Scalar&lt;U&gt;; the value to parse into a String
      * @param <U> the unit type for the scalar
      * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
@@ -98,6 +110,45 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
     public static <U extends Unit<U>> String stringOf(final Scalar<U> value)
     {
         return value.expressAsSpecifiedUnit(value.doubleValue()) + value.getUnit().getAbbreviation();
+    }
+
+    /**
+     * Returns a String representation of the scalar value that can be parsed back into its scalar type. The String
+     * representation is the double value in the unit, followed by the official abbreviation of the unit without spaces, in the
+     * English locale.
+     * @param value Scalar&lt;U&gt;; the value to parse into a String
+     * @param <U> the unit type for the scalar
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     */
+    public static <U extends Unit<U>> String stringOfDefaultLocale(final Scalar<U> value)
+    {
+        return value.expressAsSpecifiedUnit(value.doubleValue()) + value.getUnit().getDefaultLocaleAbbreviation();
+    }
+
+    /**
+     * Returns a String representation of the scalar value that can be parsed back into its scalar type. The String
+     * representation is the double value in the unit, followed by the default textual abbreviation of the unit without spaces,
+     * in the current locale.
+     * @param value Scalar&lt;U&gt;; the value to parse into a String
+     * @param <U> the unit type for the scalar
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     */
+    public static <U extends Unit<U>> String textualStringOf(final Scalar<U> value)
+    {
+        return value.expressAsSpecifiedUnit(value.doubleValue()) + value.getUnit().getDefaultTextualRepresentation();
+    }
+
+    /**
+     * Returns a String representation of the scalar value that can be parsed back into its scalar type. The String
+     * representation is the double value in the unit, followed by the default textual abbreviation of the unit without spaces,
+     * in the English locale.
+     * @param value Scalar&lt;U&gt;; the value to parse into a String
+     * @param <U> the unit type for the scalar
+     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     */
+    public static <U extends Unit<U>> String textualStringOfDefaultLocale(final Scalar<U> value)
+    {
+        return value.expressAsSpecifiedUnit(value.doubleValue()) + value.getUnit().getDefaultLocaleTextualRepresentation();
     }
 
     // No hashcode or equals -- has to be implemented on a deeper level

@@ -1,5 +1,7 @@
 package org.djunits.value.vdouble.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.unit.DurationUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.unit.Unit;
@@ -174,27 +176,27 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
         {
             throw new IllegalArgumentException("Error parsing Time -- null or empty argument");
         }
-        int index = text.length() - 1;
-        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
         {
-            index--;
-        }
-        try
-        {
-            String unitString = text.substring(index + 1).trim();
-            String valueString = text.substring(0, index + 1).trim();
-            for (TimeUnit unit : Unit.getUnits(TimeUnit.class))
+            int index = matcher.end();
+            try
             {
-                if (unitString.equals(unit.getAbbreviation()))
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                for (TimeUnit unit : Unit.getUnits(TimeUnit.class))
                 {
-                    double d = Double.parseDouble(valueString);
-                    return new Time(d, unit);
+                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
+                    {
+                        double d = Double.parseDouble(valueString);
+                        return new Time(d, unit);
+                    }
                 }
             }
-        }
-        catch (Exception exception)
-        {
-            throw new IllegalArgumentException("Error parsing Time from " + text, exception);
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing Time from " + text, exception);
+            }
         }
         throw new IllegalArgumentException("Error parsing Time from " + text);
     }

@@ -1,5 +1,7 @@
 package org.djunits.value.vfloat.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.unit.AbsoluteTemperatureUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.Unit;
@@ -25,7 +27,7 @@ import org.djunits.unit.Unit;
  * All rights reserved. <br>
  * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
- * $LastChangedDate: 2019-01-18 00:35:01 +0100 (Fri, 18 Jan 2019) $, @version $Revision: 324 $, by $Author: averbraeck $,
+ * $LastChangedDate: 2019-02-27 23:44:43 +0100 (Wed, 27 Feb 2019) $, @version $Revision: 333 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
@@ -184,27 +186,27 @@ public class FloatAbsoluteTemperature
         {
             throw new IllegalArgumentException("Error parsing FloatAbsoluteTemperature -- null or empty argument");
         }
-        int index = text.length() - 1;
-        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
         {
-            index--;
-        }
-        try
-        {
-            String unitString = text.substring(index + 1).trim();
-            String valueString = text.substring(0, index + 1).trim();
-            for (AbsoluteTemperatureUnit unit : Unit.getUnits(AbsoluteTemperatureUnit.class))
+            int index = matcher.end();
+            try
             {
-                if (unitString.equals(unit.getAbbreviation()))
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                for (AbsoluteTemperatureUnit unit : Unit.getUnits(AbsoluteTemperatureUnit.class))
                 {
-                    float f = Float.parseFloat(valueString);
-                    return new FloatAbsoluteTemperature(f, unit);
+                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
+                    {
+                        float f = Float.parseFloat(valueString);
+                        return new FloatAbsoluteTemperature(f, unit);
+                    }
                 }
             }
-        }
-        catch (Exception exception)
-        {
-            throw new IllegalArgumentException("Error parsing FloatAbsoluteTemperature from " + text, exception);
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing FloatAbsoluteTemperature from " + text, exception);
+            }
         }
         throw new IllegalArgumentException("Error parsing FloatAbsoluteTemperature from " + text);
     }

@@ -1,5 +1,7 @@
 package org.djunits.value.vdouble.scalar;
 
+import java.util.regex.Matcher;
+
 import org.djunits.unit.AccelerationUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.ForceUnit;
@@ -179,27 +181,27 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
         {
             throw new IllegalArgumentException("Error parsing Acceleration -- null or empty argument");
         }
-        int index = text.length() - 1;
-        while ("0123456789.".indexOf(text.charAt(index)) == -1 && index > 0)
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
         {
-            index--;
-        }
-        try
-        {
-            String unitString = text.substring(index + 1).trim();
-            String valueString = text.substring(0, index + 1).trim();
-            for (AccelerationUnit unit : Unit.getUnits(AccelerationUnit.class))
+            int index = matcher.end();
+            try
             {
-                if (unitString.equals(unit.getAbbreviation()))
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                for (AccelerationUnit unit : Unit.getUnits(AccelerationUnit.class))
                 {
-                    double d = Double.parseDouble(valueString);
-                    return new Acceleration(d, unit);
+                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
+                    {
+                        double d = Double.parseDouble(valueString);
+                        return new Acceleration(d, unit);
+                    }
                 }
             }
-        }
-        catch (Exception exception)
-        {
-            throw new IllegalArgumentException("Error parsing Acceleration from " + text, exception);
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing Acceleration from " + text, exception);
+            }
         }
         throw new IllegalArgumentException("Error parsing Acceleration from " + text);
     }
