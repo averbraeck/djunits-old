@@ -5,7 +5,7 @@
 <meta name="Author" content="Peter Knoppers, p.knoppers@tudelft.nl" />
 <meta name="Author" content="Alexander Verbraeck, a.verbraeck@tudelft.nl" />
 <meta name="Description" content="Delft Java Unit System" />
-<meta name="Copyright" content="Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved." />
+<meta name="Copyright" content="Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved." />
 <meta name="Language" content="en" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Language" content="en" />
@@ -135,7 +135,8 @@ public static Jerk interpolate(final Jerk zero,
 
     <h2>Building a unit with absolute and relative subclasses</h2>
     <p>
-      Most classes are just relative, and don't have an absolute version. <br />&nbsp;
+      Most classes are just relative, and don't have an absolute version. See the Length and Position classes, or the
+      Temperature and AbsoluteTemperature classes for examples how absolute and relative units are linked to each other. <br />&nbsp;
     </p>
   </div>
 

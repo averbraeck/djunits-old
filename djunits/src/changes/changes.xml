@@ -2,7 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="3.01.00" date="2019-03-02" description="Unit construction and localizations changed">
+    <release version="3.01.00" date="2019-03-02" description="Unit constructor and localizations changed">
+      <action dev="averbraeck" type="update">
+        Website information has incorporated the Unit constructor changes.
+      </action>
       <action dev="averbraeck" type="add">
         The properties file for the localizations file has changed. The abbreviation key now finds both
         the abbreviation and the name for a localized unit. In addition, zero or more text-only 
