@@ -5,7 +5,7 @@
 <meta name="Author" content="Peter Knoppers, p.knoppers@tudelft.nl" />
 <meta name="Author" content="Alexander Verbraeck, a.verbraeck@tudelft.nl" />
 <meta name="Description" content="Delft Java Unit System" />
-<meta name="Copyright" content="Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved." />
+<meta name="Copyright" content="Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved." />
 <meta name="Language" content="en" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Language" content="en" />
@@ -120,7 +120,7 @@ public JerkUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, fi
          final String abbreviation, final UnitSystem unitSystem)
 {
   super(name, abbreviation, unitSystem, SI, lengthUnit.getConversionFactorToStandardUnit()
-          / Math.pow(durationUnit.getConversionFactorToStandardUnit(), 3.0), false);
+          / Math.pow(durationUnit.getConversionFactorToStandardUnit(), 3.0));
   this.lengthUnit = lengthUnit;
   this.durationUnit = durationUnit;
 }
@@ -128,17 +128,17 @@ public JerkUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, fi
  public JerkUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
         final JerkUnit referenceUnit, final double conversionFactorToReferenceUnit)
 {
-  super(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit,
-	      false);
+  super(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit);
   this.lengthUnit = referenceUnit.getLengthUnit();
   this.durationUnit = referenceUnit.getDurationUnit();
 }
 </pre>
 
     <p>
-      The "false" as the last argument to the super-constructor of the Unit indicates that this is not a standard unit. This means it is not localized, nor
-      looked up in the "localeunit.properties" file. Instead, the strings given as "name" and "abbreviation" are used when printing the unit. In case you <i>add</i>
-      the units to the localization files, use the <i>key</i> to the items in the localization file as name and abbreviation. The Unit class will then look up
+      The fact a name and abbreviation are given to the super-constructor of the Unit indicates that this is not a standard unit. 
+      This means it is not localized, nor looked up in the "localeunit.properties" file. Instead, the strings given as "name" and 
+      "abbreviation" are used when printing the unit. In case you <i>add</i> the units to the localization files, use the <i>key</i> 
+      to the items in the localization file as the abbreviation (and don't provide a name). The Unit class will then look up
       the (localized) strings for the name and abbreviation in the corresponding language locale files.
     </p>
 

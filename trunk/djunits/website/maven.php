@@ -5,7 +5,7 @@
 <meta name="Author" content="Peter Knoppers, p.knoppers@tudelft.nl" />
 <meta name="Author" content="Alexander Verbraeck, a.verbraeck@tudelft.nl" />
 <meta name="Description" content="Delft Java Unit System" />
-<meta name="Copyright" content="Copyright (c) 2015-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved." />
+<meta name="Copyright" content="Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved." />
 <meta name="Language" content="en" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Language" content="en" />
@@ -38,12 +38,12 @@
   &lt;dependency&gt;
     &lt;groupId&gt;org.djunits&lt;/groupId&gt;
     &lt;artifactId&gt;djunits&lt;/artifactId&gt;
-    &lt;version&gt;3.00.07&lt;/version&gt;
+    &lt;version&gt;3.01.00&lt;/version&gt;
   &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </pre>
 
-    <p>Of course, the version number (3.00.07 in the above example) needs to be replaced with the version that one wants to include in the project.</p>
+    <p>Of course, the version number (3.01.07 in the above example) needs to be replaced with the version that one wants to include in the project.</p>
     <p>Right now, the DJUNITS files are kept on a server at TU Delft, and are not yet made available on Maven Central. Therefore, the repository location
       has to be specified separately in the Maven POM-file:</p>
 
