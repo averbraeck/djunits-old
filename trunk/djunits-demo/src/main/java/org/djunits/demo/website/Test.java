@@ -1,10 +1,16 @@
 package org.djunits.demo.website;
 
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.LengthUnit;
+import org.djunits.unit.SpeedUnit;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.matrix.MutableLengthMatrix;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
+import org.djunits.value.vdouble.scalar.Duration;
+import org.djunits.value.vdouble.scalar.Length;
+import org.djunits.value.vdouble.scalar.Speed;
 import org.djunits.value.vdouble.vector.DoubleVector;
 
 /**
@@ -20,6 +26,16 @@ import org.djunits.value.vdouble.vector.DoubleVector;
  */
 public final class Test
 {
+    /** Furlong example. */
+    public static final LengthUnit FURLONG = new LengthUnit("Furlong", "fr", UnitSystem.IMPERIAL, LengthUnit.FOOT, 660);
+
+    /** Fortnight example. */
+    public static final DurationUnit FORTNIGHT = new DurationUnit("Fortnight", "fn", UnitSystem.OTHER, DurationUnit.DAY, 14);
+
+    /** fr/fn example. */
+    public static final SpeedUnit FURLONGS_PER_FORTNIGHT =
+            new SpeedUnit(FURLONG, FORTNIGHT, "Furlongs per Fortnight", "fr/fn", UnitSystem.OTHER);
+
     /** */
     private Test()
     {
@@ -32,6 +48,13 @@ public final class Test
      */
     public static void main(final String[] args) throws ValueException
     {
+        Length fr1000 = new Length(1000.0, FURLONG);
+        Duration twoWeeks = new Duration(1.0, FORTNIGHT);
+        Speed speed = fr1000.divideBy(twoWeeks);
+        System.out.println(speed);
+        System.out.println(speed.toString(FURLONGS_PER_FORTNIGHT));
+        System.out.println();
+
         DoubleScalar.Rel<JerkUnit> jerk1 = new DoubleScalar.Rel<>(1.2, JerkUnit.SI);
         System.out.println("jerk1 = new DoubleScalar.Rel<>(1.2, JerkUnit.SI) : " + jerk1);
         DoubleScalar.Rel<JerkUnit> jerk2 = jerk1.multiplyBy(2.0);
