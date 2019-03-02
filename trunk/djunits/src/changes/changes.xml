@@ -3,6 +3,10 @@
   <body>
 
     <release version="3.01.00" date="2019-03-02" description="Unit constructor and localizations changed">
+      <action dev="averbraeck" type="add">
+        In the djunits-generator project, the class GenerateXSD generates a file called 'djunits.xsd' with 
+        all units in /generated-code/resources, which can be used for text-based XML parsing of units.
+      </action>
       <action dev="averbraeck" type="update">
         Website information has incorporated the Unit constructor changes.
       </action>
