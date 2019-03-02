@@ -39,34 +39,25 @@ public class DirectionUnit extends AbsoluteLinearUnit<DirectionUnit, AngleUnit>
 
     static
     {
-        BASE = new DirectionUnit("DirectionUnit.base", "DirectionUnit.base", OTHER, 1.0, 0.0, false, AngleUnit.RADIAN);
-        NORTH_RADIAN = new DirectionUnit("DirectionUnit.North(rad)", "DirectionUnit.North(radians)", OTHER, 1.0, 0.0, false,
-                AngleUnit.RADIAN);
-        NORTH_DEGREE = new DirectionUnit("DirectionUnit.North(deg)", "DirectionUnit.North(degrees)", OTHER, Math.PI / 180.0,
-                0.0, false, AngleUnit.RADIAN);
-        EAST_RADIAN = new DirectionUnit("DirectionUnit.East(rad)", "DirectionUnit.East(radians)", OTHER, 1.0, -Math.PI / 2.0,
-                false, AngleUnit.RADIAN);
-        EAST_DEGREE = new DirectionUnit("DirectionUnit.East(deg)", "DirectionUnit.East(degrees)", OTHER, Math.PI / 180.0, -90.0,
-                false, AngleUnit.RADIAN);
+        NORTH_RADIAN = new DirectionUnit("DirectionUnit.North(rad)", OTHER, 1.0, 0.0, AngleUnit.RADIAN);
+        BASE = NORTH_RADIAN;
+        NORTH_DEGREE = new DirectionUnit("DirectionUnit.North(deg)", OTHER, Math.PI / 180.0, 0.0, AngleUnit.RADIAN);
+        EAST_RADIAN = new DirectionUnit("DirectionUnit.East(rad)", OTHER, 1.0, -Math.PI / 2.0, AngleUnit.RADIAN);
+        EAST_DEGREE = new DirectionUnit("DirectionUnit.East(deg)", OTHER, Math.PI / 180.0, -90.0, AngleUnit.RADIAN);
     }
 
     /**
      * Build a DirectionUnit with a scale factor and offset to the base DirectionUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param scaleFactor double; multiply a value in this unit by the factor to convert to the given reference unit
      * @param offset double; the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      * @param relativeUnit AngleUnit; the corresponding relative unit belonging to this absolute unit
      */
-    private DirectionUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final double scaleFactor, final double offset, final boolean standardUnit, final AngleUnit relativeUnit)
+    private DirectionUnit(final String abbreviationKey, final UnitSystem unitSystem, final double scaleFactor,
+            final double offset, final AngleUnit relativeUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, scaleFactor, offset, standardUnit, relativeUnit);
+        super(abbreviationKey, unitSystem, scaleFactor, offset, relativeUnit);
     }
 
     /**
@@ -81,7 +72,7 @@ public class DirectionUnit extends AbsoluteLinearUnit<DirectionUnit, AngleUnit>
     public DirectionUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final double scaleFactor,
             final double offset, final AngleUnit relativeUnit)
     {
-        this(name, abbreviation, unitSystem, scaleFactor, offset, false, relativeUnit);
+        super(name, abbreviation, unitSystem, scaleFactor, offset, relativeUnit);
     }
 
     /** {@inheritDoc} */

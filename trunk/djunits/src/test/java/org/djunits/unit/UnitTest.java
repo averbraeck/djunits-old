@@ -19,14 +19,9 @@ public class UnitTest
     /**
      * Test the lookupUnitWithSICoefficients method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void lookupUnitWithSICoefficients()
     {
-        // System.out.println(Unit.lookupUnitWithSICoefficients(ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString())
-        // .toString());
-        // System.out.println(ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString());
-        // System.out.println(ElectricalPotentialUnit.VOLT.getSICoefficients().toString());
         assertTrue("ABVOLT is expressed in Volt",
                 Unit.lookupUnitWithSICoefficients(ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString())
                         .contains(ElectricalPotentialUnit.VOLT));
@@ -54,11 +49,10 @@ public class UnitTest
     /**
      * Check objects returned by getAllUnitsOfType.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void getAllUnitsOfType()
     {
-        Unit<?>[] baseUnits = { MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, DurationUnit.SECOND,
+        Unit<?>[] baseUnits = {MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, DurationUnit.SECOND,
                 TemperatureUnit.KELVIN, /*
                                          * LuminousIntencity . CANDELA , ? ? ? . mol
                                          */ };
@@ -98,9 +92,9 @@ public class UnitTest
         assertEquals("message should be our message", message, e.getMessage());
         assertEquals("cause should not be our cause", cause, e.getCause());
         assertEquals("cause description should be our cause string", causeString, e.getCause().getMessage());
-        for (boolean enableSuppression : new boolean[] { true, false })
+        for (boolean enableSuppression : new boolean[] {true, false})
         {
-            for (boolean writableStackTrace : new boolean[] { true, false })
+            for (boolean writableStackTrace : new boolean[] {true, false})
             {
                 e = new UnitException(message, cause, enableSuppression, writableStackTrace);
                 assertTrue("Exception should not be null", null != e);

@@ -37,30 +37,22 @@ public class FlowMassUnit extends LinearUnit<FlowMassUnit>
 
     static
     {
-        SI = new FlowMassUnit(MassUnit.KILOGRAM, DurationUnit.SECOND, "FlowMassUnit.kilogram_per_second", "FlowMassUnit.kg/s",
-                SI_DERIVED, true);
+        SI = new FlowMassUnit(MassUnit.KILOGRAM, DurationUnit.SECOND, "FlowMassUnit.kg/s", SI_DERIVED);
         KILOGRAM_PER_SECOND = SI;
-        POUND_PER_SECOND = new FlowMassUnit(MassUnit.POUND, DurationUnit.SECOND, "FlowMassUnit.pound_per_second",
-                "FlowMassUnit.lb/s", IMPERIAL, true);
+        POUND_PER_SECOND = new FlowMassUnit(MassUnit.POUND, DurationUnit.SECOND, "FlowMassUnit.lb/s", IMPERIAL);
     }
 
     /**
      * Create a flow-massunit based on mass and time.
      * @param massUnit MassUnit; the unit of mass for the flow unit, e.g., kilogram
      * @param durationUnit DurationUnit; the unit of time for the flow unit, e.g., second
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private FlowMassUnit(final MassUnit massUnit, final DurationUnit durationUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+    private FlowMassUnit(final MassUnit massUnit, final DurationUnit durationUnit, final String abbreviationKey,
+            final UnitSystem unitSystem)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, KILOGRAM_PER_SECOND,
-                massUnit.getScaleFactor() / durationUnit.getScaleFactor(), standardUnit);
+        super(abbreviationKey, unitSystem, KILOGRAM_PER_SECOND, massUnit.getScaleFactor() / durationUnit.getScaleFactor());
         this.massUnit = massUnit;
         this.durationUnit = durationUnit;
     }
@@ -76,27 +68,23 @@ public class FlowMassUnit extends LinearUnit<FlowMassUnit>
     public FlowMassUnit(final MassUnit massUnit, final DurationUnit durationUnit, final String name, final String abbreviation,
             final UnitSystem unitSystem)
     {
-        this(massUnit, durationUnit, name, abbreviation, unitSystem, false);
+        super(name, abbreviation, unitSystem, KILOGRAM_PER_SECOND, massUnit.getScaleFactor() / durationUnit.getScaleFactor());
+        this.massUnit = massUnit;
+        this.durationUnit = durationUnit;
     }
 
     /**
      * Create a flow-massunit based on another flow-massunit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit FlowMassUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private FlowMassUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final FlowMassUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private FlowMassUnit(final String abbreviationKey, final UnitSystem unitSystem, final FlowMassUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.durationUnit = referenceUnit.getDurationUnit();
     }
@@ -113,7 +101,9 @@ public class FlowMassUnit extends LinearUnit<FlowMassUnit>
     public FlowMassUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final FlowMassUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
+        this.massUnit = referenceUnit.getMassUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**

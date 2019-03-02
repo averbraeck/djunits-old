@@ -74,53 +74,34 @@ public class SpeedUnit extends LinearUnit<SpeedUnit>
 
     static
     {
-        SI = new SpeedUnit(LengthUnit.METER, DurationUnit.SECOND, "SpeedUnit.meter_per_second", "SpeedUnit.m/s", SI_DERIVED,
-                true);
+        SI = new SpeedUnit(LengthUnit.METER, DurationUnit.SECOND, "SpeedUnit.m/s", SI_DERIVED);
         METER_PER_SECOND = SI;
-        METER_PER_HOUR = new SpeedUnit(LengthUnit.METER, DurationUnit.HOUR, "SpeedUnit.meter_per_hour", "SpeedUnit.m/h",
-                SI_DERIVED, true);
-        KM_PER_SECOND = new SpeedUnit(LengthUnit.KILOMETER, DurationUnit.SECOND, "SpeedUnit.kilometer_per_second",
-                "SpeedUnit.km/s", SI_DERIVED, true);
-        KM_PER_HOUR = new SpeedUnit(LengthUnit.KILOMETER, DurationUnit.HOUR, "SpeedUnit.kilometer_per_hour", "SpeedUnit.km/h",
-                SI_DERIVED, true);
-        INCH_PER_SECOND = new SpeedUnit(LengthUnit.INCH, DurationUnit.SECOND, "SpeedUnit.inch_per_second", "SpeedUnit.in/s",
-                IMPERIAL, true);
-        INCH_PER_MINUTE = new SpeedUnit(LengthUnit.INCH, DurationUnit.MINUTE, "SpeedUnit.inch_per_minute", "SpeedUnit.in/min",
-                IMPERIAL, true);
-        INCH_PER_HOUR =
-                new SpeedUnit(LengthUnit.INCH, DurationUnit.HOUR, "SpeedUnit.inch_per_hour", "SpeedUnit.in/h", IMPERIAL, true);
-        FOOT_PER_SECOND = new SpeedUnit(LengthUnit.FOOT, DurationUnit.SECOND, "SpeedUnit.foot_per_second", "SpeedUnit.fps",
-                IMPERIAL, true);
-        FOOT_PER_MINUTE = new SpeedUnit(LengthUnit.FOOT, DurationUnit.MINUTE, "SpeedUnit.foot_per_minute", "SpeedUnit.ft/min",
-                IMPERIAL, true);
-        FOOT_PER_HOUR =
-                new SpeedUnit(LengthUnit.FOOT, DurationUnit.HOUR, "SpeedUnit.foot_per_hour", "SpeedUnit.ft/h", IMPERIAL, true);
-        MILE_PER_SECOND = new SpeedUnit(LengthUnit.MILE, DurationUnit.SECOND, "SpeedUnit.mile_per_second", "SpeedUnit.mi/s",
-                IMPERIAL, true);
-        MILE_PER_MINUTE = new SpeedUnit(LengthUnit.MILE, DurationUnit.MINUTE, "SpeedUnit.mile_per_minute", "SpeedUnit.mi/min",
-                IMPERIAL, true);
-        MILE_PER_HOUR =
-                new SpeedUnit(LengthUnit.MILE, DurationUnit.HOUR, "SpeedUnit.mile_per_hour", "SpeedUnit.mph", IMPERIAL, true);
-        KNOT = new SpeedUnit(LengthUnit.NAUTICAL_MILE, DurationUnit.HOUR, "SpeedUnit.knot", "SpeedUnit.kt", IMPERIAL, true);
+        METER_PER_HOUR = new SpeedUnit(LengthUnit.METER, DurationUnit.HOUR, "SpeedUnit.m/h", SI_DERIVED);
+        KM_PER_SECOND = new SpeedUnit(LengthUnit.KILOMETER, DurationUnit.SECOND, "SpeedUnit.km/s", SI_DERIVED);
+        KM_PER_HOUR = new SpeedUnit(LengthUnit.KILOMETER, DurationUnit.HOUR, "SpeedUnit.km/h", SI_DERIVED);
+        INCH_PER_SECOND = new SpeedUnit(LengthUnit.INCH, DurationUnit.SECOND, "SpeedUnit.in/s", IMPERIAL);
+        INCH_PER_MINUTE = new SpeedUnit(LengthUnit.INCH, DurationUnit.MINUTE, "SpeedUnit.in/min", IMPERIAL);
+        INCH_PER_HOUR = new SpeedUnit(LengthUnit.INCH, DurationUnit.HOUR, "SpeedUnit.in/h", IMPERIAL);
+        FOOT_PER_SECOND = new SpeedUnit(LengthUnit.FOOT, DurationUnit.SECOND, "SpeedUnit.fps", IMPERIAL);
+        FOOT_PER_MINUTE = new SpeedUnit(LengthUnit.FOOT, DurationUnit.MINUTE, "SpeedUnit.ft/min", IMPERIAL);
+        FOOT_PER_HOUR = new SpeedUnit(LengthUnit.FOOT, DurationUnit.HOUR, "SpeedUnit.ft/h", IMPERIAL);
+        MILE_PER_SECOND = new SpeedUnit(LengthUnit.MILE, DurationUnit.SECOND, "SpeedUnit.mi/s", IMPERIAL);
+        MILE_PER_MINUTE = new SpeedUnit(LengthUnit.MILE, DurationUnit.MINUTE, "SpeedUnit.mi/min", IMPERIAL);
+        MILE_PER_HOUR = new SpeedUnit(LengthUnit.MILE, DurationUnit.HOUR, "SpeedUnit.mph", IMPERIAL);
+        KNOT = new SpeedUnit(LengthUnit.NAUTICAL_MILE, DurationUnit.HOUR, "SpeedUnit.kt", IMPERIAL);
     }
 
     /**
      * Build a speed unit from a length unit and a time unit.
      * @param lengthUnit LengthUnit; the unit of length for the speed unit, e.g., meter
      * @param durationUnit DurationUnit; the unit of time for the speed unit, e.g., second
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private SpeedUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+    private SpeedUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, final String abbreviationKey,
+            final UnitSystem unitSystem)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, METER_PER_SECOND,
-                lengthUnit.getScaleFactor() / durationUnit.getScaleFactor(), standardUnit);
+        super(abbreviationKey, unitSystem, METER_PER_SECOND, lengthUnit.getScaleFactor() / durationUnit.getScaleFactor());
         this.lengthUnit = lengthUnit;
         this.durationUnit = durationUnit;
     }
@@ -136,27 +117,23 @@ public class SpeedUnit extends LinearUnit<SpeedUnit>
     public SpeedUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name, final String abbreviation,
             final UnitSystem unitSystem)
     {
-        this(lengthUnit, durationUnit, name, abbreviation, unitSystem, false);
+        super(name, abbreviation, unitSystem, METER_PER_SECOND, lengthUnit.getScaleFactor() / durationUnit.getScaleFactor());
+        this.lengthUnit = lengthUnit;
+        this.durationUnit = durationUnit;
     }
 
     /**
      * Build a SpeedUnit based on another SpeedUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit SpeedUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private SpeedUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final SpeedUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private SpeedUnit(final String abbreviationKey, final UnitSystem unitSystem, final SpeedUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
         this.lengthUnit = referenceUnit.getLengthUnit();
         this.durationUnit = referenceUnit.getDurationUnit();
     }
@@ -173,7 +150,9 @@ public class SpeedUnit extends LinearUnit<SpeedUnit>
     public SpeedUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final SpeedUnit referenceUnit,
             final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
+        this.lengthUnit = referenceUnit.getLengthUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**

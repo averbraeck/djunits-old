@@ -24,7 +24,6 @@ public class DurationUnitTest extends AbstractLinearUnitTest<DurationUnit>
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.
      */
-    @SuppressWarnings("static-method")
     @Before
     public final void setup()
     {
@@ -48,15 +47,15 @@ public class DurationUnitTest extends AbstractLinearUnitTest<DurationUnit>
     {
         checkUnitRatioNameAndAbbreviation(DurationUnit.SECOND, 1, 0.00000001, "second", "s");
         checkUnitRatioNameAndAbbreviation(DurationUnit.HOUR, 3600, 0.0005, "hour", "h");
-        checkUnitRatioNameAndAbbreviation(DurationUnit.DAY, 86400, 0.001, "day", "d");
+        checkUnitRatioNameAndAbbreviation(DurationUnit.DAY, 86400, 0.001, "day", "day");
         // Check two conversions between non-standard units
         assertEquals("one DAY is 24 HOUR", 24, getMultiplicationFactorTo(DurationUnit.DAY, DurationUnit.HOUR), 0.0001);
         assertEquals("one HOUR is about 0.0417 DAY", 0.0417, getMultiplicationFactorTo(DurationUnit.HOUR, DurationUnit.DAY),
                 0.0001);
         // Check conversion factor to standard unit for all remaining time units
         checkUnitRatioNameAndAbbreviation(DurationUnit.MILLISECOND, 0.001, 0.00000001, "millisecond", "ms");
-        checkUnitRatioNameAndAbbreviation(DurationUnit.MINUTE, 60, 0.000001, "minute", "m");
-        checkUnitRatioNameAndAbbreviation(DurationUnit.WEEK, 7 * 86400, 0.1, "week", "w");
+        checkUnitRatioNameAndAbbreviation(DurationUnit.MINUTE, 60, 0.000001, "minute", "min");
+        checkUnitRatioNameAndAbbreviation(DurationUnit.WEEK, 7 * 86400, 0.1, "week", "wk");
     }
 
     /**

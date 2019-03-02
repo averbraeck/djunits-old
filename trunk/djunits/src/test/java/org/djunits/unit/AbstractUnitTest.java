@@ -22,9 +22,9 @@ public abstract class AbstractUnitTest<U extends Unit<U>>
      */
     protected final void checkUnitNameAndAbbreviation(final U u, final String expectedName, final String expectedAbbreviation)
     {
-        assertEquals(String.format("Name of %s is %s", u.getNameKey(), expectedName), expectedName, u.getName());
-        assertEquals(String.format("Abbreviation of %s is %s", u.getNameKey(), expectedAbbreviation), expectedAbbreviation,
-                u.getAbbreviation());
+        assertEquals(String.format("Name of %s is %s", u.getAbbreviationKey(), expectedName), expectedName, u.getName());
+        assertEquals(String.format("Abbreviation of %s is %s", u.getAbbreviationKey(), expectedAbbreviation),
+                expectedAbbreviation, u.getAbbreviation());
     }
 
     /**
@@ -35,7 +35,6 @@ public abstract class AbstractUnitTest<U extends Unit<U>>
      */
     protected final void checkKeys(final U u, final String expectedNameKey, final String expectedAbbreviationKey)
     {
-        assertEquals("unit key", expectedNameKey, u.getNameKey());
         assertEquals("abbreviation key", expectedAbbreviationKey, u.getAbbreviationKey());
     }
 }

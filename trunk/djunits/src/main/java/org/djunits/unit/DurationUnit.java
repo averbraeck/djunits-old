@@ -59,49 +59,42 @@ public class DurationUnit extends LinearUnit<DurationUnit>
 
     static
     {
-        SI = new DurationUnit("DurationUnit.second", "DurationUnit.s", SI_BASE);
+        SI = new DurationUnit("DurationUnit.s", SI_BASE);
         SECOND = SI;
-        ATTOSECOND = new DurationUnit("DurationUnit.attosecond", "DurationUnit.as", SI_BASE, SECOND, 1E-18, true);
-        FEMTOSECOND = new DurationUnit("DurationUnit.femtosecond", "DurationUnit.fs", SI_BASE, SECOND, 1E-15, true);
-        PICOSECOND = new DurationUnit("DurationUnit.picosecond", "DurationUnit.ps", SI_BASE, SECOND, 1E-12, true);
-        NANOSECOND = new DurationUnit("DurationUnit.nanosecond", "DurationUnit.ns", SI_BASE, SECOND, 1E-9, true);
-        MICROSECOND = new DurationUnit("DurationUnit.microsecond", "DurationUnit.mus", SI_BASE, SECOND, 1E-6, true);
-        MILLISECOND = new DurationUnit("DurationUnit.millisecond", "DurationUnit.ms", SI_BASE, SECOND, 1E-3, true);
-        MINUTE = new DurationUnit("DurationUnit.minute", "DurationUnit.m", SI_ACCEPTED, SECOND, 60.0, true);
-        HOUR = new DurationUnit("DurationUnit.hour", "DurationUnit.h", SI_ACCEPTED, MINUTE, 60.0, true);
-        DAY = new DurationUnit("DurationUnit.day", "DurationUnit.d", SI_ACCEPTED, HOUR, 24.0, true);
-        WEEK = new DurationUnit("DurationUnit.week", "DurationUnit.w", OTHER, DAY, 7.0, true);
+        ATTOSECOND = new DurationUnit("DurationUnit.as", SI_BASE, SECOND, 1E-18);
+        FEMTOSECOND = new DurationUnit("DurationUnit.fs", SI_BASE, SECOND, 1E-15);
+        PICOSECOND = new DurationUnit("DurationUnit.ps", SI_BASE, SECOND, 1E-12);
+        NANOSECOND = new DurationUnit("DurationUnit.ns", SI_BASE, SECOND, 1E-9);
+        MICROSECOND = new DurationUnit("DurationUnit.mus", SI_BASE, SECOND, 1E-6);
+        MILLISECOND = new DurationUnit("DurationUnit.ms", SI_BASE, SECOND, 1E-3);
+        MINUTE = new DurationUnit("DurationUnit.m", SI_ACCEPTED, SECOND, 60.0);
+        HOUR = new DurationUnit("DurationUnit.h", SI_ACCEPTED, MINUTE, 60.0);
+        DAY = new DurationUnit("DurationUnit.d", SI_ACCEPTED, HOUR, 24.0);
+        WEEK = new DurationUnit("DurationUnit.w", OTHER, DAY, 7.0);
     }
 
     /**
      * Build a standard DurationUnit.
-     * @param nameKey String; the key to the locale file for the long name of the unit
      * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
-    private DurationUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
+    private DurationUnit(final String abbreviationKey, final UnitSystem unitSystem)
     {
-        super(nameKey, abbreviationKey, unitSystem, true);
+        super(abbreviationKey, unitSystem);
     }
 
     /**
      * Build a DurationUnit with a conversion factor to another DurationUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit DurationUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private DurationUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final DurationUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private DurationUnit(final String abbreviationKey, final UnitSystem unitSystem, final DurationUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
     }
 
     /**
@@ -116,7 +109,7 @@ public class DurationUnit extends LinearUnit<DurationUnit>
     public DurationUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final DurationUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
     }
 
     /** {@inheritDoc} */

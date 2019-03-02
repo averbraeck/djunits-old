@@ -114,70 +114,46 @@ public class VolumeUnit extends LinearUnit<VolumeUnit>
 
     static
     {
-        SI = new VolumeUnit(LengthUnit.METER, "VolumeUnit.cubic_meter", "VolumeUnit.m^3", SI_DERIVED, true);
+        SI = new VolumeUnit(LengthUnit.METER, "VolumeUnit.m^3", SI_DERIVED);
         CUBIC_METER = SI;
-        CUBIC_ATTOMETER =
-                new VolumeUnit(LengthUnit.ATTOMETER, "VolumeUnit.cubic_attometer", "VolumeUnit.am^3", SI_DERIVED, true);
-        CUBIC_FEMTOMETER =
-                new VolumeUnit(LengthUnit.FEMTOMETER, "VolumeUnit.cubic_femtometer", "VolumeUnit.fm^3", SI_DERIVED, true);
-        CUBIC_PICOMETER =
-                new VolumeUnit(LengthUnit.PICOMETER, "VolumeUnit.cubic_picometer", "VolumeUnit.pm^3", SI_DERIVED, true);
-        CUBIC_NANOMETER =
-                new VolumeUnit(LengthUnit.NANOMETER, "VolumeUnit.cubic_nanometer", "VolumeUnit.nm^3", SI_DERIVED, true);
-        CUBIC_MICROMETER =
-                new VolumeUnit(LengthUnit.MICROMETER, "VolumeUnit.cubic_micrometer", "VolumeUnit.mum^3", SI_DERIVED, true);
-        CUBIC_MILLIMETER =
-                new VolumeUnit(LengthUnit.MILLIMETER, "VolumeUnit.cubic_millimeter", "VolumeUnit.mm^3", SI_DERIVED, true);
-        CUBIC_CENTIMETER =
-                new VolumeUnit(LengthUnit.CENTIMETER, "VolumeUnit.cubic_centimeter", "VolumeUnit.cm^3", SI_DERIVED, true);
-        CUBIC_DECIMETER =
-                new VolumeUnit(LengthUnit.DECIMETER, "VolumeUnit.cubic_decimeter", "VolumeUnit.dm^3", SI_DERIVED, true);
-        CUBIC_DEKAMETER =
-                new VolumeUnit(LengthUnit.DEKAMETER, "VolumeUnit.cubic_dekameter", "VolumeUnit.dam^3", SI_DERIVED, true);
-        CUBIC_HECTOMETER =
-                new VolumeUnit(LengthUnit.HECTOMETER, "VolumeUnit.cubic_hectometer", "VolumeUnit.hm^3", SI_DERIVED, true);
-        CUBIC_KILOMETER =
-                new VolumeUnit(LengthUnit.KILOMETER, "VolumeUnit.cubic_kilometer", "VolumeUnit.km^3", SI_DERIVED, true);
-        CUBIC_MEGAMETER =
-                new VolumeUnit(LengthUnit.MEGAMETER, "VolumeUnit.cubic_megameter", "VolumeUnit.Mm^3", SI_DERIVED, true);
-        LITER = new VolumeUnit("VolumeUnit.liter", "VolumeUnit.L", SI_ACCEPTED, CUBIC_DECIMETER, 1.0, true);
-        CUBIC_MILE = new VolumeUnit(LengthUnit.MILE, "VolumeUnit.cubic_mile", "VolumeUnit.mi^3", IMPERIAL, true);
-        CUBIC_FOOT = new VolumeUnit(LengthUnit.FOOT, "VolumeUnit.cubic_foot", "VolumeUnit.ft^3", IMPERIAL, true);
-        CUBIC_INCH = new VolumeUnit(LengthUnit.INCH, "VolumeUnit.cubic_inch", "VolumeUnit.in^3", IMPERIAL, true);
-        CUBIC_YARD = new VolumeUnit(LengthUnit.YARD, "VolumeUnit.cubic_yard", "VolumeUnit.yd^3", IMPERIAL, true);
-        GALLON_US_FLUID = new VolumeUnit("VolumeUnit.gallon_(US)", "VolumeUnit.gal(US)", US_CUSTOMARY, CUBIC_INCH, 231.0, true);
-        GALLON_IMP = new VolumeUnit("VolumeUnit.gallon_(imp)", "VolumeUnit.gal(imp)", IMPERIAL, LITER, 4.5409, true);
-        OUNCE_US_FLUID = new VolumeUnit("VolumeUnit.ounce_(fluid_US)", "VolumeUnit.US_fl_oz", US_CUSTOMARY, GALLON_US_FLUID,
-                1.0 / 128.0, true);
-        OUNCE_IMP_FLUID = new VolumeUnit("VolumeUnit.ounce_(fluid_imperial)", "VolumeUnit.fl_oz_(imp)", IMPERIAL, GALLON_IMP,
-                1.0 / 160.0, true);
-        PINT_US_FLUID = new VolumeUnit("VolumeUnit.pint_(US_fluid)", "VolumeUnit.pt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID,
-                1.0 / 8.0, true);
-        PINT_IMP = new VolumeUnit("VolumeUnit.pint_(imperial)", "VolumeUnit.pt_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 8.0, true);
-        QUART_US_FLUID = new VolumeUnit("VolumeUnit.quart_(US_fluid)", "VolumeUnit.qt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID,
-                1.0 / 4.0, true);
-        QUART_IMP = new VolumeUnit("VolumeUnit.quart_(imperial)", "VolumeUnit.qt_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 4.0, true);
-        CUBIC_LIGHTYEAR =
-                new VolumeUnit(LengthUnit.LIGHTYEAR, "VolumeUnit.cubic_lightyear", "VolumeUnit.ly^3", SI_DERIVED, true);
-        CUBIC_PARSEC = new VolumeUnit(LengthUnit.PARSEC, "VolumeUnit.cubic_parsec", "VolumeUnit.pc^3", SI_DERIVED, true);
+        CUBIC_ATTOMETER = new VolumeUnit(LengthUnit.ATTOMETER, "VolumeUnit.am^3", SI_DERIVED);
+        CUBIC_FEMTOMETER = new VolumeUnit(LengthUnit.FEMTOMETER, "VolumeUnit.fm^3", SI_DERIVED);
+        CUBIC_PICOMETER = new VolumeUnit(LengthUnit.PICOMETER, "VolumeUnit.pm^3", SI_DERIVED);
+        CUBIC_NANOMETER = new VolumeUnit(LengthUnit.NANOMETER, "VolumeUnit.nm^3", SI_DERIVED);
+        CUBIC_MICROMETER = new VolumeUnit(LengthUnit.MICROMETER, "VolumeUnit.mum^3", SI_DERIVED);
+        CUBIC_MILLIMETER = new VolumeUnit(LengthUnit.MILLIMETER, "VolumeUnit.mm^3", SI_DERIVED);
+        CUBIC_CENTIMETER = new VolumeUnit(LengthUnit.CENTIMETER, "VolumeUnit.cm^3", SI_DERIVED);
+        CUBIC_DECIMETER = new VolumeUnit(LengthUnit.DECIMETER, "VolumeUnit.dm^3", SI_DERIVED);
+        CUBIC_DEKAMETER = new VolumeUnit(LengthUnit.DEKAMETER, "VolumeUnit.dam^3", SI_DERIVED);
+        CUBIC_HECTOMETER = new VolumeUnit(LengthUnit.HECTOMETER, "VolumeUnit.hm^3", SI_DERIVED);
+        CUBIC_KILOMETER = new VolumeUnit(LengthUnit.KILOMETER, "VolumeUnit.km^3", SI_DERIVED);
+        CUBIC_MEGAMETER = new VolumeUnit(LengthUnit.MEGAMETER, "VolumeUnit.Mm^3", SI_DERIVED);
+        LITER = new VolumeUnit("VolumeUnit.L", SI_ACCEPTED, CUBIC_DECIMETER, 1.0);
+        CUBIC_MILE = new VolumeUnit(LengthUnit.MILE, "VolumeUnit.mi^3", IMPERIAL);
+        CUBIC_FOOT = new VolumeUnit(LengthUnit.FOOT, "VolumeUnit.ft^3", IMPERIAL);
+        CUBIC_INCH = new VolumeUnit(LengthUnit.INCH, "VolumeUnit.in^3", IMPERIAL);
+        CUBIC_YARD = new VolumeUnit(LengthUnit.YARD, "VolumeUnit.yd^3", IMPERIAL);
+        GALLON_US_FLUID = new VolumeUnit("VolumeUnit.gal(US)", US_CUSTOMARY, CUBIC_INCH, 231.0);
+        GALLON_IMP = new VolumeUnit("VolumeUnit.gal(imp)", IMPERIAL, LITER, 4.5409);
+        OUNCE_US_FLUID = new VolumeUnit("VolumeUnit.US_fl_oz", US_CUSTOMARY, GALLON_US_FLUID, 1.0 / 128.0);
+        OUNCE_IMP_FLUID = new VolumeUnit("VolumeUnit.fl_oz_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 160.0);
+        PINT_US_FLUID = new VolumeUnit("VolumeUnit.pt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID, 1.0 / 8.0);
+        PINT_IMP = new VolumeUnit("VolumeUnit.pt_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 8.0);
+        QUART_US_FLUID = new VolumeUnit("VolumeUnit.qt(US_fl)", US_CUSTOMARY, GALLON_US_FLUID, 1.0 / 4.0);
+        QUART_IMP = new VolumeUnit("VolumeUnit.qt_(imp)", IMPERIAL, GALLON_IMP, 1.0 / 4.0);
+        CUBIC_LIGHTYEAR = new VolumeUnit(LengthUnit.LIGHTYEAR, "VolumeUnit.ly^3", SI_DERIVED);
+        CUBIC_PARSEC = new VolumeUnit(LengthUnit.PARSEC, "VolumeUnit.pc^3", SI_DERIVED);
     }
 
     /**
      * Define volume unit based on length, e.g. a m^3 is based on meters.
      * @param lengthUnit LengthUnit; the unit of length for the speed unit, e.g., meter
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private VolumeUnit(final LengthUnit lengthUnit, final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final UnitSystem unitSystem, final boolean standardUnit)
+    private VolumeUnit(final LengthUnit lengthUnit, final String abbreviationKey, final UnitSystem unitSystem)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, CUBIC_METER, Math.pow(lengthUnit.getScaleFactor(), 3),
-                standardUnit);
+        super(abbreviationKey, unitSystem, CUBIC_METER, Math.pow(lengthUnit.getScaleFactor(), 3));
         this.lengthUnit = lengthUnit;
     }
 
@@ -190,27 +166,22 @@ public class VolumeUnit extends LinearUnit<VolumeUnit>
      */
     public VolumeUnit(final LengthUnit lengthUnit, final String name, final String abbreviation, final UnitSystem unitSystem)
     {
-        this(lengthUnit, name, abbreviation, unitSystem, false);
+        super(name, abbreviation, unitSystem, CUBIC_METER, Math.pow(lengthUnit.getScaleFactor(), 3));
+        this.lengthUnit = lengthUnit;
     }
 
     /**
      * This constructor constructs a uVolumeUnitnit out of another defined VolumeUnit, e.g. quart is 0.25 gallon.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit VolumeUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private VolumeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final VolumeUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private VolumeUnit(final String abbreviationKey, final UnitSystem unitSystem, final VolumeUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
         this.lengthUnit = referenceUnit.getLengthUnit();
     }
 
@@ -226,7 +197,8 @@ public class VolumeUnit extends LinearUnit<VolumeUnit>
     public VolumeUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final VolumeUnit referenceUnit,
             final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
+        this.lengthUnit = referenceUnit.getLengthUnit();
     }
 
     /**

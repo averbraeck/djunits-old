@@ -24,7 +24,6 @@ public class LinearDensityUnitTest extends AbstractLinearUnitTest<LinearDensityU
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.
      */
-    @SuppressWarnings("static-method")
     @Before
     public final void setup()
     {
@@ -46,9 +45,9 @@ public class LinearDensityUnitTest extends AbstractLinearUnitTest<LinearDensityU
     @Test
     public final void conversions()
     {
-        checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_METER, 1, 0.000001, "per meter", "1/m");
-        checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_KILOMETER, 0.001, 0.0000001, "per kilometer", "1/km");
-        checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_MILLIMETER, 1000, 0.01, "per millimeter", "1/mm");
+        checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_METER, 1, 0.000001, "per meter", "/m");
+        checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_KILOMETER, 0.001, 0.0000001, "per kilometer", "/km");
+        checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_MILLIMETER, 1000, 0.01, "per millimeter", "/mm");
         // Check two conversions between non-standard units
         assertEquals("one per millimeter is 1000000 per kilometer", 1000000,
                 getMultiplicationFactorTo(LinearDensityUnit.PER_MILLIMETER, LinearDensityUnit.PER_KILOMETER), 0.1);

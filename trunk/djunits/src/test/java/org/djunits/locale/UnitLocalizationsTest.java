@@ -1,4 +1,4 @@
-package org.djunits.unit;
+package org.djunits.locale;
 
 import static org.junit.Assert.assertTrue;
 
@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import org.djunits.AvailableLocalizations;
-import org.djunits.locale.DefaultLocale;
+import org.djunits.unit.Unit;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -55,6 +55,8 @@ public class UnitLocalizationsTest
         List<String> localeNames = AvailableLocalizations.availableLocalizations(head, path);
         for (String localeName : localeNames)
         {
+            System.out.println("Testing for locale: " + localeName);
+            
             // System.out.println("Checking internationalization to " + localeName);
             DefaultLocale.setLocale(new Locale(localeName));
 
@@ -78,18 +80,14 @@ public class UnitLocalizationsTest
                     Unit<?> u = (Unit<?>) o;
                     if (u.isLocalizable())
                     {
-                        String nameKey = u.getNameKey();
-                        assertTrue("Name key must be non-null", null != nameKey);
-                        assertTrue("Name key must be non-empty", nameKey.length() > 0);
                         String abbreviationKey = u.getAbbreviationKey();
                         assertTrue("Abbreviation key must be non-null", null != abbreviationKey);
                         assertTrue("Abbreviation key must be non-empty", abbreviationKey.length() > 0);
-                        usedKeys.add(nameKey);
                         usedKeys.add(abbreviationKey);
                         String name = u.getName();
                         if (name.startsWith("!") && name.endsWith("!"))
                         {
-                            errors.add(String.format("Missing translation for name %s to %s", nameKey, localeName));
+                            errors.add(String.format("Missing translation for name %s to %s", abbreviationKey, localeName));
                         }
                         String abbreviation = u.getAbbreviation();
                         if (abbreviation.startsWith("!") && abbreviation.endsWith("!"))
@@ -101,6 +99,7 @@ public class UnitLocalizationsTest
                 }
             }
         }
+
         for (String localeName : localeNames)
         {
             Properties properties = new Properties();
@@ -138,6 +137,7 @@ public class UnitLocalizationsTest
                 errors.add(String.format("Unused key %s for locale %s", unusedKey, localeName));
             }
         }
+
         for (String s : errors)
         {
             System.err.println("UnitLocalizations error: " + s);

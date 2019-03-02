@@ -32,7 +32,7 @@ public final class ShowDisplayUnit
         System.out.println("original si : " + length.si);
         length.setDisplayUnit(LengthUnit.METER);
         System.out.println("changed len: " + length);
-        System.out.println("changed si : " + length.si);
+        System.out.println("[not] changed si : " + length.si);
         // not possible: length.setDisplayUnit(MassUnit.KILOGRAM);
     }
 

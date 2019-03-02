@@ -1,8 +1,11 @@
 package org.djunits.unit;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,9 +31,6 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
 {
     /** */
     private static final long serialVersionUID = 20140607;
-
-    /** The key to the locale file for the long name of the unit, or null when it is a user-defined unit. */
-    private final String nameKey;
 
     /** The key to the locale file for the abbreviation of the unit, or null when it is a user-defined unit. */
     private final String abbreviationKey;
@@ -66,29 +66,45 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     /** A static map of all defined units. */
     private static final Map<String, Set<Unit<?>>> UNITS = new HashMap<String, Set<Unit<?>>>();
 
-    /** Localization information. */
-    private static Localization localization = new Localization("localeunit");
-
     /** Has this class been initialized? */
-    private static boolean initialized = false;
+    private static boolean standardUnitsInitialized = false;
 
     /** Standard (SI) unit or not? */
     private boolean baseSIUnit;
 
     /** The array of the names of the standard units. */
-    public static final String[] STANDARD_UNITS = new String[] { "AbsoluteTemperatureUnit", "AccelerationUnit",
-            "AngleSolidUnit", "AngleUnit", "AreaUnit", "DensityUnit", "DimensionlessUnit", "DirectionUnit", "DurationUnit",
+    public static final String[] STANDARD_UNITS = new String[] {"AbsoluteTemperatureUnit", "AccelerationUnit", "AngleSolidUnit",
+            "AngleUnit", "AreaUnit", "DensityUnit", "DimensionlessUnit", "DirectionUnit", "DurationUnit",
             "ElectricalChargeUnit", "ElectricalCurrentUnit", "ElectricalPotentialUnit", "ElectricalResistanceUnit",
             "EnergyUnit", "FlowMassUnit", "FlowVolumeUnit", "ForceUnit", "FrequencyUnit", "LengthUnit", "LinearDensityUnit",
             "MassUnit", "MoneyUnit", "MoneyPerAreaUnit", "MoneyPerEnergyUnit", "MoneyPerLengthUnit", "MoneyPerMassUnit",
             "MoneyPerDurationUnit", "MoneyPerVolumeUnit", "PositionUnit", "PowerUnit", "PressureUnit", "SpeedUnit",
-            "TemperatureUnit", "TimeUnit", "TorqueUnit", "VolumeUnit" };
+            "TemperatureUnit", "TimeUnit", "TorqueUnit", "VolumeUnit"};
 
     /** the cached hashcode. */
     private final int cachedHashCode;
 
-    /** Force all units to be loaded. */
-    private static void initialize()
+    /** Localization information. */
+    private static Localization localization;
+
+    /** The default locale. */
+    private static final Localization DEFAULT_LOCALIZATION = new Localization("localeunit");
+
+    /** The cached default locale information. */
+    private String[] cachedDefaultLocaleInfo;
+
+    /**
+     * Make sure there is a default locale for e.g., a standard XML representation of the unit names and abbreviations.
+     */
+    static
+    {
+        localization = DEFAULT_LOCALIZATION;
+    }
+
+    /**
+     * Force all units to be loaded so we can use static lookup functions for the standard units.
+     */
+    private static void initializeStandardUnits()
     {
         for (String className : STANDARD_UNITS)
         {
@@ -102,41 +118,22 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
                 System.err.println("Could not load class org.djunits.unit." + className);
             }
         }
-        initialized = true;
+        standardUnitsInitialized = true;
     }
 
     /**
-     * Build a standard unit and create the fields for a unit. If the parameter standardUnit is true, it is a standard unit
-     * where name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined unit where the
-     * localization files do not have an entry. If standardUnit is true, a UnitException is silently ignored; if standardUnit is
-     * false a UnitException is thrown as a RunTimeException.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * Build a standard unit and create the fields for that unit. For a standard unit, a UnitException is silently ignored.
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    protected Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final boolean standardUnit)
+    protected Unit(final String abbreviationKey, final UnitSystem unitSystem)
     {
         this.scale = StandardScale.SCALE;
         this.baseSIUnit = true;
-        if (standardUnit)
-        {
-            this.nameKey = nameOrNameKey;
-            this.abbreviationKey = abbreviationOrAbbreviationKey;
-            this.name = null;
-            this.abbreviation = null;
-        }
-        else
-        {
-            this.nameKey = null;
-            this.abbreviationKey = null;
-            this.name = nameOrNameKey;
-            this.abbreviation = abbreviationOrAbbreviationKey;
-        }
+        this.abbreviationKey = abbreviationKey;
+        this.name = null;
+        this.abbreviation = null;
+        this.cachedDefaultLocaleInfo = DEFAULT_LOCALIZATION.getString(this.abbreviationKey).split("\\|");
         this.unitSystem = unitSystem;
         this.cachedHashCode = generateHashCode();
         try
@@ -145,46 +142,26 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         }
         catch (UnitException ue)
         {
-            if (!standardUnit)
-            {
-                throw new RuntimeException(ue);
-            }
+            // silently ignore.
         }
     }
 
     /**
-     * Build a unit with a specific conversion scale to/from the standard unit. If the parameter standardUnit is true, it is a
-     * standard unit where name is the nameKey, and abbreviation is the abbreviationKey; if false, this unit is a user-defined
-     * unit where the localization files do not have an entry. If standardUnit is true, a UnitException is silently ignored; if
-     * standardUnit is false a UnitException is thrown as a RunTimeException.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * Build a standard unit with a specific conversion scale to/from the standard unit. For a standard unit, a UnitException is
+     * silently ignored.
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit, otherwise the abbreviation
+     *            itself
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param scale Scale; the conversion scale to use for this unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    protected Unit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final Scale scale, final boolean standardUnit)
+    protected Unit(final String abbreviationKey, final UnitSystem unitSystem, final Scale scale)
     {
         this.scale = scale;
         this.baseSIUnit = scale.isBaseSIScale();
-        if (standardUnit)
-        {
-            this.nameKey = nameOrNameKey;
-            this.abbreviationKey = abbreviationOrAbbreviationKey;
-            this.name = null;
-            this.abbreviation = null;
-        }
-        else
-        {
-            this.nameKey = null;
-            this.abbreviationKey = null;
-            this.name = nameOrNameKey;
-            this.abbreviation = abbreviationOrAbbreviationKey;
-        }
+        this.abbreviationKey = abbreviationKey;
+        this.name = null;
+        this.abbreviation = null;
+        this.cachedDefaultLocaleInfo = DEFAULT_LOCALIZATION.getString(this.abbreviationKey).split("\\|");
         this.unitSystem = unitSystem;
         this.cachedHashCode = generateHashCode();
         try
@@ -193,10 +170,62 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         }
         catch (UnitException ue)
         {
-            if (!standardUnit)
-            {
-                throw new RuntimeException(ue);
-            }
+            // silently ignore
+        }
+    }
+
+    /**
+     * Build a user-defined unit and create the fields for that unit. This unit is a user-defined unit where the localization
+     * files do not have an entry. A UnitException is thrown as a RunTimeException.
+     * @param name String; the key to the locale file for the long name of the unit, otherwise the name itself
+     * @param abbreviation String; the key to the locale file for the abbreviation of the unit, otherwise the abbreviation
+     *            itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     */
+    protected Unit(final String name, final String abbreviation, final UnitSystem unitSystem)
+    {
+        this.scale = StandardScale.SCALE;
+        this.baseSIUnit = true;
+        this.abbreviationKey = null;
+        this.name = name;
+        this.abbreviation = abbreviation;
+        this.unitSystem = unitSystem;
+        this.cachedHashCode = generateHashCode();
+        try
+        {
+            addUnit(this);
+        }
+        catch (UnitException ue)
+        {
+            throw new RuntimeException(ue);
+        }
+    }
+
+    /**
+     * Build a user-defined unit with a specific conversion scale to/from the standard unit. This unit is a user-defined unit
+     * where the localization files do not have an entry. A UnitException is thrown as a RunTimeException.
+     * @param name String; the key to the locale file for the long name of the unit, otherwise the name itself
+     * @param abbreviation String; the key to the locale file for the abbreviation of the unit, otherwise the abbreviation
+     *            itself
+     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * @param scale Scale; the conversion scale to use for this unit
+     */
+    protected Unit(final String name, final String abbreviation, final UnitSystem unitSystem, final Scale scale)
+    {
+        this.scale = scale;
+        this.baseSIUnit = scale.isBaseSIScale();
+        this.abbreviationKey = null;
+        this.name = name;
+        this.abbreviation = abbreviation;
+        this.unitSystem = unitSystem;
+        this.cachedHashCode = generateHashCode();
+        try
+        {
+            addUnit(this);
+        }
+        catch (UnitException ue)
+        {
+            throw new RuntimeException(ue);
         }
     }
 
@@ -206,7 +235,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      */
     public final boolean isLocalizable()
     {
-        return this.nameKey != null;
+        return this.abbreviationKey != null;
     }
 
     /**
@@ -267,9 +296,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     @SuppressWarnings("unchecked")
     public static <V extends Unit<V>> Set<V> getUnits(final Class<V> unitClass)
     {
-        if (!initialized)
+        if (!standardUnitsInitialized)
         {
-            initialize();
+            initializeStandardUnits();
         }
         Set<V> returnSet = new HashSet<V>();
         if (UNITS.containsKey(unitClass.getSimpleName()))
@@ -287,13 +316,12 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      * @return the set of defined units belonging to this Unit class. The empty set will be returned in case the unit type does
      *         not have any units.
      */
-    // TODO call static method from the instance method? The two are now too similar.
     @SuppressWarnings("unchecked")
     public final Set<Unit<U>> getAllUnitsOfThisType()
     {
-        if (!initialized)
+        if (!standardUnitsInitialized)
         {
-            initialize();
+            initializeStandardUnits();
         }
         Set<Unit<U>> returnSet = new HashSet<Unit<U>>();
         if (UNITS.containsKey(this.getClass().getSimpleName()))
@@ -315,16 +343,36 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         {
             return this.name;
         }
-        return localization.getString(this.nameKey);
+        if (localization.equals(DEFAULT_LOCALIZATION))
+        {
+            return getDefaultLocaleName();
+        }
+        String[] loc = localization.getString(this.abbreviationKey).split("\\|");
+        if (loc.length >= 2)
+        {
+            return loc[1].trim();
+        }
+        if (loc.length >= 1)
+        {
+            return loc[0].trim();
+        }
+        return this.abbreviationKey;
     }
 
     /**
-     * This method returns the name key, or null in case the name is hard coded.
-     * @return name key, e.g. DurationUnit.MetersPerSecond, or null for a user-defined unit
+     * @return the name in the default locale, e.g. meters per second
      */
-    public final String getNameKey()
+    public final String getDefaultLocaleName()
     {
-        return this.nameKey;
+        if (this.cachedDefaultLocaleInfo.length >= 2)
+        {
+            return this.cachedDefaultLocaleInfo[1].trim();
+        }
+        if (this.cachedDefaultLocaleInfo.length >= 1)
+        {
+            return this.cachedDefaultLocaleInfo[0].trim();
+        }
+        return this.abbreviationKey;
     }
 
     /**
@@ -336,7 +384,28 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         {
             return this.abbreviation;
         }
-        return localization.getString(this.abbreviationKey);
+        if (localization.equals(DEFAULT_LOCALIZATION))
+        {
+            return getDefaultLocaleAbbreviation();
+        }
+        String[] loc = localization.getString(this.abbreviationKey).split("\\|");
+        if (loc.length >= 1)
+        {
+            return loc[0].trim();
+        }
+        return this.abbreviationKey;
+    }
+
+    /**
+     * @return the abbreviation in the default locale, e.g., m/s
+     */
+    public final String getDefaultLocaleAbbreviation()
+    {
+        if (this.cachedDefaultLocaleInfo.length >= 1)
+        {
+            return this.cachedDefaultLocaleInfo[0].trim();
+        }
+        return this.abbreviationKey;
     }
 
     /**
@@ -345,6 +414,106 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      */
     public final String getAbbreviationKey()
     {
+        return this.abbreviationKey;
+    }
+
+    /**
+     * @return the textual display types of the unit. In case the list contains more than one abbreviation, the first one is the
+     *         default one. In case none is available, the standard abbreviation is used. In case that one is also not available
+     *         the abbreviation key is used.
+     */
+    public final List<String> getTextualRepresentations()
+    {
+        if (this.abbreviation != null)
+        {
+            return Arrays.asList(new String[] {this.abbreviation});
+        }
+        if (localization.equals(DEFAULT_LOCALIZATION))
+        {
+            return getDefaultLocaleTextualRepresentations();
+        }
+        String[] loc = localization.getString(this.abbreviationKey).split("\\|");
+        if (loc.length >= 3)
+        {
+            List<String> textList = new ArrayList<>();
+            for (int i = 2; i < loc.length; i++)
+            {
+                textList.add(loc[i].trim());
+            }
+            return textList;
+        }
+        if (loc.length >= 1)
+        {
+            return Arrays.asList(new String[] {loc[0].trim()});
+        }
+        return Arrays.asList(new String[] {this.abbreviationKey});
+    }
+
+    /**
+     * @return the textual display types of the unit in the default locale; In case the list contains more than one
+     *         abbreviation, the first one is the default one. In case none is available, the standard abbreviation is used. In
+     *         case that one is also not available the abbreviation key is used.
+     */
+    public final List<String> getDefaultLocaleTextualRepresentations()
+    {
+        if (this.cachedDefaultLocaleInfo.length >= 3)
+        {
+            List<String> textList = new ArrayList<>();
+            for (int i = 2; i < this.cachedDefaultLocaleInfo.length; i++)
+            {
+                textList.add(this.cachedDefaultLocaleInfo[i].trim());
+            }
+            return textList;
+        }
+        if (this.cachedDefaultLocaleInfo.length >= 1)
+        {
+            return Arrays.asList(new String[] {this.cachedDefaultLocaleInfo[0].trim()});
+        }
+        return Arrays.asList(new String[] {this.abbreviationKey});
+    }
+
+    /**
+     * @return the default textual display representation of the unit; In case there are more textual representations, the first
+     *         one is the default one. In case none is available, the standard abbreviation is used. In case that one is also
+     *         not available the abbreviation key is used.
+     */
+    public final String getDefaultTextualRepresentation()
+    {
+        if (this.abbreviation != null)
+        {
+            return this.abbreviation;
+        }
+        if (localization.equals(DEFAULT_LOCALIZATION))
+        {
+            return getDefaultLocaleTextualRepresentation();
+        }
+        String[] loc = localization.getString(this.abbreviationKey).split("\\|");
+        if (loc.length >= 3)
+        {
+            return loc[2].trim();
+        }
+        if (loc.length >= 1)
+        {
+            return loc[0].trim();
+        }
+        return this.abbreviationKey;
+    }
+
+    /**
+     * @return the default textual display representation of the unit in the default locale; In case there are more textual
+     *         representations, the first one is the default one. In case none is available, the standard abbreviation is used.
+     *         In case that one is also not available the abbreviation key is used.
+     */
+    public final String getDefaultLocaleTextualRepresentation()
+    {
+        if (this.cachedDefaultLocaleInfo.length >= 3)
+        {
+            return this.cachedDefaultLocaleInfo[2].trim();
+        }
+        if (this.cachedDefaultLocaleInfo.length >= 1)
+        {
+            return this.cachedDefaultLocaleInfo[0].trim();
+        }
         return this.abbreviationKey;
     }
 
@@ -399,9 +568,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      */
     public static Set<Unit<?>> lookupUnitWithSICoefficients(final String normalizedSICoefficientsString)
     {
-        if (!initialized)
+        if (!standardUnitsInitialized)
         {
-            initialize();
+            initializeStandardUnits();
         }
         if (SI_UNITS.containsKey(normalizedSICoefficientsString))
         {
@@ -414,12 +583,11 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      * @param normalizedSICoefficientsString the normalized string (e.g., kg.m/s2) to look up
      * @return a set of Units belonging to this string, or a set with a new unit when it does not yet exist
      */
-    // TODO call other static method? The two are now too similar.
     public static Set<Unit<?>> lookupOrCreateUnitWithSICoefficients(final String normalizedSICoefficientsString)
     {
-        if (!initialized)
+        if (!standardUnitsInitialized)
         {
-            initialize();
+            initializeStandardUnits();
         }
         if (SI_UNITS.containsKey(normalizedSICoefficientsString))
         {
@@ -437,16 +605,16 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
      */
     public static SIUnit lookupOrCreateSIUnitWithSICoefficients(final String normalizedSICoefficientsString)
     {
-        if (!initialized)
+        if (!standardUnitsInitialized)
         {
-            initialize();
+            initializeStandardUnits();
         }
         if (SI_UNITS.containsKey(normalizedSICoefficientsString)
                 && SI_UNITS.get(normalizedSICoefficientsString).containsKey(SIUnit.class))
         {
             return (SIUnit) SI_UNITS.get(normalizedSICoefficientsString).get(SIUnit.class);
         }
-        SIUnit unit = new SIUnit("SIUnit." + normalizedSICoefficientsString, false);
+        SIUnit unit = new SIUnit("SIUnit." + normalizedSICoefficientsString);
         return unit;
     }
 
@@ -468,7 +636,6 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         result = prime * result + ((this.abbreviation == null) ? 0 : this.abbreviation.hashCode());
         result = prime * result + ((this.abbreviationKey == null) ? 0 : this.abbreviationKey.hashCode());
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
-        result = prime * result + ((this.nameKey == null) ? 0 : this.nameKey.hashCode());
         return result;
     }
 
@@ -481,7 +648,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings({ "checkstyle:designforextension", "checkstyle:needbraces" })
+    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces"})
     @Override
     public boolean equals(final Object obj)
     {
@@ -512,13 +679,6 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
                 return false;
         }
         else if (!this.name.equals(other.name))
-            return false;
-        if (this.nameKey == null)
-        {
-            if (other.nameKey != null)
-                return false;
-        }
-        else if (!this.nameKey.equals(other.nameKey))
             return false;
         return true;
     }

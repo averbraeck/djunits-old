@@ -43,13 +43,12 @@ public class MoneyPerMassUnit extends LinearUnit<MoneyPerMassUnit>
 
     static
     {
-        EUR_PER_KILOGRAM = new MoneyPerMassUnit(MoneyUnit.EUR, MassUnit.KILOGRAM, "EUR per kilogram", "\u20AC/kg", false);
+        EUR_PER_KILOGRAM = new MoneyPerMassUnit(MoneyUnit.EUR, MassUnit.KILOGRAM, "EUR per kilogram", "\u20AC/kg");
         EUR_PER_METRIC_TON =
-                new MoneyPerMassUnit(MoneyUnit.EUR, MassUnit.TON_METRIC, "EUR per metric ton", "\u20AC/ton(metric)", false);
-        USD_PER_POUND = new MoneyPerMassUnit(MoneyUnit.USD, MassUnit.POUND, "USD per pound", "US$/lb", false);
-        USD_PER_LONG_TON = new MoneyPerMassUnit(MoneyUnit.USD, MassUnit.TON_LONG, "USD per long ton", "US$/ton(long)", false);
-        USD_PER_SHORT_TON =
-                new MoneyPerMassUnit(MoneyUnit.USD, MassUnit.TON_SHORT, "USD per short ton", "US$/ton(short)", false);
+                new MoneyPerMassUnit(MoneyUnit.EUR, MassUnit.TON_METRIC, "EUR per metric ton", "\u20AC/ton(metric)");
+        USD_PER_POUND = new MoneyPerMassUnit(MoneyUnit.USD, MassUnit.POUND, "USD per pound", "US$/lb");
+        USD_PER_LONG_TON = new MoneyPerMassUnit(MoneyUnit.USD, MassUnit.TON_LONG, "USD per long ton", "US$/ton(long)");
+        USD_PER_SHORT_TON = new MoneyPerMassUnit(MoneyUnit.USD, MassUnit.TON_SHORT, "USD per short ton", "US$/ton(short)");
         standardMoneyPerMassUnit = EUR_PER_KILOGRAM;
     }
 
@@ -57,18 +56,12 @@ public class MoneyPerMassUnit extends LinearUnit<MoneyPerMassUnit>
      * Build a money per mass unit from a money unit and an mass unit.
      * @param moneyUnit MoneyUnit; the unit of money for the money per mass unit, e.g., EUR
      * @param massUnit MassUnit; the unit of mass for the money per mass unit, e.g., kg
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      */
-    private MoneyPerMassUnit(final MoneyUnit moneyUnit, final MassUnit massUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final boolean standardUnit)
+    private MoneyPerMassUnit(final MoneyUnit moneyUnit, final MassUnit massUnit, final String abbreviationKey)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerMassUnit,
-                moneyUnit.getScaleFactor() / massUnit.getScaleFactor(), standardUnit);
+        super(abbreviationKey, UnitSystem.OTHER, standardMoneyPerMassUnit,
+                moneyUnit.getScaleFactor() / massUnit.getScaleFactor());
         this.moneyUnit = moneyUnit;
         this.massUnit = massUnit;
     }
@@ -82,26 +75,23 @@ public class MoneyPerMassUnit extends LinearUnit<MoneyPerMassUnit>
      */
     public MoneyPerMassUnit(final MoneyUnit moneyUnit, final MassUnit massUnit, final String name, final String abbreviation)
     {
-        this(moneyUnit, massUnit, name, abbreviation, false);
+        super(name, abbreviation, UnitSystem.OTHER, standardMoneyPerMassUnit,
+                moneyUnit.getScaleFactor() / massUnit.getScaleFactor());
+        this.moneyUnit = moneyUnit;
+        this.massUnit = massUnit;
     }
 
     /**
      * Build a MoneyPerMassUnit unit based on another MoneyPerMassUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param referenceUnit MoneyPerMassUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private MoneyPerMassUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final MoneyPerMassUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private MoneyPerMassUnit(final String abbreviationKey, final MoneyPerMassUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.massUnit = referenceUnit.getMassUnit();
     }
@@ -117,7 +107,9 @@ public class MoneyPerMassUnit extends LinearUnit<MoneyPerMassUnit>
     public MoneyPerMassUnit(final String name, final String abbreviation, final MoneyPerMassUnit referenceUnit,
             final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit);
+        this.moneyUnit = referenceUnit.getMoneyUnit();
+        this.massUnit = referenceUnit.getMassUnit();
     }
 
     /**

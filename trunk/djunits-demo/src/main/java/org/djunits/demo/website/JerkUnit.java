@@ -1,8 +1,8 @@
 package org.djunits.demo.website;
 
+import org.djunits.unit.DurationUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearUnit;
-import org.djunits.unit.DurationUnit;
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
@@ -17,7 +17,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @author <a href="http://www.transport.citg.tudelft.nl">Wouter Schakel</a>
  */
-@SuppressWarnings({ "javadoc" })
+@SuppressWarnings({"javadoc"})
 public class JerkUnit extends LinearUnit<JerkUnit>
 {
     private final LengthUnit lengthUnit;
@@ -47,8 +47,7 @@ public class JerkUnit extends LinearUnit<JerkUnit>
     public JerkUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name, final String abbreviation,
             final UnitSystem unitSystem)
     {
-        super(name, abbreviation, unitSystem, SI, lengthUnit.getScaleFactor() / Math.pow(durationUnit.getScaleFactor(), 3.0),
-                false);
+        super(name, abbreviation, unitSystem, SI, lengthUnit.getScaleFactor() / Math.pow(durationUnit.getScaleFactor(), 3.0));
         this.lengthUnit = lengthUnit;
         this.durationUnit = durationUnit;
     }
@@ -56,7 +55,7 @@ public class JerkUnit extends LinearUnit<JerkUnit>
     public JerkUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final JerkUnit referenceUnit,
             final double conversionFactorToReferenceUnit)
     {
-        super(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, conversionFactorToReferenceUnit);
         this.lengthUnit = referenceUnit.getLengthUnit();
         this.durationUnit = referenceUnit.getDurationUnit();
     }

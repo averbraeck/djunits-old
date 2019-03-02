@@ -95,67 +95,40 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
 
     static
     {
-        SI = new LinearDensityUnit(LengthUnit.METER, "LinearDensityUnit.per_meter", "LinearDensityUnit./m", SI_DERIVED, true);
+        SI = new LinearDensityUnit(LengthUnit.METER, "LinearDensityUnit./m", SI_DERIVED);
         PER_METER = SI;
-        PER_ATTOMETER = new LinearDensityUnit("LinearDensityUnit.per_attometer", "LinearDensityUnit./am", SI_DERIVED, PER_METER,
-                1.0E18, true);
-        PER_FEMTOMETER = new LinearDensityUnit("LinearDensityUnit.per_femtometer", "LinearDensityUnit./fm", SI_DERIVED,
-                PER_METER, 1.0E15, true);
-        PER_PICOMETER = new LinearDensityUnit("LinearDensityUnit.per_picometer", "LinearDensityUnit./pm", SI_DERIVED, PER_METER,
-                1.0E12, true);
-        PER_NANOMETER = new LinearDensityUnit("LinearDensityUnit.per_nanometer", "LinearDensityUnit./nm", SI_DERIVED, PER_METER,
-                1.0E9, true);
-        PER_MICROMETER = new LinearDensityUnit("LinearDensityUnit.per_micrometer", "LinearDensityUnit./mum", SI_DERIVED,
-                PER_METER, 1.0E6, true);
-        PER_MILLIMETER = new LinearDensityUnit("LinearDensityUnit.per_millimeter", "LinearDensityUnit./mm", SI_DERIVED,
-                PER_METER, 1000.0, true);
-        PER_CENTIMETER = new LinearDensityUnit("LinearDensityUnit.per_centimeter", "LinearDensityUnit./cm", SI_DERIVED,
-                PER_METER, 100.0, true);
-        PER_DECIMETER = new LinearDensityUnit("LinearDensityUnit.per_decimeter", "LinearDensityUnit./dm", SI_DERIVED, PER_METER,
-                10.0, true);
-        PER_DEKAMETER = new LinearDensityUnit("LinearDensityUnit.per_dekameter", "LinearDensityUnit./dam", SI_DERIVED,
-                PER_METER, 0.1, true);
-        PER_HECTOMETER = new LinearDensityUnit("LinearDensityUnit.per_hectometer", "LinearDensityUnit./hm", SI_DERIVED,
-                PER_METER, 0.01, true);
-        PER_KILOMETER = new LinearDensityUnit("LinearDensityUnit.per_kilometer", "LinearDensityUnit./km", SI_DERIVED, PER_METER,
-                0.001, true);
-        PER_MEGAMETER = new LinearDensityUnit("LinearDensityUnit.per_megameter", "LinearDensityUnit./Mm", SI_DERIVED, PER_METER,
-                1.0E-6, true);
-        PER_FOOT = new LinearDensityUnit("LinearDensityUnit.per_foot", "LinearDensityUnit./ft", IMPERIAL, PER_METER,
-                1.0 / 0.3048, true);
-        PER_INCH = new LinearDensityUnit("LinearDensityUnit.per_inch", "LinearDensityUnit./in", IMPERIAL, PER_FOOT, 12.0, true);
-        PER_MILE = new LinearDensityUnit("LinearDensityUnit.per_mile", "LinearDensityUnit./mi", IMPERIAL, PER_FOOT,
-                1.0 / 5280.0, true);
-        PER_NAUTICAL_MILE = new LinearDensityUnit("LinearDensityUnit.per_nauticalMile", "LinearDensityUnit./NM", IMPERIAL,
-                PER_METER, 1.0 / 1852.0, true);
-        PER_YARD = new LinearDensityUnit("LinearDensityUnit.per_yard", "LinearDensityUnit./yd", IMPERIAL, PER_FOOT, 1.0 / 3.0,
-                true);
-        PER_ASTRONOMICAL_UNIT = new LinearDensityUnit("LinearDensityUnit.per_astronomicalUnit", "LinearDensityUnit./AU", OTHER,
-                PER_METER, 1.0 / 149597870700.0, true);
-        PER_LIGHTYEAR = new LinearDensityUnit("LinearDensityUnit.per_lightyear", "LinearDensityUnit./ly", OTHER, PER_METER,
-                1.0 / 9460730472580800.0, true);
-        PER_PARSEC = new LinearDensityUnit("LinearDensityUnit.per_parsec", "LinearDensityUnit./pc", OTHER, PER_LIGHTYEAR,
-                Math.PI / 648000.0, true);
-        PER_ANGSTROM = new LinearDensityUnit("LinearDensityUnit.per_angstrom", "LinearDensityUnit./A", OTHER, PER_METER,
-                1.0 / 1E-10, true);
+        PER_ATTOMETER = new LinearDensityUnit("LinearDensityUnit./am", SI_DERIVED, PER_METER, 1.0E18);
+        PER_FEMTOMETER = new LinearDensityUnit("LinearDensityUnit./fm", SI_DERIVED, PER_METER, 1.0E15);
+        PER_PICOMETER = new LinearDensityUnit("LinearDensityUnit./pm", SI_DERIVED, PER_METER, 1.0E12);
+        PER_NANOMETER = new LinearDensityUnit("LinearDensityUnit./nm", SI_DERIVED, PER_METER, 1.0E9);
+        PER_MICROMETER = new LinearDensityUnit("LinearDensityUnit./mum", SI_DERIVED, PER_METER, 1.0E6);
+        PER_MILLIMETER = new LinearDensityUnit("LinearDensityUnit./mm", SI_DERIVED, PER_METER, 1000.0);
+        PER_CENTIMETER = new LinearDensityUnit("LinearDensityUnit./cm", SI_DERIVED, PER_METER, 100.0);
+        PER_DECIMETER = new LinearDensityUnit("LinearDensityUnit./dm", SI_DERIVED, PER_METER, 10.0);
+        PER_DEKAMETER = new LinearDensityUnit("LinearDensityUnit./dam", SI_DERIVED, PER_METER, 0.1);
+        PER_HECTOMETER = new LinearDensityUnit("LinearDensityUnit./hm", SI_DERIVED, PER_METER, 0.01);
+        PER_KILOMETER = new LinearDensityUnit("LinearDensityUnit./km", SI_DERIVED, PER_METER, 0.001);
+        PER_MEGAMETER = new LinearDensityUnit("LinearDensityUnit./Mm", SI_DERIVED, PER_METER, 1.0E-6);
+        PER_FOOT = new LinearDensityUnit("LinearDensityUnit./ft", IMPERIAL, PER_METER, 1.0 / 0.3048);
+        PER_INCH = new LinearDensityUnit("LinearDensityUnit./in", IMPERIAL, PER_FOOT, 12.0);
+        PER_MILE = new LinearDensityUnit("LinearDensityUnit./mi", IMPERIAL, PER_FOOT, 1.0 / 5280.0);
+        PER_NAUTICAL_MILE = new LinearDensityUnit("LinearDensityUnit./NM", IMPERIAL, PER_METER, 1.0 / 1852.0);
+        PER_YARD = new LinearDensityUnit("LinearDensityUnit./yd", IMPERIAL, PER_FOOT, 1.0 / 3.0);
+        PER_ASTRONOMICAL_UNIT = new LinearDensityUnit("LinearDensityUnit./AU", OTHER, PER_METER, 1.0 / 149597870700.0);
+        PER_LIGHTYEAR = new LinearDensityUnit("LinearDensityUnit./ly", OTHER, PER_METER, 1.0 / 9460730472580800.0);
+        PER_PARSEC = new LinearDensityUnit("LinearDensityUnit./pc", OTHER, PER_LIGHTYEAR, Math.PI / 648000.0);
+        PER_ANGSTROM = new LinearDensityUnit("LinearDensityUnit./A", OTHER, PER_METER, 1.0 / 1E-10);
     }
 
     /**
      * Define a LinearDensityUnit based on length. You can define unit like "per meter" here.
      * @param lengthUnit LengthUnit; the unit of length for the linear density unit, e.g., meter
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private LinearDensityUnit(final LengthUnit lengthUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+    private LinearDensityUnit(final LengthUnit lengthUnit, final String abbreviationKey, final UnitSystem unitSystem)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, PER_METER, 1.0 / lengthUnit.getScaleFactor(),
-                standardUnit);
+        super(abbreviationKey, unitSystem, PER_METER, 1.0 / lengthUnit.getScaleFactor());
         this.lengthUnit = lengthUnit;
     }
 
@@ -169,28 +142,22 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
     public LinearDensityUnit(final LengthUnit lengthUnit, final String name, final String abbreviation,
             final UnitSystem unitSystem)
     {
-        this(lengthUnit, name, abbreviation, unitSystem, false);
+        super(name, abbreviation, unitSystem, PER_METER, 1.0 / lengthUnit.getScaleFactor());
+        this.lengthUnit = lengthUnit;
     }
 
     /**
      * Build a LinearDensityUnit with a conversion factor to another LinearDensityUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit LinearDensityUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private LinearDensityUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final UnitSystem unitSystem, final LinearDensityUnit referenceUnit, final double scaleFactorToReferenceUnit,
-            final boolean standardUnit)
+    private LinearDensityUnit(final String abbreviationKey, final UnitSystem unitSystem, final LinearDensityUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
         this.lengthUnit = referenceUnit.getLengthUnit();
     }
 
@@ -206,7 +173,8 @@ public class LinearDensityUnit extends LinearUnit<LinearDensityUnit>
     public LinearDensityUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final LinearDensityUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
+        this.lengthUnit = referenceUnit.getLengthUnit();
     }
 
     /**

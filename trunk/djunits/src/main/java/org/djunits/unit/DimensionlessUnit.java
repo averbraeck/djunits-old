@@ -24,17 +24,16 @@ public final class DimensionlessUnit extends Unit<DimensionlessUnit>
 
     static
     {
-        SI = new DimensionlessUnit("DimensionlessUnit.si", "DimensionlessUnit.si", OTHER);
+        SI = new DimensionlessUnit("DimensionlessUnit.si", OTHER);
     }
 
     /**
-     * @param nameKey String; the key to the locale file for the long name of the unit
      * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      */
-    private DimensionlessUnit(final String nameKey, final String abbreviationKey, final UnitSystem unitSystem)
+    private DimensionlessUnit(final String abbreviationKey, final UnitSystem unitSystem)
     {
-        super(nameKey, abbreviationKey, unitSystem, true);
+        super(abbreviationKey, unitSystem);
     }
 
     /** {@inheritDoc} */

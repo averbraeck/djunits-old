@@ -40,12 +40,10 @@ public class MoneyPerAreaUnit extends LinearUnit<MoneyPerAreaUnit>
 
     static
     {
-        EUR_PER_SQUARE_METER =
-                new MoneyPerAreaUnit(MoneyUnit.EUR, AreaUnit.SQUARE_METER, "EUR per square meter", "\u20AC/m^2", false);
-        EUR_PER_HECTARE = new MoneyPerAreaUnit(MoneyUnit.EUR, AreaUnit.HECTARE, "EUR per hectare", "\u20AC/ha", false);
-        USD_PER_ACRE = new MoneyPerAreaUnit(MoneyUnit.USD, AreaUnit.ACRE, "USD per acre", "US$/acre", false);
-        USD_PER_SQUARE_FOOT =
-                new MoneyPerAreaUnit(MoneyUnit.USD, AreaUnit.SQUARE_FOOT, "USD per square foot", "US$/ft^2", false);
+        EUR_PER_SQUARE_METER = new MoneyPerAreaUnit(MoneyUnit.EUR, AreaUnit.SQUARE_METER, "EUR per sq.meter", "\u20AC/m^2");
+        EUR_PER_HECTARE = new MoneyPerAreaUnit(MoneyUnit.EUR, AreaUnit.HECTARE, "EUR per hectare", "\u20AC/ha");
+        USD_PER_ACRE = new MoneyPerAreaUnit(MoneyUnit.USD, AreaUnit.ACRE, "US$ per acre", "US$/acre");
+        USD_PER_SQUARE_FOOT = new MoneyPerAreaUnit(MoneyUnit.USD, AreaUnit.SQUARE_FOOT, "US$ per sq/foot", "US$/ft^2");
         standardMoneyPerAreaUnit = EUR_PER_SQUARE_METER;
     }
 
@@ -53,18 +51,12 @@ public class MoneyPerAreaUnit extends LinearUnit<MoneyPerAreaUnit>
      * Build a money per area unit from a money unit and an area unit.
      * @param moneyUnit MoneyUnit; the unit of money for the money per area unit, e.g., EUR
      * @param areaUnit AreaUnit; the unit of area for the money per area unit, e.g., m^2
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      */
-    private MoneyPerAreaUnit(final MoneyUnit moneyUnit, final AreaUnit areaUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final boolean standardUnit)
+    private MoneyPerAreaUnit(final MoneyUnit moneyUnit, final AreaUnit areaUnit, final String abbreviationKey)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerAreaUnit,
-                moneyUnit.getScaleFactor() / areaUnit.getScaleFactor(), standardUnit);
+        super(abbreviationKey, UnitSystem.OTHER, standardMoneyPerAreaUnit,
+                moneyUnit.getScaleFactor() / areaUnit.getScaleFactor());
         this.moneyUnit = moneyUnit;
         this.areaUnit = areaUnit;
     }
@@ -78,26 +70,23 @@ public class MoneyPerAreaUnit extends LinearUnit<MoneyPerAreaUnit>
      */
     public MoneyPerAreaUnit(final MoneyUnit moneyUnit, final AreaUnit areaUnit, final String name, final String abbreviation)
     {
-        this(moneyUnit, areaUnit, name, abbreviation, false);
+        super(name, abbreviation, UnitSystem.OTHER, standardMoneyPerAreaUnit,
+                moneyUnit.getScaleFactor() / areaUnit.getScaleFactor());
+        this.moneyUnit = moneyUnit;
+        this.areaUnit = areaUnit;
     }
 
     /**
      * Build a MoneyPerAreaUnit unit based on another MoneyPerAreaUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param referenceUnit MoneyPerAreaUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private MoneyPerAreaUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final MoneyPerAreaUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private MoneyPerAreaUnit(final String abbreviationKey, final MoneyPerAreaUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.areaUnit = referenceUnit.getAreaUnit();
     }
@@ -113,7 +102,9 @@ public class MoneyPerAreaUnit extends LinearUnit<MoneyPerAreaUnit>
     public MoneyPerAreaUnit(final String name, final String abbreviation, final MoneyPerAreaUnit referenceUnit,
             final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit);
+        this.moneyUnit = referenceUnit.getMoneyUnit();
+        this.areaUnit = referenceUnit.getAreaUnit();
     }
 
     /**

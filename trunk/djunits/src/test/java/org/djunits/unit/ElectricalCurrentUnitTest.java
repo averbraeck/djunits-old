@@ -22,7 +22,6 @@ public class ElectricalCurrentUnitTest extends AbstractLinearUnitTest<Electrical
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.
      */
-    @SuppressWarnings("static-method")
     @Before
     public final void setup()
     {

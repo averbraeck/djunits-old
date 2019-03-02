@@ -77,7 +77,6 @@ public class DoubleVectorDenseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringAbsTest()
     {
@@ -102,7 +101,6 @@ public class DoubleVectorDenseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringMutableAbsTest()
     {
@@ -195,7 +193,6 @@ public class DoubleVectorDenseTest
     /**
      * Test conversion to mutable equivalent and back.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toMutableAndBackAbsTest()
     {
@@ -243,7 +240,6 @@ public class DoubleVectorDenseTest
     /**
      * Test the equals method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void equalsAbsTest()
     {
@@ -272,7 +268,6 @@ public class DoubleVectorDenseTest
     /**
      * Test the Math functions.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void mathFunctionsTestAbsTest()
     {
@@ -334,7 +329,6 @@ public class DoubleVectorDenseTest
     /**
      * Test plus(DoubleVectorAbs.Dense, DoubleVectorRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfAbsDenseAndRelDenseTest()
     {
@@ -362,7 +356,6 @@ public class DoubleVectorDenseTest
     /**
      * Test minus(DoubleVectorAbs.Dense, DoubleVectorRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfAbsDenseAndRelDenseTest()
     {
@@ -390,7 +383,6 @@ public class DoubleVectorDenseTest
     /**
      * Test plus(DoubleVectorAbs.Dense, DoubleVectorRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfAbsDenseAndRelSparseTest()
     {
@@ -418,7 +410,6 @@ public class DoubleVectorDenseTest
     /**
      * Test minus(DoubleVectorAbs.Dense, DoubleVectorRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfAbsDenseAndRelSparseTest()
     {
@@ -446,7 +437,6 @@ public class DoubleVectorDenseTest
     /**
      * Test that malformed or mismatching arrays throw a ValueException.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void sizeCheckAbsTest()
     {
@@ -469,7 +459,6 @@ public class DoubleVectorDenseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringRelTest()
     {
@@ -493,7 +482,6 @@ public class DoubleVectorDenseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringMutableRelTest()
     {
@@ -576,7 +564,6 @@ public class DoubleVectorDenseTest
     /**
      * Test conversion to mutable equivalent and back.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toMutableAndBackRelTest()
     {
@@ -622,7 +609,6 @@ public class DoubleVectorDenseTest
     /**
      * Test the equals method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void equalsRelTest()
     {
@@ -650,7 +636,6 @@ public class DoubleVectorDenseTest
     /**
      * Test the Math functions.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void mathFunctionsTestRelTest()
     {
@@ -722,7 +707,6 @@ public class DoubleVectorDenseTest
     /**
      * Test plus(DoubleVectorRel.Dense, DoubleVectorRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfRelDenseAndRelDenseTest()
     {
@@ -749,7 +733,6 @@ public class DoubleVectorDenseTest
     /**
      * Test minus(DoubleVectorRel.Dense, DoubleVectorRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfRelDenseAndRelDenseTest()
     {
@@ -776,7 +759,6 @@ public class DoubleVectorDenseTest
     /**
      * Test times(DoubleVectorRel.Dense, DoubleVectorRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binarytimesOfRelDenseAndRelDenseTest()
     {
@@ -803,7 +785,6 @@ public class DoubleVectorDenseTest
     /**
      * Test plus(DoubleVectorRel.Dense, DoubleVectorRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfRelDenseAndRelSparseTest()
     {
@@ -830,7 +811,6 @@ public class DoubleVectorDenseTest
     /**
      * Test minus(DoubleVectorRel.Dense, DoubleVectorRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfRelDenseAndRelSparseTest()
     {
@@ -857,7 +837,6 @@ public class DoubleVectorDenseTest
     /**
      * Test times(DoubleVectorRel.Dense, DoubleVectorRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binarytimesOfRelDenseAndRelSparseTest()
     {
@@ -884,7 +863,6 @@ public class DoubleVectorDenseTest
     /**
      * Test that malformed or mismatching arrays throw a ValueException.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void sizeCheckRelTest()
     {

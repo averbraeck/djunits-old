@@ -590,186 +590,186 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
         CurrencyUnit.registerCurrency("UYI", 940, 0, new ArrayList<String>());
         CurrencyUnit.registerCurrency("XBT", -1, 8, new ArrayList<String>());
 
-        AED = new MoneyUnit(CurrencyUnit.getInstance("AED"), "MoneyUnit.AED", "MoneyUnit.AED", true);
-        AFN = new MoneyUnit(CurrencyUnit.getInstance("AFN"), "MoneyUnit.AFN", "MoneyUnit.AFN", true);
-        ALL = new MoneyUnit(CurrencyUnit.getInstance("ALL"), "MoneyUnit.ALL", "MoneyUnit.ALL", true);
-        AMD = new MoneyUnit(CurrencyUnit.getInstance("AMD"), "MoneyUnit.AMD", "MoneyUnit.AMD", true);
-        ANG = new MoneyUnit(CurrencyUnit.getInstance("ANG"), "MoneyUnit.ANG", "MoneyUnit.ANG", true);
-        AOA = new MoneyUnit(CurrencyUnit.getInstance("AOA"), "MoneyUnit.AOA", "MoneyUnit.AOA", true);
-        ARS = new MoneyUnit(CurrencyUnit.getInstance("ARS"), "MoneyUnit.ARS", "MoneyUnit.ARS", true);
-        AUD = new MoneyUnit(CurrencyUnit.getInstance("AUD"), "MoneyUnit.AUD", "MoneyUnit.AUD", true);
-        AWG = new MoneyUnit(CurrencyUnit.getInstance("AWG"), "MoneyUnit.AWG", "MoneyUnit.AWG", true);
-        AZN = new MoneyUnit(CurrencyUnit.getInstance("AZN"), "MoneyUnit.AZN", "MoneyUnit.AZN", true);
-        BAM = new MoneyUnit(CurrencyUnit.getInstance("BAM"), "MoneyUnit.BAM", "MoneyUnit.BAM", true);
-        BBD = new MoneyUnit(CurrencyUnit.getInstance("BBD"), "MoneyUnit.BBD", "MoneyUnit.BBD", true);
-        BDT = new MoneyUnit(CurrencyUnit.getInstance("BDT"), "MoneyUnit.BDT", "MoneyUnit.BDT", true);
-        BGN = new MoneyUnit(CurrencyUnit.getInstance("BGN"), "MoneyUnit.BGN", "MoneyUnit.BGN", true);
-        BHD = new MoneyUnit(CurrencyUnit.getInstance("BHD"), "MoneyUnit.BHD", "MoneyUnit.BHD", true);
-        BIF = new MoneyUnit(CurrencyUnit.getInstance("BIF"), "MoneyUnit.BIF", "MoneyUnit.BIF", true);
-        BMD = new MoneyUnit(CurrencyUnit.getInstance("BMD"), "MoneyUnit.BMD", "MoneyUnit.BMD", true);
-        BND = new MoneyUnit(CurrencyUnit.getInstance("BND"), "MoneyUnit.BND", "MoneyUnit.BND", true);
-        BOB = new MoneyUnit(CurrencyUnit.getInstance("BOB"), "MoneyUnit.BOB", "MoneyUnit.BOB", true);
-        BOV = new MoneyUnit(CurrencyUnit.getInstance("BOV"), "MoneyUnit.BOV", "MoneyUnit.BOV", true);
-        BRL = new MoneyUnit(CurrencyUnit.getInstance("BRL"), "MoneyUnit.BRL", "MoneyUnit.BRL", true);
-        BSD = new MoneyUnit(CurrencyUnit.getInstance("BSD"), "MoneyUnit.BSD", "MoneyUnit.BSD", true);
-        BTN = new MoneyUnit(CurrencyUnit.getInstance("BTN"), "MoneyUnit.BTN", "MoneyUnit.BTN", true);
-        BWP = new MoneyUnit(CurrencyUnit.getInstance("BWP"), "MoneyUnit.BWP", "MoneyUnit.BWP", true);
-        BYN = new MoneyUnit(CurrencyUnit.getInstance("BYN"), "MoneyUnit.BYN", "MoneyUnit.BYN", true);
-        BYR = new MoneyUnit(CurrencyUnit.getInstance("BYR"), "MoneyUnit.BYR", "MoneyUnit.BYR", true);
-        BZD = new MoneyUnit(CurrencyUnit.getInstance("BZD"), "MoneyUnit.BZD", "MoneyUnit.BZD", true);
-        CAD = new MoneyUnit(CurrencyUnit.getInstance("CAD"), "MoneyUnit.CAD", "MoneyUnit.CAD", true);
-        CDF = new MoneyUnit(CurrencyUnit.getInstance("CDF"), "MoneyUnit.CDF", "MoneyUnit.CDF", true);
-        CHE = new MoneyUnit(CurrencyUnit.getInstance("CHE"), "MoneyUnit.CHE", "MoneyUnit.CHE", true);
-        CHF = new MoneyUnit(CurrencyUnit.getInstance("CHF"), "MoneyUnit.CHF", "MoneyUnit.CHF", true);
-        CHW = new MoneyUnit(CurrencyUnit.getInstance("CHW"), "MoneyUnit.CHW", "MoneyUnit.CHW", true);
-        CLF = new MoneyUnit(CurrencyUnit.getInstance("CLF"), "MoneyUnit.CLF", "MoneyUnit.CLF", true);
-        CLP = new MoneyUnit(CurrencyUnit.getInstance("CLP"), "MoneyUnit.CLP", "MoneyUnit.CLP", true);
-        CNY = new MoneyUnit(CurrencyUnit.getInstance("CNY"), "MoneyUnit.CNY", "MoneyUnit.CNY", true);
-        COP = new MoneyUnit(CurrencyUnit.getInstance("COP"), "MoneyUnit.COP", "MoneyUnit.COP", true);
-        COU = new MoneyUnit(CurrencyUnit.getInstance("COU"), "MoneyUnit.COU", "MoneyUnit.COU", true);
-        CRC = new MoneyUnit(CurrencyUnit.getInstance("CRC"), "MoneyUnit.CRC", "MoneyUnit.CRC", true);
-        CUC = new MoneyUnit(CurrencyUnit.getInstance("CUC"), "MoneyUnit.CUC", "MoneyUnit.CUC", true);
-        CUP = new MoneyUnit(CurrencyUnit.getInstance("CUP"), "MoneyUnit.CUP", "MoneyUnit.CUP", true);
-        CVE = new MoneyUnit(CurrencyUnit.getInstance("CVE"), "MoneyUnit.CVE", "MoneyUnit.CVE", true);
-        CZK = new MoneyUnit(CurrencyUnit.getInstance("CZK"), "MoneyUnit.CZK", "MoneyUnit.CZK", true);
-        DJF = new MoneyUnit(CurrencyUnit.getInstance("DJF"), "MoneyUnit.DJF", "MoneyUnit.DJF", true);
-        DKK = new MoneyUnit(CurrencyUnit.getInstance("DKK"), "MoneyUnit.DKK", "MoneyUnit.DKK", true);
-        DOP = new MoneyUnit(CurrencyUnit.getInstance("DOP"), "MoneyUnit.DOP", "MoneyUnit.DOP", true);
-        DZD = new MoneyUnit(CurrencyUnit.getInstance("DZD"), "MoneyUnit.DZD", "MoneyUnit.DZD", true);
-        EGP = new MoneyUnit(CurrencyUnit.getInstance("EGP"), "MoneyUnit.EGP", "MoneyUnit.EGP", true);
-        ERN = new MoneyUnit(CurrencyUnit.getInstance("ERN"), "MoneyUnit.ERN", "MoneyUnit.ERN", true);
-        ETB = new MoneyUnit(CurrencyUnit.getInstance("ETB"), "MoneyUnit.ETB", "MoneyUnit.ETB", true);
-        EUR = new MoneyUnit(CurrencyUnit.getInstance("EUR"), "MoneyUnit.EUR", "MoneyUnit.EUR", true);
-        FJD = new MoneyUnit(CurrencyUnit.getInstance("FJD"), "MoneyUnit.FJD", "MoneyUnit.FJD", true);
-        FKP = new MoneyUnit(CurrencyUnit.getInstance("FKP"), "MoneyUnit.FKP", "MoneyUnit.FKP", true);
-        GBP = new MoneyUnit(CurrencyUnit.getInstance("GBP"), "MoneyUnit.GBP", "MoneyUnit.GBP", true);
-        GEL = new MoneyUnit(CurrencyUnit.getInstance("GEL"), "MoneyUnit.GEL", "MoneyUnit.GEL", true);
-        GHS = new MoneyUnit(CurrencyUnit.getInstance("GHS"), "MoneyUnit.GHS", "MoneyUnit.GHS", true);
-        GIP = new MoneyUnit(CurrencyUnit.getInstance("GIP"), "MoneyUnit.GIP", "MoneyUnit.GIP", true);
-        GMD = new MoneyUnit(CurrencyUnit.getInstance("GMD"), "MoneyUnit.GMD", "MoneyUnit.GMD", true);
-        GNF = new MoneyUnit(CurrencyUnit.getInstance("GNF"), "MoneyUnit.GNF", "MoneyUnit.GNF", true);
-        GTQ = new MoneyUnit(CurrencyUnit.getInstance("GTQ"), "MoneyUnit.GTQ", "MoneyUnit.GTQ", true);
-        GYD = new MoneyUnit(CurrencyUnit.getInstance("GYD"), "MoneyUnit.GYD", "MoneyUnit.GYD", true);
-        HKD = new MoneyUnit(CurrencyUnit.getInstance("HKD"), "MoneyUnit.HKD", "MoneyUnit.HKD", true);
-        HNL = new MoneyUnit(CurrencyUnit.getInstance("HNL"), "MoneyUnit.HNL", "MoneyUnit.HNL", true);
-        HRK = new MoneyUnit(CurrencyUnit.getInstance("HRK"), "MoneyUnit.HRK", "MoneyUnit.HRK", true);
-        HTG = new MoneyUnit(CurrencyUnit.getInstance("HTG"), "MoneyUnit.HTG", "MoneyUnit.HTG", true);
-        HUF = new MoneyUnit(CurrencyUnit.getInstance("HUF"), "MoneyUnit.HUF", "MoneyUnit.HUF", true);
-        IDR = new MoneyUnit(CurrencyUnit.getInstance("IDR"), "MoneyUnit.IDR", "MoneyUnit.IDR", true);
-        ILS = new MoneyUnit(CurrencyUnit.getInstance("ILS"), "MoneyUnit.ILS", "MoneyUnit.ILS", true);
-        INR = new MoneyUnit(CurrencyUnit.getInstance("INR"), "MoneyUnit.INR", "MoneyUnit.INR", true);
-        IQD = new MoneyUnit(CurrencyUnit.getInstance("IQD"), "MoneyUnit.IQD", "MoneyUnit.IQD", true);
-        IRR = new MoneyUnit(CurrencyUnit.getInstance("IRR"), "MoneyUnit.IRR", "MoneyUnit.IRR", true);
-        ISK = new MoneyUnit(CurrencyUnit.getInstance("ISK"), "MoneyUnit.ISK", "MoneyUnit.ISK", true);
-        JMD = new MoneyUnit(CurrencyUnit.getInstance("JMD"), "MoneyUnit.JMD", "MoneyUnit.JMD", true);
-        JOD = new MoneyUnit(CurrencyUnit.getInstance("JOD"), "MoneyUnit.JOD", "MoneyUnit.JOD", true);
-        JPY = new MoneyUnit(CurrencyUnit.getInstance("JPY"), "MoneyUnit.JPY", "MoneyUnit.JPY", true);
-        KES = new MoneyUnit(CurrencyUnit.getInstance("KES"), "MoneyUnit.KES", "MoneyUnit.KES", true);
-        KGS = new MoneyUnit(CurrencyUnit.getInstance("KGS"), "MoneyUnit.KGS", "MoneyUnit.KGS", true);
-        KHR = new MoneyUnit(CurrencyUnit.getInstance("KHR"), "MoneyUnit.KHR", "MoneyUnit.KHR", true);
-        KMF = new MoneyUnit(CurrencyUnit.getInstance("KMF"), "MoneyUnit.KMF", "MoneyUnit.KMF", true);
-        KPW = new MoneyUnit(CurrencyUnit.getInstance("KPW"), "MoneyUnit.KPW", "MoneyUnit.KPW", true);
-        KRW = new MoneyUnit(CurrencyUnit.getInstance("KRW"), "MoneyUnit.KRW", "MoneyUnit.KRW", true);
-        KWD = new MoneyUnit(CurrencyUnit.getInstance("KWD"), "MoneyUnit.KWD", "MoneyUnit.KWD", true);
-        KYD = new MoneyUnit(CurrencyUnit.getInstance("KYD"), "MoneyUnit.KYD", "MoneyUnit.KYD", true);
-        KZT = new MoneyUnit(CurrencyUnit.getInstance("KZT"), "MoneyUnit.KZT", "MoneyUnit.KZT", true);
-        LAK = new MoneyUnit(CurrencyUnit.getInstance("LAK"), "MoneyUnit.LAK", "MoneyUnit.LAK", true);
-        LBP = new MoneyUnit(CurrencyUnit.getInstance("LBP"), "MoneyUnit.LBP", "MoneyUnit.LBP", true);
-        LKR = new MoneyUnit(CurrencyUnit.getInstance("LKR"), "MoneyUnit.LKR", "MoneyUnit.LKR", true);
-        LRD = new MoneyUnit(CurrencyUnit.getInstance("LRD"), "MoneyUnit.LRD", "MoneyUnit.LRD", true);
-        LSL = new MoneyUnit(CurrencyUnit.getInstance("LSL"), "MoneyUnit.LSL", "MoneyUnit.LSL", true);
-        LYD = new MoneyUnit(CurrencyUnit.getInstance("LYD"), "MoneyUnit.LYD", "MoneyUnit.LYD", true);
-        MAD = new MoneyUnit(CurrencyUnit.getInstance("MAD"), "MoneyUnit.MAD", "MoneyUnit.MAD", true);
-        MDL = new MoneyUnit(CurrencyUnit.getInstance("MDL"), "MoneyUnit.MDL", "MoneyUnit.MDL", true);
-        MGA = new MoneyUnit(CurrencyUnit.getInstance("MGA"), "MoneyUnit.MGA", "MoneyUnit.MGA", true);
-        MKD = new MoneyUnit(CurrencyUnit.getInstance("MKD"), "MoneyUnit.MKD", "MoneyUnit.MKD", true);
-        MMK = new MoneyUnit(CurrencyUnit.getInstance("MMK"), "MoneyUnit.MMK", "MoneyUnit.MMK", true);
-        MNT = new MoneyUnit(CurrencyUnit.getInstance("MNT"), "MoneyUnit.MNT", "MoneyUnit.MNT", true);
-        MOP = new MoneyUnit(CurrencyUnit.getInstance("MOP"), "MoneyUnit.MOP", "MoneyUnit.MOP", true);
-        MRO = new MoneyUnit(CurrencyUnit.getInstance("MRO"), "MoneyUnit.MRO", "MoneyUnit.MRO", true);
-        MUR = new MoneyUnit(CurrencyUnit.getInstance("MUR"), "MoneyUnit.MUR", "MoneyUnit.MUR", true);
-        MVR = new MoneyUnit(CurrencyUnit.getInstance("MVR"), "MoneyUnit.MVR", "MoneyUnit.MVR", true);
-        MWK = new MoneyUnit(CurrencyUnit.getInstance("MWK"), "MoneyUnit.MWK", "MoneyUnit.MWK", true);
-        MXN = new MoneyUnit(CurrencyUnit.getInstance("MXN"), "MoneyUnit.MXN", "MoneyUnit.MXN", true);
-        MXV = new MoneyUnit(CurrencyUnit.getInstance("MXV"), "MoneyUnit.MXV", "MoneyUnit.MXV", true);
-        MYR = new MoneyUnit(CurrencyUnit.getInstance("MYR"), "MoneyUnit.MYR", "MoneyUnit.MYR", true);
-        MZN = new MoneyUnit(CurrencyUnit.getInstance("MZN"), "MoneyUnit.MZN", "MoneyUnit.MZN", true);
-        NAD = new MoneyUnit(CurrencyUnit.getInstance("NAD"), "MoneyUnit.NAD", "MoneyUnit.NAD", true);
-        NGN = new MoneyUnit(CurrencyUnit.getInstance("NGN"), "MoneyUnit.NGN", "MoneyUnit.NGN", true);
-        NIO = new MoneyUnit(CurrencyUnit.getInstance("NIO"), "MoneyUnit.NIO", "MoneyUnit.NIO", true);
-        NOK = new MoneyUnit(CurrencyUnit.getInstance("NOK"), "MoneyUnit.NOK", "MoneyUnit.NOK", true);
-        NPR = new MoneyUnit(CurrencyUnit.getInstance("NPR"), "MoneyUnit.NPR", "MoneyUnit.NPR", true);
-        NZD = new MoneyUnit(CurrencyUnit.getInstance("NZD"), "MoneyUnit.NZD", "MoneyUnit.NZD", true);
-        OMR = new MoneyUnit(CurrencyUnit.getInstance("OMR"), "MoneyUnit.OMR", "MoneyUnit.OMR", true);
-        PAB = new MoneyUnit(CurrencyUnit.getInstance("PAB"), "MoneyUnit.PAB", "MoneyUnit.PAB", true);
-        PEN = new MoneyUnit(CurrencyUnit.getInstance("PEN"), "MoneyUnit.PEN", "MoneyUnit.PEN", true);
-        PGK = new MoneyUnit(CurrencyUnit.getInstance("PGK"), "MoneyUnit.PGK", "MoneyUnit.PGK", true);
-        PHP = new MoneyUnit(CurrencyUnit.getInstance("PHP"), "MoneyUnit.PHP", "MoneyUnit.PHP", true);
-        PKR = new MoneyUnit(CurrencyUnit.getInstance("PKR"), "MoneyUnit.PKR", "MoneyUnit.PKR", true);
-        PLN = new MoneyUnit(CurrencyUnit.getInstance("PLN"), "MoneyUnit.PLN", "MoneyUnit.PLN", true);
-        PYG = new MoneyUnit(CurrencyUnit.getInstance("PYG"), "MoneyUnit.PYG", "MoneyUnit.PYG", true);
-        QAR = new MoneyUnit(CurrencyUnit.getInstance("QAR"), "MoneyUnit.QAR", "MoneyUnit.QAR", true);
-        RON = new MoneyUnit(CurrencyUnit.getInstance("RON"), "MoneyUnit.RON", "MoneyUnit.RON", true);
-        RSD = new MoneyUnit(CurrencyUnit.getInstance("RSD"), "MoneyUnit.RSD", "MoneyUnit.RSD", true);
-        RUB = new MoneyUnit(CurrencyUnit.getInstance("RUB"), "MoneyUnit.RUB", "MoneyUnit.RUB", true);
-        RWF = new MoneyUnit(CurrencyUnit.getInstance("RWF"), "MoneyUnit.RWF", "MoneyUnit.RWF", true);
-        SAR = new MoneyUnit(CurrencyUnit.getInstance("SAR"), "MoneyUnit.SAR", "MoneyUnit.SAR", true);
-        SBD = new MoneyUnit(CurrencyUnit.getInstance("SBD"), "MoneyUnit.SBD", "MoneyUnit.SBD", true);
-        SCR = new MoneyUnit(CurrencyUnit.getInstance("SCR"), "MoneyUnit.SCR", "MoneyUnit.SCR", true);
-        SDG = new MoneyUnit(CurrencyUnit.getInstance("SDG"), "MoneyUnit.SDG", "MoneyUnit.SDG", true);
-        SEK = new MoneyUnit(CurrencyUnit.getInstance("SEK"), "MoneyUnit.SEK", "MoneyUnit.SEK", true);
-        SGD = new MoneyUnit(CurrencyUnit.getInstance("SGD"), "MoneyUnit.SGD", "MoneyUnit.SGD", true);
-        SHP = new MoneyUnit(CurrencyUnit.getInstance("SHP"), "MoneyUnit.SHP", "MoneyUnit.SHP", true);
-        SLL = new MoneyUnit(CurrencyUnit.getInstance("SLL"), "MoneyUnit.SLL", "MoneyUnit.SLL", true);
-        SOS = new MoneyUnit(CurrencyUnit.getInstance("SOS"), "MoneyUnit.SOS", "MoneyUnit.SOS", true);
-        SRD = new MoneyUnit(CurrencyUnit.getInstance("SRD"), "MoneyUnit.SRD", "MoneyUnit.SRD", true);
-        SSP = new MoneyUnit(CurrencyUnit.getInstance("SSP"), "MoneyUnit.SSP", "MoneyUnit.SSP", true);
-        STD = new MoneyUnit(CurrencyUnit.getInstance("STD"), "MoneyUnit.STD", "MoneyUnit.STD", true);
-        SVC = new MoneyUnit(CurrencyUnit.getInstance("SVC"), "MoneyUnit.SVC", "MoneyUnit.SVC", true);
-        SYP = new MoneyUnit(CurrencyUnit.getInstance("SYP"), "MoneyUnit.SYP", "MoneyUnit.SYP", true);
-        SZL = new MoneyUnit(CurrencyUnit.getInstance("SZL"), "MoneyUnit.SZL", "MoneyUnit.SZL", true);
-        THB = new MoneyUnit(CurrencyUnit.getInstance("THB"), "MoneyUnit.THB", "MoneyUnit.THB", true);
-        TJS = new MoneyUnit(CurrencyUnit.getInstance("TJS"), "MoneyUnit.TJS", "MoneyUnit.TJS", true);
-        TMT = new MoneyUnit(CurrencyUnit.getInstance("TMT"), "MoneyUnit.TMT", "MoneyUnit.TMT", true);
-        TND = new MoneyUnit(CurrencyUnit.getInstance("TND"), "MoneyUnit.TND", "MoneyUnit.TND", true);
-        TOP = new MoneyUnit(CurrencyUnit.getInstance("TOP"), "MoneyUnit.TOP", "MoneyUnit.TOP", true);
-        TRY = new MoneyUnit(CurrencyUnit.getInstance("TRY"), "MoneyUnit.TRY", "MoneyUnit.TRY", true);
-        TTD = new MoneyUnit(CurrencyUnit.getInstance("TTD"), "MoneyUnit.TTD", "MoneyUnit.TTD", true);
-        TWD = new MoneyUnit(CurrencyUnit.getInstance("TWD"), "MoneyUnit.TWD", "MoneyUnit.TWD", true);
-        TZS = new MoneyUnit(CurrencyUnit.getInstance("TZS"), "MoneyUnit.TZS", "MoneyUnit.TZS", true);
-        UAH = new MoneyUnit(CurrencyUnit.getInstance("UAH"), "MoneyUnit.UAH", "MoneyUnit.UAH", true);
-        UGX = new MoneyUnit(CurrencyUnit.getInstance("UGX"), "MoneyUnit.UGX", "MoneyUnit.UGX", true);
-        USD = new MoneyUnit(CurrencyUnit.getInstance("USD"), "MoneyUnit.USD", "MoneyUnit.USD", true);
-        USN = new MoneyUnit(CurrencyUnit.getInstance("USN"), "MoneyUnit.USN", "MoneyUnit.USN", true);
-        UYI = new MoneyUnit(CurrencyUnit.getInstance("UYI"), "MoneyUnit.UYI", "MoneyUnit.UYI", true);
-        UYU = new MoneyUnit(CurrencyUnit.getInstance("UYU"), "MoneyUnit.UYU", "MoneyUnit.UYU", true);
-        UZS = new MoneyUnit(CurrencyUnit.getInstance("UZS"), "MoneyUnit.UZS", "MoneyUnit.UZS", true);
-        VEF = new MoneyUnit(CurrencyUnit.getInstance("VEF"), "MoneyUnit.VEF", "MoneyUnit.VEF", true);
-        VND = new MoneyUnit(CurrencyUnit.getInstance("VND"), "MoneyUnit.VND", "MoneyUnit.VND", true);
-        VUV = new MoneyUnit(CurrencyUnit.getInstance("VUV"), "MoneyUnit.VUV", "MoneyUnit.VUV", true);
-        WST = new MoneyUnit(CurrencyUnit.getInstance("WST"), "MoneyUnit.WST", "MoneyUnit.WST", true);
-        XAF = new MoneyUnit(CurrencyUnit.getInstance("XAF"), "MoneyUnit.XAF", "MoneyUnit.XAF", true);
-        XAG = new MoneyUnit(CurrencyUnit.getInstance("XAG"), "MoneyUnit.XAG", "MoneyUnit.XAG", true);
-        XAU = new MoneyUnit(CurrencyUnit.getInstance("XAU"), "MoneyUnit.XAU", "MoneyUnit.XAU", true);
-        XBA = new MoneyUnit(CurrencyUnit.getInstance("XBA"), "MoneyUnit.XBA", "MoneyUnit.XBA", true);
-        XBB = new MoneyUnit(CurrencyUnit.getInstance("XBB"), "MoneyUnit.XBB", "MoneyUnit.XBB", true);
-        XBC = new MoneyUnit(CurrencyUnit.getInstance("XBC"), "MoneyUnit.XBC", "MoneyUnit.XBC", true);
-        XBD = new MoneyUnit(CurrencyUnit.getInstance("XBD"), "MoneyUnit.XBD", "MoneyUnit.XBD", true);
-        XCD = new MoneyUnit(CurrencyUnit.getInstance("XCD"), "MoneyUnit.XCD", "MoneyUnit.XCD", true);
-        XDR = new MoneyUnit(CurrencyUnit.getInstance("XDR"), "MoneyUnit.XDR", "MoneyUnit.XDR", true);
-        XOF = new MoneyUnit(CurrencyUnit.getInstance("XOF"), "MoneyUnit.XOF", "MoneyUnit.XOF", true);
-        XPD = new MoneyUnit(CurrencyUnit.getInstance("XPD"), "MoneyUnit.XPD", "MoneyUnit.XPD", true);
-        XPF = new MoneyUnit(CurrencyUnit.getInstance("XPF"), "MoneyUnit.XPF", "MoneyUnit.XPF", true);
-        XPT = new MoneyUnit(CurrencyUnit.getInstance("XPT"), "MoneyUnit.XPT", "MoneyUnit.XPT", true);
-        XSU = new MoneyUnit(CurrencyUnit.getInstance("XSU"), "MoneyUnit.XSU", "MoneyUnit.XSU", true);
-        XTS = new MoneyUnit(CurrencyUnit.getInstance("XTS"), "MoneyUnit.XTS", "MoneyUnit.XTS", true);
-        XUA = new MoneyUnit(CurrencyUnit.getInstance("XUA"), "MoneyUnit.XUA", "MoneyUnit.XUA", true);
-        XXX = new MoneyUnit(CurrencyUnit.getInstance("XXX"), "MoneyUnit.XXX", "MoneyUnit.XXX", true);
-        YER = new MoneyUnit(CurrencyUnit.getInstance("YER"), "MoneyUnit.YER", "MoneyUnit.YER", true);
-        ZAR = new MoneyUnit(CurrencyUnit.getInstance("ZAR"), "MoneyUnit.ZAR", "MoneyUnit.ZAR", true);
-        ZMW = new MoneyUnit(CurrencyUnit.getInstance("ZMW"), "MoneyUnit.ZMW", "MoneyUnit.ZMW", true);
-        ZWL = new MoneyUnit(CurrencyUnit.getInstance("ZWL"), "MoneyUnit.ZWL", "MoneyUnit.ZWL", true);
-        XBT = new MoneyUnit(CurrencyUnit.getInstance("XBT"), "MoneyUnit.XBT", "MoneyUnit.XBT", true);
+        AED = new MoneyUnit(CurrencyUnit.getInstance("AED"), "MoneyUnit.AED");
+        AFN = new MoneyUnit(CurrencyUnit.getInstance("AFN"), "MoneyUnit.AFN");
+        ALL = new MoneyUnit(CurrencyUnit.getInstance("ALL"), "MoneyUnit.ALL");
+        AMD = new MoneyUnit(CurrencyUnit.getInstance("AMD"), "MoneyUnit.AMD");
+        ANG = new MoneyUnit(CurrencyUnit.getInstance("ANG"), "MoneyUnit.ANG");
+        AOA = new MoneyUnit(CurrencyUnit.getInstance("AOA"), "MoneyUnit.AOA");
+        ARS = new MoneyUnit(CurrencyUnit.getInstance("ARS"), "MoneyUnit.ARS");
+        AUD = new MoneyUnit(CurrencyUnit.getInstance("AUD"), "MoneyUnit.AUD");
+        AWG = new MoneyUnit(CurrencyUnit.getInstance("AWG"), "MoneyUnit.AWG");
+        AZN = new MoneyUnit(CurrencyUnit.getInstance("AZN"), "MoneyUnit.AZN");
+        BAM = new MoneyUnit(CurrencyUnit.getInstance("BAM"), "MoneyUnit.BAM");
+        BBD = new MoneyUnit(CurrencyUnit.getInstance("BBD"), "MoneyUnit.BBD");
+        BDT = new MoneyUnit(CurrencyUnit.getInstance("BDT"), "MoneyUnit.BDT");
+        BGN = new MoneyUnit(CurrencyUnit.getInstance("BGN"), "MoneyUnit.BGN");
+        BHD = new MoneyUnit(CurrencyUnit.getInstance("BHD"), "MoneyUnit.BHD");
+        BIF = new MoneyUnit(CurrencyUnit.getInstance("BIF"), "MoneyUnit.BIF");
+        BMD = new MoneyUnit(CurrencyUnit.getInstance("BMD"), "MoneyUnit.BMD");
+        BND = new MoneyUnit(CurrencyUnit.getInstance("BND"), "MoneyUnit.BND");
+        BOB = new MoneyUnit(CurrencyUnit.getInstance("BOB"), "MoneyUnit.BOB");
+        BOV = new MoneyUnit(CurrencyUnit.getInstance("BOV"), "MoneyUnit.BOV");
+        BRL = new MoneyUnit(CurrencyUnit.getInstance("BRL"), "MoneyUnit.BRL");
+        BSD = new MoneyUnit(CurrencyUnit.getInstance("BSD"), "MoneyUnit.BSD");
+        BTN = new MoneyUnit(CurrencyUnit.getInstance("BTN"), "MoneyUnit.BTN");
+        BWP = new MoneyUnit(CurrencyUnit.getInstance("BWP"), "MoneyUnit.BWP");
+        BYN = new MoneyUnit(CurrencyUnit.getInstance("BYN"), "MoneyUnit.BYN");
+        BYR = new MoneyUnit(CurrencyUnit.getInstance("BYR"), "MoneyUnit.BYR");
+        BZD = new MoneyUnit(CurrencyUnit.getInstance("BZD"), "MoneyUnit.BZD");
+        CAD = new MoneyUnit(CurrencyUnit.getInstance("CAD"), "MoneyUnit.CAD");
+        CDF = new MoneyUnit(CurrencyUnit.getInstance("CDF"), "MoneyUnit.CDF");
+        CHE = new MoneyUnit(CurrencyUnit.getInstance("CHE"), "MoneyUnit.CHE");
+        CHF = new MoneyUnit(CurrencyUnit.getInstance("CHF"), "MoneyUnit.CHF");
+        CHW = new MoneyUnit(CurrencyUnit.getInstance("CHW"), "MoneyUnit.CHW");
+        CLF = new MoneyUnit(CurrencyUnit.getInstance("CLF"), "MoneyUnit.CLF");
+        CLP = new MoneyUnit(CurrencyUnit.getInstance("CLP"), "MoneyUnit.CLP");
+        CNY = new MoneyUnit(CurrencyUnit.getInstance("CNY"), "MoneyUnit.CNY");
+        COP = new MoneyUnit(CurrencyUnit.getInstance("COP"), "MoneyUnit.COP");
+        COU = new MoneyUnit(CurrencyUnit.getInstance("COU"), "MoneyUnit.COU");
+        CRC = new MoneyUnit(CurrencyUnit.getInstance("CRC"), "MoneyUnit.CRC");
+        CUC = new MoneyUnit(CurrencyUnit.getInstance("CUC"), "MoneyUnit.CUC");
+        CUP = new MoneyUnit(CurrencyUnit.getInstance("CUP"), "MoneyUnit.CUP");
+        CVE = new MoneyUnit(CurrencyUnit.getInstance("CVE"), "MoneyUnit.CVE");
+        CZK = new MoneyUnit(CurrencyUnit.getInstance("CZK"), "MoneyUnit.CZK");
+        DJF = new MoneyUnit(CurrencyUnit.getInstance("DJF"), "MoneyUnit.DJF");
+        DKK = new MoneyUnit(CurrencyUnit.getInstance("DKK"), "MoneyUnit.DKK");
+        DOP = new MoneyUnit(CurrencyUnit.getInstance("DOP"), "MoneyUnit.DOP");
+        DZD = new MoneyUnit(CurrencyUnit.getInstance("DZD"), "MoneyUnit.DZD");
+        EGP = new MoneyUnit(CurrencyUnit.getInstance("EGP"), "MoneyUnit.EGP");
+        ERN = new MoneyUnit(CurrencyUnit.getInstance("ERN"), "MoneyUnit.ERN");
+        ETB = new MoneyUnit(CurrencyUnit.getInstance("ETB"), "MoneyUnit.ETB");
+        EUR = new MoneyUnit(CurrencyUnit.getInstance("EUR"), "MoneyUnit.EUR");
+        FJD = new MoneyUnit(CurrencyUnit.getInstance("FJD"), "MoneyUnit.FJD");
+        FKP = new MoneyUnit(CurrencyUnit.getInstance("FKP"), "MoneyUnit.FKP");
+        GBP = new MoneyUnit(CurrencyUnit.getInstance("GBP"), "MoneyUnit.GBP");
+        GEL = new MoneyUnit(CurrencyUnit.getInstance("GEL"), "MoneyUnit.GEL");
+        GHS = new MoneyUnit(CurrencyUnit.getInstance("GHS"), "MoneyUnit.GHS");
+        GIP = new MoneyUnit(CurrencyUnit.getInstance("GIP"), "MoneyUnit.GIP");
+        GMD = new MoneyUnit(CurrencyUnit.getInstance("GMD"), "MoneyUnit.GMD");
+        GNF = new MoneyUnit(CurrencyUnit.getInstance("GNF"), "MoneyUnit.GNF");
+        GTQ = new MoneyUnit(CurrencyUnit.getInstance("GTQ"), "MoneyUnit.GTQ");
+        GYD = new MoneyUnit(CurrencyUnit.getInstance("GYD"), "MoneyUnit.GYD");
+        HKD = new MoneyUnit(CurrencyUnit.getInstance("HKD"), "MoneyUnit.HKD");
+        HNL = new MoneyUnit(CurrencyUnit.getInstance("HNL"), "MoneyUnit.HNL");
+        HRK = new MoneyUnit(CurrencyUnit.getInstance("HRK"), "MoneyUnit.HRK");
+        HTG = new MoneyUnit(CurrencyUnit.getInstance("HTG"), "MoneyUnit.HTG");
+        HUF = new MoneyUnit(CurrencyUnit.getInstance("HUF"), "MoneyUnit.HUF");
+        IDR = new MoneyUnit(CurrencyUnit.getInstance("IDR"), "MoneyUnit.IDR");
+        ILS = new MoneyUnit(CurrencyUnit.getInstance("ILS"), "MoneyUnit.ILS");
+        INR = new MoneyUnit(CurrencyUnit.getInstance("INR"), "MoneyUnit.INR");
+        IQD = new MoneyUnit(CurrencyUnit.getInstance("IQD"), "MoneyUnit.IQD");
+        IRR = new MoneyUnit(CurrencyUnit.getInstance("IRR"), "MoneyUnit.IRR");
+        ISK = new MoneyUnit(CurrencyUnit.getInstance("ISK"), "MoneyUnit.ISK");
+        JMD = new MoneyUnit(CurrencyUnit.getInstance("JMD"), "MoneyUnit.JMD");
+        JOD = new MoneyUnit(CurrencyUnit.getInstance("JOD"), "MoneyUnit.JOD");
+        JPY = new MoneyUnit(CurrencyUnit.getInstance("JPY"), "MoneyUnit.JPY");
+        KES = new MoneyUnit(CurrencyUnit.getInstance("KES"), "MoneyUnit.KES");
+        KGS = new MoneyUnit(CurrencyUnit.getInstance("KGS"), "MoneyUnit.KGS");
+        KHR = new MoneyUnit(CurrencyUnit.getInstance("KHR"), "MoneyUnit.KHR");
+        KMF = new MoneyUnit(CurrencyUnit.getInstance("KMF"), "MoneyUnit.KMF");
+        KPW = new MoneyUnit(CurrencyUnit.getInstance("KPW"), "MoneyUnit.KPW");
+        KRW = new MoneyUnit(CurrencyUnit.getInstance("KRW"), "MoneyUnit.KRW");
+        KWD = new MoneyUnit(CurrencyUnit.getInstance("KWD"), "MoneyUnit.KWD");
+        KYD = new MoneyUnit(CurrencyUnit.getInstance("KYD"), "MoneyUnit.KYD");
+        KZT = new MoneyUnit(CurrencyUnit.getInstance("KZT"), "MoneyUnit.KZT");
+        LAK = new MoneyUnit(CurrencyUnit.getInstance("LAK"), "MoneyUnit.LAK");
+        LBP = new MoneyUnit(CurrencyUnit.getInstance("LBP"), "MoneyUnit.LBP");
+        LKR = new MoneyUnit(CurrencyUnit.getInstance("LKR"), "MoneyUnit.LKR");
+        LRD = new MoneyUnit(CurrencyUnit.getInstance("LRD"), "MoneyUnit.LRD");
+        LSL = new MoneyUnit(CurrencyUnit.getInstance("LSL"), "MoneyUnit.LSL");
+        LYD = new MoneyUnit(CurrencyUnit.getInstance("LYD"), "MoneyUnit.LYD");
+        MAD = new MoneyUnit(CurrencyUnit.getInstance("MAD"), "MoneyUnit.MAD");
+        MDL = new MoneyUnit(CurrencyUnit.getInstance("MDL"), "MoneyUnit.MDL");
+        MGA = new MoneyUnit(CurrencyUnit.getInstance("MGA"), "MoneyUnit.MGA");
+        MKD = new MoneyUnit(CurrencyUnit.getInstance("MKD"), "MoneyUnit.MKD");
+        MMK = new MoneyUnit(CurrencyUnit.getInstance("MMK"), "MoneyUnit.MMK");
+        MNT = new MoneyUnit(CurrencyUnit.getInstance("MNT"), "MoneyUnit.MNT");
+        MOP = new MoneyUnit(CurrencyUnit.getInstance("MOP"), "MoneyUnit.MOP");
+        MRO = new MoneyUnit(CurrencyUnit.getInstance("MRO"), "MoneyUnit.MRO");
+        MUR = new MoneyUnit(CurrencyUnit.getInstance("MUR"), "MoneyUnit.MUR");
+        MVR = new MoneyUnit(CurrencyUnit.getInstance("MVR"), "MoneyUnit.MVR");
+        MWK = new MoneyUnit(CurrencyUnit.getInstance("MWK"), "MoneyUnit.MWK");
+        MXN = new MoneyUnit(CurrencyUnit.getInstance("MXN"), "MoneyUnit.MXN");
+        MXV = new MoneyUnit(CurrencyUnit.getInstance("MXV"), "MoneyUnit.MXV");
+        MYR = new MoneyUnit(CurrencyUnit.getInstance("MYR"), "MoneyUnit.MYR");
+        MZN = new MoneyUnit(CurrencyUnit.getInstance("MZN"), "MoneyUnit.MZN");
+        NAD = new MoneyUnit(CurrencyUnit.getInstance("NAD"), "MoneyUnit.NAD");
+        NGN = new MoneyUnit(CurrencyUnit.getInstance("NGN"), "MoneyUnit.NGN");
+        NIO = new MoneyUnit(CurrencyUnit.getInstance("NIO"), "MoneyUnit.NIO");
+        NOK = new MoneyUnit(CurrencyUnit.getInstance("NOK"), "MoneyUnit.NOK");
+        NPR = new MoneyUnit(CurrencyUnit.getInstance("NPR"), "MoneyUnit.NPR");
+        NZD = new MoneyUnit(CurrencyUnit.getInstance("NZD"), "MoneyUnit.NZD");
+        OMR = new MoneyUnit(CurrencyUnit.getInstance("OMR"), "MoneyUnit.OMR");
+        PAB = new MoneyUnit(CurrencyUnit.getInstance("PAB"), "MoneyUnit.PAB");
+        PEN = new MoneyUnit(CurrencyUnit.getInstance("PEN"), "MoneyUnit.PEN");
+        PGK = new MoneyUnit(CurrencyUnit.getInstance("PGK"), "MoneyUnit.PGK");
+        PHP = new MoneyUnit(CurrencyUnit.getInstance("PHP"), "MoneyUnit.PHP");
+        PKR = new MoneyUnit(CurrencyUnit.getInstance("PKR"), "MoneyUnit.PKR");
+        PLN = new MoneyUnit(CurrencyUnit.getInstance("PLN"), "MoneyUnit.PLN");
+        PYG = new MoneyUnit(CurrencyUnit.getInstance("PYG"), "MoneyUnit.PYG");
+        QAR = new MoneyUnit(CurrencyUnit.getInstance("QAR"), "MoneyUnit.QAR");
+        RON = new MoneyUnit(CurrencyUnit.getInstance("RON"), "MoneyUnit.RON");
+        RSD = new MoneyUnit(CurrencyUnit.getInstance("RSD"), "MoneyUnit.RSD");
+        RUB = new MoneyUnit(CurrencyUnit.getInstance("RUB"), "MoneyUnit.RUB");
+        RWF = new MoneyUnit(CurrencyUnit.getInstance("RWF"), "MoneyUnit.RWF");
+        SAR = new MoneyUnit(CurrencyUnit.getInstance("SAR"), "MoneyUnit.SAR");
+        SBD = new MoneyUnit(CurrencyUnit.getInstance("SBD"), "MoneyUnit.SBD");
+        SCR = new MoneyUnit(CurrencyUnit.getInstance("SCR"), "MoneyUnit.SCR");
+        SDG = new MoneyUnit(CurrencyUnit.getInstance("SDG"), "MoneyUnit.SDG");
+        SEK = new MoneyUnit(CurrencyUnit.getInstance("SEK"), "MoneyUnit.SEK");
+        SGD = new MoneyUnit(CurrencyUnit.getInstance("SGD"), "MoneyUnit.SGD");
+        SHP = new MoneyUnit(CurrencyUnit.getInstance("SHP"), "MoneyUnit.SHP");
+        SLL = new MoneyUnit(CurrencyUnit.getInstance("SLL"), "MoneyUnit.SLL");
+        SOS = new MoneyUnit(CurrencyUnit.getInstance("SOS"), "MoneyUnit.SOS");
+        SRD = new MoneyUnit(CurrencyUnit.getInstance("SRD"), "MoneyUnit.SRD");
+        SSP = new MoneyUnit(CurrencyUnit.getInstance("SSP"), "MoneyUnit.SSP");
+        STD = new MoneyUnit(CurrencyUnit.getInstance("STD"), "MoneyUnit.STD");
+        SVC = new MoneyUnit(CurrencyUnit.getInstance("SVC"), "MoneyUnit.SVC");
+        SYP = new MoneyUnit(CurrencyUnit.getInstance("SYP"), "MoneyUnit.SYP");
+        SZL = new MoneyUnit(CurrencyUnit.getInstance("SZL"), "MoneyUnit.SZL");
+        THB = new MoneyUnit(CurrencyUnit.getInstance("THB"), "MoneyUnit.THB");
+        TJS = new MoneyUnit(CurrencyUnit.getInstance("TJS"), "MoneyUnit.TJS");
+        TMT = new MoneyUnit(CurrencyUnit.getInstance("TMT"), "MoneyUnit.TMT");
+        TND = new MoneyUnit(CurrencyUnit.getInstance("TND"), "MoneyUnit.TND");
+        TOP = new MoneyUnit(CurrencyUnit.getInstance("TOP"), "MoneyUnit.TOP");
+        TRY = new MoneyUnit(CurrencyUnit.getInstance("TRY"), "MoneyUnit.TRY");
+        TTD = new MoneyUnit(CurrencyUnit.getInstance("TTD"), "MoneyUnit.TTD");
+        TWD = new MoneyUnit(CurrencyUnit.getInstance("TWD"), "MoneyUnit.TWD");
+        TZS = new MoneyUnit(CurrencyUnit.getInstance("TZS"), "MoneyUnit.TZS");
+        UAH = new MoneyUnit(CurrencyUnit.getInstance("UAH"), "MoneyUnit.UAH");
+        UGX = new MoneyUnit(CurrencyUnit.getInstance("UGX"), "MoneyUnit.UGX");
+        USD = new MoneyUnit(CurrencyUnit.getInstance("USD"), "MoneyUnit.USD");
+        USN = new MoneyUnit(CurrencyUnit.getInstance("USN"), "MoneyUnit.USN");
+        UYI = new MoneyUnit(CurrencyUnit.getInstance("UYI"), "MoneyUnit.UYI");
+        UYU = new MoneyUnit(CurrencyUnit.getInstance("UYU"), "MoneyUnit.UYU");
+        UZS = new MoneyUnit(CurrencyUnit.getInstance("UZS"), "MoneyUnit.UZS");
+        VEF = new MoneyUnit(CurrencyUnit.getInstance("VEF"), "MoneyUnit.VEF");
+        VND = new MoneyUnit(CurrencyUnit.getInstance("VND"), "MoneyUnit.VND");
+        VUV = new MoneyUnit(CurrencyUnit.getInstance("VUV"), "MoneyUnit.VUV");
+        WST = new MoneyUnit(CurrencyUnit.getInstance("WST"), "MoneyUnit.WST");
+        XAF = new MoneyUnit(CurrencyUnit.getInstance("XAF"), "MoneyUnit.XAF");
+        XAG = new MoneyUnit(CurrencyUnit.getInstance("XAG"), "MoneyUnit.XAG");
+        XAU = new MoneyUnit(CurrencyUnit.getInstance("XAU"), "MoneyUnit.XAU");
+        XBA = new MoneyUnit(CurrencyUnit.getInstance("XBA"), "MoneyUnit.XBA");
+        XBB = new MoneyUnit(CurrencyUnit.getInstance("XBB"), "MoneyUnit.XBB");
+        XBC = new MoneyUnit(CurrencyUnit.getInstance("XBC"), "MoneyUnit.XBC");
+        XBD = new MoneyUnit(CurrencyUnit.getInstance("XBD"), "MoneyUnit.XBD");
+        XCD = new MoneyUnit(CurrencyUnit.getInstance("XCD"), "MoneyUnit.XCD");
+        XDR = new MoneyUnit(CurrencyUnit.getInstance("XDR"), "MoneyUnit.XDR");
+        XOF = new MoneyUnit(CurrencyUnit.getInstance("XOF"), "MoneyUnit.XOF");
+        XPD = new MoneyUnit(CurrencyUnit.getInstance("XPD"), "MoneyUnit.XPD");
+        XPF = new MoneyUnit(CurrencyUnit.getInstance("XPF"), "MoneyUnit.XPF");
+        XPT = new MoneyUnit(CurrencyUnit.getInstance("XPT"), "MoneyUnit.XPT");
+        XSU = new MoneyUnit(CurrencyUnit.getInstance("XSU"), "MoneyUnit.XSU");
+        XTS = new MoneyUnit(CurrencyUnit.getInstance("XTS"), "MoneyUnit.XTS");
+        XUA = new MoneyUnit(CurrencyUnit.getInstance("XUA"), "MoneyUnit.XUA");
+        XXX = new MoneyUnit(CurrencyUnit.getInstance("XXX"), "MoneyUnit.XXX");
+        YER = new MoneyUnit(CurrencyUnit.getInstance("YER"), "MoneyUnit.YER");
+        ZAR = new MoneyUnit(CurrencyUnit.getInstance("ZAR"), "MoneyUnit.ZAR");
+        ZMW = new MoneyUnit(CurrencyUnit.getInstance("ZMW"), "MoneyUnit.ZMW");
+        ZWL = new MoneyUnit(CurrencyUnit.getInstance("ZWL"), "MoneyUnit.ZWL");
+        XBT = new MoneyUnit(CurrencyUnit.getInstance("XBT"), "MoneyUnit.XBT");
 
         standardMoneyUnit = USD;
     }
@@ -777,16 +777,11 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
     /**
      * Define money unit.
      * @param currencyUnit CurrencyUnit; the joda-money CurrencyUnit on which this djunits unit is based
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
      * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private MoneyUnit(final CurrencyUnit currencyUnit, final String nameOrNameKey, final String abbreviationKey,
-            final boolean standardUnit)
+    private MoneyUnit(final CurrencyUnit currencyUnit, final String abbreviationKey)
     {
-        super(nameOrNameKey, abbreviationKey, UnitSystem.OTHER, standardUnit);
+        super(abbreviationKey, UnitSystem.OTHER);
         this.currencyUnit = currencyUnit;
         this.codeNumber = currencyUnit.getNumericCode();
         this.codeString = currencyUnit.getCode();
@@ -800,25 +795,24 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
      */
     public MoneyUnit(final CurrencyUnit currencyUnit, final String name, final String abbreviation)
     {
-        this(currencyUnit, name, abbreviation, false);
+        super(name, abbreviation, UnitSystem.OTHER);
+        this.currencyUnit = currencyUnit;
+        this.codeNumber = currencyUnit.getNumericCode();
+        this.codeString = currencyUnit.getCode();
     }
 
     /**
      * Build a money unit based on another money unit with a conversion factor.
      * @param currencyUnit CurrencyUnit; the joda-money CurrencyUnit on which this djunits unit is based
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
      * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param referenceUnit MoneyUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private MoneyUnit(final CurrencyUnit currencyUnit, final String nameOrNameKey, final String abbreviationKey,
-            final MoneyUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private MoneyUnit(final CurrencyUnit currencyUnit, final String abbreviationKey, final MoneyUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit, standardUnit);
+        super(abbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit);
         this.currencyUnit = currencyUnit;
         this.codeNumber = currencyUnit.getNumericCode();
         this.codeString = currencyUnit.getCode();
@@ -836,7 +830,10 @@ public class MoneyUnit extends LinearUnit<MoneyUnit>
     public MoneyUnit(final CurrencyUnit currencyUnit, final String name, final String abbreviation,
             final MoneyUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(currencyUnit, name, abbreviation, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit);
+        this.currencyUnit = currencyUnit;
+        this.codeNumber = currencyUnit.getNumericCode();
+        this.codeString = currencyUnit.getCode();
     }
 
     /**

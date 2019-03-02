@@ -40,11 +40,10 @@ public class MoneyPerLengthUnit extends LinearUnit<MoneyPerLengthUnit>
 
     static
     {
-        EUR_PER_METER = new MoneyPerLengthUnit(MoneyUnit.EUR, LengthUnit.METER, "EUR per meter", "\u20AC/m", false);
-        EUR_PER_KILOMETER =
-                new MoneyPerLengthUnit(MoneyUnit.EUR, LengthUnit.KILOMETER, "EUR per kilometer", "\u20AC/km", false);
-        USD_PER_MILE = new MoneyPerLengthUnit(MoneyUnit.USD, LengthUnit.MILE, "USD per mile", "US$/mi", false);
-        USD_PER_FOOT = new MoneyPerLengthUnit(MoneyUnit.USD, LengthUnit.FOOT, "USD per foot", "US$/ft", false);
+        EUR_PER_METER = new MoneyPerLengthUnit(MoneyUnit.EUR, LengthUnit.METER, "EUR per meter", "\u20AC/m");
+        EUR_PER_KILOMETER = new MoneyPerLengthUnit(MoneyUnit.EUR, LengthUnit.KILOMETER, "EUR per kilometer", "\u20AC/km");
+        USD_PER_MILE = new MoneyPerLengthUnit(MoneyUnit.USD, LengthUnit.MILE, "USD per mile", "US$/mi");
+        USD_PER_FOOT = new MoneyPerLengthUnit(MoneyUnit.USD, LengthUnit.FOOT, "USD per foot", "US$/ft");
         standardMoneyPerLengthUnit = EUR_PER_METER;
     }
 
@@ -52,18 +51,12 @@ public class MoneyPerLengthUnit extends LinearUnit<MoneyPerLengthUnit>
      * Build a money per length unit from a money unit and an length unit.
      * @param moneyUnit MoneyUnit; the unit of money for the money per length unit, e.g., EUR
      * @param lengthUnit LengthUnit; the unit of length for the money per length unit, e.g., meter
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      */
-    private MoneyPerLengthUnit(final MoneyUnit moneyUnit, final LengthUnit lengthUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final boolean standardUnit)
+    private MoneyPerLengthUnit(final MoneyUnit moneyUnit, final LengthUnit lengthUnit, final String abbreviationKey)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, standardMoneyPerLengthUnit,
-                moneyUnit.getScaleFactor() / lengthUnit.getScaleFactor(), standardUnit);
+        super(abbreviationKey, UnitSystem.OTHER, standardMoneyPerLengthUnit,
+                moneyUnit.getScaleFactor() / lengthUnit.getScaleFactor());
         this.moneyUnit = moneyUnit;
         this.lengthUnit = lengthUnit;
     }
@@ -78,26 +71,23 @@ public class MoneyPerLengthUnit extends LinearUnit<MoneyPerLengthUnit>
     public MoneyPerLengthUnit(final MoneyUnit moneyUnit, final LengthUnit lengthUnit, final String name,
             final String abbreviation)
     {
-        this(moneyUnit, lengthUnit, name, abbreviation, false);
+        super(name, abbreviation, UnitSystem.OTHER, standardMoneyPerLengthUnit,
+                moneyUnit.getScaleFactor() / lengthUnit.getScaleFactor());
+        this.moneyUnit = moneyUnit;
+        this.lengthUnit = lengthUnit;
     }
 
     /**
      * Build a MoneyPerLengthUnit unit based on another MoneyPerLengthUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param referenceUnit MoneyPerLengthUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private MoneyPerLengthUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final MoneyPerLengthUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private MoneyPerLengthUnit(final String abbreviationKey, final MoneyPerLengthUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit);
         this.moneyUnit = referenceUnit.getMoneyUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
     }
@@ -113,7 +103,9 @@ public class MoneyPerLengthUnit extends LinearUnit<MoneyPerLengthUnit>
     public MoneyPerLengthUnit(final String name, final String abbreviation, final MoneyPerLengthUnit referenceUnit,
             final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, UnitSystem.OTHER, referenceUnit, scaleFactorToReferenceUnit);
+        this.moneyUnit = referenceUnit.getMoneyUnit();
+        this.lengthUnit = referenceUnit.getLengthUnit();
     }
 
     /**

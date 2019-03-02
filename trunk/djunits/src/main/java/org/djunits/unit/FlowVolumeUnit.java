@@ -81,58 +81,41 @@ public class FlowVolumeUnit extends LinearUnit<FlowVolumeUnit>
 
     static
     {
-        SI = new FlowVolumeUnit(LengthUnit.METER, DurationUnit.SECOND, "FlowVolumeUnit.cubic_meter_per_second",
-                "FlowVolumeUnit.m^3/s", SI_DERIVED, true);
+        SI = new FlowVolumeUnit(LengthUnit.METER, DurationUnit.SECOND, "FlowVolumeUnit.m^3/s", SI_DERIVED);
         CUBIC_METER_PER_SECOND = SI;
-        CUBIC_METER_PER_MINUTE = new FlowVolumeUnit(LengthUnit.METER, DurationUnit.MINUTE,
-                "FlowVolumeUnit.cubic_meter_per_minute", "FlowVolumeUnit.m^3/min", SI_ACCEPTED, true);
-        CUBIC_METER_PER_HOUR = new FlowVolumeUnit(LengthUnit.METER, DurationUnit.HOUR, "FlowVolumeUnit.cubic_meter_per_hour",
-                "FlowVolumeUnit.m^3/h", SI_ACCEPTED, true);
-        CUBIC_METER_PER_DAY = new FlowVolumeUnit(LengthUnit.METER, DurationUnit.DAY, "FlowVolumeUnit.cubic_meter_per_day",
-                "FlowVolumeUnit.m^3/d", SI_ACCEPTED, true);
-        LITER_PER_SECOND = new FlowVolumeUnit(VolumeUnit.LITER, DurationUnit.SECOND, "FlowVolumeUnit.liter_per_second",
-                "FlowVolumeUnit.L/s", SI_ACCEPTED, true);
-        LITER_PER_MINUTE = new FlowVolumeUnit(VolumeUnit.LITER, DurationUnit.MINUTE, "FlowVolumeUnit.liter_per_minute",
-                "FlowVolumeUnit.L/min", SI_ACCEPTED, true);
-        LITER_PER_HOUR = new FlowVolumeUnit(VolumeUnit.LITER, DurationUnit.HOUR, "FlowVolumeUnit.liter_per_hour",
-                "FlowVolumeUnit.L/h", SI_ACCEPTED, true);
-        LITER_PER_DAY = new FlowVolumeUnit(VolumeUnit.LITER, DurationUnit.DAY, "FlowVolumeUnit.liter_per_day",
-                "FlowVolumeUnit.L/d", SI_ACCEPTED, true);
-        CUBIC_FEET_PER_SECOND = new FlowVolumeUnit(LengthUnit.FOOT, DurationUnit.SECOND, "FlowVolumeUnit.cubic_feet_per_second",
-                "FlowVolumeUnit.ft^3/s", IMPERIAL, true);
-        CUBIC_FEET_PER_MINUTE = new FlowVolumeUnit(LengthUnit.FOOT, DurationUnit.MINUTE, "FlowVolumeUnit.cubic_feet_per_minute",
-                "FlowVolumeUnit.ft^3/min", IMPERIAL, true);
-        CUBIC_INCH_PER_SECOND = new FlowVolumeUnit(LengthUnit.INCH, DurationUnit.SECOND, "FlowVolumeUnit.cubic_inch_per_second",
-                "FlowVolumeUnit.in^3/s", IMPERIAL, true);
-        CUBIC_INCH_PER_MINUTE = new FlowVolumeUnit(LengthUnit.INCH, DurationUnit.MINUTE, "FlowVolumeUnit.cubic_inch_per_minute",
-                "FlowVolumeUnit.in^3/min", IMPERIAL, true);
-        GALLON_PER_SECOND = new FlowVolumeUnit(VolumeUnit.GALLON_US_FLUID, DurationUnit.SECOND,
-                "FlowVolumeUnit.gallon_(US)_per_second", "FlowVolumeUnit.gal/s", US_CUSTOMARY, true);
-        GALLON_PER_MINUTE = new FlowVolumeUnit(VolumeUnit.GALLON_US_FLUID, DurationUnit.MINUTE,
-                "FlowVolumeUnit.gallon_(US)_per_minute", "FlowVolumeUnit.gal/min", US_CUSTOMARY, true);
-        GALLON_PER_HOUR = new FlowVolumeUnit(VolumeUnit.GALLON_US_FLUID, DurationUnit.HOUR,
-                "FlowVolumeUnit.gallon_(US)_per_hour", "FlowVolumeUnit.gal/h", US_CUSTOMARY, true);
-        GALLON_PER_DAY = new FlowVolumeUnit(VolumeUnit.GALLON_US_FLUID, DurationUnit.DAY, "FlowVolumeUnit.gallon_(US)_per_day",
-                "FlowVolumeUnit.gal/d", US_CUSTOMARY, true);
+        CUBIC_METER_PER_MINUTE =
+                new FlowVolumeUnit(LengthUnit.METER, DurationUnit.MINUTE, "FlowVolumeUnit.m^3/min", SI_ACCEPTED);
+        CUBIC_METER_PER_HOUR = new FlowVolumeUnit(LengthUnit.METER, DurationUnit.HOUR, "FlowVolumeUnit.m^3/h", SI_ACCEPTED);
+        CUBIC_METER_PER_DAY = new FlowVolumeUnit(LengthUnit.METER, DurationUnit.DAY, "FlowVolumeUnit.m^3/d", SI_ACCEPTED);
+        LITER_PER_SECOND = new FlowVolumeUnit(VolumeUnit.LITER, DurationUnit.SECOND, "FlowVolumeUnit.L/s", SI_ACCEPTED);
+        LITER_PER_MINUTE = new FlowVolumeUnit(VolumeUnit.LITER, DurationUnit.MINUTE, "FlowVolumeUnit.L/min", SI_ACCEPTED);
+        LITER_PER_HOUR = new FlowVolumeUnit(VolumeUnit.LITER, DurationUnit.HOUR, "FlowVolumeUnit.L/h", SI_ACCEPTED);
+        LITER_PER_DAY = new FlowVolumeUnit(VolumeUnit.LITER, DurationUnit.DAY, "FlowVolumeUnit.L/d", SI_ACCEPTED);
+        CUBIC_FEET_PER_SECOND = new FlowVolumeUnit(LengthUnit.FOOT, DurationUnit.SECOND, "FlowVolumeUnit.ft^3/s", IMPERIAL);
+        CUBIC_FEET_PER_MINUTE = new FlowVolumeUnit(LengthUnit.FOOT, DurationUnit.MINUTE, "FlowVolumeUnit.ft^3/min", IMPERIAL);
+        CUBIC_INCH_PER_SECOND = new FlowVolumeUnit(LengthUnit.INCH, DurationUnit.SECOND, "FlowVolumeUnit.in^3/s", IMPERIAL);
+        CUBIC_INCH_PER_MINUTE = new FlowVolumeUnit(LengthUnit.INCH, DurationUnit.MINUTE, "FlowVolumeUnit.in^3/min", IMPERIAL);
+        GALLON_PER_SECOND =
+                new FlowVolumeUnit(VolumeUnit.GALLON_US_FLUID, DurationUnit.SECOND, "FlowVolumeUnit.gal/s", US_CUSTOMARY);
+        GALLON_PER_MINUTE =
+                new FlowVolumeUnit(VolumeUnit.GALLON_US_FLUID, DurationUnit.MINUTE, "FlowVolumeUnit.gal/min", US_CUSTOMARY);
+        GALLON_PER_HOUR =
+                new FlowVolumeUnit(VolumeUnit.GALLON_US_FLUID, DurationUnit.HOUR, "FlowVolumeUnit.gal/h", US_CUSTOMARY);
+        GALLON_PER_DAY = new FlowVolumeUnit(VolumeUnit.GALLON_US_FLUID, DurationUnit.DAY, "FlowVolumeUnit.gal/d", US_CUSTOMARY);
     }
 
     /**
      * Create a flow-volumeunit based on length (cubed) per time unit.
      * @param lengthUnit LengthUnit; the unit of length for the flow unit, e.g., meter
      * @param durationUnit DurationUnit; the unit of time for the flow unit, e.g., second
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private FlowVolumeUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+    private FlowVolumeUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, final String abbreviationKey,
+            final UnitSystem unitSystem)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, CUBIC_METER_PER_SECOND,
-                Math.pow(lengthUnit.getScaleFactor(), 3.0) / durationUnit.getScaleFactor(), standardUnit);
+        super(abbreviationKey, unitSystem, CUBIC_METER_PER_SECOND,
+                Math.pow(lengthUnit.getScaleFactor(), 3.0) / durationUnit.getScaleFactor());
         this.lengthUnit = lengthUnit;
         this.durationUnit = durationUnit;
     }
@@ -148,26 +131,23 @@ public class FlowVolumeUnit extends LinearUnit<FlowVolumeUnit>
     public FlowVolumeUnit(final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
     {
-        this(lengthUnit, durationUnit, name, abbreviation, unitSystem, false);
+        super(name, abbreviation, unitSystem, CUBIC_METER_PER_SECOND,
+                Math.pow(lengthUnit.getScaleFactor(), 3.0) / durationUnit.getScaleFactor());
+        this.lengthUnit = lengthUnit;
+        this.durationUnit = durationUnit;
     }
 
     /**
      * Create a flow-volumeunit based as a volume unit per time unit.
      * @param volumeUnit VolumeUnit; the unit of volume for the flow unit, e.g., cubic meter
      * @param durationUnit DurationUnit; the unit of time for the flow unit, e.g., second
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private FlowVolumeUnit(final VolumeUnit volumeUnit, final DurationUnit durationUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+    private FlowVolumeUnit(final VolumeUnit volumeUnit, final DurationUnit durationUnit, final String abbreviationKey,
+            final UnitSystem unitSystem)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, CUBIC_METER_PER_SECOND,
-                volumeUnit.getScaleFactor() / durationUnit.getScaleFactor(), standardUnit);
+        super(abbreviationKey, unitSystem, CUBIC_METER_PER_SECOND, volumeUnit.getScaleFactor() / durationUnit.getScaleFactor());
         this.lengthUnit = volumeUnit.getLengthUnit();
         this.durationUnit = durationUnit;
     }
@@ -183,27 +163,24 @@ public class FlowVolumeUnit extends LinearUnit<FlowVolumeUnit>
     public FlowVolumeUnit(final VolumeUnit volumeUnit, final DurationUnit durationUnit, final String name,
             final String abbreviation, final UnitSystem unitSystem)
     {
-        this(volumeUnit, durationUnit, name, abbreviation, unitSystem, false);
+        super(name, abbreviation, unitSystem, CUBIC_METER_PER_SECOND,
+                volumeUnit.getScaleFactor() / durationUnit.getScaleFactor());
+        this.lengthUnit = volumeUnit.getLengthUnit();
+        this.durationUnit = durationUnit;
     }
 
     /**
      * Create a flow-volumeunit based on another flow-volumeunit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit FlowVolumeUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private FlowVolumeUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final FlowVolumeUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private FlowVolumeUnit(final String abbreviationKey, final UnitSystem unitSystem, final FlowVolumeUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
         this.lengthUnit = referenceUnit.getLengthUnit();
         this.durationUnit = referenceUnit.getDurationUnit();
     }
@@ -220,7 +197,9 @@ public class FlowVolumeUnit extends LinearUnit<FlowVolumeUnit>
     public FlowVolumeUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final FlowVolumeUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
+        this.lengthUnit = referenceUnit.getLengthUnit();
+        this.durationUnit = referenceUnit.getDurationUnit();
     }
 
     /**

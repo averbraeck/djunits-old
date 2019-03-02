@@ -23,7 +23,6 @@ public class FormatTest
     /**
      * Test that size, precision and accuracy are OK.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void format()
     {

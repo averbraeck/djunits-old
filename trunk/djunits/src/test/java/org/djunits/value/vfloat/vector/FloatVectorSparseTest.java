@@ -77,7 +77,6 @@ public class FloatVectorSparseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringAbsTest()
     {
@@ -102,7 +101,6 @@ public class FloatVectorSparseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringMutableAbsTest()
     {
@@ -195,7 +193,6 @@ public class FloatVectorSparseTest
     /**
      * Test conversion to mutable equivalent and back.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toMutableAndBackAbsTest()
     {
@@ -243,7 +240,6 @@ public class FloatVectorSparseTest
     /**
      * Test the equals method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void equalsAbsTest()
     {
@@ -272,7 +268,6 @@ public class FloatVectorSparseTest
     /**
      * Test the Math functions.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void mathFunctionsTestAbsTest()
     {
@@ -334,7 +329,6 @@ public class FloatVectorSparseTest
     /**
      * Test plus(FloatVectorAbs.Sparse, FloatVectorRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfAbsSparseAndRelDenseTest()
     {
@@ -361,7 +355,6 @@ public class FloatVectorSparseTest
     /**
      * Test minus(FloatVectorAbs.Sparse, FloatVectorRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfAbsSparseAndRelDenseTest()
     {
@@ -388,7 +381,6 @@ public class FloatVectorSparseTest
     /**
      * Test plus(FloatVectorAbs.Sparse, FloatVectorRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfAbsSparseAndRelSparseTest()
     {
@@ -415,7 +407,6 @@ public class FloatVectorSparseTest
     /**
      * Test minus(FloatVectorAbs.Sparse, FloatVectorRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfAbsSparseAndRelSparseTest()
     {
@@ -442,7 +433,6 @@ public class FloatVectorSparseTest
     /**
      * Test that malformed or mismatching arrays throw a ValueException.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void sizeCheckAbsTest()
     {
@@ -465,7 +455,6 @@ public class FloatVectorSparseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringRelTest()
     {
@@ -489,7 +478,6 @@ public class FloatVectorSparseTest
     /**
      * Test that the toString method returns something sensible.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toStringMutableRelTest()
     {
@@ -572,7 +560,6 @@ public class FloatVectorSparseTest
     /**
      * Test conversion to mutable equivalent and back.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void toMutableAndBackRelTest()
     {
@@ -618,7 +605,6 @@ public class FloatVectorSparseTest
     /**
      * Test the equals method.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void equalsRelTest()
     {
@@ -645,7 +631,6 @@ public class FloatVectorSparseTest
     /**
      * Test the Math functions.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void mathFunctionsTestRelTest()
     {
@@ -717,7 +702,6 @@ public class FloatVectorSparseTest
     /**
      * Test plus(FloatVectorRel.Sparse, FloatVectorRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfRelSparseAndRelDenseTest()
     {
@@ -743,7 +727,6 @@ public class FloatVectorSparseTest
     /**
      * Test minus(FloatVectorRel.Sparse, FloatVectorRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfRelSparseAndRelDenseTest()
     {
@@ -769,7 +752,6 @@ public class FloatVectorSparseTest
     /**
      * Test times(FloatVectorRel.Sparse, FloatVectorRel.Dense).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binarytimesOfRelSparseAndRelDenseTest()
     {
@@ -795,7 +777,6 @@ public class FloatVectorSparseTest
     /**
      * Test plus(FloatVectorRel.Sparse, FloatVectorRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryplusOfRelSparseAndRelSparseTest()
     {
@@ -821,7 +802,6 @@ public class FloatVectorSparseTest
     /**
      * Test minus(FloatVectorRel.Sparse, FloatVectorRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binaryminusOfRelSparseAndRelSparseTest()
     {
@@ -847,7 +827,6 @@ public class FloatVectorSparseTest
     /**
      * Test times(FloatVectorRel.Sparse, FloatVectorRel.Sparse).
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void binarytimesOfRelSparseAndRelSparseTest()
     {
@@ -873,7 +852,6 @@ public class FloatVectorSparseTest
     /**
      * Test that malformed or mismatching arrays throw a ValueException.
      */
-    @SuppressWarnings("static-method")
     @Test
     public final void sizeCheckRelTest()
     {

@@ -90,63 +90,43 @@ public class PositionUnit extends AbsoluteLinearUnit<PositionUnit, LengthUnit>
 
     static
     {
-        BASE = new PositionUnit("PositionUnit.base", "PositionUnit.base", OTHER, 1.0, 0.0, LengthUnit.METER);
-        METER = new PositionUnit("PositionUnit.meter", "PositionUnit.m", OTHER, 1.0, 0.0, true, LengthUnit.METER);
-        ATTOMETER =
-                new PositionUnit("PositionUnit.attometer", "PositionUnit.am", OTHER, 1.0E-18, 0.0, true, LengthUnit.ATTOMETER);
-        FEMTOMETER = new PositionUnit("PositionUnit.femtometer", "PositionUnit.fm", OTHER, 1.0E-15, 0.0, true,
-                LengthUnit.FEMTOMETER);
-        PICOMETER =
-                new PositionUnit("PositionUnit.picometer", "PositionUnit.pm", OTHER, 1.0E-12, 0.0, true, LengthUnit.PICOMETER);
-        NANOMETER =
-                new PositionUnit("PositionUnit.nanometer", "PositionUnit.nm", OTHER, 1.0E-9, 0.0, true, LengthUnit.NANOMETER);
-        MICROMETER = new PositionUnit("PositionUnit.micrometer", "PositionUnit.mum", OTHER, 1.0E-6, 0.0, true,
-                LengthUnit.MICROMETER);
-        MILLIMETER =
-                new PositionUnit("PositionUnit.millimeter", "PositionUnit.mm", OTHER, 0.001, 0.0, true, LengthUnit.MILLIMETER);
-        CENTIMETER =
-                new PositionUnit("PositionUnit.centimeter", "PositionUnit.cm", OTHER, 0.01, 0.0, true, LengthUnit.CENTIMETER);
-        DECIMETER = new PositionUnit("PositionUnit.decimeter", "PositionUnit.dm", OTHER, 0.1, 0.0, true, LengthUnit.DECIMETER);
-        DEKAMETER =
-                new PositionUnit("PositionUnit.dekameter", "PositionUnit.dam", OTHER, 10.0, 0.0, true, LengthUnit.DEKAMETER);
-        HECTOMETER =
-                new PositionUnit("PositionUnit.hectometer", "PositionUnit.hm", OTHER, 100.0, 0.0, true, LengthUnit.HECTOMETER);
-        KILOMETER =
-                new PositionUnit("PositionUnit.kilometer", "PositionUnit.km", OTHER, 1000.0, 0.0, true, LengthUnit.KILOMETER);
-        MEGAMETER = new PositionUnit("PositionUnit.megameter", "PositionUnit.Mm", OTHER, 1000000.0, 0.0, true,
-                LengthUnit.MEGAMETER);
-        FOOT = new PositionUnit("PositionUnit.foot", "PositionUnit.ft", OTHER, 0.3048, 0.0, true, LengthUnit.FOOT);
-        INCH = new PositionUnit("PositionUnit.inch", "PositionUnit.in", OTHER, 0.3048 / 12.0, 0.0, true, LengthUnit.INCH);
-        MILE = new PositionUnit("PositionUnit.mile", "PositionUnit.mi", OTHER, 0.3048 * 5280.0, 0.0, true, LengthUnit.MILE);
-        YARD = new PositionUnit("PositionUnit.yard", "PositionUnit.yd", OTHER, 0.3048 * 3.0, 0.0, true, LengthUnit.YARD);
-        NAUTICAL_MILE = new PositionUnit("PositionUnit.nauticalMile", "PositionUnit.NM", OTHER, 1852.0, 0.0, true,
-                LengthUnit.NAUTICAL_MILE);
-        ASTRONOMICAL_UNIT = new PositionUnit("PositionUnit.astronomicalUnit", "PositionUnit.AU", OTHER, 149597870700.0, 0.0,
-                true, LengthUnit.ASTRONOMICAL_UNIT);
-        LIGHTYEAR = new PositionUnit("PositionUnit.lightyear", "PositionUnit.ly", OTHER, 9460730472580800.0, 0.0, true,
-                LengthUnit.LIGHTYEAR);
-        PARSEC = new PositionUnit("PositionUnit.parsec", "PositionUnit.pc", OTHER, 648000 / Math.PI, 0.0, true,
-                LengthUnit.PARSEC);
-        ANGSTROM = new PositionUnit("PositionUnit.angstrom", "PositionUnit.A", OTHER, 1E-10, 0.0, true, LengthUnit.ANGSTROM);
+        METER = new PositionUnit("PositionUnit.m", OTHER, 1.0, 0.0, LengthUnit.METER);
+        BASE = METER;
+        ATTOMETER = new PositionUnit("PositionUnit.am", OTHER, 1.0E-18, 0.0, LengthUnit.ATTOMETER);
+        FEMTOMETER = new PositionUnit("PositionUnit.fm", OTHER, 1.0E-15, 0.0, LengthUnit.FEMTOMETER);
+        PICOMETER = new PositionUnit("PositionUnit.pm", OTHER, 1.0E-12, 0.0, LengthUnit.PICOMETER);
+        NANOMETER = new PositionUnit("PositionUnit.nm", OTHER, 1.0E-9, 0.0, LengthUnit.NANOMETER);
+        MICROMETER = new PositionUnit("PositionUnit.mum", OTHER, 1.0E-6, 0.0, LengthUnit.MICROMETER);
+        MILLIMETER = new PositionUnit("PositionUnit.mm", OTHER, 0.001, 0.0, LengthUnit.MILLIMETER);
+        CENTIMETER = new PositionUnit("PositionUnit.cm", OTHER, 0.01, 0.0, LengthUnit.CENTIMETER);
+        DECIMETER = new PositionUnit("PositionUnit.dm", OTHER, 0.1, 0.0, LengthUnit.DECIMETER);
+        DEKAMETER = new PositionUnit("PositionUnit.dam", OTHER, 10.0, 0.0, LengthUnit.DEKAMETER);
+        HECTOMETER = new PositionUnit("PositionUnit.hm", OTHER, 100.0, 0.0, LengthUnit.HECTOMETER);
+        KILOMETER = new PositionUnit("PositionUnit.km", OTHER, 1000.0, 0.0, LengthUnit.KILOMETER);
+        MEGAMETER = new PositionUnit("PositionUnit.Mm", OTHER, 1000000.0, 0.0, LengthUnit.MEGAMETER);
+        FOOT = new PositionUnit("PositionUnit.ft", OTHER, 0.3048, 0.0, LengthUnit.FOOT);
+        INCH = new PositionUnit("PositionUnit.in", OTHER, 0.3048 / 12.0, 0.0, LengthUnit.INCH);
+        MILE = new PositionUnit("PositionUnit.mi", OTHER, 0.3048 * 5280.0, 0.0, LengthUnit.MILE);
+        YARD = new PositionUnit("PositionUnit.yd", OTHER, 0.3048 * 3.0, 0.0, LengthUnit.YARD);
+        NAUTICAL_MILE = new PositionUnit("PositionUnit.NM", OTHER, 1852.0, 0.0, LengthUnit.NAUTICAL_MILE);
+        ASTRONOMICAL_UNIT = new PositionUnit("PositionUnit.AU", OTHER, 149597870700.0, 0.0, LengthUnit.ASTRONOMICAL_UNIT);
+        LIGHTYEAR = new PositionUnit("PositionUnit.ly", OTHER, 9460730472580800.0, 0.0, LengthUnit.LIGHTYEAR);
+        PARSEC = new PositionUnit("PositionUnit.pc", OTHER, 648000 / Math.PI, 0.0, LengthUnit.PARSEC);
+        ANGSTROM = new PositionUnit("PositionUnit.A", OTHER, 1E-10, 0.0, LengthUnit.ANGSTROM);
     }
 
     /**
      * Build a PositionUnit with a scale factor and offset to the base PositionUnit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param scaleFactor double; multiply a value in this unit by the factor to convert to the given reference unit
      * @param offset double; the offset to the reference unit to add to convert to the standard (e.g., BASE) unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      * @param relativeUnit LengthUnit; the corresponding relative unit belonging to this absolute unit
      */
-    private PositionUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final double scaleFactor, final double offset, final boolean standardUnit, final LengthUnit relativeUnit)
+    private PositionUnit(final String abbreviationKey, final UnitSystem unitSystem, final double scaleFactor,
+            final double offset, final LengthUnit relativeUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, scaleFactor, offset, standardUnit, relativeUnit);
+        super(abbreviationKey, unitSystem, scaleFactor, offset, relativeUnit);
     }
 
     /**
@@ -161,7 +141,7 @@ public class PositionUnit extends AbsoluteLinearUnit<PositionUnit, LengthUnit>
     public PositionUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final double scaleFactor,
             final double offset, final LengthUnit relativeUnit)
     {
-        this(name, abbreviation, unitSystem, scaleFactor, offset, false, relativeUnit);
+        super(name, abbreviation, unitSystem, scaleFactor, offset, relativeUnit);
     }
 
     /** {@inheritDoc} */

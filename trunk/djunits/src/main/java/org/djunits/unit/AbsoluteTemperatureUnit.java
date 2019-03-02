@@ -41,38 +41,30 @@ public class AbsoluteTemperatureUnit extends AbsoluteLinearUnit<AbsoluteTemperat
 
     static
     {
-        BASE = new AbsoluteTemperatureUnit("AbsoluteTemperatureUnit.kelvin", "AbsoluteTemperatureUnit.K", OTHER, 1.0, 0.0, true,
-                TemperatureUnit.KELVIN);
+        BASE = new AbsoluteTemperatureUnit("AbsoluteTemperatureUnit.K", OTHER, 1.0, 0.0, TemperatureUnit.KELVIN);
         KELVIN = BASE;
-        DEGREE_CELSIUS = new AbsoluteTemperatureUnit("AbsoluteTemperatureUnit.degree_Celsius", "AbsoluteTemperatureUnit.dgC",
-                SI_DERIVED, 1.0, 273.15, true, TemperatureUnit.DEGREE_CELSIUS);
-        DEGREE_FAHRENHEIT = new AbsoluteTemperatureUnit("AbsoluteTemperatureUnit.degree_Fahrenheit",
-                "AbsoluteTemperatureUnit.dgF", IMPERIAL, 5.0 / 9.0, 459.67, true, TemperatureUnit.DEGREE_FAHRENHEIT);
-        DEGREE_RANKINE = new AbsoluteTemperatureUnit("AbsoluteTemperatureUnit.degree_Rankine", "AbsoluteTemperatureUnit.dgR",
-                OTHER, 5.0 / 9.0, 0.0, true, TemperatureUnit.DEGREE_RANKINE);
-        DEGREE_REAUMUR = new AbsoluteTemperatureUnit("AbsoluteTemperatureUnit.degree_Reaumur", "AbsoluteTemperatureUnit.dgRe",
-                OTHER, 4.0 / 5.0, 273.15, true, TemperatureUnit.DEGREE_REAUMUR);
+        DEGREE_CELSIUS = new AbsoluteTemperatureUnit("AbsoluteTemperatureUnit.dgC", SI_DERIVED, 1.0, 273.15,
+                TemperatureUnit.DEGREE_CELSIUS);
+        DEGREE_FAHRENHEIT = new AbsoluteTemperatureUnit("AbsoluteTemperatureUnit.dgF", IMPERIAL, 5.0 / 9.0, 459.67,
+                TemperatureUnit.DEGREE_FAHRENHEIT);
+        DEGREE_RANKINE = new AbsoluteTemperatureUnit("AbsoluteTemperatureUnit.dgR", OTHER, 5.0 / 9.0, 0.0,
+                TemperatureUnit.DEGREE_RANKINE);
+        DEGREE_REAUMUR = new AbsoluteTemperatureUnit("AbsoluteTemperatureUnit.dgRe", OTHER, 4.0 / 5.0, 273.15,
+                TemperatureUnit.DEGREE_REAUMUR);
     }
 
     /**
      * Build a AbsoluteTemperatureUnit with a conversion factor and offset to Kelvin.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param conversionFactorToStandardUnit double; multiply by this number to convert to the standard unit
      * @param offsetToStandardUnit double; the offsetToKelvin to add to convert to the standard (e.g., SI) unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      * @param relativeUnit TemperatureUnit; the corresponding relative unit belonging to this absolute unit
      */
-    private AbsoluteTemperatureUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey,
-            final UnitSystem unitSystem, final double conversionFactorToStandardUnit, final double offsetToStandardUnit,
-            final boolean standardUnit, final TemperatureUnit relativeUnit)
+    private AbsoluteTemperatureUnit(final String abbreviationKey, final UnitSystem unitSystem,
+            final double conversionFactorToStandardUnit, final double offsetToStandardUnit, final TemperatureUnit relativeUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, conversionFactorToStandardUnit, offsetToStandardUnit,
-                standardUnit, relativeUnit);
+        super(abbreviationKey, unitSystem, conversionFactorToStandardUnit, offsetToStandardUnit, relativeUnit);
     }
 
     /**
@@ -87,7 +79,7 @@ public class AbsoluteTemperatureUnit extends AbsoluteLinearUnit<AbsoluteTemperat
     public AbsoluteTemperatureUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final double conversionFactorToStandardUnit, final double offsetToKelvin, final TemperatureUnit relativeUnit)
     {
-        this(name, abbreviation, unitSystem, conversionFactorToStandardUnit, offsetToKelvin, false, relativeUnit);
+        super(name, abbreviation, unitSystem, conversionFactorToStandardUnit, offsetToKelvin, relativeUnit);
     }
 
     /** {@inheritDoc} */

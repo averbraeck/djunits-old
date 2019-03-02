@@ -36,30 +36,23 @@ public class DensityUnit extends LinearUnit<DensityUnit>
 
     static
     {
-        SI = new DensityUnit(MassUnit.KILOGRAM, LengthUnit.METER, "DensityUnit.kilogram_per_cubic_meter", "DensityUnit.kg/m^3",
-                SI_DERIVED, true);
+        SI = new DensityUnit(MassUnit.KILOGRAM, LengthUnit.METER, "DensityUnit.kg/m^3", SI_DERIVED);
         KG_PER_METER_3 = SI;
-        GRAM_PER_CENTIMETER_3 = new DensityUnit(MassUnit.GRAM, LengthUnit.CENTIMETER, "DensityUnit.gram_per_cubic_centimeter",
-                "DensityUnit.g/cm^3", SI_DERIVED, true);
+        GRAM_PER_CENTIMETER_3 = new DensityUnit(MassUnit.GRAM, LengthUnit.CENTIMETER, "DensityUnit.g/cm^3", SI_DERIVED);
     }
 
     /**
      * Define density unit based on mass and length. You can define units like kg/m^3 here.
      * @param massUnit MassUnit; the unit of mass for the density unit, e.g., kg
      * @param lengthUnit LengthUnit; the unit of length for the density unit, e.g., meter
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private DensityUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final String nameOrNameKey,
-            final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem, final boolean standardUnit)
+    private DensityUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final String abbreviationKey,
+            final UnitSystem unitSystem)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, KG_PER_METER_3,
-                massUnit.getScaleFactor() / Math.pow(lengthUnit.getScaleFactor(), 3.0), standardUnit);
+        super(abbreviationKey, unitSystem, KG_PER_METER_3,
+                massUnit.getScaleFactor() / Math.pow(lengthUnit.getScaleFactor(), 3.0));
         this.massUnit = massUnit;
         this.lengthUnit = lengthUnit;
     }
@@ -75,27 +68,24 @@ public class DensityUnit extends LinearUnit<DensityUnit>
     public DensityUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final String name, final String abbreviation,
             final UnitSystem unitSystem)
     {
-        this(massUnit, lengthUnit, name, abbreviation, unitSystem, false);
+        super(name, abbreviation, unitSystem, KG_PER_METER_3,
+                massUnit.getScaleFactor() / Math.pow(lengthUnit.getScaleFactor(), 3.0));
+        this.massUnit = massUnit;
+        this.lengthUnit = lengthUnit;
     }
 
     /**
      * Build a unit with a conversion factor to another unit.
-     * @param nameOrNameKey String; if standardUnit: the key to the locale file for the long name of the unit, otherwise the
-     *            name itself
-     * @param abbreviationOrAbbreviationKey String; if standardUnit: the key to the locale file for the abbreviation of the
-     *            unit, otherwise the abbreviation itself
+     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
      * @param referenceUnit DensityUnit; the unit to convert to
      * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
      *            unit
-     * @param standardUnit boolean; indicates whether it is a standard unit with a definition in the locale, or a user-defined
-     *            unit
      */
-    private DensityUnit(final String nameOrNameKey, final String abbreviationOrAbbreviationKey, final UnitSystem unitSystem,
-            final DensityUnit referenceUnit, final double scaleFactorToReferenceUnit, final boolean standardUnit)
+    private DensityUnit(final String abbreviationKey, final UnitSystem unitSystem, final DensityUnit referenceUnit,
+            final double scaleFactorToReferenceUnit)
     {
-        super(nameOrNameKey, abbreviationOrAbbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit,
-                standardUnit);
+        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
         this.massUnit = referenceUnit.getMassUnit();
         this.lengthUnit = referenceUnit.getLengthUnit();
     }
@@ -112,7 +102,9 @@ public class DensityUnit extends LinearUnit<DensityUnit>
     public DensityUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
             final DensityUnit referenceUnit, final double scaleFactorToReferenceUnit)
     {
-        this(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit, false);
+        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
+        this.massUnit = referenceUnit.getMassUnit();
+        this.lengthUnit = referenceUnit.getLengthUnit();
     }
 
     /**

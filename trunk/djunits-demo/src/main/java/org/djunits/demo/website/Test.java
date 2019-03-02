@@ -3,7 +3,6 @@ package org.djunits.demo.website;
 import org.djunits.unit.LengthUnit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.vdouble.matrix.LengthMatrix;
 import org.djunits.value.vdouble.matrix.MutableLengthMatrix;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
 import org.djunits.value.vdouble.vector.DoubleVector;
@@ -19,8 +18,13 @@ import org.djunits.value.vdouble.vector.DoubleVector;
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  * @author <a href="http://www.transport.citg.tudelft.nl">Wouter Schakel</a>
  */
-public class Test
+public final class Test
 {
+    /** */
+    private Test()
+    {
+        // utility class
+    }
 
     /**
      * @param args String[]; args
@@ -29,12 +33,17 @@ public class Test
     public static void main(final String[] args) throws ValueException
     {
         DoubleScalar.Rel<JerkUnit> jerk1 = new DoubleScalar.Rel<>(1.2, JerkUnit.SI);
+        System.out.println("jerk1 = new DoubleScalar.Rel<>(1.2, JerkUnit.SI) : " + jerk1);
         DoubleScalar.Rel<JerkUnit> jerk2 = jerk1.multiplyBy(2.0);
-        double[] sv = new double[] { 1, 2, 3, 4, 5 };
+        System.out.println("jerk2 = jerk1.multiplyBy(2.0)                    : " + jerk2);
+        double[] sv = new double[] {1, 2, 3, 4, 5};
         DoubleVector.Rel<JerkUnit> jerkVector = new DoubleVector.Rel<JerkUnit>(sv, JerkUnit.SI, StorageType.DENSE);
+        System.out.println("jerkVector: : " + jerkVector);
 
         Jerk jjerk1 = new Jerk(1.2, JerkUnit.SI);
+        System.out.println("jerk1 = new Jerk(1.2, JerkUnit.SI) : " + jjerk1);
         Jerk jjerk2 = jjerk1.multiplyBy(2.0);
+        System.out.println("jerk2 = jerk1.multiplyBy(2.0)      : " + jjerk2);
 
         double[][] data = new double[1000][1000];
         for (int i = 0; i < 1000; i++)
