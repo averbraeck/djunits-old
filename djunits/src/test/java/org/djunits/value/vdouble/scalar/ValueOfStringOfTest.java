@@ -152,6 +152,7 @@ public class ValueOfStringOfTest
                 Scalar<?> value = null;
                 try
                 {
+                    System.out.println("Calling " + scalarClass.getName() + ".valueOf(" + scalarString + ")");
                     value = (Scalar<?>) valueOfMethod.invoke(scalarClass, scalarString);
                 }
                 catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
