@@ -282,6 +282,8 @@
           <excludes>
             <exclude>**/IT*.java</exclude>
           </excludes>
+          <!-- Make sure every unit test is run as a separate process to avoid static leaks between tests -->
+          <forkMode>always</forkMode>
         </configuration>
       </plugin>
 
