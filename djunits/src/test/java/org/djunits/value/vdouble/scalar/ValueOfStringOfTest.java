@@ -45,7 +45,7 @@ public class ValueOfStringOfTest
     public final void durationValueOfTest()
     {
         Duration duration = new Duration(10.0, DurationUnit.MINUTE);
-        assertEquals("10.0min", Scalar.stringOf(duration));
+        assertEquals("10.0 min", Scalar.stringOf(duration));
         assertEquals(duration, Duration.valueOf(Scalar.stringOf(duration)));
     }
 
@@ -137,7 +137,7 @@ public class ValueOfStringOfTest
                 {
                     fail("textualStringOfDefaultLocale for scalar " + scalarUnit + " failed for Scalar class " + classPath);
                 }
-                assertEquals("1.0" + unitRep, scalarString);
+                assertEquals("1.0" + " " + unitRep, scalarString);
 
                 // find the valueOf method
                 Method valueOfMethod = null;
