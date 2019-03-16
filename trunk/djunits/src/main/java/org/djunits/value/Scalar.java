@@ -109,7 +109,7 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
      */
     public static <U extends Unit<U>> String stringOf(final Scalar<U> value)
     {
-        return value.expressAsSpecifiedUnit(value.doubleValue()) + value.getUnit().getAbbreviation();
+        return value.expressAsSpecifiedUnit(value.doubleValue()) + " " + value.getUnit().getAbbreviation();
     }
 
     /**
@@ -122,7 +122,7 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
      */
     public static <U extends Unit<U>> String stringOfDefaultLocale(final Scalar<U> value)
     {
-        return value.expressAsSpecifiedUnit(value.doubleValue()) + value.getUnit().getDefaultLocaleAbbreviation();
+        return value.expressAsSpecifiedUnit(value.doubleValue()) + " " + value.getUnit().getDefaultLocaleAbbreviation();
     }
 
     /**
@@ -135,7 +135,7 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
      */
     public static <U extends Unit<U>> String textualStringOf(final Scalar<U> value)
     {
-        return value.expressAsSpecifiedUnit(value.doubleValue()) + value.getUnit().getDefaultTextualRepresentation();
+        return value.expressAsSpecifiedUnit(value.doubleValue()) + " " + value.getUnit().getDefaultTextualRepresentation();
     }
 
     /**
@@ -148,7 +148,7 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
      */
     public static <U extends Unit<U>> String textualStringOfDefaultLocale(final Scalar<U> value)
     {
-        return value.expressAsSpecifiedUnit(value.doubleValue()) + value.getUnit().getDefaultLocaleTextualRepresentation();
+        return value.expressAsSpecifiedUnit(value.doubleValue()) + " " + value.getUnit().getDefaultLocaleTextualRepresentation();
     }
 
     // No hashcode or equals -- has to be implemented on a deeper level

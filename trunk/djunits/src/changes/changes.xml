@@ -2,6 +2,13 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.01.01" date="2019-03-16" description="stringOf methods have space between number and unit">
+      <action dev="averbraeck" type="fix">
+        The Scalar.stringOf methods now have a space between the number and the unit, so "2.3 rad" 
+        instead of "2.3rad".
+      </action>
+    </release>
+    
     <release version="3.01.00" date="2019-03-02" description="Unit constructor and localizations changed">
       <action dev="averbraeck" type="fix">
         The surefire test plugin in the pom file has forkMode set to 'always' to ensure every unit test 
