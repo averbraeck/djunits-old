@@ -19,6 +19,9 @@ import org.djunits.value.vfloat.FloatFunction;
  */
 public class FloatVectorDataDense extends FloatVectorData
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /**
      * Create a vector with dense data.
      * @param vectorSI float[]; the data to store

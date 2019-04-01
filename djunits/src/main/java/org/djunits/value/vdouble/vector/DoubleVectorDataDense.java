@@ -19,6 +19,9 @@ import org.djunits.value.vdouble.DoubleFunction;
  */
 public class DoubleVectorDataDense extends DoubleVectorData
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /**
      * Create a vector with dense data.
      * @param vectorSI double[]; the data to store

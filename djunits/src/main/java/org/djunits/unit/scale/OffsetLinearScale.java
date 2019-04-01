@@ -15,6 +15,9 @@ package org.djunits.unit.scale;
  */
 public class OffsetLinearScale extends LinearScale implements Scale
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+    
     /** The offset that has to be taken into account for conversions, multiplied by the conversionFactorToStandardUnit. */
     private final double offsetToStandardUnit;
 

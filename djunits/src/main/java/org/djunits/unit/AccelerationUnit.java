@@ -57,7 +57,7 @@ public class AccelerationUnit extends LinearUnit<AccelerationUnit>
     /** standard gravity. */
     public static final AccelerationUnit STANDARD_GRAVITY;
 
-    /** standard gravity. */
+    /** cm/s. */
     public static final AccelerationUnit GAL;
 
     static

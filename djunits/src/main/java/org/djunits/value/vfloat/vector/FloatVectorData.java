@@ -1,5 +1,6 @@
 package org.djunits.value.vfloat.vector;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.SortedMap;
@@ -21,8 +22,11 @@ import org.djunits.value.vfloat.scalar.FloatScalarInterface;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-abstract class FloatVectorData
+abstract class FloatVectorData implements Serializable
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /** the internal storage of the Vector; can be sparse or dense. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected float[] vectorSI;
