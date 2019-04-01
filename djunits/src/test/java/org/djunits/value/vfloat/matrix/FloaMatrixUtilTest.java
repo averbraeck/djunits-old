@@ -79,11 +79,11 @@ public class FloaMatrixUtilTest
 
         FloatDirectionMatrix direction = FloatMatrixUtil.instantiate(a1020, DirectionUnit.BASE, StorageType.DENSE);
         assertEquals("Direction", 10.0f, direction.getSI(0, 0), 0.001d);
-        direction = FloatMatrixUtil.instantiate(a12, DirectionUnit.NORTH_DEGREE, StorageType.DENSE);
+        direction = FloatMatrixUtil.instantiate(a12, DirectionUnit.EAST_DEGREE, StorageType.DENSE);
         assertEquals("Direction", Math.PI / 180.0f, direction.getSI(0, 0), 0.001d);
-        direction = FloatMatrixUtil.instantiateSI(a1020, DirectionUnit.NORTH_DEGREE, StorageType.DENSE);
+        direction = FloatMatrixUtil.instantiateSI(a1020, DirectionUnit.EAST_DEGREE, StorageType.DENSE);
         assertEquals("Direction", 10.0f, direction.getSI(0, 0), 0.001d);
-        assertSame("Direction", DirectionUnit.NORTH_DEGREE, direction.getUnit());
+        assertSame("Direction", DirectionUnit.EAST_DEGREE, direction.getUnit());
 
         FloatAreaMatrix area = FloatMatrixUtil.instantiate(a1020, AreaUnit.SI, StorageType.DENSE);
         assertEquals("Area", 10.0f, area.getSI(0, 0), 0.001d);

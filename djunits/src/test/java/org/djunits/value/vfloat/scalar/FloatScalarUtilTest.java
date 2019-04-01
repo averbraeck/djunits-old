@@ -69,11 +69,11 @@ public class FloatScalarUtilTest
 
         FloatDirection direction = FloatScalarUtil.instantiate(10.0f, DirectionUnit.BASE);
         assertEquals("Direction", 10.0f, direction.si, 0.001d);
-        direction = FloatScalarUtil.instantiate(1.0f, DirectionUnit.NORTH_DEGREE);
+        direction = FloatScalarUtil.instantiate(1.0f, DirectionUnit.EAST_DEGREE);
         assertEquals("Direction", Math.PI / 180.0, direction.si, 0.001d);
-        direction = FloatScalarUtil.instantiateSI(10.0f, DirectionUnit.NORTH_DEGREE);
+        direction = FloatScalarUtil.instantiateSI(10.0f, DirectionUnit.EAST_DEGREE);
         assertEquals("Direction", 10.0f, direction.si, 0.001d);
-        assertSame("Direction", DirectionUnit.NORTH_DEGREE, direction.getUnit());
+        assertSame("Direction", DirectionUnit.EAST_DEGREE, direction.getUnit());
 
         FloatArea area = FloatScalarUtil.instantiate(10.0f, AreaUnit.SI);
         assertEquals("Area", 10.0f, area.si, 0.001d);

@@ -70,11 +70,11 @@ public class DoubleScalarUtilTest
 
         Direction direction = DoubleScalarUtil.instantiate(10.0, DirectionUnit.BASE);
         assertEquals("Direction", 10.0, direction.si, 0.0001d);
-        direction = DoubleScalarUtil.instantiate(1.0, DirectionUnit.NORTH_DEGREE);
+        direction = DoubleScalarUtil.instantiate(1.0, DirectionUnit.EAST_DEGREE);
         assertEquals("Direction", Math.PI / 180.0, direction.si, 0.001d);
-        direction = DoubleScalarUtil.instantiateSI(10.0, DirectionUnit.NORTH_DEGREE);
+        direction = DoubleScalarUtil.instantiateSI(10.0, DirectionUnit.EAST_DEGREE);
         assertEquals("Direction", 10.0, direction.si, 0.0001d);
-        assertSame("Direction", DirectionUnit.NORTH_DEGREE, direction.getUnit());
+        assertSame("Direction", DirectionUnit.EAST_DEGREE, direction.getUnit());
 
         Area area = DoubleScalarUtil.instantiate(10.0, AreaUnit.SI);
         assertEquals("Area", 10.0, area.si, 0.0001d);
