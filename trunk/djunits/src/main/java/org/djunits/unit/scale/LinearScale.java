@@ -17,6 +17,9 @@ package org.djunits.unit.scale;
  */
 public class LinearScale implements Scale
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+    
     /** multiply by this number to convert to the standard (e.g., SI) unit. */
     private final double conversionFactorToStandardUnit;
 

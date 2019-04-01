@@ -19,6 +19,9 @@ import org.djunits.value.ValueException;
  */
 public class DoubleVectorDataSparse extends DoubleVectorData
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /** the index values of the Vector. */
     private int[] indices;
 
@@ -255,7 +258,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
+    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
     @Override
     public boolean equals(final Object obj)
     {

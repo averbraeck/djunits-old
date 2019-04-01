@@ -2,6 +2,20 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.01.02" date="2019-04-01" description="DirectionUnit repaired; serializable">
+      <action dev="averbraeck" type="fix">
+        The DirectionUnit gave wrong results for Northing versus Easting. Easting has now been taken as
+        the BASE direction whereas Northing shows a shift of 90 degrees. All units are counter-clockwise.
+        A DirectionTest and DirectionUnitTest have been added to check the correctness.  
+      </action>
+      <action dev="averbraeck" type="fix">
+        Several classes were not serializable. A unit test now checks all (outer) classes that are
+        not interfaces, abstract classes, or classes with a private constructor (utility classes)
+        for the implementation of the Serializable interface. Classes that were not serializable
+        have been adapted.
+      </action>
+    </release>
+    
     <release version="3.01.01" date="2019-03-16" description="stringOf methods have space between number and unit">
       <action dev="averbraeck" type="fix">
         The Scalar.stringOf methods now have a space between the number and the unit, so "2.3 rad" 

@@ -13,6 +13,9 @@ package org.djunits.unit.scale;
  */
 public class StandardScale extends LinearScale
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+    
     /** a ready-to-use instance of the standard scale (they are all the same...). */
     public static final StandardScale SCALE = new StandardScale();
 

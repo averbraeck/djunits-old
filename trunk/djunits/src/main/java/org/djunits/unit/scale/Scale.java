@@ -1,5 +1,7 @@
 package org.djunits.unit.scale;
 
+import java.io.Serializable;
+
 /**
  * Scales for unit conversion, offers functions to and from SI units. E.g., LinearScale for Length, Area, etc. LinearOffsetScale
  * for Temperature. PercentScale for Angle. LogarithmicScale for Sound.
@@ -12,7 +14,7 @@ package org.djunits.unit.scale;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public interface Scale
+public interface Scale extends Serializable
 {
     /**
      * Convert a value to an SI value using this scale.

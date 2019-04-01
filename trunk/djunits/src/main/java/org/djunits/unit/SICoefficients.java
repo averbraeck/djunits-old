@@ -1,5 +1,6 @@
 package org.djunits.unit;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 
 /**
@@ -11,8 +12,11 @@ import java.util.EnumMap;
  * initial version Jun 15, 2014 <br>
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class SICoefficients
+public class SICoefficients implements Serializable
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+    
     /** the map with SI base units and corresponding coefficients. */
     private final EnumMap<SI, Integer> coefficientsMap;
 

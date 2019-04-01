@@ -1,5 +1,6 @@
 package org.djunits.locale;
 
+import java.io.Serializable;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -15,8 +16,11 @@ import java.util.ResourceBundle;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class Localization
+public class Localization implements Serializable
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /** filename without .properties, to be found in src/main/resources folder. */
     private final String bundleNamePrefix;
 

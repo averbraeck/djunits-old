@@ -19,6 +19,9 @@ import org.djunits.value.vdouble.DoubleFunction;
  */
 public class DoubleMatrixDataDense extends DoubleMatrixData
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /**
      * Create a matrix with dense data.
      * @param matrixSI double[]; the data to store

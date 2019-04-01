@@ -19,6 +19,9 @@ import org.djunits.value.vfloat.FloatFunction;
  */
 public class FloatMatrixDataDense extends FloatMatrixData
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /**
      * Create a matrix with dense data.
      * @param matrixSI float[]; the data to store

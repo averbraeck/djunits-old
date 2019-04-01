@@ -19,6 +19,9 @@ import org.djunits.value.ValueException;
  */
 public class FloatVectorDataSparse extends FloatVectorData
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /** the index values of the Vector. */
     private int[] indices;
 

@@ -1,5 +1,6 @@
 package org.djunits.value.vdouble.matrix;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
@@ -19,8 +20,11 @@ import org.djunits.value.vdouble.scalar.DoubleScalarInterface;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-abstract class DoubleMatrixData
+abstract class DoubleMatrixData implements Serializable
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /** the internal storage of the Matrix; can be sparse or dense. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected double[] matrixSI;
