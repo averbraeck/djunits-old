@@ -79,11 +79,11 @@ public class DoubleMatrixUtilTest
 
         DirectionMatrix direction = DoubleMatrixUtil.instantiate(a1020, DirectionUnit.BASE, StorageType.DENSE);
         assertEquals("Direction", 10.0, direction.getSI(0, 0), 0.0001d);
-        direction = DoubleMatrixUtil.instantiate(a12, DirectionUnit.NORTH_DEGREE, StorageType.DENSE);
+        direction = DoubleMatrixUtil.instantiate(a12, DirectionUnit.EAST_DEGREE, StorageType.DENSE);
         assertEquals("Direction", Math.PI / 180.0, direction.getSI(0, 0), 0.001d);
-        direction = DoubleMatrixUtil.instantiateSI(a1020, DirectionUnit.NORTH_DEGREE, StorageType.DENSE);
+        direction = DoubleMatrixUtil.instantiateSI(a1020, DirectionUnit.EAST_DEGREE, StorageType.DENSE);
         assertEquals("Direction", 10.0, direction.getSI(0, 0), 0.0001d);
-        assertSame("Direction", DirectionUnit.NORTH_DEGREE, direction.getUnit());
+        assertSame("Direction", DirectionUnit.EAST_DEGREE, direction.getUnit());
 
         AreaMatrix area = DoubleMatrixUtil.instantiate(a1020, AreaUnit.SI, StorageType.DENSE);
         assertEquals("Area", 10.0, area.getSI(0, 0), 0.0001d);
