@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="3.01.03" date="2019-04021" description="DirectionUnit human readable improved">
+    <release version="3.01.03" date="2019-04-21" description="DirectionUnit human readable improved">
       <action dev="averbraeck" type="update">
         The human readable form of the DirectionUnit has been improved. The old form was e.g. East(deg)
         which is not logical, as the unit is degree, w.r.t. the East. Therefore, the units have been 
