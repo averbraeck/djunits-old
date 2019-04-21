@@ -39,7 +39,7 @@ public class DirectionUnitTest extends AbstractUnitTest<DirectionUnit>
     @Test
     public final void keys()
     {
-        checkKeys(DirectionUnit.EAST_RADIAN, "DirectionUnit.East(rad)", "DirectionUnit.East(rad)");
+        checkKeys(DirectionUnit.EAST_RADIAN, "DirectionUnit.rad(East))", "DirectionUnit.rad(East)");
     }
 
     /**
@@ -66,11 +66,11 @@ public class DirectionUnitTest extends AbstractUnitTest<DirectionUnit>
     @Test
     public final void conversions()
     {
-        checkUnitValueNameAndAbbreviation(DirectionUnit.EAST_RADIAN, 1.0, 0.00001, "East(rad)", "East(rad)");
-        checkUnitValueNameAndAbbreviation(DirectionUnit.EAST_DEGREE, Math.PI / 180.0, 0.00001, "East(deg)", "East(deg)");
-        checkUnitValueNameAndAbbreviation(DirectionUnit.NORTH_RADIAN, 1.0 + Math.PI / 2.0, 0.00001, "North(rad)", "North(rad)");
-        checkUnitValueNameAndAbbreviation(DirectionUnit.NORTH_DEGREE, Math.PI / 2.0 + Math.PI / 180.0, 0.00001, "North(deg)",
-                "North(deg)");
+        checkUnitValueNameAndAbbreviation(DirectionUnit.EAST_RADIAN, 1.0, 0.00001, "rad(East)", "rad");
+        checkUnitValueNameAndAbbreviation(DirectionUnit.EAST_DEGREE, Math.PI / 180.0, 0.00001, "deg(East)", "deg");
+        checkUnitValueNameAndAbbreviation(DirectionUnit.NORTH_RADIAN, 1.0 + Math.PI / 2.0, 0.00001, "rad(North)", "rad(N)");
+        checkUnitValueNameAndAbbreviation(DirectionUnit.NORTH_DEGREE, Math.PI / 2.0 + Math.PI / 180.0, 0.00001, "deg(North)",
+                "deg(N)");
     }
 
     /**
