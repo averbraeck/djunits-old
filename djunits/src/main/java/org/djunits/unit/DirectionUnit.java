@@ -39,11 +39,11 @@ public class DirectionUnit extends AbsoluteLinearUnit<DirectionUnit, AngleUnit>
 
     static
     {
-        EAST_RADIAN = new DirectionUnit("DirectionUnit.East(rad)", OTHER, 1.0, 0.0, AngleUnit.RADIAN);
+        EAST_RADIAN = new DirectionUnit("DirectionUnit.rad(East)", OTHER, 1.0, 0.0, AngleUnit.RADIAN);
         BASE = EAST_RADIAN;
-        EAST_DEGREE = new DirectionUnit("DirectionUnit.East(deg)", OTHER, Math.PI / 180.0, 0.0, AngleUnit.DEGREE);
-        NORTH_RADIAN = new DirectionUnit("DirectionUnit.North(rad)", OTHER, 1.0, Math.PI / 2.0, AngleUnit.RADIAN);
-        NORTH_DEGREE = new DirectionUnit("DirectionUnit.North(deg)", OTHER, Math.PI / 180.0, 90.0, AngleUnit.DEGREE);
+        EAST_DEGREE = new DirectionUnit("DirectionUnit.deg(East)", OTHER, Math.PI / 180.0, 0.0, AngleUnit.DEGREE);
+        NORTH_RADIAN = new DirectionUnit("DirectionUnit.rad(North)", OTHER, 1.0, Math.PI / 2.0, AngleUnit.RADIAN);
+        NORTH_DEGREE = new DirectionUnit("DirectionUnit.deg(North)", OTHER, Math.PI / 180.0, 90.0, AngleUnit.DEGREE);
     }
 
     /**

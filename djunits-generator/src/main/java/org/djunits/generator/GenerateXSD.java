@@ -32,6 +32,11 @@ public class GenerateXSD
        DurationUnit.s  = s   | second
        DurationUnit.m  = min | minute | min | m
      */
+    
+    /**
+     * @param args String[]; not used
+     * @throws FileNotFoundException in case we cannot find the djunits project
+     */
     public static void main(final String[] args) throws FileNotFoundException
     {
         makeAbsolutePath();
@@ -77,60 +82,36 @@ public class GenerateXSD
 
                 if (line.contains("="))
                 {
-                    /*-
-                       <xsd:simpleType name="SPEEDTYPE"> 
-                         <xsd:restriction base="xsd:string">
-                           <xsd:pattern value="\d+\.?\d*\s*(km/h|m/s|mi/h|ft/s)"></xsd:pattern>
-                         </xsd:restriction>
-                       </xsd:simpleType>
-                     */
-
-                    String key = line.split("=")[0].trim().split("\\.")[0];
-                    String val = line.split("=")[1].trim();
-                    String[] vals = val.split("\\|");
-                    if (!typeStr.equals(key))
-                    {
-                        // new type
-                        if (typeStr.length() > 0)
-                        {
-                            if (typeStr.startsWith("Dimension"))
-                                pw.write("\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n");
-                            else
-                                pw.write(")\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n");
-                        }
-                        typeStr = key;
-                        String type = key.replace("Unit", "TYPE").toUpperCase();
-                        pw.write("  <xsd:simpleType name=\"" + type + "\">\n");
-                        pw.write("     <xsd:restriction base=\"xsd:string\">\n");
-                        if (type.equals("DIMENSIONLESSTYPE"))
-                            pw.write("      <xsd:pattern value=\"[+-]?\\d+\\.?\\d*\\s*");
-                        else
-                        {
-                            pw.write("      <xsd:pattern value=\"[+-]?\\d+\\.?\\d*\\s*(");
-                            if (vals.length > 2)
-                            {
-                                pw.write(escape(vals[2]));
-                                for (int i = 3; i < vals.length; i++)
-                                    pw.write("|" + escape(vals[i]));
-                            }
-                            else
-                                pw.write(escape(vals[0]));
-                        }
-                    }
-                    else
-                    {
-                        if (vals.length > 2)
-                        {
-                            for (int i = 2; i < vals.length; i++)
-                                pw.write("|" + escape(vals[i]));
-                        }
-                        else
-                            pw.write("|" + escape(vals[0]));
-                    }
-                    System.out.println(vals[0]);
+                    typeStr = writeType(pw, line, typeStr, false);
                 }
                 line = br.readLine();
             }
+            if (typeStr.length() > 0)
+            {
+                pw.write(")\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n");
+                pw.write("  <!-- ==================================== POSITIVE TYPES ===================================== -->\n");
+                pw.write("\n");
+            }
+         
+            br.close();
+            br = new BufferedReader(new FileReader(in));
+            typeStr = "";
+            line = br.readLine();
+            while (line != null)
+            {
+                if (line.startsWith("#"))
+                {
+                    line = br.readLine();
+                    continue;
+                }
+
+                if (line.contains("="))
+                {
+                    typeStr = writeType(pw, line, typeStr, true);
+                }
+                line = br.readLine();
+            }
+            
             if (typeStr.length() > 0)
             {
                 pw.write(")\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n" + "</xsd:schema>\n");
@@ -145,6 +126,76 @@ public class GenerateXSD
         {
             exception.printStackTrace();
         }
+    }
+
+    /**
+     * Write a unit to the file, with or without [+-]?
+     * @param pw the file to write to
+     * @param typeStrOrig the previous the unit we were looking at
+     * @param line the line from the preoperties file 
+     * @param plus with or without [+-]?
+     * @return the unit we are looking at
+     */
+    private static String writeType(final PrintWriter pw, final String line, final String typeStrOrig, final boolean plus)
+    {
+        /*-
+        <xsd:simpleType name="SPEEDTYPE"> 
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\d+\.?\d*\s*(km/h|m/s|mi/h|ft/s)"></xsd:pattern>
+          </xsd:restriction>
+        </xsd:simpleType>
+        */
+
+        String typeStr = typeStrOrig;
+        String key = line.split("=")[0].trim().split("\\.")[0];
+        String val = line.split("=")[1].trim();
+        String[] vals = val.split("\\|");
+        if (!typeStr.equals(key))
+        {
+            // new type
+            if (typeStr.length() > 0)
+            {
+                if (typeStr.startsWith("Dimension"))
+                    pw.write("\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n");
+                else
+                    pw.write(")\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n");
+            }
+            typeStr = key;
+            String type = key.replace("Unit", "TYPE").toUpperCase();
+            if (plus)
+            {
+                type = "POSITIVE" + type;
+            }
+            pw.write("  <xsd:simpleType name=\"" + type + "\">\n");
+            pw.write("     <xsd:restriction base=\"xsd:string\">\n");
+            String plusmin = plus ? "" : "[+-]?";
+            if (type.contains("DIMENSIONLESSTYPE"))
+                pw.write("      <xsd:pattern value=\"" + plusmin + "[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?\\s*");
+            else
+            {
+                pw.write("      <xsd:pattern value=\"" + plusmin + "[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?\\s*(");
+                if (vals.length > 2)
+                {
+                    pw.write(escape(vals[2]));
+                    for (int i = 3; i < vals.length; i++)
+                        pw.write("|" + escape(vals[i]));
+                }
+                else
+                    pw.write(escape(vals[0]));
+            }
+        }
+        else
+        {
+            if (vals.length > 2)
+            {
+                for (int i = 2; i < vals.length; i++)
+                    pw.write("|" + escape(vals[i]));
+            }
+            else
+                pw.write("|" + escape(vals[0]));
+        }
+        System.out.println(vals[0]);
+        return typeStr;
     }
 
     /** the characters to escape. */

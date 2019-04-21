@@ -2,6 +2,30 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.01.03" date="2019-04021" description="DirectionUnit human readable improved">
+      <action dev="averbraeck" type="update">
+        The human readable form of the DirectionUnit has been improved. The old form was e.g. East(deg)
+        which is not logical, as the unit is degree, w.r.t. the East. Therefore, the units have been 
+        changed to:
+<![CDATA[
+<pre>
+DirectionUnit.rad(North) = rad(North) | rad(N)
+DirectionUnit.rad(East) = rad(East) | rad(E) | rad | radian
+DirectionUnit.deg(North) = deg(North) | deg(N)
+DirectionUnit.deg(East) = deg(East) | deg(E) | deg | degree 
+</pre>
+]]>
+      </action>
+      <action dev="averbraeck" type="update">
+        The GenerateXSD program in the djunits-generator project now also generates unit dependent 
+        XML that can only have positive values or zero. 
+      </action>
+      <action dev="averbraeck" type="update">
+        The GenerateXSD program in the djunits-generator project now also generates the possibility
+        to use the E-notation, e.g. "1.0E+6 meter". 
+      </action>
+    </release>
+    
     <release version="3.01.02" date="2019-04-01" description="DirectionUnit repaired; serializable">
       <action dev="averbraeck" type="fix">
         The DirectionUnit gave wrong results for Northing versus Easting. Easting has now been taken as
