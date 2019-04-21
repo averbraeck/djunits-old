@@ -174,25 +174,23 @@ public class GenerateXSD
             else
             {
                 pw.write("      <xsd:pattern value=\"" + plusmin + "[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?\\s*(");
+                pw.write(escape(vals[0]));
                 if (vals.length > 2)
                 {
                     pw.write(escape(vals[2]));
                     for (int i = 3; i < vals.length; i++)
                         pw.write("|" + escape(vals[i]));
                 }
-                else
-                    pw.write(escape(vals[0]));
             }
         }
         else
         {
+            pw.write("|" + escape(vals[0]));
             if (vals.length > 2)
             {
                 for (int i = 2; i < vals.length; i++)
                     pw.write("|" + escape(vals[i]));
             }
-            else
-                pw.write("|" + escape(vals[0]));
         }
         System.out.println(vals[0]);
         return typeStr;
