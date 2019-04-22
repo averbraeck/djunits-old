@@ -32,7 +32,7 @@ public class GenerateXSD
        DurationUnit.s  = s   | second
        DurationUnit.m  = min | minute | min | m
      */
-    
+
     /**
      * @param args String[]; not used
      * @throws FileNotFoundException in case we cannot find the djunits project
@@ -66,7 +66,7 @@ public class GenerateXSD
             pw.write("  xmlns=\"http://www.djunits.org/djunits\" elementFormDefault=\"qualified\">\n");
             pw.write("\n");
             pw.write("  <!-- ========================================================================================= -->\n");
-            pw.write("  <!-- ===================================== DJUNITS TYPES ===================================== -->\n");
+            pw.write("  <!-- ==================================== DJUNITS UNIT TYPES ================================= -->\n");
             pw.write("  <!-- ========================================================================================= -->\n");
             pw.write("\n");
 
@@ -82,17 +82,21 @@ public class GenerateXSD
 
                 if (line.contains("="))
                 {
-                    typeStr = writeType(pw, line, typeStr, false);
+                    typeStr = writeType(pw, line, typeStr);
                 }
                 line = br.readLine();
             }
+
             if (typeStr.length() > 0)
             {
                 pw.write(")\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n");
-                pw.write("  <!-- ==================================== POSITIVE TYPES ===================================== -->\n");
-                pw.write("\n");
             }
-         
+
+            pw.write("  <!-- ========================================================================================= -->\n");
+            pw.write("  <!-- ================================== DJUNITS SCALAR TYPES ================================= -->\n");
+            pw.write("  <!-- ========================================================================================= -->\n");
+            pw.write("\n");
+
             br.close();
             br = new BufferedReader(new FileReader(in));
             typeStr = "";
@@ -107,11 +111,40 @@ public class GenerateXSD
 
                 if (line.contains("="))
                 {
-                    typeStr = writeType(pw, line, typeStr, true);
+                    typeStr = writeScalar(pw, line, typeStr, false);
                 }
                 line = br.readLine();
             }
-            
+
+            if (typeStr.length() > 0)
+            {
+                pw.write(")\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n");
+            }
+
+            pw.write("  <!-- ========================================================================================= -->\n");
+            pw.write("  <!-- ============================= DJUNITS POSITIVE SCALAR TYPES ============================= -->\n");
+            pw.write("  <!-- ========================================================================================= -->\n");
+            pw.write("\n");
+
+            br.close();
+            br = new BufferedReader(new FileReader(in));
+            typeStr = "";
+            line = br.readLine();
+            while (line != null)
+            {
+                if (line.startsWith("#"))
+                {
+                    line = br.readLine();
+                    continue;
+                }
+
+                if (line.contains("="))
+                {
+                    typeStr = writeScalar(pw, line, typeStr, true);
+                }
+                line = br.readLine();
+            }
+
             if (typeStr.length() > 0)
             {
                 pw.write(")\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n" + "</xsd:schema>\n");
@@ -129,14 +162,14 @@ public class GenerateXSD
     }
 
     /**
-     * Write a unit to the file, with or without [+-]?
+     * Write a scalar with unit to the file, with or without [+-]?
      * @param pw the file to write to
      * @param typeStrOrig the previous the unit we were looking at
-     * @param line the line from the preoperties file 
+     * @param line the line from the preoperties file
      * @param plus with or without [+-]?
      * @return the unit we are looking at
      */
-    private static String writeType(final PrintWriter pw, final String line, final String typeStrOrig, final boolean plus)
+    private static String writeScalar(final PrintWriter pw, final String line, final String typeStrOrig, final boolean plus)
     {
         /*-
         <xsd:simpleType name="SPEEDTYPE"> 
@@ -145,6 +178,11 @@ public class GenerateXSD
           </xsd:restriction>
         </xsd:simpleType>
         */
+
+        if (line.startsWith("Money") || line.startsWith("Dimension"))
+        {
+            return typeStrOrig;
+        }
 
         String typeStr = typeStrOrig;
         String key = line.split("=")[0].trim().split("\\.")[0];
@@ -169,27 +207,98 @@ public class GenerateXSD
             pw.write("  <xsd:simpleType name=\"" + type + "\">\n");
             pw.write("     <xsd:restriction base=\"xsd:string\">\n");
             String plusmin = plus ? "" : "[+-]?";
-            if (type.contains("DIMENSIONLESSTYPE"))
+            if (type.contains("DIMENSIONLESS"))
                 pw.write("      <xsd:pattern value=\"" + plusmin + "[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?\\s*");
             else
             {
                 pw.write("      <xsd:pattern value=\"" + plusmin + "[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?\\s*(");
-                pw.write(escape(vals[0]));
                 if (vals.length > 2)
                 {
                     pw.write(escape(vals[2]));
                     for (int i = 3; i < vals.length; i++)
                         pw.write("|" + escape(vals[i]));
                 }
+                else
+                {
+                    pw.write(escape(vals[0]));
+                }
             }
         }
         else
         {
-            pw.write("|" + escape(vals[0]));
             if (vals.length > 2)
             {
                 for (int i = 2; i < vals.length; i++)
                     pw.write("|" + escape(vals[i]));
+            }
+            else
+            {
+                pw.write("|" + escape(vals[0]));
+            }
+        }
+        System.out.println(vals[0]);
+        return typeStr;
+    }
+
+    /**
+     * Write a unit type to the file
+     * @param pw the file to write to
+     * @param typeStrOrig the previous the unit we were looking at
+     * @param line the line from the preoperties file
+     * @return the unit we are looking at
+     */
+    private static String writeType(final PrintWriter pw, final String line, final String typeStrOrig)
+    {
+        /*-
+          <xsd:simpleType name="SPEEDUNITTYPE">
+            <xsd:restriction base="xsd:string">
+              <xsd:pattern value="(m/s|km/h|mi/h|ft/s|kt|m/h|km/s|mi/min|in/min|ft/min|ft/h|mi/s|in/h|in/s)"></xsd:pattern>
+            </xsd:restriction>
+          </xsd:simpleType>
+        */
+
+        if (line.startsWith("Money") || line.startsWith("Dimension"))
+        {
+            return typeStrOrig;
+        }
+
+        String typeStr = typeStrOrig;
+        String key = line.split("=")[0].trim().split("\\.")[0];
+        String val = line.split("=")[1].trim();
+        String[] vals = val.split("\\|");
+        if (!typeStr.equals(key))
+        {
+            // new type
+            if (typeStr.length() > 0)
+            {
+                pw.write(")\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n");
+            }
+            typeStr = key;
+            String type = key.replace("Unit", "UNITTYPE").toUpperCase();
+            pw.write("  <xsd:simpleType name=\"" + type + "\">\n");
+            pw.write("     <xsd:restriction base=\"xsd:string\">\n");
+            pw.write("      <xsd:pattern value=\"(");
+            if (vals.length > 2)
+            {
+                pw.write(escape(vals[2]));
+                for (int i = 3; i < vals.length; i++)
+                    pw.write("|" + escape(vals[i]));
+            }
+            else
+            {
+                pw.write(escape(vals[0]));
+            }
+        }
+        else
+        {
+            if (vals.length > 2)
+            {
+                for (int i = 2; i < vals.length; i++)
+                    pw.write("|" + escape(vals[i]));
+            }
+            else
+            {
+                pw.write("|" + escape(vals[0]));
             }
         }
         System.out.println(vals[0]);

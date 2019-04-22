@@ -415,9 +415,10 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * @return the textual display types of the unit. In case the list contains more than one abbreviation, the first one is the
-     *         default one. In case none is available, the standard abbreviation is used. In case that one is also not available
-     *         the abbreviation key is used.
+     * Return the textual display types of the unit. In case the list contains more than one abbreviation, the first one is the
+     * default one. In case none is available, the standard abbreviation is used. In case that one is also not available the
+     * abbreviation key is used. Note: the abbreviation itself is not necessarily a <b>textual</b> representation.
+     * @return the textual display types of the unit
      */
     public final List<String> getTextualRepresentations()
     {
@@ -447,9 +448,11 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * @return the textual display types of the unit in the default locale; In case the list contains more than one
-     *         abbreviation, the first one is the default one. In case none is available, the standard abbreviation is used. In
-     *         case that one is also not available the abbreviation key is used.
+     * Return the textual display types of the unit in the default locale. In case the list contains more than one abbreviation,
+     * the first one is the default one. In case none is available, the standard abbreviation is used. In case that one is also
+     * not available the abbreviation key is used. Note: the abbreviation itself is not necessarily a <b>textual</b>
+     * representation.
+     * @return the textual display types of the unit in the default locale
      */
     public final List<String> getDefaultLocaleTextualRepresentations()
     {
@@ -474,9 +477,10 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * @return the default textual display representation of the unit; In case there are more textual representations, the first
-     *         one is the default one. In case none is available, the standard abbreviation is used. In case that one is also
-     *         not available the abbreviation key is used.
+     * Return the default textual display representation of the unit. In case there are more textual representations, the first
+     * one is the default one. In case none is available, the standard abbreviation is used. In case that one is also not
+     * available the abbreviation key is used. Note: the abbreviation itself is not necessarily a <b>textual</b> representation.
+     * @return the default textual display representation of the unit
      */
     public final String getDefaultTextualRepresentation()
     {
@@ -501,9 +505,11 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * @return the default textual display representation of the unit in the default locale; In case there are more textual
-     *         representations, the first one is the default one. In case none is available, the standard abbreviation is used.
-     *         In case that one is also not available the abbreviation key is used.
+     * Return the default textual display representation of the unit in the default locale. In case there are more textual
+     * representations, the first one is the default one. In case none is available, the standard abbreviation is used. In case
+     * that one is also not available the abbreviation key is used. Note: the abbreviation itself is not necessarily a
+     * <b>textual</b> representation.
+     * @return the default textual display representation of the unit in the default locale
      */
     public final String getDefaultLocaleTextualRepresentation()
     {
