@@ -26,4 +26,61 @@ public class DirectionTest
         Direction directionN10 = new Direction(10.0, DirectionUnit.NORTH_DEGREE);
         assertEquals("10 degrees North should be pi*100/180 radians", Math.PI * (100.0 / 180.0), directionN10.si, 0.0001);
     }
+    
+    /**
+     * Check the conversions and counter clockwise direction.
+     */
+    @Test
+    public final void testDirectionStringConversions()
+    {
+        assertEquals(0.0, Direction.valueOf("0.0 deg").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("180 deg").si, 0.0001);
+        assertEquals(0.0, Direction.valueOf("0.0deg").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("180deg").si, 0.0001);
+        
+        assertEquals(0.0, Direction.valueOf("0.0 deg(E)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("180 deg(E)").si, 0.0001);
+        assertEquals(0.0, Direction.valueOf("0.0deg(E)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("180deg(E)").si, 0.0001);
+
+        assertEquals(0.0, Direction.valueOf("0.0 deg(East)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("180 deg(East)").si, 0.0001);
+        assertEquals(0.0, Direction.valueOf("0.0deg(East)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("180deg(East)").si, 0.0001);
+
+        assertEquals(0.0, Direction.valueOf("0.0 rad").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("3.1415927 rad").si, 0.0001);
+        assertEquals(0.0, Direction.valueOf("0.0rad").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("3.1415927rad").si, 0.0001);
+        
+        assertEquals(0.0, Direction.valueOf("0.0 rad(E)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("3.1415927 rad(E)").si, 0.0001);
+        assertEquals(0.0, Direction.valueOf("0.0rad(E)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("3.1415927rad(E)").si, 0.0001);
+
+        assertEquals(0.0, Direction.valueOf("0.0 rad(East)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("3.1415927 rad(East)").si, 0.0001);
+        assertEquals(0.0, Direction.valueOf("0.0rad(East)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("3.1415927rad(East)").si, 0.0001);
+        
+        assertEquals(0.5 * Math.PI, Direction.valueOf("0.0 deg(N)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("90 deg(N)").si, 0.0001);
+        assertEquals(0.5 * Math.PI, Direction.valueOf("0.0deg(N)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("90deg(N)").si, 0.0001);
+
+        assertEquals(0.5 * Math.PI, Direction.valueOf("0.0 deg(North)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("90 deg(North)").si, 0.0001);
+        assertEquals(0.5 * Math.PI, Direction.valueOf("0.0deg(North)").si, 0.0001);
+        assertEquals(Math.PI, Direction.valueOf("90deg(North)").si, 0.0001);
+        
+        assertEquals(0.5 * Math.PI, Direction.valueOf("0.0 rad(N)").si, 0.0001);
+        assertEquals(1.5 * Math.PI, Direction.valueOf("3.1415927 rad(N)").si, 0.0001);
+        assertEquals(0.5 * Math.PI, Direction.valueOf("0.0rad(N)").si, 0.0001);
+        assertEquals(1.5 * Math.PI, Direction.valueOf("3.1415927rad(N)").si, 0.0001);
+
+        assertEquals(0.5 * Math.PI, Direction.valueOf("0.0 rad(North)").si, 0.0001);
+        assertEquals(1.5 * Math.PI, Direction.valueOf("3.1415927 rad(North)").si, 0.0001);
+        assertEquals(0.5 * Math.PI, Direction.valueOf("0.0rad(North)").si, 0.0001);
+        assertEquals(1.5 * Math.PI, Direction.valueOf("3.1415927rad(North)").si, 0.0001);
+}
 }
