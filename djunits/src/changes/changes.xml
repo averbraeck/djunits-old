@@ -2,6 +2,13 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="3.01.05" date="2019-08-XX" description="Inverse units, new Money handling">
+      <action dev="averbraeck" type="update">
+        ojalgo and joda-money have been updated to new versions. Code has been slightly adapted
+        to handle new matrix handling algorithms in ojalgo.
+      </action>
+    </release>
+    
     <release version="3.01.04" date="2019-04-22" description="XSD generates unit patterns">
       <action dev="averbraeck" type="update">
         The XSD generator now also generates unit patterns. The abbreviation itself has been removed from

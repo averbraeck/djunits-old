@@ -26,17 +26,17 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
 
     /** The display unit of the Scalar. */
     private U unit;
-    
+
     /** Number pattern regex to be used in valueOf() method. */
-    protected static final Pattern NUMBER_PATTERN; 
-    
+    protected static final Pattern NUMBER_PATTERN;
+
     /** Compile number pattern regex to be used in valueOf() method of derived classes. */
     static
     {
         String regex = "[+-]?\\d+\\.?\\d*([Ee][+-]?\\d+)?";
         NUMBER_PATTERN = Pattern.compile(regex);
     }
-    
+
     /**
      * Construct a new Scalar.
      * @param unit U; the unit of the new Scalar
@@ -148,7 +148,8 @@ public abstract class Scalar<U extends Unit<U>> extends Number implements Value<
      */
     public static <U extends Unit<U>> String textualStringOfDefaultLocale(final Scalar<U> value)
     {
-        return value.expressAsSpecifiedUnit(value.doubleValue()) + " " + value.getUnit().getDefaultLocaleTextualRepresentation();
+        return value.expressAsSpecifiedUnit(value.doubleValue()) + " "
+                + value.getUnit().getDefaultLocaleTextualRepresentation();
     }
 
     // No hashcode or equals -- has to be implemented on a deeper level
