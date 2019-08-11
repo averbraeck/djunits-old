@@ -24,9 +24,9 @@
     <sonar.scm.disabled>true</sonar.scm.disabled>
 
     <djunits.version>${project.version}</djunits.version>
-    <joda-money.version>0.12</joda-money.version>
+    <joda-money.version>1.0.1</joda-money.version>
     <junit.version>4.12</junit.version>
-    <ojalgo.version>38.2</ojalgo.version>
+    <ojalgo.version>47.3.0</ojalgo.version>
 
     <maven.compiler.version>3.8.0</maven.compiler.version>
     <maven.site.version>3.7.1</maven.site.version>
@@ -219,6 +219,8 @@
         <configuration>
           <links>
             <link>https://download.oracle.com/javase/8/docs/api/</link>
+            <link>https://www.joda.org/joda-money/apidocs/</link>
+            <link>http://www.ojalgo.org/generated/</link>
           </links>
           <additionalJOption>-J-Xmx1024m</additionalJOption>
           <detectJavaApiLink>true</detectJavaApiLink>

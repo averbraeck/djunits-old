@@ -8,8 +8,6 @@ import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.ValueUtil;
 import org.djunits.value.formatter.Format;
-import org.ojalgo.access.Access2D.Factory;
-import org.ojalgo.matrix.BasicMatrix;
 import org.ojalgo.matrix.PrimitiveMatrix;
 
 /**
@@ -287,8 +285,12 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
     {
         try
         {
-            final Factory<PrimitiveMatrix> matrixFactory = PrimitiveMatrix.FACTORY;
-            final BasicMatrix m = matrixFactory.rows(this.data.getDoubleDenseMatrixSI());
+            final PrimitiveMatrix.Factory matrixFactory = PrimitiveMatrix.FACTORY;
+            final PrimitiveMatrix m = matrixFactory.rows(this.data.getDoubleDenseMatrixSI());
+            if (!m.isSquare())
+            {
+                throw new IllegalArgumentException("Matrix is not square -- determinant cannot be calculated.");
+            }
             return (float) m.getDeterminant().doubleValue();
         }
         catch (IllegalArgumentException exception)
@@ -310,7 +312,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({ "checkstyle:designforextension", "checkstyle:needbraces", "unchecked" })
+    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces", "unchecked"})
     public boolean equals(final Object obj)
     {
         if (this == obj)

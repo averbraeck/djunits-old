@@ -101,7 +101,7 @@ public class FrequencyUnit extends LinearUnit<FrequencyUnit>
     }
 
     /**
-     * Define a FrequencyUnit based on time. You can define unit like "per second" (Hertz) here.
+     * Define a FrequencyUnit based on duration. You can define unit like "per second" (Hertz) here.
      * @param durationUnit DurationUnit; the unit of time for the frequency unit, e.g., second
      * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
      * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
