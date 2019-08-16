@@ -13,6 +13,8 @@ import org.djunits.unit.Unit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
+import org.djunits.value.vfloat.vector.FloatVector;
+import org.djunits.value.vfloat.vector.MutableFloatVector;
 import org.junit.Test;
 
 /**
@@ -31,20 +33,23 @@ import org.junit.Test;
 public class DoubleVectorSparseTest
 {
     /**
-     * Generate test data.
+     * Generate sparse test data.
      * @param size int; number of values in the result
      * @param startValue double; seed value
+     * @param firstNonZero int; index of first non-zero value
+     * @param zeroRangeLength int; number of zero values to insert between each pair of generated (probably non-zero) values
      * @return double[]
      */
-    private static double[] data(final int size, final double startValue)
+    private static double[] data(final int size, final double startValue, final int firstNonZero, final int zeroRangeLength)
     {
         double[] result = new double[size];
-        for (int index = 0; index < size; index++)
+        for (int index = firstNonZero; index < size; index += zeroRangeLength + 1)
         {
-            result[index] = index + startValue;
+            result[index] = index - firstNonZero + startValue;
         }
         return result;
     }
+
 
     /**
      * Check that the values in a DoubleVectormatch the expected values.
@@ -83,7 +88,7 @@ public class DoubleVectorSparseTest
         try
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.KELVIN;
-            double[] value = data(3, 38.0);
+            double[] value = data(99, 38.0, 2, 10);
             DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dv =
                     new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dv.toString(true, true);
@@ -107,7 +112,7 @@ public class DoubleVectorSparseTest
         try
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.KELVIN;
-            double[] value = data(3, 38.0);
+            double[] value = data(99, 38.0, 2, 10);
             MutableDoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dv =
                     new MutableDoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dv.toString(true, true);
@@ -132,12 +137,12 @@ public class DoubleVectorSparseTest
         try
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.DEGREE_CELSIUS;
-            double[] value = data(3, 38.0);
+            double[] value = data(99, 38.0, 2, 10);
             DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperatureDV =
                     new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
-            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
-            assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
+            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(2), 0.05);
+            assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(2, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
             double[] out = temperatureDV.getValuesInUnit();
             for (int index = 0; index < value.length; index++)
@@ -199,8 +204,8 @@ public class DoubleVectorSparseTest
         try
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.DEGREE_CELSIUS;
-            double[] value = data(3, 38.0);
-            double[] value2 = data(3, 38.0);
+            double[] value = data(99, 38.0, 2, 10);
+            double[] value2 = data(99, 38.0, 2, 10);
             value2[0] = 12345;
             DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dv =
                     new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
@@ -274,7 +279,7 @@ public class DoubleVectorSparseTest
         double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
         for (double seedValue : seedValues)
         {
-            double[] input = data(3, seedValue);
+            double[] input = data(99, seedValue, 2, 10);
             MutableDoubleVector.Abs<PositionUnit, LengthUnit> dv;
             try
             {
@@ -334,8 +339,8 @@ public class DoubleVectorSparseTest
     {
         try
         {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
+            double[] leftValue = data(99, 123.4, 2, 10);
+            double[] rightValue = data(99, 234.5, 3, 3);
             DoubleVector.Abs<PositionUnit, LengthUnit> left =
                     new DoubleVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
@@ -361,8 +366,8 @@ public class DoubleVectorSparseTest
     {
         try
         {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
+            double[] leftValue = data(99, 123.4, 2, 10);
+            double[] rightValue = data(99, 234.5, 3, 3);
             DoubleVector.Abs<PositionUnit, LengthUnit> left =
                     new DoubleVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
@@ -388,8 +393,8 @@ public class DoubleVectorSparseTest
     {
         try
         {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
+            double[] leftValue = data(99, 123.4, 2, 10);
+            double[] rightValue = data(99, 234.5, 3, 3);
             DoubleVector.Abs<PositionUnit, LengthUnit> left =
                     new DoubleVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
@@ -415,8 +420,8 @@ public class DoubleVectorSparseTest
     {
         try
         {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
+            double[] leftValue = data(99, 123.4, 2, 10);
+            double[] rightValue = data(99, 234.5, 3, 3);
             DoubleVector.Abs<PositionUnit, LengthUnit> left =
                     new DoubleVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
@@ -465,7 +470,7 @@ public class DoubleVectorSparseTest
         try
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
-            double[] value = data(3, 38.0);
+            double[] value = data(99, 38.0, 2, 10);
             DoubleVector.Rel<TemperatureUnit> dv = new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
@@ -488,7 +493,7 @@ public class DoubleVectorSparseTest
         try
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
-            double[] value = data(3, 38.0);
+            double[] value = data(99, 38.0, 2, 10);
             MutableDoubleVector.Rel<TemperatureUnit> dv =
                     new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dv.toString(true, true);
@@ -513,12 +518,12 @@ public class DoubleVectorSparseTest
         try
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
-            double[] value = data(3, 38.0);
+            double[] value = data(99, 38.0, 2, 10);
             DoubleVector.Rel<TemperatureUnit> temperatureDV =
                     new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
-            assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDV.getSI(0), 0.05);
-            assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
+            assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDV.getSI(2), 0.05);
+            assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0, temperatureDV.getInUnit(2, TemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
             double[] out = temperatureDV.getValuesInUnit();
             for (int index = 0; index < value.length; index++)
@@ -547,7 +552,15 @@ public class DoubleVectorSparseTest
             }
             temperatureDV = new DoubleVector.Rel<TemperatureUnit>(scalar, StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
-            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV.cardinality());
+            int nonNullCount = 0;
+            for (int i = 0; i < value.length; i++)
+            {
+                if (value[i] != 0f)
+                {
+                    nonNullCount++;
+                }
+            }
+            assertEquals("All cells != 0; cardinality should equal number of cells", nonNullCount, temperatureDV.cardinality());
             double sum = 0;
             for (int index = 0; index < value.length; index++)
             {
@@ -570,8 +583,8 @@ public class DoubleVectorSparseTest
         try
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
-            double[] value = data(3, 38.0);
-            double[] value2 = data(3, 38.0);
+            double[] value = data(99, 38.0, 2, 10);
+            double[] value2 = data(99, 38.0, 2, 10);
             value2[0] = 12345;
             DoubleVector.Rel<TemperatureUnit> dv = new DoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             DoubleVector.Rel<TemperatureUnit> dvCopy = dv;
@@ -642,7 +655,7 @@ public class DoubleVectorSparseTest
         double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
         for (double seedValue : seedValues)
         {
-            double[] input = data(3, seedValue);
+            double[] input = data(99, seedValue, 2, 10);
             MutableDoubleVector.Rel<LengthUnit> dv;
             try
             {
@@ -712,8 +725,8 @@ public class DoubleVectorSparseTest
     {
         try
         {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
+            double[] leftValue = data(99, 123.4, 2, 10);
+            double[] rightValue = data(99, 234.5, 3, 3);
             DoubleVector.Rel<LengthUnit> left =
                     new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
@@ -739,8 +752,8 @@ public class DoubleVectorSparseTest
     {
         try
         {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
+            double[] leftValue = data(99, 123.4, 2, 10);
+            double[] rightValue = data(99, 234.5, 3, 3);
             DoubleVector.Rel<LengthUnit> left =
                     new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
@@ -766,8 +779,8 @@ public class DoubleVectorSparseTest
     {
         try
         {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
+            double[] leftValue = data(99, 123.4, 2, 10);
+            double[] rightValue = data(99, 234.5, 3, 3);
             DoubleVector.Rel<LengthUnit> left =
                     new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
@@ -793,8 +806,8 @@ public class DoubleVectorSparseTest
     {
         try
         {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
+            double[] leftValue = data(99, 123.4, 2, 10);
+            double[] rightValue = data(99, 234.5, 3, 3);
             DoubleVector.Rel<LengthUnit> left =
                     new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
@@ -820,8 +833,8 @@ public class DoubleVectorSparseTest
     {
         try
         {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
+            double[] leftValue = data(99, 123.4, 2, 10);
+            double[] rightValue = data(99, 234.5, 3, 3);
             DoubleVector.Rel<LengthUnit> left =
                     new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
@@ -847,8 +860,8 @@ public class DoubleVectorSparseTest
     {
         try
         {
-            double[] leftValue = data(3, 123.4);
-            double[] rightValue = data(3, 234.5);
+            double[] leftValue = data(99, 123.4, 2, 10);
+            double[] rightValue = data(99, 234.5, 3, 3);
             DoubleVector.Rel<LengthUnit> left =
                     new DoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleVector.Rel<LengthUnit> right =
@@ -885,6 +898,228 @@ public class DoubleVectorSparseTest
             junk++;
         }
         assertTrue("The variable junk is only used to suppress annoying warnings of the code checker", junk > 0);
+    }
+
+    /**
+     * Test the incrementBy method.
+     */
+    @Test
+    public final void incrementByTest()
+    {
+        try
+        {
+            for (int firstStep : new int[] {3, 10})
+            {
+                double[] leftValue = data(99, 123.4, 2, firstStep);
+                double[] rightValue = data(99, 234.5, 3, 13 - firstStep);
+                MutableDoubleVector.Rel<LengthUnit> left =
+                        new MutableDoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                MutableDoubleVector.Rel<LengthUnit> referenceLeft = left.copy();
+                DoubleVector.Rel<LengthUnit> right =
+                        new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                left.incrementBy(right);
+                for (int i = 0; i < leftValue.length; i++)
+                {
+                    assertEquals("value of element should be sum of contributing elements",
+                            referenceLeft.getSI(i) + right.getSI(i), left.getSI(i), 0.001);
+                }
+                left = new MutableDoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                right = new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                left.incrementBy(right);
+                for (int i = 0; i < leftValue.length; i++)
+                {
+                    assertEquals("value of element should be sum of contributing elements",
+                            referenceLeft.getSI(i) + right.getSI(i), left.getSI(i), 0.001);
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the decrementBy method.
+     */
+    @Test
+    public final void decrementByTest()
+    {
+        try
+        {
+            for (int firstStep : new int[] {3, 10})
+            {
+                double[] leftValue = data(99, 123.4, 2, firstStep);
+                double[] rightValue = data(99, 234.5, 3, 13 - firstStep);
+                MutableDoubleVector.Rel<LengthUnit> left =
+                        new MutableDoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                MutableDoubleVector.Rel<LengthUnit> referenceLeft = left.copy();
+                DoubleVector.Rel<LengthUnit> right =
+                        new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                left.decrementBy(right);
+                for (int i = 0; i < leftValue.length; i++)
+                {
+                    assertEquals("value of element should be difference of contributing elements",
+                            referenceLeft.getSI(i) - right.getSI(i), left.getSI(i), 0.001);
+                }
+                left = new MutableDoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                right = new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                left.decrementBy(right);
+                for (int i = 0; i < leftValue.length; i++)
+                {
+                    assertEquals("value of element should be difference of contributing elements",
+                            referenceLeft.getSI(i) - right.getSI(i), left.getSI(i), 0.001);
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the multiplyBy method.
+     */
+    @Test
+    public final void multiplyByTest()
+    {
+        try
+        {
+            for (int firstStep : new int[] { 3, 10 })
+            {
+                for (boolean lastNanOrdering : new boolean[] {false, true})
+                {
+                    double[] leftValue = data(99, 123.4, 2, firstStep);
+                    double[] rightValue = data(99, 234.5, 3, 13 - firstStep);
+                    leftValue[0] = Float.NaN;
+                    leftValue[1] = Float.NaN;
+                    rightValue[1] = Float.NaN;
+                    rightValue[2] = Float.NaN;
+                    if (lastNanOrdering)
+                    {
+                        leftValue[98] = Float.NaN;
+                        leftValue[97] = Float.NaN;
+                        rightValue[97] = Float.NaN;
+                        rightValue[96] = Float.NaN;
+                    }
+                    else
+                    {
+                        rightValue[98] = Float.NaN;
+                        rightValue[97] = Float.NaN;
+                        leftValue[97] = Float.NaN;
+                        leftValue[96] = Float.NaN;
+                    }
+                    MutableDoubleVector.Rel<LengthUnit> left =
+                            new MutableDoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                    MutableDoubleVector.Rel<LengthUnit> referenceLeft = left.copy();
+                    DoubleVector.Rel<LengthUnit> right =
+                            new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                    left.multiplyBy(right);
+                    for (int i = 0; i < leftValue.length; i++)
+                    {
+                        assertEquals("value of element should be product of contributing elements",
+                                referenceLeft.getSI(i) * right.getSI(i), left.getSI(i), 0.001);
+                    }
+                    left = new MutableDoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                    right = new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                    left.multiplyBy(right);
+                    for (int i = 0; i < leftValue.length; i++)
+                    {
+                        assertEquals("value of element should be product of contributing elements",
+                                referenceLeft.getSI(i) * right.getSI(i), left.getSI(i), 0.001);
+                    }
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the divideBy method.
+     */
+    @Test
+    public final void divideByTest()
+    {
+        try
+        {
+            for (int firstStep : new int[] { 3, 10 })
+            {
+                for (boolean lastNanOrdering : new boolean[] {false, true})
+                {
+                    double[] leftValue = data(99, 123.4f, 2, firstStep);
+                    double[] rightValue = data(99, 234.5f, 3, 13 - firstStep);
+                    leftValue[0] = Float.NaN;
+                    leftValue[1] = Float.NaN;
+                    rightValue[1] = Float.NaN;
+                    rightValue[2] = Float.NaN;
+                    if (lastNanOrdering)
+                    {
+                        leftValue[98] = Float.NaN;
+                        leftValue[97] = Float.NaN;
+                        rightValue[97] = Float.NaN;
+                        rightValue[96] = Float.NaN;
+                    }
+                    else
+                    {
+                        rightValue[98] = Float.NaN;
+                        rightValue[97] = Float.NaN;
+                        leftValue[97] = Float.NaN;
+                        leftValue[96] = Float.NaN;
+                    }
+                    MutableDoubleVector.Rel<LengthUnit> left =
+                            new MutableDoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                    MutableDoubleVector.Rel<LengthUnit> referenceLeft = left.copy();
+                    DoubleVector.Rel<LengthUnit> right =
+                            new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                    left.divideBy(right);
+                    for (int i = 0; i < leftValue.length; i++)
+                    {
+                        double expect = referenceLeft.getSI(i) / right.getSI(i);
+                        if (Double.isNaN(expect))
+                        {
+                            assertTrue("value of element should be NaN", Double.isNaN(left.getSI(i)));
+                        }
+                        else if (Double.isInfinite(expect))
+                        {
+                            assertTrue("value of element should be infinite", Double.isInfinite(left.getSI(i)));
+                        }
+                        else
+                        {
+                            assertEquals("value of element should be ratio of contributing elements", expect, left.getSI(i),
+                                    0.001);
+                        }
+                    }
+                    left = new MutableDoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                    right = new DoubleVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                    left.divideBy(right);
+                    for (int i = 0; i < leftValue.length; i++)
+                    {
+                        double expect = referenceLeft.getSI(i) / right.getSI(i);
+                        if (Double.isNaN(expect))
+                        {
+                            assertTrue("value of element should be NaN", Double.isNaN(left.getSI(i)));
+                        }
+                        else if (Double.isInfinite(expect))
+                        {
+                            assertTrue("value of element should be infinite", Double.isInfinite(left.getSI(i)));
+                        }
+                        else
+                        {
+                            assertEquals("value of element should be ratio of contributing elements", expect, left.getSI(i),
+                                    0.001);
+                        }
+                    }
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
     }
 
     /** */
