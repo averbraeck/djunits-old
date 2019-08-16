@@ -374,6 +374,7 @@ abstract class FloatVectorData implements Serializable
     {
         checkSizes(right);
         float[] dv = new float[size()];
+        // TODO this may cause an out of memory condition even though the result fits easily in available memory
         IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) + right.getSI(i));
         if (this instanceof FloatVectorDataSparse && right instanceof FloatVectorDataSparse)
         {
