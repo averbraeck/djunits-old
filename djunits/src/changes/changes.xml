@@ -15,6 +15,10 @@
         MILLIAMPERE_SECOND = new ElectricalChargeUnit(ElectricalCurrentUnit.MILLIAMPERE, DurationUnit.SECOND, 
           "ElectricalChargeUnit.mAh", SI_DERIVED);
       </action>      
+      <action dev="averbraeck" type="add">
+        New test in UnitsTest to find errors such as the one above. All units are compared on a constructed
+        scalar with new(...) and a scalar with valueOf(...) to see if they match.
+      </action>
     </release>
     
     <release version="3.01.04" date="2019-04-22" description="XSD generates unit patterns">
