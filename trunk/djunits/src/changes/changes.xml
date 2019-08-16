@@ -7,6 +7,14 @@
         ojalgo and joda-money have been updated to new versions. Code has been slightly adapted
         to handle new matrix handling algorithms in ojalgo.
       </action>
+      <action dev="averbraeck" type="fix">
+        Mistake in ElectricalChargeUnit repaired:
+        MILLIAMPERE_HOUR = new ElectricalChargeUnit(ElectricalCurrentUnit.MILLIAMPERE, DurationUnit.HOUR, 
+          "ElectricalChargeUnit.mAh", SI_DERIVED);
+        had the same abbreviation as:
+        MILLIAMPERE_SECOND = new ElectricalChargeUnit(ElectricalCurrentUnit.MILLIAMPERE, DurationUnit.SECOND, 
+          "ElectricalChargeUnit.mAh", SI_DERIVED);
+      </action>      
     </release>
     
     <release version="3.01.04" date="2019-04-22" description="XSD generates unit patterns">
