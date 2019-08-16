@@ -146,102 +146,337 @@ public class FloatVectorDataSparse extends FloatVectorData
     @Override
     public final void incrementBy(final FloatVectorData right) throws ValueException
     {
-        int newLength =
-                (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 || right.getSI(i) != 0.0).count();
-        float[] newVectorSI = new float[newLength];
-        int[] newIndices = new int[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        // note: if adding -2 and +2, a 0-value will be part of the new sparse matrix.
-        int count = 0;
-        for (int i = 0; i < size(); i++)
+        int maxLength =
+                (right.isSparse() ? this.indices.length + ((FloatVectorDataSparse) right).indices.length : right.size());
+        float[] tempVectorSI = new float[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        if (right.isSparse())
         {
-            if (this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
+            int ownIndex = 0;
+            int rightIndex = 0;
+            FloatVectorDataSparse rightData = (FloatVectorDataSparse) right;
+            while (ownIndex < this.indices.length || rightIndex < rightData.indices.length)
             {
-                newVectorSI[count] = getSI(i) + right.getSI(i);
-                newIndices[count] = i;
-                count++;
+                float value;
+                int index;
+                if (ownIndex < this.indices.length && rightIndex < rightData.indices.length)
+                {   // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == rightData.indices[rightIndex])
+                    {
+                        value = this.vectorSI[ownIndex] + rightData.vectorSI[rightIndex];
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                        rightIndex++;
+                    }
+                    else if (this.indices[ownIndex] < rightData.indices[rightIndex])
+                    {
+                        value = this.vectorSI[ownIndex];
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                    }
+                    else
+                    {
+                        value = rightData.vectorSI[rightIndex];
+                        index = rightData.indices[rightIndex];
+                        rightIndex++;
+                    }
+                }
+                else if (ownIndex < this.indices.length)
+                {   // right has run out of values; we have not
+                    value = this.vectorSI[ownIndex];
+                    index = this.indices[ownIndex];
+                    ownIndex++;
+                }
+                else
+                {   // we have run out of values; right has not
+                    value = rightData.vectorSI[rightIndex];
+                    index = rightData.indices[rightIndex];
+                    rightIndex++;
+                }
+                if (value != 0f)
+                {
+                    tempIndices[nextIndex] = index;
+                    tempVectorSI[nextIndex] = value;
+                    nextIndex++;
+                }
             }
         }
-
-        this.indices = newIndices;
-        this.vectorSI = newVectorSI;
+        else
+        {
+            int ownIndex = 0;
+            for (int i = 0; i < right.size(); i++)
+            {
+                if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+                {
+                    ownIndex++;
+                }
+                float value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f) 
+                        + right.getSI(i);
+                if (value != 0f)
+                {
+                    tempIndices[nextIndex] = i;
+                    tempVectorSI[nextIndex] = value;
+                    nextIndex++;
+                }
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void decrementBy(final FloatVectorData right) throws ValueException
     {
-        int newLength =
-                (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 || right.getSI(i) != 0.0).count();
-        float[] newVectorSI = new float[newLength];
-        int[] newIndices = new int[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        // note: if subtracting 2 from 2, a 0-value will be part of the new sparse matrix.
-        int count = 0;
-        for (int i = 0; i < size(); i++)
+        int maxLength =
+                (right.isSparse() ? this.indices.length + ((FloatVectorDataSparse) right).indices.length : right.size());
+        float[] tempVectorSI = new float[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        if (right.isSparse())
         {
-            if (this.getSI(i) != 0.0 || right.getSI(i) != 0.0)
+            int ownIndex = 0;
+            int rightIndex = 0;
+            FloatVectorDataSparse rightData = (FloatVectorDataSparse) right;
+            while (ownIndex < this.indices.length || rightIndex < rightData.indices.length)
             {
-                newVectorSI[count] = getSI(i) - right.getSI(i);
-                newIndices[count] = i;
-                count++;
+                float value;
+                int index;
+                if (ownIndex < this.indices.length && rightIndex < rightData.indices.length)
+                {   // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == rightData.indices[rightIndex])
+                    {
+                        value = this.vectorSI[ownIndex] - rightData.vectorSI[rightIndex];
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                        rightIndex++;
+                    }
+                    else if (this.indices[ownIndex] < rightData.indices[rightIndex])
+                    {
+                        value = this.vectorSI[ownIndex];
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                    }
+                    else
+                    {
+                        value = 0f - rightData.vectorSI[rightIndex];
+                        index = rightData.indices[rightIndex];
+                        rightIndex++;
+                    }
+                }
+                else if (ownIndex < this.indices.length)
+                {   // right has run out of values; we have not
+                    value = this.vectorSI[ownIndex];
+                    index = this.indices[ownIndex];
+                    ownIndex++;
+                }
+                else
+                {   // we have run out of values; right has not
+                    value = 0f - rightData.vectorSI[rightIndex];
+                    index = rightData.indices[rightIndex];
+                    rightIndex++;
+                }
+                if (value != 0f)
+                {
+                    tempIndices[nextIndex] = index;
+                    tempVectorSI[nextIndex] = value;
+                    nextIndex++;
+                }
             }
         }
-
-        this.indices = newIndices;
-        this.vectorSI = newVectorSI;
+        else
+        {
+            int ownIndex = 0;
+            for (int i = 0; i < right.size(); i++)
+            {
+                if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+                {
+                    ownIndex++;
+                }
+                float value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f) 
+                        - right.getSI(i);
+                if (value != 0f)
+                {
+                    tempIndices[nextIndex] = i;
+                    tempVectorSI[nextIndex] = value;
+                    nextIndex++;
+                }
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void multiplyBy(final FloatVectorData right) throws ValueException
     {
-        int newLength =
-                (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 && right.getSI(i) != 0.0).count();
-        float[] newVectorSI = new float[newLength];
-        int[] newIndices = new int[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        int count = 0;
-        for (int i = 0; i < size(); i++)
+        int maxLength =
+                (right.isSparse() ? this.indices.length + ((FloatVectorDataSparse) right).indices.length : right.size());
+        float[] tempVectorSI = new float[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        if (right.isSparse())
         {
-            if (this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
+            int ownIndex = 0;
+            int rightIndex = 0;
+            FloatVectorDataSparse rightData = (FloatVectorDataSparse) right;
+            while (ownIndex < this.indices.length || rightIndex < rightData.indices.length)
             {
-                newVectorSI[count] = getSI(i) * right.getSI(i);
-                newIndices[count] = i;
-                count++;
+                float value = 0f;
+                int index = -1;
+                if (ownIndex < this.indices.length && rightIndex < rightData.indices.length)
+                {   // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == rightData.indices[rightIndex])
+                    {
+                        value = this.vectorSI[ownIndex] * rightData.vectorSI[rightIndex];
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                        rightIndex++;
+                    }
+                    else if (this.indices[ownIndex] < rightData.indices[rightIndex])
+                    {
+                        if (Float.isNaN(this.vectorSI[ownIndex]))
+                        {
+                            value = Float.NaN;
+                            index = this.indices[ownIndex];
+                        }
+                        ownIndex++;
+                    }
+                    else if (this.indices[ownIndex] > rightData.indices[rightIndex])
+                    {
+                        if (Float.isNaN(rightData.vectorSI[rightIndex]))
+                        {
+                            value = Float.NaN;
+                            index = rightData.indices[rightIndex];
+                        }
+                        rightIndex++;
+                    }
+                }
+                else if (ownIndex < this.indices.length)
+                {   // right has run out of values; we have not
+                    if (Float.isNaN(this.vectorSI[ownIndex]))
+                    {
+                        value = Float.NaN;
+                        index = this.indices[ownIndex];
+                    }
+                    ownIndex++;
+                }
+                else
+                {   // we have run out of values; right has not
+                    if (Float.isNaN(rightData.vectorSI[rightIndex]))
+                    {
+                        value = Float.NaN;
+                        index = rightData.indices[rightIndex];
+                    }
+                    rightIndex++;
+                }
+                if (value != 0f)
+                {
+                    tempIndices[nextIndex] = index;
+                    tempVectorSI[nextIndex] = value;
+                    nextIndex++;
+                }
             }
         }
-
-        this.indices = newIndices;
-        this.vectorSI = newVectorSI;
+        else
+        {
+            int ownIndex = 0;
+            for (int i = 0; i < right.size(); i++)
+            {
+                if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+                {
+                    ownIndex++;
+                }
+                float value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f) 
+                        * right.getSI(i);
+                if (value != 0f)
+                {
+                    tempIndices[nextIndex] = i;
+                    tempVectorSI[nextIndex] = value;
+                    nextIndex++;
+                }
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void divideBy(final FloatVectorData right) throws ValueException
     {
-        int newLength =
-                (int) IntStream.range(0, size()).parallel().filter(i -> this.getSI(i) != 0.0 && right.getSI(i) != 0.0).count();
-        float[] newVectorSI = new float[newLength];
-        int[] newIndices = new int[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        int count = 0;
-        for (int i = 0; i < size(); i++)
+        int maxLength = size();
+        float[] tempVectorSI = new float[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        if (right.isSparse())
         {
-            if (this.getSI(i) != 0.0 && right.getSI(i) != 0.0)
+            int ownIndex = 0;
+            int rightIndex = 0;
+            FloatVectorDataSparse rightData = (FloatVectorDataSparse) right;
+            for (int index = 0; index < size(); index++)
             {
-                newVectorSI[count] = getSI(i) / right.getSI(i);
-                newIndices[count] = i;
-                count++;
+                float value = Float.NaN;
+                if (ownIndex < this.indices.length && rightIndex < rightData.indices.length)
+                {   // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == index &&  rightData.indices[rightIndex] == index)
+                    {
+                        value = this.vectorSI[ownIndex] / rightData.vectorSI[rightIndex];
+                        ownIndex++;
+                        rightIndex++;
+                    }
+                    else if (this.indices[ownIndex] == index)
+                    {
+                        value = this.vectorSI[ownIndex] / 0f;
+                        ownIndex++;
+                    }
+                    else if (rightData.indices[rightIndex] == index)
+                    {
+                        value = 0f / rightData.vectorSI[rightIndex];
+                        rightIndex++;
+                    }
+                }
+                else if (ownIndex < this.indices.length)
+                {   // right has run out of values; we have not
+                    value = (this.indices[ownIndex] == index ? this.vectorSI[ownIndex] : 0f) / 0f;
+                    ownIndex++;
+                }
+                else
+                {   // we have run out of values; right has not
+                    value = 0f / rightData.vectorSI[rightIndex];
+                    rightIndex++;
+                }
+                if (value != 0f)
+                {
+                    tempIndices[nextIndex] = index;
+                    tempVectorSI[nextIndex] = value;
+                    nextIndex++;
+                }
             }
         }
-
-        this.indices = newIndices;
-        this.vectorSI = newVectorSI;
+        else
+        {
+            int ownIndex = 0;
+            for (int i = 0; i < right.size(); i++)
+            {
+                if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+                {
+                    ownIndex++;
+                }
+                float value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f) 
+                        / right.getSI(i);
+                if (value != 0f)
+                {
+                    tempIndices[nextIndex] = i;
+                    tempVectorSI[nextIndex] = value;
+                    nextIndex++;
+                }
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
     }
 
     /** {@inheritDoc} */
