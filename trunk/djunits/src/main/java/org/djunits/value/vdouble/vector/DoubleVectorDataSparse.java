@@ -1,11 +1,9 @@
 package org.djunits.value.vdouble.vector;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
-import org.djunits.value.vfloat.vector.FloatVectorDataSparse;
 
 /**
  * Stores sparse data for a DoubleVector and carries out basic operations.
