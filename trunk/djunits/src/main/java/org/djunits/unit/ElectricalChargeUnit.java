@@ -100,7 +100,7 @@ public class ElectricalChargeUnit extends LinearUnit<ElectricalChargeUnit>
         MEGAAMPERE_HOUR = new ElectricalChargeUnit(ElectricalCurrentUnit.MEGAAMPERE, DurationUnit.HOUR,
                 "ElectricalChargeUnit.MAh", SI_DERIVED);
         MILLIAMPERE_SECOND = new ElectricalChargeUnit(ElectricalCurrentUnit.MILLIAMPERE, DurationUnit.SECOND,
-                "ElectricalChargeUnit.mAh", SI_DERIVED);
+                "ElectricalChargeUnit.mAs", SI_DERIVED);
         FARADAY = new ElectricalChargeUnit("ElectricalChargeUnit.F", OTHER, COULOMB, 96485.3383);
         ATOMIC_UNIT = new ElectricalChargeUnit("ElectricalChargeUnit.e", SI_ACCEPTED, COULOMB, 1.6021765314E-19);
         STATCOULOMB = new ElectricalChargeUnit("ElectricalChargeUnit.statC", CGS_ESU, COULOMB, 3.335641E-10);
