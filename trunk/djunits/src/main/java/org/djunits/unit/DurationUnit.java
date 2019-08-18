@@ -125,29 +125,4 @@ public class DurationUnit extends LinearUnit<DurationUnit>
     {
         return "s";
     }
-
-    public PerDurationUnit getInverse()
-    {
-        return new PerDurationUnit(this, "per " + getName(), "/" + getAbbreviation(), getUnitSystem());
-    }
-    
-    /** */
-    public static class PerDurationUnit extends FrequencyUnit
-    {
-        /** */
-        private static final long serialVersionUID = 1L;
-
-        /**
-         * Define a user-defined PerDurationUnit based on time. You can define unit like "per fortnight" here.
-         * @param durationUnit DurationUnit; the unit of time for the frequency unit, e.g., second
-         * @param name String; the long name of the unit
-         * @param abbreviation String; the abbreviation of the unit
-         * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-         */
-        public PerDurationUnit(final DurationUnit durationUnit, final String name, final String abbreviation,
-                final UnitSystem unitSystem)
-        {
-            super(durationUnit, name, abbreviation, unitSystem);
-        }
-    }
 }
