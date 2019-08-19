@@ -1117,6 +1117,333 @@ public class FloatMatrixDenseTest
         }
     }
 
+    /**
+     * Test the incrementBy method.
+     */
+    @Test
+    public final void incrementByTest()
+    {
+        try
+        {
+            float[][] leftValue = data(3, 5, false, 123.4f);
+            float[][] rightValue = data(3, 5, false, 234.5f);
+            MutableFloatMatrix.Rel<LengthUnit> left =
+                    new MutableFloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            MutableFloatMatrix.Rel<LengthUnit> referenceLeft = left.copy();
+            FloatMatrix.Rel<LengthUnit> right = new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            left.incrementBy(right);
+            for (int row = 0; row < leftValue.length; row++)
+            {
+                for (int col = 0; col < leftValue[row].length; col++)
+                {
+                    assertEquals("value of element should be sum of contributing elements",
+                            referenceLeft.getSI(row, col) + right.getSI(row, col), left.getSI(row, col), 0.001);
+                }
+            }
+            left = new MutableFloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            right = new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            left.incrementBy(right);
+            for (int row = 0; row < leftValue.length; row++)
+            {
+                for (int col = 0; col < leftValue[row].length; col++)
+                {
+                    assertEquals("value of element should be sum of contributing elements",
+                            referenceLeft.getSI(row, col) + right.getSI(row, col), left.getSI(row, col), 0.001);
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the decrementBy method.
+     */
+    @Test
+    public final void decrementByTest()
+    {
+        try
+        {
+            float[][] leftValue = data(3, 5, false, 123.4f);
+            float[][] rightValue = data(3, 5, false, 234.5f);
+            MutableFloatMatrix.Rel<LengthUnit> left =
+                    new MutableFloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            MutableFloatMatrix.Rel<LengthUnit> referenceLeft = left.copy();
+            FloatMatrix.Rel<LengthUnit> right = new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            left.decrementBy(right);
+            for (int row = 0; row < leftValue.length; row++)
+            {
+                for (int col = 0; col < leftValue[row].length; col++)
+                {
+                    assertEquals("value of element should be difference of contributing elements",
+                            referenceLeft.getSI(row, col) - right.getSI(row, col), left.getSI(row, col), 0.001);
+                }
+            }
+            left = new MutableFloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            right = new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            left.decrementBy(right);
+            for (int row = 0; row < leftValue.length; row++)
+            {
+                for (int col = 0; col < leftValue[row].length; col++)
+                {
+                    assertEquals("value of element should be difference of contributing elements",
+                            referenceLeft.getSI(row, col) - right.getSI(row, col), left.getSI(row, col), 0.001);
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the multiplyBy method.
+     */
+    @Test
+    public final void multiplyByTest()
+    {
+        try
+        {
+            for (boolean lastNanOrdering : new boolean[] { false, true })
+            {
+                float[][] leftValue = data(30, 50, false, 123.4f);
+                float[][] rightValue = data(30, 50, false, 234.5f);
+                leftValue[0][0] = Float.NaN;
+                leftValue[0][1] = Float.NaN;
+                rightValue[0][1] = Float.NaN;
+                rightValue[0][2] = Float.NaN;
+                if (lastNanOrdering)
+                {
+                    leftValue[29][49] = Float.NaN;
+                    leftValue[29][48] = Float.NaN;
+                    rightValue[29][48] = Float.NaN;
+                    rightValue[29][47] = Float.NaN;
+                }
+                else
+                {
+                    rightValue[29][49] = Float.NaN;
+                    rightValue[29][48] = Float.NaN;
+                    leftValue[29][48] = Float.NaN;
+                    leftValue[29][47] = Float.NaN;
+                }
+                MutableFloatMatrix.Rel<LengthUnit> left =
+                        new MutableFloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                MutableFloatMatrix.Rel<LengthUnit> referenceLeft = left.copy();
+                FloatMatrix.Rel<LengthUnit> right =
+                        new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                left.multiplyBy(right);
+                for (int row = 0; row < leftValue.length; row++)
+                {
+                    for (int col = 0; col < leftValue[row].length; col++)
+                    {
+                        assertEquals("value of element should be product of contributing elements",
+                                referenceLeft.getSI(row, col) * right.getSI(row, col), left.getSI(row, col), 0.001);
+                    }
+                }
+                left = new MutableFloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                right = new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                left.multiplyBy(right);
+                for (int row = 0; row < leftValue.length; row++)
+                {
+                    for (int col = 0; col < leftValue[row].length; col++)
+                    {
+                        assertEquals("value of element should be product of contributing elements",
+                                referenceLeft.getSI(row, col) * right.getSI(row, col), left.getSI(row, col), 0.001);
+                    }
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the divideBy method.
+     */
+    @Test
+    public final void divideByTest()
+    {
+        try
+        {
+            for (boolean lastNanOrdering : new boolean[] { false, true })
+            {
+                float[][] leftValue = data(30, 50, false, 123.4f);
+                float[][] rightValue = data(30, 50, false, 234.5f);
+                leftValue[0][0] = Float.NaN;
+                leftValue[0][1] = Float.NaN;
+                rightValue[0][1] = Float.NaN;
+                rightValue[0][2] = Float.NaN;
+                if (lastNanOrdering)
+                {
+                    leftValue[29][49] = Float.NaN;
+                    leftValue[29][48] = Float.NaN;
+                    rightValue[29][48] = Float.NaN;
+                    rightValue[29][47] = Float.NaN;
+                }
+                else
+                {
+                    rightValue[29][49] = Float.NaN;
+                    rightValue[29][48] = Float.NaN;
+                    leftValue[29][48] = Float.NaN;
+                    leftValue[29][47] = Float.NaN;
+                }
+                MutableFloatMatrix.Rel<LengthUnit> left =
+                        new MutableFloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                MutableFloatMatrix.Rel<LengthUnit> referenceLeft = left.copy();
+                FloatMatrix.Rel<LengthUnit> right =
+                        new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                left.divideBy(right);
+                for (int row = 0; row < leftValue.length; row++)
+                {
+                    for (int col = 0; col < leftValue[row].length; col++)
+                    {
+                        float expect = referenceLeft.getSI(row, col) / right.getSI(row, col);
+                        float got = left.getSI(row, col);
+                        if (Float.isNaN(expect))
+                        {
+                            assertTrue("value of element should be NaN", Float.isNaN(got));
+                        }
+                        else if (Float.isInfinite(expect))
+                        {
+                            assertTrue("value of element should be infinite", Float.isInfinite(got));
+                        }
+                        else
+                        {
+                            assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
+                        }
+                    }
+                }
+                left = new MutableFloatMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                right = new FloatMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                left.divideBy(right);
+                for (int row = 0; row < leftValue.length; row++)
+                {
+                    for (int col = 0; col < leftValue[row].length; col++)
+                    {
+                        float expect = referenceLeft.getSI(row, col) / right.getSI(row, col);
+                        float got = left.getSI(row, col);
+                        if (Float.isNaN(expect))
+                        {
+                            assertTrue("value of element should be NaN", Float.isNaN(got));
+                        }
+                        else if (Float.isInfinite(expect))
+                        {
+                            assertTrue("value of element should be infinite", Float.isInfinite(got));
+                        }
+                        else
+                        {
+                            assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
+                        }
+                    }
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the incrementBy, decrementBy, multiplyBy and divideBy methods that take a scalar as second argument.
+     */
+    @Test
+    public void modifyByScalar()
+    {
+        try
+        {
+            TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
+            float[][] value = data(3, 5, false, 38.0f);
+            float modifier = 8.76f;
+            MutableFloatMatrix.Rel<TemperatureUnit> testVector =
+                    new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.incrementBy(modifier);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertEquals("value of element should be sum of contributing elements", value[row][col] + modifier,
+                            testVector.getSI(row, col), 0.001);
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.incrementBy(Float.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.decrementBy(modifier);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertEquals("value of element should be difference of contributing elements", value[row][col] - modifier,
+                            testVector.getSI(row, col), 0.001);
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.decrementBy(Float.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.multiplyBy(modifier);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertEquals("value of element should be product of contributing elements", value[row][col] * modifier,
+                            testVector.getSI(row, col), 0.001);
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.multiplyBy(Float.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.divideBy(modifier);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertEquals("value of element should be dividend of contributing elements", value[row][col] / modifier,
+                            testVector.getSI(row, col), 0.001);
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.divideBy(Float.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
     /** */
     interface FloatToFloat
     {

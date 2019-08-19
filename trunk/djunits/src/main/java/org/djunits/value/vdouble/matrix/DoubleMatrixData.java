@@ -367,7 +367,7 @@ abstract class DoubleMatrixData implements Serializable
      * Divide two matrices on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
      * matrix is returned.
      * @param right DoubleMatrixData; the other data object to divide by
-     * @return the sum of this data object and the other data object
+     * @return the ratio of this data object and the other data object on a value by value basis
      * @throws ValueException if matrices have different lengths
      */
     public DoubleMatrixData divide(final DoubleMatrixData right) throws ValueException
@@ -376,9 +376,9 @@ abstract class DoubleMatrixData implements Serializable
         double[] dm = new double[this.rows * this.cols];
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) / right.getSI(r, c)));
-        if (this instanceof DoubleMatrixDataDense && right instanceof DoubleMatrixDataDense)
+        if (this instanceof DoubleMatrixDataSparse && right instanceof DoubleMatrixDataSparse)
         {
-            return new DoubleMatrixDataDense(dm, this.rows, this.cols);
+            return new DoubleMatrixDataSparse(dm, this.rows, this.cols);
         }
         return new DoubleMatrixDataDense(dm, this.rows, this.cols).toSparse();
     }

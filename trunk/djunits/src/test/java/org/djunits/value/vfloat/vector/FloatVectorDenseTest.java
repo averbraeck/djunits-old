@@ -875,6 +875,281 @@ public class FloatVectorDenseTest
         assertTrue("The variable junk is only used to suppress annoying warnings of the code checker", junk > 0);
     }
 
+    /**
+     * Test the incrementBy method.
+     */
+    @Test
+    public final void incrementByTest()
+    {
+        try
+        {
+            float[] leftValue = data(99, 123.4f);
+            float[] rightValue = data(99, 234.5f);
+            MutableFloatVector.Rel<LengthUnit> left =
+                    new MutableFloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            MutableFloatVector.Rel<LengthUnit> referenceLeft = left.copy();
+            FloatVector.Rel<LengthUnit> right = new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            left.incrementBy(right);
+            for (int i = 0; i < leftValue.length; i++)
+            {
+                assertEquals("value of element should be sum of contributing elements", referenceLeft.getSI(i) + right.getSI(i),
+                        left.getSI(i), 0.001);
+            }
+            left = new MutableFloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            right = new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            left.incrementBy(right);
+            for (int i = 0; i < leftValue.length; i++)
+            {
+                assertEquals("value of element should be sum of contributing elements", referenceLeft.getSI(i) + right.getSI(i),
+                        left.getSI(i), 0.001);
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the decrementBy method.
+     */
+    @Test
+    public final void decrementByTest()
+    {
+        try
+        {
+            float[] leftValue = data(99, 123.4f);
+            float[] rightValue = data(99, 234.5f);
+            MutableFloatVector.Rel<LengthUnit> left =
+                    new MutableFloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            MutableFloatVector.Rel<LengthUnit> referenceLeft = left.copy();
+            FloatVector.Rel<LengthUnit> right = new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            left.decrementBy(right);
+            for (int i = 0; i < leftValue.length; i++)
+            {
+                assertEquals("value of element should be difference of contributing elements",
+                        referenceLeft.getSI(i) - right.getSI(i), left.getSI(i), 0.001);
+            }
+            left = new MutableFloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            right = new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            left.decrementBy(right);
+            for (int i = 0; i < leftValue.length; i++)
+            {
+                assertEquals("value of element should be difference of contributing elements",
+                        referenceLeft.getSI(i) - right.getSI(i), left.getSI(i), 0.001);
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the multiplyBy method.
+     */
+    @Test
+    public final void multiplyByTest()
+    {
+        try
+        {
+            for (boolean lastNanOrdering : new boolean[] { false, true })
+            {
+                float[] leftValue = data(99, 123.4f);
+                float[] rightValue = data(99, 234.5f);
+                leftValue[0] = Float.NaN;
+                leftValue[1] = Float.NaN;
+                rightValue[1] = Float.NaN;
+                rightValue[2] = Float.NaN;
+                if (lastNanOrdering)
+                {
+                    leftValue[98] = Float.NaN;
+                    leftValue[97] = Float.NaN;
+                    rightValue[97] = Float.NaN;
+                    rightValue[96] = Float.NaN;
+                }
+                else
+                {
+                    rightValue[98] = Float.NaN;
+                    rightValue[97] = Float.NaN;
+                    leftValue[97] = Float.NaN;
+                    leftValue[96] = Float.NaN;
+                }
+                MutableFloatVector.Rel<LengthUnit> left =
+                        new MutableFloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                MutableFloatVector.Rel<LengthUnit> referenceLeft = left.copy();
+                FloatVector.Rel<LengthUnit> right =
+                        new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                left.multiplyBy(right);
+                for (int i = 0; i < leftValue.length; i++)
+                {
+                    assertEquals("value of element should be product of contributing elements",
+                            referenceLeft.getSI(i) * right.getSI(i), left.getSI(i), 0.001);
+                }
+                left = new MutableFloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                right = new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                left.multiplyBy(right);
+                for (int i = 0; i < leftValue.length; i++)
+                {
+                    assertEquals("value of element should be product of contributing elements",
+                            referenceLeft.getSI(i) * right.getSI(i), left.getSI(i), 0.001);
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the divideBy method.
+     */
+    @Test
+    public final void divideByTest()
+    {
+        try
+        {
+            for (boolean lastNanOrdering : new boolean[] { false, true })
+            {
+                float[] leftValue = data(99, 123.4f);
+                float[] rightValue = data(99, 234.5f);
+                leftValue[0] = Float.NaN;
+                leftValue[1] = Float.NaN;
+                rightValue[1] = Float.NaN;
+                rightValue[2] = Float.NaN;
+                if (lastNanOrdering)
+                {
+                    leftValue[98] = Float.NaN;
+                    leftValue[97] = Float.NaN;
+                    rightValue[97] = Float.NaN;
+                    rightValue[96] = Float.NaN;
+                }
+                else
+                {
+                    rightValue[98] = Float.NaN;
+                    rightValue[97] = Float.NaN;
+                    leftValue[97] = Float.NaN;
+                    leftValue[96] = Float.NaN;
+                }
+                MutableFloatVector.Rel<LengthUnit> left =
+                        new MutableFloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                MutableFloatVector.Rel<LengthUnit> referenceLeft = left.copy();
+                FloatVector.Rel<LengthUnit> right =
+                        new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                left.divideBy(right);
+                for (int i = 0; i < leftValue.length; i++)
+                {
+                    float expect = referenceLeft.getSI(i) / right.getSI(i);
+                    float got = left.getSI(i);
+                    if (Float.isNaN(expect))
+                    {
+                        assertTrue("value of element should be NaN", Float.isNaN(got));
+                    }
+                    else if (Float.isInfinite(expect))
+                    {
+                        assertTrue("value of element should be infinite", Float.isInfinite(got));
+                    }
+                    else
+                    {
+                        assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
+                    }
+                }
+                left = new MutableFloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                right = new FloatVector.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                left.divideBy(right);
+                for (int i = 0; i < leftValue.length; i++)
+                {
+                    float expect = referenceLeft.getSI(i) / right.getSI(i);
+                    float got = left.getSI(i);
+                    if (Float.isNaN(expect))
+                    {
+                        assertTrue("value of element should be NaN", Float.isNaN(got));
+                    }
+                    else if (Float.isInfinite(expect))
+                    {
+                        assertTrue("value of element should be infinite", Float.isInfinite(got));
+                    }
+                    else
+                    {
+                        assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
+                    }
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the incrementBy, decrementBy, multiplyBy and divideBy methods that take a scalar as second argument.
+     */
+    @Test
+    public void modifyByScalar()
+    {
+        try
+        {
+            TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
+            float[] value = data(99, 38.0f);
+            float modifier = 8.76f;
+            MutableFloatVector.Rel<TemperatureUnit> testVector =
+                    new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.incrementBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("incremented value should match", value[index] + modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.incrementBy(Float.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(index)));
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.decrementBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("decremented value should match", value[index] - modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.decrementBy(Float.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("decremented value should be NaN", Float.isNaN(testVector.getInUnit(index)));
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.multiplyBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("multiplied value should match", value[index] * modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.multiplyBy(Float.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("multiplied value should be NaN", Float.isNaN(testVector.getInUnit(index)));
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.divideBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("divided value should match", value[index] / modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.divideBy(Float.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("divided value should be NaN", Float.isNaN(testVector.getInUnit(index)));
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+    
     /** */
     interface FloatToFloat
     {

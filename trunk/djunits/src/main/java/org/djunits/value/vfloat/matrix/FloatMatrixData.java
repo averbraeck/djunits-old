@@ -293,10 +293,7 @@ abstract class FloatMatrixData implements Serializable
      * Add a number to this matrix on a cell-by-cell basis.
      * @param valueSI float; the value to add
      */
-    public void incrementBy(final float valueSI)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] += valueSI);
-    }
+    public abstract void incrementBy(float valueSI);
 
     /**
      * Subtract two matrices on a cell-by-cell basis. If both matrices are sparse, a sparse matrix is returned, otherwise a
@@ -329,10 +326,7 @@ abstract class FloatMatrixData implements Serializable
      * Subtract a number from this matrix on a cell-by-cell basis.
      * @param valueSI float; the value to subtract
      */
-    public void decrementBy(final float valueSI)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] -= valueSI);
-    }
+    public abstract void decrementBy(float valueSI);
 
     /**
      * Multiply two matrix on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
@@ -366,10 +360,7 @@ abstract class FloatMatrixData implements Serializable
      * Multiply the values of this matrix with a number on a cell-by-cell basis.
      * @param valueSI float; the value to multiply with
      */
-    public void multiplyBy(final float valueSI)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] *= valueSI);
-    }
+    public abstract void multiplyBy(float valueSI);
 
     /**
      * Divide two matrices on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
@@ -403,10 +394,7 @@ abstract class FloatMatrixData implements Serializable
      * Divide the values of this matrix by a number on a cell-by-cell basis.
      * @param valueSI float; the value to multiply with
      */
-    public void divideBy(final float valueSI)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] /= valueSI);
-    }
+    public abstract void divideBy(float valueSI);
 
     /* ============================================================================================ */
     /* =============================== EQUALS, HASHCODE, TOSTRING ================================= */

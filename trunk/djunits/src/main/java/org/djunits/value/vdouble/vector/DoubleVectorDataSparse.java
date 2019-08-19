@@ -227,6 +227,34 @@ public class DoubleVectorDataSparse extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
+    public final void incrementBy(final double valueSI)
+    {
+        int maxLength = size();
+        double[] tempVectorSI = new double[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        int ownIndex = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+            {
+                ownIndex++;
+            }
+            double value =
+                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0) + valueSI;
+            if (value != 0f)
+            {
+                tempIndices[nextIndex] = i;
+                tempVectorSI[nextIndex] = value;
+                nextIndex++;
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final void decrementBy(final DoubleVectorData right) throws ValueException
     {
         int maxLength =
@@ -302,6 +330,34 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                     tempVectorSI[nextIndex] = value;
                     nextIndex++;
                 }
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final double valueSI)
+    {
+        int maxLength = size();
+        double[] tempVectorSI = new double[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        int ownIndex = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+            {
+                ownIndex++;
+            }
+            double value =
+                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0) - valueSI;
+            if (value != 0f)
+            {
+                tempIndices[nextIndex] = i;
+                tempVectorSI[nextIndex] = value;
+                nextIndex++;
             }
         }
         this.indices = Arrays.copyOf(tempIndices, nextIndex);
@@ -405,6 +461,34 @@ public class DoubleVectorDataSparse extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
+    public final void multiplyBy(final double valueSI)
+    {
+        int maxLength = size();
+        double[] tempVectorSI = new double[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        int ownIndex = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+            {
+                ownIndex++;
+            }
+            double value =
+                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0) * valueSI;
+            if (value != 0f)
+            {
+                tempIndices[nextIndex] = i;
+                tempVectorSI[nextIndex] = value;
+                nextIndex++;
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final void divideBy(final DoubleVectorData right) throws ValueException
     {
         int maxLength = size();
@@ -473,6 +557,34 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                     tempVectorSI[nextIndex] = value;
                     nextIndex++;
                 }
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void divideBy(final double valueSI)
+    {
+        int maxLength = size();
+        double[] tempVectorSI = new double[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        int ownIndex = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+            {
+                ownIndex++;
+            }
+            double value =
+                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0) / valueSI;
+            if (value != 0f)
+            {
+                tempIndices[nextIndex] = i;
+                tempVectorSI[nextIndex] = value;
+                nextIndex++;
             }
         }
         this.indices = Arrays.copyOf(tempIndices, nextIndex);

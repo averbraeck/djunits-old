@@ -277,20 +277,6 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     @Override
     public final void incrementBy(final FloatMatrixData right) throws ValueException
     {
-        /*-
-            // the number of new cells = the sum of the number of cells of each minus the overlapping cells.
-            int overlap = 0;
-            for (int index = 0; index < this.matrixSI.length; index++)
-            {
-                int c = (int) this.indices[index] % this.cols;
-                int r = (int) this.indices[index] / this.cols;
-                if (right.getSI(r, c) != 0.0)
-                {
-                    overlap++;
-                }
-            }
-            int newLength = cardinality() + right.cardinality() - overlap;
-         */
         int newLength = 0;
         for (int r = 0; r < rows(); r++)
         {
@@ -321,7 +307,44 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                 }
             }
         }
+        this.indices = newIndices;
+        this.matrixSI = newMatrixSI;
+    }
 
+    /** {@inheritDoc} */
+    @Override
+    public final void incrementBy(final float valueSI)
+    {
+        int newLength = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                if (this.getSI(r, c) + valueSI != 0.0)
+                {
+                    newLength++;
+                }
+            }
+        }
+        float[] newMatrixSI = new float[newLength];
+        long[] newIndices = new long[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                float value = this.getSI(r, c) + valueSI;
+                if (value != 0.0)
+                {
+                    int index = r * cols() + c;
+                    newMatrixSI[count] = value;
+                    newIndices[count] = index;
+                    count++;
+                }
+            }
+        }
         this.indices = newIndices;
         this.matrixSI = newMatrixSI;
     }
@@ -360,7 +383,44 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                 }
             }
         }
+        this.indices = newIndices;
+        this.matrixSI = newMatrixSI;
+    }
 
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final float valueSI)
+    {
+        int newLength = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                if (this.getSI(r, c) - valueSI != 0.0)
+                {
+                    newLength++;
+                }
+            }
+        }
+        float[] newMatrixSI = new float[newLength];
+        long[] newIndices = new long[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                float value = this.getSI(r, c) - valueSI;
+                if (value != 0.0)
+                {
+                    int index = r * cols() + c;
+                    newMatrixSI[count] = value;
+                    newIndices[count] = index;
+                    count++;
+                }
+            }
+        }
         this.indices = newIndices;
         this.matrixSI = newMatrixSI;
     }
@@ -399,7 +459,44 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                 }
             }
         }
+        this.indices = newIndices;
+        this.matrixSI = newMatrixSI;
+    }
 
+    /** {@inheritDoc} */
+    @Override
+    public final void multiplyBy(final float valueSI)
+    {
+        int newLength = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                if (this.getSI(r, c) * valueSI != 0.0)
+                {
+                    newLength++;
+                }
+            }
+        }
+        float[] newMatrixSI = new float[newLength];
+        long[] newIndices = new long[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                float value = this.getSI(r, c) * valueSI;
+                if (value != 0.0)
+                {
+                    int index = r * cols() + c;
+                    newMatrixSI[count] = value;
+                    newIndices[count] = index;
+                    count++;
+                }
+            }
+        }
         this.indices = newIndices;
         this.matrixSI = newMatrixSI;
     }
@@ -438,7 +535,44 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                 }
             }
         }
+        this.indices = newIndices;
+        this.matrixSI = newMatrixSI;
+    }
 
+    /** {@inheritDoc} */
+    @Override
+    public final void divideBy(final float valueSI)
+    {
+        int newLength = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                if (this.getSI(r, c) / valueSI != 0.0)
+                {
+                    newLength++;
+                }
+            }
+        }
+        float[] newMatrixSI = new float[newLength];
+        long[] newIndices = new long[newLength];
+
+        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
+        int count = 0;
+        for (int r = 0; r < rows(); r++)
+        {
+            for (int c = 0; c < cols(); c++)
+            {
+                float value = this.getSI(r, c) / valueSI;
+                if (value != 0.0)
+                {
+                    int index = r * cols() + c;
+                    newMatrixSI[count] = value;
+                    newIndices[count] = index;
+                    count++;
+                }
+            }
+        }
         this.indices = newIndices;
         this.matrixSI = newMatrixSI;
     }

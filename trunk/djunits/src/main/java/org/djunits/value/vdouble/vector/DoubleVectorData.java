@@ -423,10 +423,7 @@ abstract class DoubleVectorData implements Serializable
      * Add a number to this vector on a cell-by-cell basis.
      * @param valueSI double; the value to add
      */
-    public void incrementBy(final double valueSI)
-    {
-        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] += valueSI);
-    }
+    public abstract void incrementBy(double valueSI);
 
     /**
      * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
@@ -457,10 +454,7 @@ abstract class DoubleVectorData implements Serializable
      * Subtract a number from this vector on a cell-by-cell basis.
      * @param valueSI double; the value to subtract
      */
-    public void decrementBy(final double valueSI)
-    {
-        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] -= valueSI);
-    }
+    public abstract void decrementBy(double valueSI);
 
     /**
      * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
@@ -492,10 +486,7 @@ abstract class DoubleVectorData implements Serializable
      * Multiply the values of this vector with a number on a cell-by-cell basis.
      * @param valueSI double; the value to multiply with
      */
-    public void multiplyBy(final double valueSI)
-    {
-        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] *= valueSI);
-    }
+    public abstract void multiplyBy(double valueSI);
 
     /**
      * Divide two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
@@ -527,10 +518,7 @@ abstract class DoubleVectorData implements Serializable
      * Divide the values of this vector by a number on a cell-by-cell basis.
      * @param valueSI double; the value to multiply with
      */
-    public void divideBy(final double valueSI)
-    {
-        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] /= valueSI);
-    }
+    public abstract void divideBy(double valueSI);
 
     /* ============================================================================================ */
     /* =============================== EQUALS, HASHCODE, TOSTRING ================================= */

@@ -1120,6 +1120,73 @@ public class DoubleVectorSparseTest
         }
     }
 
+    /**
+     * Test the incrementBy, decrementBy, multiplyBy and divideBy methods that take a scalar as second argument.
+     */
+    @Test
+    public void modifyByScalar()
+    {
+        try
+        {
+            TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
+            double[] value = data(99, 38.0f, 2, 3);
+            double modifier = 8.76d;
+            MutableDoubleVector.Rel<TemperatureUnit> testVector =
+                    new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.incrementBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("incremented value should match", value[index] + modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.incrementBy(Double.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("incremented value should be NaN", Double.isNaN(testVector.getInUnit(index)));
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.decrementBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("decremented value should match", value[index] - modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.decrementBy(Double.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("decremented value should be NaN", Double.isNaN(testVector.getInUnit(index)));
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.multiplyBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("multiplied value should match", value[index] * modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.multiplyBy(Double.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("multiplied value should be NaN", Double.isNaN(testVector.getInUnit(index)));
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.divideBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("divided value should match", value[index] / modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.divideBy(Double.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("divided value should be NaN", Double.isNaN(testVector.getInUnit(index)));
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+    
     /** */
     interface DoubleToDouble
     {

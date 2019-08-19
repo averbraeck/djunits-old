@@ -1382,6 +1382,101 @@ public class FloatMatrixSparseTest
         }
     }
 
+    /**
+     * Test the incrementBy, decrementBy, multiplyBy and divideBy methods that take a scalar as second argument.
+     */
+    @Test
+    public void modifyByScalar()
+    {
+        try
+        {
+            TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
+            float[][] value = data(30, 50, false, 12.3f, 2, 3);
+            float modifier = 8.76f;
+            MutableFloatMatrix.Rel<TemperatureUnit> testVector =
+                    new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.incrementBy(modifier);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertEquals("incremented value should match", value[row][col] + modifier, testVector.getInUnit(row, col), 
+                            0.01);
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.incrementBy(Float.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col))); 
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.decrementBy(modifier);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertEquals("incremented value should match", value[row][col] - modifier, testVector.getInUnit(row, col), 
+                            0.01);
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.decrementBy(Float.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col))); 
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.multiplyBy(modifier);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertEquals("incremented value should match", value[row][col] * modifier, testVector.getInUnit(row, col), 
+                            0.01);
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.multiplyBy(Float.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col))); 
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.divideBy(modifier);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertEquals("incremented value should match", value[row][col] / modifier, testVector.getInUnit(row, col), 
+                            0.01);
+                }
+            }
+            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.divideBy(Float.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col))); 
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+    
     /** */
     interface FloatToFloat
     {

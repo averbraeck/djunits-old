@@ -227,6 +227,34 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
+    public final void incrementBy(final float valueSI)
+    {
+        int maxLength = size();
+        float[] tempVectorSI = new float[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        int ownIndex = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+            {
+                ownIndex++;
+            }
+            float value =
+                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f) + valueSI;
+            if (value != 0f)
+            {
+                tempIndices[nextIndex] = i;
+                tempVectorSI[nextIndex] = value;
+                nextIndex++;
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final void decrementBy(final FloatVectorData right) throws ValueException
     {
         int maxLength =
@@ -302,6 +330,34 @@ public class FloatVectorDataSparse extends FloatVectorData
                     tempVectorSI[nextIndex] = value;
                     nextIndex++;
                 }
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final float valueSI)
+    {
+        int maxLength = size();
+        float[] tempVectorSI = new float[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        int ownIndex = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+            {
+                ownIndex++;
+            }
+            float value =
+                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f) - valueSI;
+            if (value != 0f)
+            {
+                tempIndices[nextIndex] = i;
+                tempVectorSI[nextIndex] = value;
+                nextIndex++;
             }
         }
         this.indices = Arrays.copyOf(tempIndices, nextIndex);
@@ -405,6 +461,34 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
+    public final void multiplyBy(final float valueSI)
+    {
+        int maxLength = size();
+        float[] tempVectorSI = new float[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        int ownIndex = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+            {
+                ownIndex++;
+            }
+            float value =
+                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f) * valueSI;
+            if (value != 0f)
+            {
+                tempIndices[nextIndex] = i;
+                tempVectorSI[nextIndex] = value;
+                nextIndex++;
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final void divideBy(final FloatVectorData right) throws ValueException
     {
         int maxLength = size();
@@ -473,6 +557,34 @@ public class FloatVectorDataSparse extends FloatVectorData
                     tempVectorSI[nextIndex] = value;
                     nextIndex++;
                 }
+            }
+        }
+        this.indices = Arrays.copyOf(tempIndices, nextIndex);
+        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void divideBy(final float valueSI)
+    {
+        int maxLength = size();
+        float[] tempVectorSI = new float[maxLength];
+        int[] tempIndices = new int[maxLength];
+        int nextIndex = 0;
+        int ownIndex = 0;
+        for (int i = 0; i < size(); i++)
+        {
+            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+            {
+                ownIndex++;
+            }
+            float value =
+                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f) / valueSI;
+            if (value != 0f)
+            {
+                tempIndices[nextIndex] = i;
+                tempVectorSI[nextIndex] = value;
+                nextIndex++;
             }
         }
         this.indices = Arrays.copyOf(tempIndices, nextIndex);
