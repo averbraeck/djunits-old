@@ -1077,18 +1077,18 @@ public class DoubleVectorSparseTest
                     for (int i = 0; i < leftValue.length; i++)
                     {
                         double expect = referenceLeft.getSI(i) / right.getSI(i);
+                        double got = left.getSI(i);
                         if (Double.isNaN(expect))
                         {
-                            assertTrue("value of element should be NaN", Double.isNaN(left.getSI(i)));
+                            assertTrue("value of element should be NaN", Double.isNaN(got));
                         }
                         else if (Double.isInfinite(expect))
                         {
-                            assertTrue("value of element should be infinite", Double.isInfinite(left.getSI(i)));
+                            assertTrue("value of element should be infinite", Double.isInfinite(got));
                         }
                         else
                         {
-                            assertEquals("value of element should be ratio of contributing elements", expect, left.getSI(i),
-                                    0.001);
+                            assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
                         }
                     }
                     left = new MutableDoubleVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
@@ -1097,18 +1097,18 @@ public class DoubleVectorSparseTest
                     for (int i = 0; i < leftValue.length; i++)
                     {
                         double expect = referenceLeft.getSI(i) / right.getSI(i);
+                        double got = left.getSI(i);
                         if (Double.isNaN(expect))
                         {
-                            assertTrue("value of element should be NaN", Double.isNaN(left.getSI(i)));
+                            assertTrue("value of element should be NaN", Double.isNaN(got));
                         }
                         else if (Double.isInfinite(expect))
                         {
-                            assertTrue("value of element should be infinite", Double.isInfinite(left.getSI(i)));
+                            assertTrue("value of element should be infinite", Double.isInfinite(got));
                         }
                         else
                         {
-                            assertEquals("value of element should be ratio of contributing elements", expect, left.getSI(i),
-                                    0.001);
+                            assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
                         }
                     }
                 }
