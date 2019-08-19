@@ -193,8 +193,8 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         float[] matrixSINew = new float[this.matrixSI.length + 1];
         System.arraycopy(this.indices, 0, indicesNew, 0, internalIndex);
         System.arraycopy(this.matrixSI, 0, matrixSINew, 0, internalIndex);
-        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex - 1, this.indices.length - internalIndex);
-        System.arraycopy(this.matrixSI, internalIndex, matrixSINew, internalIndex - 1, this.indices.length - internalIndex);
+        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex + 1, this.indices.length - internalIndex);
+        System.arraycopy(this.matrixSI, internalIndex, matrixSINew, internalIndex + 1, this.indices.length - internalIndex);
         indicesNew[internalIndex] = index;
         matrixSINew[internalIndex] = valueSI;
         this.indices = indicesNew;

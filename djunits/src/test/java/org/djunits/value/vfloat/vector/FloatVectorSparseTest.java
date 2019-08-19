@@ -1057,18 +1057,18 @@ public class FloatVectorSparseTest
                     for (int i = 0; i < leftValue.length; i++)
                     {
                         float expect = referenceLeft.getSI(i) / right.getSI(i);
+                        float got = left.getSI(i);
                         if (Float.isNaN(expect))
                         {
-                            assertTrue("value of element should be NaN", Float.isNaN(left.getSI(i)));
+                            assertTrue("value of element should be NaN", Float.isNaN(got));
                         }
                         else if (Float.isInfinite(expect))
                         {
-                            assertTrue("value of element should be infinite", Float.isInfinite(left.getSI(i)));
+                            assertTrue("value of element should be infinite", Float.isInfinite(got));
                         }
                         else
                         {
-                            assertEquals("value of element should be ratio of contributing elements", expect, left.getSI(i),
-                                    0.001);
+                            assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
                         }
                     }
                     left = new MutableFloatVector.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
@@ -1077,18 +1077,18 @@ public class FloatVectorSparseTest
                     for (int i = 0; i < leftValue.length; i++)
                     {
                         float expect = referenceLeft.getSI(i) / right.getSI(i);
+                        float got = left.getSI(i);
                         if (Float.isNaN(expect))
                         {
-                            assertTrue("value of element should be NaN", Float.isNaN(left.getSI(i)));
+                            assertTrue("value of element should be NaN", Float.isNaN(got));
                         }
                         else if (Float.isInfinite(expect))
                         {
-                            assertTrue("value of element should be infinite", Float.isInfinite(left.getSI(i)));
+                            assertTrue("value of element should be infinite", Float.isInfinite(got));
                         }
                         else
                         {
-                            assertEquals("value of element should be ratio of contributing elements", expect, left.getSI(i),
-                                    0.001);
+                            assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
                         }
                     }
                 }
