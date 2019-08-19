@@ -171,12 +171,26 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public final void incrementBy(final float valueSI)
+    {
+        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] += valueSI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final void decrementBy(final FloatMatrixData right) throws ValueException
     {
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right.getSI(r, c)));
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final float valueSI)
+    {
+        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] -= valueSI);
+    }
+    
     /** {@inheritDoc} */
     @Override
     public final void multiplyBy(final FloatMatrixData right) throws ValueException
@@ -187,9 +201,24 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public final void multiplyBy(final float valueSI)
+    {
+        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] *= valueSI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final void divideBy(final FloatMatrixData right) throws ValueException
     {
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public final void divideBy(final float valueSI)
+    {
+        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] /= valueSI);
+    }
+
 }

@@ -1100,6 +1100,73 @@ public class FloatVectorSparseTest
         }
     }
 
+    /**
+     * Test the incrementBy, decrementBy, multiplyBy and divideBy methods that take a scalar as second argument.
+     */
+    @Test
+    public void modifyByScalar()
+    {
+        try
+        {
+            TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
+            float[] value = data(99, 38.0f, 2, 3);
+            float modifier = 8.76f;
+            MutableFloatVector.Rel<TemperatureUnit> testVector =
+                    new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.incrementBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("incremented value should match", value[index] + modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.incrementBy(Float.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(index)));
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.decrementBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("decremented value should match", value[index] - modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.decrementBy(Float.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("decremented value should be NaN", Float.isNaN(testVector.getInUnit(index)));
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.multiplyBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("multiplied value should match", value[index] * modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.multiplyBy(Float.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("multiplied value should be NaN", Float.isNaN(testVector.getInUnit(index)));
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.divideBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("divided value should match", value[index] / modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            testVector.divideBy(Float.NaN);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertTrue("divided value should be NaN", Float.isNaN(testVector.getInUnit(index)));
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+    
     /** */
     interface FloatToFloat
     {

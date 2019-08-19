@@ -270,20 +270,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     @Override
     public final void incrementBy(final DoubleMatrixData right) throws ValueException
     {
-        /*-
-            // the number of new cells = the sum of the number of cells of each minus the overlapping cells.
-            int overlap = 0;
-            for (int index = 0; index < this.matrixSI.length; index++)
-            {
-                int c = (int) this.indices[index] % this.cols;
-                int r = (int) this.indices[index] / this.cols;
-                if (right.getSI(r, c) != 0.0)
-                {
-                    overlap++;
-                }
-            }
-            int newLength = cardinality() + right.cardinality() - overlap;
-         */
         int newLength = 0;
         for (int r = 0; r < rows(); r++)
         {
@@ -314,7 +300,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                 }
             }
         }
-
         this.indices = newIndices;
         this.matrixSI = newMatrixSI;
     }
@@ -353,7 +338,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                 }
             }
         }
-
         this.indices = newIndices;
         this.matrixSI = newMatrixSI;
     }
@@ -392,7 +376,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                 }
             }
         }
-
         this.indices = newIndices;
         this.matrixSI = newMatrixSI;
     }
@@ -431,7 +414,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                 }
             }
         }
-
         this.indices = newIndices;
         this.matrixSI = newMatrixSI;
     }
