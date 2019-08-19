@@ -66,6 +66,7 @@ public class FlowVolumeUnitTest extends AbstractLinearUnitTest<FlowVolumeUnit>
                 new FlowVolumeUnit("TrucksPerHour", "tph", UnitSystem.OTHER, FlowVolumeUnit.CUBIC_METER_PER_HOUR, 100);
         assertTrue("Can create a new FlowMassUnit", null != myFVU);
         checkUnitRatioNameAndAbbreviation(myFVU, 100. / 3600, 0.0001, "TrucksPerHour", "tph");
+        deregisterUnit(myFVU);
     }
 
 }

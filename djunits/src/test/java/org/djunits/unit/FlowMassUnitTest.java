@@ -64,6 +64,7 @@ public class FlowMassUnitTest extends AbstractLinearUnitTest<FlowMassUnit>
                 new FlowMassUnit("WaterDropsPerHour", "wdpu", UnitSystem.OTHER, FlowMassUnit.KILOGRAM_PER_SECOND, 1234);
         assertTrue("Can create a new FlowMassUnit", null != myFMU);
         checkUnitRatioNameAndAbbreviation(myFMU, 1234, 0.0001, "WaterDropsPerHour", "wdpu");
+        deregisterUnit(myFMU);
     }
 
 }

@@ -2,6 +2,10 @@ package org.djunits.unit;
 
 import static org.junit.Assert.assertEquals;
 
+import java.lang.reflect.Field;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
@@ -36,5 +40,26 @@ public abstract class AbstractUnitTest<U extends Unit<U>>
     protected final void checkKeys(final U u, final String expectedNameKey, final String expectedAbbreviationKey)
     {
         assertEquals("abbreviation key", expectedAbbreviationKey, u.getAbbreviationKey());
+    }
+
+    /**
+     * Method for unit tests...
+     * @param unit the unit to deregister
+     */
+    @SuppressWarnings("unchecked")
+    public static void deregisterUnit(final Unit<?> unit)
+    {
+        try
+        {
+            Field unitsField = Unit.class.getDeclaredField("UNITS");
+            unitsField.setAccessible(true);
+            Map<String, Set<Unit<?>>> unitsMap = (Map<String, Set<Unit<?>>>) unitsField.get(unit);
+            unitsMap.get(unit.getClass().getSimpleName()).remove(unit);
+        }
+        catch (Exception e)
+        {
+            System.err.println("Problem deregistering unit " + unit.getClass().getSimpleName() + "." + unit.getAbbreviation()
+                    + ": " + e.getMessage());
+        }
     }
 }

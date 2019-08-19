@@ -78,6 +78,7 @@ public class AbsoluteTemperatureUnitTest extends AbstractOffsetUnitTest<Absolute
                 new AbsoluteTemperatureUnit("Newton", "N", UnitSystem.OTHER, 3.0, 273.15, TemperatureUnit.KELVIN);
         assertTrue("Can create a new AbsoluteTempteratureUnit", null != myTU);
         checkUnitRatioOffsetNameAndAbbreviation(myTU, 3, 273.15, 0.0001, "Newton", "N");
+        deregisterUnit(myTU);
     }
 
 }

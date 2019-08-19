@@ -64,6 +64,7 @@ public class LinearDensityUnitTest extends AbstractLinearUnitTest<LinearDensityU
         LinearDensityUnit muLDU = new LinearDensityUnit("PerInch", "/in", OTHER, LinearDensityUnit.PER_METER, 2.54 / 100);
         assertTrue("Can create a new LinearDensityUnit", null != muLDU);
         checkUnitRatioNameAndAbbreviation(muLDU, 0.0254, 0.000001, "PerInch", "/in");
+        deregisterUnit(muLDU);
     }
 
 }

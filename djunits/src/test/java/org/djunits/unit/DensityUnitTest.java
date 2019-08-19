@@ -62,6 +62,7 @@ public class DensityUnitTest extends AbstractLinearUnitTest<DensityUnit>
         DensityUnit myDU = new DensityUnit("DensityUnit", "SPCF", SI_DERIVED, DensityUnit.KG_PER_METER_3, 515.317882);
         assertTrue("Can create a new DensityUnit", null != myDU);
         checkUnitRatioNameAndAbbreviation(myDU, 515.3, 0.1, "DensityUnit", "SPCF");
+        deregisterUnit(myDU);
     }
 
 }

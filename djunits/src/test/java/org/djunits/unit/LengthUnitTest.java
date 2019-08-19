@@ -74,5 +74,6 @@ public class LengthUnitTest extends AbstractLinearUnitTest<LengthUnit>
         LengthUnit myLU = new LengthUnit("Furlong", "fl", OTHER, LengthUnit.METER, 201.16800);
         assertTrue("Can create a new LengthUnit", null != myLU);
         checkUnitRatioNameAndAbbreviation(myLU, 200, 2, "Furlong", "fl");
+        deregisterUnit(myLU);
     }
 }

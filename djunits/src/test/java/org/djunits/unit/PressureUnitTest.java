@@ -80,6 +80,7 @@ public class PressureUnitTest extends AbstractLinearUnitTest<PressureUnit>
                 new PressureUnit("HealthyHumanHeart", "hhhp", UnitSystem.OTHER, PressureUnit.MILLIMETER_MERCURY, 106);
         assertTrue("Can create a new PowerUnit", null != myPU);
         checkUnitRatioNameAndAbbreviation(myPU, 14132.1711, 0.01, "HealthyHumanHeart", "hhhp");
+        deregisterUnit(myPU);
     }
 
 }
