@@ -380,7 +380,6 @@ abstract class FloatMatrixData implements Serializable
      */
     public FloatMatrixData divide(final FloatMatrixData right) throws ValueException
     {
-        // FIXME: looks very wrong; div0 appears to result in 0f; not Float.NaN
         checkSizes(right);
         float[] dm = new float[this.rows * this.cols];
         IntStream.range(0, this.rows).parallel().forEach(
