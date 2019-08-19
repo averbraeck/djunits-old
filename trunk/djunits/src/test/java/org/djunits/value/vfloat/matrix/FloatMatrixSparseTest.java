@@ -56,14 +56,6 @@ public class FloatMatrixSparseTest
             }
             result[row][column] = index - firstNonZero + 1000 * row + startValue;
         }
-//        for (int row = 0; row < rows; row++)
-//        {
-//            result[row] = new float[row == badRowIndex ? columns + 1 : columns];
-//            for (int column = 0; column < result[row].length; column++)
-//            {
-//                result[row][column] = row * 1000 + column + startValue;
-//            }
-//        }
         return result;
     }
 
