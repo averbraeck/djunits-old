@@ -372,6 +372,7 @@ abstract class DoubleMatrixData implements Serializable
      */
     public DoubleMatrixData divide(final DoubleMatrixData right) throws ValueException
     {
+        // FIXME: looks very wrong; div0 appears to result in 0d; not Float.NaN
         checkSizes(right);
         double[] dm = new double[this.rows * this.cols];
         IntStream.range(0, this.rows).parallel().forEach(
