@@ -63,15 +63,19 @@ public class UnitsTest implements UNITS
             Class<U> unitClass = (Class<U>) Class.forName("org.djunits.unit." + className + "Unit");
             for (U unit : Unit.getUnits(unitClass))
             {
-                String defaultAbbreviation = unit.getDefaultTextualRepresentation();
-                Constructor<Scalar<U>> scalarConstructor = scalarClass.getConstructor(double.class, unitClass);
-                Scalar<U> scalarNew = scalarConstructor.newInstance(1.2, unit);
-                Method valueOfMethod = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
-                Scalar<U> scalarValue = (Scalar<U>) valueOfMethod.invoke(scalarClass, "1.2" + defaultAbbreviation);
-                assertEquals(scalarNew.doubleValue(), scalarValue.doubleValue(), 0.00001);
-                assertEquals(scalarNew.getUnit(), scalarValue.getUnit());
-                assertEquals(scalarNew, scalarValue);
-                // System.out.println(scalarNew + " = " + scalarValue);
+                if (!unit.toString().equals("7abbr")) // ignore this unit from the ScalarOperationsTest if present
+                {
+                    System.out.println("Test valueOf(" + className + "." + unit + ")");
+                    String defaultAbbreviation = unit.getDefaultTextualRepresentation();
+                    Constructor<Scalar<U>> scalarConstructor = scalarClass.getConstructor(double.class, unitClass);
+                    Scalar<U> scalarNew = scalarConstructor.newInstance(1.2, unit);
+                    Method valueOfMethod = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
+                    Scalar<U> scalarValue = (Scalar<U>) valueOfMethod.invoke(scalarClass, "1.2" + defaultAbbreviation);
+                    assertEquals(scalarNew.doubleValue(), scalarValue.doubleValue(), 0.00001);
+                    assertEquals(scalarNew.getUnit(), scalarValue.getUnit());
+                    assertEquals(scalarNew, scalarValue);
+                    // System.out.println(scalarNew + " = " + scalarValue);
+                }
             }
         }
     }

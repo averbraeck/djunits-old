@@ -63,5 +63,6 @@ public class AngleSolidUnitTest extends AbstractLinearUnitTest<AngleSolidUnit>
         AngleSolidUnit myAPU = new AngleSolidUnit("point", "pt", OTHER, AngleSolidUnit.STERADIAN, 0.19634954085);
         assertTrue("Can create a new TimeUnit", null != myAPU);
         checkUnitRatioNameAndAbbreviation(myAPU, 0.19634954085, 0.0000001, "point", "pt");
+        deregisterUnit(myAPU);
     }
 }

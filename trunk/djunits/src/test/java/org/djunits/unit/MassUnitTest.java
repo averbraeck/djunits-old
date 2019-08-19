@@ -67,6 +67,7 @@ public class MassUnitTest extends AbstractLinearUnitTest<MassUnit>
         MassUnit myMU = new MassUnit("Person", "pn", OTHER, MassUnit.KILOGRAM, 80);
         assertTrue("Can create a new MassUnit", null != myMU);
         checkUnitRatioNameAndAbbreviation(myMU, 80, 1, "Person", "pn");
+        deregisterUnit(myMU);
     }
 
 }

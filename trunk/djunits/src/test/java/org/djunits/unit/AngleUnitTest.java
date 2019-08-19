@@ -89,6 +89,7 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
         AngleUnit myAPU = new AngleUnit("point", "pt", OTHER, AngleUnit.RADIAN, 0.19634954085);
         assertTrue("Can create a new AngleUnit", null != myAPU);
         checkUnitValueNameAndAbbreviation(myAPU, 0.19634954085, 0.0000001, "point", "pt");
+        deregisterUnit(myAPU);
     }
 
     /**

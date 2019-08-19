@@ -83,6 +83,7 @@ public class DirectionUnitTest extends AbstractUnitTest<DirectionUnit>
         DirectionUnit myAPU = new DirectionUnit("clockDegE", "cDE", OTHER, -Math.PI / 180.0, -0.0, AngleUnit.DEGREE);
         assertTrue("Can create a new DirectionUnit", null != myAPU);
         checkUnitValueNameAndAbbreviation(myAPU, -Math.PI / 180.0, 0.0001, "clockDegE", "cDE");
+        deregisterUnit(myAPU);
     }
 
     /**
@@ -95,6 +96,7 @@ public class DirectionUnitTest extends AbstractUnitTest<DirectionUnit>
         DirectionUnit myAPU = new DirectionUnit("compass", "cDN", OTHER, -Math.PI / 180.0, -90.0, AngleUnit.DEGREE);
         assertTrue("Can create a new DirectionUnit", null != myAPU);
         checkUnitValueNameAndAbbreviation(myAPU, Math.PI / 2.0 - Math.PI / 180.0, 0.0001, "compass", "cDN");
+        deregisterUnit(myAPU);
     }
 
     /**

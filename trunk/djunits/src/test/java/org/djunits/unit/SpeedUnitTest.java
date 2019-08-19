@@ -67,6 +67,7 @@ public class SpeedUnitTest extends AbstractLinearUnitTest<SpeedUnit>
         SpeedUnit mySU = new SpeedUnit("Sprinter", "sprtr", SI_DERIVED, SpeedUnit.KM_PER_HOUR, 48);
         assertTrue("Can create a new PowerUnit", null != mySU);
         checkUnitRatioNameAndAbbreviation(mySU, 13.3333, 0.0001, "Sprinter", "sprtr");
+        deregisterUnit(mySU);
     }
 
 }

@@ -65,6 +65,7 @@ public class FrequencyUnitTest extends AbstractLinearUnitTest<FrequencyUnit>
         FrequencyUnit myFU = new FrequencyUnit("MiddleA", "MA", OTHER, FrequencyUnit.KILOHERTZ, 0.440);
         assertTrue("Can create a new ForceUnit", null != myFU);
         checkUnitRatioNameAndAbbreviation(myFU, 440, 0.0001, "MiddleA", "MA");
+        deregisterUnit(myFU);
     }
 
 }

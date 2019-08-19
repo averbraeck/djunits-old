@@ -67,6 +67,7 @@ public class DurationUnitTest extends AbstractLinearUnitTest<DurationUnit>
         DurationUnit myTU = new DurationUnit("Fortnight", "fn", OTHER, DurationUnit.SECOND, 14 * 86400);
         assertTrue("Can create a new DurationUnit", null != myTU);
         checkUnitRatioNameAndAbbreviation(myTU, 14 * 86400, 1, "Fortnight", "fn");
+        deregisterUnit(myTU);
     }
 
 }

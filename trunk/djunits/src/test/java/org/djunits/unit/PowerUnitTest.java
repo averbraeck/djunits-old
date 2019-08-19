@@ -75,6 +75,7 @@ public class PowerUnitTest extends AbstractLinearUnitTest<PowerUnit>
         PowerUnit myMU = new PowerUnit("Person", "pnp", UnitSystem.OTHER, PowerUnit.WATT, 250);
         assertTrue("Can create a new PowerUnit", null != myMU);
         checkUnitRatioNameAndAbbreviation(myMU, 250, 1, "Person", "pnp");
+        deregisterUnit(myMU);
     }
 
 }

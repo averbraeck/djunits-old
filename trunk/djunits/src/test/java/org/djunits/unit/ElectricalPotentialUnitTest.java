@@ -64,11 +64,13 @@ public class ElectricalPotentialUnitTest extends AbstractLinearUnitTest<Electric
                 new ElectricalPotentialUnit("NanoVolt", "nV", SI_DERIVED, ElectricalPotentialUnit.VOLT, 1e-9);
         assertTrue("Can create a new ElectricalPotentialUnit", null != myEPU);
         checkUnitRatioNameAndAbbreviation(myEPU, 1e-9, 0.1, "NanoVolt", "nV");
+        deregisterUnit(myEPU);
 
         myEPU = new ElectricalPotentialUnit(PowerUnit.FOOT_POUND_FORCE_PER_HOUR, ElectricalCurrentUnit.MICROAMPERE,
                 "fpfph/microA", "fpfph/uA", UnitSystem.IMPERIAL);
         assertTrue("Can create a new ElectricalPotentialUnit", null != myEPU);
         checkUnitRatioNameAndAbbreviation(myEPU, 376.6, 0.1, "fpfph/microA", "fpfph/uA");
+        deregisterUnit(myEPU);
     }
 
 }

@@ -80,6 +80,7 @@ public class VolumeUnitTest extends AbstractLinearUnitTest<VolumeUnit>
         VolumeUnit myVU = new VolumeUnit("Barrel", "brl", OTHER, VolumeUnit.LITER, 119.240471);
         assertTrue("Can create a new VolumeUnit", null != myVU);
         checkUnitRatioNameAndAbbreviation(myVU, 0.119240471, 0.000001, "Barrel", "brl");
+        deregisterUnit(myVU);
     }
 
 }

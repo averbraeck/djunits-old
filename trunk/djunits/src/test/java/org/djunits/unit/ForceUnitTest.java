@@ -63,6 +63,7 @@ public class ForceUnitTest extends AbstractLinearUnitTest<ForceUnit>
         ForceUnit myFU = new ForceUnit("AntForce", "af", UnitSystem.OTHER, ForceUnit.KILOGRAM_FORCE, 0.002);
         assertTrue("Can create a new ForceUnit", null != myFU);
         checkUnitRatioNameAndAbbreviation(myFU, 0.002 * 9.8, 0.0001, "AntForce", "af");
+        deregisterUnit(myFU);
     }
 
 }
