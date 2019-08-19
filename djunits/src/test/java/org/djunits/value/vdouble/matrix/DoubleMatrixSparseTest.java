@@ -36,19 +36,25 @@ public class DoubleMatrixSparseTest
      * @param columns int; the number of columns in the result
      * @param nonRectangular boolean; if true; return a non-rectangular array; if false; return a rectangular array
      * @param startValue double; seed value
+     * @param firstNonZero int; index of first non-zero value
+     * @param zeroRangeLength int; number of zero values to insert between each pair of generated (probably non-zero) values
      * @return double[][]
      */
-    private static double[][] data(final int rows, final int columns, final boolean nonRectangular, final double startValue)
+    private static double[][] data(final int rows, final int columns, final boolean nonRectangular, final double startValue, 
+            final int firstNonZero, final int zeroRangeLength)
     {
         double[][] result = new double[rows][];
         final int badRowIndex = nonRectangular ? rows - 1 : -1;
-        for (int row = 0; row < rows; row++)
+        int lastRow = -1;
+        for (int index = firstNonZero; index < rows * columns; index += zeroRangeLength + 1)
         {
-            result[row] = new double[row == badRowIndex ? columns + 1 : columns];
-            for (int column = 0; column < result[row].length; column++)
+            int row = index / columns;
+            int column = index % columns;
+            while (lastRow < row)
             {
-                result[row][column] = row * 1000 + column + startValue;
+                result[++lastRow] = new double[row == badRowIndex ? columns + 1 : columns];
             }
+            result[row][column] = index - firstNonZero + 1000 * row + startValue;
         }
         return result;
     }
@@ -93,7 +99,7 @@ public class DoubleMatrixSparseTest
         try
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.KELVIN;
-            double[][] value = data(3, 5, false, 38.0);
+            double[][] value = data(30, 55, false, 38.0, 2, 3);
             DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dm =
                     new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dm.toString(true, true);
@@ -117,7 +123,7 @@ public class DoubleMatrixSparseTest
         try
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.KELVIN;
-            double[][] value = data(3, 5, false, 38.0);
+            double[][] value = data(30, 55, false, 38.0, 2, 3);
             MutableDoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dm =
                     new MutableDoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dm.toString(true, true);
@@ -142,12 +148,12 @@ public class DoubleMatrixSparseTest
         try
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.DEGREE_CELSIUS;
-            double[][] value = data(3, 5, false, 38.0);
+            double[][] value = data(30, 55, false, 38.0, 2, 3);
             DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperatureDM =
                     new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, true);
-            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDM.getSI(0, 0), 0.05);
-            assertEquals("Value in Fahrenheit", 100.4, temperatureDM.getInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
+            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDM.getSI(0, 2), 0.05);
+            assertEquals("Value in Fahrenheit", 100.4, temperatureDM.getInUnit(0, 2, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
             double[][] out = temperatureDM.getValuesInUnit();
             for (int row = 0; row < value.length; row++)
@@ -224,8 +230,8 @@ public class DoubleMatrixSparseTest
         try
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.DEGREE_CELSIUS;
-            double[][] value = data(3, 5, false, 38.0);
-            double[][] value2 = data(3, 5, false, 38.0);
+            double[][] value = data(30, 50, false, 38.0, 2, 3);
+            double[][] value2 = data(30, 50, false, 38.0, 2, 3);
             value2[0][0] = 12345;
             DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dm =
                     new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
@@ -299,7 +305,7 @@ public class DoubleMatrixSparseTest
         double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
         for (double seedValue : seedValues)
         {
-            double[][] input = data(3, 5, false, seedValue);
+            double[][] input = data(30, 50, false, seedValue, 2, 3);
             MutableDoubleMatrix.Abs<PositionUnit, LengthUnit> dm;
             try
             {
@@ -359,8 +365,8 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
+            double[][] leftValue = data(30, 50, false, 123.4f, 2, 3);
+            double[][] rightValue = data(30, 50, false, 234.5f, 2, 5);
             DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
                     new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Rel<LengthUnit> right =
@@ -389,8 +395,8 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
+            double[][] leftValue = data(30, 50, false, 123.4f, 2, 3);
+            double[][] rightValue = data(30, 50, false, 234.5f, 2, 5);
             DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
                     new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Rel<LengthUnit> right =
@@ -419,8 +425,8 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
+            double[][] leftValue = data(30, 50, false, 123.4f, 2, 3);
+            double[][] rightValue = data(30, 50, false, 234.5f, 2, 5);
             DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
                     new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Rel<LengthUnit> right =
@@ -449,8 +455,8 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
+            double[][] leftValue = data(30, 50, false, 123.4f, 2, 3);
+            double[][] rightValue = data(30, 50, false, 234.5f, 2, 5);
             DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
                     new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Rel<LengthUnit> right =
@@ -493,7 +499,7 @@ public class DoubleMatrixSparseTest
         try
         {
             // Matrix with null on first row
-            double[][] in = data(3, 5, false, 12.3);
+            double[][] in = data(30, 50, false, 12.3, 2, 3);
             in[0] = null;
             new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in, AbsoluteTemperatureUnit.DEGREE_CELSIUS,
                     StorageType.SPARSE);
@@ -507,7 +513,7 @@ public class DoubleMatrixSparseTest
         try
         {
             // Matrix with null on last row
-            double[][] in = data(3, 5, false, 12.3);
+            double[][] in = data(30, 50, false, 12.3, 2, 3);
             in[in.length - 1] = null;
             new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in, AbsoluteTemperatureUnit.DEGREE_CELSIUS,
                     StorageType.SPARSE);
@@ -521,7 +527,7 @@ public class DoubleMatrixSparseTest
         try
         {
             // Non-rectangular array
-            double[][] in = data(3, 5, true, 12.3);
+            double[][] in = data(30, 50, true, 12.3, 2, 3);
             new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in, AbsoluteTemperatureUnit.DEGREE_CELSIUS,
                     StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
@@ -532,7 +538,7 @@ public class DoubleMatrixSparseTest
             junk++;
         }
         // Determinant of non-square Matrix
-        double[][] in = data(3, 5, false, 12.3);
+        double[][] in = data(30, 50, false, 12.3, 2, 3);
         try
         {
             DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> matrix = null;
@@ -590,7 +596,7 @@ public class DoubleMatrixSparseTest
         try
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
-            double[][] value = data(3, 5, false, 38.0);
+            double[][] value = data(30, 50, false, 38.0, 2, 3);
             DoubleMatrix.Rel<TemperatureUnit> dm = new DoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
@@ -613,7 +619,7 @@ public class DoubleMatrixSparseTest
         try
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
-            double[][] value = data(3, 5, false, 38.0);
+            double[][] value = data(30, 50, false, 38.0, 2, 3);
             MutableDoubleMatrix.Rel<TemperatureUnit> dm =
                     new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dm.toString(true, true);
@@ -638,13 +644,13 @@ public class DoubleMatrixSparseTest
         try
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
-            double[][] value = data(3, 5, false, 38.0);
+            double[][] value = data(30, 50, false, 38.0, 2, 3);
             DoubleMatrix.Rel<TemperatureUnit> temperatureDM =
                     new DoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
-            assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDM.getSI(0, 0), 0.05);
+            assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDM.getSI(0, 2), 0.05);
             assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0,
-                    temperatureDM.getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
+                    temperatureDM.getInUnit(0, 2, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
             double[][] out = temperatureDM.getValuesInUnit();
             for (int row = 0; row < value.length; row++)
             {
@@ -683,8 +689,18 @@ public class DoubleMatrixSparseTest
             }
             temperatureDM = new DoubleMatrix.Rel<TemperatureUnit>(scalar, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
-            assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
-                    temperatureDM.cardinality());
+            int nonNullCount = 0;
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    if (value[row][col] != 0f)
+                    {
+                        nonNullCount++;
+                    }
+                }
+            }
+            assertEquals("All cells != 0; cardinality should equal number of cells", nonNullCount, temperatureDM.cardinality());
             double sum = 0;
             for (int row = 0; row < value.length; row++)
             {
@@ -711,8 +727,8 @@ public class DoubleMatrixSparseTest
         try
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
-            double[][] value = data(3, 5, false, 38.0);
-            double[][] value2 = data(3, 5, false, 38.0);
+            double[][] value = data(30, 50, false, 38.0, 2, 3);
+            double[][] value2 = data(30, 50, false, 38.0, 2, 3);
             value2[0][0] = 12345;
             DoubleMatrix.Rel<TemperatureUnit> dm = new DoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             DoubleMatrix.Rel<TemperatureUnit> dmCopy = dm;
@@ -783,7 +799,7 @@ public class DoubleMatrixSparseTest
         double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
         for (double seedValue : seedValues)
         {
-            double[][] input = data(3, 5, false, seedValue);
+            double[][] input = data(30, 50, false, seedValue, 2, 3);
             MutableDoubleMatrix.Rel<LengthUnit> dm;
             try
             {
@@ -853,8 +869,8 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
+            double[][] leftValue = data(30, 50, false, 123.4, 2, 3);
+            double[][] rightValue = data(30, 50, false, 234.5, 2, 5);
             DoubleMatrix.Rel<LengthUnit> left =
                     new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Rel<LengthUnit> right =
@@ -883,8 +899,8 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
+            double[][] leftValue = data(30, 50, false, 123.4, 2, 3);
+            double[][] rightValue = data(30, 50, false, 234.5, 2, 5);
             DoubleMatrix.Rel<LengthUnit> left =
                     new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Rel<LengthUnit> right =
@@ -913,8 +929,8 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
+            double[][] leftValue = data(30, 50, false, 123.4, 2, 3);
+            double[][] rightValue = data(30, 50, false, 234.5, 2, 5);
             DoubleMatrix.Rel<LengthUnit> left =
                     new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Rel<LengthUnit> right =
@@ -943,8 +959,8 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
+            double[][] leftValue = data(30, 50, false, 123.4, 2, 3);
+            double[][] rightValue = data(30, 50, false, 234.5, 2, 5);
             DoubleMatrix.Rel<LengthUnit> left =
                     new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Rel<LengthUnit> right =
@@ -973,8 +989,8 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
+            double[][] leftValue = data(30, 50, false, 123.4, 2, 3);
+            double[][] rightValue = data(30, 50, false, 234.5, 2, 5);
             DoubleMatrix.Rel<LengthUnit> left =
                     new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Rel<LengthUnit> right =
@@ -1003,8 +1019,8 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] leftValue = data(3, 5, false, 123.4);
-            double[][] rightValue = data(3, 5, false, 234.5);
+            double[][] leftValue = data(30, 50, false, 123.4, 2, 3);
+            double[][] rightValue = data(30, 50, false, 234.5, 2, 5);
             DoubleMatrix.Rel<LengthUnit> left =
                     new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Rel<LengthUnit> right =
@@ -1046,7 +1062,7 @@ public class DoubleMatrixSparseTest
         try
         {
             // Matrix with null on first row
-            double[][] in = data(3, 5, false, 12.3);
+            double[][] in = data(30, 50, false, 12.3, 2, 3);
             in[0] = null;
             new DoubleMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
@@ -1059,7 +1075,7 @@ public class DoubleMatrixSparseTest
         try
         {
             // Matrix with null on last row
-            double[][] in = data(3, 5, false, 12.3);
+            double[][] in = data(30, 50, false, 12.3, 2, 3);
             in[in.length - 1] = null;
             new DoubleMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
@@ -1072,7 +1088,7 @@ public class DoubleMatrixSparseTest
         try
         {
             // Non-rectangular array
-            double[][] in = data(3, 5, true, 12.3);
+            double[][] in = data(30, 50, true, 12.3, 2, 3);
             new DoubleMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
@@ -1082,7 +1098,7 @@ public class DoubleMatrixSparseTest
             junk++;
         }
         // Determinant of non-square Matrix
-        double[][] in = data(3, 5, false, 12.3);
+        double[][] in = data(30, 50, false, 12.3, 2, 3);
         try
         {
             DoubleMatrix.Rel<TemperatureUnit> matrix = null;
@@ -1125,6 +1141,254 @@ public class DoubleMatrixSparseTest
                 System.err.println("Ignoring bug in COLT library");
                 return;
             }
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the incrementBy method.
+     */
+    @Test
+    public final void incrementByTest()
+    {
+        try
+        {
+            for (int firstStep : new int[] {3, 5})
+            {
+                double[][] leftValue = data(30, 50, false, 123.4, 2, firstStep);
+                double[][] rightValue = data(30, 50, false, 234.5, 2, 8 - firstStep);
+                MutableDoubleMatrix.Rel<LengthUnit> left =
+                        new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                MutableDoubleMatrix.Rel<LengthUnit> referenceLeft = left.copy();
+                DoubleMatrix.Rel<LengthUnit> right =
+                        new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                left.incrementBy(right);
+                for (int row = 0; row < leftValue.length; row++)
+                {
+                    for (int col = 0; col < leftValue[row].length; col++)
+                    {
+                        assertEquals("value of element should be sum of contributing elements",
+                                referenceLeft.getSI(row, col) + right.getSI(row, col), left.getSI(row, col), 0.001);
+                    }
+                }
+                left = new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                right = new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                left.incrementBy(right);
+                for (int row = 0; row < leftValue.length; row++)
+                {
+                    for (int col = 0; col < leftValue[row].length; col++)
+                    {
+                        assertEquals("value of element should be sum of contributing elements",
+                                referenceLeft.getSI(row, col) + right.getSI(row, col), left.getSI(row, col), 0.001);
+                    }
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the decrementBy method.
+     */
+    @Test
+    public final void decrementByTest()
+    {
+        try
+        {
+            for (int firstStep : new int[] {3, 5})
+            {
+                double[][] leftValue = data(30, 50, false, 123.4, 2, firstStep);
+                double[][] rightValue = data(30, 50, false, 234.5, 2, 8 - firstStep);
+                MutableDoubleMatrix.Rel<LengthUnit> left =
+                        new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                MutableDoubleMatrix.Rel<LengthUnit> referenceLeft = left.copy();
+                DoubleMatrix.Rel<LengthUnit> right =
+                        new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                left.decrementBy(right);
+                for (int row = 0; row < leftValue.length; row++)
+                {
+                    for (int col = 0; col < leftValue[row].length; col++)
+                    {
+                        assertEquals("value of element should be sum of contributing elements",
+                                referenceLeft.getSI(row, col) - right.getSI(row, col), left.getSI(row, col), 0.001);
+                    }
+                }
+                left = new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                right = new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                left.decrementBy(right);
+                for (int row = 0; row < leftValue.length; row++)
+                {
+                    for (int col = 0; col < leftValue[row].length; col++)
+                    {
+                        assertEquals("value of element should be sum of contributing elements",
+                                referenceLeft.getSI(row, col) - right.getSI(row, col), left.getSI(row, col), 0.001);
+                    }
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the multiplyBy method.
+     */
+    @Test
+    public final void multiplyByTest()
+    {
+        try
+        {
+            for (int firstStep : new int[] { 3, 5 })
+            {
+                for (boolean lastNanOrdering : new boolean[] {false, true})
+                {
+                    double[][] leftValue = data(30, 50, false, 123.4, 2, firstStep);
+                    double[][] rightValue = data(30, 50, false, 234.5, 2, 8 - firstStep);
+                    leftValue[0][0] = Float.NaN;
+                    leftValue[0][1] = Float.NaN;
+                    rightValue[0][1] = Float.NaN;
+                    rightValue[0][2] = Float.NaN;
+                    if (lastNanOrdering)
+                    {
+                        leftValue[29][49] = Float.NaN;
+                        leftValue[29][48] = Float.NaN;
+                        rightValue[29][48] = Float.NaN;
+                        rightValue[29][47] = Float.NaN;
+                    }
+                    else
+                    {
+                        rightValue[29][49] = Float.NaN;
+                        rightValue[29][48] = Float.NaN;
+                        leftValue[29][48] = Float.NaN;
+                        leftValue[29][47] = Float.NaN;
+                    }
+                    MutableDoubleMatrix.Rel<LengthUnit> left =
+                            new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                    MutableDoubleMatrix.Rel<LengthUnit> referenceLeft = left.copy();
+                    DoubleMatrix.Rel<LengthUnit> right =
+                            new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                    left.multiplyBy(right);
+                    for (int row = 0; row < leftValue.length; row++)
+                    {
+                        for (int col = 0; col < leftValue[row].length; col++)
+                        {
+                            assertEquals("value of element should be sum of contributing elements",
+                                    referenceLeft.getSI(row, col) * right.getSI(row, col), left.getSI(row, col), 0.001);
+                        }
+                    }
+                    left = new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                    right = new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                    left.multiplyBy(right);
+                    for (int row = 0; row < leftValue.length; row++)
+                    {
+                        for (int col = 0; col < leftValue[row].length; col++)
+                        {
+                            assertEquals("value of element should be sum of contributing elements",
+                                    referenceLeft.getSI(row, col) * right.getSI(row, col), left.getSI(row, col), 0.001);
+                        }
+                    }
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
+            fail("Caught unexpected ValueException: " + ve.toString());
+        }
+    }
+
+    /**
+     * Test the divideBy method.
+     */
+    @Test
+    public final void divideByTest()
+    {
+        try
+        {
+            for (int firstStep : new int[] { 3, 5 })
+            {
+                for (boolean lastNanOrdering : new boolean[] {false, true})
+                {
+                    double[][] leftValue = data(30, 50, false, 123.4f, 2, firstStep);
+                    double[][] rightValue = data(30, 50, false, 234.5f, 2, 8 - firstStep);
+                    leftValue[0][0] = Float.NaN;
+                    leftValue[0][1] = Float.NaN;
+                    rightValue[0][1] = Float.NaN;
+                    rightValue[0][2] = Float.NaN;
+                    if (lastNanOrdering)
+                    {
+                        leftValue[29][49] = Float.NaN;
+                        leftValue[29][48] = Float.NaN;
+                        rightValue[29][48] = Float.NaN;
+                        rightValue[29][47] = Float.NaN;
+                    }
+                    else
+                    {
+                        rightValue[29][49] = Float.NaN;
+                        rightValue[29][48] = Float.NaN;
+                        leftValue[29][48] = Float.NaN;
+                        leftValue[29][47] = Float.NaN;
+                    }
+                    MutableDoubleMatrix.Rel<LengthUnit> left =
+                            new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                    MutableDoubleMatrix.Rel<LengthUnit> referenceLeft = left.copy();
+                    DoubleMatrix.Rel<LengthUnit> right =
+                            new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                    left.divideBy(right);
+                    for (int row = 0; row < leftValue.length; row++)
+                    {
+                        for (int col = 0; col < leftValue[row].length; col++)
+                        {
+                            double expect = referenceLeft.getSI(row, col) / right.getSI(row, col);
+                            double got = left.getSI(row,  col);
+                            if (Double.isNaN(expect))
+                            {
+                                assertTrue("value of element should be NaN", Double.isNaN(got));
+                            }
+                            else if (Double.isInfinite(expect))
+                            {
+                                assertTrue("value of element should be infinite", Double.isInfinite(got));
+                            }
+                            else
+                            {
+                                assertEquals("value of element should be ratio of contributing elements", expect, got,
+                                        0.001);
+                            }
+                        }
+                    }
+                    left = new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.SPARSE);
+                    right = new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                    left.divideBy(right);
+                    for (int row = 0; row < leftValue.length; row++)
+                    {
+                        for (int col = 0; col < leftValue[row].length; col++)
+                        {
+                            double expect = referenceLeft.getSI(row, col) / right.getSI(row, col);
+                            double got = left.getSI(row,  col);
+                            if (Double.isNaN(expect))
+                            {
+                                assertTrue("value of element should be NaN", Double.isNaN(got));
+                            }
+                            else if (Double.isInfinite(expect))
+                            {
+                                assertTrue("value of element should be infinite", Double.isInfinite(got));
+                            }
+                            else
+                            {
+                                assertEquals("value of element should be ratio of contributing elements", expect, got,
+                                        0.001);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (ValueException ve)
+        {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
     }
