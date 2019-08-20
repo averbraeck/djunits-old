@@ -187,7 +187,7 @@ public class ScalarOperationsTest
             }
         }
         testUnaryMethods(scalarClassAbsRel, isAbs, doubleType);
-        testInterpolateMethod(scalarClassAbsRel, isAbs, doubleType);
+        testStaticMethods(scalarClassAbsRel, isAbs, doubleType);
     }
 
     /**
@@ -550,7 +550,7 @@ public class ScalarOperationsTest
         result = round.invoke(left);
         assertEquals("Result of operation", Math.round(value), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                 0.01);
-
+        
         if (!abs)
         {
             Method methodAbs = ClassUtil.resolveMethod(scalarClass, "abs", new Class[] {});
@@ -800,7 +800,7 @@ public class ScalarOperationsTest
     }
 
     /**
-     * Test the interpolate method.
+     * Test the various static methods.
      * @param scalarClass Class&lt;?&gt;; the class to test
      * @param abs boolean; if true; scalarClass is Absolute; if false; scalarClass is Relative
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
@@ -810,7 +810,7 @@ public class ScalarOperationsTest
      * @throws IllegalAccessException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
      */
-    private void testInterpolateMethod(final Class<?> scalarClass, final boolean abs, final boolean doubleType)
+    private void testStaticMethods(final Class<?> scalarClass, final boolean abs, final boolean doubleType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchFieldException
     {
@@ -841,6 +841,72 @@ public class ScalarOperationsTest
                 assertEquals("Result of operation", expectedResult, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                         0.01);
             }
+            /*-
+            double biggestValue = 345.678;
+            AbstractDoubleScalar<?,
+                    ?> biggest = abs
+                            ? (AbstractDoubleScalarAbs<?, ?, ?, ?>) constructor.newInstance(biggestValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs))
+                            : (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(biggestValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs));
+            */
+            Method max = ClassUtil.resolveMethod(scalarClass, "max", scalarClass, scalarClass);
+            AbstractDoubleScalar<?, ?> result = (AbstractDoubleScalar<?, ?>) max.invoke(null, zero, one);
+            assertEquals("max returns object with maximum value", one, result);
+            result = (AbstractDoubleScalar<?, ?>) max.invoke(null, one, zero);
+            assertEquals("max returns object with maximum value", one, result);
+            /*-
+            max = ClassUtil.resolveMethod(scalarClass,  "max", scalarClass, scalarClass, scalarClass);
+            result = (AbstractDoubleScalar<?, ?>) max.invoke(null,  zero, biggest, one);
+            assertEquals("max returns object with maximum value", biggest, result);
+            */
+            Method min = ClassUtil.resolveMethod(scalarClass, "min", scalarClass, scalarClass);
+            result = (AbstractDoubleScalar<?, ?>) min.invoke(null, zero, one);
+            assertEquals("min returns object with maximum value", zero, result);
+            result = (AbstractDoubleScalar<?, ?>) min.invoke(null, one, zero);
+            assertEquals("min returns object with maximum value", zero, result);
+            if ((!scalarClass.getName().contains(".ElectricalResistance")) && (!scalarClass.getName().contains(".Money")))
+            {
+                Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
+                String string = zero.toString();
+                result = (AbstractDoubleScalar<?, ?>) valueOf.invoke(null, string);
+                assertEquals("valueOf toString returns a decent approximation of the input", zeroValue, result.getSI(), 0.001);
+                try
+                {
+                    valueOf.invoke(null, (String) null);
+                    fail("Null string in valueOf should have thrown an IllegalArgumentException (which may have been converted "
+                            + "into an InvocationTargetException)");
+                }
+                catch (IllegalArgumentException | InvocationTargetException iae)
+                {
+                    // Ignore expected exception
+                }
+                try
+                {
+                    valueOf.invoke(null, "");
+                    fail("Empty string in valueOf should have thrown an IllegalArgumentException");
+                }
+                catch (IllegalArgumentException | InvocationTargetException iae)
+                {
+                    // Ignore expected exception
+                }
+                try
+                {
+                    valueOf.invoke(null, "NONSENSEVALUE");
+                    fail("Nonsense string in valueOf should have thrown an IllegalArgumentException");
+                }
+                catch (IllegalArgumentException | InvocationTargetException iae)
+                {
+                    // Ignore expected exception
+                }
+            }
+            
+            if (!scalarClass.getName().contains(".Money"))
+            {
+                Method createSI = ClassUtil.resolveMethod(scalarClass, "createSI", double.class);
+                result = (AbstractDoubleScalar<?, ?>) createSI.invoke(null, zeroValue);
+                assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);
+            }
         }
         else
         {
@@ -866,6 +932,58 @@ public class ScalarOperationsTest
                 result = (AbstractFloatScalar<?, ?>) interpolate.invoke(null, zero, one, ratio);
                 assertEquals("Result of operation", expectedResult, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                         0.01);
+            }
+            Method max = ClassUtil.resolveMethod(scalarClass, "max", scalarClass, scalarClass);
+            AbstractFloatScalar<?, ?> result = (AbstractFloatScalar<?, ?>) max.invoke(null, zero, one);
+            assertEquals("max return object with maximum value", one, result);
+            result = (AbstractFloatScalar<?, ?>) max.invoke(null, one, zero);
+            assertEquals("max return object with maximum value", one, result);
+            Method min = ClassUtil.resolveMethod(scalarClass, "min", scalarClass, scalarClass);
+            result = (AbstractFloatScalar<?, ?>) min.invoke(null, zero, one);
+            assertEquals("min returns object with maximum value", zero, result);
+            result = (AbstractFloatScalar<?, ?>) min.invoke(null, one, zero);
+            assertEquals("min returns object with maximum value", zero, result);
+            if ((!scalarClass.getName().contains(".FloatElectricalResistance"))
+                    && (!scalarClass.getName().contains(".FloatMoney")))
+            {
+                Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
+                String string = zero.toString();
+                result = (AbstractFloatScalar<?, ?>) valueOf.invoke(null, string);
+                assertEquals("valueOf toString returns a decent approximation of the input", zeroValue, result.getSI(), 0.001);
+                try
+                {
+                    valueOf.invoke(null, (String) null);
+                    fail("Null string in valueOf should have thrown an IllegalArgumentException (which may have been converted "
+                            + "into an InvocationTargetException)");
+                }
+                catch (IllegalArgumentException | InvocationTargetException iae)
+                {
+                    // Ignore expected exception
+                }
+                try
+                {
+                    valueOf.invoke(null, "");
+                    fail("Empty string in valueOf should have thrown an IllegalArgumentException");
+                }
+                catch (IllegalArgumentException | InvocationTargetException iae)
+                {
+                    // Ignore expected exception
+                }
+                try
+                {
+                    valueOf.invoke(null, "NONSENSEVALUE");
+                    fail("Nonsense string in valueOf should have thrown an IllegalArgumentException");
+                }
+                catch (IllegalArgumentException | InvocationTargetException iae)
+                {
+                    // Ignore expected exception
+                }
+            }
+            if (!scalarClass.getName().contains(".FloatMoney"))
+            {
+                Method createSI = ClassUtil.resolveMethod(scalarClass, "createSI", float.class);
+                result = (AbstractFloatScalar<?, ?>) createSI.invoke(null, zeroValue);
+                assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);
             }
         }
     }
