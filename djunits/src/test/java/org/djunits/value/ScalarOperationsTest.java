@@ -841,7 +841,6 @@ public class ScalarOperationsTest
                 assertEquals("Result of operation", expectedResult, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                         0.01);
             }
-            /*-
             double biggestValue = 345.678;
             AbstractDoubleScalar<?,
                     ?> biggest = abs
@@ -849,22 +848,39 @@ public class ScalarOperationsTest
                                     getSIUnitInstance(getUnitClass(scalarClass), abs))
                             : (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(biggestValue,
                                     getSIUnitInstance(getUnitClass(scalarClass), abs));
-            */
             Method max = ClassUtil.resolveMethod(scalarClass, "max", scalarClass, scalarClass);
             AbstractDoubleScalar<?, ?> result = (AbstractDoubleScalar<?, ?>) max.invoke(null, zero, one);
             assertEquals("max returns object with maximum value", one, result);
             result = (AbstractDoubleScalar<?, ?>) max.invoke(null, one, zero);
             assertEquals("max returns object with maximum value", one, result);
-            /*-
-            max = ClassUtil.resolveMethod(scalarClass,  "max", scalarClass, scalarClass, scalarClass);
-            result = (AbstractDoubleScalar<?, ?>) max.invoke(null,  zero, biggest, one);
-            assertEquals("max returns object with maximum value", biggest, result);
-            */
+            // https://stackoverflow.com/questions/1679421/how-to-get-the-array-class-for-a-given-class-in-java
+            Class<?> emptyClassArrayClass = java.lang.reflect.Array.newInstance(scalarClass, 0).getClass(); 
+            max = ClassUtil.resolveMethod(scalarClass, "max", scalarClass, scalarClass, emptyClassArrayClass);
+            AbstractDoubleScalar<?, ?>[] additionalArguments =
+                    (AbstractDoubleScalar<?, ?>[]) java.lang.reflect.Array.newInstance(scalarClass, 1);
+            additionalArguments[0] = biggest;
+            result = (AbstractDoubleScalar<?, ?>) max.invoke(null, zero, one, additionalArguments);
+            assertEquals("max return object with maximum value", biggest, result);
+            result = (AbstractDoubleScalar<?, ?>) max.invoke(null, one, zero, additionalArguments);
+            assertEquals("max return object with maximum value", biggest, result);
+            additionalArguments[0] = zero;
+            result = (AbstractDoubleScalar<?, ?>) max.invoke(null, biggest, zero, additionalArguments);
+            assertEquals("max return object with maximum value", biggest, result);
+            
             Method min = ClassUtil.resolveMethod(scalarClass, "min", scalarClass, scalarClass);
             result = (AbstractDoubleScalar<?, ?>) min.invoke(null, zero, one);
             assertEquals("min returns object with maximum value", zero, result);
             result = (AbstractDoubleScalar<?, ?>) min.invoke(null, one, zero);
             assertEquals("min returns object with maximum value", zero, result);
+            min = ClassUtil.resolveMethod(scalarClass, "min", scalarClass, scalarClass, emptyClassArrayClass);
+            result = (AbstractDoubleScalar<?, ?>) min.invoke(null, one, biggest, additionalArguments);
+            assertEquals("min return object with minimum value", zero, result);
+            result = (AbstractDoubleScalar<?, ?>) min.invoke(null, biggest, one, additionalArguments);
+            assertEquals("min return object with minimum value", zero, result);
+            additionalArguments[0] = biggest;
+            result = (AbstractDoubleScalar<?, ?>) min.invoke(null, zero, one, additionalArguments);
+            assertEquals("min return object with minimum value", zero, result);
+            
             if ((!scalarClass.getName().contains(".ElectricalResistance")) && (!scalarClass.getName().contains(".Money")))
             {
                 Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
@@ -933,16 +949,46 @@ public class ScalarOperationsTest
                 assertEquals("Result of operation", expectedResult, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                         0.01);
             }
+            float biggestValue = 345.678f;
+            AbstractFloatScalar<?,
+                    ?> biggest = abs
+                            ? (AbstractFloatScalarAbs<?, ?, ?, ?>) constructor.newInstance(biggestValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs))
+                            : (AbstractFloatScalarRel<?, ?>) constructor.newInstance(biggestValue,
+                                    getSIUnitInstance(getUnitClass(scalarClass), abs));
             Method max = ClassUtil.resolveMethod(scalarClass, "max", scalarClass, scalarClass);
             AbstractFloatScalar<?, ?> result = (AbstractFloatScalar<?, ?>) max.invoke(null, zero, one);
             assertEquals("max return object with maximum value", one, result);
             result = (AbstractFloatScalar<?, ?>) max.invoke(null, one, zero);
             assertEquals("max return object with maximum value", one, result);
+            // https://stackoverflow.com/questions/1679421/how-to-get-the-array-class-for-a-given-class-in-java
+            Class<?> emptyClassArrayClass = java.lang.reflect.Array.newInstance(scalarClass, 0).getClass(); 
+            max = ClassUtil.resolveMethod(scalarClass, "max", scalarClass, scalarClass, emptyClassArrayClass);
+            AbstractFloatScalar<?, ?>[] additionalArguments =
+                    (AbstractFloatScalar<?, ?>[]) java.lang.reflect.Array.newInstance(scalarClass, 1);
+            additionalArguments[0] = biggest;
+            result = (AbstractFloatScalar<?, ?>) max.invoke(null, zero, one, additionalArguments);
+            assertEquals("max return object with maximum value", biggest, result);
+            result = (AbstractFloatScalar<?, ?>) max.invoke(null, one, zero, additionalArguments);
+            assertEquals("max return object with maximum value", biggest, result);
+            additionalArguments[0] = zero;
+            result = (AbstractFloatScalar<?, ?>) max.invoke(null, biggest, zero, additionalArguments);
+            assertEquals("max return object with maximum value", biggest, result);
+            
             Method min = ClassUtil.resolveMethod(scalarClass, "min", scalarClass, scalarClass);
             result = (AbstractFloatScalar<?, ?>) min.invoke(null, zero, one);
             assertEquals("min returns object with maximum value", zero, result);
             result = (AbstractFloatScalar<?, ?>) min.invoke(null, one, zero);
             assertEquals("min returns object with maximum value", zero, result);
+            min = ClassUtil.resolveMethod(scalarClass, "min", scalarClass, scalarClass, emptyClassArrayClass);
+            result = (AbstractFloatScalar<?, ?>) min.invoke(null, one, biggest, additionalArguments);
+            assertEquals("min return object with minimum value", zero, result);
+            result = (AbstractFloatScalar<?, ?>) min.invoke(null, biggest, one, additionalArguments);
+            assertEquals("min return object with minimum value", zero, result);
+            additionalArguments[0] = biggest;
+            result = (AbstractFloatScalar<?, ?>) min.invoke(null, zero, one, additionalArguments);
+            assertEquals("min return object with minimum value", zero, result);
+            
             if ((!scalarClass.getName().contains(".FloatElectricalResistance"))
                     && (!scalarClass.getName().contains(".FloatMoney")))
             {
