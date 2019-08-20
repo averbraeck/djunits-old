@@ -13,7 +13,6 @@ import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.MoneyPerAreaUnit;
 import org.djunits.unit.MoneyPerEnergyUnit;
-import org.djunits.unit.MoneyPerLengthUnit;
 import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.Unit;
 import org.junit.Test;

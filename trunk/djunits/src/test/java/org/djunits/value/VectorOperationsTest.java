@@ -80,8 +80,8 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchFieldException, SecurityException, IllegalArgumentException, ClassNotFoundException, ValueException
     {
-        doubleOrFloatScalarOperationsTest(true); // Double precision versions
-        doubleOrFloatScalarOperationsTest(false); // Float versions
+        doubleOrFloatVectorOperationsTest(true); // Double precision versions
+        doubleOrFloatVectorOperationsTest(false); // Float versions
     }
 
     /**
@@ -97,7 +97,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws SecurityException on reflection error
      * @throws ValueException when index out of range
      */
-    private void doubleOrFloatScalarOperationsTest(final boolean doubleType)
+    private void doubleOrFloatVectorOperationsTest(final boolean doubleType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchFieldException, SecurityException, IllegalArgumentException, ClassNotFoundException, ValueException
     {
@@ -157,7 +157,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * Find the methods defined in the class itself (not in a superclass) called multiplyBy or divideBy and test the method.
      * Also test the Unary methods of the class.
      * @param vectorClassAbsRel class to test
-     * @param isAbs boolean; if true; the scalarClassAbsRel must be aAsolute; if false; the scalarClassAbsRel must be Relative
+     * @param isAbs boolean; if true; the vectorClassAbsRel must be absolute; if false; the vectorClassAbsRel must be Relative
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
      * @param storageType StorageType; DENSE or SPARSE
      * @param mutable boolean; if true; the vectorClass should be mutable; if false; the vectorClass should not be mutable
@@ -756,7 +756,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         else
         {
             AbstractFloatVector<?, ?> fv = (AbstractFloatVector<?, ?>) vector;
-            for (int i = 0; i < doubleValue.length; i++)
+            for (int i = 0; i < floatValue.length; i++)
             {
                 AbstractFloatScalar<?, ?> fs = fv.get(i);
                 float got = fs.getSI();
@@ -1620,6 +1620,13 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 // result = (AbstractDoubleScalar<?, ?>) interpolate.invoke(null, zero, one, ratio);
                 // verifyAbsRelPrecisionAndValues(abs, doubleType, result, expectedResult, 0.01);
             }
+            Method toArray = ClassUtil.resolveMethod(vectorClass, "toArray");
+            AbstractDoubleScalar<?, ?>[] result = (AbstractDoubleScalar<?, ?>[]) toArray.invoke(zero);
+            assertEquals("toArray result has correct number of entries", zero.size(), result.length);
+            for (int index = 0; index < result.length; index++)
+            {
+                assertEquals("Element in array has correct value", zeroValue[index], result[index].getSI(), 0.001);
+            }
         }
         else
         {
@@ -1641,6 +1648,13 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 // AbstractFloatScalar<?, ?> result;
                 // result = (AbstractFloatScalar<?, ?>) interpolate.invoke(null, zero, one, ratio);
                 // verifyAbsRelPrecisionAndValues(abs, doubleType, storageType, result, expectedResult, 0.01);
+            }
+            Method toArray = ClassUtil.resolveMethod(vectorClass, "toArray");
+            AbstractFloatScalar<?, ?>[] result = (AbstractFloatScalar<?, ?>[]) toArray.invoke(zero);
+            assertEquals("toArray result has correct number of entries", zero.size(), result.length);
+            for (int index = 0; index < result.length; index++)
+            {
+                assertEquals("Element in array has correct value", zeroValue[index], result[index].getSI(), 0.001);
             }
         }
     }
