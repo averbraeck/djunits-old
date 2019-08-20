@@ -138,6 +138,7 @@ abstract class DoubleVectorData implements Serializable
                 return new DoubleVectorDataDense(valuesSI);
 
             case SPARSE:
+                // FIXME: Memory issue. This makes a full size copy of the data and afterwards makes that sparse 
                 return DoubleVectorDataSparse.instantiate(valuesSI);
 
             default:
@@ -176,6 +177,7 @@ abstract class DoubleVectorData implements Serializable
                 return new DoubleVectorDataDense(valuesSI);
 
             case SPARSE:
+                // FIXME: Memory issue. This makes a full size copy of the data and afterwards makes that sparse 
                 return DoubleVectorDataSparse.instantiate(valuesSI);
 
             default:
@@ -206,6 +208,7 @@ abstract class DoubleVectorData implements Serializable
                 return new DoubleVectorDataDense(valuesSI);
 
             case SPARSE:
+                // FIXME: Memory issue. This makes a full size copy of the data and afterwards makes that sparse 
                 return DoubleVectorDataSparse.instantiate(valuesSI);
 
             default:
