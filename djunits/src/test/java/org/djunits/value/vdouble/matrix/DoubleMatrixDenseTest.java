@@ -13,8 +13,6 @@ import org.djunits.unit.Unit;
 import org.djunits.value.StorageType;
 import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.DoubleScalar;
-import org.djunits.value.vfloat.matrix.FloatMatrix;
-import org.djunits.value.vfloat.matrix.MutableFloatMatrix;
 import org.junit.Test;
 
 /**
