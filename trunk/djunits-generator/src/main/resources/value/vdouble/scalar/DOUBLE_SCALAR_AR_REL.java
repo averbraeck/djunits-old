@@ -181,7 +181,7 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
     /**
      * Returns a %TypeRel% representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a %TypeRel%
      * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
      * @throws IllegalArgumentException when the text cannot be parsed
