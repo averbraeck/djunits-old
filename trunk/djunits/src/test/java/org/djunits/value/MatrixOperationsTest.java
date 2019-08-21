@@ -3,6 +3,7 @@ package org.djunits.value;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -179,7 +180,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 testMultiplyByOrDivideByMethod(matrixClassAbsRel, method, false, doubleType, isAbs, storageType);
             }
         }
-        // testConstructors(matrixClassAbsRel, isAbs, doubleType, mutable, storageType);
+        testConstructors(matrixClassAbsRel, isAbs, doubleType, mutable, storageType);
         testGet(matrixClassAbsRel, isAbs, doubleType, mutable, storageType);
         testUnaryMethods(matrixClassAbsRel, isAbs, doubleType, mutable, storageType);
         testInterpolateMethod(matrixClassAbsRel, isAbs, doubleType, storageType);
@@ -485,6 +486,76 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
     }
 
     /**
+     * @param matrixClass the class to test
+     * @param abs boolean; if true; the absolute version is tested; if false; the relative version is tested
+     * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
+     * @param mutable boolean; if true; perform test for mutable version; if false; perform test for non-mutable version
+     * @param storageType StorageType; Dense or Sparse
+     * @throws NoSuchMethodException on class or method resolving error
+     * @throws InstantiationException on class or method resolving error
+     * @throws IllegalAccessException on class or method resolving error
+     * @throws InvocationTargetException on class or method resolving error
+     * @throws NoSuchFieldException on class or method resolving error
+     * @throws ClassNotFoundException on class or method resolving error
+     * @throws ValueException when index out of range
+     */
+    private void testConstructors(final Class<?> matrixClass, final boolean abs, final boolean doubleType,
+            final boolean mutable, final StorageType storageType) throws NoSuchMethodException, InstantiationException,
+            IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
+    {
+        double[][] doubleValue = { { 1.23456, 2.34567, 3.45678 }, { 4.56789, 5.67890, 6.78901 } };
+        float[][] floatValue = { { 1.23456f, 2.34567f, 3.45678f }, { 4.56789f, 5.67890f, 6.78901f } };
+        Object value = doubleType ? doubleValue : floatValue;
+        findAndTestConstructor(matrixClass, new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType },
+                abs, doubleType, storageType, value);
+        // What is the corresponding Scalar type?
+        String scalarClassName = matrixClass.getName();
+        // System.out.println("name is " + scalarClassName);
+        scalarClassName = scalarClassName.replaceFirst("Matrix", "");
+        // System.out.println("name is " + scalarClassName);
+        scalarClassName = scalarClassName.replaceFirst("matrix", "scalar");
+        // System.out.println("name is " + scalarClassName);
+        scalarClassName = scalarClassName.replaceFirst("Mutable", "");
+        // System.out.println("name is " + scalarClassName);
+        Class<?> scalarClassAbsRel = Class.forName(scalarClassName);
+        // System.out.println("class is " + scalarClassAbsRel);
+        if (doubleType)
+        {
+            Constructor<?> constructor =
+                    scalarClassAbsRel.getConstructor(new Class<?>[] { double.class, getUnitClass(matrixClass) });
+            // Construct a matrix of the correct scalar objects
+            Object[][] objectArray =
+                    (Object[][]) Array.newInstance(scalarClassAbsRel, doubleValue.length, doubleValue[0].length);
+            for (int row = 0; row < doubleValue.length; row++)
+            {
+                for (int col = 0; col < doubleValue[row].length; col++)
+                {
+                    objectArray[row][col] =
+                            constructor.newInstance(doubleValue[row][col], getSIUnitInstance(getUnitClass(matrixClass)));
+                }
+            }
+            findAndTestConstructor(matrixClass, new Object[] { objectArray, storageType }, abs, doubleType, storageType, value);
+        }
+        else
+        {
+            Constructor<?> constructor =
+                    scalarClassAbsRel.getConstructor(new Class<?>[] { float.class, getUnitClass(matrixClass) });
+            // Construct a matrix of the correct scalar objects
+            Object[][] objectArray =
+                    (Object[][]) Array.newInstance(scalarClassAbsRel, floatValue.length, floatValue[0].length);
+            for (int row = 0; row < floatValue.length; row++)
+            {
+                for (int col = 0; col < floatValue[row].length; col++)
+                {
+                    objectArray[row][col] =
+                            constructor.newInstance(floatValue[row][col], getSIUnitInstance(getUnitClass(matrixClass)));
+                }
+            }
+            findAndTestConstructor(matrixClass, new Object[] { objectArray, storageType }, abs, doubleType, storageType, value);
+        }
+    }
+
+    /**
      * Return a string with the types of all types of a class array.
      * @param params Class&lt;?&gt;[]; the class array
      * @return String
@@ -568,6 +639,32 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             fail("Cannot find suitable constructor");
         }
         return constructor.newInstance(args);
+    }
+
+    /**
+     * Find and execute a constructor and check the result.
+     * @param matrixClass Class&lt;?&gt;; the class to which the constructor belongs
+     * @param args Object[]; arguments to provide to the constructor
+     * @param abs boolean; if true; the result of the constructor is expected to be Absolute; if false; the result of the
+     *            constructor is expected to be relative
+     * @param doubleType boolean; if true; the args argument is array of double; of false; the args argument is array of float
+     * @param expectedStorageType StorageType; the expected Storage type (DENSE or SPARSE)
+     * @param expectedResult Object; either array of double, or array of float
+     * @throws NoSuchMethodException on class or method resolving error
+     * @throws SecurityException on class or method resolving error
+     * @throws InstantiationException on class or method resolving error
+     * @throws IllegalAccessException on class or method resolving error
+     * @throws IllegalArgumentException on class or method resolving error
+     * @throws InvocationTargetException on class or method resolving error
+     * @throws ValueException when index out of range
+     */
+    private void findAndTestConstructor(final Class<?> matrixClass, final Object[] args, final boolean abs,
+            final boolean doubleType, final StorageType expectedStorageType, final Object expectedResult)
+            throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException, ValueException
+    {
+        verifyAbsRelPrecisionAndValues(abs, doubleType, expectedStorageType,
+                findAndExecuteConstructor(matrixClass, args, doubleType), expectedResult, 0.0001);
     }
 
     /**
