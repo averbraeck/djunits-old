@@ -473,7 +473,7 @@ public class ScalarOperationsTest
 
     /**
      * @param scalarClass the class to test
-     * @param abs abs or rel class
+     * @param abs boolean; if true; test Absolute class; if false; test the Relative class
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
@@ -558,7 +558,7 @@ public class ScalarOperationsTest
             assertEquals("Result of operation", Math.abs(value), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
         }
-
+        
         if (scalarClass.getName().contains("Dimensionless"))
         {
             Method asin = ClassUtil.resolveMethod(scalarClass, "asin", new Class[] {});
