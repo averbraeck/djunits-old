@@ -487,7 +487,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
 
     /**
      * @param matrixClass the class to test
-     * @param abs boolean; if true; the absolute version is tested; if false; the relative version is tested
+     * @param abs boolean; if true; test Absolute class; if false; test the Relative class
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
      * @param mutable boolean; if true; perform test for mutable version; if false; perform test for non-mutable version
      * @param storageType StorageType; Dense or Sparse
