@@ -40,6 +40,9 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     /** constant with value zero. */
     public static final FloatElectricalResistance ZERO = new FloatElectricalResistance(0.0f, ElectricalResistanceUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatElectricalResistance ONE = new FloatElectricalResistance(1.0f, ElectricalResistanceUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatElectricalResistance NaN = new FloatElectricalResistance(Float.NaN, ElectricalResistanceUnit.SI);

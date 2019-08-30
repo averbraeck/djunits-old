@@ -15,7 +15,7 @@ import org.djunits4.unit.PositionUnit;
  * we can now write:
  * 
  * <pre>
- * Position value = new Position(100.0, PositionUnit.DEFAULT);
+ * Position value = new Position(100.0, PositionUnit.BASE);
  * </pre>
  * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit

@@ -39,6 +39,9 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
     /** constant with value zero. */
     public static final FloatAngle ZERO = new FloatAngle(0.0f, AngleUnit.SI);
 
+    /** constant with value one. */
+    public static final FloatAngle ONE = new FloatAngle(1.0f, AngleUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatAngle NaN = new FloatAngle(Float.NaN, AngleUnit.SI);

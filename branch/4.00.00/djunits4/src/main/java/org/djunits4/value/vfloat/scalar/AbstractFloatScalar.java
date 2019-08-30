@@ -54,7 +54,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean lt(final T o)
     {
-        return this.si < o.si;
+        return this.getSI() < o.getSI();
     }
 
     /**
@@ -64,7 +64,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean le(final T o)
     {
-        return this.si <= o.si;
+        return this.getSI() <= o.getSI();
     }
 
     /**
@@ -74,7 +74,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean gt(final T o)
     {
-        return this.si > o.si;
+        return this.getSI() > o.getSI();
     }
 
     /**
@@ -84,7 +84,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean ge(final T o)
     {
-        return this.si >= o.si;
+        return this.getSI() >= o.getSI();
     }
 
     /**
@@ -94,7 +94,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean eq(final T o)
     {
-        return this.si == o.si;
+        return this.getSI() == o.getSI();
     }
 
     /**
@@ -104,7 +104,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean ne(final T o)
     {
-        return this.si != o.si;
+        return this.getSI() != o.getSI();
     }
 
     /**
@@ -113,7 +113,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean lt0()
     {
-        return this.si < 0.0f;
+        return this.getSI() < 0.0f;
     }
 
     /**
@@ -122,7 +122,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean le0()
     {
-        return this.si <= 0.0f;
+        return this.getSI() <= 0.0f;
     }
 
     /**
@@ -131,7 +131,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean gt0()
     {
-        return this.si > 0.0f;
+        return this.getSI() > 0.0f;
     }
 
     /**
@@ -140,7 +140,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean ge0()
     {
-        return this.si >= 0.0f;
+        return this.getSI() >= 0.0f;
     }
 
     /**
@@ -149,7 +149,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean eq0()
     {
-        return this.si == 0.0f;
+        return this.getSI() == 0.0f;
     }
 
     /**
@@ -158,14 +158,14 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean ne0()
     {
-        return this.si != 0.0f;
+        return this.getSI() != 0.0f;
     }
 
     /** {@inheritDoc} */
     @Override
     public final int compareTo(final T o)
     {
-        return Float.compare(this.si, o.si);
+        return Float.compare(this.getSI(), o.getSI());
     }
 
     /**
@@ -277,7 +277,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
     {
         final int prime = 31;
         int result = getUnit().getStandardUnit().hashCode();
-        result = prime * result + Float.floatToIntBits(this.si);
+        result = prime * result + Float.floatToIntBits(this.getSI());
         return result;
     }
 
@@ -295,7 +295,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
         AbstractFloatScalar<U, T> other = (AbstractFloatScalar<U, T>) obj;
         if (!getUnit().getStandardUnit().equals(other.getUnit().getStandardUnit()))
             return false;
-        if (Float.floatToIntBits(this.si) != Float.floatToIntBits(other.si))
+        if (Float.floatToIntBits(this.getSI()) != Float.floatToIntBits(other.getSI()))
             return false;
         return true;
     }

@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -21,12 +21,12 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kgm2/s3A2" as the SI signature. */
-    public static final BaseUnit<ElectricalResistanceUnit> BASE = new BaseUnit<>("kgm2/s3A2");
+    public static final UnitBase<ElectricalResistanceUnit> BASE = new UnitBase<>("kgm2/s3A2");
 
     /** The SI unit for electrical resistance is Ohm. */
     public static final ElectricalResistanceUnit SI = new ElectricalResistanceUnit()
             .build(new Unit.Builder<ElectricalResistanceUnit>().setBaseUnit(BASE).setId("ohm").setName("ohm")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale())
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE)
                     .setDefaultDisplayAbbreviation("\u03A9").setDefaultTextualAbbreviation("ohm"));
 
     /** Ohm. */

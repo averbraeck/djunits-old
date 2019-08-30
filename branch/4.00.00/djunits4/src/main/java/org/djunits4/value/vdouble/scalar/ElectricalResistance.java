@@ -39,6 +39,9 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
     /** constant with value zero. */
     public static final ElectricalResistance ZERO = new ElectricalResistance(0.0, ElectricalResistanceUnit.SI);
 
+    /** constant with value one. */
+    public static final ElectricalResistance ONE = new ElectricalResistance(1.0, ElectricalResistanceUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final ElectricalResistance NaN = new ElectricalResistance(Double.NaN, ElectricalResistanceUnit.SI);

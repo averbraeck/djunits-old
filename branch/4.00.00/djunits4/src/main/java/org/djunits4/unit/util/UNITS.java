@@ -1,4 +1,42 @@
-package org.djunits4.unit;
+package org.djunits4.unit.util;
+
+import org.djunits4.unit.AbsorbedDoseUnit;
+import org.djunits4.unit.AccelerationUnit;
+import org.djunits4.unit.AmountOfSubstanceUnit;
+import org.djunits4.unit.AngleSolidUnit;
+import org.djunits4.unit.AngleUnit;
+import org.djunits4.unit.AreaUnit;
+import org.djunits4.unit.CatalyticActivityUnit;
+import org.djunits4.unit.DensityUnit;
+import org.djunits4.unit.DurationUnit;
+import org.djunits4.unit.ElectricalCapacitanceUnit;
+import org.djunits4.unit.ElectricalChargeUnit;
+import org.djunits4.unit.ElectricalConductanceUnit;
+import org.djunits4.unit.ElectricalCurrentUnit;
+import org.djunits4.unit.ElectricalInductanceUnit;
+import org.djunits4.unit.ElectricalPotentialUnit;
+import org.djunits4.unit.ElectricalResistanceUnit;
+import org.djunits4.unit.EnergyUnit;
+import org.djunits4.unit.EquivalentDoseUnit;
+import org.djunits4.unit.FlowMassUnit;
+import org.djunits4.unit.FlowVolumeUnit;
+import org.djunits4.unit.ForceUnit;
+import org.djunits4.unit.FrequencyUnit;
+import org.djunits4.unit.IlluminanceUnit;
+import org.djunits4.unit.LengthUnit;
+import org.djunits4.unit.LinearDensityUnit;
+import org.djunits4.unit.LuminousFluxUnit;
+import org.djunits4.unit.LuminousIntensityUnit;
+import org.djunits4.unit.MagneticFluxDensityUnit;
+import org.djunits4.unit.MagneticFluxUnit;
+import org.djunits4.unit.MassUnit;
+import org.djunits4.unit.PowerUnit;
+import org.djunits4.unit.PressureUnit;
+import org.djunits4.unit.RadioActivityUnit;
+import org.djunits4.unit.SpeedUnit;
+import org.djunits4.unit.TemperatureUnit;
+import org.djunits4.unit.TorqueUnit;
+import org.djunits4.unit.VolumeUnit;
 
 /**
  * Easy access methods for the DoubleScalar, DoubleVector, DoubleMatrix classes and their Float equivalents. Instead of <br>

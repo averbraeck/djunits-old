@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -21,11 +21,11 @@ public final class DimensionlessUnit extends Unit<DimensionlessUnit>
     private static final long serialVersionUID = 20150830L;
 
     /** The base, with the empty SI signature. */
-    public static final BaseUnit<DimensionlessUnit> BASE = new BaseUnit<>("");
+    public static final UnitBase<DimensionlessUnit> BASE = new UnitBase<>("");
 
     /** The SI unit for a dimension less unit is "1" or N/A. */
     public static final DimensionlessUnit SI =
             new DimensionlessUnit().build(new Unit.Builder<DimensionlessUnit>().setBaseUnit(BASE).setId("unit").setName("unit")
-                    .setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
 
 }

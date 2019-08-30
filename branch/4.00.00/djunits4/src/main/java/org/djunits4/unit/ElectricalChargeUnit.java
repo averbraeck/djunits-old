@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.LinearScale;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
@@ -22,12 +22,12 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "sA" as the SI signature. */
-    public static final BaseUnit<ElectricalChargeUnit> BASE = new BaseUnit<>("sA");
+    public static final UnitBase<ElectricalChargeUnit> BASE = new UnitBase<>("sA");
 
     /** The SI unit for electrical charge is Coulomb = A.s. */
     public static final ElectricalChargeUnit SI = new ElectricalChargeUnit()
             .build(new Unit.Builder<ElectricalChargeUnit>().setBaseUnit(BASE).setId("C").setName("coulomb")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Coulomb = A.s. */
     public static final ElectricalChargeUnit COULOMB = SI;

@@ -43,6 +43,9 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
     /** constant with value zero. */
     public static final Volume ZERO = new Volume(0.0, VolumeUnit.SI);
 
+    /** constant with value one. */
+    public static final Volume ONE = new Volume(1.0, VolumeUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Volume NaN = new Volume(Double.NaN, VolumeUnit.SI);

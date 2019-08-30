@@ -42,6 +42,9 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
     /** constant with value zero. */
     public static final FloatElectricalPotential ZERO = new FloatElectricalPotential(0.0f, ElectricalPotentialUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatElectricalPotential ONE = new FloatElectricalPotential(1.0f, ElectricalPotentialUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatElectricalPotential NaN = new FloatElectricalPotential(Float.NaN, ElectricalPotentialUnit.SI);

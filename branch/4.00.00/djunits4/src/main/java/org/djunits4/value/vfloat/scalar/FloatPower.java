@@ -43,6 +43,9 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
     /** constant with value zero. */
     public static final FloatPower ZERO = new FloatPower(0.0f, PowerUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatPower ONE = new FloatPower(1.0f, PowerUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatPower NaN = new FloatPower(Float.NaN, PowerUnit.SI);

@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -20,12 +20,12 @@ public class SpeedUnit extends Unit<SpeedUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "m/s" as the SI signature. */
-    public static final BaseUnit<SpeedUnit> BASE = new BaseUnit<>("m/s");
+    public static final UnitBase<SpeedUnit> BASE = new UnitBase<>("m/s");
 
     /** The SI unit for speed is m/s. */
     public static final SpeedUnit SI =
             new SpeedUnit().build(new Unit.Builder<SpeedUnit>().setBaseUnit(BASE).setId("m/s").setName("meter per second")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
 
     /** m/s. */
     public static final SpeedUnit METER_PER_SECOND = SI;

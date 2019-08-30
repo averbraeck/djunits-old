@@ -144,7 +144,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
      */
     public final MA incrementBy(final S increment)
     {
-        return incrementBy(increment.si);
+        return incrementBy(increment.getSI());
     }
 
     /**
@@ -181,7 +181,7 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
      */
     public final MA decrementBy(final S decrement)
     {
-        return decrementBy(decrement.si);
+        return decrementBy(decrement.getSI());
     }
 
     /**

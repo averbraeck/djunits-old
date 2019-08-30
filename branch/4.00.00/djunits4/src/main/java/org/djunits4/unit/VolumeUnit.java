@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -21,12 +21,12 @@ public class VolumeUnit extends Unit<VolumeUnit>
     private static final long serialVersionUID = 20140604L;
 
     /** The base, with "m2" as the SI signature. */
-    public static final BaseUnit<VolumeUnit> BASE = new BaseUnit<>("m3");
+    public static final UnitBase<VolumeUnit> BASE = new UnitBase<>("m3");
 
     /** The SI unit for area is m^3. */
     public static final VolumeUnit SI =
             new VolumeUnit().build(new Unit.Builder<VolumeUnit>().setBaseUnit(BASE).setId("m^3").setName("cubic meter")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** m^3. */
     public static final VolumeUnit CUBIC_METER = SI;

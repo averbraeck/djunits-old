@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -21,12 +21,12 @@ public class IlluminanceUnit extends Unit<IlluminanceUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "lux" as the SI signature. */
-    public static final BaseUnit<IlluminanceUnit> BASE = new BaseUnit<>("cd/m2");
+    public static final UnitBase<IlluminanceUnit> BASE = new UnitBase<>("cd/m2");
 
     /** The SI unit for amount of illuminance is lux */
     public static final IlluminanceUnit SI = new IlluminanceUnit()
             .build(new Unit.Builder<IlluminanceUnit>().setBaseUnit(BASE).setId("").setName("lumen")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Lux. */
     public static final IlluminanceUnit LUX = SI;

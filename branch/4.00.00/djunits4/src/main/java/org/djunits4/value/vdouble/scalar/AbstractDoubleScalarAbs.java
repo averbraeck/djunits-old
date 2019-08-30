@@ -47,7 +47,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
      */
     public AbstractDoubleScalarAbs(final A value)
     {
-        super(value.getUnit(), value.si);
+        super(value.getUnit(), value.getSI());
     }
 
     /**

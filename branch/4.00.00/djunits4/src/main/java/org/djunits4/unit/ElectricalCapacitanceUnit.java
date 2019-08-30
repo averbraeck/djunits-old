@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -22,12 +22,12 @@ public class ElectricalCapacitanceUnit extends Unit<ElectricalCapacitanceUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "s3A2/kgm2" as the SI signature. */
-    public static final BaseUnit<ElectricalCapacitanceUnit> BASE = new BaseUnit<>("s4A2/kgm2");
+    public static final UnitBase<ElectricalCapacitanceUnit> BASE = new UnitBase<>("s4A2/kgm2");
 
     /** The SI unit for electrical conductance is Siemens. */
     public static final ElectricalCapacitanceUnit SI = new ElectricalCapacitanceUnit()
             .build(new Unit.Builder<ElectricalCapacitanceUnit>().setBaseUnit(BASE).setId("F").setName("farad")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Farad. */
     public static final ElectricalCapacitanceUnit FARAD = SI;

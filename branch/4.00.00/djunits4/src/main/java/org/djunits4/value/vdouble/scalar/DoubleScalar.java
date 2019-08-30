@@ -206,12 +206,11 @@ public abstract class DoubleScalar
      * @param right AbstractDoubleScalarRel&lt;?, ?&gt;; the right operand
      * @return DoubleScalar.Rel&lt;SIUnit&gt;; the product of the two values
      */
-    public static DoubleScalar.Rel<SIUnit> multiply(final AbstractDoubleScalarRel<?, ?> left,
-            final AbstractDoubleScalarRel<?, ?> right)
+    public static SIScalar multiply(final AbstractDoubleScalarRel<?, ?> left, final AbstractDoubleScalarRel<?, ?> right)
     {
-        SIUnit targetUnit = SIUnit.lookupOrCreateUnitWithSIDimensions(
+        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(
                 left.getUnit().getBaseUnit().getSiDimensions().plus(right.getUnit().getBaseUnit().getSiDimensions()));
-        return new DoubleScalar.Rel<SIUnit>(left.getSI() * right.getSI(), targetUnit);
+        return new SIScalar(left.getSI() * right.getSI(), targetUnit);
     }
 
     /**
@@ -220,12 +219,11 @@ public abstract class DoubleScalar
      * @param right AbstractDoubleScalarRel&lt;?, ?&gt;; the right operand
      * @return DoubleScalar.Rel&lt;SIUnit&gt;; the ratio of the two values
      */
-    public static DoubleScalar.Rel<SIUnit> divide(final AbstractDoubleScalarRel<?, ?> left,
-            final AbstractDoubleScalarRel<?, ?> right)
+    public static SIScalar divide(final AbstractDoubleScalarRel<?, ?> left, final AbstractDoubleScalarRel<?, ?> right)
     {
-        SIUnit targetUnit = SIUnit.lookupOrCreateUnitWithSIDimensions(
+        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(
                 left.getUnit().getBaseUnit().getSiDimensions().minus(right.getUnit().getBaseUnit().getSiDimensions()));
-        return new DoubleScalar.Rel<SIUnit>(left.getSI() / right.getSI(), targetUnit);
+        return new SIScalar(left.getSI() / right.getSI(), targetUnit);
     }
 
     /**

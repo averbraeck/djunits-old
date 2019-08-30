@@ -54,7 +54,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean lt(final T o)
     {
-        return this.si < o.si;
+        return this.getSI() < o.getSI();
     }
 
     /**
@@ -64,7 +64,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean le(final T o)
     {
-        return this.si <= o.si;
+        return this.getSI() <= o.getSI();
     }
 
     /**
@@ -74,7 +74,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean gt(final T o)
     {
-        return this.si > o.si;
+        return this.getSI() > o.getSI();
     }
 
     /**
@@ -84,7 +84,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean ge(final T o)
     {
-        return this.si >= o.si;
+        return this.getSI() >= o.getSI();
     }
 
     /**
@@ -94,7 +94,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean eq(final T o)
     {
-        return this.si == o.si;
+        return this.getSI() == o.getSI();
     }
 
     /**
@@ -104,7 +104,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean ne(final T o)
     {
-        return this.si != o.si;
+        return this.getSI() != o.getSI();
     }
 
     /**
@@ -113,7 +113,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean lt0()
     {
-        return this.si < 0.0;
+        return this.getSI() < 0.0;
     }
 
     /**
@@ -122,7 +122,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean le0()
     {
-        return this.si <= 0.0;
+        return this.getSI() <= 0.0;
     }
 
     /**
@@ -131,7 +131,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean gt0()
     {
-        return this.si > 0.0;
+        return this.getSI() > 0.0;
     }
 
     /**
@@ -140,7 +140,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean ge0()
     {
-        return this.si >= 0.0;
+        return this.getSI() >= 0.0;
     }
 
     /**
@@ -149,7 +149,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean eq0()
     {
-        return this.si == 0.0;
+        return this.getSI() == 0.0;
     }
 
     /**
@@ -158,7 +158,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean ne0()
     {
-        return this.si != 0.0;
+        return this.getSI() != 0.0;
     }
 
     /** {@inheritDoc} */
@@ -166,7 +166,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
     @SuppressWarnings("checkstyle:designforextension")
     public final int compareTo(final T o)
     {
-        return Double.compare(this.si, o.si);
+        return Double.compare(this.getSI(), o.getSI());
     }
 
     /** {@inheritDoc} */
@@ -277,7 +277,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
         final int prime = 31;
         int result = getUnit().getStandardUnit().hashCode();
         long temp;
-        temp = Double.doubleToLongBits(this.si);
+        temp = Double.doubleToLongBits(this.getSI());
         result = prime * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
@@ -296,7 +296,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
         AbstractDoubleScalar<U, T> other = (AbstractDoubleScalar<U, T>) obj;
         if (!getUnit().getStandardUnit().equals(other.getUnit().getStandardUnit()))
             return false;
-        if (Double.doubleToLongBits(this.si) != Double.doubleToLongBits(other.si))
+        if (Double.doubleToLongBits(this.getSI()) != Double.doubleToLongBits(other.getSI()))
             return false;
         return true;
     }

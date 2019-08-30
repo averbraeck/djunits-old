@@ -39,6 +39,9 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
     /** constant with value zero. */
     public static final FloatElectricalCharge ZERO = new FloatElectricalCharge(0.0f, ElectricalChargeUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatElectricalCharge ONE = new FloatElectricalCharge(1.0f, ElectricalChargeUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatElectricalCharge NaN = new FloatElectricalCharge(Float.NaN, ElectricalChargeUnit.SI);

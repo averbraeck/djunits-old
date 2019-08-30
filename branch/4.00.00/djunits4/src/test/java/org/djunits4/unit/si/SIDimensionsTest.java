@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.djunits4.unit.UnitException;
+import org.djunits4.unit.util.UnitException;
 import org.junit.Test;
 
 /**

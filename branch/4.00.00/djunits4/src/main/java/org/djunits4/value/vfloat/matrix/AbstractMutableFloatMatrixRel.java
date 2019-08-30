@@ -140,7 +140,7 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      */
     public final MR incrementBy(final S increment)
     {
-        return incrementBy(increment.si);
+        return incrementBy(increment.getSI());
     }
 
     /**
@@ -177,7 +177,7 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      */
     public final MR decrementBy(final S decrement)
     {
-        return decrementBy(decrement.si);
+        return decrementBy(decrement.getSI());
     }
 
     /**
@@ -214,7 +214,7 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      */
     public final MR multiplyBy(final S factor)
     {
-        return multiplyBy(factor.si);
+        return multiplyBy(factor.getSI());
     }
 
     /** {@inheritDoc} */
@@ -257,7 +257,7 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      */
     public final MR divideBy(final S factor)
     {
-        return divideBy(factor.si);
+        return divideBy(factor.getSI());
     }
 
     /**********************************************************************************/

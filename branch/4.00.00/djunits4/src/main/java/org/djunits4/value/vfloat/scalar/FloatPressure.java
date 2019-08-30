@@ -39,6 +39,9 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
     /** constant with value zero. */
     public static final FloatPressure ZERO = new FloatPressure(0.0f, PressureUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatPressure ONE = new FloatPressure(1.0f, PressureUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatPressure NaN = new FloatPressure(Float.NaN, PressureUnit.SI);

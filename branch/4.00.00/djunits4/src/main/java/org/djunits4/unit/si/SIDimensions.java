@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 import org.djunits4.Throw;
-import org.djunits4.unit.UnitException;
+import org.djunits4.unit.util.UnitException;
 
 /**
  * SIDimensions stores the dimensionality of a unit using the SI standards. Angle (rad) and solid angle (sr) have been added to

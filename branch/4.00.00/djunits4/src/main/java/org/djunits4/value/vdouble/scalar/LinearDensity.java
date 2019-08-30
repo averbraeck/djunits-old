@@ -40,6 +40,9 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
     /** constant with value zero. */
     public static final LinearDensity ZERO = new LinearDensity(0.0, LinearDensityUnit.SI);
 
+    /** constant with value one. */
+    public static final LinearDensity ONE = new LinearDensity(1.0, LinearDensityUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final LinearDensity NaN = new LinearDensity(Double.NaN, LinearDensityUnit.SI);

@@ -26,10 +26,10 @@ public final class UnitTypes implements Serializable
     public static final UnitTypes INSTANCE = new UnitTypes();
 
     /** the SI registry of the units. */
-    private Map<SIDimensions, Set<BaseUnit<?>>> siRegistry = new LinkedHashMap<>();
+    private Map<SIDimensions, Set<UnitBase<?>>> siRegistry = new LinkedHashMap<>();
 
     /** the name registry of the units. */
-    private Map<String, BaseUnit<?>> registry = new LinkedHashMap<>();
+    private Map<String, UnitBase<?>> registry = new LinkedHashMap<>();
 
     /** Only call once from a static field. */
     private UnitTypes()
@@ -41,10 +41,10 @@ public final class UnitTypes implements Serializable
      * Register the baseUnit in the UnitType registries.
      * @param baseUnit the baseUnit to register.
      */
-    public void register(final BaseUnit<?> baseUnit)
+    public void register(final UnitBase<?> baseUnit)
     {
         this.registry.put(baseUnit.getClass().getSimpleName(), baseUnit);
-        Set<BaseUnit<?>> siSet = this.siRegistry.get(baseUnit.getSiDimensions());
+        Set<UnitBase<?>> siSet = this.siRegistry.get(baseUnit.getSiDimensions());
         if (siSet == null)
         {
             siSet = new LinkedHashSet<>();
@@ -58,9 +58,9 @@ public final class UnitTypes implements Serializable
      * @param siDimensions the SI dimensions to search for
      * @return a safe copy of the baseUnit set registered for this SI dimensions fingerprint
      */
-    public Set<BaseUnit<?>> getBaseUnits(final SIDimensions siDimensions)
+    public Set<UnitBase<?>> getBaseUnits(final SIDimensions siDimensions)
     {
-        Set<BaseUnit<?>> baseUnitsSet = new LinkedHashSet<>();
+        Set<UnitBase<?>> baseUnitsSet = new LinkedHashSet<>();
         if (this.siRegistry.containsKey(siDimensions))
         {
             baseUnitsSet.addAll(this.siRegistry.get(siDimensions));

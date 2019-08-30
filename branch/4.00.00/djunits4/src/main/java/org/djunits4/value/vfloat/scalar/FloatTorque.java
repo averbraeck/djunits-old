@@ -43,6 +43,9 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
     /** constant with value zero. */
     public static final FloatTorque ZERO = new FloatTorque(0.0f, TorqueUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatTorque ONE = new FloatTorque(1.0f, TorqueUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatTorque NaN = new FloatTorque(Float.NaN, TorqueUnit.SI);

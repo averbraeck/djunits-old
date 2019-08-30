@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -21,12 +21,12 @@ public class FlowVolumeUnit extends Unit<FlowVolumeUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kg/s" as the SI signature. */
-    public static final BaseUnit<FlowVolumeUnit> BASE = new BaseUnit<>("m3/s");
+    public static final UnitBase<FlowVolumeUnit> BASE = new UnitBase<>("m3/s");
 
     /** The SI unit for volume flow rate is m^3/s. */
     public static final FlowVolumeUnit SI = new FlowVolumeUnit()
             .build(new Unit.Builder<FlowVolumeUnit>().setBaseUnit(BASE).setId("m^3/s").setName("cubic meter per second")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
 
     /** m^3/s. */
     public static final FlowVolumeUnit CUBIC_METER_PER_SECOND = SI;

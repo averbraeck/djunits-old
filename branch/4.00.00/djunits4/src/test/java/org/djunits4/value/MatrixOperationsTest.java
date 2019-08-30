@@ -10,12 +10,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-import org.djunits4.unit.UNITS;
 import org.djunits4.unit.Unit;
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.LinearScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
+import org.djunits4.unit.util.UNITS;
 import org.djunits4.util.ClassUtil;
 import org.djunits4.value.vdouble.matrix.AbstractDoubleMatrix;
 import org.djunits4.value.vdouble.matrix.DoubleMatrixInterface;
@@ -23,9 +23,11 @@ import org.djunits4.value.vdouble.scalar.AbstractDoubleScalar;
 import org.djunits4.value.vdouble.scalar.Area;
 import org.djunits4.value.vdouble.scalar.DoubleScalar;
 import org.djunits4.value.vdouble.scalar.Length;
+import org.djunits4.value.vdouble.scalar.SIScalar;
 import org.djunits4.value.vfloat.matrix.AbstractFloatMatrix;
 import org.djunits4.value.vfloat.matrix.FloatMatrixInterface;
 import org.djunits4.value.vfloat.scalar.AbstractFloatScalar;
+import org.djunits4.value.vfloat.scalar.FloatSIScalar;
 import org.djunits4.value.vfloat.scalar.FloatScalar;
 import org.junit.Assert;
 import org.junit.Test;
@@ -253,17 +255,17 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             {
                 Method multiplyMethod = matrixClass.getDeclaredMethod("multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
-                double resultSI = ((DoubleScalar.Rel<?>) result).si;
+                double resultSI = ((DoubleScalar.Rel<?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
                 Method divideMethod = matrixClass.getDeclaredMethod("divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
-                double resultSI = ((DoubleScalar.Rel<?>) result).si;
+                double resultSI = ((DoubleScalar.Rel<?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
-            DoubleScalar.Rel<?> result = multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
+            SIScalar result = multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
             // System.out.println("result is " + result);
             String resultCoefficients = result.getUnit().getBaseUnit().getSiDimensions().toString();
             assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
@@ -283,17 +285,17 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             {
                 Method multiplyMethod = matrixClass.getDeclaredMethod("multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
-                double resultSI = ((FloatScalar.Rel<?>) result).si;
+                double resultSI = ((FloatScalar.Rel<?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
                 Method divideMethod = matrixClass.getDeclaredMethod("divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
-                float resultSI = ((FloatScalar.Rel<?>) result).si;
+                float resultSI = ((FloatScalar.Rel<?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
-            FloatScalar.Rel<?> result = multiply ? FloatScalar.multiply(left, right) : FloatScalar.divide(left, right);
+            FloatSIScalar result = multiply ? FloatScalar.multiply(left, right) : FloatScalar.divide(left, right);
             // System.out.println("result is " + result);
             String resultCoefficients = result.getUnit().getBaseUnit().getSiDimensions().toString();
             assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
@@ -1375,9 +1377,9 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         Object compatibleRight = null;
         Object compatibleRel = null;
         // TODO: Probably we exclude too much here for the tests...
-        if (!matrixClass.getName().contains("Dimensionless")
-                && !matrixClass.getName().contains("AbsoluteTemperature") && !matrixClass.getName().contains("Position")
-                && !matrixClass.getName().contains("Time") && !matrixClass.getName().contains("Direction"))
+        if (!matrixClass.getName().contains("Dimensionless") && !matrixClass.getName().contains("AbsoluteTemperature")
+                && !matrixClass.getName().contains("Position") && !matrixClass.getName().contains("Time")
+                && !matrixClass.getName().contains("Direction"))
         {
             // Construct a new unit to test mixed unit plus and minus
             Class<?> unitClass = getUnitClass(matrixClass);
@@ -1388,13 +1390,13 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
             Constructor<?> unitConstructor = unitClass.getConstructor(); // empty constructor -- provide Builder
             Unit newUnit = (Unit) unitConstructor.newInstance();
-            Method buildMethod = ClassUtil.resolveMethod(Unit.class, "build", Unit.Builder.class); 
+            Method buildMethod = ClassUtil.resolveMethod(Unit.class, "build", Unit.Builder.class);
             Unit.Builder builder = new Unit.Builder<>();
             builder.setId("7abbr");
             builder.setName("7fullName");
             builder.setUnitSystem(unitSystem);
             builder.setScale(new LinearScale(7));
-            builder.setBaseUnit((BaseUnit) getSIUnitInstance(unitClass).getBaseUnit());
+            builder.setBaseUnit((UnitBase) getSIUnitInstance(unitClass).getBaseUnit());
             builder.setSiPrefixes(SIPrefixes.NONE);
             buildMethod.setAccessible(true);
             buildMethod.invoke(newUnit, builder);

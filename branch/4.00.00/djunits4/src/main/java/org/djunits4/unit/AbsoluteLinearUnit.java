@@ -1,11 +1,12 @@
 package org.djunits4.unit;
 
 import org.djunits4.Throw;
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.OffsetLinearScale;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
+import org.djunits4.unit.util.UnitRuntimeException;
 
 /**
  * The AbsoluteUnit class indicates that a unit is absolute and has a "zero" point. The relative base unit will be set correctly
@@ -24,7 +25,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     private static final long serialVersionUID = 20190826L;
 
     /** The relative unit belonging to this unit. */
-    private BaseUnit<RU> relativeBaseUnit;
+    private UnitBase<RU> relativeBaseUnit;
 
     /** The corresponding relative unit with the same unit scale factor. */
     private RU relativeUnit;
@@ -33,7 +34,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
      * Return the corresponding relative base unit.
      * @return Unit&lt;?&gt;; the the corresponding relative base unit
      */
-    public BaseUnit<RU> getRelativeBaseUnit()
+    public UnitBase<RU> getRelativeBaseUnit()
     {
         return this.relativeBaseUnit;
     }
@@ -301,7 +302,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
 
         /** {@inheritDoc} */
         @Override
-        public Builder<AU, RU> setBaseUnit(final BaseUnit<AU> baseUnit)
+        public Builder<AU, RU> setBaseUnit(final UnitBase<AU> baseUnit)
         {
             super.setBaseUnit(baseUnit);
             return this;

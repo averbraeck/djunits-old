@@ -40,6 +40,9 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
     /** constant with value zero. */
     public static final Frequency ZERO = new Frequency(0.0, FrequencyUnit.SI);
 
+    /** constant with value one. */
+    public static final Frequency ONE = new Frequency(1.0, FrequencyUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Frequency NaN = new Frequency(Double.NaN, FrequencyUnit.SI);

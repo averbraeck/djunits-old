@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -21,12 +21,12 @@ public class AmountOfSubstanceUnit extends Unit<AmountOfSubstanceUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "mol" as the SI signature. */
-    public static final BaseUnit<AmountOfSubstanceUnit> BASE = new BaseUnit<>("cd");
+    public static final UnitBase<AmountOfSubstanceUnit> BASE = new UnitBase<>("cd");
 
     /** The SI unit for amount of substance is mole. */
     public static final AmountOfSubstanceUnit SI = new AmountOfSubstanceUnit()
             .build(new Unit.Builder<AmountOfSubstanceUnit>().setBaseUnit(BASE).setId("mol").setName("mole")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Mole. */
     public static final AmountOfSubstanceUnit MOLE = SI;

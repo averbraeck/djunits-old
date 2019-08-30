@@ -6,14 +6,17 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.djunits4.Throw;
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
+import org.djunits4.unit.base.UnitTypes;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.scale.LinearScale;
 import org.djunits4.unit.scale.OffsetLinearScale;
 import org.djunits4.unit.scale.Scale;
-import org.djunits4.unit.scale.IdentityScale;
+import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.si.SIPrefix;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
+import org.djunits4.unit.util.UnitRuntimeException;
 
 /**
  * All units are internally <i>stored</i> relative to a standard unit with conversion factor. This means that e.g., a meter is
@@ -26,7 +29,7 @@ import org.djunits4.unit.unitsystem.UnitSystem;
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  * @param <U> the unit to reference the actual unit in return values
  */
-public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
+public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 {
     /** */
     private static final long serialVersionUID = 20190818L;
@@ -59,10 +62,10 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     private boolean baseSIUnit;
 
     /**
-     * The corresponding base unit that contains all registered units for the unit as well as SI dimension information. The
-     * base unit of a base unit is null.
+     * The corresponding unit base that contains all registered units for the unit as well as SI dimension information. The base
+     * unit of a unit base is null.
      */
-    private BaseUnit<U> baseUnit;
+    private UnitBase<U> unitBase;
 
     /**
      * Initialize a blank unit that can be built through reflection with several 'setter' methods followed by calling the
@@ -95,7 +98,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         Throw.when(builder.getId().length() == 0, UnitRuntimeException.class, "Constructing unit %s: id.length cannot be 0",
                 cName);
         String unitId = builder.getId();
-        Throw.whenNull(builder.getBaseUnit(), "Constructing unit %s.%s: baseUnit cannot be null", cName, unitId);
+        Throw.whenNull(builder.getUnitBase(), "Constructing unit %s.%s: baseUnit cannot be null", cName, unitId);
         Throw.whenNull(builder.getName(), "Constructing unit %s.%s: name cannot be null", cName, unitId);
         Throw.when(builder.getName().length() == 0, UnitRuntimeException.class,
                 "Constructing unit %s.%s: name.length cannot be 0", cName, unitId);
@@ -105,7 +108,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         // set the key fields
         this.id = unitId;
         this.name = builder.getName();
-        this.baseUnit = builder.getBaseUnit();
+        this.unitBase = builder.getUnitBase();
         this.unitSystem = builder.getUnitSystem();
         this.scale = builder.getScale();
         this.generated = builder.isGenerated();
@@ -144,7 +147,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         SIPrefixes siPrefixes = builder.getSiPrefixes() == null ? SIPrefixes.NONE : builder.getSiPrefixes();
 
         // Register the unit, possibly including all SI prefixes
-        this.baseUnit.registerUnit((U) this, siPrefixes);
+        this.unitBase.registerUnit((U) this, siPrefixes);
         return (U) this;
     }
 
@@ -177,7 +180,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
             Builder<U> builder = makeBuilder();
             builder.setId(cloneId);
             builder.setName(cloneName);
-            builder.setBaseUnit(this.baseUnit);
+            builder.setBaseUnit(this.unitBase);
             builder.setSiPrefixes(SIPrefixes.NONE);
             builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
             builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
@@ -260,7 +263,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
             Builder<U> builder = makeBuilder();
             builder.setId(cloneId);
             builder.setName(cloneName);
-            builder.setBaseUnit(this.baseUnit);
+            builder.setBaseUnit(this.unitBase);
             builder.setSiPrefixes(SIPrefixes.NONE);
             builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
             builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
@@ -322,7 +325,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
             Builder<U> builder = makeBuilder();
             builder.setId(derivedId);
             builder.setName(derivedName);
-            builder.setBaseUnit(this.baseUnit);
+            builder.setBaseUnit(this.unitBase);
             builder.setSiPrefixes(SIPrefixes.NONE);
             builder.setScale(new LinearScale(scaleFactor * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
             builder.setUnitSystem(derivedUnitSystem);
@@ -378,6 +381,50 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     protected Builder<U> makeBuilder()
     {
         return new Builder<U>();
+    }
+
+    /**
+     * Create or lookup a unit based on given SI dimensions. E.g., a unit with dimensions 1/s^2 or kg.m/s^2.
+     * @param siDimensions the vector with the dimensionality of the unit
+     * @return SIUnit; an SIUnit object with the right dimensions
+     */
+    @SuppressWarnings("unchecked")
+    public static SIUnit lookupOrCreateUnitWithSIDimensions(final SIDimensions siDimensions)
+    {
+        Throw.whenNull(siDimensions, "siDimensions cannot be null");
+
+        UnitBase<SIUnit> unitBase = null;
+        SIUnit unit = null;
+
+        Set<UnitBase<?>> baseUnitSet = UnitTypes.INSTANCE.getBaseUnits(siDimensions);
+        for (UnitBase<?> bu : baseUnitSet)
+        {
+            if (bu.getStandardUnit().getClass().equals(Unit.class))
+            {
+                unitBase = (UnitBase<SIUnit>) bu;
+            }
+        }
+
+        if (unitBase == null)
+        {
+            unitBase = new UnitBase<SIUnit>(siDimensions);
+            Builder<SIUnit> builder = new Builder<>();
+            builder.setId(siDimensions.toString(true, true));
+            builder.setName(siDimensions.toString(true, true));
+            builder.setBaseUnit(unitBase);
+            builder.setScale(IdentityScale.SCALE);
+            builder.setGenerated(true);
+            builder.setUnitSystem(UnitSystem.SI_DERIVED);
+            builder.setSiPrefixes(SIPrefixes.NONE);
+            unit = new SIUnit();
+            unit.build(builder); // it will be registered at the BaseUnit
+        }
+        else
+        {
+            unit = unitBase.getStandardUnit();
+        }
+
+        return unit;
     }
 
     /**
@@ -444,13 +491,13 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * Retrieve the base unit of this unit.
-     * @return BaseUnit&lt;U&gt;; the base unit of this unit. if this unit is itself a base unit; the returned value is
+     * Retrieve the unit base of this unit.
+     * @return BaseUnit&lt;U&gt;; the unit base of this unit. if this unit is itself a unit base; the returned value is
      *         <code>null</code>
      */
-    public BaseUnit<U> getBaseUnit()
+    public UnitBase<U> getBaseUnit()
     {
-        return this.baseUnit;
+        return this.unitBase;
     }
 
     /**
@@ -474,13 +521,13 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
     /**
      * Retrieve the standard unit (SI Unit) belonging to this unit.
-     * @return U; the standard unit (SI unit) belonging to this unit 
+     * @return U; the standard unit (SI unit) belonging to this unit
      */
     public U getStandardUnit()
     {
         return getBaseUnit().getStandardUnit();
     }
-    
+
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
@@ -496,7 +543,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.abbreviations == null) ? 0 : this.abbreviations.hashCode());
-        result = prime * result + ((this.baseUnit == null) ? 0 : this.baseUnit.hashCode());
+        result = prime * result + ((this.unitBase == null) ? 0 : this.unitBase.hashCode());
         result = prime * result + ((this.defaultDisplayAbbreviation == null) ? 0 : this.defaultDisplayAbbreviation.hashCode());
         result = prime * result + ((this.defaultTextualAbbreviation == null) ? 0 : this.defaultTextualAbbreviation.hashCode());
         result = prime * result + (this.generated ? 1231 : 1237);
@@ -525,12 +572,12 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
         else if (!this.abbreviations.equals(other.abbreviations))
             return false;
-        if (this.baseUnit == null)
+        if (this.unitBase == null)
         {
-            if (other.baseUnit != null)
+            if (other.unitBase != null)
                 return false;
         }
-        else if (!this.baseUnit.equals(other.baseUnit))
+        else if (!this.unitBase.equals(other.unitBase))
             return false;
         if (this.defaultDisplayAbbreviation == null)
         {
@@ -583,7 +630,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     @Override
     public String toString()
     {
-        return "Unit[id=" + this.id + ", name=" + this.name + "]";
+        return this.defaultDisplayAbbreviation;
     }
 
     /**
@@ -626,10 +673,10 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         private boolean generated = false;
 
         /**
-         * The corresponding base unit that contains all registered units for the unit as well as SI dimension information.
-         * The base unit is null for base units themselves.
+         * The corresponding unit base that contains all registered units for the unit as well as SI dimension information. The
+         * unit base should never be null.
          */
-        private BaseUnit<U> baseUnit;
+        private UnitBase<U> unitBase;
 
         /**
          * Empty constructor. Content is generated through chaining: new Unit.Builder<TypeUnit>().setId("id").setName("name");
@@ -823,25 +870,25 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * Retrieve the base unit.
-         * @return baseUnit BaseUnit&lt;U&gt;; the base unit
+         * Retrieve the unit base.
+         * @return baseUnit BaseUnit&lt;U&gt;; the unit base
          */
-        public BaseUnit<U> getBaseUnit()
+        public UnitBase<U> getUnitBase()
         {
-            return this.baseUnit;
+            return this.unitBase;
         }
 
         /**
-         * Set the base unit. Defaults to <code>null</code>. Should only be set to build a non-base unit.
-         * @param baseUnit BaseUnit; the base unit
+         * Set the unit base. Can never be null and has to be filled.
+         * @param unitBase UnitBase; the unit base
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setBaseUnit(final BaseUnit<U> baseUnit)
+        public Builder<U> setBaseUnit(final UnitBase<U> unitBase)
         {
-            this.baseUnit = baseUnit;
+            this.unitBase = unitBase;
             return this;
         }
-        
+
     }
-    
+
 }

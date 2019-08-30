@@ -44,6 +44,9 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
     /** constant with value zero. */
     public static final FloatForce ZERO = new FloatForce(0.0f, ForceUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatForce ONE = new FloatForce(1.0f, ForceUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatForce NaN = new FloatForce(Float.NaN, ForceUnit.SI);

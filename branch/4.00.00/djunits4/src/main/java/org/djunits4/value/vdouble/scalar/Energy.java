@@ -42,6 +42,9 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     /** constant with value zero. */
     public static final Energy ZERO = new Energy(0.0, EnergyUnit.SI);
 
+    /** constant with value one. */
+    public static final Energy ONE = new Energy(1.0, EnergyUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Energy NaN = new Energy(Double.NaN, EnergyUnit.SI);

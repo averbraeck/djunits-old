@@ -42,6 +42,9 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
     /** constant with value zero. */
     public static final Area ZERO = new Area(0.0, AreaUnit.SI);
 
+    /** constant with value one. */
+    public static final Area ONE = new Area(1.0, AreaUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Area NaN = new Area(Double.NaN, AreaUnit.SI);

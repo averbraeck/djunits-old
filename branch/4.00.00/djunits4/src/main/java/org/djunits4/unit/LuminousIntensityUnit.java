@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -21,12 +21,12 @@ public class LuminousIntensityUnit extends Unit<LuminousIntensityUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "cd" as the SI signature. */
-    public static final BaseUnit<LuminousIntensityUnit> BASE = new BaseUnit<>("cd");
+    public static final UnitBase<LuminousIntensityUnit> BASE = new UnitBase<>("cd");
 
     /** The SI unit for luminous intensity is cd. */
     public static final LuminousIntensityUnit SI = new LuminousIntensityUnit()
             .build(new Unit.Builder<LuminousIntensityUnit>().setBaseUnit(BASE).setId("cd").setName("candela")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Candela. */
     public static final LuminousIntensityUnit CANDELA = SI;

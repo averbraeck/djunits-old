@@ -43,7 +43,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
      */
     public AbstractDoubleScalarRel(final R value)
     {
-        super(value.getUnit(), value.si);
+        super(value.getUnit(), value.getSI());
     }
 
     /**
@@ -64,10 +64,10 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     {
         if (getUnit().isBaseSIUnit())
         {
-            return instantiateRel(this.si + increment.si, getUnit().getStandardUnit());
+            return instantiateRel(this.getSI() + increment.getSI(), getUnit().getStandardUnit());
         }
         return getUnit().equals(increment.getUnit()) ? instantiateRel(getInUnit() + increment.getInUnit(), getUnit())
-                : instantiateRel(this.si + increment.si, getUnit().getStandardUnit());
+                : instantiateRel(this.getSI() + increment.getSI(), getUnit().getStandardUnit());
     }
 
     /**
@@ -80,10 +80,10 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     {
         if (getUnit().isBaseSIUnit())
         {
-            return instantiateRel(this.si - decrement.si, getUnit().getStandardUnit());
+            return instantiateRel(this.getSI() - decrement.getSI(), getUnit().getStandardUnit());
         }
         return getUnit().equals(decrement.getUnit()) ? instantiateRel(getInUnit() - decrement.getInUnit(), getUnit())
-                : instantiateRel(this.si - decrement.si, getUnit().getStandardUnit());
+                : instantiateRel(this.getSI() - decrement.getSI(), getUnit().getStandardUnit());
     }
 
     /**
@@ -99,6 +99,35 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
             final double ratio)
     {
         return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
+     * Multiply this scalar by another scalar and create a new scalar.
+     * @param otherScalar Scalar; the value by which this scalar is multiplied
+     * @return DoubleScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
+     */
+    public SIScalar multiplyBy(AbstractDoubleScalarRel<?, ?> otherScalar)
+    {
+        return DoubleScalar.multiply(this, otherScalar);
+    }
+
+    /**
+     * Create the reciprocal of this scalar with the correct dimensions.
+     * @return DoubleScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
+     */
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
+    }
+
+    /**
+     * Divide this scalar by another scalar and create a new scalar.
+     * @param otherScalar Scalar; the value by which this scalar is divided
+     * @return DoubleScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
+     */
+    public SIScalar divideBy(AbstractDoubleScalarRel<?, ?> otherScalar)
+    {
+        return DoubleScalar.divide(this, otherScalar);
     }
 
     /**********************************************************************************/
@@ -168,4 +197,5 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     {
         return instantiateRel(getInUnit() / constant, getUnit());
     }
+
 }

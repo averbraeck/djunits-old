@@ -43,6 +43,9 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
     /** constant with value zero. */
     public static final Torque ZERO = new Torque(0.0, TorqueUnit.SI);
 
+    /** constant with value one. */
+    public static final Torque ONE = new Torque(1.0, TorqueUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Torque NaN = new Torque(Double.NaN, TorqueUnit.SI);

@@ -1,7 +1,7 @@
 package org.djunits4.unit.scale;
 
 import org.djunits4.Throw;
-import org.djunits4.unit.UnitRuntimeException;
+import org.djunits4.unit.util.UnitRuntimeException;
 
 /**
  * A Scale for linear transformations not involving a zero-offset, e.g. for Length, Time, Area. <br>

@@ -47,7 +47,7 @@ public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, R
      */
     public AbstractFloatScalarAbs(final A value)
     {
-        super(value.getUnit(), value.si);
+        super(value.getUnit(), value.getSI());
     }
 
     /**

@@ -41,6 +41,9 @@ public class FloatFlowVolume extends AbstractFloatScalarRel<FlowVolumeUnit, Floa
     /** constant with value zero. */
     public static final FloatFlowVolume ZERO = new FloatFlowVolume(0.0f, FlowVolumeUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatFlowVolume ONE = new FloatFlowVolume(1.0f, FlowVolumeUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatFlowVolume NaN = new FloatFlowVolume(Float.NaN, FlowVolumeUnit.SI);

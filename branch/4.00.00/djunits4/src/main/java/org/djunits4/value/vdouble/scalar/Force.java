@@ -44,6 +44,9 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
     /** constant with value zero. */
     public static final Force ZERO = new Force(0.0, ForceUnit.SI);
 
+    /** constant with value one. */
+    public static final Force ONE = new Force(1.0, ForceUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Force NaN = new Force(Double.NaN, ForceUnit.SI);

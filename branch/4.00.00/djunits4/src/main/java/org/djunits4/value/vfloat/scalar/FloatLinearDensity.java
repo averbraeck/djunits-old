@@ -40,6 +40,9 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
     /** constant with value zero. */
     public static final FloatLinearDensity ZERO = new FloatLinearDensity(0.0f, LinearDensityUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatLinearDensity ONE = new FloatLinearDensity(1.0f, LinearDensityUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatLinearDensity NaN = new FloatLinearDensity(Float.NaN, LinearDensityUnit.SI);

@@ -240,12 +240,11 @@ public abstract class FloatScalar
      * @param right AbstractFloatScalarRel&lt;?, ?&gt;; the right operand
      * @return FloatScalar.Rel&lt;SIUnit&gt;; the product of the two values
      */
-    public static FloatScalar.Rel<SIUnit> multiply(final AbstractFloatScalarRel<?, ?> left,
-            final AbstractFloatScalarRel<?, ?> right)
+    public static FloatSIScalar multiply(final AbstractFloatScalarRel<?, ?> left, final AbstractFloatScalarRel<?, ?> right)
     {
-        SIUnit targetUnit = SIUnit.lookupOrCreateUnitWithSIDimensions(
+        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(
                 left.getUnit().getBaseUnit().getSiDimensions().plus(right.getUnit().getBaseUnit().getSiDimensions()));
-        return new FloatScalar.Rel<SIUnit>(left.getSI() * right.getSI(), targetUnit);
+        return new FloatSIScalar(left.getSI() * right.getSI(), targetUnit);
     }
 
     /**
@@ -254,12 +253,11 @@ public abstract class FloatScalar
      * @param right AbstractFloatScalarRel&lt;?, ?&gt;; the right operand
      * @return FloatScalar.Rel&lt;SIUnit&gt;; the ratio of the two values
      */
-    public static FloatScalar.Rel<SIUnit> divide(final AbstractFloatScalarRel<?, ?> left,
-            final AbstractFloatScalarRel<?, ?> right)
+    public static FloatSIScalar divide(final AbstractFloatScalarRel<?, ?> left, final AbstractFloatScalarRel<?, ?> right)
     {
-        SIUnit targetUnit = SIUnit.lookupOrCreateUnitWithSIDimensions(
+        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(
                 left.getUnit().getBaseUnit().getSiDimensions().minus(right.getUnit().getBaseUnit().getSiDimensions()));
-        return new FloatScalar.Rel<SIUnit>(left.getSI() / right.getSI(), targetUnit);
+        return new FloatSIScalar(left.getSI() / right.getSI(), targetUnit);
     }
 
     /**

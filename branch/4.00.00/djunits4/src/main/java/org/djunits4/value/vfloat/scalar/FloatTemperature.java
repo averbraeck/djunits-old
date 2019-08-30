@@ -39,6 +39,9 @@ public class FloatTemperature extends AbstractFloatScalarRel<TemperatureUnit, Fl
     /** constant with value zero. */
     public static final FloatTemperature ZERO = new FloatTemperature(0.0f, TemperatureUnit.SI);
 
+    /** constant with value one. */
+    public static final FloatTemperature ONE = new FloatTemperature(1.0f, TemperatureUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatTemperature NaN = new FloatTemperature(Float.NaN, TemperatureUnit.SI);

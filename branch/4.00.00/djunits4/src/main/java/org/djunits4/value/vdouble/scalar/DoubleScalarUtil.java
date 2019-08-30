@@ -29,8 +29,8 @@ import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TimeUnit;
 import org.djunits4.unit.TorqueUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.unit.UnitException;
 import org.djunits4.unit.VolumeUnit;
+import org.djunits4.unit.util.UnitException;
 
 /**
  * Class to instantiate any DoubleScalar based on the provided unit.

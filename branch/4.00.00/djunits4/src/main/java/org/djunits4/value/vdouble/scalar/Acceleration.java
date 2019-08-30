@@ -40,6 +40,9 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
     /** constant with value zero. */
     public static final Acceleration ZERO = new Acceleration(0.0, AccelerationUnit.SI);
 
+    /** constant with value one. */
+    public static final Acceleration ONE = new Acceleration(1.0, AccelerationUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Acceleration NaN = new Acceleration(Double.NaN, AccelerationUnit.SI);

@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.OffsetLinearScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -21,7 +21,7 @@ public class PositionUnit extends AbsoluteLinearUnit<PositionUnit, LengthUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "m" as the SI signature. */
-    public static final BaseUnit<PositionUnit> BASE = new BaseUnit<>("m");
+    public static final UnitBase<PositionUnit> BASE = new UnitBase<>("m");
 
     /** The SI unit for position is meter. */
     public static final PositionUnit DEFAULT =

@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -20,11 +20,11 @@ public class LengthUnit extends Unit<LengthUnit>
     private static final long serialVersionUID = 20190818L;
 
     /** The base, with "m" as the SI signature. */
-    public static final BaseUnit<LengthUnit> BASE = new BaseUnit<>("m");
+    public static final UnitBase<LengthUnit> BASE = new UnitBase<>("m");
 
     /** The SI unit for length is meter. */
     public static final LengthUnit SI = new LengthUnit().build(new Unit.Builder<LengthUnit>().setBaseUnit(BASE).setId("m")
-            .setName("meter").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+            .setName("meter").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** meter. */
     public final static LengthUnit METER = SI;

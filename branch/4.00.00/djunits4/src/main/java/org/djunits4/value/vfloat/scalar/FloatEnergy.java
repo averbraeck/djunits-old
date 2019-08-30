@@ -42,6 +42,9 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
     /** constant with value zero. */
     public static final FloatEnergy ZERO = new FloatEnergy(0.0f, EnergyUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatEnergy ONE = new FloatEnergy(1.0f, EnergyUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatEnergy NaN = new FloatEnergy(Float.NaN, EnergyUnit.SI);

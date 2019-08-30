@@ -42,6 +42,9 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
     /** constant with value zero. */
     public static final Mass ZERO = new Mass(0.0, MassUnit.SI);
 
+    /** constant with value one. */
+    public static final Mass ONE = new Mass(1.0, MassUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Mass NaN = new Mass(Double.NaN, MassUnit.SI);

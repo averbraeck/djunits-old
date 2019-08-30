@@ -54,6 +54,7 @@ public class EngineeringFormatterTest
         doULPTest();
         Locale.setDefault(Locale.GERMAN); // Uses a comma as radix symbol
         doULPTest();
+        Locale.setDefault(Locale.US); // RESTORE THE DEFAULT LOCALE
     }
 
     /**
@@ -107,6 +108,7 @@ public class EngineeringFormatterTest
         doWidthTest();
         Locale.setDefault(Locale.GERMAN); // Uses a comma as radix symbol
         doWidthTest();
+        Locale.setDefault(Locale.US); // RESTORE THE DEFAULT LOCALE
     }
 
     /**

@@ -43,7 +43,7 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
      */
     public AbstractFloatScalarRel(final R value)
     {
-        super(value.getUnit(), value.si);
+        super(value.getUnit(), value.getSI());
     }
 
     /**
@@ -64,10 +64,10 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
     {
         if (getUnit().isBaseSIUnit())
         {
-            return instantiateRel(this.si + increment.si, getUnit().getStandardUnit());
+            return instantiateRel(this.getSI() + increment.getSI(), getUnit().getStandardUnit());
         }
         return getUnit().equals(increment.getUnit()) ? instantiateRel(getInUnit() + increment.getInUnit(), getUnit())
-                : instantiateRel(this.si + increment.si, getUnit().getStandardUnit());
+                : instantiateRel(this.getSI() + increment.getSI(), getUnit().getStandardUnit());
     }
 
     /**
@@ -80,10 +80,10 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
     {
         if (getUnit().isBaseSIUnit())
         {
-            return instantiateRel(this.si - decrement.si, getUnit().getStandardUnit());
+            return instantiateRel(this.getSI() - decrement.getSI(), getUnit().getStandardUnit());
         }
         return getUnit().equals(decrement.getUnit()) ? instantiateRel(getInUnit() - decrement.getInUnit(), getUnit())
-                : instantiateRel(this.si - decrement.si, getUnit().getStandardUnit());
+                : instantiateRel(this.getSI() - decrement.getSI(), getUnit().getStandardUnit());
     }
 
     /**********************************************************************************/

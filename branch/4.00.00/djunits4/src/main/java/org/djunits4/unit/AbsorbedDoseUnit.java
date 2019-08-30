@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -22,12 +22,12 @@ public class AbsorbedDoseUnit extends Unit<AbsorbedDoseUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "m2/s2" as the SI signature. */
-    public static final BaseUnit<AbsorbedDoseUnit> BASE = new BaseUnit<>("m2/s2");
+    public static final UnitBase<AbsorbedDoseUnit> BASE = new UnitBase<>("m2/s2");
 
     /** The SI unit for absorbed dose of ionizing radiation is Gray. */
     public static final AbsorbedDoseUnit SI = new AbsorbedDoseUnit()
             .build(new Unit.Builder<AbsorbedDoseUnit>().setBaseUnit(BASE).setId("Gy").setName("gray")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Gray. */
     public static final AbsorbedDoseUnit GRAY = SI;

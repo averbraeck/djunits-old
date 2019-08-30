@@ -2,7 +2,7 @@ package org.djunits4.unit;
 
 import java.util.GregorianCalendar;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.OffsetLinearScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -29,7 +29,7 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "m2" as the SI signature. */
-    public static final BaseUnit<TimeUnit> BASE = new BaseUnit<>("s");
+    public static final UnitBase<TimeUnit> BASE = new UnitBase<>("s");
 
     /**
      * The base unit for time with an artifical "zero" point with a calculation in seconds. Note that when the offset becomes

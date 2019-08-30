@@ -1,7 +1,7 @@
-package org.djunits4.unit;
+package org.djunits4.unit.util;
 
 /**
- * Runtime Exceptions in Unit package.
+ * Exceptions in Unit package.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -10,57 +10,57 @@ package org.djunits4.unit;
  * initial version Jun 18, 2014 <br>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class UnitRuntimeException extends RuntimeException
+public class UnitException extends Exception
 {
 
     /** */
-    private static final long serialVersionUID = 20190821L;
+    private static final long serialVersionUID = 20140618L;
 
     /**
-     * Construct a new UnitRuntimeException with all default values.
+     * Construct a new UnitException with all default values.
      */
-    public UnitRuntimeException()
+    public UnitException()
     {
         super();
     }
 
     /**
-     * Construct a new UnitRuntimeException.
+     * Construct a new UnitException.
      * @param message String; String
      * @param cause Throwable; Throwable
-     * @param enableSuppression boolean;am
+     * @param enableSuppression boolean;
      * @param writableStackTrace boolean; boolean
      */
-    public UnitRuntimeException(final String message, final Throwable cause, final boolean enableSuppression,
+    public UnitException(final String message, final Throwable cause, final boolean enableSuppression,
             final boolean writableStackTrace)
     {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 
     /**
-     * Construct a new UnitRuntimeException with some default values.
+     * Construct a new UnitException with some default values.
      * @param message String; String
      * @param cause Throwable; Throwable
      */
-    public UnitRuntimeException(final String message, final Throwable cause)
+    public UnitException(final String message, final Throwable cause)
     {
         super(message, cause);
     }
 
     /**
-     * Construct a new UnitRuntimeException with some default values.
+     * Construct a new UnitException with some default values.
      * @param message String; String
      */
-    public UnitRuntimeException(final String message)
+    public UnitException(final String message)
     {
         super(message);
     }
 
     /**
-     * Construct a new UnitRuntimeException with some default values.
+     * Construct a new UnitException with some default values.
      * @param cause Throwable; Throwable
      */
-    public UnitRuntimeException(final Throwable cause)
+    public UnitException(final Throwable cause)
     {
         super(cause);
     }

@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.LinearScale;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
@@ -23,12 +23,12 @@ public class MassUnit extends Unit<MassUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kg" as the SI signature. */
-    public static final BaseUnit<MassUnit> BASE = new BaseUnit<>("kg");
+    public static final UnitBase<MassUnit> BASE = new UnitBase<>("kg");
 
     /** The SI unit for mass is kilogram. */
     public static final MassUnit SI =
             new MassUnit().build(new Unit.Builder<MassUnit>().setBaseUnit(BASE).setId("kg").setName("kilogram")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.KILO).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.KILO).setScale(IdentityScale.SCALE));
 
     /** kilogram. */
     public static final MassUnit KILOGRAM = SI;

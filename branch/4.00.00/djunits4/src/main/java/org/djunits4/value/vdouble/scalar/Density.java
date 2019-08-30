@@ -38,6 +38,9 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
     /** constant with value zero. */
     public static final Density ZERO = new Density(0.0, DensityUnit.SI);
 
+    /** constant with value one. */
+    public static final Density ONE = new Density(1.0, DensityUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Density NaN = new Density(Double.NaN, DensityUnit.SI);

@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -21,11 +21,11 @@ public class PowerUnit extends Unit<PowerUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kgm2/s3" as the SI signature. */
-    public static final BaseUnit<PowerUnit> BASE = new BaseUnit<>("kgm2/s3");
+    public static final UnitBase<PowerUnit> BASE = new UnitBase<>("kgm2/s3");
 
     /** The SI unit for power is watt. */
     public static final PowerUnit SI = new PowerUnit().build(new Unit.Builder<PowerUnit>().setBaseUnit(BASE).setId("W")
-            .setName("watt").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+            .setName("watt").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** watt. */
     public static final PowerUnit WATT = SI;

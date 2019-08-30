@@ -15,7 +15,7 @@ import org.djunits4.unit.DirectionUnit;
  * we can now write:
  * 
  * <pre>
- * Direction value = new Direction(100.0, DirectionUnit.DEFAULT);
+ * Direction value = new Direction(100.0, DirectionUnit.BASE);
  * </pre>
  * 
  * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit

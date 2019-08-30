@@ -6,14 +6,14 @@ import java.util.Map;
 
 import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
-import org.djunits4.unit.UnitException;
-import org.djunits4.unit.UnitRuntimeException;
 import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.si.SIPrefix;
 import org.djunits4.unit.si.SIPrefixes;
+import org.djunits4.unit.util.UnitException;
+import org.djunits4.unit.util.UnitRuntimeException;
 
 /**
- * BaseUnit is an extension of Unit that contains a map of all registered units belonging to this base unit. It also contains
+ * UnitBase contains a map of all registered units belonging to this base. It also contains
  * the SI 'fingerprint' of the unit. The fingerprint is registered in the UnitTypes singleton where are unit types are
  * registered.
  * <p>
@@ -23,7 +23,7 @@ import org.djunits4.unit.si.SIPrefixes;
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  * @param <U> the unit to reference the actual unit in return values
  */
-public class BaseUnit<U extends Unit<U>> implements Serializable
+public class UnitBase<U extends Unit<U>> implements Serializable
 {
     /** */
     private static final long serialVersionUID = 20190818L;
@@ -34,21 +34,21 @@ public class BaseUnit<U extends Unit<U>> implements Serializable
      */
     private final SIDimensions siDimensions;
 
-    /** Derived units for this base unit, retrievable by id. The key is the unit id (e.g., "m"). */
+    /** Derived units for this unit base, retrievable by id. The key is the unit id (e.g., "m"). */
     private final Map<String, U> unitsById = new LinkedHashMap<String, U>();
 
-    /** Derived units for this base unit, retrievable by abbreviation. The key is the unit abbreviation (e.g., "kWh"). */
+    /** Derived units for this unit base, retrievable by abbreviation. The key is the unit abbreviation (e.g., "kWh"). */
     private final Map<String, U> unitsByAbbreviation = new LinkedHashMap<String, U>();
 
-    /** The standard unit belonging to this base unit. The first unit that gets registered is considered to be standard. */
+    /** The standard unit belonging to this unit base. The first unit that gets registered is considered to be standard. */
     private U standardUnit = null;
 
     /**
-     * Create a base unit with the SI dimensions.
+     * Create a unit base with the SI dimensions.
      * @param siDimensions the 9 dimensions of the unit, wrapped in an SIDimensions object
      * @throws NullPointerException when one of the arguments is null
      */
-    public BaseUnit(final SIDimensions siDimensions)
+    public UnitBase(final SIDimensions siDimensions)
     {
         Throw.whenNull(siDimensions, "siDimensions cannot be null");
         this.siDimensions = siDimensions;
@@ -56,12 +56,12 @@ public class BaseUnit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * Create a base unit with the SI dimensions as a String.
+     * Create a unit base with the SI dimensions as a String.
      * @param siString the 9 dimensions of the unit, represented as an SI string
      * @throws UnitRuntimeException when the String cannot be translated into an SIDimensions object
      * @throws NullPointerException when one of the arguments is null
      */
-    public BaseUnit(final String siString) throws UnitRuntimeException
+    public UnitBase(final String siString) throws UnitRuntimeException
     {
         Throw.whenNull(siString, "siString cannot be null");
         try
@@ -76,11 +76,11 @@ public class BaseUnit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * Create a base unit with the SI dimensions, provided as a byte array.
+     * Create a unit base with the SI dimensions, provided as a byte array.
      * @param siSignature the 9 dimensions of the unit
      * @throws NullPointerException when one of the arguments is null
      */
-    public BaseUnit(final byte[] siSignature)
+    public UnitBase(final byte[] siSignature)
     {
         Throw.whenNull(siSignature, "siSignature cannot be null");
         this.siDimensions = new SIDimensions(siSignature);
@@ -252,7 +252,7 @@ public class BaseUnit<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * @return U; the standardUnit for this base unit, usually the first registered unit.
+     * @return U; the standardUnit for this unit base, usually the first registered unit.
      */
     public U getStandardUnit()
     {

@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.djunits4.unit.Unit;
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.LinearScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -160,11 +160,12 @@ public class ScalarOperationsTest
         {
             if (method.getName().equals("multiplyBy"))
             {
-                // note: filter out the method that multiplies by a constant...
+                // note: filter out the method that multiplies by a constant or a general scalar...
                 testMultiplyOrDivideMethodAbsRel(scalarClassAbsRel, isAbs, method, true, doubleType);
             }
             else if (method.getName().equals("divideBy"))
             {
+                // note: filter out the method that divides by a constant or a general scalar...
                 testMultiplyOrDivideMethodAbsRel(scalarClassAbsRel, isAbs, method, false, doubleType);
             }
         }
@@ -210,6 +211,11 @@ public class ScalarOperationsTest
             // not interested in multiplying a scalar with a double.
             return;
         }
+        if (parameterClass.getSimpleName().startsWith("Abstract"))
+        {
+            // not interested in multiplying a scalar with a generic scalar.
+            return;
+        }
         if (!relativeOrAbsoluteClass.isAssignableFrom(parameterClass))
         {
             System.out.println("abs=" + abs + ", method=" + scalarClass.getName() + "." + method.getName() + " param="
@@ -253,14 +259,14 @@ public class ScalarOperationsTest
             {
                 Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
-                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).si;
+                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
                 Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
-                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).si;
+                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
         }
@@ -281,14 +287,14 @@ public class ScalarOperationsTest
                 {
                     Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
                     Object result = multiplyMethod.invoke(left, right);
-                    double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).si;
+                    double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 else
                 {
                     Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
                     Object result = divideMethod.invoke(left, right);
-                    double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).si;
+                    double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 AbstractDoubleScalarRel<?, ?> result =
@@ -312,14 +318,14 @@ public class ScalarOperationsTest
                 {
                     Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
                     Object result = multiplyMethod.invoke(left, right);
-                    double resultSI = ((AbstractFloatScalarRel<?, ?>) result).si;
+                    double resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 else
                 {
                     Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
                     Object result = divideMethod.invoke(left, right);
-                    float resultSI = ((AbstractFloatScalarRel<?, ?>) result).si;
+                    float resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 AbstractFloatScalarRel<?, ?> result =
@@ -634,7 +640,7 @@ public class ScalarOperationsTest
             builder.setName("7fullName");
             builder.setUnitSystem(unitSystem);
             builder.setScale(new LinearScale(7));
-            builder.setBaseUnit((BaseUnit) getSIUnitInstance(unitClass, false).getBaseUnit());
+            builder.setBaseUnit((UnitBase) getSIUnitInstance(unitClass, false).getBaseUnit());
             builder.setSiPrefixes(SIPrefixes.NONE);
             buildMethod.setAccessible(true);
             buildMethod.invoke(newUnit, builder);

@@ -199,7 +199,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      */
     public final MA incrementBy(final S increment)
     {
-        return incrementBy(increment.si);
+        return incrementBy(increment.getSI());
     }
 
     /**
@@ -236,7 +236,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      */
     public final MA decrementBy(final S decrement)
     {
-        return decrementBy(decrement.si);
+        return decrementBy(decrement.getSI());
     }
 
     /**

@@ -62,6 +62,9 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
     /** constant with value zero. */
     public static final Dimensionless ZERO = new Dimensionless(0.0, DimensionlessUnit.SI);
 
+    /** constant with value one. */
+    public static final Dimensionless ONE = new Dimensionless(1.0, DimensionlessUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Dimensionless NaN = new Dimensionless(Double.NaN, DimensionlessUnit.SI);

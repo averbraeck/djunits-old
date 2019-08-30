@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.djunits4.unit.UnitException;
+import org.djunits4.unit.util.UnitException;
 import org.junit.Test;
 
 /**
@@ -25,15 +25,15 @@ public class ScaleTest
     @Test
     public void testScale() throws UnitException
     {
-        IdentityScale sscale = new IdentityScale();
+        IdentityScale sscale = IdentityScale.SCALE;
         assertEquals(1.0, sscale.getConversionFactorToStandardUnit(), 0.0001);
         assertEquals(1.0, sscale.toStandardUnit(1.0), 0.0001);
         assertEquals(1.0, sscale.fromStandardUnit(1.0), 0.0001);
         assertEquals(2.5, sscale.toStandardUnit(2.5), 0.0001);
         assertEquals("StandardScale []", sscale.toString());
 
-        IdentityScale s1 = new IdentityScale();
-        IdentityScale s2 = new IdentityScale();
+        IdentityScale s1 = IdentityScale.SCALE;
+        IdentityScale s2 = IdentityScale.SCALE;
         assertEquals(s1, s1);
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());

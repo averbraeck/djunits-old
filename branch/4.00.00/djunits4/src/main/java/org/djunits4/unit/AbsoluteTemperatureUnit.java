@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.OffsetLinearScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -19,7 +19,7 @@ public class AbsoluteTemperatureUnit extends AbsoluteLinearUnit<AbsoluteTemperat
     private static final long serialVersionUID = 20140605L;
 
     /** The base, with "K" as the SI signature. */
-    public static final BaseUnit<AbsoluteTemperatureUnit> BASE = new BaseUnit<>("K");
+    public static final UnitBase<AbsoluteTemperatureUnit> BASE = new UnitBase<>("K");
 
     /** The default unit for temperature is Kelvin. */
     public static final AbsoluteTemperatureUnit KELVIN = new AbsoluteTemperatureUnit()

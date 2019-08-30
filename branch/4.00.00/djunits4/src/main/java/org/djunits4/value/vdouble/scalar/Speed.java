@@ -44,6 +44,9 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
     /** constant with value zero. */
     public static final Speed ZERO = new Speed(0.0, SpeedUnit.SI);
 
+    /** constant with value one. */
+    public static final Speed ONE = new Speed(1.0, SpeedUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Speed NaN = new Speed(Double.NaN, SpeedUnit.SI);

@@ -77,7 +77,7 @@ public class DoubleScalarTest
                 new DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit);
         checkContentsAndType(mds, value, 0.001, tempUnit, true);
         mds = new DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(-200, tempUnit);
-        assertEquals("-200 Celsius roughly equivalent to 73 Kelvin", 73.0d, mds.si, 1.0d);
+        assertEquals("-200 Celsius roughly equivalent to 73 Kelvin", 73.0d, mds.getSI(), 1.0d);
         mds = new DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(temperatureDS);
         checkContentsAndType(mds, value, 0.001, tempUnit, true);
         DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperature2DS =
@@ -168,7 +168,7 @@ public class DoubleScalarTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double input = seedValue;
@@ -356,7 +356,7 @@ public class DoubleScalarTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double input = seedValue;
@@ -449,7 +449,7 @@ public class DoubleScalarTest
         double rightValue = 234.5;
         DoubleScalar.Rel<LengthUnit> left = new DoubleScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         DoubleScalar.Rel<LengthUnit> right = new DoubleScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        DoubleScalar.Rel<?> result = DoubleScalar.multiply(left, right);
+        SIScalar result = DoubleScalar.multiply(left, right);
         assertEquals("value of element should be SI multiply of contributing elements", left.getSI() * right.getSI(),
                 result.getSI(), 0.001);
     }
@@ -464,7 +464,7 @@ public class DoubleScalarTest
         double rightValue = 234.5;
         DoubleScalar.Rel<LengthUnit> left = new DoubleScalar.Rel<LengthUnit>(leftValue, LengthUnit.MILE);
         DoubleScalar.Rel<LengthUnit> right = new DoubleScalar.Rel<LengthUnit>(rightValue, LengthUnit.MILE);
-        DoubleScalar.Rel<?> result = DoubleScalar.divide(left, right);
+        SIScalar result = DoubleScalar.divide(left, right);
         assertEquals("value of element should be SI divide of contributing elements", left.getSI() / right.getSI(),
                 result.getSI(), 0.001);
     }

@@ -40,6 +40,9 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
     /** constant with value zero. */
     public static final FloatFlowMass ZERO = new FloatFlowMass(0.0f, FlowMassUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatFlowMass ONE = new FloatFlowMass(1.0f, FlowMassUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatFlowMass NaN = new FloatFlowMass(Float.NaN, FlowMassUnit.SI);

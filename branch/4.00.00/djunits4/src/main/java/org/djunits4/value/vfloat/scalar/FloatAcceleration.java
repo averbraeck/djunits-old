@@ -40,6 +40,9 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
     /** constant with value zero. */
     public static final FloatAcceleration ZERO = new FloatAcceleration(0.0f, AccelerationUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatAcceleration ONE = new FloatAcceleration(1.0f, AccelerationUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatAcceleration NaN = new FloatAcceleration(Float.NaN, AccelerationUnit.SI);

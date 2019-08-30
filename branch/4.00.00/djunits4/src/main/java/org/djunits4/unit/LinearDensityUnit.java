@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -21,12 +21,12 @@ public class LinearDensityUnit extends Unit<LinearDensityUnit>
     private static final long serialVersionUID = 20141111L;
 
     /** The base, with "/m" as the SI signature. */
-    public static final BaseUnit<LinearDensityUnit> BASE = new BaseUnit<>("m-1");
+    public static final UnitBase<LinearDensityUnit> BASE = new UnitBase<>("m-1");
 
     /** The SI unit for objects per unit of distance is 1/meter. */
     public static final LinearDensityUnit SI = new LinearDensityUnit()
             .build(new Unit.Builder<LinearDensityUnit>().setBaseUnit(BASE).setId("/m").setName("per meter")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** 1/meter. */
     public static final LinearDensityUnit PER_METER = SI;

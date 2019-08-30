@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.LinearScale;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
@@ -22,12 +22,12 @@ public class EnergyUnit extends Unit<EnergyUnit>
     private static final long serialVersionUID = 20140604L;
 
     /** The base, with "kgm2/s2" as the SI signature. */
-    public static final BaseUnit<EnergyUnit> BASE = new BaseUnit<>("kgm2/s2");
+    public static final UnitBase<EnergyUnit> BASE = new UnitBase<>("kgm2/s2");
 
     /** The SI unit for energy is Joule (J) = kgm2/s2. */
     public static final EnergyUnit SI =
             new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setBaseUnit(BASE).setId("J").setName("joule")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Joule. */
     public static final EnergyUnit JOULE = SI;

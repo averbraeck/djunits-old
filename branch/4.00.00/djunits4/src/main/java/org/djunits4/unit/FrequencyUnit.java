@@ -1,6 +1,6 @@
 package org.djunits4.unit;
 
-import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -21,12 +21,12 @@ public class FrequencyUnit extends Unit<FrequencyUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The SI unit for frequency is Hertz or 1/s. */
-    public static final BaseUnit<FrequencyUnit> BASE = new BaseUnit<>("/s");
+    public static final UnitBase<FrequencyUnit> BASE = new UnitBase<>("/s");
 
     /** The SI unit for frequency is Hertz. */
     public static final FrequencyUnit SI =
             new FrequencyUnit().build(new Unit.Builder<FrequencyUnit>().setBaseUnit(BASE).setId("Hz").setName("hertz")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Hertz. */
     public static final FrequencyUnit HERTZ = SI;
