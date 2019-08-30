@@ -1,0 +1,54 @@
+package org.djunits4.unit;
+
+import org.djunits4.unit.base.BaseUnit;
+import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.si.SIPrefixes;
+import org.djunits4.unit.unitsystem.UnitSystem;
+
+/**
+ * The units of electrical potential (voltage).
+ * <p>
+ * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
+ * <p>
+ * $LastChangedDate: 2019-03-02 19:06:46 +0100 (Sat, 02 Mar 2019) $, @version $Revision: 342 $, by $Author: averbraeck $,
+ * initial version May 15, 2014 <br>
+ * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ */
+public class ElectricalPotentialUnit extends Unit<ElectricalPotentialUnit>
+{
+    /** */
+    private static final long serialVersionUID = 20140607L;
+
+    /** the base, with "kgm2/s3A" as the SI signature. */
+    public static final BaseUnit<ElectricalPotentialUnit> BASE = new BaseUnit<>("kgm2/s3A");
+
+    /** The SI unit for electrical potential is Volt. */
+    public static final ElectricalPotentialUnit SI = new ElectricalPotentialUnit()
+            .build(new Unit.Builder<ElectricalPotentialUnit>().setBaseUnit(BASE).setId("V").setName("volt")
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new StandardScale()));
+
+    /** Volt. */
+    public static final ElectricalPotentialUnit VOLT = SI;
+
+    /** microvolt. */
+    public static final ElectricalPotentialUnit MICROVOLT = VOLT.deriveSI(SIPrefixes.getUnit("mu"));
+
+    /** millivolt. */
+    public static final ElectricalPotentialUnit MILLIVOLT = VOLT.deriveSI(SIPrefixes.getUnit("m"));
+
+    /** kilovolt. */
+    public static final ElectricalPotentialUnit KILOVOLT = VOLT.deriveSI(SIPrefixes.getUnit("k"));
+
+    /** megavolt. */
+    public static final ElectricalPotentialUnit MEGAVOLT = VOLT.deriveSI(SIPrefixes.getUnit("M"));
+
+    /** gigavolt. */
+    public static final ElectricalPotentialUnit GIGAVOLT = VOLT.deriveSI(SIPrefixes.getUnit("G"));
+
+    /** statvolt. */
+    public static final ElectricalPotentialUnit STATVOLT = VOLT.deriveLinear(299.792458, "stV", "statvolt", UnitSystem.CGS_ESU);
+
+    /** abvolt. */
+    public static final ElectricalPotentialUnit ABVOLT = VOLT.deriveLinear(1.0E-8, "abV", "abvolt", UnitSystem.CGS_EMU);
+}
