@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.djunits</groupId>
-  <artifactId>djunits</artifactId>
+  <artifactId>djunits4</artifactId>
   <version>4.00.00</version>
 
   <name>DJUNITS-4</name>
