@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -20,13 +20,13 @@ public class TemperatureUnit extends Unit<TemperatureUnit>
     /** */
     private static final long serialVersionUID = 20140605L;
 
-    /** the base, with "m2" as the SI signature. */
+    /** The base, with "m2" as the SI signature. */
     public static final BaseUnit<TemperatureUnit> BASE = new BaseUnit<>("K");
 
     /** The SI unit for temperature is Kelvin. */
     public static final TemperatureUnit SI =
             new TemperatureUnit().build(new Unit.Builder<TemperatureUnit>().setBaseUnit(BASE).setId("K").setName("Kelvin")
-                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
 
     /** Kelvin. */
     public static final TemperatureUnit KELVIN = SI;
@@ -46,4 +46,5 @@ public class TemperatureUnit extends Unit<TemperatureUnit>
     /** Degree Reaumur. */
     public static final TemperatureUnit DEGREE_REAUMUR = KELVIN.deriveLinear(4.0 / 5.0, "dgRe", "degree Reaumur",
             UnitSystem.SI_DERIVED, "\u00B0R\u00E9", "degRe", new String[] {"Re", "R\u00E9"});
+    
 }

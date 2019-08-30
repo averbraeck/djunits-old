@@ -9,18 +9,18 @@ package org.djunits4.unit.scale;
  * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class StandardScale extends LinearScale
+public class IdentityScale extends LinearScale
 {
     /** */
     private static final long serialVersionUID = 20151011L;
     
-    /** a ready-to-use instance of the standard scale (they are all the same...). */
-    public static final StandardScale SCALE = new StandardScale();
+    /** A ready-to-use instance of the standard scale (they are all the same...). */
+    public static final IdentityScale IDENTIY_SCALE = new IdentityScale();
 
     /**
      * Construct a standard Scale without a transformation.
      */
-    public StandardScale()
+    public IdentityScale()
     {
         super(1.0);
     }
@@ -45,4 +45,5 @@ public class StandardScale extends LinearScale
     {
         return "StandardScale []";
     }
+    
 }

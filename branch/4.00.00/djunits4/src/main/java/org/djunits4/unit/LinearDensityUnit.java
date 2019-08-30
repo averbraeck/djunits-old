@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -20,13 +20,13 @@ public class LinearDensityUnit extends Unit<LinearDensityUnit>
     /** */
     private static final long serialVersionUID = 20141111L;
 
-    /** the base, with "/m" as the SI signature. */
+    /** The base, with "/m" as the SI signature. */
     public static final BaseUnit<LinearDensityUnit> BASE = new BaseUnit<>("m-1");
 
     /** The SI unit for objects per unit of distance is 1/meter. */
     public static final LinearDensityUnit SI = new LinearDensityUnit()
             .build(new Unit.Builder<LinearDensityUnit>().setBaseUnit(BASE).setId("/m").setName("per meter")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
 
     /** 1/meter. */
     public static final LinearDensityUnit PER_METER = SI;
@@ -86,4 +86,5 @@ public class LinearDensityUnit extends Unit<LinearDensityUnit>
     /** 1/Angstrom. */
     public static final LinearDensityUnit PER_ANGSTROM =
             PER_METER.deriveLinear(1.0E-10, "/A", "per Angstrom", UnitSystem.OTHER, "/\u212B", "/A");
+    
 }

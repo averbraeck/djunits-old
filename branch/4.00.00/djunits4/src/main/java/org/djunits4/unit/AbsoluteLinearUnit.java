@@ -9,7 +9,7 @@ import org.djunits4.unit.unitsystem.UnitSystem;
 
 /**
  * The AbsoluteUnit class indicates that a unit is absolute and has a "zero" point. The relative base unit will be set correctly
- * for each derived unit, as this is one of the fields that will be cloned.
+ * for each derived unit, as this is one of the fields that will be cloned to create a derived unit.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -23,10 +23,10 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     /** */
     private static final long serialVersionUID = 20190826L;
 
-    /** the relative unit belonging to this unit. */
+    /** The relative unit belonging to this unit. */
     private BaseUnit<RU> relativeBaseUnit;
 
-    /** the corresponding relative unit with the same unit scale factor. */
+    /** The corresponding relative unit with the same unit scale factor. */
     private RU relativeUnit;
 
     /**
@@ -70,16 +70,17 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
      * and therefore <code>valueSI =
      * ((value2 + o2) * f2 + o1) * f1</code>, which can also be written as
      * <code>value2 * f1 * f2 + f1 * f2 * o2 + f1 * o1</code>.
-     * @param scaleFactor the linear scale factor of the unit
-     * @param offset the offset to use for the scale
-     * @param derivedRelativeUnit the corresponding relative unit with the same scale factor
+     * @param scaleFactor double; the linear scale factor of the unit
+     * @param offset double; the offset to use for the scale
+     * @param derivedRelativeUnit RU; the corresponding relative unit with the same scale factor
      * @param derivedId String; the new id of the derived unit
      * @param derivedName String; the new name of the derived unit
-     * @param derivedUnitSystem the unit system of the derived unit
-     * @param derivedDefaultDisplayAbbreviation the default abbreviation to use in e.g, the toString() method. Can be null.
-     * @param derivedDefaultTextualAbbreviation the default textual abbreviation to use in, e.g, typing. Can be null.
-     * @param derivedAbbreviations the other valid abbreviations for the unit, e.g. {"h", "hr", "hour"}. Can be null.
-     * @return a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
+     * @param derivedUnitSystem UnitSystem; the unit system of the derived unit
+     * @param derivedDefaultDisplayAbbreviation String; the default abbreviation to use in e.g, the toString() method. Can be
+     *            null.
+     * @param derivedDefaultTextualAbbreviation String; the default textual abbreviation to use in, e.g, typing. Can be null.
+     * @param derivedAbbreviations String... any other valid abbreviations for the unit, e.g. {"h", "hr", "hour"}. Can be empty.
+     * @return AU; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
     protected AU deriveLinearOffset(final double scaleFactor, final double offset, final RU derivedRelativeUnit,
@@ -128,13 +129,13 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     /**
      * Create a linearly scaled version of this unit with an offset. The scale field will be filled with the correct
      * scaleFactor. Note that the unit that is used for derivation can already have a scaleFactor.
-     * @param scaleFactor the linear scale factor of the unit
-     * @param offset the offset to use for the scale
-     * @param derivedRelativeUnit the corresponding relative unit with the same scale factor
+     * @param scaleFactor double; the linear scale factor of the unit
+     * @param offset double; the offset to use for the scale
+     * @param derivedRelativeUnit RU; the corresponding relative unit with the same scale factor
      * @param derivedId String; the new id of the derived unit
      * @param derivedName String; the new name of the derived unit
-     * @param derivedUnitSystem the unit system of the derived unit
-     * @return a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
+     * @param derivedUnitSystem UnitSystem; the unit system of the derived unit
+     * @return AU; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
     protected AU deriveLinearOffset(final double scaleFactor, final double offset, final RU derivedRelativeUnit,
@@ -147,12 +148,12 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     /**
      * Create a linearly scaled version of this unit with an offset. The unitSystem will be copied. The scale field will be
      * filled with the correct scaleFactor. Note that the unit that is used for derivation can already have a scaleFactor.
-     * @param scaleFactor the linear scale factor of the unit
-     * @param offset the offset to use for the scale
-     * @param derivedRelativeUnit the corresponding relative unit with the same scale factor
+     * @param scaleFactor double; the linear scale factor of the unit
+     * @param offset double; the offset to use for the scale
+     * @param derivedRelativeUnit RU; the corresponding relative unit with the same scale factor
      * @param derivedId String; the new id of the derived unit
      * @param derivedName String; the new name of the derived unit
-     * @return a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
+     * @return AU; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
     protected AU deriveLinearOffset(final double scaleFactor, final double offset, final RU derivedRelativeUnit,
@@ -191,7 +192,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
      */
     public static class Builder<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>> extends Unit.Builder<AU>
     {
-        /** the relative unit belonging to this unit. */
+        /** The relative unit belonging to this unit. */
         private RU relativeUnit;
 
         /** {@inheritDoc} */
@@ -212,7 +213,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
         }
 
         /**
-         * Return the corresponding relative unit that has the same conversion factor.
+         * Retrieve the corresponding relative unit that has the same conversion factor.
          * @return Unit&lt;?&gt;; the the corresponding relative unit with the same conversion factor
          */
         public RU getRelativeUnit()
@@ -223,7 +224,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
         /**
          * Sets the corresponding relative unit that has the same conversion factor.
          * @param relativeUnit Unit&lt;?&gt;; the the corresponding relative unit with the same conversion factor
-         * @return the builder for chaining
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<AU, RU> setRelativeUnit(final RU relativeUnit)
         {
@@ -232,7 +233,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
             return this;
         }
 
-        // other setters overridden to make them return this builder rather than the Unit.Builder.
+        // Other setters overridden to make them return this builder rather than the Unit.Builder.
 
         /** {@inheritDoc} */
         @Override
@@ -305,5 +306,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
             super.setBaseUnit(baseUnit);
             return this;
         }
+        
     }
+    
 }

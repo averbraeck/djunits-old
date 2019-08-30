@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -18,17 +18,19 @@ public class DensityUnit extends Unit<DensityUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "kg/m3" as the SI signature. */
+    /** The base, with "kg/m3" as the SI signature. */
     public static final BaseUnit<DensityUnit> BASE = new BaseUnit<>("kg/m3");
 
     /** The SI unit for standard density is kg/m^3. */
-    public static final DensityUnit SI =
-            new DensityUnit().build(new Unit.Builder<DensityUnit>().setBaseUnit(BASE).setId("kg/m^3").setName("kilogram per cubic meter")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new StandardScale()));
+    public static final DensityUnit SI = new DensityUnit()
+            .build(new Unit.Builder<DensityUnit>().setBaseUnit(BASE).setId("kg/m^3").setName("kilogram per cubic meter")
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new IdentityScale()));
 
     /** kg/m^3. */
     public static final DensityUnit KG_PER_METER_3 = SI;
 
     /** g/cm^3. */
-    public static final DensityUnit GRAM_PER_CENTIMETER_3 = KG_PER_METER_3.deriveLinear(1.0E3, "g/cm^3", "gram per cubic centimeter");
+    public static final DensityUnit GRAM_PER_CENTIMETER_3 =
+            KG_PER_METER_3.deriveLinear(1.0E3, "g/cm^3", "gram per cubic centimeter");
+
 }

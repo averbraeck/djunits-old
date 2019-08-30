@@ -17,7 +17,7 @@ public class UnitException extends Exception
     private static final long serialVersionUID = 20140618L;
 
     /**
-     * 
+     * Construct a new UnitException with all default values.
      */
     public UnitException()
     {
@@ -25,9 +25,10 @@ public class UnitException extends Exception
     }
 
     /**
+     * Construct a new UnitException.
      * @param message String; String
      * @param cause Throwable; Throwable
-     * @param enableSuppression boolean;am
+     * @param enableSuppression boolean;
      * @param writableStackTrace boolean; boolean
      */
     public UnitException(final String message, final Throwable cause, final boolean enableSuppression,
@@ -37,6 +38,7 @@ public class UnitException extends Exception
     }
 
     /**
+     * Construct a new UnitException with some default values.
      * @param message String; String
      * @param cause Throwable; Throwable
      */
@@ -46,6 +48,7 @@ public class UnitException extends Exception
     }
 
     /**
+     * Construct a new UnitException with some default values.
      * @param message String; String
      */
     public UnitException(final String message)
@@ -54,6 +57,7 @@ public class UnitException extends Exception
     }
 
     /**
+     * Construct a new UnitException with some default values.
      * @param cause Throwable; Throwable
      */
     public UnitException(final Throwable cause)

@@ -1,5 +1,5 @@
 /**
- * Units for version 4 of DJUNITS -- experimental package. <br>
+ * Units for version 4 of DJUNITS. <br>
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.

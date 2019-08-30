@@ -17,7 +17,7 @@ public class UnitRuntimeException extends RuntimeException
     private static final long serialVersionUID = 20190821L;
 
     /**
-     * 
+     * Construct a new UnitRuntimeException with all default values.
      */
     public UnitRuntimeException()
     {
@@ -25,6 +25,7 @@ public class UnitRuntimeException extends RuntimeException
     }
 
     /**
+     * Construct a new UnitRuntimeException.
      * @param message String; String
      * @param cause Throwable; Throwable
      * @param enableSuppression boolean;am
@@ -37,6 +38,7 @@ public class UnitRuntimeException extends RuntimeException
     }
 
     /**
+     * Construct a new UnitRuntimeException with some default values.
      * @param message String; String
      * @param cause Throwable; Throwable
      */
@@ -46,6 +48,7 @@ public class UnitRuntimeException extends RuntimeException
     }
 
     /**
+     * Construct a new UnitRuntimeException with some default values.
      * @param message String; String
      */
     public UnitRuntimeException(final String message)
@@ -54,6 +57,7 @@ public class UnitRuntimeException extends RuntimeException
     }
 
     /**
+     * Construct a new UnitRuntimeException with some default values.
      * @param cause Throwable; Throwable
      */
     public UnitRuntimeException(final Throwable cause)

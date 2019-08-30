@@ -21,7 +21,7 @@ public class DirectionUnit extends AbsoluteLinearUnit<DirectionUnit, AngleUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "rad" as the SI signature. */
+    /** The base, with "rad" as the SI signature. */
     public static final BaseUnit<DirectionUnit> BASE = new BaseUnit<>("rad");
 
     /** The unit for direction with East as the origin and radians as the displacement. */

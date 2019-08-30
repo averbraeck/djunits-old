@@ -20,7 +20,7 @@ public class PositionUnit extends AbsoluteLinearUnit<PositionUnit, LengthUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "m" as the SI signature. */
+    /** The base, with "m" as the SI signature. */
     public static final BaseUnit<PositionUnit> BASE = new BaseUnit<>("m");
 
     /** The SI unit for position is meter. */

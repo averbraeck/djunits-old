@@ -28,7 +28,7 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "m2" as the SI signature. */
+    /** The base, with "m2" as the SI signature. */
     public static final BaseUnit<TimeUnit> BASE = new BaseUnit<>("s");
 
     /**
@@ -113,7 +113,7 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
      * 1-1-2020 has a value of around 6.4E13 ms. If we want to be precise on the ms level, we need 13 significant digits. A
      * float has around 7 significant digits (23 bit mantissa), whereas a double has around 16 significant digits (52 bit
      * mantissa). This means that a float time with an offset of 1-1-0001 is at best precise to an hour level. A double time is
-     * precise to microseconds. Therefore, avoid using float times that use the EPOCH_YEAR_1.
+     * precise to microseconds. Therefore, avoid using float times that use the EPOCH_YEAR1_SECOND.
      */
     public static final TimeUnit EPOCH_YEAR1_SECOND =
             EPOCH_SECOND.deriveLinearOffset(1.0, new GregorianCalendar(1, 0, 1, 0, 0, 0).getTimeInMillis() / 1000.0,
@@ -125,9 +125,10 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
      * the ms level, we need 11 significant digits. A float has around 7 significant digits (23 bit mantissa), whereas a double
      * has around 16 significant digits (52 bit mantissa). This means that a float time with an offset of 1-1-2000 is at best
      * precise to a minute level. A double time is precise to fractions of microseconds. Therefore, avoid using float times that
-     * use the EPOCH_J2000_1.
+     * use the EPOCH_J2000_SECOND.
      */
     public static final TimeUnit EPOCH_J2000_SECOND =
             EPOCH_SECOND.deriveLinearOffset(1.0, new GregorianCalendar(2000, 0, 1, 12, 0, 0).getTimeInMillis() / 1000.0,
                     DurationUnit.SECOND, "s(Y2000)", "seconds since 1-1-2000 12:00 GMT");
+    
 }

@@ -25,15 +25,15 @@ public class ScaleTest
     @Test
     public void testScale() throws UnitException
     {
-        StandardScale sscale = new StandardScale();
+        IdentityScale sscale = new IdentityScale();
         assertEquals(1.0, sscale.getConversionFactorToStandardUnit(), 0.0001);
         assertEquals(1.0, sscale.toStandardUnit(1.0), 0.0001);
         assertEquals(1.0, sscale.fromStandardUnit(1.0), 0.0001);
         assertEquals(2.5, sscale.toStandardUnit(2.5), 0.0001);
         assertEquals("StandardScale []", sscale.toString());
 
-        StandardScale s1 = new StandardScale();
-        StandardScale s2 = new StandardScale();
+        IdentityScale s1 = new IdentityScale();
+        IdentityScale s2 = new IdentityScale();
         assertEquals(s1, s1);
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());

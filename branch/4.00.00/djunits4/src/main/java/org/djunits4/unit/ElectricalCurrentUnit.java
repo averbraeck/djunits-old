@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -20,13 +20,13 @@ public class ElectricalCurrentUnit extends Unit<ElectricalCurrentUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "A" as the SI signature. */
+    /** The base, with "A" as the SI signature. */
     public static final BaseUnit<ElectricalCurrentUnit> BASE = new BaseUnit<>("A");
 
     /** The SI unit for electrical current is Ampere. */
     public static final ElectricalCurrentUnit SI = new ElectricalCurrentUnit()
             .build(new Unit.Builder<ElectricalCurrentUnit>().setBaseUnit(BASE).setId("A").setName("ampere")
-                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
 
     /** Ampere. */
     public static final ElectricalCurrentUnit AMPERE = SI;
@@ -48,4 +48,5 @@ public class ElectricalCurrentUnit extends Unit<ElectricalCurrentUnit>
 
     /** abampere (GCS EMU). */
     public static final ElectricalCurrentUnit ABAMPERE = AMPERE.deriveLinear(10.0, "abA", "abampere", UnitSystem.CGS_EMU);
+    
 }

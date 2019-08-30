@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -26,7 +26,7 @@ public class FrequencyUnit extends Unit<FrequencyUnit>
     /** The SI unit for frequency is Hertz. */
     public static final FrequencyUnit SI =
             new FrequencyUnit().build(new Unit.Builder<FrequencyUnit>().setBaseUnit(BASE).setId("Hz").setName("hertz")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
 
     /** Hertz. */
     public static final FrequencyUnit HERTZ = SI;
@@ -70,4 +70,5 @@ public class FrequencyUnit extends Unit<FrequencyUnit>
 
     /** 1/week. */
     public static final FrequencyUnit PER_WEEK = PER_DAY.deriveLinear(1.0 / 7.0, "1/wk", "per week", UnitSystem.OTHER);
+    
 }

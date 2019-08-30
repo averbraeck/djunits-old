@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -19,13 +19,13 @@ public class AccelerationUnit extends Unit<AccelerationUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "m/s2" as the SI signature. */
+    /** The base, with "m/s2" as the SI signature. */
     public static final BaseUnit<AccelerationUnit> BASE = new BaseUnit<>("m/s2");
 
     /** The SI unit for acceleration is m/s^2. */
     public static final AccelerationUnit SI = new AccelerationUnit()
             .build(new Unit.Builder<AccelerationUnit>().setBaseUnit(BASE).setId("m/s2").setName("meter per second squared")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new IdentityScale()));
 
     /** m/s2. */
     public static final AccelerationUnit METER_PER_SECOND_2 = SI;
@@ -57,16 +57,17 @@ public class AccelerationUnit extends Unit<AccelerationUnit>
     public static final AccelerationUnit MILE_PER_HOUR_PER_SECOND =
             SI.deriveLinear(factorSD("mi/h", "s"), "mi/h/s", "mile per hour per second");
 
-    /** standard gravity. */
+    /** The standard gravity. */
     public static final AccelerationUnit STANDARD_GRAVITY = SI.deriveLinear(9.80665, "g", "standard gravity", UnitSystem.OTHER);
 
     /** cm/s. */
     public static final AccelerationUnit GAL = SI.deriveLinear(factorLD("cm", "s"), "Gal", "gal", UnitSystem.CGS);
 
     /**
-     * @param length the used length unit, e.g. km
-     * @param duration the used duration unit, e.g. h
-     * @return the conversion factor from the provided units (e.g. km/h2) to the standard unit (e.g., m/s2)
+     * Determine the conversion factor to the base acceleration unit, given a length unit and a duration unit.
+     * @param length String; a length unit, e.g. km
+     * @param duration String; a duration unit, e.g. h
+     * @return double; the conversion factor from the provided units (e.g. km/h2) to the standard unit (m/s2)
      */
     private static double factorLD(final String length, final String duration)
     {
@@ -76,13 +77,15 @@ public class AccelerationUnit extends Unit<AccelerationUnit>
     }
 
     /**
-     * @param speed the used speed unit, e.g. km/h
-     * @param duration the used duration unit, e.g. s
-     * @return the conversion factor from the provided units (e.g. km/h/s) to the standard unit (e.g., m/s2)
+     * Determine the conversion factor to the base acceleration unit, given a speed unit and a duration unit.
+     * @param speed String; a speed unit, e.g. km/h
+     * @param duration String; a duration unit, e.g. s
+     * @return the conversion factor from the provided units (e.g. km/h/s) to the standard unit (m/s2)
      */
     private static double factorSD(final String speed, final String duration)
     {
         return SpeedUnit.BASE.of(speed).getScale().toStandardUnit(1.0)
                 / DurationUnit.BASE.of(duration).getScale().toStandardUnit(1.0);
     }
+    
 }

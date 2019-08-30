@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -19,12 +19,12 @@ public class LengthUnit extends Unit<LengthUnit>
     /** */
     private static final long serialVersionUID = 20190818L;
 
-    /** the base, with "m" as the SI signature. */
+    /** The base, with "m" as the SI signature. */
     public static final BaseUnit<LengthUnit> BASE = new BaseUnit<>("m");
 
     /** The SI unit for length is meter. */
     public static final LengthUnit SI = new LengthUnit().build(new Unit.Builder<LengthUnit>().setBaseUnit(BASE).setId("m")
-            .setName("meter").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(new StandardScale()));
+            .setName("meter").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
 
     /** meter. */
     public final static LengthUnit METER = SI;
@@ -80,4 +80,5 @@ public class LengthUnit extends Unit<LengthUnit>
 
     /** Angstrom = 10^-10 m. */
     public static final LengthUnit ANGSTROM = METER.deriveLinear(1.0E-10, "A", "Angstrom", UnitSystem.OTHER, "\u212B", "A");
+    
 }

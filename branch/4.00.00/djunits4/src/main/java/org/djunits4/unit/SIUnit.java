@@ -5,7 +5,7 @@ import java.util.Set;
 import org.djunits4.Throw;
 import org.djunits4.unit.base.BaseUnit;
 import org.djunits4.unit.base.UnitTypes;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -52,7 +52,7 @@ public class SIUnit extends Unit<SIUnit>
             builder.setId(siDimensions.toString());
             builder.setName(siDimensions.toString());
             builder.setBaseUnit(baseUnit);
-            builder.setScale(new StandardScale());
+            builder.setScale(new IdentityScale());
             builder.setGenerated(true);
             builder.setUnitSystem(UnitSystem.SI_DERIVED);
             builder.setSiPrefixes(SIPrefixes.NONE);
@@ -66,4 +66,5 @@ public class SIUnit extends Unit<SIUnit>
 
         return unit;
     }
+    
 }

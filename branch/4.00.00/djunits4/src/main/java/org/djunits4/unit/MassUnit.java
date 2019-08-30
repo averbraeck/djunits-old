@@ -2,7 +2,7 @@ package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
 import org.djunits4.unit.scale.LinearScale;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -22,13 +22,13 @@ public class MassUnit extends Unit<MassUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "kg" as the SI signature. */
+    /** The base, with "kg" as the SI signature. */
     public static final BaseUnit<MassUnit> BASE = new BaseUnit<>("kg");
 
     /** The SI unit for mass is kilogram. */
     public static final MassUnit SI =
             new MassUnit().build(new Unit.Builder<MassUnit>().setBaseUnit(BASE).setId("kg").setName("kilogram")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.KILO).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.KILO).setScale(new IdentityScale()));
 
     /** kilogram. */
     public static final MassUnit KILOGRAM = SI;
@@ -82,4 +82,5 @@ public class MassUnit extends Unit<MassUnit>
 
     /** gigaelectronvolt. */
     public static final MassUnit GIGAELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("G"));
+    
 }

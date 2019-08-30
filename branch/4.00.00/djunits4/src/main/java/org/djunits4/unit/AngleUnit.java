@@ -2,7 +2,7 @@ package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
 import org.djunits4.unit.scale.GradeScale;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -22,13 +22,13 @@ public class AngleUnit extends Unit<AngleUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "rad" as the SI signature. */
+    /** The base, with "rad" as the SI signature. */
     public static final BaseUnit<AngleUnit> BASE = new BaseUnit<>("rad");
 
     /** The SI unit for angle is radian. */
     public static final AngleUnit SI =
             new AngleUnit().build(new Unit.Builder<AngleUnit>().setBaseUnit(BASE).setId("rad").setName("radians")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new IdentityScale()));
 
     /** radian. */
     public static final AngleUnit RADIAN = SI;
@@ -57,4 +57,5 @@ public class AngleUnit extends Unit<AngleUnit>
 
     /** centesimal arcsecond. */
     public static final AngleUnit CENTESIMAL_ARCSECOND = GRAD.deriveLinear(1.0 / 10000.0, "c\"", "centesimal arcsecond");
+    
 }

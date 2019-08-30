@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -20,12 +20,12 @@ public class PowerUnit extends Unit<PowerUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "kgm2/s3" as the SI signature. */
+    /** The base, with "kgm2/s3" as the SI signature. */
     public static final BaseUnit<PowerUnit> BASE = new BaseUnit<>("kgm2/s3");
 
     /** The SI unit for power is watt. */
     public static final PowerUnit SI = new PowerUnit().build(new Unit.Builder<PowerUnit>().setBaseUnit(BASE).setId("W")
-            .setName("watt").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new StandardScale()));
+            .setName("watt").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
 
     /** watt. */
     public static final PowerUnit WATT = SI;
@@ -79,12 +79,14 @@ public class PowerUnit extends Unit<PowerUnit>
             SI.deriveLinear(factorED(EnergyUnit.ERG, DurationUnit.SECOND), "erg/s", "erg per second", UnitSystem.CGS);
 
     /**
-     * @param energy the used energy unit, e.g. erg
-     * @param duration the used duration unit, e.g. s
-     * @return the conversion factor from the provided units (e.g. erg/s) to the standard unit (e.g., W)
+     * Determine the conversion factor to the base power unit, given an energy unit and a duration unit.
+     * @param energy EnergyUnit; the used energy unit, e.g. erg
+     * @param duration DurationUnit; the used duration unit, e.g. s
+     * @return double; the conversion factor from the provided units (e.g. erg/s) to the standard unit (e.g., W)
      */
     private static double factorED(final EnergyUnit energy, final DurationUnit duration)
     {
         return energy.getScale().toStandardUnit(1.0) / duration.getScale().toStandardUnit(1.0);
     }
+    
 }

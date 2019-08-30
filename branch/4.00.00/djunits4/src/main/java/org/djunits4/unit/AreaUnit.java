@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -20,13 +20,13 @@ public class AreaUnit extends Unit<AreaUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "m2" as the SI signature. */
+    /** The base, with "m2" as the SI signature. */
     public static final BaseUnit<AreaUnit> BASE = new BaseUnit<>("m2");
 
     /** The SI unit for area is m^2. */
     public static final AreaUnit SI =
             new AreaUnit().build(new Unit.Builder<AreaUnit>().setBaseUnit(BASE).setId("m^2").setName("square meter")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
 
     /** m^2. */
     public static final AreaUnit SQUARE_METER = SI;
@@ -83,12 +83,13 @@ public class AreaUnit extends Unit<AreaUnit>
 
     /**
      * Calculate the conversion factor for a "squared" length.
-     * @param lu the LengthUnit to use as the base
-     * @return the conversion factor
+     * @param lu LengthUnit; the LengthUnit to use as the base
+     * @return double; the conversion factor
      */
     private static double sqLength(final LengthUnit lu)
     {
         double factor = lu.getScale().toStandardUnit(1.0);
         return factor * factor;
     }
+    
 }

@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -20,13 +20,13 @@ public class PressureUnit extends Unit<PressureUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "kg/ms2" as the SI signature. */
+    /** The base, with "kg/ms2" as the SI signature. */
     public static final BaseUnit<PressureUnit> BASE = new BaseUnit<>("kg/ms2");
 
     /** The SI unit for pressure is Pascal = kgm/s2. */
     public static final PressureUnit SI =
             new PressureUnit().build(new Unit.Builder<PressureUnit>().setBaseUnit(BASE).setId("Pa").setName("pascal")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
 
     /** Pascal. */
     public static final PressureUnit PASCAL = SI;
@@ -94,12 +94,14 @@ public class PressureUnit extends Unit<PressureUnit>
             SI.deriveLinear(factorFA(ForceUnit.STHENE, AreaUnit.SQUARE_METER), "pz", "pi\u00E8ze", UnitSystem.MTS);
 
     /**
-     * @param force the used force unit, e.g. kgf
-     * @param area the used area unit, e.g. mm2
-     * @return the conversion factor from the provided units (e.g. kgf/mm2) to the standard unit (Pa)
+     * Determine the conversion factor to the base pressure unit, given a force unit and an area unit.
+     * @param force ForceUnit; the used force unit, e.g. kgf
+     * @param area AreaUnit; the used area unit, e.g. mm2
+     * @return double; the conversion factor from the provided units (e.g. kgf/mm2) to the standard unit (Pa)
      */
     private static double factorFA(final ForceUnit force, final AreaUnit area)
     {
         return force.getScale().toStandardUnit(1.0) / area.getScale().toStandardUnit(1.0);
     }
+    
 }

@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -19,13 +19,13 @@ public class SpeedUnit extends Unit<SpeedUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "m/s" as the SI signature. */
+    /** The base, with "m/s" as the SI signature. */
     public static final BaseUnit<SpeedUnit> BASE = new BaseUnit<>("m/s");
 
     /** The SI unit for speed is m/s. */
     public static final SpeedUnit SI =
             new SpeedUnit().build(new Unit.Builder<SpeedUnit>().setBaseUnit(BASE).setId("m/s").setName("meter per second")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new IdentityScale()));
 
     /** m/s. */
     public static final SpeedUnit METER_PER_SECOND = SI;
@@ -83,12 +83,14 @@ public class SpeedUnit extends Unit<SpeedUnit>
             SI.deriveLinear(factorLD(LengthUnit.NAUTICAL_MILE, DurationUnit.HOUR), "kt", "knot", UnitSystem.OTHER);
 
     /**
-     * @param length the used length unit, e.g. km
-     * @param duration the used duration unit, e.g. h
-     * @return the conversion factor from the provided units (e.g. km/h) to the standard unit (e.g., m/s)
+     * Determine the conversion factor to the base speed unit, given a length unit and a duration unit.
+     * @param length LengthUnit; the used length unit, e.g. km
+     * @param duration DurationUnit; the used duration unit, e.g. h
+     * @return double; the conversion factor from the provided units (e.g. km/h) to the standard unit (e.g., m/s)
      */
     private static double factorLD(final LengthUnit length, final DurationUnit duration)
     {
         return length.getScale().toStandardUnit(1.0) / duration.getScale().toStandardUnit(1.0);
     }
+    
 }

@@ -2,7 +2,7 @@ package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
 import org.djunits4.unit.scale.LinearScale;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -21,13 +21,13 @@ public class EnergyUnit extends Unit<EnergyUnit>
     /** */
     private static final long serialVersionUID = 20140604L;
 
-    /** the base, with "kgm2/s2" as the SI signature. */
+    /** The base, with "kgm2/s2" as the SI signature. */
     public static final BaseUnit<EnergyUnit> BASE = new BaseUnit<>("kgm2/s2");
 
     /** The SI unit for energy is Joule (J) = kgm2/s2. */
     public static final EnergyUnit SI =
             new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setBaseUnit(BASE).setId("J").setName("joule")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
 
     /** Joule. */
     public static final EnergyUnit JOULE = SI;
@@ -132,12 +132,14 @@ public class EnergyUnit extends Unit<EnergyUnit>
     public static final EnergyUnit ERG = JOULE.deriveLinear(1.0E-7, "erg", "erg", UnitSystem.CGS);
 
     /**
-     * @param force the used force unit, e.g. lbf
-     * @param distance the used duration unit, e.g. ft
-     * @return the conversion factor from the provided units (e.g. ft.lbf) to the standard unit (e.g., J)
+     * Determine the conversion factor to the base energy unit, given a force unit and a length unit.
+     * @param force ForceUnit; the used force unit, e.g. lbf
+     * @param distance LengthUnit; the used length unit, e.g. ft
+     * @return double; the conversion factor from the provided units (e.g. ft.lbf) to the standard unit (e.g., J)
      */
     private static double factorFL(final ForceUnit force, final LengthUnit distance)
     {
         return force.getScale().toStandardUnit(1.0) * distance.getScale().toStandardUnit(1.0);
     }
+    
 }

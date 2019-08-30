@@ -18,7 +18,7 @@ public class AbsoluteTemperatureUnit extends AbsoluteLinearUnit<AbsoluteTemperat
     /** */
     private static final long serialVersionUID = 20140605L;
 
-    /** the base, with "K" as the SI signature. */
+    /** The base, with "K" as the SI signature. */
     public static final BaseUnit<AbsoluteTemperatureUnit> BASE = new BaseUnit<>("K");
 
     /** The default unit for temperature is Kelvin. */

@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -20,13 +20,13 @@ public class ElectricalPotentialUnit extends Unit<ElectricalPotentialUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "kgm2/s3A" as the SI signature. */
+    /** The base, with "kgm2/s3A" as the SI signature. */
     public static final BaseUnit<ElectricalPotentialUnit> BASE = new BaseUnit<>("kgm2/s3A");
 
     /** The SI unit for electrical potential is Volt. */
     public static final ElectricalPotentialUnit SI = new ElectricalPotentialUnit()
             .build(new Unit.Builder<ElectricalPotentialUnit>().setBaseUnit(BASE).setId("V").setName("volt")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new IdentityScale()));
 
     /** Volt. */
     public static final ElectricalPotentialUnit VOLT = SI;
@@ -51,4 +51,5 @@ public class ElectricalPotentialUnit extends Unit<ElectricalPotentialUnit>
 
     /** abvolt. */
     public static final ElectricalPotentialUnit ABVOLT = VOLT.deriveLinear(1.0E-8, "abV", "abvolt", UnitSystem.CGS_EMU);
+    
 }

@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -20,13 +20,13 @@ public class TorqueUnit extends Unit<TorqueUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "kgm2/s2" as the SI signature. */
+    /** The base, with "kgm2/s2" as the SI signature. */
     public static final BaseUnit<TorqueUnit> BASE = new BaseUnit<>("kgm2/s2");
 
     /** The SI unit for torque is Newton meter = kgm2/s2. */
     public static final TorqueUnit SI =
             new TorqueUnit().build(new Unit.Builder<TorqueUnit>().setBaseUnit(BASE).setId("N.m").setName("Newton meter")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new IdentityScale()));
 
     /** Newton meter. */
     public static final TorqueUnit NEWTON_METER = SI;
@@ -44,12 +44,14 @@ public class TorqueUnit extends Unit<TorqueUnit>
             SI.deriveLinear(factorLF(LengthUnit.INCH, ForceUnit.POUND_FORCE), "lbf.in", "pound-inch", UnitSystem.IMPERIAL);
 
     /**
-     * @param length the used length unit, e.g. m
-     * @param force the used force unit, e.g. kgf
-     * @return the conversion factor from the provided units (e.g. m.kgf) to the standard unit (e.g., Nm or kg.m2/s2)
+     * Determine the conversion factor to the base torque unit, given a length unit and a force unit.
+     * @param length LengthUnit; the used length unit, e.g. m
+     * @param force ForceUnit; the used force unit, e.g. kgf
+     * @return double; the conversion factor from the provided units (e.g. m.kgf) to the standard unit (e.g., Nm or kg.m2/s2)
      */
     private static double factorLF(final LengthUnit length, final ForceUnit force)
     {
         return length.getScale().toStandardUnit(1.0) * force.getScale().toStandardUnit(1.0);
     }
+    
 }

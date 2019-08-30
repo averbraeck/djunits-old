@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -20,13 +20,13 @@ public class ForceUnit extends Unit<ForceUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "kgm/s2" as the SI signature. */
+    /** The base, with "kgm/s2" as the SI signature. */
     public static final BaseUnit<ForceUnit> BASE = new BaseUnit<>("kgm/s2");
 
     /** The SI unit for force is Newton. */
     public static final ForceUnit SI =
             new ForceUnit().build(new Unit.Builder<ForceUnit>().setBaseUnit(BASE).setId("N").setName("newton")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(new IdentityScale()));
 
     /** Newton. */
     public static final ForceUnit NEWTON = SI;
@@ -56,12 +56,14 @@ public class ForceUnit extends Unit<ForceUnit>
             SI.deriveLinear(factorMA(MassUnit.TON_METRIC, AccelerationUnit.METER_PER_SECOND_2), "sn", "sthene", UnitSystem.MTS);
 
     /**
-     * @param mass the used mass unit, e.g. lb
-     * @param acceleration the used acceleration unit, e.g. ft/s2
-     * @return the conversion factor from the provided units (e.g. lb.ft/s2) to the standard unit (e.g., kg.m/s2)
+     * Determine the conversion factor to the base force unit, given a mass unit and an acceleration unit.
+     * @param mass MassUnit; the used mass unit, e.g. lb
+     * @param acceleration AccelerationUnit; the used acceleration unit, e.g. ft/s2
+     * @return double; the conversion factor from the provided units (e.g. lb.ft/s2) to the standard unit (e.g., kg.m/s2)
      */
     private static double factorMA(final MassUnit mass, final AccelerationUnit acceleration)
     {
         return mass.getScale().toStandardUnit(1.0) * acceleration.getScale().toStandardUnit(1.0);
     }
+    
 }

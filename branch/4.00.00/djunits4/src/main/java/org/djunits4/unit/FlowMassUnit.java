@@ -1,7 +1,7 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.BaseUnit;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -20,13 +20,13 @@ public class FlowMassUnit extends Unit<FlowMassUnit>
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** the base, with "kg/s" as the SI signature. */
+    /** The base, with "kg/s" as the SI signature. */
     public static final BaseUnit<FlowMassUnit> BASE = new BaseUnit<>("kg/s");
 
     /** The SI unit for mass flow rate is kg/s. */
     public static final FlowMassUnit SI = new FlowMassUnit()
             .build(new Unit.Builder<FlowMassUnit>().setBaseUnit(BASE).setId("kg/s").setName("kilogram per second")
-                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.NONE).setScale(new StandardScale()));
+                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.NONE).setScale(new IdentityScale()));
 
     /** kg/s. */
     public static final FlowMassUnit KILOGRAM_PER_SECOND = SI;
@@ -36,12 +36,14 @@ public class FlowMassUnit extends Unit<FlowMassUnit>
             .deriveLinear(factorMD(MassUnit.POUND, DurationUnit.SECOND), "lb/s", "pound per second", UnitSystem.IMPERIAL);
 
     /**
-     * @param mass the used mass unit, e.g. lb
-     * @param duration the used duration unit, e.g. h
-     * @return the conversion factor from the provided units (e.g. lb/h) to the standard unit (e.g., kg/s)
+     * Determine the conversion factor to the base flow mass unit, given a mass unit and a duration unit.
+     * @param mass MassUnit; the used mass unit, e.g. lb
+     * @param duration DurationUnit; the used duration unit, e.g. h
+     * @return double; the conversion factor from the provided units (e.g. lb/h) to the standard unit (e.g., kg/s)
      */
     private static double factorMD(final MassUnit mass, final DurationUnit duration)
     {
         return mass.getScale().toStandardUnit(1.0) / duration.getScale().toStandardUnit(1.0);
     }
+    
 }

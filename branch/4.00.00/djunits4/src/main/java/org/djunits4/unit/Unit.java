@@ -10,7 +10,7 @@ import org.djunits4.unit.base.BaseUnit;
 import org.djunits4.unit.scale.LinearScale;
 import org.djunits4.unit.scale.OffsetLinearScale;
 import org.djunits4.unit.scale.Scale;
-import org.djunits4.unit.scale.StandardScale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.si.SIPrefix;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
@@ -37,13 +37,13 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     /** The abbreviations in the default locale. All abbreviations an be used in the valueOf() and of() methods. */
     private Set<String> abbreviations;
 
-    /** the default display abbreviation in the default locale for printing. Included in the abbreviations list. */
+    /** The default display abbreviation in the default locale for printing. Included in the abbreviations list. */
     private String defaultDisplayAbbreviation;
 
-    /** the default textual abbreviation in the default locale for data entry. Included in the abbreviations list. */
+    /** The default textual abbreviation in the default locale for data entry. Included in the abbreviations list. */
     private String defaultTextualAbbreviation;
 
-    /** the long name of the unit in the default locale. */
+    /** The long name of the unit in the default locale. */
     private String name;
 
     /** The scale to use to convert between this unit and the standard (e.g., SI, BASE) unit. */
@@ -52,15 +52,15 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     /** The unit system, e.g. SI or Imperial. */
     private UnitSystem unitSystem;
 
-    /** whether the unit has been automatically generated or not. */
+    /** Has the unit been automatically generated or not. */
     private boolean generated;
 
-    /** does the unit have the standard SI signature? */
+    /** Does the unit have the standard SI signature? */
     private boolean baseSIUnit;
 
     /**
-     * /** The corresponding base unit that contains all registered units for the unit as well as SI dimension information. The
-     * base unit is null for base units themselves.
+     * The corresponding base unit that contains all registered units for the unit as well as SI dimension information. The
+     * base unit of a base unit is null.
      */
     private BaseUnit<U> baseUnit;
 
@@ -83,13 +83,13 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * defaultTextualAbbreviation, nor the defaultAbbreviation are set, both get the value of the unitId provided in the
      * builder.
      * @param builder Builder&lt;U&gt; the object that contains the information about the construction of the class
-     * @return the constructed unit
+     * @return U; the constructed unit
      * @throws UnitRuntimeException when not all fields have been set
      */
     @SuppressWarnings("unchecked")
     protected U build(final Builder<U> builder) throws UnitRuntimeException
     {
-        // check the validity
+        // Check the validity
         String cName = getClass().getSimpleName();
         Throw.whenNull(builder.getId(), "Constructing unit %s: id cannot be null", cName);
         Throw.when(builder.getId().length() == 0, UnitRuntimeException.class, "Constructing unit %s: id.length cannot be 0",
@@ -111,7 +111,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         this.generated = builder.isGenerated();
         this.baseSIUnit = this.scale.isBaseSIScale();
 
-        // set and check the abbreviations
+        // Set and check the abbreviations
         if (builder.getDefaultDisplayAbbreviation() == null)
         {
             if (builder.getDefaultTextualAbbreviation() == null)
@@ -140,19 +140,19 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         this.abbreviations.add(this.defaultTextualAbbreviation);
         this.abbreviations.addAll(builder.getAdditionalAbbreviations());
 
-        // see what SI prefixes have to be registered. If not specified: NONE.
+        // See what SI prefixes have to be registered. If not specified: NONE.
         SIPrefixes siPrefixes = builder.getSiPrefixes() == null ? SIPrefixes.NONE : builder.getSiPrefixes();
 
-        // register the unit, possibly including all SI prefixes
+        // Register the unit, possibly including all SI prefixes
         this.baseUnit.registerUnit((U) this, siPrefixes);
         return (U) this;
     }
 
     /**
      * Create a scaled version of this unit with the same unit system but another SI prefix and scale.
-     * @param siPrefix the prefix for which to scale the unit
-     * @param automaticallyGenerated indicate whether the unit has been automatically generated
-     * @return a scaled instance of this unit
+     * @param siPrefix SIPrefix; the prefix for which to scale the unit
+     * @param automaticallyGenerated boolean; indicate whether the unit has been automatically generated
+     * @return U; a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
      */
     public U deriveSI(final SIPrefix siPrefix, final boolean automaticallyGenerated)
@@ -162,7 +162,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         {
             U clone = clone();
 
-            // get values: combine all prefixes with all names / abbreviations
+            // Get values: combine all prefixes with all names / abbreviations
             String cloneId = siPrefix.getDefaultTextualPrefix() + clone.getId();
             String cloneName = siPrefix.getPrefixName() + clone.getName();
             Set<String> cloneAbbreviations = new LinkedHashSet<>();
@@ -173,7 +173,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
             String cloneDefaultAbbreviation = siPrefix.getDefaultDisplayPrefix() + clone.getDefaultDisplayAbbreviation();
             String cloneDefaultTextualAbbreviation = siPrefix.getDefaultTextualPrefix() + clone.getDefaultTextualAbbreviation();
 
-            // make a builder and set values
+            // Make a builder and set values
             Builder<U> builder = makeBuilder();
             builder.setId(cloneId);
             builder.setName(cloneName);
@@ -220,7 +220,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * abbreviations at the start will be replaced by the new information from the SIPrefix.
      * @param siPrefix the prefix for which to scale the unit
      * @param automaticallyGenerated indicate whether the unit has been automatically generated
-     * @return a scaled instance of this unit
+     * @return U; a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
      */
     public U deriveSIKilo(final SIPrefix siPrefix, final boolean automaticallyGenerated)
@@ -297,7 +297,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * @param derivedDefaultDisplayAbbreviation the default abbreviation to use in e.g, the toString() method. Can be null.
      * @param derivedDefaultTextualAbbreviation the default textual abbreviation to use in, e.g, typing. Can be null.
      * @param derivedAbbreviations the other valid abbreviations for the unit, e.g. {"h", "hr", "hour"}. Can be left out.
-     * @return a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
+     * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
     protected U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName,
@@ -308,7 +308,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         Throw.whenNull(derivedId, "deriving unit from %s.%s; derivedId cannot be null", cName, this.id);
         Throw.whenNull(derivedName, "deriving unit from %s.%s; derivedName cannot be null", cName, this.id);
         Throw.whenNull(derivedUnitSystem, "deriving unit from %s.%s; derivedUnitSystem cannot be null", cName, this.id);
-        if (!getScale().getClass().equals(LinearScale.class) && !getScale().getClass().equals(StandardScale.class))
+        if (!getScale().getClass().equals(LinearScale.class) && !getScale().getClass().equals(IdentityScale.class))
         {
             throw new UnitRuntimeException("Cannot derive from unit " + cName + "." + getId() + " with scale "
                     + getScale().getClass().getSimpleName() + ". Scale should be Linear");
@@ -348,7 +348,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * @param derivedId String; the new id of the derived unit
      * @param derivedName String; the new name of the derived unit
      * @param derivedUnitSystem the unit system of the derived unit
-     * @return a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
+     * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
     protected U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName,
@@ -363,7 +363,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * @param scaleFactor the linear scale factor of the unit
      * @param derivedId String; the new id of the derived unit
      * @param derivedName String; the new name of the derived unit
-     * @return a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
+     * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
     protected U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName)
@@ -381,7 +381,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * @return id
+     * Retrieve the unit id.
+     * @return String; the unit id
      */
     public String getId()
     {
@@ -389,7 +390,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * @return abbreviations
+     * Retrieve the unit abbreviations.
+     * @return Set&lt;String&gt;; the unit abbreviations
      */
     public Set<String> getAbbreviations()
     {
@@ -397,7 +399,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * @return defaultAbbreviation
+     * Retrieve the default abbreviation.
+     * @return String; the default abbreviation
      */
     public String getDefaultDisplayAbbreviation()
     {
@@ -405,7 +408,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * @return defaultTextualAbbreviation
+     * Retrieve the default textual abbreviation.
+     * @return String; the default textual abbreviation
      */
     public String getDefaultTextualAbbreviation()
     {
@@ -413,7 +417,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * @return name
+     * Retrieve the name of this unit.
+     * @return String; the name of this unit
      */
     public String getName()
     {
@@ -421,7 +426,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * @return scale
+     * Retrieve the scale of this unit.
+     * @return Scale; the scale of this unit
      */
     public Scale getScale()
     {
@@ -429,7 +435,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * @return unitSystem
+     * Retrieve the unit system of this unit.
+     * @return unitSystem the unit system of this unit
      */
     public UnitSystem getUnitSystem()
     {
@@ -437,7 +444,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * @return baseUnit
+     * Retrieve the base unit of this unit.
+     * @return BaseUnit&lt;U&gt;; the base unit of this unit. if this unit is itself a base unit; the returned value is
+     *         <code>null</code>
      */
     public BaseUnit<U> getBaseUnit()
     {
@@ -445,7 +454,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * @return whether the unit has been automatically generated or not
+     * Indicate whether is unit was automatically generated.
+     * @return boolean; true if this unit has been automatically generate; false if it was not automatically generated
      */
     public boolean isGenerated()
     {
@@ -453,7 +463,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * @return whether the unit has the standard SI signature
+     * Indicate whether this unit has the standard SI signature.
+     * @return boolean; true if this unit has the standard SI signature; false if this unit does not have the standard SI
+     *         signature
      */
     public boolean isBaseSIUnit()
     {
@@ -461,7 +473,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * @return U the standard unit (SI unit) belonging to this unit. 
+     * Retrieve the standard unit (SI Unit) belonging to this unit.
+     * @return U; the standard unit (SI unit) belonging to this unit 
      */
     public U getStandardUnit()
     {
@@ -591,13 +604,13 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         /** The abbreviations in the default locale. All abbreviations an be used in the valueOf() and of() methods. */
         private Set<String> additionalAbbreviations = new LinkedHashSet<>();
 
-        /** the default abbreviation in the default locale for printing. Included in the abbreviations list. */
+        /** The default abbreviation in the default locale for printing. Included in the abbreviations list. */
         private String defaultDisplayAbbreviation;
 
-        /** the default textual abbreviation in the default locale for data entry. Included in the abbreviations list. */
+        /** The default textual abbreviation in the default locale for data entry. Included in the abbreviations list. */
         private String defaultTextualAbbreviation;
 
-        /** the long name of the unit in the default locale. */
+        /** The full name of the unit in the default locale. */
         private String name;
 
         /** The scale to use to convert between this unit and the standard (e.g., SI, BASE) unit. */
@@ -613,7 +626,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         private boolean generated = false;
 
         /**
-         * /** The corresponding base unit that contains all registered units for the unit as well as SI dimension information.
+         * The corresponding base unit that contains all registered units for the unit as well as SI dimension information.
          * The base unit is null for base units themselves.
          */
         private BaseUnit<U> baseUnit;
@@ -623,7 +636,7 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
          */
         public Builder()
         {
-            // empty constructor. Content is generated through chaining
+            // Empty constructor. Content is generated through (chaining of) method calls
         }
 
         /**
@@ -636,10 +649,11 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * Set whether SI prefixes, ranging from yotta (y) to yocto (Y), are allowed.
+         * Set whether SI prefixes, ranging from yotta (y) to yocto (Y), are allowed. If not set; this property defaults to
+         * <code>false</code>.
          * @param siPrefixes SIPrefixes set siPrefixes, NONE (e.g., for inch), ALL (e.g., for meter) or KILO (e.g., for
          *            kilometer)
-         * @return the instance that is being constructed for chaining
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setSiPrefixes(final SIPrefixes siPrefixes)
         {
@@ -648,7 +662,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @return id
+         * Retrieve the id of the unit that this builder builds.
+         * @return String; the id of the unit that this builder builds
          */
         public String getId()
         {
@@ -656,8 +671,10 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @param id set id
-         * @return the instance that is being constructed for chaining
+         * Set the id of the unit that this builder builds.
+         * @param id String; set the id of the unit that this builder builds (must be set; the default is <code>null</code>
+         *            which is invalid)
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setId(final String id)
         {
@@ -666,7 +683,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @return abbreviations
+         * Retrieve the additional abbreviations.
+         * @return Set&lt;String&gt;; the additional abbreviations
          */
         public Set<String> getAdditionalAbbreviations()
         {
@@ -674,8 +692,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @param additionalAbbreviations set abbreviations
-         * @return the instance that is being constructed for chaining
+         * Set the additional abbreviations.
+         * @param additionalAbbreviations String...; the additional abbreviations
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setAdditionalAbbreviations(final String... additionalAbbreviations)
         {
@@ -684,7 +703,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @return defaultDisplayAbbreviation
+         * Retrieve the default display abbreviation.
+         * @return String; the default display abbreviation
          */
         public String getDefaultDisplayAbbreviation()
         {
@@ -692,8 +712,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @param defaultDisplayAbbreviation set defaultDisplayAbbreviation
-         * @return the instance that is being constructed for chaining
+         * Set the default display abbreviation.
+         * @param defaultDisplayAbbreviation String; the default display abbreviation
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setDefaultDisplayAbbreviation(final String defaultDisplayAbbreviation)
         {
@@ -702,7 +723,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @return defaultTextualAbbreviation
+         * Retrieve the default textual abbreviation.
+         * @return String; the default textual abbreviation
          */
         public String getDefaultTextualAbbreviation()
         {
@@ -710,8 +732,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @param defaultTextualAbbreviation set defaultTextualAbbreviation
-         * @return the instance that is being constructed for chaining
+         * Set the default textual abbreviation.
+         * @param defaultTextualAbbreviation String; the default textual abbreviation
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setDefaultTextualAbbreviation(final String defaultTextualAbbreviation)
         {
@@ -720,7 +743,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @return name
+         * Return the name.
+         * @return String; the name
          */
         public String getName()
         {
@@ -728,8 +752,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @param name set name
-         * @return the instance that is being constructed for chaining
+         * Set the name.
+         * @param name String; the name
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setName(final String name)
         {
@@ -738,7 +763,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @return scale
+         * Retrieve the scale.
+         * @return Scale; the scale
          */
         public Scale getScale()
         {
@@ -746,8 +772,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @param scale set scale
-         * @return the instance that is being constructed for chaining
+         * Set the scale.
+         * @param scale Scale; set the scale
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setScale(final Scale scale)
         {
@@ -756,7 +783,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @return unitSystem
+         * Retrieve the unit system.
+         * @return unitSystem UnitSystem; the unit system
          */
         public UnitSystem getUnitSystem()
         {
@@ -764,8 +792,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @param unitSystem set unitSystem
-         * @return the instance that is being constructed for chaining
+         * Set the unit system.
+         * @param unitSystem unitSystem; the unit system
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setUnitSystem(final UnitSystem unitSystem)
         {
@@ -774,7 +803,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @return generated
+         * Retrieve the generated flag.
+         * @return generated Boolean; the generated flag
          */
         public boolean isGenerated()
         {
@@ -782,8 +812,9 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @param generated set generated
-         * @return the instance that is being constructed for chaining
+         * Set the generated flag. Defaults to false. Should be set for units that are automatically generated.
+         * @param generated boolean; the value for the generated flag
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setGenerated(final boolean generated)
         {
@@ -792,7 +823,8 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @return baseUnit
+         * Retrieve the base unit.
+         * @return baseUnit BaseUnit&lt;U&gt;; the base unit
          */
         public BaseUnit<U> getBaseUnit()
         {
@@ -800,13 +832,16 @@ public abstract class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
-         * @param baseUnit set baseUnit
-         * @return the instance that is being constructed for chaining
+         * Set the base unit. Defaults to <code>null</code>. Should only be set to build a non-base unit.
+         * @param baseUnit BaseUnit; the base unit
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setBaseUnit(final BaseUnit<U> baseUnit)
         {
             this.baseUnit = baseUnit;
             return this;
         }
+        
     }
+    
 }
