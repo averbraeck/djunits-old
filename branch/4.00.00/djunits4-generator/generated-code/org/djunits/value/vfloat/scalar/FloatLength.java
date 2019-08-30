@@ -29,6 +29,9 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
     /** constant with value zero. */
     public static final FloatLength ZERO = new FloatLength(0.0f, LengthUnit.SI);
 
+    /** constant with value one. */
+    public static final FloatLength ONE = new FloatLength(1.0f, LengthUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatLength NaN = new FloatLength(Float.NaN, LengthUnit.SI);

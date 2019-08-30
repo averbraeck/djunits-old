@@ -29,6 +29,9 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
     /** constant with value zero. */
     public static final FloatDuration ZERO = new FloatDuration(0.0f, DurationUnit.SI);
 
+    /** constant with value one. */
+    public static final FloatDuration ONE = new FloatDuration(1.0f, DurationUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatDuration NaN = new FloatDuration(Float.NaN, DurationUnit.SI);

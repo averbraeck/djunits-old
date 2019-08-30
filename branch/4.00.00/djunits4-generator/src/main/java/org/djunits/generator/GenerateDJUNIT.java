@@ -275,7 +275,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Abs + Rel classes in value.vdouble.scalar.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleScalarAbsRel() throws IOException, URISyntaxException
     {
@@ -305,7 +305,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Rel classes in value.vdouble.scalar.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleScalarRel() throws IOException, URISyntaxException
     {
@@ -342,7 +342,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Abs + Rel classes in value.vfloat.scalar.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatScalarAbsRel() throws IOException, URISyntaxException
     {
@@ -373,7 +373,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Rel classes in value.vfloat.scalar.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatScalarRel() throws IOException, URISyntaxException
     {
@@ -451,7 +451,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Abs + Rel classes in value.vdouble.vector.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleVectorAbsRel() throws IOException, URISyntaxException
     {
@@ -499,7 +499,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Rel classes in value.vdouble.vector.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleVectorRel() throws IOException, URISyntaxException
     {
@@ -559,7 +559,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Abs + Rel classes in value.vfloat.vector.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatVectorAbsRel() throws IOException, URISyntaxException
     {
@@ -609,7 +609,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Rel classes in value.vfloat.vector.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatVectorRel() throws IOException, URISyntaxException
     {
@@ -707,7 +707,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Abs + Rel classes in value.vdouble.matrix.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleMatrixAbsRel() throws IOException, URISyntaxException
     {
@@ -755,7 +755,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Rel classes in value.vdouble.matrix.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleMatrixRel() throws IOException, URISyntaxException
     {
@@ -815,7 +815,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Abs + Rel classes in value.vfloat.matrix.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatMatrixAbsRel() throws IOException, URISyntaxException
     {
@@ -865,7 +865,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Rel classes in value.vfloat.matrix.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatMatrixRel() throws IOException, URISyntaxException
     {
@@ -918,6 +918,125 @@ public class GenerateDJUNIT
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
         }
+    }
+
+    /****************************************************************************************************************/
+    /********************************************* SISCALAR *********************************************************/
+    /****************************************************************************************************************/
+
+    /**
+     * Generate SIScalar.java in value.vdouble.scalar.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateSIScalar() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/scalar/";
+        URL siScalarURL = URLResource.getResource("/" + relativePath + "SISCALAR.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siScalarURL.toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
+        {
+            allRelTypes.add(arType[1]);
+        }
+
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            // @formatter:off
+            asMethods += 
+                "    /**\n" + 
+                "     * Return the current scalar as a " + lc + ".\n" + 
+                "     * @return " + type + "; the current scalar as a " + lc + "\n" + 
+                "     */\n" + 
+                "    public final " + type + " as" + type + "()\n" + 
+                "    {\n" + 
+                "        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
+                "                UnitRuntimeException.class, \"cannot cast %s to " + type + "\", this.toString());\n" + 
+                "        return new " + type + "(getSI(), " + type + "Unit.SI);\n" + 
+                "    }\n" + 
+                "\n" + 
+                "    /**\n" + 
+                "     * Return the current scalar as a " + lc + ", and provide a display unit.\n" + 
+                "     * @param displayUnit the unit in which the value will be displayed\n" + 
+                "     * @return " + type + "; the current scalar as a " + lc + "\n" + 
+                "     */\n" + 
+                "    public final " + type + " as" + type + "(final " + type + "Unit displayUnit)\n" + 
+                "    {\n" + 
+                "        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
+                "                UnitRuntimeException.class, \"cannot cast %s to " + type + "\", this.toString());\n" + 
+                "        return new " + type + "(getSI(), displayUnit); // do not translate -- we have the SI value right here\n" + 
+                "    }\n";
+            // @formatter:on
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "SIScalar.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "SIScalar.java");
+    }
+
+    /**
+     * Generate SIScalar.java in value.vfloat.scalar.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateFloatSIScalar() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vfloat/scalar/";
+        URL siScalarURL = URLResource.getResource("/" + relativePath + "FLOATSISCALAR.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siScalarURL.toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
+        {
+            allRelTypes.add(arType[1]);
+        }
+
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            String ftype = "Float" + type;
+            // @formatter:off
+            asMethods += 
+                "    /**\n" + 
+                "     * Return the current scalar as a " + lc + ".\n" + 
+                "     * @return " + ftype + "; the current scalar as a " + lc + "\n" + 
+                "     */\n" + 
+                "    public final " + ftype + " as" + type + "()\n" + 
+                "    {\n" + 
+                "        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
+                "                UnitRuntimeException.class, \"cannot cast %s to " + ftype + "\", this.toString());\n" + 
+                "        return new " + ftype + "(getSI(), " + type + "Unit.SI);\n" + 
+                "    }\n" + 
+                "\n" + 
+                "    /**\n" + 
+                "     * Return the current scalar as a " + lc + ", and provide a display unit.\n" + 
+                "     * @param displayUnit the unit in which the value will be displayed\n" + 
+                "     * @return " + ftype + "; the current scalar as a " + lc + "\n" + 
+                "     */\n" + 
+                "    public final " + ftype + " as" + type + "(final " + type + "Unit displayUnit)\n" + 
+                "    {\n" + 
+                "        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
+                "                UnitRuntimeException.class, \"cannot cast %s to " + ftype + "\", this.toString());\n" + 
+                "        return new " + ftype + "(getSI(), displayUnit); // do not translate -- we have the SI value right here\n" + 
+                "    }\n";
+            // @formatter:on
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "FloatSIScalar.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "FloatSIScalar.java");
     }
 
     /****************************************************************************************************************/
@@ -994,7 +1113,7 @@ public class GenerateDJUNIT
     /**
      * @param args String[]; args, should be blank
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     public static void main(String[] args) throws IOException, URISyntaxException
     {
@@ -1018,6 +1137,9 @@ public class GenerateDJUNIT
         generateDoubleMatrixRel();
         generateFloatMatrixAbsRel();
         generateFloatMatrixRel();
+
+        generateSIScalar();
+        generateFloatSIScalar();
     }
 
 }

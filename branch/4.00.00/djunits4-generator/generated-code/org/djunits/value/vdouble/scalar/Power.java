@@ -29,6 +29,9 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
     /** constant with value zero. */
     public static final Power ZERO = new Power(0.0, PowerUnit.SI);
 
+    /** constant with value one. */
+    public static final Power ONE = new Power(1.0, PowerUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Power NaN = new Power(Double.NaN, PowerUnit.SI);

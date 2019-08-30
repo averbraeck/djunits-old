@@ -29,6 +29,9 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
     /** constant with value zero. */
     public static final FloatSpeed ZERO = new FloatSpeed(0.0f, SpeedUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatSpeed ONE = new FloatSpeed(1.0f, SpeedUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatSpeed NaN = new FloatSpeed(Float.NaN, SpeedUnit.SI);

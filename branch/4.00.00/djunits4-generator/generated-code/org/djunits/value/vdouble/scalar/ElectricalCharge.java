@@ -29,6 +29,9 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
     /** constant with value zero. */
     public static final ElectricalCharge ZERO = new ElectricalCharge(0.0, ElectricalChargeUnit.SI);
 
+    /** constant with value one. */
+    public static final ElectricalCharge ONE = new ElectricalCharge(1.0, ElectricalChargeUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final ElectricalCharge NaN = new ElectricalCharge(Double.NaN, ElectricalChargeUnit.SI);

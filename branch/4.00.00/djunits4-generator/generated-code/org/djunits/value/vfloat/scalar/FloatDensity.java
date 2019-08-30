@@ -29,6 +29,9 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
     /** constant with value zero. */
     public static final FloatDensity ZERO = new FloatDensity(0.0f, DensityUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatDensity ONE = new FloatDensity(1.0f, DensityUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatDensity NaN = new FloatDensity(Float.NaN, DensityUnit.SI);

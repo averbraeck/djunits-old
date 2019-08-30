@@ -29,6 +29,9 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
     /** constant with value zero. */
     public static final ElectricalCurrent ZERO = new ElectricalCurrent(0.0, ElectricalCurrentUnit.SI);
 
+    /** constant with value one. */
+    public static final ElectricalCurrent ONE = new ElectricalCurrent(1.0, ElectricalCurrentUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final ElectricalCurrent NaN = new ElectricalCurrent(Double.NaN, ElectricalCurrentUnit.SI);

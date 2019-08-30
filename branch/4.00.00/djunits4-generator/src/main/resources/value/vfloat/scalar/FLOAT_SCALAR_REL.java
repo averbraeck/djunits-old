@@ -29,6 +29,9 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
     /** constant with value zero. */
     public static final Float%Type% ZERO = new Float%Type%(0.0f, %Type%Unit.SI);
 
+    /** constant with value zero. */
+    public static final Float%Type% ONE = new Float%Type%(1.0f, %Type%Unit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Float%Type% NaN = new Float%Type%(Float.NaN, %Type%Unit.SI);

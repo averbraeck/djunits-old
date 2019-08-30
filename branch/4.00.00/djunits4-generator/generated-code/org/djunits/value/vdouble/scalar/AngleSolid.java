@@ -29,6 +29,9 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
     /** constant with value zero. */
     public static final AngleSolid ZERO = new AngleSolid(0.0, AngleSolidUnit.SI);
 
+    /** constant with value one. */
+    public static final AngleSolid ONE = new AngleSolid(1.0, AngleSolidUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final AngleSolid NaN = new AngleSolid(Double.NaN, AngleSolidUnit.SI);

@@ -29,6 +29,9 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     /** constant with value zero. */
     public static final FloatElectricalCurrent ZERO = new FloatElectricalCurrent(0.0f, ElectricalCurrentUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatElectricalCurrent ONE = new FloatElectricalCurrent(1.0f, ElectricalCurrentUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatElectricalCurrent NaN = new FloatElectricalCurrent(Float.NaN, ElectricalCurrentUnit.SI);

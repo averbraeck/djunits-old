@@ -1,11 +1,15 @@
 %AbsoluteTemperature
 
+%AbsorbedDose
+
 %Acceleration
 /Acceleration=Dimensionless
 *Mass=Force
 *Duration=Speed
 /Frequency=Speed
 /Speed=Frequency
+
+%AmountOfSubstance
 
 %Angle
 /Angle=Dimensionless
@@ -23,6 +27,8 @@
 *Speed=FlowVolume
 *Pressure=Force
 
+%CatalyticActivity
+
 %Density
 /Density=Dimensionless
 *Volume=Mass
@@ -39,16 +45,22 @@
 *Power=Energy
 *Speed=Length
 
+%ElectricalCapacitance
+
 %ElectricalCharge
 /ElectricalCharge=Dimensionless
 /Duration=ElectricalCurrent
 /ElectricalCurrent=Duration
+
+%ElectricalCondictance
 
 %ElectricalCurrent
 /ElectricalCurrent=Dimensionless
 *ElectricalPotential=Power
 *Duration=ElectricalCharge
 *ElectricalResistance=ElectricalPotential
+
+%ElectricalInductance
 
 %ElectricalPotential
 /ElectricalPotential=Dimensionless
@@ -69,6 +81,8 @@
 /Power=Duration
 /Volume=Pressure
 *Frequency=Power
+
+%EquivalentDose
 
 %FlowMass
 /FlowMass=Dimensionless
@@ -103,6 +117,8 @@
 *Speed=Acceleration
 *Energy=Power
 
+%Illuminance
+
 %Length
 /Length=Dimensionless
 *Length=Area
@@ -119,6 +135,14 @@
 *Area=Length
 *Energy=Force
 *Speed=Frequency
+
+%LuminousFlux
+
+%LuminousIntensity
+
+%MagneticFluxDensity
+
+%MagneticFlux
 
 %Mass
 /Mass=Dimensionless
@@ -145,6 +169,8 @@
 /Pressure=Dimensionless
 *Area=Force
 *Volume=Energy
+
+%RadioActivity
 
 %Speed
 /Speed=Dimensionless

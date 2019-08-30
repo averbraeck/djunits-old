@@ -29,6 +29,9 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
     /** constant with value zero. */
     public static final FloatFrequency ZERO = new FloatFrequency(0.0f, FrequencyUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatFrequency ONE = new FloatFrequency(1.0f, FrequencyUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatFrequency NaN = new FloatFrequency(Float.NaN, FrequencyUnit.SI);

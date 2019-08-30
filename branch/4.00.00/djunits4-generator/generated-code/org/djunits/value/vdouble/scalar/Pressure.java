@@ -29,6 +29,9 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
     /** constant with value zero. */
     public static final Pressure ZERO = new Pressure(0.0, PressureUnit.SI);
 
+    /** constant with value one. */
+    public static final Pressure ONE = new Pressure(1.0, PressureUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Pressure NaN = new Pressure(Double.NaN, PressureUnit.SI);

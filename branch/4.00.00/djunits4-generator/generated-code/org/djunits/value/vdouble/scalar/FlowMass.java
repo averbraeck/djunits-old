@@ -29,6 +29,9 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     /** constant with value zero. */
     public static final FlowMass ZERO = new FlowMass(0.0, FlowMassUnit.SI);
 
+    /** constant with value one. */
+    public static final FlowMass ONE = new FlowMass(1.0, FlowMassUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FlowMass NaN = new FlowMass(Double.NaN, FlowMassUnit.SI);

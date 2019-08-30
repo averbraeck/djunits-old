@@ -29,6 +29,9 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
     /** constant with value zero. */
     public static final FloatMass ZERO = new FloatMass(0.0f, MassUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatMass ONE = new FloatMass(1.0f, MassUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatMass NaN = new FloatMass(Float.NaN, MassUnit.SI);

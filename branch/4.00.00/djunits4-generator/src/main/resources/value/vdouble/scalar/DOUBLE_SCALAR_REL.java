@@ -29,6 +29,9 @@ public class %Type% extends AbstractDoubleScalarRel<%Type%Unit, %Type%> %DIMLESS
     /** constant with value zero. */
     public static final %Type% ZERO = new %Type%(0.0, %Type%Unit.SI);
 
+    /** constant with value one. */
+    public static final %Type% ONE = new %Type%(1.0, %Type%Unit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final %Type% NaN = new %Type%(Double.NaN, %Type%Unit.SI);

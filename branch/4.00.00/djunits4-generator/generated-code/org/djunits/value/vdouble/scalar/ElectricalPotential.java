@@ -29,6 +29,9 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
     /** constant with value zero. */
     public static final ElectricalPotential ZERO = new ElectricalPotential(0.0, ElectricalPotentialUnit.SI);
 
+    /** constant with value one. */
+    public static final ElectricalPotential ONE = new ElectricalPotential(1.0, ElectricalPotentialUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final ElectricalPotential NaN = new ElectricalPotential(Double.NaN, ElectricalPotentialUnit.SI);

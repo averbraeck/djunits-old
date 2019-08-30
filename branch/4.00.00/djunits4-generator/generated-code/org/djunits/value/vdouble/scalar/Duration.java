@@ -29,6 +29,9 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
     /** constant with value zero. */
     public static final Duration ZERO = new Duration(0.0, DurationUnit.SI);
 
+    /** constant with value zero. */
+    public static final Duration ONE = new Duration(1.0, DurationUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Duration NaN = new Duration(Double.NaN, DurationUnit.SI);

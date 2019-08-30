@@ -29,6 +29,9 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     /** constant with value zero. */
     public static final FloatDimensionless ZERO = new FloatDimensionless(0.0f, DimensionlessUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatDimensionless ONE = new FloatDimensionless(1.0f, DimensionlessUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatDimensionless NaN = new FloatDimensionless(Float.NaN, DimensionlessUnit.SI);

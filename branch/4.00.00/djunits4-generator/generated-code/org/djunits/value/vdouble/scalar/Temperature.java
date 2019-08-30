@@ -29,6 +29,9 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
     /** constant with value zero. */
     public static final Temperature ZERO = new Temperature(0.0, TemperatureUnit.SI);
 
+    /** constant with value zero. */
+    public static final Temperature ONE = new Temperature(1.0, TemperatureUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Temperature NaN = new Temperature(Double.NaN, TemperatureUnit.SI);

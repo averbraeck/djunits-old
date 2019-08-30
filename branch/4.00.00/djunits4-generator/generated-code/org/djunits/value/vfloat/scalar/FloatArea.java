@@ -29,6 +29,9 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
     /** constant with value zero. */
     public static final FloatArea ZERO = new FloatArea(0.0f, AreaUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatArea ONE = new FloatArea(1.0f, AreaUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatArea NaN = new FloatArea(Float.NaN, AreaUnit.SI);

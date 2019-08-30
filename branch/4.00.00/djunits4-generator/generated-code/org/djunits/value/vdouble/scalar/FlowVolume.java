@@ -29,6 +29,9 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
     /** constant with value zero. */
     public static final FlowVolume ZERO = new FlowVolume(0.0, FlowVolumeUnit.SI);
 
+    /** constant with value one. */
+    public static final FlowVolume ONE = new FlowVolume(1.0, FlowVolumeUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FlowVolume NaN = new FlowVolume(Double.NaN, FlowVolumeUnit.SI);

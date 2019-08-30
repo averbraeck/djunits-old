@@ -29,6 +29,9 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
     /** constant with value zero. */
     public static final Length ZERO = new Length(0.0, LengthUnit.SI);
 
+    /** constant with value zero. */
+    public static final Length ONE = new Length(1.0, LengthUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Length NaN = new Length(Double.NaN, LengthUnit.SI);

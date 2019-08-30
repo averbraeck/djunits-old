@@ -29,6 +29,9 @@ public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, Floa
     /** constant with value zero. */
     public static final FloatAngleSolid ZERO = new FloatAngleSolid(0.0f, AngleSolidUnit.SI);
 
+    /** constant with value zero. */
+    public static final FloatAngleSolid ONE = new FloatAngleSolid(1.0f, AngleSolidUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatAngleSolid NaN = new FloatAngleSolid(Float.NaN, AngleSolidUnit.SI);

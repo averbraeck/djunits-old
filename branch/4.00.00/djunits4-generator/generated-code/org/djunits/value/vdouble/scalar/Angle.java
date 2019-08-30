@@ -29,6 +29,9 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
     /** constant with value zero. */
     public static final Angle ZERO = new Angle(0.0, AngleUnit.SI);
 
+    /** constant with value zero. */
+    public static final Angle ONE = new Angle(1.0, AngleUnit.SI);
+
     /** constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Angle NaN = new Angle(Double.NaN, AngleUnit.SI);
