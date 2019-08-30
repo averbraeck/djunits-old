@@ -88,8 +88,8 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Interpolate between two values.
-     * @param zero Duration; the low value
-     * @param one Duration; the high value
+     * @param zero R; the low value
+     * @param one R; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      * @param <U> the unit
@@ -103,7 +103,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Multiply this scalar by another scalar and create a new scalar.
-     * @param otherScalar Scalar; the value by which this scalar is multiplied
+     * @param otherScalar AbstractDoubleScalarRel&lt;?, ?&gt;; the value by which this scalar is multiplied
      * @return DoubleScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
      */
     public SIScalar multiplyBy(AbstractDoubleScalarRel<?, ?> otherScalar)
@@ -122,7 +122,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
 
     /**
      * Divide this scalar by another scalar and create a new scalar.
-     * @param otherScalar Scalar; the value by which this scalar is divided
+     * @param otherScalar AbstractDoubleScalarRel&lt;?, ?&gt;; the value by which this scalar is divided
      * @return DoubleScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
      */
     public SIScalar divideBy(AbstractDoubleScalarRel<?, ?> otherScalar)

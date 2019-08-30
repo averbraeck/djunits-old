@@ -27,8 +27,8 @@ public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMa
     /**
      * Construct a new Relative Immutable Double FlowMassVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double FlowMassVector
-     * @param unit U; the unit of the new Relative Immutable Double FlowMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FlowMassUnit; the unit of the new Relative Immutable Double FlowMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FlowMassVector(final double[] values, final FlowMassUnit unit, final StorageType storageType) throws ValueException
@@ -38,9 +38,9 @@ public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMa
 
     /**
      * Construct a new Relative Immutable Double FlowMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double FlowMassVector
-     * @param unit U; the unit of the new Relative Immutable Double FlowMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double FlowMassVector
+     * @param unit FlowMassUnit; the unit of the new Relative Immutable Double FlowMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FlowMassVector(final List<Double> values, final FlowMassUnit unit, final StorageType storageType)
@@ -51,8 +51,8 @@ public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMa
 
     /**
      * Construct a new Relative Immutable Double FlowMassVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double FlowMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FlowMass[]; the values of the entries in the new Relative Immutable Double FlowMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FlowMassVector(final FlowMass[] values, final StorageType storageType) throws ValueException
@@ -62,8 +62,8 @@ public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMa
 
     /**
      * Construct a new Relative Immutable Double FlowMassVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double FlowMassVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FlowMass&gt;; the values of the entries in the new Relative Immutable Double FlowMassVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FlowMassVector(final List<FlowMass> values, final StorageType storageType) throws ValueException
@@ -73,10 +73,10 @@ public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMa
 
     /**
      * Construct a new Relative Immutable Double FlowMassVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, FlowMass&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            FlowMassVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FlowMassVector(final SortedMap<Integer, FlowMass> values, final int length, final StorageType storageType)
@@ -87,10 +87,11 @@ public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMa
 
     /**
      * Construct a new Relative Immutable Double FlowMassVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double FlowMassVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double FlowMassVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            FlowMassVector
+     * @param unit FlowMassUnit; the unit of the new Relative Sparse Mutable Double FlowMassVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FlowMassVector(final SortedMap<Integer, Double> values, final FlowMassUnit unit, final int length,
@@ -100,8 +101,8 @@ public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMa
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit FlowMassUnit; the unit
      */
     FlowMassVector(final DoubleVectorData data, final FlowMassUnit unit)
     {

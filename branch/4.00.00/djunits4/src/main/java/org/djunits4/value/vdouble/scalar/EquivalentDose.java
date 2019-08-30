@@ -57,8 +57,8 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
 
     /**
      * Construct EquivalentDose scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit EquivalentDoseUnit; unit for the double value
      */
     public EquivalentDose(final double value, final EquivalentDoseUnit unit)
     {
@@ -67,7 +67,7 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
 
     /**
      * Construct EquivalentDose scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value EquivalentDose; Scalar from which to construct this instance
      */
     public EquivalentDose(final EquivalentDose value)
     {
@@ -83,7 +83,7 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
 
     /**
      * Construct EquivalentDose scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final EquivalentDose createSI(final double value)
@@ -93,9 +93,9 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero EquivalentDose; the low value
+     * @param one EquivalentDose; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static EquivalentDose interpolate(final EquivalentDose zero, final EquivalentDose one, final double ratio)
@@ -105,8 +105,8 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 EquivalentDose; the first scalar
+     * @param r2 EquivalentDose; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static EquivalentDose max(final EquivalentDose r1, final EquivalentDose r2)
@@ -116,9 +116,9 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 EquivalentDose; the first scalar
+     * @param r2 EquivalentDose; the second scalar
+     * @param rn EquivalentDose...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static EquivalentDose max(final EquivalentDose r1, final EquivalentDose r2, final EquivalentDose... rn)
@@ -136,8 +136,8 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 EquivalentDose; the first scalar
+     * @param r2 EquivalentDose; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static EquivalentDose min(final EquivalentDose r1, final EquivalentDose r2)
@@ -147,9 +147,9 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 EquivalentDose; the first scalar
+     * @param r2 EquivalentDose; the second scalar
+     * @param rn EquivalentDose...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static EquivalentDose min(final EquivalentDose r1, final EquivalentDose r2, final EquivalentDose... rn)

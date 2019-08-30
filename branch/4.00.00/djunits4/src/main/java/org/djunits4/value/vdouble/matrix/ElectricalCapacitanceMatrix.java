@@ -25,8 +25,8 @@ public class ElectricalCapacitanceMatrix extends AbstractDoubleMatrixRel<Electri
     /**
      * Construct a new Relative Immutable Double ElectricalCapacitanceMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double ElectricalCapacitanceMatrix
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalCapacitanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Immutable Double ElectricalCapacitanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalCapacitanceMatrix(final double[][] values, final ElectricalCapacitanceUnit unit,
@@ -37,9 +37,9 @@ public class ElectricalCapacitanceMatrix extends AbstractDoubleMatrixRel<Electri
 
     /**
      * Construct a new Relative Immutable Double ElectricalCapacitanceMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
+     * @param values ElectricalCapacitance[][]; the values of the entries in the new Relative Immutable Double
      *            ElectricalCapacitanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalCapacitanceMatrix(final ElectricalCapacitance[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class ElectricalCapacitanceMatrix extends AbstractDoubleMatrixRel<Electri
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit ElectricalCapacitanceUnit; the unit
      */
     ElectricalCapacitanceMatrix(final DoubleMatrixData data, final ElectricalCapacitanceUnit unit)
     {

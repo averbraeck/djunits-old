@@ -59,8 +59,8 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Construct FloatRadioActivity scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit RadioActivityUnit; unit for the float value
      */
     public FloatRadioActivity(final float value, final RadioActivityUnit unit)
     {
@@ -69,7 +69,7 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Construct FloatRadioActivity scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatRadioActivity; Scalar from which to construct this instance
      */
     public FloatRadioActivity(final FloatRadioActivity value)
     {
@@ -78,8 +78,8 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Construct FloatRadioActivity scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit RadioActivityUnit; unit for the resulting float value
      */
     public FloatRadioActivity(final double value, final RadioActivityUnit unit)
     {
@@ -95,7 +95,7 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Construct FloatRadioActivity scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatRadioActivity createSI(final float value)
@@ -105,9 +105,9 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatRadioActivity; the low value
+     * @param one FloatRadioActivity; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatRadioActivity interpolate(final FloatRadioActivity zero, final FloatRadioActivity one, final float ratio)
@@ -117,8 +117,8 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatRadioActivity; the first scalar
+     * @param r2 FloatRadioActivity; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatRadioActivity max(final FloatRadioActivity r1, final FloatRadioActivity r2)
@@ -128,9 +128,9 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatRadioActivity; the first scalar
+     * @param r2 FloatRadioActivity; the second scalar
+     * @param rn FloatRadioActivity...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatRadioActivity max(final FloatRadioActivity r1, final FloatRadioActivity r2,
@@ -149,8 +149,8 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatRadioActivity; the first scalar
+     * @param r2 FloatRadioActivity; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatRadioActivity min(final FloatRadioActivity r1, final FloatRadioActivity r2)
@@ -160,9 +160,9 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatRadioActivity; the first scalar
+     * @param r2 FloatRadioActivity; the second scalar
+     * @param rn FloatRadioActivity...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatRadioActivity min(final FloatRadioActivity r1, final FloatRadioActivity r2,

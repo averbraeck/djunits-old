@@ -26,8 +26,8 @@ public class MutableAbsoluteTemperatureMatrix extends AbstractMutableDoubleMatri
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureMatrix.
      * @param values double[][]; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureMatrix
-     * @param unit U; the unit of the new Absolute Mutable Double AbsoluteTemperatureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Mutable Double AbsoluteTemperatureMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAbsoluteTemperatureMatrix(final double[][] values, final AbsoluteTemperatureUnit unit,
@@ -38,9 +38,9 @@ public class MutableAbsoluteTemperatureMatrix extends AbstractMutableDoubleMatri
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable Double
+     * @param values AbsoluteTemperature[][]; the values of the entries in the new Absolute Mutable Double
      *            AbsoluteTemperatureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAbsoluteTemperatureMatrix(final AbsoluteTemperature[][] values, final StorageType storageType)
@@ -51,8 +51,8 @@ public class MutableAbsoluteTemperatureMatrix extends AbstractMutableDoubleMatri
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit AbsoluteTemperatureUnit; the unit
      */
     MutableAbsoluteTemperatureMatrix(final DoubleMatrixData data, final AbsoluteTemperatureUnit unit)
     {

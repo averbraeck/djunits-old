@@ -54,5 +54,5 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
     /** stat-ohm. */
     public static final ElectricalResistanceUnit STATOHM =
             OHM.deriveLinear(8.987551787E11, "stohm", "statohm", UnitSystem.CGS_ESU, "st\u03A9", "stohm");
-    
+
 }

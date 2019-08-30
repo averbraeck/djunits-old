@@ -25,8 +25,8 @@ public class MutableFloatElectricalConductanceMatrix extends AbstractMutableFloa
     /**
      * Construct a new Relative Immutable FloatElectricalConductanceMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatElectricalConductanceMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatElectricalConductanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalConductanceUnit; the unit of the new Relative Immutable FloatElectricalConductanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalConductanceMatrix(final float[][] values, final ElectricalConductanceUnit unit,
@@ -37,9 +37,9 @@ public class MutableFloatElectricalConductanceMatrix extends AbstractMutableFloa
 
     /**
      * Construct a new Relative Immutable FloatElectricalConductanceMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalConductance[][]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalConductanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalConductanceMatrix(final FloatElectricalConductance[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableFloatElectricalConductanceMatrix extends AbstractMutableFloa
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit ElectricalConductanceUnit; the unit
      */
     MutableFloatElectricalConductanceMatrix(final FloatMatrixData data, final ElectricalConductanceUnit unit)
     {

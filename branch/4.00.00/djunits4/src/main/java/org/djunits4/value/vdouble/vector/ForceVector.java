@@ -27,8 +27,8 @@ public class ForceVector extends AbstractDoubleVectorRel<ForceUnit, ForceVector,
     /**
      * Construct a new Relative Immutable Double ForceVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double ForceVector
-     * @param unit U; the unit of the new Relative Immutable Double ForceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ForceUnit; the unit of the new Relative Immutable Double ForceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ForceVector(final double[] values, final ForceUnit unit, final StorageType storageType) throws ValueException
@@ -38,9 +38,9 @@ public class ForceVector extends AbstractDoubleVectorRel<ForceUnit, ForceVector,
 
     /**
      * Construct a new Relative Immutable Double ForceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ForceVector
-     * @param unit U; the unit of the new Relative Immutable Double ForceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double ForceVector
+     * @param unit ForceUnit; the unit of the new Relative Immutable Double ForceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ForceVector(final List<Double> values, final ForceUnit unit, final StorageType storageType) throws ValueException
@@ -50,8 +50,8 @@ public class ForceVector extends AbstractDoubleVectorRel<ForceUnit, ForceVector,
 
     /**
      * Construct a new Relative Immutable Double ForceVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double ForceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Force[]; the values of the entries in the new Relative Immutable Double ForceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ForceVector(final Force[] values, final StorageType storageType) throws ValueException
@@ -61,8 +61,8 @@ public class ForceVector extends AbstractDoubleVectorRel<ForceUnit, ForceVector,
 
     /**
      * Construct a new Relative Immutable Double ForceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ForceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Force&gt;; the values of the entries in the new Relative Immutable Double ForceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ForceVector(final List<Force> values, final StorageType storageType) throws ValueException
@@ -72,10 +72,10 @@ public class ForceVector extends AbstractDoubleVectorRel<ForceUnit, ForceVector,
 
     /**
      * Construct a new Relative Immutable Double ForceVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Force&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            ForceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ForceVector(final SortedMap<Integer, Force> values, final int length, final StorageType storageType)
@@ -86,10 +86,11 @@ public class ForceVector extends AbstractDoubleVectorRel<ForceUnit, ForceVector,
 
     /**
      * Construct a new Relative Immutable Double ForceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double ForceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double ForceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            ForceVector
+     * @param unit ForceUnit; the unit of the new Relative Sparse Mutable Double ForceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ForceVector(final SortedMap<Integer, Double> values, final ForceUnit unit, final int length,
@@ -99,8 +100,8 @@ public class ForceVector extends AbstractDoubleVectorRel<ForceUnit, ForceVector,
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit ForceUnit; the unit
      */
     ForceVector(final DoubleVectorData data, final ForceUnit unit)
     {

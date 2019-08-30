@@ -46,8 +46,8 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
 
     /**
      * Construct Time scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit TimeUnit; unit for the double value
      */
     public Time(final double value, final TimeUnit unit)
     {
@@ -56,7 +56,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
 
     /**
      * Construct Time scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Time; Scalar from which to construct this instance
      */
     public Time(final Time value)
     {
@@ -79,7 +79,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
 
     /**
      * Construct %TypeAbsl% scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Time createSI(final double value)
@@ -89,9 +89,9 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Time; the low value
+     * @param one Time; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Time interpolate(final Time zero, final Time one, final double ratio)
@@ -101,8 +101,8 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 Time; the first scalar
+     * @param a2 Time; the second scalar
      * @return the maximum value of two absolute scalars
      */
     public static Time max(final Time a1, final Time a2)
@@ -112,9 +112,9 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 Time; the first scalar
+     * @param a2 Time; the second scalar
+     * @param an Time...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static Time max(final Time a1, final Time a2, final Time... an)
@@ -132,8 +132,8 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 Time; the first scalar
+     * @param a2 Time; the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static Time min(final Time a1, final Time a2)
@@ -143,9 +143,9 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 Time; the first scalar
+     * @param a2 Time; the second scalar
+     * @param an Time...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static Time min(final Time a1, final Time a2, final Time... an)

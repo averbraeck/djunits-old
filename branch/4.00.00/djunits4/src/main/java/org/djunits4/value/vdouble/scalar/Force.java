@@ -65,8 +65,8 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Construct Force scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit ForceUnit; unit for the double value
      */
     public Force(final double value, final ForceUnit unit)
     {
@@ -75,7 +75,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Construct Force scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Force; Scalar from which to construct this instance
      */
     public Force(final Force value)
     {
@@ -91,7 +91,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Construct Force scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Force createSI(final double value)
@@ -101,9 +101,9 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Force; the low value
+     * @param one Force; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Force interpolate(final Force zero, final Force one, final double ratio)
@@ -113,8 +113,8 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Force; the first scalar
+     * @param r2 Force; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Force max(final Force r1, final Force r2)
@@ -124,9 +124,9 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Force; the first scalar
+     * @param r2 Force; the second scalar
+     * @param rn Force...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Force max(final Force r1, final Force r2, final Force... rn)
@@ -144,8 +144,8 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Force; the first scalar
+     * @param r2 Force; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Force min(final Force r1, final Force r2)
@@ -155,9 +155,9 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Force; the first scalar
+     * @param r2 Force; the second scalar
+     * @param rn Force...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Force min(final Force r1, final Force r2, final Force... rn)
@@ -214,7 +214,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Force, which results in a Dimensionless scalar.
-     * @param v Force scalar
+     * @param v Force; Force scalar
      * @return Dimensionless scalar as a division of Force and Force
      */
     public final Dimensionless divideBy(final Force v)
@@ -224,7 +224,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the multiplication of Force and Length, which results in a Energy scalar.
-     * @param v Force scalar
+     * @param v Length; Force scalar
      * @return Energy scalar as a multiplication of Force and Length
      */
     public final Energy multiplyBy(final Length v)
@@ -234,7 +234,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and LinearDensity, which results in a Energy scalar.
-     * @param v Force scalar
+     * @param v LinearDensity; Force scalar
      * @return Energy scalar as a division of Force and LinearDensity
      */
     public final Energy divideBy(final LinearDensity v)
@@ -244,7 +244,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Energy, which results in a LinearDensity scalar.
-     * @param v Force scalar
+     * @param v Energy; Force scalar
      * @return LinearDensity scalar as a division of Force and Energy
      */
     public final LinearDensity divideBy(final Energy v)
@@ -254,7 +254,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the multiplication of Force and Speed, which results in a Power scalar.
-     * @param v Force scalar
+     * @param v Speed; Force scalar
      * @return Power scalar as a multiplication of Force and Speed
      */
     public final Power multiplyBy(final Speed v)
@@ -264,7 +264,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Mass, which results in a Acceleration scalar.
-     * @param v Force scalar
+     * @param v Mass; Force scalar
      * @return Acceleration scalar as a division of Force and Mass
      */
     public final Acceleration divideBy(final Mass v)
@@ -274,7 +274,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Acceleration, which results in a Mass scalar.
-     * @param v Force scalar
+     * @param v Acceleration; Force scalar
      * @return Mass scalar as a division of Force and Acceleration
      */
     public final Mass divideBy(final Acceleration v)
@@ -284,7 +284,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Area, which results in a Pressure scalar.
-     * @param v Force scalar
+     * @param v Area; Force scalar
      * @return Pressure scalar as a division of Force and Area
      */
     public final Pressure divideBy(final Area v)
@@ -294,7 +294,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Pressure, which results in a Area scalar.
-     * @param v Force scalar
+     * @param v Pressure; Force scalar
      * @return Area scalar as a division of Force and Pressure
      */
     public final Area divideBy(final Pressure v)

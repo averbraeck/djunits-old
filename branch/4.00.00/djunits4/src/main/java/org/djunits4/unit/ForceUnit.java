@@ -65,5 +65,5 @@ public class ForceUnit extends Unit<ForceUnit>
     {
         return mass.getScale().toStandardUnit(1.0) * acceleration.getScale().toStandardUnit(1.0);
     }
-    
+
 }

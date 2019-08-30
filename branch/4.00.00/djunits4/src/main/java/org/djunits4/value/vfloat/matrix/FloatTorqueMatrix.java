@@ -25,8 +25,8 @@ public class FloatTorqueMatrix
     /**
      * Construct a new Relative Immutable FloatTorqueMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatTorqueMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatTorqueMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit TorqueUnit; the unit of the new Relative Immutable FloatTorqueMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatTorqueMatrix(final float[][] values, final TorqueUnit unit, final StorageType storageType) throws ValueException
@@ -36,9 +36,8 @@ public class FloatTorqueMatrix
 
     /**
      * Construct a new Relative Immutable FloatTorqueMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatTorqueMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatTorque[][]; the values of the entries in the new Relative Immutable Float FloatTorqueMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatTorqueMatrix(final FloatTorque[][] values, final StorageType storageType) throws ValueException
@@ -47,8 +46,8 @@ public class FloatTorqueMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit TorqueUnit; the unit
      */
     FloatTorqueMatrix(final FloatMatrixData data, final TorqueUnit unit)
     {

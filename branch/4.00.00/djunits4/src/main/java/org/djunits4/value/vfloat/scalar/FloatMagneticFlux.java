@@ -59,8 +59,8 @@ public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, 
 
     /**
      * Construct FloatMagneticFlux scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit MagneticFluxUnit; unit for the float value
      */
     public FloatMagneticFlux(final float value, final MagneticFluxUnit unit)
     {
@@ -69,7 +69,7 @@ public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, 
 
     /**
      * Construct FloatMagneticFlux scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatMagneticFlux; Scalar from which to construct this instance
      */
     public FloatMagneticFlux(final FloatMagneticFlux value)
     {
@@ -78,8 +78,8 @@ public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, 
 
     /**
      * Construct FloatMagneticFlux scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit MagneticFluxUnit; unit for the resulting float value
      */
     public FloatMagneticFlux(final double value, final MagneticFluxUnit unit)
     {
@@ -95,7 +95,7 @@ public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, 
 
     /**
      * Construct FloatMagneticFlux scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatMagneticFlux createSI(final float value)
@@ -105,9 +105,9 @@ public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, 
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatMagneticFlux; the low value
+     * @param one FloatMagneticFlux; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatMagneticFlux interpolate(final FloatMagneticFlux zero, final FloatMagneticFlux one, final float ratio)
@@ -117,8 +117,8 @@ public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, 
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatMagneticFlux; the first scalar
+     * @param r2 FloatMagneticFlux; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatMagneticFlux max(final FloatMagneticFlux r1, final FloatMagneticFlux r2)
@@ -128,9 +128,9 @@ public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, 
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatMagneticFlux; the first scalar
+     * @param r2 FloatMagneticFlux; the second scalar
+     * @param rn FloatMagneticFlux...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatMagneticFlux max(final FloatMagneticFlux r1, final FloatMagneticFlux r2, final FloatMagneticFlux... rn)
@@ -148,8 +148,8 @@ public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, 
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatMagneticFlux; the first scalar
+     * @param r2 FloatMagneticFlux; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatMagneticFlux min(final FloatMagneticFlux r1, final FloatMagneticFlux r2)
@@ -159,9 +159,9 @@ public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, 
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatMagneticFlux; the first scalar
+     * @param r2 FloatMagneticFlux; the second scalar
+     * @param rn FloatMagneticFlux...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatMagneticFlux min(final FloatMagneticFlux r1, final FloatMagneticFlux r2, final FloatMagneticFlux... rn)

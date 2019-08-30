@@ -26,8 +26,8 @@ public class DirectionMatrix extends
     /**
      * Construct a new Absolute Immutable Double AngleMatrix.
      * @param values double[][]; the values of the entries in the new Absolute Immutable Double AngleMatrix
-     * @param unit U; the unit of the new Absolute Immutable Double AngleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DirectionUnit; the unit of the new Absolute Immutable Double AngleMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public DirectionMatrix(final double[][] values, final DirectionUnit unit, final StorageType storageType)
@@ -38,8 +38,8 @@ public class DirectionMatrix extends
 
     /**
      * Construct a new Absolute Immutable Double AngleMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable Double AngleMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Direction[][]; the values of the entries in the new Absolute Immutable Double AngleMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public DirectionMatrix(final Direction[][] values, final StorageType storageType) throws ValueException
@@ -49,8 +49,8 @@ public class DirectionMatrix extends
 
     /**
      * Construct a new Absolute Immutable Double AngleMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit DirectionUnit; the unit
      */
     DirectionMatrix(final DoubleMatrixData data, final DirectionUnit unit)
     {

@@ -64,8 +64,8 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Construct FloatElectricalCapacitance scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit ElectricalCapacitanceUnit; unit for the float value
      */
     public FloatElectricalCapacitance(final float value, final ElectricalCapacitanceUnit unit)
     {
@@ -74,7 +74,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Construct FloatElectricalCapacitance scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatElectricalCapacitance; Scalar from which to construct this instance
      */
     public FloatElectricalCapacitance(final FloatElectricalCapacitance value)
     {
@@ -83,8 +83,8 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Construct FloatElectricalCapacitance scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit ElectricalCapacitanceUnit; unit for the resulting float value
      */
     public FloatElectricalCapacitance(final double value, final ElectricalCapacitanceUnit unit)
     {
@@ -100,7 +100,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Construct FloatElectricalCapacitance scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatElectricalCapacitance createSI(final float value)
@@ -110,9 +110,9 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatElectricalCapacitance; the low value
+     * @param one FloatElectricalCapacitance; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalCapacitance interpolate(final FloatElectricalCapacitance zero,
@@ -124,8 +124,8 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatElectricalCapacitance; the first scalar
+     * @param r2 FloatElectricalCapacitance; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatElectricalCapacitance max(final FloatElectricalCapacitance r1, final FloatElectricalCapacitance r2)
@@ -135,9 +135,9 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatElectricalCapacitance; the first scalar
+     * @param r2 FloatElectricalCapacitance; the second scalar
+     * @param rn FloatElectricalCapacitance...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatElectricalCapacitance max(final FloatElectricalCapacitance r1, final FloatElectricalCapacitance r2,
@@ -156,8 +156,8 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatElectricalCapacitance; the first scalar
+     * @param r2 FloatElectricalCapacitance; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatElectricalCapacitance min(final FloatElectricalCapacitance r1, final FloatElectricalCapacitance r2)
@@ -167,9 +167,9 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatElectricalCapacitance; the first scalar
+     * @param r2 FloatElectricalCapacitance; the second scalar
+     * @param rn FloatElectricalCapacitance...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatElectricalCapacitance min(final FloatElectricalCapacitance r1, final FloatElectricalCapacitance r2,

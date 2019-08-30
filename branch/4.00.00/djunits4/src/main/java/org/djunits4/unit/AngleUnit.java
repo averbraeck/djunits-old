@@ -57,5 +57,5 @@ public class AngleUnit extends Unit<AngleUnit>
 
     /** centesimal arcsecond. */
     public static final AngleUnit CENTESIMAL_ARCSECOND = GRAD.deriveLinear(1.0 / 10000.0, "c\"", "centesimal arcsecond");
-    
+
 }

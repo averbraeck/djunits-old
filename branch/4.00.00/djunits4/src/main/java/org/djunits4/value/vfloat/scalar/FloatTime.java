@@ -40,8 +40,8 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
 
     /**
      * Construct FloatTime scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit TimeUnit; unit for the float value
      */
     public FloatTime(final float value, final TimeUnit unit)
     {
@@ -50,8 +50,8 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
 
     /**
      * Construct FloatTime scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit TimeUnit; unit for the resulting float value
      */
     public FloatTime(final double value, final TimeUnit unit)
     {
@@ -60,7 +60,7 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
 
     /**
      * Construct FloatTime scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatTime; Scalar from which to construct this instance
      */
     public FloatTime(final FloatTime value)
     {
@@ -83,7 +83,7 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
 
     /**
      * Construct FloatTime scalar.
-     * @param value float value in BASE units
+     * @param value float; float value in BASE units
      * @return the new scalar with the BASE value
      */
     public static final FloatTime createSI(final float value)
@@ -93,9 +93,9 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatTime; the low value
+     * @param one FloatTime; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatTime interpolate(final FloatTime zero, final FloatTime one, final float ratio)
@@ -105,8 +105,8 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 FloatTime; the first scalar
+     * @param a2 FloatTime; the second scalar
      * @return the maximum value of two absolute scalars
      */
     public static FloatTime max(final FloatTime a1, final FloatTime a2)
@@ -116,9 +116,9 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 FloatTime; the first scalar
+     * @param a2 FloatTime; the second scalar
+     * @param an FloatTime...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static FloatTime max(final FloatTime a1, final FloatTime a2, final FloatTime... an)
@@ -136,8 +136,8 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 FloatTime; the first scalar
+     * @param a2 FloatTime; the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static FloatTime min(final FloatTime a1, final FloatTime a2)
@@ -147,9 +147,9 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 FloatTime; the first scalar
+     * @param a2 FloatTime; the second scalar
+     * @param an FloatTime...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static FloatTime min(final FloatTime a1, final FloatTime a2, final FloatTime... an)

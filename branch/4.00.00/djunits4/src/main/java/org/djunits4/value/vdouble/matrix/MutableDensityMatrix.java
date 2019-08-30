@@ -25,8 +25,8 @@ public class MutableDensityMatrix
     /**
      * Construct a new Relative Immutable Double DensityMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double DensityMatrix
-     * @param unit U; the unit of the new Relative Immutable Double DensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DensityUnit; the unit of the new Relative Immutable Double DensityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableDensityMatrix(final double[][] values, final DensityUnit unit, final StorageType storageType)
@@ -37,8 +37,8 @@ public class MutableDensityMatrix
 
     /**
      * Construct a new Relative Immutable Double DensityMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double DensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Density[][]; the values of the entries in the new Relative Immutable Double DensityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableDensityMatrix(final Density[][] values, final StorageType storageType) throws ValueException
@@ -47,8 +47,8 @@ public class MutableDensityMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit DensityUnit; the unit
      */
     MutableDensityMatrix(final DoubleMatrixData data, final DensityUnit unit)
     {

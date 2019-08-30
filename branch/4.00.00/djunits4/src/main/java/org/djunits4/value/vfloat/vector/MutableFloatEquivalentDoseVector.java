@@ -28,8 +28,8 @@ public class MutableFloatEquivalentDoseVector extends AbstractMutableFloatVector
     /**
      * Construct a new Relative Immutable Float EquivalentDoseVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float EquivalentDoseVector
-     * @param unit U; the unit of the new Relative Immutable Float EquivalentDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit EquivalentDoseUnit; the unit of the new Relative Immutable Float EquivalentDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatEquivalentDoseVector(final float[] values, final EquivalentDoseUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatEquivalentDoseVector extends AbstractMutableFloatVector
 
     /**
      * Construct a new Relative Immutable Float EquivalentDoseVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float EquivalentDoseVector
-     * @param unit U; the unit of the new Relative Immutable Float EquivalentDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float EquivalentDoseVector
+     * @param unit EquivalentDoseUnit; the unit of the new Relative Immutable Float EquivalentDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatEquivalentDoseVector(final List<Float> values, final EquivalentDoseUnit unit,
@@ -53,9 +53,8 @@ public class MutableFloatEquivalentDoseVector extends AbstractMutableFloatVector
 
     /**
      * Construct a new Relative Immutable Float EquivalentDoseVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            EquivalentDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatEquivalentDose[]; the values of the entries in the new Relative Immutable Float EquivalentDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatEquivalentDoseVector(final FloatEquivalentDose[] values, final StorageType storageType)
@@ -66,8 +65,9 @@ public class MutableFloatEquivalentDoseVector extends AbstractMutableFloatVector
 
     /**
      * Construct a new Relative Immutable Float EquivalentDoseVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float EquivalentDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatEquivalentDose&gt;; the values of the entries in the new Relative Immutable Float
+     *            EquivalentDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatEquivalentDoseVector(final List<FloatEquivalentDose> values, final StorageType storageType)
@@ -78,10 +78,10 @@ public class MutableFloatEquivalentDoseVector extends AbstractMutableFloatVector
 
     /**
      * Construct a new Relative Immutable Float EquivalentDoseVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            EquivalentDoseVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatEquivalentDose&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float EquivalentDoseVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatEquivalentDoseVector(final SortedMap<Integer, FloatEquivalentDose> values, final int length,
@@ -92,10 +92,11 @@ public class MutableFloatEquivalentDoseVector extends AbstractMutableFloatVector
 
     /**
      * Construct a new Relative Immutable Float EquivalentDoseVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float EquivalentDoseVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float EquivalentDoseVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            EquivalentDoseVector
+     * @param unit EquivalentDoseUnit; the unit of the new Relative Sparse Mutable Float EquivalentDoseVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatEquivalentDoseVector(final SortedMap<Integer, Float> values, final EquivalentDoseUnit unit,
@@ -105,8 +106,8 @@ public class MutableFloatEquivalentDoseVector extends AbstractMutableFloatVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit EquivalentDoseUnit; the unit
      */
     MutableFloatEquivalentDoseVector(final FloatVectorData data, final EquivalentDoseUnit unit)
     {

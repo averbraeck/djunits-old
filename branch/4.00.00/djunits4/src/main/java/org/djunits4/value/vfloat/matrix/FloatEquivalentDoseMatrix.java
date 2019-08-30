@@ -25,8 +25,8 @@ public class FloatEquivalentDoseMatrix extends AbstractFloatMatrixRel<Equivalent
     /**
      * Construct a new Relative Immutable FloatEquivalentDoseMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatEquivalentDoseMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatEquivalentDoseMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit EquivalentDoseUnit; the unit of the new Relative Immutable FloatEquivalentDoseMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatEquivalentDoseMatrix(final float[][] values, final EquivalentDoseUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class FloatEquivalentDoseMatrix extends AbstractFloatMatrixRel<Equivalent
 
     /**
      * Construct a new Relative Immutable FloatEquivalentDoseMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatEquivalentDose[][]; the values of the entries in the new Relative Immutable Float
      *            FloatEquivalentDoseMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatEquivalentDoseMatrix(final FloatEquivalentDose[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class FloatEquivalentDoseMatrix extends AbstractFloatMatrixRel<Equivalent
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit EquivalentDoseUnit; the unit
      */
     FloatEquivalentDoseMatrix(final FloatMatrixData data, final EquivalentDoseUnit unit)
     {

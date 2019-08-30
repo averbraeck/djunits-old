@@ -51,5 +51,5 @@ public class ElectricalPotentialUnit extends Unit<ElectricalPotentialUnit>
 
     /** abvolt. */
     public static final ElectricalPotentialUnit ABVOLT = VOLT.deriveLinear(1.0E-8, "abV", "abvolt", UnitSystem.CGS_EMU);
-    
+
 }

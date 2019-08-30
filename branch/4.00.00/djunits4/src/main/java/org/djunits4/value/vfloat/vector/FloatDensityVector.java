@@ -28,8 +28,8 @@ public class FloatDensityVector
     /**
      * Construct a new Relative Immutable Float FloatDensityVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatDensityVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DensityUnit; the unit of the new Relative Immutable Float FloatDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatDensityVector(final float[] values, final DensityUnit unit, final StorageType storageType) throws ValueException
@@ -39,9 +39,9 @@ public class FloatDensityVector
 
     /**
      * Construct a new Relative Immutable Float FloatDensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatDensityVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatDensityVector
+     * @param unit DensityUnit; the unit of the new Relative Immutable Float FloatDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatDensityVector(final List<Float> values, final DensityUnit unit, final StorageType storageType)
@@ -52,9 +52,8 @@ public class FloatDensityVector
 
     /**
      * Construct a new Relative Immutable Float FloatDensityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatDensity[]; the values of the entries in the new Relative Immutable Float FloatDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatDensityVector(final FloatDensity[] values, final StorageType storageType) throws ValueException
@@ -64,8 +63,8 @@ public class FloatDensityVector
 
     /**
      * Construct a new Relative Immutable Float FloatDensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatDensity&gt;; the values of the entries in the new Relative Immutable Float FloatDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatDensityVector(final List<FloatDensity> values, final StorageType storageType) throws ValueException
@@ -75,10 +74,10 @@ public class FloatDensityVector
 
     /**
      * Construct a new Relative Immutable Float FloatDensityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
+     * @param values SortedMap&lt;Integer, FloatDensity&gt;; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatDensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatDensityVector(final SortedMap<Integer, FloatDensity> values, final int length, final StorageType storageType)
@@ -89,10 +88,11 @@ public class FloatDensityVector
 
     /**
      * Construct a new Relative Immutable Float FloatDensityVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatDensityVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatDensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatDensityVector
+     * @param unit DensityUnit; the unit of the new Relative Sparse Mutable Float FloatDensityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatDensityVector(final SortedMap<Integer, Float> values, final DensityUnit unit, final int length,
@@ -102,8 +102,8 @@ public class FloatDensityVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit DensityUnit; the unit
      */
     FloatDensityVector(final FloatVectorData data, final DensityUnit unit)
     {

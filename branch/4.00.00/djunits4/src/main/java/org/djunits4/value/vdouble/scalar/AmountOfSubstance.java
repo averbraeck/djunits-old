@@ -59,8 +59,8 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Construct AmountOfSubstance scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit AmountOfSubstanceUnit; unit for the double value
      */
     public AmountOfSubstance(final double value, final AmountOfSubstanceUnit unit)
     {
@@ -69,7 +69,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Construct AmountOfSubstance scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value AmountOfSubstance; Scalar from which to construct this instance
      */
     public AmountOfSubstance(final AmountOfSubstance value)
     {
@@ -85,7 +85,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Construct AmountOfSubstance scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final AmountOfSubstance createSI(final double value)
@@ -95,9 +95,9 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero AmountOfSubstance; the low value
+     * @param one AmountOfSubstance; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static AmountOfSubstance interpolate(final AmountOfSubstance zero, final AmountOfSubstance one, final double ratio)
@@ -107,8 +107,8 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 AmountOfSubstance; the first scalar
+     * @param r2 AmountOfSubstance; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static AmountOfSubstance max(final AmountOfSubstance r1, final AmountOfSubstance r2)
@@ -118,9 +118,9 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 AmountOfSubstance; the first scalar
+     * @param r2 AmountOfSubstance; the second scalar
+     * @param rn AmountOfSubstance...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static AmountOfSubstance max(final AmountOfSubstance r1, final AmountOfSubstance r2, final AmountOfSubstance... rn)
@@ -138,8 +138,8 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 AmountOfSubstance; the first scalar
+     * @param r2 AmountOfSubstance; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static AmountOfSubstance min(final AmountOfSubstance r1, final AmountOfSubstance r2)
@@ -149,9 +149,9 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 AmountOfSubstance; the first scalar
+     * @param r2 AmountOfSubstance; the second scalar
+     * @param rn AmountOfSubstance...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static AmountOfSubstance min(final AmountOfSubstance r1, final AmountOfSubstance r2, final AmountOfSubstance... rn)

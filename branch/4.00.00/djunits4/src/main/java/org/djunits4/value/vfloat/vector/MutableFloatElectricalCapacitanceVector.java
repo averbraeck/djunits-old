@@ -28,8 +28,8 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
     /**
      * Construct a new Relative Immutable Float ElectricalCapacitanceVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float ElectricalCapacitanceVector
-     * @param unit U; the unit of the new Relative Immutable Float ElectricalCapacitanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Immutable Float ElectricalCapacitanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalCapacitanceVector(final float[] values, final ElectricalCapacitanceUnit unit,
@@ -40,9 +40,10 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
 
     /**
      * Construct a new Relative Immutable Float ElectricalCapacitanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float ElectricalCapacitanceVector
-     * @param unit U; the unit of the new Relative Immutable Float ElectricalCapacitanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float
+     *            ElectricalCapacitanceVector
+     * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Immutable Float ElectricalCapacitanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalCapacitanceVector(final List<Float> values, final ElectricalCapacitanceUnit unit,
@@ -53,9 +54,9 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
 
     /**
      * Construct a new Relative Immutable Float ElectricalCapacitanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalCapacitance[]; the values of the entries in the new Relative Immutable Float
      *            ElectricalCapacitanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalCapacitanceVector(final FloatElectricalCapacitance[] values, final StorageType storageType)
@@ -66,8 +67,9 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
 
     /**
      * Construct a new Relative Immutable Float ElectricalCapacitanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float ElectricalCapacitanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatElectricalCapacitance&gt;; the values of the entries in the new Relative Immutable Float
+     *            ElectricalCapacitanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalCapacitanceVector(final List<FloatElectricalCapacitance> values, final StorageType storageType)
@@ -78,10 +80,10 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
 
     /**
      * Construct a new Relative Immutable Float ElectricalCapacitanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            ElectricalCapacitanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatElectricalCapacitance&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Float ElectricalCapacitanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalCapacitanceVector(final SortedMap<Integer, FloatElectricalCapacitance> values,
@@ -92,10 +94,11 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
 
     /**
      * Construct a new Relative Immutable Float ElectricalCapacitanceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float ElectricalCapacitanceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float ElectricalCapacitanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            ElectricalCapacitanceVector
+     * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Sparse Mutable Float ElectricalCapacitanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalCapacitanceVector(final SortedMap<Integer, Float> values, final ElectricalCapacitanceUnit unit,
@@ -105,8 +108,8 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit ElectricalCapacitanceUnit; the unit
      */
     MutableFloatElectricalCapacitanceVector(final FloatVectorData data, final ElectricalCapacitanceUnit unit)
     {

@@ -25,8 +25,8 @@ public class LuminousIntensityMatrix extends AbstractDoubleMatrixRel<LuminousInt
     /**
      * Construct a new Relative Immutable Double LuminousIntensityMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double LuminousIntensityMatrix
-     * @param unit U; the unit of the new Relative Immutable Double LuminousIntensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit LuminousIntensityUnit; the unit of the new Relative Immutable Double LuminousIntensityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public LuminousIntensityMatrix(final double[][] values, final LuminousIntensityUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class LuminousIntensityMatrix extends AbstractDoubleMatrixRel<LuminousInt
 
     /**
      * Construct a new Relative Immutable Double LuminousIntensityMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
+     * @param values LuminousIntensity[][]; the values of the entries in the new Relative Immutable Double
      *            LuminousIntensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public LuminousIntensityMatrix(final LuminousIntensity[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class LuminousIntensityMatrix extends AbstractDoubleMatrixRel<LuminousInt
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit LuminousIntensityUnit; the unit
      */
     LuminousIntensityMatrix(final DoubleMatrixData data, final LuminousIntensityUnit unit)
     {

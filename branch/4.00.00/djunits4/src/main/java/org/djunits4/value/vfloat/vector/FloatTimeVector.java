@@ -29,8 +29,8 @@ public class FloatTimeVector extends
     /**
      * Construct a new Absolute Immutable FloatTimeVector.
      * @param values float[]; the values of the entries in the new Absolute Immutable FloatTimeVector
-     * @param unit U; the unit of the new Absolute Immutable FloatTimeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit TimeUnit; the unit of the new Absolute Immutable FloatTimeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatTimeVector(final float[] values, final TimeUnit unit, final StorageType storageType) throws ValueException
@@ -40,9 +40,9 @@ public class FloatTimeVector extends
 
     /**
      * Construct a new Absolute Immutable FloatTimeVector.
-     * @param values List; the values of the entries in the new Absolute Immutable FloatTimeVector
-     * @param unit U; the unit of the new Absolute Immutable FloatTimeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable FloatTimeVector
+     * @param unit TimeUnit; the unit of the new Absolute Immutable FloatTimeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatTimeVector(final List<Float> values, final TimeUnit unit, final StorageType storageType) throws ValueException
@@ -52,8 +52,8 @@ public class FloatTimeVector extends
 
     /**
      * Construct a new Absolute Immutable FloatTimeVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Immutable FloatTimeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatTime[]; the values of the entries in the new Absolute Immutable FloatTimeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatTimeVector(final FloatTime[] values, final StorageType storageType) throws ValueException
@@ -63,8 +63,8 @@ public class FloatTimeVector extends
 
     /**
      * Construct a new Absolute Immutable FloatTimeVector.
-     * @param values List; the values of the entries in the new Absolute Immutable FloatTimeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatTime&gt;; the values of the entries in the new Absolute Immutable FloatTimeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatTimeVector(final List<FloatTime> values, final StorageType storageType) throws ValueException
@@ -74,9 +74,10 @@ public class FloatTimeVector extends
 
     /**
      * Construct a new Absolute Immutable FloatTimeVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable FloatTimeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatTime&gt;; the values of the entries in the new Absolute Sparse Mutable
+     *            FloatTimeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatTimeVector(final SortedMap<Integer, FloatTime> values, final int length, final StorageType storageType)
@@ -87,10 +88,11 @@ public class FloatTimeVector extends
 
     /**
      * Construct a new Absolute Immutable FloatTimeVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatTimeVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable FloatTimeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Absolute Sparse Mutable
+     *            FloatTimeVector
+     * @param unit TimeUnit; the unit of the new Absolute Sparse Mutable FloatTimeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatTimeVector(final SortedMap<Integer, Float> values, final TimeUnit unit, final int length,
@@ -101,8 +103,8 @@ public class FloatTimeVector extends
 
     /**
      * Construct a new Absolute Immutable FloatTimeVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit TimeUnit; the unit
      */
     FloatTimeVector(final FloatVectorData data, final TimeUnit unit)
     {

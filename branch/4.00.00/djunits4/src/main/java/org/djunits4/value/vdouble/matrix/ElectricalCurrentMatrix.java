@@ -25,8 +25,8 @@ public class ElectricalCurrentMatrix extends AbstractDoubleMatrixRel<ElectricalC
     /**
      * Construct a new Relative Immutable Double ElectricalCurrentMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double ElectricalCurrentMatrix
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalCurrentMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalCurrentUnit; the unit of the new Relative Immutable Double ElectricalCurrentMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalCurrentMatrix(final double[][] values, final ElectricalCurrentUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class ElectricalCurrentMatrix extends AbstractDoubleMatrixRel<ElectricalC
 
     /**
      * Construct a new Relative Immutable Double ElectricalCurrentMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
+     * @param values ElectricalCurrent[][]; the values of the entries in the new Relative Immutable Double
      *            ElectricalCurrentMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalCurrentMatrix(final ElectricalCurrent[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class ElectricalCurrentMatrix extends AbstractDoubleMatrixRel<ElectricalC
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit ElectricalCurrentUnit; the unit
      */
     ElectricalCurrentMatrix(final DoubleMatrixData data, final ElectricalCurrentUnit unit)
     {

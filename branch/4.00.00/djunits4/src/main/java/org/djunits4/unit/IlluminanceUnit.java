@@ -24,8 +24,8 @@ public class IlluminanceUnit extends Unit<IlluminanceUnit>
     public static final UnitBase<IlluminanceUnit> BASE = new UnitBase<>("cd/m2");
 
     /** The SI unit for amount of illuminance is lux */
-    public static final IlluminanceUnit SI = new IlluminanceUnit()
-            .build(new Unit.Builder<IlluminanceUnit>().setBaseUnit(BASE).setId("").setName("lumen")
+    public static final IlluminanceUnit SI =
+            new IlluminanceUnit().build(new Unit.Builder<IlluminanceUnit>().setBaseUnit(BASE).setId("").setName("lumen")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Lux. */

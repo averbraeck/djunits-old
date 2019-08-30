@@ -25,8 +25,8 @@ public class MutableFloatAmountOfSubstanceMatrix extends AbstractMutableFloatMat
     /**
      * Construct a new Relative Immutable FloatAmountOfSubstanceMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatAmountOfSubstanceMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatAmountOfSubstanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AmountOfSubstanceUnit; the unit of the new Relative Immutable FloatAmountOfSubstanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAmountOfSubstanceMatrix(final float[][] values, final AmountOfSubstanceUnit unit,
@@ -37,9 +37,9 @@ public class MutableFloatAmountOfSubstanceMatrix extends AbstractMutableFloatMat
 
     /**
      * Construct a new Relative Immutable FloatAmountOfSubstanceMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatAmountOfSubstance[][]; the values of the entries in the new Relative Immutable Float
      *            FloatAmountOfSubstanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAmountOfSubstanceMatrix(final FloatAmountOfSubstance[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableFloatAmountOfSubstanceMatrix extends AbstractMutableFloatMat
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit AmountOfSubstanceUnit; the unit
      */
     MutableFloatAmountOfSubstanceMatrix(final FloatMatrixData data, final AmountOfSubstanceUnit unit)
     {

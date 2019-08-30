@@ -62,8 +62,8 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
 
     /**
      * Construct ElectricalCapacitance scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit ElectricalCapacitanceUnit; unit for the double value
      */
     public ElectricalCapacitance(final double value, final ElectricalCapacitanceUnit unit)
     {
@@ -72,7 +72,7 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
 
     /**
      * Construct ElectricalCapacitance scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value ElectricalCapacitance; Scalar from which to construct this instance
      */
     public ElectricalCapacitance(final ElectricalCapacitance value)
     {
@@ -88,7 +88,7 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
 
     /**
      * Construct ElectricalCapacitance scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final ElectricalCapacitance createSI(final double value)
@@ -98,9 +98,9 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero ElectricalCapacitance; the low value
+     * @param one ElectricalCapacitance; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static ElectricalCapacitance interpolate(final ElectricalCapacitance zero, final ElectricalCapacitance one,
@@ -112,8 +112,8 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 ElectricalCapacitance; the first scalar
+     * @param r2 ElectricalCapacitance; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static ElectricalCapacitance max(final ElectricalCapacitance r1, final ElectricalCapacitance r2)
@@ -123,9 +123,9 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 ElectricalCapacitance; the first scalar
+     * @param r2 ElectricalCapacitance; the second scalar
+     * @param rn ElectricalCapacitance...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static ElectricalCapacitance max(final ElectricalCapacitance r1, final ElectricalCapacitance r2,
@@ -144,8 +144,8 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 ElectricalCapacitance; the first scalar
+     * @param r2 ElectricalCapacitance; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static ElectricalCapacitance min(final ElectricalCapacitance r1, final ElectricalCapacitance r2)
@@ -155,9 +155,9 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 ElectricalCapacitance; the first scalar
+     * @param r2 ElectricalCapacitance; the second scalar
+     * @param rn ElectricalCapacitance...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static ElectricalCapacitance min(final ElectricalCapacitance r1, final ElectricalCapacitance r2,

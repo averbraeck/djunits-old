@@ -25,8 +25,8 @@ public class CatalyticActivityMatrix extends AbstractDoubleMatrixRel<CatalyticAc
     /**
      * Construct a new Relative Immutable Double CatalyticActivityMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double CatalyticActivityMatrix
-     * @param unit U; the unit of the new Relative Immutable Double CatalyticActivityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit CatalyticActivityUnit; the unit of the new Relative Immutable Double CatalyticActivityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public CatalyticActivityMatrix(final double[][] values, final CatalyticActivityUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class CatalyticActivityMatrix extends AbstractDoubleMatrixRel<CatalyticAc
 
     /**
      * Construct a new Relative Immutable Double CatalyticActivityMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
+     * @param values CatalyticActivity[][]; the values of the entries in the new Relative Immutable Double
      *            CatalyticActivityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public CatalyticActivityMatrix(final CatalyticActivity[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class CatalyticActivityMatrix extends AbstractDoubleMatrixRel<CatalyticAc
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit CatalyticActivityUnit; the unit
      */
     CatalyticActivityMatrix(final DoubleMatrixData data, final CatalyticActivityUnit unit)
     {

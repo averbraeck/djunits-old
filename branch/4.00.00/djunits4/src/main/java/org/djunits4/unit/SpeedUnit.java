@@ -92,5 +92,5 @@ public class SpeedUnit extends Unit<SpeedUnit>
     {
         return length.getScale().toStandardUnit(1.0) / duration.getScale().toStandardUnit(1.0);
     }
-    
+
 }

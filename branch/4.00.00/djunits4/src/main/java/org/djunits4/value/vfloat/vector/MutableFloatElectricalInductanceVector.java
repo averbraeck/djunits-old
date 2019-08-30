@@ -28,8 +28,8 @@ public class MutableFloatElectricalInductanceVector extends AbstractMutableFloat
     /**
      * Construct a new Relative Immutable Float ElectricalInductanceVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float ElectricalInductanceVector
-     * @param unit U; the unit of the new Relative Immutable Float ElectricalInductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalInductanceUnit; the unit of the new Relative Immutable Float ElectricalInductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalInductanceVector(final float[] values, final ElectricalInductanceUnit unit,
@@ -40,9 +40,9 @@ public class MutableFloatElectricalInductanceVector extends AbstractMutableFloat
 
     /**
      * Construct a new Relative Immutable Float ElectricalInductanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float ElectricalInductanceVector
-     * @param unit U; the unit of the new Relative Immutable Float ElectricalInductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float ElectricalInductanceVector
+     * @param unit ElectricalInductanceUnit; the unit of the new Relative Immutable Float ElectricalInductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalInductanceVector(final List<Float> values, final ElectricalInductanceUnit unit,
@@ -53,9 +53,9 @@ public class MutableFloatElectricalInductanceVector extends AbstractMutableFloat
 
     /**
      * Construct a new Relative Immutable Float ElectricalInductanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalInductance[]; the values of the entries in the new Relative Immutable Float
      *            ElectricalInductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalInductanceVector(final FloatElectricalInductance[] values, final StorageType storageType)
@@ -66,8 +66,9 @@ public class MutableFloatElectricalInductanceVector extends AbstractMutableFloat
 
     /**
      * Construct a new Relative Immutable Float ElectricalInductanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float ElectricalInductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatElectricalInductance&gt;; the values of the entries in the new Relative Immutable Float
+     *            ElectricalInductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalInductanceVector(final List<FloatElectricalInductance> values, final StorageType storageType)
@@ -78,10 +79,10 @@ public class MutableFloatElectricalInductanceVector extends AbstractMutableFloat
 
     /**
      * Construct a new Relative Immutable Float ElectricalInductanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            ElectricalInductanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatElectricalInductance&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Float ElectricalInductanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalInductanceVector(final SortedMap<Integer, FloatElectricalInductance> values, final int length,
@@ -92,10 +93,11 @@ public class MutableFloatElectricalInductanceVector extends AbstractMutableFloat
 
     /**
      * Construct a new Relative Immutable Float ElectricalInductanceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float ElectricalInductanceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float ElectricalInductanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            ElectricalInductanceVector
+     * @param unit ElectricalInductanceUnit; the unit of the new Relative Sparse Mutable Float ElectricalInductanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalInductanceVector(final SortedMap<Integer, Float> values, final ElectricalInductanceUnit unit,
@@ -105,8 +107,8 @@ public class MutableFloatElectricalInductanceVector extends AbstractMutableFloat
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit ElectricalInductanceUnit; the unit
      */
     MutableFloatElectricalInductanceVector(final FloatVectorData data, final ElectricalInductanceUnit unit)
     {

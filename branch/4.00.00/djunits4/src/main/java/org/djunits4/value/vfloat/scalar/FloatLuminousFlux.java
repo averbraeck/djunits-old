@@ -59,8 +59,8 @@ public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, 
 
     /**
      * Construct FloatLuminousFlux scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit LuminousFluxUnit; unit for the float value
      */
     public FloatLuminousFlux(final float value, final LuminousFluxUnit unit)
     {
@@ -69,7 +69,7 @@ public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, 
 
     /**
      * Construct FloatLuminousFlux scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatLuminousFlux; Scalar from which to construct this instance
      */
     public FloatLuminousFlux(final FloatLuminousFlux value)
     {
@@ -78,8 +78,8 @@ public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, 
 
     /**
      * Construct FloatLuminousFlux scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit LuminousFluxUnit; unit for the resulting float value
      */
     public FloatLuminousFlux(final double value, final LuminousFluxUnit unit)
     {
@@ -95,7 +95,7 @@ public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, 
 
     /**
      * Construct FloatLuminousFlux scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatLuminousFlux createSI(final float value)
@@ -105,9 +105,9 @@ public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, 
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatLuminousFlux; the low value
+     * @param one FloatLuminousFlux; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatLuminousFlux interpolate(final FloatLuminousFlux zero, final FloatLuminousFlux one, final float ratio)
@@ -117,8 +117,8 @@ public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, 
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatLuminousFlux; the first scalar
+     * @param r2 FloatLuminousFlux; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatLuminousFlux max(final FloatLuminousFlux r1, final FloatLuminousFlux r2)
@@ -128,9 +128,9 @@ public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, 
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatLuminousFlux; the first scalar
+     * @param r2 FloatLuminousFlux; the second scalar
+     * @param rn FloatLuminousFlux...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatLuminousFlux max(final FloatLuminousFlux r1, final FloatLuminousFlux r2, final FloatLuminousFlux... rn)
@@ -148,8 +148,8 @@ public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, 
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatLuminousFlux; the first scalar
+     * @param r2 FloatLuminousFlux; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatLuminousFlux min(final FloatLuminousFlux r1, final FloatLuminousFlux r2)
@@ -159,9 +159,9 @@ public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, 
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatLuminousFlux; the first scalar
+     * @param r2 FloatLuminousFlux; the second scalar
+     * @param rn FloatLuminousFlux...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatLuminousFlux min(final FloatLuminousFlux r1, final FloatLuminousFlux r2, final FloatLuminousFlux... rn)

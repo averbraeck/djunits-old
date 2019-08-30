@@ -27,8 +27,8 @@ public class MutableFloatAbsoluteTemperatureMatrix
     /**
      * Construct a new Absolute Mutable FloatAbsoluteTemperatureMatrix.
      * @param values float[][]; the values of the entries in the new Absolute Mutable FloatAbsoluteTemperatureMatrix
-     * @param unit U; the unit of the new Absolute Mutable FloatAbsoluteTemperatureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Mutable FloatAbsoluteTemperatureMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAbsoluteTemperatureMatrix(final float[][] values, final AbsoluteTemperatureUnit unit,
@@ -39,9 +39,9 @@ public class MutableFloatAbsoluteTemperatureMatrix
 
     /**
      * Construct a new Absolute Mutable FloatAbsoluteTemperatureMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable
+     * @param values FloatAbsoluteTemperature[][]; the values of the entries in the new Absolute Mutable
      *            FloatAbsoluteTemperatureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAbsoluteTemperatureMatrix(final FloatAbsoluteTemperature[][] values, final StorageType storageType)
@@ -52,8 +52,8 @@ public class MutableFloatAbsoluteTemperatureMatrix
 
     /**
      * Construct a new Absolute Mutable FloatAbsoluteTemperatureMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit AbsoluteTemperatureUnit; the unit
      */
     MutableFloatAbsoluteTemperatureMatrix(final FloatMatrixData data, final AbsoluteTemperatureUnit unit)
     {

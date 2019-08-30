@@ -24,8 +24,8 @@ public class TorqueMatrix extends AbstractDoubleMatrixRel<TorqueUnit, TorqueMatr
     /**
      * Construct a new Relative Immutable Double TorqueMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double TorqueMatrix
-     * @param unit U; the unit of the new Relative Immutable Double TorqueMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit TorqueUnit; the unit of the new Relative Immutable Double TorqueMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public TorqueMatrix(final double[][] values, final TorqueUnit unit, final StorageType storageType) throws ValueException
@@ -35,8 +35,8 @@ public class TorqueMatrix extends AbstractDoubleMatrixRel<TorqueUnit, TorqueMatr
 
     /**
      * Construct a new Relative Immutable Double TorqueMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double TorqueMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Torque[][]; the values of the entries in the new Relative Immutable Double TorqueMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public TorqueMatrix(final Torque[][] values, final StorageType storageType) throws ValueException
@@ -45,8 +45,8 @@ public class TorqueMatrix extends AbstractDoubleMatrixRel<TorqueUnit, TorqueMatr
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit TorqueUnit; the unit
      */
     TorqueMatrix(final DoubleMatrixData data, final TorqueUnit unit)
     {

@@ -60,8 +60,8 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Construct FloatAngle scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit AngleUnit; unit for the float value
      */
     public FloatAngle(final float value, final AngleUnit unit)
     {
@@ -70,7 +70,7 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Construct FloatAngle scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatAngle; Scalar from which to construct this instance
      */
     public FloatAngle(final FloatAngle value)
     {
@@ -79,8 +79,8 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Construct FloatAngle scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit AngleUnit; unit for the resulting float value
      */
     public FloatAngle(final double value, final AngleUnit unit)
     {
@@ -96,7 +96,7 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Construct FloatAngle scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatAngle createSI(final float value)
@@ -106,8 +106,8 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the float value
-     * @param unit the unit
+     * @param value float; the float value
+     * @param unit DirectionUnit; the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
     public final FloatDirection instantiateAbs(final float value, final DirectionUnit unit)
@@ -117,9 +117,9 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatAngle; the low value
+     * @param one FloatAngle; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatAngle interpolate(final FloatAngle zero, final FloatAngle one, final float ratio)
@@ -129,7 +129,7 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
+     * @param v FloatDirection; the value to add
      * @return sum of this value and v as a new object
      */
     public final FloatDirection plus(final FloatDirection v)
@@ -140,8 +140,8 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatAngle; the first scalar
+     * @param r2 FloatAngle; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatAngle max(final FloatAngle r1, final FloatAngle r2)
@@ -151,9 +151,9 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatAngle; the first scalar
+     * @param r2 FloatAngle; the second scalar
+     * @param rn FloatAngle...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatAngle max(final FloatAngle r1, final FloatAngle r2, final FloatAngle... rn)
@@ -171,8 +171,8 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatAngle; the first scalar
+     * @param r2 FloatAngle; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatAngle min(final FloatAngle r1, final FloatAngle r2)
@@ -182,9 +182,9 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatAngle; the first scalar
+     * @param r2 FloatAngle; the second scalar
+     * @param rn FloatAngle...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatAngle min(final FloatAngle r1, final FloatAngle r2, final FloatAngle... rn)
@@ -241,7 +241,7 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
 
     /**
      * Calculate the division of FloatAngle and FloatAngle, which results in a FloatDimensionless scalar.
-     * @param v FloatAngle scalar
+     * @param v FloatAngle; FloatAngle scalar
      * @return FloatDimensionless scalar as a division of FloatAngle and FloatAngle
      */
     public final FloatDimensionless divideBy(final FloatAngle v)

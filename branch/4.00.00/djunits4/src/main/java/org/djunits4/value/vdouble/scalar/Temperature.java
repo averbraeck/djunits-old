@@ -60,8 +60,8 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Construct Temperature scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit TemperatureUnit; unit for the double value
      */
     public Temperature(final double value, final TemperatureUnit unit)
     {
@@ -70,7 +70,7 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Construct Temperature scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Temperature; Scalar from which to construct this instance
      */
     public Temperature(final Temperature value)
     {
@@ -86,8 +86,8 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value the double value
-     * @param unit the unit
+     * @param value double; the double value
+     * @param unit AbsoluteTemperatureUnit; the unit
      * @return A a new absolute instance of the DoubleScalar of the right type
      */
     public final AbsoluteTemperature instantiateAbs(final double value, final AbsoluteTemperatureUnit unit)
@@ -97,7 +97,7 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Construct Temperature scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Temperature createSI(final double value)
@@ -107,9 +107,9 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Temperature; the low value
+     * @param one Temperature; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Temperature interpolate(final Temperature zero, final Temperature one, final double ratio)
@@ -119,7 +119,7 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
+     * @param v AbsoluteTemperature; the value to add
      * @return sum of this value and v as a new object
      */
     public final AbsoluteTemperature plus(final AbsoluteTemperature v)
@@ -130,8 +130,8 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Temperature; the first scalar
+     * @param r2 Temperature; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Temperature max(final Temperature r1, final Temperature r2)
@@ -141,9 +141,9 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Temperature; the first scalar
+     * @param r2 Temperature; the second scalar
+     * @param rn Temperature...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Temperature max(final Temperature r1, final Temperature r2, final Temperature... rn)
@@ -161,8 +161,8 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Temperature; the first scalar
+     * @param r2 Temperature; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Temperature min(final Temperature r1, final Temperature r2)
@@ -172,9 +172,9 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Temperature; the first scalar
+     * @param r2 Temperature; the second scalar
+     * @param rn Temperature...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Temperature min(final Temperature r1, final Temperature r2, final Temperature... rn)
@@ -231,7 +231,7 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
-     * @param v Temperature scalar
+     * @param v Temperature; Temperature scalar
      * @return Dimensionless scalar as a division of Temperature and Temperature
      */
     public final Dimensionless divideBy(final Temperature v)

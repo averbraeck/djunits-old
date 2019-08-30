@@ -80,7 +80,8 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
      * @param derivedDefaultDisplayAbbreviation String; the default abbreviation to use in e.g, the toString() method. Can be
      *            null.
      * @param derivedDefaultTextualAbbreviation String; the default textual abbreviation to use in, e.g, typing. Can be null.
-     * @param derivedAbbreviations String... any other valid abbreviations for the unit, e.g. {"h", "hr", "hour"}. Can be empty.
+     * @param derivedAbbreviations String...; String... any other valid abbreviations for the unit, e.g. {"h", "hr", "hour"}.
+     *            Can be empty.
      * @return AU; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
@@ -224,7 +225,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
 
         /**
          * Sets the corresponding relative unit that has the same conversion factor.
-         * @param relativeUnit Unit&lt;?&gt;; the the corresponding relative unit with the same conversion factor
+         * @param relativeUnit RU; the the corresponding relative unit with the same conversion factor
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<AU, RU> setRelativeUnit(final RU relativeUnit)
@@ -307,7 +308,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
             super.setBaseUnit(baseUnit);
             return this;
         }
-        
+
     }
-    
+
 }

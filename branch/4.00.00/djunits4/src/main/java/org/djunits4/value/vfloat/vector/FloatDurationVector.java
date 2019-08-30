@@ -28,8 +28,8 @@ public class FloatDurationVector
     /**
      * Construct a new Relative Immutable FloatDurationVector.
      * @param values float[]; the values of the entries in the new Relative Immutable FloatDurationVector
-     * @param unit U; the unit of the new Relative Immutable FloatDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DurationUnit; the unit of the new Relative Immutable FloatDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatDurationVector(final float[] values, final DurationUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class FloatDurationVector
 
     /**
      * Construct a new Relative Immutable FloatDurationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatDurationVector
-     * @param unit U; the unit of the new Relative Immutable FloatDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable FloatDurationVector
+     * @param unit DurationUnit; the unit of the new Relative Immutable FloatDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatDurationVector(final List<Float> values, final DurationUnit unit, final StorageType storageType)
@@ -53,8 +53,8 @@ public class FloatDurationVector
 
     /**
      * Construct a new Relative Immutable FloatDurationVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable FloatDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatDuration[]; the values of the entries in the new Relative Immutable FloatDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatDurationVector(final FloatDuration[] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ public class FloatDurationVector
 
     /**
      * Construct a new Relative Immutable FloatDurationVector.
-     * @param values List; the values of the entries in the new Relative Immutable FloatDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatDuration&gt;; the values of the entries in the new Relative Immutable FloatDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatDurationVector(final List<FloatDuration> values, final StorageType storageType) throws ValueException
@@ -75,10 +75,10 @@ public class FloatDurationVector
 
     /**
      * Construct a new Relative Immutable FloatDurationVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable
+     * @param values SortedMap&lt;Integer, FloatDuration&gt;; the values of the entries in the new Relative Sparse Mutable
      *            FloatDurationVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatDurationVector(final SortedMap<Integer, FloatDuration> values, final int length, final StorageType storageType)
@@ -89,10 +89,11 @@ public class FloatDurationVector
 
     /**
      * Construct a new Relative Immutable FloatDurationVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatDurationVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatDurationVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable
+     *            FloatDurationVector
+     * @param unit DurationUnit; the unit of the new Relative Sparse Mutable FloatDurationVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatDurationVector(final SortedMap<Integer, Float> values, final DurationUnit unit, final int length,
@@ -103,8 +104,8 @@ public class FloatDurationVector
 
     /**
      * Construct a new Relative Immutable FloatDurationVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit DurationUnit; the unit
      */
     FloatDurationVector(final FloatVectorData data, final DurationUnit unit)
     {

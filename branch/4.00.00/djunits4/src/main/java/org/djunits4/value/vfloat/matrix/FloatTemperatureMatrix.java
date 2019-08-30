@@ -25,8 +25,8 @@ public class FloatTemperatureMatrix
     /**
      * Construct a new Relative Immutable FloatTemperatureMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatTemperatureMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatTemperatureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit TemperatureUnit; the unit of the new Relative Immutable FloatTemperatureMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatTemperatureMatrix(final float[][] values, final TemperatureUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class FloatTemperatureMatrix
 
     /**
      * Construct a new Relative Immutable FloatTemperatureMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable
-     *            FloatTemperatureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatTemperature[][]; the values of the entries in the new Relative Immutable FloatTemperatureMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatTemperatureMatrix(final FloatTemperature[][] values, final StorageType storageType) throws ValueException
@@ -49,8 +48,8 @@ public class FloatTemperatureMatrix
 
     /**
      * Construct a new Relative Immutable FloatTemperatureMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit TemperatureUnit; the unit
      */
     FloatTemperatureMatrix(final FloatMatrixData data, final TemperatureUnit unit)
     {

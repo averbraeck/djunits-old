@@ -87,5 +87,5 @@ public class AccelerationUnit extends Unit<AccelerationUnit>
         return SpeedUnit.BASE.of(speed).getScale().toStandardUnit(1.0)
                 / DurationUnit.BASE.of(duration).getScale().toStandardUnit(1.0);
     }
-    
+
 }

@@ -29,8 +29,8 @@ public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<Absol
     /**
      * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
      * @param values float[]; the values of the entries in the new Absolute Immutable FloatAbsoluteTemperatureVector
-     * @param unit U; the unit of the new Absolute Immutable FloatAbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Immutable FloatAbsoluteTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatAbsoluteTemperatureVector(final float[] values, final AbsoluteTemperatureUnit unit,
@@ -41,9 +41,9 @@ public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<Absol
 
     /**
      * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param values List; the values of the entries in the new Absolute Immutable FloatAbsoluteTemperatureVector
-     * @param unit U; the unit of the new Absolute Immutable FloatAbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable FloatAbsoluteTemperatureVector
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Immutable FloatAbsoluteTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatAbsoluteTemperatureVector(final List<Float> values, final AbsoluteTemperatureUnit unit,
@@ -54,9 +54,9 @@ public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<Absol
 
     /**
      * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Immutable
+     * @param values FloatAbsoluteTemperature[]; the values of the entries in the new Absolute Immutable
      *            FloatAbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatAbsoluteTemperatureVector(final FloatAbsoluteTemperature[] values, final StorageType storageType)
@@ -67,8 +67,9 @@ public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<Absol
 
     /**
      * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param values List; the values of the entries in the new Absolute Immutable FloatAbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatAbsoluteTemperature&gt;; the values of the entries in the new Absolute Immutable
+     *            FloatAbsoluteTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatAbsoluteTemperatureVector(final List<FloatAbsoluteTemperature> values, final StorageType storageType)
@@ -79,10 +80,10 @@ public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<Absol
 
     /**
      * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable
-     *            FloatAbsoluteTemperatureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatAbsoluteTemperature&gt;; the values of the entries in the new Absolute Sparse
+     *            Mutable FloatAbsoluteTemperatureVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatAbsoluteTemperatureVector(final SortedMap<Integer, FloatAbsoluteTemperature> values, final int length,
@@ -93,10 +94,11 @@ public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<Absol
 
     /**
      * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatAbsoluteTemperatureVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable FloatAbsoluteTemperatureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Absolute Sparse Mutable
+     *            FloatAbsoluteTemperatureVector
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Sparse Mutable FloatAbsoluteTemperatureVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatAbsoluteTemperatureVector(final SortedMap<Integer, Float> values, final AbsoluteTemperatureUnit unit,
@@ -107,8 +109,8 @@ public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<Absol
 
     /**
      * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit AbsoluteTemperatureUnit; the unit
      */
     FloatAbsoluteTemperatureVector(final FloatVectorData data, final AbsoluteTemperatureUnit unit)
     {

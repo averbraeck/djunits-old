@@ -28,8 +28,8 @@ public class MutableAccelerationVector
     /**
      * Construct a new Relative Immutable Double AccelerationVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double AccelerationVector
-     * @param unit U; the unit of the new Relative Immutable Double AccelerationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AccelerationUnit; the unit of the new Relative Immutable Double AccelerationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAccelerationVector(final double[] values, final AccelerationUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableAccelerationVector
 
     /**
      * Construct a new Relative Immutable Double AccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double AccelerationVector
-     * @param unit U; the unit of the new Relative Immutable Double AccelerationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double AccelerationVector
+     * @param unit AccelerationUnit; the unit of the new Relative Immutable Double AccelerationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAccelerationVector(final List<Double> values, final AccelerationUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class MutableAccelerationVector
 
     /**
      * Construct a new Relative Immutable Double AccelerationVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            AccelerationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Acceleration[]; the values of the entries in the new Relative Immutable Double AccelerationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAccelerationVector(final Acceleration[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,8 @@ public class MutableAccelerationVector
 
     /**
      * Construct a new Relative Immutable Double AccelerationVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double AccelerationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Acceleration&gt;; the values of the entries in the new Relative Immutable Double AccelerationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAccelerationVector(final List<Acceleration> values, final StorageType storageType) throws ValueException
@@ -76,10 +75,10 @@ public class MutableAccelerationVector
 
     /**
      * Construct a new Relative Immutable Double AccelerationVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Acceleration&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            AccelerationVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAccelerationVector(final SortedMap<Integer, Acceleration> values, final int length,
@@ -90,10 +89,11 @@ public class MutableAccelerationVector
 
     /**
      * Construct a new Relative Immutable Double AccelerationVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double AccelerationVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double AccelerationVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            AccelerationVector
+     * @param unit AccelerationUnit; the unit of the new Relative Sparse Mutable Double AccelerationVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAccelerationVector(final SortedMap<Integer, Double> values, final AccelerationUnit unit, final int length,
@@ -103,8 +103,8 @@ public class MutableAccelerationVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit AccelerationUnit; the unit
      */
     MutableAccelerationVector(final DoubleVectorData data, final AccelerationUnit unit)
     {

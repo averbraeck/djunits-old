@@ -25,8 +25,8 @@ public class FloatLuminousIntensityMatrix extends AbstractFloatMatrixRel<Luminou
     /**
      * Construct a new Relative Immutable FloatLuminousIntensityMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatLuminousIntensityMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatLuminousIntensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit LuminousIntensityUnit; the unit of the new Relative Immutable FloatLuminousIntensityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatLuminousIntensityMatrix(final float[][] values, final LuminousIntensityUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class FloatLuminousIntensityMatrix extends AbstractFloatMatrixRel<Luminou
 
     /**
      * Construct a new Relative Immutable FloatLuminousIntensityMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatLuminousIntensity[][]; the values of the entries in the new Relative Immutable Float
      *            FloatLuminousIntensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatLuminousIntensityMatrix(final FloatLuminousIntensity[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class FloatLuminousIntensityMatrix extends AbstractFloatMatrixRel<Luminou
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit LuminousIntensityUnit; the unit
      */
     FloatLuminousIntensityMatrix(final FloatMatrixData data, final LuminousIntensityUnit unit)
     {

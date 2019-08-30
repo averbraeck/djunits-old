@@ -25,8 +25,8 @@ public class MutableRadioActivityMatrix extends
     /**
      * Construct a new Relative Immutable Double RadioActivityMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double RadioActivityMatrix
-     * @param unit U; the unit of the new Relative Immutable Double RadioActivityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit RadioActivityUnit; the unit of the new Relative Immutable Double RadioActivityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableRadioActivityMatrix(final double[][] values, final RadioActivityUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableRadioActivityMatrix extends
 
     /**
      * Construct a new Relative Immutable Double RadioActivityMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            RadioActivityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values RadioActivity[][]; the values of the entries in the new Relative Immutable Double RadioActivityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableRadioActivityMatrix(final RadioActivity[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableRadioActivityMatrix extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit RadioActivityUnit; the unit
      */
     MutableRadioActivityMatrix(final DoubleMatrixData data, final RadioActivityUnit unit)
     {

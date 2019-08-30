@@ -28,8 +28,8 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
     /**
      * Construct a new Relative Immutable Float AbsorbedDoseVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float AbsorbedDoseVector
-     * @param unit U; the unit of the new Relative Immutable Float AbsorbedDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AbsorbedDoseUnit; the unit of the new Relative Immutable Float AbsorbedDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAbsorbedDoseVector(final float[] values, final AbsorbedDoseUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
 
     /**
      * Construct a new Relative Immutable Float AbsorbedDoseVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float AbsorbedDoseVector
-     * @param unit U; the unit of the new Relative Immutable Float AbsorbedDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float AbsorbedDoseVector
+     * @param unit AbsorbedDoseUnit; the unit of the new Relative Immutable Float AbsorbedDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAbsorbedDoseVector(final List<Float> values, final AbsorbedDoseUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
 
     /**
      * Construct a new Relative Immutable Float AbsorbedDoseVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            AbsorbedDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatAbsorbedDose[]; the values of the entries in the new Relative Immutable Float AbsorbedDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAbsorbedDoseVector(final FloatAbsorbedDose[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
 
     /**
      * Construct a new Relative Immutable Float AbsorbedDoseVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float AbsorbedDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatAbsorbedDose&gt;; the values of the entries in the new Relative Immutable Float
+     *            AbsorbedDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAbsorbedDoseVector(final List<FloatAbsorbedDose> values, final StorageType storageType)
@@ -77,10 +77,10 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
 
     /**
      * Construct a new Relative Immutable Float AbsorbedDoseVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            AbsorbedDoseVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatAbsorbedDose&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float AbsorbedDoseVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAbsorbedDoseVector(final SortedMap<Integer, FloatAbsorbedDose> values, final int length,
@@ -91,10 +91,11 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
 
     /**
      * Construct a new Relative Immutable Float AbsorbedDoseVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float AbsorbedDoseVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float AbsorbedDoseVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            AbsorbedDoseVector
+     * @param unit AbsorbedDoseUnit; the unit of the new Relative Sparse Mutable Float AbsorbedDoseVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAbsorbedDoseVector(final SortedMap<Integer, Float> values, final AbsorbedDoseUnit unit, final int length,
@@ -104,8 +105,8 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit AbsorbedDoseUnit; the unit
      */
     MutableFloatAbsorbedDoseVector(final FloatVectorData data, final AbsorbedDoseUnit unit)
     {

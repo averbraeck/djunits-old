@@ -57,8 +57,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Construct FloatIlluminance scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit IlluminanceUnit; unit for the float value
      */
     public FloatIlluminance(final float value, final IlluminanceUnit unit)
     {
@@ -67,7 +67,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Construct FloatIlluminance scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatIlluminance; Scalar from which to construct this instance
      */
     public FloatIlluminance(final FloatIlluminance value)
     {
@@ -76,8 +76,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Construct FloatIlluminance scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit IlluminanceUnit; unit for the resulting float value
      */
     public FloatIlluminance(final double value, final IlluminanceUnit unit)
     {
@@ -93,7 +93,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Construct FloatIlluminance scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatIlluminance createSI(final float value)
@@ -103,9 +103,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatIlluminance; the low value
+     * @param one FloatIlluminance; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatIlluminance interpolate(final FloatIlluminance zero, final FloatIlluminance one, final float ratio)
@@ -115,8 +115,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatIlluminance; the first scalar
+     * @param r2 FloatIlluminance; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatIlluminance max(final FloatIlluminance r1, final FloatIlluminance r2)
@@ -126,9 +126,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatIlluminance; the first scalar
+     * @param r2 FloatIlluminance; the second scalar
+     * @param rn FloatIlluminance...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatIlluminance max(final FloatIlluminance r1, final FloatIlluminance r2, final FloatIlluminance... rn)
@@ -146,8 +146,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatIlluminance; the first scalar
+     * @param r2 FloatIlluminance; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatIlluminance min(final FloatIlluminance r1, final FloatIlluminance r2)
@@ -157,9 +157,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatIlluminance; the first scalar
+     * @param r2 FloatIlluminance; the second scalar
+     * @param rn FloatIlluminance...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatIlluminance min(final FloatIlluminance r1, final FloatIlluminance r2, final FloatIlluminance... rn)

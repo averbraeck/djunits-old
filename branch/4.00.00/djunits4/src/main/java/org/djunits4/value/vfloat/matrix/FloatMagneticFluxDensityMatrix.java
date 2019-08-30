@@ -25,8 +25,8 @@ public class FloatMagneticFluxDensityMatrix extends AbstractFloatMatrixRel<Magne
     /**
      * Construct a new Relative Immutable FloatMagneticFluxDensityMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatMagneticFluxDensityMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatMagneticFluxDensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MagneticFluxDensityUnit; the unit of the new Relative Immutable FloatMagneticFluxDensityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatMagneticFluxDensityMatrix(final float[][] values, final MagneticFluxDensityUnit unit,
@@ -37,9 +37,9 @@ public class FloatMagneticFluxDensityMatrix extends AbstractFloatMatrixRel<Magne
 
     /**
      * Construct a new Relative Immutable FloatMagneticFluxDensityMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatMagneticFluxDensity[][]; the values of the entries in the new Relative Immutable Float
      *            FloatMagneticFluxDensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatMagneticFluxDensityMatrix(final FloatMagneticFluxDensity[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class FloatMagneticFluxDensityMatrix extends AbstractFloatMatrixRel<Magne
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit MagneticFluxDensityUnit; the unit
      */
     FloatMagneticFluxDensityMatrix(final FloatMatrixData data, final MagneticFluxDensityUnit unit)
     {

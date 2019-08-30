@@ -31,8 +31,8 @@ public class MutableDimensionlessVector extends
     /**
      * Construct a new Relative Immutable Double DimensionlessVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double DimensionlessVector
-     * @param unit U; the unit of the new Relative Immutable Double DimensionlessVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DimensionlessUnit; the unit of the new Relative Immutable Double DimensionlessVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableDimensionlessVector(final double[] values, final DimensionlessUnit unit, final StorageType storageType)
@@ -43,9 +43,9 @@ public class MutableDimensionlessVector extends
 
     /**
      * Construct a new Relative Immutable Double DimensionlessVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double DimensionlessVector
-     * @param unit U; the unit of the new Relative Immutable Double DimensionlessVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double DimensionlessVector
+     * @param unit DimensionlessUnit; the unit of the new Relative Immutable Double DimensionlessVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableDimensionlessVector(final List<Double> values, final DimensionlessUnit unit, final StorageType storageType)
@@ -56,9 +56,8 @@ public class MutableDimensionlessVector extends
 
     /**
      * Construct a new Relative Immutable Double DimensionlessVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            DimensionlessVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Dimensionless[]; the values of the entries in the new Relative Immutable Double DimensionlessVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableDimensionlessVector(final Dimensionless[] values, final StorageType storageType) throws ValueException
@@ -68,8 +67,9 @@ public class MutableDimensionlessVector extends
 
     /**
      * Construct a new Relative Immutable Double DimensionlessVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double DimensionlessVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Dimensionless&gt;; the values of the entries in the new Relative Immutable Double
+     *            DimensionlessVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableDimensionlessVector(final List<Dimensionless> values, final StorageType storageType) throws ValueException
@@ -79,10 +79,10 @@ public class MutableDimensionlessVector extends
 
     /**
      * Construct a new Relative Immutable Double DimensionlessVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
-     *            DimensionlessVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Dimensionless&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Double DimensionlessVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableDimensionlessVector(final SortedMap<Integer, Dimensionless> values, final int length,
@@ -93,10 +93,11 @@ public class MutableDimensionlessVector extends
 
     /**
      * Construct a new Relative Immutable Double DimensionlessVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double DimensionlessVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double DimensionlessVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            DimensionlessVector
+     * @param unit DimensionlessUnit; the unit of the new Relative Sparse Mutable Double DimensionlessVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableDimensionlessVector(final SortedMap<Integer, Double> values, final DimensionlessUnit unit, final int length,
@@ -106,8 +107,8 @@ public class MutableDimensionlessVector extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit DimensionlessUnit; the unit
      */
     MutableDimensionlessVector(final DoubleVectorData data, final DimensionlessUnit unit)
     {

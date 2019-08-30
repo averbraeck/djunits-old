@@ -28,8 +28,8 @@ public class FloatLuminousFluxVector extends
     /**
      * Construct a new Relative Immutable Float FloatLuminousFluxVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatLuminousFluxVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatLuminousFluxVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit LuminousFluxUnit; the unit of the new Relative Immutable Float FloatLuminousFluxVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatLuminousFluxVector(final float[] values, final LuminousFluxUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class FloatLuminousFluxVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatLuminousFluxVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatLuminousFluxVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatLuminousFluxVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatLuminousFluxVector
+     * @param unit LuminousFluxUnit; the unit of the new Relative Immutable Float FloatLuminousFluxVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatLuminousFluxVector(final List<Float> values, final LuminousFluxUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class FloatLuminousFluxVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatLuminousFluxVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatLuminousFluxVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatLuminousFlux[]; the values of the entries in the new Relative Immutable Float FloatLuminousFluxVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatLuminousFluxVector(final FloatLuminousFlux[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class FloatLuminousFluxVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatLuminousFluxVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatLuminousFluxVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatLuminousFlux&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatLuminousFluxVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatLuminousFluxVector(final List<FloatLuminousFlux> values, final StorageType storageType) throws ValueException
@@ -76,10 +76,10 @@ public class FloatLuminousFluxVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatLuminousFluxVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatLuminousFluxVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatLuminousFlux&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float FloatLuminousFluxVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatLuminousFluxVector(final SortedMap<Integer, FloatLuminousFlux> values, final int length,
@@ -90,10 +90,11 @@ public class FloatLuminousFluxVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatLuminousFluxVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatLuminousFluxVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatLuminousFluxVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatLuminousFluxVector
+     * @param unit LuminousFluxUnit; the unit of the new Relative Sparse Mutable Float FloatLuminousFluxVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatLuminousFluxVector(final SortedMap<Integer, Float> values, final LuminousFluxUnit unit, final int length,
@@ -103,8 +104,8 @@ public class FloatLuminousFluxVector extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit LuminousFluxUnit; the unit
      */
     FloatLuminousFluxVector(final FloatVectorData data, final LuminousFluxUnit unit)
     {

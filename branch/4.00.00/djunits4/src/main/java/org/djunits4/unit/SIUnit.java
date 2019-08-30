@@ -19,5 +19,5 @@ public class SIUnit extends Unit<SIUnit>
     {
         return getBaseUnit().getSiDimensions().toString(true, false);
     }
-    
+
 }

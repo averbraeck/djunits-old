@@ -39,7 +39,7 @@ public final class UnitTypes implements Serializable
 
     /**
      * Register the baseUnit in the UnitType registries.
-     * @param baseUnit the baseUnit to register.
+     * @param baseUnit UnitBase&lt;?&gt;; the baseUnit to register.
      */
     public void register(final UnitBase<?> baseUnit)
     {
@@ -55,7 +55,7 @@ public final class UnitTypes implements Serializable
 
     /**
      * Retrieve a safe copy of the baseUnit set registered for an SI fingerprint.
-     * @param siDimensions the SI dimensions to search for
+     * @param siDimensions SIDimensions; the SI dimensions to search for
      * @return a safe copy of the baseUnit set registered for this SI dimensions fingerprint
      */
     public Set<UnitBase<?>> getBaseUnits(final SIDimensions siDimensions)

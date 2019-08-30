@@ -26,8 +26,8 @@ public class TimeMatrix
     /**
      * Construct a new Absolute Immutable Double DurationMatrix.
      * @param values double[][]; the values of the entries in the new Absolute Immutable Double DurationMatrix
-     * @param unit U; the unit of the new Absolute Immutable Double DurationMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit TimeUnit; the unit of the new Absolute Immutable Double DurationMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public TimeMatrix(final double[][] values, final TimeUnit unit, final StorageType storageType) throws ValueException
@@ -37,9 +37,8 @@ public class TimeMatrix
 
     /**
      * Construct a new Absolute Immutable Double DurationMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable Double
-     *            DurationMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Time[][]; the values of the entries in the new Absolute Immutable Double DurationMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public TimeMatrix(final Time[][] values, final StorageType storageType) throws ValueException
@@ -49,8 +48,8 @@ public class TimeMatrix
 
     /**
      * Construct a new Absolute Immutable Double DurationMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit TimeUnit; the unit
      */
     TimeMatrix(final DoubleMatrixData data, final TimeUnit unit)
     {

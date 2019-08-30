@@ -27,8 +27,8 @@ public class MutableVolumeVector extends AbstractMutableDoubleVectorRel<VolumeUn
     /**
      * Construct a new Relative Immutable Double VolumeVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double VolumeVector
-     * @param unit U; the unit of the new Relative Immutable Double VolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit VolumeUnit; the unit of the new Relative Immutable Double VolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableVolumeVector(final double[] values, final VolumeUnit unit, final StorageType storageType)
@@ -39,9 +39,9 @@ public class MutableVolumeVector extends AbstractMutableDoubleVectorRel<VolumeUn
 
     /**
      * Construct a new Relative Immutable Double VolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double VolumeVector
-     * @param unit U; the unit of the new Relative Immutable Double VolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double VolumeVector
+     * @param unit VolumeUnit; the unit of the new Relative Immutable Double VolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableVolumeVector(final List<Double> values, final VolumeUnit unit, final StorageType storageType)
@@ -52,8 +52,8 @@ public class MutableVolumeVector extends AbstractMutableDoubleVectorRel<VolumeUn
 
     /**
      * Construct a new Relative Immutable Double VolumeVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double VolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Volume[]; the values of the entries in the new Relative Immutable Double VolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableVolumeVector(final Volume[] values, final StorageType storageType) throws ValueException
@@ -63,8 +63,8 @@ public class MutableVolumeVector extends AbstractMutableDoubleVectorRel<VolumeUn
 
     /**
      * Construct a new Relative Immutable Double VolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double VolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Volume&gt;; the values of the entries in the new Relative Immutable Double VolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableVolumeVector(final List<Volume> values, final StorageType storageType) throws ValueException
@@ -74,10 +74,10 @@ public class MutableVolumeVector extends AbstractMutableDoubleVectorRel<VolumeUn
 
     /**
      * Construct a new Relative Immutable Double VolumeVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Volume&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            VolumeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableVolumeVector(final SortedMap<Integer, Volume> values, final int length, final StorageType storageType)
@@ -88,10 +88,11 @@ public class MutableVolumeVector extends AbstractMutableDoubleVectorRel<VolumeUn
 
     /**
      * Construct a new Relative Immutable Double VolumeVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double VolumeVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double VolumeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            VolumeVector
+     * @param unit VolumeUnit; the unit of the new Relative Sparse Mutable Double VolumeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableVolumeVector(final SortedMap<Integer, Double> values, final VolumeUnit unit, final int length,
@@ -101,8 +102,8 @@ public class MutableVolumeVector extends AbstractMutableDoubleVectorRel<VolumeUn
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit VolumeUnit; the unit
      */
     MutableVolumeVector(final DoubleVectorData data, final VolumeUnit unit)
     {

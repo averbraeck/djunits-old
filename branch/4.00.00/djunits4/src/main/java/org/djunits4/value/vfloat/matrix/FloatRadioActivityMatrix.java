@@ -25,8 +25,8 @@ public class FloatRadioActivityMatrix extends
     /**
      * Construct a new Relative Immutable FloatRadioActivityMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatRadioActivityMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatRadioActivityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit RadioActivityUnit; the unit of the new Relative Immutable FloatRadioActivityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatRadioActivityMatrix(final float[][] values, final RadioActivityUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class FloatRadioActivityMatrix extends
 
     /**
      * Construct a new Relative Immutable FloatRadioActivityMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatRadioActivity[][]; the values of the entries in the new Relative Immutable Float
      *            FloatRadioActivityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatRadioActivityMatrix(final FloatRadioActivity[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class FloatRadioActivityMatrix extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit RadioActivityUnit; the unit
      */
     FloatRadioActivityMatrix(final FloatMatrixData data, final RadioActivityUnit unit)
     {

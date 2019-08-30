@@ -24,8 +24,8 @@ public class FloatPowerMatrix extends AbstractFloatMatrixRel<PowerUnit, FloatPow
     /**
      * Construct a new Relative Immutable FloatPowerMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatPowerMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatPowerMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit PowerUnit; the unit of the new Relative Immutable FloatPowerMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatPowerMatrix(final float[][] values, final PowerUnit unit, final StorageType storageType) throws ValueException
@@ -35,9 +35,8 @@ public class FloatPowerMatrix extends AbstractFloatMatrixRel<PowerUnit, FloatPow
 
     /**
      * Construct a new Relative Immutable FloatPowerMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatPowerMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatPower[][]; the values of the entries in the new Relative Immutable Float FloatPowerMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatPowerMatrix(final FloatPower[][] values, final StorageType storageType) throws ValueException
@@ -46,8 +45,8 @@ public class FloatPowerMatrix extends AbstractFloatMatrixRel<PowerUnit, FloatPow
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit PowerUnit; the unit
      */
     FloatPowerMatrix(final FloatMatrixData data, final PowerUnit unit)
     {

@@ -24,8 +24,8 @@ public class FloatSpeedMatrix extends AbstractFloatMatrixRel<SpeedUnit, FloatSpe
     /**
      * Construct a new Relative Immutable FloatSpeedMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatSpeedMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatSpeedMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit SpeedUnit; the unit of the new Relative Immutable FloatSpeedMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatSpeedMatrix(final float[][] values, final SpeedUnit unit, final StorageType storageType) throws ValueException
@@ -35,9 +35,8 @@ public class FloatSpeedMatrix extends AbstractFloatMatrixRel<SpeedUnit, FloatSpe
 
     /**
      * Construct a new Relative Immutable FloatSpeedMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatSpeedMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatSpeed[][]; the values of the entries in the new Relative Immutable Float FloatSpeedMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatSpeedMatrix(final FloatSpeed[][] values, final StorageType storageType) throws ValueException
@@ -46,8 +45,8 @@ public class FloatSpeedMatrix extends AbstractFloatMatrixRel<SpeedUnit, FloatSpe
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit SpeedUnit; the unit
      */
     FloatSpeedMatrix(final FloatMatrixData data, final SpeedUnit unit)
     {

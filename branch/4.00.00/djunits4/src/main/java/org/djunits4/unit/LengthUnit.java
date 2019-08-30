@@ -80,5 +80,5 @@ public class LengthUnit extends Unit<LengthUnit>
 
     /** Angstrom = 10^-10 m. */
     public static final LengthUnit ANGSTROM = METER.deriveLinear(1.0E-10, "A", "Angstrom", UnitSystem.OTHER, "\u212B", "A");
-    
+
 }

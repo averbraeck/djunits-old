@@ -26,8 +26,8 @@ public class PositionMatrix
     /**
      * Construct a new Absolute Immutable Double LengthMatrix.
      * @param values double[][]; the values of the entries in the new Absolute Immutable Double LengthMatrix
-     * @param unit U; the unit of the new Absolute Immutable Double LengthMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit PositionUnit; the unit of the new Absolute Immutable Double LengthMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public PositionMatrix(final double[][] values, final PositionUnit unit, final StorageType storageType) throws ValueException
@@ -37,8 +37,8 @@ public class PositionMatrix
 
     /**
      * Construct a new Absolute Immutable Double LengthMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable Double LengthMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Position[][]; the values of the entries in the new Absolute Immutable Double LengthMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public PositionMatrix(final Position[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class PositionMatrix
 
     /**
      * Construct a new Absolute Immutable Double LengthMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit PositionUnit; the unit
      */
     PositionMatrix(final DoubleMatrixData data, final PositionUnit unit)
     {

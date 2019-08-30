@@ -62,8 +62,8 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
 
     /**
      * Construct MagneticFluxDensity scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit MagneticFluxDensityUnit; unit for the double value
      */
     public MagneticFluxDensity(final double value, final MagneticFluxDensityUnit unit)
     {
@@ -72,7 +72,7 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
 
     /**
      * Construct MagneticFluxDensity scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value MagneticFluxDensity; Scalar from which to construct this instance
      */
     public MagneticFluxDensity(final MagneticFluxDensity value)
     {
@@ -88,7 +88,7 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
 
     /**
      * Construct MagneticFluxDensity scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final MagneticFluxDensity createSI(final double value)
@@ -98,9 +98,9 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero MagneticFluxDensity; the low value
+     * @param one MagneticFluxDensity; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static MagneticFluxDensity interpolate(final MagneticFluxDensity zero, final MagneticFluxDensity one,
@@ -111,8 +111,8 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 MagneticFluxDensity; the first scalar
+     * @param r2 MagneticFluxDensity; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static MagneticFluxDensity max(final MagneticFluxDensity r1, final MagneticFluxDensity r2)
@@ -122,9 +122,9 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 MagneticFluxDensity; the first scalar
+     * @param r2 MagneticFluxDensity; the second scalar
+     * @param rn MagneticFluxDensity...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static MagneticFluxDensity max(final MagneticFluxDensity r1, final MagneticFluxDensity r2,
@@ -143,8 +143,8 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 MagneticFluxDensity; the first scalar
+     * @param r2 MagneticFluxDensity; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static MagneticFluxDensity min(final MagneticFluxDensity r1, final MagneticFluxDensity r2)
@@ -154,9 +154,9 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 MagneticFluxDensity; the first scalar
+     * @param r2 MagneticFluxDensity; the second scalar
+     * @param rn MagneticFluxDensity...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static MagneticFluxDensity min(final MagneticFluxDensity r1, final MagneticFluxDensity r2,

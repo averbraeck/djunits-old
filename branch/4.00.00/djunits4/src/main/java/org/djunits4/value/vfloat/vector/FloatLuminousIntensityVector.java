@@ -28,8 +28,8 @@ public class FloatLuminousIntensityVector extends AbstractFloatVectorRel<Luminou
     /**
      * Construct a new Relative Immutable Float FloatLuminousIntensityVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatLuminousIntensityVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatLuminousIntensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit LuminousIntensityUnit; the unit of the new Relative Immutable Float FloatLuminousIntensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatLuminousIntensityVector(final float[] values, final LuminousIntensityUnit unit, final StorageType storageType)
@@ -40,9 +40,10 @@ public class FloatLuminousIntensityVector extends AbstractFloatVectorRel<Luminou
 
     /**
      * Construct a new Relative Immutable Float FloatLuminousIntensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatLuminousIntensityVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatLuminousIntensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatLuminousIntensityVector
+     * @param unit LuminousIntensityUnit; the unit of the new Relative Immutable Float FloatLuminousIntensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatLuminousIntensityVector(final List<Float> values, final LuminousIntensityUnit unit,
@@ -53,9 +54,9 @@ public class FloatLuminousIntensityVector extends AbstractFloatVectorRel<Luminou
 
     /**
      * Construct a new Relative Immutable Float FloatLuminousIntensityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatLuminousIntensity[]; the values of the entries in the new Relative Immutable Float
      *            FloatLuminousIntensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatLuminousIntensityVector(final FloatLuminousIntensity[] values, final StorageType storageType)
@@ -66,8 +67,9 @@ public class FloatLuminousIntensityVector extends AbstractFloatVectorRel<Luminou
 
     /**
      * Construct a new Relative Immutable Float FloatLuminousIntensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatLuminousIntensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatLuminousIntensity&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatLuminousIntensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatLuminousIntensityVector(final List<FloatLuminousIntensity> values, final StorageType storageType)
@@ -78,10 +80,10 @@ public class FloatLuminousIntensityVector extends AbstractFloatVectorRel<Luminou
 
     /**
      * Construct a new Relative Immutable Float FloatLuminousIntensityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatLuminousIntensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatLuminousIntensity&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Float FloatLuminousIntensityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatLuminousIntensityVector(final SortedMap<Integer, FloatLuminousIntensity> values, final int length,
@@ -92,10 +94,11 @@ public class FloatLuminousIntensityVector extends AbstractFloatVectorRel<Luminou
 
     /**
      * Construct a new Relative Immutable Float FloatLuminousIntensityVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatLuminousIntensityVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatLuminousIntensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatLuminousIntensityVector
+     * @param unit LuminousIntensityUnit; the unit of the new Relative Sparse Mutable Float FloatLuminousIntensityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatLuminousIntensityVector(final SortedMap<Integer, Float> values, final LuminousIntensityUnit unit,
@@ -105,8 +108,8 @@ public class FloatLuminousIntensityVector extends AbstractFloatVectorRel<Luminou
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit LuminousIntensityUnit; the unit
      */
     FloatLuminousIntensityVector(final FloatVectorData data, final LuminousIntensityUnit unit)
     {

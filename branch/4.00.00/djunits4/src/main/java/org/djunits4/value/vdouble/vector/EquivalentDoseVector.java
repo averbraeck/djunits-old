@@ -28,8 +28,8 @@ public class EquivalentDoseVector
     /**
      * Construct a new Relative Immutable Double EquivalentDoseVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double EquivalentDoseVector
-     * @param unit U; the unit of the new Relative Immutable Double EquivalentDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit EquivalentDoseUnit; the unit of the new Relative Immutable Double EquivalentDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public EquivalentDoseVector(final double[] values, final EquivalentDoseUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class EquivalentDoseVector
 
     /**
      * Construct a new Relative Immutable Double EquivalentDoseVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double EquivalentDoseVector
-     * @param unit U; the unit of the new Relative Immutable Double EquivalentDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double EquivalentDoseVector
+     * @param unit EquivalentDoseUnit; the unit of the new Relative Immutable Double EquivalentDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public EquivalentDoseVector(final List<Double> values, final EquivalentDoseUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class EquivalentDoseVector
 
     /**
      * Construct a new Relative Immutable Double EquivalentDoseVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            EquivalentDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values EquivalentDose[]; the values of the entries in the new Relative Immutable Double EquivalentDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public EquivalentDoseVector(final EquivalentDose[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class EquivalentDoseVector
 
     /**
      * Construct a new Relative Immutable Double EquivalentDoseVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double EquivalentDoseVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;EquivalentDose&gt;; the values of the entries in the new Relative Immutable Double
+     *            EquivalentDoseVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public EquivalentDoseVector(final List<EquivalentDose> values, final StorageType storageType) throws ValueException
@@ -76,10 +76,10 @@ public class EquivalentDoseVector
 
     /**
      * Construct a new Relative Immutable Double EquivalentDoseVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
-     *            EquivalentDoseVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, EquivalentDose&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Double EquivalentDoseVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public EquivalentDoseVector(final SortedMap<Integer, EquivalentDose> values, final int length,
@@ -90,10 +90,11 @@ public class EquivalentDoseVector
 
     /**
      * Construct a new Relative Immutable Double EquivalentDoseVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double EquivalentDoseVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double EquivalentDoseVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            EquivalentDoseVector
+     * @param unit EquivalentDoseUnit; the unit of the new Relative Sparse Mutable Double EquivalentDoseVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public EquivalentDoseVector(final SortedMap<Integer, Double> values, final EquivalentDoseUnit unit, final int length,
@@ -103,8 +104,8 @@ public class EquivalentDoseVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit EquivalentDoseUnit; the unit
      */
     EquivalentDoseVector(final DoubleVectorData data, final EquivalentDoseUnit unit)
     {

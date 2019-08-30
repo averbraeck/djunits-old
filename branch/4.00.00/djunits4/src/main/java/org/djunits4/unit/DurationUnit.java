@@ -50,5 +50,5 @@ public class DurationUnit extends Unit<DurationUnit>
     /** week. */
     public static final DurationUnit WEEK =
             DAY.deriveLinear(7.0, "wk", "week", UnitSystem.OTHER, "wk", "wk", new String[] {"w", "wk", "week"});
-    
+
 }

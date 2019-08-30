@@ -28,8 +28,8 @@ public class MutableFloatAmountOfSubstanceVector extends AbstractMutableFloatVec
     /**
      * Construct a new Relative Immutable Float AmountOfSubstanceVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float AmountOfSubstanceVector
-     * @param unit U; the unit of the new Relative Immutable Float AmountOfSubstanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AmountOfSubstanceUnit; the unit of the new Relative Immutable Float AmountOfSubstanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAmountOfSubstanceVector(final float[] values, final AmountOfSubstanceUnit unit,
@@ -40,9 +40,9 @@ public class MutableFloatAmountOfSubstanceVector extends AbstractMutableFloatVec
 
     /**
      * Construct a new Relative Immutable Float AmountOfSubstanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float AmountOfSubstanceVector
-     * @param unit U; the unit of the new Relative Immutable Float AmountOfSubstanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float AmountOfSubstanceVector
+     * @param unit AmountOfSubstanceUnit; the unit of the new Relative Immutable Float AmountOfSubstanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAmountOfSubstanceVector(final List<Float> values, final AmountOfSubstanceUnit unit,
@@ -53,9 +53,9 @@ public class MutableFloatAmountOfSubstanceVector extends AbstractMutableFloatVec
 
     /**
      * Construct a new Relative Immutable Float AmountOfSubstanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatAmountOfSubstance[]; the values of the entries in the new Relative Immutable Float
      *            AmountOfSubstanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAmountOfSubstanceVector(final FloatAmountOfSubstance[] values, final StorageType storageType)
@@ -66,8 +66,9 @@ public class MutableFloatAmountOfSubstanceVector extends AbstractMutableFloatVec
 
     /**
      * Construct a new Relative Immutable Float AmountOfSubstanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float AmountOfSubstanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatAmountOfSubstance&gt;; the values of the entries in the new Relative Immutable Float
+     *            AmountOfSubstanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAmountOfSubstanceVector(final List<FloatAmountOfSubstance> values, final StorageType storageType)
@@ -78,10 +79,10 @@ public class MutableFloatAmountOfSubstanceVector extends AbstractMutableFloatVec
 
     /**
      * Construct a new Relative Immutable Float AmountOfSubstanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            AmountOfSubstanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatAmountOfSubstance&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Float AmountOfSubstanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatAmountOfSubstanceVector(final SortedMap<Integer, FloatAmountOfSubstance> values, final int length,
@@ -92,10 +93,11 @@ public class MutableFloatAmountOfSubstanceVector extends AbstractMutableFloatVec
 
     /**
      * Construct a new Relative Immutable Float AmountOfSubstanceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float AmountOfSubstanceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float AmountOfSubstanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            AmountOfSubstanceVector
+     * @param unit AmountOfSubstanceUnit; the unit of the new Relative Sparse Mutable Float AmountOfSubstanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatAmountOfSubstanceVector(final SortedMap<Integer, Float> values, final AmountOfSubstanceUnit unit,
@@ -105,8 +107,8 @@ public class MutableFloatAmountOfSubstanceVector extends AbstractMutableFloatVec
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit AmountOfSubstanceUnit; the unit
      */
     MutableFloatAmountOfSubstanceVector(final FloatVectorData data, final AmountOfSubstanceUnit unit)
     {

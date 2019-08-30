@@ -60,8 +60,8 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Construct Pressure scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit PressureUnit; unit for the double value
      */
     public Pressure(final double value, final PressureUnit unit)
     {
@@ -70,7 +70,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Construct Pressure scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Pressure; Scalar from which to construct this instance
      */
     public Pressure(final Pressure value)
     {
@@ -86,7 +86,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Construct Pressure scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Pressure createSI(final double value)
@@ -96,9 +96,9 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Pressure; the low value
+     * @param one Pressure; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Pressure interpolate(final Pressure zero, final Pressure one, final double ratio)
@@ -108,8 +108,8 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Pressure max(final Pressure r1, final Pressure r2)
@@ -119,9 +119,9 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
+     * @param rn Pressure...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Pressure max(final Pressure r1, final Pressure r2, final Pressure... rn)
@@ -139,8 +139,8 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Pressure min(final Pressure r1, final Pressure r2)
@@ -150,9 +150,9 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
+     * @param rn Pressure...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Pressure min(final Pressure r1, final Pressure r2, final Pressure... rn)
@@ -209,7 +209,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
-     * @param v Pressure scalar
+     * @param v Pressure; Pressure scalar
      * @return Dimensionless scalar as a division of Pressure and Pressure
      */
     public final Dimensionless divideBy(final Pressure v)
@@ -219,7 +219,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
-     * @param v Pressure scalar
+     * @param v Area; Pressure scalar
      * @return Force scalar as a multiplication of Pressure and Area
      */
     public final Force multiplyBy(final Area v)
@@ -229,7 +229,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
-     * @param v Pressure scalar
+     * @param v Volume; Pressure scalar
      * @return Energy scalar as a multiplication of Pressure and Volume
      */
     public final Energy multiplyBy(final Volume v)

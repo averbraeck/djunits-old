@@ -102,8 +102,8 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /**
      * Interpolate between two values.
-     * @param zero Duration; the low value
-     * @param one Duration; the high value
+     * @param zero A; the low value
+     * @param one A; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      * @param <AU> the absolute unit

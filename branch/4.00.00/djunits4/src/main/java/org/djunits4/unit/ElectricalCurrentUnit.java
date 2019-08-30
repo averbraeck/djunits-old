@@ -44,9 +44,10 @@ public class ElectricalCurrentUnit extends Unit<ElectricalCurrentUnit>
     public static final ElectricalCurrentUnit MEGAAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("M"));
 
     /** statampere (GCS ESU). */
-    public static final ElectricalCurrentUnit STATAMPERE = AMPERE.deriveLinear(3.335641E-10, "statA", "statampere", UnitSystem.CGS_ESU);
+    public static final ElectricalCurrentUnit STATAMPERE =
+            AMPERE.deriveLinear(3.335641E-10, "statA", "statampere", UnitSystem.CGS_ESU);
 
     /** abampere (GCS EMU). */
     public static final ElectricalCurrentUnit ABAMPERE = AMPERE.deriveLinear(10.0, "abA", "abampere", UnitSystem.CGS_EMU);
-    
+
 }

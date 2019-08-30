@@ -26,8 +26,8 @@ public class MutableFloatDirectionMatrix extends AbstractMutableFloatMatrixAbs<D
     /**
      * Construct a new Absolute Mutable FloatDirectionMatrix.
      * @param values float[][]; the values of the entries in the new Absolute Mutable FloatDirectionMatrix
-     * @param unit U; the unit of the new Absolute Mutable FloatDirectionMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DirectionUnit; the unit of the new Absolute Mutable FloatDirectionMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDirectionMatrix(final float[][] values, final DirectionUnit unit, final StorageType storageType)
@@ -38,8 +38,8 @@ public class MutableFloatDirectionMatrix extends AbstractMutableFloatMatrixAbs<D
 
     /**
      * Construct a new Absolute Mutable FloatDirectionMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Mutable FloatDirectionMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatDirection[][]; the values of the entries in the new Absolute Mutable FloatDirectionMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDirectionMatrix(final FloatDirection[][] values, final StorageType storageType) throws ValueException
@@ -49,8 +49,8 @@ public class MutableFloatDirectionMatrix extends AbstractMutableFloatMatrixAbs<D
 
     /**
      * Construct a new Absolute Mutable FloatDirectionMatrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit DirectionUnit; the unit
      */
     MutableFloatDirectionMatrix(final FloatMatrixData data, final DirectionUnit unit)
     {

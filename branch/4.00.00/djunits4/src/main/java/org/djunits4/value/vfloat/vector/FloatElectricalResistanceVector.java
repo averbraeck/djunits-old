@@ -28,8 +28,8 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
     /**
      * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatElectricalResistanceVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatElectricalResistanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable Float FloatElectricalResistanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalResistanceVector(final float[] values, final ElectricalResistanceUnit unit,
@@ -40,9 +40,10 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatElectricalResistanceVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatElectricalResistanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatElectricalResistanceVector
+     * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable Float FloatElectricalResistanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalResistanceVector(final List<Float> values, final ElectricalResistanceUnit unit,
@@ -53,9 +54,9 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalResistance[]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalResistanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalResistanceVector(final FloatElectricalResistance[] values, final StorageType storageType)
@@ -66,8 +67,9 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatElectricalResistanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatElectricalResistance&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatElectricalResistanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalResistanceVector(final List<FloatElectricalResistance> values, final StorageType storageType)
@@ -78,10 +80,10 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatElectricalResistanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatElectricalResistance&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Float FloatElectricalResistanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalResistanceVector(final SortedMap<Integer, FloatElectricalResistance> values, final int length,
@@ -92,10 +94,11 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatElectricalResistanceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatElectricalResistanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatElectricalResistanceVector
+     * @param unit ElectricalResistanceUnit; the unit of the new Relative Sparse Mutable Float FloatElectricalResistanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalResistanceVector(final SortedMap<Integer, Float> values, final ElectricalResistanceUnit unit,
@@ -105,8 +108,8 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit ElectricalResistanceUnit; the unit
      */
     FloatElectricalResistanceVector(final FloatVectorData data, final ElectricalResistanceUnit unit)
     {

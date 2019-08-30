@@ -25,8 +25,8 @@ public class MutableFloatElectricalCurrentMatrix extends AbstractMutableFloatMat
     /**
      * Construct a new Relative Immutable FloatElectricalCurrentMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatElectricalCurrentMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatElectricalCurrentMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalCurrentUnit; the unit of the new Relative Immutable FloatElectricalCurrentMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalCurrentMatrix(final float[][] values, final ElectricalCurrentUnit unit,
@@ -37,9 +37,9 @@ public class MutableFloatElectricalCurrentMatrix extends AbstractMutableFloatMat
 
     /**
      * Construct a new Relative Immutable FloatElectricalCurrentMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalCurrent[][]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalCurrentMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalCurrentMatrix(final FloatElectricalCurrent[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableFloatElectricalCurrentMatrix extends AbstractMutableFloatMat
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit ElectricalCurrentUnit; the unit
      */
     MutableFloatElectricalCurrentMatrix(final FloatMatrixData data, final ElectricalCurrentUnit unit)
     {

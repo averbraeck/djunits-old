@@ -88,5 +88,5 @@ public class PowerUnit extends Unit<PowerUnit>
     {
         return energy.getScale().toStandardUnit(1.0) / duration.getScale().toStandardUnit(1.0);
     }
-    
+
 }

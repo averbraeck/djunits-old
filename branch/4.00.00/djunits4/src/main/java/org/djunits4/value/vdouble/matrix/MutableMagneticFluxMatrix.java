@@ -25,8 +25,8 @@ public class MutableMagneticFluxMatrix
     /**
      * Construct a new Relative Immutable Double MagneticFluxMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double MagneticFluxMatrix
-     * @param unit U; the unit of the new Relative Immutable Double MagneticFluxMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MagneticFluxUnit; the unit of the new Relative Immutable Double MagneticFluxMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMagneticFluxMatrix(final double[][] values, final MagneticFluxUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableMagneticFluxMatrix
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            MagneticFluxMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values MagneticFlux[][]; the values of the entries in the new Relative Immutable Double MagneticFluxMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableMagneticFluxMatrix(final MagneticFlux[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableMagneticFluxMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit MagneticFluxUnit; the unit
      */
     MutableMagneticFluxMatrix(final DoubleMatrixData data, final MagneticFluxUnit unit)
     {

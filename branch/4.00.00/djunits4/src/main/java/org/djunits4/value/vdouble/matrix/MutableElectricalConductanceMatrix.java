@@ -25,8 +25,8 @@ public class MutableElectricalConductanceMatrix extends AbstractMutableDoubleMat
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double ElectricalConductanceMatrix
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalConductanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalConductanceUnit; the unit of the new Relative Immutable Double ElectricalConductanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalConductanceMatrix(final double[][] values, final ElectricalConductanceUnit unit,
@@ -37,9 +37,9 @@ public class MutableElectricalConductanceMatrix extends AbstractMutableDoubleMat
 
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
+     * @param values ElectricalConductance[][]; the values of the entries in the new Relative Immutable Double
      *            ElectricalConductanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalConductanceMatrix(final ElectricalConductance[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableElectricalConductanceMatrix extends AbstractMutableDoubleMat
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit ElectricalConductanceUnit; the unit
      */
     MutableElectricalConductanceMatrix(final DoubleMatrixData data, final ElectricalConductanceUnit unit)
     {

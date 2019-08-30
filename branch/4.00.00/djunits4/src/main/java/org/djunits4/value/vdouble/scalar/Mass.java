@@ -63,8 +63,8 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Construct Mass scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit MassUnit; unit for the double value
      */
     public Mass(final double value, final MassUnit unit)
     {
@@ -73,7 +73,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Construct Mass scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Mass; Scalar from which to construct this instance
      */
     public Mass(final Mass value)
     {
@@ -89,7 +89,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Construct Mass scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Mass createSI(final double value)
@@ -99,9 +99,9 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Mass; the low value
+     * @param one Mass; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Mass interpolate(final Mass zero, final Mass one, final double ratio)
@@ -111,8 +111,8 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Mass; the first scalar
+     * @param r2 Mass; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Mass max(final Mass r1, final Mass r2)
@@ -122,9 +122,9 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Mass; the first scalar
+     * @param r2 Mass; the second scalar
+     * @param rn Mass...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Mass max(final Mass r1, final Mass r2, final Mass... rn)
@@ -142,8 +142,8 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Mass; the first scalar
+     * @param r2 Mass; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Mass min(final Mass r1, final Mass r2)
@@ -153,9 +153,9 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Mass; the first scalar
+     * @param r2 Mass; the second scalar
+     * @param rn Mass...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Mass min(final Mass r1, final Mass r2, final Mass... rn)
@@ -212,7 +212,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and Mass, which results in a Dimensionless scalar.
-     * @param v Mass scalar
+     * @param v Mass; Mass scalar
      * @return Dimensionless scalar as a division of Mass and Mass
      */
     public final Dimensionless divideBy(final Mass v)
@@ -222,7 +222,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and FlowMass, which results in a Duration scalar.
-     * @param v Mass scalar
+     * @param v FlowMass; Mass scalar
      * @return Duration scalar as a division of Mass and FlowMass
      */
     public final Duration divideBy(final FlowMass v)
@@ -232,7 +232,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and Duration, which results in a FlowMass scalar.
-     * @param v Mass scalar
+     * @param v Duration; Mass scalar
      * @return FlowMass scalar as a division of Mass and Duration
      */
     public final FlowMass divideBy(final Duration v)
@@ -242,7 +242,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the multiplication of Mass and Acceleration, which results in a Force scalar.
-     * @param v Mass scalar
+     * @param v Acceleration; Mass scalar
      * @return Force scalar as a multiplication of Mass and Acceleration
      */
     public final Force multiplyBy(final Acceleration v)
@@ -252,7 +252,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the multiplication of Mass and Frequency, which results in a FlowMass scalar.
-     * @param v Mass scalar
+     * @param v Frequency; Mass scalar
      * @return FlowMass scalar as a multiplication of Mass and Frequency
      */
     public final FlowMass multiplyBy(final Frequency v)
@@ -262,7 +262,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and Density, which results in a Volume scalar.
-     * @param v Mass scalar
+     * @param v Density; Mass scalar
      * @return Volume scalar as a division of Mass and Density
      */
     public final Volume divideBy(final Density v)
@@ -272,7 +272,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and Volume, which results in a Density scalar.
-     * @param v Mass scalar
+     * @param v Volume; Mass scalar
      * @return Density scalar as a division of Mass and Volume
      */
     public final Density divideBy(final Volume v)

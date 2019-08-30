@@ -24,8 +24,8 @@ public class LuminousFluxUnit extends Unit<LuminousFluxUnit>
     public static final UnitBase<LuminousFluxUnit> BASE = new UnitBase<>("srcd");
 
     /** The SI unit for amount of luminous flux is Lumen. */
-    public static final LuminousFluxUnit SI = new LuminousFluxUnit()
-            .build(new Unit.Builder<LuminousFluxUnit>().setBaseUnit(BASE).setId("lm").setName("lumen")
+    public static final LuminousFluxUnit SI =
+            new LuminousFluxUnit().build(new Unit.Builder<LuminousFluxUnit>().setBaseUnit(BASE).setId("lm").setName("lumen")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Mole. */

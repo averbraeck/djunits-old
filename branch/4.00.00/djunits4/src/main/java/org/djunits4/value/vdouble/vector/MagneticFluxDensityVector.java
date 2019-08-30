@@ -28,8 +28,8 @@ public class MagneticFluxDensityVector extends AbstractDoubleVectorRel<MagneticF
     /**
      * Construct a new Relative Immutable Double MagneticFluxDensityVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double MagneticFluxDensityVector
-     * @param unit U; the unit of the new Relative Immutable Double MagneticFluxDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MagneticFluxDensityUnit; the unit of the new Relative Immutable Double MagneticFluxDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MagneticFluxDensityVector(final double[] values, final MagneticFluxDensityUnit unit, final StorageType storageType)
@@ -40,9 +40,10 @@ public class MagneticFluxDensityVector extends AbstractDoubleVectorRel<MagneticF
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxDensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double MagneticFluxDensityVector
-     * @param unit U; the unit of the new Relative Immutable Double MagneticFluxDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double
+     *            MagneticFluxDensityVector
+     * @param unit MagneticFluxDensityUnit; the unit of the new Relative Immutable Double MagneticFluxDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MagneticFluxDensityVector(final List<Double> values, final MagneticFluxDensityUnit unit,
@@ -53,9 +54,9 @@ public class MagneticFluxDensityVector extends AbstractDoubleVectorRel<MagneticF
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxDensityVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
+     * @param values MagneticFluxDensity[]; the values of the entries in the new Relative Immutable Double
      *            MagneticFluxDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MagneticFluxDensityVector(final MagneticFluxDensity[] values, final StorageType storageType) throws ValueException
@@ -65,8 +66,9 @@ public class MagneticFluxDensityVector extends AbstractDoubleVectorRel<MagneticF
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxDensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double MagneticFluxDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;MagneticFluxDensity&gt;; the values of the entries in the new Relative Immutable Double
+     *            MagneticFluxDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MagneticFluxDensityVector(final List<MagneticFluxDensity> values, final StorageType storageType)
@@ -77,10 +79,10 @@ public class MagneticFluxDensityVector extends AbstractDoubleVectorRel<MagneticF
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxDensityVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
-     *            MagneticFluxDensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, MagneticFluxDensity&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Double MagneticFluxDensityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MagneticFluxDensityVector(final SortedMap<Integer, MagneticFluxDensity> values, final int length,
@@ -91,10 +93,11 @@ public class MagneticFluxDensityVector extends AbstractDoubleVectorRel<MagneticF
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxDensityVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double MagneticFluxDensityVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double MagneticFluxDensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            MagneticFluxDensityVector
+     * @param unit MagneticFluxDensityUnit; the unit of the new Relative Sparse Mutable Double MagneticFluxDensityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MagneticFluxDensityVector(final SortedMap<Integer, Double> values, final MagneticFluxDensityUnit unit,
@@ -104,8 +107,8 @@ public class MagneticFluxDensityVector extends AbstractDoubleVectorRel<MagneticF
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit MagneticFluxDensityUnit; the unit
      */
     MagneticFluxDensityVector(final DoubleVectorData data, final MagneticFluxDensityUnit unit)
     {

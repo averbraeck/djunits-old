@@ -61,8 +61,8 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Construct Acceleration scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit AccelerationUnit; unit for the double value
      */
     public Acceleration(final double value, final AccelerationUnit unit)
     {
@@ -71,7 +71,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Construct Acceleration scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Acceleration; Scalar from which to construct this instance
      */
     public Acceleration(final Acceleration value)
     {
@@ -87,7 +87,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Construct Acceleration scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Acceleration createSI(final double value)
@@ -97,9 +97,9 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Acceleration; the low value
+     * @param one Acceleration; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Acceleration interpolate(final Acceleration zero, final Acceleration one, final double ratio)
@@ -109,8 +109,8 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Acceleration; the first scalar
+     * @param r2 Acceleration; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Acceleration max(final Acceleration r1, final Acceleration r2)
@@ -120,9 +120,9 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Acceleration; the first scalar
+     * @param r2 Acceleration; the second scalar
+     * @param rn Acceleration...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Acceleration max(final Acceleration r1, final Acceleration r2, final Acceleration... rn)
@@ -140,8 +140,8 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Acceleration; the first scalar
+     * @param r2 Acceleration; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Acceleration min(final Acceleration r1, final Acceleration r2)
@@ -151,9 +151,9 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Acceleration; the first scalar
+     * @param r2 Acceleration; the second scalar
+     * @param rn Acceleration...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Acceleration min(final Acceleration r1, final Acceleration r2, final Acceleration... rn)
@@ -210,7 +210,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Acceleration, which results in a Dimensionless scalar.
-     * @param v Acceleration scalar
+     * @param v Acceleration; Acceleration scalar
      * @return Dimensionless scalar as a division of Acceleration and Acceleration
      */
     public final Dimensionless divideBy(final Acceleration v)
@@ -220,7 +220,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the multiplication of Acceleration and Mass, which results in a Force scalar.
-     * @param v Acceleration scalar
+     * @param v Mass; Acceleration scalar
      * @return Force scalar as a multiplication of Acceleration and Mass
      */
     public final Force multiplyBy(final Mass v)
@@ -230,7 +230,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the multiplication of Acceleration and Duration, which results in a Speed scalar.
-     * @param v Acceleration scalar
+     * @param v Duration; Acceleration scalar
      * @return Speed scalar as a multiplication of Acceleration and Duration
      */
     public final Speed multiplyBy(final Duration v)
@@ -240,7 +240,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Frequency, which results in a Speed scalar.
-     * @param v Acceleration scalar
+     * @param v Frequency; Acceleration scalar
      * @return Speed scalar as a division of Acceleration and Frequency
      */
     public final Speed divideBy(final Frequency v)
@@ -250,7 +250,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Speed, which results in a Frequency scalar.
-     * @param v Acceleration scalar
+     * @param v Speed; Acceleration scalar
      * @return Frequency scalar as a division of Acceleration and Speed
      */
     public final Frequency divideBy(final Speed v)

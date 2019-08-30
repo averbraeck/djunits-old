@@ -28,8 +28,8 @@ public class FloatElectricalConductanceVector extends AbstractFloatVectorRel<Ele
     /**
      * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatElectricalConductanceVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalConductanceUnit; the unit of the new Relative Immutable Float FloatElectricalConductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalConductanceVector(final float[] values, final ElectricalConductanceUnit unit,
@@ -40,9 +40,10 @@ public class FloatElectricalConductanceVector extends AbstractFloatVectorRel<Ele
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatElectricalConductanceVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatElectricalConductanceVector
+     * @param unit ElectricalConductanceUnit; the unit of the new Relative Immutable Float FloatElectricalConductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalConductanceVector(final List<Float> values, final ElectricalConductanceUnit unit,
@@ -53,9 +54,9 @@ public class FloatElectricalConductanceVector extends AbstractFloatVectorRel<Ele
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalConductance[]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalConductanceVector(final FloatElectricalConductance[] values, final StorageType storageType)
@@ -66,8 +67,9 @@ public class FloatElectricalConductanceVector extends AbstractFloatVectorRel<Ele
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatElectricalConductance&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatElectricalConductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalConductanceVector(final List<FloatElectricalConductance> values, final StorageType storageType)
@@ -78,10 +80,10 @@ public class FloatElectricalConductanceVector extends AbstractFloatVectorRel<Ele
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatElectricalConductanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatElectricalConductance&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Float FloatElectricalConductanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalConductanceVector(final SortedMap<Integer, FloatElectricalConductance> values, final int length,
@@ -92,10 +94,11 @@ public class FloatElectricalConductanceVector extends AbstractFloatVectorRel<Ele
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatElectricalConductanceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatElectricalConductanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatElectricalConductanceVector
+     * @param unit ElectricalConductanceUnit; the unit of the new Relative Sparse Mutable Float FloatElectricalConductanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalConductanceVector(final SortedMap<Integer, Float> values, final ElectricalConductanceUnit unit,
@@ -105,8 +108,8 @@ public class FloatElectricalConductanceVector extends AbstractFloatVectorRel<Ele
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit ElectricalConductanceUnit; the unit
      */
     FloatElectricalConductanceVector(final FloatVectorData data, final ElectricalConductanceUnit unit)
     {

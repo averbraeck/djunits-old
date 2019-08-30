@@ -25,8 +25,8 @@ public class EquivalentDoseMatrix
     /**
      * Construct a new Relative Immutable Double EquivalentDoseMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double EquivalentDoseMatrix
-     * @param unit U; the unit of the new Relative Immutable Double EquivalentDoseMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit EquivalentDoseUnit; the unit of the new Relative Immutable Double EquivalentDoseMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public EquivalentDoseMatrix(final double[][] values, final EquivalentDoseUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class EquivalentDoseMatrix
 
     /**
      * Construct a new Relative Immutable Double EquivalentDoseMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            EquivalentDoseMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values EquivalentDose[][]; the values of the entries in the new Relative Immutable Double EquivalentDoseMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public EquivalentDoseMatrix(final EquivalentDose[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class EquivalentDoseMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit EquivalentDoseUnit; the unit
      */
     EquivalentDoseMatrix(final DoubleMatrixData data, final EquivalentDoseUnit unit)
     {

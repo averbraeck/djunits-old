@@ -30,8 +30,8 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
 
     /**
      * Construct SI scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit SIUnit; unit for the float value
      */
     public FloatSIScalar(final float value, final SIUnit unit)
     {
@@ -40,7 +40,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
 
     /**
      * Construct SI scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatSIScalar; Scalar from which to construct this instance
      */
     public FloatSIScalar(final FloatSIScalar value)
     {
@@ -56,8 +56,8 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
 
     /**
      * Construct SI scalar.
-     * @param value float value in SI units
-     * @param unit the unit to use for the SI scalar
+     * @param value float; float value in SI units
+     * @param unit SIUnit; the unit to use for the SI scalar
      * @return the new scalar with the SI value
      */
     public static final FloatSIScalar createSI(final float value, final SIUnit unit)
@@ -67,9 +67,9 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatSIScalar; the low value
+     * @param one FloatSIScalar; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatSIScalar interpolate(final FloatSIScalar zero, final FloatSIScalar one, final float ratio)
@@ -79,8 +79,8 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatSIScalar; the first scalar
+     * @param r2 FloatSIScalar; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatSIScalar max(final FloatSIScalar r1, final FloatSIScalar r2)
@@ -90,9 +90,9 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatSIScalar; the first scalar
+     * @param r2 FloatSIScalar; the second scalar
+     * @param rn FloatSIScalar...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatSIScalar max(final FloatSIScalar r1, final FloatSIScalar r2, final FloatSIScalar... rn)
@@ -110,8 +110,8 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatSIScalar; the first scalar
+     * @param r2 FloatSIScalar; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatSIScalar min(final FloatSIScalar r1, final FloatSIScalar r2)
@@ -121,9 +121,9 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatSIScalar; the first scalar
+     * @param r2 FloatSIScalar; the second scalar
+     * @param rn FloatSIScalar...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatSIScalar min(final FloatSIScalar r1, final FloatSIScalar r2, final FloatSIScalar... rn)
@@ -141,7 +141,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
 
     /**
      * Calculate the division of SI and SI, which results in a FloatDimensionless scalar.
-     * @param v SI scalar
+     * @param v FloatSIScalar; SI scalar
      * @return FloatDimensionless scalar as a division of SI and SI
      */
     public final FloatDimensionless divideBy(final FloatSIScalar v)
@@ -156,7 +156,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
     /**
      * Return the current scalar transformed to a scalar in the same scalar type as the example. Of course the SI dimensionality
      * has to match, otherwise the scalar cannot be transformed.
-     * @param example an example object that serves as the 'template', e.g. Speed.ZERO
+     * @param example K; an example object that serves as the 'template', e.g. Speed.ZERO
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     public final <KU extends Unit<KU>, K extends AbstractFloatScalarRel<KU, K>> K as(final K example)
@@ -169,8 +169,8 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
     /**
      * Return the current scalar transformed to a scalar in the same scalar type as the example. Of course the SI dimensionality
      * has to match, otherwise the scalar cannot be transformed.
-     * @param example an example object that serves as the 'template', e.g. Speed.ZERO
-     * @param displayUnit the unit in which the value will be displayed
+     * @param example K; an example object that serves as the 'template', e.g. Speed.ZERO
+     * @param displayUnit KU; the unit in which the value will be displayed
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     public final <KU extends Unit<KU>, K extends AbstractFloatScalarRel<KU, K>> K as(final K example, final KU displayUnit)
@@ -183,7 +183,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
     /**
      * Return the current scalar transformed to a scalar in the given class type. Of course the SI dimensionality has to match,
      * otherwise the scalar cannot be transformed.
-     * @param returnClass the class of the
+     * @param returnClass Class&lt;K&gt;; the class of the
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     @SuppressWarnings("unchecked")
@@ -207,8 +207,8 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
     /**
      * Return the current scalar transformed to a scalar in the given class type. Of course the SI dimensionality has to match,
      * otherwise the scalar cannot be transformed.
-     * @param returnClass the class of the
-     * @param displayUnit the unit in which the value will be displayed
+     * @param returnClass Class&lt;K&gt;; the class of the
+     * @param displayUnit KU; the unit in which the value will be displayed
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     @SuppressWarnings("unchecked")
@@ -242,7 +242,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
 
     /**
      * Return the current scalar as a speed, and provide a display unit.
-     * @param displayUnit the unit in which the value will be displayed
+     * @param displayUnit SpeedUnit; the unit in which the value will be displayed
      * @return FloatSpeed; the current scalar as a speed
      */
     public final FloatSpeed asSpeed(final SpeedUnit displayUnit)

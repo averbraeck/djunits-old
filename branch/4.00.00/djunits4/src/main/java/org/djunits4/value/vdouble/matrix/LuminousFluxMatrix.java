@@ -25,8 +25,8 @@ public class LuminousFluxMatrix
     /**
      * Construct a new Relative Immutable Double LuminousFluxMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double LuminousFluxMatrix
-     * @param unit U; the unit of the new Relative Immutable Double LuminousFluxMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit LuminousFluxUnit; the unit of the new Relative Immutable Double LuminousFluxMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public LuminousFluxMatrix(final double[][] values, final LuminousFluxUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class LuminousFluxMatrix
 
     /**
      * Construct a new Relative Immutable Double LuminousFluxMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            LuminousFluxMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values LuminousFlux[][]; the values of the entries in the new Relative Immutable Double LuminousFluxMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public LuminousFluxMatrix(final LuminousFlux[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class LuminousFluxMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit LuminousFluxUnit; the unit
      */
     LuminousFluxMatrix(final DoubleMatrixData data, final LuminousFluxUnit unit)
     {

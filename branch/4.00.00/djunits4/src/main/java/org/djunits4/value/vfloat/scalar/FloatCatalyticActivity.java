@@ -61,8 +61,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Construct FloatCatalyticActivity scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit CatalyticActivityUnit; unit for the float value
      */
     public FloatCatalyticActivity(final float value, final CatalyticActivityUnit unit)
     {
@@ -71,7 +71,7 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Construct FloatCatalyticActivity scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatCatalyticActivity; Scalar from which to construct this instance
      */
     public FloatCatalyticActivity(final FloatCatalyticActivity value)
     {
@@ -80,8 +80,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Construct FloatCatalyticActivity scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit CatalyticActivityUnit; unit for the resulting float value
      */
     public FloatCatalyticActivity(final double value, final CatalyticActivityUnit unit)
     {
@@ -97,7 +97,7 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Construct FloatCatalyticActivity scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatCatalyticActivity createSI(final float value)
@@ -107,9 +107,9 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatCatalyticActivity; the low value
+     * @param one FloatCatalyticActivity; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatCatalyticActivity interpolate(final FloatCatalyticActivity zero, final FloatCatalyticActivity one,
@@ -121,8 +121,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatCatalyticActivity; the first scalar
+     * @param r2 FloatCatalyticActivity; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatCatalyticActivity max(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2)
@@ -132,9 +132,9 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatCatalyticActivity; the first scalar
+     * @param r2 FloatCatalyticActivity; the second scalar
+     * @param rn FloatCatalyticActivity...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatCatalyticActivity max(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2,
@@ -153,8 +153,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatCatalyticActivity; the first scalar
+     * @param r2 FloatCatalyticActivity; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatCatalyticActivity min(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2)
@@ -164,9 +164,9 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatCatalyticActivity; the first scalar
+     * @param r2 FloatCatalyticActivity; the second scalar
+     * @param rn FloatCatalyticActivity...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatCatalyticActivity min(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2,

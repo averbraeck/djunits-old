@@ -28,8 +28,8 @@ public class FloatElectricalChargeVector extends AbstractFloatVectorRel<Electric
     /**
      * Construct a new Relative Immutable Float FloatElectricalChargeVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatElectricalChargeVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatElectricalChargeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalChargeUnit; the unit of the new Relative Immutable Float FloatElectricalChargeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalChargeVector(final float[] values, final ElectricalChargeUnit unit, final StorageType storageType)
@@ -40,9 +40,10 @@ public class FloatElectricalChargeVector extends AbstractFloatVectorRel<Electric
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalChargeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatElectricalChargeVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatElectricalChargeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatElectricalChargeVector
+     * @param unit ElectricalChargeUnit; the unit of the new Relative Immutable Float FloatElectricalChargeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalChargeVector(final List<Float> values, final ElectricalChargeUnit unit, final StorageType storageType)
@@ -53,9 +54,9 @@ public class FloatElectricalChargeVector extends AbstractFloatVectorRel<Electric
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalChargeVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalCharge[]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalChargeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalChargeVector(final FloatElectricalCharge[] values, final StorageType storageType)
@@ -66,8 +67,9 @@ public class FloatElectricalChargeVector extends AbstractFloatVectorRel<Electric
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalChargeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatElectricalChargeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatElectricalCharge&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatElectricalChargeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalChargeVector(final List<FloatElectricalCharge> values, final StorageType storageType)
@@ -78,10 +80,10 @@ public class FloatElectricalChargeVector extends AbstractFloatVectorRel<Electric
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalChargeVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatElectricalChargeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatElectricalCharge&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Float FloatElectricalChargeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalChargeVector(final SortedMap<Integer, FloatElectricalCharge> values, final int length,
@@ -92,10 +94,11 @@ public class FloatElectricalChargeVector extends AbstractFloatVectorRel<Electric
 
     /**
      * Construct a new Relative Immutable Float FloatElectricalChargeVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatElectricalChargeVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatElectricalChargeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatElectricalChargeVector
+     * @param unit ElectricalChargeUnit; the unit of the new Relative Sparse Mutable Float FloatElectricalChargeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalChargeVector(final SortedMap<Integer, Float> values, final ElectricalChargeUnit unit,
@@ -105,8 +108,8 @@ public class FloatElectricalChargeVector extends AbstractFloatVectorRel<Electric
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit ElectricalChargeUnit; the unit
      */
     FloatElectricalChargeVector(final FloatVectorData data, final ElectricalChargeUnit unit)
     {

@@ -30,5 +30,5 @@ public class AmountOfSubstanceUnit extends Unit<AmountOfSubstanceUnit>
 
     /** Mole. */
     public static final AmountOfSubstanceUnit MOLE = SI;
-    
+
 }

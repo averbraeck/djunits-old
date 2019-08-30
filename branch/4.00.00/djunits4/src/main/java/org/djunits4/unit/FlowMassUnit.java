@@ -45,5 +45,5 @@ public class FlowMassUnit extends Unit<FlowMassUnit>
     {
         return mass.getScale().toStandardUnit(1.0) / duration.getScale().toStandardUnit(1.0);
     }
-    
+
 }

@@ -65,8 +65,8 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Construct FloatElectricalCurrent scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit ElectricalCurrentUnit; unit for the float value
      */
     public FloatElectricalCurrent(final float value, final ElectricalCurrentUnit unit)
     {
@@ -75,7 +75,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Construct FloatElectricalCurrent scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatElectricalCurrent; Scalar from which to construct this instance
      */
     public FloatElectricalCurrent(final FloatElectricalCurrent value)
     {
@@ -84,8 +84,8 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Construct FloatElectricalCurrent scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit ElectricalCurrentUnit; unit for the resulting float value
      */
     public FloatElectricalCurrent(final double value, final ElectricalCurrentUnit unit)
     {
@@ -101,7 +101,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Construct FloatElectricalCurrent scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatElectricalCurrent createSI(final float value)
@@ -111,9 +111,9 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatElectricalCurrent; the low value
+     * @param one FloatElectricalCurrent; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalCurrent interpolate(final FloatElectricalCurrent zero, final FloatElectricalCurrent one,
@@ -125,8 +125,8 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatElectricalCurrent; the first scalar
+     * @param r2 FloatElectricalCurrent; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatElectricalCurrent max(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2)
@@ -136,9 +136,9 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatElectricalCurrent; the first scalar
+     * @param r2 FloatElectricalCurrent; the second scalar
+     * @param rn FloatElectricalCurrent...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatElectricalCurrent max(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2,
@@ -157,8 +157,8 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatElectricalCurrent; the first scalar
+     * @param r2 FloatElectricalCurrent; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatElectricalCurrent min(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2)
@@ -168,9 +168,9 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatElectricalCurrent; the first scalar
+     * @param r2 FloatElectricalCurrent; the second scalar
+     * @param rn FloatElectricalCurrent...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatElectricalCurrent min(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2,
@@ -229,7 +229,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     /**
      * Calculate the division of FloatElectricalCurrent and FloatElectricalCurrent, which results in a FloatDimensionless
      * scalar.
-     * @param v FloatElectricalCurrent scalar
+     * @param v FloatElectricalCurrent; FloatElectricalCurrent scalar
      * @return FloatDimensionless scalar as a division of FloatElectricalCurrent and FloatElectricalCurrent
      */
     public final FloatDimensionless divideBy(final FloatElectricalCurrent v)
@@ -240,7 +240,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     /**
      * Calculate the multiplication of FloatElectricalCurrent and FloatElectricalPotential, which results in a FloatPower
      * scalar.
-     * @param v FloatElectricalCurrent scalar
+     * @param v FloatElectricalPotential; FloatElectricalCurrent scalar
      * @return FloatPower scalar as a multiplication of FloatElectricalCurrent and FloatElectricalPotential
      */
     public final FloatPower multiplyBy(final FloatElectricalPotential v)
@@ -251,7 +251,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     /**
      * Calculate the multiplication of FloatElectricalCurrent and FloatDuration, which results in a FloatElectricalCharge
      * scalar.
-     * @param v FloatElectricalCurrent scalar
+     * @param v FloatDuration; FloatElectricalCurrent scalar
      * @return FloatElectricalCharge scalar as a multiplication of FloatElectricalCurrent and FloatDuration
      */
     public final FloatElectricalCharge multiplyBy(final FloatDuration v)
@@ -262,7 +262,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     /**
      * Calculate the multiplication of FloatElectricalCurrent and FloatElectricalResistance, which results in a
      * FloatElectricalPotential scalar.
-     * @param v FloatElectricalCurrent scalar
+     * @param v FloatElectricalResistance; FloatElectricalCurrent scalar
      * @return FloatElectricalPotential scalar as a multiplication of FloatElectricalCurrent and FloatElectricalResistance
      */
     public final FloatElectricalPotential multiplyBy(final FloatElectricalResistance v)

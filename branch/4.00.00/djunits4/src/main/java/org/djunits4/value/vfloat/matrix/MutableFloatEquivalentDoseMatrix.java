@@ -25,8 +25,8 @@ public class MutableFloatEquivalentDoseMatrix extends AbstractMutableFloatMatrix
     /**
      * Construct a new Relative Immutable FloatEquivalentDoseMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatEquivalentDoseMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatEquivalentDoseMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit EquivalentDoseUnit; the unit of the new Relative Immutable FloatEquivalentDoseMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatEquivalentDoseMatrix(final float[][] values, final EquivalentDoseUnit unit,
@@ -37,9 +37,9 @@ public class MutableFloatEquivalentDoseMatrix extends AbstractMutableFloatMatrix
 
     /**
      * Construct a new Relative Immutable FloatEquivalentDoseMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatEquivalentDose[][]; the values of the entries in the new Relative Immutable Float
      *            FloatEquivalentDoseMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatEquivalentDoseMatrix(final FloatEquivalentDose[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableFloatEquivalentDoseMatrix extends AbstractMutableFloatMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit EquivalentDoseUnit; the unit
      */
     MutableFloatEquivalentDoseMatrix(final FloatMatrixData data, final EquivalentDoseUnit unit)
     {

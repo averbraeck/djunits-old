@@ -103,5 +103,5 @@ public class PressureUnit extends Unit<PressureUnit>
     {
         return force.getScale().toStandardUnit(1.0) / area.getScale().toStandardUnit(1.0);
     }
-    
+
 }

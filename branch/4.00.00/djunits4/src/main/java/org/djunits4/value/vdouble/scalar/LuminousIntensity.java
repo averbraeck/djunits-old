@@ -59,8 +59,8 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Construct LuminousIntensity scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit LuminousIntensityUnit; unit for the double value
      */
     public LuminousIntensity(final double value, final LuminousIntensityUnit unit)
     {
@@ -69,7 +69,7 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Construct LuminousIntensity scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value LuminousIntensity; Scalar from which to construct this instance
      */
     public LuminousIntensity(final LuminousIntensity value)
     {
@@ -85,7 +85,7 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Construct LuminousIntensity scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final LuminousIntensity createSI(final double value)
@@ -95,9 +95,9 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero LuminousIntensity; the low value
+     * @param one LuminousIntensity; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static LuminousIntensity interpolate(final LuminousIntensity zero, final LuminousIntensity one, final double ratio)
@@ -107,8 +107,8 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 LuminousIntensity; the first scalar
+     * @param r2 LuminousIntensity; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static LuminousIntensity max(final LuminousIntensity r1, final LuminousIntensity r2)
@@ -118,9 +118,9 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 LuminousIntensity; the first scalar
+     * @param r2 LuminousIntensity; the second scalar
+     * @param rn LuminousIntensity...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static LuminousIntensity max(final LuminousIntensity r1, final LuminousIntensity r2, final LuminousIntensity... rn)
@@ -138,8 +138,8 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 LuminousIntensity; the first scalar
+     * @param r2 LuminousIntensity; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static LuminousIntensity min(final LuminousIntensity r1, final LuminousIntensity r2)
@@ -149,9 +149,9 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 LuminousIntensity; the first scalar
+     * @param r2 LuminousIntensity; the second scalar
+     * @param rn LuminousIntensity...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static LuminousIntensity min(final LuminousIntensity r1, final LuminousIntensity r2, final LuminousIntensity... rn)

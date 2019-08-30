@@ -16,7 +16,7 @@ public abstract class DefaultLocale implements Serializable
 {
     /** */
     private static final long serialVersionUID = 1L;
-    
+
     /** The default locale to use in djunits. */
     private static Locale locale;
 

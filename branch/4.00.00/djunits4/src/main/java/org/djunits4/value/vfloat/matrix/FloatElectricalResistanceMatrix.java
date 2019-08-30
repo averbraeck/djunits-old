@@ -25,8 +25,8 @@ public class FloatElectricalResistanceMatrix extends AbstractFloatMatrixRel<Elec
     /**
      * Construct a new Relative Immutable FloatElectricalResistanceMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatElectricalResistanceMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatElectricalResistanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable FloatElectricalResistanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalResistanceMatrix(final float[][] values, final ElectricalResistanceUnit unit,
@@ -37,9 +37,9 @@ public class FloatElectricalResistanceMatrix extends AbstractFloatMatrixRel<Elec
 
     /**
      * Construct a new Relative Immutable FloatElectricalResistanceMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalResistance[][]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalResistanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalResistanceMatrix(final FloatElectricalResistance[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class FloatElectricalResistanceMatrix extends AbstractFloatMatrixRel<Elec
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit ElectricalResistanceUnit; the unit
      */
     FloatElectricalResistanceMatrix(final FloatMatrixData data, final ElectricalResistanceUnit unit)
     {

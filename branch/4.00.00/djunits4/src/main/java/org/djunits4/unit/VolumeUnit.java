@@ -115,5 +115,5 @@ public class VolumeUnit extends Unit<VolumeUnit>
         double factor = lu.getScale().toStandardUnit(1.0);
         return factor * factor * factor;
     }
-    
+
 }

@@ -27,8 +27,8 @@ public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPow
     /**
      * Construct a new Relative Immutable Float FloatPowerVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatPowerVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatPowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit PowerUnit; the unit of the new Relative Immutable Float FloatPowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatPowerVector(final float[] values, final PowerUnit unit, final StorageType storageType) throws ValueException
@@ -38,9 +38,9 @@ public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPow
 
     /**
      * Construct a new Relative Immutable Float FloatPowerVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatPowerVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatPowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatPowerVector
+     * @param unit PowerUnit; the unit of the new Relative Immutable Float FloatPowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatPowerVector(final List<Float> values, final PowerUnit unit, final StorageType storageType) throws ValueException
@@ -50,8 +50,8 @@ public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPow
 
     /**
      * Construct a new Relative Immutable Float FloatPowerVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float FloatPowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatPower[]; the values of the entries in the new Relative Immutable Float FloatPowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatPowerVector(final FloatPower[] values, final StorageType storageType) throws ValueException
@@ -61,8 +61,8 @@ public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPow
 
     /**
      * Construct a new Relative Immutable Float FloatPowerVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatPowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatPower&gt;; the values of the entries in the new Relative Immutable Float FloatPowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatPowerVector(final List<FloatPower> values, final StorageType storageType) throws ValueException
@@ -72,10 +72,10 @@ public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPow
 
     /**
      * Construct a new Relative Immutable Float FloatPowerVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
+     * @param values SortedMap&lt;Integer, FloatPower&gt;; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatPowerVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatPowerVector(final SortedMap<Integer, FloatPower> values, final int length, final StorageType storageType)
@@ -86,10 +86,11 @@ public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPow
 
     /**
      * Construct a new Relative Immutable Float FloatPowerVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatPowerVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatPowerVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatPowerVector
+     * @param unit PowerUnit; the unit of the new Relative Sparse Mutable Float FloatPowerVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatPowerVector(final SortedMap<Integer, Float> values, final PowerUnit unit, final int length,
@@ -99,8 +100,8 @@ public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPow
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit PowerUnit; the unit
      */
     FloatPowerVector(final FloatVectorData data, final PowerUnit unit)
     {

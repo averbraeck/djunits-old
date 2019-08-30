@@ -25,8 +25,8 @@ public class MutableFloatMagneticFluxMatrix extends AbstractMutableFloatMatrixRe
     /**
      * Construct a new Relative Immutable FloatMagneticFluxMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatMagneticFluxMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatMagneticFluxMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MagneticFluxUnit; the unit of the new Relative Immutable FloatMagneticFluxMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatMagneticFluxMatrix(final float[][] values, final MagneticFluxUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class MutableFloatMagneticFluxMatrix extends AbstractMutableFloatMatrixRe
 
     /**
      * Construct a new Relative Immutable FloatMagneticFluxMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatMagneticFlux[][]; the values of the entries in the new Relative Immutable Float
      *            FloatMagneticFluxMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatMagneticFluxMatrix(final FloatMagneticFlux[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableFloatMagneticFluxMatrix extends AbstractMutableFloatMatrixRe
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit MagneticFluxUnit; the unit
      */
     MutableFloatMagneticFluxMatrix(final FloatMatrixData data, final MagneticFluxUnit unit)
     {

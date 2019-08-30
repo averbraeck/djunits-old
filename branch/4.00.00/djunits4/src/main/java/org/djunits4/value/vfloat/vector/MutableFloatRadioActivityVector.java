@@ -28,8 +28,8 @@ public class MutableFloatRadioActivityVector extends AbstractMutableFloatVectorR
     /**
      * Construct a new Relative Immutable Float RadioActivityVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float RadioActivityVector
-     * @param unit U; the unit of the new Relative Immutable Float RadioActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit RadioActivityUnit; the unit of the new Relative Immutable Float RadioActivityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatRadioActivityVector(final float[] values, final RadioActivityUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatRadioActivityVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float RadioActivityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float RadioActivityVector
-     * @param unit U; the unit of the new Relative Immutable Float RadioActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float RadioActivityVector
+     * @param unit RadioActivityUnit; the unit of the new Relative Immutable Float RadioActivityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatRadioActivityVector(final List<Float> values, final RadioActivityUnit unit,
@@ -53,9 +53,8 @@ public class MutableFloatRadioActivityVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float RadioActivityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            RadioActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatRadioActivity[]; the values of the entries in the new Relative Immutable Float RadioActivityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatRadioActivityVector(final FloatRadioActivity[] values, final StorageType storageType)
@@ -66,8 +65,9 @@ public class MutableFloatRadioActivityVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float RadioActivityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float RadioActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatRadioActivity&gt;; the values of the entries in the new Relative Immutable Float
+     *            RadioActivityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatRadioActivityVector(final List<FloatRadioActivity> values, final StorageType storageType)
@@ -78,10 +78,10 @@ public class MutableFloatRadioActivityVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float RadioActivityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            RadioActivityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatRadioActivity&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float RadioActivityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatRadioActivityVector(final SortedMap<Integer, FloatRadioActivity> values, final int length,
@@ -92,10 +92,11 @@ public class MutableFloatRadioActivityVector extends AbstractMutableFloatVectorR
 
     /**
      * Construct a new Relative Immutable Float RadioActivityVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float RadioActivityVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float RadioActivityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            RadioActivityVector
+     * @param unit RadioActivityUnit; the unit of the new Relative Sparse Mutable Float RadioActivityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatRadioActivityVector(final SortedMap<Integer, Float> values, final RadioActivityUnit unit,
@@ -105,8 +106,8 @@ public class MutableFloatRadioActivityVector extends AbstractMutableFloatVectorR
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit RadioActivityUnit; the unit
      */
     MutableFloatRadioActivityVector(final FloatVectorData data, final RadioActivityUnit unit)
     {

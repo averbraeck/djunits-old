@@ -28,8 +28,8 @@ public class AngleSolidVector
     /**
      * Construct a new Relative Immutable Double AngleSolidVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double AngleSolidVector
-     * @param unit U; the unit of the new Relative Immutable Double AngleSolidVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AngleSolidUnit; the unit of the new Relative Immutable Double AngleSolidVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public AngleSolidVector(final double[] values, final AngleSolidUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class AngleSolidVector
 
     /**
      * Construct a new Relative Immutable Double AngleSolidVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double AngleSolidVector
-     * @param unit U; the unit of the new Relative Immutable Double AngleSolidVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double AngleSolidVector
+     * @param unit AngleSolidUnit; the unit of the new Relative Immutable Double AngleSolidVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public AngleSolidVector(final List<Double> values, final AngleSolidUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class AngleSolidVector
 
     /**
      * Construct a new Relative Immutable Double AngleSolidVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            AngleSolidVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values AngleSolid[]; the values of the entries in the new Relative Immutable Double AngleSolidVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public AngleSolidVector(final AngleSolid[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,8 @@ public class AngleSolidVector
 
     /**
      * Construct a new Relative Immutable Double AngleSolidVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double AngleSolidVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;AngleSolid&gt;; the values of the entries in the new Relative Immutable Double AngleSolidVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public AngleSolidVector(final List<AngleSolid> values, final StorageType storageType) throws ValueException
@@ -76,10 +75,10 @@ public class AngleSolidVector
 
     /**
      * Construct a new Relative Immutable Double AngleSolidVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, AngleSolid&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            AngleSolidVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public AngleSolidVector(final SortedMap<Integer, AngleSolid> values, final int length, final StorageType storageType)
@@ -90,10 +89,11 @@ public class AngleSolidVector
 
     /**
      * Construct a new Relative Immutable Double AngleSolidVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double AngleSolidVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double AngleSolidVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            AngleSolidVector
+     * @param unit AngleSolidUnit; the unit of the new Relative Sparse Mutable Double AngleSolidVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public AngleSolidVector(final SortedMap<Integer, Double> values, final AngleSolidUnit unit, final int length,
@@ -103,8 +103,8 @@ public class AngleSolidVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit AngleSolidUnit; the unit
      */
     AngleSolidVector(final DoubleVectorData data, final AngleSolidUnit unit)
     {

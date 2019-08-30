@@ -53,5 +53,5 @@ public class TorqueUnit extends Unit<TorqueUnit>
     {
         return length.getScale().toStandardUnit(1.0) * force.getScale().toStandardUnit(1.0);
     }
-    
+
 }

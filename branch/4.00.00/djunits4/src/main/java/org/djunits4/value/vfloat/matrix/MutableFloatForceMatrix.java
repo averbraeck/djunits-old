@@ -25,8 +25,8 @@ public class MutableFloatForceMatrix
     /**
      * Construct a new Relative Immutable FloatForceMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatForceMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatForceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ForceUnit; the unit of the new Relative Immutable FloatForceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatForceMatrix(final float[][] values, final ForceUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableFloatForceMatrix
 
     /**
      * Construct a new Relative Immutable FloatForceMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatForceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatForce[][]; the values of the entries in the new Relative Immutable Float FloatForceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatForceMatrix(final FloatForce[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableFloatForceMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit ForceUnit; the unit
      */
     MutableFloatForceMatrix(final FloatMatrixData data, final ForceUnit unit)
     {

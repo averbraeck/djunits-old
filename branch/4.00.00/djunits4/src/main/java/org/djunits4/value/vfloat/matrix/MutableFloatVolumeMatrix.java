@@ -25,8 +25,8 @@ public class MutableFloatVolumeMatrix
     /**
      * Construct a new Relative Immutable FloatVolumeMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatVolumeMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatVolumeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit VolumeUnit; the unit of the new Relative Immutable FloatVolumeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatVolumeMatrix(final float[][] values, final VolumeUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableFloatVolumeMatrix
 
     /**
      * Construct a new Relative Immutable FloatVolumeMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatVolumeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatVolume[][]; the values of the entries in the new Relative Immutable Float FloatVolumeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatVolumeMatrix(final FloatVolume[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableFloatVolumeMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit VolumeUnit; the unit
      */
     MutableFloatVolumeMatrix(final FloatMatrixData data, final VolumeUnit unit)
     {

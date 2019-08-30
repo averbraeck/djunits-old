@@ -57,8 +57,8 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Construct MagneticFlux scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit MagneticFluxUnit; unit for the double value
      */
     public MagneticFlux(final double value, final MagneticFluxUnit unit)
     {
@@ -67,7 +67,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Construct MagneticFlux scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value MagneticFlux; Scalar from which to construct this instance
      */
     public MagneticFlux(final MagneticFlux value)
     {
@@ -83,7 +83,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Construct MagneticFlux scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final MagneticFlux createSI(final double value)
@@ -93,9 +93,9 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero MagneticFlux; the low value
+     * @param one MagneticFlux; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static MagneticFlux interpolate(final MagneticFlux zero, final MagneticFlux one, final double ratio)
@@ -105,8 +105,8 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 MagneticFlux; the first scalar
+     * @param r2 MagneticFlux; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static MagneticFlux max(final MagneticFlux r1, final MagneticFlux r2)
@@ -116,9 +116,9 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 MagneticFlux; the first scalar
+     * @param r2 MagneticFlux; the second scalar
+     * @param rn MagneticFlux...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static MagneticFlux max(final MagneticFlux r1, final MagneticFlux r2, final MagneticFlux... rn)
@@ -136,8 +136,8 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 MagneticFlux; the first scalar
+     * @param r2 MagneticFlux; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static MagneticFlux min(final MagneticFlux r1, final MagneticFlux r2)
@@ -147,9 +147,9 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 MagneticFlux; the first scalar
+     * @param r2 MagneticFlux; the second scalar
+     * @param rn MagneticFlux...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static MagneticFlux min(final MagneticFlux r1, final MagneticFlux r2, final MagneticFlux... rn)

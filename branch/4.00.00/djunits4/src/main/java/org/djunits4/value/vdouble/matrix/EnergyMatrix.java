@@ -24,8 +24,8 @@ public class EnergyMatrix extends AbstractDoubleMatrixRel<EnergyUnit, EnergyMatr
     /**
      * Construct a new Relative Immutable Double EnergyMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double EnergyMatrix
-     * @param unit U; the unit of the new Relative Immutable Double EnergyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit EnergyUnit; the unit of the new Relative Immutable Double EnergyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public EnergyMatrix(final double[][] values, final EnergyUnit unit, final StorageType storageType) throws ValueException
@@ -35,8 +35,8 @@ public class EnergyMatrix extends AbstractDoubleMatrixRel<EnergyUnit, EnergyMatr
 
     /**
      * Construct a new Relative Immutable Double EnergyMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double EnergyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Energy[][]; the values of the entries in the new Relative Immutable Double EnergyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public EnergyMatrix(final Energy[][] values, final StorageType storageType) throws ValueException
@@ -45,8 +45,8 @@ public class EnergyMatrix extends AbstractDoubleMatrixRel<EnergyUnit, EnergyMatr
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit EnergyUnit; the unit
      */
     EnergyMatrix(final DoubleMatrixData data, final EnergyUnit unit)
     {

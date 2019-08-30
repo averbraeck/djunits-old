@@ -28,8 +28,8 @@ public class ElectricalConductanceVector extends AbstractDoubleVectorRel<Electri
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double ElectricalConductanceVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalConductanceUnit; the unit of the new Relative Immutable Double ElectricalConductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalConductanceVector(final double[] values, final ElectricalConductanceUnit unit,
@@ -40,9 +40,10 @@ public class ElectricalConductanceVector extends AbstractDoubleVectorRel<Electri
 
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalConductanceVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double
+     *            ElectricalConductanceVector
+     * @param unit ElectricalConductanceUnit; the unit of the new Relative Immutable Double ElectricalConductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalConductanceVector(final List<Double> values, final ElectricalConductanceUnit unit,
@@ -53,9 +54,9 @@ public class ElectricalConductanceVector extends AbstractDoubleVectorRel<Electri
 
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
+     * @param values ElectricalConductance[]; the values of the entries in the new Relative Immutable Double
      *            ElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalConductanceVector(final ElectricalConductance[] values, final StorageType storageType)
@@ -66,8 +67,9 @@ public class ElectricalConductanceVector extends AbstractDoubleVectorRel<Electri
 
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;ElectricalConductance&gt;; the values of the entries in the new Relative Immutable Double
+     *            ElectricalConductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalConductanceVector(final List<ElectricalConductance> values, final StorageType storageType)
@@ -78,10 +80,10 @@ public class ElectricalConductanceVector extends AbstractDoubleVectorRel<Electri
 
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
-     *            ElectricalConductanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, ElectricalConductance&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Double ElectricalConductanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalConductanceVector(final SortedMap<Integer, ElectricalConductance> values, final int length,
@@ -92,10 +94,11 @@ public class ElectricalConductanceVector extends AbstractDoubleVectorRel<Electri
 
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double ElectricalConductanceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double ElectricalConductanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            ElectricalConductanceVector
+     * @param unit ElectricalConductanceUnit; the unit of the new Relative Sparse Mutable Double ElectricalConductanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalConductanceVector(final SortedMap<Integer, Double> values, final ElectricalConductanceUnit unit,
@@ -105,8 +108,8 @@ public class ElectricalConductanceVector extends AbstractDoubleVectorRel<Electri
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit ElectricalConductanceUnit; the unit
      */
     ElectricalConductanceVector(final DoubleVectorData data, final ElectricalConductanceUnit unit)
     {

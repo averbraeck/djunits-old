@@ -24,8 +24,8 @@ public class MagneticFluxUnit extends Unit<MagneticFluxUnit>
     public static final UnitBase<MagneticFluxUnit> BASE = new UnitBase<>("kgm2/s2A");
 
     /** The SI unit for magnetic flux is Weber. */
-    public static final MagneticFluxUnit SI = new MagneticFluxUnit()
-            .build(new Unit.Builder<MagneticFluxUnit>().setBaseUnit(BASE).setId("Wb").setName("weber")
+    public static final MagneticFluxUnit SI =
+            new MagneticFluxUnit().build(new Unit.Builder<MagneticFluxUnit>().setBaseUnit(BASE).setId("Wb").setName("weber")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Weber. */

@@ -91,5 +91,5 @@ public class AreaUnit extends Unit<AreaUnit>
         double factor = lu.getScale().toStandardUnit(1.0);
         return factor * factor;
     }
-    
+
 }

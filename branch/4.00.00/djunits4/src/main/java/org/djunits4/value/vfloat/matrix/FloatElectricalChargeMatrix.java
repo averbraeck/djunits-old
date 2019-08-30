@@ -25,8 +25,8 @@ public class FloatElectricalChargeMatrix extends AbstractFloatMatrixRel<Electric
     /**
      * Construct a new Relative Immutable FloatElectricalChargeMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatElectricalChargeMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatElectricalChargeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalChargeUnit; the unit of the new Relative Immutable FloatElectricalChargeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalChargeMatrix(final float[][] values, final ElectricalChargeUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class FloatElectricalChargeMatrix extends AbstractFloatMatrixRel<Electric
 
     /**
      * Construct a new Relative Immutable FloatElectricalChargeMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalCharge[][]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalChargeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalChargeMatrix(final FloatElectricalCharge[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class FloatElectricalChargeMatrix extends AbstractFloatMatrixRel<Electric
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit ElectricalChargeUnit; the unit
      */
     FloatElectricalChargeMatrix(final FloatMatrixData data, final ElectricalChargeUnit unit)
     {

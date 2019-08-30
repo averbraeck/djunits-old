@@ -15,7 +15,7 @@ public class GradeScale implements Scale
 {
     /** */
     private static final long serialVersionUID = 20151011L;
-    
+
     /** Multiply by this number to convert to the standard (e.g., SI) unit. */
     private final double conversionFactorToGrade;
 

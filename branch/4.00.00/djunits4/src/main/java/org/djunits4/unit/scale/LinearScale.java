@@ -67,7 +67,7 @@ public class LinearScale implements Scale
     {
         return this.conversionFactorToStandardUnit == 1.0;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public int hashCode()

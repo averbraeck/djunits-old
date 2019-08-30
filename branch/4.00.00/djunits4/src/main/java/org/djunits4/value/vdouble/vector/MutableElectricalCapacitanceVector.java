@@ -28,8 +28,8 @@ public class MutableElectricalCapacitanceVector extends AbstractMutableDoubleVec
     /**
      * Construct a new Relative Immutable Double ElectricalCapacitanceVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double ElectricalCapacitanceVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalCapacitanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Immutable Double ElectricalCapacitanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalCapacitanceVector(final double[] values, final ElectricalCapacitanceUnit unit,
@@ -40,9 +40,10 @@ public class MutableElectricalCapacitanceVector extends AbstractMutableDoubleVec
 
     /**
      * Construct a new Relative Immutable Double ElectricalCapacitanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalCapacitanceVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalCapacitanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double
+     *            ElectricalCapacitanceVector
+     * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Immutable Double ElectricalCapacitanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalCapacitanceVector(final List<Double> values, final ElectricalCapacitanceUnit unit,
@@ -53,9 +54,9 @@ public class MutableElectricalCapacitanceVector extends AbstractMutableDoubleVec
 
     /**
      * Construct a new Relative Immutable Double ElectricalCapacitanceVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
+     * @param values ElectricalCapacitance[]; the values of the entries in the new Relative Immutable Double
      *            ElectricalCapacitanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalCapacitanceVector(final ElectricalCapacitance[] values, final StorageType storageType)
@@ -66,8 +67,9 @@ public class MutableElectricalCapacitanceVector extends AbstractMutableDoubleVec
 
     /**
      * Construct a new Relative Immutable Double ElectricalCapacitanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalCapacitanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;ElectricalCapacitance&gt;; the values of the entries in the new Relative Immutable Double
+     *            ElectricalCapacitanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalCapacitanceVector(final List<ElectricalCapacitance> values, final StorageType storageType)
@@ -78,10 +80,10 @@ public class MutableElectricalCapacitanceVector extends AbstractMutableDoubleVec
 
     /**
      * Construct a new Relative Immutable Double ElectricalCapacitanceVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
-     *            ElectricalCapacitanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, ElectricalCapacitance&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Double ElectricalCapacitanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalCapacitanceVector(final SortedMap<Integer, ElectricalCapacitance> values, final int length,
@@ -92,10 +94,11 @@ public class MutableElectricalCapacitanceVector extends AbstractMutableDoubleVec
 
     /**
      * Construct a new Relative Immutable Double ElectricalCapacitanceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double ElectricalCapacitanceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double ElectricalCapacitanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            ElectricalCapacitanceVector
+     * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Sparse Mutable Double ElectricalCapacitanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalCapacitanceVector(final SortedMap<Integer, Double> values, final ElectricalCapacitanceUnit unit,
@@ -105,8 +108,8 @@ public class MutableElectricalCapacitanceVector extends AbstractMutableDoubleVec
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit ElectricalCapacitanceUnit; the unit
      */
     MutableElectricalCapacitanceVector(final DoubleVectorData data, final ElectricalCapacitanceUnit unit)
     {

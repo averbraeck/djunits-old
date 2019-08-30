@@ -25,8 +25,8 @@ public class MutableElectricalInductanceMatrix extends AbstractMutableDoubleMatr
     /**
      * Construct a new Relative Immutable Double ElectricalInductanceMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double ElectricalInductanceMatrix
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalInductanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalInductanceUnit; the unit of the new Relative Immutable Double ElectricalInductanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalInductanceMatrix(final double[][] values, final ElectricalInductanceUnit unit,
@@ -37,9 +37,9 @@ public class MutableElectricalInductanceMatrix extends AbstractMutableDoubleMatr
 
     /**
      * Construct a new Relative Immutable Double ElectricalInductanceMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
+     * @param values ElectricalInductance[][]; the values of the entries in the new Relative Immutable Double
      *            ElectricalInductanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalInductanceMatrix(final ElectricalInductance[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableElectricalInductanceMatrix extends AbstractMutableDoubleMatr
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit ElectricalInductanceUnit; the unit
      */
     MutableElectricalInductanceMatrix(final DoubleMatrixData data, final ElectricalInductanceUnit unit)
     {

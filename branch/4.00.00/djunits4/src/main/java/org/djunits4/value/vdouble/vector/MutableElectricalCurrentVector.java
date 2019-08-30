@@ -28,8 +28,8 @@ public class MutableElectricalCurrentVector extends AbstractMutableDoubleVectorR
     /**
      * Construct a new Relative Immutable Double ElectricalCurrentVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double ElectricalCurrentVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalCurrentVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalCurrentUnit; the unit of the new Relative Immutable Double ElectricalCurrentVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalCurrentVector(final double[] values, final ElectricalCurrentUnit unit,
@@ -40,9 +40,9 @@ public class MutableElectricalCurrentVector extends AbstractMutableDoubleVectorR
 
     /**
      * Construct a new Relative Immutable Double ElectricalCurrentVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalCurrentVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalCurrentVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double ElectricalCurrentVector
+     * @param unit ElectricalCurrentUnit; the unit of the new Relative Immutable Double ElectricalCurrentVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalCurrentVector(final List<Double> values, final ElectricalCurrentUnit unit,
@@ -53,9 +53,8 @@ public class MutableElectricalCurrentVector extends AbstractMutableDoubleVectorR
 
     /**
      * Construct a new Relative Immutable Double ElectricalCurrentVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            ElectricalCurrentVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values ElectricalCurrent[]; the values of the entries in the new Relative Immutable Double ElectricalCurrentVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalCurrentVector(final ElectricalCurrent[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class MutableElectricalCurrentVector extends AbstractMutableDoubleVectorR
 
     /**
      * Construct a new Relative Immutable Double ElectricalCurrentVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalCurrentVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;ElectricalCurrent&gt;; the values of the entries in the new Relative Immutable Double
+     *            ElectricalCurrentVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalCurrentVector(final List<ElectricalCurrent> values, final StorageType storageType)
@@ -77,10 +77,10 @@ public class MutableElectricalCurrentVector extends AbstractMutableDoubleVectorR
 
     /**
      * Construct a new Relative Immutable Double ElectricalCurrentVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
-     *            ElectricalCurrentVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, ElectricalCurrent&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Double ElectricalCurrentVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalCurrentVector(final SortedMap<Integer, ElectricalCurrent> values, final int length,
@@ -91,10 +91,11 @@ public class MutableElectricalCurrentVector extends AbstractMutableDoubleVectorR
 
     /**
      * Construct a new Relative Immutable Double ElectricalCurrentVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double ElectricalCurrentVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double ElectricalCurrentVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            ElectricalCurrentVector
+     * @param unit ElectricalCurrentUnit; the unit of the new Relative Sparse Mutable Double ElectricalCurrentVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalCurrentVector(final SortedMap<Integer, Double> values, final ElectricalCurrentUnit unit,
@@ -104,8 +105,8 @@ public class MutableElectricalCurrentVector extends AbstractMutableDoubleVectorR
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit ElectricalCurrentUnit; the unit
      */
     MutableElectricalCurrentVector(final DoubleVectorData data, final ElectricalCurrentUnit unit)
     {

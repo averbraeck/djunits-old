@@ -25,8 +25,8 @@ public class FloatCatalyticActivityMatrix extends AbstractFloatMatrixRel<Catalyt
     /**
      * Construct a new Relative Immutable FloatCatalyticActivityMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatCatalyticActivityMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatCatalyticActivityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit CatalyticActivityUnit; the unit of the new Relative Immutable FloatCatalyticActivityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatCatalyticActivityMatrix(final float[][] values, final CatalyticActivityUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class FloatCatalyticActivityMatrix extends AbstractFloatMatrixRel<Catalyt
 
     /**
      * Construct a new Relative Immutable FloatCatalyticActivityMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatCatalyticActivity[][]; the values of the entries in the new Relative Immutable Float
      *            FloatCatalyticActivityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatCatalyticActivityMatrix(final FloatCatalyticActivity[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class FloatCatalyticActivityMatrix extends AbstractFloatMatrixRel<Catalyt
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit CatalyticActivityUnit; the unit
      */
     FloatCatalyticActivityMatrix(final FloatMatrixData data, final CatalyticActivityUnit unit)
     {

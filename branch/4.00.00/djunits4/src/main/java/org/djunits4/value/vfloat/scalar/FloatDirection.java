@@ -40,8 +40,8 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Construct FloatDirection scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit DirectionUnit; unit for the float value
      */
     public FloatDirection(final float value, final DirectionUnit unit)
     {
@@ -50,8 +50,8 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Construct FloatDirection scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit DirectionUnit; unit for the resulting float value
      */
     public FloatDirection(final double value, final DirectionUnit unit)
     {
@@ -60,7 +60,7 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Construct FloatDirection scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatDirection; Scalar from which to construct this instance
      */
     public FloatDirection(final FloatDirection value)
     {
@@ -83,7 +83,7 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Construct FloatDirection scalar.
-     * @param value float value in BASE units
+     * @param value float; float value in BASE units
      * @return the new scalar with the BASE value
      */
     public static final FloatDirection createSI(final float value)
@@ -93,9 +93,9 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatDirection; the low value
+     * @param one FloatDirection; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatDirection interpolate(final FloatDirection zero, final FloatDirection one, final float ratio)
@@ -105,8 +105,8 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 FloatDirection; the first scalar
+     * @param a2 FloatDirection; the second scalar
      * @return the maximum value of two absolute scalars
      */
     public static FloatDirection max(final FloatDirection a1, final FloatDirection a2)
@@ -116,9 +116,9 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 FloatDirection; the first scalar
+     * @param a2 FloatDirection; the second scalar
+     * @param an FloatDirection...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static FloatDirection max(final FloatDirection a1, final FloatDirection a2, final FloatDirection... an)
@@ -136,8 +136,8 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 FloatDirection; the first scalar
+     * @param a2 FloatDirection; the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static FloatDirection min(final FloatDirection a1, final FloatDirection a2)
@@ -147,9 +147,9 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 FloatDirection; the first scalar
+     * @param a2 FloatDirection; the second scalar
+     * @param an FloatDirection...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static FloatDirection min(final FloatDirection a1, final FloatDirection a2, final FloatDirection... an)

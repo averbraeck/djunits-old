@@ -207,7 +207,7 @@ public class SIDimensions implements Serializable
     /**
      * Add a set of SI dimensions to this SIDimensions. Note: as dimensions are considered to be immutable, a new dimension is
      * returned. The original dimension remains unaltered.
-     * @param dim2 the dimensions to add (usually as a result of multiplication of scalars)
+     * @param dim2 SIDimensions; the dimensions to add (usually as a result of multiplication of scalars)
      * @return the new dimensions with the dimensions of this object plus the dimensions in the parameter
      */
     public SIDimensions plus(final SIDimensions dim2)
@@ -223,7 +223,7 @@ public class SIDimensions implements Serializable
     /**
      * Subtract a set of SI dimensions from this SIDimensions. Note: as dimensions are considered to be immutable, a new
      * dimension is returned. The original dimension remains unaltered.
-     * @param dim2 the dimensions to add (usually as a result of multiplication of scalars)
+     * @param dim2 SIDimensions; the dimensions to add (usually as a result of multiplication of scalars)
      * @return the new dimensions with the dimensions of this object minus the dimensions in the parameter
      */
     public SIDimensions minus(final SIDimensions dim2)
@@ -254,8 +254,8 @@ public class SIDimensions implements Serializable
     /**
      * Add two SIDimensions and return the new SIDimensions. Usually, dimensions are added as a result of multiplication of
      * scalars.
-     * @param dim1 the first set of dimensions
-     * @param dim2 the second set of dimensions
+     * @param dim1 SIDimensions; the first set of dimensions
+     * @param dim2 SIDimensions; the second set of dimensions
      * @return the new dimensions with the sum of the dimensions in the parameters
      */
     public static SIDimensions add(final SIDimensions dim1, final SIDimensions dim2)
@@ -271,8 +271,8 @@ public class SIDimensions implements Serializable
     /**
      * Subtract an SIDimensions (dim2) from another SIDimensions (dim1) and return the new SIDimensions. Usually, dimensions are
      * added as a result of division of scalars.
-     * @param dim1 the first set of dimensions
-     * @param dim2 the second set of dimensions that will be subtracted from dim1
+     * @param dim1 SIDimensions; the first set of dimensions
+     * @param dim2 SIDimensions; the second set of dimensions that will be subtracted from dim1
      * @return the new dimensions with the difference of the dimensions in the parameters
      */
     public static SIDimensions subtract(final SIDimensions dim1, final SIDimensions dim2)
@@ -326,7 +326,7 @@ public class SIDimensions implements Serializable
     /**
      * Return a string such as "kgm/s2" or "kg.m/s^2" or "kg.m.s^-2" from this SIDimensions.
      * @param divided if true, return m/s2 for acceleration; if false return ms-2
-     * @param separator if true, add dots between successive units, e.g. kg.m.s-2 instead of kgms-2
+     * @param separator boolean; if true, add dots between successive units, e.g. kg.m.s-2 instead of kgms-2
      * @return a 'divided' string from this SIDimensions
      */
     public String toString(final boolean divided, final boolean separator)

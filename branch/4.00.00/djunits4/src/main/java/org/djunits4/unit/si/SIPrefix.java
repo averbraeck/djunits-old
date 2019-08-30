@@ -31,9 +31,9 @@ public class SIPrefix implements Serializable
 
     /**
      * Construct an SI prefix.
-     * @param defaultTextualPrefix the prefix abbreviation, duch as "M" for mega and "da" for deca
-     * @param prefixName the prefix name such as "mega" or "deca"
-     * @param factor the factor that the SI prefix represents, such as 1.0E6 for mega
+     * @param defaultTextualPrefix String; the prefix abbreviation, duch as "M" for mega and "da" for deca
+     * @param prefixName String; the prefix name such as "mega" or "deca"
+     * @param factor double; the factor that the SI prefix represents, such as 1.0E6 for mega
      * @param defaultDisplayPrefix the display prefix; "\u03BC" for micro
      */
     public SIPrefix(final String defaultTextualPrefix, final String prefixName, final double factor,
@@ -51,9 +51,9 @@ public class SIPrefix implements Serializable
 
     /**
      * Construct an SI prefix with the defaultDisplayPrefix equal to the defaultTextualPrefix.
-     * @param defaultTextualPrefix the prefix abbreviation, duch as "M" for mega and "da" for deca
-     * @param prefixName the prefix name such as "mega" or "deca"
-     * @param factor the factor that the SI prefix represents, such as 1.0E6 for mega
+     * @param defaultTextualPrefix String; the prefix abbreviation, duch as "M" for mega and "da" for deca
+     * @param prefixName String; the prefix name such as "mega" or "deca"
+     * @param factor double; the factor that the SI prefix represents, such as 1.0E6 for mega
      */
     public SIPrefix(final String defaultTextualPrefix, final String prefixName, final double factor)
     {

@@ -62,8 +62,8 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Construct ElectricalConductance scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit ElectricalConductanceUnit; unit for the double value
      */
     public ElectricalConductance(final double value, final ElectricalConductanceUnit unit)
     {
@@ -72,7 +72,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Construct ElectricalConductance scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value ElectricalConductance; Scalar from which to construct this instance
      */
     public ElectricalConductance(final ElectricalConductance value)
     {
@@ -88,7 +88,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Construct ElectricalConductance scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final ElectricalConductance createSI(final double value)
@@ -98,9 +98,9 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero ElectricalConductance; the low value
+     * @param one ElectricalConductance; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static ElectricalConductance interpolate(final ElectricalConductance zero, final ElectricalConductance one,
@@ -112,8 +112,8 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 ElectricalConductance; the first scalar
+     * @param r2 ElectricalConductance; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static ElectricalConductance max(final ElectricalConductance r1, final ElectricalConductance r2)
@@ -123,9 +123,9 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 ElectricalConductance; the first scalar
+     * @param r2 ElectricalConductance; the second scalar
+     * @param rn ElectricalConductance...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static ElectricalConductance max(final ElectricalConductance r1, final ElectricalConductance r2,
@@ -144,8 +144,8 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 ElectricalConductance; the first scalar
+     * @param r2 ElectricalConductance; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static ElectricalConductance min(final ElectricalConductance r1, final ElectricalConductance r2)
@@ -155,9 +155,9 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 ElectricalConductance; the first scalar
+     * @param r2 ElectricalConductance; the second scalar
+     * @param rn ElectricalConductance...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static ElectricalConductance min(final ElectricalConductance r1, final ElectricalConductance r2,

@@ -64,8 +64,8 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Construct FloatElectricalConductance scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit ElectricalConductanceUnit; unit for the float value
      */
     public FloatElectricalConductance(final float value, final ElectricalConductanceUnit unit)
     {
@@ -74,7 +74,7 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Construct FloatElectricalConductance scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatElectricalConductance; Scalar from which to construct this instance
      */
     public FloatElectricalConductance(final FloatElectricalConductance value)
     {
@@ -83,8 +83,8 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Construct FloatElectricalConductance scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit ElectricalConductanceUnit; unit for the resulting float value
      */
     public FloatElectricalConductance(final double value, final ElectricalConductanceUnit unit)
     {
@@ -100,7 +100,7 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Construct FloatElectricalConductance scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatElectricalConductance createSI(final float value)
@@ -110,9 +110,9 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatElectricalConductance; the low value
+     * @param one FloatElectricalConductance; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalConductance interpolate(final FloatElectricalConductance zero,
@@ -124,8 +124,8 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatElectricalConductance; the first scalar
+     * @param r2 FloatElectricalConductance; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatElectricalConductance max(final FloatElectricalConductance r1, final FloatElectricalConductance r2)
@@ -135,9 +135,9 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatElectricalConductance; the first scalar
+     * @param r2 FloatElectricalConductance; the second scalar
+     * @param rn FloatElectricalConductance...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatElectricalConductance max(final FloatElectricalConductance r1, final FloatElectricalConductance r2,
@@ -156,8 +156,8 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatElectricalConductance; the first scalar
+     * @param r2 FloatElectricalConductance; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatElectricalConductance min(final FloatElectricalConductance r1, final FloatElectricalConductance r2)
@@ -167,9 +167,9 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatElectricalConductance; the first scalar
+     * @param r2 FloatElectricalConductance; the second scalar
+     * @param rn FloatElectricalConductance...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatElectricalConductance min(final FloatElectricalConductance r1, final FloatElectricalConductance r2,

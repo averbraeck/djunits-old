@@ -25,8 +25,8 @@ public class MutableFloatIlluminanceMatrix extends
     /**
      * Construct a new Relative Immutable FloatIlluminanceMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatIlluminanceMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatIlluminanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit IlluminanceUnit; the unit of the new Relative Immutable FloatIlluminanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatIlluminanceMatrix(final float[][] values, final IlluminanceUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableFloatIlluminanceMatrix extends
 
     /**
      * Construct a new Relative Immutable FloatIlluminanceMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatIlluminanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatIlluminance[][]; the values of the entries in the new Relative Immutable Float FloatIlluminanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatIlluminanceMatrix(final FloatIlluminance[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableFloatIlluminanceMatrix extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit IlluminanceUnit; the unit
      */
     MutableFloatIlluminanceMatrix(final FloatMatrixData data, final IlluminanceUnit unit)
     {

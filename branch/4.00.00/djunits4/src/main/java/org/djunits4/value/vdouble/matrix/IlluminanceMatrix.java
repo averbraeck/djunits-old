@@ -25,8 +25,8 @@ public class IlluminanceMatrix
     /**
      * Construct a new Relative Immutable Double IlluminanceMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double IlluminanceMatrix
-     * @param unit U; the unit of the new Relative Immutable Double IlluminanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit IlluminanceUnit; the unit of the new Relative Immutable Double IlluminanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public IlluminanceMatrix(final double[][] values, final IlluminanceUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class IlluminanceMatrix
 
     /**
      * Construct a new Relative Immutable Double IlluminanceMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            IlluminanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Illuminance[][]; the values of the entries in the new Relative Immutable Double IlluminanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public IlluminanceMatrix(final Illuminance[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class IlluminanceMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit IlluminanceUnit; the unit
      */
     IlluminanceMatrix(final DoubleMatrixData data, final IlluminanceUnit unit)
     {

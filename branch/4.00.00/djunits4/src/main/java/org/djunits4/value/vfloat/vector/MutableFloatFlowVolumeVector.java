@@ -28,8 +28,8 @@ public class MutableFloatFlowVolumeVector extends
     /**
      * Construct a new Relative Immutable Float FlowVolumeVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FlowVolumeVector
-     * @param unit U; the unit of the new Relative Immutable Float FlowVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FlowVolumeUnit; the unit of the new Relative Immutable Float FlowVolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatFlowVolumeVector(final float[] values, final FlowVolumeUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatFlowVolumeVector extends
 
     /**
      * Construct a new Relative Immutable Float FlowVolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FlowVolumeVector
-     * @param unit U; the unit of the new Relative Immutable Float FlowVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FlowVolumeVector
+     * @param unit FlowVolumeUnit; the unit of the new Relative Immutable Float FlowVolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatFlowVolumeVector(final List<Float> values, final FlowVolumeUnit unit, final StorageType storageType)
@@ -53,8 +53,8 @@ public class MutableFloatFlowVolumeVector extends
 
     /**
      * Construct a new Relative Immutable Float FlowVolumeVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float FlowVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatFlowVolume[]; the values of the entries in the new Relative Immutable Float FlowVolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatFlowVolumeVector(final FloatFlowVolume[] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ public class MutableFloatFlowVolumeVector extends
 
     /**
      * Construct a new Relative Immutable Float FlowVolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FlowVolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatFlowVolume&gt;; the values of the entries in the new Relative Immutable Float FlowVolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatFlowVolumeVector(final List<FloatFlowVolume> values, final StorageType storageType) throws ValueException
@@ -75,10 +75,10 @@ public class MutableFloatFlowVolumeVector extends
 
     /**
      * Construct a new Relative Immutable Float FlowVolumeVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FlowVolumeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatFlowVolume&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float FlowVolumeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatFlowVolumeVector(final SortedMap<Integer, FloatFlowVolume> values, final int length,
@@ -89,10 +89,11 @@ public class MutableFloatFlowVolumeVector extends
 
     /**
      * Construct a new Relative Immutable Float FlowVolumeVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FlowVolumeVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FlowVolumeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FlowVolumeVector
+     * @param unit FlowVolumeUnit; the unit of the new Relative Sparse Mutable Float FlowVolumeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatFlowVolumeVector(final SortedMap<Integer, Float> values, final FlowVolumeUnit unit, final int length,
@@ -102,8 +103,8 @@ public class MutableFloatFlowVolumeVector extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit FlowVolumeUnit; the unit
      */
     MutableFloatFlowVolumeVector(final FloatVectorData data, final FlowVolumeUnit unit)
     {

@@ -25,8 +25,8 @@ public class MutablePressureMatrix
     /**
      * Construct a new Relative Immutable Double PressureMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double PressureMatrix
-     * @param unit U; the unit of the new Relative Immutable Double PressureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit PressureUnit; the unit of the new Relative Immutable Double PressureMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutablePressureMatrix(final double[][] values, final PressureUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutablePressureMatrix
 
     /**
      * Construct a new Relative Immutable Double PressureMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            PressureMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Pressure[][]; the values of the entries in the new Relative Immutable Double PressureMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutablePressureMatrix(final Pressure[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutablePressureMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit PressureUnit; the unit
      */
     MutablePressureMatrix(final DoubleMatrixData data, final PressureUnit unit)
     {

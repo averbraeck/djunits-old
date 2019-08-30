@@ -25,8 +25,8 @@ public class MutableFloatDensityMatrix
     /**
      * Construct a new Relative Immutable FloatDensityMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatDensityMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatDensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DensityUnit; the unit of the new Relative Immutable FloatDensityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDensityMatrix(final float[][] values, final DensityUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class MutableFloatDensityMatrix
 
     /**
      * Construct a new Relative Immutable FloatDensityMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatDensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatDensity[][]; the values of the entries in the new Relative Immutable Float FloatDensityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDensityMatrix(final FloatDensity[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class MutableFloatDensityMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit DensityUnit; the unit
      */
     MutableFloatDensityMatrix(final FloatMatrixData data, final DensityUnit unit)
     {

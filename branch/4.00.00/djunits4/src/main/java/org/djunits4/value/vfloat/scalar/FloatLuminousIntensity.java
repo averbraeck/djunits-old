@@ -61,8 +61,8 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
 
     /**
      * Construct FloatLuminousIntensity scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; float value
+     * @param unit LuminousIntensityUnit; unit for the float value
      */
     public FloatLuminousIntensity(final float value, final LuminousIntensityUnit unit)
     {
@@ -71,7 +71,7 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
 
     /**
      * Construct FloatLuminousIntensity scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatLuminousIntensity; Scalar from which to construct this instance
      */
     public FloatLuminousIntensity(final FloatLuminousIntensity value)
     {
@@ -80,8 +80,8 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
 
     /**
      * Construct FloatLuminousIntensity scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; double value
+     * @param unit LuminousIntensityUnit; unit for the resulting float value
      */
     public FloatLuminousIntensity(final double value, final LuminousIntensityUnit unit)
     {
@@ -97,7 +97,7 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
 
     /**
      * Construct FloatLuminousIntensity scalar.
-     * @param value float value in SI units
+     * @param value float; float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatLuminousIntensity createSI(final float value)
@@ -107,9 +107,9 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero FloatLuminousIntensity; the low value
+     * @param one FloatLuminousIntensity; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatLuminousIntensity interpolate(final FloatLuminousIntensity zero, final FloatLuminousIntensity one,
@@ -121,8 +121,8 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatLuminousIntensity; the first scalar
+     * @param r2 FloatLuminousIntensity; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatLuminousIntensity max(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2)
@@ -132,9 +132,9 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatLuminousIntensity; the first scalar
+     * @param r2 FloatLuminousIntensity; the second scalar
+     * @param rn FloatLuminousIntensity...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatLuminousIntensity max(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2,
@@ -153,8 +153,8 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatLuminousIntensity; the first scalar
+     * @param r2 FloatLuminousIntensity; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatLuminousIntensity min(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2)
@@ -164,9 +164,9 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatLuminousIntensity; the first scalar
+     * @param r2 FloatLuminousIntensity; the second scalar
+     * @param rn FloatLuminousIntensity...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatLuminousIntensity min(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2,

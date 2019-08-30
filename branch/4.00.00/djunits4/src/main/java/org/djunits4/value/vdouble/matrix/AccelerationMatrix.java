@@ -25,8 +25,8 @@ public class AccelerationMatrix
     /**
      * Construct a new Relative Immutable Double AccelerationMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double AccelerationMatrix
-     * @param unit U; the unit of the new Relative Immutable Double AccelerationMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AccelerationUnit; the unit of the new Relative Immutable Double AccelerationMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public AccelerationMatrix(final double[][] values, final AccelerationUnit unit, final StorageType storageType)
@@ -37,9 +37,8 @@ public class AccelerationMatrix
 
     /**
      * Construct a new Relative Immutable Double AccelerationMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            AccelerationMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Acceleration[][]; the values of the entries in the new Relative Immutable Double AccelerationMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public AccelerationMatrix(final Acceleration[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +47,8 @@ public class AccelerationMatrix
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit AccelerationUnit; the unit
      */
     AccelerationMatrix(final DoubleMatrixData data, final AccelerationUnit unit)
     {

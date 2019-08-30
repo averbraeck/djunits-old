@@ -25,8 +25,8 @@ public class FloatAccelerationMatrix extends
     /**
      * Construct a new Relative Immutable FloatAccelerationMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatAccelerationMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatAccelerationMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AccelerationUnit; the unit of the new Relative Immutable FloatAccelerationMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatAccelerationMatrix(final float[][] values, final AccelerationUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class FloatAccelerationMatrix extends
 
     /**
      * Construct a new Relative Immutable FloatAccelerationMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatAcceleration[][]; the values of the entries in the new Relative Immutable Float
      *            FloatAccelerationMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatAccelerationMatrix(final FloatAcceleration[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class FloatAccelerationMatrix extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit AccelerationUnit; the unit
      */
     FloatAccelerationMatrix(final FloatMatrixData data, final AccelerationUnit unit)
     {

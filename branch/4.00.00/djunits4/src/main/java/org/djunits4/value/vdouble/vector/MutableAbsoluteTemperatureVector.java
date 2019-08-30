@@ -29,8 +29,8 @@ public class MutableAbsoluteTemperatureVector extends AbstractMutableDoubleVecto
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
      * @param values double[]; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureVector
-     * @param unit U; the unit of the new Absolute Mutable Double AbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Mutable Double AbsoluteTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAbsoluteTemperatureVector(final double[] values, final AbsoluteTemperatureUnit unit,
@@ -41,9 +41,9 @@ public class MutableAbsoluteTemperatureVector extends AbstractMutableDoubleVecto
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param values List; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureVector
-     * @param unit U; the unit of the new Absolute Mutable Double AbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureVector
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Mutable Double AbsoluteTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAbsoluteTemperatureVector(final List<Double> values, final AbsoluteTemperatureUnit unit,
@@ -54,9 +54,9 @@ public class MutableAbsoluteTemperatureVector extends AbstractMutableDoubleVecto
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable Double
+     * @param values AbsoluteTemperature[]; the values of the entries in the new Absolute Mutable Double
      *            AbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAbsoluteTemperatureVector(final AbsoluteTemperature[] values, final StorageType storageType)
@@ -67,8 +67,9 @@ public class MutableAbsoluteTemperatureVector extends AbstractMutableDoubleVecto
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param values List; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;AbsoluteTemperature&gt;; the values of the entries in the new Absolute Mutable Double
+     *            AbsoluteTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAbsoluteTemperatureVector(final List<AbsoluteTemperature> values, final StorageType storageType)
@@ -79,10 +80,10 @@ public class MutableAbsoluteTemperatureVector extends AbstractMutableDoubleVecto
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable Double
-     *            AbsoluteTemperatureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, AbsoluteTemperature&gt;; the values of the entries in the new Absolute Sparse Mutable
+     *            Double AbsoluteTemperatureVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAbsoluteTemperatureVector(final SortedMap<Integer, AbsoluteTemperature> values, final int length,
@@ -93,10 +94,11 @@ public class MutableAbsoluteTemperatureVector extends AbstractMutableDoubleVecto
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable Double AbsoluteTemperatureVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable Double AbsoluteTemperatureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Absolute Sparse Mutable Double
+     *            AbsoluteTemperatureVector
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Sparse Mutable Double AbsoluteTemperatureVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAbsoluteTemperatureVector(final SortedMap<Integer, Double> values, final AbsoluteTemperatureUnit unit,
@@ -107,8 +109,8 @@ public class MutableAbsoluteTemperatureVector extends AbstractMutableDoubleVecto
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit AbsoluteTemperatureUnit; the unit
      */
     MutableAbsoluteTemperatureVector(final DoubleVectorData data, final AbsoluteTemperatureUnit unit)
     {

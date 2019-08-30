@@ -103,5 +103,5 @@ public class FlowVolumeUnit extends Unit<FlowVolumeUnit>
     {
         return volume.getScale().toStandardUnit(1.0) / duration.getScale().toStandardUnit(1.0);
     }
-    
+
 }

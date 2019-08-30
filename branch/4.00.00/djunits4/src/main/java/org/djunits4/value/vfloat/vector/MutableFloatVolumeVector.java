@@ -28,8 +28,8 @@ public class MutableFloatVolumeVector
     /**
      * Construct a new Relative Immutable Float VolumeVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float VolumeVector
-     * @param unit U; the unit of the new Relative Immutable Float VolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit VolumeUnit; the unit of the new Relative Immutable Float VolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatVolumeVector(final float[] values, final VolumeUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatVolumeVector
 
     /**
      * Construct a new Relative Immutable Float VolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float VolumeVector
-     * @param unit U; the unit of the new Relative Immutable Float VolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float VolumeVector
+     * @param unit VolumeUnit; the unit of the new Relative Immutable Float VolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatVolumeVector(final List<Float> values, final VolumeUnit unit, final StorageType storageType)
@@ -53,8 +53,8 @@ public class MutableFloatVolumeVector
 
     /**
      * Construct a new Relative Immutable Float VolumeVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float VolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatVolume[]; the values of the entries in the new Relative Immutable Float VolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatVolumeVector(final FloatVolume[] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ public class MutableFloatVolumeVector
 
     /**
      * Construct a new Relative Immutable Float VolumeVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float VolumeVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatVolume&gt;; the values of the entries in the new Relative Immutable Float VolumeVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatVolumeVector(final List<FloatVolume> values, final StorageType storageType) throws ValueException
@@ -75,9 +75,10 @@ public class MutableFloatVolumeVector
 
     /**
      * Construct a new Relative Immutable Float VolumeVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float VolumeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatVolume&gt;; the values of the entries in the new Relative Sparse Mutable Float
+     *            VolumeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatVolumeVector(final SortedMap<Integer, FloatVolume> values, final int length,
@@ -88,10 +89,11 @@ public class MutableFloatVolumeVector
 
     /**
      * Construct a new Relative Immutable Float VolumeVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float VolumeVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float VolumeVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            VolumeVector
+     * @param unit VolumeUnit; the unit of the new Relative Sparse Mutable Float VolumeVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatVolumeVector(final SortedMap<Integer, Float> values, final VolumeUnit unit, final int length,
@@ -101,8 +103,8 @@ public class MutableFloatVolumeVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit VolumeUnit; the unit
      */
     MutableFloatVolumeVector(final FloatVectorData data, final VolumeUnit unit)
     {

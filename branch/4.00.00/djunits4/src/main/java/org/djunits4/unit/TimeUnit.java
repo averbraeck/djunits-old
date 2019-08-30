@@ -130,5 +130,5 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
     public static final TimeUnit EPOCH_J2000_SECOND =
             EPOCH_SECOND.deriveLinearOffset(1.0, new GregorianCalendar(2000, 0, 1, 12, 0, 0).getTimeInMillis() / 1000.0,
                     DurationUnit.SECOND, "s(Y2000)", "seconds since 1-1-2000 12:00 GMT");
-    
+
 }

@@ -25,8 +25,8 @@ public class MutableFloatElectricalInductanceMatrix extends AbstractMutableFloat
     /**
      * Construct a new Relative Immutable FloatElectricalInductanceMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatElectricalInductanceMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatElectricalInductanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalInductanceUnit; the unit of the new Relative Immutable FloatElectricalInductanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatElectricalInductanceMatrix(final float[][] values, final ElectricalInductanceUnit unit,
@@ -37,9 +37,9 @@ public class MutableFloatElectricalInductanceMatrix extends AbstractMutableFloat
 
     /**
      * Construct a new Relative Immutable FloatElectricalInductanceMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalInductance[][]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalInductanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatElectricalInductanceMatrix(final FloatElectricalInductance[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableFloatElectricalInductanceMatrix extends AbstractMutableFloat
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit ElectricalInductanceUnit; the unit
      */
     MutableFloatElectricalInductanceMatrix(final FloatMatrixData data, final ElectricalInductanceUnit unit)
     {

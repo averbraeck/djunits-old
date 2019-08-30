@@ -86,5 +86,5 @@ public class LinearDensityUnit extends Unit<LinearDensityUnit>
     /** 1/Angstrom. */
     public static final LinearDensityUnit PER_ANGSTROM =
             PER_METER.deriveLinear(1.0E-10, "/A", "per Angstrom", UnitSystem.OTHER, "/\u212B", "/A");
-    
+
 }

@@ -28,8 +28,8 @@ public class FloatFrequencyVector
     /**
      * Construct a new Relative Immutable Float FloatFrequencyVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatFrequencyVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatFrequencyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FrequencyUnit; the unit of the new Relative Immutable Float FloatFrequencyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatFrequencyVector(final float[] values, final FrequencyUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class FloatFrequencyVector
 
     /**
      * Construct a new Relative Immutable Float FloatFrequencyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatFrequencyVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatFrequencyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatFrequencyVector
+     * @param unit FrequencyUnit; the unit of the new Relative Immutable Float FloatFrequencyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatFrequencyVector(final List<Float> values, final FrequencyUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class FloatFrequencyVector
 
     /**
      * Construct a new Relative Immutable Float FloatFrequencyVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatFrequencyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatFrequency[]; the values of the entries in the new Relative Immutable Float FloatFrequencyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatFrequencyVector(final FloatFrequency[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class FloatFrequencyVector
 
     /**
      * Construct a new Relative Immutable Float FloatFrequencyVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatFrequencyVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatFrequency&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatFrequencyVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatFrequencyVector(final List<FloatFrequency> values, final StorageType storageType) throws ValueException
@@ -76,10 +76,10 @@ public class FloatFrequencyVector
 
     /**
      * Construct a new Relative Immutable Float FloatFrequencyVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatFrequencyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatFrequency&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float FloatFrequencyVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatFrequencyVector(final SortedMap<Integer, FloatFrequency> values, final int length,
@@ -90,10 +90,11 @@ public class FloatFrequencyVector
 
     /**
      * Construct a new Relative Immutable Float FloatFrequencyVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatFrequencyVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatFrequencyVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatFrequencyVector
+     * @param unit FrequencyUnit; the unit of the new Relative Sparse Mutable Float FloatFrequencyVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatFrequencyVector(final SortedMap<Integer, Float> values, final FrequencyUnit unit, final int length,
@@ -103,8 +104,8 @@ public class FloatFrequencyVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit FrequencyUnit; the unit
      */
     FloatFrequencyVector(final FloatVectorData data, final FrequencyUnit unit)
     {

@@ -46,5 +46,5 @@ public class TemperatureUnit extends Unit<TemperatureUnit>
     /** Degree Reaumur. */
     public static final TemperatureUnit DEGREE_REAUMUR = KELVIN.deriveLinear(4.0 / 5.0, "dgRe", "degree Reaumur",
             UnitSystem.SI_DERIVED, "\u00B0R\u00E9", "degRe", new String[] {"Re", "R\u00E9"});
-    
+
 }

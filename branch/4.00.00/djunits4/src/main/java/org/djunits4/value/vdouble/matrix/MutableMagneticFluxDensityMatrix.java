@@ -25,8 +25,8 @@ public class MutableMagneticFluxDensityMatrix extends AbstractMutableDoubleMatri
     /**
      * Construct a new Relative Immutable Double MagneticFluxDensityMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double MagneticFluxDensityMatrix
-     * @param unit U; the unit of the new Relative Immutable Double MagneticFluxDensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MagneticFluxDensityUnit; the unit of the new Relative Immutable Double MagneticFluxDensityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMagneticFluxDensityMatrix(final double[][] values, final MagneticFluxDensityUnit unit,
@@ -37,9 +37,9 @@ public class MutableMagneticFluxDensityMatrix extends AbstractMutableDoubleMatri
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxDensityMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
+     * @param values MagneticFluxDensity[][]; the values of the entries in the new Relative Immutable Double
      *            MagneticFluxDensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableMagneticFluxDensityMatrix(final MagneticFluxDensity[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableMagneticFluxDensityMatrix extends AbstractMutableDoubleMatri
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit MagneticFluxDensityUnit; the unit
      */
     MutableMagneticFluxDensityMatrix(final DoubleMatrixData data, final MagneticFluxDensityUnit unit)
     {

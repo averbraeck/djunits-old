@@ -57,8 +57,8 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Construct RadioActivity scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit RadioActivityUnit; unit for the double value
      */
     public RadioActivity(final double value, final RadioActivityUnit unit)
     {
@@ -67,7 +67,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Construct RadioActivity scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value RadioActivity; Scalar from which to construct this instance
      */
     public RadioActivity(final RadioActivity value)
     {
@@ -83,7 +83,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Construct RadioActivity scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final RadioActivity createSI(final double value)
@@ -93,9 +93,9 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero RadioActivity; the low value
+     * @param one RadioActivity; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static RadioActivity interpolate(final RadioActivity zero, final RadioActivity one, final double ratio)
@@ -105,8 +105,8 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 RadioActivity; the first scalar
+     * @param r2 RadioActivity; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static RadioActivity max(final RadioActivity r1, final RadioActivity r2)
@@ -116,9 +116,9 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 RadioActivity; the first scalar
+     * @param r2 RadioActivity; the second scalar
+     * @param rn RadioActivity...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static RadioActivity max(final RadioActivity r1, final RadioActivity r2, final RadioActivity... rn)
@@ -136,8 +136,8 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 RadioActivity; the first scalar
+     * @param r2 RadioActivity; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static RadioActivity min(final RadioActivity r1, final RadioActivity r2)
@@ -147,9 +147,9 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 RadioActivity; the first scalar
+     * @param r2 RadioActivity; the second scalar
+     * @param rn RadioActivity...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static RadioActivity min(final RadioActivity r1, final RadioActivity r2, final RadioActivity... rn)

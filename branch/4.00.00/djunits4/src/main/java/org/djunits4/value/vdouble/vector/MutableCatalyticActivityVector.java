@@ -28,8 +28,8 @@ public class MutableCatalyticActivityVector extends AbstractMutableDoubleVectorR
     /**
      * Construct a new Relative Immutable Double CatalyticActivityVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double CatalyticActivityVector
-     * @param unit U; the unit of the new Relative Immutable Double CatalyticActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit CatalyticActivityUnit; the unit of the new Relative Immutable Double CatalyticActivityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableCatalyticActivityVector(final double[] values, final CatalyticActivityUnit unit,
@@ -40,9 +40,9 @@ public class MutableCatalyticActivityVector extends AbstractMutableDoubleVectorR
 
     /**
      * Construct a new Relative Immutable Double CatalyticActivityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double CatalyticActivityVector
-     * @param unit U; the unit of the new Relative Immutable Double CatalyticActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double CatalyticActivityVector
+     * @param unit CatalyticActivityUnit; the unit of the new Relative Immutable Double CatalyticActivityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableCatalyticActivityVector(final List<Double> values, final CatalyticActivityUnit unit,
@@ -53,9 +53,8 @@ public class MutableCatalyticActivityVector extends AbstractMutableDoubleVectorR
 
     /**
      * Construct a new Relative Immutable Double CatalyticActivityVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            CatalyticActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values CatalyticActivity[]; the values of the entries in the new Relative Immutable Double CatalyticActivityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableCatalyticActivityVector(final CatalyticActivity[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class MutableCatalyticActivityVector extends AbstractMutableDoubleVectorR
 
     /**
      * Construct a new Relative Immutable Double CatalyticActivityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double CatalyticActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;CatalyticActivity&gt;; the values of the entries in the new Relative Immutable Double
+     *            CatalyticActivityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableCatalyticActivityVector(final List<CatalyticActivity> values, final StorageType storageType)
@@ -77,10 +77,10 @@ public class MutableCatalyticActivityVector extends AbstractMutableDoubleVectorR
 
     /**
      * Construct a new Relative Immutable Double CatalyticActivityVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
-     *            CatalyticActivityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, CatalyticActivity&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Double CatalyticActivityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableCatalyticActivityVector(final SortedMap<Integer, CatalyticActivity> values, final int length,
@@ -91,10 +91,11 @@ public class MutableCatalyticActivityVector extends AbstractMutableDoubleVectorR
 
     /**
      * Construct a new Relative Immutable Double CatalyticActivityVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double CatalyticActivityVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double CatalyticActivityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            CatalyticActivityVector
+     * @param unit CatalyticActivityUnit; the unit of the new Relative Sparse Mutable Double CatalyticActivityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableCatalyticActivityVector(final SortedMap<Integer, Double> values, final CatalyticActivityUnit unit,
@@ -104,8 +105,8 @@ public class MutableCatalyticActivityVector extends AbstractMutableDoubleVectorR
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit CatalyticActivityUnit; the unit
      */
     MutableCatalyticActivityVector(final DoubleVectorData data, final CatalyticActivityUnit unit)
     {

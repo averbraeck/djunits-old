@@ -59,8 +59,8 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Construct CatalyticActivity scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit CatalyticActivityUnit; unit for the double value
      */
     public CatalyticActivity(final double value, final CatalyticActivityUnit unit)
     {
@@ -69,7 +69,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Construct CatalyticActivity scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value CatalyticActivity; Scalar from which to construct this instance
      */
     public CatalyticActivity(final CatalyticActivity value)
     {
@@ -85,7 +85,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Construct CatalyticActivity scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final CatalyticActivity createSI(final double value)
@@ -95,9 +95,9 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero CatalyticActivity; the low value
+     * @param one CatalyticActivity; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static CatalyticActivity interpolate(final CatalyticActivity zero, final CatalyticActivity one, final double ratio)
@@ -107,8 +107,8 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 CatalyticActivity; the first scalar
+     * @param r2 CatalyticActivity; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static CatalyticActivity max(final CatalyticActivity r1, final CatalyticActivity r2)
@@ -118,9 +118,9 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 CatalyticActivity; the first scalar
+     * @param r2 CatalyticActivity; the second scalar
+     * @param rn CatalyticActivity...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static CatalyticActivity max(final CatalyticActivity r1, final CatalyticActivity r2, final CatalyticActivity... rn)
@@ -138,8 +138,8 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 CatalyticActivity; the first scalar
+     * @param r2 CatalyticActivity; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static CatalyticActivity min(final CatalyticActivity r1, final CatalyticActivity r2)
@@ -149,9 +149,9 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 CatalyticActivity; the first scalar
+     * @param r2 CatalyticActivity; the second scalar
+     * @param rn CatalyticActivity...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static CatalyticActivity min(final CatalyticActivity r1, final CatalyticActivity r2, final CatalyticActivity... rn)

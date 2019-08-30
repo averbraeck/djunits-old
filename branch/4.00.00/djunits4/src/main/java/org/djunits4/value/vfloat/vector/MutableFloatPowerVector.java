@@ -28,8 +28,8 @@ public class MutableFloatPowerVector
     /**
      * Construct a new Relative Immutable Float PowerVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float PowerVector
-     * @param unit U; the unit of the new Relative Immutable Float PowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit PowerUnit; the unit of the new Relative Immutable Float PowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatPowerVector(final float[] values, final PowerUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableFloatPowerVector
 
     /**
      * Construct a new Relative Immutable Float PowerVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float PowerVector
-     * @param unit U; the unit of the new Relative Immutable Float PowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float PowerVector
+     * @param unit PowerUnit; the unit of the new Relative Immutable Float PowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatPowerVector(final List<Float> values, final PowerUnit unit, final StorageType storageType)
@@ -53,8 +53,8 @@ public class MutableFloatPowerVector
 
     /**
      * Construct a new Relative Immutable Float PowerVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float PowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatPower[]; the values of the entries in the new Relative Immutable Float PowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatPowerVector(final FloatPower[] values, final StorageType storageType) throws ValueException
@@ -64,8 +64,8 @@ public class MutableFloatPowerVector
 
     /**
      * Construct a new Relative Immutable Float PowerVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float PowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatPower&gt;; the values of the entries in the new Relative Immutable Float PowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatPowerVector(final List<FloatPower> values, final StorageType storageType) throws ValueException
@@ -75,9 +75,10 @@ public class MutableFloatPowerVector
 
     /**
      * Construct a new Relative Immutable Float PowerVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float PowerVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatPower&gt;; the values of the entries in the new Relative Sparse Mutable Float
+     *            PowerVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatPowerVector(final SortedMap<Integer, FloatPower> values, final int length, final StorageType storageType)
@@ -88,10 +89,11 @@ public class MutableFloatPowerVector
 
     /**
      * Construct a new Relative Immutable Float PowerVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float PowerVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float PowerVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            PowerVector
+     * @param unit PowerUnit; the unit of the new Relative Sparse Mutable Float PowerVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatPowerVector(final SortedMap<Integer, Float> values, final PowerUnit unit, final int length,
@@ -101,8 +103,8 @@ public class MutableFloatPowerVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit PowerUnit; the unit
      */
     MutableFloatPowerVector(final FloatVectorData data, final PowerUnit unit)
     {

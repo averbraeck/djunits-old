@@ -66,8 +66,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Construct Length scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit LengthUnit; unit for the double value
      */
     public Length(final double value, final LengthUnit unit)
     {
@@ -76,7 +76,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Construct Length scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Length; Scalar from which to construct this instance
      */
     public Length(final Length value)
     {
@@ -92,8 +92,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value the double value
-     * @param unit the unit
+     * @param value double; the double value
+     * @param unit PositionUnit; the unit
      * @return A a new absolute instance of the DoubleScalar of the right type
      */
     public final Position instantiateAbs(final double value, final PositionUnit unit)
@@ -103,7 +103,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Construct Length scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Length createSI(final double value)
@@ -113,9 +113,9 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Length; the low value
+     * @param one Length; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Length interpolate(final Length zero, final Length one, final double ratio)
@@ -125,7 +125,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
+     * @param v Position; the value to add
      * @return sum of this value and v as a new object
      */
     public final Position plus(final Position v)
@@ -136,8 +136,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Length max(final Length r1, final Length r2)
@@ -147,9 +147,9 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
+     * @param rn Length...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Length max(final Length r1, final Length r2, final Length... rn)
@@ -167,8 +167,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Length min(final Length r1, final Length r2)
@@ -178,9 +178,9 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
+     * @param rn Length...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Length min(final Length r1, final Length r2, final Length... rn)
@@ -237,7 +237,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Length, which results in a Dimensionless scalar.
-     * @param v Length scalar
+     * @param v Length; Length scalar
      * @return Dimensionless scalar as a division of Length and Length
      */
     public final Dimensionless divideBy(final Length v)
@@ -247,7 +247,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Length, which results in a Area scalar.
-     * @param v Length scalar
+     * @param v Length; Length scalar
      * @return Area scalar as a multiplication of Length and Length
      */
     public final Area multiplyBy(final Length v)
@@ -257,7 +257,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and LinearDensity, which results in a Area scalar.
-     * @param v Length scalar
+     * @param v LinearDensity; Length scalar
      * @return Area scalar as a division of Length and LinearDensity
      */
     public final Area divideBy(final LinearDensity v)
@@ -267,7 +267,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Area, which results in a LinearDensity scalar.
-     * @param v Length scalar
+     * @param v Area; Length scalar
      * @return LinearDensity scalar as a division of Length and Area
      */
     public final LinearDensity divideBy(final Area v)
@@ -277,7 +277,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Area, which results in a Volume scalar.
-     * @param v Length scalar
+     * @param v Area; Length scalar
      * @return Volume scalar as a multiplication of Length and Area
      */
     public final Volume multiplyBy(final Area v)
@@ -287,7 +287,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Force, which results in a Energy scalar.
-     * @param v Length scalar
+     * @param v Force; Length scalar
      * @return Energy scalar as a multiplication of Length and Force
      */
     public final Energy multiplyBy(final Force v)
@@ -297,7 +297,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
-     * @param v Length scalar
+     * @param v Frequency; Length scalar
      * @return Speed scalar as a multiplication of Length and Frequency
      */
     public final Speed multiplyBy(final Frequency v)
@@ -307,7 +307,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Duration, which results in a Speed scalar.
-     * @param v Length scalar
+     * @param v Duration; Length scalar
      * @return Speed scalar as a division of Length and Duration
      */
     public final Speed divideBy(final Duration v)
@@ -317,7 +317,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Speed, which results in a Duration scalar.
-     * @param v Length scalar
+     * @param v Speed; Length scalar
      * @return Duration scalar as a division of Length and Speed
      */
     public final Duration divideBy(final Speed v)

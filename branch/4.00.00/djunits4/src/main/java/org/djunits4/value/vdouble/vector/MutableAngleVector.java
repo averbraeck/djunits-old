@@ -27,8 +27,8 @@ public class MutableAngleVector extends AbstractMutableDoubleVectorRel<AngleUnit
     /**
      * Construct a new Relative Mutable Double AngleVector.
      * @param values double[]; the values of the entries in the new Relative Mutable Double AngleVector
-     * @param unit U; the unit of the new Relative Mutable Double AngleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AngleUnit; the unit of the new Relative Mutable Double AngleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAngleVector(final double[] values, final AngleUnit unit, final StorageType storageType) throws ValueException
@@ -38,9 +38,9 @@ public class MutableAngleVector extends AbstractMutableDoubleVectorRel<AngleUnit
 
     /**
      * Construct a new Relative Mutable Double AngleVector.
-     * @param values List; the values of the entries in the new Relative Mutable Double AngleVector
-     * @param unit U; the unit of the new Relative Mutable Double AngleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Mutable Double AngleVector
+     * @param unit AngleUnit; the unit of the new Relative Mutable Double AngleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAngleVector(final List<Double> values, final AngleUnit unit, final StorageType storageType)
@@ -51,8 +51,8 @@ public class MutableAngleVector extends AbstractMutableDoubleVectorRel<AngleUnit
 
     /**
      * Construct a new Relative Mutable Double AngleVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable Double AngleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Angle[]; the values of the entries in the new Relative Mutable Double AngleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAngleVector(final Angle[] values, final StorageType storageType) throws ValueException
@@ -62,8 +62,8 @@ public class MutableAngleVector extends AbstractMutableDoubleVectorRel<AngleUnit
 
     /**
      * Construct a new Relative Mutable Double AngleVector.
-     * @param values List; the values of the entries in the new Relative Mutable Double AngleVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Angle&gt;; the values of the entries in the new Relative Mutable Double AngleVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAngleVector(final List<Angle> values, final StorageType storageType) throws ValueException
@@ -73,10 +73,10 @@ public class MutableAngleVector extends AbstractMutableDoubleVectorRel<AngleUnit
 
     /**
      * Construct a new Relative Mutable Double AngleVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Angle&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            AngleVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAngleVector(final SortedMap<Integer, Angle> values, final int length, final StorageType storageType)
@@ -87,10 +87,11 @@ public class MutableAngleVector extends AbstractMutableDoubleVectorRel<AngleUnit
 
     /**
      * Construct a new Relative Mutable Double AngleVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double AngleVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double AngleVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            AngleVector
+     * @param unit AngleUnit; the unit of the new Relative Sparse Mutable Double AngleVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAngleVector(final SortedMap<Integer, Double> values, final AngleUnit unit, final int length,
@@ -101,8 +102,8 @@ public class MutableAngleVector extends AbstractMutableDoubleVectorRel<AngleUnit
 
     /**
      * Construct a new Relative Mutable Double AngleVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit AngleUnit; the unit
      */
     MutableAngleVector(final DoubleVectorData data, final AngleUnit unit)
     {

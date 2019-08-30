@@ -57,8 +57,8 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Construct Illuminance scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit IlluminanceUnit; unit for the double value
      */
     public Illuminance(final double value, final IlluminanceUnit unit)
     {
@@ -67,7 +67,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Construct Illuminance scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Illuminance; Scalar from which to construct this instance
      */
     public Illuminance(final Illuminance value)
     {
@@ -83,7 +83,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Construct Illuminance scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Illuminance createSI(final double value)
@@ -93,9 +93,9 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Illuminance; the low value
+     * @param one Illuminance; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Illuminance interpolate(final Illuminance zero, final Illuminance one, final double ratio)
@@ -105,8 +105,8 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Illuminance; the first scalar
+     * @param r2 Illuminance; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static Illuminance max(final Illuminance r1, final Illuminance r2)
@@ -116,9 +116,9 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Illuminance; the first scalar
+     * @param r2 Illuminance; the second scalar
+     * @param rn Illuminance...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static Illuminance max(final Illuminance r1, final Illuminance r2, final Illuminance... rn)
@@ -136,8 +136,8 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 Illuminance; the first scalar
+     * @param r2 Illuminance; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static Illuminance min(final Illuminance r1, final Illuminance r2)
@@ -147,9 +147,9 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 Illuminance; the first scalar
+     * @param r2 Illuminance; the second scalar
+     * @param rn Illuminance...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static Illuminance min(final Illuminance r1, final Illuminance r2, final Illuminance... rn)

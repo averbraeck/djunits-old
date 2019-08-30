@@ -70,5 +70,5 @@ public class FrequencyUnit extends Unit<FrequencyUnit>
 
     /** 1/week. */
     public static final FrequencyUnit PER_WEEK = PER_DAY.deriveLinear(1.0 / 7.0, "1/wk", "per week", UnitSystem.OTHER);
-    
+
 }

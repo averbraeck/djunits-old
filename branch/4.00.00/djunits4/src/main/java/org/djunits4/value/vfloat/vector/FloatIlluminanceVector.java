@@ -28,8 +28,8 @@ public class FloatIlluminanceVector
     /**
      * Construct a new Relative Immutable Float FloatIlluminanceVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatIlluminanceVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatIlluminanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit IlluminanceUnit; the unit of the new Relative Immutable Float FloatIlluminanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatIlluminanceVector(final float[] values, final IlluminanceUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class FloatIlluminanceVector
 
     /**
      * Construct a new Relative Immutable Float FloatIlluminanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatIlluminanceVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatIlluminanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatIlluminanceVector
+     * @param unit IlluminanceUnit; the unit of the new Relative Immutable Float FloatIlluminanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatIlluminanceVector(final List<Float> values, final IlluminanceUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class FloatIlluminanceVector
 
     /**
      * Construct a new Relative Immutable Float FloatIlluminanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatIlluminanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatIlluminance[]; the values of the entries in the new Relative Immutable Float FloatIlluminanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatIlluminanceVector(final FloatIlluminance[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,9 @@ public class FloatIlluminanceVector
 
     /**
      * Construct a new Relative Immutable Float FloatIlluminanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatIlluminanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatIlluminance&gt;; the values of the entries in the new Relative Immutable Float
+     *            FloatIlluminanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatIlluminanceVector(final List<FloatIlluminance> values, final StorageType storageType) throws ValueException
@@ -76,10 +76,10 @@ public class FloatIlluminanceVector
 
     /**
      * Construct a new Relative Immutable Float FloatIlluminanceVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatIlluminanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatIlluminance&gt;; the values of the entries in the new Relative Sparse Mutable
+     *            Float FloatIlluminanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatIlluminanceVector(final SortedMap<Integer, FloatIlluminance> values, final int length,
@@ -90,10 +90,11 @@ public class FloatIlluminanceVector
 
     /**
      * Construct a new Relative Immutable Float FloatIlluminanceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatIlluminanceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatIlluminanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            FloatIlluminanceVector
+     * @param unit IlluminanceUnit; the unit of the new Relative Sparse Mutable Float FloatIlluminanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatIlluminanceVector(final SortedMap<Integer, Float> values, final IlluminanceUnit unit, final int length,
@@ -103,8 +104,8 @@ public class FloatIlluminanceVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit IlluminanceUnit; the unit
      */
     FloatIlluminanceVector(final FloatVectorData data, final IlluminanceUnit unit)
     {

@@ -24,8 +24,8 @@ public class FrequencyMatrix extends AbstractDoubleMatrixRel<FrequencyUnit, Freq
     /**
      * Construct a new Relative Immutable Double FrequencyMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double FrequencyMatrix
-     * @param unit U; the unit of the new Relative Immutable Double FrequencyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FrequencyUnit; the unit of the new Relative Immutable Double FrequencyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FrequencyMatrix(final double[][] values, final FrequencyUnit unit, final StorageType storageType)
@@ -36,9 +36,8 @@ public class FrequencyMatrix extends AbstractDoubleMatrixRel<FrequencyUnit, Freq
 
     /**
      * Construct a new Relative Immutable Double FrequencyMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
-     *            FrequencyMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Frequency[][]; the values of the entries in the new Relative Immutable Double FrequencyMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FrequencyMatrix(final Frequency[][] values, final StorageType storageType) throws ValueException
@@ -47,8 +46,8 @@ public class FrequencyMatrix extends AbstractDoubleMatrixRel<FrequencyUnit, Freq
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit FrequencyUnit; the unit
      */
     FrequencyMatrix(final DoubleMatrixData data, final FrequencyUnit unit)
     {

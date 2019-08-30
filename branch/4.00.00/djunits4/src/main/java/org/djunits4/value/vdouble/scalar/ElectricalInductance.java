@@ -62,8 +62,8 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Construct ElectricalInductance scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit ElectricalInductanceUnit; unit for the double value
      */
     public ElectricalInductance(final double value, final ElectricalInductanceUnit unit)
     {
@@ -72,7 +72,7 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Construct ElectricalInductance scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value ElectricalInductance; Scalar from which to construct this instance
      */
     public ElectricalInductance(final ElectricalInductance value)
     {
@@ -88,7 +88,7 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Construct ElectricalInductance scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final ElectricalInductance createSI(final double value)
@@ -98,9 +98,9 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero ElectricalInductance; the low value
+     * @param one ElectricalInductance; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static ElectricalInductance interpolate(final ElectricalInductance zero, final ElectricalInductance one,
@@ -111,8 +111,8 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 ElectricalInductance; the first scalar
+     * @param r2 ElectricalInductance; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static ElectricalInductance max(final ElectricalInductance r1, final ElectricalInductance r2)
@@ -122,9 +122,9 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 ElectricalInductance; the first scalar
+     * @param r2 ElectricalInductance; the second scalar
+     * @param rn ElectricalInductance...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static ElectricalInductance max(final ElectricalInductance r1, final ElectricalInductance r2,
@@ -143,8 +143,8 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 ElectricalInductance; the first scalar
+     * @param r2 ElectricalInductance; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static ElectricalInductance min(final ElectricalInductance r1, final ElectricalInductance r2)
@@ -154,9 +154,9 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 ElectricalInductance; the first scalar
+     * @param r2 ElectricalInductance; the second scalar
+     * @param rn ElectricalInductance...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static ElectricalInductance min(final ElectricalInductance r1, final ElectricalInductance r2,

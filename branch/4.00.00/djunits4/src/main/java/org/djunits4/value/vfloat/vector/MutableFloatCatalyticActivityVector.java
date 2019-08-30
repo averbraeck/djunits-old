@@ -28,8 +28,8 @@ public class MutableFloatCatalyticActivityVector extends AbstractMutableFloatVec
     /**
      * Construct a new Relative Immutable Float CatalyticActivityVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float CatalyticActivityVector
-     * @param unit U; the unit of the new Relative Immutable Float CatalyticActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit CatalyticActivityUnit; the unit of the new Relative Immutable Float CatalyticActivityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatCatalyticActivityVector(final float[] values, final CatalyticActivityUnit unit,
@@ -40,9 +40,9 @@ public class MutableFloatCatalyticActivityVector extends AbstractMutableFloatVec
 
     /**
      * Construct a new Relative Immutable Float CatalyticActivityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float CatalyticActivityVector
-     * @param unit U; the unit of the new Relative Immutable Float CatalyticActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float CatalyticActivityVector
+     * @param unit CatalyticActivityUnit; the unit of the new Relative Immutable Float CatalyticActivityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatCatalyticActivityVector(final List<Float> values, final CatalyticActivityUnit unit,
@@ -53,9 +53,9 @@ public class MutableFloatCatalyticActivityVector extends AbstractMutableFloatVec
 
     /**
      * Construct a new Relative Immutable Float CatalyticActivityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatCatalyticActivity[]; the values of the entries in the new Relative Immutable Float
      *            CatalyticActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatCatalyticActivityVector(final FloatCatalyticActivity[] values, final StorageType storageType)
@@ -66,8 +66,9 @@ public class MutableFloatCatalyticActivityVector extends AbstractMutableFloatVec
 
     /**
      * Construct a new Relative Immutable Float CatalyticActivityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float CatalyticActivityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatCatalyticActivity&gt;; the values of the entries in the new Relative Immutable Float
+     *            CatalyticActivityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatCatalyticActivityVector(final List<FloatCatalyticActivity> values, final StorageType storageType)
@@ -78,10 +79,10 @@ public class MutableFloatCatalyticActivityVector extends AbstractMutableFloatVec
 
     /**
      * Construct a new Relative Immutable Float CatalyticActivityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            CatalyticActivityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatCatalyticActivity&gt;; the values of the entries in the new Relative Sparse
+     *            Mutable Float CatalyticActivityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatCatalyticActivityVector(final SortedMap<Integer, FloatCatalyticActivity> values, final int length,
@@ -92,10 +93,11 @@ public class MutableFloatCatalyticActivityVector extends AbstractMutableFloatVec
 
     /**
      * Construct a new Relative Immutable Float CatalyticActivityVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float CatalyticActivityVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float CatalyticActivityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
+     *            CatalyticActivityVector
+     * @param unit CatalyticActivityUnit; the unit of the new Relative Sparse Mutable Float CatalyticActivityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatCatalyticActivityVector(final SortedMap<Integer, Float> values, final CatalyticActivityUnit unit,
@@ -105,8 +107,8 @@ public class MutableFloatCatalyticActivityVector extends AbstractMutableFloatVec
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit CatalyticActivityUnit; the unit
      */
     MutableFloatCatalyticActivityVector(final FloatVectorData data, final CatalyticActivityUnit unit)
     {

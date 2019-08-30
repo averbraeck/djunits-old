@@ -25,8 +25,8 @@ public class FloatElectricalCapacitanceMatrix extends AbstractFloatMatrixRel<Ele
     /**
      * Construct a new Relative Immutable FloatElectricalCapacitanceMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatElectricalCapacitanceMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatElectricalCapacitanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Immutable FloatElectricalCapacitanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatElectricalCapacitanceMatrix(final float[][] values, final ElectricalCapacitanceUnit unit,
@@ -37,9 +37,9 @@ public class FloatElectricalCapacitanceMatrix extends AbstractFloatMatrixRel<Ele
 
     /**
      * Construct a new Relative Immutable FloatElectricalCapacitanceMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatElectricalCapacitance[][]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalCapacitanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatElectricalCapacitanceMatrix(final FloatElectricalCapacitance[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class FloatElectricalCapacitanceMatrix extends AbstractFloatMatrixRel<Ele
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit ElectricalCapacitanceUnit; the unit
      */
     FloatElectricalCapacitanceMatrix(final FloatMatrixData data, final ElectricalCapacitanceUnit unit)
     {

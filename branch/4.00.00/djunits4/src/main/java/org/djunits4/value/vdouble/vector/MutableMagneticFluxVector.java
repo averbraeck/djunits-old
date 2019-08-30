@@ -28,8 +28,8 @@ public class MutableMagneticFluxVector
     /**
      * Construct a new Relative Immutable Double MagneticFluxVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double MagneticFluxVector
-     * @param unit U; the unit of the new Relative Immutable Double MagneticFluxVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MagneticFluxUnit; the unit of the new Relative Immutable Double MagneticFluxVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMagneticFluxVector(final double[] values, final MagneticFluxUnit unit, final StorageType storageType)
@@ -40,9 +40,9 @@ public class MutableMagneticFluxVector
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double MagneticFluxVector
-     * @param unit U; the unit of the new Relative Immutable Double MagneticFluxVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double MagneticFluxVector
+     * @param unit MagneticFluxUnit; the unit of the new Relative Immutable Double MagneticFluxVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMagneticFluxVector(final List<Double> values, final MagneticFluxUnit unit, final StorageType storageType)
@@ -53,9 +53,8 @@ public class MutableMagneticFluxVector
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            MagneticFluxVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values MagneticFlux[]; the values of the entries in the new Relative Immutable Double MagneticFluxVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableMagneticFluxVector(final MagneticFlux[] values, final StorageType storageType) throws ValueException
@@ -65,8 +64,8 @@ public class MutableMagneticFluxVector
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double MagneticFluxVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;MagneticFlux&gt;; the values of the entries in the new Relative Immutable Double MagneticFluxVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableMagneticFluxVector(final List<MagneticFlux> values, final StorageType storageType) throws ValueException
@@ -76,10 +75,10 @@ public class MutableMagneticFluxVector
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, MagneticFlux&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            MagneticFluxVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableMagneticFluxVector(final SortedMap<Integer, MagneticFlux> values, final int length,
@@ -90,10 +89,11 @@ public class MutableMagneticFluxVector
 
     /**
      * Construct a new Relative Immutable Double MagneticFluxVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double MagneticFluxVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double MagneticFluxVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            MagneticFluxVector
+     * @param unit MagneticFluxUnit; the unit of the new Relative Sparse Mutable Double MagneticFluxVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableMagneticFluxVector(final SortedMap<Integer, Double> values, final MagneticFluxUnit unit, final int length,
@@ -103,8 +103,8 @@ public class MutableMagneticFluxVector
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit MagneticFluxUnit; the unit
      */
     MutableMagneticFluxVector(final DoubleVectorData data, final MagneticFluxUnit unit)
     {

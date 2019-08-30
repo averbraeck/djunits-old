@@ -13,7 +13,7 @@ public class IdentityScale extends LinearScale
 {
     /** */
     private static final long serialVersionUID = 20151011L;
-    
+
     /** A ready-to-use instance of the standard scale (they are all the same...). */
     public static final IdentityScale SCALE = new IdentityScale();
 
@@ -45,5 +45,5 @@ public class IdentityScale extends LinearScale
     {
         return "StandardScale []";
     }
-    
+
 }

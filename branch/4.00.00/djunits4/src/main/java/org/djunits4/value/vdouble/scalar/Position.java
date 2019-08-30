@@ -40,8 +40,8 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Construct Position scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit PositionUnit; unit for the double value
      */
     public Position(final double value, final PositionUnit unit)
     {
@@ -50,7 +50,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Construct Position scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Position; Scalar from which to construct this instance
      */
     public Position(final Position value)
     {
@@ -73,7 +73,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Construct %TypeAbsl% scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Position createSI(final double value)
@@ -83,9 +83,9 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero Position; the low value
+     * @param one Position; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Position interpolate(final Position zero, final Position one, final double ratio)
@@ -95,8 +95,8 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 Position; the first scalar
+     * @param a2 Position; the second scalar
      * @return the maximum value of two absolute scalars
      */
     public static Position max(final Position a1, final Position a2)
@@ -106,9 +106,9 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 Position; the first scalar
+     * @param a2 Position; the second scalar
+     * @param an Position...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static Position max(final Position a1, final Position a2, final Position... an)
@@ -126,8 +126,8 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 Position; the first scalar
+     * @param a2 Position; the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static Position min(final Position a1, final Position a2)
@@ -137,9 +137,9 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 Position; the first scalar
+     * @param a2 Position; the second scalar
+     * @param an Position...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static Position min(final Position a1, final Position a2, final Position... an)

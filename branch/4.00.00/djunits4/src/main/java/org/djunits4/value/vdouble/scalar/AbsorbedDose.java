@@ -57,8 +57,8 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
 
     /**
      * Construct AbsorbedDose scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit AbsorbedDoseUnit; unit for the double value
      */
     public AbsorbedDose(final double value, final AbsorbedDoseUnit unit)
     {
@@ -67,7 +67,7 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
 
     /**
      * Construct AbsorbedDose scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value AbsorbedDose; Scalar from which to construct this instance
      */
     public AbsorbedDose(final AbsorbedDose value)
     {
@@ -83,7 +83,7 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
 
     /**
      * Construct AbsorbedDose scalar.
-     * @param value double value in SI units
+     * @param value double; double value in SI units
      * @return the new scalar with the SI value
      */
     public static final AbsorbedDose createSI(final double value)
@@ -93,9 +93,9 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param zero AbsorbedDose; the low value
+     * @param one AbsorbedDose; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static AbsorbedDose interpolate(final AbsorbedDose zero, final AbsorbedDose one, final double ratio)
@@ -105,8 +105,8 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 AbsorbedDose; the first scalar
+     * @param r2 AbsorbedDose; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static AbsorbedDose max(final AbsorbedDose r1, final AbsorbedDose r2)
@@ -116,9 +116,9 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 AbsorbedDose; the first scalar
+     * @param r2 AbsorbedDose; the second scalar
+     * @param rn AbsorbedDose...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static AbsorbedDose max(final AbsorbedDose r1, final AbsorbedDose r2, final AbsorbedDose... rn)
@@ -136,8 +136,8 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 AbsorbedDose; the first scalar
+     * @param r2 AbsorbedDose; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static AbsorbedDose min(final AbsorbedDose r1, final AbsorbedDose r2)
@@ -147,9 +147,9 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 AbsorbedDose; the first scalar
+     * @param r2 AbsorbedDose; the second scalar
+     * @param rn AbsorbedDose...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static AbsorbedDose min(final AbsorbedDose r1, final AbsorbedDose r2, final AbsorbedDose... rn)

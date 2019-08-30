@@ -25,8 +25,8 @@ public class MutableElectricalResistanceMatrix extends AbstractMutableDoubleMatr
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceMatrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double ElectricalResistanceMatrix
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalResistanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable Double ElectricalResistanceMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableElectricalResistanceMatrix(final double[][] values, final ElectricalResistanceUnit unit,
@@ -37,9 +37,9 @@ public class MutableElectricalResistanceMatrix extends AbstractMutableDoubleMatr
 
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceMatrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double
+     * @param values ElectricalResistance[][]; the values of the entries in the new Relative Immutable Double
      *            ElectricalResistanceMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableElectricalResistanceMatrix(final ElectricalResistance[][] values, final StorageType storageType)
@@ -49,8 +49,8 @@ public class MutableElectricalResistanceMatrix extends AbstractMutableDoubleMatr
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit ElectricalResistanceUnit; the unit
      */
     MutableElectricalResistanceMatrix(final DoubleMatrixData data, final ElectricalResistanceUnit unit)
     {

@@ -1,8 +1,8 @@
 package org.djunits4.unit;
 
 import org.djunits4.unit.base.UnitBase;
-import org.djunits4.unit.scale.LinearScale;
 import org.djunits4.unit.scale.IdentityScale;
+import org.djunits4.unit.scale.LinearScale;
 import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 
@@ -141,5 +141,5 @@ public class EnergyUnit extends Unit<EnergyUnit>
     {
         return force.getScale().toStandardUnit(1.0) * distance.getScale().toStandardUnit(1.0);
     }
-    
+
 }

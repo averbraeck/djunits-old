@@ -25,8 +25,8 @@ public class FloatLinearDensityMatrix extends
     /**
      * Construct a new Relative Immutable FloatLinearDensityMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatLinearDensityMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatLinearDensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit LinearDensityUnit; the unit of the new Relative Immutable FloatLinearDensityMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatLinearDensityMatrix(final float[][] values, final LinearDensityUnit unit, final StorageType storageType)
@@ -37,9 +37,9 @@ public class FloatLinearDensityMatrix extends
 
     /**
      * Construct a new Relative Immutable FloatLinearDensityMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatLinearDensity[][]; the values of the entries in the new Relative Immutable Float
      *            FloatLinearDensityMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatLinearDensityMatrix(final FloatLinearDensity[][] values, final StorageType storageType) throws ValueException
@@ -48,8 +48,8 @@ public class FloatLinearDensityMatrix extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit LinearDensityUnit; the unit
      */
     FloatLinearDensityMatrix(final FloatMatrixData data, final LinearDensityUnit unit)
     {

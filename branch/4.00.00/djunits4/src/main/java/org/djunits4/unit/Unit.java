@@ -85,7 +85,8 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * not set, the defaultAbbreviation gets the value of defaultTextualAbbreviation. When neither the
      * defaultTextualAbbreviation, nor the defaultAbbreviation are set, both get the value of the unitId provided in the
      * builder.
-     * @param builder Builder&lt;U&gt; the object that contains the information about the construction of the class
+     * @param builder Builder&lt;U&gt;; Builder&lt;U&gt; the object that contains the information about the construction of the
+     *            class
      * @return U; the constructed unit
      * @throws UnitRuntimeException when not all fields have been set
      */
@@ -209,7 +210,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
     /**
      * Create a scaled version of this unit with the same unit system but another SI prefix and scale. This method is used for a
      * unit that is explicitly scaled with an SI prefix.
-     * @param siPrefix the prefix for which to scale the unit
+     * @param siPrefix SIPrefix; the prefix for which to scale the unit
      * @return a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
      */
@@ -221,8 +222,8 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
     /**
      * Create a scaled version of this unit with the same unit system but another SI prefix and scale, where the "k" and "kilo"
      * abbreviations at the start will be replaced by the new information from the SIPrefix.
-     * @param siPrefix the prefix for which to scale the unit
-     * @param automaticallyGenerated indicate whether the unit has been automatically generated
+     * @param siPrefix SIPrefix; the prefix for which to scale the unit
+     * @param automaticallyGenerated boolean; indicate whether the unit has been automatically generated
      * @return U; a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
      */
@@ -293,13 +294,15 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
     /**
      * Create a linearly scaled version of this unit. The scale field will be filled with the correct scaleFactor. Note that the
      * unit that is used for derivation can already have a scaleFactor.
-     * @param scaleFactor the linear scale factor of the unit
+     * @param scaleFactor double; the linear scale factor of the unit
      * @param derivedId String; the new id of the derived unit
      * @param derivedName String; the new name of the derived unit
-     * @param derivedUnitSystem the unit system of the derived unit
-     * @param derivedDefaultDisplayAbbreviation the default abbreviation to use in e.g, the toString() method. Can be null.
-     * @param derivedDefaultTextualAbbreviation the default textual abbreviation to use in, e.g, typing. Can be null.
-     * @param derivedAbbreviations the other valid abbreviations for the unit, e.g. {"h", "hr", "hour"}. Can be left out.
+     * @param derivedUnitSystem UnitSystem; the unit system of the derived unit
+     * @param derivedDefaultDisplayAbbreviation String; the default abbreviation to use in e.g, the toString() method. Can be
+     *            null.
+     * @param derivedDefaultTextualAbbreviation String; the default textual abbreviation to use in, e.g, typing. Can be null.
+     * @param derivedAbbreviations String...; the other valid abbreviations for the unit, e.g. {"h", "hr", "hour"}. Can be left
+     *            out.
      * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
@@ -347,10 +350,10 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
     /**
      * Create a linearly scaled version of this unit. The scale field will be filled with the correct scaleFactor. Note that the
      * unit that is used for derivation can already have a scaleFactor.
-     * @param scaleFactor the linear scale factor of the unit
+     * @param scaleFactor double; the linear scale factor of the unit
      * @param derivedId String; the new id of the derived unit
      * @param derivedName String; the new name of the derived unit
-     * @param derivedUnitSystem the unit system of the derived unit
+     * @param derivedUnitSystem UnitSystem; the unit system of the derived unit
      * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
@@ -363,7 +366,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
     /**
      * Create a linearly scaled version of this unit. The unitSystem will be copied. The scale field will be filled with the
      * correct scaleFactor. Note that the unit that is used for derivation can already have a scaleFactor.
-     * @param scaleFactor the linear scale factor of the unit
+     * @param scaleFactor double; the linear scale factor of the unit
      * @param derivedId String; the new id of the derived unit
      * @param derivedName String; the new name of the derived unit
      * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
@@ -385,7 +388,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
     /**
      * Create or lookup a unit based on given SI dimensions. E.g., a unit with dimensions 1/s^2 or kg.m/s^2.
-     * @param siDimensions the vector with the dimensionality of the unit
+     * @param siDimensions SIDimensions; the vector with the dimensionality of the unit
      * @return SIUnit; an SIUnit object with the right dimensions
      */
     @SuppressWarnings("unchecked")
@@ -698,8 +701,8 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         /**
          * Set whether SI prefixes, ranging from yotta (y) to yocto (Y), are allowed. If not set; this property defaults to
          * <code>false</code>.
-         * @param siPrefixes SIPrefixes set siPrefixes, NONE (e.g., for inch), ALL (e.g., for meter) or KILO (e.g., for
-         *            kilometer)
+         * @param siPrefixes SIPrefixes; SIPrefixes set siPrefixes, NONE (e.g., for inch), ALL (e.g., for meter) or KILO (e.g.,
+         *            for kilometer)
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setSiPrefixes(final SIPrefixes siPrefixes)
@@ -840,7 +843,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         /**
          * Set the unit system.
-         * @param unitSystem unitSystem; the unit system
+         * @param unitSystem UnitSystem; the unit system
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setUnitSystem(final UnitSystem unitSystem)
@@ -880,7 +883,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         /**
          * Set the unit base. Can never be null and has to be filled.
-         * @param unitBase UnitBase; the unit base
+         * @param unitBase UnitBase&lt;U&gt;; the unit base
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setBaseUnit(final UnitBase<U> unitBase)

@@ -13,9 +13,8 @@ import org.djunits4.unit.util.UnitException;
 import org.djunits4.unit.util.UnitRuntimeException;
 
 /**
- * UnitBase contains a map of all registered units belonging to this base. It also contains
- * the SI 'fingerprint' of the unit. The fingerprint is registered in the UnitTypes singleton where are unit types are
- * registered.
+ * UnitBase contains a map of all registered units belonging to this base. It also contains the SI 'fingerprint' of the unit.
+ * The fingerprint is registered in the UnitTypes singleton where are unit types are registered.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -45,7 +44,7 @@ public class UnitBase<U extends Unit<U>> implements Serializable
 
     /**
      * Create a unit base with the SI dimensions.
-     * @param siDimensions the 9 dimensions of the unit, wrapped in an SIDimensions object
+     * @param siDimensions SIDimensions; the 9 dimensions of the unit, wrapped in an SIDimensions object
      * @throws NullPointerException when one of the arguments is null
      */
     public UnitBase(final SIDimensions siDimensions)
@@ -57,7 +56,7 @@ public class UnitBase<U extends Unit<U>> implements Serializable
 
     /**
      * Create a unit base with the SI dimensions as a String.
-     * @param siString the 9 dimensions of the unit, represented as an SI string
+     * @param siString String; the 9 dimensions of the unit, represented as an SI string
      * @throws UnitRuntimeException when the String cannot be translated into an SIDimensions object
      * @throws NullPointerException when one of the arguments is null
      */
@@ -77,7 +76,7 @@ public class UnitBase<U extends Unit<U>> implements Serializable
 
     /**
      * Create a unit base with the SI dimensions, provided as a byte array.
-     * @param siSignature the 9 dimensions of the unit
+     * @param siSignature byte[]; the 9 dimensions of the unit
      * @throws NullPointerException when one of the arguments is null
      */
     public UnitBase(final byte[] siSignature)
@@ -94,7 +93,7 @@ public class UnitBase<U extends Unit<U>> implements Serializable
      * as the millimeter and the kilometer are registered as well. When earlier or later the "KILOMETER" is created as a
      * separate unit, the "km" lookup will result in the "KILOMETER" registration rather than in the "METER" registration with a
      * factor of 1000.
-     * @param unit the unit to register in the map.
+     * @param unit U; the unit to register in the map.
      * @param siPrefixes SIPrefixes; indicates whether and which SI prefixes should be generated.
      */
     public void registerUnit(final U unit, final SIPrefixes siPrefixes)
