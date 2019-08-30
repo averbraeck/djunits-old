@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.djunits</groupId>
-  <artifactId>djunits-generator</artifactId>
+  <artifactId>djunits4-generator</artifactId>
   <version>4.00.00</version>
 
   <name>Generators for DJUNITS classes, version 4</name>
