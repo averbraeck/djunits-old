@@ -36,6 +36,7 @@ public class TimeUnitTest extends AbstractOffsetUnitTest<TimeUnit>
     @Test
     public final void conversions()
     {
+        assertEquals("s", TimeUnit.DEFAULT.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioOffsetNameAndAbbreviation(TimeUnit.BASE_SECOND, 1, 0.0, 0.00000001, "second", "s");
         checkUnitRatioOffsetNameAndAbbreviation(TimeUnit.BASE_HOUR, 3600, 0.0, 0.0005, "hour", "hr");
         checkUnitRatioOffsetNameAndAbbreviation(TimeUnit.BASE_DAY, 86400, 0.0, 0.001, "day", "day");
@@ -62,6 +63,15 @@ public class TimeUnitTest extends AbstractOffsetUnitTest<TimeUnit>
         assertTrue("Can create a new TimeUnit", null != myTU);
         checkUnitRatioOffsetNameAndAbbreviation(myTU, 14 * 86400, 0.0, 1, "Fortnight", "fn");
         TimeUnit.BASE.unregister(myTU);
+    }
+    
+    /**
+     * Verify relative base unit.
+     */
+    @Test
+    public final void testRelative()
+    {
+        assertEquals(DurationUnit.BASE, TimeUnit.DEFAULT.getRelativeUnitBase());
     }
 
 }

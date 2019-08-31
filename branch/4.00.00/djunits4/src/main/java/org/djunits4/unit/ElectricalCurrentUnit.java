@@ -25,7 +25,7 @@ public class ElectricalCurrentUnit extends Unit<ElectricalCurrentUnit>
 
     /** The SI unit for electrical current is Ampere. */
     public static final ElectricalCurrentUnit SI = new ElectricalCurrentUnit()
-            .build(new Unit.Builder<ElectricalCurrentUnit>().setBaseUnit(BASE).setId("A").setName("ampere")
+            .build(new Unit.Builder<ElectricalCurrentUnit>().setUnitBase(BASE).setId("A").setName("ampere")
                     .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Ampere. */

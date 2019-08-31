@@ -23,7 +23,7 @@ public class DensityUnit extends Unit<DensityUnit>
 
     /** The SI unit for standard density is kg/m^3. */
     public static final DensityUnit SI = new DensityUnit()
-            .build(new Unit.Builder<DensityUnit>().setBaseUnit(BASE).setId("kg/m^3").setName("kilogram per cubic meter")
+            .build(new Unit.Builder<DensityUnit>().setUnitBase(BASE).setId("kg/m^3").setName("kilogram per cubic meter")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
 
     /** kg/m^3. */

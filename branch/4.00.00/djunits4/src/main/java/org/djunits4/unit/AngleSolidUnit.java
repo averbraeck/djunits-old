@@ -23,7 +23,7 @@ public class AngleSolidUnit extends Unit<AngleSolidUnit>
 
     /** The SI unit for solid angle is steradian. */
     public static final AngleSolidUnit SI =
-            new AngleSolidUnit().build(new Unit.Builder<AngleSolidUnit>().setBaseUnit(BASE).setId("sr").setName("steradian")
+            new AngleSolidUnit().build(new Unit.Builder<AngleSolidUnit>().setUnitBase(BASE).setId("sr").setName("steradian")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
 
     /** steradian. */

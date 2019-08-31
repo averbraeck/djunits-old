@@ -36,6 +36,7 @@ public class PowerUnitTest extends AbstractLinearUnitTest<PowerUnit>
     @Test
     public final void conversions()
     {
+        assertEquals("kgm2/s3", PowerUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(PowerUnit.WATT, 1, 0.00000001, "watt", "W");
         checkUnitRatioNameAndAbbreviation(PowerUnit.FOOT_POUND_FORCE_PER_HOUR, 0.00037661608333, 0.0000000001,
                 "foot pound-force per hour", "ft.lbf/h");

@@ -26,7 +26,7 @@ public class RadioActivityUnit extends Unit<RadioActivityUnit>
 
     /** The SI unit for radio activity is Becquerel. */
     public static final RadioActivityUnit SI = new RadioActivityUnit()
-            .build(new Unit.Builder<RadioActivityUnit>().setBaseUnit(BASE).setId("Bq").setName("becquerel")
+            .build(new Unit.Builder<RadioActivityUnit>().setUnitBase(BASE).setId("Bq").setName("becquerel")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Becquerel. */

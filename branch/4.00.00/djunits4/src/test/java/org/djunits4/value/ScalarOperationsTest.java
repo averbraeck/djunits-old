@@ -40,18 +40,6 @@ import org.junit.Test;
  */
 public class ScalarOperationsTest
 {
-    /** The classes that are absolute (name = class name). */
-    public static final String[] CLASSNAMES_ABS = new String[] {"AbsoluteTemperature", "Direction", "Position", "Time"};
-
-    /** The relative classes that mirror the absolute ones (name = class name). */
-    public static final String[] CLASSNAMES_ABS_REL = new String[] {"Temperature", "Angle", "Length", "Duration"};
-
-    /** The classes that are just relative (name = class name). */
-    public static final String[] CLASSNAMES_REL = new String[] {"Angle", "Acceleration", "AngleSolid", "Area", "Density",
-            "Dimensionless", "Duration", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance",
-            "Energy", "FlowMass", "FlowVolume", "Force", "Frequency", "Length", "LinearDensity", "Mass", "Power", "Pressure",
-            "Speed", "Temperature", "Torque", "Volume"};
-
     /**
      * Test constructor on the specified double scalar classes.
      * @throws IllegalAccessException on class or method resolving error
@@ -90,10 +78,10 @@ public class ScalarOperationsTest
         final String upperType = doubleType ? "Double" : "Float";
         final String type = upperType.toLowerCase();
         // get the interfaces such as org.djunits4.value.vdouble.scalar.Time
-        for (int i = 0; i < CLASSNAMES_ABS.length; i++)
+        for (int i = 0; i < CLASSNAMES.ABS.length; i++)
         {
-            String scalarNameAbs = CLASSNAMES_ABS[i];
-            String scalarNameRel = CLASSNAMES_ABS_REL[i];
+            String scalarNameAbs = CLASSNAMES.ABS[i];
+            String scalarNameRel = CLASSNAMES.ABS_REL[i];
             String scalarClassNameAbs = doubleType ? scalarNameAbs : "Float" + scalarNameAbs;
             String scalarClassNameRel = doubleType ? scalarNameRel : "Float" + scalarNameRel;
             Class<?> scalarClassAbs = null;
@@ -122,7 +110,7 @@ public class ScalarOperationsTest
         }
 
         // get the interfaces such as org.djunits4.value.vXXXX.scalar.Area
-        for (String scalarName : CLASSNAMES_REL)
+        for (String scalarName : CLASSNAMES.REL)
         {
             String scalarClassName = doubleType ? scalarName : "Float" + scalarName;
             Class<?> scalarClassRel = null;
@@ -300,7 +288,7 @@ public class ScalarOperationsTest
                 AbstractDoubleScalarRel<?, ?> result =
                         multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
                 // System.out.println("result is " + result);
-                String resultCoefficients = result.getUnit().getBaseUnit().getSiDimensions().toString();
+                String resultCoefficients = result.getUnit().getUnitBase().getSiDimensions().toString();
                 assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
             }
             else
@@ -331,7 +319,7 @@ public class ScalarOperationsTest
                 AbstractFloatScalarRel<?, ?> result =
                         multiply ? FloatScalar.multiply(left, right) : FloatScalar.divide(left, right);
                 // System.out.println("result is " + result);
-                String resultCoefficients = result.getUnit().getBaseUnit().getSiDimensions().toString();
+                String resultCoefficients = result.getUnit().getUnitBase().getSiDimensions().toString();
                 assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
             }
         }
@@ -348,7 +336,7 @@ public class ScalarOperationsTest
     {
         Field si = clas.getField("SI");
         Unit<?> u = ((Unit<?>) si.get(clas));
-        String r = u.getBaseUnit().getSiDimensions().toString();
+        String r = u.getUnitBase().getSiDimensions().toString();
         return r;
     }
 
@@ -634,17 +622,17 @@ public class ScalarOperationsTest
             referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
             Constructor<?> unitConstructor = unitClass.getConstructor(); // empty constructor -- provide Builder
             Unit newUnit = (Unit) unitConstructor.newInstance();
-            Method buildMethod = ClassUtil.resolveMethod(Unit.class, "build", Unit.Builder.class); 
+            Method buildMethod = ClassUtil.resolveMethod(Unit.class, "build", Unit.Builder.class);
             Unit.Builder builder = new Unit.Builder<>();
             builder.setId("7abbr");
             builder.setName("7fullName");
             builder.setUnitSystem(unitSystem);
             builder.setScale(new LinearScale(7));
-            builder.setBaseUnit((UnitBase) getSIUnitInstance(unitClass, false).getBaseUnit());
+            builder.setUnitBase((UnitBase) getSIUnitInstance(unitClass, false).getUnitBase());
             builder.setSiPrefixes(SIPrefixes.NONE);
             buildMethod.setAccessible(true);
             buildMethod.invoke(newUnit, builder);
-            
+
             // System.out.println("new unit prints like " + newUnit);
             if (doubleType)
             {
@@ -657,7 +645,7 @@ public class ScalarOperationsTest
                         : (AbstractFloatScalarRel<?, ?>) constructor.newInstance((float) value, newUnit);
             }
             // System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
-            newUnit.getBaseUnit().unregister(newUnit);
+            newUnit.getUnitBase().unregister(newUnit);
         }
         if (!abs)
         {
@@ -770,7 +758,7 @@ public class ScalarOperationsTest
                 assertEquals("Result of compatible abs or rel minus rel", 6 * value,
                         verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result), 0.01);
             }
-            
+
         }
     }
 

@@ -257,4 +257,12 @@ public class UnitBase<U extends Unit<U>> implements Serializable
     {
         return this.standardUnit;
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
+    {
+        return "UnitBase [standardUnit=" + this.standardUnit + ", siDimensions=" + this.siDimensions + "]";
+    }
+    
 }

@@ -22,7 +22,7 @@ public class DurationUnit extends Unit<DurationUnit>
     public static final UnitBase<DurationUnit> BASE = new UnitBase<>("s");
 
     /** The SI unit for duration is second. */
-    public static final DurationUnit SI = new DurationUnit().build(new Unit.Builder<DurationUnit>().setBaseUnit(BASE).setId("s")
+    public static final DurationUnit SI = new DurationUnit().build(new Unit.Builder<DurationUnit>().setUnitBase(BASE).setId("s")
             .setName("second").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** second. */

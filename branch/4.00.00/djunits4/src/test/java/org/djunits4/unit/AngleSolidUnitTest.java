@@ -36,6 +36,7 @@ public class AngleSolidUnitTest extends AbstractLinearUnitTest<AngleSolidUnit>
     @Test
     public final void conversions()
     {
+        assertEquals("sr", AngleSolidUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(AngleSolidUnit.STERADIAN, 1, 0.0000001, "steradian", "sr");
         checkUnitRatioNameAndAbbreviation(AngleSolidUnit.SQUARE_DEGREE, 1.0 / 3283, 0.0005, "square degree", "sq.deg");
         // Check two conversions between units
@@ -49,7 +50,7 @@ public class AngleSolidUnitTest extends AbstractLinearUnitTest<AngleSolidUnit>
      * Verify that we can create our own angle unit.
      */
     @Test
-    public final void createAngleUnit()
+    public final void createSolidAngleUnit()
     {
         AngleSolidUnit myAPU = AngleSolidUnit.STERADIAN.deriveLinear(0.19634954085, "pt", "point", UnitSystem.OTHER);
         assertTrue("Can create a new TimeUnit", null != myAPU);

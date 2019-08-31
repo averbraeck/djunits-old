@@ -25,7 +25,7 @@ public class ElectricalConductanceUnit extends Unit<ElectricalConductanceUnit>
 
     /** The SI unit for electrical conductance is Siemens. */
     public static final ElectricalConductanceUnit SI = new ElectricalConductanceUnit()
-            .build(new Unit.Builder<ElectricalConductanceUnit>().setBaseUnit(BASE).setId("S").setName("siemens")
+            .build(new Unit.Builder<ElectricalConductanceUnit>().setUnitBase(BASE).setId("S").setName("siemens")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Siemens. */

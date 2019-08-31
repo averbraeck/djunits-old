@@ -31,9 +31,9 @@ public class SIDimensionsTest
         SIDimensions si2 = new SIDimensions(new byte[] {0, 0, 1, 1, -2, 0, 0, 0, 0});
         SIDimensions si3 = SIDimensions.of("kgm/s2");
         SIDimensions si4 = SIDimensions.of("kgms-2");
-        assertEquals(si1, si2);
-        assertEquals(si2, si3);
-        assertEquals(si3, si4);
+        assertEquals(si1 + "!= " + si2, si1, si2);
+        assertEquals(si2 + "!= " + si3, si2, si3);
+        assertEquals(si3 + "!= " + si4, si3, si4);
         assertEquals(si1.hashCode(), si2.hashCode());
         assertTrue(si1.equals(si2));
         assertTrue(si1.equals(si1));
@@ -71,6 +71,10 @@ public class SIDimensionsTest
 
         SIDimensions si9 = SIDimensions.of("rad1sr2kg3m4s5A6K7mol8cd9");
         assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9]", si9.toString());
+        SIDimensions si9a = SIDimensions.of("mol8cd9rad1sr2kg3m4s5A6K7");
+        assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9]", si9a.toString());
+        SIDimensions si9b = SIDimensions.of("cd9mol8K7A6s5m4kg3sr2rad1");
+        assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9]", si9b.toString());
 
         SIDimensions siInv = si1.invert();
         assertEquals("[0, 0, -1, -1, 2, 0, 0, 0, 0]", siInv.toString());
@@ -78,22 +82,65 @@ public class SIDimensionsTest
         SIDimensions si10 = SIDimensions.of("kgm2s2/kgm2s");
         assertEquals("[0, 0, 0, 0, 1, 0, 0, 0, 0]", si10.toString());
 
+        // .
         assertEquals("kgm/s2", si1.toString(true, false));
         assertEquals("kg.m/s2", si1.toString(true, true));
         assertEquals("kgms-2", si1.toString(false, false));
         assertEquals("kg.m.s-2", si1.toString(false, true));
-
+        // ^
+        assertEquals("kgm/s2", si1.toString(true, false, false));
+        assertEquals("kg.m/s2", si1.toString(true, true, false));
+        assertEquals("kgms-2", si1.toString(false, false, false));
+        assertEquals("kg.m.s-2", si1.toString(false, true, false));
+        assertEquals("kgm/s^2", si1.toString(true, false, true));
+        assertEquals("kg.m/s^2", si1.toString(true, true, true));
+        assertEquals("kgms^-2", si1.toString(false, false, true));
+        assertEquals("kg.m.s^-2", si1.toString(false, true, true));
+        // html
+        assertEquals("kgm/s<sup>2</sup>", si1.toHTMLString(true, false));
+        assertEquals("kg.m/s<sup>2</sup>", si1.toHTMLString(true, true));
+        assertEquals("kgms<sup>-2</sup>", si1.toHTMLString(false, false));
+        assertEquals("kg.m.s<sup>-2</sup>", si1.toHTMLString(false, true));
+        
         SIDimensions si11 = SIDimensions.of("s-3");
         assertEquals("1/s3", si11.toString(true, false));
         assertEquals("1/s3", si11.toString(true, true));
         assertEquals("s-3", si11.toString(false, false));
         assertEquals("s-3", si11.toString(false, true));
+        // ^
+        assertEquals("1/s3", si11.toString(true, false, false));
+        assertEquals("1/s3", si11.toString(true, true, false));
+        assertEquals("s-3", si11.toString(false, false, false));
+        assertEquals("s-3", si11.toString(false, true, false));
+        assertEquals("1/s^3", si11.toString(true, false, true));
+        assertEquals("1/s^3", si11.toString(true, true, true));
+        assertEquals("s^-3", si11.toString(false, false, true));
+        assertEquals("s^-3", si11.toString(false, true, true));
+        // html
+        assertEquals("1/s<sup>3</sup>", si11.toHTMLString(true, false));
+        assertEquals("1/s<sup>3</sup>", si11.toHTMLString(true, true));
+        assertEquals("s<sup>-3</sup>", si11.toHTMLString(false, false));
+        assertEquals("s<sup>-3</sup>", si11.toHTMLString(false, true));
 
         SIDimensions si12 = SIDimensions.of("kgm2/s3A");
         assertEquals("kgm2/s3A", si12.toString(true, false));
         assertEquals("kg.m2/s3.A", si12.toString(true, true));
         assertEquals("kgm2s-3A-1", si12.toString(false, false));
         assertEquals("kg.m2.s-3.A-1", si12.toString(false, true));
+        // ^
+        assertEquals("kgm2/s3A", si12.toString(true, false, false));
+        assertEquals("kg.m2/s3.A", si12.toString(true, true, false));
+        assertEquals("kgm2s-3A-1", si12.toString(false, false, false));
+        assertEquals("kg.m2.s-3.A-1", si12.toString(false, true, false));
+        assertEquals("kgm^2/s^3A", si12.toString(true, false, true));
+        assertEquals("kg.m^2/s^3.A", si12.toString(true, true, true));
+        assertEquals("kgm^2s^-3A^-1", si12.toString(false, false, true));
+        assertEquals("kg.m^2.s^-3.A^-1", si12.toString(false, true, true));
+        // html
+        assertEquals("kgm<sup>2</sup>/s<sup>3</sup>A", si12.toHTMLString(true, false));
+        assertEquals("kg.m<sup>2</sup>/s<sup>3</sup>.A", si12.toHTMLString(true, true));
+        assertEquals("kgm<sup>2</sup>s<sup>-3</sup>A<sup>-1</sup>", si12.toHTMLString(false, false));
+        assertEquals("kg.m<sup>2</sup>.s<sup>-3</sup>.A<sup>-1</sup>", si12.toHTMLString(false, true));
 
         // fractional
         SIDimensions sif = new SIDimensions(new byte[] {0, 0, 1, 1, -2, 0, 0, 0, 0}, new byte[] {1, 1, 1, 1, 1, 1, 1, 1, 1});

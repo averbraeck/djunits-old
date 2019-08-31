@@ -27,7 +27,7 @@ public class AsScalarTest
         Length l = Length.valueOf("50.0 m");
         SIScalar pace = DoubleScalar.divide(d, l);
         System.out.println("pace = " + pace);
-        assertEquals("s/m", pace.getUnit().toString());
+        assertEquals("pace has as unit "+pace.getUnit().toString()+" instead of s/m", "s/m", pace.getUnit().toString());
         assertEquals(0.2, pace.getSI(), 0.00001);
         assertTrue(pace.toString().startsWith("0.200"));
         assertTrue(pace.toString().endsWith("s/m"));

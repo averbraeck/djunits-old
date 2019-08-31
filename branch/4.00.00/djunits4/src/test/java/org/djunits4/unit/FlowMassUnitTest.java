@@ -36,6 +36,7 @@ public class FlowMassUnitTest extends AbstractLinearUnitTest<FlowMassUnit>
     @Test
     public final void conversions()
     {
+        assertEquals("kg/s", FlowMassUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(FlowMassUnit.KILOGRAM_PER_SECOND, 1, 0.000001, "kilogram per second", "kg/s");
         checkUnitRatioNameAndAbbreviation(FlowMassUnit.POUND_PER_SECOND, 0.453592, 0.0001, "pound per second", "lb/s");
         // Check two conversions between non-standard units

@@ -25,7 +25,7 @@ public class TemperatureUnit extends Unit<TemperatureUnit>
 
     /** The SI unit for temperature is Kelvin. */
     public static final TemperatureUnit SI =
-            new TemperatureUnit().build(new Unit.Builder<TemperatureUnit>().setBaseUnit(BASE).setId("K").setName("Kelvin")
+            new TemperatureUnit().build(new Unit.Builder<TemperatureUnit>().setUnitBase(BASE).setId("K").setName("Kelvin")
                     .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Kelvin. */

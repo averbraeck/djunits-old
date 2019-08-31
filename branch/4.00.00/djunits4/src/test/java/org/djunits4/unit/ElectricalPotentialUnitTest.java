@@ -36,6 +36,7 @@ public class ElectricalPotentialUnitTest extends AbstractLinearUnitTest<Electric
     @Test
     public final void conversions()
     {
+        assertEquals("kgm2/s3A", ElectricalPotentialUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(ElectricalPotentialUnit.VOLT, 1, 0.00000001, "volt", "V");
         checkUnitRatioNameAndAbbreviation(ElectricalPotentialUnit.MILLIVOLT, 0.001, 0.00000000001, "millivolt", "mV");
         checkUnitRatioNameAndAbbreviation(ElectricalPotentialUnit.KILOVOLT, 1000, 0.005, "kilovolt", "kV");

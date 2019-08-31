@@ -36,6 +36,7 @@ public class FlowVolumeUnitTest extends AbstractLinearUnitTest<FlowVolumeUnit>
     @Test
     public final void conversions()
     {
+        assertEquals("m3/s", FlowVolumeUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(FlowVolumeUnit.CUBIC_METER_PER_SECOND, 1, 0.000001, "cubic meter per second",
                 "m^3/s");
         checkUnitRatioNameAndAbbreviation(FlowVolumeUnit.CUBIC_METER_PER_MINUTE, 0.0166667, 0.000001, "cubic meter per minute",

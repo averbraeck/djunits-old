@@ -26,7 +26,7 @@ public class EnergyUnit extends Unit<EnergyUnit>
 
     /** The SI unit for energy is Joule (J) = kgm2/s2. */
     public static final EnergyUnit SI =
-            new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setBaseUnit(BASE).setId("J").setName("joule")
+            new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setUnitBase(BASE).setId("J").setName("joule")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Joule. */
@@ -81,7 +81,7 @@ public class EnergyUnit extends Unit<EnergyUnit>
 
     /** watt-hour. */
     public static final EnergyUnit WATT_HOUR =
-            new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setBaseUnit(BASE).setId("Wh").setName("watt-hour")
+            new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setUnitBase(BASE).setId("Wh").setName("watt-hour")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new LinearScale(3600.0)));
 
     /** microwatt-hour. */
@@ -106,7 +106,7 @@ public class EnergyUnit extends Unit<EnergyUnit>
     public static final EnergyUnit PETAWATT_HOUR = WATT_HOUR.deriveSI(SIPrefixes.getUnit("P"));
 
     /** electronvolt. */
-    public static final EnergyUnit ELECTRONVOLT = new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setBaseUnit(BASE)
+    public static final EnergyUnit ELECTRONVOLT = new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setUnitBase(BASE)
             .setId("eV").setName("electronvolt").setUnitSystem(UnitSystem.SI_ACCEPTED).setSiPrefixes(SIPrefixes.UNIT)
             .setScale(new LinearScale(1.602176565314E-19)));
 

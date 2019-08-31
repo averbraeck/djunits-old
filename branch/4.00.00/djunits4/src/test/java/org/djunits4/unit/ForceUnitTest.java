@@ -36,6 +36,7 @@ public class ForceUnitTest extends AbstractLinearUnitTest<ForceUnit>
     @Test
     public final void conversions()
     {
+        assertEquals("kgm/s2", ForceUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(ForceUnit.NEWTON, 1, 0.000001, "newton", "N");
         checkUnitRatioNameAndAbbreviation(ForceUnit.DYNE, 0.00001, 0.000000001, "dyne", "dyn");
         // Check two conversions between non-standard units

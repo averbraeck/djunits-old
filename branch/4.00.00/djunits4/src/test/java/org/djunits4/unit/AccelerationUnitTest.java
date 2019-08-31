@@ -1,10 +1,12 @@
 package org.djunits4.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits4.locale.DefaultLocale;
+import org.djunits4.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,6 +36,7 @@ public class AccelerationUnitTest extends AbstractLinearUnitTest<AccelerationUni
     @Test
     public final void conversions()
     {
+        assertEquals("m/s2", AccelerationUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.METER_PER_SECOND_2, 1, 0.00000001, "meter per second squared",
                 "m/s2");
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.KM_PER_HOUR_2, 1 / 3.6 / 3600, 0.0005, "kilometer per hour squared",
@@ -63,4 +66,17 @@ public class AccelerationUnitTest extends AbstractLinearUnitTest<AccelerationUni
     {
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.STANDARD_GRAVITY, 9.8, 0.02, "standard gravity", "g");
     }
+    
+    /**
+     * Verify that we can create our own Acceleration unit.
+     */
+    @Test
+    public final void createAccelerationUnit()
+    {
+        AccelerationUnit myUnit = AccelerationUnit.SI.deriveLinear(1.23, "my", "myAcceleration", UnitSystem.OTHER);
+        assertTrue("Can create a new AccelerationUnit", null != myUnit);
+        checkUnitRatioNameAndAbbreviation(myUnit, 1.23, 0.0001, "myAcceleration", "my");
+        AccelerationUnit.BASE.unregister(myUnit);
+    }
+
 }

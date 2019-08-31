@@ -1,10 +1,12 @@
 package org.djunits4.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits4.locale.DefaultLocale;
+import org.djunits4.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,6 +36,7 @@ public class ElectricalChargeUnitTest extends AbstractLinearUnitTest<ElectricalC
     @Test
     public final void conversions()
     {
+        assertEquals("sA", ElectricalChargeUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(ElectricalChargeUnit.COULOMB, 1, 0.00000001, "coulomb", "C");
         checkUnitRatioNameAndAbbreviation(ElectricalChargeUnit.MILLIAMPERE_HOUR, 3.6, 0.000000005, "milliampere hour", "mAh");
         checkUnitRatioNameAndAbbreviation(ElectricalChargeUnit.FARADAY, 96485.3365, 0.005, "faraday", "F");
@@ -43,6 +46,18 @@ public class ElectricalChargeUnitTest extends AbstractLinearUnitTest<ElectricalC
         // Test the other units
         checkUnitRatioNameAndAbbreviation(ElectricalChargeUnit.ATOMIC_UNIT, 1.60217653e-19, 1e-25, "elementary unit of charge",
                 "e");
+    }
+
+    /**
+     * Verify that we can create our own ElectricalCharge unit.
+     */
+    @Test
+    public final void createElectricalChargeUnit()
+    {
+        ElectricalChargeUnit myUnit = ElectricalChargeUnit.SI.deriveLinear(1.23, "my", "myElectricalCharge", UnitSystem.OTHER);
+        assertTrue("Can create a new ElectricalChargeUnit", null != myUnit);
+        checkUnitRatioNameAndAbbreviation(myUnit, 1.23, 0.0001, "myElectricalCharge", "my");
+        ElectricalChargeUnit.BASE.unregister(myUnit);
     }
 
 }

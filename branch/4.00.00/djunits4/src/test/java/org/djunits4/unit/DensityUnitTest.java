@@ -36,6 +36,7 @@ public class DensityUnitTest extends AbstractLinearUnitTest<DensityUnit>
     @Test
     public final void conversions()
     {
+        assertEquals("kg/m3", DensityUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(DensityUnit.KG_PER_METER_3, 1, 0.00000001, "kilogram per cubic meter", "kg/m^3");
         checkUnitRatioNameAndAbbreviation(DensityUnit.GRAM_PER_CENTIMETER_3, 1000, 0.0001, "gram per cubic centimeter",
                 "g/cm^3");

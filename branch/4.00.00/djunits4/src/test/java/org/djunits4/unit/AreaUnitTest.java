@@ -1,10 +1,12 @@
 package org.djunits4.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits4.locale.DefaultLocale;
+import org.djunits4.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,6 +36,7 @@ public class AreaUnitTest extends AbstractLinearUnitTest<AreaUnit>
     @Test
     public final void conversions()
     {
+        assertEquals("m2", AreaUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(AreaUnit.SQUARE_METER, 1, 0.00000001, "square meter", "m^2");
         checkUnitRatioNameAndAbbreviation(AreaUnit.SQUARE_KILOMETER, 1000000, 0.05, "square kilometer", "km^2");
         checkUnitRatioNameAndAbbreviation(AreaUnit.SQUARE_MILE, 2589990, 2, "square mile", "mi^2");
@@ -46,6 +49,18 @@ public class AreaUnitTest extends AbstractLinearUnitTest<AreaUnit>
         checkUnitRatioNameAndAbbreviation(AreaUnit.SQUARE_INCH, 0.00064516, 0.00000001, "square inch", "in^2");
         checkUnitRatioNameAndAbbreviation(AreaUnit.SQUARE_YARD, 0.836127, 0.000001, "square yard", "yd^2");
         checkUnitRatioNameAndAbbreviation(AreaUnit.ACRE, 4046.9, 0.05, "acre", "ac");
+    }
+
+    /**
+     * Verify that we can create our own Area unit.
+     */
+    @Test
+    public final void createAreaUnit()
+    {
+        AreaUnit myUnit = AreaUnit.SI.deriveLinear(1.23, "my", "myArea", UnitSystem.OTHER);
+        assertTrue("Can create a new AreaUnit", null != myUnit);
+        checkUnitRatioNameAndAbbreviation(myUnit, 1.23, 0.0001, "myArea", "my");
+        AreaUnit.BASE.unregister(myUnit);
     }
 
 }

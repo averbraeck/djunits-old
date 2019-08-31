@@ -26,7 +26,7 @@ public class ElectricalCapacitanceUnit extends Unit<ElectricalCapacitanceUnit>
 
     /** The SI unit for electrical conductance is Siemens. */
     public static final ElectricalCapacitanceUnit SI = new ElectricalCapacitanceUnit()
-            .build(new Unit.Builder<ElectricalCapacitanceUnit>().setBaseUnit(BASE).setId("F").setName("farad")
+            .build(new Unit.Builder<ElectricalCapacitanceUnit>().setUnitBase(BASE).setId("F").setName("farad")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Farad. */

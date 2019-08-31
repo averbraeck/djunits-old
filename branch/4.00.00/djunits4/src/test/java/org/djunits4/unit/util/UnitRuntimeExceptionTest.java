@@ -1,32 +1,32 @@
-package org.djunits4.unit;
+package org.djunits4.unit.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.djunits4.unit.util.UnitException;
+import org.djunits4.unit.util.UnitRuntimeException;
 import org.junit.Test;
 
 /**
- * UnitExceptionTest.java.
+ * UnitRuntimeExceptionTest.java.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class UnitExceptionTest
+public class UnitRuntimeExceptionTest
 {
-    /** test the UnitException. */
+    /** test the UnitRuntimeException. */
     @Test
     public void testException()
     {
         try
         {
-            throw new UnitException();
+            throw new UnitRuntimeException();
         }
-        catch (UnitException e)
+        catch (UnitRuntimeException e)
         {
             assertNull(e.getMessage());
         }
@@ -37,9 +37,9 @@ public class UnitExceptionTest
         
         try
         {
-            throw new UnitException("abc");
+            throw new UnitRuntimeException("abc");
         }
-        catch (UnitException e)
+        catch (UnitRuntimeException e)
         {
             assertEquals("abc", e.getMessage());
         }
@@ -50,9 +50,9 @@ public class UnitExceptionTest
         
         try
         {
-            throw new UnitException(new IllegalArgumentException());
+            throw new UnitRuntimeException(new IllegalArgumentException());
         }
-        catch (UnitException e)
+        catch (UnitRuntimeException e)
         {
             assertTrue(e.getMessage().contains("IllegalArgumentException"));
             assertTrue(e.getCause() instanceof IllegalArgumentException);
@@ -64,9 +64,9 @@ public class UnitExceptionTest
         
         try
         {
-            throw new UnitException("abc", new IllegalArgumentException("def"));
+            throw new UnitRuntimeException("abc", new IllegalArgumentException("def"));
         }
-        catch (UnitException e)
+        catch (UnitRuntimeException e)
         {
             assertEquals("abc", e.getMessage());
             assertTrue(e.getCause() instanceof IllegalArgumentException);

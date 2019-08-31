@@ -46,18 +46,6 @@ import org.junit.Test;
  */
 public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
 {
-    /** The classes that are absolute (name = class name). */
-    public static final String[] CLASSNAMES_ABS = new String[] {"AbsoluteTemperature", "Direction", "Position", "Time"};
-
-    /** The relative classes that mirror the absolute ones (name = class name). */
-    public static final String[] CLASSNAMES_ABS_REL = new String[] {"Temperature", "Angle", "Length", "Duration"};
-
-    /** The classes that are just relative (name = class name). */
-    public static final String[] CLASSNAMES_REL = new String[] {"Angle", "Acceleration", "AngleSolid", "Area", "Density",
-            "Dimensionless", "Duration", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance",
-            "Energy", "FlowMass", "FlowVolume", "Force", "Frequency", "Length", "LinearDensity", "Mass", "Power", "Pressure",
-            "Speed", "Temperature", "Torque", "Volume"};
-
     /**
      * Perform many tests on the double and float matrix types.
      * @throws IllegalAccessException on class or method resolving error
@@ -104,9 +92,9 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             for (StorageType storageType : StorageType.values())
             {
                 // get the interfaces such as org.djunits4.value.vdouble.matrix.Time
-                for (int i = 0; i < CLASSNAMES_ABS.length; i++)
+                for (int i = 0; i < CLASSNAMES.ABS.length; i++)
                 {
-                    String matrixNameAbs = CLASSNAMES_ABS[i];
+                    String matrixNameAbs = CLASSNAMES.ABS[i];
                     Class<?> matrixClassAbs = null;
                     String classNameAbs = "org.djunits4.value.v" + doubleOrFloat + ".matrix." + (mutable ? "Mutable" : "")
                             + floatPrefix + matrixNameAbs + upperMatrixType;
@@ -114,7 +102,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                     matrixClassAbs = Class.forName(classNameAbs);
                     Class<?> matrixClassRel = null;
 
-                    String matrixNameRel = CLASSNAMES_ABS_REL[i];
+                    String matrixNameRel = CLASSNAMES.ABS_REL[i];
                     String classNameRel = "org.djunits4.value.v" + doubleOrFloat + ".matrix." + (mutable ? "Mutable" : "")
                             + floatPrefix + matrixNameRel + upperMatrixType;
                     matrixClassRel = Class.forName(classNameRel);
@@ -125,7 +113,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                     // testAbsRelConversion(matrixClass, true, doubleType, StorageType.SPARSE);
                 }
                 // get the interfaces such as org.djunits4.value.vXXXX.matrix.Area
-                for (String matrixName : CLASSNAMES_REL)
+                for (String matrixName : CLASSNAMES.REL)
                 {
                     String matrixClassName = (doubleType ? "" : "Float") + matrixName;
                     String fullClassName = "org.djunits4.value.v" + doubleOrFloat + ".matrix." + (mutable ? "Mutable" : "")
@@ -267,7 +255,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             }
             SIScalar result = multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
             // System.out.println("result is " + result);
-            String resultCoefficients = result.getUnit().getBaseUnit().getSiDimensions().toString();
+            String resultCoefficients = result.getUnit().getUnitBase().getSiDimensions().toString();
             assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
         }
         else
@@ -297,7 +285,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             }
             FloatSIScalar result = multiply ? FloatScalar.multiply(left, right) : FloatScalar.divide(left, right);
             // System.out.println("result is " + result);
-            String resultCoefficients = result.getUnit().getBaseUnit().getSiDimensions().toString();
+            String resultCoefficients = result.getUnit().getUnitBase().getSiDimensions().toString();
             assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
         }
     }
@@ -318,14 +306,14 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             {
                 if (field.getType().equals(clas))
                 {
-                    return ((Unit<?>) field.get(clas)).getBaseUnit().getSiDimensions().toString();
+                    return ((Unit<?>) field.get(clas)).getUnitBase().getSiDimensions().toString();
                 }
             }
             return "1";
         }
         Field si = clas.getField("SI");
         Unit<?> u = ((Unit<?>) si.get(clas));
-        String r = u.getBaseUnit().getSiDimensions().toString();
+        String r = u.getUnitBase().getSiDimensions().toString();
         return r;
         // return ((Unit<?>) si.get(clas)).getBaseUnit().getSiDimensions().toString();
     }
@@ -1396,7 +1384,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             builder.setName("7fullName");
             builder.setUnitSystem(unitSystem);
             builder.setScale(new LinearScale(7));
-            builder.setBaseUnit((UnitBase) getSIUnitInstance(unitClass).getBaseUnit());
+            builder.setUnitBase((UnitBase) getSIUnitInstance(unitClass).getUnitBase());
             builder.setSiPrefixes(SIPrefixes.NONE);
             buildMethod.setAccessible(true);
             buildMethod.invoke(newUnit, builder);
@@ -1407,15 +1395,15 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             if (abs)
             {
                 String className = matrixClass.getName();
-                for (int i = 0; i < CLASSNAMES_ABS.length; i++)
+                for (int i = 0; i < CLASSNAMES.ABS.length; i++)
                 {
-                    className = className.replaceAll(CLASSNAMES_ABS[i], CLASSNAMES_ABS_REL[i]);
+                    className = className.replaceAll(CLASSNAMES.ABS[i], CLASSNAMES.ABS_REL[i]);
                 }
                 Class<?> relClass = Class.forName(className);
                 compatibleRel = findAndExecuteConstructor(relClass, new Object[] {value, newUnit, storageType}, doubleType);
                 // System.out.println("compatibleRel prints like \"" + compatibleRight + "\"");
             }
-            newUnit.getBaseUnit().unregister(newUnit);
+            newUnit.getUnitBase().unregister(newUnit);
         }
         if (null != compatibleRight)
         {

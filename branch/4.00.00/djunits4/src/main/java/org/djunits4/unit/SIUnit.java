@@ -17,7 +17,7 @@ public class SIUnit extends Unit<SIUnit>
     @Override
     public String toString()
     {
-        return getBaseUnit().getSiDimensions().toString(true, false);
+        return getUnitBase().getSiDimensions().toString(true, false);
     }
 
 }

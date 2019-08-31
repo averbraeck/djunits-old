@@ -25,7 +25,7 @@ public class ElectricalPotentialUnit extends Unit<ElectricalPotentialUnit>
 
     /** The SI unit for electrical potential is Volt. */
     public static final ElectricalPotentialUnit SI = new ElectricalPotentialUnit()
-            .build(new Unit.Builder<ElectricalPotentialUnit>().setBaseUnit(BASE).setId("V").setName("volt")
+            .build(new Unit.Builder<ElectricalPotentialUnit>().setUnitBase(BASE).setId("V").setName("volt")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Volt. */

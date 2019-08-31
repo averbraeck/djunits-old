@@ -9,7 +9,7 @@ import org.djunits4.unit.unitsystem.UnitSystem;
 import org.djunits4.unit.util.UnitRuntimeException;
 
 /**
- * The AbsoluteUnit class indicates that a unit is absolute and has a "zero" point. The relative base unit will be set correctly
+ * The AbsoluteUnit class indicates that a unit is absolute and has a "zero" point. The relative unit base will be set correctly
  * for each derived unit, as this is one of the fields that will be cloned to create a derived unit.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
@@ -25,18 +25,18 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     private static final long serialVersionUID = 20190826L;
 
     /** The relative unit belonging to this unit. */
-    private UnitBase<RU> relativeBaseUnit;
+    private UnitBase<RU> relativeUnitBase;
 
     /** The corresponding relative unit with the same unit scale factor. */
     private RU relativeUnit;
 
     /**
-     * Return the corresponding relative base unit.
-     * @return Unit&lt;?&gt;; the the corresponding relative base unit
+     * Return the corresponding relative unit base.
+     * @return Unit&lt;?&gt;; the the corresponding relative unit base
      */
-    public UnitBase<RU> getRelativeBaseUnit()
+    public UnitBase<RU> getRelativeUnitBase()
     {
-        return this.relativeBaseUnit;
+        return this.relativeUnitBase;
     }
 
     /**
@@ -55,7 +55,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     {
         this.relativeUnit = ((Builder<AU, RU>) builder).getRelativeUnit();
         Throw.whenNull(this.relativeUnit, "Relative unit for unit " + builder.getId() + " cannot be null");
-        this.relativeBaseUnit = this.relativeUnit.getBaseUnit();
+        this.relativeUnitBase = this.relativeUnit.getUnitBase();
         AU unit = super.build(builder);
         return unit;
     }
@@ -65,7 +65,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
      * scaleFactor. Note that the unit that is used for derivation is currently not allowed to already have a scaleFactor and an
      * offset. <br>
      * When this has to be implemented later, it might work as follows: when we have an original scale with offset o1 and
-     * scalefactor f1, the calculation to the base unit is valueSI = (value1 + o1) * f1. So the offset is expressed in the
+     * scalefactor f1, the calculation to the unit base is valueSI = (value1 + o1) * f1. So the offset is expressed in the
      * "unit" of the value. If we combine a second scale factor for a derived unit with offset o2 and scalefactor f2, we need to
      * calculate the ultimate scale to the base (si) unit. The factor then becomes: <code>value1 = (value2 + o2) * f2</code>,
      * and therefore <code>valueSI =
@@ -109,7 +109,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
             builder.setId(derivedId);
             builder.setName(derivedName);
             builder.setRelativeUnit(derivedRelativeUnit);
-            builder.setBaseUnit(getBaseUnit());
+            builder.setUnitBase(getUnitBase());
             builder.setSiPrefixes(SIPrefixes.NONE);
             builder.setScale(new OffsetLinearScale(scaleFactor, offset));
             builder.setUnitSystem(derivedUnitSystem);
@@ -181,7 +181,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     }
 
     /**
-     * Builder for the AbsoluteUnit. This builder forces a relative base unit to be set for the absolute unit as well.
+     * Builder for the AbsoluteUnit. This builder forces a relative unit base to be set for the absolute unit as well.
      * Furthermore, it forces an OffsetLinearScale rather than a linear scale.
      * <p>
      * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
@@ -303,10 +303,18 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
 
         /** {@inheritDoc} */
         @Override
-        public Builder<AU, RU> setBaseUnit(final UnitBase<AU> baseUnit)
+        public Builder<AU, RU> setUnitBase(final UnitBase<AU> baseUnit)
         {
-            super.setBaseUnit(baseUnit);
+            super.setUnitBase(baseUnit);
             return this;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public String toString()
+        {
+            return "Builder [relativeUnit=" + this.relativeUnit + ", getId()=" + this.getId() + ", getName()=" + this.getName()
+                    + ", getUnitBase()=" + this.getUnitBase() + "]";
         }
 
     }

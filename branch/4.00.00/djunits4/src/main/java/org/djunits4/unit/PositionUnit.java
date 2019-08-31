@@ -25,7 +25,7 @@ public class PositionUnit extends AbsoluteLinearUnit<PositionUnit, LengthUnit>
 
     /** The SI unit for position is meter. */
     public static final PositionUnit DEFAULT =
-            new PositionUnit().build(new AbsoluteLinearUnit.Builder<PositionUnit, LengthUnit>().setBaseUnit(BASE).setId("m")
+            new PositionUnit().build(new AbsoluteLinearUnit.Builder<PositionUnit, LengthUnit>().setUnitBase(BASE).setId("m")
                     .setName("meter").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT)
                     .setScale(new OffsetLinearScale(1.0, 0.0)).setRelativeUnit(LengthUnit.METER));
 

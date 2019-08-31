@@ -243,7 +243,7 @@ public abstract class FloatScalar
     public static FloatSIScalar multiply(final AbstractFloatScalarRel<?, ?> left, final AbstractFloatScalarRel<?, ?> right)
     {
         SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(
-                left.getUnit().getBaseUnit().getSiDimensions().plus(right.getUnit().getBaseUnit().getSiDimensions()));
+                left.getUnit().getUnitBase().getSiDimensions().plus(right.getUnit().getUnitBase().getSiDimensions()));
         return new FloatSIScalar(left.getSI() * right.getSI(), targetUnit);
     }
 
@@ -256,7 +256,7 @@ public abstract class FloatScalar
     public static FloatSIScalar divide(final AbstractFloatScalarRel<?, ?> left, final AbstractFloatScalarRel<?, ?> right)
     {
         SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(
-                left.getUnit().getBaseUnit().getSiDimensions().minus(right.getUnit().getBaseUnit().getSiDimensions()));
+                left.getUnit().getUnitBase().getSiDimensions().minus(right.getUnit().getUnitBase().getSiDimensions()));
         return new FloatSIScalar(left.getSI() / right.getSI(), targetUnit);
     }
 

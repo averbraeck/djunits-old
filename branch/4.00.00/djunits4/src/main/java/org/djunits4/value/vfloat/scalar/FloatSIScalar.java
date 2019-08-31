@@ -161,9 +161,9 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final <KU extends Unit<KU>, K extends AbstractFloatScalarRel<KU, K>> K as(final K example)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(example.getUnit().getBaseUnit().getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(example.getUnit().getUnitBase().getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), example.toString());
-        return example.instantiateRel(this.si, example.getUnit().getBaseUnit().getStandardUnit());
+        return example.instantiateRel(this.si, example.getUnit().getUnitBase().getStandardUnit());
     }
 
     /**
@@ -175,7 +175,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final <KU extends Unit<KU>, K extends AbstractFloatScalarRel<KU, K>> K as(final K example, final KU displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(example.getUnit().getBaseUnit().getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(example.getUnit().getUnitBase().getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), example.toString());
         return example.instantiateRel((float) ValueUtil.expressAsUnit(this.si, displayUnit), displayUnit);
     }
@@ -193,7 +193,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
         {
             Method createSI = returnClass.getMethod("createSI", float.class);
             K result = (K) createSI.invoke(returnClass, this.si);
-            Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(result.getUnit().getBaseUnit().getSiDimensions())),
+            Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(result.getUnit().getUnitBase().getSiDimensions())),
                     UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), result.toString());
             return result;
         }
@@ -218,7 +218,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
         {
             Method createSI = returnClass.getMethod("createSI", float.class);
             K result = (K) createSI.invoke(returnClass, this.si);
-            Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(result.getUnit().getBaseUnit().getSiDimensions())),
+            Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(result.getUnit().getUnitBase().getSiDimensions())),
                     UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), result.toString());
             return result.instantiateRel((float) ValueUtil.expressAsUnit(this.si, displayUnit), displayUnit);
         }
@@ -235,7 +235,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatSpeed asSpeed()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Speed", this.toString());
         return new FloatSpeed(getSI(), SpeedUnit.SI);
     }
@@ -247,7 +247,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatSpeed asSpeed(final SpeedUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Speed", this.toString());
         return new FloatSpeed(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }

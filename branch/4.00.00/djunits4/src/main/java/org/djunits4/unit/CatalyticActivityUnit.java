@@ -26,7 +26,7 @@ public class CatalyticActivityUnit extends Unit<CatalyticActivityUnit>
 
     /** The SI unit for catalytic activity is Katal. */
     public static final CatalyticActivityUnit SI = new CatalyticActivityUnit()
-            .build(new Unit.Builder<CatalyticActivityUnit>().setBaseUnit(BASE).setId("kat").setName("katal")
+            .build(new Unit.Builder<CatalyticActivityUnit>().setUnitBase(BASE).setId("kat").setName("katal")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** KATAL. */

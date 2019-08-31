@@ -181,7 +181,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             Builder<U> builder = makeBuilder();
             builder.setId(cloneId);
             builder.setName(cloneName);
-            builder.setBaseUnit(this.unitBase);
+            builder.setUnitBase(this.unitBase);
             builder.setSiPrefixes(SIPrefixes.NONE);
             builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
             builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
@@ -264,7 +264,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             Builder<U> builder = makeBuilder();
             builder.setId(cloneId);
             builder.setName(cloneName);
-            builder.setBaseUnit(this.unitBase);
+            builder.setUnitBase(this.unitBase);
             builder.setSiPrefixes(SIPrefixes.NONE);
             builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
             builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
@@ -328,7 +328,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             Builder<U> builder = makeBuilder();
             builder.setId(derivedId);
             builder.setName(derivedName);
-            builder.setBaseUnit(this.unitBase);
+            builder.setUnitBase(this.unitBase);
             builder.setSiPrefixes(SIPrefixes.NONE);
             builder.setScale(new LinearScale(scaleFactor * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
             builder.setUnitSystem(derivedUnitSystem);
@@ -414,7 +414,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             Builder<SIUnit> builder = new Builder<>();
             builder.setId(siDimensions.toString(true, true));
             builder.setName(siDimensions.toString(true, true));
-            builder.setBaseUnit(unitBase);
+            builder.setUnitBase(unitBase);
             builder.setScale(IdentityScale.SCALE);
             builder.setGenerated(true);
             builder.setUnitSystem(UnitSystem.SI_DERIVED);
@@ -498,7 +498,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * @return BaseUnit&lt;U&gt;; the unit base of this unit. if this unit is itself a unit base; the returned value is
      *         <code>null</code>
      */
-    public UnitBase<U> getBaseUnit()
+    public UnitBase<U> getUnitBase()
     {
         return this.unitBase;
     }
@@ -528,7 +528,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      */
     public U getStandardUnit()
     {
-        return getBaseUnit().getStandardUnit();
+        return getUnitBase().getStandardUnit();
     }
 
     /** {@inheritDoc} */
@@ -886,10 +886,17 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
          * @param unitBase UnitBase&lt;U&gt;; the unit base
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setBaseUnit(final UnitBase<U> unitBase)
+        public Builder<U> setUnitBase(final UnitBase<U> unitBase)
         {
             this.unitBase = unitBase;
             return this;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public String toString()
+        {
+            return "Builder [id=" + this.id + ", name=" + this.name + ", scale=" + this.scale + "]";
         }
 
     }

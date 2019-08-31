@@ -24,7 +24,7 @@ public class SpeedUnit extends Unit<SpeedUnit>
 
     /** The SI unit for speed is m/s. */
     public static final SpeedUnit SI =
-            new SpeedUnit().build(new Unit.Builder<SpeedUnit>().setBaseUnit(BASE).setId("m/s").setName("meter per second")
+            new SpeedUnit().build(new Unit.Builder<SpeedUnit>().setUnitBase(BASE).setId("m/s").setName("meter per second")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
 
     /** m/s. */

@@ -25,7 +25,7 @@ public class FrequencyUnit extends Unit<FrequencyUnit>
 
     /** The SI unit for frequency is Hertz. */
     public static final FrequencyUnit SI =
-            new FrequencyUnit().build(new Unit.Builder<FrequencyUnit>().setBaseUnit(BASE).setId("Hz").setName("hertz")
+            new FrequencyUnit().build(new Unit.Builder<FrequencyUnit>().setUnitBase(BASE).setId("Hz").setName("hertz")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Hertz. */

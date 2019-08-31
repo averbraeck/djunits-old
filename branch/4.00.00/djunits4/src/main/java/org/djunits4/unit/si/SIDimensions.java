@@ -29,6 +29,9 @@ public class SIDimensions implements Serializable
     /** The abbreviations of the SI units we use in SIDimensions. */
     public static final String[] SI_ABBREVIATIONS = new String[] {"rad", "sr", "kg", "m", "s", "A", "K", "mol", "cd"};
 
+    /** For parsing, the mol has to be parsed before the m, otherwise the "m" from "mol" is eaten; same for "s" and "sr". */
+    private static final int[] PARSE_ORDER = new int[] {0, 1, 2, 7, 3, 4, 5, 6, 8};
+
     /**
      * The currently 9 dimensions of the SI unit we distinguish: 0: angle (rad), 1: solid angle (sr), 2: mass (kg), 3: length
      * (m), 4: time (s), 5: current (A), 6: temperature (K), 7: amount of substance (mol), 8: luminous intensity (cd). As an
@@ -115,7 +118,8 @@ public class SIDimensions implements Serializable
      * SIDimensions.of("kgms-2") will both be translated to a dimensions object with vector {0,0,1,1,-2,0,0,0,0}. It is allowed
      * to use 0 or 1 for the dimensions. Having the same unit in the numerator and the denominator is not seen as a problem: the
      * values are subtracted from each other, so m/m will have a length dimensionality of 0. Dimensions between -9 and 9 are
-     * allowed.
+     * allowed. Periods and ^ are taken out, but other characters are not allowed and will lead to a UnitException. The order of
+     * units that is allowed can be arbitrary, so "kg/ms2" is accepted as well as "kg/s^2.m".
      * @param siString String; the string to translate
      * @return the corresponding SI dimensions
      * @throws UnitException when the string could not be parsed into dimensions
@@ -146,6 +150,8 @@ public class SIDimensions implements Serializable
     /**
      * Translate a string representing SI dimensions to an SIDimensions object. Example: SIDimensions.of("kgm2") is translated
      * to a vector {0,0,1,2,0,0,0,0,0}. It is allowed to use 0 or 1 for the dimensions. Dimensions between -9 and 9 are allowed.
+     * The parsing is quite lenient: periods and ^ are taken out, and the order can be arbitrary, so "kgms-2" is accepted as
+     * well as "m.s^-2.kg"
      * @param siString String; concatenation of SI units with positive or negative dimensions. No divisions sign is allowed.
      * @return a vector of length NUMBER_DIMENSIONS with the dimensions for the SI units
      * @throws UnitException when the String cannot be parsed, e.g. due to units not being recognized
@@ -159,43 +165,60 @@ public class SIDimensions implements Serializable
             return dim;
         }
         String copy = siString;
-        for (int i = 0; i < SI_ABBREVIATIONS.length; i++)
+        int copyLength = copy.length();
+        while (copyLength > 0)
         {
-            String si = SI_ABBREVIATIONS[i];
-            if (copy.startsWith(si))
+            // find the next unit
+            for (int j = 0; j < SI_ABBREVIATIONS.length; j++)
             {
-                copy = copy.substring(si.length());
-                if (copy.length() == 0)
+                int i = PARSE_ORDER[j];
+                String si = SI_ABBREVIATIONS[i];
+                if (copy.startsWith(si))
                 {
-                    dim[i] = 1;
-                }
-                else if (copy.startsWith("-"))
-                {
-                    if (copy.length() == 1)
+                    if (dim[i] != 0)
                     {
-                        throw new UnitException("SI string " + siString + " ends with a minus sign");
+                        throw new UnitException("SI string " + siString + " has a double entry for unit " + si);
                     }
-                    if (Character.isDigit(copy.charAt(1)))
+                    copy = copy.substring(si.length());
+                    if (copy.length() == 0)
                     {
-                        dim[i] = (byte) (-1 * (copy.charAt(1) - '0'));
+                        dim[i] = 1;
+                        break;
                     }
-                    else
+                    else if (copy.startsWith("-"))
                     {
+                        if (copy.length() == 1)
+                        {
+                            throw new UnitException("SI string " + siString + " ends with a minus sign");
+                        }
+                        if (Character.isDigit(copy.charAt(1)))
+                        {
+                            dim[i] = (byte) (-1 * (copy.charAt(1) - '0'));
+                            copy = copy.substring(2);
+                            break;
+                        }
                         throw new UnitException(
                                 "SI string " + siString + " has a minus sign for unit " + si + " but no dimension");
                     }
-                    copy = copy.substring(2);
-                }
-                else if (Character.isDigit(copy.charAt(0)))
-                {
-                    dim[i] = (byte) (copy.charAt(0) - '0');
-                    copy = copy.substring(1);
-                }
-                else
-                {
-                    dim[i] = 1;
+                    else if (Character.isDigit(copy.charAt(0)))
+                    {
+                        dim[i] = (byte) (copy.charAt(0) - '0');
+                        copy = copy.substring(1);
+                        break;
+                    }
+                    else
+                    {
+                        dim[i] = 1;
+                        break;
+                    }
                 }
             }
+            if (copy.length() == copyLength)
+            {
+                // we did not parse anything... wrong character
+                break;
+            }
+            copyLength = copy.length();
         }
         if (copy.length() != 0)
         {
@@ -325,12 +348,13 @@ public class SIDimensions implements Serializable
 
     /**
      * Return a string such as "kgm/s2" or "kg.m/s^2" or "kg.m.s^-2" from this SIDimensions.
-     * @param divided if true, return m/s2 for acceleration; if false return ms-2
-     * @param separator boolean; if true, add dots between successive units, e.g. kg.m.s-2 instead of kgms-2
-     * @return a 'divided' string from this SIDimensions
+     * @param divided boolean; if true, return m/s2 for acceleration; if false return ms-2
+     * @param separator String; add this string between successive units, e.g. kg.m.s-2 instead of kgms-2
+     * @param powerPrefix String; the prefix for the power, e.g., "^" or "<sup>" 
+     * @param powerPostfix String; the postfix for the power, e.g., "</sup>" 
+     * @return a formatted string for this SIDimensions
      */
-    public String toString(final boolean divided, final boolean separator)
-    // TODO: final String separator, final String powerPrefix, final String powerPostfix)
+    public String toString(final boolean divided, final String separator, final String powerPrefix, final String powerPostfix)
     {
         StringBuffer s = new StringBuffer();
         boolean first = true;
@@ -343,9 +367,9 @@ public class SIDimensions implements Serializable
             }
             if ((!divided && this.dimensions[i] != 0) || (divided && this.dimensions[i] > 0))
             {
-                if (!first && separator)
+                if (!first)
                 {
-                    s.append(".");
+                    s.append(separator);
                 }
                 else
                 {
@@ -354,7 +378,9 @@ public class SIDimensions implements Serializable
                 s.append(SI_ABBREVIATIONS[i]);
                 if (this.dimensions[i] != 1)
                 {
+                    s.append(powerPrefix);
                     s.append(this.dimensions[i]);
+                    s.append(powerPostfix);
                 }
             }
         }
@@ -373,9 +399,9 @@ public class SIDimensions implements Serializable
             {
                 if (this.dimensions[i] < 0)
                 {
-                    if (!first && separator)
+                    if (!first)
                     {
-                        s.append(".");
+                        s.append(separator);
                     }
                     else
                     {
@@ -384,7 +410,9 @@ public class SIDimensions implements Serializable
                     s.append(SI_ABBREVIATIONS[i]);
                     if (this.dimensions[i] < -1)
                     {
+                        s.append(powerPrefix);
                         s.append(-this.dimensions[i]);
+                        s.append(powerPostfix);
                     }
                 }
             }
@@ -392,6 +420,40 @@ public class SIDimensions implements Serializable
         return s.toString();
     }
 
+    /**
+     * Return a string such as "kgm/s2" or "kg.m/s2" or "kg.m.s-2" from this SIDimensions.
+     * @param divided boolean; if true, return m/s2 for acceleration; if false return ms-2
+     * @param separator boolean; if true, add a period between successive units, e.g. kg.m.s-2 instead of kgms-2
+     * @return a formatted string for this SIDimensions
+     */
+    public String toString(final boolean divided, final boolean separator)
+    {
+        return toString(divided, separator ? "." : "", "", "");
+    }
+
+    /**
+     * Return a string such as "kgm/s2" or "kg.m/s^2" or "kg.m.s^-2" from this SIDimensions.
+     * @param divided boolean; if true, return m/s2 for acceleration; if false return ms-2
+     * @param separator boolean; if true, add a period between successive units, e.g. kg.m.s-2 instead of kgms-2
+     * @param power boolean; if true, add a ^ sign before the power, e.g., "kg.m^2/s^3" instead of "kg.m2/s3"
+     * @return a formatted string for this SIDimensions
+     */
+    public String toString(final boolean divided, final boolean separator, final boolean power)
+    {
+        return toString(divided, separator ? "." : "", power ? "^" : "", "");
+    }
+    
+    /**
+     * Return a string such as "kgm/s<sup>2</sup>" or or "kg.m.s<sup>-2</sup>" from this SIDimensions.
+     * @param divided boolean; if true, return "m/s<sup>2</sup>" for acceleration; if false return "ms<sup>-2</sup>"
+     * @param separator boolean; if true, add a period between successive units, e.g. kg.m.s<sup>-2</sup>
+     * @return a formatted string for this SIDimensions
+     */
+    public String toHTMLString(final boolean divided, final boolean separator)
+    {
+        return toString(divided, separator ? "." : "", "<sup>", "</sup>");
+    }
+    
     /** {@inheritDoc} */
     @Override
     public String toString()

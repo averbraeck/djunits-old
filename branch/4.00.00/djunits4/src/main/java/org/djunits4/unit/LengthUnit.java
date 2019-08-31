@@ -23,7 +23,7 @@ public class LengthUnit extends Unit<LengthUnit>
     public static final UnitBase<LengthUnit> BASE = new UnitBase<>("m");
 
     /** The SI unit for length is meter. */
-    public static final LengthUnit SI = new LengthUnit().build(new Unit.Builder<LengthUnit>().setBaseUnit(BASE).setId("m")
+    public static final LengthUnit SI = new LengthUnit().build(new Unit.Builder<LengthUnit>().setUnitBase(BASE).setId("m")
             .setName("meter").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** meter. */

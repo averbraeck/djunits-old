@@ -25,7 +25,7 @@ public final class DimensionlessUnit extends Unit<DimensionlessUnit>
 
     /** The SI unit for a dimension less unit is "1" or N/A. */
     public static final DimensionlessUnit SI =
-            new DimensionlessUnit().build(new Unit.Builder<DimensionlessUnit>().setBaseUnit(BASE).setId("unit").setName("unit")
+            new DimensionlessUnit().build(new Unit.Builder<DimensionlessUnit>().setUnitBase(BASE).setId("unit").setName("unit")
                     .setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
 
 }

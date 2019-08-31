@@ -26,7 +26,7 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
 
     /** The SI unit for electrical charge is Coulomb = A.s. */
     public static final ElectricalChargeUnit SI = new ElectricalChargeUnit()
-            .build(new Unit.Builder<ElectricalChargeUnit>().setBaseUnit(BASE).setId("C").setName("coulomb")
+            .build(new Unit.Builder<ElectricalChargeUnit>().setUnitBase(BASE).setId("C").setName("coulomb")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Coulomb = A.s. */
@@ -40,7 +40,7 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
 
     /** ampere hour. */
     public static final ElectricalChargeUnit AMPERE_HOUR = new ElectricalChargeUnit()
-            .build(new Unit.Builder<ElectricalChargeUnit>().setBaseUnit(BASE).setId("Ah").setName("ampere hour")
+            .build(new Unit.Builder<ElectricalChargeUnit>().setUnitBase(BASE).setId("Ah").setName("ampere hour")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(new LinearScale(3600.0)));
 
     /** milliampere hour. */

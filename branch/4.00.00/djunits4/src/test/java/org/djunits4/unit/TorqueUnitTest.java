@@ -1,10 +1,12 @@
 package org.djunits4.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits4.locale.DefaultLocale;
+import org.djunits4.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,6 +36,7 @@ public class TorqueUnitTest extends AbstractLinearUnitTest<TorqueUnit>
     @Test
     public final void conversions()
     {
+        assertEquals("kgm2/s2", TorqueUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(TorqueUnit.NEWTON_METER, 1, 0.00000001, "Newton meter", "N.m");
         checkUnitRatioNameAndAbbreviation(TorqueUnit.METER_KILOGRAM_FORCE, 9.80665, 0.000005, "meter kilogram-force", "m.kgf");
         checkUnitRatioNameAndAbbreviation(TorqueUnit.POUND_FOOT, 1.35581794833, 0.0000001, "pound-foot", "lbf.ft");
@@ -42,6 +45,18 @@ public class TorqueUnitTest extends AbstractLinearUnitTest<TorqueUnit>
                 getMultiplicationFactorTo(TorqueUnit.POUND_FOOT, TorqueUnit.POUND_INCH), 0.0001);
         // Check conversion factor to standard unit for all remaining acceleration units
         checkUnitRatioNameAndAbbreviation(TorqueUnit.POUND_INCH, 0.112984829, 0.000000001, "pound-inch", "lbf.in");
+    }
+
+    /**
+     * Verify that we can create our own Torque unit.
+     */
+    @Test
+    public final void createTorqueUnit()
+    {
+        TorqueUnit myUnit = TorqueUnit.SI.deriveLinear(1.23, "my", "myTorque", UnitSystem.OTHER);
+        assertTrue("Can create a new TorqueUnit", null != myUnit);
+        checkUnitRatioNameAndAbbreviation(myUnit, 1.23, 0.0001, "myTorque", "my");
+        TorqueUnit.BASE.unregister(myUnit);
     }
 
 }

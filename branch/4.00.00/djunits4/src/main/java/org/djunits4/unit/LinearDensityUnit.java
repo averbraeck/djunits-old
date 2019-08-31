@@ -25,7 +25,7 @@ public class LinearDensityUnit extends Unit<LinearDensityUnit>
 
     /** The SI unit for objects per unit of distance is 1/meter. */
     public static final LinearDensityUnit SI = new LinearDensityUnit()
-            .build(new Unit.Builder<LinearDensityUnit>().setBaseUnit(BASE).setId("/m").setName("per meter")
+            .build(new Unit.Builder<LinearDensityUnit>().setUnitBase(BASE).setId("/m").setName("per meter")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** 1/meter. */

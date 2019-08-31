@@ -25,7 +25,7 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
 
     /** The SI unit for electrical resistance is Ohm. */
     public static final ElectricalResistanceUnit SI = new ElectricalResistanceUnit()
-            .build(new Unit.Builder<ElectricalResistanceUnit>().setBaseUnit(BASE).setId("ohm").setName("ohm")
+            .build(new Unit.Builder<ElectricalResistanceUnit>().setUnitBase(BASE).setId("ohm").setName("ohm")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE)
                     .setDefaultDisplayAbbreviation("\u03A9").setDefaultTextualAbbreviation("ohm"));
 
