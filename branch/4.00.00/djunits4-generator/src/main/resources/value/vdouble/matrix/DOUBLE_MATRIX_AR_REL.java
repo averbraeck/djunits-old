@@ -12,12 +12,10 @@ import org.djunits4.value.vdouble.scalar.*;
  * Immutable %TypeRel% Matrix.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
- * version Sep 5, 2015 <br>
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
+ * </p>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class %TypeRel%Matrix extends AbstractDoubleMatrixRel<%TypeRelUnit%, %TypeRel%Matrix, Mutable%TypeRel%Matrix, %TypeRel%>
 {
@@ -27,8 +25,8 @@ public class %TypeRel%Matrix extends AbstractDoubleMatrixRel<%TypeRelUnit%, %Typ
     /**
      * Construct a new Relative Immutable Double %TypeRel%Matrix.
      * @param values double[][]; the values of the entries in the new Relative Immutable Double %TypeRel%Matrix
-     * @param unit U; the unit of the new Relative Immutable Double %TypeRel%Matrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit %TypeRelUnit%; the unit of the new Relative Immutable Double %TypeRel%Matrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public %TypeRel%Matrix(final double[][] values, final %TypeRelUnit% unit, final StorageType storageType) throws ValueException
@@ -38,8 +36,8 @@ public class %TypeRel%Matrix extends AbstractDoubleMatrixRel<%TypeRelUnit%, %Typ
 
     /**
      * Construct a new Relative Immutable Double %TypeRel%Matrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double %TypeRel%Matrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values %TypeRel%[][]; the values of the entries in the new Relative Immutable Double %TypeRel%Matrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public %TypeRel%Matrix(final %TypeRel%[][] values, final StorageType storageType) throws ValueException
@@ -49,8 +47,8 @@ public class %TypeRel%Matrix extends AbstractDoubleMatrixRel<%TypeRelUnit%, %Typ
 
     /**
      * Construct a new Relative Immutable Double %TypeRel%Matrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit %TypeRelUnit%; the unit
      */
     %TypeRel%Matrix(final DoubleMatrixData data, final %TypeRelUnit% unit)
     {

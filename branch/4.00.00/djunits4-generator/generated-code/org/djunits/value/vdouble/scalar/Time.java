@@ -14,7 +14,7 @@ import org.djunits4.unit.*;
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
  * Note that when the offset of a stored absolute Time becomes large, precision of a double might not be enough for the required
  * resolution of a Time. A double has around 16 significant digits (52 bit mantissa). This means that when we need to have a
@@ -25,8 +25,8 @@ import org.djunits4.unit.*;
  * <p>
  * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, Duration>
 {
@@ -38,7 +38,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
 
     /**
      * Construct Time scalar.
-     * @param value double value
+     * @param value double; the double value
      * @param unit unit for the double value
      */
     public Time(final double value, final TimeUnit unit)
@@ -71,7 +71,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
 
     /**
      * Construct %TypeAbsl% scalar.
-     * @param value double value in SI units
+     * @param value double; the double value in SI units
      * @return the new scalar with the SI value
      */
     public static final Time createSI(final double value)
@@ -83,7 +83,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
      * Interpolate between two values.
      * @param zero the low value
      * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static Time interpolate(final Time zero, final Time one, final double ratio)
@@ -159,7 +159,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * necessary, between the value and the unit.
      * @param text String; the textual representation to parse into a Time
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Time valueOf(final String text) throws IllegalArgumentException

@@ -23,7 +23,7 @@ import org.djunits4.unit.TimeUnit;
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
  * Note that when the offset of a stored absolute Time becomes large, precision of a double might not be enough for the required
  * resolution of a Time. A double has around 16 significant digits (52 bit mantissa). This means that when we need to have a
@@ -33,8 +33,8 @@ import org.djunits4.unit.TimeUnit;
  * <p>
  * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, Duration>
 {

@@ -5,21 +5,14 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the Relative %TypeRel% DoubleScalar. Instead of:
- * <pre>DoubleScalar&lt;%TypeRelUnit%&gt; value = new DoubleScalar&lt;%TypeRelUnit%&gt;(100.0, %TypeRelUnit%.SI);</pre>
- * we can now write:
- * <pre>%TypeRel% value = new %TypeRel%(100.0, %TypeRelUnit%.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
- * unit used are compatible.
+ * Easy access methods for the Relative %TypeRel% DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * </p>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
 {
@@ -50,8 +43,8 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
 
     /**
      * Construct %TypeRel% scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit %TypeRelUnit%; unit for the double value
      */
     public %TypeRel%(final double value, final %TypeRelUnit% unit)
     {
@@ -60,7 +53,7 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
 
     /**
      * Construct %TypeRel% scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value %TypeRel%; Scalar from which to construct this instance
      */
     public %TypeRel%(final %TypeRel% value)
     {
@@ -76,9 +69,9 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
 
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value the double value
+     * @param value double; the double value
      * @param unit the unit
-     * @return A a new absolute instance of the DoubleScalar of the right type
+     * @return %TypeAbs%; a new absolute instance of the DoubleScalar of the right type
      */
     public final %TypeAbs% instantiateAbs(final double value, final %TypeAbsUnit% unit)
     {
@@ -87,8 +80,8 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
 
     /**
      * Construct %TypeRel% scalar.
-     * @param value double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return %TypeRel%; the new scalar with the SI value
      */
     public static final %TypeRel% createSI(final double value)
     {
@@ -99,7 +92,7 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
      * Interpolate between two values.
      * @param zero the low value
      * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static %TypeRel% interpolate(final %TypeRel% zero, final %TypeRel% one, final double ratio)
@@ -186,7 +179,7 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * necessary, between the value and the unit.
      * @param text String; the textual representation to parse into a %TypeRel%
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static %TypeRel% valueOf(final String text) throws IllegalArgumentException

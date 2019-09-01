@@ -14,12 +14,12 @@ import org.djunits4.unit.*;
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
  * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 {
@@ -50,7 +50,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct FloatLength scalar.
-     * @param value float value
+     * @param value float; the float value
      * @param unit unit for the float value
      */
     public FloatLength(final float value, final LengthUnit unit)
@@ -69,7 +69,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct FloatLength scalar using a double value.
-     * @param value double value
+     * @param value double; the double value
      * @param unit unit for the resulting float value
      */
     public FloatLength(final double value, final LengthUnit unit)
@@ -86,7 +86,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct FloatLength scalar.
-     * @param value float value in SI units
+     * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatLength createSI(final float value)
@@ -96,7 +96,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the float value
+     * @param value float; the float value
      * @param unit the unit
      * @return A a new absolute instance of the FloatScalar of the right type
      */
@@ -109,7 +109,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
      * Interpolate between two values.
      * @param zero the low value
      * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatLength interpolate(final FloatLength zero, final FloatLength one, final float ratio)
@@ -196,7 +196,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * necessary, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatLength
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatLength valueOf(final String text) throws IllegalArgumentException

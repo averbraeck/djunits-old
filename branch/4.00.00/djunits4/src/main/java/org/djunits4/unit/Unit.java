@@ -24,7 +24,7 @@ import org.djunits4.unit.util.UnitRuntimeException;
  * express a length meter in kilometers, we have to <i>divide</i> by the conversion factor.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  * @param <U> the unit to reference the actual unit in return values
@@ -641,7 +641,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * <p>
      * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
      * <br>
-     * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
+     * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
      * <p>
      * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
      * @param <U> the unit for which the builder contains the information.

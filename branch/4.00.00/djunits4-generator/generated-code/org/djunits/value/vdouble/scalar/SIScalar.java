@@ -13,12 +13,12 @@ import org.djunits4.value.ValueUtil;
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * <p>
  * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
  * initial version Sep 1, 2015 <br>
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 {
@@ -27,7 +27,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Construct SI scalar.
-     * @param value double value
+     * @param value double; the double value
      * @param unit unit for the double value
      */
     public SIScalar(final double value, final SIUnit unit)
@@ -53,7 +53,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Construct SI scalar.
-     * @param value double value in SI units
+     * @param value double; the double value in SI units
      * @param unit the unit to use for the SI scalar
      * @return the new scalar with the SI value
      */
@@ -66,7 +66,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      * Interpolate between two values.
      * @param zero the low value
      * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static SIScalar interpolate(final SIScalar zero, final SIScalar one, final double ratio)

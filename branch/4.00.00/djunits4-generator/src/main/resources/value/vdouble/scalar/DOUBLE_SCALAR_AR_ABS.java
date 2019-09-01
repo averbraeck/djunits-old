@@ -5,22 +5,15 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the Absolute %TypeAbs% DoubleScalar. Instead of:
- * <pre>DoubleScalar.Abs&lt;%TypeAbsUnit%&gt; value = new DoubleScalar.Abs&lt;%TypeAbsUnit%&gt;(100.0, %TypeAbsUnit%.SI);</pre>
- * we can now write:
- * <pre>%TypeAbs% value = new %TypeAbs%(100.0, %TypeAbsUnit%.BASE);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
- * unit used are compatible.
+ * Easy access methods for the Absolute %TypeAbs% DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
 ##TIME##
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ * </p>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%, %TypeRelUnit%, %TypeRel%>
 {
@@ -32,8 +25,8 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Construct %TypeAbs% scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; value
+     * @param unit %TypeAbsUnit%; unit for the double value
      */
     public %TypeAbs%(final double value, final %TypeAbsUnit% unit)
     {
@@ -42,7 +35,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Construct %TypeAbs% scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value %TypeAbs%; Scalar from which to construct this instance
      */
     public %TypeAbs%(final %TypeAbs% value)
     {
@@ -65,8 +58,8 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Construct %TypeAbsl% scalar.
-     * @param value double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; value in SI units
+     * @return %TypeAbs%; the new scalar with the SI value
      */
     public static final %TypeAbs% createSI(final double value)
     {
@@ -75,10 +68,10 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @param zero %TypeAbs%; the low value
+     * @param one%TypeAbs%; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @return %TypeAbs%; a Scalar at the ratio between
      */
     public static %TypeAbs% interpolate(final %TypeAbs% zero, final %TypeAbs% one, final double ratio)
     {
@@ -88,9 +81,9 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @return the maximum value of two absolute scalars
+     * @param a1 %TypeAbs%; the first scalar
+     * @param a2 %TypeAbs%; the second scalar
+     * @return %TypeAbs%; the maximum value of two absolute scalars
      */
     public static %TypeAbs% max(final %TypeAbs% a1, final %TypeAbs% a2)
     {
@@ -99,9 +92,9 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 %TypeAbs%; the first scalar
+     * @param a2 %TypeAbs%; the second scalar
+     * @param an %TypeAbs%[]; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static %TypeAbs% max(final %TypeAbs% a1, final %TypeAbs% a2, final %TypeAbs%... an)
@@ -119,8 +112,8 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 %TypeAbs%; the first scalar
+     * @param a2 %TypeAbs%; the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static %TypeAbs% min(final %TypeAbs% a1, final %TypeAbs% a2)
@@ -130,9 +123,9 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 %TypeAbs%; the first scalar
+     * @param a2 %TypeAbs%; the second scalar
+     * @param an %TypeAbs%[]; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static %TypeAbs% min(final %TypeAbs% a1, final %TypeAbs% a2, final %TypeAbs%... an)
@@ -153,7 +146,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * necessary, between the value and the unit.
      * @param text String; the textual representation to parse into a %TypeAbs%
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static %TypeAbs% valueOf(final String text) throws IllegalArgumentException

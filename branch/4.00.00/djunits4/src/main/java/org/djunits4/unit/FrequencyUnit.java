@@ -9,11 +9,11 @@ import org.djunits4.unit.unitsystem.UnitSystem;
  * Standard frequency unit based on time.
  * <p>
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2019-08-12 00:52:51 +0200 (Mon, 12 Aug 2019) $, @version $Revision: 412 $, by $Author: averbraeck $,
  * initial version May 15, 2014 <br>
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class FrequencyUnit extends Unit<FrequencyUnit>
 {

@@ -5,21 +5,14 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the %Type% FloatScalar. Instead of:
- * <pre>FloatScalar.Rel&lt;%TypeRelUnit%&gt; value = new FloatScalar.Rel&lt;%TypeRelUnit%&gt;(100.0, %TypeRelUnit%.SI);</pre>
- * we can now write:
- * <pre>Float%TypeRel% value = new Float%TypeRel%(100.0, %TypeRelUnit%.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
- * unit used are compatible.
+ * Easy access methods for the Float%TypeRel% FloatScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * </p>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%TypeRel%>
 {
@@ -50,8 +43,8 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Construct Float%TypeRel% scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; the float value
+     * @param unit %TypeRelUnit%; unit for the float value
      */
     public Float%TypeRel%(final float value, final %TypeRelUnit% unit)
     {
@@ -69,8 +62,8 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Construct Float%TypeRel% scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; the double value
+     * @param unit %TypeRelUnit%; unit for the resulting float value
      */
     public Float%TypeRel%(final double value, final %TypeRelUnit% unit)
     {
@@ -86,8 +79,8 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Construct Float%TypeRel% scalar.
-     * @param value float value in SI units
-     * @return the new scalar with the SI value
+     * @param value float; the float value in SI units
+     * @return Float%TypeRel%; the new scalar with the SI value
      */
     public static final Float%TypeRel% createSI(final float value)
     {
@@ -96,9 +89,9 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the float value
-     * @param unit the unit
-     * @return A a new absolute instance of the FloatScalar of the right type
+     * @param value float; the float value
+     * @param unit %TypeAbsUnit%; the unit
+     * @return Float%TypeAbs%; a new absolute instance of the FloatScalar of the right type
      */
     public final Float%TypeAbs% instantiateAbs(final float value, final %TypeAbsUnit% unit)
     {
@@ -107,10 +100,10 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @param zero Float%TypeRel%; the low value
+     * @param one Float%TypeRel%; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @return Float%TypeRel%; a Scalar at the ratio between
      */
     public static Float%TypeRel% interpolate(final Float%TypeRel% zero, final Float%TypeRel% one, final float ratio)
     {
@@ -120,8 +113,8 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
     
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
+     * @param v Float%TypeAbs%; ; the value to add
+     * @return Float%TypeAbs%; sum of this value and v as a new object
      */
     public final Float%TypeAbs% plus(final Float%TypeAbs% v)
     {
@@ -131,9 +124,9 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 Float%TypeRel%; the first scalar
+     * @param Float%TypeRel%; r2 the second scalar
+     * @return Float%TypeRel%; the maximum value of two relative scalars
      */
     public static Float%TypeRel% max(final Float%TypeRel% r1, final Float%TypeRel% r2)
     {
@@ -142,10 +135,10 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 Float%TypeRel%; the first scalar
+     * @param r2 Float%TypeRel%; the second scalar
+     * @param rn Float%TypeRel%...; the other scalars
+     * @return Float%TypeRel%; the maximum value of more than two relative scalars
      */
     public static Float%TypeRel% max(final Float%TypeRel% r1, final Float%TypeRel% r2, final Float%TypeRel%... rn)
     {
@@ -162,9 +155,9 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 Float%TypeRel%; the first scalar
+     * @param r2 Float%TypeRel%; the second scalar
+     * @return Float%TypeRel%; the minimum value of two relative scalars
      */
     public static Float%TypeRel% min(final Float%TypeRel% r1, final Float%TypeRel% r2)
     {
@@ -173,10 +166,10 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 Float%TypeRel%; the first scalar
+     * @param r2 Float%TypeRel%; the second scalar
+     * @param rn Float%TypeRel%...; the other scalars
+     * @return Float%TypeRel%; the minimum value of more than two relative scalars
      */
     public static Float%TypeRel% min(final Float%TypeRel% r1, final Float%TypeRel% r2, final Float%TypeRel%... rn)
     {
@@ -196,7 +189,7 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * necessary, between the value and the unit.
      * @param text String; the textual representation to parse into a Float%TypeRel%
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return Float%TypeRel%; the Scalar value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Float%TypeRel% valueOf(final String text) throws IllegalArgumentException

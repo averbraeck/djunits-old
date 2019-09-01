@@ -3,7 +3,7 @@ package org.djunits4.value.vdouble.scalar;
 /**
  * Various physical constants.
  * <p>
- * @author <a href="https://www.tudelft.nl/p.knoppers">Peter Knoppers</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers">Peter Knoppers</a>
  */
 public class Constants
 {

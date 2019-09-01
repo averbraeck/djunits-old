@@ -12,12 +12,10 @@ import org.djunits4.value.vdouble.scalar.*;
  * Immutable Double %Type%Vector, a vector of values with a %Type%Unit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Oct 9, 2015 <br>
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class %Type%Vector extends
     AbstractDoubleVectorRel<%Type%Unit, %Type%Vector, Mutable%Type%Vector, %Type%>
@@ -29,7 +27,7 @@ public class %Type%Vector extends
      * Construct a new Relative Immutable Double %Type%Vector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double %Type%Vector
      * @param unit U; the unit of the new Relative Immutable Double %Type%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public %Type%Vector(final double[] values, final %Type%Unit unit, final StorageType storageType)
@@ -42,7 +40,7 @@ public class %Type%Vector extends
      * Construct a new Relative Immutable Double %Type%Vector.
      * @param values List; the values of the entries in the new Relative Immutable Double %Type%Vector
      * @param unit U; the unit of the new Relative Immutable Double %Type%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public %Type%Vector(final List<Double> values, final %Type%Unit unit, final StorageType storageType)
@@ -55,7 +53,7 @@ public class %Type%Vector extends
      * Construct a new Relative Immutable Double %Type%Vector.
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
      *            %Type%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public %Type%Vector(final %Type%[] values, final StorageType storageType) throws ValueException
@@ -66,7 +64,7 @@ public class %Type%Vector extends
     /**
      * Construct a new Relative Immutable Double %Type%Vector.
      * @param values List; the values of the entries in the new Relative Immutable Double %Type%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public %Type%Vector(final List<%Type%> values, final StorageType storageType) throws ValueException
@@ -79,7 +77,7 @@ public class %Type%Vector extends
      * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            %Type%Vector
      * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public %Type%Vector(final SortedMap<Integer, %Type%> values, final int length, final StorageType storageType)
@@ -93,7 +91,7 @@ public class %Type%Vector extends
      * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double %Type%Vector
      * @param unit U; the unit of the new Relative Sparse Mutable Double %Type%Vector
      * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public %Type%Vector(final SortedMap<Integer, Double> values, final %Type%Unit unit, final int length,
