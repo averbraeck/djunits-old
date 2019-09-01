@@ -5,26 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.CatalyticActivityUnit;
 
 /**
- * Easy access methods for the CatalyticActivity DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;CatalyticActivityUnit&gt; value = new DoubleScalar.Rel&lt;CatalyticActivityUnit&gt;(100.0, CatalyticActivityUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * CatalyticActivity value = new CatalyticActivity(100.0, CatalyticActivityUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the CatalyticActivity DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -59,7 +44,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Construct CatalyticActivity scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit CatalyticActivityUnit; unit for the double value
      */
     public CatalyticActivity(final double value, final CatalyticActivityUnit unit)
@@ -85,8 +70,8 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Construct CatalyticActivity scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return CatalyticActivity; the new scalar with the SI value
      */
     public static final CatalyticActivity createSI(final double value)
     {
@@ -98,7 +83,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
      * @param zero CatalyticActivity; the low value
      * @param one CatalyticActivity; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return CatalyticActivity; a Scalar at the ratio between
      */
     public static CatalyticActivity interpolate(final CatalyticActivity zero, final CatalyticActivity one, final double ratio)
     {
@@ -109,7 +94,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
      * Return the maximum value of two relative scalars.
      * @param r1 CatalyticActivity; the first scalar
      * @param r2 CatalyticActivity; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return CatalyticActivity; the maximum value of two relative scalars
      */
     public static CatalyticActivity max(final CatalyticActivity r1, final CatalyticActivity r2)
     {
@@ -121,7 +106,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
      * @param r1 CatalyticActivity; the first scalar
      * @param r2 CatalyticActivity; the second scalar
      * @param rn CatalyticActivity...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return CatalyticActivity; the maximum value of more than two relative scalars
      */
     public static CatalyticActivity max(final CatalyticActivity r1, final CatalyticActivity r2, final CatalyticActivity... rn)
     {
@@ -140,7 +125,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
      * Return the minimum value of two relative scalars.
      * @param r1 CatalyticActivity; the first scalar
      * @param r2 CatalyticActivity; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return CatalyticActivity; the minimum value of two relative scalars
      */
     public static CatalyticActivity min(final CatalyticActivity r1, final CatalyticActivity r2)
     {
@@ -152,7 +137,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
      * @param r1 CatalyticActivity; the first scalar
      * @param r2 CatalyticActivity; the second scalar
      * @param rn CatalyticActivity...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return CatalyticActivity; the minimum value of more than two relative scalars
      */
     public static CatalyticActivity min(final CatalyticActivity r1, final CatalyticActivity r2, final CatalyticActivity... rn)
     {
@@ -170,9 +155,9 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
     /**
      * Returns a CatalyticActivity representation of a textual representation of a value with a unit. The String representation
      * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
-     * allowed, but not necessary, between the value and the unit.
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a CatalyticActivity
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return CatalyticActivity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static CatalyticActivity valueOf(final String text) throws IllegalArgumentException

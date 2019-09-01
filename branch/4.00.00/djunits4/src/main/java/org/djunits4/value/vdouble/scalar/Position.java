@@ -6,27 +6,12 @@ import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 
 /**
- * Easy access methods for the Absolute Position DoubleScalar. Instead of:
- * 
- * <pre>
- * DoubleScalar.Abs&lt;PositionUnit&gt; value = new DoubleScalar.Abs&lt;PositionUnit&gt;(100.0, PositionUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * Position value = new Position(100.0, PositionUnit.BASE);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Absolute Position DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -40,7 +25,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
 
     /**
      * Construct Position scalar.
-     * @param value double; double value
+     * @param value double; value
      * @param unit PositionUnit; unit for the double value
      */
     public Position(final double value, final PositionUnit unit)
@@ -72,9 +57,9 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
     }
 
     /**
-     * Construct %TypeAbsl% scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * Construct Position scalar.
+     * @param value double; value in SI units
+     * @return Position; the new scalar with the SI value
      */
     public static final Position createSI(final double value)
     {
@@ -86,7 +71,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
      * @param zero Position; the low value
      * @param one Position; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Position; a Scalar at the ratio between
      */
     public static Position interpolate(final Position zero, final Position one, final double ratio)
     {
@@ -97,7 +82,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
      * Return the maximum value of two absolute scalars.
      * @param a1 Position; the first scalar
      * @param a2 Position; the second scalar
-     * @return the maximum value of two absolute scalars
+     * @return Position; the maximum value of two absolute scalars
      */
     public static Position max(final Position a1, final Position a2)
     {
@@ -158,9 +143,9 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
     /**
      * Returns a Position representation of a textual representation of a value with a unit. The String representation that can
      * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Position
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Position valueOf(final String text) throws IllegalArgumentException

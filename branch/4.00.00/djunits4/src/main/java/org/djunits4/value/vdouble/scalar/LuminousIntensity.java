@@ -5,26 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.LuminousIntensityUnit;
 
 /**
- * Easy access methods for the LuminousIntensity DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;LuminousIntensityUnit&gt; value = new DoubleScalar.Rel&lt;LuminousIntensityUnit&gt;(100.0, LuminousIntensityUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * LuminousIntensity value = new LuminousIntensity(100.0, LuminousIntensityUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the LuminousIntensity DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -59,7 +44,7 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Construct LuminousIntensity scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit LuminousIntensityUnit; unit for the double value
      */
     public LuminousIntensity(final double value, final LuminousIntensityUnit unit)
@@ -85,8 +70,8 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Construct LuminousIntensity scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return LuminousIntensity; the new scalar with the SI value
      */
     public static final LuminousIntensity createSI(final double value)
     {
@@ -98,7 +83,7 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
      * @param zero LuminousIntensity; the low value
      * @param one LuminousIntensity; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return LuminousIntensity; a Scalar at the ratio between
      */
     public static LuminousIntensity interpolate(final LuminousIntensity zero, final LuminousIntensity one, final double ratio)
     {
@@ -109,7 +94,7 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
      * Return the maximum value of two relative scalars.
      * @param r1 LuminousIntensity; the first scalar
      * @param r2 LuminousIntensity; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return LuminousIntensity; the maximum value of two relative scalars
      */
     public static LuminousIntensity max(final LuminousIntensity r1, final LuminousIntensity r2)
     {
@@ -121,7 +106,7 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
      * @param r1 LuminousIntensity; the first scalar
      * @param r2 LuminousIntensity; the second scalar
      * @param rn LuminousIntensity...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return LuminousIntensity; the maximum value of more than two relative scalars
      */
     public static LuminousIntensity max(final LuminousIntensity r1, final LuminousIntensity r2, final LuminousIntensity... rn)
     {
@@ -140,7 +125,7 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
      * Return the minimum value of two relative scalars.
      * @param r1 LuminousIntensity; the first scalar
      * @param r2 LuminousIntensity; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return LuminousIntensity; the minimum value of two relative scalars
      */
     public static LuminousIntensity min(final LuminousIntensity r1, final LuminousIntensity r2)
     {
@@ -152,7 +137,7 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
      * @param r1 LuminousIntensity; the first scalar
      * @param r2 LuminousIntensity; the second scalar
      * @param rn LuminousIntensity...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return LuminousIntensity; the minimum value of more than two relative scalars
      */
     public static LuminousIntensity min(final LuminousIntensity r1, final LuminousIntensity r2, final LuminousIntensity... rn)
     {
@@ -170,9 +155,9 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
     /**
      * Returns a LuminousIntensity representation of a textual representation of a value with a unit. The String representation
      * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
-     * allowed, but not necessary, between the value and the unit.
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a LuminousIntensity
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return LuminousIntensity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static LuminousIntensity valueOf(final String text) throws IllegalArgumentException

@@ -53,9 +53,7 @@ import org.djunits4.value.ValueUtil;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -66,7 +64,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Construct SI scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit SIUnit; unit for the double value
      */
     public SIScalar(final double value, final SIUnit unit)
@@ -92,9 +90,9 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Construct SI scalar.
-     * @param value double; double value in SI units
+     * @param value double; the double value in SI units
      * @param unit SIUnit; the unit to use for the SI scalar
-     * @return the new scalar with the SI value
+     * @return SIScalar; the new scalar with the SI value
      */
     public static final SIScalar createSI(final double value, final SIUnit unit)
     {
@@ -106,7 +104,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      * @param zero SIScalar; the low value
      * @param one SIScalar; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return SIScalar; a Scalar at the ratio between
      */
     public static SIScalar interpolate(final SIScalar zero, final SIScalar one, final double ratio)
     {
@@ -117,7 +115,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      * Return the maximum value of two relative scalars.
      * @param r1 SIScalar; the first scalar
      * @param r2 SIScalar; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return SIScalar; the maximum value of two relative scalars
      */
     public static SIScalar max(final SIScalar r1, final SIScalar r2)
     {
@@ -129,7 +127,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      * @param r1 SIScalar; the first scalar
      * @param r2 SIScalar; the second scalar
      * @param rn SIScalar...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return SIScalar; the maximum value of more than two relative scalars
      */
     public static SIScalar max(final SIScalar r1, final SIScalar r2, final SIScalar... rn)
     {
@@ -148,7 +146,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      * Return the minimum value of two relative scalars.
      * @param r1 SIScalar; the first scalar
      * @param r2 SIScalar; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return SIScalar; the minimum value of two relative scalars
      */
     public static SIScalar min(final SIScalar r1, final SIScalar r2)
     {
@@ -160,7 +158,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      * @param r1 SIScalar; the first scalar
      * @param r2 SIScalar; the second scalar
      * @param rn SIScalar...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return SIScalar; the minimum value of more than two relative scalars
      */
     public static SIScalar min(final SIScalar r1, final SIScalar r2, final SIScalar... rn)
     {
@@ -219,7 +217,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Return the current scalar transformed to a scalar in the given class type. Of course the SI dimensionality has to match,
      * otherwise the scalar cannot be transformed.
-     * @param returnClass Class&lt;K&gt;; the class of the
+     * @param returnClass Class&lt;K&gt;; the class of the scalar to be constructed
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     @SuppressWarnings("unchecked")
@@ -243,7 +241,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Return the current scalar transformed to a scalar in the given class type. Of course the SI dimensionality has to match,
      * otherwise the scalar cannot be transformed.
-     * @param returnClass Class&lt;K&gt;; the class of the
+     * @param returnClass Class&lt;K&gt;; the class of the scalar to be constructed
      * @param displayUnit KU; the unit in which the value will be displayed
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
@@ -279,7 +277,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a absorbeddose, and provide a display unit.
-     * @param displayUnit AbsorbedDoseUnit; the unit in which the value will be displayed
+ * @param displayUnit AbsorbedDoseUnit; the unit in which the value will be displayed
      * @return AbsorbedDose; the current scalar as a absorbeddose
      */
     public final AbsorbedDose asAbsorbedDose(final AbsorbedDoseUnit displayUnit)
@@ -302,7 +300,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a acceleration, and provide a display unit.
-     * @param displayUnit AccelerationUnit; the unit in which the value will be displayed
+ * @param displayUnit AccelerationUnit; the unit in which the value will be displayed
      * @return Acceleration; the current scalar as a acceleration
      */
     public final Acceleration asAcceleration(final AccelerationUnit displayUnit)
@@ -325,7 +323,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a amountofsubstance, and provide a display unit.
-     * @param displayUnit AmountOfSubstanceUnit; the unit in which the value will be displayed
+ * @param displayUnit AmountOfSubstanceUnit; the unit in which the value will be displayed
      * @return AmountOfSubstance; the current scalar as a amountofsubstance
      */
     public final AmountOfSubstance asAmountOfSubstance(final AmountOfSubstanceUnit displayUnit)
@@ -348,7 +346,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a anglesolid, and provide a display unit.
-     * @param displayUnit AngleSolidUnit; the unit in which the value will be displayed
+ * @param displayUnit AngleSolidUnit; the unit in which the value will be displayed
      * @return AngleSolid; the current scalar as a anglesolid
      */
     public final AngleSolid asAngleSolid(final AngleSolidUnit displayUnit)
@@ -371,7 +369,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a area, and provide a display unit.
-     * @param displayUnit AreaUnit; the unit in which the value will be displayed
+ * @param displayUnit AreaUnit; the unit in which the value will be displayed
      * @return Area; the current scalar as a area
      */
     public final Area asArea(final AreaUnit displayUnit)
@@ -394,7 +392,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a catalyticactivity, and provide a display unit.
-     * @param displayUnit CatalyticActivityUnit; the unit in which the value will be displayed
+ * @param displayUnit CatalyticActivityUnit; the unit in which the value will be displayed
      * @return CatalyticActivity; the current scalar as a catalyticactivity
      */
     public final CatalyticActivity asCatalyticActivity(final CatalyticActivityUnit displayUnit)
@@ -417,7 +415,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a density, and provide a display unit.
-     * @param displayUnit DensityUnit; the unit in which the value will be displayed
+ * @param displayUnit DensityUnit; the unit in which the value will be displayed
      * @return Density; the current scalar as a density
      */
     public final Density asDensity(final DensityUnit displayUnit)
@@ -440,7 +438,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a dimensionless, and provide a display unit.
-     * @param displayUnit DimensionlessUnit; the unit in which the value will be displayed
+ * @param displayUnit DimensionlessUnit; the unit in which the value will be displayed
      * @return Dimensionless; the current scalar as a dimensionless
      */
     public final Dimensionless asDimensionless(final DimensionlessUnit displayUnit)
@@ -463,7 +461,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a electricalcapacitance, and provide a display unit.
-     * @param displayUnit ElectricalCapacitanceUnit; the unit in which the value will be displayed
+ * @param displayUnit ElectricalCapacitanceUnit; the unit in which the value will be displayed
      * @return ElectricalCapacitance; the current scalar as a electricalcapacitance
      */
     public final ElectricalCapacitance asElectricalCapacitance(final ElectricalCapacitanceUnit displayUnit)
@@ -486,7 +484,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a electricalcharge, and provide a display unit.
-     * @param displayUnit ElectricalChargeUnit; the unit in which the value will be displayed
+ * @param displayUnit ElectricalChargeUnit; the unit in which the value will be displayed
      * @return ElectricalCharge; the current scalar as a electricalcharge
      */
     public final ElectricalCharge asElectricalCharge(final ElectricalChargeUnit displayUnit)
@@ -509,7 +507,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a electricalconductance, and provide a display unit.
-     * @param displayUnit ElectricalConductanceUnit; the unit in which the value will be displayed
+ * @param displayUnit ElectricalConductanceUnit; the unit in which the value will be displayed
      * @return ElectricalConductance; the current scalar as a electricalconductance
      */
     public final ElectricalConductance asElectricalConductance(final ElectricalConductanceUnit displayUnit)
@@ -532,7 +530,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a electricalcurrent, and provide a display unit.
-     * @param displayUnit ElectricalCurrentUnit; the unit in which the value will be displayed
+ * @param displayUnit ElectricalCurrentUnit; the unit in which the value will be displayed
      * @return ElectricalCurrent; the current scalar as a electricalcurrent
      */
     public final ElectricalCurrent asElectricalCurrent(final ElectricalCurrentUnit displayUnit)
@@ -555,7 +553,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a electricalinductance, and provide a display unit.
-     * @param displayUnit ElectricalInductanceUnit; the unit in which the value will be displayed
+ * @param displayUnit ElectricalInductanceUnit; the unit in which the value will be displayed
      * @return ElectricalInductance; the current scalar as a electricalinductance
      */
     public final ElectricalInductance asElectricalInductance(final ElectricalInductanceUnit displayUnit)
@@ -578,7 +576,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a electricalpotential, and provide a display unit.
-     * @param displayUnit ElectricalPotentialUnit; the unit in which the value will be displayed
+ * @param displayUnit ElectricalPotentialUnit; the unit in which the value will be displayed
      * @return ElectricalPotential; the current scalar as a electricalpotential
      */
     public final ElectricalPotential asElectricalPotential(final ElectricalPotentialUnit displayUnit)
@@ -601,7 +599,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a electricalresistance, and provide a display unit.
-     * @param displayUnit ElectricalResistanceUnit; the unit in which the value will be displayed
+ * @param displayUnit ElectricalResistanceUnit; the unit in which the value will be displayed
      * @return ElectricalResistance; the current scalar as a electricalresistance
      */
     public final ElectricalResistance asElectricalResistance(final ElectricalResistanceUnit displayUnit)
@@ -624,7 +622,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a energy, and provide a display unit.
-     * @param displayUnit EnergyUnit; the unit in which the value will be displayed
+ * @param displayUnit EnergyUnit; the unit in which the value will be displayed
      * @return Energy; the current scalar as a energy
      */
     public final Energy asEnergy(final EnergyUnit displayUnit)
@@ -647,7 +645,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a equivalentdose, and provide a display unit.
-     * @param displayUnit EquivalentDoseUnit; the unit in which the value will be displayed
+ * @param displayUnit EquivalentDoseUnit; the unit in which the value will be displayed
      * @return EquivalentDose; the current scalar as a equivalentdose
      */
     public final EquivalentDose asEquivalentDose(final EquivalentDoseUnit displayUnit)
@@ -670,7 +668,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a flowmass, and provide a display unit.
-     * @param displayUnit FlowMassUnit; the unit in which the value will be displayed
+ * @param displayUnit FlowMassUnit; the unit in which the value will be displayed
      * @return FlowMass; the current scalar as a flowmass
      */
     public final FlowMass asFlowMass(final FlowMassUnit displayUnit)
@@ -693,7 +691,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a flowvolume, and provide a display unit.
-     * @param displayUnit FlowVolumeUnit; the unit in which the value will be displayed
+ * @param displayUnit FlowVolumeUnit; the unit in which the value will be displayed
      * @return FlowVolume; the current scalar as a flowvolume
      */
     public final FlowVolume asFlowVolume(final FlowVolumeUnit displayUnit)
@@ -716,7 +714,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a force, and provide a display unit.
-     * @param displayUnit ForceUnit; the unit in which the value will be displayed
+ * @param displayUnit ForceUnit; the unit in which the value will be displayed
      * @return Force; the current scalar as a force
      */
     public final Force asForce(final ForceUnit displayUnit)
@@ -739,7 +737,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a frequency, and provide a display unit.
-     * @param displayUnit FrequencyUnit; the unit in which the value will be displayed
+ * @param displayUnit FrequencyUnit; the unit in which the value will be displayed
      * @return Frequency; the current scalar as a frequency
      */
     public final Frequency asFrequency(final FrequencyUnit displayUnit)
@@ -762,7 +760,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a illuminance, and provide a display unit.
-     * @param displayUnit IlluminanceUnit; the unit in which the value will be displayed
+ * @param displayUnit IlluminanceUnit; the unit in which the value will be displayed
      * @return Illuminance; the current scalar as a illuminance
      */
     public final Illuminance asIlluminance(final IlluminanceUnit displayUnit)
@@ -785,7 +783,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a lineardensity, and provide a display unit.
-     * @param displayUnit LinearDensityUnit; the unit in which the value will be displayed
+ * @param displayUnit LinearDensityUnit; the unit in which the value will be displayed
      * @return LinearDensity; the current scalar as a lineardensity
      */
     public final LinearDensity asLinearDensity(final LinearDensityUnit displayUnit)
@@ -808,7 +806,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a luminousflux, and provide a display unit.
-     * @param displayUnit LuminousFluxUnit; the unit in which the value will be displayed
+ * @param displayUnit LuminousFluxUnit; the unit in which the value will be displayed
      * @return LuminousFlux; the current scalar as a luminousflux
      */
     public final LuminousFlux asLuminousFlux(final LuminousFluxUnit displayUnit)
@@ -831,7 +829,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a luminousintensity, and provide a display unit.
-     * @param displayUnit LuminousIntensityUnit; the unit in which the value will be displayed
+ * @param displayUnit LuminousIntensityUnit; the unit in which the value will be displayed
      * @return LuminousIntensity; the current scalar as a luminousintensity
      */
     public final LuminousIntensity asLuminousIntensity(final LuminousIntensityUnit displayUnit)
@@ -854,7 +852,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a magneticfluxdensity, and provide a display unit.
-     * @param displayUnit MagneticFluxDensityUnit; the unit in which the value will be displayed
+ * @param displayUnit MagneticFluxDensityUnit; the unit in which the value will be displayed
      * @return MagneticFluxDensity; the current scalar as a magneticfluxdensity
      */
     public final MagneticFluxDensity asMagneticFluxDensity(final MagneticFluxDensityUnit displayUnit)
@@ -877,7 +875,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a magneticflux, and provide a display unit.
-     * @param displayUnit MagneticFluxUnit; the unit in which the value will be displayed
+ * @param displayUnit MagneticFluxUnit; the unit in which the value will be displayed
      * @return MagneticFlux; the current scalar as a magneticflux
      */
     public final MagneticFlux asMagneticFlux(final MagneticFluxUnit displayUnit)
@@ -900,7 +898,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a mass, and provide a display unit.
-     * @param displayUnit MassUnit; the unit in which the value will be displayed
+ * @param displayUnit MassUnit; the unit in which the value will be displayed
      * @return Mass; the current scalar as a mass
      */
     public final Mass asMass(final MassUnit displayUnit)
@@ -923,7 +921,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a power, and provide a display unit.
-     * @param displayUnit PowerUnit; the unit in which the value will be displayed
+ * @param displayUnit PowerUnit; the unit in which the value will be displayed
      * @return Power; the current scalar as a power
      */
     public final Power asPower(final PowerUnit displayUnit)
@@ -946,7 +944,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a pressure, and provide a display unit.
-     * @param displayUnit PressureUnit; the unit in which the value will be displayed
+ * @param displayUnit PressureUnit; the unit in which the value will be displayed
      * @return Pressure; the current scalar as a pressure
      */
     public final Pressure asPressure(final PressureUnit displayUnit)
@@ -969,7 +967,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a radioactivity, and provide a display unit.
-     * @param displayUnit RadioActivityUnit; the unit in which the value will be displayed
+ * @param displayUnit RadioActivityUnit; the unit in which the value will be displayed
      * @return RadioActivity; the current scalar as a radioactivity
      */
     public final RadioActivity asRadioActivity(final RadioActivityUnit displayUnit)
@@ -992,7 +990,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a speed, and provide a display unit.
-     * @param displayUnit SpeedUnit; the unit in which the value will be displayed
+ * @param displayUnit SpeedUnit; the unit in which the value will be displayed
      * @return Speed; the current scalar as a speed
      */
     public final Speed asSpeed(final SpeedUnit displayUnit)
@@ -1015,7 +1013,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a torque, and provide a display unit.
-     * @param displayUnit TorqueUnit; the unit in which the value will be displayed
+ * @param displayUnit TorqueUnit; the unit in which the value will be displayed
      * @return Torque; the current scalar as a torque
      */
     public final Torque asTorque(final TorqueUnit displayUnit)
@@ -1038,7 +1036,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a volume, and provide a display unit.
-     * @param displayUnit VolumeUnit; the unit in which the value will be displayed
+ * @param displayUnit VolumeUnit; the unit in which the value will be displayed
      * @return Volume; the current scalar as a volume
      */
     public final Volume asVolume(final VolumeUnit displayUnit)
@@ -1061,7 +1059,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a angle, and provide a display unit.
-     * @param displayUnit AngleUnit; the unit in which the value will be displayed
+ * @param displayUnit AngleUnit; the unit in which the value will be displayed
      * @return Angle; the current scalar as a angle
      */
     public final Angle asAngle(final AngleUnit displayUnit)
@@ -1084,7 +1082,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a length, and provide a display unit.
-     * @param displayUnit LengthUnit; the unit in which the value will be displayed
+ * @param displayUnit LengthUnit; the unit in which the value will be displayed
      * @return Length; the current scalar as a length
      */
     public final Length asLength(final LengthUnit displayUnit)
@@ -1107,7 +1105,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a temperature, and provide a display unit.
-     * @param displayUnit TemperatureUnit; the unit in which the value will be displayed
+ * @param displayUnit TemperatureUnit; the unit in which the value will be displayed
      * @return Temperature; the current scalar as a temperature
      */
     public final Temperature asTemperature(final TemperatureUnit displayUnit)
@@ -1130,7 +1128,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the current scalar as a duration, and provide a display unit.
-     * @param displayUnit DurationUnit; the unit in which the value will be displayed
+ * @param displayUnit DurationUnit; the unit in which the value will be displayed
      * @return Duration; the current scalar as a duration
      */
     public final Duration asDuration(final DurationUnit displayUnit)

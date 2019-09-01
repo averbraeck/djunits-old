@@ -11,26 +11,11 @@ import org.djunits4.unit.LinearDensityUnit;
 import org.djunits4.unit.VolumeUnit;
 
 /**
- * Easy access methods for the Area DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;AreaUnit&gt; value = new DoubleScalar.Rel&lt;AreaUnit&gt;(100.0, AreaUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * Area value = new Area(100.0, AreaUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Area DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -63,7 +48,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Construct Area scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit AreaUnit; unit for the double value
      */
     public Area(final double value, final AreaUnit unit)
@@ -89,8 +74,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Construct Area scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return Area; the new scalar with the SI value
      */
     public static final Area createSI(final double value)
     {
@@ -102,7 +87,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param zero Area; the low value
      * @param one Area; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Area; a Scalar at the ratio between
      */
     public static Area interpolate(final Area zero, final Area one, final double ratio)
     {
@@ -113,7 +98,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * Return the maximum value of two relative scalars.
      * @param r1 Area; the first scalar
      * @param r2 Area; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return Area; the maximum value of two relative scalars
      */
     public static Area max(final Area r1, final Area r2)
     {
@@ -125,7 +110,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param r1 Area; the first scalar
      * @param r2 Area; the second scalar
      * @param rn Area...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return Area; the maximum value of more than two relative scalars
      */
     public static Area max(final Area r1, final Area r2, final Area... rn)
     {
@@ -144,7 +129,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * Return the minimum value of two relative scalars.
      * @param r1 Area; the first scalar
      * @param r2 Area; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return Area; the minimum value of two relative scalars
      */
     public static Area min(final Area r1, final Area r2)
     {
@@ -156,7 +141,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param r1 Area; the first scalar
      * @param r2 Area; the second scalar
      * @param rn Area...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return Area; the minimum value of more than two relative scalars
      */
     public static Area min(final Area r1, final Area r2, final Area... rn)
     {
@@ -174,9 +159,9 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
     /**
      * Returns a Area representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Area
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return Area; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Area valueOf(final String text) throws IllegalArgumentException
@@ -212,7 +197,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and Area, which results in a Dimensionless scalar.
-     * @param v Area; Area scalar
+ * @param v Area; Area scalar
      * @return Dimensionless scalar as a division of Area and Area
      */
     public final Dimensionless divideBy(final Area v)
@@ -222,7 +207,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Length, which results in a Volume scalar.
-     * @param v Length; Area scalar
+ * @param v Length; Area scalar
      * @return Volume scalar as a multiplication of Area and Length
      */
     public final Volume multiplyBy(final Length v)
@@ -232,7 +217,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and LinearDensity, which results in a Volume scalar.
-     * @param v LinearDensity; Area scalar
+ * @param v LinearDensity; Area scalar
      * @return Volume scalar as a division of Area and LinearDensity
      */
     public final Volume divideBy(final LinearDensity v)
@@ -242,7 +227,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and Volume, which results in a LinearDensity scalar.
-     * @param v Volume; Area scalar
+ * @param v Volume; Area scalar
      * @return LinearDensity scalar as a division of Area and Volume
      */
     public final LinearDensity divideBy(final Volume v)
@@ -252,7 +237,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and Length, which results in a Length scalar.
-     * @param v Length; Area scalar
+ * @param v Length; Area scalar
      * @return Length scalar as a division of Area and Length
      */
     public final Length divideBy(final Length v)
@@ -262,7 +247,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and LinearDensity, which results in a Length scalar.
-     * @param v LinearDensity; Area scalar
+ * @param v LinearDensity; Area scalar
      * @return Length scalar as a multiplication of Area and LinearDensity
      */
     public final Length multiplyBy(final LinearDensity v)
@@ -272,7 +257,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Speed, which results in a FlowVolume scalar.
-     * @param v Speed; Area scalar
+ * @param v Speed; Area scalar
      * @return FlowVolume scalar as a multiplication of Area and Speed
      */
     public final FlowVolume multiplyBy(final Speed v)
@@ -282,7 +267,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Pressure, which results in a Force scalar.
-     * @param v Pressure; Area scalar
+ * @param v Pressure; Area scalar
      * @return Force scalar as a multiplication of Area and Pressure
      */
     public final Force multiplyBy(final Pressure v)

@@ -6,28 +6,12 @@ import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.TemperatureUnit;
 
 /**
- * Easy access methods for the Absolute AbsoluteTemperature DoubleScalar. Instead of:
- * 
- * <pre>
- * DoubleScalar.Abs&lt;AbsoluteTemperatureUnit&gt; value =
- *         new DoubleScalar.Abs&lt;AbsoluteTemperatureUnit&gt;(100.0, AbsoluteTemperatureUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * AbsoluteTemperature value = new AbsoluteTemperature(100.0, AbsoluteTemperatureUnit.BASE);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Absolute AbsoluteTemperature DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -42,7 +26,7 @@ public class AbsoluteTemperature
 
     /**
      * Construct AbsoluteTemperature scalar.
-     * @param value double; double value
+     * @param value double; value
      * @param unit AbsoluteTemperatureUnit; unit for the double value
      */
     public AbsoluteTemperature(final double value, final AbsoluteTemperatureUnit unit)
@@ -74,9 +58,9 @@ public class AbsoluteTemperature
     }
 
     /**
-     * Construct %TypeAbsl% scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * Construct AbsoluteTemperature scalar.
+     * @param value double; value in SI units
+     * @return AbsoluteTemperature; the new scalar with the SI value
      */
     public static final AbsoluteTemperature createSI(final double value)
     {
@@ -88,7 +72,7 @@ public class AbsoluteTemperature
      * @param zero AbsoluteTemperature; the low value
      * @param one AbsoluteTemperature; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return AbsoluteTemperature; a Scalar at the ratio between
      */
     public static AbsoluteTemperature interpolate(final AbsoluteTemperature zero, final AbsoluteTemperature one,
             final double ratio)
@@ -100,7 +84,7 @@ public class AbsoluteTemperature
      * Return the maximum value of two absolute scalars.
      * @param a1 AbsoluteTemperature; the first scalar
      * @param a2 AbsoluteTemperature; the second scalar
-     * @return the maximum value of two absolute scalars
+     * @return AbsoluteTemperature; the maximum value of two absolute scalars
      */
     public static AbsoluteTemperature max(final AbsoluteTemperature a1, final AbsoluteTemperature a2)
     {
@@ -163,9 +147,9 @@ public class AbsoluteTemperature
     /**
      * Returns a AbsoluteTemperature representation of a textual representation of a value with a unit. The String
      * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
-     * Spaces are allowed, but not necessary, between the value and the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a AbsoluteTemperature
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static AbsoluteTemperature valueOf(final String text) throws IllegalArgumentException

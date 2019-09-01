@@ -6,26 +6,11 @@ import org.djunits4.unit.AngleSolidUnit;
 import org.djunits4.unit.DimensionlessUnit;
 
 /**
- * Easy access methods for the AngleSolid DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;AngleSolidUnit&gt; value = new DoubleScalar.Rel&lt;AngleSolidUnit&gt;(100.0, AngleSolidUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * AngleSolid value = new AngleSolid(100.0, AngleSolidUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the AngleSolid DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -58,7 +43,7 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
 
     /**
      * Construct AngleSolid scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit AngleSolidUnit; unit for the double value
      */
     public AngleSolid(final double value, final AngleSolidUnit unit)
@@ -84,8 +69,8 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
 
     /**
      * Construct AngleSolid scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return AngleSolid; the new scalar with the SI value
      */
     public static final AngleSolid createSI(final double value)
     {
@@ -97,7 +82,7 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
      * @param zero AngleSolid; the low value
      * @param one AngleSolid; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return AngleSolid; a Scalar at the ratio between
      */
     public static AngleSolid interpolate(final AngleSolid zero, final AngleSolid one, final double ratio)
     {
@@ -108,7 +93,7 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
      * Return the maximum value of two relative scalars.
      * @param r1 AngleSolid; the first scalar
      * @param r2 AngleSolid; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return AngleSolid; the maximum value of two relative scalars
      */
     public static AngleSolid max(final AngleSolid r1, final AngleSolid r2)
     {
@@ -120,7 +105,7 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
      * @param r1 AngleSolid; the first scalar
      * @param r2 AngleSolid; the second scalar
      * @param rn AngleSolid...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return AngleSolid; the maximum value of more than two relative scalars
      */
     public static AngleSolid max(final AngleSolid r1, final AngleSolid r2, final AngleSolid... rn)
     {
@@ -139,7 +124,7 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
      * Return the minimum value of two relative scalars.
      * @param r1 AngleSolid; the first scalar
      * @param r2 AngleSolid; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return AngleSolid; the minimum value of two relative scalars
      */
     public static AngleSolid min(final AngleSolid r1, final AngleSolid r2)
     {
@@ -151,7 +136,7 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
      * @param r1 AngleSolid; the first scalar
      * @param r2 AngleSolid; the second scalar
      * @param rn AngleSolid...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return AngleSolid; the minimum value of more than two relative scalars
      */
     public static AngleSolid min(final AngleSolid r1, final AngleSolid r2, final AngleSolid... rn)
     {
@@ -169,9 +154,9 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
     /**
      * Returns a AngleSolid representation of a textual representation of a value with a unit. The String representation that
      * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
-     * not necessary, between the value and the unit.
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a AngleSolid
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return AngleSolid; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static AngleSolid valueOf(final String text) throws IllegalArgumentException
@@ -207,7 +192,7 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
 
     /**
      * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
-     * @param v AngleSolid; AngleSolid scalar
+ * @param v AngleSolid; AngleSolid scalar
      * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
      */
     public final Dimensionless divideBy(final AngleSolid v)

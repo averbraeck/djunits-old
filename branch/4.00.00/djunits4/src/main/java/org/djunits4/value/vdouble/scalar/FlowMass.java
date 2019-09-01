@@ -9,26 +9,11 @@ import org.djunits4.unit.FrequencyUnit;
 import org.djunits4.unit.MassUnit;
 
 /**
- * Easy access methods for the FlowMass DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;FlowMassUnit&gt; value = new DoubleScalar.Rel&lt;FlowMassUnit&gt;(100.0, FlowMassUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * FlowMass value = new FlowMass(100.0, FlowMassUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FlowMass DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -61,7 +46,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Construct FlowMass scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit FlowMassUnit; unit for the double value
      */
     public FlowMass(final double value, final FlowMassUnit unit)
@@ -87,8 +72,8 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Construct FlowMass scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return FlowMass; the new scalar with the SI value
      */
     public static final FlowMass createSI(final double value)
     {
@@ -100,7 +85,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
      * @param zero FlowMass; the low value
      * @param one FlowMass; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return FlowMass; a Scalar at the ratio between
      */
     public static FlowMass interpolate(final FlowMass zero, final FlowMass one, final double ratio)
     {
@@ -111,7 +96,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
      * Return the maximum value of two relative scalars.
      * @param r1 FlowMass; the first scalar
      * @param r2 FlowMass; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return FlowMass; the maximum value of two relative scalars
      */
     public static FlowMass max(final FlowMass r1, final FlowMass r2)
     {
@@ -123,7 +108,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
      * @param r1 FlowMass; the first scalar
      * @param r2 FlowMass; the second scalar
      * @param rn FlowMass...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return FlowMass; the maximum value of more than two relative scalars
      */
     public static FlowMass max(final FlowMass r1, final FlowMass r2, final FlowMass... rn)
     {
@@ -142,7 +127,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
      * Return the minimum value of two relative scalars.
      * @param r1 FlowMass; the first scalar
      * @param r2 FlowMass; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return FlowMass; the minimum value of two relative scalars
      */
     public static FlowMass min(final FlowMass r1, final FlowMass r2)
     {
@@ -154,7 +139,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
      * @param r1 FlowMass; the first scalar
      * @param r2 FlowMass; the second scalar
      * @param rn FlowMass...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return FlowMass; the minimum value of more than two relative scalars
      */
     public static FlowMass min(final FlowMass r1, final FlowMass r2, final FlowMass... rn)
     {
@@ -172,9 +157,9 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     /**
      * Returns a FlowMass representation of a textual representation of a value with a unit. The String representation that can
      * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FlowMass
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return FlowMass; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FlowMass valueOf(final String text) throws IllegalArgumentException
@@ -210,7 +195,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the division of FlowMass and FlowMass, which results in a Dimensionless scalar.
-     * @param v FlowMass; FlowMass scalar
+ * @param v FlowMass; FlowMass scalar
      * @return Dimensionless scalar as a division of FlowMass and FlowMass
      */
     public final Dimensionless divideBy(final FlowMass v)
@@ -220,7 +205,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the multiplication of FlowMass and Duration, which results in a Mass scalar.
-     * @param v Duration; FlowMass scalar
+ * @param v Duration; FlowMass scalar
      * @return Mass scalar as a multiplication of FlowMass and Duration
      */
     public final Mass multiplyBy(final Duration v)
@@ -230,7 +215,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the division of FlowMass and Frequency, which results in a Mass scalar.
-     * @param v Frequency; FlowMass scalar
+ * @param v Frequency; FlowMass scalar
      * @return Mass scalar as a division of FlowMass and Frequency
      */
     public final Mass divideBy(final Frequency v)
@@ -240,7 +225,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the division of FlowMass and Mass, which results in a Frequency scalar.
-     * @param v Mass; FlowMass scalar
+ * @param v Mass; FlowMass scalar
      * @return Frequency scalar as a division of FlowMass and Mass
      */
     public final Frequency divideBy(final Mass v)
@@ -250,7 +235,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the multiplication of FlowMass and Speed, which results in a Force scalar.
-     * @param v Speed; FlowMass scalar
+ * @param v Speed; FlowMass scalar
      * @return Force scalar as a multiplication of FlowMass and Speed
      */
     public final Force multiplyBy(final Speed v)

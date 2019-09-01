@@ -5,27 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.ElectricalConductanceUnit;
 
 /**
- * Easy access methods for the ElectricalConductance DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;ElectricalConductanceUnit&gt; value =
- *         new DoubleScalar.Rel&lt;ElectricalConductanceUnit&gt;(100.0, ElectricalConductanceUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * ElectricalConductance value = new ElectricalConductance(100.0, ElectricalConductanceUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the ElectricalConductance DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -62,7 +46,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Construct ElectricalConductance scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit ElectricalConductanceUnit; unit for the double value
      */
     public ElectricalConductance(final double value, final ElectricalConductanceUnit unit)
@@ -88,8 +72,8 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Construct ElectricalConductance scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return ElectricalConductance; the new scalar with the SI value
      */
     public static final ElectricalConductance createSI(final double value)
     {
@@ -101,7 +85,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
      * @param zero ElectricalConductance; the low value
      * @param one ElectricalConductance; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return ElectricalConductance; a Scalar at the ratio between
      */
     public static ElectricalConductance interpolate(final ElectricalConductance zero, final ElectricalConductance one,
             final double ratio)
@@ -114,7 +98,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
      * Return the maximum value of two relative scalars.
      * @param r1 ElectricalConductance; the first scalar
      * @param r2 ElectricalConductance; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return ElectricalConductance; the maximum value of two relative scalars
      */
     public static ElectricalConductance max(final ElectricalConductance r1, final ElectricalConductance r2)
     {
@@ -126,7 +110,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
      * @param r1 ElectricalConductance; the first scalar
      * @param r2 ElectricalConductance; the second scalar
      * @param rn ElectricalConductance...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return ElectricalConductance; the maximum value of more than two relative scalars
      */
     public static ElectricalConductance max(final ElectricalConductance r1, final ElectricalConductance r2,
             final ElectricalConductance... rn)
@@ -146,7 +130,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
      * Return the minimum value of two relative scalars.
      * @param r1 ElectricalConductance; the first scalar
      * @param r2 ElectricalConductance; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return ElectricalConductance; the minimum value of two relative scalars
      */
     public static ElectricalConductance min(final ElectricalConductance r1, final ElectricalConductance r2)
     {
@@ -158,7 +142,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
      * @param r1 ElectricalConductance; the first scalar
      * @param r2 ElectricalConductance; the second scalar
      * @param rn ElectricalConductance...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return ElectricalConductance; the minimum value of more than two relative scalars
      */
     public static ElectricalConductance min(final ElectricalConductance r1, final ElectricalConductance r2,
             final ElectricalConductance... rn)
@@ -177,9 +161,9 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
     /**
      * Returns a ElectricalConductance representation of a textual representation of a value with a unit. The String
      * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
-     * Spaces are allowed, but not necessary, between the value and the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a ElectricalConductance
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return ElectricalConductance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static ElectricalConductance valueOf(final String text) throws IllegalArgumentException

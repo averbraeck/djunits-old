@@ -9,26 +9,11 @@ import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.LinearDensityUnit;
 
 /**
- * Easy access methods for the LinearDensity DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;LinearDensityUnit&gt; value = new DoubleScalar.Rel&lt;LinearDensityUnit&gt;(100.0, LinearDensityUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * LinearDensity value = new LinearDensity(100.0, LinearDensityUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the LinearDensity DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -61,7 +46,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Construct LinearDensity scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit LinearDensityUnit; unit for the double value
      */
     public LinearDensity(final double value, final LinearDensityUnit unit)
@@ -87,8 +72,8 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Construct LinearDensity scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return LinearDensity; the new scalar with the SI value
      */
     public static final LinearDensity createSI(final double value)
     {
@@ -100,7 +85,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      * @param zero LinearDensity; the low value
      * @param one LinearDensity; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return LinearDensity; a Scalar at the ratio between
      */
     public static LinearDensity interpolate(final LinearDensity zero, final LinearDensity one, final double ratio)
     {
@@ -111,7 +96,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      * Return the maximum value of two relative scalars.
      * @param r1 LinearDensity; the first scalar
      * @param r2 LinearDensity; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return LinearDensity; the maximum value of two relative scalars
      */
     public static LinearDensity max(final LinearDensity r1, final LinearDensity r2)
     {
@@ -123,7 +108,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      * @param r1 LinearDensity; the first scalar
      * @param r2 LinearDensity; the second scalar
      * @param rn LinearDensity...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return LinearDensity; the maximum value of more than two relative scalars
      */
     public static LinearDensity max(final LinearDensity r1, final LinearDensity r2, final LinearDensity... rn)
     {
@@ -142,7 +127,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      * Return the minimum value of two relative scalars.
      * @param r1 LinearDensity; the first scalar
      * @param r2 LinearDensity; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return LinearDensity; the minimum value of two relative scalars
      */
     public static LinearDensity min(final LinearDensity r1, final LinearDensity r2)
     {
@@ -154,7 +139,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      * @param r1 LinearDensity; the first scalar
      * @param r2 LinearDensity; the second scalar
      * @param rn LinearDensity...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return LinearDensity; the minimum value of more than two relative scalars
      */
     public static LinearDensity min(final LinearDensity r1, final LinearDensity r2, final LinearDensity... rn)
     {
@@ -172,9 +157,9 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
     /**
      * Returns a LinearDensity representation of a textual representation of a value with a unit. The String representation that
      * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
-     * not necessary, between the value and the unit.
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a LinearDensity
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return LinearDensity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static LinearDensity valueOf(final String text) throws IllegalArgumentException
@@ -210,7 +195,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
-     * @param v LinearDensity; LinearDensity scalar
+ * @param v LinearDensity; LinearDensity scalar
      * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
      */
     public final Dimensionless divideBy(final LinearDensity v)
@@ -220,7 +205,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
-     * @param v Area; LinearDensity scalar
+ * @param v Area; LinearDensity scalar
      * @return Length scalar as a multiplication of LinearDensity and Area
      */
     public final Length multiplyBy(final Area v)
@@ -230,7 +215,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
-     * @param v Energy; LinearDensity scalar
+ * @param v Energy; LinearDensity scalar
      * @return Force scalar as a multiplication of LinearDensity and Energy
      */
     public final Force multiplyBy(final Energy v)
@@ -240,7 +225,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
-     * @param v Speed; LinearDensity scalar
+ * @param v Speed; LinearDensity scalar
      * @return Frequency scalar as a multiplication of LinearDensity and Speed
      */
     public final Frequency multiplyBy(final Speed v)

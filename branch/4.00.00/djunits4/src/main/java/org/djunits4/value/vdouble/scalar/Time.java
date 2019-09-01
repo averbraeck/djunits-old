@@ -6,20 +6,7 @@ import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.TimeUnit;
 
 /**
- * Easy access methods for the Absolute Time DoubleScalar. Instead of:
- * 
- * <pre>
- * DoubleScalar.Abs&lt;TimeUnit&gt; value = new DoubleScalar.Abs&lt;TimeUnit&gt;(100.0, TimeUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * Time value = new Time(100.0, TimeUnit.BASE);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Absolute Time DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
@@ -30,9 +17,7 @@ import org.djunits4.unit.TimeUnit;
  * double Time with TimeUnit.BASE as its unit, the largest value where the ms precision is reached is 2^51 = 2.3E15, which is
  * around 71000 years. This is sufficient to store a date in the 21st Century with a BASE or an Epoch offset precise to a
  * microsecond.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -46,7 +31,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
 
     /**
      * Construct Time scalar.
-     * @param value double; double value
+     * @param value double; value
      * @param unit TimeUnit; unit for the double value
      */
     public Time(final double value, final TimeUnit unit)
@@ -78,9 +63,9 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
     }
 
     /**
-     * Construct %TypeAbsl% scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * Construct Time scalar.
+     * @param value double; value in SI units
+     * @return Time; the new scalar with the SI value
      */
     public static final Time createSI(final double value)
     {
@@ -92,7 +77,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
      * @param zero Time; the low value
      * @param one Time; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Time; a Scalar at the ratio between
      */
     public static Time interpolate(final Time zero, final Time one, final double ratio)
     {
@@ -103,7 +88,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
      * Return the maximum value of two absolute scalars.
      * @param a1 Time; the first scalar
      * @param a2 Time; the second scalar
-     * @return the maximum value of two absolute scalars
+     * @return Time; the maximum value of two absolute scalars
      */
     public static Time max(final Time a1, final Time a2)
     {
@@ -164,9 +149,9 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
     /**
      * Returns a Time representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Time
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Time valueOf(final String text) throws IllegalArgumentException

@@ -13,26 +13,11 @@ import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.SpeedUnit;
 
 /**
- * Easy access methods for the Speed DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;SpeedUnit&gt; value = new DoubleScalar.Rel&lt;SpeedUnit&gt;(100.0, SpeedUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * Speed value = new Speed(100.0, SpeedUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Speed DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -65,7 +50,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Construct Speed scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit SpeedUnit; unit for the double value
      */
     public Speed(final double value, final SpeedUnit unit)
@@ -91,8 +76,8 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Construct Speed scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return Speed; the new scalar with the SI value
      */
     public static final Speed createSI(final double value)
     {
@@ -104,7 +89,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param zero Speed; the low value
      * @param one Speed; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Speed; a Scalar at the ratio between
      */
     public static Speed interpolate(final Speed zero, final Speed one, final double ratio)
     {
@@ -115,7 +100,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * Return the maximum value of two relative scalars.
      * @param r1 Speed; the first scalar
      * @param r2 Speed; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return Speed; the maximum value of two relative scalars
      */
     public static Speed max(final Speed r1, final Speed r2)
     {
@@ -127,7 +112,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param r1 Speed; the first scalar
      * @param r2 Speed; the second scalar
      * @param rn Speed...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return Speed; the maximum value of more than two relative scalars
      */
     public static Speed max(final Speed r1, final Speed r2, final Speed... rn)
     {
@@ -146,7 +131,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * Return the minimum value of two relative scalars.
      * @param r1 Speed; the first scalar
      * @param r2 Speed; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return Speed; the minimum value of two relative scalars
      */
     public static Speed min(final Speed r1, final Speed r2)
     {
@@ -158,7 +143,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param r1 Speed; the first scalar
      * @param r2 Speed; the second scalar
      * @param rn Speed...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return Speed; the minimum value of more than two relative scalars
      */
     public static Speed min(final Speed r1, final Speed r2, final Speed... rn)
     {
@@ -176,9 +161,9 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
     /**
      * Returns a Speed representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Speed
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return Speed; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Speed valueOf(final String text) throws IllegalArgumentException
@@ -214,7 +199,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the division of Speed and Speed, which results in a Dimensionless scalar.
-     * @param v Speed; Speed scalar
+ * @param v Speed; Speed scalar
      * @return Dimensionless scalar as a division of Speed and Speed
      */
     public final Dimensionless divideBy(final Speed v)
@@ -224,7 +209,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and Area, which results in a FlowVolume scalar.
-     * @param v Area; Speed scalar
+ * @param v Area; Speed scalar
      * @return FlowVolume scalar as a multiplication of Speed and Area
      */
     public final FlowVolume multiplyBy(final Area v)
@@ -234,7 +219,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and Force, which results in a Power scalar.
-     * @param v Force; Speed scalar
+ * @param v Force; Speed scalar
      * @return Power scalar as a multiplication of Speed and Force
      */
     public final Power multiplyBy(final Force v)
@@ -244,7 +229,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and Frequency, which results in a Acceleration scalar.
-     * @param v Frequency; Speed scalar
+ * @param v Frequency; Speed scalar
      * @return Acceleration scalar as a multiplication of Speed and Frequency
      */
     public final Acceleration multiplyBy(final Frequency v)
@@ -254,7 +239,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the division of Speed and Length, which results in a Frequency scalar.
-     * @param v Length; Speed scalar
+ * @param v Length; Speed scalar
      * @return Frequency scalar as a division of Speed and Length
      */
     public final Frequency divideBy(final Length v)
@@ -264,7 +249,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the division of Speed and Frequency, which results in a Length scalar.
-     * @param v Frequency; Speed scalar
+ * @param v Frequency; Speed scalar
      * @return Length scalar as a division of Speed and Frequency
      */
     public final Length divideBy(final Frequency v)
@@ -274,7 +259,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and LinearDensity, which results in a Frequency scalar.
-     * @param v LinearDensity; Speed scalar
+ * @param v LinearDensity; Speed scalar
      * @return Frequency scalar as a multiplication of Speed and LinearDensity
      */
     public final Frequency multiplyBy(final LinearDensity v)
@@ -284,7 +269,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and Duration, which results in a Length scalar.
-     * @param v Duration; Speed scalar
+ * @param v Duration; Speed scalar
      * @return Length scalar as a multiplication of Speed and Duration
      */
     public final Length multiplyBy(final Duration v)
@@ -294,7 +279,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the division of Speed and Duration, which results in a Acceleration scalar.
-     * @param v Duration; Speed scalar
+ * @param v Duration; Speed scalar
      * @return Acceleration scalar as a division of Speed and Duration
      */
     public final Acceleration divideBy(final Duration v)
@@ -304,7 +289,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the division of Speed and Acceleration, which results in a Duration scalar.
-     * @param v Acceleration; Speed scalar
+ * @param v Acceleration; Speed scalar
      * @return Duration scalar as a division of Speed and Acceleration
      */
     public final Duration divideBy(final Acceleration v)
@@ -314,7 +299,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and FlowMass, which results in a Force scalar.
-     * @param v FlowMass; Speed scalar
+ * @param v FlowMass; Speed scalar
      * @return Force scalar as a multiplication of Speed and FlowMass
      */
     public final Force multiplyBy(final FlowMass v)

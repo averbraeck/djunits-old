@@ -13,27 +13,12 @@ import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.VolumeUnit;
 
 /**
- * Easy access methods for the Relative Length DoubleScalar. Instead of:
- * 
- * <pre>
- * DoubleScalar&lt;LengthUnit&gt; value = new DoubleScalar&lt;LengthUnit&gt;(100.0, LengthUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * Length value = new Length(100.0, LengthUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Relative Length DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -94,7 +79,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
      * @param value double; the double value
      * @param unit PositionUnit; the unit
-     * @return A a new absolute instance of the DoubleScalar of the right type
+     * @return Position; a new absolute instance of the DoubleScalar of the right type
      */
     public final Position instantiateAbs(final double value, final PositionUnit unit)
     {
@@ -103,8 +88,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Construct Length scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return Length; the new scalar with the SI value
      */
     public static final Length createSI(final double value)
     {
@@ -116,7 +101,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
      * @param zero Length; the low value
      * @param one Length; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Length; a Scalar at the ratio between
      */
     public static Length interpolate(final Length zero, final Length one, final double ratio)
     {
@@ -125,8 +110,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v Position; the value to add
-     * @return sum of this value and v as a new object
+ * @param v Position; the value to add
+     * @return Position; sum of this value and v as a new object
      */
     public final Position plus(final Position v)
     {
@@ -138,7 +123,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
      * Return the maximum value of two relative scalars.
      * @param r1 Length; the first scalar
      * @param r2 Length; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return Length; the maximum value of two relative scalars
      */
     public static Length max(final Length r1, final Length r2)
     {
@@ -150,7 +135,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
      * @param r1 Length; the first scalar
      * @param r2 Length; the second scalar
      * @param rn Length...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return Length; the maximum value of more than two relative scalars
      */
     public static Length max(final Length r1, final Length r2, final Length... rn)
     {
@@ -169,7 +154,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
      * Return the minimum value of two relative scalars.
      * @param r1 Length; the first scalar
      * @param r2 Length; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return Length; the minimum value of two relative scalars
      */
     public static Length min(final Length r1, final Length r2)
     {
@@ -181,7 +166,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
      * @param r1 Length; the first scalar
      * @param r2 Length; the second scalar
      * @param rn Length...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return Length; the minimum value of more than two relative scalars
      */
     public static Length min(final Length r1, final Length r2, final Length... rn)
     {
@@ -199,9 +184,9 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
     /**
      * Returns a Length representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Length
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return Length; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Length valueOf(final String text) throws IllegalArgumentException
@@ -237,7 +222,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Length, which results in a Dimensionless scalar.
-     * @param v Length; Length scalar
+ * @param v Length; Length scalar
      * @return Dimensionless scalar as a division of Length and Length
      */
     public final Dimensionless divideBy(final Length v)
@@ -247,7 +232,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Length, which results in a Area scalar.
-     * @param v Length; Length scalar
+ * @param v Length; Length scalar
      * @return Area scalar as a multiplication of Length and Length
      */
     public final Area multiplyBy(final Length v)
@@ -257,7 +242,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and LinearDensity, which results in a Area scalar.
-     * @param v LinearDensity; Length scalar
+ * @param v LinearDensity; Length scalar
      * @return Area scalar as a division of Length and LinearDensity
      */
     public final Area divideBy(final LinearDensity v)
@@ -267,7 +252,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Area, which results in a LinearDensity scalar.
-     * @param v Area; Length scalar
+ * @param v Area; Length scalar
      * @return LinearDensity scalar as a division of Length and Area
      */
     public final LinearDensity divideBy(final Area v)
@@ -277,7 +262,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Area, which results in a Volume scalar.
-     * @param v Area; Length scalar
+ * @param v Area; Length scalar
      * @return Volume scalar as a multiplication of Length and Area
      */
     public final Volume multiplyBy(final Area v)
@@ -287,7 +272,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Force, which results in a Energy scalar.
-     * @param v Force; Length scalar
+ * @param v Force; Length scalar
      * @return Energy scalar as a multiplication of Length and Force
      */
     public final Energy multiplyBy(final Force v)
@@ -297,7 +282,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
-     * @param v Frequency; Length scalar
+ * @param v Frequency; Length scalar
      * @return Speed scalar as a multiplication of Length and Frequency
      */
     public final Speed multiplyBy(final Frequency v)
@@ -307,7 +292,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Duration, which results in a Speed scalar.
-     * @param v Duration; Length scalar
+ * @param v Duration; Length scalar
      * @return Speed scalar as a division of Length and Duration
      */
     public final Speed divideBy(final Duration v)
@@ -317,7 +302,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Speed, which results in a Duration scalar.
-     * @param v Speed; Length scalar
+ * @param v Speed; Length scalar
      * @return Duration scalar as a division of Length and Speed
      */
     public final Duration divideBy(final Speed v)

@@ -7,27 +7,11 @@ import org.djunits4.unit.ElectricalPotentialUnit;
 import org.djunits4.unit.ElectricalResistanceUnit;
 
 /**
- * Easy access methods for the ElectricalResistance DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;ElectricalResistanceUnit&gt; value =
- *         new DoubleScalar.Rel&lt;ElectricalResistanceUnit&gt;(100.0, ElectricalResistanceUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * ElectricalResistance value = new ElectricalResistance(100.0, ElectricalResistanceUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the ElectricalResistance DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -64,7 +48,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
 
     /**
      * Construct ElectricalResistance scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit ElectricalResistanceUnit; unit for the double value
      */
     public ElectricalResistance(final double value, final ElectricalResistanceUnit unit)
@@ -90,8 +74,8 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
 
     /**
      * Construct ElectricalResistance scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return ElectricalResistance; the new scalar with the SI value
      */
     public static final ElectricalResistance createSI(final double value)
     {
@@ -103,7 +87,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
      * @param zero ElectricalResistance; the low value
      * @param one ElectricalResistance; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return ElectricalResistance; a Scalar at the ratio between
      */
     public static ElectricalResistance interpolate(final ElectricalResistance zero, final ElectricalResistance one,
             final double ratio)
@@ -115,7 +99,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
      * Return the maximum value of two relative scalars.
      * @param r1 ElectricalResistance; the first scalar
      * @param r2 ElectricalResistance; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return ElectricalResistance; the maximum value of two relative scalars
      */
     public static ElectricalResistance max(final ElectricalResistance r1, final ElectricalResistance r2)
     {
@@ -127,7 +111,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
      * @param r1 ElectricalResistance; the first scalar
      * @param r2 ElectricalResistance; the second scalar
      * @param rn ElectricalResistance...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return ElectricalResistance; the maximum value of more than two relative scalars
      */
     public static ElectricalResistance max(final ElectricalResistance r1, final ElectricalResistance r2,
             final ElectricalResistance... rn)
@@ -147,7 +131,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
      * Return the minimum value of two relative scalars.
      * @param r1 ElectricalResistance; the first scalar
      * @param r2 ElectricalResistance; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return ElectricalResistance; the minimum value of two relative scalars
      */
     public static ElectricalResistance min(final ElectricalResistance r1, final ElectricalResistance r2)
     {
@@ -159,7 +143,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
      * @param r1 ElectricalResistance; the first scalar
      * @param r2 ElectricalResistance; the second scalar
      * @param rn ElectricalResistance...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return ElectricalResistance; the minimum value of more than two relative scalars
      */
     public static ElectricalResistance min(final ElectricalResistance r1, final ElectricalResistance r2,
             final ElectricalResistance... rn)
@@ -178,9 +162,9 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
     /**
      * Returns a ElectricalResistance representation of a textual representation of a value with a unit. The String
      * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
-     * Spaces are allowed, but not necessary, between the value and the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a ElectricalResistance
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return ElectricalResistance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static ElectricalResistance valueOf(final String text) throws IllegalArgumentException
@@ -216,7 +200,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
 
     /**
      * Calculate the division of ElectricalResistance and ElectricalResistance, which results in a Dimensionless scalar.
-     * @param v ElectricalResistance; ElectricalResistance scalar
+ * @param v ElectricalResistance; ElectricalResistance scalar
      * @return Dimensionless scalar as a division of ElectricalResistance and ElectricalResistance
      */
     public final Dimensionless divideBy(final ElectricalResistance v)
@@ -227,7 +211,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
     /**
      * Calculate the multiplication of ElectricalResistance and ElectricalCurrent, which results in a ElectricalPotential
      * scalar.
-     * @param v ElectricalCurrent; ElectricalResistance scalar
+ * @param v ElectricalCurrent; ElectricalResistance scalar
      * @return ElectricalPotential scalar as a multiplication of ElectricalResistance and ElectricalCurrent
      */
     public final ElectricalPotential multiplyBy(final ElectricalCurrent v)

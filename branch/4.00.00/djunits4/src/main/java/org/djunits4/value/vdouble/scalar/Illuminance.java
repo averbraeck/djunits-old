@@ -5,26 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.IlluminanceUnit;
 
 /**
- * Easy access methods for the Illuminance DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;IlluminanceUnit&gt; value = new DoubleScalar.Rel&lt;IlluminanceUnit&gt;(100.0, IlluminanceUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * Illuminance value = new Illuminance(100.0, IlluminanceUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Illuminance DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -57,7 +42,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Construct Illuminance scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit IlluminanceUnit; unit for the double value
      */
     public Illuminance(final double value, final IlluminanceUnit unit)
@@ -83,8 +68,8 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Construct Illuminance scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return Illuminance; the new scalar with the SI value
      */
     public static final Illuminance createSI(final double value)
     {
@@ -96,7 +81,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
      * @param zero Illuminance; the low value
      * @param one Illuminance; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Illuminance; a Scalar at the ratio between
      */
     public static Illuminance interpolate(final Illuminance zero, final Illuminance one, final double ratio)
     {
@@ -107,7 +92,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
      * Return the maximum value of two relative scalars.
      * @param r1 Illuminance; the first scalar
      * @param r2 Illuminance; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return Illuminance; the maximum value of two relative scalars
      */
     public static Illuminance max(final Illuminance r1, final Illuminance r2)
     {
@@ -119,7 +104,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
      * @param r1 Illuminance; the first scalar
      * @param r2 Illuminance; the second scalar
      * @param rn Illuminance...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return Illuminance; the maximum value of more than two relative scalars
      */
     public static Illuminance max(final Illuminance r1, final Illuminance r2, final Illuminance... rn)
     {
@@ -138,7 +123,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
      * Return the minimum value of two relative scalars.
      * @param r1 Illuminance; the first scalar
      * @param r2 Illuminance; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return Illuminance; the minimum value of two relative scalars
      */
     public static Illuminance min(final Illuminance r1, final Illuminance r2)
     {
@@ -150,7 +135,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
      * @param r1 Illuminance; the first scalar
      * @param r2 Illuminance; the second scalar
      * @param rn Illuminance...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return Illuminance; the minimum value of more than two relative scalars
      */
     public static Illuminance min(final Illuminance r1, final Illuminance r2, final Illuminance... rn)
     {
@@ -168,9 +153,9 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
     /**
      * Returns a Illuminance representation of a textual representation of a value with a unit. The String representation that
      * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
-     * not necessary, between the value and the unit.
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a Illuminance
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return Illuminance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Illuminance valueOf(final String text) throws IllegalArgumentException

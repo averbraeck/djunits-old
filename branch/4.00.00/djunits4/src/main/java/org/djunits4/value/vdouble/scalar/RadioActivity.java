@@ -5,26 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.RadioActivityUnit;
 
 /**
- * Easy access methods for the RadioActivity DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;RadioActivityUnit&gt; value = new DoubleScalar.Rel&lt;RadioActivityUnit&gt;(100.0, RadioActivityUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * RadioActivity value = new RadioActivity(100.0, RadioActivityUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the RadioActivity DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -57,7 +42,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Construct RadioActivity scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit RadioActivityUnit; unit for the double value
      */
     public RadioActivity(final double value, final RadioActivityUnit unit)
@@ -83,8 +68,8 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Construct RadioActivity scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return RadioActivity; the new scalar with the SI value
      */
     public static final RadioActivity createSI(final double value)
     {
@@ -96,7 +81,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
      * @param zero RadioActivity; the low value
      * @param one RadioActivity; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return RadioActivity; a Scalar at the ratio between
      */
     public static RadioActivity interpolate(final RadioActivity zero, final RadioActivity one, final double ratio)
     {
@@ -107,7 +92,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
      * Return the maximum value of two relative scalars.
      * @param r1 RadioActivity; the first scalar
      * @param r2 RadioActivity; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return RadioActivity; the maximum value of two relative scalars
      */
     public static RadioActivity max(final RadioActivity r1, final RadioActivity r2)
     {
@@ -119,7 +104,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
      * @param r1 RadioActivity; the first scalar
      * @param r2 RadioActivity; the second scalar
      * @param rn RadioActivity...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return RadioActivity; the maximum value of more than two relative scalars
      */
     public static RadioActivity max(final RadioActivity r1, final RadioActivity r2, final RadioActivity... rn)
     {
@@ -138,7 +123,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
      * Return the minimum value of two relative scalars.
      * @param r1 RadioActivity; the first scalar
      * @param r2 RadioActivity; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return RadioActivity; the minimum value of two relative scalars
      */
     public static RadioActivity min(final RadioActivity r1, final RadioActivity r2)
     {
@@ -150,7 +135,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
      * @param r1 RadioActivity; the first scalar
      * @param r2 RadioActivity; the second scalar
      * @param rn RadioActivity...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return RadioActivity; the minimum value of more than two relative scalars
      */
     public static RadioActivity min(final RadioActivity r1, final RadioActivity r2, final RadioActivity... rn)
     {
@@ -168,9 +153,9 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
     /**
      * Returns a RadioActivity representation of a textual representation of a value with a unit. The String representation that
      * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
-     * not necessary, between the value and the unit.
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a RadioActivity
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return RadioActivity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static RadioActivity valueOf(final String text) throws IllegalArgumentException

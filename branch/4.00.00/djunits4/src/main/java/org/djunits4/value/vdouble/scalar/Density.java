@@ -7,26 +7,11 @@ import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.MassUnit;
 
 /**
- * Easy access methods for the Density DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;DensityUnit&gt; value = new DoubleScalar.Rel&lt;DensityUnit&gt;(100.0, DensityUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * Density value = new Density(100.0, DensityUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Density DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -59,7 +44,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Construct Density scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit DensityUnit; unit for the double value
      */
     public Density(final double value, final DensityUnit unit)
@@ -85,8 +70,8 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Construct Density scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return Density; the new scalar with the SI value
      */
     public static final Density createSI(final double value)
     {
@@ -98,7 +83,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
      * @param zero Density; the low value
      * @param one Density; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Density; a Scalar at the ratio between
      */
     public static Density interpolate(final Density zero, final Density one, final double ratio)
     {
@@ -109,7 +94,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
      * Return the maximum value of two relative scalars.
      * @param r1 Density; the first scalar
      * @param r2 Density; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return Density; the maximum value of two relative scalars
      */
     public static Density max(final Density r1, final Density r2)
     {
@@ -121,7 +106,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
      * @param r1 Density; the first scalar
      * @param r2 Density; the second scalar
      * @param rn Density...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return Density; the maximum value of more than two relative scalars
      */
     public static Density max(final Density r1, final Density r2, final Density... rn)
     {
@@ -140,7 +125,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
      * Return the minimum value of two relative scalars.
      * @param r1 Density; the first scalar
      * @param r2 Density; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return Density; the minimum value of two relative scalars
      */
     public static Density min(final Density r1, final Density r2)
     {
@@ -152,7 +137,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
      * @param r1 Density; the first scalar
      * @param r2 Density; the second scalar
      * @param rn Density...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return Density; the minimum value of more than two relative scalars
      */
     public static Density min(final Density r1, final Density r2, final Density... rn)
     {
@@ -170,9 +155,9 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
     /**
      * Returns a Density representation of a textual representation of a value with a unit. The String representation that can
      * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Density
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return Density; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Density valueOf(final String text) throws IllegalArgumentException
@@ -208,7 +193,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the division of Density and Density, which results in a Dimensionless scalar.
-     * @param v Density; Density scalar
+ * @param v Density; Density scalar
      * @return Dimensionless scalar as a division of Density and Density
      */
     public final Dimensionless divideBy(final Density v)
@@ -218,7 +203,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
-     * @param v Volume; Density scalar
+ * @param v Volume; Density scalar
      * @return Mass scalar as a multiplication of Density and Volume
      */
     public final Mass multiplyBy(final Volume v)

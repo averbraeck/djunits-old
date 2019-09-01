@@ -5,26 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.AmountOfSubstanceUnit;
 
 /**
- * Easy access methods for the AmountOfSubstance DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;AmountOfSubstanceUnit&gt; value = new DoubleScalar.Rel&lt;AmountOfSubstanceUnit&gt;(100.0, AmountOfSubstanceUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * AmountOfSubstance value = new AmountOfSubstance(100.0, AmountOfSubstanceUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the AmountOfSubstance DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -59,7 +44,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Construct AmountOfSubstance scalar.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit AmountOfSubstanceUnit; unit for the double value
      */
     public AmountOfSubstance(final double value, final AmountOfSubstanceUnit unit)
@@ -85,8 +70,8 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Construct AmountOfSubstance scalar.
-     * @param value double; double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return AmountOfSubstance; the new scalar with the SI value
      */
     public static final AmountOfSubstance createSI(final double value)
     {
@@ -98,7 +83,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
      * @param zero AmountOfSubstance; the low value
      * @param one AmountOfSubstance; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return AmountOfSubstance; a Scalar at the ratio between
      */
     public static AmountOfSubstance interpolate(final AmountOfSubstance zero, final AmountOfSubstance one, final double ratio)
     {
@@ -109,7 +94,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
      * Return the maximum value of two relative scalars.
      * @param r1 AmountOfSubstance; the first scalar
      * @param r2 AmountOfSubstance; the second scalar
-     * @return the maximum value of two relative scalars
+     * @return AmountOfSubstance; the maximum value of two relative scalars
      */
     public static AmountOfSubstance max(final AmountOfSubstance r1, final AmountOfSubstance r2)
     {
@@ -121,7 +106,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
      * @param r1 AmountOfSubstance; the first scalar
      * @param r2 AmountOfSubstance; the second scalar
      * @param rn AmountOfSubstance...; the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @return AmountOfSubstance; the maximum value of more than two relative scalars
      */
     public static AmountOfSubstance max(final AmountOfSubstance r1, final AmountOfSubstance r2, final AmountOfSubstance... rn)
     {
@@ -140,7 +125,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
      * Return the minimum value of two relative scalars.
      * @param r1 AmountOfSubstance; the first scalar
      * @param r2 AmountOfSubstance; the second scalar
-     * @return the minimum value of two relative scalars
+     * @return AmountOfSubstance; the minimum value of two relative scalars
      */
     public static AmountOfSubstance min(final AmountOfSubstance r1, final AmountOfSubstance r2)
     {
@@ -152,7 +137,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
      * @param r1 AmountOfSubstance; the first scalar
      * @param r2 AmountOfSubstance; the second scalar
      * @param rn AmountOfSubstance...; the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @return AmountOfSubstance; the minimum value of more than two relative scalars
      */
     public static AmountOfSubstance min(final AmountOfSubstance r1, final AmountOfSubstance r2, final AmountOfSubstance... rn)
     {
@@ -170,9 +155,9 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
     /**
      * Returns a AmountOfSubstance representation of a textual representation of a value with a unit. The String representation
      * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
-     * allowed, but not necessary, between the value and the unit.
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a AmountOfSubstance
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return AmountOfSubstance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static AmountOfSubstance valueOf(final String text) throws IllegalArgumentException
