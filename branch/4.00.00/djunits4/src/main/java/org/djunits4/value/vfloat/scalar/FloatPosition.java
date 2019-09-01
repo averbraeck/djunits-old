@@ -6,27 +6,12 @@ import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 
 /**
- * Easy access methods for the Position FloatScalar. Instead of:
- * 
- * <pre>
- * FloatScalar.Abs&lt;PositionUnit&gt; value = new FloatScalar.Abs&lt;PositionUnit&gt;(100.0, PositionUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * FloatPosition value = new FloatPosition(100.0, PositionUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FloatPosition FloatScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -40,7 +25,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
 
     /**
      * Construct FloatPosition scalar.
-     * @param value float; float value
+     * @param value float; the float value
      * @param unit PositionUnit; unit for the float value
      */
     public FloatPosition(final float value, final PositionUnit unit)
@@ -50,7 +35,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
 
     /**
      * Construct FloatPosition scalar using a double value.
-     * @param value double; double value
+     * @param value double; the double value
      * @param unit PositionUnit; unit for the resulting float value
      */
     public FloatPosition(final double value, final PositionUnit unit)
@@ -83,8 +68,8 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
 
     /**
      * Construct FloatPosition scalar.
-     * @param value float; float value in BASE units
-     * @return the new scalar with the BASE value
+     * @param value float; the float value in BASE units
+     * @return FloatPosition; the new scalar with the BASE value
      */
     public static final FloatPosition createSI(final float value)
     {
@@ -96,7 +81,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      * @param zero FloatPosition; the low value
      * @param one FloatPosition; the high value
      * @param ratio float; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return FloatPosition; a Scalar at the ratio between
      */
     public static FloatPosition interpolate(final FloatPosition zero, final FloatPosition one, final float ratio)
     {
@@ -107,7 +92,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      * Return the maximum value of two absolute scalars.
      * @param a1 FloatPosition; the first scalar
      * @param a2 FloatPosition; the second scalar
-     * @return the maximum value of two absolute scalars
+     * @return FloatPosition; the maximum value of two absolute scalars
      */
     public static FloatPosition max(final FloatPosition a1, final FloatPosition a2)
     {
@@ -119,7 +104,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      * @param a1 FloatPosition; the first scalar
      * @param a2 FloatPosition; the second scalar
      * @param an FloatPosition...; the other scalars
-     * @return the maximum value of more than two absolute scalars
+     * @return FloatPosition; the maximum value of more than two absolute scalars
      */
     public static FloatPosition max(final FloatPosition a1, final FloatPosition a2, final FloatPosition... an)
     {
@@ -138,7 +123,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      * Return the minimum value of two absolute scalars.
      * @param a1 FloatPosition; the first scalar
      * @param a2 FloatPosition; the second scalar
-     * @return the minimum value of two absolute scalars
+     * @return FloatPosition; the minimum value of two absolute scalars
      */
     public static FloatPosition min(final FloatPosition a1, final FloatPosition a2)
     {
@@ -150,7 +135,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      * @param a1 FloatPosition; the first scalar
      * @param a2 FloatPosition; the second scalar
      * @param an FloatPosition...; the other scalars
-     * @return the minimum value of more than two absolute scalars
+     * @return FloatPosition; the minimum value of more than two absolute scalars
      */
     public static FloatPosition min(final FloatPosition a1, final FloatPosition a2, final FloatPosition... an)
     {
@@ -168,9 +153,9 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
     /**
      * Returns a FloatPosition representation of a textual representation of a value with a unit. The String representation that
      * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
-     * not necessary, between the value and the unit.
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatPosition
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return FloatPosition; the Scalar value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatPosition valueOf(final String text) throws IllegalArgumentException

@@ -13,26 +13,11 @@ import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
 
 /**
- * Easy access methods for the Force FloatScalar, which is relative by definition. An example is Speed. Instead of:
- * 
- * <pre>
- * FloatScalar.Rel&lt;ForceUnit&gt; value = new FloatScalar.Rel&lt;ForceUnit&gt;(100.0, ForceUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * FloatForce value = new FloatForce(100.0, ForceUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FloatForce FloatScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -65,8 +50,8 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Construct FloatForce scalar.
-     * @param value float; float value
-     * @param unit ForceUnit; unit for the float value
+     * @param value float; the float value
+     * @param unit unit for the float value
      */
     public FloatForce(final float value, final ForceUnit unit)
     {
@@ -75,7 +60,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Construct FloatForce scalar.
-     * @param value FloatForce; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatForce(final FloatForce value)
     {
@@ -84,8 +69,8 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Construct FloatForce scalar using a double value.
-     * @param value double; double value
-     * @param unit ForceUnit; unit for the resulting float value
+     * @param value double; the double value
+     * @param unit unit for the resulting float value
      */
     public FloatForce(final double value, final ForceUnit unit)
     {
@@ -101,7 +86,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Construct FloatForce scalar.
-     * @param value float; float value in SI units
+     * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatForce createSI(final float value)
@@ -111,9 +96,9 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Interpolate between two values.
-     * @param zero FloatForce; the low value
-     * @param one FloatForce; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatForce interpolate(final FloatForce zero, final FloatForce one, final float ratio)
@@ -123,8 +108,8 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatForce; the first scalar
-     * @param r2 FloatForce; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatForce max(final FloatForce r1, final FloatForce r2)
@@ -134,9 +119,9 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatForce; the first scalar
-     * @param r2 FloatForce; the second scalar
-     * @param rn FloatForce...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatForce max(final FloatForce r1, final FloatForce r2, final FloatForce... rn)
@@ -154,8 +139,8 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatForce; the first scalar
-     * @param r2 FloatForce; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatForce min(final FloatForce r1, final FloatForce r2)
@@ -165,9 +150,9 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatForce; the first scalar
-     * @param r2 FloatForce; the second scalar
-     * @param rn FloatForce...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatForce min(final FloatForce r1, final FloatForce r2, final FloatForce... rn)
@@ -186,9 +171,9 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
     /**
      * Returns a FloatForce representation of a textual representation of a value with a unit. The String representation that
      * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
-     * not necessary, between the value and the unit.
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatForce
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatForce valueOf(final String text) throws IllegalArgumentException
@@ -224,7 +209,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Calculate the division of FloatForce and FloatForce, which results in a FloatDimensionless scalar.
-     * @param v FloatForce; FloatForce scalar
+     * @param v FloatForce scalar
      * @return FloatDimensionless scalar as a division of FloatForce and FloatForce
      */
     public final FloatDimensionless divideBy(final FloatForce v)
@@ -234,7 +219,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Calculate the multiplication of FloatForce and FloatLength, which results in a FloatEnergy scalar.
-     * @param v FloatLength; FloatForce scalar
+     * @param v FloatForce scalar
      * @return FloatEnergy scalar as a multiplication of FloatForce and FloatLength
      */
     public final FloatEnergy multiplyBy(final FloatLength v)
@@ -244,7 +229,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Calculate the division of FloatForce and FloatLinearDensity, which results in a FloatEnergy scalar.
-     * @param v FloatLinearDensity; FloatForce scalar
+     * @param v FloatForce scalar
      * @return FloatEnergy scalar as a division of FloatForce and FloatLinearDensity
      */
     public final FloatEnergy divideBy(final FloatLinearDensity v)
@@ -254,7 +239,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Calculate the division of FloatForce and FloatEnergy, which results in a FloatLinearDensity scalar.
-     * @param v FloatEnergy; FloatForce scalar
+     * @param v FloatForce scalar
      * @return FloatLinearDensity scalar as a division of FloatForce and FloatEnergy
      */
     public final FloatLinearDensity divideBy(final FloatEnergy v)
@@ -264,7 +249,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Calculate the multiplication of FloatForce and FloatSpeed, which results in a FloatPower scalar.
-     * @param v FloatSpeed; FloatForce scalar
+     * @param v FloatForce scalar
      * @return FloatPower scalar as a multiplication of FloatForce and FloatSpeed
      */
     public final FloatPower multiplyBy(final FloatSpeed v)
@@ -274,7 +259,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Calculate the division of FloatForce and FloatMass, which results in a FloatAcceleration scalar.
-     * @param v FloatMass; FloatForce scalar
+     * @param v FloatForce scalar
      * @return FloatAcceleration scalar as a division of FloatForce and FloatMass
      */
     public final FloatAcceleration divideBy(final FloatMass v)
@@ -284,7 +269,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Calculate the division of FloatForce and FloatAcceleration, which results in a FloatMass scalar.
-     * @param v FloatAcceleration; FloatForce scalar
+     * @param v FloatForce scalar
      * @return FloatMass scalar as a division of FloatForce and FloatAcceleration
      */
     public final FloatMass divideBy(final FloatAcceleration v)
@@ -294,7 +279,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Calculate the division of FloatForce and FloatArea, which results in a FloatPressure scalar.
-     * @param v FloatArea; FloatForce scalar
+     * @param v FloatForce scalar
      * @return FloatPressure scalar as a division of FloatForce and FloatArea
      */
     public final FloatPressure divideBy(final FloatArea v)
@@ -304,7 +289,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 
     /**
      * Calculate the division of FloatForce and FloatPressure, which results in a FloatArea scalar.
-     * @param v FloatPressure; FloatForce scalar
+     * @param v FloatForce scalar
      * @return FloatArea scalar as a division of FloatForce and FloatPressure
      */
     public final FloatArea divideBy(final FloatPressure v)

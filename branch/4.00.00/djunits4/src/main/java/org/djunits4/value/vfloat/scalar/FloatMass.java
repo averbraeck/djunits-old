@@ -11,26 +11,11 @@ import org.djunits4.unit.MassUnit;
 import org.djunits4.unit.VolumeUnit;
 
 /**
- * Easy access methods for the Mass FloatScalar, which is relative by definition. An example is Speed. Instead of:
- * 
- * <pre>
- * FloatScalar.Rel&lt;MassUnit&gt; value = new FloatScalar.Rel&lt;MassUnit&gt;(100.0, MassUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * FloatMass value = new FloatMass(100.0, MassUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FloatMass FloatScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -63,8 +48,8 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Construct FloatMass scalar.
-     * @param value float; float value
-     * @param unit MassUnit; unit for the float value
+     * @param value float; the float value
+     * @param unit unit for the float value
      */
     public FloatMass(final float value, final MassUnit unit)
     {
@@ -73,7 +58,7 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Construct FloatMass scalar.
-     * @param value FloatMass; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatMass(final FloatMass value)
     {
@@ -82,8 +67,8 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Construct FloatMass scalar using a double value.
-     * @param value double; double value
-     * @param unit MassUnit; unit for the resulting float value
+     * @param value double; the double value
+     * @param unit unit for the resulting float value
      */
     public FloatMass(final double value, final MassUnit unit)
     {
@@ -99,7 +84,7 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Construct FloatMass scalar.
-     * @param value float; float value in SI units
+     * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatMass createSI(final float value)
@@ -109,9 +94,9 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Interpolate between two values.
-     * @param zero FloatMass; the low value
-     * @param one FloatMass; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatMass interpolate(final FloatMass zero, final FloatMass one, final float ratio)
@@ -121,8 +106,8 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatMass; the first scalar
-     * @param r2 FloatMass; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatMass max(final FloatMass r1, final FloatMass r2)
@@ -132,9 +117,9 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatMass; the first scalar
-     * @param r2 FloatMass; the second scalar
-     * @param rn FloatMass...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatMass max(final FloatMass r1, final FloatMass r2, final FloatMass... rn)
@@ -152,8 +137,8 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatMass; the first scalar
-     * @param r2 FloatMass; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatMass min(final FloatMass r1, final FloatMass r2)
@@ -163,9 +148,9 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatMass; the first scalar
-     * @param r2 FloatMass; the second scalar
-     * @param rn FloatMass...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatMass min(final FloatMass r1, final FloatMass r2, final FloatMass... rn)
@@ -184,9 +169,9 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
     /**
      * Returns a FloatMass representation of a textual representation of a value with a unit. The String representation that can
      * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatMass
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatMass valueOf(final String text) throws IllegalArgumentException
@@ -222,7 +207,7 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Calculate the division of FloatMass and FloatMass, which results in a FloatDimensionless scalar.
-     * @param v FloatMass; FloatMass scalar
+     * @param v FloatMass scalar
      * @return FloatDimensionless scalar as a division of FloatMass and FloatMass
      */
     public final FloatDimensionless divideBy(final FloatMass v)
@@ -232,7 +217,7 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Calculate the division of FloatMass and FloatFlowMass, which results in a FloatDuration scalar.
-     * @param v FloatFlowMass; FloatMass scalar
+     * @param v FloatMass scalar
      * @return FloatDuration scalar as a division of FloatMass and FloatFlowMass
      */
     public final FloatDuration divideBy(final FloatFlowMass v)
@@ -242,7 +227,7 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Calculate the division of FloatMass and FloatDuration, which results in a FloatFlowMass scalar.
-     * @param v FloatDuration; FloatMass scalar
+     * @param v FloatMass scalar
      * @return FloatFlowMass scalar as a division of FloatMass and FloatDuration
      */
     public final FloatFlowMass divideBy(final FloatDuration v)
@@ -252,7 +237,7 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Calculate the multiplication of FloatMass and FloatAcceleration, which results in a FloatForce scalar.
-     * @param v FloatAcceleration; FloatMass scalar
+     * @param v FloatMass scalar
      * @return FloatForce scalar as a multiplication of FloatMass and FloatAcceleration
      */
     public final FloatForce multiplyBy(final FloatAcceleration v)
@@ -262,7 +247,7 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Calculate the multiplication of FloatMass and FloatFrequency, which results in a FloatFlowMass scalar.
-     * @param v FloatFrequency; FloatMass scalar
+     * @param v FloatMass scalar
      * @return FloatFlowMass scalar as a multiplication of FloatMass and FloatFrequency
      */
     public final FloatFlowMass multiplyBy(final FloatFrequency v)
@@ -272,7 +257,7 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Calculate the division of FloatMass and FloatDensity, which results in a FloatVolume scalar.
-     * @param v FloatDensity; FloatMass scalar
+     * @param v FloatMass scalar
      * @return FloatVolume scalar as a division of FloatMass and FloatDensity
      */
     public final FloatVolume divideBy(final FloatDensity v)
@@ -282,7 +267,7 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
 
     /**
      * Calculate the division of FloatMass and FloatVolume, which results in a FloatDensity scalar.
-     * @param v FloatVolume; FloatMass scalar
+     * @param v FloatMass scalar
      * @return FloatDensity scalar as a division of FloatMass and FloatVolume
      */
     public final FloatDensity divideBy(final FloatVolume v)

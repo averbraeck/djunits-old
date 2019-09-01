@@ -11,26 +11,11 @@ import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
 
 /**
- * Easy access methods for the Energy FloatScalar, which is relative by definition. An example is Speed. Instead of:
- * 
- * <pre>
- * FloatScalar.Rel&lt;EnergyUnit&gt; value = new FloatScalar.Rel&lt;EnergyUnit&gt;(100.0, EnergyUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * FloatEnergy value = new FloatEnergy(100.0, EnergyUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FloatEnergy FloatScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -63,8 +48,8 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Construct FloatEnergy scalar.
-     * @param value float; float value
-     * @param unit EnergyUnit; unit for the float value
+     * @param value float; the float value
+     * @param unit unit for the float value
      */
     public FloatEnergy(final float value, final EnergyUnit unit)
     {
@@ -73,7 +58,7 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Construct FloatEnergy scalar.
-     * @param value FloatEnergy; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatEnergy(final FloatEnergy value)
     {
@@ -82,8 +67,8 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Construct FloatEnergy scalar using a double value.
-     * @param value double; double value
-     * @param unit EnergyUnit; unit for the resulting float value
+     * @param value double; the double value
+     * @param unit unit for the resulting float value
      */
     public FloatEnergy(final double value, final EnergyUnit unit)
     {
@@ -99,7 +84,7 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Construct FloatEnergy scalar.
-     * @param value float; float value in SI units
+     * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatEnergy createSI(final float value)
@@ -109,9 +94,9 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Interpolate between two values.
-     * @param zero FloatEnergy; the low value
-     * @param one FloatEnergy; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatEnergy interpolate(final FloatEnergy zero, final FloatEnergy one, final float ratio)
@@ -121,8 +106,8 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatEnergy; the first scalar
-     * @param r2 FloatEnergy; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatEnergy max(final FloatEnergy r1, final FloatEnergy r2)
@@ -132,9 +117,9 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatEnergy; the first scalar
-     * @param r2 FloatEnergy; the second scalar
-     * @param rn FloatEnergy...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatEnergy max(final FloatEnergy r1, final FloatEnergy r2, final FloatEnergy... rn)
@@ -152,8 +137,8 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatEnergy; the first scalar
-     * @param r2 FloatEnergy; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatEnergy min(final FloatEnergy r1, final FloatEnergy r2)
@@ -163,9 +148,9 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatEnergy; the first scalar
-     * @param r2 FloatEnergy; the second scalar
-     * @param rn FloatEnergy...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatEnergy min(final FloatEnergy r1, final FloatEnergy r2, final FloatEnergy... rn)
@@ -184,9 +169,9 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
     /**
      * Returns a FloatEnergy representation of a textual representation of a value with a unit. The String representation that
      * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
-     * not necessary, between the value and the unit.
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatEnergy
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatEnergy valueOf(final String text) throws IllegalArgumentException
@@ -222,7 +207,7 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Calculate the division of FloatEnergy and FloatEnergy, which results in a FloatDimensionless scalar.
-     * @param v FloatEnergy; FloatEnergy scalar
+     * @param v FloatEnergy scalar
      * @return FloatDimensionless scalar as a division of FloatEnergy and FloatEnergy
      */
     public final FloatDimensionless divideBy(final FloatEnergy v)
@@ -232,7 +217,7 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Calculate the division of FloatEnergy and FloatForce, which results in a FloatLength scalar.
-     * @param v FloatForce; FloatEnergy scalar
+     * @param v FloatEnergy scalar
      * @return FloatLength scalar as a division of FloatEnergy and FloatForce
      */
     public final FloatLength divideBy(final FloatForce v)
@@ -242,7 +227,7 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Calculate the division of FloatEnergy and FloatLength, which results in a FloatForce scalar.
-     * @param v FloatLength; FloatEnergy scalar
+     * @param v FloatEnergy scalar
      * @return FloatForce scalar as a division of FloatEnergy and FloatLength
      */
     public final FloatForce divideBy(final FloatLength v)
@@ -252,7 +237,7 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Calculate the multiplication of FloatEnergy and FloatLinearDensity, which results in a FloatForce scalar.
-     * @param v FloatLinearDensity; FloatEnergy scalar
+     * @param v FloatEnergy scalar
      * @return FloatForce scalar as a multiplication of FloatEnergy and FloatLinearDensity
      */
     public final FloatForce multiplyBy(final FloatLinearDensity v)
@@ -262,7 +247,7 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Calculate the division of FloatEnergy and FloatDuration, which results in a FloatPower scalar.
-     * @param v FloatDuration; FloatEnergy scalar
+     * @param v FloatEnergy scalar
      * @return FloatPower scalar as a division of FloatEnergy and FloatDuration
      */
     public final FloatPower divideBy(final FloatDuration v)
@@ -272,7 +257,7 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Calculate the division of FloatEnergy and FloatPower, which results in a FloatDuration scalar.
-     * @param v FloatPower; FloatEnergy scalar
+     * @param v FloatEnergy scalar
      * @return FloatDuration scalar as a division of FloatEnergy and FloatPower
      */
     public final FloatDuration divideBy(final FloatPower v)
@@ -282,7 +267,7 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Calculate the division of FloatEnergy and FloatVolume, which results in a FloatPressure scalar.
-     * @param v FloatVolume; FloatEnergy scalar
+     * @param v FloatEnergy scalar
      * @return FloatPressure scalar as a division of FloatEnergy and FloatVolume
      */
     public final FloatPressure divideBy(final FloatVolume v)
@@ -292,7 +277,7 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 
     /**
      * Calculate the multiplication of FloatEnergy and FloatFrequency, which results in a FloatPower scalar.
-     * @param v FloatFrequency; FloatEnergy scalar
+     * @param v FloatEnergy scalar
      * @return FloatPower scalar as a multiplication of FloatEnergy and FloatFrequency
      */
     public final FloatPower multiplyBy(final FloatFrequency v)

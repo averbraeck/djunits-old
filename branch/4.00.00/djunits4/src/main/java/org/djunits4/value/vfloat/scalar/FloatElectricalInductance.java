@@ -5,28 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.ElectricalInductanceUnit;
 
 /**
- * Easy access methods for the ElectricalInductance FloatScalar, which is relative by definition. An example is Speed. Instead
- * of:
- * 
- * <pre>
- * FloatScalar.Rel&lt;ElectricalInductanceUnit&gt; value =
- *         new FloatScalar.Rel&lt;ElectricalInductanceUnit&gt;(100.0, ElectricalInductanceUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * FloatElectricalInductance value = new FloatElectricalInductance(100.0, ElectricalInductanceUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FloatElectricalInductance FloatScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -63,8 +46,8 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Construct FloatElectricalInductance scalar.
-     * @param value float; float value
-     * @param unit ElectricalInductanceUnit; unit for the float value
+     * @param value float; the float value
+     * @param unit unit for the float value
      */
     public FloatElectricalInductance(final float value, final ElectricalInductanceUnit unit)
     {
@@ -73,7 +56,7 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Construct FloatElectricalInductance scalar.
-     * @param value FloatElectricalInductance; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatElectricalInductance(final FloatElectricalInductance value)
     {
@@ -82,8 +65,8 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Construct FloatElectricalInductance scalar using a double value.
-     * @param value double; double value
-     * @param unit ElectricalInductanceUnit; unit for the resulting float value
+     * @param value double; the double value
+     * @param unit unit for the resulting float value
      */
     public FloatElectricalInductance(final double value, final ElectricalInductanceUnit unit)
     {
@@ -99,7 +82,7 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Construct FloatElectricalInductance scalar.
-     * @param value float; float value in SI units
+     * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatElectricalInductance createSI(final float value)
@@ -109,9 +92,9 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Interpolate between two values.
-     * @param zero FloatElectricalInductance; the low value
-     * @param one FloatElectricalInductance; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalInductance interpolate(final FloatElectricalInductance zero,
@@ -123,8 +106,8 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatElectricalInductance; the first scalar
-     * @param r2 FloatElectricalInductance; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatElectricalInductance max(final FloatElectricalInductance r1, final FloatElectricalInductance r2)
@@ -134,9 +117,9 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatElectricalInductance; the first scalar
-     * @param r2 FloatElectricalInductance; the second scalar
-     * @param rn FloatElectricalInductance...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatElectricalInductance max(final FloatElectricalInductance r1, final FloatElectricalInductance r2,
@@ -155,8 +138,8 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatElectricalInductance; the first scalar
-     * @param r2 FloatElectricalInductance; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatElectricalInductance min(final FloatElectricalInductance r1, final FloatElectricalInductance r2)
@@ -166,9 +149,9 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatElectricalInductance; the first scalar
-     * @param r2 FloatElectricalInductance; the second scalar
-     * @param rn FloatElectricalInductance...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatElectricalInductance min(final FloatElectricalInductance r1, final FloatElectricalInductance r2,
@@ -188,9 +171,9 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
     /**
      * Returns a FloatElectricalInductance representation of a textual representation of a value with a unit. The String
      * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
-     * Spaces are allowed, but not necessary, between the value and the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatElectricalInductance
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatElectricalInductance valueOf(final String text) throws IllegalArgumentException

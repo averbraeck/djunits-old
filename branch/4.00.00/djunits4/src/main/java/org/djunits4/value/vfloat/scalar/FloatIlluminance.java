@@ -5,26 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.IlluminanceUnit;
 
 /**
- * Easy access methods for the Illuminance FloatScalar, which is relative by definition. An example is Speed. Instead of:
- * 
- * <pre>
- * FloatScalar.Rel&lt;IlluminanceUnit&gt; value = new FloatScalar.Rel&lt;IlluminanceUnit&gt;(100.0, IlluminanceUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * FloatIlluminance value = new FloatIlluminance(100.0, IlluminanceUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FloatIlluminance FloatScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -57,8 +42,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Construct FloatIlluminance scalar.
-     * @param value float; float value
-     * @param unit IlluminanceUnit; unit for the float value
+     * @param value float; the float value
+     * @param unit unit for the float value
      */
     public FloatIlluminance(final float value, final IlluminanceUnit unit)
     {
@@ -67,7 +52,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Construct FloatIlluminance scalar.
-     * @param value FloatIlluminance; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatIlluminance(final FloatIlluminance value)
     {
@@ -76,8 +61,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Construct FloatIlluminance scalar using a double value.
-     * @param value double; double value
-     * @param unit IlluminanceUnit; unit for the resulting float value
+     * @param value double; the double value
+     * @param unit unit for the resulting float value
      */
     public FloatIlluminance(final double value, final IlluminanceUnit unit)
     {
@@ -93,7 +78,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Construct FloatIlluminance scalar.
-     * @param value float; float value in SI units
+     * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatIlluminance createSI(final float value)
@@ -103,9 +88,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Interpolate between two values.
-     * @param zero FloatIlluminance; the low value
-     * @param one FloatIlluminance; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatIlluminance interpolate(final FloatIlluminance zero, final FloatIlluminance one, final float ratio)
@@ -115,8 +100,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatIlluminance; the first scalar
-     * @param r2 FloatIlluminance; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatIlluminance max(final FloatIlluminance r1, final FloatIlluminance r2)
@@ -126,9 +111,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatIlluminance; the first scalar
-     * @param r2 FloatIlluminance; the second scalar
-     * @param rn FloatIlluminance...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatIlluminance max(final FloatIlluminance r1, final FloatIlluminance r2, final FloatIlluminance... rn)
@@ -146,8 +131,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatIlluminance; the first scalar
-     * @param r2 FloatIlluminance; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatIlluminance min(final FloatIlluminance r1, final FloatIlluminance r2)
@@ -157,9 +142,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatIlluminance; the first scalar
-     * @param r2 FloatIlluminance; the second scalar
-     * @param rn FloatIlluminance...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatIlluminance min(final FloatIlluminance r1, final FloatIlluminance r2, final FloatIlluminance... rn)
@@ -178,9 +163,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
     /**
      * Returns a FloatIlluminance representation of a textual representation of a value with a unit. The String representation
      * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
-     * allowed, but not necessary, between the value and the unit.
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatIlluminance
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatIlluminance valueOf(final String text) throws IllegalArgumentException

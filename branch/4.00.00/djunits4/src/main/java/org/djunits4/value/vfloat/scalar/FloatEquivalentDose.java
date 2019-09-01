@@ -5,26 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.EquivalentDoseUnit;
 
 /**
- * Easy access methods for the EquivalentDose FloatScalar, which is relative by definition. An example is Speed. Instead of:
- * 
- * <pre>
- * FloatScalar.Rel&lt;EquivalentDoseUnit&gt; value = new FloatScalar.Rel&lt;EquivalentDoseUnit&gt;(100.0, EquivalentDoseUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * FloatEquivalentDose value = new FloatEquivalentDose(100.0, EquivalentDoseUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FloatEquivalentDose FloatScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -59,8 +44,8 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Construct FloatEquivalentDose scalar.
-     * @param value float; float value
-     * @param unit EquivalentDoseUnit; unit for the float value
+     * @param value float; the float value
+     * @param unit unit for the float value
      */
     public FloatEquivalentDose(final float value, final EquivalentDoseUnit unit)
     {
@@ -69,7 +54,7 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Construct FloatEquivalentDose scalar.
-     * @param value FloatEquivalentDose; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatEquivalentDose(final FloatEquivalentDose value)
     {
@@ -78,8 +63,8 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Construct FloatEquivalentDose scalar using a double value.
-     * @param value double; double value
-     * @param unit EquivalentDoseUnit; unit for the resulting float value
+     * @param value double; the double value
+     * @param unit unit for the resulting float value
      */
     public FloatEquivalentDose(final double value, final EquivalentDoseUnit unit)
     {
@@ -95,7 +80,7 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Construct FloatEquivalentDose scalar.
-     * @param value float; float value in SI units
+     * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatEquivalentDose createSI(final float value)
@@ -105,9 +90,9 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Interpolate between two values.
-     * @param zero FloatEquivalentDose; the low value
-     * @param one FloatEquivalentDose; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatEquivalentDose interpolate(final FloatEquivalentDose zero, final FloatEquivalentDose one,
@@ -118,8 +103,8 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatEquivalentDose; the first scalar
-     * @param r2 FloatEquivalentDose; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatEquivalentDose max(final FloatEquivalentDose r1, final FloatEquivalentDose r2)
@@ -129,9 +114,9 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatEquivalentDose; the first scalar
-     * @param r2 FloatEquivalentDose; the second scalar
-     * @param rn FloatEquivalentDose...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatEquivalentDose max(final FloatEquivalentDose r1, final FloatEquivalentDose r2,
@@ -150,8 +135,8 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatEquivalentDose; the first scalar
-     * @param r2 FloatEquivalentDose; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatEquivalentDose min(final FloatEquivalentDose r1, final FloatEquivalentDose r2)
@@ -161,9 +146,9 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatEquivalentDose; the first scalar
-     * @param r2 FloatEquivalentDose; the second scalar
-     * @param rn FloatEquivalentDose...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatEquivalentDose min(final FloatEquivalentDose r1, final FloatEquivalentDose r2,
@@ -183,9 +168,9 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
     /**
      * Returns a FloatEquivalentDose representation of a textual representation of a value with a unit. The String
      * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
-     * Spaces are allowed, but not necessary, between the value and the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatEquivalentDose
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatEquivalentDose valueOf(final String text) throws IllegalArgumentException

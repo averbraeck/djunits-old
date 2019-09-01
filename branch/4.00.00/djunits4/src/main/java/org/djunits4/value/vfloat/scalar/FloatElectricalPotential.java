@@ -9,28 +9,11 @@ import org.djunits4.unit.ElectricalResistanceUnit;
 import org.djunits4.unit.PowerUnit;
 
 /**
- * Easy access methods for the ElectricalPotential FloatScalar, which is relative by definition. An example is Speed. Instead
- * of:
- * 
- * <pre>
- * FloatScalar.Rel&lt;ElectricalPotentialUnit&gt; value =
- *         new FloatScalar.Rel&lt;ElectricalPotentialUnit&gt;(100.0, ElectricalPotentialUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * FloatElectricalPotential value = new FloatElectricalPotential(100.0, ElectricalPotentialUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FloatElectricalPotential FloatScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -67,8 +50,8 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
 
     /**
      * Construct FloatElectricalPotential scalar.
-     * @param value float; float value
-     * @param unit ElectricalPotentialUnit; unit for the float value
+     * @param value float; the float value
+     * @param unit unit for the float value
      */
     public FloatElectricalPotential(final float value, final ElectricalPotentialUnit unit)
     {
@@ -77,7 +60,7 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
 
     /**
      * Construct FloatElectricalPotential scalar.
-     * @param value FloatElectricalPotential; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatElectricalPotential(final FloatElectricalPotential value)
     {
@@ -86,8 +69,8 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
 
     /**
      * Construct FloatElectricalPotential scalar using a double value.
-     * @param value double; double value
-     * @param unit ElectricalPotentialUnit; unit for the resulting float value
+     * @param value double; the double value
+     * @param unit unit for the resulting float value
      */
     public FloatElectricalPotential(final double value, final ElectricalPotentialUnit unit)
     {
@@ -103,7 +86,7 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
 
     /**
      * Construct FloatElectricalPotential scalar.
-     * @param value float; float value in SI units
+     * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
     public static final FloatElectricalPotential createSI(final float value)
@@ -113,9 +96,9 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
 
     /**
      * Interpolate between two values.
-     * @param zero FloatElectricalPotential; the low value
-     * @param one FloatElectricalPotential; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalPotential interpolate(final FloatElectricalPotential zero, final FloatElectricalPotential one,
@@ -127,8 +110,8 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatElectricalPotential; the first scalar
-     * @param r2 FloatElectricalPotential; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatElectricalPotential max(final FloatElectricalPotential r1, final FloatElectricalPotential r2)
@@ -138,9 +121,9 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatElectricalPotential; the first scalar
-     * @param r2 FloatElectricalPotential; the second scalar
-     * @param rn FloatElectricalPotential...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatElectricalPotential max(final FloatElectricalPotential r1, final FloatElectricalPotential r2,
@@ -159,8 +142,8 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatElectricalPotential; the first scalar
-     * @param r2 FloatElectricalPotential; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatElectricalPotential min(final FloatElectricalPotential r1, final FloatElectricalPotential r2)
@@ -170,9 +153,9 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatElectricalPotential; the first scalar
-     * @param r2 FloatElectricalPotential; the second scalar
-     * @param rn FloatElectricalPotential...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatElectricalPotential min(final FloatElectricalPotential r1, final FloatElectricalPotential r2,
@@ -192,9 +175,9 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
     /**
      * Returns a FloatElectricalPotential representation of a textual representation of a value with a unit. The String
      * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
-     * Spaces are allowed, but not necessary, between the value and the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatElectricalPotential
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatElectricalPotential valueOf(final String text) throws IllegalArgumentException
@@ -231,7 +214,7 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
     /**
      * Calculate the division of FloatElectricalPotential and FloatElectricalPotential, which results in a FloatDimensionless
      * scalar.
-     * @param v FloatElectricalPotential; FloatElectricalPotential scalar
+     * @param v FloatElectricalPotential scalar
      * @return FloatDimensionless scalar as a division of FloatElectricalPotential and FloatElectricalPotential
      */
     public final FloatDimensionless divideBy(final FloatElectricalPotential v)
@@ -242,7 +225,7 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
     /**
      * Calculate the multiplication of FloatElectricalPotential and FloatElectricalCurrent, which results in a FloatPower
      * scalar.
-     * @param v FloatElectricalCurrent; FloatElectricalPotential scalar
+     * @param v FloatElectricalPotential scalar
      * @return FloatPower scalar as a multiplication of FloatElectricalPotential and FloatElectricalCurrent
      */
     public final FloatPower multiplyBy(final FloatElectricalCurrent v)
@@ -253,7 +236,7 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
     /**
      * Calculate the division of FloatElectricalPotential and FloatElectricalCurrent, which results in a
      * FloatElectricalResistance scalar.
-     * @param v FloatElectricalCurrent; FloatElectricalPotential scalar
+     * @param v FloatElectricalPotential scalar
      * @return FloatElectricalResistance scalar as a division of FloatElectricalPotential and FloatElectricalCurrent
      */
     public final FloatElectricalResistance divideBy(final FloatElectricalCurrent v)
@@ -264,7 +247,7 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
     /**
      * Calculate the division of FloatElectricalPotential and FloatElectricalResistance, which results in a
      * FloatElectricalCurrent scalar.
-     * @param v FloatElectricalResistance; FloatElectricalPotential scalar
+     * @param v FloatElectricalPotential scalar
      * @return FloatElectricalCurrent scalar as a division of FloatElectricalPotential and FloatElectricalResistance
      */
     public final FloatElectricalCurrent divideBy(final FloatElectricalResistance v)
