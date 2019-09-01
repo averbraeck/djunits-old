@@ -82,10 +82,10 @@ public class PositionUnit extends AbsoluteLinearUnit<PositionUnit, LengthUnit>
 
     /** Lightyear = 9,460,730,472,580,800 m. */
     public static final PositionUnit LIGHTYEAR =
-            METER.deriveLinearOffset(9460730472580800.0, 0.0, LengthUnit.LIGHTYEAR, "ly", "lightyear", UnitSystem.OTHER);
+            METER.deriveLinearOffset(9_460_730_472_580_800.0, 0.0, LengthUnit.LIGHTYEAR, "ly", "lightyear", UnitSystem.OTHER);
 
     /** Parsec = 648,000 / PI ly. */
-    public static final PositionUnit PARSEC = METER.deriveLinearOffset(9460730472580800.0 * 648000.0 / Math.PI, 0.0,
+    public static final PositionUnit PARSEC = METER.deriveLinearOffset(9_460_730_472_580_800.0 * 648_000.0 / Math.PI, 0.0,
             LengthUnit.PARSEC, "Pc", "Parsec", UnitSystem.OTHER);
 
     /** Angstrom = 10^-10 m. */

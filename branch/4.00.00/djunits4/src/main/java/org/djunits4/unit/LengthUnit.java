@@ -70,13 +70,13 @@ public class LengthUnit extends Unit<LengthUnit>
 
     /** Astronomical Unit = 149,597,870,700 m. */
     public static final LengthUnit ASTRONOMICAL_UNIT =
-            METER.deriveLinear(149597870700.0, "AU", "Astronomical Unit", UnitSystem.OTHER);
+            METER.deriveLinear(149_597_870_700.0, "AU", "Astronomical Unit", UnitSystem.OTHER);
 
     /** Lightyear = 9,460,730,472,580,800 m. */
-    public static final LengthUnit LIGHTYEAR = METER.deriveLinear(9460730472580800.0, "ly", "lightyear", UnitSystem.OTHER);
+    public static final LengthUnit LIGHTYEAR = METER.deriveLinear(9_460_730_472_580_800.0, "ly", "lightyear", UnitSystem.OTHER);
 
     /** Parsec = 648,000 / PI ly. */
-    public static final LengthUnit PARSEC = LIGHTYEAR.deriveLinear(648000.0 / Math.PI, "Pc", "Parsec");
+    public static final LengthUnit PARSEC = LIGHTYEAR.deriveLinear(648_000.0 / Math.PI, "Pc", "Parsec");
 
     /** Angstrom = 10^-10 m. */
     public static final LengthUnit ANGSTROM = METER.deriveLinear(1.0E-10, "A", "Angstrom", UnitSystem.OTHER, "\u212B", "A");
