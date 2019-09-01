@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.util.UnitRuntimeException;
 
@@ -23,7 +24,7 @@ import org.djunits4.unit.util.UnitRuntimeException;
 public final class DoubleScalarUtil
 {
     /** the cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<AbstractDoubleScalar<?, ?>>> CACHE = new HashMap<>();
+    private static Map<Unit<?>, Constructor<? extends AbstractDoubleScalar<?, ?>>> CACHE = new HashMap<>();
 
     /** */
     private DoubleScalarUtil()
@@ -32,7 +33,7 @@ public final class DoubleScalarUtil
     }
 
     /**
-     * Instantiate the DoubleScalar based on its unit. Rigid check on types for the compiler.
+     * Instantiate the DoubleScalar based on its unit. Rigid check on types by the compiler.
      * @param value double; the value
      * @param unit U; the unit in which the value is expressed
      * @return an instantiated DoubleScalar with the value expressed in the unit
@@ -58,11 +59,24 @@ public final class DoubleScalarUtil
     {
         try
         {
-            Constructor<AbstractDoubleScalar<?, ?>> scalarConstructor = CACHE.get(unit);
+            Constructor<? extends AbstractDoubleScalar<?, ?>> scalarConstructor = CACHE.get(unit);
             if (scalarConstructor == null)
             {
-                Class<AbstractDoubleScalar<?, ?>> scalarClass = (Class<AbstractDoubleScalar<?, ?>>) Class
-                        .forName("org.djunits4.value.vdouble.scalar." + unit.getClass().getSimpleName().replace("Unit", ""));
+                if (!unit.getClass().getSimpleName().endsWith("Unit"))
+                {
+                    throw new ClassNotFoundException(
+                            "Unit " + unit + " name does noet end with 'Unit'. Cannot find corresponding scalar");
+                }
+                Class<? extends AbstractDoubleScalar<?, ?>> scalarClass;
+                if (unit instanceof SIUnit)
+                {
+                    scalarClass = SIScalar.class;
+                }
+                else
+                {
+                    scalarClass = (Class<AbstractDoubleScalar<?, ?>>) Class.forName(
+                            "org.djunits4.value.vdouble.scalar." + unit.getClass().getSimpleName().replace("Unit", ""));
+                }
                 scalarConstructor = scalarClass.getDeclaredConstructor(double.class, unit.getClass());
                 CACHE.put(unit, scalarConstructor);
             }
@@ -71,7 +85,8 @@ public final class DoubleScalarUtil
         catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
                 | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
         {
-            throw new UnitRuntimeException("Cannot instantiate AbstractScalar of unit " + unit.toString());
+            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleScalar of unit " + unit.toString() + ". Reason: "
+                    + exception.getMessage());
         }
     }
 
@@ -98,12 +113,13 @@ public final class DoubleScalarUtil
      * @return an instantiated DoubleScalar with the value expressed in the unit
      * @param <S> the return type
      */
-    @SuppressWarnings({"unchecked", "checkstyle:needbraces", "cast", "rawtypes"})
-    public static <S extends AbstractDoubleScalar<?, S>> S instantiateAnonymousSI(final double si, final Unit<?> displayUnit)
+    @SuppressWarnings({"unchecked"})
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> S instantiateAnonymousSI(final double si,
+            final Unit<?> displayUnit)
     {
         S value;
         value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit());
-        ((AbstractDoubleScalar) value).setDisplayUnit((Unit) displayUnit);
+        value.setDisplayUnit((U) displayUnit);
         return value;
     }
 

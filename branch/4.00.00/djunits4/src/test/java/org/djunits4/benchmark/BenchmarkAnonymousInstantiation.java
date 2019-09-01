@@ -32,6 +32,7 @@ import org.djunits4.unit.MassUnit;
 import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
+import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TimeUnit;
@@ -65,6 +66,7 @@ import org.djunits4.value.vdouble.scalar.Mass;
 import org.djunits4.value.vdouble.scalar.Position;
 import org.djunits4.value.vdouble.scalar.Power;
 import org.djunits4.value.vdouble.scalar.Pressure;
+import org.djunits4.value.vdouble.scalar.SIScalar;
 import org.djunits4.value.vdouble.scalar.Speed;
 import org.djunits4.value.vdouble.scalar.Temperature;
 import org.djunits4.value.vdouble.scalar.Time;
@@ -82,7 +84,7 @@ import org.djunits4.value.vdouble.scalar.Volume;
 public class BenchmarkAnonymousInstantiation
 {
     /** the cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<AbstractDoubleScalar<?, ?>>> CACHE = new HashMap<>();
+    private static Map<Unit<?>, Constructor<? extends AbstractDoubleScalar<?, ?>>> CACHE = new HashMap<>();
 
     /** the cache to make the lookup of the method handle for a Scalar belonging to a unit faster. */
     private static Map<Unit<?>, MethodHandle> MH_CACHE = new HashMap<>();
@@ -121,11 +123,24 @@ public class BenchmarkAnonymousInstantiation
     {
         try
         {
-            Constructor<AbstractDoubleScalar<?, ?>> scalarConstructor = CACHE.get(unit);
+            Constructor<? extends AbstractDoubleScalar<?, ?>> scalarConstructor = CACHE.get(unit);
             if (scalarConstructor == null)
             {
-                Class<AbstractDoubleScalar<?, ?>> scalarClass = (Class<AbstractDoubleScalar<?, ?>>) Class
-                        .forName("org.djunits4.value.vdouble.scalar." + unit.getClass().getSimpleName().replace("Unit", ""));
+                if (!unit.getClass().getSimpleName().endsWith("Unit"))
+                {
+                    throw new ClassNotFoundException(
+                            "Unit " + unit + " name does noet end with 'Unit'. Cannot find corresponding scalar");
+                }
+                Class<? extends AbstractDoubleScalar<?, ?>> scalarClass;
+                if (unit instanceof SIUnit)
+                {
+                    scalarClass = SIScalar.class;
+                }
+                else
+                {
+                    scalarClass = (Class<AbstractDoubleScalar<?, ?>>) Class.forName(
+                            "org.djunits4.value.vdouble.scalar." + unit.getClass().getSimpleName().replace("Unit", ""));
+                }
                 scalarConstructor = scalarClass.getDeclaredConstructor(double.class, unit.getClass());
                 CACHE.put(unit, scalarConstructor);
             }
@@ -134,7 +149,8 @@ public class BenchmarkAnonymousInstantiation
         catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
                 | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
         {
-            throw new UnitRuntimeException("Cannot instantiate AbstractScalar of unit " + unit.toString());
+            throw new UnitRuntimeException(
+                    "Cannot instantiate AbstractScalar of unit " + unit.toString() + ". Reason: " + exception.getMessage());
         }
     }
 
