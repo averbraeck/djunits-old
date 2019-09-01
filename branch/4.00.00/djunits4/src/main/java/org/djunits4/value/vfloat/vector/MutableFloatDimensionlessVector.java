@@ -3,6 +3,8 @@ package org.djunits4.value.vfloat.vector;
 import java.util.List;
 import java.util.SortedMap;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.value.MathFunctionsDimensionless;
 import org.djunits4.value.StorageType;
@@ -19,6 +21,7 @@ import org.djunits4.value.vfloat.scalar.FloatDimensionless;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class MutableFloatDimensionlessVector extends AbstractMutableFloatVectorRel<DimensionlessUnit, FloatDimensionlessVector,
         MutableFloatDimensionlessVector, FloatDimensionless>
         implements MathFunctionsDimensionless<MutableFloatDimensionlessVector>

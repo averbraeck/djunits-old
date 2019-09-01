@@ -1,5 +1,7 @@
 package org.djunits4.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
@@ -14,6 +16,7 @@ import org.djunits4.value.vdouble.scalar.Temperature;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class TemperatureMatrix
         extends AbstractDoubleMatrixRel<TemperatureUnit, TemperatureMatrix, MutableTemperatureMatrix, Temperature>
 {

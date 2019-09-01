@@ -2,6 +2,8 @@ package org.djunits4.value.vfloat.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.ForceUnit;
@@ -20,6 +22,7 @@ import org.djunits4.unit.VolumeUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 {
     /** */

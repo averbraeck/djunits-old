@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
 import org.djunits4.unit.ElectricalCurrentUnit;
@@ -17,6 +19,7 @@ import org.djunits4.unit.PowerUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrentUnit, ElectricalCurrent>
 {
     /** */
@@ -197,7 +200,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
 
     /**
      * Calculate the division of ElectricalCurrent and ElectricalCurrent, which results in a Dimensionless scalar.
- * @param v ElectricalCurrent; ElectricalCurrent scalar
+     * @param v ElectricalCurrent scalar
      * @return Dimensionless scalar as a division of ElectricalCurrent and ElectricalCurrent
      */
     public final Dimensionless divideBy(final ElectricalCurrent v)
@@ -207,7 +210,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
 
     /**
      * Calculate the multiplication of ElectricalCurrent and ElectricalPotential, which results in a Power scalar.
- * @param v ElectricalPotential; ElectricalCurrent scalar
+     * @param v ElectricalCurrent scalar
      * @return Power scalar as a multiplication of ElectricalCurrent and ElectricalPotential
      */
     public final Power multiplyBy(final ElectricalPotential v)
@@ -217,7 +220,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
 
     /**
      * Calculate the multiplication of ElectricalCurrent and Duration, which results in a ElectricalCharge scalar.
- * @param v Duration; ElectricalCurrent scalar
+     * @param v ElectricalCurrent scalar
      * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Duration
      */
     public final ElectricalCharge multiplyBy(final Duration v)
@@ -228,7 +231,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
     /**
      * Calculate the multiplication of ElectricalCurrent and ElectricalResistance, which results in a ElectricalPotential
      * scalar.
- * @param v ElectricalResistance; ElectricalCurrent scalar
+     * @param v ElectricalCurrent scalar
      * @return ElectricalPotential scalar as a multiplication of ElectricalCurrent and ElectricalResistance
      */
     public final ElectricalPotential multiplyBy(final ElectricalResistance v)

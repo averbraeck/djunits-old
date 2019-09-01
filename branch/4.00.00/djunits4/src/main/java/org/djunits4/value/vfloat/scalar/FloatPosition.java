@@ -2,6 +2,8 @@ package org.djunits4.value.vfloat.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 
@@ -15,6 +17,7 @@ import org.djunits4.unit.PositionUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPosition, LengthUnit, FloatLength>
 {
     /** */

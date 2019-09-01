@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.AngleSolidUnit;
 import org.djunits4.unit.AngleUnit;
@@ -38,6 +40,7 @@ import org.djunits4.value.MathFunctionsDimensionless;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Dimensionless>
         implements MathFunctionsDimensionless<Dimensionless>
 {
@@ -350,7 +353,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the division of Dimensionless and Dimensionless, which results in a Dimensionless scalar.
- * @param v Dimensionless; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Dimensionless scalar as a division of Dimensionless and Dimensionless
      */
     public final Dimensionless divideBy(final Dimensionless v)
@@ -360,7 +363,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Acceleration, which results in a Acceleration scalar.
- * @param v Acceleration; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Acceleration scalar as a multiplication of Dimensionless and Acceleration
      */
     public final Acceleration multiplyBy(final Acceleration v)
@@ -370,7 +373,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Angle, which results in a Angle scalar.
- * @param v Angle; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Angle scalar as a multiplication of Dimensionless and Angle
      */
     public final Angle multiplyBy(final Angle v)
@@ -380,7 +383,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and AngleSolid, which results in a AngleSolid scalar.
- * @param v AngleSolid; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return AngleSolid scalar as a multiplication of Dimensionless and AngleSolid
      */
     public final AngleSolid multiplyBy(final AngleSolid v)
@@ -390,7 +393,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Area, which results in a Area scalar.
- * @param v Area; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Area scalar as a multiplication of Dimensionless and Area
      */
     public final Area multiplyBy(final Area v)
@@ -400,7 +403,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Density, which results in a Density scalar.
- * @param v Density; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Density scalar as a multiplication of Dimensionless and Density
      */
     public final Density multiplyBy(final Density v)
@@ -410,7 +413,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Dimensionless, which results in a Dimensionless scalar.
- * @param v Dimensionless; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Dimensionless scalar as a multiplication of Dimensionless and Dimensionless
      */
     public final Dimensionless multiplyBy(final Dimensionless v)
@@ -420,7 +423,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and ElectricalCharge, which results in a ElectricalCharge scalar.
- * @param v ElectricalCharge; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return ElectricalCharge scalar as a multiplication of Dimensionless and ElectricalCharge
      */
     public final ElectricalCharge multiplyBy(final ElectricalCharge v)
@@ -430,7 +433,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and ElectricalCurrent, which results in a ElectricalCurrent scalar.
- * @param v ElectricalCurrent; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return ElectricalCurrent scalar as a multiplication of Dimensionless and ElectricalCurrent
      */
     public final ElectricalCurrent multiplyBy(final ElectricalCurrent v)
@@ -440,7 +443,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and ElectricalPotential, which results in a ElectricalPotential scalar.
- * @param v ElectricalPotential; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return ElectricalPotential scalar as a multiplication of Dimensionless and ElectricalPotential
      */
     public final ElectricalPotential multiplyBy(final ElectricalPotential v)
@@ -450,7 +453,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and ElectricalResistance, which results in a ElectricalResistance scalar.
- * @param v ElectricalResistance; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return ElectricalResistance scalar as a multiplication of Dimensionless and ElectricalResistance
      */
     public final ElectricalResistance multiplyBy(final ElectricalResistance v)
@@ -460,7 +463,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Energy, which results in a Energy scalar.
- * @param v Energy; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Energy scalar as a multiplication of Dimensionless and Energy
      */
     public final Energy multiplyBy(final Energy v)
@@ -470,7 +473,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and FlowMass, which results in a FlowMass scalar.
- * @param v FlowMass; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return FlowMass scalar as a multiplication of Dimensionless and FlowMass
      */
     public final FlowMass multiplyBy(final FlowMass v)
@@ -480,7 +483,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and FlowVolume, which results in a FlowVolume scalar.
- * @param v FlowVolume; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return FlowVolume scalar as a multiplication of Dimensionless and FlowVolume
      */
     public final FlowVolume multiplyBy(final FlowVolume v)
@@ -490,7 +493,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Force, which results in a Force scalar.
- * @param v Force; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Force scalar as a multiplication of Dimensionless and Force
      */
     public final Force multiplyBy(final Force v)
@@ -500,7 +503,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Frequency, which results in a Frequency scalar.
- * @param v Frequency; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Frequency scalar as a multiplication of Dimensionless and Frequency
      */
     public final Frequency multiplyBy(final Frequency v)
@@ -510,7 +513,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Length, which results in a Length scalar.
- * @param v Length; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Length scalar as a multiplication of Dimensionless and Length
      */
     public final Length multiplyBy(final Length v)
@@ -520,7 +523,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and LinearDensity, which results in a LinearDensity scalar.
- * @param v LinearDensity; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return LinearDensity scalar as a multiplication of Dimensionless and LinearDensity
      */
     public final LinearDensity multiplyBy(final LinearDensity v)
@@ -530,7 +533,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Mass, which results in a Mass scalar.
- * @param v Mass; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Mass scalar as a multiplication of Dimensionless and Mass
      */
     public final Mass multiplyBy(final Mass v)
@@ -540,7 +543,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Power, which results in a Power scalar.
- * @param v Power; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Power scalar as a multiplication of Dimensionless and Power
      */
     public final Power multiplyBy(final Power v)
@@ -550,7 +553,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Pressure, which results in a Pressure scalar.
- * @param v Pressure; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Pressure scalar as a multiplication of Dimensionless and Pressure
      */
     public final Pressure multiplyBy(final Pressure v)
@@ -560,7 +563,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Speed, which results in a Speed scalar.
- * @param v Speed; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Speed scalar as a multiplication of Dimensionless and Speed
      */
     public final Speed multiplyBy(final Speed v)
@@ -570,7 +573,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Temperature, which results in a Temperature scalar.
- * @param v Temperature; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Temperature scalar as a multiplication of Dimensionless and Temperature
      */
     public final Temperature multiplyBy(final Temperature v)
@@ -580,7 +583,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Duration, which results in a Duration scalar.
- * @param v Duration; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Duration scalar as a multiplication of Dimensionless and Duration
      */
     public final Duration multiplyBy(final Duration v)
@@ -590,7 +593,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Torque, which results in a Torque scalar.
- * @param v Torque; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Torque scalar as a multiplication of Dimensionless and Torque
      */
     public final Torque multiplyBy(final Torque v)
@@ -600,7 +603,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the multiplication of Dimensionless and Volume, which results in a Volume scalar.
- * @param v Volume; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Volume scalar as a multiplication of Dimensionless and Volume
      */
     public final Volume multiplyBy(final Volume v)
@@ -610,7 +613,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the division of Dimensionless and Length, which results in a LinearDensity scalar.
- * @param v Length; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return LinearDensity scalar as a division of Dimensionless and Length
      */
     public final LinearDensity divideBy(final Length v)
@@ -620,7 +623,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the division of Dimensionless and LinearDensity, which results in a Length scalar.
- * @param v LinearDensity; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Length scalar as a division of Dimensionless and LinearDensity
      */
     public final Length divideBy(final LinearDensity v)
@@ -630,7 +633,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the division of Dimensionless and Duration, which results in a Frequency scalar.
- * @param v Duration; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Frequency scalar as a division of Dimensionless and Duration
      */
     public final Frequency divideBy(final Duration v)
@@ -640,7 +643,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
 
     /**
      * Calculate the division of Dimensionless and Frequency, which results in a Duration scalar.
- * @param v Frequency; Dimensionless scalar
+     * @param v Dimensionless scalar
      * @return Duration scalar as a division of Dimensionless and Frequency
      */
     public final Duration divideBy(final Frequency v)

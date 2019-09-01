@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.FlowMassUnit;
 import org.djunits4.unit.ForceUnit;
@@ -17,6 +19,7 @@ import org.djunits4.unit.MassUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 {
     /** */
@@ -195,7 +198,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the division of FlowMass and FlowMass, which results in a Dimensionless scalar.
- * @param v FlowMass; FlowMass scalar
+     * @param v FlowMass scalar
      * @return Dimensionless scalar as a division of FlowMass and FlowMass
      */
     public final Dimensionless divideBy(final FlowMass v)
@@ -205,7 +208,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the multiplication of FlowMass and Duration, which results in a Mass scalar.
- * @param v Duration; FlowMass scalar
+     * @param v FlowMass scalar
      * @return Mass scalar as a multiplication of FlowMass and Duration
      */
     public final Mass multiplyBy(final Duration v)
@@ -215,7 +218,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the division of FlowMass and Frequency, which results in a Mass scalar.
- * @param v Frequency; FlowMass scalar
+     * @param v FlowMass scalar
      * @return Mass scalar as a division of FlowMass and Frequency
      */
     public final Mass divideBy(final Frequency v)
@@ -225,7 +228,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the division of FlowMass and Mass, which results in a Frequency scalar.
- * @param v Mass; FlowMass scalar
+     * @param v FlowMass scalar
      * @return Frequency scalar as a division of FlowMass and Mass
      */
     public final Frequency divideBy(final Mass v)
@@ -235,7 +238,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the multiplication of FlowMass and Speed, which results in a Force scalar.
- * @param v Speed; FlowMass scalar
+     * @param v FlowMass scalar
      * @return Force scalar as a multiplication of FlowMass and Speed
      */
     public final Force multiplyBy(final Speed v)

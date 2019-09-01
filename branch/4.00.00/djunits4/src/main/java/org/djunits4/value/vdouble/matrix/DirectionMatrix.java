@@ -1,5 +1,7 @@
 package org.djunits4.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.DirectionUnit;
 import org.djunits4.value.StorageType;
@@ -15,6 +17,7 @@ import org.djunits4.value.vdouble.scalar.Direction;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class DirectionMatrix extends
         AbstractDoubleMatrixAbs<DirectionUnit, AngleUnit, DirectionMatrix, AngleMatrix, MutableDirectionMatrix, Direction>
 {

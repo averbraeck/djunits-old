@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.AngleSolidUnit;
 import org.djunits4.unit.DimensionlessUnit;
 
@@ -14,6 +16,7 @@ import org.djunits4.unit.DimensionlessUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSolid>
 {
     /** */
@@ -192,7 +195,7 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
 
     /**
      * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
- * @param v AngleSolid; AngleSolid scalar
+     * @param v AngleSolid scalar
      * @return Dimensionless scalar as a division of AngleSolid and AngleSolid
      */
     public final Dimensionless divideBy(final AngleSolid v)

@@ -3,6 +3,8 @@ package org.djunits4.value.vdouble.vector;
 import java.util.List;
 import java.util.SortedMap;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.DirectionUnit;
 import org.djunits4.value.StorageType;
@@ -18,6 +20,7 @@ import org.djunits4.value.vdouble.scalar.Direction;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class DirectionVector extends
         AbstractDoubleVectorAbs<DirectionUnit, AngleUnit, DirectionVector, AngleVector, MutableDirectionVector, Direction>
 {
@@ -38,7 +41,7 @@ public class DirectionVector extends
 
     /**
      * Construct a new Absolute Immutable Double DirectionVector.
- * @param values List&lt;Double&gt;; the values of the entries in the new Absolute Immutable Double DirectionVector
+     * @param values List&lt;double&gt;; the values of the entries in the new Absolute Immutable Double DirectionVector
      * @param unit DirectionUnit; the unit of the new Absolute Immutable Double DirectionVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null

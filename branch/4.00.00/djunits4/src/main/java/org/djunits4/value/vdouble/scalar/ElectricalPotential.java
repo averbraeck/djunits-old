@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ElectricalCurrentUnit;
 import org.djunits4.unit.ElectricalPotentialUnit;
@@ -17,6 +19,7 @@ import org.djunits4.unit.PowerUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPotentialUnit, ElectricalPotential>
 {
     /** */
@@ -202,7 +205,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalPotential, which results in a Dimensionless scalar.
- * @param v ElectricalPotential; ElectricalPotential scalar
+     * @param v ElectricalPotential scalar
      * @return Dimensionless scalar as a division of ElectricalPotential and ElectricalPotential
      */
     public final Dimensionless divideBy(final ElectricalPotential v)
@@ -212,7 +215,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the multiplication of ElectricalPotential and ElectricalCurrent, which results in a Power scalar.
- * @param v ElectricalCurrent; ElectricalPotential scalar
+     * @param v ElectricalPotential scalar
      * @return Power scalar as a multiplication of ElectricalPotential and ElectricalCurrent
      */
     public final Power multiplyBy(final ElectricalCurrent v)
@@ -222,7 +225,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalCurrent, which results in a ElectricalResistance scalar.
- * @param v ElectricalCurrent; ElectricalPotential scalar
+     * @param v ElectricalPotential scalar
      * @return ElectricalResistance scalar as a division of ElectricalPotential and ElectricalCurrent
      */
     public final ElectricalResistance divideBy(final ElectricalCurrent v)
@@ -232,7 +235,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalResistance, which results in a ElectricalCurrent scalar.
- * @param v ElectricalResistance; ElectricalPotential scalar
+     * @param v ElectricalPotential scalar
      * @return ElectricalCurrent scalar as a division of ElectricalPotential and ElectricalResistance
      */
     public final ElectricalCurrent divideBy(final ElectricalResistance v)

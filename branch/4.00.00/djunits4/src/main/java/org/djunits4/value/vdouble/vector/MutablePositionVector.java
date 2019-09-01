@@ -3,6 +3,8 @@ package org.djunits4.value.vdouble.vector;
 import java.util.List;
 import java.util.SortedMap;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 import org.djunits4.value.StorageType;
@@ -18,6 +20,7 @@ import org.djunits4.value.vdouble.scalar.Position;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class MutablePositionVector extends
         AbstractMutableDoubleVectorAbs<PositionUnit, LengthUnit, PositionVector, LengthVector, MutablePositionVector, Position>
 {

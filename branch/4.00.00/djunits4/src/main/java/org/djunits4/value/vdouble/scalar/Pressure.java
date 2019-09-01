@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.EnergyUnit;
 import org.djunits4.unit.ForceUnit;
@@ -16,6 +18,7 @@ import org.djunits4.unit.PressureUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 {
     /** */
@@ -194,7 +197,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
- * @param v Pressure; Pressure scalar
+     * @param v Pressure scalar
      * @return Dimensionless scalar as a division of Pressure and Pressure
      */
     public final Dimensionless divideBy(final Pressure v)
@@ -204,7 +207,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
- * @param v Area; Pressure scalar
+     * @param v Pressure scalar
      * @return Force scalar as a multiplication of Pressure and Area
      */
     public final Force multiplyBy(final Area v)
@@ -214,7 +217,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
- * @param v Volume; Pressure scalar
+     * @param v Pressure scalar
      * @return Energy scalar as a multiplication of Pressure and Volume
      */
     public final Energy multiplyBy(final Volume v)

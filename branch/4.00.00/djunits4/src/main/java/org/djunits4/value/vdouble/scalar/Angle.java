@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DirectionUnit;
@@ -16,6 +18,7 @@ import org.djunits4.unit.DirectionUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 {
     /** */
@@ -104,7 +107,7 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
- * @param v Direction; the value to add
+     * @param v %TypAbs%; the value to add
      * @return Direction; sum of this value and v as a new object
      */
     public final Direction plus(final Direction v)
@@ -216,7 +219,7 @@ public class Angle extends AbstractDoubleScalarRel<AngleUnit, Angle>
 
     /**
      * Calculate the division of Angle and Angle, which results in a Dimensionless scalar.
- * @param v Angle; Angle scalar
+     * @param v Angle scalar
      * @return Dimensionless scalar as a division of Angle and Angle
      */
     public final Dimensionless divideBy(final Angle v)

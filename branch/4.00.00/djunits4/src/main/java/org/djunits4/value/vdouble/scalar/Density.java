@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DensityUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.MassUnit;
@@ -15,6 +17,7 @@ import org.djunits4.unit.MassUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 {
     /** */
@@ -193,7 +196,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the division of Density and Density, which results in a Dimensionless scalar.
- * @param v Density; Density scalar
+     * @param v Density scalar
      * @return Dimensionless scalar as a division of Density and Density
      */
     public final Dimensionless divideBy(final Density v)
@@ -203,7 +206,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
- * @param v Volume; Density scalar
+     * @param v Density scalar
      * @return Mass scalar as a multiplication of Density and Volume
      */
     public final Mass multiplyBy(final Volume v)

@@ -3,6 +3,8 @@ package org.djunits4.value.vdouble.vector;
 import java.util.List;
 import java.util.SortedMap;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
@@ -17,6 +19,7 @@ import org.djunits4.value.vdouble.scalar.Duration;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class MutableDurationVector
         extends AbstractMutableDoubleVectorRel<DurationUnit, DurationVector, MutableDurationVector, Duration>
 {
@@ -73,7 +76,7 @@ public class MutableDurationVector
 
     /**
      * Construct a new Relative Mutable Double DurationVector.
- * @param values SortedMap&lt;Integer, Duration&gt;; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Duration&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
      *            DurationVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)

@@ -1,5 +1,7 @@
 package org.djunits4.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.FrequencyUnit;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
@@ -14,6 +16,7 @@ import org.djunits4.value.vdouble.scalar.Frequency;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class MutableFrequencyMatrix
         extends AbstractMutableDoubleMatrixRel<FrequencyUnit, FrequencyMatrix, MutableFrequencyMatrix, Frequency>
 {
@@ -35,7 +38,7 @@ public class MutableFrequencyMatrix
 
     /**
      * Construct a new Relative Immutable Double FrequencyMatrix.
- * @param values Frequency[][]; the values of the entries in the new Relative Immutable Double FrequencyMatrix
+     * @param values %TypeAbs%[][]; the values of the entries in the new Relative Immutable Double FrequencyMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */

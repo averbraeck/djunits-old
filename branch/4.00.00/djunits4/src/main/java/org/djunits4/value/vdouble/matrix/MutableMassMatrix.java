@@ -1,5 +1,7 @@
 package org.djunits4.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.MassUnit;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
@@ -14,6 +16,7 @@ import org.djunits4.value.vdouble.scalar.Mass;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class MutableMassMatrix extends AbstractMutableDoubleMatrixRel<MassUnit, MassMatrix, MutableMassMatrix, Mass>
 {
     /** */
@@ -33,7 +36,7 @@ public class MutableMassMatrix extends AbstractMutableDoubleMatrixRel<MassUnit, 
 
     /**
      * Construct a new Relative Immutable Double MassMatrix.
- * @param values Mass[][]; the values of the entries in the new Relative Immutable Double MassMatrix
+     * @param values %TypeAbs%[][]; the values of the entries in the new Relative Immutable Double MassMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */

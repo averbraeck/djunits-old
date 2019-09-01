@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
@@ -22,6 +24,7 @@ import org.djunits4.unit.VolumeUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 {
     /** */
@@ -110,7 +113,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
- * @param v Time; the value to add
+     * @param v %TypAbs%; the value to add
      * @return Time; sum of this value and v as a new object
      */
     public final Time plus(final Time v)
@@ -222,7 +225,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the division of Duration and Duration, which results in a Dimensionless scalar.
- * @param v Duration; Duration scalar
+     * @param v Duration scalar
      * @return Dimensionless scalar as a division of Duration and Duration
      */
     public final Dimensionless divideBy(final Duration v)
@@ -232,7 +235,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and Frequency, which results in a Dimensionless scalar.
- * @param v Frequency; Duration scalar
+     * @param v Duration scalar
      * @return Dimensionless scalar as a multiplication of Duration and Frequency
      */
     public final Dimensionless multiplyBy(final Frequency v)
@@ -242,7 +245,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and ElectricalCurrent, which results in a ElectricalCharge scalar.
- * @param v ElectricalCurrent; Duration scalar
+     * @param v Duration scalar
      * @return ElectricalCharge scalar as a multiplication of Duration and ElectricalCurrent
      */
     public final ElectricalCharge multiplyBy(final ElectricalCurrent v)
@@ -252,7 +255,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and FlowMass, which results in a Mass scalar.
- * @param v FlowMass; Duration scalar
+     * @param v Duration scalar
      * @return Mass scalar as a multiplication of Duration and FlowMass
      */
     public final Mass multiplyBy(final FlowMass v)
@@ -262,7 +265,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and FlowVolume, which results in a Volume scalar.
- * @param v FlowVolume; Duration scalar
+     * @param v Duration scalar
      * @return Volume scalar as a multiplication of Duration and FlowVolume
      */
     public final Volume multiplyBy(final FlowVolume v)
@@ -272,7 +275,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and Acceleration, which results in a Speed scalar.
- * @param v Acceleration; Duration scalar
+     * @param v Duration scalar
      * @return Speed scalar as a multiplication of Duration and Acceleration
      */
     public final Speed multiplyBy(final Acceleration v)
@@ -282,7 +285,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and Power, which results in a Energy scalar.
- * @param v Power; Duration scalar
+     * @param v Duration scalar
      * @return Energy scalar as a multiplication of Duration and Power
      */
     public final Energy multiplyBy(final Power v)
@@ -292,7 +295,7 @@ public class Duration extends AbstractDoubleScalarRel<DurationUnit, Duration>
 
     /**
      * Calculate the multiplication of Duration and Speed, which results in a Length scalar.
- * @param v Speed; Duration scalar
+     * @param v Duration scalar
      * @return Length scalar as a multiplication of Duration and Speed
      */
     public final Length multiplyBy(final Speed v)

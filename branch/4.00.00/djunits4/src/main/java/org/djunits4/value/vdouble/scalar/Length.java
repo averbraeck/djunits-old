@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
@@ -22,6 +24,7 @@ import org.djunits4.unit.VolumeUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 {
     /** */
@@ -110,7 +113,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
- * @param v Position; the value to add
+     * @param v %TypAbs%; the value to add
      * @return Position; sum of this value and v as a new object
      */
     public final Position plus(final Position v)
@@ -222,7 +225,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Length, which results in a Dimensionless scalar.
- * @param v Length; Length scalar
+     * @param v Length scalar
      * @return Dimensionless scalar as a division of Length and Length
      */
     public final Dimensionless divideBy(final Length v)
@@ -232,7 +235,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Length, which results in a Area scalar.
- * @param v Length; Length scalar
+     * @param v Length scalar
      * @return Area scalar as a multiplication of Length and Length
      */
     public final Area multiplyBy(final Length v)
@@ -242,7 +245,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and LinearDensity, which results in a Area scalar.
- * @param v LinearDensity; Length scalar
+     * @param v Length scalar
      * @return Area scalar as a division of Length and LinearDensity
      */
     public final Area divideBy(final LinearDensity v)
@@ -252,7 +255,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Area, which results in a LinearDensity scalar.
- * @param v Area; Length scalar
+     * @param v Length scalar
      * @return LinearDensity scalar as a division of Length and Area
      */
     public final LinearDensity divideBy(final Area v)
@@ -262,7 +265,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Area, which results in a Volume scalar.
- * @param v Area; Length scalar
+     * @param v Length scalar
      * @return Volume scalar as a multiplication of Length and Area
      */
     public final Volume multiplyBy(final Area v)
@@ -272,7 +275,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Force, which results in a Energy scalar.
- * @param v Force; Length scalar
+     * @param v Length scalar
      * @return Energy scalar as a multiplication of Length and Force
      */
     public final Energy multiplyBy(final Force v)
@@ -282,7 +285,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
- * @param v Frequency; Length scalar
+     * @param v Length scalar
      * @return Speed scalar as a multiplication of Length and Frequency
      */
     public final Speed multiplyBy(final Frequency v)
@@ -292,7 +295,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Duration, which results in a Speed scalar.
- * @param v Duration; Length scalar
+     * @param v Length scalar
      * @return Speed scalar as a division of Length and Duration
      */
     public final Speed divideBy(final Duration v)
@@ -302,7 +305,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Calculate the division of Length and Speed, which results in a Duration scalar.
- * @param v Speed; Length scalar
+     * @param v Length scalar
      * @return Duration scalar as a division of Length and Speed
      */
     public final Duration divideBy(final Speed v)

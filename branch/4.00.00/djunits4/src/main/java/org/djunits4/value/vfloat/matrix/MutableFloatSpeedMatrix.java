@@ -1,5 +1,7 @@
 package org.djunits4.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
@@ -14,6 +16,7 @@ import org.djunits4.value.vfloat.scalar.FloatSpeed;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class MutableFloatSpeedMatrix
         extends AbstractMutableFloatMatrixRel<SpeedUnit, FloatSpeedMatrix, MutableFloatSpeedMatrix, FloatSpeed>
 {

@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ForceUnit;
@@ -17,6 +19,7 @@ import org.djunits4.unit.SpeedUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acceleration>
 {
     /** */
@@ -195,7 +198,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Acceleration, which results in a Dimensionless scalar.
- * @param v Acceleration; Acceleration scalar
+     * @param v Acceleration scalar
      * @return Dimensionless scalar as a division of Acceleration and Acceleration
      */
     public final Dimensionless divideBy(final Acceleration v)
@@ -205,7 +208,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the multiplication of Acceleration and Mass, which results in a Force scalar.
- * @param v Mass; Acceleration scalar
+     * @param v Acceleration scalar
      * @return Force scalar as a multiplication of Acceleration and Mass
      */
     public final Force multiplyBy(final Mass v)
@@ -215,7 +218,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the multiplication of Acceleration and Duration, which results in a Speed scalar.
- * @param v Duration; Acceleration scalar
+     * @param v Acceleration scalar
      * @return Speed scalar as a multiplication of Acceleration and Duration
      */
     public final Speed multiplyBy(final Duration v)
@@ -225,7 +228,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Frequency, which results in a Speed scalar.
- * @param v Frequency; Acceleration scalar
+     * @param v Acceleration scalar
      * @return Speed scalar as a division of Acceleration and Frequency
      */
     public final Speed divideBy(final Frequency v)
@@ -235,7 +238,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Speed, which results in a Frequency scalar.
- * @param v Speed; Acceleration scalar
+     * @param v Acceleration scalar
      * @return Frequency scalar as a division of Acceleration and Speed
      */
     public final Frequency divideBy(final Speed v)

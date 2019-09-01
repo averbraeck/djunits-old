@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.FlowVolumeUnit;
@@ -19,6 +21,7 @@ import org.djunits4.unit.VolumeUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 {
     /** */
@@ -197,7 +200,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and Area, which results in a Dimensionless scalar.
- * @param v Area; Area scalar
+     * @param v Area scalar
      * @return Dimensionless scalar as a division of Area and Area
      */
     public final Dimensionless divideBy(final Area v)
@@ -207,7 +210,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Length, which results in a Volume scalar.
- * @param v Length; Area scalar
+     * @param v Area scalar
      * @return Volume scalar as a multiplication of Area and Length
      */
     public final Volume multiplyBy(final Length v)
@@ -217,7 +220,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and LinearDensity, which results in a Volume scalar.
- * @param v LinearDensity; Area scalar
+     * @param v Area scalar
      * @return Volume scalar as a division of Area and LinearDensity
      */
     public final Volume divideBy(final LinearDensity v)
@@ -227,7 +230,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and Volume, which results in a LinearDensity scalar.
- * @param v Volume; Area scalar
+     * @param v Area scalar
      * @return LinearDensity scalar as a division of Area and Volume
      */
     public final LinearDensity divideBy(final Volume v)
@@ -237,7 +240,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and Length, which results in a Length scalar.
- * @param v Length; Area scalar
+     * @param v Area scalar
      * @return Length scalar as a division of Area and Length
      */
     public final Length divideBy(final Length v)
@@ -247,7 +250,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and LinearDensity, which results in a Length scalar.
- * @param v LinearDensity; Area scalar
+     * @param v Area scalar
      * @return Length scalar as a multiplication of Area and LinearDensity
      */
     public final Length multiplyBy(final LinearDensity v)
@@ -257,7 +260,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Speed, which results in a FlowVolume scalar.
- * @param v Speed; Area scalar
+     * @param v Area scalar
      * @return FlowVolume scalar as a multiplication of Area and Speed
      */
     public final FlowVolume multiplyBy(final Speed v)
@@ -267,7 +270,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Pressure, which results in a Force scalar.
- * @param v Pressure; Area scalar
+     * @param v Area scalar
      * @return Force scalar as a multiplication of Area and Pressure
      */
     public final Force multiplyBy(final Pressure v)

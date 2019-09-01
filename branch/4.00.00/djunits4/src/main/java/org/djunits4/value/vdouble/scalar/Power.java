@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ElectricalCurrentUnit;
 import org.djunits4.unit.ElectricalPotentialUnit;
@@ -20,6 +22,7 @@ import org.djunits4.unit.SpeedUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 {
     /** */
@@ -198,7 +201,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Power, which results in a Dimensionless scalar.
- * @param v Power; Power scalar
+     * @param v Power scalar
      * @return Dimensionless scalar as a division of Power and Power
      */
     public final Dimensionless divideBy(final Power v)
@@ -208,7 +211,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the multiplication of Power and Duration, which results in a Energy scalar.
- * @param v Duration; Power scalar
+     * @param v Power scalar
      * @return Energy scalar as a multiplication of Power and Duration
      */
     public final Energy multiplyBy(final Duration v)
@@ -218,7 +221,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Frequency, which results in a Energy scalar.
- * @param v Frequency; Power scalar
+     * @param v Power scalar
      * @return Energy scalar as a division of Power and Frequency
      */
     public final Energy divideBy(final Frequency v)
@@ -228,7 +231,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Energy, which results in a Frequency scalar.
- * @param v Energy; Power scalar
+     * @param v Power scalar
      * @return Frequency scalar as a division of Power and Energy
      */
     public final Frequency divideBy(final Energy v)
@@ -238,7 +241,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Speed, which results in a Force scalar.
- * @param v Speed; Power scalar
+     * @param v Power scalar
      * @return Force scalar as a division of Power and Speed
      */
     public final Force divideBy(final Speed v)
@@ -248,7 +251,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Force, which results in a Speed scalar.
- * @param v Force; Power scalar
+     * @param v Power scalar
      * @return Speed scalar as a division of Power and Force
      */
     public final Speed divideBy(final Force v)
@@ -258,7 +261,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
- * @param v ElectricalPotential; Power scalar
+     * @param v Power scalar
      * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
      */
     public final ElectricalCurrent divideBy(final ElectricalPotential v)
@@ -268,7 +271,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
- * @param v ElectricalCurrent; Power scalar
+     * @param v Power scalar
      * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
      */
     public final ElectricalPotential divideBy(final ElectricalCurrent v)

@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.TemperatureUnit;
@@ -16,6 +18,7 @@ import org.djunits4.unit.TemperatureUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temperature>
 {
     /** */
@@ -104,7 +107,7 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
- * @param v AbsoluteTemperature; the value to add
+     * @param v %TypAbs%; the value to add
      * @return AbsoluteTemperature; sum of this value and v as a new object
      */
     public final AbsoluteTemperature plus(final AbsoluteTemperature v)
@@ -216,7 +219,7 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
- * @param v Temperature; Temperature scalar
+     * @param v Temperature scalar
      * @return Dimensionless scalar as a division of Temperature and Temperature
      */
     public final Dimensionless divideBy(final Temperature v)

@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.EnergyUnit;
@@ -19,6 +21,7 @@ import org.djunits4.unit.PressureUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 {
     /** */
@@ -197,7 +200,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Energy, which results in a Dimensionless scalar.
- * @param v Energy; Energy scalar
+     * @param v Energy scalar
      * @return Dimensionless scalar as a division of Energy and Energy
      */
     public final Dimensionless divideBy(final Energy v)
@@ -207,7 +210,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Force, which results in a Length scalar.
- * @param v Force; Energy scalar
+     * @param v Energy scalar
      * @return Length scalar as a division of Energy and Force
      */
     public final Length divideBy(final Force v)
@@ -217,7 +220,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Length, which results in a Force scalar.
- * @param v Length; Energy scalar
+     * @param v Energy scalar
      * @return Force scalar as a division of Energy and Length
      */
     public final Force divideBy(final Length v)
@@ -227,7 +230,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the multiplication of Energy and LinearDensity, which results in a Force scalar.
- * @param v LinearDensity; Energy scalar
+     * @param v Energy scalar
      * @return Force scalar as a multiplication of Energy and LinearDensity
      */
     public final Force multiplyBy(final LinearDensity v)
@@ -237,7 +240,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Duration, which results in a Power scalar.
- * @param v Duration; Energy scalar
+     * @param v Energy scalar
      * @return Power scalar as a division of Energy and Duration
      */
     public final Power divideBy(final Duration v)
@@ -247,7 +250,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Power, which results in a Duration scalar.
- * @param v Power; Energy scalar
+     * @param v Energy scalar
      * @return Duration scalar as a division of Energy and Power
      */
     public final Duration divideBy(final Power v)
@@ -257,7 +260,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Volume, which results in a Pressure scalar.
- * @param v Volume; Energy scalar
+     * @param v Energy scalar
      * @return Pressure scalar as a division of Energy and Volume
      */
     public final Pressure divideBy(final Volume v)
@@ -267,7 +270,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the multiplication of Energy and Frequency, which results in a Power scalar.
- * @param v Frequency; Energy scalar
+     * @param v Energy scalar
      * @return Power scalar as a multiplication of Energy and Frequency
      */
     public final Power multiplyBy(final Frequency v)

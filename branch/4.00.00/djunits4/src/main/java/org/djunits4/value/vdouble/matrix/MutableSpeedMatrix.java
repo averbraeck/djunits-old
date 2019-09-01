@@ -1,5 +1,7 @@
 package org.djunits4.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
@@ -14,6 +16,7 @@ import org.djunits4.value.vdouble.scalar.Speed;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class MutableSpeedMatrix extends AbstractMutableDoubleMatrixRel<SpeedUnit, SpeedMatrix, MutableSpeedMatrix, Speed>
 {
     /** */
@@ -34,7 +37,7 @@ public class MutableSpeedMatrix extends AbstractMutableDoubleMatrixRel<SpeedUnit
 
     /**
      * Construct a new Relative Immutable Double SpeedMatrix.
- * @param values Speed[][]; the values of the entries in the new Relative Immutable Double SpeedMatrix
+     * @param values %TypeAbs%[][]; the values of the entries in the new Relative Immutable Double SpeedMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */

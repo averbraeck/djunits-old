@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
@@ -16,6 +18,7 @@ import org.djunits4.unit.ElectricalCurrentUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUnit, ElectricalCharge>
 {
     /** */
@@ -196,7 +199,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and ElectricalCharge, which results in a Dimensionless scalar.
- * @param v ElectricalCharge; ElectricalCharge scalar
+     * @param v ElectricalCharge scalar
      * @return Dimensionless scalar as a division of ElectricalCharge and ElectricalCharge
      */
     public final Dimensionless divideBy(final ElectricalCharge v)
@@ -206,7 +209,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and Duration, which results in a ElectricalCurrent scalar.
- * @param v Duration; ElectricalCharge scalar
+     * @param v ElectricalCharge scalar
      * @return ElectricalCurrent scalar as a division of ElectricalCharge and Duration
      */
     public final ElectricalCurrent divideBy(final Duration v)
@@ -216,7 +219,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and ElectricalCurrent, which results in a Duration scalar.
- * @param v ElectricalCurrent; ElectricalCharge scalar
+     * @param v ElectricalCharge scalar
      * @return Duration scalar as a division of ElectricalCharge and ElectricalCurrent
      */
     public final Duration divideBy(final ElectricalCurrent v)

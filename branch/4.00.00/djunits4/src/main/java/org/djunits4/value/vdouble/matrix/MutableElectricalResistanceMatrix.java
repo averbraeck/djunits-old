@@ -1,5 +1,7 @@
 package org.djunits4.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.ElectricalResistanceUnit;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
@@ -14,6 +16,7 @@ import org.djunits4.value.vdouble.scalar.ElectricalResistance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class MutableElectricalResistanceMatrix extends AbstractMutableDoubleMatrixRel<ElectricalResistanceUnit,
         ElectricalResistanceMatrix, MutableElectricalResistanceMatrix, ElectricalResistance>
 {
@@ -35,7 +38,7 @@ public class MutableElectricalResistanceMatrix extends AbstractMutableDoubleMatr
 
     /**
      * Construct a new Relative Immutable Double ElectricalResistanceMatrix.
- * @param values ElectricalResistance[][]; the values of the entries in the new Relative Immutable Double ElectricalResistanceMatrix
+     * @param values %TypeAbs%[][]; the values of the entries in the new Relative Immutable Double ElectricalResistanceMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */

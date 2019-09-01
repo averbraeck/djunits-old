@@ -2,6 +2,8 @@ package org.djunits4.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.FrequencyUnit;
@@ -17,6 +19,7 @@ import org.djunits4.unit.SpeedUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 {
     /** */
@@ -195,7 +198,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the division of Frequency and Frequency, which results in a Dimensionless scalar.
- * @param v Frequency; Frequency scalar
+     * @param v Frequency scalar
      * @return Dimensionless scalar as a division of Frequency and Frequency
      */
     public final Dimensionless divideBy(final Frequency v)
@@ -205,7 +208,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Duration, which results in a Dimensionless scalar.
- * @param v Duration; Frequency scalar
+     * @param v Frequency scalar
      * @return Dimensionless scalar as a multiplication of Frequency and Duration
      */
     public final Dimensionless multiplyBy(final Duration v)
@@ -215,7 +218,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Length, which results in a Speed scalar.
- * @param v Length; Frequency scalar
+     * @param v Frequency scalar
      * @return Speed scalar as a multiplication of Frequency and Length
      */
     public final Speed multiplyBy(final Length v)
@@ -225,7 +228,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Speed, which results in a Acceleration scalar.
- * @param v Speed; Frequency scalar
+     * @param v Frequency scalar
      * @return Acceleration scalar as a multiplication of Frequency and Speed
      */
     public final Acceleration multiplyBy(final Speed v)
@@ -235,7 +238,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Energy, which results in a Power scalar.
- * @param v Energy; Frequency scalar
+     * @param v Frequency scalar
      * @return Power scalar as a multiplication of Frequency and Energy
      */
     public final Power multiplyBy(final Energy v)

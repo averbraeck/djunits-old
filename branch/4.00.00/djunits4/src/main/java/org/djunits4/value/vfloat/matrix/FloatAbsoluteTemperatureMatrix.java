@@ -1,5 +1,7 @@
 package org.djunits4.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.value.StorageType;
@@ -15,6 +17,7 @@ import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class FloatAbsoluteTemperatureMatrix extends AbstractFloatMatrixAbs<AbsoluteTemperatureUnit, TemperatureUnit,
         FloatAbsoluteTemperatureMatrix, FloatTemperatureMatrix, MutableFloatAbsoluteTemperatureMatrix, FloatAbsoluteTemperature>
 {
