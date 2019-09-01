@@ -51,7 +51,6 @@ public class UnitBase<U extends Unit<U>> implements Serializable
     {
         Throw.whenNull(siDimensions, "siDimensions cannot be null");
         this.siDimensions = siDimensions;
-        UnitTypes.INSTANCE.register(this);
     }
 
     /**
@@ -71,7 +70,6 @@ public class UnitBase<U extends Unit<U>> implements Serializable
         {
             throw new UnitRuntimeException(exception);
         }
-        UnitTypes.INSTANCE.register(this);
     }
 
     /**
@@ -83,7 +81,6 @@ public class UnitBase<U extends Unit<U>> implements Serializable
     {
         Throw.whenNull(siSignature, "siSignature cannot be null");
         this.siDimensions = new SIDimensions(siSignature);
-        UnitTypes.INSTANCE.register(this);
     }
 
     /**
@@ -102,6 +99,7 @@ public class UnitBase<U extends Unit<U>> implements Serializable
         if (this.standardUnit == null)
         {
             this.standardUnit = unit; // The first unit that gets registered is considered to be standard
+            UnitTypes.INSTANCE.register(this);
         }
         if (siPrefixes.equals(SIPrefixes.UNIT))
         {

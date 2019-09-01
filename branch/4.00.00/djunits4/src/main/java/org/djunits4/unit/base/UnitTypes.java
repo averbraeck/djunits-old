@@ -31,7 +31,9 @@ public final class UnitTypes implements Serializable
     /** the name registry of the units. */
     private Map<String, UnitBase<?>> registry = new LinkedHashMap<>();
 
-    /** Only call once from a static field. */
+    /**
+     * Only call once from a static field.
+     */
     private UnitTypes()
     {
         //
@@ -43,7 +45,7 @@ public final class UnitTypes implements Serializable
      */
     public void register(final UnitBase<?> baseUnit)
     {
-        this.registry.put(baseUnit.getClass().getSimpleName(), baseUnit);
+        this.registry.put(baseUnit.getStandardUnit().getClass().getSimpleName(), baseUnit);
         Set<UnitBase<?>> siSet = this.siRegistry.get(baseUnit.getSiDimensions());
         if (siSet == null)
         {
@@ -58,7 +60,7 @@ public final class UnitTypes implements Serializable
      * @param siDimensions SIDimensions; the SI dimensions to search for
      * @return a safe copy of the baseUnit set registered for this SI dimensions fingerprint
      */
-    public Set<UnitBase<?>> getBaseUnits(final SIDimensions siDimensions)
+    public Set<UnitBase<?>> getUnitBases(final SIDimensions siDimensions)
     {
         Set<UnitBase<?>> baseUnitsSet = new LinkedHashSet<>();
         if (this.siRegistry.containsKey(siDimensions))
@@ -68,4 +70,13 @@ public final class UnitTypes implements Serializable
         return baseUnitsSet;
     }
 
+    /**
+     * Return the UnitBase for a given name of a unit class, or null if it has not been registered.
+     * @param unitClassName String; the unit class name to search for, e.g., "LengthUnit"
+     * @return UnitBase; the unitBase belonging to the class, or null if not found
+     */
+    public UnitBase<?> getUnitBase(final String unitClassName)
+    {
+        return this.registry.get(unitClassName);
+    }
 }

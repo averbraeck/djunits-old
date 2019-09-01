@@ -86,6 +86,35 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
                 : instantiateRel(this.getSI() - decrement.getSI(), getUnit().getStandardUnit());
     }
 
+    /**
+     * Multiply this scalar by another scalar and create a new scalar.
+     * @param otherScalar AbstractFloatScalarRel&lt;?, ?&gt;; the value by which this scalar is multiplied
+     * @return FloatScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
+     */
+    public FloatSIScalar multiplyBy(AbstractFloatScalarRel<?, ?> otherScalar)
+    {
+        return FloatScalar.multiply(this, otherScalar);
+    }
+
+    /**
+     * Create the reciprocal of this scalar with the correct dimensions.
+     * @return FloatScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
+     */
+    public FloatSIScalar reciprocal()
+    {
+        return FloatScalar.divide(FloatDimensionless.ONE, this);
+    }
+
+    /**
+     * Divide this scalar by another scalar and create a new scalar.
+     * @param otherScalar AbstractFloatScalarRel&lt;?, ?&gt;; the value by which this scalar is divided
+     * @return FloatScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
+     */
+    public FloatSIScalar divideBy(AbstractFloatScalarRel<?, ?> otherScalar)
+    {
+        return FloatScalar.divide(this, otherScalar);
+    }
+
     /**********************************************************************************/
     /********************************** MATH METHODS **********************************/
     /**********************************************************************************/

@@ -1,36 +1,13 @@
 package org.djunits4.value.vdouble.matrix;
 
-import org.djunits4.unit.AbsoluteTemperatureUnit;
-import org.djunits4.unit.AccelerationUnit;
-import org.djunits4.unit.AngleSolidUnit;
-import org.djunits4.unit.AngleUnit;
-import org.djunits4.unit.AreaUnit;
-import org.djunits4.unit.DensityUnit;
-import org.djunits4.unit.DimensionlessUnit;
-import org.djunits4.unit.DirectionUnit;
-import org.djunits4.unit.DurationUnit;
-import org.djunits4.unit.ElectricalChargeUnit;
-import org.djunits4.unit.ElectricalCurrentUnit;
-import org.djunits4.unit.ElectricalPotentialUnit;
-import org.djunits4.unit.ElectricalResistanceUnit;
-import org.djunits4.unit.EnergyUnit;
-import org.djunits4.unit.FlowMassUnit;
-import org.djunits4.unit.FlowVolumeUnit;
-import org.djunits4.unit.ForceUnit;
-import org.djunits4.unit.FrequencyUnit;
-import org.djunits4.unit.LengthUnit;
-import org.djunits4.unit.LinearDensityUnit;
-import org.djunits4.unit.MassUnit;
-import org.djunits4.unit.PositionUnit;
-import org.djunits4.unit.PowerUnit;
-import org.djunits4.unit.PressureUnit;
-import org.djunits4.unit.SpeedUnit;
-import org.djunits4.unit.TemperatureUnit;
-import org.djunits4.unit.TimeUnit;
-import org.djunits4.unit.TorqueUnit;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.unit.VolumeUnit;
-import org.djunits4.unit.util.UnitException;
+import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
 
@@ -48,6 +25,9 @@ import org.djunits4.value.ValueException;
  */
 public final class DoubleMatrixUtil
 {
+    /** the cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
+    private static Map<Unit<?>, Constructor<? extends AbstractDoubleMatrix<?, ?>>> CACHE = new HashMap<>();
+
     /** */
     private DoubleMatrixUtil()
     {
@@ -73,14 +53,7 @@ public final class DoubleMatrixUtil
     /**
      * Instantiate the DoubleMatrix based on its unit. Loose check for types on the compiler. This allows the unit to be
      * specified as a Unit&lt;?&gt; type.<br>
-     * <b>Note</b> that it is possible to make mistakes with anonymous units. The following <u>does</u> compile:
-     * 
-     * <pre>
-     * MoneyPerLengthUnit mlu = new MoneyPerLengthUnit(MoneyUnit.USD, LengthUnit.METER, "$/m", "$/m");
-     * 
-     * MoneyPerArea mpa = DoubleMatrixUtil.instantiateAnonymous(10.0, mlu);
-     * </pre>
-     * 
+     * <b>Note</b> that it is possible to make mistakes with anonymous units.
      * @param value double[][]; the value
      * @param unit Unit&lt;?&gt;; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
@@ -88,70 +61,42 @@ public final class DoubleMatrixUtil
      * @param <S> the return type
      * @throws ValueException on vector init error
      */
-    @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
+    @SuppressWarnings("unchecked")
     public static <S extends AbstractDoubleMatrix<?, S>> S instantiateAnonymous(final double[][] value, final Unit<?> unit,
             final StorageType storageType) throws ValueException
     {
-        if (unit instanceof DimensionlessUnit)
-            return (S) new DimensionlessMatrix(value, (DimensionlessUnit) unit, storageType);
-        else if (unit instanceof AccelerationUnit)
-            return (S) new AccelerationMatrix(value, (AccelerationUnit) unit, storageType);
-        else if (unit instanceof AngleSolidUnit)
-            return (S) new AngleSolidMatrix(value, (AngleSolidUnit) unit, storageType);
-        else if (unit instanceof AngleUnit)
-            return (S) new AngleMatrix(value, (AngleUnit) unit, storageType);
-        else if (unit instanceof DirectionUnit)
-            return (S) new DirectionMatrix(value, (DirectionUnit) unit, storageType);
-        else if (unit instanceof AreaUnit)
-            return (S) new AreaMatrix(value, (AreaUnit) unit, storageType);
-        else if (unit instanceof DensityUnit)
-            return (S) new DensityMatrix(value, (DensityUnit) unit, storageType);
-        else if (unit instanceof ElectricalChargeUnit)
-            return (S) new ElectricalChargeMatrix(value, (ElectricalChargeUnit) unit, storageType);
-        else if (unit instanceof ElectricalCurrentUnit)
-            return (S) new ElectricalCurrentMatrix(value, (ElectricalCurrentUnit) unit, storageType);
-        else if (unit instanceof ElectricalPotentialUnit)
-            return (S) new ElectricalPotentialMatrix(value, (ElectricalPotentialUnit) unit, storageType);
-        else if (unit instanceof ElectricalResistanceUnit)
-            return (S) new ElectricalResistanceMatrix(value, (ElectricalResistanceUnit) unit, storageType);
-        else if (unit instanceof EnergyUnit)
-            return (S) new EnergyMatrix(value, (EnergyUnit) unit, storageType);
-        else if (unit instanceof FlowMassUnit)
-            return (S) new FlowMassMatrix(value, (FlowMassUnit) unit, storageType);
-        else if (unit instanceof FlowVolumeUnit)
-            return (S) new FlowVolumeMatrix(value, (FlowVolumeUnit) unit, storageType);
-        else if (unit instanceof ForceUnit)
-            return (S) new ForceMatrix(value, (ForceUnit) unit, storageType);
-        else if (unit instanceof FrequencyUnit)
-            return (S) new FrequencyMatrix(value, (FrequencyUnit) unit, storageType);
-        else if (unit instanceof LengthUnit)
-            return (S) new LengthMatrix(value, (LengthUnit) unit, storageType);
-        else if (unit instanceof PositionUnit)
-            return (S) new PositionMatrix(value, (PositionUnit) unit, storageType);
-        else if (unit instanceof LinearDensityUnit)
-            return (S) new LinearDensityMatrix(value, (LinearDensityUnit) unit, storageType);
-        else if (unit instanceof MassUnit)
-            return (S) new MassMatrix(value, (MassUnit) unit, storageType);
-        else if (unit instanceof PowerUnit)
-            return (S) new PowerMatrix(value, (PowerUnit) unit, storageType);
-        else if (unit instanceof PressureUnit)
-            return (S) new PressureMatrix(value, (PressureUnit) unit, storageType);
-        else if (unit instanceof SpeedUnit)
-            return (S) new SpeedMatrix(value, (SpeedUnit) unit, storageType);
-        else if (unit instanceof TemperatureUnit)
-            return (S) new TemperatureMatrix(value, (TemperatureUnit) unit, storageType);
-        else if (unit instanceof AbsoluteTemperatureUnit)
-            return (S) new AbsoluteTemperatureMatrix(value, (AbsoluteTemperatureUnit) unit, storageType);
-        else if (unit instanceof DurationUnit)
-            return (S) new DurationMatrix(value, (DurationUnit) unit, storageType);
-        else if (unit instanceof TimeUnit)
-            return (S) new TimeMatrix(value, (TimeUnit) unit, storageType);
-        else if (unit instanceof TorqueUnit)
-            return (S) new TorqueMatrix(value, (TorqueUnit) unit, storageType);
-        else if (unit instanceof VolumeUnit)
-            return (S) new VolumeMatrix(value, (VolumeUnit) unit, storageType);
-        else
-            throw new RuntimeException(new UnitException("Cannot instantiate AbstractMatrix of unit " + unit.toString()));
+        try
+        {
+            Constructor<? extends AbstractDoubleMatrix<?, ?>> matrixConstructor = CACHE.get(unit);
+            if (matrixConstructor == null)
+            {
+                if (!unit.getClass().getSimpleName().endsWith("Unit"))
+                {
+                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
+                            + " name does noet end with 'Unit'. Cannot find corresponding matrix");
+                }
+                Class<? extends AbstractDoubleMatrix<?, ?>> matrixClass;
+                if (unit instanceof SIUnit)
+                {
+                    // TODO: matrixClass = SIMatrix.class;
+                    throw new UnitRuntimeException("Cannot instantiate AbstractDoubleMatrix of unit " + unit.toString());
+                }
+                else
+                {
+                    matrixClass = (Class<AbstractDoubleMatrix<?, ?>>) Class.forName("org.djunits4.value.vdouble.matrix."
+                            + unit.getClass().getSimpleName().replace("Unit", "") + "Matrix");
+                }
+                matrixConstructor = matrixClass.getDeclaredConstructor(double[][].class, unit.getClass(), StorageType.class);
+                CACHE.put(unit, matrixConstructor);
+            }
+            return (S) matrixConstructor.newInstance(value, unit, storageType);
+        }
+        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
+        {
+            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleMatrix of unit " + unit.toString() + ". Reason: "
+                    + exception.getMessage());
+        }
     }
 
     /**

@@ -21,7 +21,7 @@ public class MagneticFluxDensityUnit extends Unit<MagneticFluxDensityUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "kg/m2s2A" as the SI signature. */
-    public static final UnitBase<MagneticFluxDensityUnit> BASE = new UnitBase<>("kg/m2s2A");
+    public static final UnitBase<MagneticFluxDensityUnit> BASE = new UnitBase<>("kg/s2A");
 
     /** The SI unit for magnetic flux density is Tesla. */
     public static final MagneticFluxDensityUnit SI = new MagneticFluxDensityUnit()

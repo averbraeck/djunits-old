@@ -25,7 +25,7 @@ public class IlluminanceUnit extends Unit<IlluminanceUnit>
 
     /** The SI unit for amount of illuminance is lux */
     public static final IlluminanceUnit SI =
-            new IlluminanceUnit().build(new Unit.Builder<IlluminanceUnit>().setUnitBase(BASE).setId("lm").setName("lumen")
+            new IlluminanceUnit().build(new Unit.Builder<IlluminanceUnit>().setUnitBase(BASE).setId("lx").setName("lux")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Lux. */

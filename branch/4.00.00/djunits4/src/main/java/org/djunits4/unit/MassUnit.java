@@ -64,9 +64,9 @@ public class MassUnit extends Unit<MassUnit>
     public static final MassUnit DALTON = KILOGRAM.deriveLinear(1.6605388628E-27, "Da", "Dalton", UnitSystem.SI_ACCEPTED);
 
     /** electronvolt = 1.782661907E-36 kg. See http://physics.nist.gov/cuu/Constants/Table/allascii.txt. */
-    public static final MassUnit ELECTRONVOLT =
-            new MassUnit().build(new Unit.Builder<MassUnit>().setUnitBase(BASE).setId("eV").setName("electronvolt")
-                    .setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.UNIT).setScale(new LinearScale(1.782661907E-36)));
+    public static final MassUnit ELECTRONVOLT = new MassUnit().build(
+            new Unit.Builder<MassUnit>().setUnitBase(BASE).setId("eV").setName("electronvolt").setUnitSystem(UnitSystem.OTHER)
+                    .setSiPrefixes(SIPrefixes.UNIT_POS).setScale(new LinearScale(1.782661907E-36)));
 
     /** microelectronvolt. */
     public static final MassUnit MICROELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("mu"));

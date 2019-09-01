@@ -64,8 +64,8 @@ public final class DoubleScalarUtil
             {
                 if (!unit.getClass().getSimpleName().endsWith("Unit"))
                 {
-                    throw new ClassNotFoundException(
-                            "Unit " + unit + " name does noet end with 'Unit'. Cannot find corresponding scalar");
+                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
+                            + " name does noet end with 'Unit'. Cannot find corresponding scalar");
                 }
                 Class<? extends AbstractDoubleScalar<?, ?>> scalarClass;
                 if (unit instanceof SIUnit)

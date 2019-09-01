@@ -1,6 +1,7 @@
 package org.djunits4.unit.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.lang.reflect.Field;
 
@@ -30,16 +31,19 @@ public class TestUNITS
         // See if we can calculate a value for each of the constants
         for (Field constantField : UNITS.class.getDeclaredFields())
         {
-            Unit<?> constant = (Unit<?>) constantField.get(UNITS.class);
+            if (constantField.getName().equals("UNIT")) // dimensionless
+                continue;
+            Unit<?> constant = (Unit<?>) constantField.get(null);
+            if (constant == null)
+                fail("constant for field " + constantField.getName() + " is null");
             assertEquals("types of fields differ for " + constantField.getName(), constant.getClass(), constantField.getType());
-            if (!constant.getId().contains("eV")) // used in Energy and Mass with prefix, so they differ...
-            {
-                // find the field with this name in the declaring class
-                Field unitField = constant.getClass().getDeclaredField(constantField.getName());
-                Unit<?> unitConstant = (Unit<?>) unitField.get(constant.getClass());
-                // see if this is the same field with the same content
-                assertEquals("fields differ for " + constantField.getName(), constant, unitConstant);
-            }
+            if (constant.getId().contains("eV")) // used in Energy and Mass with prefix, so they differ...
+                continue;
+            // find the field with this name in the declaring class
+            Field unitField = constant.getClass().getDeclaredField(constantField.getName());
+            Unit<?> unitConstant = (Unit<?>) unitField.get(constant.getClass());
+            // see if this is the same field with the same content
+            assertEquals("fields differ for " + constantField.getName(), constant, unitConstant);
         }
     }
 }

@@ -1,36 +1,13 @@
 package org.djunits4.value.vdouble.vector;
 
-import org.djunits4.unit.AbsoluteTemperatureUnit;
-import org.djunits4.unit.AccelerationUnit;
-import org.djunits4.unit.AngleSolidUnit;
-import org.djunits4.unit.AngleUnit;
-import org.djunits4.unit.AreaUnit;
-import org.djunits4.unit.DensityUnit;
-import org.djunits4.unit.DimensionlessUnit;
-import org.djunits4.unit.DirectionUnit;
-import org.djunits4.unit.DurationUnit;
-import org.djunits4.unit.ElectricalChargeUnit;
-import org.djunits4.unit.ElectricalCurrentUnit;
-import org.djunits4.unit.ElectricalPotentialUnit;
-import org.djunits4.unit.ElectricalResistanceUnit;
-import org.djunits4.unit.EnergyUnit;
-import org.djunits4.unit.FlowMassUnit;
-import org.djunits4.unit.FlowVolumeUnit;
-import org.djunits4.unit.ForceUnit;
-import org.djunits4.unit.FrequencyUnit;
-import org.djunits4.unit.LengthUnit;
-import org.djunits4.unit.LinearDensityUnit;
-import org.djunits4.unit.MassUnit;
-import org.djunits4.unit.PositionUnit;
-import org.djunits4.unit.PowerUnit;
-import org.djunits4.unit.PressureUnit;
-import org.djunits4.unit.SpeedUnit;
-import org.djunits4.unit.TemperatureUnit;
-import org.djunits4.unit.TimeUnit;
-import org.djunits4.unit.TorqueUnit;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.unit.VolumeUnit;
-import org.djunits4.unit.util.UnitException;
+import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
 
@@ -48,6 +25,9 @@ import org.djunits4.value.ValueException;
  */
 public final class DoubleVectorUtil
 {
+    /** the cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
+    private static Map<Unit<?>, Constructor<? extends AbstractDoubleVector<?, ?>>> CACHE = new HashMap<>();
+
     /** */
     private DoubleVectorUtil()
     {
@@ -73,14 +53,7 @@ public final class DoubleVectorUtil
     /**
      * Instantiate the DoubleVector based on its unit. Loose check for types on the compiler. This allows the unit to be
      * specified as a Unit&lt;?&gt; type.<br>
-     * <b>Note</b> that it is possible to make mistakes with anonymous units. The following <u>does</u> compile:
-     * 
-     * <pre>
-     * MoneyPerLengthUnit mlu = new MoneyPerLengthUnit(MoneyUnit.USD, LengthUnit.METER, "$/m", "$/m");
-     * 
-     * MoneyPerArea mpa = DoubleVectorUtil.instantiateAnonymous(10.0, mlu);
-     * </pre>
-     * 
+     * <b>Note</b> that it is possible to make mistakes with anonymous units.
      * @param value double[]; the value
      * @param unit Unit&lt;?&gt;; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
@@ -88,70 +61,42 @@ public final class DoubleVectorUtil
      * @param <S> the return type
      * @throws ValueException on vector init error
      */
-    @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
+    @SuppressWarnings("unchecked")
     public static <S extends AbstractDoubleVector<?, S>> S instantiateAnonymous(final double[] value, final Unit<?> unit,
             final StorageType storageType) throws ValueException
     {
-        if (unit instanceof DimensionlessUnit)
-            return (S) new DimensionlessVector(value, (DimensionlessUnit) unit, storageType);
-        else if (unit instanceof AccelerationUnit)
-            return (S) new AccelerationVector(value, (AccelerationUnit) unit, storageType);
-        else if (unit instanceof AngleSolidUnit)
-            return (S) new AngleSolidVector(value, (AngleSolidUnit) unit, storageType);
-        else if (unit instanceof AngleUnit)
-            return (S) new AngleVector(value, (AngleUnit) unit, storageType);
-        else if (unit instanceof DirectionUnit)
-            return (S) new DirectionVector(value, (DirectionUnit) unit, storageType);
-        else if (unit instanceof AreaUnit)
-            return (S) new AreaVector(value, (AreaUnit) unit, storageType);
-        else if (unit instanceof DensityUnit)
-            return (S) new DensityVector(value, (DensityUnit) unit, storageType);
-        else if (unit instanceof ElectricalChargeUnit)
-            return (S) new ElectricalChargeVector(value, (ElectricalChargeUnit) unit, storageType);
-        else if (unit instanceof ElectricalCurrentUnit)
-            return (S) new ElectricalCurrentVector(value, (ElectricalCurrentUnit) unit, storageType);
-        else if (unit instanceof ElectricalPotentialUnit)
-            return (S) new ElectricalPotentialVector(value, (ElectricalPotentialUnit) unit, storageType);
-        else if (unit instanceof ElectricalResistanceUnit)
-            return (S) new ElectricalResistanceVector(value, (ElectricalResistanceUnit) unit, storageType);
-        else if (unit instanceof EnergyUnit)
-            return (S) new EnergyVector(value, (EnergyUnit) unit, storageType);
-        else if (unit instanceof FlowMassUnit)
-            return (S) new FlowMassVector(value, (FlowMassUnit) unit, storageType);
-        else if (unit instanceof FlowVolumeUnit)
-            return (S) new FlowVolumeVector(value, (FlowVolumeUnit) unit, storageType);
-        else if (unit instanceof ForceUnit)
-            return (S) new ForceVector(value, (ForceUnit) unit, storageType);
-        else if (unit instanceof FrequencyUnit)
-            return (S) new FrequencyVector(value, (FrequencyUnit) unit, storageType);
-        else if (unit instanceof LengthUnit)
-            return (S) new LengthVector(value, (LengthUnit) unit, storageType);
-        else if (unit instanceof PositionUnit)
-            return (S) new PositionVector(value, (PositionUnit) unit, storageType);
-        else if (unit instanceof LinearDensityUnit)
-            return (S) new LinearDensityVector(value, (LinearDensityUnit) unit, storageType);
-        else if (unit instanceof MassUnit)
-            return (S) new MassVector(value, (MassUnit) unit, storageType);
-        else if (unit instanceof PowerUnit)
-            return (S) new PowerVector(value, (PowerUnit) unit, storageType);
-        else if (unit instanceof PressureUnit)
-            return (S) new PressureVector(value, (PressureUnit) unit, storageType);
-        else if (unit instanceof SpeedUnit)
-            return (S) new SpeedVector(value, (SpeedUnit) unit, storageType);
-        else if (unit instanceof TemperatureUnit)
-            return (S) new TemperatureVector(value, (TemperatureUnit) unit, storageType);
-        else if (unit instanceof AbsoluteTemperatureUnit)
-            return (S) new AbsoluteTemperatureVector(value, (AbsoluteTemperatureUnit) unit, storageType);
-        else if (unit instanceof DurationUnit)
-            return (S) new DurationVector(value, (DurationUnit) unit, storageType);
-        else if (unit instanceof TimeUnit)
-            return (S) new TimeVector(value, (TimeUnit) unit, storageType);
-        else if (unit instanceof TorqueUnit)
-            return (S) new TorqueVector(value, (TorqueUnit) unit, storageType);
-        else if (unit instanceof VolumeUnit)
-            return (S) new VolumeVector(value, (VolumeUnit) unit, storageType);
-        else
-            throw new RuntimeException(new UnitException("Cannot instantiate AbstractVector of unit " + unit.toString()));
+        try
+        {
+            Constructor<? extends AbstractDoubleVector<?, ?>> vectorConstructor = CACHE.get(unit);
+            if (vectorConstructor == null)
+            {
+                if (!unit.getClass().getSimpleName().endsWith("Unit"))
+                {
+                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
+                            + " name does noet end with 'Unit'. Cannot find corresponding vector");
+                }
+                Class<? extends AbstractDoubleVector<?, ?>> vectorClass;
+                if (unit instanceof SIUnit)
+                {
+                    // TODO: vectorClass = SIVector.class;
+                    throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString());
+                }
+                else
+                {
+                    vectorClass = (Class<AbstractDoubleVector<?, ?>>) Class.forName("org.djunits4.value.vdouble.vector."
+                            + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");
+                }
+                vectorConstructor = vectorClass.getDeclaredConstructor(double[].class, unit.getClass(), StorageType.class);
+                CACHE.put(unit, vectorConstructor);
+            }
+            return (S) vectorConstructor.newInstance(value, unit, storageType);
+        }
+        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
+        {
+            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString() + ". Reason: "
+                    + exception.getMessage());
+        }
     }
 
     /**

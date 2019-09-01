@@ -8,6 +8,7 @@ import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.CatalyticActivityUnit;
 import org.djunits4.unit.DensityUnit;
+import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.ElectricalCapacitanceUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
@@ -64,7 +65,7 @@ public interface UNITS
     /*********************************** ABSORBED DOSE (OF IONIZING RADIATION) **************************************/
     /****************************************************************************************************************/
 
-    AbsorbedDoseUnit GRAY                   = AbsorbedDoseUnit.GRAY;
+    final AbsorbedDoseUnit GRAY                   = AbsorbedDoseUnit.GRAY;
 
     /****************************************************************************************************************/
     /************************************************ ACCELERATION **************************************************/
@@ -138,8 +139,14 @@ public interface UNITS
     /************************************************** DENSITY  ****************************************************/
     /****************************************************************************************************************/
 
-    DensityUnit KG_PER_METER_3        = DensityUnit.KG_PER_METER_3;
-    DensityUnit GRAM_PER_CENTIMETER_3 = DensityUnit.GRAM_PER_CENTIMETER_3;
+    final DensityUnit KG_PER_METER_3        = DensityUnit.KG_PER_METER_3;
+    final DensityUnit GRAM_PER_CENTIMETER_3 = DensityUnit.GRAM_PER_CENTIMETER_3;
+
+    /****************************************************************************************************************/
+    /************************************************ DIMENSIONLESS *************************************************/
+    /****************************************************************************************************************/
+
+    DimensionlessUnit UNIT        = DimensionlessUnit.SI;
 
     /****************************************************************************************************************/
     /************************************************** DURATION ****************************************************/

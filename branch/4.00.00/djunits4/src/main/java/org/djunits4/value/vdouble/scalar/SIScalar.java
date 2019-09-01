@@ -186,6 +186,38 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
         return new Dimensionless(this.getSI() / v.getSI(), DimensionlessUnit.SI);
     }
 
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("checkstyle:designforextension")
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = getUnit().getUnitBase().getSiDimensions().hashCode();
+        long temp;
+        temp = Double.doubleToLongBits(this.getSI());
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces"})
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        SIScalar other = (SIScalar) obj;
+        if (!getUnit().getUnitBase().getSiDimensions().equals(other.getUnit().getUnitBase().getSiDimensions()))
+            return false;
+        if (Double.doubleToLongBits(this.getSI()) != Double.doubleToLongBits(other.getSI()))
+            return false;
+        return true;
+    }
+
     /**********************************************************************************/
     /******************************** 'CAST AS' METHODS *******************************/
     /**********************************************************************************/

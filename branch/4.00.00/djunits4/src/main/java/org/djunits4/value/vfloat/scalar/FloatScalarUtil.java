@@ -64,8 +64,8 @@ public final class FloatScalarUtil
             {
                 if (!unit.getClass().getSimpleName().endsWith("Unit"))
                 {
-                    throw new ClassNotFoundException(
-                            "Unit " + unit + " name does noet end with 'Unit'. Cannot find corresponding scalar");
+                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
+                            + " name does noet end with 'Unit'. Cannot find corresponding scalar");
                 }
                 Class<? extends AbstractFloatScalar<?, ?>> scalarClass;
                 if (unit instanceof SIUnit)

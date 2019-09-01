@@ -186,6 +186,36 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
         return new FloatDimensionless(this.getSI() / v.getSI(), DimensionlessUnit.SI);
     }
 
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("checkstyle:designforextension")
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = getUnit().getUnitBase().getSiDimensions().hashCode();
+        result = prime * result + Float.floatToIntBits(this.getSI());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces"})
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FloatSIScalar other = (FloatSIScalar) obj;
+        if (!getUnit().getUnitBase().getSiDimensions().equals(other.getUnit().getUnitBase().getSiDimensions()))
+            return false;
+        if (Float.floatToIntBits(this.getSI()) != Float.floatToIntBits(other.getSI()))
+            return false;
+        return true;
+    }
+
     /**********************************************************************************/
     /******************************** 'CAST AS' METHODS *******************************/
     /**********************************************************************************/

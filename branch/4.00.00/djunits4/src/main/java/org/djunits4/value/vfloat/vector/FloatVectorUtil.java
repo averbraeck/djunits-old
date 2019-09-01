@@ -1,36 +1,13 @@
 package org.djunits4.value.vfloat.vector;
 
-import org.djunits4.unit.AbsoluteTemperatureUnit;
-import org.djunits4.unit.AccelerationUnit;
-import org.djunits4.unit.AngleSolidUnit;
-import org.djunits4.unit.AngleUnit;
-import org.djunits4.unit.AreaUnit;
-import org.djunits4.unit.DensityUnit;
-import org.djunits4.unit.DimensionlessUnit;
-import org.djunits4.unit.DirectionUnit;
-import org.djunits4.unit.DurationUnit;
-import org.djunits4.unit.ElectricalChargeUnit;
-import org.djunits4.unit.ElectricalCurrentUnit;
-import org.djunits4.unit.ElectricalPotentialUnit;
-import org.djunits4.unit.ElectricalResistanceUnit;
-import org.djunits4.unit.EnergyUnit;
-import org.djunits4.unit.FlowMassUnit;
-import org.djunits4.unit.FlowVolumeUnit;
-import org.djunits4.unit.ForceUnit;
-import org.djunits4.unit.FrequencyUnit;
-import org.djunits4.unit.LengthUnit;
-import org.djunits4.unit.LinearDensityUnit;
-import org.djunits4.unit.MassUnit;
-import org.djunits4.unit.PositionUnit;
-import org.djunits4.unit.PowerUnit;
-import org.djunits4.unit.PressureUnit;
-import org.djunits4.unit.SpeedUnit;
-import org.djunits4.unit.TemperatureUnit;
-import org.djunits4.unit.TimeUnit;
-import org.djunits4.unit.TorqueUnit;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.unit.VolumeUnit;
-import org.djunits4.unit.util.UnitException;
+import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
 
@@ -48,6 +25,9 @@ import org.djunits4.value.ValueException;
  */
 public final class FloatVectorUtil
 {
+    /** the cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
+    private static Map<Unit<?>, Constructor<? extends AbstractFloatVector<?, ?>>> CACHE = new HashMap<>();
+
     /** */
     private FloatVectorUtil()
     {
@@ -73,14 +53,7 @@ public final class FloatVectorUtil
     /**
      * Instantiate the FloatVector based on its unit. Loose check for types on the compiler. This allows the unit to be
      * specified as a Unit&lt;?&gt; type.<br>
-     * <b>Note</b> that it is possible to make mistakes with anonymous units. The following <u>does</u> compile:
-     * 
-     * <pre>
-     * MoneyPerLengthUnit mlu = new MoneyPerLengthUnit(MoneyUnit.USD, LengthUnit.METER, "$/m", "$/m");
-     * 
-     * MoneyPerArea mpa = FloatVectorUtil.instantiateAnonymous(10.0, mlu);
-     * </pre>
-     * 
+     * <b>Note</b> that it is possible to make mistakes with anonymous units.
      * @param value float[]; the value
      * @param unit Unit&lt;?&gt;; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
@@ -88,70 +61,42 @@ public final class FloatVectorUtil
      * @param <S> the return type
      * @throws ValueException on vector init error
      */
-    @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
+    @SuppressWarnings("unchecked")
     public static <S extends AbstractFloatVector<?, S>> S instantiateAnonymous(final float[] value, final Unit<?> unit,
             final StorageType storageType) throws ValueException
     {
-        if (unit instanceof DimensionlessUnit)
-            return (S) new FloatDimensionlessVector(value, (DimensionlessUnit) unit, storageType);
-        else if (unit instanceof AccelerationUnit)
-            return (S) new FloatAccelerationVector(value, (AccelerationUnit) unit, storageType);
-        else if (unit instanceof AngleSolidUnit)
-            return (S) new FloatAngleSolidVector(value, (AngleSolidUnit) unit, storageType);
-        else if (unit instanceof AngleUnit)
-            return (S) new FloatAngleVector(value, (AngleUnit) unit, storageType);
-        else if (unit instanceof DirectionUnit)
-            return (S) new FloatDirectionVector(value, (DirectionUnit) unit, storageType);
-        else if (unit instanceof AreaUnit)
-            return (S) new FloatAreaVector(value, (AreaUnit) unit, storageType);
-        else if (unit instanceof DensityUnit)
-            return (S) new FloatDensityVector(value, (DensityUnit) unit, storageType);
-        else if (unit instanceof ElectricalChargeUnit)
-            return (S) new FloatElectricalChargeVector(value, (ElectricalChargeUnit) unit, storageType);
-        else if (unit instanceof ElectricalCurrentUnit)
-            return (S) new FloatElectricalCurrentVector(value, (ElectricalCurrentUnit) unit, storageType);
-        else if (unit instanceof ElectricalPotentialUnit)
-            return (S) new FloatElectricalPotentialVector(value, (ElectricalPotentialUnit) unit, storageType);
-        else if (unit instanceof ElectricalResistanceUnit)
-            return (S) new FloatElectricalResistanceVector(value, (ElectricalResistanceUnit) unit, storageType);
-        else if (unit instanceof EnergyUnit)
-            return (S) new FloatEnergyVector(value, (EnergyUnit) unit, storageType);
-        else if (unit instanceof FlowMassUnit)
-            return (S) new FloatFlowMassVector(value, (FlowMassUnit) unit, storageType);
-        else if (unit instanceof FlowVolumeUnit)
-            return (S) new FloatFlowVolumeVector(value, (FlowVolumeUnit) unit, storageType);
-        else if (unit instanceof ForceUnit)
-            return (S) new FloatForceVector(value, (ForceUnit) unit, storageType);
-        else if (unit instanceof FrequencyUnit)
-            return (S) new FloatFrequencyVector(value, (FrequencyUnit) unit, storageType);
-        else if (unit instanceof LengthUnit)
-            return (S) new FloatLengthVector(value, (LengthUnit) unit, storageType);
-        else if (unit instanceof PositionUnit)
-            return (S) new FloatPositionVector(value, (PositionUnit) unit, storageType);
-        else if (unit instanceof LinearDensityUnit)
-            return (S) new FloatLinearDensityVector(value, (LinearDensityUnit) unit, storageType);
-        else if (unit instanceof MassUnit)
-            return (S) new FloatMassVector(value, (MassUnit) unit, storageType);
-        else if (unit instanceof PowerUnit)
-            return (S) new FloatPowerVector(value, (PowerUnit) unit, storageType);
-        else if (unit instanceof PressureUnit)
-            return (S) new FloatPressureVector(value, (PressureUnit) unit, storageType);
-        else if (unit instanceof SpeedUnit)
-            return (S) new FloatSpeedVector(value, (SpeedUnit) unit, storageType);
-        else if (unit instanceof TemperatureUnit)
-            return (S) new FloatTemperatureVector(value, (TemperatureUnit) unit, storageType);
-        else if (unit instanceof AbsoluteTemperatureUnit)
-            return (S) new FloatAbsoluteTemperatureVector(value, (AbsoluteTemperatureUnit) unit, storageType);
-        else if (unit instanceof DurationUnit)
-            return (S) new FloatDurationVector(value, (DurationUnit) unit, storageType);
-        else if (unit instanceof TimeUnit)
-            return (S) new FloatTimeVector(value, (TimeUnit) unit, storageType);
-        else if (unit instanceof TorqueUnit)
-            return (S) new FloatTorqueVector(value, (TorqueUnit) unit, storageType);
-        else if (unit instanceof VolumeUnit)
-            return (S) new FloatVolumeVector(value, (VolumeUnit) unit, storageType);
-        else
-            throw new RuntimeException(new UnitException("Cannot instantiate AbstractVector of unit " + unit.toString()));
+        try
+        {
+            Constructor<? extends AbstractFloatVector<?, ?>> vectorConstructor = CACHE.get(unit);
+            if (vectorConstructor == null)
+            {
+                if (!unit.getClass().getSimpleName().endsWith("Unit"))
+                {
+                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
+                            + " name does noet end with 'Unit'. Cannot find corresponding vector");
+                }
+                Class<? extends AbstractFloatVector<?, ?>> vectorClass;
+                if (unit instanceof SIUnit)
+                {
+                    // TODO: vectorClass = SIVector.class;
+                    throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString());
+                }
+                else
+                {
+                    vectorClass = (Class<AbstractFloatVector<?, ?>>) Class.forName("org.djunits4.value.vfloat.vector.Float"
+                            + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");
+                }
+                vectorConstructor = vectorClass.getDeclaredConstructor(float[].class, unit.getClass(), StorageType.class);
+                CACHE.put(unit, vectorConstructor);
+            }
+            return (S) vectorConstructor.newInstance(value, unit, storageType);
+        }
+        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
+        {
+            throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString() + ". Reason: "
+                    + exception.getMessage());
+        }
     }
 
     /**

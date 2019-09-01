@@ -399,7 +399,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         UnitBase<SIUnit> unitBase = null;
         SIUnit unit = null;
 
-        Set<UnitBase<?>> baseUnitSet = UnitTypes.INSTANCE.getBaseUnits(siDimensions);
+        Set<UnitBase<?>> baseUnitSet = UnitTypes.INSTANCE.getUnitBases(siDimensions);
         for (UnitBase<?> bu : baseUnitSet)
         {
             if (bu.getStandardUnit().getClass().equals(Unit.class))

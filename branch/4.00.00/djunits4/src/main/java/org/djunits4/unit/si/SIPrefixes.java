@@ -19,11 +19,17 @@ public enum SIPrefixes
     /** All SI prefixes allowed. E.g., for the "meter". */
     UNIT,
 
+    /** All positive SI prefixes allowed. E.g., for the electronVolt to avoid underflow with float values. */
+    UNIT_POS,
+
     /** SI prefixes allowed, but default starts with "kilo" / "k", e.g., for the "kilogram". */
     KILO;
 
     /** the SI prefixes and their values for the "UNIT" settings. */
     public static final Map<String, SIPrefix> UNIT_PREFIXES = new LinkedHashMap<>();
+
+    /** the positive SI prefixes and their values for the "UNIT_POS" settings. */
+    public static final Map<String, SIPrefix> UNIT_POS_PREFIXES = new LinkedHashMap<>();
 
     /** the SI prefixes and their values for the "KILO" settings. */
     public static final Map<String, SIPrefix> KILO_PREFIXES = new LinkedHashMap<>();
@@ -51,6 +57,17 @@ public enum SIPrefixes
         UNIT_PREFIXES.put("E", new SIPrefix("E", "exa", 1.0E18));
         UNIT_PREFIXES.put("Z", new SIPrefix("Z", "zetta", 1.0E21));
         UNIT_PREFIXES.put("Y", new SIPrefix("Y", "yotta", 1.0E24));
+
+        UNIT_POS_PREFIXES.put("da", new SIPrefix("da", "deca", 1.0E1));
+        UNIT_POS_PREFIXES.put("h", new SIPrefix("h", "hecto", 1.0E2));
+        UNIT_POS_PREFIXES.put("k", new SIPrefix("k", "kilo", 1.0E3));
+        UNIT_POS_PREFIXES.put("M", new SIPrefix("M", "mega", 1.0E6));
+        UNIT_POS_PREFIXES.put("G", new SIPrefix("G", "giga", 1.0E9));
+        UNIT_POS_PREFIXES.put("T", new SIPrefix("T", "tera", 1.0E12));
+        UNIT_POS_PREFIXES.put("P", new SIPrefix("P", "peta", 1.0E15));
+        UNIT_POS_PREFIXES.put("E", new SIPrefix("E", "exa", 1.0E18));
+        UNIT_POS_PREFIXES.put("Z", new SIPrefix("Z", "zetta", 1.0E21));
+        UNIT_POS_PREFIXES.put("Y", new SIPrefix("Y", "yotta", 1.0E24));
 
         KILO_PREFIXES.put("y", new SIPrefix("y", "yocto", 1.0E-27));
         KILO_PREFIXES.put("z", new SIPrefix("z", "zepto", 1.0E-24));
