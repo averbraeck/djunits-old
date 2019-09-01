@@ -3,6 +3,8 @@ package org.djunits4.value.vfloat.matrix;
 import java.util.List;
 import java.util.SortedMap;
 
+import javax.annotation.Generated;
+
 import org.djunits4.unit.*;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
@@ -17,6 +19,7 @@ import org.djunits4.value.vfloat.scalar.*;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class FloatElectricalResistanceMatrix extends
     AbstractFloatMatrixRel<ElectricalResistanceUnit, FloatElectricalResistanceMatrix, MutableFloatElectricalResistanceMatrix, FloatElectricalResistance>
 {
