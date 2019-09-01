@@ -13,9 +13,7 @@ import org.djunits4.value.vfloat.scalar.*;
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -29,8 +27,8 @@ public class MutableFloatDirectionVector
     /**
      * Construct a new Absolute Mutable FloatDirectionVector.
      * @param values float[]; the values of the entries in the new Absolute Mutable FloatDirectionVector
-     * @param unit U; the unit of the new Absolute Mutable FloatDirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DirectionUnit; the unit of the new Absolute Mutable FloatDirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDirectionVector(final float[] values, final DirectionUnit unit, final StorageType storageType) throws ValueException
@@ -40,9 +38,9 @@ public class MutableFloatDirectionVector
 
     /**
      * Construct a new Absolute Mutable FloatDirectionVector.
-     * @param values List; the values of the entries in the new Absolute Mutable FloatDirectionVector
-     * @param unit U; the unit of the new Absolute Mutable FloatDirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Mutable FloatDirectionVector
+     * @param unit DirectionUnit; the unit of the new Absolute Mutable FloatDirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDirectionVector(final List<Float> values, final DirectionUnit unit, final StorageType storageType) throws ValueException
@@ -52,8 +50,8 @@ public class MutableFloatDirectionVector
 
     /**
      * Construct a new Absolute Mutable FloatDirectionVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable FloatDirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatDirection[]; the values of the entries in the new Absolute Mutable FloatDirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDirectionVector(final FloatDirection[] values, final StorageType storageType) throws ValueException
@@ -63,8 +61,8 @@ public class MutableFloatDirectionVector
 
     /**
      * Construct a new Absolute Mutable FloatDirectionVector.
-     * @param values List; the values of the entries in the new Absolute Mutable FloatDirectionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatDirection&gt;; the values of the entries in the new Absolute Mutable FloatDirectionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDirectionVector(final List<FloatDirection> values, final StorageType storageType) throws ValueException
@@ -74,9 +72,9 @@ public class MutableFloatDirectionVector
 
     /**
      * Construct a new Absolute Mutable FloatDirectionVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable FloatDirectionVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatDirection&gt;; the values of the entries in the new Absolute Sparse Mutable FloatDirectionVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDirectionVector(final SortedMap<Integer, FloatDirection> values, final int length, final StorageType storageType)
@@ -87,10 +85,10 @@ public class MutableFloatDirectionVector
 
     /**
      * Construct a new Absolute Mutable FloatDirectionVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatDirectionVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable FloatDirectionVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Absolute Sparse Mutable FloatDirectionVector
+     * @param unit DirectionUnit; the unit of the new Absolute Sparse Mutable FloatDirectionVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDirectionVector(final SortedMap<Integer, Float> values, final DirectionUnit unit, final int length,
@@ -101,7 +99,7 @@ public class MutableFloatDirectionVector
 
     /**
      * Construct a new Absolute Mutable FloatDirectionVector.
-     * @param data an internal data object
+     * @param data FloatVectorData; an internal data object
      * @param unit the unit
      */
     MutableFloatDirectionVector(final FloatVectorData data, final DirectionUnit unit)

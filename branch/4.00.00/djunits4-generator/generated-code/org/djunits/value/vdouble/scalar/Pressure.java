@@ -5,19 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the Pressure DoubleScalar, which is relative by definition. Instead of:
- * <pre>DoubleScalar.Rel&lt;PressureUnit&gt; value = new DoubleScalar.Rel&lt;PressureUnit&gt;(100.0,
- * PressureUnit.SI);</pre>
- * we can now write:
- * <pre>Pressure value = new Pressure(100.0, PressureUnit.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Pressure DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $, initial
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -51,7 +43,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
     /**
      * Construct Pressure scalar.
      * @param value double; the double value
-     * @param unit unit for the double value
+     * @param unit PressureUnit; unit for the double value
      */
     public Pressure(final double value, final PressureUnit unit)
     {
@@ -60,7 +52,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Construct Pressure scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Pressure; Scalar from which to construct this instance
      */
     public Pressure(final Pressure value)
     {
@@ -77,7 +69,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
     /**
      * Construct Pressure scalar.
      * @param value double; the double value in SI units
-     * @return the new scalar with the SI value
+     * @return Pressure; the new scalar with the SI value
      */
     public static final Pressure createSI(final double value)
     {
@@ -86,10 +78,10 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
     
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero Pressure; the low value
+     * @param one Pressure; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Pressure; a Scalar at the ratio between
      */
     public static Pressure interpolate(final Pressure zero, final Pressure one, final double ratio)
     {
@@ -98,9 +90,9 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
     
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
+     * @return Pressure; the maximum value of two relative scalars
      */
     public static Pressure max(final Pressure r1, final Pressure r2)
     {
@@ -109,10 +101,10 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
+     * @param rn Pressure...; the other scalars
+     * @return Pressure; the maximum value of more than two relative scalars
      */
     public static Pressure max(final Pressure r1, final Pressure r2, final Pressure... rn)
     {
@@ -129,9 +121,9 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
+     * @return Pressure; the minimum value of two relative scalars
      */
     public static Pressure min(final Pressure r1, final Pressure r2)
     {
@@ -140,10 +132,10 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
+     * @param rn Pressure...; the other scalars
+     * @return Pressure; the minimum value of more than two relative scalars
      */
     public static Pressure min(final Pressure r1, final Pressure r2, final Pressure... rn)
     {
@@ -161,9 +153,9 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
     /**
      * Returns a Pressure representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Pressure
-     * @return the Scalar representation of the value in its unit
+     * @return Pressure; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Pressure valueOf(final String text) throws IllegalArgumentException

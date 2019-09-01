@@ -14,8 +14,6 @@ import org.djunits4.value.vdouble.scalar.*;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Oct 9, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -28,8 +26,8 @@ public class MutablePowerVector extends
     /**
      * Construct a new Relative Immutable Double PowerVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double PowerVector
-     * @param unit U; the unit of the new Relative Immutable Double PowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit PowerUnit; the unit of the new Relative Immutable Double PowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutablePowerVector(final double[] values, final PowerUnit unit, final StorageType storageType)
@@ -40,9 +38,9 @@ public class MutablePowerVector extends
 
     /**
      * Construct a new Relative Immutable Double PowerVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double PowerVector
-     * @param unit U; the unit of the new Relative Immutable Double PowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double PowerVector
+     * @param unit PowerUnit; the unit of the new Relative Immutable Double PowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutablePowerVector(final List<Double> values, final PowerUnit unit, final StorageType storageType)
@@ -53,9 +51,8 @@ public class MutablePowerVector extends
 
     /**
      * Construct a new Relative Immutable Double PowerVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            PowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Power[]; the values of the entries in the new Relative Immutable Double PowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutablePowerVector(final Power[] values, final StorageType storageType) throws ValueException
@@ -65,8 +62,8 @@ public class MutablePowerVector extends
 
     /**
      * Construct a new Relative Immutable Double PowerVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double PowerVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Power&gt;; the values of the entries in the new Relative Immutable Double PowerVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutablePowerVector(final List<Power> values, final StorageType storageType) throws ValueException
@@ -76,10 +73,10 @@ public class MutablePowerVector extends
 
     /**
      * Construct a new Relative Immutable Double PowerVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, Power&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            PowerVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutablePowerVector(final SortedMap<Integer, Power> values, final int length, final StorageType storageType)
@@ -90,10 +87,10 @@ public class MutablePowerVector extends
 
     /**
      * Construct a new Relative Immutable Double PowerVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double PowerVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double PowerVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double PowerVector
+     * @param unit PowerUnit; the unit of the new Relative Sparse Mutable Double PowerVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutablePowerVector(final SortedMap<Integer, Double> values, final PowerUnit unit, final int length,
@@ -103,8 +100,8 @@ public class MutablePowerVector extends
     }
     
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit PowerUnit; the unit
      */
     MutablePowerVector(final DoubleVectorData data, final PowerUnit unit)
     {

@@ -5,19 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the Energy DoubleScalar, which is relative by definition. Instead of:
- * <pre>DoubleScalar.Rel&lt;EnergyUnit&gt; value = new DoubleScalar.Rel&lt;EnergyUnit&gt;(100.0,
- * EnergyUnit.SI);</pre>
- * we can now write:
- * <pre>Energy value = new Energy(100.0, EnergyUnit.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Energy DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $, initial
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -51,7 +43,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     /**
      * Construct Energy scalar.
      * @param value double; the double value
-     * @param unit unit for the double value
+     * @param unit EnergyUnit; unit for the double value
      */
     public Energy(final double value, final EnergyUnit unit)
     {
@@ -60,7 +52,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Construct Energy scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Energy; Scalar from which to construct this instance
      */
     public Energy(final Energy value)
     {
@@ -77,7 +69,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     /**
      * Construct Energy scalar.
      * @param value double; the double value in SI units
-     * @return the new scalar with the SI value
+     * @return Energy; the new scalar with the SI value
      */
     public static final Energy createSI(final double value)
     {
@@ -86,10 +78,10 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero Energy; the low value
+     * @param one Energy; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Energy; a Scalar at the ratio between
      */
     public static Energy interpolate(final Energy zero, final Energy one, final double ratio)
     {
@@ -98,9 +90,9 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 Energy; the first scalar
+     * @param r2 Energy; the second scalar
+     * @return Energy; the maximum value of two relative scalars
      */
     public static Energy max(final Energy r1, final Energy r2)
     {
@@ -109,10 +101,10 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 Energy; the first scalar
+     * @param r2 Energy; the second scalar
+     * @param rn Energy...; the other scalars
+     * @return Energy; the maximum value of more than two relative scalars
      */
     public static Energy max(final Energy r1, final Energy r2, final Energy... rn)
     {
@@ -129,9 +121,9 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 Energy; the first scalar
+     * @param r2 Energy; the second scalar
+     * @return Energy; the minimum value of two relative scalars
      */
     public static Energy min(final Energy r1, final Energy r2)
     {
@@ -140,10 +132,10 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 Energy; the first scalar
+     * @param r2 Energy; the second scalar
+     * @param rn Energy...; the other scalars
+     * @return Energy; the minimum value of more than two relative scalars
      */
     public static Energy min(final Energy r1, final Energy r2, final Energy... rn)
     {
@@ -161,9 +153,9 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     /**
      * Returns a Energy representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Energy
-     * @return the Scalar representation of the value in its unit
+     * @return Energy; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Energy valueOf(final String text) throws IllegalArgumentException

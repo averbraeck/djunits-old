@@ -13,9 +13,7 @@ import org.djunits4.value.vfloat.scalar.*;
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -28,8 +26,8 @@ public class FloatPositionVector extends
     /**
      * Construct a new Absolute Immutable FloatPositionVector.
      * @param values float[]; the values of the entries in the new Absolute Immutable FloatPositionVector
-     * @param unit U; the unit of the new Absolute Immutable FloatPositionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit PositionUnit; the unit of the new Absolute Immutable FloatPositionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatPositionVector(final float[] values, final PositionUnit unit, final StorageType storageType) throws ValueException
@@ -39,9 +37,9 @@ public class FloatPositionVector extends
 
     /**
      * Construct a new Absolute Immutable FloatPositionVector.
-     * @param values List; the values of the entries in the new Absolute Immutable FloatPositionVector
-     * @param unit U; the unit of the new Absolute Immutable FloatPositionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable FloatPositionVector
+     * @param unit PositionUnit; the unit of the new Absolute Immutable FloatPositionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatPositionVector(final List<Float> values, final PositionUnit unit, final StorageType storageType) throws ValueException
@@ -51,8 +49,8 @@ public class FloatPositionVector extends
 
     /**
      * Construct a new Absolute Immutable FloatPositionVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Immutable FloatPositionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatPosition[]; the values of the entries in the new Absolute Immutable FloatPositionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatPositionVector(final FloatPosition[] values, final StorageType storageType) throws ValueException
@@ -62,8 +60,8 @@ public class FloatPositionVector extends
 
     /**
      * Construct a new Absolute Immutable FloatPositionVector.
-     * @param values List; the values of the entries in the new Absolute Immutable FloatPositionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatPosition&gt;; the values of the entries in the new Absolute Immutable FloatPositionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatPositionVector(final List<FloatPosition> values, final StorageType storageType) throws ValueException
@@ -73,9 +71,9 @@ public class FloatPositionVector extends
 
     /**
      * Construct a new Absolute Immutable FloatPositionVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable FloatPositionVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatPosition&gt;; the values of the entries in the new Absolute Sparse Mutable FloatPositionVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatPositionVector(final SortedMap<Integer, FloatPosition> values, final int length, final StorageType storageType)
@@ -86,10 +84,10 @@ public class FloatPositionVector extends
 
     /**
      * Construct a new Absolute Immutable FloatPositionVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable FloatPositionVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable FloatPositionVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Absolute Sparse Mutable FloatPositionVector
+     * @param unit PositionUnit; the unit of the new Absolute Sparse Mutable FloatPositionVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatPositionVector(final SortedMap<Integer, Float> values, final PositionUnit unit, final int length,
@@ -100,8 +98,8 @@ public class FloatPositionVector extends
 
     /**
      * Construct a new Absolute Immutable FloatPositionVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit PositionUnit; the unit
      */
     FloatPositionVector(final FloatVectorData data, final PositionUnit unit)
     {

@@ -14,8 +14,6 @@ import org.djunits4.value.vfloat.scalar.*;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Oct 9, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -28,8 +26,8 @@ public class MutableFloatSpeedMatrix extends
     /**
      * Construct a new Relative Immutable FloatSpeedMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatSpeedMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatSpeedMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit SpeedUnit; the unit of the new Relative Immutable FloatSpeedMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatSpeedMatrix(final float[][] values, final SpeedUnit unit, final StorageType storageType)
@@ -40,9 +38,9 @@ public class MutableFloatSpeedMatrix extends
 
     /**
      * Construct a new Relative Immutable FloatSpeedMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
+     * @param values FloatSpeed[][]; the values of the entries in the new Relative Immutable Float
      *            FloatSpeedMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatSpeedMatrix(final FloatSpeed[][] values, final StorageType storageType) throws ValueException
@@ -51,8 +49,8 @@ public class MutableFloatSpeedMatrix extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit SpeedUnit; the unit
      */
     MutableFloatSpeedMatrix(final FloatMatrixData data, final SpeedUnit unit)
     {

@@ -5,19 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the Force DoubleScalar, which is relative by definition. Instead of:
- * <pre>DoubleScalar.Rel&lt;ForceUnit&gt; value = new DoubleScalar.Rel&lt;ForceUnit&gt;(100.0,
- * ForceUnit.SI);</pre>
- * we can now write:
- * <pre>Force value = new Force(100.0, ForceUnit.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Force DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $, initial
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -51,7 +43,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
     /**
      * Construct Force scalar.
      * @param value double; the double value
-     * @param unit unit for the double value
+     * @param unit ForceUnit; unit for the double value
      */
     public Force(final double value, final ForceUnit unit)
     {
@@ -60,7 +52,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Construct Force scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Force; Scalar from which to construct this instance
      */
     public Force(final Force value)
     {
@@ -77,7 +69,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
     /**
      * Construct Force scalar.
      * @param value double; the double value in SI units
-     * @return the new scalar with the SI value
+     * @return Force; the new scalar with the SI value
      */
     public static final Force createSI(final double value)
     {
@@ -86,10 +78,10 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
     
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero Force; the low value
+     * @param one Force; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Force; a Scalar at the ratio between
      */
     public static Force interpolate(final Force zero, final Force one, final double ratio)
     {
@@ -98,9 +90,9 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
     
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 Force; the first scalar
+     * @param r2 Force; the second scalar
+     * @return Force; the maximum value of two relative scalars
      */
     public static Force max(final Force r1, final Force r2)
     {
@@ -109,10 +101,10 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 Force; the first scalar
+     * @param r2 Force; the second scalar
+     * @param rn Force...; the other scalars
+     * @return Force; the maximum value of more than two relative scalars
      */
     public static Force max(final Force r1, final Force r2, final Force... rn)
     {
@@ -129,9 +121,9 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 Force; the first scalar
+     * @param r2 Force; the second scalar
+     * @return Force; the minimum value of two relative scalars
      */
     public static Force min(final Force r1, final Force r2)
     {
@@ -140,10 +132,10 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 Force; the first scalar
+     * @param r2 Force; the second scalar
+     * @param rn Force...; the other scalars
+     * @return Force; the minimum value of more than two relative scalars
      */
     public static Force min(final Force r1, final Force r2, final Force... rn)
     {
@@ -161,9 +153,9 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
     /**
      * Returns a Force representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Force
-     * @return the Scalar representation of the value in its unit
+     * @return Force; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Force valueOf(final String text) throws IllegalArgumentException

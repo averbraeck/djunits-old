@@ -14,9 +14,7 @@ import org.djunits4.value.ValueUtil;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -28,7 +26,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Construct SI scalar.
      * @param value double; the double value
-     * @param unit unit for the double value
+     * @param unit SIUnit; unit for the double value
      */
     public SIScalar(final double value, final SIUnit unit)
     {
@@ -37,7 +35,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Construct SI scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value SIScalar; Scalar from which to construct this instance
      */
     public SIScalar(final SIScalar value)
     {
@@ -54,8 +52,8 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Construct SI scalar.
      * @param value double; the double value in SI units
-     * @param unit the unit to use for the SI scalar
-     * @return the new scalar with the SI value
+     * @param unit SIUnit; the unit to use for the SI scalar
+     * @return SIScalar; the new scalar with the SI value
      */
     public static final SIScalar createSI(final double value, final SIUnit unit)
     {
@@ -64,10 +62,10 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero SIScalar; the low value
+     * @param one SIScalar; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return SIScalar; a Scalar at the ratio between
      */
     public static SIScalar interpolate(final SIScalar zero, final SIScalar one, final double ratio)
     {
@@ -76,9 +74,9 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 SIScalar; the first scalar
+     * @param r2 SIScalar; the second scalar
+     * @return SIScalar; the maximum value of two relative scalars
      */
     public static SIScalar max(final SIScalar r1, final SIScalar r2)
     {
@@ -87,10 +85,10 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 SIScalar; the first scalar
+     * @param r2 SIScalar; the second scalar
+     * @param rn SIScalar...; the other scalars
+     * @return SIScalar; the maximum value of more than two relative scalars
      */
     public static SIScalar max(final SIScalar r1, final SIScalar r2, final SIScalar... rn)
     {
@@ -107,9 +105,9 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 SIScalar; the first scalar
+     * @param r2 SIScalar; the second scalar
+     * @return SIScalar; the minimum value of two relative scalars
      */
     public static SIScalar min(final SIScalar r1, final SIScalar r2)
     {
@@ -118,10 +116,10 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 SIScalar; the first scalar
+     * @param r2 SIScalar; the second scalar
+     * @param rn SIScalar...; the other scalars
+     * @return SIScalar; the minimum value of more than two relative scalars
      */
     public static SIScalar min(final SIScalar r1, final SIScalar r2, final SIScalar... rn)
     {
@@ -138,7 +136,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Calculate the division of SI and SI, which results in a Dimensionless scalar.
-     * @param v SI scalar
+     * @param v SIScalar; SI scalar
      * @return Dimensionless scalar as a division of SI and SI
      */
     public final Dimensionless divideBy(final SIScalar v)
@@ -153,26 +151,26 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Return the current scalar transformed to a scalar in the same scalar type as the example. Of course the SI dimensionality
      * has to match, otherwise the scalar cannot be transformed.
-     * @param example an example object that serves as the 'template', e.g. Speed.ZERO
+     * @param example K; an example object that serves as the 'template', e.g. Speed.ZERO
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final K example)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(example.getUnit().getBaseUnit().getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(example.getUnit().getUnitBase().getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), example.toString());
-        return example.instantiateRel(this.si, example.getUnit().getBaseUnit().getStandardUnit());
+        return example.instantiateRel(this.si, example.getUnit().getUnitBase().getStandardUnit());
     }
 
     /**
      * Return the current scalar transformed to a scalar in the same scalar type as the example. Of course the SI dimensionality
      * has to match, otherwise the scalar cannot be transformed.
-     * @param example an example object that serves as the 'template', e.g. Speed.ZERO
-     * @param displayUnit the unit in which the value will be displayed
+     * @param example K; an example object that serves as the 'template', e.g. Speed.ZERO
+     * @param displayUnit KU; the unit in which the value will be displayed
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final K example, final KU displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(example.getUnit().getBaseUnit().getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(example.getUnit().getUnitBase().getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), example.toString());
         return example.instantiateRel(ValueUtil.expressAsUnit(this.si, displayUnit), displayUnit);
     }
@@ -180,7 +178,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Return the current scalar transformed to a scalar in the given class type. Of course the SI dimensionality has to match,
      * otherwise the scalar cannot be transformed.
-     * @param returnClass the class of the
+     * @param returnClass Class&lt;K&gt;; the class of the scalar to be constructed
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     @SuppressWarnings("unchecked")
@@ -190,7 +188,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
         {
             Method createSI = returnClass.getMethod("createSI", double.class);
             K result = (K) createSI.invoke(returnClass, this.si);
-            Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(result.getUnit().getBaseUnit().getSiDimensions())),
+            Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(result.getUnit().getUnitBase().getSiDimensions())),
                     UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), result.toString());
             return result;
         }
@@ -204,8 +202,8 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Return the current scalar transformed to a scalar in the given class type. Of course the SI dimensionality has to match,
      * otherwise the scalar cannot be transformed.
-     * @param returnClass the class of the
-     * @param displayUnit the unit in which the value will be displayed
+     * @param returnClass Class&lt;K&gt;; the class of the scalar to be constructed
+     * @param displayUnit KU; the unit in which the value will be displayed
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     @SuppressWarnings("unchecked")
@@ -216,7 +214,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
         {
             Method createSI = returnClass.getMethod("createSI", double.class);
             K result = (K) createSI.invoke(returnClass, this.si);
-            Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(result.getUnit().getBaseUnit().getSiDimensions())),
+            Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(result.getUnit().getUnitBase().getSiDimensions())),
                     UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), result.toString());
             return result.instantiateRel(ValueUtil.expressAsUnit(this.si, displayUnit), displayUnit);
         }
@@ -233,7 +231,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final AbsorbedDose asAbsorbedDose()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AbsorbedDose", this.toString());
         return new AbsorbedDose(getSI(), AbsorbedDoseUnit.SI);
     }
@@ -245,7 +243,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final AbsorbedDose asAbsorbedDose(final AbsorbedDoseUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AbsorbedDose", this.toString());
         return new AbsorbedDose(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -255,7 +253,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Acceleration asAcceleration()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Acceleration", this.toString());
         return new Acceleration(getSI(), AccelerationUnit.SI);
     }
@@ -267,7 +265,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Acceleration asAcceleration(final AccelerationUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Acceleration", this.toString());
         return new Acceleration(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -277,7 +275,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final AmountOfSubstance asAmountOfSubstance()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AmountOfSubstance", this.toString());
         return new AmountOfSubstance(getSI(), AmountOfSubstanceUnit.SI);
     }
@@ -289,7 +287,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final AmountOfSubstance asAmountOfSubstance(final AmountOfSubstanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AmountOfSubstance", this.toString());
         return new AmountOfSubstance(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -299,7 +297,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final AngleSolid asAngleSolid()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AngleSolid", this.toString());
         return new AngleSolid(getSI(), AngleSolidUnit.SI);
     }
@@ -311,7 +309,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final AngleSolid asAngleSolid(final AngleSolidUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AngleSolid", this.toString());
         return new AngleSolid(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -321,7 +319,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Area asArea()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Area", this.toString());
         return new Area(getSI(), AreaUnit.SI);
     }
@@ -333,7 +331,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Area asArea(final AreaUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Area", this.toString());
         return new Area(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -343,7 +341,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final CatalyticActivity asCatalyticActivity()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to CatalyticActivity", this.toString());
         return new CatalyticActivity(getSI(), CatalyticActivityUnit.SI);
     }
@@ -355,7 +353,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final CatalyticActivity asCatalyticActivity(final CatalyticActivityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to CatalyticActivity", this.toString());
         return new CatalyticActivity(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -365,7 +363,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Density asDensity()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Density", this.toString());
         return new Density(getSI(), DensityUnit.SI);
     }
@@ -377,7 +375,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Density asDensity(final DensityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Density", this.toString());
         return new Density(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -387,7 +385,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Dimensionless asDimensionless()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Dimensionless", this.toString());
         return new Dimensionless(getSI(), DimensionlessUnit.SI);
     }
@@ -399,7 +397,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Dimensionless asDimensionless(final DimensionlessUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Dimensionless", this.toString());
         return new Dimensionless(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -409,7 +407,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalCapacitance asElectricalCapacitance()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCapacitance", this.toString());
         return new ElectricalCapacitance(getSI(), ElectricalCapacitanceUnit.SI);
     }
@@ -421,7 +419,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalCapacitance asElectricalCapacitance(final ElectricalCapacitanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCapacitance", this.toString());
         return new ElectricalCapacitance(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -431,7 +429,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalCharge asElectricalCharge()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCharge", this.toString());
         return new ElectricalCharge(getSI(), ElectricalChargeUnit.SI);
     }
@@ -443,7 +441,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalCharge asElectricalCharge(final ElectricalChargeUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCharge", this.toString());
         return new ElectricalCharge(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -453,7 +451,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalConductance asElectricalConductance()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalConductance", this.toString());
         return new ElectricalConductance(getSI(), ElectricalConductanceUnit.SI);
     }
@@ -465,7 +463,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalConductance asElectricalConductance(final ElectricalConductanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalConductance", this.toString());
         return new ElectricalConductance(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -475,7 +473,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalCurrent asElectricalCurrent()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCurrent", this.toString());
         return new ElectricalCurrent(getSI(), ElectricalCurrentUnit.SI);
     }
@@ -487,7 +485,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalCurrent asElectricalCurrent(final ElectricalCurrentUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCurrent", this.toString());
         return new ElectricalCurrent(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -497,7 +495,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalInductance asElectricalInductance()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalInductance", this.toString());
         return new ElectricalInductance(getSI(), ElectricalInductanceUnit.SI);
     }
@@ -509,7 +507,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalInductance asElectricalInductance(final ElectricalInductanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalInductance", this.toString());
         return new ElectricalInductance(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -519,7 +517,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalPotential asElectricalPotential()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalPotential", this.toString());
         return new ElectricalPotential(getSI(), ElectricalPotentialUnit.SI);
     }
@@ -531,7 +529,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalPotential asElectricalPotential(final ElectricalPotentialUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalPotential", this.toString());
         return new ElectricalPotential(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -541,7 +539,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalResistance asElectricalResistance()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalResistance", this.toString());
         return new ElectricalResistance(getSI(), ElectricalResistanceUnit.SI);
     }
@@ -553,7 +551,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final ElectricalResistance asElectricalResistance(final ElectricalResistanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalResistance", this.toString());
         return new ElectricalResistance(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -563,7 +561,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Energy asEnergy()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Energy", this.toString());
         return new Energy(getSI(), EnergyUnit.SI);
     }
@@ -575,7 +573,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Energy asEnergy(final EnergyUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Energy", this.toString());
         return new Energy(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -585,7 +583,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final EquivalentDose asEquivalentDose()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to EquivalentDose", this.toString());
         return new EquivalentDose(getSI(), EquivalentDoseUnit.SI);
     }
@@ -597,7 +595,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final EquivalentDose asEquivalentDose(final EquivalentDoseUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to EquivalentDose", this.toString());
         return new EquivalentDose(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -607,7 +605,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final FlowMass asFlowMass()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowMass", this.toString());
         return new FlowMass(getSI(), FlowMassUnit.SI);
     }
@@ -619,7 +617,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final FlowMass asFlowMass(final FlowMassUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowMass", this.toString());
         return new FlowMass(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -629,7 +627,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final FlowVolume asFlowVolume()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowVolume", this.toString());
         return new FlowVolume(getSI(), FlowVolumeUnit.SI);
     }
@@ -641,7 +639,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final FlowVolume asFlowVolume(final FlowVolumeUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowVolume", this.toString());
         return new FlowVolume(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -651,7 +649,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Force asForce()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Force", this.toString());
         return new Force(getSI(), ForceUnit.SI);
     }
@@ -663,7 +661,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Force asForce(final ForceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Force", this.toString());
         return new Force(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -673,7 +671,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Frequency asFrequency()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Frequency", this.toString());
         return new Frequency(getSI(), FrequencyUnit.SI);
     }
@@ -685,7 +683,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Frequency asFrequency(final FrequencyUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Frequency", this.toString());
         return new Frequency(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -695,7 +693,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Illuminance asIlluminance()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Illuminance", this.toString());
         return new Illuminance(getSI(), IlluminanceUnit.SI);
     }
@@ -707,7 +705,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Illuminance asIlluminance(final IlluminanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Illuminance", this.toString());
         return new Illuminance(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -717,7 +715,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final LinearDensity asLinearDensity()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LinearDensity", this.toString());
         return new LinearDensity(getSI(), LinearDensityUnit.SI);
     }
@@ -729,7 +727,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final LinearDensity asLinearDensity(final LinearDensityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LinearDensity", this.toString());
         return new LinearDensity(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -739,7 +737,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final LuminousFlux asLuminousFlux()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousFlux", this.toString());
         return new LuminousFlux(getSI(), LuminousFluxUnit.SI);
     }
@@ -751,7 +749,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final LuminousFlux asLuminousFlux(final LuminousFluxUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousFlux", this.toString());
         return new LuminousFlux(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -761,7 +759,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final LuminousIntensity asLuminousIntensity()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousIntensity", this.toString());
         return new LuminousIntensity(getSI(), LuminousIntensityUnit.SI);
     }
@@ -773,7 +771,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final LuminousIntensity asLuminousIntensity(final LuminousIntensityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousIntensity", this.toString());
         return new LuminousIntensity(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -783,7 +781,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final MagneticFluxDensity asMagneticFluxDensity()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFluxDensity", this.toString());
         return new MagneticFluxDensity(getSI(), MagneticFluxDensityUnit.SI);
     }
@@ -795,7 +793,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final MagneticFluxDensity asMagneticFluxDensity(final MagneticFluxDensityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFluxDensity", this.toString());
         return new MagneticFluxDensity(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -805,7 +803,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final MagneticFlux asMagneticFlux()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFlux", this.toString());
         return new MagneticFlux(getSI(), MagneticFluxUnit.SI);
     }
@@ -817,7 +815,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final MagneticFlux asMagneticFlux(final MagneticFluxUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFlux", this.toString());
         return new MagneticFlux(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -827,7 +825,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Mass asMass()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Mass", this.toString());
         return new Mass(getSI(), MassUnit.SI);
     }
@@ -839,7 +837,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Mass asMass(final MassUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Mass", this.toString());
         return new Mass(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -849,7 +847,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Power asPower()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Power", this.toString());
         return new Power(getSI(), PowerUnit.SI);
     }
@@ -861,7 +859,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Power asPower(final PowerUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Power", this.toString());
         return new Power(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -871,7 +869,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Pressure asPressure()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Pressure", this.toString());
         return new Pressure(getSI(), PressureUnit.SI);
     }
@@ -883,7 +881,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Pressure asPressure(final PressureUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Pressure", this.toString());
         return new Pressure(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -893,7 +891,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final RadioActivity asRadioActivity()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to RadioActivity", this.toString());
         return new RadioActivity(getSI(), RadioActivityUnit.SI);
     }
@@ -905,7 +903,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final RadioActivity asRadioActivity(final RadioActivityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to RadioActivity", this.toString());
         return new RadioActivity(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -915,7 +913,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Speed asSpeed()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Speed", this.toString());
         return new Speed(getSI(), SpeedUnit.SI);
     }
@@ -927,7 +925,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Speed asSpeed(final SpeedUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Speed", this.toString());
         return new Speed(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -937,7 +935,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Torque asTorque()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Torque", this.toString());
         return new Torque(getSI(), TorqueUnit.SI);
     }
@@ -949,7 +947,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Torque asTorque(final TorqueUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Torque", this.toString());
         return new Torque(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -959,7 +957,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Volume asVolume()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Volume", this.toString());
         return new Volume(getSI(), VolumeUnit.SI);
     }
@@ -971,7 +969,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Volume asVolume(final VolumeUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Volume", this.toString());
         return new Volume(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -981,7 +979,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Angle asAngle()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Angle", this.toString());
         return new Angle(getSI(), AngleUnit.SI);
     }
@@ -993,7 +991,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Angle asAngle(final AngleUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Angle", this.toString());
         return new Angle(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -1003,7 +1001,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Length asLength()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Length", this.toString());
         return new Length(getSI(), LengthUnit.SI);
     }
@@ -1015,7 +1013,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Length asLength(final LengthUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Length", this.toString());
         return new Length(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -1025,7 +1023,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Temperature asTemperature()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Temperature", this.toString());
         return new Temperature(getSI(), TemperatureUnit.SI);
     }
@@ -1037,7 +1035,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Temperature asTemperature(final TemperatureUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Temperature", this.toString());
         return new Temperature(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }
@@ -1047,7 +1045,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Duration asDuration()
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Duration", this.toString());
         return new Duration(getSI(), DurationUnit.SI);
     }
@@ -1059,7 +1057,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public final Duration asDuration(final DurationUnit displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Duration", this.toString());
         return new Duration(getSI(), displayUnit); // do not translate -- we have the SI value right here
     }

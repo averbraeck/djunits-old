@@ -13,9 +13,7 @@ import org.djunits4.value.vdouble.scalar.*;
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -29,8 +27,8 @@ public class MutableAbsoluteTemperatureVector
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
      * @param values double[]; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureVector
-     * @param unit U; the unit of the new Absolute Mutable Double AbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Mutable Double AbsoluteTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAbsoluteTemperatureVector(final double[] values, final AbsoluteTemperatureUnit unit, final StorageType storageType) throws ValueException
@@ -40,9 +38,9 @@ public class MutableAbsoluteTemperatureVector
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param values List; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureVector
-     * @param unit U; the unit of the new Absolute Mutable Double AbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureVector
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Mutable Double AbsoluteTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAbsoluteTemperatureVector(final List<Double> values, final AbsoluteTemperatureUnit unit, final StorageType storageType) throws ValueException
@@ -52,8 +50,8 @@ public class MutableAbsoluteTemperatureVector
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values AbsoluteTemperature[]; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAbsoluteTemperatureVector(final AbsoluteTemperature[] values, final StorageType storageType) throws ValueException
@@ -63,8 +61,8 @@ public class MutableAbsoluteTemperatureVector
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param values List; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;AbsoluteTemperature&gt;; the values of the entries in the new Absolute Mutable Double AbsoluteTemperatureVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAbsoluteTemperatureVector(final List<AbsoluteTemperature> values, final StorageType storageType) throws ValueException
@@ -74,9 +72,9 @@ public class MutableAbsoluteTemperatureVector
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable Double AbsoluteTemperatureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, AbsoluteTemperature&gt;; the values of the entries in the new Absolute Sparse Mutable Double AbsoluteTemperatureVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableAbsoluteTemperatureVector(final SortedMap<Integer, AbsoluteTemperature> values, final int length, final StorageType storageType)
@@ -87,10 +85,10 @@ public class MutableAbsoluteTemperatureVector
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable Double AbsoluteTemperatureVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable Double AbsoluteTemperatureVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Absolute Sparse Mutable Double AbsoluteTemperatureVector
+     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Sparse Mutable Double AbsoluteTemperatureVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableAbsoluteTemperatureVector(final SortedMap<Integer, Double> values, final AbsoluteTemperatureUnit unit, final int length,
@@ -101,8 +99,8 @@ public class MutableAbsoluteTemperatureVector
 
     /**
      * Construct a new Absolute Mutable Double AbsoluteTemperatureVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit AbsoluteTemperatureUnit; the unit
      */
     MutableAbsoluteTemperatureVector(final DoubleVectorData data, final AbsoluteTemperatureUnit unit)
     {

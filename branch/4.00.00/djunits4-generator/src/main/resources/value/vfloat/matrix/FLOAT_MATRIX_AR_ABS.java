@@ -26,7 +26,7 @@ public class Float%TypeAbs%Matrix extends
     /**
      * Construct a new Absolute Immutable Float%TypeAbs%Matrix.
      * @param values float[][]; the values of the entries in the new Absolute Immutable Float%TypeAbs%Matrix
-     * @param unit U; the unit of the new Absolute Immutable Float%TypeAbs%Matrix
+     * @param unit %TypeAbsUnit%; the unit of the new Absolute Immutable Float%TypeAbs%Matrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -37,7 +37,7 @@ public class Float%TypeAbs%Matrix extends
 
     /**
      * Construct a new Absolute Immutable Float%TypeAbs%Matrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Absolute Immutable Float%TypeAbs%Matrix
+     * @param values Float%TypeAbs%[][]; the values of the entries in the new Absolute Immutable Float%TypeAbs%Matrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -48,8 +48,8 @@ public class Float%TypeAbs%Matrix extends
 
     /**
      * Construct a new Absolute Immutable Float%TypeAbs%Matrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit %TypeAbsUnit%; the unit
      */
     Float%TypeAbs%Matrix(final FloatMatrixData data, final %TypeAbsUnit% unit)
     {

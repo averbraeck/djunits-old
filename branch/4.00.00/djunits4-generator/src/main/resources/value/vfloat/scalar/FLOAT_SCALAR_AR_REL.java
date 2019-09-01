@@ -53,7 +53,7 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Construct Float%TypeRel% scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Float%TypeRel%; Scalar from which to construct this instance
      */
     public Float%TypeRel%(final Float%TypeRel% value)
     {
@@ -125,7 +125,7 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Float%TypeRel%; the first scalar
-     * @param Float%TypeRel%; r2 the second scalar
+     * @param r2 Float%TypeRel%; the second scalar
      * @return Float%TypeRel%; the maximum value of two relative scalars
      */
     public static Float%TypeRel% max(final Float%TypeRel% r1, final Float%TypeRel% r2)
@@ -187,7 +187,7 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
     /**
      * Returns a Float%TypeRel% representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Float%TypeRel%
      * @return Float%TypeRel%; the Scalar value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed

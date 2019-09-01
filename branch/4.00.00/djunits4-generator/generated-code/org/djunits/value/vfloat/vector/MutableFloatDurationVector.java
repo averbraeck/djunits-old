@@ -13,9 +13,7 @@ import org.djunits4.value.vfloat.scalar.*;
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -27,8 +25,8 @@ public class MutableFloatDurationVector extends AbstractMutableFloatVectorRel<Du
     /**
      * Construct a new Relative Mutable FloatDurationVector.
      * @param values float[]; the values of the entries in the new Relative Mutable FloatDurationVector
-     * @param unit U; the unit of the new Relative Mutable FloatDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit DurationUnit; the unit of the new Relative Mutable FloatDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDurationVector(final float[] values, final DurationUnit unit, final StorageType storageType) throws ValueException
@@ -38,9 +36,9 @@ public class MutableFloatDurationVector extends AbstractMutableFloatVectorRel<Du
 
     /**
      * Construct a new Relative Mutable FloatDurationVector.
-     * @param values List; the values of the entries in the new Relative Mutable FloatDurationVector
-     * @param unit U; the unit of the new Relative Mutable FloatDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Mutable FloatDurationVector
+     * @param unit DurationUnit; the unit of the new Relative Mutable FloatDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDurationVector(final List<Float> values, final DurationUnit unit, final StorageType storageType) throws ValueException
@@ -50,8 +48,8 @@ public class MutableFloatDurationVector extends AbstractMutableFloatVectorRel<Du
 
     /**
      * Construct a new Relative Mutable FloatDurationVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable FloatDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatDuration[]; the values of the entries in the new Relative Mutable FloatDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDurationVector(final FloatDuration[] values, final StorageType storageType) throws ValueException
@@ -61,8 +59,8 @@ public class MutableFloatDurationVector extends AbstractMutableFloatVectorRel<Du
 
     /**
      * Construct a new Relative Mutable FloatDurationVector.
-     * @param values List; the values of the entries in the new Relative Mutable FloatDurationVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatDuration&gt;; the values of the entries in the new Relative Mutable FloatDurationVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDurationVector(final List<FloatDuration> values, final StorageType storageType) throws ValueException
@@ -72,9 +70,9 @@ public class MutableFloatDurationVector extends AbstractMutableFloatVectorRel<Du
 
     /**
      * Construct a new Relative Mutable FloatDurationVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable FloatDurationVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, FloatDuration&gt;; the values of the entries in the new Relative Sparse Mutable FloatDurationVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatDurationVector(final SortedMap<Integer, FloatDuration> values, final int length, final StorageType storageType)
@@ -85,10 +83,10 @@ public class MutableFloatDurationVector extends AbstractMutableFloatVectorRel<Du
 
     /**
      * Construct a new Relative Mutable FloatDurationVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable FloatDurationVector
-     * @param unit U; the unit of the new Relative Sparse Mutable FloatDurationVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable FloatDurationVector
+     * @param unit DurationUnit; the unit of the new Relative Sparse Mutable FloatDurationVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatDurationVector(final SortedMap<Integer, Float> values, final DurationUnit unit, final int length,
@@ -99,7 +97,7 @@ public class MutableFloatDurationVector extends AbstractMutableFloatVectorRel<Du
 
     /**
      * Construct a new Relative Mutable FloatDurationVector.
-     * @param data an internal data object
+     * @param data FloatVectorData; an internal data object
      * @param unit the unit
      */
     MutableFloatDurationVector(final FloatVectorData data, final DurationUnit unit)

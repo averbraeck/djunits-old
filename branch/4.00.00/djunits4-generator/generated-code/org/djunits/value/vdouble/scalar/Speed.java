@@ -5,19 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the Speed DoubleScalar, which is relative by definition. Instead of:
- * <pre>DoubleScalar.Rel&lt;SpeedUnit&gt; value = new DoubleScalar.Rel&lt;SpeedUnit&gt;(100.0,
- * SpeedUnit.SI);</pre>
- * we can now write:
- * <pre>Speed value = new Speed(100.0, SpeedUnit.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Speed DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $, initial
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -51,7 +43,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
     /**
      * Construct Speed scalar.
      * @param value double; the double value
-     * @param unit unit for the double value
+     * @param unit SpeedUnit; unit for the double value
      */
     public Speed(final double value, final SpeedUnit unit)
     {
@@ -60,7 +52,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Construct Speed scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Speed; Scalar from which to construct this instance
      */
     public Speed(final Speed value)
     {
@@ -77,7 +69,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
     /**
      * Construct Speed scalar.
      * @param value double; the double value in SI units
-     * @return the new scalar with the SI value
+     * @return Speed; the new scalar with the SI value
      */
     public static final Speed createSI(final double value)
     {
@@ -86,10 +78,10 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
     
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero Speed; the low value
+     * @param one Speed; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Speed; a Scalar at the ratio between
      */
     public static Speed interpolate(final Speed zero, final Speed one, final double ratio)
     {
@@ -98,9 +90,9 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
     
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 Speed; the first scalar
+     * @param r2 Speed; the second scalar
+     * @return Speed; the maximum value of two relative scalars
      */
     public static Speed max(final Speed r1, final Speed r2)
     {
@@ -109,10 +101,10 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 Speed; the first scalar
+     * @param r2 Speed; the second scalar
+     * @param rn Speed...; the other scalars
+     * @return Speed; the maximum value of more than two relative scalars
      */
     public static Speed max(final Speed r1, final Speed r2, final Speed... rn)
     {
@@ -129,9 +121,9 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 Speed; the first scalar
+     * @param r2 Speed; the second scalar
+     * @return Speed; the minimum value of two relative scalars
      */
     public static Speed min(final Speed r1, final Speed r2)
     {
@@ -140,10 +132,10 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 Speed; the first scalar
+     * @param r2 Speed; the second scalar
+     * @param rn Speed...; the other scalars
+     * @return Speed; the minimum value of more than two relative scalars
      */
     public static Speed min(final Speed r1, final Speed r2, final Speed... rn)
     {
@@ -161,9 +153,9 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
     /**
      * Returns a Speed representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Speed
-     * @return the Scalar representation of the value in its unit
+     * @return Speed; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Speed valueOf(final String text) throws IllegalArgumentException

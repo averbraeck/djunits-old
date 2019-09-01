@@ -5,19 +5,12 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the Relative Length DoubleScalar. Instead of:
- * <pre>DoubleScalar&lt;LengthUnit&gt; value = new DoubleScalar&lt;LengthUnit&gt;(100.0, LengthUnit.SI);</pre>
- * we can now write:
- * <pre>Length value = new Length(100.0, LengthUnit.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
- * unit used are compatible.
+ * Easy access methods for the Relative Length DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -50,8 +43,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Construct Length scalar.
-     * @param value double; the double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit LengthUnit; unit for the double value
      */
     public Length(final double value, final LengthUnit unit)
     {
@@ -60,7 +53,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Construct Length scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Length; Scalar from which to construct this instance
      */
     public Length(final Length value)
     {
@@ -77,8 +70,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
      * @param value double; the double value
-     * @param unit the unit
-     * @return A a new absolute instance of the DoubleScalar of the right type
+     * @param unit PositionUnit; the unit
+     * @return Position; a new absolute instance of the DoubleScalar of the right type
      */
     public final Position instantiateAbs(final double value, final PositionUnit unit)
     {
@@ -88,7 +81,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
     /**
      * Construct Length scalar.
      * @param value double; the double value in SI units
-     * @return the new scalar with the SI value
+     * @return Length; the new scalar with the SI value
      */
     public static final Length createSI(final double value)
     {
@@ -97,10 +90,10 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero Length; the low value
+     * @param one Length; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Length; a Scalar at the ratio between
      */
     public static Length interpolate(final Length zero, final Length one, final double ratio)
     {
@@ -110,8 +103,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
     
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
+     * @param v %TypAbs%; the value to add
+     * @return Position; sum of this value and v as a new object
      */
     public final Position plus(final Position v)
     {
@@ -121,9 +114,9 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
+     * @return Length; the maximum value of two relative scalars
      */
     public static Length max(final Length r1, final Length r2)
     {
@@ -132,10 +125,10 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
+     * @param rn Length...; the other scalars
+     * @return Length; the maximum value of more than two relative scalars
      */
     public static Length max(final Length r1, final Length r2, final Length... rn)
     {
@@ -152,9 +145,9 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
+     * @return Length; the minimum value of two relative scalars
      */
     public static Length min(final Length r1, final Length r2)
     {
@@ -163,10 +156,10 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
+     * @param rn Length...; the other scalars
+     * @return Length; the minimum value of more than two relative scalars
      */
     public static Length min(final Length r1, final Length r2, final Length... rn)
     {
@@ -184,9 +177,9 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
     /**
      * Returns a Length representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Length
-     * @return the Scalar representation of the value in its unit
+     * @return Length; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Length valueOf(final String text) throws IllegalArgumentException

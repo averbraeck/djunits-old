@@ -951,7 +951,7 @@ public class GenerateDJUNIT
                 "     */\n" + 
                 "    public final " + type + " as" + type + "()\n" + 
                 "    {\n" + 
-                "        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
+                "        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
                 "                UnitRuntimeException.class, \"cannot cast %s to " + type + "\", this.toString());\n" + 
                 "        return new " + type + "(getSI(), " + type + "Unit.SI);\n" + 
                 "    }\n" + 
@@ -963,7 +963,7 @@ public class GenerateDJUNIT
                 "     */\n" + 
                 "    public final " + type + " as" + type + "(final " + type + "Unit displayUnit)\n" + 
                 "    {\n" + 
-                "        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
+                "        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
                 "                UnitRuntimeException.class, \"cannot cast %s to " + type + "\", this.toString());\n" + 
                 "        return new " + type + "(getSI(), displayUnit); // do not translate -- we have the SI value right here\n" + 
                 "    }\n";
@@ -1009,7 +1009,7 @@ public class GenerateDJUNIT
                 "     */\n" + 
                 "    public final " + ftype + " as" + type + "()\n" + 
                 "    {\n" + 
-                "        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
+                "        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
                 "                UnitRuntimeException.class, \"cannot cast %s to " + ftype + "\", this.toString());\n" + 
                 "        return new " + ftype + "(getSI(), " + type + "Unit.SI);\n" + 
                 "    }\n" + 
@@ -1021,7 +1021,7 @@ public class GenerateDJUNIT
                 "     */\n" + 
                 "    public final " + ftype + " as" + type + "(final " + type + "Unit displayUnit)\n" + 
                 "    {\n" + 
-                "        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
+                "        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
                 "                UnitRuntimeException.class, \"cannot cast %s to " + ftype + "\", this.toString());\n" + 
                 "        return new " + ftype + "(getSI(), displayUnit); // do not translate -- we have the SI value right here\n" + 
                 "    }\n";

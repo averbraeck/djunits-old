@@ -5,19 +5,12 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the Relative Temperature DoubleScalar. Instead of:
- * <pre>DoubleScalar&lt;TemperatureUnit&gt; value = new DoubleScalar&lt;TemperatureUnit&gt;(100.0, TemperatureUnit.SI);</pre>
- * we can now write:
- * <pre>Temperature value = new Temperature(100.0, TemperatureUnit.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
- * unit used are compatible.
+ * Easy access methods for the Relative Temperature DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -50,8 +43,8 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Construct Temperature scalar.
-     * @param value double; the double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit TemperatureUnit; unit for the double value
      */
     public Temperature(final double value, final TemperatureUnit unit)
     {
@@ -60,7 +53,7 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Construct Temperature scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Temperature; Scalar from which to construct this instance
      */
     public Temperature(final Temperature value)
     {
@@ -77,8 +70,8 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
      * @param value double; the double value
-     * @param unit the unit
-     * @return A a new absolute instance of the DoubleScalar of the right type
+     * @param unit AbsoluteTemperatureUnit; the unit
+     * @return AbsoluteTemperature; a new absolute instance of the DoubleScalar of the right type
      */
     public final AbsoluteTemperature instantiateAbs(final double value, final AbsoluteTemperatureUnit unit)
     {
@@ -88,7 +81,7 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
     /**
      * Construct Temperature scalar.
      * @param value double; the double value in SI units
-     * @return the new scalar with the SI value
+     * @return Temperature; the new scalar with the SI value
      */
     public static final Temperature createSI(final double value)
     {
@@ -97,10 +90,10 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero Temperature; the low value
+     * @param one Temperature; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Temperature; a Scalar at the ratio between
      */
     public static Temperature interpolate(final Temperature zero, final Temperature one, final double ratio)
     {
@@ -110,8 +103,8 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
     
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
+     * @param v %TypAbs%; the value to add
+     * @return AbsoluteTemperature; sum of this value and v as a new object
      */
     public final AbsoluteTemperature plus(final AbsoluteTemperature v)
     {
@@ -121,9 +114,9 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 Temperature; the first scalar
+     * @param r2 Temperature; the second scalar
+     * @return Temperature; the maximum value of two relative scalars
      */
     public static Temperature max(final Temperature r1, final Temperature r2)
     {
@@ -132,10 +125,10 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 Temperature; the first scalar
+     * @param r2 Temperature; the second scalar
+     * @param rn Temperature...; the other scalars
+     * @return Temperature; the maximum value of more than two relative scalars
      */
     public static Temperature max(final Temperature r1, final Temperature r2, final Temperature... rn)
     {
@@ -152,9 +145,9 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 Temperature; the first scalar
+     * @param r2 Temperature; the second scalar
+     * @return Temperature; the minimum value of two relative scalars
      */
     public static Temperature min(final Temperature r1, final Temperature r2)
     {
@@ -163,10 +156,10 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 Temperature; the first scalar
+     * @param r2 Temperature; the second scalar
+     * @param rn Temperature...; the other scalars
+     * @return Temperature; the minimum value of more than two relative scalars
      */
     public static Temperature min(final Temperature r1, final Temperature r2, final Temperature... rn)
     {
@@ -184,9 +177,9 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
     /**
      * Returns a Temperature representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Temperature
-     * @return the Scalar representation of the value in its unit
+     * @return Temperature; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static Temperature valueOf(final String text) throws IllegalArgumentException

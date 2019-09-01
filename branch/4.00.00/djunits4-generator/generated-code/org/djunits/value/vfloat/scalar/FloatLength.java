@@ -5,19 +5,12 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the %Type% FloatScalar. Instead of:
- * <pre>FloatScalar.Rel&lt;LengthUnit&gt; value = new FloatScalar.Rel&lt;LengthUnit&gt;(100.0, LengthUnit.SI);</pre>
- * we can now write:
- * <pre>FloatLength value = new FloatLength(100.0, LengthUnit.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
- * unit used are compatible.
+ * Easy access methods for the FloatLength FloatScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -51,7 +44,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
     /**
      * Construct FloatLength scalar.
      * @param value float; the float value
-     * @param unit unit for the float value
+     * @param unit LengthUnit; unit for the float value
      */
     public FloatLength(final float value, final LengthUnit unit)
     {
@@ -60,7 +53,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct FloatLength scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatLength; Scalar from which to construct this instance
      */
     public FloatLength(final FloatLength value)
     {
@@ -70,7 +63,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
     /**
      * Construct FloatLength scalar using a double value.
      * @param value double; the double value
-     * @param unit unit for the resulting float value
+     * @param unit LengthUnit; unit for the resulting float value
      */
     public FloatLength(final double value, final LengthUnit unit)
     {
@@ -87,7 +80,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
     /**
      * Construct FloatLength scalar.
      * @param value float; the float value in SI units
-     * @return the new scalar with the SI value
+     * @return FloatLength; the new scalar with the SI value
      */
     public static final FloatLength createSI(final float value)
     {
@@ -97,8 +90,8 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
     /**
      * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
      * @param value float; the float value
-     * @param unit the unit
-     * @return A a new absolute instance of the FloatScalar of the right type
+     * @param unit PositionUnit; the unit
+     * @return FloatPosition; a new absolute instance of the FloatScalar of the right type
      */
     public final FloatPosition instantiateAbs(final float value, final PositionUnit unit)
     {
@@ -107,10 +100,10 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero FloatLength; the low value
+     * @param one FloatLength; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return FloatLength; a Scalar at the ratio between
      */
     public static FloatLength interpolate(final FloatLength zero, final FloatLength one, final float ratio)
     {
@@ -120,8 +113,8 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
     
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
+     * @param v FloatPosition; ; the value to add
+     * @return FloatPosition; sum of this value and v as a new object
      */
     public final FloatPosition plus(final FloatPosition v)
     {
@@ -131,9 +124,9 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
+     * @return FloatLength; the maximum value of two relative scalars
      */
     public static FloatLength max(final FloatLength r1, final FloatLength r2)
     {
@@ -142,10 +135,10 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
+     * @param rn FloatLength...; the other scalars
+     * @return FloatLength; the maximum value of more than two relative scalars
      */
     public static FloatLength max(final FloatLength r1, final FloatLength r2, final FloatLength... rn)
     {
@@ -162,9 +155,9 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
+     * @return FloatLength; the minimum value of two relative scalars
      */
     public static FloatLength min(final FloatLength r1, final FloatLength r2)
     {
@@ -173,10 +166,10 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
+     * @param rn FloatLength...; the other scalars
+     * @return FloatLength; the minimum value of more than two relative scalars
      */
     public static FloatLength min(final FloatLength r1, final FloatLength r2, final FloatLength... rn)
     {
@@ -194,9 +187,9 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
     /**
      * Returns a FloatLength representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatLength
-     * @return the Scalar representation of the value in its unit
+     * @return FloatLength; the Scalar value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatLength valueOf(final String text) throws IllegalArgumentException

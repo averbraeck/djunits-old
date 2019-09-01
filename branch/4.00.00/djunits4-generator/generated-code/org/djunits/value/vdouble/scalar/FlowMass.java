@@ -5,19 +5,11 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the FlowMass DoubleScalar, which is relative by definition. Instead of:
- * <pre>DoubleScalar.Rel&lt;FlowMassUnit&gt; value = new DoubleScalar.Rel&lt;FlowMassUnit&gt;(100.0,
- * FlowMassUnit.SI);</pre>
- * we can now write:
- * <pre>FlowMass value = new FlowMass(100.0, FlowMassUnit.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FlowMass DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $, initial
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -51,7 +43,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     /**
      * Construct FlowMass scalar.
      * @param value double; the double value
-     * @param unit unit for the double value
+     * @param unit FlowMassUnit; unit for the double value
      */
     public FlowMass(final double value, final FlowMassUnit unit)
     {
@@ -60,7 +52,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Construct FlowMass scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FlowMass; Scalar from which to construct this instance
      */
     public FlowMass(final FlowMass value)
     {
@@ -77,7 +69,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     /**
      * Construct FlowMass scalar.
      * @param value double; the double value in SI units
-     * @return the new scalar with the SI value
+     * @return FlowMass; the new scalar with the SI value
      */
     public static final FlowMass createSI(final double value)
     {
@@ -86,10 +78,10 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero FlowMass; the low value
+     * @param one FlowMass; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return FlowMass; a Scalar at the ratio between
      */
     public static FlowMass interpolate(final FlowMass zero, final FlowMass one, final double ratio)
     {
@@ -98,9 +90,9 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 FlowMass; the first scalar
+     * @param r2 FlowMass; the second scalar
+     * @return FlowMass; the maximum value of two relative scalars
      */
     public static FlowMass max(final FlowMass r1, final FlowMass r2)
     {
@@ -109,10 +101,10 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 FlowMass; the first scalar
+     * @param r2 FlowMass; the second scalar
+     * @param rn FlowMass...; the other scalars
+     * @return FlowMass; the maximum value of more than two relative scalars
      */
     public static FlowMass max(final FlowMass r1, final FlowMass r2, final FlowMass... rn)
     {
@@ -129,9 +121,9 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 FlowMass; the first scalar
+     * @param r2 FlowMass; the second scalar
+     * @return FlowMass; the minimum value of two relative scalars
      */
     public static FlowMass min(final FlowMass r1, final FlowMass r2)
     {
@@ -140,10 +132,10 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 FlowMass; the first scalar
+     * @param r2 FlowMass; the second scalar
+     * @param rn FlowMass...; the other scalars
+     * @return FlowMass; the minimum value of more than two relative scalars
      */
     public static FlowMass min(final FlowMass r1, final FlowMass r2, final FlowMass... rn)
     {
@@ -161,9 +153,9 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     /**
      * Returns a FlowMass representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FlowMass
-     * @return the Scalar representation of the value in its unit
+     * @return FlowMass; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FlowMass valueOf(final String text) throws IllegalArgumentException

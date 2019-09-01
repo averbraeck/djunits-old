@@ -5,20 +5,13 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the Absolute Direction DoubleScalar. Instead of:
- * <pre>DoubleScalar.Abs&lt;DirectionUnit&gt; value = new DoubleScalar.Abs&lt;DirectionUnit&gt;(100.0, DirectionUnit.SI);</pre>
- * we can now write:
- * <pre>Direction value = new Direction(100.0, DirectionUnit.BASE);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
- * unit used are compatible.
+ * Easy access methods for the Absolute Direction DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
 
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -32,8 +25,8 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Construct Direction scalar.
-     * @param value double; the double value
-     * @param unit unit for the double value
+     * @param value double; value
+     * @param unit DirectionUnit; unit for the double value
      */
     public Direction(final double value, final DirectionUnit unit)
     {
@@ -42,7 +35,7 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Construct Direction scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Direction; Scalar from which to construct this instance
      */
     public Direction(final Direction value)
     {
@@ -64,9 +57,9 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
     }
 
     /**
-     * Construct %TypeAbsl% scalar.
-     * @param value double; the double value in SI units
-     * @return the new scalar with the SI value
+     * Construct Direction scalar.
+     * @param value double; value in SI units
+     * @return Direction; the new scalar with the SI value
      */
     public static final Direction createSI(final double value)
     {
@@ -75,10 +68,10 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero Direction; the low value
+     * @param one Direction; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return Direction; a Scalar at the ratio between
      */
     public static Direction interpolate(final Direction zero, final Direction one, final double ratio)
     {
@@ -88,9 +81,9 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @return the maximum value of two absolute scalars
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
+     * @return Direction; the maximum value of two absolute scalars
      */
     public static Direction max(final Direction a1, final Direction a2)
     {
@@ -99,9 +92,9 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
+     * @param an Direction...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static Direction max(final Direction a1, final Direction a2, final Direction... an)
@@ -119,8 +112,8 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static Direction min(final Direction a1, final Direction a2)
@@ -130,9 +123,9 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
+     * @param an Direction...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static Direction min(final Direction a1, final Direction a2, final Direction... an)
@@ -151,7 +144,7 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
     /**
      * Returns a Direction representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Direction
      * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed

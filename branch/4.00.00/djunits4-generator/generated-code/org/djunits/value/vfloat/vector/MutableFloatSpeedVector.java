@@ -14,8 +14,6 @@ import org.djunits4.value.vfloat.scalar.*;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Oct 9, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -28,8 +26,8 @@ public class MutableFloatSpeedVector extends
     /**
      * Construct a new Relative Immutable Float SpeedVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float SpeedVector
-     * @param unit U; the unit of the new Relative Immutable Float SpeedVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit SpeedUnit; the unit of the new Relative Immutable Float SpeedVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatSpeedVector(final float[] values, final SpeedUnit unit, final StorageType storageType)
@@ -40,9 +38,9 @@ public class MutableFloatSpeedVector extends
 
     /**
      * Construct a new Relative Immutable Float SpeedVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float SpeedVector
-     * @param unit U; the unit of the new Relative Immutable Float SpeedVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float SpeedVector
+     * @param unit SpeedUnit; the unit of the new Relative Immutable Float SpeedVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatSpeedVector(final List<Float> values, final SpeedUnit unit, final StorageType storageType)
@@ -53,9 +51,8 @@ public class MutableFloatSpeedVector extends
 
     /**
      * Construct a new Relative Immutable Float SpeedVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            SpeedVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatSpeed[]; the values of the entries in the new Relative Immutable Float SpeedVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatSpeedVector(final FloatSpeed[] values, final StorageType storageType) throws ValueException
@@ -65,8 +62,8 @@ public class MutableFloatSpeedVector extends
 
     /**
      * Construct a new Relative Immutable Float SpeedVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float SpeedVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatSpeed&gt;; the values of the entries in the new Relative Immutable Float SpeedVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatSpeedVector(final List<FloatSpeed> values, final StorageType storageType) throws ValueException
@@ -76,10 +73,10 @@ public class MutableFloatSpeedVector extends
 
     /**
      * Construct a new Relative Immutable Float SpeedVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
+     * @param values SortedMap&lt;Integer, FloatSpeed&gt;; the values of the entries in the new Relative Sparse Mutable Float
      *            SpeedVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutableFloatSpeedVector(final SortedMap<Integer, FloatSpeed> values, final int length, final StorageType storageType)
@@ -90,10 +87,10 @@ public class MutableFloatSpeedVector extends
 
     /**
      * Construct a new Relative Immutable Float SpeedVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float SpeedVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float SpeedVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float SpeedVector
+     * @param unit SpeedUnit; the unit of the new Relative Sparse Mutable Float SpeedVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutableFloatSpeedVector(final SortedMap<Integer, Float> values, final SpeedUnit unit, final int length,
@@ -103,7 +100,7 @@ public class MutableFloatSpeedVector extends
     }
     
     /**
-     * @param data an internal data object
+     * @param data FloatVectorData; an internal data object
      * @param unit the unit
      */
     MutableFloatSpeedVector(final FloatVectorData data, final SpeedUnit unit)

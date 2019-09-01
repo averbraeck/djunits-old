@@ -25,7 +25,7 @@ public class MutableFloat%TypeRel%Matrix extends AbstractMutableFloatMatrixRel<%
     /**
      * Construct a new Relative Mutable Float%TypeRel%Matrix.
      * @param values float[][]; the values of the entries in the new Relative Mutable Float%TypeRel%Matrix
-     * @param unit U; the unit of the new Relative Mutable Float%TypeRel%Matrix
+     * @param unit %TypeRelUnit%; the unit of the new Relative Mutable Float%TypeRel%Matrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -36,7 +36,7 @@ public class MutableFloat%TypeRel%Matrix extends AbstractMutableFloatMatrixRel<%
 
     /**
      * Construct a new Relative Mutable Float%TypeRel%Matrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Mutable Float%TypeRel%Matrix
+     * @param values Float%TypeRel%[][]; the values of the entries in the new Relative Mutable Float%TypeRel%Matrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -47,8 +47,8 @@ public class MutableFloat%TypeRel%Matrix extends AbstractMutableFloatMatrixRel<%
 
     /**
      * Construct a new Relative Mutable Float%TypeRel%Matrix.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit %TypeRelUnit%; the unit
      */
     MutableFloat%TypeRel%Matrix(final FloatMatrixData data, final %TypeRelUnit% unit)
     {

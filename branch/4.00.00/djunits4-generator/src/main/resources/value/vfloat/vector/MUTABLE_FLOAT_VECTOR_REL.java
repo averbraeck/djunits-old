@@ -26,7 +26,7 @@ public class MutableFloat%Type%Vector extends
     /**
      * Construct a new Relative Immutable Float %Type%Vector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float %Type%Vector
-     * @param unit U; the unit of the new Relative Immutable Float %Type%Vector
+     * @param unit %Type%Unit; the unit of the new Relative Immutable Float %Type%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -38,8 +38,8 @@ public class MutableFloat%Type%Vector extends
 
     /**
      * Construct a new Relative Immutable Float %Type%Vector.
-     * @param values List; the values of the entries in the new Relative Immutable Float %Type%Vector
-     * @param unit U; the unit of the new Relative Immutable Float %Type%Vector
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float %Type%Vector
+     * @param unit %Type%Unit; the unit of the new Relative Immutable Float %Type%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -51,8 +51,7 @@ public class MutableFloat%Type%Vector extends
 
     /**
      * Construct a new Relative Immutable Float %Type%Vector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            %Type%Vector
+     * @param values Float%Type%[]; the values of the entries in the new Relative Immutable Float %Type%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -63,7 +62,7 @@ public class MutableFloat%Type%Vector extends
 
     /**
      * Construct a new Relative Immutable Float %Type%Vector.
-     * @param values List; the values of the entries in the new Relative Immutable Float %Type%Vector
+     * @param values List&lt;Float%Type%&gt;; the values of the entries in the new Relative Immutable Float %Type%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -74,9 +73,9 @@ public class MutableFloat%Type%Vector extends
 
     /**
      * Construct a new Relative Immutable Float %Type%Vector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
+     * @param values SortedMap&lt;Integer, Float%Type%&gt;; the values of the entries in the new Relative Sparse Mutable Float
      *            %Type%Vector
-     * @param length the size of the vector
+     * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -88,9 +87,9 @@ public class MutableFloat%Type%Vector extends
 
     /**
      * Construct a new Relative Immutable Float %Type%Vector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float %Type%Vector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float %Type%Vector
-     * @param length the size of the vector
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float %Type%Vector
+     * @param unit %Type%Unit; the unit of the new Relative Sparse Mutable Float %Type%Vector
+     * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -101,7 +100,7 @@ public class MutableFloat%Type%Vector extends
     }
     
     /**
-     * @param data an internal data object
+     * @param data FloatVectorData; an internal data object
      * @param unit the unit
      */
     MutableFloat%Type%Vector(final FloatVectorData data, final %Type%Unit unit)

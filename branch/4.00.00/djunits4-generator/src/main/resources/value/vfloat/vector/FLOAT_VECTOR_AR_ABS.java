@@ -26,7 +26,7 @@ public class Float%TypeAbs%Vector extends
     /**
      * Construct a new Absolute Immutable Float%TypeAbs%Vector.
      * @param values float[]; the values of the entries in the new Absolute Immutable Float%TypeAbs%Vector
-     * @param unit U; the unit of the new Absolute Immutable Float%TypeAbs%Vector
+     * @param unit %TypeAbsUnit%; the unit of the new Absolute Immutable Float%TypeAbs%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -37,8 +37,8 @@ public class Float%TypeAbs%Vector extends
 
     /**
      * Construct a new Absolute Immutable Float%TypeAbs%Vector.
-     * @param values List; the values of the entries in the new Absolute Immutable Float%TypeAbs%Vector
-     * @param unit U; the unit of the new Absolute Immutable Float%TypeAbs%Vector
+     * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable Float%TypeAbs%Vector
+     * @param unit %TypeAbsUnit%; the unit of the new Absolute Immutable Float%TypeAbs%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -49,7 +49,7 @@ public class Float%TypeAbs%Vector extends
 
     /**
      * Construct a new Absolute Immutable Float%TypeAbs%Vector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Immutable Float%TypeAbs%Vector
+     * @param values Float%TypeAbs%[]; the values of the entries in the new Absolute Immutable Float%TypeAbs%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -60,7 +60,7 @@ public class Float%TypeAbs%Vector extends
 
     /**
      * Construct a new Absolute Immutable Float%TypeAbs%Vector.
-     * @param values List; the values of the entries in the new Absolute Immutable Float%TypeAbs%Vector
+     * @param values List&lt;Float%TypeAbs%&gt;; the values of the entries in the new Absolute Immutable Float%TypeAbs%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -71,8 +71,8 @@ public class Float%TypeAbs%Vector extends
 
     /**
      * Construct a new Absolute Immutable Float%TypeAbs%Vector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable Float%TypeAbs%Vector
-     * @param length the size of the vector
+     * @param values SortedMap&lt;Integer, Float%TypeAbs%&gt;; the values of the entries in the new Absolute Sparse Mutable Float%TypeAbs%Vector
+     * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -84,9 +84,9 @@ public class Float%TypeAbs%Vector extends
 
     /**
      * Construct a new Absolute Immutable Float%TypeAbs%Vector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable Float%TypeAbs%Vector
-     * @param unit U; the unit of the new Absolute Sparse Mutable Float%TypeAbs%Vector
-     * @param length the size of the vector
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Absolute Sparse Mutable Float%TypeAbs%Vector
+     * @param unit %TypeAbsUnit%; the unit of the new Absolute Sparse Mutable Float%TypeAbs%Vector
+     * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -98,8 +98,8 @@ public class Float%TypeAbs%Vector extends
 
     /**
      * Construct a new Absolute Immutable Float%TypeAbs%Vector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit %TypeAbsUnit%; the unit
      */
     Float%TypeAbs%Vector(final FloatVectorData data, final %TypeAbsUnit% unit)
     {

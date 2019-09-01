@@ -5,20 +5,13 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the AbsoluteTemperature FloatScalar. Instead of:
- * <pre>FloatScalar.Abs&lt;AbsoluteTemperatureUnit&gt; value = new FloatScalar.Abs&lt;AbsoluteTemperatureUnit&gt;(100.0, AbsoluteTemperatureUnit.SI);</pre>
- * we can now write:
- * <pre>FloatAbsoluteTemperature value = new FloatAbsoluteTemperature(100.0, AbsoluteTemperatureUnit.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
- * unit used are compatible.
+ * Easy access methods for the FloatAbsoluteTemperature FloatScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
 
- * <p>
- * $LastChangedDate: 2019-03-03 00:54:10 +0100 (Sun, 03 Mar 2019) $, @version $Revision: 350 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -33,7 +26,7 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
     /**
      * Construct FloatAbsoluteTemperature scalar.
      * @param value float; the float value
-     * @param unit unit for the float value
+     * @param unit AbsoluteTemperatureUnit; unit for the float value
      */
     public FloatAbsoluteTemperature(final float value, final AbsoluteTemperatureUnit unit)
     {
@@ -43,7 +36,7 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
     /**
      * Construct FloatAbsoluteTemperature scalar using a double value.
      * @param value double; the double value
-     * @param unit unit for the resulting float value
+     * @param unit AbsoluteTemperatureUnit; unit for the resulting float value
      */
     public FloatAbsoluteTemperature(final double value, final AbsoluteTemperatureUnit unit)
     {
@@ -52,7 +45,7 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
 
     /**
      * Construct FloatAbsoluteTemperature scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatAbsoluteTemperature; Scalar from which to construct this instance
      */
     public FloatAbsoluteTemperature(final FloatAbsoluteTemperature value)
     {
@@ -76,7 +69,7 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
     /**
      * Construct FloatAbsoluteTemperature scalar.
      * @param value float; the float value in BASE units
-     * @return the new scalar with the BASE value
+     * @return FloatAbsoluteTemperature; the new scalar with the BASE value
      */
     public static final FloatAbsoluteTemperature createSI(final float value)
     {
@@ -85,10 +78,10 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @param zero FloatAbsoluteTemperature; the low value
+     * @param one FloatAbsoluteTemperature; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @return FloatAbsoluteTemperature; a Scalar at the ratio between
      */
     public static FloatAbsoluteTemperature interpolate(final FloatAbsoluteTemperature zero, final FloatAbsoluteTemperature one, final float ratio)
     {
@@ -98,9 +91,9 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
     
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @return the maximum value of two absolute scalars
+     * @param a1 FloatAbsoluteTemperature; the first scalar
+     * @param a2 FloatAbsoluteTemperature; the second scalar
+     * @return FloatAbsoluteTemperature; the maximum value of two absolute scalars
      */
     public static FloatAbsoluteTemperature max(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2)
     {
@@ -109,10 +102,10 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
-     * @return the maximum value of more than two absolute scalars
+     * @param a1 FloatAbsoluteTemperature; the first scalar
+     * @param a2 FloatAbsoluteTemperature; the second scalar
+     * @param an FloatAbsoluteTemperature...; the other scalars
+     * @return FloatAbsoluteTemperature; the maximum value of more than two absolute scalars
      */
     public static FloatAbsoluteTemperature max(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2, final FloatAbsoluteTemperature... an)
     {
@@ -129,9 +122,9 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @return the minimum value of two absolute scalars
+     * @param a1 FloatAbsoluteTemperature; the first scalar
+     * @param a2 FloatAbsoluteTemperature; the second scalar
+     * @return FloatAbsoluteTemperature; the minimum value of two absolute scalars
      */
     public static FloatAbsoluteTemperature min(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2)
     {
@@ -140,10 +133,10 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
-     * @return the minimum value of more than two absolute scalars
+     * @param a1 FloatAbsoluteTemperature; the first scalar
+     * @param a2 FloatAbsoluteTemperature; the second scalar
+     * @param an FloatAbsoluteTemperature...; the other scalars
+     * @return FloatAbsoluteTemperature; the minimum value of more than two absolute scalars
      */
     public static FloatAbsoluteTemperature min(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2, final FloatAbsoluteTemperature... an)
     {
@@ -161,9 +154,9 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
     /**
      * Returns a FloatAbsoluteTemperature representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatAbsoluteTemperature
-     * @return the Scalar representation of the value in its unit
+     * @return FloatAbsoluteTemperature; the Scalar value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatAbsoluteTemperature valueOf(final String text) throws IllegalArgumentException

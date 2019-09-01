@@ -13,9 +13,7 @@ import org.djunits4.value.vdouble.scalar.*;
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -29,8 +27,8 @@ public class MutablePositionVector
     /**
      * Construct a new Absolute Mutable Double PositionVector.
      * @param values double[]; the values of the entries in the new Absolute Mutable Double PositionVector
-     * @param unit U; the unit of the new Absolute Mutable Double PositionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit PositionUnit; the unit of the new Absolute Mutable Double PositionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutablePositionVector(final double[] values, final PositionUnit unit, final StorageType storageType) throws ValueException
@@ -40,9 +38,9 @@ public class MutablePositionVector
 
     /**
      * Construct a new Absolute Mutable Double PositionVector.
-     * @param values List; the values of the entries in the new Absolute Mutable Double PositionVector
-     * @param unit U; the unit of the new Absolute Mutable Double PositionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Absolute Mutable Double PositionVector
+     * @param unit PositionUnit; the unit of the new Absolute Mutable Double PositionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutablePositionVector(final List<Double> values, final PositionUnit unit, final StorageType storageType) throws ValueException
@@ -52,8 +50,8 @@ public class MutablePositionVector
 
     /**
      * Construct a new Absolute Mutable Double PositionVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable Double PositionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values Position[]; the values of the entries in the new Absolute Mutable Double PositionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutablePositionVector(final Position[] values, final StorageType storageType) throws ValueException
@@ -63,8 +61,8 @@ public class MutablePositionVector
 
     /**
      * Construct a new Absolute Mutable Double PositionVector.
-     * @param values List; the values of the entries in the new Absolute Mutable Double PositionVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Position&gt;; the values of the entries in the new Absolute Mutable Double PositionVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutablePositionVector(final List<Position> values, final StorageType storageType) throws ValueException
@@ -74,9 +72,9 @@ public class MutablePositionVector
 
     /**
      * Construct a new Absolute Mutable Double PositionVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable Double PositionVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Position&gt;; the values of the entries in the new Absolute Sparse Mutable Double PositionVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public MutablePositionVector(final SortedMap<Integer, Position> values, final int length, final StorageType storageType)
@@ -87,10 +85,10 @@ public class MutablePositionVector
 
     /**
      * Construct a new Absolute Mutable Double PositionVector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable Double PositionVector
-     * @param unit U; the unit of the new Absolute Sparse Mutable Double PositionVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Absolute Sparse Mutable Double PositionVector
+     * @param unit PositionUnit; the unit of the new Absolute Sparse Mutable Double PositionVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public MutablePositionVector(final SortedMap<Integer, Double> values, final PositionUnit unit, final int length,
@@ -101,8 +99,8 @@ public class MutablePositionVector
 
     /**
      * Construct a new Absolute Mutable Double PositionVector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit PositionUnit; the unit
      */
     MutablePositionVector(final DoubleVectorData data, final PositionUnit unit)
     {

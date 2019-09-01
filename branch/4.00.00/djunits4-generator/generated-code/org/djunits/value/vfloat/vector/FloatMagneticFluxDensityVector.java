@@ -14,8 +14,6 @@ import org.djunits4.value.vfloat.scalar.*;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Oct 9, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -28,8 +26,8 @@ public class FloatMagneticFluxDensityVector extends
     /**
      * Construct a new Relative Immutable Float FloatMagneticFluxDensityVector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatMagneticFluxDensityVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatMagneticFluxDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit MagneticFluxDensityUnit; the unit of the new Relative Immutable Float FloatMagneticFluxDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatMagneticFluxDensityVector(final float[] values, final MagneticFluxDensityUnit unit, final StorageType storageType)
@@ -40,9 +38,9 @@ public class FloatMagneticFluxDensityVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatMagneticFluxDensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatMagneticFluxDensityVector
-     * @param unit U; the unit of the new Relative Immutable Float FloatMagneticFluxDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatMagneticFluxDensityVector
+     * @param unit MagneticFluxDensityUnit; the unit of the new Relative Immutable Float FloatMagneticFluxDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatMagneticFluxDensityVector(final List<Float> values, final MagneticFluxDensityUnit unit, final StorageType storageType)
@@ -53,9 +51,8 @@ public class FloatMagneticFluxDensityVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatMagneticFluxDensityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            FloatMagneticFluxDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatMagneticFluxDensity[]; the values of the entries in the new Relative Immutable Float FloatMagneticFluxDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatMagneticFluxDensityVector(final FloatMagneticFluxDensity[] values, final StorageType storageType) throws ValueException
@@ -65,8 +62,8 @@ public class FloatMagneticFluxDensityVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatMagneticFluxDensityVector.
-     * @param values List; the values of the entries in the new Relative Immutable Float FloatMagneticFluxDensityVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;FloatMagneticFluxDensity&gt;; the values of the entries in the new Relative Immutable Float FloatMagneticFluxDensityVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatMagneticFluxDensityVector(final List<FloatMagneticFluxDensity> values, final StorageType storageType) throws ValueException
@@ -76,10 +73,10 @@ public class FloatMagneticFluxDensityVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatMagneticFluxDensityVector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
+     * @param values SortedMap&lt;Integer, FloatMagneticFluxDensity&gt;; the values of the entries in the new Relative Sparse Mutable Float
      *            FloatMagneticFluxDensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatMagneticFluxDensityVector(final SortedMap<Integer, FloatMagneticFluxDensity> values, final int length, final StorageType storageType)
@@ -90,10 +87,10 @@ public class FloatMagneticFluxDensityVector extends
 
     /**
      * Construct a new Relative Immutable Float FloatMagneticFluxDensityVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float FloatMagneticFluxDensityVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float FloatMagneticFluxDensityVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float FloatMagneticFluxDensityVector
+     * @param unit MagneticFluxDensityUnit; the unit of the new Relative Sparse Mutable Float FloatMagneticFluxDensityVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatMagneticFluxDensityVector(final SortedMap<Integer, Float> values, final MagneticFluxDensityUnit unit, final int length,
@@ -103,7 +100,7 @@ public class FloatMagneticFluxDensityVector extends
     }
 
     /**
-     * @param data an internal data object
+     * @param data FloatVectorData; an internal data object
      * @param unit the unit
      */
     FloatMagneticFluxDensityVector(final FloatVectorData data, final MagneticFluxDensityUnit unit)

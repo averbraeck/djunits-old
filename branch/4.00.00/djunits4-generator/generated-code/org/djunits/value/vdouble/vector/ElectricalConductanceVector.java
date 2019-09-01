@@ -14,8 +14,6 @@ import org.djunits4.value.vdouble.scalar.*;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Oct 9, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -28,8 +26,8 @@ public class ElectricalConductanceVector extends
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double ElectricalConductanceVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit ElectricalConductanceUnit; the unit of the new Relative Immutable Double ElectricalConductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalConductanceVector(final double[] values, final ElectricalConductanceUnit unit, final StorageType storageType)
@@ -40,9 +38,9 @@ public class ElectricalConductanceVector extends
 
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalConductanceVector
-     * @param unit U; the unit of the new Relative Immutable Double ElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double ElectricalConductanceVector
+     * @param unit ElectricalConductanceUnit; the unit of the new Relative Immutable Double ElectricalConductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalConductanceVector(final List<Double> values, final ElectricalConductanceUnit unit, final StorageType storageType)
@@ -53,9 +51,8 @@ public class ElectricalConductanceVector extends
 
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            ElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values ElectricalConductance[]; the values of the entries in the new Relative Immutable Double ElectricalConductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalConductanceVector(final ElectricalConductance[] values, final StorageType storageType) throws ValueException
@@ -65,8 +62,8 @@ public class ElectricalConductanceVector extends
 
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
-     * @param values List; the values of the entries in the new Relative Immutable Double ElectricalConductanceVector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values List&lt;ElectricalConductance&gt;; the values of the entries in the new Relative Immutable Double ElectricalConductanceVector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalConductanceVector(final List<ElectricalConductance> values, final StorageType storageType) throws ValueException
@@ -76,10 +73,10 @@ public class ElectricalConductanceVector extends
 
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, ElectricalConductance&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            ElectricalConductanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public ElectricalConductanceVector(final SortedMap<Integer, ElectricalConductance> values, final int length, final StorageType storageType)
@@ -90,10 +87,10 @@ public class ElectricalConductanceVector extends
 
     /**
      * Construct a new Relative Immutable Double ElectricalConductanceVector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double ElectricalConductanceVector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double ElectricalConductanceVector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double ElectricalConductanceVector
+     * @param unit ElectricalConductanceUnit; the unit of the new Relative Sparse Mutable Double ElectricalConductanceVector
+     * @param length int; the size of the vector
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public ElectricalConductanceVector(final SortedMap<Integer, Double> values, final ElectricalConductanceUnit unit, final int length,
@@ -103,8 +100,8 @@ public class ElectricalConductanceVector extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit ElectricalConductanceUnit; the unit
      */
     ElectricalConductanceVector(final DoubleVectorData data, final ElectricalConductanceUnit unit)
     {

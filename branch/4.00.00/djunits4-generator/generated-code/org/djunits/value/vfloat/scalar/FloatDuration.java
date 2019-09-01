@@ -5,19 +5,12 @@ import java.util.regex.Matcher;
 import org.djunits4.unit.*;
 
 /**
- * Easy access methods for the %Type% FloatScalar. Instead of:
- * <pre>FloatScalar.Rel&lt;DurationUnit&gt; value = new FloatScalar.Rel&lt;DurationUnit&gt;(100.0, DurationUnit.SI);</pre>
- * we can now write:
- * <pre>FloatDuration value = new FloatDuration(100.0, DurationUnit.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
- * unit used are compatible.
+ * Easy access methods for the FloatDuration FloatScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
- * $LastChangedDate: 2015-12-22 04:32:39 +0100 (Tue, 22 Dec 2015) $, @version $Revision: 180 $, by $Author: averbraeck $,
- * initial version Sep 1, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -51,7 +44,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
     /**
      * Construct FloatDuration scalar.
      * @param value float; the float value
-     * @param unit unit for the float value
+     * @param unit DurationUnit; unit for the float value
      */
     public FloatDuration(final float value, final DurationUnit unit)
     {
@@ -60,7 +53,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Construct FloatDuration scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatDuration; Scalar from which to construct this instance
      */
     public FloatDuration(final FloatDuration value)
     {
@@ -70,7 +63,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
     /**
      * Construct FloatDuration scalar using a double value.
      * @param value double; the double value
-     * @param unit unit for the resulting float value
+     * @param unit DurationUnit; unit for the resulting float value
      */
     public FloatDuration(final double value, final DurationUnit unit)
     {
@@ -87,7 +80,7 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
     /**
      * Construct FloatDuration scalar.
      * @param value float; the float value in SI units
-     * @return the new scalar with the SI value
+     * @return FloatDuration; the new scalar with the SI value
      */
     public static final FloatDuration createSI(final float value)
     {
@@ -97,8 +90,8 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
     /**
      * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
      * @param value float; the float value
-     * @param unit the unit
-     * @return A a new absolute instance of the FloatScalar of the right type
+     * @param unit TimeUnit; the unit
+     * @return FloatTime; a new absolute instance of the FloatScalar of the right type
      */
     public final FloatTime instantiateAbs(final float value, final TimeUnit unit)
     {
@@ -107,10 +100,10 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero FloatDuration; the low value
+     * @param one FloatDuration; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return FloatDuration; a Scalar at the ratio between
      */
     public static FloatDuration interpolate(final FloatDuration zero, final FloatDuration one, final float ratio)
     {
@@ -120,8 +113,8 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
     
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
+     * @param v FloatTime; ; the value to add
+     * @return FloatTime; sum of this value and v as a new object
      */
     public final FloatTime plus(final FloatTime v)
     {
@@ -131,9 +124,9 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 FloatDuration; the first scalar
+     * @param r2 FloatDuration; the second scalar
+     * @return FloatDuration; the maximum value of two relative scalars
      */
     public static FloatDuration max(final FloatDuration r1, final FloatDuration r2)
     {
@@ -142,10 +135,10 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 FloatDuration; the first scalar
+     * @param r2 FloatDuration; the second scalar
+     * @param rn FloatDuration...; the other scalars
+     * @return FloatDuration; the maximum value of more than two relative scalars
      */
     public static FloatDuration max(final FloatDuration r1, final FloatDuration r2, final FloatDuration... rn)
     {
@@ -162,9 +155,9 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 FloatDuration; the first scalar
+     * @param r2 FloatDuration; the second scalar
+     * @return FloatDuration; the minimum value of two relative scalars
      */
     public static FloatDuration min(final FloatDuration r1, final FloatDuration r2)
     {
@@ -173,10 +166,10 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 FloatDuration; the first scalar
+     * @param r2 FloatDuration; the second scalar
+     * @param rn FloatDuration...; the other scalars
+     * @return FloatDuration; the minimum value of more than two relative scalars
      */
     public static FloatDuration min(final FloatDuration r1, final FloatDuration r2, final FloatDuration... rn)
     {
@@ -194,9 +187,9 @@ public class FloatDuration extends AbstractFloatScalarRel<DurationUnit, FloatDur
     /**
      * Returns a FloatDuration representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatDuration
-     * @return the Scalar representation of the value in its unit
+     * @return FloatDuration; the Scalar value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static FloatDuration valueOf(final String text) throws IllegalArgumentException

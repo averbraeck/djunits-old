@@ -14,8 +14,6 @@ import org.djunits4.value.vfloat.scalar.*;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Oct 9, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -28,8 +26,8 @@ public class FloatFlowVolumeMatrix extends
     /**
      * Construct a new Relative Immutable FloatFlowVolumeMatrix.
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatFlowVolumeMatrix
-     * @param unit U; the unit of the new Relative Immutable FloatFlowVolumeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param unit FlowVolumeUnit; the unit of the new Relative Immutable FloatFlowVolumeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
     public FloatFlowVolumeMatrix(final float[][] values, final FlowVolumeUnit unit, final StorageType storageType)
@@ -40,9 +38,8 @@ public class FloatFlowVolumeMatrix extends
 
     /**
      * Construct a new Relative Immutable FloatFlowVolumeMatrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatFlowVolumeMatrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
+     * @param values FloatFlowVolume; the values of the entries in the new Relative Immutable FloatFlowVolumeMatrix
+     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
     public FloatFlowVolumeMatrix(final FloatFlowVolume[][] values, final StorageType storageType) throws ValueException
@@ -51,8 +48,8 @@ public class FloatFlowVolumeMatrix extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatMatrixData; an internal data object
+     * @param unit FlowVolumeUnit; the unit
      */
     FloatFlowVolumeMatrix(final FloatMatrixData data, final FlowVolumeUnit unit)
     {

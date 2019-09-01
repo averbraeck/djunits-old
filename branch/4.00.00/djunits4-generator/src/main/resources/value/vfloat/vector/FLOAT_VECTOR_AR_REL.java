@@ -25,7 +25,7 @@ public class Float%TypeRel%Vector extends AbstractFloatVectorRel<%TypeRelUnit%, 
     /**
      * Construct a new Relative Immutable Float%TypeRel%Vector.
      * @param values float[]; the values of the entries in the new Relative Immutable Float%TypeRel%Vector
-     * @param unit U; the unit of the new Relative Immutable Float%TypeRel%Vector
+     * @param unit %TypeRelUnit%; the unit of the new Relative Immutable Float%TypeRel%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -36,8 +36,8 @@ public class Float%TypeRel%Vector extends AbstractFloatVectorRel<%TypeRelUnit%, 
 
     /**
      * Construct a new Relative Immutable Float%TypeRel%Vector.
-     * @param values List; the values of the entries in the new Relative Immutable Float%TypeRel%Vector
-     * @param unit U; the unit of the new Relative Immutable Float%TypeRel%Vector
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float%TypeRel%Vector
+     * @param unit %TypeRelUnit%; the unit of the new Relative Immutable Float%TypeRel%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -48,7 +48,7 @@ public class Float%TypeRel%Vector extends AbstractFloatVectorRel<%TypeRelUnit%, 
 
     /**
      * Construct a new Relative Immutable Float%TypeRel%Vector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float%TypeRel%Vector
+     * @param values Float%TypeRel%[]; the values of the entries in the new Relative Immutable Float%TypeRel%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -59,7 +59,7 @@ public class Float%TypeRel%Vector extends AbstractFloatVectorRel<%TypeRelUnit%, 
 
     /**
      * Construct a new Relative Immutable Float%TypeRel%Vector.
-     * @param values List; the values of the entries in the new Relative Immutable Float%TypeRel%Vector
+     * @param values List&lt;Float%TypeRel%&gt;; the values of the entries in the new Relative Immutable Float%TypeRel%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -70,8 +70,8 @@ public class Float%TypeRel%Vector extends AbstractFloatVectorRel<%TypeRelUnit%, 
 
     /**
      * Construct a new Relative Immutable Float%TypeRel%Vector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float%TypeRel%Vector
-     * @param length the size of the vector
+     * @param values SortedMap&lt;Integer, Float%TypeRel%&gt;; the values of the entries in the new Relative Sparse Mutable Float%TypeRel%Vector
+     * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -83,9 +83,9 @@ public class Float%TypeRel%Vector extends AbstractFloatVectorRel<%TypeRelUnit%, 
 
     /**
      * Construct a new Relative Immutable Float%TypeRel%Vector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float%TypeRel%Vector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float%TypeRel%Vector
-     * @param length the size of the vector
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float%TypeRel%Vector
+     * @param unit %TypeRelUnit%; the unit of the new Relative Sparse Mutable Float%TypeRel%Vector
+     * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -97,8 +97,8 @@ public class Float%TypeRel%Vector extends AbstractFloatVectorRel<%TypeRelUnit%, 
 
     /**
      * Construct a new Relative Immutable Float%TypeRel%Vector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data FloatVectorData; an internal data object
+     * @param unit %TypeRelUnit%; the unit
      */
     Float%TypeRel%Vector(final FloatVectorData data, final %TypeRelUnit% unit)
     {
