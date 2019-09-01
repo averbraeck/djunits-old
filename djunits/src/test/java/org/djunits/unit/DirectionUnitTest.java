@@ -16,11 +16,11 @@ import org.junit.Test;
 /**
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2019-03-02 19:06:46 +0100 (Sat, 02 Mar 2019) $, @version $Revision: 342 $, by $Author: averbraeck $,
  * initial version Jun 4, 2014 <br>
- * @author <a href="http://tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class DirectionUnitTest extends AbstractUnitTest<DirectionUnit>
 {
