@@ -7,11 +7,11 @@ import org.djunits.unit.scale.OffsetLinearScale;
 /**
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
  * initial version Jun 6, 2014 <br>
- * @author <a href="http://tudelft.nl/pknoppers">Peter Knoppers</a>
+ * @author <a href="https://tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <OU> Make the test specific for this sub class of OffsetUnit
  */
 public class AbstractOffsetUnitTest<OU extends Unit<OU>> extends AbstractUnitTest<OU>

@@ -11,11 +11,11 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * Note that the EAST and NORTH Directions are <b>counter</b>clockwise.
  * <p>
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate: 2017-01-30 14:23:11 +0100 (Mon, 30 Jan 2017) $, @version $Revision: 234 $, by $Author: averbraeck $,
  * initial version May 15, 2014 <br>
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class DirectionUnit extends AbsoluteLinearUnit<DirectionUnit, AngleUnit>
 {

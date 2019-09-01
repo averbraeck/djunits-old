@@ -37,7 +37,7 @@ import java.net.URL;
  * <p>
  * @version May 2, 2014 <br>
  * @author Peter Jacobs
- * @author <a href="http://www.tbm.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public final class URLResource
 {

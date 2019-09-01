@@ -13,11 +13,11 @@ import org.junit.Test;
 /**
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>.
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * $LastChangedDate$, @version $Revision$, by $Author$,
  * initial version 11 nov. 2014 <br>
- * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class LinearDensityUnitTest extends AbstractLinearUnitTest<LinearDensityUnit>
 {
