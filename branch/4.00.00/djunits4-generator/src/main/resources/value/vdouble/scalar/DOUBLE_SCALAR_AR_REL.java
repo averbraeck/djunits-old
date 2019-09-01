@@ -70,7 +70,7 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
     /**
      * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
      * @param value double; the double value
-     * @param unit the unit
+     * @param unit %TypeAbsUnit%; the unit
      * @return %TypeAbs%; a new absolute instance of the DoubleScalar of the right type
      */
     public final %TypeAbs% instantiateAbs(final double value, final %TypeAbsUnit% unit)
@@ -90,10 +90,10 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero %TypeRel%; the low value
+     * @param one %TypeRel%; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return %TypeRel%; a Scalar at the ratio between
      */
     public static %TypeRel% interpolate(final %TypeRel% zero, final %TypeRel% one, final double ratio)
     {
@@ -103,8 +103,8 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
     
     /**
      * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
+     * @param v %TypAbs%; the value to add
+     * @return %TypeAbs%; sum of this value and v as a new object
      */
     public final %TypeAbs% plus(final %TypeAbs% v)
     {
@@ -114,9 +114,9 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 %TypeRel%; the first scalar
+     * @param r2 %TypeRel%; the second scalar
+     * @return %TypeRel%; the maximum value of two relative scalars
      */
     public static %TypeRel% max(final %TypeRel% r1, final %TypeRel% r2)
     {
@@ -125,10 +125,10 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 %TypeRel%; the first scalar
+     * @param r2 %TypeRel%; the second scalar
+     * @param rn %TypeRel%...; the other scalars
+     * @return %TypeRel%; the maximum value of more than two relative scalars
      */
     public static %TypeRel% max(final %TypeRel% r1, final %TypeRel% r2, final %TypeRel%... rn)
     {
@@ -145,9 +145,9 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 %TypeRel%; the first scalar
+     * @param r2 %TypeRel%; the second scalar
+     * @return %TypeRel%; the minimum value of two relative scalars
      */
     public static %TypeRel% min(final %TypeRel% r1, final %TypeRel% r2)
     {
@@ -156,10 +156,10 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 %TypeRel%; the first scalar
+     * @param r2 %TypeRel%; the second scalar
+     * @param rn %TypeRel%...; the other scalars
+     * @return %TypeRel%; the minimum value of more than two relative scalars
      */
     public static %TypeRel% min(final %TypeRel% r1, final %TypeRel% r2, final %TypeRel%... rn)
     {
@@ -177,9 +177,9 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
     /**
      * Returns a %TypeRel% representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a %TypeRel%
-     * @return the Scalar representation of the value in its unit
+     * @return %TypeRel%; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      */
     public static %TypeRel% valueOf(final String text) throws IllegalArgumentException

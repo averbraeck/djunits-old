@@ -26,7 +26,7 @@ public class %TypeAbs%Matrix extends
     /**
      * Construct a new Absolute Immutable Double %TypeRel%Matrix.
      * @param values double[][]; the values of the entries in the new Absolute Immutable Double %TypeRel%Matrix
-     * @param unit U; the unit of the new Absolute Immutable Double %TypeRel%Matrix
+     * @param unit %TypeAbsUnit%; the unit of the new Absolute Immutable Double %TypeRel%Matrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */

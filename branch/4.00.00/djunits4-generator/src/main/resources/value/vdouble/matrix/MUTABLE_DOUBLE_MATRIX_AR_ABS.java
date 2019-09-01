@@ -27,7 +27,7 @@ public class Mutable%TypeAbs%Matrix
     /**
      * Construct a new Absolute Mutable Double %TypeAbs%Matrix.
      * @param values double[][]; the values of the entries in the new Absolute Mutable Double %TypeAbs%Matrix
-     * @param unit U; the unit of the new Absolute Mutable Double %TypeAbs%Matrix
+     * @param unit %TypeAbsUnit%; the unit of the new Absolute Mutable Double %TypeAbs%Matrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */

@@ -25,7 +25,7 @@ public class Mutable%TypeRel%Matrix extends AbstractMutableDoubleMatrixRel<%Type
     /**
      * Construct a new Relative Mutable Double %TypeRel%Matrix.
      * @param values double[][]; the values of the entries in the new Relative Mutable Double %TypeRel%Matrix
-     * @param unit U; the unit of the new Relative Mutable Double %TypeRel%Matrix
+     * @param unit %TypeRelUnit%; the unit of the new Relative Mutable Double %TypeRel%Matrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */

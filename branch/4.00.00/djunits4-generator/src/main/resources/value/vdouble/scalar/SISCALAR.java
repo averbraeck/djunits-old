@@ -26,7 +26,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Construct SI scalar.
      * @param value double; the double value
-     * @param unit unit for the double value
+     * @param unit SIUnit; unit for the double value
      */
     public SIScalar(final double value, final SIUnit unit)
     {
@@ -35,7 +35,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Construct SI scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value SIScalar; Scalar from which to construct this instance
      */
     public SIScalar(final SIScalar value)
     {
@@ -52,8 +52,8 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Construct SI scalar.
      * @param value double; the double value in SI units
-     * @param unit the unit to use for the SI scalar
-     * @return the new scalar with the SI value
+     * @param unit SIUnit; the unit to use for the SI scalar
+     * @return SIScalar; the new scalar with the SI value
      */
     public static final SIScalar createSI(final double value, final SIUnit unit)
     {
@@ -62,10 +62,10 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
+     * @param zero SIScalar; the low value
+     * @param one SIScalar; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @return SIScalar; a Scalar at the ratio between
      */
     public static SIScalar interpolate(final SIScalar zero, final SIScalar one, final double ratio)
     {
@@ -74,9 +74,9 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 SIScalar; the first scalar
+     * @param r2 SIScalar; the second scalar
+     * @return SIScalar; the maximum value of two relative scalars
      */
     public static SIScalar max(final SIScalar r1, final SIScalar r2)
     {
@@ -85,10 +85,10 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 SIScalar; the first scalar
+     * @param r2 SIScalar; the second scalar
+     * @param rn SIScalar...; the other scalars
+     * @return SIScalar; the maximum value of more than two relative scalars
      */
     public static SIScalar max(final SIScalar r1, final SIScalar r2, final SIScalar... rn)
     {
@@ -105,9 +105,9 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 SIScalar; the first scalar
+     * @param r2 SIScalar; the second scalar
+     * @return SIScalar; the minimum value of two relative scalars
      */
     public static SIScalar min(final SIScalar r1, final SIScalar r2)
     {
@@ -116,10 +116,10 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 SIScalar; the first scalar
+     * @param r2 SIScalar; the second scalar
+     * @param rn SIScalar...; the other scalars
+     * @return SIScalar; the minimum value of more than two relative scalars
      */
     public static SIScalar min(final SIScalar r1, final SIScalar r2, final SIScalar... rn)
     {
@@ -136,7 +136,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 
     /**
      * Calculate the division of SI and SI, which results in a Dimensionless scalar.
-     * @param v SI scalar
+     * @param v SIScalar; SI scalar
      * @return Dimensionless scalar as a division of SI and SI
      */
     public final Dimensionless divideBy(final SIScalar v)
@@ -151,26 +151,26 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Return the current scalar transformed to a scalar in the same scalar type as the example. Of course the SI dimensionality
      * has to match, otherwise the scalar cannot be transformed.
-     * @param example an example object that serves as the 'template', e.g. Speed.ZERO
+     * @param example K; an example object that serves as the 'template', e.g. Speed.ZERO
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final K example)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(example.getUnit().getBaseUnit().getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(example.getUnit().getUnitBase().getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), example.toString());
-        return example.instantiateRel(this.si, example.getUnit().getBaseUnit().getStandardUnit());
+        return example.instantiateRel(this.si, example.getUnit().getUnitBase().getStandardUnit());
     }
 
     /**
      * Return the current scalar transformed to a scalar in the same scalar type as the example. Of course the SI dimensionality
      * has to match, otherwise the scalar cannot be transformed.
-     * @param example an example object that serves as the 'template', e.g. Speed.ZERO
-     * @param displayUnit the unit in which the value will be displayed
+     * @param example K; an example object that serves as the 'template', e.g. Speed.ZERO
+     * @param displayUnit KU; the unit in which the value will be displayed
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final K example, final KU displayUnit)
     {
-        Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(example.getUnit().getBaseUnit().getSiDimensions())),
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(example.getUnit().getUnitBase().getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), example.toString());
         return example.instantiateRel(ValueUtil.expressAsUnit(this.si, displayUnit), displayUnit);
     }
@@ -178,7 +178,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Return the current scalar transformed to a scalar in the given class type. Of course the SI dimensionality has to match,
      * otherwise the scalar cannot be transformed.
-     * @param returnClass the class of the
+     * @param returnClass Class&lt;K&gt;; the class of the scalar to be constructed
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     @SuppressWarnings("unchecked")
@@ -188,7 +188,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
         {
             Method createSI = returnClass.getMethod("createSI", double.class);
             K result = (K) createSI.invoke(returnClass, this.si);
-            Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(result.getUnit().getBaseUnit().getSiDimensions())),
+            Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(result.getUnit().getUnitBase().getSiDimensions())),
                     UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), result.toString());
             return result;
         }
@@ -202,8 +202,8 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**
      * Return the current scalar transformed to a scalar in the given class type. Of course the SI dimensionality has to match,
      * otherwise the scalar cannot be transformed.
-     * @param returnClass the class of the
-     * @param displayUnit the unit in which the value will be displayed
+     * @param returnClass Class&lt;K&gt;; the class of the scalar to be constructed
+     * @param displayUnit KU; the unit in which the value will be displayed
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
     @SuppressWarnings("unchecked")
@@ -214,7 +214,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
         {
             Method createSI = returnClass.getMethod("createSI", double.class);
             K result = (K) createSI.invoke(returnClass, this.si);
-            Throw.when(!(getUnit().getBaseUnit().getSiDimensions().equals(result.getUnit().getBaseUnit().getSiDimensions())),
+            Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(result.getUnit().getUnitBase().getSiDimensions())),
                     UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), result.toString());
             return result.instantiateRel(ValueUtil.expressAsUnit(this.si, displayUnit), displayUnit);
         }

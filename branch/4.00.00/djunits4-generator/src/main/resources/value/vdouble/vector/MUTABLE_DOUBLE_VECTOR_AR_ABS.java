@@ -27,7 +27,7 @@ public class Mutable%TypeAbs%Vector
     /**
      * Construct a new Absolute Mutable Double %TypeAbs%Vector.
      * @param values double[]; the values of the entries in the new Absolute Mutable Double %TypeAbs%Vector
-     * @param unit U; the unit of the new Absolute Mutable Double %TypeAbs%Vector
+     * @param unit %TypeAbsUnit%; the unit of the new Absolute Mutable Double %TypeAbs%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -38,8 +38,8 @@ public class Mutable%TypeAbs%Vector
 
     /**
      * Construct a new Absolute Mutable Double %TypeAbs%Vector.
-     * @param values List; the values of the entries in the new Absolute Mutable Double %TypeAbs%Vector
-     * @param unit U; the unit of the new Absolute Mutable Double %TypeAbs%Vector
+     * @param values List&lt;Double&gt;; the values of the entries in the new Absolute Mutable Double %TypeAbs%Vector
+     * @param unit %TypeAbsUnit%; the unit of the new Absolute Mutable Double %TypeAbs%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -50,7 +50,7 @@ public class Mutable%TypeAbs%Vector
 
     /**
      * Construct a new Absolute Mutable Double %TypeAbs%Vector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Mutable Double %TypeAbs%Vector
+     * @param values %TypeAbs%[]; the values of the entries in the new Absolute Mutable Double %TypeAbs%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -61,7 +61,7 @@ public class Mutable%TypeAbs%Vector
 
     /**
      * Construct a new Absolute Mutable Double %TypeAbs%Vector.
-     * @param values List; the values of the entries in the new Absolute Mutable Double %TypeAbs%Vector
+     * @param values List&lt;%TypeAbs%&gt;; the values of the entries in the new Absolute Mutable Double %TypeAbs%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -72,8 +72,8 @@ public class Mutable%TypeAbs%Vector
 
     /**
      * Construct a new Absolute Mutable Double %TypeAbs%Vector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable Double %TypeAbs%Vector
-     * @param length the size of the vector
+     * @param values SortedMap&lt;Integer, %TypeAbs%&gt;; the values of the entries in the new Absolute Sparse Mutable Double %TypeAbs%Vector
+     * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -85,9 +85,9 @@ public class Mutable%TypeAbs%Vector
 
     /**
      * Construct a new Absolute Mutable Double %TypeAbs%Vector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable Double %TypeAbs%Vector
-     * @param unit U; the unit of the new Absolute Sparse Mutable Double %TypeAbs%Vector
-     * @param length the size of the vector
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Absolute Sparse Mutable Double %TypeAbs%Vector
+     * @param unit %TypeAbsUnit%; the unit of the new Absolute Sparse Mutable Double %TypeAbs%Vector
+     * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -99,8 +99,8 @@ public class Mutable%TypeAbs%Vector
 
     /**
      * Construct a new Absolute Mutable Double %TypeAbs%Vector.
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit %TypeAbsUnit%; the unit
      */
     Mutable%TypeAbs%Vector(final DoubleVectorData data, final %TypeAbsUnit% unit)
     {

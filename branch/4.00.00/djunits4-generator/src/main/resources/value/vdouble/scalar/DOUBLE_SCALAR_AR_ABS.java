@@ -57,7 +57,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
     }
 
     /**
-     * Construct %TypeAbsl% scalar.
+     * Construct %TypeAbs% scalar.
      * @param value double; value in SI units
      * @return %TypeAbs%; the new scalar with the SI value
      */
@@ -69,7 +69,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
     /**
      * Interpolate between two values.
      * @param zero %TypeAbs%; the low value
-     * @param one%TypeAbs%; the high value
+     * @param one %TypeAbs%; the high value
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return %TypeAbs%; a Scalar at the ratio between
      */
@@ -94,7 +94,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
      * Return the maximum value of more than two absolute scalars.
      * @param a1 %TypeAbs%; the first scalar
      * @param a2 %TypeAbs%; the second scalar
-     * @param an %TypeAbs%[]; the other scalars
+     * @param an %TypeAbs%...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static %TypeAbs% max(final %TypeAbs% a1, final %TypeAbs% a2, final %TypeAbs%... an)
@@ -125,7 +125,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
      * Return the minimum value of more than two absolute scalars.
      * @param a1 %TypeAbs%; the first scalar
      * @param a2 %TypeAbs%; the second scalar
-     * @param an %TypeAbs%[]; the other scalars
+     * @param an %TypeAbs%...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static %TypeAbs% min(final %TypeAbs% a1, final %TypeAbs% a2, final %TypeAbs%... an)
@@ -144,7 +144,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
     /**
      * Returns a %TypeAbs% representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a %TypeAbs%
      * @return the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed

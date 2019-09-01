@@ -26,7 +26,7 @@ public class %Type%Vector extends
     /**
      * Construct a new Relative Immutable Double %Type%Vector.
      * @param values double[]; the values of the entries in the new Relative Immutable Double %Type%Vector
-     * @param unit U; the unit of the new Relative Immutable Double %Type%Vector
+     * @param unit %Type%Unit; the unit of the new Relative Immutable Double %Type%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -38,8 +38,8 @@ public class %Type%Vector extends
 
     /**
      * Construct a new Relative Immutable Double %Type%Vector.
-     * @param values List; the values of the entries in the new Relative Immutable Double %Type%Vector
-     * @param unit U; the unit of the new Relative Immutable Double %Type%Vector
+     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double %Type%Vector
+     * @param unit %Type%Unit; the unit of the new Relative Immutable Double %Type%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -51,8 +51,7 @@ public class %Type%Vector extends
 
     /**
      * Construct a new Relative Immutable Double %Type%Vector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Double
-     *            %Type%Vector
+     * @param values %Type%[]; the values of the entries in the new Relative Immutable Double %Type%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -63,7 +62,7 @@ public class %Type%Vector extends
 
     /**
      * Construct a new Relative Immutable Double %Type%Vector.
-     * @param values List; the values of the entries in the new Relative Immutable Double %Type%Vector
+     * @param values List&lt;%Type%&gt;; the values of the entries in the new Relative Immutable Double %Type%Vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -74,9 +73,9 @@ public class %Type%Vector extends
 
     /**
      * Construct a new Relative Immutable Double %Type%Vector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Double
+     * @param values SortedMap&lt;Integer, %Type%&gt;; the values of the entries in the new Relative Sparse Mutable Double
      *            %Type%Vector
-     * @param length the size of the vector
+     * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values has zero entries
      */
@@ -88,9 +87,9 @@ public class %Type%Vector extends
 
     /**
      * Construct a new Relative Immutable Double %Type%Vector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Double %Type%Vector
-     * @param unit U; the unit of the new Relative Sparse Mutable Double %Type%Vector
-     * @param length the size of the vector
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double %Type%Vector
+     * @param unit %Type%Unit; the unit of the new Relative Sparse Mutable Double %Type%Vector
+     * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @throws ValueException when values is null
      */
@@ -101,8 +100,8 @@ public class %Type%Vector extends
     }
 
     /**
-     * @param data an internal data object
-     * @param unit the unit
+     * @param data DoubleVectorData; an internal data object
+     * @param unit %Type%Unit; the unit
      */
     %Type%Vector(final DoubleVectorData data, final %Type%Unit unit)
     {
