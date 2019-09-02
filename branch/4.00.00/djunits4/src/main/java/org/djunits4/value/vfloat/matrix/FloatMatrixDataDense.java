@@ -69,6 +69,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
     }
 
     /**
+     * Apply a function to all data elements of this matrix.
      * @param floatFunction FloatFunction; the function to apply on the (mutable) data elements
      */
     public final void assign(final FloatFunction floatFunction)

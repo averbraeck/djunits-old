@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * SIPrefixes.java.
+ * Useful sets of SI prefixes.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -16,22 +16,22 @@ public enum SIPrefixes
     /** No SI prefixes allowed. E.g., for the "inch". */
     NONE,
 
-    /** All SI prefixes allowed. E.g., for the "meter". */
+    /** All standard SI prefixes allowed. E.g., for the "meter". */
     UNIT,
 
-    /** All positive SI prefixes allowed. E.g., for the electronVolt to avoid underflow with float values. */
+    /** All SI prefixes indicating larger than 1. E.g., for the electronVolt to avoid underflow with float values. */
     UNIT_POS,
 
     /** SI prefixes allowed, but default starts with "kilo" / "k", e.g., for the "kilogram". */
     KILO;
 
-    /** the SI prefixes and their values for the "UNIT" settings. */
+    /** The SI prefixes and their values for the "UNIT" settings. */
     public static final Map<String, SIPrefix> UNIT_PREFIXES = new LinkedHashMap<>();
 
-    /** the positive SI prefixes and their values for the "UNIT_POS" settings. */
+    /** The larger than 1 SI prefixes and their values for the "UNIT_POS" settings. */
     public static final Map<String, SIPrefix> UNIT_POS_PREFIXES = new LinkedHashMap<>();
 
-    /** the SI prefixes and their values for the "KILO" settings. */
+    /** The SI prefixes and their values for the "KILO" settings. */
     public static final Map<String, SIPrefix> KILO_PREFIXES = new LinkedHashMap<>();
 
     static
@@ -93,9 +93,9 @@ public enum SIPrefixes
     }
 
     /**
-     * Return the prefix information for the given prefix key (e.g., "G" for "giga").
+     * Look up and return the prefix information for the given prefix key (e.g., "G" for "giga").
      * @param prefixKey String; the prefix key, e.g., "G" for "giga"
-     * @return the SIPrefix information
+     * @return SIPrefix; the SIPrefix information, or null if the <code>prefixKey</code> does not exist
      */
     public static SIPrefix getUnit(final String prefixKey)
     {
@@ -106,7 +106,7 @@ public enum SIPrefixes
      * Return the prefix information for the given prefix key (e.g., "G" for "giga"), with an offset of a factor 1000 for units
      * that have "kilo" as the default.
      * @param prefixKey String; the prefix key, e.g., "G" for "giga"
-     * @return the SIPrefix information, with an offset of 1000. So "k" will return 1, and "" will return 1.0E-3.
+     * @return SIPrefix; the SIPrefix information, with an offset of 1000. So "k" will return 1, and "" will return 1.0E-3.
      */
     public static SIPrefix getKiloUnit(final String prefixKey)
     {

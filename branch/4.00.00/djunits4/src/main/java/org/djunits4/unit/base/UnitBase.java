@@ -147,7 +147,7 @@ public class UnitBase<U extends Unit<U>> implements Serializable
         {
             if (this.unitsByAbbreviation.containsKey(abbreviation))
             {
-                // if both are generated or both are not generated, give an error
+                // if both are generated or both are not generated, give an exception
                 if (getUnitByAbbreviation(abbreviation).isGenerated() == unit.isGenerated())
                 {
                     throw new UnitRuntimeException("A unit with abbreviation " + abbreviation
@@ -233,7 +233,8 @@ public class UnitBase<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * @return a safe copy of the registryById
+     * Retrieve a safe copy of the registryById.
+     * @return Map&lt;String, U&gt;; a safe copy of the registryById
      */
     public Map<String, U> getUnitsById()
     {
@@ -241,7 +242,8 @@ public class UnitBase<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * @return a safe copy of the registryByAbbreviation
+     * Return a safe copy of the registryByAbbreviation.
+     * @return Map&lt;String, U&gt;; a safe copy of the registryByAbbreviation
      */
     public Map<String, U> getUnitsByAbbreviation()
     {
@@ -249,7 +251,8 @@ public class UnitBase<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * @return U; the standardUnit for this unit base, usually the first registered unit.
+     * Retrieve the standard unit for this unit base (usually the first registered unit).
+     * @return U; the standardUnit for this unit base (usually the first registered unit)
      */
     public U getStandardUnit()
     {

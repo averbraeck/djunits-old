@@ -25,10 +25,10 @@ import org.djunits4.value.ValueException;
  */
 public final class FloatVectorUtil
 {
-    /** the cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
+    /** The cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
     private static Map<Unit<?>, Constructor<? extends AbstractFloatVector<?, ?>>> CACHE = new HashMap<>();
 
-    /** */
+    /** Do not instantiate. */
     private FloatVectorUtil()
     {
         // Utility class.
@@ -39,7 +39,7 @@ public final class FloatVectorUtil
      * @param value float[]; the value
      * @param unit U; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated FloatVector with the value expressed in the unit
+     * @return S; an instantiated FloatVector with the value expressed in the unit
      * @param <U> the unit
      * @param <S> the return type
      * @throws ValueException on vector init error
@@ -57,7 +57,7 @@ public final class FloatVectorUtil
      * @param value float[]; the value
      * @param unit Unit&lt;?&gt;; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated FloatVector with the value expressed in the unit
+     * @return S; an instantiated FloatVector with the value expressed in the unit
      * @param <S> the return type
      * @throws ValueException on vector init error
      */
@@ -73,7 +73,7 @@ public final class FloatVectorUtil
                 if (!unit.getClass().getSimpleName().endsWith("Unit"))
                 {
                     throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
-                            + " name does noet end with 'Unit'. Cannot find corresponding vector");
+                            + " name does not end with 'Unit'. Cannot find corresponding vector");
                 }
                 Class<? extends AbstractFloatVector<?, ?>> vectorClass;
                 if (unit instanceof SIUnit)
@@ -104,7 +104,7 @@ public final class FloatVectorUtil
      * @param si float[]; the value in SI units
      * @param displayUnit U; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated FloatVector with the value expressed in the unit
+     * @return S; an instantiated FloatVector with the value expressed in the unit
      * @throws ValueException on vector init error
      * @param <U> the unit
      * @param <S> the return type
@@ -129,17 +129,17 @@ public final class FloatVectorUtil
      * @param si float[]; the value in SI units
      * @param displayUnit Unit&lt;?&gt;; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated FloatVector with the value expressed in the unit
+     * @return S; an instantiated FloatVector with the value expressed in the unit
      * @throws ValueException on vector init error
      * @param <S> the return type
      */
-    @SuppressWarnings({"unchecked", "checkstyle:needbraces", "cast", "rawtypes"})
+    @SuppressWarnings({"unchecked", "checkstyle:needbraces", "rawtypes"})
     public static <S extends AbstractFloatVector<?, S>> S instantiateAnonymousSI(final float[] si, final Unit<?> displayUnit,
             final StorageType storageType) throws ValueException
     {
-        S value;
-        value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit(), storageType);
+        S value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit(), storageType);
         ((AbstractFloatVector) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }
+    
 }

@@ -7,8 +7,8 @@ import java.io.Serializable;
  * functions are <i>not</i> implemented, as they don't make sense with the units. E.g., a cubic root of a Volume should give a
  * Length, and not another volume... Trigoniometric functions should not give back the same unit either. The abs() function is
  * not included here, as abs() only makes sense for relative vales. What is the absolute value of 14 January 2016? Therefore the
- * functions that the interface forces to implement is rather limited, and certainly not the entire range of java.lang.Math
- * functions.
+ * set of functions that the interface forces to implement is rather limited, and certainly not the entire range of
+ * java.lang.Math functions.
  * <p>
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -46,4 +46,5 @@ public interface MathFunctionsAbs<T> extends Serializable
      * @return T; the modified T
      */
     T round();
+    
 }

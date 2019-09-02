@@ -43,7 +43,7 @@ public class IdentityScale extends LinearScale
     @Override
     public String toString()
     {
-        return "StandardScale []";
+        return "IdentityScale []";
     }
 
 }

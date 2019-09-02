@@ -34,6 +34,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
     }
 
     /**
+     * Modify the data by applying a function to each value.
      * @param doubleFunction DoubleFunction; the function to apply on the (mutable) data elements
      */
     public final void assign(final DoubleFunction doubleFunction)

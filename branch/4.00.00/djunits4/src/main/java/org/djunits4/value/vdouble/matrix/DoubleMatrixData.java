@@ -41,7 +41,8 @@ abstract class DoubleMatrixData implements Serializable
     private final StorageType storageType;
 
     /**
-     * @param storageType StorageType; the data type.
+     * Construct a new DoubleMatrixData store.
+     * @param storageType StorageType; the data type
      */
     DoubleMatrixData(final StorageType storageType)
     {
@@ -149,7 +150,8 @@ abstract class DoubleMatrixData implements Serializable
     }
 
     /**
-     * @return the number of rows of the matrix
+     * Retrieve the row count.
+     * @return int; the number of rows of the matrix
      */
     public int rows()
     {
@@ -157,7 +159,8 @@ abstract class DoubleMatrixData implements Serializable
     }
 
     /**
-     * @return the number of columns of the matrix
+     * Retrieve the column count.
+     * @return int; the number of columns of the matrix
      */
     public int cols()
     {
@@ -165,7 +168,8 @@ abstract class DoubleMatrixData implements Serializable
     }
 
     /**
-     * @return whether data type is sparse.
+     * Is this matrix sparse?
+     * @return boolean; true if the data storage type is sparse; false if the data storage type is not sparse
      */
     public boolean isSparse()
     {
@@ -173,7 +177,8 @@ abstract class DoubleMatrixData implements Serializable
     }
 
     /**
-     * @return the sparse transformation of this data
+     * Return the data of this matrix in sparse storage format.
+     * @return DoubleMatrixDataSparse; the sparse transformation of this data
      */
     public DoubleMatrixDataSparse toSparse()
     {
@@ -181,7 +186,8 @@ abstract class DoubleMatrixData implements Serializable
     }
 
     /**
-     * @return whether data type is dense.
+     * Is this matrix dense?
+     * @return boolean; true if the data storage type is dense; false if the data storage type is not dense
      */
     public boolean isDense()
     {
@@ -189,7 +195,8 @@ abstract class DoubleMatrixData implements Serializable
     }
 
     /**
-     * @return the dense transformation of this data
+     * Return the data of this matrix in dense storage format.
+     * @return DoubleMatrixDataDense; the dense transformation of this data
      */
     public DoubleMatrixDataDense toDense()
     {
@@ -197,6 +204,7 @@ abstract class DoubleMatrixData implements Serializable
     }
 
     /**
+     * Retrieve one value from this data.
      * @param row int; the row number to get the value for
      * @param col int; the column number to get the value for
      * @return the value at the [row, col] point
@@ -212,7 +220,8 @@ abstract class DoubleMatrixData implements Serializable
     public abstract void setSI(int row, int col, double valueSI);
 
     /**
-     * @return the number of non-zero cells.
+     * Compute and return the number of non-zero cells in this matrix.
+     * @return int; the number of non-zero cells
      */
     public final int cardinality()
     {
@@ -220,7 +229,8 @@ abstract class DoubleMatrixData implements Serializable
     }
 
     /**
-     * @return the sum of the values of all cells.
+     * Compute and return the sum of the values of all cells of this matrix.
+     * @return double; the sum of the values of all cells
      */
     public final double zSum()
     {
@@ -228,12 +238,14 @@ abstract class DoubleMatrixData implements Serializable
     }
 
     /**
-     * @return a deep copy of the data.
+     * Create and return a deep copy of the data.
+     * @return DoubleMatrixData; a deep copy of the data
      */
     public abstract DoubleMatrixData copy();
 
     /**
-     * @return a safe dense copy of matrixSI as a matrix
+     * Create and return a deep copy of the data in dense format.
+     * @return double[][]; a safe, dense copy of matrixSI as a matrix
      */
     public abstract double[][] getDenseMatrixSI();
 
@@ -313,7 +325,7 @@ abstract class DoubleMatrixData implements Serializable
     /**
      * Subtract a matrix from this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
      * @param right DoubleMatrixData; the other data object to subtract
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueException if matrices have different sizes
      */
     public abstract void decrementBy(DoubleMatrixData right) throws ValueException;
 
@@ -331,7 +343,7 @@ abstract class DoubleMatrixData implements Serializable
      * matrix is returned.
      * @param right DoubleMatrixData; the other data object to multiply with
      * @return the sum of this data object and the other data object
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueException if matrices have different sizes
      */
     public DoubleMatrixData times(final DoubleMatrixData right) throws ValueException
     {
@@ -368,7 +380,7 @@ abstract class DoubleMatrixData implements Serializable
      * matrix is returned.
      * @param right DoubleMatrixData; the other data object to divide by
      * @return the ratio of this data object and the other data object on a value by value basis
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueException if matrices have different sizes
      */
     public DoubleMatrixData divide(final DoubleMatrixData right) throws ValueException
     {
@@ -387,7 +399,7 @@ abstract class DoubleMatrixData implements Serializable
      * Divide the values of a matrix by the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense)
      * stays the same.
      * @param right DoubleMatrixData; the other data object to divide by
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueException if matrices have different sizes
      */
     public abstract void divideBy(DoubleMatrixData right) throws ValueException;
 
@@ -446,4 +458,5 @@ abstract class DoubleMatrixData implements Serializable
     {
         return "DoubleMatrixData [storageType=" + this.storageType + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
     }
+    
 }

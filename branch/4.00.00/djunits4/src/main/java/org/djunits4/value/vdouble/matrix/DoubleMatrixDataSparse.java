@@ -30,7 +30,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     private final int length;
 
     /**
-     * Create a vector with sparse data.
+     * Create a matrix with sparse data.
      * @param matrixSI double[]; the data to store
      * @param indices long[]; the index values of the Matrix, with &lt;tt&gt;index = row * cols + col&lt;/tt&gt;
      * @param length int; the length of the vector (padded with 0 after highest index in indices)
@@ -49,7 +49,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     }
 
     /**
-     * Create a vector with sparse data from an internal vector with dense data.
+     * Create a matrix with sparse data from an internal vector with dense data.
      * @param denseSI double[]; the dense data to store
      * @param rows int; the number of rows
      * @param cols int; the number of columns
@@ -72,7 +72,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     }
 
     /**
-     * Create a vector with sparse data.
+     * Create a matrix with sparse data.
      * @param dataSI double[][]; the data to store
      * @throws ValueException in case matrix is ragged
      */
@@ -238,9 +238,9 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     }
 
     /**
-     * Calculate the number of non-zero values in this double[][] matrix.
+     * Calculate the number of non-zero values in a double[][] matrix.
      * @param valuesSI double[][]; the double[][] matrix
-     * @return the number of non-zero values in this double[][] matrix
+     * @return the number of non-zero values in the double[][] matrix
      */
     private static int nonZero(final double[][] valuesSI)
     {
@@ -258,9 +258,9 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     }
 
     /**
-     * Calculate the number of non-zero values in this double[] vector.
+     * Calculate the number of non-zero values in a double[] vector.
      * @param valuesSI double[]; the double[] vector
-     * @return the number of non-zero values in this double[] vector
+     * @return the number of non-zero values in the double[] vector
      */
     private static int nonZero(final double[] valuesSI)
     {
@@ -449,4 +449,5 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
             return false;
         return true;
     }
+    
 }

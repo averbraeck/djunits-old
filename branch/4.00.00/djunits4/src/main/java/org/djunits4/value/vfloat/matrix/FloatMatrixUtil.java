@@ -25,10 +25,10 @@ import org.djunits4.value.ValueException;
  */
 public final class FloatMatrixUtil
 {
-    /** the cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
+    /** The cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
     private static Map<Unit<?>, Constructor<? extends AbstractFloatMatrix<?, ?>>> CACHE = new HashMap<>();
 
-    /** */
+    /** Do not instantiate. */
     private FloatMatrixUtil()
     {
         // Utility class.
@@ -39,7 +39,7 @@ public final class FloatMatrixUtil
      * @param value float[][]; the value
      * @param unit U; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated FloatMatrix with the value expressed in the unit
+     * @return S; an instantiated FloatMatrix with the value expressed in the unit
      * @param <U> the unit
      * @param <S> the return type
      * @throws ValueException on vector init error
@@ -57,7 +57,7 @@ public final class FloatMatrixUtil
      * @param value float[][]; the value
      * @param unit Unit&lt;?&gt;; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated FloatMatrix with the value expressed in the unit
+     * @return S; an instantiated FloatMatrix with the value expressed in the unit
      * @param <S> the return type
      * @throws ValueException on vector init error
      */
@@ -104,7 +104,7 @@ public final class FloatMatrixUtil
      * @param si float[][]; the value in SI units
      * @param displayUnit U; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated FloatMatrix with the value expressed in the unit
+     * @return S; an instantiated FloatMatrix with the value expressed in the unit
      * @throws ValueException on vector init error
      * @param <U> the unit
      * @param <S> the return type
@@ -122,17 +122,17 @@ public final class FloatMatrixUtil
      * @param si float[][]; the value in SI units
      * @param displayUnit Unit&lt;?&gt;; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated FloatMatrix with the value expressed in the unit
+     * @return S; an instantiated FloatMatrix with the value expressed in the unit
      * @throws ValueException on vector init error
      * @param <S> the return type
      */
-    @SuppressWarnings({"unchecked", "checkstyle:needbraces", "cast", "rawtypes"})
+    @SuppressWarnings({"unchecked", "checkstyle:needbraces", "rawtypes"})
     public static <S extends AbstractFloatMatrix<?, S>> S instantiateAnonymousSI(final float[][] si, final Unit<?> displayUnit,
             final StorageType storageType) throws ValueException
     {
-        S value;
-        value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit(), storageType);
+        S value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit(), storageType);
         ((AbstractFloatMatrix) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }
+    
 }

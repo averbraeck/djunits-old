@@ -17,7 +17,7 @@ public class SIRuntimeException extends RuntimeException
     private static final long serialVersionUID = 20190821L;
 
     /**
-     * 
+     * Construct a new SIRuntimeException with all fields set to default values.
      */
     public SIRuntimeException()
     {
@@ -25,6 +25,7 @@ public class SIRuntimeException extends RuntimeException
     }
 
     /**
+     * Construct a new SIRuntimeException with specified message and cause.
      * @param message String; String
      * @param cause Throwable; Throwable
      */
@@ -34,7 +35,8 @@ public class SIRuntimeException extends RuntimeException
     }
 
     /**
-     * @param message String; String
+      * Construct a new SIRuntimeException with specified message.
+    * @param message String; String
      */
     public SIRuntimeException(final String message)
     {
@@ -42,6 +44,7 @@ public class SIRuntimeException extends RuntimeException
     }
 
     /**
+     * Construct a new SIRuntimeException with specified cause.
      * @param cause Throwable; Throwable
      */
     public SIRuntimeException(final Throwable cause)

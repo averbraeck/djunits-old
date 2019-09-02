@@ -295,4 +295,5 @@ public abstract class DoubleVector
         }
 
     }
+    
 }

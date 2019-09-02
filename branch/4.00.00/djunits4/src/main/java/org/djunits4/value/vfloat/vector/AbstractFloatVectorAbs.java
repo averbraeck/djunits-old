@@ -208,7 +208,7 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar type
-     * @return the unit of the object
+     * @return AU; the unit of the object
      * @throws ValueException when the array has length equal to 0
      */
     static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
@@ -227,7 +227,7 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * @param <AU> the absolute unit of the scalars in the list
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar in the list
-     * @return the unit of the object
+     * @return AU the unit of the object
      * @throws ValueException when the array has length equal to 0
      */
     static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
@@ -246,8 +246,8 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * @param <AU> the absolute unit of the scalars in the map
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar in the list
-     * @return List the provided list
-     * @throws ValueException when the list has size equal to 0
+     * @return SortedMap&lt;Integer, S&gt;; the provided Map
+     * @throws ValueException when the Map is null or has size equal to 0
      */
     static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
             S extends AbstractFloatScalarAbs<AU, S, RU, ?>> AU checkUnit(final SortedMap<Integer, S> dsMap)
@@ -265,8 +265,8 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
     /* ============================================================================================ */
 
     /**
-     * Returns an iterator over the scalars in this vector in proper sequence.
-     * @return an iterator over the scalars in this vector in proper sequence
+     * Create and return an iterator over the scalars in this vector in proper sequence.
+     * @return Iterator&lt;S&gt;; an iterator over the scalars in this vector in proper sequence
      */
     @Override
     public Iterator<S> iterator()

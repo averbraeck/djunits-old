@@ -1,5 +1,5 @@
 /**
- * Unit scales for version 4 of DJUNITS -- experimental package. <br>
+ * Unit scales for DJUNITS. <br>
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.

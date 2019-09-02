@@ -41,7 +41,8 @@ abstract class FloatMatrixData implements Serializable
     private final StorageType storageType;
 
     /**
-     * @param storageType StorageType; the data type.
+     * Construct a new DoubleMatrixData store.
+     * @param storageType StorageType; the data type
      */
     FloatMatrixData(final StorageType storageType)
     {
@@ -149,7 +150,8 @@ abstract class FloatMatrixData implements Serializable
     }
 
     /**
-     * @return the number of rows of the matrix
+     * Retrieve the row count.
+     * @return int; the number of rows of the matrix
      */
     public int rows()
     {
@@ -157,7 +159,8 @@ abstract class FloatMatrixData implements Serializable
     }
 
     /**
-     * @return the number of columns of the matrix
+     * Retrieve the column count.
+     * @return int; the number of columns of the matrix
      */
     public int cols()
     {
@@ -165,7 +168,8 @@ abstract class FloatMatrixData implements Serializable
     }
 
     /**
-     * @return whether data type is sparse.
+     * Is this matrix sparse?
+     * @return boolean; true if the data storage type is sparse; false if the data storage type is not sparse
      */
     public boolean isSparse()
     {
@@ -173,7 +177,8 @@ abstract class FloatMatrixData implements Serializable
     }
 
     /**
-     * @return the sparse transformation of this data
+     * Return the data of this matrix in sparse storage format.
+     * @return FloatMatrixDataSparse; the sparse transformation of this data
      */
     public FloatMatrixDataSparse toSparse()
     {
@@ -181,7 +186,8 @@ abstract class FloatMatrixData implements Serializable
     }
 
     /**
-     * @return whether data type is dense.
+     * Is this matrix dense?
+     * @return boolean; true if the data storage type is dense; false if the data storage type is not dense
      */
     public boolean isDense()
     {
@@ -189,7 +195,8 @@ abstract class FloatMatrixData implements Serializable
     }
 
     /**
-     * @return the dense transformation of this data
+     * Return the data of this matrix in dense storage format.
+     * @return FloatMatrixDataDense; the dense transformation of this data
      */
     public FloatMatrixDataDense toDense()
     {
@@ -197,6 +204,7 @@ abstract class FloatMatrixData implements Serializable
     }
 
     /**
+     * Retrieve one value from this data.
      * @param row int; the row number to get the value for
      * @param col int; the column number to get the value for
      * @return the value at the [row, col] point
@@ -212,7 +220,8 @@ abstract class FloatMatrixData implements Serializable
     public abstract void setSI(int row, int col, float valueSI);
 
     /**
-     * @return the number of non-zero cells.
+     * Compute and return the number of non-zero cells in this matrix.
+     * @return int; the number of non-zero cells
      */
     public final int cardinality()
     {
@@ -222,7 +231,8 @@ abstract class FloatMatrixData implements Serializable
     }
 
     /**
-     * @return the sum of the values of all cells.
+     * Compute and return the sum of the values of all cells of this matrix.
+     * @return float; the sum of the values of all cells
      */
     public final float zSum()
     {
@@ -231,17 +241,20 @@ abstract class FloatMatrixData implements Serializable
     }
 
     /**
-     * @return a deep copy of the data.
+     * Create and return a deep copy of the data.
+     * @return FloatMatrixData; a deep copy of the data
      */
     public abstract FloatMatrixData copy();
 
     /**
-     * @return a safe dense copy of matrixSI as a matrix
+     * Create and return a deep copy of the data in dense format.
+     * @return float[][]; a safe, dense copy of matrixSI as a matrix
      */
     public abstract float[][] getDenseMatrixSI();
 
     /**
-     * @return a safe dense copy of matrixSI as a double matrix
+     * Create and return a deep copy of the data in dense format.
+     * @return double[][]; a safe, dense copy of matrixSI as a matrix
      */
     public abstract double[][] getDoubleDenseMatrixSI();
 
@@ -333,7 +346,7 @@ abstract class FloatMatrixData implements Serializable
      * matrix is returned.
      * @param right FloatMatrixData; the other data object to multiply with
      * @return the sum of this data object and the other data object
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueException if matrices have different sizes
      */
     public FloatMatrixData times(final FloatMatrixData right) throws ValueException
     {
@@ -352,7 +365,7 @@ abstract class FloatMatrixData implements Serializable
      * Multiply a matrix with the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the
      * same.
      * @param right FloatMatrixData; the other data object to multiply with
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueException if matrices have different sizes
      */
     public abstract void multiplyBy(FloatMatrixData right) throws ValueException;
 
@@ -367,7 +380,7 @@ abstract class FloatMatrixData implements Serializable
      * matrix is returned.
      * @param right FloatMatrixData; the other data object to divide by
      * @return the sum of this data object and the other data object
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueException if matrices have different sizes
      */
     public FloatMatrixData divide(final FloatMatrixData right) throws ValueException
     {
@@ -386,7 +399,7 @@ abstract class FloatMatrixData implements Serializable
      * Divide the values of a matrix by the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense)
      * stays the same.
      * @param right FloatMatrixData; the other data object to divide by
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueException if matrices have different sizes
      */
     public abstract void divideBy(FloatMatrixData right) throws ValueException;
 
@@ -442,4 +455,5 @@ abstract class FloatMatrixData implements Serializable
     {
         return "FloatMatrixData [storageType=" + this.storageType + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
     }
+    
 }

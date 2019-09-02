@@ -22,17 +22,17 @@ public final class UnitTypes implements Serializable
     /** */
     private static final long serialVersionUID = 20190818L;
 
-    /** the one instance. */
+    /** The one instance. */
     public static final UnitTypes INSTANCE = new UnitTypes();
 
-    /** the SI registry of the units. */
+    /** The SI registry of the units. */
     private Map<SIDimensions, Set<UnitBase<?>>> siRegistry = new LinkedHashMap<>();
 
-    /** the name registry of the units. */
+    /** The name registry of the units. */
     private Map<String, UnitBase<?>> registry = new LinkedHashMap<>();
 
     /**
-     * Only call once from a static field.
+     * Only called once to initialize a static final field.
      */
     private UnitTypes()
     {
@@ -79,4 +79,5 @@ public final class UnitTypes implements Serializable
     {
         return this.registry.get(unitClassName);
     }
+    
 }

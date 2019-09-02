@@ -20,4 +20,5 @@ public abstract class DoubleFunction
      * @return the result of the function.
      */
     public abstract double apply(double argument);
+    
 }

@@ -132,7 +132,7 @@ public abstract class FloatScalar
      * @param <RU> Unit; the relative unit of the parameter
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
-     * @return A, an absolute typed FloatScalar; the sum of the values as an Absolute value
+     * @return A; an absolute typed FloatScalar; the sum of the values as an Absolute value
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractFloatScalarRel<RU, R>,
             A extends AbstractFloatScalarAbs<AU, A, RU, R>> A plus(final R left, final A right)
@@ -147,7 +147,7 @@ public abstract class FloatScalar
      * @param right R, a relative typed FloatScalar; the right argument
      * @param <U> Unit; the unit of the parameters and the result
      * @param <R> the relative type
-     * @return R, a relative typed FloatScalar; the sum of the values as a Relative value
+     * @return R; a relative typed FloatScalar; the sum of the values as a Relative value
      */
     public static <U extends Unit<U>, R extends AbstractFloatScalarRel<U, R>> R plus(final R left, final R right)
     {
@@ -163,7 +163,7 @@ public abstract class FloatScalar
      * @param <RU> Unit; the relative unit of the parameter
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
-     * @return A, an absolute typed FloatScalar; the resulting value as an absolute value
+     * @return A; an absolute typed FloatScalar; the resulting value as an absolute value
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractFloatScalarRel<RU, R>,
             A extends AbstractFloatScalarAbs<AU, A, RU, R>> A minus(final A left, final R right)
@@ -178,7 +178,7 @@ public abstract class FloatScalar
      * @param right R, a relative typed FloatScalar; the right value
      * @param <U> Unit; the unit of the parameters and the result
      * @param <R> the relative type
-     * @return R, a relative typed FloatScalar; the resulting value as a relative value
+     * @return R; a relative typed FloatScalar; the resulting value as a relative value
      */
     public static <U extends Unit<U>, R extends AbstractFloatScalarRel<U, R>> R minus(final R left, final R right)
     {
@@ -194,7 +194,7 @@ public abstract class FloatScalar
      * @param <RU> Unit; the relative unit of the parameter and the result
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
-     * @return R, a relative typed FloatScalar; the difference of the two absolute values as a relative value
+     * @return R; a relative typed FloatScalar; the difference of the two absolute values as a relative value
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractFloatScalarRel<RU, R>,
             A extends AbstractFloatScalarAbs<AU, A, RU, R>> R minus(final A left, final A right)
@@ -211,7 +211,7 @@ public abstract class FloatScalar
      * @param <RU> Unit; the relative unit belonging to the absolute unit
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
-     * @return Absolute FloatScalar
+     * @return A; an Absolute FloatScalar
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractFloatScalarRel<RU, R>,
             A extends AbstractFloatScalarAbs<AU, A, RU, R>> A interpolate(final A zero, final A one, final float ratio)
@@ -226,7 +226,7 @@ public abstract class FloatScalar
      * @param ratio float; the ratio that determines where between (or outside) zero and one the result lies
      * @param <U> Unit; the unit of the parameters and the result
      * @param <R> the relative type
-     * @return Relative FloatScalar
+     * @return R; a Relative FloatScalar
      */
     public static <U extends Unit<U>, R extends AbstractFloatScalarRel<U, R>> R interpolate(final R zero, final R one,
             final float ratio)
@@ -267,7 +267,8 @@ public abstract class FloatScalar
      * @param ratio float; the ratio that determines where between (or outside) zero and one the result lies
      * @param <AU> Unit; the absolute unit of the parameter and the result
      * @param <RU> Unit; the relative unit belonging to the absolute unit
-     * @return FloatScalar.Abs&lt;U&gt;
+     * @return FloatScalar.Abs&lt;AU, RU&gt;; an Absolute Scalar at the <code>ratio</code> between <code>zero</code> and
+     *         <code>one</code>
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>> FloatScalar.Abs<AU, RU> interpolate(
             final FloatScalar.Abs<AU, RU> zero, final FloatScalar.Abs<AU, RU> one, final float ratio)
@@ -282,7 +283,8 @@ public abstract class FloatScalar
      * @param one FloatScalar.Rel&lt;U&gt;; one reference (returned when ratio == 1)
      * @param ratio float; the ratio that determines where between (or outside) zero and one the result lies
      * @param <U> Unit; the unit of the parameters and the result
-     * @return FloatScalar.Rel&lt;U&gt;
+     * @return FloatScalar.Abs&lt;U&gt;; a Relative Scalar at the <code>ratio</code> between <code>zero</code> and
+     *         <code>one</code>
      */
     public static <U extends Unit<U>> FloatScalar.Rel<U> interpolate(final FloatScalar.Rel<U> zero,
             final FloatScalar.Rel<U> one, final float ratio)

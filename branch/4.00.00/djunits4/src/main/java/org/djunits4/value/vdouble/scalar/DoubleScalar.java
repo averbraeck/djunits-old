@@ -113,7 +113,7 @@ public abstract class DoubleScalar
      * @param <RU> Unit; the relative unit of the parameters and the result
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
-     * @return A, an absolute typed DoubleScalar; the sum of the values as an Absolute value
+     * @return A; an absolute typed DoubleScalar; the sum of the values as an Absolute value
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractDoubleScalarRel<RU, R>,
             A extends AbstractDoubleScalarAbs<AU, A, RU, R>> A plus(final A left, final R right)
@@ -130,7 +130,7 @@ public abstract class DoubleScalar
      * @param <RU> Unit; the relative unit of the parameters and the result
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
-     * @return A, an absolute typed DoubleScalar; the sum of the values as an Absolute value
+     * @return A; an absolute typed DoubleScalar; the sum of the values as an Absolute value
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractDoubleScalarRel<RU, R>,
             A extends AbstractDoubleScalarAbs<AU, A, RU, R>> A plus(final R left, final A right)
@@ -145,7 +145,7 @@ public abstract class DoubleScalar
      * @param right R, a relative typed DoubleScalar; the right argument
      * @param <U> Unit; the unit of the parameters and the result
      * @param <R> the relative type
-     * @return R, a relative typed DoubleScalar; the sum of the values as a Relative value
+     * @return R; a relative typed DoubleScalar; the sum of the values as a Relative value
      */
     public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>> R plus(final R left, final R right)
     {
@@ -161,7 +161,7 @@ public abstract class DoubleScalar
      * @param <RU> Unit; the relative unit of the parameters and the result
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
-     * @return A, an absolute typed DoubleScalar; the resulting value as an absolute value
+     * @return A; an absolute typed DoubleScalar; the resulting value as an absolute value
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractDoubleScalarRel<RU, R>,
             A extends AbstractDoubleScalarAbs<AU, A, RU, R>> A minus(final A left, final R right)
@@ -176,7 +176,7 @@ public abstract class DoubleScalar
      * @param right R, a relative typed DoubleScalar; the right value
      * @param <U> Unit; the unit of the parameters and the result
      * @param <R> the relative type
-     * @return R, a relative typed DoubleScalar; the resulting value as a relative value
+     * @return R; a relative typed DoubleScalar; the resulting value as a relative value
      */
     public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>> R minus(final R left, final R right)
     {
@@ -192,7 +192,7 @@ public abstract class DoubleScalar
      * @param <RU> Unit; the relative unit of the parameters and the result
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
-     * @return R, a relative typed DoubleScalar; the difference of the two absolute values as a relative value
+     * @return R; a relative typed DoubleScalar; the difference of the two absolute values as a relative value
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractDoubleScalarRel<RU, R>,
             A extends AbstractDoubleScalarAbs<AU, A, RU, R>> R minus(final A left, final A right)
@@ -233,7 +233,7 @@ public abstract class DoubleScalar
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @param <U> Unit; the unit of the parameters and the result
      * @param <R> the relative type
-     * @return a Scalar at the ratio between
+     * @return R; an Absolute Scalar at the <code>ratio</code> between <code>zero</code> and <code>one</code>
      */
     public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>> R interpolate(final R zero, final R one,
             final double ratio)
@@ -250,7 +250,7 @@ public abstract class DoubleScalar
      * @param <RU> Unit; the relative unit of the parameters and the result
      * @param <R> the relative type
      * @param <A> the corresponding absolute type
-     * @return a Scalar at the ratio between
+     * @return R; a Relative Scalar at the <code>ratio</code> between <code>zero</code> and <code>one</code>
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>, R extends AbstractDoubleScalarRel<RU, R>,
             A extends AbstractDoubleScalarAbs<AU, A, RU, R>> A interpolate(final A zero, final A one, final double ratio)
@@ -264,7 +264,7 @@ public abstract class DoubleScalar
      * @param r2 T; the second scalar
      * @param <U> Unit; the unit of the parameters and the result
      * @param <T> the argument and result type
-     * @return the maximum value of two relative scalars
+     * @return T; the maximum value of two relative scalars
      */
     public static <U extends Unit<U>, T extends AbstractDoubleScalar<U, T>> T max(final T r1, final T r2)
     {
@@ -278,7 +278,7 @@ public abstract class DoubleScalar
      * @param rn T...; the other scalars
      * @param <U> Unit; the unit of the parameters and the result
      * @param <T> the argument and result type
-     * @return the maximum value of more than two relative scalars
+     * @return T; the maximum value of more than two relative scalars
      */
     @SafeVarargs
     public static <U extends Unit<U>, T extends AbstractDoubleScalar<U, T>> T max(final T r1, final T r2, final T... rn)
@@ -300,7 +300,7 @@ public abstract class DoubleScalar
      * @param r2 T; the second scalar
      * @param <U> Unit; the unit of the parameters and the result
      * @param <T> the argument and result type
-     * @return the minimum value of two relative scalars
+     * @return T; the minimum value of two relative scalars
      */
     public static <U extends Unit<U>, T extends AbstractDoubleScalar<U, T>> T min(final T r1, final T r2)
     {
@@ -314,7 +314,7 @@ public abstract class DoubleScalar
      * @param rn T...; the other scalars
      * @param <U> Unit; the unit of the parameters and the result
      * @param <T> the argument and result type
-     * @return the minimum value of more than two relative scalars
+     * @return T; the minimum value of more than two relative scalars
      */
     @SafeVarargs
     public static <U extends Unit<U>, T extends AbstractDoubleScalar<U, T>> T min(final T r1, final T r2, final T... rn)

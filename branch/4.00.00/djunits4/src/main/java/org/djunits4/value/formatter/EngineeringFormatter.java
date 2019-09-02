@@ -63,7 +63,7 @@ public final class EngineeringFormatter
     {
         if (room < 10)
         {
-            return format(val, 10); // This formatter needs at least 10 positions
+            return format(val, 10); // The EngineeringFormatter needs at least 10 positions
         }
         if (Double.isNaN(val) || 0d == val || Double.isInfinite(val))
         {
@@ -108,7 +108,8 @@ public final class EngineeringFormatter
     }
 
     /**
-     * Make the exponent of a floating point value a multiple of 3. Assumes that the first dot or comma is the radix symbol.
+     * Make the exponent of a floating point value a multiple of 3. Assumes that the first dot or comma is the radix symbol and
+     * 'e' or 'E' is used at the exponent symbol.
      * @param in String; String representation of a floating point value
      * @return String; The engineering formatted value
      */

@@ -14,7 +14,7 @@ public class MTS extends UnitSystem
     private static final long serialVersionUID = 20140606L;
 
     /**
-     * protected constructor to avoid creating other (false) unit systems.
+     * Protected constructor to avoid creating other (false) unit systems.
      * @param abbreviationKey String; the abbreviation of the unit system, such as SI
      * @param nameKey String; the name of the unit system, such as SI Base
      */

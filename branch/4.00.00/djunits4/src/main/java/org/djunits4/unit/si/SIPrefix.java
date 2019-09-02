@@ -17,16 +17,16 @@ public class SIPrefix implements Serializable
     /** */
     private static final long serialVersionUID = 20190821L;
 
-    /** the default textual prefix abbreviation, such as "M" for mega and "da" for deca. */
+    /** The default textual prefix abbreviation, such as "M" for mega and "da" for deca. */
     private final String defaultTextualPrefix;
 
-    /** the default display prefix abbreviation, such as "\u03BC" for micro. */
+    /** The default display prefix abbreviation, such as "\u03BC" for micro. */
     private final String defaultDisplayPrefix;
 
-    /** the prefix name such as "mega" or "deca". */
+    /** The prefix name such as "mega" or "deca". */
     private final String prefixName;
 
-    /** the factor that the SI prefix represents, such as 1.0E6 for mega. */
+    /** The factor that the SI prefix represents, such as 1.0E6 for mega. */
     private final double factor;
 
     /**
@@ -61,7 +61,8 @@ public class SIPrefix implements Serializable
     }
 
     /**
-     * @return defaultTextualPrefix
+     * Retrieve the default textual prefix.
+     * @return String; the default textual prefix
      */
     public String getDefaultTextualPrefix()
     {
@@ -69,7 +70,8 @@ public class SIPrefix implements Serializable
     }
 
     /**
-     * @return prefixName
+     * Retrieve the prefix name.
+     * @return String; the prefix name
      */
     public String getPrefixName()
     {
@@ -77,7 +79,8 @@ public class SIPrefix implements Serializable
     }
 
     /**
-     * @return factor
+     * Retrieve the factor.
+     * @return double; the factor
      */
     public double getFactor()
     {
@@ -85,10 +88,19 @@ public class SIPrefix implements Serializable
     }
 
     /**
-     * @return defaultDisplayPrefix
+     * Retrieve the default display prefix.
+     * @return String; the default display prefix
      */
     public String getDefaultDisplayPrefix()
     {
         return this.defaultDisplayPrefix;
     }
+
+    @Override
+    public String toString()
+    {
+        return "SIPrefix [defaultTextualPrefix=" + defaultTextualPrefix + ", defaultDisplayPrefix=" + defaultDisplayPrefix
+                + ", prefixName=" + prefixName + ", factor=" + factor + "]";
+    }
+    
 }

@@ -31,6 +31,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
     public final float si;
 
     /**
+     * Construct a new AbstractFloatScalar;
      * @param unit U; the unit
      * @param si float; the si value to store
      */
@@ -48,9 +49,9 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
     }
 
     /**
-     * Test if this Relative FloatScalar is less than a Relative FloatScalar.
+     * Test if this Relative FloatScalar is less than another Relative FloatScalar.
      * @param o T, a relative typed FloatScalar; the right hand side operand of the comparison
-     * @return boolean
+     * @return boolean; true if this is less than other; false if this is not less than other
      */
     public final boolean lt(final T o)
     {
@@ -58,7 +59,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
     }
 
     /**
-     * Test if this Relative FloatScalar is less than or equal to a Relative FloatScalar.
+     * Test if this Relative FloatScalar is less than or equal to another Relative FloatScalar.
      * @param o T, a relative typed FloatScalar; the right hand side operand of the comparison
      * @return boolean
      */
@@ -70,7 +71,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
     /**
      * Test if this Relative FloatScalar is greater than or equal to a Relative FloatScalar.
      * @param o T, a relative typed FloatScalar; the right hand side operand of the comparison
-     * @return boolean
+     * @return boolean; true if this is greater than or equal to other; false if this is not greater than or equal to other
      */
     public final boolean gt(final T o)
     {
@@ -80,7 +81,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
     /**
      * Test if this Relative FloatScalar is greater than a Relative FloatScalar.
      * @param o T, a relative typed FloatScalar; the right hand side operand of the comparison
-     * @return boolean
+     * @return boolean; true if this is greater than other; false if this is not greater than other
      */
     public final boolean ge(final T o)
     {
@@ -90,7 +91,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
     /**
      * Test if this Relative FloatScalar is equal to a Relative FloatScalar.
      * @param o T, a relative typed FloatScalar; the right hand side operand of the comparison
-     * @return boolean
+     * @return boolean; true if this is equal to other; false if this is not equal to other
      */
     public final boolean eq(final T o)
     {
@@ -100,7 +101,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
     /**
      * Test if this Relative FloatScalar is not equal to a Relative FloatScalar.
      * @param o T, a relative typed FloatScalar; the right hand side operand of the comparison
-     * @return boolean
+     * @return boolean; true if this is not equal to other; false if this is equal to other
      */
     public final boolean ne(final T o)
     {
@@ -109,7 +110,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
 
     /**
      * Test if this Relative FloatScalar is less than 0.0.
-     * @return boolean
+     * @return boolean; true if this is less than 0.0; false if this is not less than 0.0
      */
     public final boolean lt0()
     {
@@ -118,7 +119,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
 
     /**
      * Test if this Relative FloatScalar is less than or equal to 0.0.
-     * @return boolean
+     * @return boolean; true if this is less than or equal to 0.0; false if this is not less than or equal to 0.0
      */
     public final boolean le0()
     {
@@ -127,25 +128,25 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
 
     /**
      * Test if this Relative FloatScalar is greater than or equal to 0.0.
-     * @return boolean
+     * @return boolean; true if this is greater than or equal to 0.0; false if this is not greater than or equal to 0.0
      */
     public final boolean gt0()
-    {
-        return this.getSI() > 0.0f;
-    }
-
-    /**
-     * Test if this Relative FloatScalar is greater than 0.0.
-     * @return boolean
-     */
-    public final boolean ge0()
     {
         return this.getSI() >= 0.0f;
     }
 
     /**
+     * Test if this Relative FloatScalar is greater than 0.0.
+     * @return boolean; true if this is greater than 0.0; false if this is not greater than 0.0
+     */
+    public final boolean ge0()
+    {
+        return this.getSI() > 0.0f;
+    }
+
+    /**
      * Test if this Relative FloatScalar is equal to 0.0.
-     * @return boolean
+     * @return boolean; true if this is equal to 0.0; false if this is not equal to 0.0
      */
     public final boolean eq0()
     {
@@ -154,7 +155,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
 
     /**
      * Test if this Relative FloatScalar is not equal to 0.0.
-     * @return boolean
+     * @return boolean; true if this is not equal to 0.0; false if this is equal to 0.0
      */
     public final boolean ne0()
     {

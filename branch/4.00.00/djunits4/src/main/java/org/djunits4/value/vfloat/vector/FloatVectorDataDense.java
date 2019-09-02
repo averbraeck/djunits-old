@@ -34,6 +34,7 @@ public class FloatVectorDataDense extends FloatVectorData
     }
 
     /**
+     * Modify the data by applying a function to each value.
      * @param floatFunction FloatFunction; the function to apply on the (mutable) data elements
      */
     public final void assign(final FloatFunction floatFunction)

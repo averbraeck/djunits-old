@@ -20,4 +20,5 @@ public abstract class FloatFunction
      * @return the result of the function.
      */
     public abstract float apply(float argument);
+    
 }

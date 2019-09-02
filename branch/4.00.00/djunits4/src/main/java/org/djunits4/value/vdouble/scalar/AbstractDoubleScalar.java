@@ -31,6 +31,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
     public final double si;
 
     /**
+     * Construct a new AbstractDoubleScalar;
      * @param unit U; the unit
      * @param si double; the si value to store
      */
@@ -48,9 +49,9 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
     }
 
     /**
-     * Test if this DoubleScalar is less than a DoubleScalar.
+     * Test if this DoubleScalar is less than another DoubleScalar.
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
-     * @return boolean
+     * @return boolean; true if this is less than other; false if this is not less than other
      */
     public final boolean lt(final T o)
     {
@@ -58,7 +59,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
     }
 
     /**
-     * Test if this DoubleScalar is less than or equal to a DoubleScalar.
+     * Test if this DoubleScalar is less than or equal to another DoubleScalar.
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
      * @return boolean
      */
@@ -70,7 +71,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
     /**
      * Test if this DoubleScalar is greater than or equal to a DoubleScalar.
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
-     * @return boolean
+     * @return boolean; true if this is greater than or equal to other; false if this is not greater than or equal to other
      */
     public final boolean gt(final T o)
     {
@@ -80,7 +81,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
     /**
      * Test if this DoubleScalar is greater than a DoubleScalar.
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
-     * @return boolean
+     * @return boolean; true if this is greater than other; false if this is not greater than other
      */
     public final boolean ge(final T o)
     {
@@ -90,7 +91,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
     /**
      * Test if this DoubleScalar is equal to a DoubleScalar.
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
-     * @return boolean
+     * @return boolean; true if this is equal to other; false if this is not equal to other
      */
     public final boolean eq(final T o)
     {
@@ -100,7 +101,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
     /**
      * Test if this DoubleScalar is not equal to a DoubleScalar.
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
-     * @return boolean
+     * @return boolean; true if this is not equal to other; false if this is equal to other
      */
     public final boolean ne(final T o)
     {
@@ -109,7 +110,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
 
     /**
      * Test if this DoubleScalar is less than 0.0.
-     * @return boolean
+     * @return boolean; true if this is less than 0.0; false if this is not less than 0.0
      */
     public final boolean lt0()
     {
@@ -118,7 +119,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
 
     /**
      * Test if this DoubleScalar is less than or equal to 0.0.
-     * @return boolean
+     * @return boolean; true if this is less than or equal to 0.0; false if this is not less than or equal to 0.0
      */
     public final boolean le0()
     {
@@ -127,25 +128,25 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
 
     /**
      * Test if this DoubleScalar is greater than or equal to 0.0.
-     * @return boolean
+     * @return boolean; true if this is greater than or equal to 0.0; false if this is not greater than or equal to 0.0
      */
     public final boolean gt0()
-    {
-        return this.getSI() > 0.0;
-    }
-
-    /**
-     * Test if this DoubleScalar is greater than 0.0.
-     * @return boolean
-     */
-    public final boolean ge0()
     {
         return this.getSI() >= 0.0;
     }
 
     /**
+     * Test if this DoubleScalar is greater than 0.0.
+     * @return boolean; true if this is greater than 0.0; false if this is not greater than 0.0
+     */
+    public final boolean ge0()
+    {
+        return this.getSI() > 0.0;
+    }
+
+    /**
      * Test if this DoubleScalar is equal to 0.0.
-     * @return boolean
+     * @return boolean; true if this is equal to 0.0; false if this is not equal to 0.0
      */
     public final boolean eq0()
     {
@@ -154,7 +155,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
 
     /**
      * Test if this DoubleScalar is not equal to 0.0.
-     * @return boolean
+     * @return boolean; true if this is not equal to 0.0; false if this is equal to 0.0
      */
     public final boolean ne0()
     {

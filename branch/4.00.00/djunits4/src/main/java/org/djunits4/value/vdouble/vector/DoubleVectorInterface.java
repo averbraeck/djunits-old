@@ -64,20 +64,20 @@ public interface DoubleVectorInterface<U extends Unit<U>>
     double getInUnit(int index, U targetUnit) throws ValueException;
 
     /**
-     * return a mutable version of this vector.
-     * @return a mutable version of this vector
+     * Create and return a mutable version of this vector.
+     * @return MutableDoubleVectorInterface&lt;U&gt;; a mutable version of this vector
      */
     MutableDoubleVectorInterface<U> mutable();
 
     /**
-     * return a sparse version of this vector.
-     * @return a sparse version of this vector
+     * Create and return a sparse version of this vector.
+     * @return DoubleVectorInterface&lt;U&gt;; a sparse version of this vector
      */
     DoubleVectorInterface<U> toSparse();
 
     /**
-     * return a dense version of this vector.
-     * @return a dense version of this vector
+     * Create and return a dense version of this vector.
+     * @return DoubleVectorInterface&lt;U&gt;; a dense version of this vector
      */
     DoubleVectorInterface<U> toDense();
 
@@ -107,20 +107,21 @@ public interface DoubleVectorInterface<U extends Unit<U>>
     double[] getValuesInUnit(U targetUnit);
 
     /**
-     * @return a String with the Vector, non-verbose, with the unit attached.
+     * Concise description of this DoubleVectorInterface.
+     * @return a String with the DoubleVectorInterface, non-verbose, with the unit attached.
      */
     @Override
     String toString();
 
     /**
-     * Print this DoubleVector with the values expressed in the specified unit.
+     * Somewhat verbose description of this DoubleVectorInterface with the values expressed in the specified unit.
      * @param displayUnit U; the unit into which the values are converted for display
      * @return String; printable string with the vector contents expressed in the specified unit
      */
     String toString(U displayUnit);
 
     /**
-     * Print this DoubleVector with optional type and unit information.
+     * Somewhat verbose description of this DoubleVector with optional type and unit information.
      * @param verbose boolean; if true; include type info; if false; exclude type info
      * @param withUnit boolean; if true; include the unit; of false; exclude the unit
      * @return String; printable string with the vector contents
@@ -128,7 +129,7 @@ public interface DoubleVectorInterface<U extends Unit<U>>
     String toString(boolean verbose, boolean withUnit);
 
     /**
-     * Print this DoubleVector with the values expressed in the specified unit.
+     * Somewhat verbose description of  this DoubleVector with the values expressed in the specified unit.
      * @param displayUnit U; the unit into which the values are converted for display
      * @param verbose boolean; if true; include type info; if false; exclude type info
      * @param withUnit boolean; if true; include the unit; of false; exclude the unit

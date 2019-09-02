@@ -45,6 +45,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, T extends Abstract
     }
 
     /**
+     * Retrieve the data.
      * @return the internal data -- can only be used within package and by subclasses.
      */
     protected final DoubleVectorData getData()

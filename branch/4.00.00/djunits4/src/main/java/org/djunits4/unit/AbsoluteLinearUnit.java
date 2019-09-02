@@ -32,7 +32,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
 
     /**
      * Return the corresponding relative unit base.
-     * @return Unit&lt;?&gt;; the the corresponding relative unit base
+     * @return Unit&lt;RU&gt;; the the corresponding relative unit base
      */
     public UnitBase<RU> getRelativeUnitBase()
     {
@@ -41,7 +41,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
 
     /**
      * Return the corresponding relative unit.
-     * @return Unit&lt;?&gt;; the the corresponding relative unit
+     * @return Unit&lt;RU&gt;; the the corresponding relative unit
      */
     public RU getRelativeUnit()
     {
@@ -235,7 +235,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
             return this;
         }
 
-        // Other setters overridden to make them return this builder rather than the Unit.Builder.
+        // Other setters will have to be overridden to make them return this builder rather than the Unit.Builder.
 
         /** {@inheritDoc} */
         @Override

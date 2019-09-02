@@ -1,6 +1,7 @@
 package org.djunits4.unit.scale;
 
 /**
+ * Scale with factor and zero point offset.
  * <p>
  * A Scale for linear transformations with an offset that has to be applied first when converting to the standard (SI) unit,
  * before the scaling takes place, e.g. for Temperature. As an example, transform from Degrees Fahrenheit to Kelvin (SI). The
@@ -74,7 +75,8 @@ public class OffsetLinearScale extends LinearScale implements Scale
     }
 
     /**
-     * @return offsetToStandardUnit
+     * Retrieve the offset from the standard unit.
+     * @return double; the offset from the standard unit
      */
     public final double getOffsetToStandardUnit()
     {

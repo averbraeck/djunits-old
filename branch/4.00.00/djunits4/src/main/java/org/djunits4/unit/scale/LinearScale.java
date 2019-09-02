@@ -54,7 +54,8 @@ public class LinearScale implements Scale
     }
 
     /**
-     * @return conversionFactorToStandardUnit
+     * Retrieve the factor for conversion to the standard unit.
+     * @return double; the factor for conversion to the standard unit
      */
     public final double getConversionFactorToStandardUnit()
     {
@@ -104,4 +105,5 @@ public class LinearScale implements Scale
     {
         return "LinearScale [conversionFactorToStandardUnit=" + this.conversionFactorToStandardUnit + "]";
     }
+    
 }

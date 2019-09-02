@@ -24,4 +24,5 @@ public enum StorageType
      * and memory availability is low. Changing a zero value to a non-zero value is CPU-time-expensive
      */
     SPARSE;
+    
 }

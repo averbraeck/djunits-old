@@ -44,18 +44,20 @@ public interface AngleUtil
      */
     static float normalize(final float angle)
     {
-        float normalized = (float) (angle % (2 * Math.PI));
-        if (normalized < 0.0)
-        {
-            normalized += 2 * Math.PI;
-        }
-        return normalized;
+        return (float) normalize((double) angle);
+        // PK: Replaces this code that would not always result in minimal possible quantization error: 
+        // float normalized = (float) (angle % (2 * Math.PI));
+        // if (normalized < 0.0)
+        // {
+        // normalized += 2 * Math.PI;
+        // }
+        // return normalized;
     }
 
     /**
      * Normalize an angle between 0 and 2 * PI.
      * @param angle DoubleScalar.Abs&lt;DirectionUnit,AngleUnit&gt;; original angle.
-     * @return angle between 0 and 2 * PI.
+     * @return DoubleScalar.Abs&lt;DirectionUnit, AngleUnit&gt;; angle between 0 and 2 * PI.
      */
     static DoubleScalar.Abs<DirectionUnit, AngleUnit> normalize(final DoubleScalar.Abs<DirectionUnit, AngleUnit> angle)
     {
@@ -66,7 +68,7 @@ public interface AngleUtil
     /**
      * Normalize an angle between 0 and 2 * PI.
      * @param angle DoubleScalar.Rel&lt;AngleUnit&gt;; original angle.
-     * @return angle between 0 and 2 * PI.
+     * @return DoubleScalar.Rel&lt;AngleUnit&gt;; angle between 0 and 2 * PI.
      */
     static DoubleScalar.Rel<AngleUnit> normalize(final DoubleScalar.Rel<AngleUnit> angle)
     {
@@ -77,7 +79,7 @@ public interface AngleUtil
     /**
      * Normalize an angle between 0 and 2 * PI.
      * @param angle FloatScalar.Abs&lt;DirectionUnit,AngleUnit&gt;; original angle.
-     * @return angle between 0 and 2 * PI.
+     * @return FloatScalar.Abs&lt;DirectionUnit, AngleUnit&gt;; angle between 0 and 2 * PI.
      */
     static FloatScalar.Abs<DirectionUnit, AngleUnit> normalize(final FloatScalar.Abs<DirectionUnit, AngleUnit> angle)
     {
@@ -88,7 +90,7 @@ public interface AngleUtil
     /**
      * Normalize an angle between 0 and 2 * PI.
      * @param angle FloatScalar.Rel&lt;AngleUnit&gt;; original angle.
-     * @return angle between 0 and 2 * PI.
+     * @return FloatScalar.Rel&lt;AngleUnit&gt;; angle between 0 and 2 * PI.
      */
     static FloatScalar.Rel<AngleUnit> normalize(final FloatScalar.Rel<AngleUnit> angle)
     {
@@ -99,7 +101,7 @@ public interface AngleUtil
     /**
      * Normalize an angle between 0 and 2 * PI.
      * @param angle Direction; original angle.
-     * @return angle between 0 and 2 * PI.
+     * @return Direction; angle between 0 and 2 * PI.
      */
     static Direction normalize(final Direction angle)
     {
@@ -110,7 +112,7 @@ public interface AngleUtil
     /**
      * Normalize an angle between 0 and 2 * PI.
      * @param angle Angle; original angle.
-     * @return angle between 0 and 2 * PI.
+     * @return Angle; angle between 0 and 2 * PI.
      */
     static Angle normalize(final Angle angle)
     {
@@ -121,7 +123,7 @@ public interface AngleUtil
     /**
      * Normalize an angle between 0 and 2 * PI.
      * @param angle FloatDirection; original angle.
-     * @return angle between 0 and 2 * PI.
+     * @return FloatDirection; angle between 0 and 2 * PI.
      */
     static FloatDirection normalize(final FloatDirection angle)
     {
@@ -132,11 +134,12 @@ public interface AngleUtil
     /**
      * Normalize an angle between 0 and 2 * PI.
      * @param angle FloatAngle; original angle.
-     * @return angle between 0 and 2 * PI.
+     * @return FloatAngle; angle between 0 and 2 * PI.
      */
     static FloatAngle normalize(final FloatAngle angle)
     {
         float normalized = (float) angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
         return new FloatAngle(normalized, angle.getUnit());
     }
+    
 }

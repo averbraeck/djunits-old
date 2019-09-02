@@ -19,7 +19,7 @@ public class ValueException extends Exception
     private static final long serialVersionUID = 20150626L;
 
     /**
-     * Construct a new ValueException.
+     * Construct a new ValueException using default values for all fields.
      */
     public ValueException()
     {
@@ -27,7 +27,7 @@ public class ValueException extends Exception
     }
 
     /**
-     * Construct a new ValueException.
+     * Construct a new ValueException with specified description.
      * @param message String; description of the problem
      */
     public ValueException(final String message)
@@ -36,7 +36,7 @@ public class ValueException extends Exception
     }
 
     /**
-     * Construct a new ValueException.
+     * Construct a new ValueException with specified cause.
      * @param cause Throwable; the cause of this ValueException
      */
     public ValueException(final Throwable cause)
@@ -45,7 +45,7 @@ public class ValueException extends Exception
     }
 
     /**
-     * Construct a new ValueException.
+     * Construct a new ValueException with specified description and cause.
      * @param message String; description of the problem
      * @param cause Throwable; the cause of this ValueException
      */
@@ -55,7 +55,7 @@ public class ValueException extends Exception
     }
 
     /**
-     * Construct a new ValueException.
+     * Construct a new ValueException specifying all fields.
      * @param message String; description of the problem
      * @param cause Throwable; the cause of this ValueException
      * @param enableSuppression boolean; whether or not suppression is enabled or disabled

@@ -20,4 +20,10 @@ public interface FloatScalarInterface
      */
     float getSI();
 
+    /**
+     * Retrieve the value in the original unit.
+     * @return double
+     */
+    float getInUnit();
+
 }

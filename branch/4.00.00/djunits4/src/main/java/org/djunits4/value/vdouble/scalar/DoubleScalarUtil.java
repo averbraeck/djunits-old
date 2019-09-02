@@ -23,10 +23,10 @@ import org.djunits4.unit.util.UnitRuntimeException;
  */
 public final class DoubleScalarUtil
 {
-    /** the cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
+    /** The cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
     private static Map<Unit<?>, Constructor<? extends AbstractDoubleScalar<?, ?>>> CACHE = new HashMap<>();
 
-    /** */
+    /** Do not instantiate. */
     private DoubleScalarUtil()
     {
         // Utility class.
@@ -36,7 +36,7 @@ public final class DoubleScalarUtil
      * Instantiate the DoubleScalar based on its unit. Rigid check on types by the compiler.
      * @param value double; the value
      * @param unit U; the unit in which the value is expressed
-     * @return an instantiated DoubleScalar with the value expressed in the unit
+     * @return S; an instantiated DoubleScalar with the value expressed in the unit
      * @param <U> the unit
      * @param <S> the return type
      */
@@ -51,7 +51,7 @@ public final class DoubleScalarUtil
      * <b>Note</b> that it is possible to make mistakes with anonymous units.
      * @param value double; the value
      * @param unit Unit&lt;?&gt;; the unit in which the value is expressed
-     * @return an instantiated DoubleScalar with the value expressed in the unit
+     * @return S; an instantiated DoubleScalar with the value expressed in the unit
      * @param <S> the return type
      */
     @SuppressWarnings("unchecked")
@@ -94,7 +94,7 @@ public final class DoubleScalarUtil
      * Instantiate the DoubleScalar based on its unit.
      * @param si double; the value in SI units
      * @param displayUnit U; the unit in which the value is expressed
-     * @return an instantiated DoubleScalar with the value expressed in the unit
+     * @return S; an instantiated DoubleScalar with the value expressed in the unit
      * @param <U> the unit
      * @param <S> the return type
      */
@@ -110,15 +110,14 @@ public final class DoubleScalarUtil
      * <b>Note</b> that it is possible to make mistakes with anonymous units.
      * @param si double; the value in SI units
      * @param displayUnit Unit&lt;?&gt;; the unit in which the value is expressed
-     * @return an instantiated DoubleScalar with the value expressed in the unit
+     * @return S; an instantiated DoubleScalar with the value expressed in the unit
      * @param <S> the return type
      */
     @SuppressWarnings({"unchecked"})
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> S instantiateAnonymousSI(final double si,
             final Unit<?> displayUnit)
     {
-        S value;
-        value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit());
+        S value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit());
         value.setDisplayUnit((U) displayUnit);
         return value;
     }

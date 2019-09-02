@@ -46,6 +46,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
     }
 
     /**
+     * Retrieve the data.
      * @return the internal data -- can only be used within package and by subclasses.
      */
     protected final FloatMatrixData getData()
@@ -205,10 +206,10 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
     }
 
     /**
-     * Check that a 2D array of float is not null and rectangular; i.e. all rows have the same length.
+     * Check that a 2D array of float is not null,not empty and not jagged; i.e. all rows have the same length.
      * @param values float[][]; the 2D array to check
      * @return the values in case the method is used in a constructor
-     * @throws ValueException when not all rows have the same length
+     * @throws ValueException when <code>values</code> is null, empty, or jagged
      */
     protected static float[][] ensureRectangularAndNonEmpty(final float[][] values) throws ValueException
     {

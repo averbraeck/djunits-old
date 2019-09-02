@@ -169,7 +169,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * result in a new Relative value. If both operands are sparse, the result is a sparse vector or matrix, otherwise the
      * result is a dense vector or matrix.
      * @param rel R; the right operand
-     * @return the addition of this vector and the operand
+     * @return R; the addition of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
     public final R plus(final R rel) throws ValueException
@@ -182,7 +182,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * store the result in a new Relative value. If both operands are sparse, the result is a sparse vector or matrix, otherwise
      * the result is a dense vector or matrix.
      * @param rel R; the right operand
-     * @return the subtraction of this vector and the operand
+     * @return R; the subtraction of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
     public final R minus(final R rel) throws ValueException
@@ -195,7 +195,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * store the result in a new Relative value. If both operands are dense, the result is a dense vector or matrix, otherwise
      * the result is a sparse vector or matrix.
      * @param rel R; the right operand
-     * @return the multiplication of this vector and the operand
+     * @return R; the multiplication of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
     public final R times(final R rel) throws ValueException
@@ -208,7 +208,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * result in a new Relative value. If both operands are dense, the result is a dense vector or matrix, otherwise the result
      * is a sparse vector or matrix.
      * @param rel R; the right operand
-     * @return the division of this vector and the operand
+     * @return R; the division of this vector and the operand
      * @throws ValueException in case this vector or matrix and the operand have a different size
      */
     public final R divide(final R rel) throws ValueException
@@ -225,7 +225,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * @param dsArray AbstractFloatScalarRel&lt;U,S&gt;[]; the array to check and get the unit for
      * @param <U> the unit
      * @param <S> the scalar type
-     * @return the unit of the object
+     * @return U; the unit of the object
      * @throws ValueException when the array has length equal to 0
      */
     static <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>> U checkUnit(final AbstractFloatScalarRel<U, S>[] dsArray)
@@ -243,7 +243,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * @param dsList List&lt;S&gt;; the list to check and get the unit for
      * @param <U> the unit
      * @param <S> the scalar in the list
-     * @return the unit of the object
+     * @return U; the unit of the object
      * @throws ValueException when the array has length equal to 0
      */
     static <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>> U checkUnit(final List<S> dsList) throws ValueException
@@ -260,8 +260,8 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * @param dsMap SortedMap&lt;Integer,S&gt;; the provided map
      * @param <U> Unit; the unit of the FloatScalar list
      * @param <S> the scalar in the list
-     * @return List the provided list
-     * @throws ValueException when the list has size equal to 0
+     * @return Map&lt;Integer, S&gt;; the provided Map
+     * @throws ValueException when the Map is null or has size equal to 0
      */
     static <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>> U checkUnit(final SortedMap<Integer, S> dsMap)
             throws ValueException
@@ -278,8 +278,8 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
     /* ============================================================================================ */
 
     /**
-     * Returns an iterator over the scalars in this vector in proper sequence.
-     * @return an iterator over the scalars in this vector in proper sequence
+     * Create and return an iterator over the scalars in this vector in proper sequence.
+     * @return Iterator&lt;S&gt;; an iterator over the scalars in this vector in proper sequence
      */
     @Override
     public Iterator<S> iterator()

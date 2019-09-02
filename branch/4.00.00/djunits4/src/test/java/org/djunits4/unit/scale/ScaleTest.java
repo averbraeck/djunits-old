@@ -30,7 +30,7 @@ public class ScaleTest
         assertEquals(1.0, sscale.toStandardUnit(1.0), 0.0001);
         assertEquals(1.0, sscale.fromStandardUnit(1.0), 0.0001);
         assertEquals(2.5, sscale.toStandardUnit(2.5), 0.0001);
-        assertEquals("StandardScale []", sscale.toString());
+        assertEquals("IdentityScale []", sscale.toString());
 
         IdentityScale s1 = IdentityScale.SCALE;
         IdentityScale s2 = IdentityScale.SCALE;

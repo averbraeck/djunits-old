@@ -455,4 +455,5 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
         checkCopyOnWrite();
         this.data.divideBy(sum);
     }
+    
 }

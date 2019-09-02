@@ -25,10 +25,10 @@ import org.djunits4.value.ValueException;
  */
 public final class DoubleMatrixUtil
 {
-    /** the cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
+    /** The cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
     private static Map<Unit<?>, Constructor<? extends AbstractDoubleMatrix<?, ?>>> CACHE = new HashMap<>();
 
-    /** */
+    /** Do not instantiate. */
     private DoubleMatrixUtil()
     {
         // Utility class.
@@ -39,7 +39,7 @@ public final class DoubleMatrixUtil
      * @param value double[][]; the value
      * @param unit U; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated DoubleMatrix with the value expressed in the unit
+     * @return S; an instantiated DoubleMatrix with the value expressed in the unit
      * @param <U> the unit
      * @param <S> the return type
      * @throws ValueException on vector init error
@@ -56,8 +56,8 @@ public final class DoubleMatrixUtil
      * <b>Note</b> that it is possible to make mistakes with anonymous units.
      * @param value double[][]; the value
      * @param unit Unit&lt;?&gt;; the unit in which the value is expressed
-     * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated DoubleMatrix with the value expressed in the unit
+     * @param storageType StorageType; whether the matrix is SPARSE or DENSE
+     * @return S; an instantiated DoubleMatrix with the value expressed in the unit
      * @param <S> the return type
      * @throws ValueException on vector init error
      */
@@ -104,7 +104,7 @@ public final class DoubleMatrixUtil
      * @param si double[][]; the value in SI units
      * @param displayUnit U; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated DoubleMatrix with the value expressed in the unit
+     * @return S; an instantiated DoubleMatrix with the value expressed in the unit
      * @throws ValueException on vector init error
      * @param <U> the unit
      * @param <S> the return type
@@ -129,17 +129,17 @@ public final class DoubleMatrixUtil
      * @param si double[][]; the value in SI units
      * @param displayUnit Unit&lt;?&gt;; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return an instantiated DoubleMatrix with the value expressed in the unit
+     * @return S; an instantiated DoubleMatrix with the value expressed in the unit
      * @throws ValueException on vector init error
      * @param <S> the return type
      */
-    @SuppressWarnings({"unchecked", "checkstyle:needbraces", "cast", "rawtypes"})
+    @SuppressWarnings({"unchecked", "checkstyle:needbraces", "rawtypes"})
     public static <S extends AbstractDoubleMatrix<?, S>> S instantiateAnonymousSI(final double[][] si,
             final Unit<?> displayUnit, final StorageType storageType) throws ValueException
     {
-        S value;
-        value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit(), storageType);
+        S value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit(), storageType);
         ((AbstractDoubleMatrix) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }
+    
 }

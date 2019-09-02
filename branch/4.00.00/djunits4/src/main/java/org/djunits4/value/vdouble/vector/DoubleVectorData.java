@@ -27,17 +27,18 @@ abstract class DoubleVectorData implements Serializable
     /** */
     private static final long serialVersionUID = 1L;
 
-    /** the internal storage of the Vector; can be sparse or dense. */
+    /** The internal storage of the Vector; can be sparse or dense. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected double[] vectorSI;
 
-    /** the data type. */
+    /** The data type. */
     private final StorageType storageType;
 
-    /** threshold to do parallel execution. */
+    /** Threshold to do parallel execution. */
     protected static final int PARALLEL_THRESHOLD = 1000;
 
     /**
+     * Construct a new DoubleVectorData object.
      * @param storageType StorageType; the data type.
      */
     DoubleVectorData(final StorageType storageType)
@@ -55,7 +56,7 @@ abstract class DoubleVectorData implements Serializable
      * @param values double[]; the (SI) values to store
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
-     * @return the DoubleVectorData with the right data type
+     * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueException when values are null, or storageType is null
      */
     public static DoubleVectorData instantiate(final double[] values, final Scale scale, final StorageType storageType)
@@ -97,7 +98,7 @@ abstract class DoubleVectorData implements Serializable
      * @param values List&lt;Double&gt;; the values to store
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
-     * @return the DoubleVectorData with the right data type
+     * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueException when list is null, or storageType is null
      */
     public static DoubleVectorData instantiate(final List<Double> values, final Scale scale, final StorageType storageType)
@@ -150,7 +151,7 @@ abstract class DoubleVectorData implements Serializable
      * Instantiate a DoubleVectorData with the right data type.
      * @param values DoubleScalarInterface[]; the values to store
      * @param storageType StorageType; the data type to use
-     * @return the DoubleVectorData with the right data type
+     * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
     public static DoubleVectorData instantiate(final DoubleScalarInterface[] values, final StorageType storageType)
@@ -189,7 +190,7 @@ abstract class DoubleVectorData implements Serializable
      * Instantiate a DoubleVectorData with the right data type.
      * @param values List&lt;? extends DoubleScalarInterface&gt;; the DoubleScalar values to store
      * @param storageType StorageType; the data type to use
-     * @return the DoubleVectorData with the right data type
+     * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
     public static DoubleVectorData instantiateLD(final List<? extends DoubleScalarInterface> values,
@@ -222,7 +223,7 @@ abstract class DoubleVectorData implements Serializable
      * @param length int; the length of the vector to pad with 0 after last entry in map
      * @param storageType StorageType; the data type to use
      * @param <S> the scalar type to use
-     * @return the DoubleVectorData with the right data type
+     * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
     public static <S extends DoubleScalarInterface> DoubleVectorData instantiateMD(final SortedMap<Integer, S> values,
@@ -259,7 +260,7 @@ abstract class DoubleVectorData implements Serializable
      * @param length int; the length of the vector to pad with 0 after last entry in map
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
-     * @return the DoubleVectorData with the right data type
+     * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueException when values is null, or storageType is null
      */
     public static DoubleVectorData instantiate(final SortedMap<Integer, Double> values, final int length, final Scale scale,
@@ -305,12 +306,14 @@ abstract class DoubleVectorData implements Serializable
     }
 
     /**
-     * @return the size of the vector
+     * Retrieve the size of the vector.
+     * @return int; the size of the vector
      */
     public abstract int size();
 
     /**
-     * @return whether data type is sparse.
+     * Is the data storage sparse?
+     * @return boolean; true if the data storage is sparse; false if the data storage is not sparse
      */
     public boolean isSparse()
     {
@@ -318,7 +321,8 @@ abstract class DoubleVectorData implements Serializable
     }
 
     /**
-     * @return the sparse transformation of this data
+     * Return the sparsely stored equivalent of this data.
+     * @return DoubleVectorDataSparse; the sparse transformation of this data
      */
     public DoubleVectorDataSparse toSparse()
     {
@@ -326,7 +330,8 @@ abstract class DoubleVectorData implements Serializable
     }
 
     /**
-     * @return whether data type is dense.
+     * Is the data storage dense?
+     * @return boolean; true if the data storage is dense; false if the data storage is not dense
      */
     public boolean isDense()
     {
@@ -334,7 +339,8 @@ abstract class DoubleVectorData implements Serializable
     }
 
     /**
-     * @return the dense transformation of this data
+     * Return the densely stored equivalent of this data.
+     * @return DoubleVectorDataDense; the dense transformation of this data
      */
     public DoubleVectorDataDense toDense()
     {
@@ -342,8 +348,9 @@ abstract class DoubleVectorData implements Serializable
     }
 
     /**
+     * Retrieve the SI value of one element of this data.
      * @param index int; the index to get the value for
-     * @return the value at the index
+     * @return double; the value at the index
      */
     public abstract double getSI(int index);
 
@@ -355,7 +362,8 @@ abstract class DoubleVectorData implements Serializable
     public abstract void setSI(int index, double valueSI);
 
     /**
-     * @return the number of non-zero cells.
+     * Retrieve the number of non-zero cells.
+     * @return int; the number of non-zero cells
      */
     public final int cardinality()
     {
@@ -363,7 +371,8 @@ abstract class DoubleVectorData implements Serializable
     }
 
     /**
-     * @return the sum of the values of all cells.
+     * Compute and return the sum of all values.
+     * @return double; the sum of the values of all cells
      */
     public final double zSum()
     {
@@ -371,12 +380,14 @@ abstract class DoubleVectorData implements Serializable
     }
 
     /**
-     * @return a deep copy of the data.
+     * Create and return a deep copy of the data.
+     * @return DoubleVectorData; a deep copy of the data
      */
     public abstract DoubleVectorData copy();
 
     /**
-     * @return a safe copy of VectorSI
+     * Create and return a dense copy of the data.
+     * @return double[]; a safe copy of VectorSI
      */
     public abstract double[] getDenseVectorSI();
 
@@ -401,7 +412,7 @@ abstract class DoubleVectorData implements Serializable
      * Add two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
      * vector is returned.
      * @param right DoubleVectorData; the other data object to add
-     * @return the sum of this data object and the other data object
+     * @return DoubleVectorData; the sum of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
     public DoubleVectorData plus(final DoubleVectorData right) throws ValueException
@@ -432,7 +443,7 @@ abstract class DoubleVectorData implements Serializable
      * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
      * vector is returned.
      * @param right DoubleVectorData; the other data object to subtract
-     * @return the sum of this data object and the other data object
+     * @return DoubleVectorData; the difference of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
     public DoubleVectorData minus(final DoubleVectorData right) throws ValueException
@@ -463,7 +474,7 @@ abstract class DoubleVectorData implements Serializable
      * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
      * vector is returned.
      * @param right DoubleVectorData; the other data object to multiply with
-     * @return the sum of this data object and the other data object
+     * @return DoubleVectorData; the product of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
     public DoubleVectorData times(final DoubleVectorData right) throws ValueException
@@ -495,7 +506,7 @@ abstract class DoubleVectorData implements Serializable
      * Divide two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
      * vector is returned.
      * @param right DoubleVectorData; the other data object to divide by
-     * @return the sum of this data object and the other data object
+     * @return DoubleVectorData; the division of this data object and the other data object
      * @throws ValueException if vectors have different lengths
      */
     public DoubleVectorData divide(final DoubleVectorData right) throws ValueException
@@ -560,4 +571,5 @@ abstract class DoubleVectorData implements Serializable
     {
         return "DoubleVectorData [storageType=" + this.storageType + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
     }
+    
 }

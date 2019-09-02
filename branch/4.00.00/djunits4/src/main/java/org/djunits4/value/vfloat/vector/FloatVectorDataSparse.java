@@ -22,10 +22,10 @@ public class FloatVectorDataSparse extends FloatVectorData
     /** */
     private static final long serialVersionUID = 1L;
 
-    /** the index values of the Vector. */
+    /** The index values of the Vector. */
     private int[] indices;
 
-    /** the length of the vector (padded with 0 after highest index in indices). */
+    /** The length of the vector (padded with 0 after highest index in indices). */
     private final int size;
 
     /**
@@ -621,4 +621,5 @@ public class FloatVectorDataSparse extends FloatVectorData
             return false;
         return true;
     }
+    
 }

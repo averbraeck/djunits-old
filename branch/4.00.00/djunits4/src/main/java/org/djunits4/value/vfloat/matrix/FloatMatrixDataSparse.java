@@ -30,7 +30,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     private final int length;
 
     /**
-     * Create a vector with sparse data.
+     * Create a matrix with sparse data.
      * @param matrixSI float[]; the data to store
      * @param indices long[]; the index values of the Matrix, with &lt;tt&gt;index = row * cols + col&lt;/tt&gt;
      * @param length int; the length of the vector (padded with 0 after highest index in indices)
@@ -48,7 +48,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     }
 
     /**
-     * Create a vector with sparse data from an internal vector with dense data.
+     * Create a matrix with sparse data from an internal vector with dense data.
      * @param denseSI float[]; the dense data to store
      * @param rows int; the number of rows
      * @param cols int; the number of columns
@@ -71,7 +71,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     }
 
     /**
-     * Create a vector with sparse data.
+     * Create a matrix with sparse data.
      * @param dataSI float[][]; the data to store
      * @throws ValueException in case matrix is ragged
      */
@@ -244,9 +244,9 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     }
 
     /**
-     * Calculate the number of non-zero values in this float[][] matrix.
+     * Calculate the number of non-zero values in a float[][] matrix.
      * @param valuesSI float[][]; the float[][] matrix
-     * @return the number of non-zero values in this float[][] matrix
+     * @return the number of non-zero values in the float[][] matrix
      */
     private static int nonZero(final float[][] valuesSI)
     {
@@ -264,9 +264,9 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     }
 
     /**
-     * Calculate the number of non-zero values in this float[] vector.
+     * Calculate the number of non-zero values in a float[] vector.
      * @param valuesSI float[]; the float[] vector
-     * @return the number of non-zero values in this float[] vector
+     * @return the number of non-zero values in the float[] vector
      */
     private static int nonZero(final float[] valuesSI)
     {
@@ -607,4 +607,5 @@ public class FloatMatrixDataSparse extends FloatMatrixData
             return false;
         return true;
     }
+    
 }

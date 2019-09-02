@@ -149,4 +149,5 @@ public interface DoubleMatrixInterface<U extends Unit<U>>
      * @return MutableDoubleMatrix&lt;U&gt;; sparse version of this DoubleMatrix
      */
     DoubleMatrixInterface<U> toSparse();
+    
 }

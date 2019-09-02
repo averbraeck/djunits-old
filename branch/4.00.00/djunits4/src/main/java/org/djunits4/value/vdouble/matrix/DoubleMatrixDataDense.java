@@ -69,6 +69,7 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
     }
 
     /**
+     * Apply a function to all data elements of this matrix.
      * @param doubleFunction DoubleFunction; the function to apply on the (mutable) data elements
      */
     public final void assign(final DoubleFunction doubleFunction)
@@ -174,4 +175,5 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
     }
+    
 }

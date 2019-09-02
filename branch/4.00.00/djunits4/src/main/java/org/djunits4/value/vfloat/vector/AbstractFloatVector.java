@@ -46,6 +46,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractF
     }
 
     /**
+     * Retrieve the data.
      * @return the internal data -- can only be used within package and by subclasses.
      */
     protected final FloatVectorData getData()

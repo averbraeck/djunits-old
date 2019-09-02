@@ -26,4 +26,5 @@ public interface MathFunctionsRel<T> extends MathFunctionsAbs<T>
      * @return T; the modified T
      */
     T neg();
+    
 }
