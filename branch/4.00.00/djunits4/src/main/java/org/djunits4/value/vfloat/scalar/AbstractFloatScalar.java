@@ -132,7 +132,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean gt0()
     {
-        return this.getSI() >= 0.0f;
+        return this.getSI() > 0.0f;
     }
 
     /**
@@ -141,7 +141,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
      */
     public final boolean ge0()
     {
-        return this.getSI() > 0.0f;
+        return this.getSI() >= 0.0f;
     }
 
     /**
@@ -169,10 +169,8 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
         return Float.compare(this.getSI(), o.getSI());
     }
 
-    /**
-     * Retrieve the value in the original unit.
-     * @return float
-     */
+    /** {@inheritDoc} */
+    @Override
     public final float getInUnit()
     {
         return (float) expressAsSpecifiedUnit(getSI());
@@ -181,7 +179,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
     /**
      * Retrieve the value converted into some specified unit.
      * @param targetUnit U; the unit to convert the value into
-     * @return float
+     * @return float; the value in the specified <code>targetUnit</code>
      */
     public final float getInUnit(final U targetUnit)
     {

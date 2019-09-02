@@ -132,7 +132,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean gt0()
     {
-        return this.getSI() >= 0.0;
+        return this.getSI() > 0.0;
     }
 
     /**
@@ -141,7 +141,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, T extends Abstract
      */
     public final boolean ge0()
     {
-        return this.getSI() > 0.0;
+        return this.getSI() >= 0.0;
     }
 
     /**
