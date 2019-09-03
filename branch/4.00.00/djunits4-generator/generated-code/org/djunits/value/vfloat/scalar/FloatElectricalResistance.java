@@ -16,32 +16,32 @@ import org.djunits4.unit.*;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.134Z")
 public class FloatElectricalResistance extends AbstractFloatScalarRel<ElectricalResistanceUnit, FloatElectricalResistance> 
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatElectricalResistance ZERO = new FloatElectricalResistance(0.0f, ElectricalResistanceUnit.SI);
 
-    /** constant with value zero. */
+    /** Constant with value one. */
     public static final FloatElectricalResistance ONE = new FloatElectricalResistance(1.0f, ElectricalResistanceUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatElectricalResistance NaN = new FloatElectricalResistance(Float.NaN, ElectricalResistanceUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatElectricalResistance POSITIVE_INFINITY = new FloatElectricalResistance(Float.POSITIVE_INFINITY, ElectricalResistanceUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatElectricalResistance NEGATIVE_INFINITY = new FloatElectricalResistance(Float.NEGATIVE_INFINITY, ElectricalResistanceUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatElectricalResistance POS_MAXVALUE = new FloatElectricalResistance(Float.MAX_VALUE, ElectricalResistanceUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatElectricalResistance NEG_MAXVALUE = new FloatElectricalResistance(-Float.MAX_VALUE, ElectricalResistanceUnit.SI);
 
     /**

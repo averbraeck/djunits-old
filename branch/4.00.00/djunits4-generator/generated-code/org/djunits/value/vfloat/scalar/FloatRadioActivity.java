@@ -16,32 +16,32 @@ import org.djunits4.unit.*;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.149Z")
 public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit, FloatRadioActivity> 
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatRadioActivity ZERO = new FloatRadioActivity(0.0f, RadioActivityUnit.SI);
 
-    /** constant with value zero. */
+    /** Constant with value one. */
     public static final FloatRadioActivity ONE = new FloatRadioActivity(1.0f, RadioActivityUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatRadioActivity NaN = new FloatRadioActivity(Float.NaN, RadioActivityUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatRadioActivity POSITIVE_INFINITY = new FloatRadioActivity(Float.POSITIVE_INFINITY, RadioActivityUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatRadioActivity NEGATIVE_INFINITY = new FloatRadioActivity(Float.NEGATIVE_INFINITY, RadioActivityUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatRadioActivity POS_MAXVALUE = new FloatRadioActivity(Float.MAX_VALUE, RadioActivityUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatRadioActivity NEG_MAXVALUE = new FloatRadioActivity(-Float.MAX_VALUE, RadioActivityUnit.SI);
 
     /**

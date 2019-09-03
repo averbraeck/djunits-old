@@ -24,7 +24,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final %TypeAbs% ZERO = new %TypeAbs%(0.0, %TypeAbsUnit%.DEFAULT);
 
     /**

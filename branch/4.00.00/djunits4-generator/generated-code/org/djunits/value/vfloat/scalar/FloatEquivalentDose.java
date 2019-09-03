@@ -16,32 +16,32 @@ import org.djunits4.unit.*;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.149Z")
 public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUnit, FloatEquivalentDose> 
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatEquivalentDose ZERO = new FloatEquivalentDose(0.0f, EquivalentDoseUnit.SI);
 
-    /** constant with value zero. */
+    /** Constant with value one. */
     public static final FloatEquivalentDose ONE = new FloatEquivalentDose(1.0f, EquivalentDoseUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatEquivalentDose NaN = new FloatEquivalentDose(Float.NaN, EquivalentDoseUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatEquivalentDose POSITIVE_INFINITY = new FloatEquivalentDose(Float.POSITIVE_INFINITY, EquivalentDoseUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatEquivalentDose NEGATIVE_INFINITY = new FloatEquivalentDose(Float.NEGATIVE_INFINITY, EquivalentDoseUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatEquivalentDose POS_MAXVALUE = new FloatEquivalentDose(Float.MAX_VALUE, EquivalentDoseUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatEquivalentDose NEG_MAXVALUE = new FloatEquivalentDose(-Float.MAX_VALUE, EquivalentDoseUnit.SI);
 
     /**

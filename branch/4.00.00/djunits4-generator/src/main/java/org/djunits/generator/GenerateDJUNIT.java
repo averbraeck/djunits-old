@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +19,8 @@ import java.util.Map;
 /**
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -240,6 +241,11 @@ public class GenerateDJUNIT
                 java = java.replace(tag, replacement);
             }
         }
+
+        // @Generated
+        java = java.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + Instant.now().toString() + "\")");
+
         return java;
     }
 
@@ -932,6 +938,8 @@ public class GenerateDJUNIT
         String relativePath = "value/vdouble/scalar/";
         URL siScalarURL = URLResource.getResource("/" + relativePath + "SISCALAR.java");
         String siJava = new String(Files.readAllBytes(Paths.get(siScalarURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + Instant.now().toString() + "\")");
 
         List<String> allRelTypes = new ArrayList<>(typesRel);
         for (String[] arType : typesAbsRel)
@@ -989,6 +997,8 @@ public class GenerateDJUNIT
         String relativePath = "value/vfloat/scalar/";
         URL siScalarURL = URLResource.getResource("/" + relativePath + "FLOATSISCALAR.java");
         String siJava = new String(Files.readAllBytes(Paths.get(siScalarURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + Instant.now().toString() + "\")");
 
         List<String> allRelTypes = new ArrayList<>(typesRel);
         for (String[] arType : typesAbsRel)

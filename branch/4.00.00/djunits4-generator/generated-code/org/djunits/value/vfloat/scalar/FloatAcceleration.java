@@ -16,32 +16,32 @@ import org.djunits4.unit.*;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.128Z")
 public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, FloatAcceleration> 
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatAcceleration ZERO = new FloatAcceleration(0.0f, AccelerationUnit.SI);
 
-    /** constant with value zero. */
+    /** Constant with value one. */
     public static final FloatAcceleration ONE = new FloatAcceleration(1.0f, AccelerationUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatAcceleration NaN = new FloatAcceleration(Float.NaN, AccelerationUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatAcceleration POSITIVE_INFINITY = new FloatAcceleration(Float.POSITIVE_INFINITY, AccelerationUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatAcceleration NEGATIVE_INFINITY = new FloatAcceleration(Float.NEGATIVE_INFINITY, AccelerationUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatAcceleration POS_MAXVALUE = new FloatAcceleration(Float.MAX_VALUE, AccelerationUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatAcceleration NEG_MAXVALUE = new FloatAcceleration(-Float.MAX_VALUE, AccelerationUnit.SI);
 
     /**

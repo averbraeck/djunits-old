@@ -16,32 +16,32 @@ import org.djunits4.unit.*;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.149Z")
 public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, FloatLuminousFlux> 
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatLuminousFlux ZERO = new FloatLuminousFlux(0.0f, LuminousFluxUnit.SI);
 
-    /** constant with value zero. */
+    /** Constant with value one. */
     public static final FloatLuminousFlux ONE = new FloatLuminousFlux(1.0f, LuminousFluxUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatLuminousFlux NaN = new FloatLuminousFlux(Float.NaN, LuminousFluxUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatLuminousFlux POSITIVE_INFINITY = new FloatLuminousFlux(Float.POSITIVE_INFINITY, LuminousFluxUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatLuminousFlux NEGATIVE_INFINITY = new FloatLuminousFlux(Float.NEGATIVE_INFINITY, LuminousFluxUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatLuminousFlux POS_MAXVALUE = new FloatLuminousFlux(Float.MAX_VALUE, LuminousFluxUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatLuminousFlux NEG_MAXVALUE = new FloatLuminousFlux(-Float.MAX_VALUE, LuminousFluxUnit.SI);
 
     /**

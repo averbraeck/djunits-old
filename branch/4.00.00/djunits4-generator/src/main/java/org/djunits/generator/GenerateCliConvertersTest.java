@@ -83,7 +83,7 @@ public class GenerateCliConvertersTest
     }
 
     /**
- * @param args String[]; blank
+     * @param args String[]; blank
      * @throws IOException on i/o error
      * @throws URISyntaxException on i/o error
      */
@@ -103,9 +103,9 @@ public class GenerateCliConvertersTest
                 "    protected " + r.type + " " + r.type.toLowerCase() + ";\n"); 
             // @formatter:on
         }
-        
+
         System.out.println("\n\n");
-        
+
         /*-
          Create this:
             args = new String[] {};
@@ -116,7 +116,7 @@ public class GenerateCliConvertersTest
             CliUtil.execute(options, args);
             assertEquals(new Acceleration(30.0, AccelerationUnit.KM_PER_HOUR_2), options.acceleration);
          */
-        
+
         for (TestRecord r : testRecords)
         {
             // @formatter:off
@@ -156,16 +156,15 @@ public class GenerateCliConvertersTest
         protected String value2;
 
         /**
- * @param type String; type, e.g. "Length"
- * @param amount1 double; initial amount, e.g. 10.0
- * @param unit1 String; initial unit, e.g. LengthUnit.METER
- * @param value1 String; initial String value, e.g. "10.0m"
- * @param amount2 double; changed amount, e.g. 5.0
- * @param unit2 String; changed unit, e.g. LengthUnit.KILOMETER
- * @param value2 String; changed String amount, e.g. 5.0km
+         * @param type String; type, e.g. "Length"
+         * @param amount1 double; initial amount, e.g. 10.0
+         * @param unit1 String; initial unit, e.g. LengthUnit.METER
+         * @param value1 String; initial String value, e.g. "10.0m"
+         * @param amount2 double; changed amount, e.g. 5.0
+         * @param unit2 String; changed unit, e.g. LengthUnit.KILOMETER
+         * @param value2 String; changed String amount, e.g. 5.0km
          */
-        public TestRecord(String type, double amount1, String unit1, String value1, double amount2, String unit2,
-                String value2)
+        public TestRecord(String type, double amount1, String unit1, String value1, double amount2, String unit2, String value2)
         {
             super();
             this.type = type;

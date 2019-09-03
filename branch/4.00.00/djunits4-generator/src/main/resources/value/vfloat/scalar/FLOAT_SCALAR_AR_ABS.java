@@ -23,7 +23,7 @@ public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeAbsUnit%, Float%
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final Float%TypeAbs% ZERO = new Float%TypeAbs%(0.0f, %TypeAbsUnit%.DEFAULT);
 
     /**

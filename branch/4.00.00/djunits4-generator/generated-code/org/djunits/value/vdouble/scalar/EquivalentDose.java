@@ -16,32 +16,32 @@ import org.djunits4.unit.*;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.096Z")
 public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, EquivalentDose> 
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final EquivalentDose ZERO = new EquivalentDose(0.0, EquivalentDoseUnit.SI);
 
-    /** constant with value one. */
+    /** Constant with value one. */
     public static final EquivalentDose ONE = new EquivalentDose(1.0, EquivalentDoseUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final EquivalentDose NaN = new EquivalentDose(Double.NaN, EquivalentDoseUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final EquivalentDose POSITIVE_INFINITY = new EquivalentDose(Double.POSITIVE_INFINITY, EquivalentDoseUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final EquivalentDose NEGATIVE_INFINITY = new EquivalentDose(Double.NEGATIVE_INFINITY, EquivalentDoseUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final EquivalentDose POS_MAXVALUE = new EquivalentDose(Double.MAX_VALUE, EquivalentDoseUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final EquivalentDose NEG_MAXVALUE = new EquivalentDose(-Double.MAX_VALUE, EquivalentDoseUnit.SI);
 
     /**

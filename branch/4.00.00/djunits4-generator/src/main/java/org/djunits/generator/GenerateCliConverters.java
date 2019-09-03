@@ -19,7 +19,7 @@ public class GenerateCliConverters
 {
 
     /**
- * @param args String[]; blank
+     * @param args String[]; blank
      * @throws IOException on i/o error
      * @throws URISyntaxException on i/o error
      */
