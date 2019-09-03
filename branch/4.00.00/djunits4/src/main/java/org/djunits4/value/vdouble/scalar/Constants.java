@@ -4,22 +4,33 @@ import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
 
 /**
- * Various physical constants.
+ * Various physical constants. For many, see
+ * <a href="https://en.wikipedia.org/wiki/2019_redefinition_of_the_SI_base_units">Wikipedia 2019 redefinition of the SI base
+ * units</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers">Peter Knoppers</a>
  */
 public class Constants
 {
-    /** Number of constituent particles in a Mole; a.k.a. Avogadro's number. */
+    /**
+     * Number of constituent particles in a Mole; a.k.a. Avogadro's number. This value is exact since the 2019 redefinition of
+     * the SI base units.
+     */
     public static final SIScalar AVOGADRO = SIScalar.of(6.02214076e23, "1/mol");
 
     /**
-     * Boltzmann constant (according to the 2019 redefinition of SI base units) in Joule per Kelvin. See
+     * Boltzmann constant in Joule per Kelvin (this value is exact since the 2019 redefinition of SI base units). See
      * <a href="https://en.wikipedia.org/wiki/Boltzmann_constant">Wikipedia: Boltzmann constant</a>
      */
     public static final SIScalar BOLTZMANN = SIScalar.of(1.380649e-23, "kgm2/s2K");
 
-    /** Electrical charge of one electron. */
+    /**
+     * The Cesium 133 ground state hyperfine structure transition frequency. This value is exact since the 2006 redefinition of
+     * the SI base units.
+     */
+    public static final Frequency CESIUM133GROUNDSTATEHYPERFINESTRUCTURETRANSITIONFREQUENCY = Frequency.of(9192631770d, "1/s");
+
+    /** Electrical charge of one electron. This value is exact since the 2019 redefinition of the SI base units. */
     public static final ElectricalCharge ELECTRONCHARGE = new ElectricalCharge(-1, ElectricalChargeUnit.ATOMIC_UNIT);
 
     /**
@@ -35,13 +46,13 @@ public class Constants
      * Mass of a neutron. See <a href="https://en.wikipedia.org/wiki/List_of_physical_constants">Wikipedia List of physical
      * constants</a>. This value of this physical constant has an uncertainty of 9.5e-37 kg.
      */
-    public static final Mass NEUTRONMASS = Mass.of(1.67492749804e-27, "kg");
+    public static final Mass NEUTRONMASS = Mass.of(1.6749274714e-27, "kg");
 
     /**
      * Mass of a proton. See <a href="https://en.wikipedia.org/wiki/Physical_constant">Wikipedia Physical constant</a>. This
      * value of this physical constant has an uncertainty of 5.1e-37.
      */
-    public static final Mass PROTONMASS = Mass.of(1.67272192369e-27, "kg");
+    public static final Mass PROTONMASS = Mass.of(1.67262192369e-27, "kg");
 
     /**
      * Gravitational constant, a.k.a. Newtonian constant of gravitation. This is the 2018 best known approximation, which has an
@@ -49,7 +60,7 @@ public class Constants
      */
     public static final SIScalar G = SIScalar.of(6.67430e-11, "m3/kgs2");
 
-    /** Speed of light in vacuum. This value is exact (the value of the meter is based on this and the value of the second). */
+    /** Speed of light in vacuum. This value is exact (since the 2006 redefinition of the SI base units). */
     public static final Speed LIGHTSPEED = Speed.of(299792458, "m/s");
 
     /**
@@ -65,10 +76,20 @@ public class Constants
     public static final SIScalar VACUUMPERMITTIVITY = SIScalar.of(8.8541878128e-12, "s4A2/kgm3");
 
     /** Impedance of vacuum. */
-    public static final SIScalar VACUUMIMPEDANCE = VACUUMPERMEABILITY.divideBy(VACUUMPERMITTIVITY);
+    public static final SIScalar VACUUMIMPEDANCE = VACUUMPERMEABILITY.multiplyBy(LIGHTSPEED);
 
-    /** Planck constant; ratio of a photon's energy and its frequency. */
-    public static final SIScalar PLANCK = SIScalar.of(6.62607015e34, "kgm2/s");
+    /**
+     * Planck constant; ratio of a photon's energy and its frequency. This value is exact since the 2019 redefinition of the SI
+     * base units.
+     */
+    public static final SIScalar PLANCK = SIScalar.of(6.62607015e-34, "kgm2/s");
+
+    /**
+     * The luminous efficacy Kcd of monochromatic radiation of frequency 540×1012 Hz (540 THz). This is the frequency of a
+     * green-colored light at approximately the peak sensitivity of the human eye. This value is exact since the 2006
+     * redefinition of the SI base units.
+     */
+    public static final SIScalar LUMINOUSEFFICACYOFMONOCHROMATICRADTIONAT540THZ = SIScalar.of(683d, "cdsrs3/kg");
 
     /** Ratio of circumference of circle and its radius. */
     public static final Dimensionless TAU = new Dimensionless(Math.PI * 2, DimensionlessUnit.SI);
