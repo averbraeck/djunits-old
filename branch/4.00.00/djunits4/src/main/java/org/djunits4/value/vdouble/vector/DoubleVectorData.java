@@ -571,5 +571,5 @@ abstract class DoubleVectorData implements Serializable
     {
         return "DoubleVectorData [storageType=" + this.storageType + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
     }
-    
+
 }

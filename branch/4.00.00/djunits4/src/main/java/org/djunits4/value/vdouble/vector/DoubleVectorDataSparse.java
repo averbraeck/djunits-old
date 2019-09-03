@@ -621,5 +621,5 @@ public class DoubleVectorDataSparse extends DoubleVectorData
             return false;
         return true;
     }
-    
+
 }

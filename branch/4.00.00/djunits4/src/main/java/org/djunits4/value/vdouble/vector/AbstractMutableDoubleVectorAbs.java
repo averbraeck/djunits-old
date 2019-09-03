@@ -409,5 +409,5 @@ abstract class AbstractMutableDoubleVectorAbs<AU extends AbsoluteLinearUnit<AU, 
         checkCopyOnWrite();
         this.data.divideBy(sum);
     }
-    
+
 }

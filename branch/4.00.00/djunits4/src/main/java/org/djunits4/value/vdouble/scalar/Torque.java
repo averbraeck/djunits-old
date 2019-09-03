@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.ForceUnit;
@@ -167,13 +168,12 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      * @param text String; the textual representation to parse into a Torque
      * @return Torque; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Torque valueOf(final String text) throws IllegalArgumentException
+    public static Torque valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Torque -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing Torque: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Torque: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -182,9 +182,9 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (TorqueUnit unit : TorqueUnit.BASE.getUnitsById().values())
+                TorqueUnit unit = TorqueUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new Torque(d, unit);
@@ -197,6 +197,26 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
             }
         }
         throw new IllegalArgumentException("Error parsing Torque from " + text);
+    }
+
+    /**
+     * Returns a Torque based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Torque; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Torque of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Torque: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Torque: empty unitString");
+        TorqueUnit unit = TorqueUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Torque(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Torque with unit " + unitString);
     }
 
     /**

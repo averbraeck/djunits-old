@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.EnergyUnit;
@@ -166,13 +167,12 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
      * @param text String; the textual representation to parse into a Energy
      * @return Energy; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Energy valueOf(final String text) throws IllegalArgumentException
+    public static Energy valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Energy -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing Energy: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Energy: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -181,9 +181,9 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (EnergyUnit unit : EnergyUnit.BASE.getUnitsById().values())
+                EnergyUnit unit = EnergyUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new Energy(d, unit);
@@ -196,6 +196,26 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
             }
         }
         throw new IllegalArgumentException("Error parsing Energy from " + text);
+    }
+
+    /**
+     * Returns a Energy based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Energy; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Energy of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Energy: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Energy: empty unitString");
+        EnergyUnit unit = EnergyUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Energy(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Energy with unit " + unitString);
     }
 
     /**

@@ -118,7 +118,7 @@ public class SIDimensions implements Serializable
      * SIDimensions.of("kgms-2") will both be translated to a dimensions object with vector {0,0,1,1,-2,0,0,0,0}. It is allowed
      * to use 0 or 1 for the dimensions. Having the same unit in the numerator and the denominator is not seen as a problem: the
      * values are subtracted from each other, so m/m will have a length dimensionality of 0. Dimensions between -9 and 9 are
-     * allowed. Periods and ^ are taken out, but other characters are not allowed and will lead to a UnitException. The order of
+     * allowed. Spaces, periods and ^ are taken out, but other characters are not allowed and will lead to a UnitException. The order of
      * allowed units is arbitrary, so "kg/ms2" is accepted as well as "kg/s^2.m".
      * @param siString String; the string to parse
      * @return SIDimension; the corresponding SI dimensions
@@ -127,14 +127,14 @@ public class SIDimensions implements Serializable
     public static SIDimensions of(final String siString) throws UnitException
     {
         Throw.whenNull(siString, "siString cannot be null");
-        // TODO: remove ^ and .
+        String dimString = siString.replaceAll("[ .^]", "");
         // TODO: fractional: ^(-1/2)
-        if (siString.contains("/"))
+        if (dimString.contains("/"))
         {
-            String[] parts = siString.split("\\/");
+            String[] parts = dimString.split("\\/");
             if (parts.length != 2)
             {
-                throw new UnitException("SI String " + siString + " contains more than one division sign");
+                throw new UnitException("SI String " + dimString + " contains more than one division sign");
             }
             byte[] numerator = parse(parts[0]);
             byte[] denominator = parse(parts[1]);
@@ -144,7 +144,7 @@ public class SIDimensions implements Serializable
             }
             return new SIDimensions(numerator);
         }
-        return new SIDimensions(parse(siString));
+        return new SIDimensions(parse(dimString));
     }
 
     /**

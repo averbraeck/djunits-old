@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.FrequencyUnit;
@@ -164,13 +165,12 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
      * @param text String; the textual representation to parse into a Frequency
      * @return Frequency; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Frequency valueOf(final String text) throws IllegalArgumentException
+    public static Frequency valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Frequency -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing Frequency: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Frequency: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -179,9 +179,9 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (FrequencyUnit unit : FrequencyUnit.BASE.getUnitsById().values())
+                FrequencyUnit unit = FrequencyUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new Frequency(d, unit);
@@ -194,6 +194,26 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
             }
         }
         throw new IllegalArgumentException("Error parsing Frequency from " + text);
+    }
+
+    /**
+     * Returns a Frequency based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Frequency; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Frequency of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Frequency: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Frequency: empty unitString");
+        FrequencyUnit unit = FrequencyUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Frequency(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Frequency with unit " + unitString);
     }
 
     /**

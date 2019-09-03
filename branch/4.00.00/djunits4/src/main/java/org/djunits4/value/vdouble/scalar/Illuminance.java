@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.IlluminanceUnit;
 
 /**
@@ -160,13 +161,12 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
      * @param text String; the textual representation to parse into a Illuminance
      * @return Illuminance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Illuminance valueOf(final String text) throws IllegalArgumentException
+    public static Illuminance valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Illuminance -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing Illuminance: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Illuminance: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -175,9 +175,9 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (IlluminanceUnit unit : IlluminanceUnit.BASE.getUnitsById().values())
+                IlluminanceUnit unit = IlluminanceUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new Illuminance(d, unit);
@@ -190,6 +190,26 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
             }
         }
         throw new IllegalArgumentException("Error parsing Illuminance from " + text);
+    }
+
+    /**
+     * Returns a Illuminance based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Illuminance; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Illuminance of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Illuminance: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Illuminance: empty unitString");
+        IlluminanceUnit unit = IlluminanceUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Illuminance(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Illuminance with unit " + unitString);
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.DirectionUnit;
 
@@ -148,15 +149,14 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
      * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Direction
-     * @return the Scalar representation of the value in its unit
+     * @return Direction; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Direction valueOf(final String text) throws IllegalArgumentException
+    public static Direction valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Direction -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing Direction: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Direction: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -165,9 +165,9 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (DirectionUnit unit : DirectionUnit.BASE.getUnitsById().values())
+                DirectionUnit unit = DirectionUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new Direction(d, unit);
@@ -180,6 +180,26 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
             }
         }
         throw new IllegalArgumentException("Error parsing Direction from " + text);
+    }
+
+    /**
+     * Returns a Direction based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Direction; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Direction of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Direction: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Direction: empty unitString");
+        DirectionUnit unit = DirectionUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Direction(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Direction with unit " + unitString);
     }
 
 }

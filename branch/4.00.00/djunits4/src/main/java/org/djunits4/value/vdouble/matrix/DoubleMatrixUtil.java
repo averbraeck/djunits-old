@@ -141,5 +141,5 @@ public final class DoubleMatrixUtil
         ((AbstractDoubleMatrix) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }
-    
+
 }

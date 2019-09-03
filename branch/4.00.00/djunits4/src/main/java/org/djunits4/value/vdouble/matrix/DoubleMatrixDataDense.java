@@ -175,5 +175,5 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
     }
-    
+
 }

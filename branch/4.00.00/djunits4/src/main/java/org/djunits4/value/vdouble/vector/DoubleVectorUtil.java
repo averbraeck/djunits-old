@@ -141,5 +141,5 @@ public final class DoubleVectorUtil
         ((AbstractDoubleVector) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }
-    
+
 }

@@ -213,23 +213,47 @@ public class UnitBase<U extends Unit<U>> implements Serializable
     }
 
     /**
-     * Retrieve a unit by one of its abbreviations.
+     * Retrieve a unit by one of its abbreviations. First try whether the abbreviation itself is available. If not, look up the
+     * unit without spaces, "." and "^" to map e.g., "kg.m/s^2" to "kgm/s2". If that fails, see if the unit is an SIDimensions
+     * string. If not, return null.
      * @param abbreviation String; the abbreviation to look up
      * @return the corresponding unit or null when it was not found
      */
     public U getUnitByAbbreviation(final String abbreviation)
     {
-        return this.unitsByAbbreviation.get(abbreviation);
+        U unit = this.unitsByAbbreviation.get(abbreviation);
+        if (unit == null)
+        {
+            unit = this.unitsByAbbreviation.get(abbreviation.replaceAll("[ .^]", ""));
+        }
+        if (unit == null)
+        {
+            try
+            {
+                SIDimensions dim = SIDimensions.of(abbreviation);
+                if (dim != null && dim.equals(this.siDimensions))
+                {
+                    unit = this.standardUnit;
+                }
+            }
+            catch (UnitException exception)
+            {
+                unit = null;
+            }
+        }
+        return unit;
     }
 
     /**
-     * Retrieve a unit by one of its abbreviations.
+     * Retrieve a unit by one of its abbreviations. First try whether the abbreviation itself is available. If not, try without
+     * "." that might separate the units (e.g., "N.m"). If that fails, look up the unit without "." and "^" to map e.g.,
+     * "kg.m/s^2" to "kgm/s2". If that fails, see if the unit is an SIDimensions string. If not, return null.
      * @param abbreviation String; the abbreviation to look up
      * @return the corresponding unit or null when it was not found
      */
     public U of(final String abbreviation)
     {
-        return this.unitsByAbbreviation.get(abbreviation);
+        return this.getUnitByAbbreviation(abbreviation);
     }
 
     /**
@@ -261,9 +285,71 @@ public class UnitBase<U extends Unit<U>> implements Serializable
 
     /** {@inheritDoc} */
     @Override
+    public int hashCode()
+    {
+        // the hashCode of the standardUnit is not evaluated because of a loop to UnitBase
+        // the hashCode of the unitByAbbreviation.values() is not evaluated because of a loop to UnitBase
+        // the hashCode of the unitById.values()is not evaluated because of a loop to UnitBase
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.siDimensions == null) ? 0 : this.siDimensions.hashCode());
+        result = prime * result + ((this.standardUnit == null) ? 0 : this.standardUnit.getId().hashCode());
+        result = prime * result + ((this.unitsByAbbreviation == null) ? 0 : this.unitsByAbbreviation.keySet().hashCode());
+        result = prime * result + ((this.unitsById == null) ? 0 : this.unitsById.keySet().hashCode());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("checkstyle:needbraces")
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        UnitBase<?> other = (UnitBase<?>) obj;
+        if (this.siDimensions == null)
+        {
+            if (other.siDimensions != null)
+                return false;
+        }
+        else if (!this.siDimensions.equals(other.siDimensions))
+            return false;
+        if (this.standardUnit == null)
+        {
+            if (other.standardUnit != null)
+                return false;
+        }
+        // the standardUnit is not compared with equals() because of a loop to UnitBase
+        else if (!this.standardUnit.getId().equals(other.standardUnit.getId()))
+            return false;
+        if (this.unitsByAbbreviation == null)
+        {
+            if (other.unitsByAbbreviation != null)
+                return false;
+        }
+        // the unitByAbbreviation is not compared with equals() because of a loop to UnitBase
+        else if (!this.unitsByAbbreviation.keySet().equals(other.unitsByAbbreviation.keySet()))
+            return false;
+        if (this.unitsById == null)
+        {
+            if (other.unitsById != null)
+                return false;
+        }
+        // the unitById is not compared with equals() because of a loop to UnitBase
+        else if (!this.unitsById.keySet().equals(other.unitsById.keySet()))
+            return false;
+        return true;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public String toString()
     {
         return "UnitBase [standardUnit=" + this.standardUnit + ", siDimensions=" + this.siDimensions + "]";
     }
-    
+
 }

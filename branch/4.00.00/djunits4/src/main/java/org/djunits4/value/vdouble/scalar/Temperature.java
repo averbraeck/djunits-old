@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.TemperatureUnit;
@@ -185,13 +186,12 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
      * @param text String; the textual representation to parse into a Temperature
      * @return Temperature; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Temperature valueOf(final String text) throws IllegalArgumentException
+    public static Temperature valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Temperature -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing Temperature: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Temperature: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -200,9 +200,9 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (TemperatureUnit unit : TemperatureUnit.BASE.getUnitsById().values())
+                TemperatureUnit unit = TemperatureUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new Temperature(d, unit);
@@ -215,6 +215,26 @@ public class Temperature extends AbstractDoubleScalarRel<TemperatureUnit, Temper
             }
         }
         throw new IllegalArgumentException("Error parsing Temperature from " + text);
+    }
+
+    /**
+     * Returns a Temperature based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Temperature; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Temperature of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Temperature: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Temperature: empty unitString");
+        TemperatureUnit unit = TemperatureUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Temperature(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Temperature with unit " + unitString);
     }
 
     /**

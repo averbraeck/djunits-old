@@ -449,5 +449,5 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
             return false;
         return true;
     }
-    
+
 }

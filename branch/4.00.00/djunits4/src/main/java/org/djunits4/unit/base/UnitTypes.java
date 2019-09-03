@@ -56,6 +56,18 @@ public final class UnitTypes implements Serializable
     }
 
     /**
+     * Unregister the baseUnit in the UnitType registries.
+     * @param baseUnit UnitBase&lt;?&gt;; the baseUnit to register.
+     */
+    public void unregister(final UnitBase<?> baseUnit)
+    {
+        if (baseUnit.getStandardUnit() != null)
+        {
+            this.registry.remove(baseUnit.getStandardUnit().getClass().getSimpleName());
+        }
+    }
+
+    /**
      * Retrieve a safe copy of the baseUnit set registered for an SI fingerprint.
      * @param siDimensions SIDimensions; the SI dimensions to search for
      * @return a safe copy of the baseUnit set registered for this SI dimensions fingerprint
@@ -79,5 +91,5 @@ public final class UnitTypes implements Serializable
     {
         return this.registry.get(unitClassName);
     }
-    
+
 }

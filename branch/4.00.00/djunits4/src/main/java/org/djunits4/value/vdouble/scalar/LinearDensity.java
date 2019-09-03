@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ForceUnit;
 import org.djunits4.unit.FrequencyUnit;
@@ -164,13 +165,12 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      * @param text String; the textual representation to parse into a LinearDensity
      * @return LinearDensity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static LinearDensity valueOf(final String text) throws IllegalArgumentException
+    public static LinearDensity valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing LinearDensity -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing LinearDensity: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing LinearDensity: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -179,9 +179,9 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (LinearDensityUnit unit : LinearDensityUnit.BASE.getUnitsById().values())
+                LinearDensityUnit unit = LinearDensityUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new LinearDensity(d, unit);
@@ -194,6 +194,26 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
             }
         }
         throw new IllegalArgumentException("Error parsing LinearDensity from " + text);
+    }
+
+    /**
+     * Returns a LinearDensity based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return LinearDensity; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static LinearDensity of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing LinearDensity: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing LinearDensity: empty unitString");
+        LinearDensityUnit unit = LinearDensityUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new LinearDensity(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing LinearDensity with unit " + unitString);
     }
 
     /**

@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.MagneticFluxUnit;
 
 /**
@@ -160,13 +161,12 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
      * @param text String; the textual representation to parse into a MagneticFlux
      * @return MagneticFlux; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static MagneticFlux valueOf(final String text) throws IllegalArgumentException
+    public static MagneticFlux valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing MagneticFlux -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing MagneticFlux: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing MagneticFlux: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -175,9 +175,9 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (MagneticFluxUnit unit : MagneticFluxUnit.BASE.getUnitsById().values())
+                MagneticFluxUnit unit = MagneticFluxUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new MagneticFlux(d, unit);
@@ -190,6 +190,26 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
             }
         }
         throw new IllegalArgumentException("Error parsing MagneticFlux from " + text);
+    }
+
+    /**
+     * Returns a MagneticFlux based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return MagneticFlux; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static MagneticFlux of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing MagneticFlux: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing MagneticFlux: empty unitString");
+        MagneticFluxUnit unit = MagneticFluxUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new MagneticFlux(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing MagneticFlux with unit " + unitString);
     }
 
 }

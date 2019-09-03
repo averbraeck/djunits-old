@@ -458,5 +458,5 @@ abstract class DoubleMatrixData implements Serializable
     {
         return "DoubleMatrixData [storageType=" + this.storageType + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
     }
-    
+
 }

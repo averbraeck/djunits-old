@@ -37,7 +37,7 @@ public class ElectricalCapacitanceUnit extends Unit<ElectricalCapacitanceUnit>
 
     /** uF. */
     public static final ElectricalCapacitanceUnit MICROFARAD =
-            FARAD.deriveLinear(1.0E-6, "uF", "microfarad", UnitSystem.SI_DERIVED, "uF", "uF", "\u03BCF", "muF");
+            FARAD.deriveLinear(1.0E-6, "muF", "microfarad", UnitSystem.SI_DERIVED, "uF", "uF", "\u03BCF", "muF");
 
     /** nF. */
     public static final ElectricalCapacitanceUnit NANOFARAD = FARAD.deriveLinear(1.0E-9, "nF", "nanofarad");

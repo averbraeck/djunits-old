@@ -129,7 +129,7 @@ public interface DoubleVectorInterface<U extends Unit<U>>
     String toString(boolean verbose, boolean withUnit);
 
     /**
-     * Somewhat verbose description of  this DoubleVector with the values expressed in the specified unit.
+     * Somewhat verbose description of this DoubleVector with the values expressed in the specified unit.
      * @param displayUnit U; the unit into which the values are converted for display
      * @param verbose boolean; if true; include type info; if false; exclude type info
      * @param withUnit boolean; if true; include the unit; of false; exclude the unit
