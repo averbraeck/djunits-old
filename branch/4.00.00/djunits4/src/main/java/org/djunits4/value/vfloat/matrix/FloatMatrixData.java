@@ -455,5 +455,5 @@ abstract class FloatMatrixData implements Serializable
     {
         return "FloatMatrixData [storageType=" + this.storageType + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
     }
-    
+
 }

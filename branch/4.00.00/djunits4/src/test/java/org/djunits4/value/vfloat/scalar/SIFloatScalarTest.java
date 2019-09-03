@@ -302,7 +302,82 @@ public class SIFloatScalarTest
         assertEquals(pace1, FloatSIScalar.min(pace3, pace2, pace1));
         assertEquals(pace1, FloatSIScalar.min(pace4, pace3, pace2, pace1));
 
-        FloatDimensionless dim = pace7.divideBy(pace2);
+        FloatDimensionless dim = pace7.divideBy(pace2).asDimensionless();
         assertEquals(3.5, dim.si, 0.001);
     }
+    
+    /**
+     * Test the min, max, createSI, interpolate, comparison methods.
+     * @throws UnitException on error
+     */
+    @Test
+    public void testFloatMethods() throws UnitException
+    {
+        SIUnit paceUnit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of("s/m"));
+        FloatSIScalar pace1 = FloatSIScalar.createSI(1.0f, paceUnit);
+        FloatSIScalar pace1a = new FloatSIScalar(pace1);
+        assertEquals(pace1, pace1a);
+        FloatSIScalar pace2 = new FloatSIScalar(2.0f, paceUnit);
+        assertEquals(2.0, pace2.si, 0.001);
+        FloatSIScalar pace3 = pace1.multiplyBy(3.0f);
+        assertEquals(3.0, pace3.si, 0.001);
+        FloatSIScalar pace5 = pace1.instantiateRel(5.0f, paceUnit);
+        assertEquals(5.0, pace5.si, 0.001);
+        FloatSIScalar pace7 = FloatSIScalar.createSI(14.0f, paceUnit).divideBy(2.0f);
+        assertEquals(7.0, pace7.si, 0.001);
+        FloatSIScalar pace4 = FloatSIScalar.interpolate(pace1, pace7, 0.5f);
+        assertEquals(4.0, pace4.si, 0.001);
+
+        assertTrue("ne0", pace1.ne0());
+        assertTrue("ge0", pace1.ge0());
+        assertTrue("gt0", pace1.gt0());
+        assertFalse("le0", pace1.le0());
+        assertFalse("eq0", pace1.eq0());
+        assertFalse("lt0", pace1.lt0());
+        
+        FloatSIScalar pace0 = pace1.minus(pace1);
+        assertEquals("0", 0.0, pace0.si, 0);
+        assertFalse("ne0", pace0.ne0());
+        assertTrue("ge0", pace0.ge0());
+        assertFalse("gt0", pace0.gt0());
+        assertTrue("le0", pace0.le0());
+        assertTrue("eq0", pace0.eq0());
+        assertFalse("lt0", pace0.lt0());
+        
+        FloatSIScalar negativePace = pace0.minus(pace1);
+        assertTrue("ne0", negativePace.ne0());
+        assertFalse("ge0", negativePace.ge0());
+        assertFalse("gt0", negativePace.gt0());
+        assertTrue("le0", negativePace.le0());
+        assertFalse("eq0", negativePace.eq0());
+        assertTrue("lt0", negativePace.lt0());
+        
+        assertEquals("compareto same", 0, pace1.compareTo(pace1));
+        assertEquals("compareto bigger", -1, pace0.compareTo(pace1));
+        assertEquals("compareto smaller", 1, pace0.compareTo(negativePace));
+
+        assertNotEquals(pace1, pace2);
+        assertNotEquals(pace1, null);
+        assertNotEquals(pace1, new Object());
+        assertNotEquals(pace1.hashCode(), pace2.hashCode());
+        assertEquals(pace1.hashCode(), pace1a.hashCode());
+
+        assertEquals(pace2, FloatSIScalar.max(pace1, pace2));
+        assertEquals(pace3, FloatSIScalar.max(pace1, pace2, pace3));
+        assertEquals(pace4, FloatSIScalar.max(pace1, pace2, pace3, pace4));
+        assertEquals(pace2, FloatSIScalar.max(pace2, pace1));
+        assertEquals(pace3, FloatSIScalar.max(pace3, pace2, pace1));
+        assertEquals(pace4, FloatSIScalar.max(pace4, pace3, pace2, pace1));
+
+        assertEquals(pace1, FloatSIScalar.min(pace1, pace2));
+        assertEquals(pace1, FloatSIScalar.min(pace1, pace2, pace3));
+        assertEquals(pace1, FloatSIScalar.min(pace1, pace2, pace3, pace4));
+        assertEquals(pace1, FloatSIScalar.min(pace2, pace1));
+        assertEquals(pace1, FloatSIScalar.min(pace3, pace2, pace1));
+        assertEquals(pace1, FloatSIScalar.min(pace4, pace3, pace2, pace1));
+
+        FloatDimensionless dim = pace7.divideBy(pace2).asDimensionless();
+        assertEquals(3.5, dim.si, 0.001);
+    }
+    
 }

@@ -404,5 +404,5 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
         checkCopyOnWrite();
         this.data.divideBy(sum);
     }
-    
+
 }

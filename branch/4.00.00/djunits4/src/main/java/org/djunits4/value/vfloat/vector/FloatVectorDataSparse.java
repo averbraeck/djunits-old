@@ -621,5 +621,5 @@ public class FloatVectorDataSparse extends FloatVectorData
             return false;
         return true;
     }
-    
+
 }

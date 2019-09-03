@@ -170,15 +170,14 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatCatalyticActivity
-     * @return the Scalar representation of the value in its unit
+     * @return FloatCatalyticActivity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static FloatCatalyticActivity valueOf(final String text) throws IllegalArgumentException
+    public static FloatCatalyticActivity valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing FloatCatalyticActivity -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing FloatCatalyticActivity: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatCatalyticActivity: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -187,9 +186,9 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (CatalyticActivityUnit unit : CatalyticActivityUnit.BASE.getUnitsById().values())
+                CatalyticActivityUnit unit = CatalyticActivityUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         float f = Float.parseFloat(valueString);
                         return new FloatCatalyticActivity(f, unit);
@@ -203,6 +202,27 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
         }
         throw new IllegalArgumentException("Error parsing FloatCatalyticActivity from " + text);
     }
+
+    /**
+     * Returns a FloatCatalyticActivity based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return FloatCatalyticActivity; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static FloatCatalyticActivity of(final float value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing FloatCatalyticActivity: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatCatalyticActivity: empty unitString");
+        CatalyticActivityUnit unit = CatalyticActivityUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new FloatCatalyticActivity(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing FloatCatalyticActivity with unit " + unitString);
+    }
+
 
 }
 

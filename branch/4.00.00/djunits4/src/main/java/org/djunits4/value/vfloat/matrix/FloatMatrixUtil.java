@@ -134,5 +134,5 @@ public final class FloatMatrixUtil
         ((AbstractFloatMatrix) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }
-    
+
 }

@@ -141,5 +141,5 @@ public final class FloatVectorUtil
         ((AbstractFloatVector) value).setDisplayUnit((Unit) displayUnit);
         return value;
     }
-    
+
 }

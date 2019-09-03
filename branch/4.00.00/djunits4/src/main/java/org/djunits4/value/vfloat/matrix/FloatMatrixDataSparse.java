@@ -607,5 +607,5 @@ public class FloatMatrixDataSparse extends FloatMatrixData
             return false;
         return true;
     }
-    
+
 }

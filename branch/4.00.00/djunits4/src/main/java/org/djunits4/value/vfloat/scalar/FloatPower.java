@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ElectricalCurrentUnit;
 import org.djunits4.unit.ElectricalPotentialUnit;
@@ -175,15 +176,14 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
      * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatPower
-     * @return the Scalar representation of the value in its unit
+     * @return FloatPower; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static FloatPower valueOf(final String text) throws IllegalArgumentException
+    public static FloatPower valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing FloatPower -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing FloatPower: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatPower: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -192,9 +192,9 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (PowerUnit unit : PowerUnit.BASE.getUnitsById().values())
+                PowerUnit unit = PowerUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         float f = Float.parseFloat(valueString);
                         return new FloatPower(f, unit);
@@ -207,6 +207,26 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
             }
         }
         throw new IllegalArgumentException("Error parsing FloatPower from " + text);
+    }
+
+    /**
+     * Returns a FloatPower based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return FloatPower; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static FloatPower of(final float value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing FloatPower: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatPower: empty unitString");
+        PowerUnit unit = PowerUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new FloatPower(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing FloatPower with unit " + unitString);
     }
 
     /**

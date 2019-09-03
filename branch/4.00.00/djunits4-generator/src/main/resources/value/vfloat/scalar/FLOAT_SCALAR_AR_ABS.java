@@ -159,15 +159,14 @@ public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeAbsUnit%, Float%
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Float%TypeAbs%
-     * @return Float%TypeAbs%; the Scalar value in its unit
+     * @return Float%TypeAbs%; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Float%TypeAbs% valueOf(final String text) throws IllegalArgumentException
+    public static Float%TypeAbs% valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Float%TypeAbs% -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing Float%TypeAbs%: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Float%TypeAbs%: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -176,9 +175,9 @@ public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeAbsUnit%, Float%
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (%TypeAbsUnit% unit : %TypeAbsUnit%.BASE.getUnitsById().values())
+                %TypeAbsUnit% unit = %TypeAbsUnit%.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         float f = Float.parseFloat(valueString);
                         return new Float%TypeAbs%(f, unit);
@@ -191,6 +190,26 @@ public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeAbsUnit%, Float%
             }
         }
         throw new IllegalArgumentException("Error parsing Float%TypeAbs% from " + text);
+    }
+
+    /**
+     * Returns a Float%TypeAbs% based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Float%TypeAbs%; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Float%TypeAbs% of(final float value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Float%TypeAbs%: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Float%TypeAbs%: empty unitString");
+        %TypeAbsUnit% unit = %TypeAbsUnit%.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Float%TypeAbs%(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Float%TypeAbs% with unit " + unitString);
     }
 
 

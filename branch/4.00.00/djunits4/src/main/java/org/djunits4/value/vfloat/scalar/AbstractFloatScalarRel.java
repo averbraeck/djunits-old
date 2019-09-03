@@ -182,5 +182,5 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
     {
         return instantiateRel(getInUnit() / constant, getUnit());
     }
-    
+
 }

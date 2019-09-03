@@ -204,16 +204,6 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
         throw new IllegalArgumentException("Error parsing SIScalar with unit " + unitString);
     }
 
-    /**
-     * Calculate the division of SI and SI, which results in a Dimensionless scalar.
-     * @param v SIScalar; SI scalar
-     * @return Dimensionless scalar as a division of SI and SI
-     */
-    public final Dimensionless divideBy(final SIScalar v)
-    {
-        return new Dimensionless(this.getSI() / v.getSI(), DimensionlessUnit.SI);
-    }
-
     /**********************************************************************************/
     /******************************** 'CAST AS' METHODS *******************************/
     /**********************************************************************************/

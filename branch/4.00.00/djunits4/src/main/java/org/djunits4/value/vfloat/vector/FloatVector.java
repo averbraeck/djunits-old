@@ -294,5 +294,5 @@ public abstract class FloatVector
         }
 
     }
-    
+
 }

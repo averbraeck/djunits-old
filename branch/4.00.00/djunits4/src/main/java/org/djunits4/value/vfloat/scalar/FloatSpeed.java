@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
@@ -176,15 +177,14 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
      * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
      * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatSpeed
-     * @return the Scalar representation of the value in its unit
+     * @return FloatSpeed; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static FloatSpeed valueOf(final String text) throws IllegalArgumentException
+    public static FloatSpeed valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing FloatSpeed -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing FloatSpeed: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatSpeed: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -193,9 +193,9 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (SpeedUnit unit : SpeedUnit.BASE.getUnitsById().values())
+                SpeedUnit unit = SpeedUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         float f = Float.parseFloat(valueString);
                         return new FloatSpeed(f, unit);
@@ -208,6 +208,26 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
             }
         }
         throw new IllegalArgumentException("Error parsing FloatSpeed from " + text);
+    }
+
+    /**
+     * Returns a FloatSpeed based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return FloatSpeed; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static FloatSpeed of(final float value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing FloatSpeed: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatSpeed: empty unitString");
+        SpeedUnit unit = SpeedUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new FloatSpeed(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing FloatSpeed with unit " + unitString);
     }
 
     /**

@@ -149,5 +149,5 @@ public interface FloatMatrixInterface<U extends Unit<U>>
      * @return MutableFloatMatrix&lt;U&gt;; sparse version of this FloatMatrix
      */
     FloatMatrixInterface<U> toSparse();
-    
+
 }

@@ -170,15 +170,14 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatElectricalConductance
-     * @return the Scalar representation of the value in its unit
+     * @return FloatElectricalConductance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static FloatElectricalConductance valueOf(final String text) throws IllegalArgumentException
+    public static FloatElectricalConductance valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing FloatElectricalConductance -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing FloatElectricalConductance: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatElectricalConductance: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -187,9 +186,9 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (ElectricalConductanceUnit unit : ElectricalConductanceUnit.BASE.getUnitsById().values())
+                ElectricalConductanceUnit unit = ElectricalConductanceUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         float f = Float.parseFloat(valueString);
                         return new FloatElectricalConductance(f, unit);
@@ -203,6 +202,27 @@ public class FloatElectricalConductance extends AbstractFloatScalarRel<Electrica
         }
         throw new IllegalArgumentException("Error parsing FloatElectricalConductance from " + text);
     }
+
+    /**
+     * Returns a FloatElectricalConductance based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return FloatElectricalConductance; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static FloatElectricalConductance of(final float value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing FloatElectricalConductance: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatElectricalConductance: empty unitString");
+        ElectricalConductanceUnit unit = ElectricalConductanceUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new FloatElectricalConductance(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing FloatElectricalConductance with unit " + unitString);
+    }
+
 
 }
 

@@ -356,5 +356,5 @@ abstract class AbstractMutableFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, R
         checkCopyOnWrite();
         this.data.divideBy(sum);
     }
-    
+
 }

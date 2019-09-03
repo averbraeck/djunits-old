@@ -542,5 +542,5 @@ abstract class FloatVectorData implements Serializable
     {
         return "FloatVectorData [storageType=" + this.storageType + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
     }
-    
+
 }

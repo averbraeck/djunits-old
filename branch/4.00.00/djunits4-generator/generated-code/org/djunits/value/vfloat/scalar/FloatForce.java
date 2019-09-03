@@ -170,15 +170,14 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatForce
-     * @return the Scalar representation of the value in its unit
+     * @return FloatForce; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static FloatForce valueOf(final String text) throws IllegalArgumentException
+    public static FloatForce valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing FloatForce -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing FloatForce: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatForce: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -187,9 +186,9 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (ForceUnit unit : ForceUnit.BASE.getUnitsById().values())
+                ForceUnit unit = ForceUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         float f = Float.parseFloat(valueString);
                         return new FloatForce(f, unit);
@@ -203,6 +202,27 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
         }
         throw new IllegalArgumentException("Error parsing FloatForce from " + text);
     }
+
+    /**
+     * Returns a FloatForce based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return FloatForce; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static FloatForce of(final float value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing FloatForce: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatForce: empty unitString");
+        ForceUnit unit = ForceUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new FloatForce(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing FloatForce with unit " + unitString);
+    }
+
         /**
          * Calculate the division of FloatForce and FloatForce, which results in a FloatDimensionless scalar.
          * @param v FloatForce scalar

@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.TemperatureUnit;
 
@@ -163,15 +164,15 @@ public class FloatAbsoluteTemperature
      * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
      * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatAbsoluteTemperature
-     * @return FloatAbsoluteTemperature; the Scalar value in its unit
+     * @return FloatAbsoluteTemperature; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static FloatAbsoluteTemperature valueOf(final String text) throws IllegalArgumentException
+    public static FloatAbsoluteTemperature valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing FloatAbsoluteTemperature -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing FloatAbsoluteTemperature: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatAbsoluteTemperature: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -180,9 +181,9 @@ public class FloatAbsoluteTemperature
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (AbsoluteTemperatureUnit unit : AbsoluteTemperatureUnit.BASE.getUnitsById().values())
+                AbsoluteTemperatureUnit unit = AbsoluteTemperatureUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         float f = Float.parseFloat(valueString);
                         return new FloatAbsoluteTemperature(f, unit);
@@ -195,6 +196,27 @@ public class FloatAbsoluteTemperature
             }
         }
         throw new IllegalArgumentException("Error parsing FloatAbsoluteTemperature from " + text);
+    }
+
+    /**
+     * Returns a FloatAbsoluteTemperature based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return FloatAbsoluteTemperature; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static FloatAbsoluteTemperature of(final float value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing FloatAbsoluteTemperature: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatAbsoluteTemperature: empty unitString");
+        AbsoluteTemperatureUnit unit = AbsoluteTemperatureUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new FloatAbsoluteTemperature(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing FloatAbsoluteTemperature with unit " + unitString);
     }
 
 }

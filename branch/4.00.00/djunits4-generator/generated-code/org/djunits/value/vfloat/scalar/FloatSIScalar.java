@@ -2,6 +2,7 @@ package org.djunits4.value.vfloat.scalar;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.regex.Matcher;
 
 import org.djunits4.Throw;
 import javax.annotation.Generated;
@@ -138,13 +139,68 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
     }
 
     /**
-     * Calculate the division of SI and SI, which results in a FloatDimensionless scalar.
-     * @param v FloatSIScalar; SI scalar
-     * @return FloatDimensionless scalar as a division of SI and SI
+     * Returns an SIScalar representation of a textual representation of a value with a unit. The String representation that can
+     * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * required, between the value and the unit.
+     * @param text String; the textual representation to parse into a SIScalar
+     * @return SIScalar; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public final FloatDimensionless divideBy(final FloatSIScalar v)
+    public static FloatSIScalar valueOf(final String text)
     {
-        return new FloatDimensionless(this.getSI() / v.getSI(), DimensionlessUnit.SI);
+        Throw.whenNull(text, "Error parsing FloatSIScalar: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatSIScalar: empty unitString");
+        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        if (matcher.find())
+        {
+            int index = matcher.end();
+            try
+            {
+                String unitString = text.substring(index).trim();
+                String valueString = text.substring(0, index).trim();
+                SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
+                if (unit != null)
+                {
+                    {
+                        float f = Float.parseFloat(valueString);
+                        return new FloatSIScalar(f, unit);
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new IllegalArgumentException("Error parsing FloatSIScalar from " + text, exception);
+            }
+        }
+        throw new IllegalArgumentException("Error parsing FloatSIScalar from " + text);
+    }
+
+    /**
+     * Returns an FloatSIScalar based on a value and the textual representation of the unit.
+     * @param value float; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return FloatSIScalar; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static FloatSIScalar of(final float value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing FloatSIScalar: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatSIScalar: empty unitString");
+        try
+        {
+            SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
+            if (unit != null)
+            {
+                return new FloatSIScalar(value, unit);
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
+        }
+        throw new IllegalArgumentException("Error parsing FloatSIScalar with unit " + unitString);
     }
 
     /**********************************************************************************/

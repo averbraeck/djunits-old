@@ -121,5 +121,5 @@ public final class FloatScalarUtil
         value.setDisplayUnit((U) displayUnit);
         return value;
     }
-    
+
 }

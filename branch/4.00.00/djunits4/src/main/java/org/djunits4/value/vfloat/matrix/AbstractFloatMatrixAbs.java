@@ -195,5 +195,5 @@ abstract class AbstractFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
             }
         }
     }
-    
+
 }

@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 
@@ -158,15 +159,14 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
      * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatPosition
-     * @return FloatPosition; the Scalar value in its unit
+     * @return FloatPosition; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static FloatPosition valueOf(final String text) throws IllegalArgumentException
+    public static FloatPosition valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing FloatPosition -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing FloatPosition: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatPosition: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -175,9 +175,9 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (PositionUnit unit : PositionUnit.BASE.getUnitsById().values())
+                PositionUnit unit = PositionUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         float f = Float.parseFloat(valueString);
                         return new FloatPosition(f, unit);
@@ -190,6 +190,26 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
             }
         }
         throw new IllegalArgumentException("Error parsing FloatPosition from " + text);
+    }
+
+    /**
+     * Returns a FloatPosition based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return FloatPosition; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static FloatPosition of(final float value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing FloatPosition: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatPosition: empty unitString");
+        PositionUnit unit = PositionUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new FloatPosition(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing FloatPosition with unit " + unitString);
     }
 
 }
