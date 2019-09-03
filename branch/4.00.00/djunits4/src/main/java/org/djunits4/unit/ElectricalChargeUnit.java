@@ -59,9 +59,9 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
     /** Faraday. */
     public static final ElectricalChargeUnit FARADAY = COULOMB.deriveLinear(96485.3383, "F", "faraday", UnitSystem.OTHER);
 
-    /** atomic unit of charge. */
+    /** atomic unit of charge. This value is exact since the 2019 redefinition of the SI base units. */
     public static final ElectricalChargeUnit ATOMIC_UNIT =
-            COULOMB.deriveLinear(1.6021765314E-19, "e", "elementary unit of charge", UnitSystem.SI_ACCEPTED);
+            COULOMB.deriveLinear(1.602176634E-19, "e", "elementary unit of charge", UnitSystem.SI_ACCEPTED);
 
     /** statcoulomb (CGS ESU). */
     public static final ElectricalChargeUnit STATCOULOMB =
