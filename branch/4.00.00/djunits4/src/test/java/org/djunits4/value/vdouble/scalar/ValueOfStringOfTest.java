@@ -137,7 +137,7 @@ public class ValueOfStringOfTest
                 }
                 catch (NoSuchMethodException | SecurityException exception)
                 {
-                    fail("Method valueOf not found for Scalar class " + classPath);
+                    fail("Method 'valueOf' not found for Scalar class " + classPath);
                 }
                 Scalar<?> value = null;
                 try
@@ -155,9 +155,39 @@ public class ValueOfStringOfTest
                     {
                         exception.printStackTrace();
                     }
-                    fail("Method valueOf failed for Scalar class " + classPath);
+                    fail("Method 'valueOf' failed for Scalar class " + classPath);
                 }
                 assertEquals(value.toString(), scalarUnit.toString());
+                
+                // find the of method
+                Method ofMethod = null;
+                try
+                {
+                    ofMethod = scalarClass.getMethod("of", double.class, String.class);
+                }
+                catch (NoSuchMethodException | SecurityException exception)
+                {
+                    fail("Method 'of' not found for Scalar class " + classPath);
+                }
+                Scalar<?> ofValue = null;
+                try
+                {
+                    System.out.println("Calling " + scalarClass.getName() + ".of(" + scalarString + ")");
+                    ofValue = (Scalar<?>) ofMethod.invoke(scalarClass, 1.0, unit.getDefaultTextualAbbreviation());
+                }
+                catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
+                {
+                    if (exception.getCause() != null)
+                    {
+                        exception.getCause().printStackTrace();
+                    }
+                    else
+                    {
+                        exception.printStackTrace();
+                    }
+                    fail("Method 'of' failed for Scalar class " + classPath);
+                }
+                assertEquals(ofValue.toString(), scalarUnit.toString());
             }
         }
     }

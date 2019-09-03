@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.*;
 
 /**
@@ -160,13 +161,12 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
      * @param text String; the textual representation to parse into a EquivalentDose
      * @return EquivalentDose; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static EquivalentDose valueOf(final String text) throws IllegalArgumentException
+    public static EquivalentDose valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing EquivalentDose -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing EquivalentDose: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing EquivalentDose: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -175,9 +175,9 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (EquivalentDoseUnit unit : EquivalentDoseUnit.BASE.getUnitsById().values())
+                EquivalentDoseUnit unit = EquivalentDoseUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new EquivalentDose(d, unit);
@@ -191,7 +191,27 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
         }
         throw new IllegalArgumentException("Error parsing EquivalentDose from " + text);
     }
-    
+
+    /**
+     * Returns a EquivalentDose based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return EquivalentDose; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static EquivalentDose of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing EquivalentDose: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing EquivalentDose: empty unitString");
+        EquivalentDoseUnit unit = EquivalentDoseUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new EquivalentDose(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing EquivalentDose with unit " + unitString);
+    }
+
     
 }
 

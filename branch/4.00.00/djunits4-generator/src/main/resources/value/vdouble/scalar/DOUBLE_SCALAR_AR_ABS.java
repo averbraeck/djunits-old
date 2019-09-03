@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.*;
 
 /**
@@ -149,15 +150,14 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a %TypeAbs%
-     * @return the Scalar representation of the value in its unit
+     * @return %TypeAbs%; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static %TypeAbs% valueOf(final String text) throws IllegalArgumentException
+    public static %TypeAbs% valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing %TypeAbs% -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing %TypeAbs%: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing %TypeAbs%: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -166,9 +166,9 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (%TypeAbsUnit% unit : %TypeAbsUnit%.BASE.getUnitsById().values())
+                %TypeAbsUnit% unit = %TypeAbsUnit%.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new %TypeAbs%(d, unit);
@@ -183,6 +183,27 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
         throw new IllegalArgumentException("Error parsing %TypeAbs% from " + text);
     }
 
+    /**
+     * Returns a %TypeAbs% based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return %TypeAbs%; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static %TypeAbs% of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing %TypeAbs%: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing %TypeAbs%: empty unitString");
+        %TypeAbsUnit% unit = %TypeAbsUnit%.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new %TypeAbs%(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing %TypeAbs% with unit " + unitString);
+    }
+
+    
 %FORMULAS%%TypeAbs%%
 }
 

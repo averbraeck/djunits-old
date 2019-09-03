@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.*;
 
 /**
@@ -160,13 +161,12 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
      * @param text String; the textual representation to parse into a FlowVolume
      * @return FlowVolume; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static FlowVolume valueOf(final String text) throws IllegalArgumentException
+    public static FlowVolume valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing FlowVolume -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing FlowVolume: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FlowVolume: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -175,9 +175,9 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (FlowVolumeUnit unit : FlowVolumeUnit.BASE.getUnitsById().values())
+                FlowVolumeUnit unit = FlowVolumeUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new FlowVolume(d, unit);
@@ -191,7 +191,27 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
         }
         throw new IllegalArgumentException("Error parsing FlowVolume from " + text);
     }
-    
+
+    /**
+     * Returns a FlowVolume based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return FlowVolume; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static FlowVolume of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing FlowVolume: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FlowVolume: empty unitString");
+        FlowVolumeUnit unit = FlowVolumeUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new FlowVolume(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing FlowVolume with unit " + unitString);
+    }
+
             /**
          * Calculate the division of FlowVolume and FlowVolume, which results in a Dimensionless scalar.
          * @param v FlowVolume scalar

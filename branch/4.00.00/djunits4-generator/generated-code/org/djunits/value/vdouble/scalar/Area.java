@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.*;
 
 /**
@@ -160,13 +161,12 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param text String; the textual representation to parse into a Area
      * @return Area; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Area valueOf(final String text) throws IllegalArgumentException
+    public static Area valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Area -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing Area: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Area: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -175,9 +175,9 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (AreaUnit unit : AreaUnit.BASE.getUnitsById().values())
+                AreaUnit unit = AreaUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new Area(d, unit);
@@ -191,7 +191,27 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
         }
         throw new IllegalArgumentException("Error parsing Area from " + text);
     }
-    
+
+    /**
+     * Returns a Area based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Area; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Area of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Area: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Area: empty unitString");
+        AreaUnit unit = AreaUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Area(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Area with unit " + unitString);
+    }
+
             /**
          * Calculate the division of Area and Area, which results in a Dimensionless scalar.
          * @param v Area scalar

@@ -331,7 +331,7 @@ public class SIScalarTest
         assertEquals(pace1, SIScalar.min(pace3, pace2, pace1));
         assertEquals(pace1, SIScalar.min(pace4, pace3, pace2, pace1));
 
-        Dimensionless dim = pace7.divideBy(pace2);
+        Dimensionless dim = pace7.divideBy(pace2).asDimensionless();
         assertEquals(3.5, dim.si, 0.001);
     }
     

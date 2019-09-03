@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.*;
 
 /**
@@ -160,13 +161,12 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      * @param text String; the textual representation to parse into a Mass
      * @return Mass; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Mass valueOf(final String text) throws IllegalArgumentException
+    public static Mass valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Mass -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing Mass: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Mass: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -175,9 +175,9 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (MassUnit unit : MassUnit.BASE.getUnitsById().values())
+                MassUnit unit = MassUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new Mass(d, unit);
@@ -191,7 +191,27 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
         }
         throw new IllegalArgumentException("Error parsing Mass from " + text);
     }
-    
+
+    /**
+     * Returns a Mass based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Mass; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Mass of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Mass: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Mass: empty unitString");
+        MassUnit unit = MassUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Mass(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Mass with unit " + unitString);
+    }
+
             /**
          * Calculate the division of Mass and Mass, which results in a Dimensionless scalar.
          * @param v Mass scalar

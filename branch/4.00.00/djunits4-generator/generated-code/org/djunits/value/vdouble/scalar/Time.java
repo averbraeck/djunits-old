@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.*;
 
 /**
@@ -155,15 +156,14 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Time
-     * @return the Scalar representation of the value in its unit
+     * @return Time; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Time valueOf(final String text) throws IllegalArgumentException
+    public static Time valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Time -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing Time: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Time: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -172,9 +172,9 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (TimeUnit unit : TimeUnit.BASE.getUnitsById().values())
+                TimeUnit unit = TimeUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new Time(d, unit);
@@ -188,6 +188,27 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
         }
         throw new IllegalArgumentException("Error parsing Time from " + text);
     }
-
+
+    /**
+     * Returns a Time based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Time; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Time of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Time: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Time: empty unitString");
+        TimeUnit unit = TimeUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Time(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Time with unit " + unitString);
+    }
+
+    
 }
 

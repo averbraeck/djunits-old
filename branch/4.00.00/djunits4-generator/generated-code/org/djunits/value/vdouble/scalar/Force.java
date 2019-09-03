@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.*;
 
 /**
@@ -160,13 +161,12 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      * @param text String; the textual representation to parse into a Force
      * @return Force; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Force valueOf(final String text) throws IllegalArgumentException
+    public static Force valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Force -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing Force: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Force: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -175,9 +175,9 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (ForceUnit unit : ForceUnit.BASE.getUnitsById().values())
+                ForceUnit unit = ForceUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new Force(d, unit);
@@ -191,7 +191,27 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
         }
         throw new IllegalArgumentException("Error parsing Force from " + text);
     }
-    
+
+    /**
+     * Returns a Force based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Force; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Force of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Force: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Force: empty unitString");
+        ForceUnit unit = ForceUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Force(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Force with unit " + unitString);
+    }
+
             /**
          * Calculate the division of Force and Force, which results in a Dimensionless scalar.
          * @param v Force scalar

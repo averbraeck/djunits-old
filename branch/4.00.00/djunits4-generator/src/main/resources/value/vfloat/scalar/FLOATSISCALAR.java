@@ -137,16 +137,6 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
         return minr;
     }
 
-    /**
-     * Calculate the division of SI and SI, which results in a FloatDimensionless scalar.
-     * @param v FloatSIScalar; SI scalar
-     * @return FloatDimensionless scalar as a division of SI and SI
-     */
-    public final FloatDimensionless divideBy(final FloatSIScalar v)
-    {
-        return new FloatDimensionless(this.getSI() / v.getSI(), DimensionlessUnit.SI);
-    }
-
     /**********************************************************************************/
     /******************************** 'CAST AS' METHODS *******************************/
     /**********************************************************************************/

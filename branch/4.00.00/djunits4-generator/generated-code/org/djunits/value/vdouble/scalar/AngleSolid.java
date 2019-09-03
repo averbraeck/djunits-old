@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.*;
 
 /**
@@ -160,13 +161,12 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
      * @param text String; the textual representation to parse into a AngleSolid
      * @return AngleSolid; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static AngleSolid valueOf(final String text) throws IllegalArgumentException
+    public static AngleSolid valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing AngleSolid -- null or empty argument");
-        }
+        Throw.whenNull(text, "Error parsing AngleSolid: unitString is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing AngleSolid: empty unitString");
         Matcher matcher = NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -175,9 +175,9 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
             {
                 String unitString = text.substring(index).trim();
                 String valueString = text.substring(0, index).trim();
-                for (AngleSolidUnit unit : AngleSolidUnit.BASE.getUnitsById().values())
+                AngleSolidUnit unit = AngleSolidUnit.BASE.getUnitByAbbreviation(unitString);
+                if (unit != null)
                 {
-                    if (unit.getAbbreviations().contains(unitString))
                     {
                         double d = Double.parseDouble(valueString);
                         return new AngleSolid(d, unit);
@@ -191,7 +191,27 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
         }
         throw new IllegalArgumentException("Error parsing AngleSolid from " + text);
     }
-    
+
+    /**
+     * Returns a AngleSolid based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return AngleSolid; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static AngleSolid of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing AngleSolid: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing AngleSolid: empty unitString");
+        AngleSolidUnit unit = AngleSolidUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new AngleSolid(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing AngleSolid with unit " + unitString);
+    }
+
             /**
          * Calculate the division of AngleSolid and AngleSolid, which results in a Dimensionless scalar.
          * @param v AngleSolid scalar
