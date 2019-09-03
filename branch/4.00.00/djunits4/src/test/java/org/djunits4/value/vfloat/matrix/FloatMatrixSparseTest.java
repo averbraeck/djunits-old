@@ -23,8 +23,6 @@ import org.junit.Test;
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate: 2019-08-19 16:28:39 +0200 (Mon, 19 Aug 2019) $, @version $Revision: 429 $, by $Author: pknoppers $,
- * initial version 26 jun, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -40,7 +38,7 @@ public class FloatMatrixSparseTest
      * @param zeroRangeLength int; number of zero values to insert between each pair of generated (probably non-zero) values
      * @return float[][]
      */
-    private static float[][] data(final int rows, final int columns, final boolean nonRectangular, final float startValue, 
+    private static float[][] data(final int rows, final int columns, final boolean nonRectangular, final float startValue,
             final int firstNonZero, final int zeroRangeLength)
     {
         float[][] result = new float[rows][];
@@ -141,7 +139,7 @@ public class FloatMatrixSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsAbsTest()
     {
@@ -302,7 +300,7 @@ public class FloatMatrixSparseTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
+        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
         for (float seedValue : seedValues)
         {
             float[][] input = data(30, 50, false, seedValue, 2, 3);
@@ -568,7 +566,7 @@ public class FloatMatrixSparseTest
     {
         try
         {
-            float[][] values = { { 1, 2, 3 }, { 3, 5, 7 }, { 5, 10, 0 } };
+            float[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> matrix =
                     new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(values, AbsoluteTemperatureUnit.KELVIN,
                             StorageType.SPARSE);
@@ -635,7 +633,7 @@ public class FloatMatrixSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsRelTest()
     {
@@ -793,7 +791,7 @@ public class FloatMatrixSparseTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
+        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
         for (float seedValue : seedValues)
         {
             float[][] input = data(30, 50, false, seedValue, 2, 3);
@@ -1118,7 +1116,7 @@ public class FloatMatrixSparseTest
     {
         try
         {
-            float[][] values = { { 1, 2, 3 }, { 3, 5, 7 }, { 5, 10, 0 } };
+            float[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             FloatMatrix.Rel<TemperatureUnit> matrix =
                     new FloatMatrix.Rel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.SPARSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
@@ -1232,7 +1230,7 @@ public class FloatMatrixSparseTest
     {
         try
         {
-            for (int firstStep : new int[] { 3, 5 })
+            for (int firstStep : new int[] {3, 5})
             {
                 for (boolean lastNanOrdering : new boolean[] {false, true})
                 {
@@ -1298,7 +1296,7 @@ public class FloatMatrixSparseTest
     {
         try
         {
-            for (int firstStep : new int[] { 3, 5 })
+            for (int firstStep : new int[] {3, 5})
             {
                 for (boolean lastNanOrdering : new boolean[] {false, true})
                 {
@@ -1333,7 +1331,7 @@ public class FloatMatrixSparseTest
                         for (int col = 0; col < leftValue[row].length; col++)
                         {
                             float expect = referenceLeft.getSI(row, col) / right.getSI(row, col);
-                            float got = left.getSI(row,  col);
+                            float got = left.getSI(row, col);
                             if (Float.isNaN(expect))
                             {
                                 assertTrue("value of element should be NaN", Float.isNaN(got));
@@ -1344,8 +1342,7 @@ public class FloatMatrixSparseTest
                             }
                             else
                             {
-                                assertEquals("value of element should be ratio of contributing elements", expect, got,
-                                        0.001);
+                                assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
                             }
                         }
                     }
@@ -1357,7 +1354,7 @@ public class FloatMatrixSparseTest
                         for (int col = 0; col < leftValue[row].length; col++)
                         {
                             float expect = referenceLeft.getSI(row, col) / right.getSI(row, col);
-                            float got = left.getSI(row,  col);
+                            float got = left.getSI(row, col);
                             if (Float.isNaN(expect))
                             {
                                 assertTrue("value of element should be NaN", Float.isNaN(got));
@@ -1368,8 +1365,7 @@ public class FloatMatrixSparseTest
                             }
                             else
                             {
-                                assertEquals("value of element should be ratio of contributing elements", expect, got,
-                                        0.001);
+                                assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
                             }
                         }
                     }
@@ -1400,7 +1396,7 @@ public class FloatMatrixSparseTest
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertEquals("incremented value should match", value[row][col] + modifier, testVector.getInUnit(row, col), 
+                    assertEquals("incremented value should match", value[row][col] + modifier, testVector.getInUnit(row, col),
                             0.01);
                 }
             }
@@ -1410,7 +1406,7 @@ public class FloatMatrixSparseTest
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col))); 
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
                 }
             }
             testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
@@ -1419,7 +1415,7 @@ public class FloatMatrixSparseTest
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertEquals("incremented value should match", value[row][col] - modifier, testVector.getInUnit(row, col), 
+                    assertEquals("incremented value should match", value[row][col] - modifier, testVector.getInUnit(row, col),
                             0.01);
                 }
             }
@@ -1429,7 +1425,7 @@ public class FloatMatrixSparseTest
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col))); 
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
                 }
             }
             testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
@@ -1438,7 +1434,7 @@ public class FloatMatrixSparseTest
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertEquals("incremented value should match", value[row][col] * modifier, testVector.getInUnit(row, col), 
+                    assertEquals("incremented value should match", value[row][col] * modifier, testVector.getInUnit(row, col),
                             0.01);
                 }
             }
@@ -1448,7 +1444,7 @@ public class FloatMatrixSparseTest
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col))); 
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
                 }
             }
             testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
@@ -1457,7 +1453,7 @@ public class FloatMatrixSparseTest
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertEquals("incremented value should match", value[row][col] / modifier, testVector.getInUnit(row, col), 
+                    assertEquals("incremented value should match", value[row][col] / modifier, testVector.getInUnit(row, col),
                             0.01);
                 }
             }
@@ -1467,7 +1463,7 @@ public class FloatMatrixSparseTest
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col))); 
+                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
                 }
             }
         }
@@ -1476,7 +1472,7 @@ public class FloatMatrixSparseTest
             fail("Caught unexpected ValueException: " + ve.toString());
         }
     }
-    
+
     /** */
     interface FloatToFloat
     {

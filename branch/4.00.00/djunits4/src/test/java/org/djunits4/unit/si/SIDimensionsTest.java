@@ -13,8 +13,8 @@ import org.junit.Test;
  * SIDimensionsTest tests the construction, addition, subtraction, and parsing of SI dimensions. <br>
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
 public class SIDimensionsTest
@@ -101,7 +101,7 @@ public class SIDimensionsTest
         assertEquals("kg.m/s<sup>2</sup>", si1.toHTMLString(true, true));
         assertEquals("kgms<sup>-2</sup>", si1.toHTMLString(false, false));
         assertEquals("kg.m.s<sup>-2</sup>", si1.toHTMLString(false, true));
-        
+
         SIDimensions si11 = SIDimensions.of("s-3");
         assertEquals("1/s3", si11.toString(true, false));
         assertEquals("1/s3", si11.toString(true, true));

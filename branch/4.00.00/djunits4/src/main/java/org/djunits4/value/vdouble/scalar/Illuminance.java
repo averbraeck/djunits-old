@@ -16,32 +16,32 @@ import org.djunits4.unit.IlluminanceUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.096Z")
 public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illuminance>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final Illuminance ZERO = new Illuminance(0.0, IlluminanceUnit.SI);
 
-    /** constant with value one. */
+    /** Constant with value one. */
     public static final Illuminance ONE = new Illuminance(1.0, IlluminanceUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Illuminance NaN = new Illuminance(Double.NaN, IlluminanceUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final Illuminance POSITIVE_INFINITY = new Illuminance(Double.POSITIVE_INFINITY, IlluminanceUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final Illuminance NEGATIVE_INFINITY = new Illuminance(Double.NEGATIVE_INFINITY, IlluminanceUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final Illuminance POS_MAXVALUE = new Illuminance(Double.MAX_VALUE, IlluminanceUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final Illuminance NEG_MAXVALUE = new Illuminance(-Double.MAX_VALUE, IlluminanceUnit.SI);
 
     /**

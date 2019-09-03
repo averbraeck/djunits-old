@@ -8,8 +8,8 @@ import org.djunits4.Throw;
  * SIPrefix contains information about one prefix, such as M for mega with the value 1.0E6.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
 public class SIPrefix implements Serializable
@@ -102,5 +102,5 @@ public class SIPrefix implements Serializable
         return "SIPrefix [defaultTextualPrefix=" + defaultTextualPrefix + ", defaultDisplayPrefix=" + defaultDisplayPrefix
                 + ", prefixName=" + prefixName + ", factor=" + factor + "]";
     }
-    
+
 }

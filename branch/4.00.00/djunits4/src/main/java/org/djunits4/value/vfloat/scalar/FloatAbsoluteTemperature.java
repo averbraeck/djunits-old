@@ -18,14 +18,14 @@ import org.djunits4.unit.TemperatureUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.112Z")
 public class FloatAbsoluteTemperature
         extends AbstractFloatScalarAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, TemperatureUnit, FloatTemperature>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatAbsoluteTemperature ZERO = new FloatAbsoluteTemperature(0.0f, AbsoluteTemperatureUnit.DEFAULT);
 
     /**

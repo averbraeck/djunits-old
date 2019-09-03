@@ -24,32 +24,32 @@ import org.djunits4.unit.SpeedUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.112Z")
 public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final Speed ZERO = new Speed(0.0, SpeedUnit.SI);
 
-    /** constant with value one. */
+    /** Constant with value one. */
     public static final Speed ONE = new Speed(1.0, SpeedUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Speed NaN = new Speed(Double.NaN, SpeedUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final Speed POSITIVE_INFINITY = new Speed(Double.POSITIVE_INFINITY, SpeedUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final Speed NEGATIVE_INFINITY = new Speed(Double.NEGATIVE_INFINITY, SpeedUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final Speed POS_MAXVALUE = new Speed(Double.MAX_VALUE, SpeedUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final Speed NEG_MAXVALUE = new Speed(-Double.MAX_VALUE, SpeedUnit.SI);
 
     /**

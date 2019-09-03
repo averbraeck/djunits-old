@@ -16,35 +16,35 @@ import org.djunits4.unit.ElectricalCapacitanceUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.096Z")
 public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCapacitanceUnit, ElectricalCapacitance>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final ElectricalCapacitance ZERO = new ElectricalCapacitance(0.0, ElectricalCapacitanceUnit.SI);
 
-    /** constant with value one. */
+    /** Constant with value one. */
     public static final ElectricalCapacitance ONE = new ElectricalCapacitance(1.0, ElectricalCapacitanceUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final ElectricalCapacitance NaN = new ElectricalCapacitance(Double.NaN, ElectricalCapacitanceUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final ElectricalCapacitance POSITIVE_INFINITY =
             new ElectricalCapacitance(Double.POSITIVE_INFINITY, ElectricalCapacitanceUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final ElectricalCapacitance NEGATIVE_INFINITY =
             new ElectricalCapacitance(Double.NEGATIVE_INFINITY, ElectricalCapacitanceUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final ElectricalCapacitance POS_MAXVALUE =
             new ElectricalCapacitance(Double.MAX_VALUE, ElectricalCapacitanceUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final ElectricalCapacitance NEG_MAXVALUE =
             new ElectricalCapacitance(-Double.MAX_VALUE, ElectricalCapacitanceUnit.SI);
 

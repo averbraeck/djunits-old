@@ -16,35 +16,35 @@ import org.djunits4.unit.ElectricalInductanceUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.134Z")
 public class FloatElectricalInductance extends AbstractFloatScalarRel<ElectricalInductanceUnit, FloatElectricalInductance>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatElectricalInductance ZERO = new FloatElectricalInductance(0.0f, ElectricalInductanceUnit.SI);
 
-    /** constant with value zero. */
+    /** Constant with value one. */
     public static final FloatElectricalInductance ONE = new FloatElectricalInductance(1.0f, ElectricalInductanceUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatElectricalInductance NaN = new FloatElectricalInductance(Float.NaN, ElectricalInductanceUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatElectricalInductance POSITIVE_INFINITY =
             new FloatElectricalInductance(Float.POSITIVE_INFINITY, ElectricalInductanceUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatElectricalInductance NEGATIVE_INFINITY =
             new FloatElectricalInductance(Float.NEGATIVE_INFINITY, ElectricalInductanceUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatElectricalInductance POS_MAXVALUE =
             new FloatElectricalInductance(Float.MAX_VALUE, ElectricalInductanceUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatElectricalInductance NEG_MAXVALUE =
             new FloatElectricalInductance(-Float.MAX_VALUE, ElectricalInductanceUnit.SI);
 

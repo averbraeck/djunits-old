@@ -17,8 +17,6 @@ import org.djunits4.value.ValueException;
  * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/current/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Aug 11, 2018 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
@@ -118,14 +116,6 @@ public final class FloatVectorUtil
     /**
      * Instantiate the FloatVector based on its unit. Loose check for types on the compiler. This allows the unit to be
      * specified as a Unit&lt;?&gt; type.<br>
-     * <b>Note</b> that it is possible to make mistakes with anonymous units. The following <u>does</u> compile:
-     * 
-     * <pre>
-     * MoneyPerLengthUnit mlu = new MoneyPerLengthUnit(MoneyUnit.USD, LengthUnit.METER, "$/m", "$/m");
-     * 
-     * MoneyPerArea mpa = FloatVectorUtil.instantiateAnonymousSI(10.0, mlu);
-     * </pre>
-     * 
      * @param si float[]; the value in SI units
      * @param displayUnit Unit&lt;?&gt;; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE

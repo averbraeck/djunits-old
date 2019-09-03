@@ -16,34 +16,34 @@ import org.djunits4.unit.AbsorbedDoseUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.128Z")
 public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, FloatAbsorbedDose>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatAbsorbedDose ZERO = new FloatAbsorbedDose(0.0f, AbsorbedDoseUnit.SI);
 
-    /** constant with value zero. */
+    /** Constant with value one. */
     public static final FloatAbsorbedDose ONE = new FloatAbsorbedDose(1.0f, AbsorbedDoseUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatAbsorbedDose NaN = new FloatAbsorbedDose(Float.NaN, AbsorbedDoseUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatAbsorbedDose POSITIVE_INFINITY =
             new FloatAbsorbedDose(Float.POSITIVE_INFINITY, AbsorbedDoseUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatAbsorbedDose NEGATIVE_INFINITY =
             new FloatAbsorbedDose(Float.NEGATIVE_INFINITY, AbsorbedDoseUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatAbsorbedDose POS_MAXVALUE = new FloatAbsorbedDose(Float.MAX_VALUE, AbsorbedDoseUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatAbsorbedDose NEG_MAXVALUE = new FloatAbsorbedDose(-Float.MAX_VALUE, AbsorbedDoseUnit.SI);
 
     /**

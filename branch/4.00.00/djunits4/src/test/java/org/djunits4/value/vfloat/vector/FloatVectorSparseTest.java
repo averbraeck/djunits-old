@@ -21,8 +21,6 @@ import org.junit.Test;
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate: 2019-08-19 16:28:39 +0200 (Mon, 19 Aug 2019) $, @version $Revision: 429 $, by $Author: pknoppers $,
- * initial version 26 jun, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -125,7 +123,7 @@ public class FloatVectorSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsAbsTest()
     {
@@ -271,7 +269,7 @@ public class FloatVectorSparseTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
+        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
         for (float seedValue : seedValues)
         {
             float[] input = data(99, seedValue, 2, 10);
@@ -502,7 +500,7 @@ public class FloatVectorSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsRelTest()
     {
@@ -642,7 +640,7 @@ public class FloatVectorSparseTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
+        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
         for (float seedValue : seedValues)
         {
             float[] input = data(99, seedValue, 2, 10);
@@ -964,7 +962,7 @@ public class FloatVectorSparseTest
     {
         try
         {
-            for (int firstStep : new int[] { 3, 10 })
+            for (int firstStep : new int[] {3, 10})
             {
                 for (boolean lastNanOrdering : new boolean[] {false, true})
                 {
@@ -1024,7 +1022,7 @@ public class FloatVectorSparseTest
     {
         try
         {
-            for (int firstStep : new int[] { 3, 10 })
+            for (int firstStep : new int[] {3, 10})
             {
                 for (boolean lastNanOrdering : new boolean[] {false, true})
                 {
@@ -1166,7 +1164,7 @@ public class FloatVectorSparseTest
             fail("Caught unexpected ValueException: " + ve.toString());
         }
     }
-    
+
     /** */
     interface FloatToFloat
     {

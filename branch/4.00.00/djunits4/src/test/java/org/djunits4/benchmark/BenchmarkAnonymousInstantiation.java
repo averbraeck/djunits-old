@@ -77,8 +77,8 @@ import org.djunits4.value.vdouble.scalar.Volume;
  * BenschmarkAnonymousInstantiation.java.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
 public class BenchmarkAnonymousInstantiation
@@ -319,7 +319,8 @@ public class BenchmarkAnonymousInstantiation
                 Class<AbstractDoubleScalar<?, S>> scalarClass = (Class<AbstractDoubleScalar<?, S>>) Class
                         .forName("org.djunits4.value.vdouble.scalar." + unit.getClass().getSimpleName().replace("Unit", ""));
                 final MethodHandles.Lookup lookup = MethodHandles.lookup();
-                methodHandle = lookup.findConstructor(scalarClass, MethodType.methodType(void.class, double.class, unit.getClass()));
+                methodHandle =
+                        lookup.findConstructor(scalarClass, MethodType.methodType(void.class, double.class, unit.getClass()));
                 MH_CACHE.put(unit, methodHandle);
             }
             S scalar = (S) methodHandle.invoke(value, unit);
@@ -333,7 +334,6 @@ public class BenchmarkAnonymousInstantiation
         }
     }
 
-    
     /**
      * Benchmark for anonymous scalar instantiation.
      * @param args empty

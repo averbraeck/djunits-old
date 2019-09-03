@@ -23,8 +23,6 @@ import org.junit.Test;
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate: 2019-08-19 11:33:59 +0200 (Mon, 19 Aug 2019) $, @version $Revision: 426 $, by $Author: pknoppers $,
- * initial version 26 jun, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -40,7 +38,7 @@ public class DoubleMatrixSparseTest
      * @param zeroRangeLength int; number of zero values to insert between each pair of generated (probably non-zero) values
      * @return double[][]
      */
-    private static double[][] data(final int rows, final int columns, final boolean nonRectangular, final double startValue, 
+    private static double[][] data(final int rows, final int columns, final boolean nonRectangular, final double startValue,
             final int firstNonZero, final int zeroRangeLength)
     {
         double[][] result = new double[rows][];
@@ -141,7 +139,7 @@ public class DoubleMatrixSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsAbsTest()
     {
@@ -302,7 +300,7 @@ public class DoubleMatrixSparseTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double[][] input = data(30, 50, false, seedValue, 2, 3);
@@ -570,7 +568,7 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] values = { { 1, 2, 3 }, { 3, 5, 7 }, { 5, 10, 0 } };
+            double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> matrix =
                     new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(values, AbsoluteTemperatureUnit.KELVIN,
                             StorageType.SPARSE);
@@ -637,7 +635,7 @@ public class DoubleMatrixSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsRelTest()
     {
@@ -796,7 +794,7 @@ public class DoubleMatrixSparseTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double[][] input = data(30, 50, false, seedValue, 2, 3);
@@ -1129,7 +1127,7 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            double[][] values = { { 1, 2, 3 }, { 3, 5, 7 }, { 5, 10, 0 } };
+            double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             DoubleMatrix.Rel<TemperatureUnit> matrix =
                     new DoubleMatrix.Rel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.SPARSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
@@ -1243,7 +1241,7 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            for (int firstStep : new int[] { 3, 5 })
+            for (int firstStep : new int[] {3, 5})
             {
                 for (boolean lastNanOrdering : new boolean[] {false, true})
                 {
@@ -1309,7 +1307,7 @@ public class DoubleMatrixSparseTest
     {
         try
         {
-            for (int firstStep : new int[] { 3, 5 })
+            for (int firstStep : new int[] {3, 5})
             {
                 for (boolean lastNanOrdering : new boolean[] {false, true})
                 {
@@ -1344,7 +1342,7 @@ public class DoubleMatrixSparseTest
                         for (int col = 0; col < leftValue[row].length; col++)
                         {
                             double expect = referenceLeft.getSI(row, col) / right.getSI(row, col);
-                            double got = left.getSI(row,  col);
+                            double got = left.getSI(row, col);
                             if (Double.isNaN(expect))
                             {
                                 assertTrue("value of element should be NaN", Double.isNaN(got));
@@ -1355,8 +1353,7 @@ public class DoubleMatrixSparseTest
                             }
                             else
                             {
-                                assertEquals("value of element should be ratio of contributing elements", expect, got,
-                                        0.001);
+                                assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
                             }
                         }
                     }
@@ -1368,7 +1365,7 @@ public class DoubleMatrixSparseTest
                         for (int col = 0; col < leftValue[row].length; col++)
                         {
                             double expect = referenceLeft.getSI(row, col) / right.getSI(row, col);
-                            double got = left.getSI(row,  col);
+                            double got = left.getSI(row, col);
                             if (Double.isNaN(expect))
                             {
                                 assertTrue("value of element should be NaN", Double.isNaN(got));
@@ -1379,8 +1376,7 @@ public class DoubleMatrixSparseTest
                             }
                             else
                             {
-                                assertEquals("value of element should be ratio of contributing elements", expect, got,
-                                        0.001);
+                                assertEquals("value of element should be ratio of contributing elements", expect, got, 0.001);
                             }
                         }
                     }

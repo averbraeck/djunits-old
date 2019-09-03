@@ -17,32 +17,32 @@ import org.djunits4.unit.DimensionlessUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.133Z")
 public class FloatAngleSolid extends AbstractFloatScalarRel<AngleSolidUnit, FloatAngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatAngleSolid ZERO = new FloatAngleSolid(0.0f, AngleSolidUnit.SI);
 
-    /** constant with value zero. */
+    /** Constant with value one. */
     public static final FloatAngleSolid ONE = new FloatAngleSolid(1.0f, AngleSolidUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatAngleSolid NaN = new FloatAngleSolid(Float.NaN, AngleSolidUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatAngleSolid POSITIVE_INFINITY = new FloatAngleSolid(Float.POSITIVE_INFINITY, AngleSolidUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatAngleSolid NEGATIVE_INFINITY = new FloatAngleSolid(Float.NEGATIVE_INFINITY, AngleSolidUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatAngleSolid POS_MAXVALUE = new FloatAngleSolid(Float.MAX_VALUE, AngleSolidUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatAngleSolid NEG_MAXVALUE = new FloatAngleSolid(-Float.MAX_VALUE, AngleSolidUnit.SI);
 
     /**

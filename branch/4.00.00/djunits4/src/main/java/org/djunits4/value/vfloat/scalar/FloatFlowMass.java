@@ -20,32 +20,32 @@ import org.djunits4.unit.MassUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.149Z")
 public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlowMass>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatFlowMass ZERO = new FloatFlowMass(0.0f, FlowMassUnit.SI);
 
-    /** constant with value zero. */
+    /** Constant with value one. */
     public static final FloatFlowMass ONE = new FloatFlowMass(1.0f, FlowMassUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatFlowMass NaN = new FloatFlowMass(Float.NaN, FlowMassUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatFlowMass POSITIVE_INFINITY = new FloatFlowMass(Float.POSITIVE_INFINITY, FlowMassUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatFlowMass NEGATIVE_INFINITY = new FloatFlowMass(Float.NEGATIVE_INFINITY, FlowMassUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatFlowMass POS_MAXVALUE = new FloatFlowMass(Float.MAX_VALUE, FlowMassUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatFlowMass NEG_MAXVALUE = new FloatFlowMass(-Float.MAX_VALUE, FlowMassUnit.SI);
 
     /**

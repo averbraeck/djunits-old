@@ -18,13 +18,13 @@ import org.djunits4.unit.DirectionUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.032Z")
 public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction, AngleUnit, Angle>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final Direction ZERO = new Direction(0.0, DirectionUnit.DEFAULT);
 
     /**

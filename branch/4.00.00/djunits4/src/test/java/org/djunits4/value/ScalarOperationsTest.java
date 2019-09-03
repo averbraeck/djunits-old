@@ -33,7 +33,6 @@ import org.junit.Test;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2019-08-22 11:11:54 +0200 (Thu, 22 Aug 2019) $, @version $Revision: 436 $, by $Author: pknoppers $, initial
  * version Sep 14, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
@@ -844,7 +843,7 @@ public class ScalarOperationsTest
             result = (AbstractDoubleScalar<?, ?>) min.invoke(null, zero, one, additionalArguments);
             assertEquals("min return object with minimum value", zero, result);
 
-            if ((!scalarClass.getName().contains(".ElectricalResistance")) && (!scalarClass.getName().contains(".Money")))
+            if (!scalarClass.getName().contains(".ElectricalResistance"))
             {
                 Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
                 String string = zero.toString();
@@ -880,12 +879,9 @@ public class ScalarOperationsTest
                 }
             }
 
-            if (!scalarClass.getName().contains(".Money"))
-            {
-                Method createSI = ClassUtil.resolveMethod(scalarClass, "createSI", double.class);
-                result = (AbstractDoubleScalar<?, ?>) createSI.invoke(null, zeroValue);
-                assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);
-            }
+            Method createSI = ClassUtil.resolveMethod(scalarClass, "createSI", double.class);
+            result = (AbstractDoubleScalar<?, ?>) createSI.invoke(null, zeroValue);
+            assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);
         }
         else
         {
@@ -952,8 +948,7 @@ public class ScalarOperationsTest
             result = (AbstractFloatScalar<?, ?>) min.invoke(null, zero, one, additionalArguments);
             assertEquals("min return object with minimum value", zero, result);
 
-            if ((!scalarClass.getName().contains(".FloatElectricalResistance"))
-                    && (!scalarClass.getName().contains(".FloatMoney")))
+            if (!scalarClass.getName().contains(".FloatElectricalResistance"))
             {
                 Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
                 String string = zero.toString();
@@ -988,12 +983,9 @@ public class ScalarOperationsTest
                     // Ignore expected exception
                 }
             }
-            if (!scalarClass.getName().contains(".FloatMoney"))
-            {
-                Method createSI = ClassUtil.resolveMethod(scalarClass, "createSI", float.class);
-                result = (AbstractFloatScalar<?, ?>) createSI.invoke(null, zeroValue);
-                assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);
-            }
+            Method createSI = ClassUtil.resolveMethod(scalarClass, "createSI", float.class);
+            result = (AbstractFloatScalar<?, ?>) createSI.invoke(null, zeroValue);
+            assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);
         }
     }
 

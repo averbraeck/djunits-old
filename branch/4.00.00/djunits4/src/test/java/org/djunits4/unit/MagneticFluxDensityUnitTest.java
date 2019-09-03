@@ -15,8 +15,6 @@ import org.junit.Test;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate: 2019-08-19 11:30:26 +0200 (Mon, 19 Aug 2019) $, @version $Revision: 425 $, by $Author: averbraeck $,
- * initial version Jun 5, 2014 <br>
  * @author <a href="https://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class MagneticFluxDensityUnitTest extends AbstractLinearUnitTest<MagneticFluxDensityUnit>
@@ -46,7 +44,8 @@ public class MagneticFluxDensityUnitTest extends AbstractLinearUnitTest<Magnetic
     @Test
     public final void createMagneticFluxDensityUnit()
     {
-        MagneticFluxDensityUnit myUnit = MagneticFluxDensityUnit.SI.deriveLinear(1.23, "my", "myMagneticFluxDensity", UnitSystem.OTHER);
+        MagneticFluxDensityUnit myUnit =
+                MagneticFluxDensityUnit.SI.deriveLinear(1.23, "my", "myMagneticFluxDensity", UnitSystem.OTHER);
         assertTrue("Can create a new MagneticFluxDensityUnit", null != myUnit);
         checkUnitRatioNameAndAbbreviation(myUnit, 1.23, 0.0001, "myMagneticFluxDensity", "my");
         MagneticFluxDensityUnit.BASE.unregister(myUnit);

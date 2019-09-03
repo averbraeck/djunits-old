@@ -17,32 +17,32 @@ import org.djunits4.unit.DimensionlessUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.085Z")
 public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSolid>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final AngleSolid ZERO = new AngleSolid(0.0, AngleSolidUnit.SI);
 
-    /** constant with value one. */
+    /** Constant with value one. */
     public static final AngleSolid ONE = new AngleSolid(1.0, AngleSolidUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final AngleSolid NaN = new AngleSolid(Double.NaN, AngleSolidUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final AngleSolid POSITIVE_INFINITY = new AngleSolid(Double.POSITIVE_INFINITY, AngleSolidUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final AngleSolid NEGATIVE_INFINITY = new AngleSolid(Double.NEGATIVE_INFINITY, AngleSolidUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final AngleSolid POS_MAXVALUE = new AngleSolid(Double.MAX_VALUE, AngleSolidUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final AngleSolid NEG_MAXVALUE = new AngleSolid(-Double.MAX_VALUE, AngleSolidUnit.SI);
 
     /**

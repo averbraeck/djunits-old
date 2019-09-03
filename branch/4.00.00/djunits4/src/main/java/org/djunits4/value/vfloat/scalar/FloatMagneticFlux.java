@@ -16,34 +16,34 @@ import org.djunits4.unit.MagneticFluxUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.149Z")
 public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, FloatMagneticFlux>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatMagneticFlux ZERO = new FloatMagneticFlux(0.0f, MagneticFluxUnit.SI);
 
-    /** constant with value zero. */
+    /** Constant with value one. */
     public static final FloatMagneticFlux ONE = new FloatMagneticFlux(1.0f, MagneticFluxUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatMagneticFlux NaN = new FloatMagneticFlux(Float.NaN, MagneticFluxUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatMagneticFlux POSITIVE_INFINITY =
             new FloatMagneticFlux(Float.POSITIVE_INFINITY, MagneticFluxUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatMagneticFlux NEGATIVE_INFINITY =
             new FloatMagneticFlux(Float.NEGATIVE_INFINITY, MagneticFluxUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatMagneticFlux POS_MAXVALUE = new FloatMagneticFlux(Float.MAX_VALUE, MagneticFluxUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatMagneticFlux NEG_MAXVALUE = new FloatMagneticFlux(-Float.MAX_VALUE, MagneticFluxUnit.SI);
 
     /**

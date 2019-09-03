@@ -30,10 +30,10 @@ public interface Scale extends Serializable
 
     /**
      * Return whether a scale is a 'standard' scale that would belong to an SI unit. For a linear scale, any scale with
-     * conversion factor 1 would be considered standard. For an offset scale, it would be considered standard if the offset is
-     * 0 and the conversion factor is 1.
+     * conversion factor 1 would be considered standard. For an offset scale, it would be considered standard if the offset is 0
+     * and the conversion factor is 1.
      * @return boolean; whether the scale is a 'standard' scale that would belong to an SI unit.
      */
     boolean isBaseSIScale();
-    
+
 }

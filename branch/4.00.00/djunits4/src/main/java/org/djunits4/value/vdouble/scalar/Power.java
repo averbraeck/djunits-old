@@ -23,32 +23,32 @@ import org.djunits4.unit.SpeedUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.112Z")
 public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final Power ZERO = new Power(0.0, PowerUnit.SI);
 
-    /** constant with value one. */
+    /** Constant with value one. */
     public static final Power ONE = new Power(1.0, PowerUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Power NaN = new Power(Double.NaN, PowerUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final Power POSITIVE_INFINITY = new Power(Double.POSITIVE_INFINITY, PowerUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final Power NEGATIVE_INFINITY = new Power(Double.NEGATIVE_INFINITY, PowerUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final Power POS_MAXVALUE = new Power(Double.MAX_VALUE, PowerUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final Power NEG_MAXVALUE = new Power(-Double.MAX_VALUE, PowerUnit.SI);
 
     /**

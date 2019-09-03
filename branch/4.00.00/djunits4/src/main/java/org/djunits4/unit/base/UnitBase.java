@@ -17,8 +17,8 @@ import org.djunits4.unit.util.UnitRuntimeException;
  * The fingerprint is registered in the UnitTypes singleton where are unit types are registered.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  * @param <U> the unit to reference the actual unit in return values
  */

@@ -15,8 +15,6 @@ import org.djunits4.value.vfloat.scalar.FloatScalar;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Oct 30, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -45,7 +43,7 @@ public interface AngleUtil
     static float normalize(final float angle)
     {
         return (float) normalize((double) angle);
-        // PK: Replaces this code that would not always result in minimal possible quantization error: 
+        // PK: Replaces this code that would not always result in minimal possible quantization error:
         // float normalized = (float) (angle % (2 * Math.PI));
         // if (normalized < 0.0)
         // {
@@ -141,5 +139,5 @@ public interface AngleUtil
         float normalized = (float) angle.getUnit().getScale().fromStandardUnit(normalize(angle.getSI()));
         return new FloatAngle(normalized, angle.getUnit());
     }
-    
+
 }

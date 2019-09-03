@@ -12,8 +12,8 @@ import org.junit.Test;
  * ScaleTest.java.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
 public class ScaleTest
@@ -114,7 +114,7 @@ public class ScaleTest
         assertNotEquals(g1.hashCode(), gscale.hashCode());
         assertFalse(g1.equals(null));
     }
-    
+
     /**
      * Test the OffsetScale for correctness and reciprocity.
      * @throws UnitException on (unexpected) error
@@ -129,13 +129,13 @@ public class ScaleTest
         assertEquals(0.0, fahrenheitScale.fromStandardUnit(255.372), 0.01); // 0 F = 255.372 K
         assertEquals(32.0, fahrenheitScale.fromStandardUnit(273.15), 0.01); // 32 F = 273.15 K
         assertEquals(-459.67, fahrenheitScale.fromStandardUnit(0.0), 0.01); // -459.67 F = 0 K
-        
+
         OffsetLinearScale std = new OffsetLinearScale(1.0, 0.0);
         OffsetLinearScale ols = new OffsetLinearScale(2.0, 10.0);
-        
+
         assertEquals(123.0, std.fromStandardUnit(std.toStandardUnit(123.0)), 0.00001);
         assertEquals(123.0, std.toStandardUnit(std.fromStandardUnit(123.0)), 0.00001);
-        
+
         assertEquals(123.0, ols.fromStandardUnit(ols.toStandardUnit(123.0)), 0.00001);
         assertEquals(123.0, ols.toStandardUnit(ols.fromStandardUnit(123.0)), 0.00001);
     }

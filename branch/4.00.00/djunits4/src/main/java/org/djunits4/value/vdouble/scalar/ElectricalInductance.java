@@ -16,35 +16,35 @@ import org.djunits4.unit.ElectricalInductanceUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.096Z")
 public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalInductanceUnit, ElectricalInductance>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final ElectricalInductance ZERO = new ElectricalInductance(0.0, ElectricalInductanceUnit.SI);
 
-    /** constant with value one. */
+    /** Constant with value one. */
     public static final ElectricalInductance ONE = new ElectricalInductance(1.0, ElectricalInductanceUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final ElectricalInductance NaN = new ElectricalInductance(Double.NaN, ElectricalInductanceUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final ElectricalInductance POSITIVE_INFINITY =
             new ElectricalInductance(Double.POSITIVE_INFINITY, ElectricalInductanceUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final ElectricalInductance NEGATIVE_INFINITY =
             new ElectricalInductance(Double.NEGATIVE_INFINITY, ElectricalInductanceUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final ElectricalInductance POS_MAXVALUE =
             new ElectricalInductance(Double.MAX_VALUE, ElectricalInductanceUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final ElectricalInductance NEG_MAXVALUE =
             new ElectricalInductance(-Double.MAX_VALUE, ElectricalInductanceUnit.SI);
 

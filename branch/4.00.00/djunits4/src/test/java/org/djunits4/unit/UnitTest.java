@@ -15,8 +15,8 @@ import org.junit.Test;
  * UnitTest.java.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
 public class UnitTest
@@ -36,7 +36,7 @@ public class UnitTest
         assertEquals(DurationUnit.HOUR, DurationUnit.BASE.of("h"));
         assertEquals(DurationUnit.HOUR, DurationUnit.BASE.of("hr"));
         assertEquals(DurationUnit.HOUR, DurationUnit.BASE.of("hour"));
-        
+
         assertEquals(1.0, SpeedUnit.METER_PER_SECOND.getScale().toStandardUnit(1.0), 1.0E-6);
         assertEquals(0.277777777, SpeedUnit.KM_PER_HOUR.getScale().toStandardUnit(1.0), 1.0E-6);
         assertEquals(0.0000771604938, AccelerationUnit.KM_PER_HOUR_2.getScale().toStandardUnit(1.0), 1.0E-12);
@@ -61,7 +61,7 @@ public class UnitTest
         LengthUnit.BASE.unregister(xx1);
         LengthUnit.BASE.unregister(xx2);
     }
-    
+
     /** hashCode() and equals(). */
     @Test
     public void unitHashCodeEqualsTest()
@@ -72,7 +72,7 @@ public class UnitTest
         LengthUnit.BASE.unregister(m13b);
         assertEquals(m13a, m13b);
         assertEquals(m13a.hashCode(), m13b.hashCode());
-        
+
         LengthUnit ym = LengthUnit.BASE.of("ym");
         LengthUnit ym2 = LengthUnit.METER.deriveSI(SIPrefixes.UNIT_PREFIXES.get("y"), false);
         LengthUnit.BASE.unregister(ym2);

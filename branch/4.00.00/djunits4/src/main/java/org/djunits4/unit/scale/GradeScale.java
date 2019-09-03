@@ -94,5 +94,5 @@ public class GradeScale implements Scale
     {
         return "GradeScale [conversionFactorToGrade=" + this.conversionFactorToGrade + "]";
     }
-    
+
 }

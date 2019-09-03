@@ -11,8 +11,8 @@ import org.djunits4.unit.util.UnitException;
  * be able to specify often used units regarding rotation.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
 public class SIDimensions implements Serializable
@@ -48,9 +48,9 @@ public class SIDimensions implements Serializable
     /**
      * Create an immutable SIDimensions instance based on a safe copy of a given dimensions specification. As an example, speed
      * is indicated as length = 1; time = -1 with the other dimensions equal to zero.
-     * @param dimensions byte[]; The (currently) 9 dimensions of the SI unit we distinguish: 0: angle (rad), 1: solid angle (sr),
-     *            2: mass (kg), 3: length (m), 4: time (s), 5: current (A), 6: temperature (K), 7: amount of substance (mol), 8:
-     *            luminous intensity (cd).
+     * @param dimensions byte[]; The (currently) 9 dimensions of the SI unit we distinguish: 0: angle (rad), 1: solid angle
+     *            (sr), 2: mass (kg), 3: length (m), 4: time (s), 5: current (A), 6: temperature (K), 7: amount of substance
+     *            (mol), 8: luminous intensity (cd).
      */
     public SIDimensions(final byte[] dimensions)
     {
@@ -67,9 +67,9 @@ public class SIDimensions implements Serializable
      * @param numerator byte[]; The (currently) 9 dimensions of the SI unit we distinguish: 0: angle (rad), 1: solid angle (sr),
      *            2: mass (kg), 3: length (m), 4: time (s), 5: current (A), 6: temperature (K), 7: amount of substance (mol), 8:
      *            luminous intensity (cd).
-     * @param denominator byte[]; The (currently) 9 dimensions of the SI unit we distinguish: 0: angle (rad), 1: solid angle (sr),
-     *            2: mass (kg), 3: length (m), 4: time (s), 5: current (A), 6: temperature (K), 7: amount of substance (mol), 8:
-     *            luminous intensity (cd).
+     * @param denominator byte[]; The (currently) 9 dimensions of the SI unit we distinguish: 0: angle (rad), 1: solid angle
+     *            (sr), 2: mass (kg), 3: length (m), 4: time (s), 5: current (A), 6: temperature (K), 7: amount of substance
+     *            (mol), 8: luminous intensity (cd).
      */
     protected SIDimensions(final byte[] numerator, final byte[] denominator)
     {
@@ -118,8 +118,8 @@ public class SIDimensions implements Serializable
      * SIDimensions.of("kgms-2") will both be translated to a dimensions object with vector {0,0,1,1,-2,0,0,0,0}. It is allowed
      * to use 0 or 1 for the dimensions. Having the same unit in the numerator and the denominator is not seen as a problem: the
      * values are subtracted from each other, so m/m will have a length dimensionality of 0. Dimensions between -9 and 9 are
-     * allowed. Spaces, periods and ^ are taken out, but other characters are not allowed and will lead to a UnitException. The order of
-     * allowed units is arbitrary, so "kg/ms2" is accepted as well as "kg/s^2.m".
+     * allowed. Spaces, periods and ^ are taken out, but other characters are not allowed and will lead to a UnitException. The
+     * order of allowed units is arbitrary, so "kg/ms2" is accepted as well as "kg/s^2.m".
      * @param siString String; the string to parse
      * @return SIDimension; the corresponding SI dimensions
      * @throws UnitException when the string could not be parsed into dimensions
@@ -350,8 +350,8 @@ public class SIDimensions implements Serializable
      * Return a string such as "kgm/s2" or "kg.m/s^2" or "kg.m.s^-2" from this SIDimensions.
      * @param divided boolean; if true, return m/s2 for acceleration; if false return ms-2
      * @param separator String; add this string between successive units, e.g. kg.m.s-2 instead of kgms-2
-     * @param powerPrefix String; the prefix for the power, e.g., "^" or "<sup>" 
-     * @param powerPostfix String; the postfix for the power, e.g., "</sup>" 
+     * @param powerPrefix String; the prefix for the power, e.g., "^" or "<sup>"
+     * @param powerPostfix String; the postfix for the power, e.g., "</sup>"
      * @return String; a formatted string for this SIDimensions
      */
     public String toString(final boolean divided, final String separator, final String powerPrefix, final String powerPostfix)
@@ -442,7 +442,7 @@ public class SIDimensions implements Serializable
     {
         return toString(divided, separator ? "." : "", power ? "^" : "", "");
     }
-    
+
     /**
      * Return a string such as "kgm/s<sup>2</sup>" or or "kg.m.s<sup>-2</sup>" from this SIDimensions.
      * @param divided boolean; if true, return "m/s<sup>2</sup>" for acceleration; if false return "ms<sup>-2</sup>"
@@ -453,7 +453,7 @@ public class SIDimensions implements Serializable
     {
         return toString(divided, separator ? "." : "", "<sup>", "</sup>");
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public String toString()
@@ -485,5 +485,5 @@ public class SIDimensions implements Serializable
             return Arrays.toString(this.dimensions);
         }
     }
-    
+
 }

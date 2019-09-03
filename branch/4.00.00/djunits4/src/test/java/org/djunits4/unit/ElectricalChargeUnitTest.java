@@ -15,8 +15,6 @@ import org.junit.Test;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate: 2019-03-02 19:06:46 +0100 (Sat, 02 Mar 2019) $, @version $Revision: 342 $, by $Author: averbraeck $,
- * initial version Jun 5, 2014 <br>
  * @author <a href="https://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class ElectricalChargeUnitTest extends AbstractLinearUnitTest<ElectricalChargeUnit>

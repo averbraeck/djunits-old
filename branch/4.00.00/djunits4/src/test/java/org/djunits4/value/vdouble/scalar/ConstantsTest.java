@@ -19,15 +19,14 @@ public class ConstantsTest
     public void constantsTest()
     {
         // These constants are exact; tolerance is 0.
-        assertEquals("Cesium frequency", 9192631770d, Constants.CESIUM133GROUNDSTATEHYPERFINESTRUCTURETRANSITIONFREQUENCY.si,
-                0);
+        assertEquals("Cesium frequency", 9192631770d, Constants.CESIUM133_FREQUENCY.si, 0);
         assertEquals("light speed", 299792458d, Constants.LIGHTSPEED.si, 0);
         assertEquals("Planck", 6.62607015e-34, Constants.PLANCK.si, 0);
         assertEquals("Boltzmann", 1.380649e-23, Constants.BOLTZMANN.si, 0);
         assertEquals("Charge of electron", -1.602176634e-19, Constants.ELECTRONCHARGE.si, 0);
         assertEquals("Charge of proton", 1.602176634e-19, Constants.PROTONCHARGE.si, 0);
         assertEquals("Avogadro", 6.02214076e23, Constants.AVOGADRO.si, 0);
-        assertEquals("Base for the Lumen", 683, Constants.LUMINOUSEFFICACYOFMONOCHROMATICRADTIONAT540THZ.si, 0);
+        assertEquals("Base for the Lumen", 683, Constants.LUMINOUS_EFFICACY_540THZ.si, 0);
         assertEquals("Tau", Math.PI * 2, Constants.TAU.si, 0);
         assertEquals("Reduced Planck", Constants.PLANCK.si / 2 / Math.PI, Constants.PLANKREDUCED.si, 0);
         // These constants have a non-zero tolerance. The tolerances used are the precision at which these constants are

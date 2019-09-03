@@ -6,8 +6,8 @@ import org.djunits4.unit.ElectricalChargeUnit;
 /**
  * Various physical constants. For many, see
  * <a href="https://en.wikipedia.org/wiki/2019_redefinition_of_the_SI_base_units">Wikipedia 2019 redefinition of the SI base
- * units</a>.
- * <p>
+ * units</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers">Peter Knoppers</a>
  */
 public class Constants
@@ -28,7 +28,7 @@ public class Constants
      * The Cesium 133 ground state hyperfine structure transition frequency. This value is exact since the 2006 redefinition of
      * the SI base units.
      */
-    public static final Frequency CESIUM133GROUNDSTATEHYPERFINESTRUCTURETRANSITIONFREQUENCY = Frequency.of(9192631770d, "1/s");
+    public static final Frequency CESIUM133_FREQUENCY = Frequency.of(9192631770d, "1/s");
 
     /** Electrical charge of one electron. This value is exact since the 2019 redefinition of the SI base units. */
     public static final ElectricalCharge ELECTRONCHARGE = new ElectricalCharge(-1, ElectricalChargeUnit.ATOMIC_UNIT);
@@ -85,11 +85,11 @@ public class Constants
     public static final SIScalar PLANCK = SIScalar.of(6.62607015e-34, "kgm2/s");
 
     /**
-     * The luminous efficacy Kcd of monochromatic radiation of frequency 540×1012 Hz (540 THz). This is the frequency of a
+     * The luminous efficacy Kcd of monochromatic radiation of frequency 540×10^12 Hz (540 THz). This is the frequency of a
      * green-colored light at approximately the peak sensitivity of the human eye. This value is exact since the 2006
      * redefinition of the SI base units.
      */
-    public static final SIScalar LUMINOUSEFFICACYOFMONOCHROMATICRADTIONAT540THZ = SIScalar.of(683d, "cdsrs3/kg");
+    public static final SIScalar LUMINOUS_EFFICACY_540THZ = SIScalar.of(683d, "cdsrs3/kg");
 
     /** Ratio of circumference of circle and its radius. */
     public static final Dimensionless TAU = new Dimensionless(Math.PI * 2, DimensionlessUnit.SI);

@@ -24,32 +24,32 @@ import org.djunits4.unit.SpeedUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.149Z")
 public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatSpeed ZERO = new FloatSpeed(0.0f, SpeedUnit.SI);
 
-    /** constant with value zero. */
+    /** Constant with value one. */
     public static final FloatSpeed ONE = new FloatSpeed(1.0f, SpeedUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatSpeed NaN = new FloatSpeed(Float.NaN, SpeedUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatSpeed POSITIVE_INFINITY = new FloatSpeed(Float.POSITIVE_INFINITY, SpeedUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatSpeed NEGATIVE_INFINITY = new FloatSpeed(Float.NEGATIVE_INFINITY, SpeedUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatSpeed POS_MAXVALUE = new FloatSpeed(Float.MAX_VALUE, SpeedUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatSpeed NEG_MAXVALUE = new FloatSpeed(-Float.MAX_VALUE, SpeedUnit.SI);
 
     /**

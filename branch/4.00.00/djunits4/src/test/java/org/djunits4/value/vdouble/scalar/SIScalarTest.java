@@ -28,8 +28,8 @@ import org.junit.Test;
  * Test.java.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
 public class SIScalarTest
@@ -66,10 +66,10 @@ public class SIScalarTest
         assertEquals(5.0, speed.getSI(), 0.00001);
         assertTrue(speed.toString().startsWith("5.000"));
         assertTrue(speed.toString().endsWith("m/s"));
-        assertTrue("toString with display unit contains display unit", 
+        assertTrue("toString with display unit contains display unit",
                 speed.toString(SpeedUnit.FOOT_PER_HOUR).indexOf("ft/h") > 0);
         FloatSpeed fs = FloatSpeed.createSI((float) speed.si);
-        assertTrue("toString with display unit contains display unit", 
+        assertTrue("toString with display unit contains display unit",
                 fs.toString(SpeedUnit.FOOT_PER_HOUR).indexOf("ft/h") > 0);
 
         Speed speedKmh = pace.reciprocal().as(Speed.class, SpeedUnit.KM_PER_HOUR);
@@ -287,7 +287,7 @@ public class SIScalarTest
         assertFalse("le0", pace1.le0());
         assertFalse("eq0", pace1.eq0());
         assertFalse("lt0", pace1.lt0());
-        
+
         SIScalar pace0 = pace1.minus(pace1);
         assertEquals("0", 0.0, pace0.si, 0);
         assertFalse("ne0", pace0.ne0());
@@ -296,7 +296,7 @@ public class SIScalarTest
         assertTrue("le0", pace0.le0());
         assertTrue("eq0", pace0.eq0());
         assertFalse("lt0", pace0.lt0());
-        
+
         SIScalar negativePace = pace0.minus(pace1);
         assertTrue("ne0", negativePace.ne0());
         assertFalse("ge0", negativePace.ge0());
@@ -304,7 +304,7 @@ public class SIScalarTest
         assertTrue("le0", negativePace.le0());
         assertFalse("eq0", negativePace.eq0());
         assertTrue("lt0", negativePace.lt0());
-        
+
         assertEquals("compareto same", 0, pace1.compareTo(pace1));
         assertEquals("compareto bigger", -1, pace0.compareTo(pace1));
         assertEquals("compareto smaller", 1, pace0.compareTo(negativePace));
@@ -332,5 +332,5 @@ public class SIScalarTest
         Dimensionless dim = pace7.divideBy(pace2).asDimensionless();
         assertEquals(3.5, dim.si, 0.001);
     }
-   
+
 }

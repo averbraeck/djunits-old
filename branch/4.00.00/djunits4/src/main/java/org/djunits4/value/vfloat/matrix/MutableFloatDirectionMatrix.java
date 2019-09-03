@@ -17,7 +17,7 @@ import org.djunits4.value.vfloat.scalar.FloatDirection;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "GenerateDJUNIT")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.275Z")
 public class MutableFloatDirectionMatrix extends AbstractMutableFloatMatrixAbs<DirectionUnit, AngleUnit, FloatDirectionMatrix,
         FloatAngleMatrix, MutableFloatDirectionMatrix, FloatDirection>
 {

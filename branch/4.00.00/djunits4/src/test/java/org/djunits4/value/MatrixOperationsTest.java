@@ -38,7 +38,6 @@ import org.junit.Test;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-10-04 13:58:23 +0200 (Sun, 04 Oct 2015) $, @version $Revision: 84 $, by $Author: averbraeck $, initial
  * version Sep 14, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
@@ -299,18 +298,6 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
      */
     private String getCoefficients(final Class<?> clas) throws IllegalAccessException, NoSuchFieldException
     {
-        if (clas.getName().contains("Money"))
-        {
-            // get any static field of the type itself
-            for (Field field : clas.getDeclaredFields())
-            {
-                if (field.getType().equals(clas))
-                {
-                    return ((Unit<?>) field.get(clas)).getUnitBase().getSiDimensions().toString();
-                }
-            }
-            return "1";
-        }
         Field si = clas.getField("SI");
         Unit<?> u = ((Unit<?>) si.get(clas));
         String r = u.getUnitBase().getSiDimensions().toString();
@@ -327,18 +314,6 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
      */
     private Unit<?> getSIUnitInstance(final Class<?> clas) throws NoSuchFieldException, IllegalAccessException
     {
-        if (clas.getName().contains("Money"))
-        {
-            // get any static field of the type itself
-            for (Field field : clas.getDeclaredFields())
-            {
-                if (field.getType().equals(clas))
-                {
-                    return ((Unit<?>) field.get(clas));
-                }
-            }
-            return null;
-        }
         // TODO: Check for BASE field in absolutes, SI field in relatives
         Field si = null;
         try

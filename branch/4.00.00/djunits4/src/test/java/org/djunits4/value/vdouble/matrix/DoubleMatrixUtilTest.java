@@ -21,8 +21,6 @@ import org.junit.Test;
  * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/current/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Aug 11, 2018 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
@@ -36,11 +34,11 @@ public class DoubleMatrixUtilTest
     @Test
     public final void instantiateTest() throws ValueException
     {
-        double[][] a12 = new double[][] { { 1.0, 2.0 }, { 3.0, 4.0 } };
-        double[][] a1020 = new double[][] { { 10.0, 20.0 }, { 30.0, 40.0 } };
-        double[][] a12h = new double[][] { { 100.0, 200.0 }, { 300.0, 400.0 } };
-        double[][] a12k = new double[][] { { 1000.0, 2000.0 }, { 3000.0, 4000.0 } };
-        double[][] a12k10 = new double[][] { { 10000.0, 20000.0 }, { 30000.0, 40000.0 } };
+        double[][] a12 = new double[][] {{1.0, 2.0}, {3.0, 4.0}};
+        double[][] a1020 = new double[][] {{10.0, 20.0}, {30.0, 40.0}};
+        double[][] a12h = new double[][] {{100.0, 200.0}, {300.0, 400.0}};
+        double[][] a12k = new double[][] {{1000.0, 2000.0}, {3000.0, 4000.0}};
+        double[][] a12k10 = new double[][] {{10000.0, 20000.0}, {30000.0, 40000.0}};
 
         DimensionlessMatrix dimensionless = DoubleMatrixUtil.instantiate(a1020, DimensionlessUnit.SI, StorageType.DENSE);
         assertEquals("Dimensionless", 10.0, dimensionless.getSI(0, 0), 0.0001d);
@@ -50,7 +48,7 @@ public class DoubleMatrixUtilTest
 
         AccelerationMatrix acceleration = DoubleMatrixUtil.instantiate(a1020, AccelerationUnit.SI, StorageType.DENSE);
         assertEquals("Acceleration", 10.0, acceleration.getSI(0, 0), 0.0001d);
-        acceleration = DoubleMatrixUtil.instantiate(new double[][] { { 12960.0, 10.0 }, { 30.0, 40.0 } },
+        acceleration = DoubleMatrixUtil.instantiate(new double[][] {{12960.0, 10.0}, {30.0, 40.0}},
                 AccelerationUnit.KM_PER_HOUR_2, StorageType.DENSE);
         assertEquals("Acceleration", 1.0, acceleration.getSI(0, 0), 0.001d);
         acceleration = DoubleMatrixUtil.instantiateSI(a1020, AccelerationUnit.KM_PER_HOUR_2, StorageType.DENSE);
@@ -91,7 +89,6 @@ public class DoubleMatrixUtilTest
 
         // TODO: other base units
 
-
     }
 
     /**
@@ -101,11 +98,11 @@ public class DoubleMatrixUtilTest
     @Test
     public final void anonymousUnitTest() throws ValueException
     {
-        double[][] a12 = new double[][] { { 1.0, 2.0 }, { 3.0, 4.0 } };
-        double[][] a1020 = new double[][] { { 10.0, 20.0 }, { 30.0, 40.0 } };
-        double[][] a12h = new double[][] { { 100.0, 200.0 }, { 300.0, 400.0 } };
-        double[][] a12k = new double[][] { { 1000.0, 2000.0 }, { 3000.0, 4000.0 } };
-        double[][] a12k10 = new double[][] { { 10000.0, 20000.0 }, { 30000.0, 40000.0 } };
+        double[][] a12 = new double[][] {{1.0, 2.0}, {3.0, 4.0}};
+        double[][] a1020 = new double[][] {{10.0, 20.0}, {30.0, 40.0}};
+        double[][] a12h = new double[][] {{100.0, 200.0}, {300.0, 400.0}};
+        double[][] a12k = new double[][] {{1000.0, 2000.0}, {3000.0, 4000.0}};
+        double[][] a12k10 = new double[][] {{10000.0, 20000.0}, {30000.0, 40000.0}};
 
         Unit<?> unitSI = LengthUnit.SI;
         Unit<?> unitKM = LengthUnit.KILOMETER;
