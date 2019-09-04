@@ -13,8 +13,6 @@ import org.djunits4.unit.Unit;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
 import org.djunits4.value.vdouble.scalar.DoubleScalar;
-import org.djunits4.value.vdouble.scalar.DoubleScalar.Rel;
-import org.djunits4.value.vfloat.matrix.MutableFloatMatrix;
 import org.junit.Test;
 
 /**
@@ -599,6 +597,8 @@ public class DoubleVectorDenseTest
             checkContentsAndType(mmdv, value, 0.001, tempUnit, false);
             mmdv.setSI(0, 0);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
+            mdv.set(0, new DoubleScalar.Rel<TemperatureUnit>(value2[0], TemperatureUnit.KELVIN));
+            checkContentsAndType(mdv, value2, 0.01, tempUnit, false);
         }
         catch (ValueException ve)
         {

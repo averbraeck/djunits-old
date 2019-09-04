@@ -597,6 +597,8 @@ public class FloatVectorDenseTest
             checkContentsAndType(mmdv, value, 0.001, tempUnit, false);
             mmdv.setSI(0, 0);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
+            mdv.set(0, new FloatScalar.Rel<TemperatureUnit>(value2[0], TemperatureUnit.KELVIN));
+            checkContentsAndType(mdv, value2, 0.01, tempUnit, false);
         }
         catch (ValueException ve)
         {

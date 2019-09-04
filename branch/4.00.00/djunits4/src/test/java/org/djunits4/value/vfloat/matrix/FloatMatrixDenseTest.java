@@ -736,6 +736,8 @@ public class FloatMatrixDenseTest
             checkContentsAndType(mmdm, value, 0.001, tempUnit, false);
             mmdm.setSI(0, 0, 0);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
+            mdm.set(0, 0, new FloatScalar.Rel<TemperatureUnit>(value2[0][0], TemperatureUnit.KELVIN));
+            checkContentsAndType(mdm, value2, 0.01, tempUnit, false);
         }
         catch (ValueException ve)
         {
