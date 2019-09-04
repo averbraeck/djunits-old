@@ -12,6 +12,8 @@ import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
+import org.djunits4.value.vdouble.scalar.DoubleScalar;
+import org.djunits4.value.vdouble.vector.MutableDoubleVector;
 import org.djunits4.value.vfloat.scalar.FloatScalar;
 import org.junit.Test;
 
@@ -1100,6 +1102,13 @@ public class FloatVectorDenseTest
                 assertEquals("incremented value should match", value[index] + modifier, testVector.getInUnit(index), 0.01);
             }
             testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatScalar.Rel<TemperatureUnit> modifierScalar = new FloatScalar.Rel<>(modifier, TemperatureUnit.DEGREE_CELSIUS);
+            testVector.incrementBy(modifierScalar);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("incremented value should match", value[index] + modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testVector.incrementBy(Float.NaN);
             for (int index = 0; index < value.length; index++)
             {
@@ -1107,6 +1116,12 @@ public class FloatVectorDenseTest
             }
             testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testVector.decrementBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("decremented value should match", value[index] - modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.decrementBy(modifierScalar);
             for (int index = 0; index < value.length; index++)
             {
                 assertEquals("decremented value should match", value[index] - modifier, testVector.getInUnit(index), 0.01);

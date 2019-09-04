@@ -13,6 +13,7 @@ import org.djunits4.unit.Unit;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
 import org.djunits4.value.vdouble.scalar.DoubleScalar;
+import org.djunits4.value.vfloat.matrix.MutableFloatMatrix;
 import org.junit.Test;
 
 /**
@@ -1367,81 +1368,102 @@ public class DoubleMatrixDenseTest
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[][] value = data(3, 5, false, 38.0);
             double modifier = 8.76;
-            MutableDoubleMatrix.Rel<TemperatureUnit> testVector =
+            MutableDoubleMatrix.Rel<TemperatureUnit> testMatrix =
                     new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.incrementBy(modifier);
+            testMatrix.incrementBy(modifier);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
                     assertEquals("value of element should be sum of contributing elements", value[row][col] + modifier,
-                            testVector.getSI(row, col), 0.001);
+                            testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testVector = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.incrementBy(Double.NaN);
+            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            DoubleScalar.Rel<TemperatureUnit> modifierScalar = new DoubleScalar.Rel<>(modifier, TemperatureUnit.DEGREE_CELSIUS);
+            testMatrix.incrementBy(modifierScalar);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Double.isNaN(testVector.getInUnit(row, col)));
+                    assertEquals("value of element should be sum of contributing elements", value[row][col] + modifier,
+                            testMatrix.getInUnit(row, col), 0.01);
                 }
             }
-            testVector = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.decrementBy(modifier);
+            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.incrementBy(Double.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Double.isNaN(testMatrix.getInUnit(row, col)));
+                }
+            }
+            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.decrementBy(modifier);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
                     assertEquals("value of element should be difference of contributing elements", value[row][col] - modifier,
-                            testVector.getSI(row, col), 0.001);
+                            testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testVector = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.decrementBy(Double.NaN);
+            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.decrementBy(modifierScalar);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Double.isNaN(testVector.getInUnit(row, col)));
+                    assertEquals("value of element should be difference of contributing elements", value[row][col] - modifier,
+                            testMatrix.getInUnit(row, col), 0.01);
                 }
             }
-            testVector = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.multiplyBy(modifier);
+            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.decrementBy(Double.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Double.isNaN(testMatrix.getInUnit(row, col)));
+                }
+            }
+            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.multiplyBy(modifier);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
                     assertEquals("value of element should be product of contributing elements", value[row][col] * modifier,
-                            testVector.getSI(row, col), 0.001);
+                            testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testVector = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.multiplyBy(Double.NaN);
+            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.multiplyBy(Double.NaN);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Double.isNaN(testVector.getInUnit(row, col)));
+                    assertTrue("incremented value should be NaN", Double.isNaN(testMatrix.getInUnit(row, col)));
                 }
             }
-            testVector = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.divideBy(modifier);
+            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.divideBy(modifier);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
                     assertEquals("value of element should be dividend of contributing elements", value[row][col] / modifier,
-                            testVector.getSI(row, col), 0.001);
+                            testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testVector = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.divideBy(Float.NaN);
+            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.divideBy(Float.NaN);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Double.isNaN(testVector.getInUnit(row, col)));
+                    assertTrue("incremented value should be NaN", Double.isNaN(testMatrix.getInUnit(row, col)));
                 }
             }
         }

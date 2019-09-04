@@ -133,7 +133,7 @@ public class FloatMatrixDenseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({"static-method", "unchecked"})
+    @SuppressWarnings({ "static-method", "unchecked" })
     @Test
     public final void basicsAbsTest()
     {
@@ -294,7 +294,7 @@ public class FloatMatrixDenseTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
+        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
         for (float seedValue : seedValues)
         {
             float[][] input = data(3, 5, false, seedValue);
@@ -560,7 +560,7 @@ public class FloatMatrixDenseTest
     {
         try
         {
-            float[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
+            float[][] values = { { 1, 2, 3 }, { 3, 5, 7 }, { 5, 10, 0 } };
             FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> matrix =
                     new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(values, AbsoluteTemperatureUnit.KELVIN,
                             StorageType.DENSE);
@@ -627,7 +627,7 @@ public class FloatMatrixDenseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({"static-method", "unchecked"})
+    @SuppressWarnings({ "static-method", "unchecked" })
     @Test
     public final void basicsRelTest()
     {
@@ -775,7 +775,7 @@ public class FloatMatrixDenseTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
+        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
         for (float seedValue : seedValues)
         {
             float[][] input = data(3, 5, false, seedValue);
@@ -1099,7 +1099,7 @@ public class FloatMatrixDenseTest
     {
         try
         {
-            float[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
+            float[][] values = { { 1, 2, 3 }, { 3, 5, 7 }, { 5, 10, 0 } };
             FloatMatrix.Rel<TemperatureUnit> matrix =
                     new FloatMatrix.Rel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.DENSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
@@ -1205,7 +1205,7 @@ public class FloatMatrixDenseTest
     {
         try
         {
-            for (boolean lastNanOrdering : new boolean[] {false, true})
+            for (boolean lastNanOrdering : new boolean[] { false, true })
             {
                 float[][] leftValue = data(30, 50, false, 123.4f);
                 float[][] rightValue = data(30, 50, false, 234.5f);
@@ -1268,7 +1268,7 @@ public class FloatMatrixDenseTest
     {
         try
         {
-            for (boolean lastNanOrdering : new boolean[] {false, true})
+            for (boolean lastNanOrdering : new boolean[] { false, true })
             {
                 float[][] leftValue = data(30, 50, false, 123.4f);
                 float[][] rightValue = data(30, 50, false, 234.5f);
@@ -1358,81 +1358,102 @@ public class FloatMatrixDenseTest
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             float[][] value = data(3, 5, false, 38.0f);
             float modifier = 8.76f;
-            MutableFloatMatrix.Rel<TemperatureUnit> testVector =
+            MutableFloatMatrix.Rel<TemperatureUnit> testMatrix =
                     new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.incrementBy(modifier);
+            testMatrix.incrementBy(modifier);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
                     assertEquals("value of element should be sum of contributing elements", value[row][col] + modifier,
-                            testVector.getSI(row, col), 0.001);
+                            testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.incrementBy(Float.NaN);
+            testMatrix = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatScalar.Rel<TemperatureUnit> modifierScalar = new FloatScalar.Rel<>(modifier, TemperatureUnit.DEGREE_CELSIUS);
+            testMatrix.incrementBy(modifierScalar);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
+                    assertEquals("value of element should be sum of contributing elements", value[row][col] + modifier,
+                            testMatrix.getInUnit(row, col), 0.01);
                 }
             }
-            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.decrementBy(modifier);
+            testMatrix = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.incrementBy(Float.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Float.isNaN(testMatrix.getInUnit(row, col)));
+                }
+            }
+            testMatrix = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.decrementBy(modifier);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
                     assertEquals("value of element should be difference of contributing elements", value[row][col] - modifier,
-                            testVector.getSI(row, col), 0.001);
+                            testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.decrementBy(Float.NaN);
+            testMatrix = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.decrementBy(modifierScalar);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
+                    assertEquals("value of element should be difference of contributing elements", value[row][col] - modifier,
+                            testMatrix.getInUnit(row, col), 0.01);
                 }
             }
-            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.multiplyBy(modifier);
+            testMatrix = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.decrementBy(Float.NaN);
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertTrue("incremented value should be NaN", Float.isNaN(testMatrix.getInUnit(row, col)));
+                }
+            }
+            testMatrix = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.multiplyBy(modifier);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
                     assertEquals("value of element should be product of contributing elements", value[row][col] * modifier,
-                            testVector.getSI(row, col), 0.001);
+                            testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.multiplyBy(Float.NaN);
+            testMatrix = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.multiplyBy(Float.NaN);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
+                    assertTrue("incremented value should be NaN", Float.isNaN(testMatrix.getInUnit(row, col)));
                 }
             }
-            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.divideBy(modifier);
+            testMatrix = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.divideBy(modifier);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
                     assertEquals("value of element should be dividend of contributing elements", value[row][col] / modifier,
-                            testVector.getSI(row, col), 0.001);
+                            testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testVector = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testVector.divideBy(Float.NaN);
+            testMatrix = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.divideBy(Float.NaN);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
                 {
-                    assertTrue("incremented value should be NaN", Float.isNaN(testVector.getInUnit(row, col)));
+                    assertTrue("incremented value should be NaN", Float.isNaN(testMatrix.getInUnit(row, col)));
                 }
             }
         }

@@ -1109,7 +1109,7 @@ public class DoubleVectorDenseTest
                 assertEquals("incremented value should match", value[index] + modifier, testVector.getInUnit(index), 0.01);
             }
             testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            Rel<TemperatureUnit> modifierScalar = new DoubleScalar.Rel<>(modifier, TemperatureUnit.DEGREE_CELSIUS);
+            DoubleScalar.Rel<TemperatureUnit> modifierScalar = new DoubleScalar.Rel<>(modifier, TemperatureUnit.DEGREE_CELSIUS);
             testVector.incrementBy(modifierScalar);
             for (int index = 0; index < value.length; index++)
             {
