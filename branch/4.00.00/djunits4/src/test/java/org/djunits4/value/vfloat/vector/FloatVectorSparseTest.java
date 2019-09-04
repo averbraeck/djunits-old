@@ -492,7 +492,7 @@ public class FloatVectorSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({"static-method", "unchecked"})
+    @SuppressWarnings({"unchecked"})
     @Test
     public final void basicsRelTest()
     {
