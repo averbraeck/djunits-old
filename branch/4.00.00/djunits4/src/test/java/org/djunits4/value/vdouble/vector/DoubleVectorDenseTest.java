@@ -14,6 +14,7 @@ import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
 import org.djunits4.value.vdouble.scalar.DoubleScalar;
 import org.djunits4.value.vdouble.scalar.DoubleScalar.Rel;
+import org.djunits4.value.vfloat.matrix.MutableFloatMatrix;
 import org.junit.Test;
 
 /**
@@ -1174,6 +1175,12 @@ public class DoubleVectorDenseTest
             for (int index = 0; index < value.length; index++)
             {
                 assertTrue("divided value should be NaN", Double.isNaN(testVector.getInUnit(index)));
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.neg();
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("value should be negated", -value[index], testVector.getInUnit(index), 0.001);
             }
         }
         catch (ValueException ve)

@@ -1456,6 +1456,15 @@ public class FloatMatrixDenseTest
                     assertTrue("incremented value should be NaN", Float.isNaN(testMatrix.getInUnit(row, col)));
                 }
             }
+            testMatrix = new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.neg();
+            for (int row = 0; row < value.length; row++)
+            {
+                for (int col = 0; col < value[row].length; col++)
+                {
+                    assertEquals("value should be negated", -value[row][col], testMatrix.getInUnit(row, col), 0.001);
+                }
+            }
         }
         catch (ValueException ve)
         {

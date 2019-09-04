@@ -1156,6 +1156,12 @@ public class FloatVectorDenseTest
             {
                 assertTrue("divided value should be NaN", Float.isNaN(testVector.getInUnit(index)));
             }
+            testVector = new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.neg();
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("value should be negated", -value[index], testVector.getInUnit(index), 0.001);
+            }
         }
         catch (ValueException ve)
         {
