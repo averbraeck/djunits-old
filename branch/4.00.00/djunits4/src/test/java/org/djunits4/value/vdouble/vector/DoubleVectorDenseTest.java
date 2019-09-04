@@ -13,6 +13,7 @@ import org.djunits4.unit.Unit;
 import org.djunits4.value.StorageType;
 import org.djunits4.value.ValueException;
 import org.djunits4.value.vdouble.scalar.DoubleScalar;
+import org.djunits4.value.vdouble.scalar.DoubleScalar.Rel;
 import org.junit.Test;
 
 /**
@@ -1108,6 +1109,13 @@ public class DoubleVectorDenseTest
                 assertEquals("incremented value should match", value[index] + modifier, testVector.getInUnit(index), 0.01);
             }
             testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            Rel<TemperatureUnit> modifierScalar = new DoubleScalar.Rel<>(modifier, TemperatureUnit.DEGREE_CELSIUS);
+            testVector.incrementBy(modifierScalar);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("incremented value should match", value[index] + modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testVector.incrementBy(Double.NaN);
             for (int index = 0; index < value.length; index++)
             {
@@ -1115,6 +1123,12 @@ public class DoubleVectorDenseTest
             }
             testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testVector.decrementBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("decremented value should match", value[index] - modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.decrementBy(modifierScalar);
             for (int index = 0; index < value.length; index++)
             {
                 assertEquals("decremented value should match", value[index] - modifier, testVector.getInUnit(index), 0.01);
@@ -1132,6 +1146,12 @@ public class DoubleVectorDenseTest
                 assertEquals("multiplied value should match", value[index] * modifier, testVector.getInUnit(index), 0.01);
             }
             testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.multiplyBy(modifierScalar);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("multiplied value should match", value[index] * modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testVector.multiplyBy(Double.NaN);
             for (int index = 0; index < value.length; index++)
             {
@@ -1139,6 +1159,12 @@ public class DoubleVectorDenseTest
             }
             testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testVector.divideBy(modifier);
+            for (int index = 0; index < value.length; index++)
+            {
+                assertEquals("divided value should match", value[index] / modifier, testVector.getInUnit(index), 0.01);
+            }
+            testVector = new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testVector.divideBy(modifierScalar);
             for (int index = 0; index < value.length; index++)
             {
                 assertEquals("divided value should match", value[index] / modifier, testVector.getInUnit(index), 0.01);
