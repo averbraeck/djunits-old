@@ -11,8 +11,6 @@ import org.djunits.value.ValueException;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Oct 3, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -161,7 +159,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                 double value;
                 int index;
                 if (ownIndex < this.indices.length && rightIndex < rightData.indices.length)
-                {   // neither we nor right has run out of values
+                { // neither we nor right has run out of values
                     if (this.indices[ownIndex] == rightData.indices[rightIndex])
                     {
                         value = this.vectorSI[ownIndex] + rightData.vectorSI[rightIndex];
@@ -183,13 +181,13 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                     }
                 }
                 else if (ownIndex < this.indices.length)
-                {   // right has run out of values; we have not
+                { // right has run out of values; we have not
                     value = this.vectorSI[ownIndex];
                     index = this.indices[ownIndex];
                     ownIndex++;
                 }
                 else
-                {   // we have run out of values; right has not
+                { // we have run out of values; right has not
                     value = rightData.vectorSI[rightIndex];
                     index = rightData.indices[rightIndex];
                     rightIndex++;
@@ -211,7 +209,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                 {
                     ownIndex++;
                 }
-                double value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f) 
+                double value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f)
                         + right.getSI(i);
                 if (value != 0f)
                 {
@@ -272,7 +270,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                 double value;
                 int index;
                 if (ownIndex < this.indices.length && rightIndex < rightData.indices.length)
-                {   // neither we nor right has run out of values
+                { // neither we nor right has run out of values
                     if (this.indices[ownIndex] == rightData.indices[rightIndex])
                     {
                         value = this.vectorSI[ownIndex] - rightData.vectorSI[rightIndex];
@@ -294,13 +292,13 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                     }
                 }
                 else if (ownIndex < this.indices.length)
-                {   // right has run out of values; we have not
+                { // right has run out of values; we have not
                     value = this.vectorSI[ownIndex];
                     index = this.indices[ownIndex];
                     ownIndex++;
                 }
                 else
-                {   // we have run out of values; right has not
+                { // we have run out of values; right has not
                     value = 0f - rightData.vectorSI[rightIndex];
                     index = rightData.indices[rightIndex];
                     rightIndex++;
@@ -322,7 +320,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                 {
                     ownIndex++;
                 }
-                double value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0) 
+                double value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0)
                         - right.getSI(i);
                 if (value != 0f)
                 {
@@ -383,7 +381,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                 double value = 0;
                 int index = -1;
                 if (ownIndex < this.indices.length && rightIndex < rightData.indices.length)
-                {   // neither we nor right has run out of values
+                { // neither we nor right has run out of values
                     if (this.indices[ownIndex] == rightData.indices[rightIndex])
                     {
                         value = this.vectorSI[ownIndex] * rightData.vectorSI[rightIndex];
@@ -411,7 +409,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                     }
                 }
                 else if (ownIndex < this.indices.length)
-                {   // right has run out of values; we have not
+                { // right has run out of values; we have not
                     if (Double.isNaN(this.vectorSI[ownIndex]))
                     {
                         value = Double.NaN;
@@ -420,7 +418,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                     ownIndex++;
                 }
                 else
-                {   // we have run out of values; right has not
+                { // we have run out of values; right has not
                     if (Double.isNaN(rightData.vectorSI[rightIndex]))
                     {
                         value = Double.NaN;
@@ -445,7 +443,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                 {
                     ownIndex++;
                 }
-                double value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0) 
+                double value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0)
                         * right.getSI(i);
                 if (value != 0)
                 {
@@ -504,8 +502,8 @@ public class DoubleVectorDataSparse extends DoubleVectorData
             {
                 double value = Double.NaN;
                 if (ownIndex < this.indices.length && rightIndex < rightData.indices.length)
-                {   // neither we nor right has run out of values
-                    if (this.indices[ownIndex] == index &&  rightData.indices[rightIndex] == index)
+                { // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == index && rightData.indices[rightIndex] == index)
                     {
                         value = this.vectorSI[ownIndex] / rightData.vectorSI[rightIndex];
                         ownIndex++;
@@ -523,12 +521,12 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                     }
                 }
                 else if (ownIndex < this.indices.length)
-                {   // right has run out of values; we have not
+                { // right has run out of values; we have not
                     value = (this.indices[ownIndex] == index ? this.vectorSI[ownIndex] : 0) / 0;
                     ownIndex++;
                 }
                 else
-                {   // we have run out of values; right has not
+                { // we have run out of values; right has not
                     value = 0f / rightData.vectorSI[rightIndex];
                     rightIndex++;
                 }
@@ -549,7 +547,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                 {
                     ownIndex++;
                 }
-                double value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0) 
+                double value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0)
                         / right.getSI(i);
                 if (value != 0)
                 {

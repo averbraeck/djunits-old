@@ -12,8 +12,6 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version May 15, 2014 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class SpeedUnit extends LinearUnit<SpeedUnit>

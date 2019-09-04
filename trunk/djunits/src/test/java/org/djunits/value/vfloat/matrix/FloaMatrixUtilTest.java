@@ -25,8 +25,6 @@ import org.junit.Test;
  * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/current/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Aug 11, 2018 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
@@ -40,11 +38,11 @@ public class FloaMatrixUtilTest
     @Test
     public final void instantiateTest() throws ValueException
     {
-        float[][] a12 = new float[][] { { 1.0f, 2.0f }, { 3.0f, 4.0f } };
-        float[][] a1020 = new float[][] { { 10.0f, 20.0f }, { 30.0f, 40.0f } };
-        float[][] a12h = new float[][] { { 100.0f, 200.0f }, { 300.0f, 400.0f } };
-        float[][] a12k = new float[][] { { 1000.0f, 2000.0f }, { 3000.0f, 4000.0f } };
-        float[][] a12k10 = new float[][] { { 10000.0f, 20000.0f }, { 30000.0f, 40000.0f } };
+        float[][] a12 = new float[][] {{1.0f, 2.0f}, {3.0f, 4.0f}};
+        float[][] a1020 = new float[][] {{10.0f, 20.0f}, {30.0f, 40.0f}};
+        float[][] a12h = new float[][] {{100.0f, 200.0f}, {300.0f, 400.0f}};
+        float[][] a12k = new float[][] {{1000.0f, 2000.0f}, {3000.0f, 4000.0f}};
+        float[][] a12k10 = new float[][] {{10000.0f, 20000.0f}, {30000.0f, 40000.0f}};
 
         FloatDimensionlessMatrix dimensionless = FloatMatrixUtil.instantiate(a1020, DimensionlessUnit.SI, StorageType.DENSE);
         assertEquals("Dimensionless", 10.0f, dimensionless.getSI(0, 0), 0.001d);
@@ -54,7 +52,7 @@ public class FloaMatrixUtilTest
 
         FloatAccelerationMatrix acceleration = FloatMatrixUtil.instantiate(a1020, AccelerationUnit.SI, StorageType.DENSE);
         assertEquals("Acceleration", 10.0f, acceleration.getSI(0, 0), 0.001d);
-        acceleration = FloatMatrixUtil.instantiate(new float[][] { { 12960.0f, 10.0f }, { 30.0f, 40.0f } },
+        acceleration = FloatMatrixUtil.instantiate(new float[][] {{12960.0f, 10.0f}, {30.0f, 40.0f}},
                 AccelerationUnit.KM_PER_HOUR_2, StorageType.DENSE);
         assertEquals("Acceleration", 1.0f, acceleration.getSI(0, 0), 0.001d);
         acceleration = FloatMatrixUtil.instantiateSI(a1020, AccelerationUnit.KM_PER_HOUR_2, StorageType.DENSE);
@@ -132,11 +130,11 @@ public class FloaMatrixUtilTest
     @Test
     public final void anonymousUnitTest() throws ValueException
     {
-        float[][] a12 = new float[][] { { 1.0f, 2.0f }, { 3.0f, 4.0f } };
-        float[][] a1020 = new float[][] { { 10.0f, 20.0f }, { 30.0f, 40.0f } };
-        float[][] a12h = new float[][] { { 100.0f, 200.0f }, { 300.0f, 400.0f } };
-        float[][] a12k = new float[][] { { 1000.0f, 2000.0f }, { 3000.0f, 4000.0f } };
-        float[][] a12k10 = new float[][] { { 10000.0f, 20000.0f }, { 30000.0f, 40000.0f } };
+        float[][] a12 = new float[][] {{1.0f, 2.0f}, {3.0f, 4.0f}};
+        float[][] a1020 = new float[][] {{10.0f, 20.0f}, {30.0f, 40.0f}};
+        float[][] a12h = new float[][] {{100.0f, 200.0f}, {300.0f, 400.0f}};
+        float[][] a12k = new float[][] {{1000.0f, 2000.0f}, {3000.0f, 4000.0f}};
+        float[][] a12k10 = new float[][] {{10000.0f, 20000.0f}, {30000.0f, 40000.0f}};
 
         Unit<?> unitSI = LengthUnit.SI;
         Unit<?> unitKM = LengthUnit.KILOMETER;

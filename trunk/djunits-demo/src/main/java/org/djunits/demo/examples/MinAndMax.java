@@ -24,8 +24,6 @@ import org.djunits.value.vfloat.vector.FloatDirectionVector;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version May 28, 2016 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
@@ -48,7 +46,7 @@ public final class MinAndMax
         Speed s2 = new Speed(12.0, SpeedUnit.METER_PER_SECOND);
         Speed s3 = new Speed(8.0, SpeedUnit.METER_PER_SECOND);
         Speed s4 = new Speed(16.0, SpeedUnit.METER_PER_SECOND);
-        SpeedVector sv = new SpeedVector(new Speed[] { s1, s2, s3, s4 }, StorageType.DENSE);
+        SpeedVector sv = new SpeedVector(new Speed[] {s1, s2, s3, s4}, StorageType.DENSE);
         System.out.println("min of " + s1 + " and " + s2 + " = " + Speed.min(s1, s2));
         System.out.println("max of " + s1 + " and " + s2 + " = " + Speed.max(s1, s2));
         System.out.println("min of " + sv + " = " + Speed.min(s1, s2, s3, s4));
@@ -60,7 +58,7 @@ public final class MinAndMax
         FloatAcceleration fa3 = new FloatAcceleration(8.0, AccelerationUnit.METER_PER_SECOND_2);
         FloatAcceleration fa4 = new FloatAcceleration(16.0, AccelerationUnit.METER_PER_SECOND_2);
         FloatAccelerationVector fav =
-                new FloatAccelerationVector(new FloatAcceleration[] { fa1, fa2, fa3, fa4 }, StorageType.DENSE);
+                new FloatAccelerationVector(new FloatAcceleration[] {fa1, fa2, fa3, fa4}, StorageType.DENSE);
         System.out.println("min of " + fa1 + " and " + fa2 + " = " + FloatAcceleration.min(fa1, fa2));
         System.out.println("max of " + fa1 + " and " + fa2 + " = " + FloatAcceleration.max(fa1, fa2));
         System.out.println("min of " + fav + " = " + FloatAcceleration.min(fa1, fa2, fa3, fa4));
@@ -71,7 +69,7 @@ public final class MinAndMax
         Duration t2 = new Duration(12.0, DurationUnit.MINUTE);
         Duration t3 = new Duration(8.0, DurationUnit.MINUTE);
         Duration t4 = new Duration(16.0, DurationUnit.MINUTE);
-        DurationVector tv = new DurationVector(new Duration[] { t1, t2, t3, t4 }, StorageType.DENSE);
+        DurationVector tv = new DurationVector(new Duration[] {t1, t2, t3, t4}, StorageType.DENSE);
         System.out.println("min of " + t1 + " and " + t2 + " = " + Duration.min(t1, t2));
         System.out.println("max of " + t1 + " and " + t2 + " = " + Duration.max(t1, t2));
         System.out.println("min of " + tv + " = " + Duration.min(t1, t2, t3, t4));
@@ -82,7 +80,7 @@ public final class MinAndMax
         FloatDirection fd2 = new FloatDirection(12.0, DirectionUnit.NORTH_DEGREE);
         FloatDirection fd3 = new FloatDirection(8.0, DirectionUnit.NORTH_DEGREE);
         FloatDirection fd4 = new FloatDirection(16.0, DirectionUnit.NORTH_DEGREE);
-        FloatDirectionVector fdv = new FloatDirectionVector(new FloatDirection[] { fd1, fd2, fd3, fd4 }, StorageType.DENSE);
+        FloatDirectionVector fdv = new FloatDirectionVector(new FloatDirection[] {fd1, fd2, fd3, fd4}, StorageType.DENSE);
         System.out.println("min of " + fd1 + " and " + fd2 + " = " + FloatDirection.min(fd1, fd2));
         System.out.println("max of " + fd1 + " and " + fd2 + " = " + FloatDirection.max(fd1, fd2));
         System.out.println("min of " + fdv + " = " + FloatDirection.min(fd1, fd2, fd3, fd4));
@@ -93,7 +91,7 @@ public final class MinAndMax
         Dimensionless d2 = new Dimensionless(12.0, DimensionlessUnit.SI);
         Dimensionless d3 = new Dimensionless(8.0, DimensionlessUnit.SI);
         Dimensionless d4 = new Dimensionless(16.0, DimensionlessUnit.SI);
-        DimensionlessVector dv = new DimensionlessVector(new Dimensionless[] { d1, d2, d3, d4 }, StorageType.DENSE);
+        DimensionlessVector dv = new DimensionlessVector(new Dimensionless[] {d1, d2, d3, d4}, StorageType.DENSE);
         System.out.println("min of " + d1 + " and " + d2 + " = " + Dimensionless.min(d1, d2));
         System.out.println("max of " + d1 + " and " + d2 + " = " + Dimensionless.max(d1, d2));
         System.out.println("min of " + dv + " = " + Dimensionless.min(d1, d2, d3, d4));

@@ -9,8 +9,6 @@ import org.djunits.unit.scale.OffsetLinearScale;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Jun 6, 2014 <br>
  * @author <a href="https://tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <OU> Make the test specific for this sub class of OffsetUnit
  */
@@ -29,13 +27,13 @@ public class AbstractOffsetUnitTest<OU extends Unit<OU>> extends AbstractUnitTes
             final double expectedOffset, final double precision, final String expectedName, final String expectedAbbreviation)
     {
         OffsetLinearScale scale = (OffsetLinearScale) ou.getScale();
-        assertEquals(String.format("zero %s is about %f reference unit", ou.getAbbreviationKey(), expectedOffset), expectedOffset,
-                scale.getOffsetToStandardUnit(), precision);
+        assertEquals(String.format("zero %s is about %f reference unit", ou.getAbbreviationKey(), expectedOffset),
+                expectedOffset, scale.getOffsetToStandardUnit(), precision);
         assertEquals(String.format("one %s is about %f reference unit", ou.getAbbreviationKey(), expectedRatio), expectedRatio,
                 scale.getConversionFactorToStandardUnit(), precision);
         assertEquals(String.format("Name of %s is %s", ou.getAbbreviationKey(), expectedName), expectedName, ou.getName());
-        assertEquals(String.format("Abbreviation of %s is %s", ou.getAbbreviationKey(), expectedAbbreviation), expectedAbbreviation,
-                ou.getAbbreviation());
+        assertEquals(String.format("Abbreviation of %s is %s", ou.getAbbreviationKey(), expectedAbbreviation),
+                expectedAbbreviation, ou.getAbbreviation());
     }
 
     /**

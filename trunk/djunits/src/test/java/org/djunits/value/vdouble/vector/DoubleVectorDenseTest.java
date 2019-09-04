@@ -23,8 +23,6 @@ import org.junit.Test;
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -125,7 +123,7 @@ public class DoubleVectorDenseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsAbsTest()
     {
@@ -271,7 +269,7 @@ public class DoubleVectorDenseTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double[] input = data(3, seedValue);
@@ -506,7 +504,7 @@ public class DoubleVectorDenseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsRelTest()
     {
@@ -639,7 +637,7 @@ public class DoubleVectorDenseTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double[] input = data(3, seedValue);
@@ -961,7 +959,7 @@ public class DoubleVectorDenseTest
     {
         try
         {
-            for (boolean lastNanOrdering : new boolean[] { false, true })
+            for (boolean lastNanOrdering : new boolean[] {false, true})
             {
                 double[] leftValue = data(99, 123.4);
                 double[] rightValue = data(99, 234.5);
@@ -1018,7 +1016,7 @@ public class DoubleVectorDenseTest
     {
         try
         {
-            for (boolean lastNanOrdering : new boolean[] { false, true })
+            for (boolean lastNanOrdering : new boolean[] {false, true})
             {
                 double[] leftValue = data(99, 123.4);
                 double[] rightValue = data(99, 234.5);

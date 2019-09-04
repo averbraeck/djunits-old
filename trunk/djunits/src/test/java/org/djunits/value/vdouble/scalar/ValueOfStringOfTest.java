@@ -20,8 +20,6 @@ import org.junit.Test;
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate: 2019-03-02 19:06:46 +0100 (Sat, 02 Mar 2019) $, @version $Revision: 342 $, by $Author: averbraeck $,
- * initial version 26 jun, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -29,10 +27,10 @@ public class ValueOfStringOfTest
 {
     /** The classes that are absolute (name = class name). Do not check Dimensionless. */
     public static final String[] CLASSNAMES = new String[] {"AbsoluteTemperature", "Direction", "Position", "Time",
-            "Temperature", "Angle", "Length", "Duration", "Angle", "Acceleration", "AngleSolid", "Area", "Density",
-            "Duration", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance", "Energy",
-            "FlowMass", "FlowVolume", "Force", "Frequency", "Length", "LinearDensity", "Mass", "Power", "Pressure", "Speed",
-            "Temperature", "Torque", "Volume"};
+            "Temperature", "Angle", "Length", "Duration", "Angle", "Acceleration", "AngleSolid", "Area", "Density", "Duration",
+            "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance", "Energy", "FlowMass",
+            "FlowVolume", "Force", "Frequency", "Length", "LinearDensity", "Mass", "Power", "Pressure", "Speed", "Temperature",
+            "Torque", "Volume"};
 
     /** The money classes that are just relative (name = class name); these classes don't have an si field. */
     public static final String[] CLASSNAMES_MONEY = new String[] {"Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",

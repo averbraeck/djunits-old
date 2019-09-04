@@ -54,7 +54,7 @@ public final class MultiplyAndDivide implements UNITS
         DoubleScalar.Rel<SpeedUnit> speed1 = new DoubleScalar.Rel<>(1.2, SpeedUnit.SI);
         DoubleScalar.Rel<SpeedUnit> speed2 = speed1.multiplyBy(2.0);
         DoubleScalar.Rel<SpeedUnit> speed3 = speed1.multiplyBy(3.0);
-        double[] sv = new double[] { 1, 2, 3, 4, 5 };
+        double[] sv = new double[] {1, 2, 3, 4, 5};
         DoubleVector.Rel<SpeedUnit> speedVector = new DoubleVector.Rel<SpeedUnit>(sv, SpeedUnit.SI, StorageType.DENSE);
     }
 

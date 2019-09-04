@@ -33,7 +33,6 @@ import org.junit.Test;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-10-04 13:58:23 +0200 (Sun, 04 Oct 2015) $, @version $Revision: 84 $, by $Author: averbraeck $, initial
  * version Sep 14, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
@@ -42,20 +41,20 @@ import org.junit.Test;
 public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
 {
     /** The classes that are absolute (name = class name). */
-    public static final String[] CLASSNAMES_ABS = new String[] { "AbsoluteTemperature", "Direction", "Position", "Time" };
+    public static final String[] CLASSNAMES_ABS = new String[] {"AbsoluteTemperature", "Direction", "Position", "Time"};
 
     /** The relative classes that mirror the absolute ones (name = class name). */
-    public static final String[] CLASSNAMES_ABS_REL = new String[] { "Temperature", "Angle", "Length", "Duration" };
+    public static final String[] CLASSNAMES_ABS_REL = new String[] {"Temperature", "Angle", "Length", "Duration"};
 
     /** The classes that are just relative (name = class name). */
-    public static final String[] CLASSNAMES_REL = new String[] { "Angle", "Acceleration", "AngleSolid", "Area", "Density",
+    public static final String[] CLASSNAMES_REL = new String[] {"Angle", "Acceleration", "AngleSolid", "Area", "Density",
             "Dimensionless", "Duration", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance",
             "Energy", "FlowMass", "FlowVolume", "Force", "Frequency", "Length", "LinearDensity", "Mass", "Power", "Pressure",
-            "Speed", "Temperature", "Torque", "Volume" };
+            "Speed", "Temperature", "Torque", "Volume"};
 
     /** The money classes that are just relative (name = class name); these classes don't have an si field. */
-    public static final String[] CLASSNAMES_MONEY = new String[] { "Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",
-            "MoneyPerMass", "MoneyPerDuration", "MoneyPerVolume" };
+    public static final String[] CLASSNAMES_MONEY = new String[] {"Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",
+            "MoneyPerMass", "MoneyPerDuration", "MoneyPerVolume"};
 
     /**
      * Perform many tests on the double and float matrix types.
@@ -98,7 +97,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         final String upperMatrixType = "Matrix";
         final String floatPrefix = doubleType ? "" : "Float";
         String doubleOrFloat = doubleType ? "double" : "float";
-        for (boolean mutable : new boolean[] { false, true })
+        for (boolean mutable : new boolean[] {false, true})
         {
             for (StorageType storageType : StorageType.values())
             {
@@ -262,14 +261,14 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
 
             if (multiply)
             {
-                Method multiplyMethod = matrixClass.getDeclaredMethod("multiplyBy", new Class[] { parameterClass });
+                Method multiplyMethod = matrixClass.getDeclaredMethod("multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
                 double resultSI = ((DoubleScalar.Rel<?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
-                Method divideMethod = matrixClass.getDeclaredMethod("divideBy", new Class[] { parameterClass });
+                Method divideMethod = matrixClass.getDeclaredMethod("divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
                 double resultSI = ((DoubleScalar.Rel<?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -292,14 +291,14 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
 
             if (multiply)
             {
-                Method multiplyMethod = matrixClass.getDeclaredMethod("multiplyBy", new Class[] { parameterClass });
+                Method multiplyMethod = matrixClass.getDeclaredMethod("multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
                 double resultSI = ((FloatScalar.Rel<?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
-                Method divideMethod = matrixClass.getDeclaredMethod("divideBy", new Class[] { parameterClass });
+                Method divideMethod = matrixClass.getDeclaredMethod("divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
                 float resultSI = ((FloatScalar.Rel<?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -503,10 +502,10 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             final boolean mutable, final StorageType storageType) throws NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
-        double[][] doubleValue = { { 1.23456, 2.34567, 3.45678 }, { 4.56789, 5.67890, 6.78901 } };
-        float[][] floatValue = { { 1.23456f, 2.34567f, 3.45678f }, { 4.56789f, 5.67890f, 6.78901f } };
+        double[][] doubleValue = {{1.23456, 2.34567, 3.45678}, {4.56789, 5.67890, 6.78901}};
+        float[][] floatValue = {{1.23456f, 2.34567f, 3.45678f}, {4.56789f, 5.67890f, 6.78901f}};
         Object value = doubleType ? doubleValue : floatValue;
-        findAndTestConstructor(matrixClass, new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType },
+        findAndTestConstructor(matrixClass, new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType},
                 abs, doubleType, storageType, value);
         // What is the corresponding Scalar type?
         String scalarClassName = matrixClass.getName();
@@ -522,7 +521,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         if (doubleType)
         {
             Constructor<?> constructor =
-                    scalarClassAbsRel.getConstructor(new Class<?>[] { double.class, getUnitClass(matrixClass) });
+                    scalarClassAbsRel.getConstructor(new Class<?>[] {double.class, getUnitClass(matrixClass)});
             // Construct a matrix of the correct scalar objects
             Object[][] objectArray =
                     (Object[][]) Array.newInstance(scalarClassAbsRel, doubleValue.length, doubleValue[0].length);
@@ -534,15 +533,14 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                             constructor.newInstance(doubleValue[row][col], getSIUnitInstance(getUnitClass(matrixClass)));
                 }
             }
-            findAndTestConstructor(matrixClass, new Object[] { objectArray, storageType }, abs, doubleType, storageType, value);
+            findAndTestConstructor(matrixClass, new Object[] {objectArray, storageType}, abs, doubleType, storageType, value);
         }
         else
         {
             Constructor<?> constructor =
-                    scalarClassAbsRel.getConstructor(new Class<?>[] { float.class, getUnitClass(matrixClass) });
+                    scalarClassAbsRel.getConstructor(new Class<?>[] {float.class, getUnitClass(matrixClass)});
             // Construct a matrix of the correct scalar objects
-            Object[][] objectArray =
-                    (Object[][]) Array.newInstance(scalarClassAbsRel, floatValue.length, floatValue[0].length);
+            Object[][] objectArray = (Object[][]) Array.newInstance(scalarClassAbsRel, floatValue.length, floatValue[0].length);
             for (int row = 0; row < floatValue.length; row++)
             {
                 for (int col = 0; col < floatValue[row].length; col++)
@@ -551,7 +549,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                             constructor.newInstance(floatValue[row][col], getSIUnitInstance(getUnitClass(matrixClass)));
                 }
             }
-            findAndTestConstructor(matrixClass, new Object[] { objectArray, storageType }, abs, doubleType, storageType, value);
+            findAndTestConstructor(matrixClass, new Object[] {objectArray, storageType}, abs, doubleType, storageType, value);
         }
     }
 
@@ -686,11 +684,11 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             final StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
-        double[][] doubleValue = { { 1.23456, 2.34567, 3.45678 }, { 4.56789, 5.67890, 6.78901 } };
-        float[][] floatValue = { { 1.23456f, 2.34567f, 3.45678f }, { 4.56789f, 5.67890f, 6.78901f } };
+        double[][] doubleValue = {{1.23456, 2.34567, 3.45678}, {4.56789, 5.67890, 6.78901}};
+        float[][] floatValue = {{1.23456f, 2.34567f, 3.45678f}, {4.56789f, 5.67890f, 6.78901f}};
         Object value = doubleType ? doubleValue : floatValue;
         Object matrix = findAndExecuteConstructor(matrixClass,
-                new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
         if (doubleType)
         {
             AbstractDoubleMatrix<?, ?> dv = (AbstractDoubleMatrix<?, ?>) matrix;
@@ -737,11 +735,11 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             final boolean mutable, final StorageType storageType) throws NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
-        double[][] doubleValue = { { 1.23456, 2.34567, 3.45678 }, { 4.56789, 5.67890, 6.78901 } };
-        float[][] floatValue = { { 1.23456f, 2.34567f, 3.45678f }, { 4.56789f, 5.67890f, 6.78901f } };
+        double[][] doubleValue = {{1.23456, 2.34567, 3.45678}, {4.56789, 5.67890, 6.78901}};
+        float[][] floatValue = {{1.23456f, 2.34567f, 3.45678f}, {4.56789f, 5.67890f, 6.78901f}};
         Object value = doubleType ? doubleValue : floatValue;
         Object left = findAndExecuteConstructor(matrixClass,
-                new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
         Object result;
         if (doubleType)
         {
@@ -765,19 +763,19 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             double doubleDifference = 42.42;
             float floatDifference = 42.42f;
             Class<?> argumentClass = doubleType ? double.class : float.class;
-            Method incrementBy = ClassUtil.resolveMethod(matrixClass, "incrementBy", new Class<?>[] { argumentClass });
-            incrementBy = ClassUtil.resolveMethod(matrixClass, "incrementBy", new Class<?>[] { argumentClass });
+            Method incrementBy = ClassUtil.resolveMethod(matrixClass, "incrementBy", new Class<?>[] {argumentClass});
+            incrementBy = ClassUtil.resolveMethod(matrixClass, "incrementBy", new Class<?>[] {argumentClass});
             incrementBy.setAccessible(true);
             // System.out.print(paramsToString(incrementBy.getParameterTypes()));
             // System.out.println("type of value is " + value.getClass());
             // System.out.println("type of difference is " + difference.getClass());
             if (doubleType)
             {
-                result = incrementBy.invoke(left, new Object[] { doubleDifference });
+                result = incrementBy.invoke(left, new Object[] {doubleDifference});
             }
             else
             {
-                result = incrementBy.invoke(left, new Object[] { floatDifference });
+                result = incrementBy.invoke(left, new Object[] {floatDifference});
             }
             for (int row = 0; row < doubleValue.length; row++)
             {
@@ -795,16 +793,16 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
             }
             left = findAndExecuteConstructor(matrixClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
-            Method decrementBy = ClassUtil.resolveMethod(matrixClass, "decrementBy", new Class<?>[] { argumentClass });
+                    new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
+            Method decrementBy = ClassUtil.resolveMethod(matrixClass, "decrementBy", new Class<?>[] {argumentClass});
             decrementBy.setAccessible(true);
             if (doubleType)
             {
-                result = decrementBy.invoke(left, new Object[] { doubleDifference });
+                result = decrementBy.invoke(left, new Object[] {doubleDifference});
             }
             else
             {
-                result = decrementBy.invoke(left, new Object[] { floatDifference });
+                result = decrementBy.invoke(left, new Object[] {floatDifference});
             }
             for (int row = 0; row < doubleValue.length; row++)
             {
@@ -823,7 +821,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             }
 
             left = findAndExecuteConstructor(matrixClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
             Method mathMethod = ClassUtil.resolveMethod(matrixClass, "ceil", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
@@ -842,7 +840,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             }
 
             left = findAndExecuteConstructor(matrixClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
             mathMethod = ClassUtil.resolveMethod(matrixClass, "floor", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
@@ -861,7 +859,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             }
 
             left = findAndExecuteConstructor(matrixClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
             mathMethod = ClassUtil.resolveMethod(matrixClass, "rint", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
@@ -880,7 +878,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             }
 
             left = findAndExecuteConstructor(matrixClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
             mathMethod = ClassUtil.resolveMethod(matrixClass, "round", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
@@ -901,7 +899,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             if (!abs)
             {
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "abs", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -923,7 +921,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             if (matrixClass.getName().contains("Dimensionless"))
             {
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "acos", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -942,7 +940,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "asin", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -961,7 +959,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "atan", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -969,18 +967,18 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 {
                     for (int col = 0; col < doubleValue[row].length; col++)
                     {
-                    assertEquals("Result of operation",
-                            doubleType ? Math.atan(doubleValue[row][col]) : ((float) Math.atan(doubleValue[row][col])),
-                            verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, row, col), 0.01);
-                    // Check that original is also modified
-                    assertEquals("Result of operation",
-                            doubleType ? Math.atan(doubleValue[row][col]) : ((float) Math.atan(doubleValue[row][col])),
-                            verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, row, col), 0.01);
+                        assertEquals("Result of operation",
+                                doubleType ? Math.atan(doubleValue[row][col]) : ((float) Math.atan(doubleValue[row][col])),
+                                verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, result, row, col), 0.01);
+                        // Check that original is also modified
+                        assertEquals("Result of operation",
+                                doubleType ? Math.atan(doubleValue[row][col]) : ((float) Math.atan(doubleValue[row][col])),
+                                verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, row, col), 0.01);
                     }
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "cbrt", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -999,7 +997,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "cos", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1018,7 +1016,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "cosh", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1037,7 +1035,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "exp", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1056,7 +1054,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "expm1", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1075,7 +1073,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "log", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1094,7 +1092,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "log10", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1113,7 +1111,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "log1p", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1132,7 +1130,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "signum", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1151,7 +1149,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "sin", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1170,7 +1168,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "sinh", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1189,7 +1187,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "sqrt", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1208,7 +1206,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "tan", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1227,7 +1225,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "tanh", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1246,7 +1244,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "inv", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1264,11 +1262,11 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                     }
                 }
 
-                for (double power : new double[] { -3, -Math.PI, -1, -0.5, 0, 0.5, 1, Math.PI, 3 })
+                for (double power : new double[] {-3, -Math.PI, -1, -0.5, 0, 0.5, 1, Math.PI, 3})
                 {
                     left = findAndExecuteConstructor(matrixClass,
-                            new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
-                    mathMethod = ClassUtil.resolveMethod(matrixClass, "pow", new Class[] { double.class });
+                            new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
+                    mathMethod = ClassUtil.resolveMethod(matrixClass, "pow", new Class[] {double.class});
                     mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                     result = mathMethod.invoke(left, power);
                     for (int row = 0; row < doubleValue.length; row++)
@@ -1289,7 +1287,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(matrixClass, "normalize", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 mathMethod.invoke(left);
@@ -1311,11 +1309,11 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                     }
                 }
 
-                double[][] doubleZeroZSum = { { -4, 4, -1, 1, 0 }, { 5, 0, 0, 0, -5 } };
-                float[][] floatZeroZSum = { { -4, 4, -1, 1, 0 }, { 5, 0, 0, 0, -5 } };
+                double[][] doubleZeroZSum = {{-4, 4, -1, 1, 0}, {5, 0, 0, 0, -5}};
+                float[][] floatZeroZSum = {{-4, 4, -1, 1, 0}, {5, 0, 0, 0, -5}};
                 Object zeroZSumValue = doubleType ? doubleZeroZSum : floatZeroZSum;
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { zeroZSumValue, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {zeroZSumValue, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 try
                 {
                     mathMethod.invoke(left);
@@ -1334,11 +1332,11 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         }
 
         left = findAndExecuteConstructor(matrixClass,
-                new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
         if (mutable)
         {
             Method multiplyBy =
-                    ClassUtil.resolveMethod(matrixClass, "multiplyBy", new Class[] { doubleType ? double.class : float.class });
+                    ClassUtil.resolveMethod(matrixClass, "multiplyBy", new Class[] {doubleType ? double.class : float.class});
             multiplyBy.setAccessible(true); // FIXME this should not be necessary
             if (doubleType)
             {
@@ -1360,9 +1358,9 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 }
             }
             left = findAndExecuteConstructor(matrixClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
             Method divideBy =
-                    ClassUtil.resolveMethod(matrixClass, "divideBy", new Class[] { doubleType ? double.class : float.class });
+                    ClassUtil.resolveMethod(matrixClass, "divideBy", new Class[] {doubleType ? double.class : float.class});
             divideBy.setAccessible(true); // FIXME this should not be necessary
             if (doubleType)
             {
@@ -1402,7 +1400,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                     unitClass.getConstructor(String.class, String.class, UnitSystem.class, unitClass, double.class);
             Object newUnit = unitConstructor.newInstance("7fullName", "7abbr", unitSystem, referenceUnit, 7d);
             // System.out.println("new unit prints like " + newUnit);
-            compatibleRight = findAndExecuteConstructor(matrixClass, new Object[] { value, newUnit, storageType }, doubleType);
+            compatibleRight = findAndExecuteConstructor(matrixClass, new Object[] {value, newUnit, storageType}, doubleType);
             // System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
             if (abs)
             {
@@ -1412,14 +1410,14 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                     className = className.replaceAll(CLASSNAMES_ABS[i], CLASSNAMES_ABS_REL[i]);
                 }
                 Class<?> relClass = Class.forName(className);
-                compatibleRel = findAndExecuteConstructor(relClass, new Object[] { value, newUnit, storageType }, doubleType);
+                compatibleRel = findAndExecuteConstructor(relClass, new Object[] {value, newUnit, storageType}, doubleType);
                 // System.out.println("compatibleRel prints like \"" + compatibleRight + "\"");
             }
         }
         if (null != compatibleRight)
         {
             left = findAndExecuteConstructor(matrixClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
             // System.out.print(listMethods(matrixClass, "plus", "\t"));
             // System.out.println("Mutable is " + mutable);
             if (!mutable)
@@ -1428,7 +1426,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 if (!abs)
                 {
                     Method plus = ClassUtil.resolveMethod(matrixClass, "plus",
-                            new Class<?>[] { compatibleRight.getClass().getSuperclass() });
+                            new Class<?>[] {compatibleRight.getClass().getSuperclass()});
                     plus.setAccessible(true);
                     result = plus.invoke(left, compatibleRight);
                     for (int row = 0; row < doubleValue.length; row++)
@@ -1445,7 +1443,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                     // System.out.print(listMethods(matrixClass, "plus", "\t"));
                     // System.out.println("Type of rel is " + compatibleRel.getClass());
                     Method plus = ClassUtil.resolveMethod(matrixClass, "plus",
-                            new Class<?>[] { compatibleRel.getClass().getSuperclass() });
+                            new Class<?>[] {compatibleRel.getClass().getSuperclass()});
                     plus.setAccessible(true);
                     result = plus.invoke(left, compatibleRel);
                     for (int row = 0; row < doubleValue.length; row++)
@@ -1460,11 +1458,11 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             }
         }
         left = findAndExecuteConstructor(matrixClass,
-                new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
         if (!mutable)
         {
             // System.out.print(listMethods(matrixClass, "minus", "\t"));
-            Method minus = ClassUtil.resolveMethod(matrixClass, "minus", new Class[] { matrixClass.getSuperclass() });
+            Method minus = ClassUtil.resolveMethod(matrixClass, "minus", new Class[] {matrixClass.getSuperclass()});
             minus.setAccessible(true);
             result = minus.invoke(left, left);
             for (int row = 0; row < doubleValue.length; row++)
@@ -1478,7 +1476,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             if (null != compatibleRight)
             {
                 left = findAndExecuteConstructor(matrixClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(matrixClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
                 result = minus.invoke(left, compatibleRight);
                 for (int row = 0; row < doubleValue.length; row++)
                 {
@@ -1535,17 +1533,17 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 getUnitClass(matrixClass), StorageType.class);
         if (doubleType)
         {
-            double[][] zeroValue = { { 1.23456, 2.45678 }, { 3.5678, 4.8765 } };
+            double[][] zeroValue = {{1.23456, 2.45678}, {3.5678, 4.8765}};
             // AbstractDoubleMatrix<?, ?> zero =
             // abs ? (DoubleMatrix.Abs<?>) constructor.newInstance(zeroValue,
             // getSIUnitInstance(getUnitClass(matrixClass)), storageType) : (DoubleMatrix.Rel<?>) constructor
             // .newInstance(zeroValue, getSIUnitInstance(getUnitClass(matrixClass)), storageType);
             AbstractDoubleMatrix<?, ?> zero = (AbstractDoubleMatrix<?, ?>) constructor.newInstance(zeroValue,
                     getSIUnitInstance(getUnitClass(matrixClass)), storageType);
-            double[][] oneValue = { { 3.45678, 4.678901 }, { 8.654, 9.35 } };
+            double[][] oneValue = {{3.45678, 4.678901}, {8.654, 9.35}};
             AbstractDoubleMatrix<?, ?> one = (AbstractDoubleMatrix<?, ?>) constructor.newInstance(oneValue,
                     getSIUnitInstance(getUnitClass(matrixClass)), storageType);
-            for (double ratio : new double[] { -5, -1, 0, 0.3, 1, 2, 10 })
+            for (double ratio : new double[] {-5, -1, 0, 0.3, 1, 2, 10})
             {
                 double[][] expectedResult = new double[zeroValue.length][zeroValue[0].length];
                 for (int row = 0; row < expectedResult.length; row++)
@@ -1575,13 +1573,13 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         }
         else
         {
-            float[][] zeroValue = { { 1.23456f, 2.45678f }, {4.654f, 987.2f}};
+            float[][] zeroValue = {{1.23456f, 2.45678f}, {4.654f, 987.2f}};
             AbstractFloatMatrix<?, ?> zero = (AbstractFloatMatrix<?, ?>) constructor.newInstance(zeroValue,
                     getSIUnitInstance(getUnitClass(matrixClass)), storageType);
-            float[][] oneValue = { { 3.45678f, 4.678901f }, { 2.222f, 3.333f } };
+            float[][] oneValue = {{3.45678f, 4.678901f}, {2.222f, 3.333f}};
             AbstractFloatMatrix<?, ?> one = (AbstractFloatMatrix<?, ?>) constructor.newInstance(oneValue,
                     getSIUnitInstance(getUnitClass(matrixClass)), storageType);
-            for (float ratio : new float[] { -5, -1, 0, 0.3f, 1, 2, 10 })
+            for (float ratio : new float[] {-5, -1, 0, 0.3f, 1, 2, 10})
             {
                 float[][] expectedResult = new float[zeroValue.length][zeroValue[0].length];
                 for (int row = 0; row < expectedResult.length; row++)

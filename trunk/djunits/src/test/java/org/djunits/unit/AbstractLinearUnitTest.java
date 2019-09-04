@@ -7,8 +7,6 @@ import static org.junit.Assert.assertEquals;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Jun 4, 2014 <br>
  * @author <a href="https://tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Make the test specific for this sub class of Unit
  */

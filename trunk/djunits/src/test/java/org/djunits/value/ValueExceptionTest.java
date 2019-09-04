@@ -43,9 +43,9 @@ public class ValueExceptionTest
         assertEquals("message should be our message", message, e.getMessage());
         assertEquals("cause should not be our cause", cause, e.getCause());
         assertEquals("cause description should be our cause string", causeString, e.getCause().getMessage());
-        for (boolean enableSuppression : new boolean[] { true, false })
+        for (boolean enableSuppression : new boolean[] {true, false})
         {
-            for (boolean writableStackTrace : new boolean[] { true, false })
+            for (boolean writableStackTrace : new boolean[] {true, false})
             {
                 e = new ValueException(message, cause, enableSuppression, writableStackTrace);
                 assertTrue("Exception should not be null", null != e);

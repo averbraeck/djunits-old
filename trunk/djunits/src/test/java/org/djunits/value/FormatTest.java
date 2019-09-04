@@ -14,8 +14,6 @@ import org.junit.Test;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Jul 1, 2014 <br>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class FormatTest
@@ -27,7 +25,7 @@ public class FormatTest
     public final void format()
     {
         Locale.setDefault(Locale.US);
-        double[] baseValues = { 1, (float) (1 / 3d) };
+        double[] baseValues = {1, (float) (1 / 3d)};
         for (int width = 8; width <= 20; width++)
         {
             for (int precision = 0; precision <= 10; precision++)

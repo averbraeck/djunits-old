@@ -21,8 +21,6 @@ import org.djunits.value.vfloat.vector.FloatTimeVector;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/current/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Jan 28, 2018 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
@@ -55,7 +53,7 @@ public final class VectorIteratorExample
         Speed s2 = new Speed(12.0, SpeedUnit.METER_PER_SECOND);
         Speed s3 = new Speed(8.0, SpeedUnit.METER_PER_SECOND);
         Speed s4 = new Speed(16.0, SpeedUnit.METER_PER_SECOND);
-        SpeedVector svd = new SpeedVector(new Speed[] { s1, s2, s3, s4 }, StorageType.DENSE);
+        SpeedVector svd = new SpeedVector(new Speed[] {s1, s2, s3, s4}, StorageType.DENSE);
         System.out.println("Speed vector (Double, Rel, Dense)");
         for (Speed s : svd)
         {
@@ -78,7 +76,7 @@ public final class VectorIteratorExample
         Time t2 = new Time(12.0, TimeUnit.BASE_SECOND);
         Time t3 = new Time(8.0, TimeUnit.BASE_SECOND);
         Time t4 = new Time(16.0, TimeUnit.BASE_SECOND);
-        TimeVector tvd = new TimeVector(new Time[] { t1, t2, t3, t4 }, StorageType.DENSE);
+        TimeVector tvd = new TimeVector(new Time[] {t1, t2, t3, t4}, StorageType.DENSE);
         System.out.println("\nTime vector (Double, Abs, Dense)");
         for (Time t : tvd)
         {
@@ -108,7 +106,7 @@ public final class VectorIteratorExample
         FloatSpeed s2 = new FloatSpeed(12.0, SpeedUnit.METER_PER_SECOND);
         FloatSpeed s3 = new FloatSpeed(8.0, SpeedUnit.METER_PER_SECOND);
         FloatSpeed s4 = new FloatSpeed(16.0, SpeedUnit.METER_PER_SECOND);
-        FloatSpeedVector svd = new FloatSpeedVector(new FloatSpeed[] { s1, s2, s3, s4 }, StorageType.DENSE);
+        FloatSpeedVector svd = new FloatSpeedVector(new FloatSpeed[] {s1, s2, s3, s4}, StorageType.DENSE);
         System.out.println("\nFloatSpeed vector (Float, Rel, Dense)");
         for (FloatSpeed s : svd)
         {
@@ -131,7 +129,7 @@ public final class VectorIteratorExample
         FloatTime t2 = new FloatTime(12.0f, TimeUnit.BASE_SECOND);
         FloatTime t3 = new FloatTime(8.0f, TimeUnit.BASE_SECOND);
         FloatTime t4 = new FloatTime(16.0f, TimeUnit.BASE_SECOND);
-        FloatTimeVector tvd = new FloatTimeVector(new FloatTime[] { t1, t2, t3, t4 }, StorageType.DENSE);
+        FloatTimeVector tvd = new FloatTimeVector(new FloatTime[] {t1, t2, t3, t4}, StorageType.DENSE);
         System.out.println("\nFloatTime vector (Float, Abs, Dense)");
         for (FloatTime t : tvd)
         {

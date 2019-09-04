@@ -103,9 +103,9 @@ public class GenerateCliConvertersTest
                 "    protected " + r.type + " " + r.type.toLowerCase() + ";\n"); 
             // @formatter:on
         }
-        
+
         System.out.println("\n\n");
-        
+
         /*-
          Create this:
             args = new String[] {};
@@ -116,7 +116,7 @@ public class GenerateCliConvertersTest
             CliUtil.execute(options, args);
             assertEquals(new Acceleration(30.0, AccelerationUnit.KM_PER_HOUR_2), options.acceleration);
          */
-        
+
         for (TestRecord r : testRecords)
         {
             // @formatter:off
@@ -164,8 +164,7 @@ public class GenerateCliConvertersTest
          * @param unit2 changed unit, e.g. LengthUnit.KILOMETER
          * @param value2 changed String amount, e.g. 5.0km
          */
-        public TestRecord(String type, double amount1, String unit1, String value1, double amount2, String unit2,
-                String value2)
+        public TestRecord(String type, double amount1, String unit1, String value1, double amount2, String unit2, String value2)
         {
             super();
             this.type = type;
