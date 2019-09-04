@@ -83,6 +83,25 @@ public class FloatMatrixDenseTest
     }
 
     /**
+     * Compare the contents of two 2D arrays.
+     * @param reference float[][]; the reference values
+     * @param result float[][]; the actual values
+     */
+    public static void compareMatrix(float[][] reference, float[][] result)
+    {
+        assertEquals("number of rows should match", reference.length, result.length);
+        for (int row = 0; row < reference.length; row++)
+        {
+            assertEquals("number of cols should match", reference[row].length, result[row].length);
+            assertEquals("2D array is not jagged", reference[row].length, reference[0].length);
+            for (int column = 0; column < reference[row].length; column++)
+            {
+                assertEquals("Value should match", reference[row][column], result[row][column], 0.001);
+            }
+        }
+    }
+
+    /**
      * Test that the toString method returns something sensible.
      */
     @Test
@@ -147,14 +166,7 @@ public class FloatMatrixDenseTest
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureFM.getSI(0, 0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureFM.getInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
-            float[][] out = temperatureFM.getValuesInUnit();
-            for (int row = 0; row < value.length; row++)
-            {
-                for (int column = 0; column < value[row].length; column++)
-                {
-                    assertEquals("Value should match", value[row][column], out[row][column], 0.001);
-                }
-            }
+            compareMatrix(value, temperatureFM.getValuesInUnit());
             MutableFloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> mfm =
                     new MutableFloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(mfm, value, 0.001, tempUnit, true);
@@ -174,14 +186,7 @@ public class FloatMatrixDenseTest
             temperatureFM = new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, AbsoluteTemperatureUnit.KELVIN,
                     StorageType.DENSE);
             checkContentsAndType(temperatureFM, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
-            out = temperatureFM.getValuesSI();
-            for (int row = 0; row < value.length; row++)
-            {
-                for (int column = 0; column < value[row].length; column++)
-                {
-                    assertEquals("Value should match", value[row][column], out[row][column], 0.001);
-                }
-            }
+            compareMatrix(value, temperatureFM.getValuesSI());
             FloatScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>[][] scalar = new FloatScalar.Abs[value.length][];
             for (int row = 0; row < value.length; row++)
             {
@@ -627,7 +632,7 @@ public class FloatMatrixDenseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({ "unchecked" })
     @Test
     public final void basicsRelTest()
     {
@@ -641,14 +646,7 @@ public class FloatMatrixDenseTest
             assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureFM.getSI(0, 0), 0.05);
             assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0,
                     temperatureFM.getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
-            float[][] out = temperatureFM.getValuesInUnit();
-            for (int row = 0; row < value.length; row++)
-            {
-                for (int column = 0; column < value[row].length; column++)
-                {
-                    assertEquals("Value should match", value[row][column], out[row][column], 0.001);
-                }
-            }
+            compareMatrix(value, temperatureFM.getValuesInUnit());
             MutableFloatMatrix.Rel<TemperatureUnit> mdm =
                     new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
@@ -659,14 +657,7 @@ public class FloatMatrixDenseTest
             assertFalse("Value is not Absolute", temperatureFM.isAbsolute());
             temperatureFM = new FloatMatrix.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
             checkContentsAndType(temperatureFM, value, 0.001, TemperatureUnit.KELVIN, false);
-            out = temperatureFM.getValuesSI();
-            for (int row = 0; row < value.length; row++)
-            {
-                for (int column = 0; column < value[row].length; column++)
-                {
-                    assertEquals("Value should match", value[row][column], out[row][column], 0.001);
-                }
-            }
+            compareMatrix(value, temperatureFM.getValuesSI());
             FloatScalar.Rel<TemperatureUnit>[][] scalar = new FloatScalar.Rel[value.length][];
             for (int row = 0; row < value.length; row++)
             {
@@ -1473,7 +1464,7 @@ public class FloatMatrixDenseTest
             fail("Caught unexpected ValueException: " + ve.toString());
         }
     }
-
+    
     /** */
     interface FloatToFloat
     {

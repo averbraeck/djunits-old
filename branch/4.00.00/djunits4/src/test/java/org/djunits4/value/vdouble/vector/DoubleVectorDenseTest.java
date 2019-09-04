@@ -73,6 +73,20 @@ public class DoubleVectorDenseTest
     }
 
     /**
+     * Compare the contents of two arrays.
+     * @param reference double[]; the reference values
+     * @param result double[]; the actual values
+     */
+    public static void compareArray(double[] reference, double[] result)
+    {
+        assertEquals("length should match", reference.length, result.length);
+        for (int index = 0; index < reference.length; index++)
+        {
+            assertEquals("Value should match", reference[index], result[index], 0.001);
+        }
+    }
+
+    /**
      * Test that the toString method returns something sensible.
      */
     @Test
@@ -123,7 +137,7 @@ public class DoubleVectorDenseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({"static-method", "unchecked"})
+    @SuppressWarnings({"unchecked"})
     @Test
     public final void basicsAbsTest()
     {
@@ -137,11 +151,7 @@ public class DoubleVectorDenseTest
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
-            double[] out = temperatureDV.getValuesInUnit();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            compareArray(value, temperatureDV.getValuesInUnit());
             MutableDoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> mdv =
                     new MutableDoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
@@ -161,11 +171,7 @@ public class DoubleVectorDenseTest
             temperatureDV = new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value,
                     AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
-            out = temperatureDV.getValuesSI();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            compareArray(value, temperatureDV.getValuesSI());
             DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>[] scalar = new DoubleScalar.Abs[value.length];
             for (int index = 0; index < value.length; index++)
             {
@@ -518,11 +524,7 @@ public class DoubleVectorDenseTest
             assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
-            double[] out = temperatureDV.getValuesInUnit();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            compareArray(value, temperatureDV.getValuesInUnit());
             MutableDoubleVector.Rel<TemperatureUnit> mdv =
                     new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
@@ -533,11 +535,7 @@ public class DoubleVectorDenseTest
             assertFalse("Value is not Absolute", temperatureDV.isAbsolute());
             temperatureDV = new DoubleVector.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, TemperatureUnit.KELVIN, false);
-            out = temperatureDV.getValuesSI();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            compareArray(value, temperatureDV.getValuesSI());
             DoubleScalar.Rel<TemperatureUnit>[] scalar = new DoubleScalar.Rel[value.length];
             for (int index = 0; index < value.length; index++)
             {

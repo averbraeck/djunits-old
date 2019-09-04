@@ -137,11 +137,7 @@ public class FloatVectorSparseTest
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(2), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(2, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
-            float[] out = temperatureDV.getValuesInUnit();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            FloatVectorDenseTest.compareArray(value, temperatureDV.getValuesInUnit());
             MutableFloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> mdv =
                     new MutableFloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
@@ -161,11 +157,7 @@ public class FloatVectorSparseTest
             temperatureDV = new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, AbsoluteTemperatureUnit.KELVIN,
                     StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
-            out = temperatureDV.getValuesSI();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            FloatVectorDenseTest.compareArray(value, temperatureDV.getValuesSI());
             FloatScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>[] scalar = new FloatScalar.Abs[value.length];
             for (int index = 0; index < value.length; index++)
             {
@@ -514,11 +506,7 @@ public class FloatVectorSparseTest
             assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureFV.getSI(2), 0.05);
             assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0, temperatureFV.getInUnit(2, TemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
-            float[] out = temperatureFV.getValuesInUnit();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            FloatVectorDenseTest.compareArray(value, temperatureFV.getValuesInUnit());
             MutableFloatVector.Rel<TemperatureUnit> mdv =
                     new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
@@ -529,11 +517,7 @@ public class FloatVectorSparseTest
             assertFalse("Value is not Absolute", temperatureFV.isAbsolute());
             temperatureFV = new FloatVector.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.SPARSE);
             checkContentsAndType(temperatureFV, value, 0.001, TemperatureUnit.KELVIN, false);
-            out = temperatureFV.getValuesSI();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            FloatVectorDenseTest.compareArray(value, temperatureFV.getValuesSI());
             FloatScalar.Rel<TemperatureUnit>[] scalar = new FloatScalar.Rel[value.length];
             for (int index = 0; index < value.length; index++)
             {

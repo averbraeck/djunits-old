@@ -139,11 +139,7 @@ public class DoubleVectorSparseTest
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(2), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(2, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
-            double[] out = temperatureDV.getValuesInUnit();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            DoubleVectorDenseTest.compareArray(value, temperatureDV.getValuesInUnit());
             MutableDoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> mdv =
                     new MutableDoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
@@ -163,11 +159,7 @@ public class DoubleVectorSparseTest
             temperatureDV = new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value,
                     AbsoluteTemperatureUnit.KELVIN, StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
-            out = temperatureDV.getValuesSI();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            DoubleVectorDenseTest.compareArray(value, temperatureDV.getValuesSI());
             DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>[] scalar = new DoubleScalar.Abs[value.length];
             for (int index = 0; index < value.length; index++)
             {
@@ -520,11 +512,7 @@ public class DoubleVectorSparseTest
             assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDV.getSI(2), 0.05);
             assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0, temperatureDV.getInUnit(2, TemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
-            double[] out = temperatureDV.getValuesInUnit();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            DoubleVectorDenseTest.compareArray(value, temperatureDV.getValuesInUnit());
             MutableDoubleVector.Rel<TemperatureUnit> mdv =
                     new MutableDoubleVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
@@ -535,11 +523,7 @@ public class DoubleVectorSparseTest
             assertFalse("Value is not Absolute", temperatureDV.isAbsolute());
             temperatureDV = new DoubleVector.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.SPARSE);
             checkContentsAndType(temperatureDV, value, 0.001, TemperatureUnit.KELVIN, false);
-            out = temperatureDV.getValuesSI();
-            for (int index = 0; index < value.length; index++)
-            {
-                assertEquals("Value should match", value[index], out[index], 0.001);
-            }
+            DoubleVectorDenseTest.compareArray(value, temperatureDV.getValuesSI());
             DoubleScalar.Rel<TemperatureUnit>[] scalar = new DoubleScalar.Rel[value.length];
             for (int index = 0; index < value.length; index++)
             {

@@ -139,7 +139,7 @@ public class DoubleMatrixSparseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({"static-method", "unchecked"})
+    @SuppressWarnings({"unchecked"})
     @Test
     public final void basicsAbsTest()
     {
@@ -153,14 +153,7 @@ public class DoubleMatrixSparseTest
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDM.getSI(0, 2), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDM.getInUnit(0, 2, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
-            double[][] out = temperatureDM.getValuesInUnit();
-            for (int row = 0; row < value.length; row++)
-            {
-                for (int column = 0; column < value[row].length; column++)
-                {
-                    assertEquals("Value should match", value[row][column], out[row][column], 0.001);
-                }
-            }
+            DoubleMatrixDenseTest.compareMatrix(value, temperatureDM.getValuesInUnit());
             MutableDoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> mdm =
                     new MutableDoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
@@ -180,14 +173,7 @@ public class DoubleMatrixSparseTest
             temperatureDM = new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value,
                     AbsoluteTemperatureUnit.KELVIN, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
-            out = temperatureDM.getValuesSI();
-            for (int row = 0; row < value.length; row++)
-            {
-                for (int column = 0; column < value[row].length; column++)
-                {
-                    assertEquals("Value should match", value[row][column], out[row][column], 0.001);
-                }
-            }
+            DoubleMatrixDenseTest.compareMatrix(value, temperatureDM.getValuesSI());
             DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>[][] scalar = new DoubleScalar.Abs[value.length][];
             for (int row = 0; row < value.length; row++)
             {
@@ -649,14 +635,7 @@ public class DoubleMatrixSparseTest
             assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDM.getSI(0, 2), 0.05);
             assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0,
                     temperatureDM.getInUnit(0, 2, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
-            double[][] out = temperatureDM.getValuesInUnit();
-            for (int row = 0; row < value.length; row++)
-            {
-                for (int column = 0; column < value[row].length; column++)
-                {
-                    assertEquals("Value should match", value[row][column], out[row][column], 0.001);
-                }
-            }
+            DoubleMatrixDenseTest.compareMatrix(value, temperatureDM.getValuesInUnit());
             MutableDoubleMatrix.Rel<TemperatureUnit> mdm =
                     new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
@@ -667,14 +646,7 @@ public class DoubleMatrixSparseTest
             assertFalse("Value is not Absolute", temperatureDM.isAbsolute());
             temperatureDM = new DoubleMatrix.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, TemperatureUnit.KELVIN, false);
-            out = temperatureDM.getValuesSI();
-            for (int row = 0; row < value.length; row++)
-            {
-                for (int column = 0; column < value[row].length; column++)
-                {
-                    assertEquals("Value should match", value[row][column], out[row][column], 0.001);
-                }
-            }
+            DoubleMatrixDenseTest.compareMatrix(value, temperatureDM.getValuesSI());
             DoubleScalar.Rel<TemperatureUnit>[][] scalar = new DoubleScalar.Rel[value.length][];
             for (int row = 0; row < value.length; row++)
             {
