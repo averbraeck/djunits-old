@@ -30,28 +30,26 @@ import org.junit.Test;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 14, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class ScalarOperationsTest
 {
     /** The classes that are absolute (name = class name). */
-    public static final String[] CLASSNAMES_ABS = new String[] { "AbsoluteTemperature", "Direction", "Position", "Time" };
+    public static final String[] CLASSNAMES_ABS = new String[] {"AbsoluteTemperature", "Direction", "Position", "Time"};
 
     /** The relative classes that mirror the absolute ones (name = class name). */
-    public static final String[] CLASSNAMES_ABS_REL = new String[] { "Temperature", "Angle", "Length", "Duration" };
+    public static final String[] CLASSNAMES_ABS_REL = new String[] {"Temperature", "Angle", "Length", "Duration"};
 
     /** The classes that are just relative (name = class name). */
-    public static final String[] CLASSNAMES_REL = new String[] { "Angle", "Acceleration", "AngleSolid", "Area", "Density",
+    public static final String[] CLASSNAMES_REL = new String[] {"Angle", "Acceleration", "AngleSolid", "Area", "Density",
             "Dimensionless", "Duration", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance",
             "Energy", "FlowMass", "FlowVolume", "Force", "Frequency", "Length", "LinearDensity", "Mass", "Power", "Pressure",
-            "Speed", "Temperature", "Torque", "Volume" };
+            "Speed", "Temperature", "Torque", "Volume"};
 
     /** The money classes that are just relative (name = class name); these classes don't have an si field. */
-    public static final String[] CLASSNAMES_MONEY = new String[] { "Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",
-            "MoneyPerMass", "MoneyPerDuration", "MoneyPerVolume" };
+    public static final String[] CLASSNAMES_MONEY = new String[] {"Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",
+            "MoneyPerMass", "MoneyPerDuration", "MoneyPerVolume"};
 
     /**
      * Test constructor on the specified double scalar classes.
@@ -269,14 +267,14 @@ public class ScalarOperationsTest
 
             if (multiply)
             {
-                Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] { parameterClass });
+                Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
                 double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
-                Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] { parameterClass });
+                Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
                 double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -297,14 +295,14 @@ public class ScalarOperationsTest
 
                 if (multiply)
                 {
-                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] { parameterClass });
+                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
                     Object result = multiplyMethod.invoke(left, right);
                     double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).si;
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 else
                 {
-                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] { parameterClass });
+                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
                     Object result = divideMethod.invoke(left, right);
                     double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).si;
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -328,14 +326,14 @@ public class ScalarOperationsTest
 
                 if (multiply)
                 {
-                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] { parameterClass });
+                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
                     Object result = multiplyMethod.invoke(left, right);
                     double resultSI = ((AbstractFloatScalarRel<?, ?>) result).si;
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 else
                 {
-                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] { parameterClass });
+                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
                     Object result = divideMethod.invoke(left, right);
                     float resultSI = ((AbstractFloatScalarRel<?, ?>) result).si;
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -550,7 +548,7 @@ public class ScalarOperationsTest
         result = round.invoke(left);
         assertEquals("Result of operation", Math.round(value), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                 0.01);
-        
+
         if (!abs)
         {
             Method methodAbs = ClassUtil.resolveMethod(scalarClass, "abs", new Class[] {});
@@ -558,7 +556,7 @@ public class ScalarOperationsTest
             assertEquals("Result of operation", Math.abs(value), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
         }
-        
+
         if (scalarClass.getName().contains("Dimensionless"))
         {
             Method asin = ClassUtil.resolveMethod(scalarClass, "asin", new Class[] {});
@@ -650,7 +648,7 @@ public class ScalarOperationsTest
             result = inv.invoke(left);
             assertEquals("Result of operation", 1 / value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
 
-            Method pow = ClassUtil.resolveMethod(scalarClass, "pow", new Class[] { double.class });
+            Method pow = ClassUtil.resolveMethod(scalarClass, "pow", new Class[] {double.class});
             result = pow.invoke(left, Math.PI);
             assertEquals("Result of operation", Math.pow(value, Math.PI),
                     verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
@@ -688,18 +686,18 @@ public class ScalarOperationsTest
         if (!abs)
         {
             Method multiplyBy =
-                    ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] { doubleType ? double.class : float.class });
+                    ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {doubleType ? double.class : float.class});
             result = doubleType ? multiplyBy.invoke(left, Math.PI) : multiplyBy.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", Math.PI * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
 
             Method divideBy =
-                    ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] { doubleType ? double.class : float.class });
+                    ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {doubleType ? double.class : float.class});
             result = doubleType ? divideBy.invoke(left, Math.PI) : divideBy.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", value / Math.PI, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
 
-            Method plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] { scalarClass });
+            Method plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] {scalarClass});
             result = plus.invoke(left, left);
             assertEquals("Result of operation", value + value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
@@ -712,7 +710,7 @@ public class ScalarOperationsTest
                 // Swap the operands
                 // System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
                 // + left.getClass().getName());
-                plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] { compatibleRight.getClass().getSuperclass() });
+                plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] {compatibleRight.getClass().getSuperclass()});
                 result = plus.invoke(compatibleRight, left);
                 assertEquals("Result of mixed operation", 8 * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                         0.01);
@@ -757,7 +755,7 @@ public class ScalarOperationsTest
             }
         }
 
-        Method minus = ClassUtil.resolveMethod(scalarClass, "minus", new Class[] { scalarClass });
+        Method minus = ClassUtil.resolveMethod(scalarClass, "minus", new Class[] {scalarClass});
         result = minus.invoke(left, left);
         assertEquals("Result of minus", 0, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result), 0.01);
         if (null != compatibleRight)
@@ -831,7 +829,7 @@ public class ScalarOperationsTest
                                     getSIUnitInstance(getUnitClass(scalarClass), abs))
                             : (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(oneValue,
                                     getSIUnitInstance(getUnitClass(scalarClass), abs));
-            for (double ratio : new double[] { -5, -1, 0, 0.3, 1, 2, 10 })
+            for (double ratio : new double[] {-5, -1, 0, 0.3, 1, 2, 10})
             {
                 double expectedResult = (1.0 - ratio) * zeroValue + ratio * oneValue;
                 Method interpolate =
@@ -854,7 +852,7 @@ public class ScalarOperationsTest
             result = (AbstractDoubleScalar<?, ?>) max.invoke(null, one, zero);
             assertEquals("max returns object with maximum value", one, result);
             // https://stackoverflow.com/questions/1679421/how-to-get-the-array-class-for-a-given-class-in-java
-            Class<?> emptyClassArrayClass = java.lang.reflect.Array.newInstance(scalarClass, 0).getClass(); 
+            Class<?> emptyClassArrayClass = java.lang.reflect.Array.newInstance(scalarClass, 0).getClass();
             max = ClassUtil.resolveMethod(scalarClass, "max", scalarClass, scalarClass, emptyClassArrayClass);
             AbstractDoubleScalar<?, ?>[] additionalArguments =
                     (AbstractDoubleScalar<?, ?>[]) java.lang.reflect.Array.newInstance(scalarClass, 1);
@@ -866,7 +864,7 @@ public class ScalarOperationsTest
             additionalArguments[0] = zero;
             result = (AbstractDoubleScalar<?, ?>) max.invoke(null, biggest, zero, additionalArguments);
             assertEquals("max return object with maximum value", biggest, result);
-            
+
             Method min = ClassUtil.resolveMethod(scalarClass, "min", scalarClass, scalarClass);
             result = (AbstractDoubleScalar<?, ?>) min.invoke(null, zero, one);
             assertEquals("min returns object with maximum value", zero, result);
@@ -880,7 +878,7 @@ public class ScalarOperationsTest
             additionalArguments[0] = biggest;
             result = (AbstractDoubleScalar<?, ?>) min.invoke(null, zero, one, additionalArguments);
             assertEquals("min return object with minimum value", zero, result);
-            
+
             if ((!scalarClass.getName().contains(".ElectricalResistance")) && (!scalarClass.getName().contains(".Money")))
             {
                 Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
@@ -916,7 +914,7 @@ public class ScalarOperationsTest
                     // Ignore expected exception
                 }
             }
-            
+
             if (!scalarClass.getName().contains(".Money"))
             {
                 Method createSI = ClassUtil.resolveMethod(scalarClass, "createSI", double.class);
@@ -940,7 +938,7 @@ public class ScalarOperationsTest
                                     getSIUnitInstance(getUnitClass(scalarClass), abs))
                             : (AbstractFloatScalarRel<?, ?>) constructor.newInstance(oneValue,
                                     getSIUnitInstance(getUnitClass(scalarClass), abs));
-            for (float ratio : new float[] { -5, -1, 0, 0.3f, 1, 2, 10 })
+            for (float ratio : new float[] {-5, -1, 0, 0.3f, 1, 2, 10})
             {
                 float expectedResult = (1.0f - ratio) * zeroValue + ratio * oneValue;
                 Method interpolate = ClassUtil.resolveMethod(scalarClass, "interpolate", scalarClass, scalarClass, float.class);
@@ -962,7 +960,7 @@ public class ScalarOperationsTest
             result = (AbstractFloatScalar<?, ?>) max.invoke(null, one, zero);
             assertEquals("max return object with maximum value", one, result);
             // https://stackoverflow.com/questions/1679421/how-to-get-the-array-class-for-a-given-class-in-java
-            Class<?> emptyClassArrayClass = java.lang.reflect.Array.newInstance(scalarClass, 0).getClass(); 
+            Class<?> emptyClassArrayClass = java.lang.reflect.Array.newInstance(scalarClass, 0).getClass();
             max = ClassUtil.resolveMethod(scalarClass, "max", scalarClass, scalarClass, emptyClassArrayClass);
             AbstractFloatScalar<?, ?>[] additionalArguments =
                     (AbstractFloatScalar<?, ?>[]) java.lang.reflect.Array.newInstance(scalarClass, 1);
@@ -974,7 +972,7 @@ public class ScalarOperationsTest
             additionalArguments[0] = zero;
             result = (AbstractFloatScalar<?, ?>) max.invoke(null, biggest, zero, additionalArguments);
             assertEquals("max return object with maximum value", biggest, result);
-            
+
             Method min = ClassUtil.resolveMethod(scalarClass, "min", scalarClass, scalarClass);
             result = (AbstractFloatScalar<?, ?>) min.invoke(null, zero, one);
             assertEquals("min returns object with maximum value", zero, result);
@@ -988,7 +986,7 @@ public class ScalarOperationsTest
             additionalArguments[0] = biggest;
             result = (AbstractFloatScalar<?, ?>) min.invoke(null, zero, one, additionalArguments);
             assertEquals("min return object with minimum value", zero, result);
-            
+
             if ((!scalarClass.getName().contains(".FloatElectricalResistance"))
                     && (!scalarClass.getName().contains(".FloatMoney")))
             {

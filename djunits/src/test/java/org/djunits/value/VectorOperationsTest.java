@@ -39,7 +39,6 @@ import org.junit.Test;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-10-04 13:58:23 +0200 (Sun, 04 Oct 2015) $, @version $Revision: 84 $, by $Author: averbraeck $, initial
  * version Sep 14, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
@@ -48,20 +47,20 @@ import org.junit.Test;
 public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
 {
     /** The classes that are absolute (name = class name). */
-    public static final String[] CLASSNAMES_ABS = new String[] { "AbsoluteTemperature", "Direction", "Position", "Time" };
+    public static final String[] CLASSNAMES_ABS = new String[] {"AbsoluteTemperature", "Direction", "Position", "Time"};
 
     /** The relative classes that mirror the absolute ones (name = class name). */
-    public static final String[] CLASSNAMES_ABS_REL = new String[] { "Temperature", "Angle", "Length", "Duration" };
+    public static final String[] CLASSNAMES_ABS_REL = new String[] {"Temperature", "Angle", "Length", "Duration"};
 
     /** The classes that are just relative (name = class name). */
-    public static final String[] CLASSNAMES_REL = new String[] { "Angle", "Acceleration", "AngleSolid", "Area", "Density",
+    public static final String[] CLASSNAMES_REL = new String[] {"Angle", "Acceleration", "AngleSolid", "Area", "Density",
             "Dimensionless", "Duration", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance",
             "Energy", "FlowMass", "FlowVolume", "Force", "Frequency", "Length", "LinearDensity", "Mass", "Power", "Pressure",
-            "Speed", "Temperature", "Torque", "Volume" };
+            "Speed", "Temperature", "Torque", "Volume"};
 
     /** The money classes that are just relative (name = class name); these classes don't have an si field. */
-    public static final String[] CLASSNAMES_MONEY = new String[] { "Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",
-            "MoneyPerMass", "MoneyPerDuration", "MoneyPerVolume" };
+    public static final String[] CLASSNAMES_MONEY = new String[] {"Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",
+            "MoneyPerMass", "MoneyPerDuration", "MoneyPerVolume"};
 
     /**
      * Perform many tests on the double and float vector types.
@@ -104,7 +103,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         final String upperVectorType = "Vector";
         final String floatPrefix = doubleType ? "" : "Float";
         String doubleOrFloat = doubleType ? "double" : "float";
-        for (boolean mutable : new boolean[] { false, true })
+        for (boolean mutable : new boolean[] {false, true})
         {
             for (StorageType storageType : StorageType.values())
             {
@@ -268,14 +267,14 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
 
             if (multiply)
             {
-                Method multiplyMethod = vectorClass.getDeclaredMethod("multiplyBy", new Class[] { parameterClass });
+                Method multiplyMethod = vectorClass.getDeclaredMethod("multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
                 double resultSI = ((DoubleScalar.Rel<?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
-                Method divideMethod = vectorClass.getDeclaredMethod("divideBy", new Class[] { parameterClass });
+                Method divideMethod = vectorClass.getDeclaredMethod("divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
                 double resultSI = ((DoubleScalar.Rel<?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -298,14 +297,14 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
 
             if (multiply)
             {
-                Method multiplyMethod = vectorClass.getDeclaredMethod("multiplyBy", new Class[] { parameterClass });
+                Method multiplyMethod = vectorClass.getDeclaredMethod("multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
                 double resultSI = ((FloatScalar.Rel<?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
-                Method divideMethod = vectorClass.getDeclaredMethod("divideBy", new Class[] { parameterClass });
+                Method divideMethod = vectorClass.getDeclaredMethod("divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
                 float resultSI = ((FloatScalar.Rel<?>) result).si;
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -503,10 +502,10 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             final boolean mutable, final StorageType storageType) throws NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
-        double[] doubleValue = { 1.23456, 2.34567, 3.45678 };
-        float[] floatValue = { 1.23456f, 2.34567f, 3.45678f };
+        double[] doubleValue = {1.23456, 2.34567, 3.45678};
+        float[] floatValue = {1.23456f, 2.34567f, 3.45678f};
         Object value = doubleType ? doubleValue : floatValue;
-        findAndTestConstructor(vectorClass, new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType },
+        findAndTestConstructor(vectorClass, new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType},
                 abs, doubleType, storageType, value);
         // What is the corresponding Scalar type?
         String scalarClassName = vectorClass.getName();
@@ -526,32 +525,31 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             {
                 list.add(doubleValue[i]);
             }
-            findAndTestConstructor(vectorClass,
-                    new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType,
-                    storageType, value);
+            findAndTestConstructor(vectorClass, new Object[] {list, getSIUnitInstance(getUnitClass(vectorClass)), storageType},
+                    abs, doubleType, storageType, value);
             // Construct a list of scalar objects
             Constructor<?> constructor =
-                    scalarClassAbsRel.getConstructor(new Class<?>[] { double.class, getUnitClass(vectorClass) });
+                    scalarClassAbsRel.getConstructor(new Class<?>[] {double.class, getUnitClass(vectorClass)});
             List<Object> objectList = new ArrayList<Object>();
             for (Double d : list)
             {
                 objectList.add(constructor.newInstance(d, getSIUnitInstance(getUnitClass(vectorClass))));
             }
-            findAndTestConstructor(vectorClass, new Object[] { objectList, storageType }, abs, doubleType, storageType, value);
+            findAndTestConstructor(vectorClass, new Object[] {objectList, storageType}, abs, doubleType, storageType, value);
             // Construct an array of the correct scalar objects
             Object[] objectArray = (Object[]) Array.newInstance(scalarClassAbsRel, objectList.size());
             for (int i = 0; i < objectList.size(); i++)
             {
                 objectArray[i] = objectList.get(i);
             }
-            findAndTestConstructor(vectorClass, new Object[] { objectArray, storageType }, abs, doubleType, storageType, value);
+            findAndTestConstructor(vectorClass, new Object[] {objectArray, storageType}, abs, doubleType, storageType, value);
             SortedMap<Integer, Object> map = new TreeMap<Integer, Object>();
             for (int i = 0; i < objectList.size(); i++)
             {
                 map.put(i, objectList.get(i));
             }
             // System.out.println("int is assignable from Integer ? " + int.class.isAssignableFrom(Integer.class));
-            findAndTestConstructor(vectorClass, new Object[] { map, objectList.size(), storageType }, abs, doubleType,
+            findAndTestConstructor(vectorClass, new Object[] {map, objectList.size(), storageType}, abs, doubleType,
                     storageType, value);
             map.clear();
             for (int i = 0; i < doubleValue.length; i++)
@@ -559,7 +557,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 map.put(i, doubleValue[i]);
             }
             findAndTestConstructor(vectorClass,
-                    new Object[] { map, getSIUnitInstance(getUnitClass(vectorClass)), doubleValue.length, storageType }, abs,
+                    new Object[] {map, getSIUnitInstance(getUnitClass(vectorClass)), doubleValue.length, storageType}, abs,
                     doubleType, storageType, value);
         }
         else
@@ -569,32 +567,31 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             {
                 list.add(floatValue[i]);
             }
-            findAndTestConstructor(vectorClass,
-                    new Object[] { list, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, abs, doubleType,
-                    storageType, value);
+            findAndTestConstructor(vectorClass, new Object[] {list, getSIUnitInstance(getUnitClass(vectorClass)), storageType},
+                    abs, doubleType, storageType, value);
             // Construct a list of scalar objects
             Constructor<?> constructor =
-                    scalarClassAbsRel.getConstructor(new Class<?>[] { double.class, getUnitClass(vectorClass) });
+                    scalarClassAbsRel.getConstructor(new Class<?>[] {double.class, getUnitClass(vectorClass)});
             List<Object> objectList = new ArrayList<Object>();
             for (Float f : list)
             {
                 objectList.add(constructor.newInstance(f, getSIUnitInstance(getUnitClass(vectorClass))));
             }
-            findAndTestConstructor(vectorClass, new Object[] { objectList, storageType }, abs, doubleType, storageType, value);
+            findAndTestConstructor(vectorClass, new Object[] {objectList, storageType}, abs, doubleType, storageType, value);
             // Construct an array of the correct scalar objects
             Object[] objectArray = (Object[]) Array.newInstance(scalarClassAbsRel, objectList.size());
             for (int i = 0; i < objectList.size(); i++)
             {
                 objectArray[i] = objectList.get(i);
             }
-            findAndTestConstructor(vectorClass, new Object[] { objectArray, storageType }, abs, doubleType, storageType, value);
+            findAndTestConstructor(vectorClass, new Object[] {objectArray, storageType}, abs, doubleType, storageType, value);
             SortedMap<Integer, Object> map = new TreeMap<Integer, Object>();
             for (int i = 0; i < objectList.size(); i++)
             {
                 map.put(i, objectList.get(i));
             }
             // System.out.println("int is assignable from Integer ? " + int.class.isAssignableFrom(Integer.class));
-            findAndTestConstructor(vectorClass, new Object[] { map, objectList.size(), storageType }, abs, doubleType,
+            findAndTestConstructor(vectorClass, new Object[] {map, objectList.size(), storageType}, abs, doubleType,
                     storageType, value);
             map.clear();
             for (int i = 0; i < floatValue.length; i++)
@@ -602,7 +599,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 map.put(i, floatValue[i]);
             }
             findAndTestConstructor(vectorClass,
-                    new Object[] { map, getSIUnitInstance(getUnitClass(vectorClass)), floatValue.length, storageType }, abs,
+                    new Object[] {map, getSIUnitInstance(getUnitClass(vectorClass)), floatValue.length, storageType}, abs,
                     doubleType, storageType, value);
         }
     }
@@ -738,11 +735,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             final StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
-        double[] doubleValue = { 1.23456, 2.34567, 3.45678 };
-        float[] floatValue = { 1.23456f, 2.34567f, 3.45678f };
+        double[] doubleValue = {1.23456, 2.34567, 3.45678};
+        float[] floatValue = {1.23456f, 2.34567f, 3.45678f};
         Object value = doubleType ? doubleValue : floatValue;
         Object vector = findAndExecuteConstructor(vectorClass,
-                new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
         if (doubleType)
         {
             AbstractDoubleVector<?, ?> dv = (AbstractDoubleVector<?, ?>) vector;
@@ -783,11 +780,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             final boolean mutable, final StorageType storageType) throws NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
     {
-        double[] doubleValue = { 1.23456, -2.34567, 3.45678 };
-        float[] floatValue = { 1.23456f, -2.34567f, 3.45678f };
+        double[] doubleValue = {1.23456, -2.34567, 3.45678};
+        float[] floatValue = {1.23456f, -2.34567f, 3.45678f};
         Object value = doubleType ? doubleValue : floatValue;
         Object left = findAndExecuteConstructor(vectorClass,
-                new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
         Object result;
         if (doubleType)
         {
@@ -863,19 +860,19 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             double doubleDifference = 42.42;
             float floatDifference = 42.42f;
             Class<?> argumentClass = doubleType ? double.class : float.class;
-            Method incrementBy = ClassUtil.resolveMethod(vectorClass, "incrementBy", new Class<?>[] { argumentClass });
-            incrementBy = ClassUtil.resolveMethod(vectorClass, "incrementBy", new Class<?>[] { argumentClass });
+            Method incrementBy = ClassUtil.resolveMethod(vectorClass, "incrementBy", new Class<?>[] {argumentClass});
+            incrementBy = ClassUtil.resolveMethod(vectorClass, "incrementBy", new Class<?>[] {argumentClass});
             incrementBy.setAccessible(true);
             // System.out.print(paramsToString(incrementBy.getParameterTypes()));
             // System.out.println("type of value is " + value.getClass());
             // System.out.println("type of difference is " + difference.getClass());
             if (doubleType)
             {
-                result = incrementBy.invoke(left, new Object[] { doubleDifference });
+                result = incrementBy.invoke(left, new Object[] {doubleDifference});
             }
             else
             {
-                result = incrementBy.invoke(left, new Object[] { floatDifference });
+                result = incrementBy.invoke(left, new Object[] {floatDifference});
             }
             for (int i = 0; i < doubleValue.length; i++)
             {
@@ -890,16 +887,16 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                         0.00001);
             }
             left = findAndExecuteConstructor(vectorClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
-            Method decrementBy = ClassUtil.resolveMethod(vectorClass, "decrementBy", new Class<?>[] { argumentClass });
+                    new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+            Method decrementBy = ClassUtil.resolveMethod(vectorClass, "decrementBy", new Class<?>[] {argumentClass});
             decrementBy.setAccessible(true);
             if (doubleType)
             {
-                result = decrementBy.invoke(left, new Object[] { doubleDifference });
+                result = decrementBy.invoke(left, new Object[] {doubleDifference});
             }
             else
             {
-                result = decrementBy.invoke(left, new Object[] { floatDifference });
+                result = decrementBy.invoke(left, new Object[] {floatDifference});
             }
             for (int i = 0; i < doubleValue.length; i++)
             {
@@ -915,7 +912,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             }
 
             left = findAndExecuteConstructor(vectorClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
             Method mathMethod = ClassUtil.resolveMethod(vectorClass, "ceil", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
@@ -931,7 +928,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             }
 
             left = findAndExecuteConstructor(vectorClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
             mathMethod = ClassUtil.resolveMethod(vectorClass, "floor", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
@@ -947,7 +944,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             }
 
             left = findAndExecuteConstructor(vectorClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
             mathMethod = ClassUtil.resolveMethod(vectorClass, "rint", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
@@ -963,7 +960,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             }
 
             left = findAndExecuteConstructor(vectorClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
             mathMethod = ClassUtil.resolveMethod(vectorClass, "round", new Class[] {});
             mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
             result = mathMethod.invoke(left);
@@ -981,7 +978,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             if (!abs)
             {
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "abs", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1000,7 +997,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             if (vectorClass.getName().contains("Dimensionless"))
             {
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "acos", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1016,7 +1013,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "asin", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1032,7 +1029,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "atan", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1048,7 +1045,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "cbrt", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1064,7 +1061,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "cos", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1080,7 +1077,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "cosh", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1096,7 +1093,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "exp", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1112,7 +1109,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "expm1", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1128,7 +1125,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "log", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1144,7 +1141,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "log10", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1160,7 +1157,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "log1p", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1176,7 +1173,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "signum", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1192,7 +1189,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "sin", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1208,7 +1205,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "sinh", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1224,7 +1221,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "sqrt", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1240,7 +1237,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "tan", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1256,7 +1253,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "tanh", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1272,7 +1269,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "inv", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 result = mathMethod.invoke(left);
@@ -1285,11 +1282,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                for (double power : new double[] { -3, -Math.PI, -1, -0.5, 0, 0.5, 1, Math.PI, 3 })
+                for (double power : new double[] {-3, -Math.PI, -1, -0.5, 0, 0.5, 1, Math.PI, 3})
                 {
                     left = findAndExecuteConstructor(vectorClass,
-                            new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
-                    mathMethod = ClassUtil.resolveMethod(vectorClass, "pow", new Class[] { double.class });
+                            new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
+                    mathMethod = ClassUtil.resolveMethod(vectorClass, "pow", new Class[] {double.class});
                     mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                     result = mathMethod.invoke(left, power);
                     for (int i = 0; i < doubleValue.length; i++)
@@ -1305,7 +1302,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
 
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 mathMethod = ClassUtil.resolveMethod(vectorClass, "normalize", new Class[] {});
                 mathMethod.setAccessible(true); // because MutableTyped classes are package protected...
                 mathMethod.invoke(left);
@@ -1320,11 +1317,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                             verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
                 }
 
-                double[] doubleZeroZSum = { -4, 4, -1, 1, 0 };
-                float[] floatZeroZSum = { -4, 4, -1, 1, 0 };
+                double[] doubleZeroZSum = {-4, 4, -1, 1, 0};
+                float[] floatZeroZSum = {-4, 4, -1, 1, 0};
                 Object zeroZSumValue = doubleType ? doubleZeroZSum : floatZeroZSum;
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { zeroZSumValue, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {zeroZSumValue, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 try
                 {
                     mathMethod.invoke(left);
@@ -1343,11 +1340,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         }
 
         left = findAndExecuteConstructor(vectorClass,
-                new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
         if (mutable)
         {
             Method multiplyBy =
-                    ClassUtil.resolveMethod(vectorClass, "multiplyBy", new Class[] { doubleType ? double.class : float.class });
+                    ClassUtil.resolveMethod(vectorClass, "multiplyBy", new Class[] {doubleType ? double.class : float.class});
             multiplyBy.setAccessible(true); // FIXME this should not be necessary
             if (doubleType)
             {
@@ -1366,9 +1363,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
             }
             left = findAndExecuteConstructor(vectorClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
             Method divideBy =
-                    ClassUtil.resolveMethod(vectorClass, "divideBy", new Class[] { doubleType ? double.class : float.class });
+                    ClassUtil.resolveMethod(vectorClass, "divideBy", new Class[] {doubleType ? double.class : float.class});
             divideBy.setAccessible(true); // FIXME this should not be necessary
             if (doubleType)
             {
@@ -1386,11 +1383,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 assertEquals("Result of operation", doubleValue[i] / Math.PI,
                         verifyAbsRelPrecisionAndExtractSI(abs, doubleType, storageType, left, i), 0.01);
             }
-            double[] zDoubleValues = { 0, 0, 0, 0, 0, 0, 0 };
-            float[] zFloatValues = { 0, 0, 0, 0, 0, 0, 0 };
+            double[] zDoubleValues = {0, 0, 0, 0, 0, 0, 0};
+            float[] zFloatValues = {0, 0, 0, 0, 0, 0, 0};
             Object zValues = doubleType ? zDoubleValues : zFloatValues;
             Method set = ClassUtil.resolveMethod(vectorClass, "setSI",
-                    new Class[] { int.class, doubleType ? double.class : float.class });
+                    new Class[] {int.class, doubleType ? double.class : float.class});
             set.setAccessible(true);
             for (int pivot2 = 0; pivot2 < zDoubleValues.length; pivot2++)
             {
@@ -1401,15 +1398,15 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                         continue;
                     }
                     left = findAndExecuteConstructor(vectorClass,
-                            new Object[] { zValues, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                            new Object[] {zValues, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                     // System.out.println("initial " + pivot + ", " + pivot2 + " " + left);
                     if (doubleType)
                     {
-                        set.invoke(left, new Object[] { pivot, Math.PI * (pivot + 1) });
+                        set.invoke(left, new Object[] {pivot, Math.PI * (pivot + 1)});
                     }
                     else
                     {
-                        set.invoke(left, new Object[] { pivot, (float) (Math.PI * (pivot + 1)) });
+                        set.invoke(left, new Object[] {pivot, (float) (Math.PI * (pivot + 1))});
                     }
                     // System.out.println("after one set " + left);
                     for (int i = 0; i < zDoubleValues.length; i++)
@@ -1419,11 +1416,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     }
                     if (doubleType)
                     {
-                        set.invoke(left, new Object[] { pivot2, Math.PI * (pivot2 + 20) });
+                        set.invoke(left, new Object[] {pivot2, Math.PI * (pivot2 + 20)});
                     }
                     else
                     {
-                        set.invoke(left, new Object[] { pivot2, (float) (Math.PI * (pivot2 + 20)) });
+                        set.invoke(left, new Object[] {pivot2, (float) (Math.PI * (pivot2 + 20))});
                     }
                     // System.out.println("after second set " + left);
                     for (int i = 0; i < zDoubleValues.length; i++)
@@ -1440,11 +1437,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                         }
                         if (doubleType)
                         {
-                            set.invoke(left, new Object[] { i, (double) (i + 1) });
+                            set.invoke(left, new Object[] {i, (double) (i + 1)});
                         }
                         else
                         {
-                            set.invoke(left, new Object[] { i, (float) (i + 1) });
+                            set.invoke(left, new Object[] {i, (float) (i + 1)});
                         }
                     }
                     // System.out.println("after fill " + left);
@@ -1475,7 +1472,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     unitClass.getConstructor(String.class, String.class, UnitSystem.class, unitClass, double.class);
             Object newUnit = unitConstructor.newInstance("7fullName", "7abbr", unitSystem, referenceUnit, 7d);
             // System.out.println("new unit prints like " + newUnit);
-            compatibleRight = findAndExecuteConstructor(vectorClass, new Object[] { value, newUnit, storageType }, doubleType);
+            compatibleRight = findAndExecuteConstructor(vectorClass, new Object[] {value, newUnit, storageType}, doubleType);
             // System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
             if (abs)
             {
@@ -1485,14 +1482,14 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     className = className.replaceAll(CLASSNAMES_ABS[i], CLASSNAMES_ABS_REL[i]);
                 }
                 Class<?> relClass = Class.forName(className);
-                compatibleRel = findAndExecuteConstructor(relClass, new Object[] { value, newUnit, storageType }, doubleType);
+                compatibleRel = findAndExecuteConstructor(relClass, new Object[] {value, newUnit, storageType}, doubleType);
                 // System.out.println("compatibleRel prints like \"" + compatibleRight + "\"");
             }
         }
         if (null != compatibleRight)
         {
             left = findAndExecuteConstructor(vectorClass,
-                    new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                    new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
             // System.out.print(listMethods(vectorClass, "plus", "\t"));
             // System.out.println("Mutable is " + mutable);
             if (!mutable)
@@ -1501,7 +1498,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 if (!abs)
                 {
                     Method plus = ClassUtil.resolveMethod(vectorClass, "plus",
-                            new Class<?>[] { compatibleRight.getClass().getSuperclass() });
+                            new Class<?>[] {compatibleRight.getClass().getSuperclass()});
                     plus.setAccessible(true);
                     result = plus.invoke(left, compatibleRight);
                     for (int i = 0; i < doubleValue.length; i++)
@@ -1515,7 +1512,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                     // System.out.print(listMethods(vectorClass, "plus", "\t"));
                     // System.out.println("Type of rel is " + compatibleRel.getClass());
                     Method plus = ClassUtil.resolveMethod(vectorClass, "plus",
-                            new Class<?>[] { compatibleRel.getClass().getSuperclass() });
+                            new Class<?>[] {compatibleRel.getClass().getSuperclass()});
                     plus.setAccessible(true);
                     result = plus.invoke(left, compatibleRel);
                     for (int i = 0; i < doubleValue.length; i++)
@@ -1527,11 +1524,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             }
         }
         left = findAndExecuteConstructor(vectorClass,
-                new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
         if (!mutable)
         {
             // System.out.print(listMethods(vectorClass, "minus", "\t"));
-            Method minus = ClassUtil.resolveMethod(vectorClass, "minus", new Class[] { vectorClass.getSuperclass() });
+            Method minus = ClassUtil.resolveMethod(vectorClass, "minus", new Class[] {vectorClass.getSuperclass()});
             minus.setAccessible(true);
             result = minus.invoke(left, left);
             for (int i = 0; i < doubleValue.length; i++)
@@ -1542,7 +1539,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             if (null != compatibleRight)
             {
                 left = findAndExecuteConstructor(vectorClass,
-                        new Object[] { value, getSIUnitInstance(getUnitClass(vectorClass)), storageType }, doubleType);
+                        new Object[] {value, getSIUnitInstance(getUnitClass(vectorClass)), storageType}, doubleType);
                 result = minus.invoke(left, compatibleRight);
                 for (int i = 0; i < doubleValue.length; i++)
                 {
@@ -1596,17 +1593,17 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 getUnitClass(vectorClass), StorageType.class);
         if (doubleType)
         {
-            double[] zeroValue = { 1.23456, 2.45678 };
+            double[] zeroValue = {1.23456, 2.45678};
             // AbstractDoubleVector<?, ?> zero =
             // abs ? (DoubleVector.Abs<?>) constructor.newInstance(zeroValue,
             // getSIUnitInstance(getUnitClass(vectorClass)), storageType) : (DoubleVector.Rel<?>) constructor
             // .newInstance(zeroValue, getSIUnitInstance(getUnitClass(vectorClass)), storageType);
             AbstractDoubleVector<?, ?> zero = (AbstractDoubleVector<?, ?>) constructor.newInstance(zeroValue,
                     getSIUnitInstance(getUnitClass(vectorClass)), storageType);
-            double[] oneValue = { 3.45678, 4.678901 };
+            double[] oneValue = {3.45678, 4.678901};
             AbstractDoubleVector<?, ?> one = (AbstractDoubleVector<?, ?>) constructor.newInstance(oneValue,
                     getSIUnitInstance(getUnitClass(vectorClass)), storageType);
-            for (double ratio : new double[] { -5, -1, 0, 0.3, 1, 2, 10 })
+            for (double ratio : new double[] {-5, -1, 0, 0.3, 1, 2, 10})
             {
                 double[] expectedResult = new double[zeroValue.length];
                 for (int i = 0; i < expectedResult.length; i++)
@@ -1630,13 +1627,13 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         }
         else
         {
-            float[] zeroValue = { 1.23456f, 2.45678f };
+            float[] zeroValue = {1.23456f, 2.45678f};
             AbstractFloatVector<?, ?> zero = (AbstractFloatVector<?, ?>) constructor.newInstance(zeroValue,
                     getSIUnitInstance(getUnitClass(vectorClass)), storageType);
-            float[] oneValue = { 3.45678f, 4.678901f };
+            float[] oneValue = {3.45678f, 4.678901f};
             AbstractFloatVector<?, ?> one = (AbstractFloatVector<?, ?>) constructor.newInstance(oneValue,
                     getSIUnitInstance(getUnitClass(vectorClass)), storageType);
-            for (float ratio : new float[] { -5, -1, 0, 0.3f, 1, 2, 10 })
+            for (float ratio : new float[] {-5, -1, 0, 0.3f, 1, 2, 10})
             {
                 float[] expectedResult = new float[zeroValue.length];
                 for (int i = 0; i < expectedResult.length; i++)

@@ -47,8 +47,6 @@ import org.djunits.value.ValueException;
  * Copyright (c) 2013-2017 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/current/license.html">OpenTrafficSim License</a>.
  * </p>
- * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,
- * initial version Aug 11, 2018 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
@@ -95,7 +93,7 @@ public final class FloatMatrixUtil
      * @param <S> the return type
      * @throws ValueException on vector init error
      */
-    @SuppressWarnings({ "unchecked", "checkstyle:needbraces" })
+    @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
     public static <S extends AbstractFloatMatrix<?, S>> S instantiateAnonymous(final float[][] value, final Unit<?> unit,
             final StorageType storageType) throws ValueException
     {
@@ -209,7 +207,7 @@ public final class FloatMatrixUtil
      * @throws ValueException on vector init error
      * @param <S> the return type
      */
-    @SuppressWarnings({ "unchecked", "checkstyle:needbraces", "cast", "rawtypes" })
+    @SuppressWarnings({"unchecked", "checkstyle:needbraces", "cast", "rawtypes"})
     public static <S extends AbstractFloatMatrix<?, S>> S instantiateAnonymousSI(final float[][] si, final Unit<?> displayUnit,
             final StorageType storageType) throws ValueException
     {

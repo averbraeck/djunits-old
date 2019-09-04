@@ -24,8 +24,6 @@ import org.junit.Test;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Jun 10, 2014 <br>
  * @author <a href="https://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
 public class UnitLocalizationsTest
@@ -33,7 +31,7 @@ public class UnitLocalizationsTest
     /**
      * Check that all defined units have all localizations.
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @Test
     public final void checkDefinedUnits()
     {
@@ -56,7 +54,7 @@ public class UnitLocalizationsTest
         for (String localeName : localeNames)
         {
             System.out.println("Testing for locale: " + localeName);
-            
+
             // System.out.println("Checking internationalization to " + localeName);
             DefaultLocale.setLocale(new Locale(localeName));
 

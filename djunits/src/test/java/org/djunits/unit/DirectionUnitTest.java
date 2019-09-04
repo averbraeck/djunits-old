@@ -18,8 +18,6 @@ import org.junit.Test;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate: 2019-03-02 19:06:46 +0100 (Sat, 02 Mar 2019) $, @version $Revision: 342 $, by $Author: averbraeck $,
- * initial version Jun 4, 2014 <br>
  * @author <a href="https://tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public class DirectionUnitTest extends AbstractUnitTest<DirectionUnit>
@@ -79,7 +77,7 @@ public class DirectionUnitTest extends AbstractUnitTest<DirectionUnit>
     @Test
     public final void createClockwiseDirectionUnit()
     {
-        // clockwise degrees from 0 EAST 
+        // clockwise degrees from 0 EAST
         DirectionUnit myAPU = new DirectionUnit("clockDegE", "cDE", OTHER, -Math.PI / 180.0, -0.0, AngleUnit.DEGREE);
         assertTrue("Can create a new DirectionUnit", null != myAPU);
         checkUnitValueNameAndAbbreviation(myAPU, -Math.PI / 180.0, 0.0001, "clockDegE", "cDE");

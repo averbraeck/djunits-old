@@ -23,8 +23,6 @@ import org.junit.Test;
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version 26 jun, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -135,7 +133,7 @@ public class DoubleMatrixDenseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsAbsTest()
     {
@@ -296,7 +294,7 @@ public class DoubleMatrixDenseTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double[][] input = data(3, 5, false, seedValue);
@@ -564,7 +562,7 @@ public class DoubleMatrixDenseTest
     {
         try
         {
-            double[][] values = { { 1, 2, 3 }, { 3, 5, 7 }, { 5, 10, 0 } };
+            double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> matrix =
                     new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(values, AbsoluteTemperatureUnit.KELVIN,
                             StorageType.DENSE);
@@ -631,7 +629,7 @@ public class DoubleMatrixDenseTest
     /**
      * Test constructor, verify the various fields in the constructed objects, test conversions to related units.
      */
-    @SuppressWarnings({ "static-method", "unchecked" })
+    @SuppressWarnings({"static-method", "unchecked"})
     @Test
     public final void basicsRelTest()
     {
@@ -780,7 +778,7 @@ public class DoubleMatrixDenseTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double[][] input = data(3, 5, false, seedValue);
@@ -1108,7 +1106,7 @@ public class DoubleMatrixDenseTest
     {
         try
         {
-            double[][] values = { { 1, 2, 3 }, { 3, 5, 7 }, { 5, 10, 0 } };
+            double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
             DoubleMatrix.Rel<TemperatureUnit> matrix =
                     new DoubleMatrix.Rel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.DENSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
@@ -1216,7 +1214,7 @@ public class DoubleMatrixDenseTest
     {
         try
         {
-            for (boolean lastNanOrdering : new boolean[] { false, true })
+            for (boolean lastNanOrdering : new boolean[] {false, true})
             {
                 double[][] leftValue = data(30, 50, false, 123.4);
                 double[][] rightValue = data(30, 50, false, 234.5);
@@ -1279,7 +1277,7 @@ public class DoubleMatrixDenseTest
     {
         try
         {
-            for (boolean lastNanOrdering : new boolean[] { false, true })
+            for (boolean lastNanOrdering : new boolean[] {false, true})
             {
                 double[][] leftValue = data(30, 50, false, 123.4);
                 double[][] rightValue = data(30, 50, false, 234.5);

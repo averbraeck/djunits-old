@@ -30,7 +30,7 @@ public class Parsing
         }
 
         System.out.println("\n==========================================================\n");
-        
+
         FloatLength fl = new FloatLength(100.0f, LengthUnit.KILOMETER);
         System.out.println(Scalar.stringOf(fl));
         System.out.println(FloatLength.valueOf(Scalar.stringOf(fl)));
@@ -44,4 +44,3 @@ public class Parsing
     }
 
 }
-

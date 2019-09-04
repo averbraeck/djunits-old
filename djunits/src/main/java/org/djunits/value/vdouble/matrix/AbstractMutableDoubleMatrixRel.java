@@ -16,7 +16,6 @@ import org.djunits.value.vdouble.scalar.AbstractDoubleScalarRel;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
- * $LastChangedDate: 2015-09-29 14:14:28 +0200 (Tue, 29 Sep 2015) $, @version $Revision: 73 $, by $Author: pknoppers $, initial
  * version Sep 5, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
@@ -243,7 +242,7 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({ "checkstyle:designforextension", "unchecked" })
+    @SuppressWarnings({"checkstyle:designforextension", "unchecked"})
     public MR divideBy(final double factor)
     {
         this.data.divideBy(factor);

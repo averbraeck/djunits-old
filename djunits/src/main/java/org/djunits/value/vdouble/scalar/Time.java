@@ -32,8 +32,6 @@ import org.djunits.unit.Unit;
  * around 71000 years. This is sufficient to store a date in the 21st Century with a BASE or an Epoch offset precise to a
  * microsecond.
  * <p>
- * $LastChangedDate$, @version $Revision$, by $Author$,
- * initial version Sep 1, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
