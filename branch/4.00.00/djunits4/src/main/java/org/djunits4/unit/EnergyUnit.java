@@ -106,7 +106,7 @@ public class EnergyUnit extends Unit<EnergyUnit>
     /** electronvolt. */
     public static final EnergyUnit ELECTRONVOLT = new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setUnitBase(BASE)
             .setId("eV").setName("electronvolt").setUnitSystem(UnitSystem.SI_ACCEPTED).setSiPrefixes(SIPrefixes.UNIT)
-            .setScale(new LinearScale(1.602176565314E-19)));
+            .setScale(new LinearScale(1.602176634E-19)));
 
     /** micro-electronvolt. */
     public static final EnergyUnit MICROELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("mu"));
