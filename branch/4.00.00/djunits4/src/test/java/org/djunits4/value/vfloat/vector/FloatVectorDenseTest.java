@@ -133,37 +133,37 @@ public class FloatVectorDenseTest
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.DEGREE_CELSIUS;
             float[] value = data(3, 38.0f);
-            FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperatureDV =
+            FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperatureFV =
                     new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
-            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
-            assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
+            checkContentsAndType(temperatureFV, value, 0.001, tempUnit, true);
+            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureFV.getSI(0), 0.05);
+            assertEquals("Value in Fahrenheit", 100.4, temperatureFV.getInUnit(0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
-            float[] out = temperatureDV.getValuesInUnit();
+            float[] out = temperatureFV.getValuesInUnit();
             for (int index = 0; index < value.length; index++)
             {
                 assertEquals("Value should match", value[index], out[index], 0.001);
             }
-            MutableFloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> mdv =
+            MutableFloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> mfv =
                     new MutableFloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            checkContentsAndType(mdv, value, 0.001, tempUnit, true);
-            mdv.setSI(0, 73);
+            checkContentsAndType(mfv, value, 0.001, tempUnit, true);
+            mfv.setSI(0, 73);
             float safe = value[0];
             value[0] = -200; // Approximate Celsius equivalent of 73 Kelvin
-            checkContentsAndType(mdv, value, 1, tempUnit, true);
+            checkContentsAndType(mfv, value, 1, tempUnit, true);
             value[0] = safe; // Restore
-            mdv.set(0, temperatureDV.get(0));
-            checkContentsAndType(mdv, value, 0.001, tempUnit, true);
-            FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperature2DV =
-                    new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(temperatureDV.getValuesSI(),
+            mfv.set(0, temperatureFV.get(0));
+            checkContentsAndType(mfv, value, 0.001, tempUnit, true);
+            FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperature2FV =
+                    new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(temperatureFV.getValuesSI(),
                             AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
-            assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
-            assertTrue("Value is Absolute", temperatureDV.isAbsolute());
-            assertFalse("Value is not Relative", temperatureDV.isRelative());
-            temperatureDV = new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, AbsoluteTemperatureUnit.KELVIN,
+            assertTrue("temperature2DV should be equal to temperatureDV", temperature2FV.equals(temperatureFV));
+            assertTrue("Value is Absolute", temperatureFV.isAbsolute());
+            assertFalse("Value is not Relative", temperatureFV.isRelative());
+            temperatureFV = new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, AbsoluteTemperatureUnit.KELVIN,
                     StorageType.DENSE);
-            checkContentsAndType(temperatureDV, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
-            out = temperatureDV.getValuesSI();
+            checkContentsAndType(temperatureFV, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
+            out = temperatureFV.getValuesSI();
             for (int index = 0; index < value.length; index++)
             {
                 assertEquals("Value should match", value[index], out[index], 0.001);
@@ -174,15 +174,15 @@ public class FloatVectorDenseTest
                 scalar[index] = new FloatScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value[index],
                         AbsoluteTemperatureUnit.DEGREE_CELSIUS);
             }
-            temperatureDV = new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(scalar, StorageType.DENSE);
-            checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
-            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV.cardinality());
+            temperatureFV = new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(scalar, StorageType.DENSE);
+            checkContentsAndType(temperatureFV, value, 0.001, tempUnit, true);
+            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureFV.cardinality());
             float sum = 0;
             for (int index = 0; index < value.length; index++)
             {
-                sum += temperatureDV.getSI(index);
+                sum += temperatureFV.getSI(index);
             }
-            assertEquals("zSum should be sum of all values", sum, temperatureDV.zSum(), 0.001);
+            assertEquals("zSum should be sum of all values", sum, temperatureFV.zSum(), 0.001);
         }
         catch (ValueException ve)
         {
@@ -512,13 +512,13 @@ public class FloatVectorDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             float[] value = data(3, 38.0f);
-            FloatVector.Rel<TemperatureUnit> temperatureDV =
+            FloatVector.Rel<TemperatureUnit> temperatureFV =
                     new FloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
-            assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDV.getSI(0), 0.05);
-            assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
+            checkContentsAndType(temperatureFV, value, 0.001, tempUnit, false);
+            assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureFV.getSI(0), 0.05);
+            assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0, temperatureFV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
-            float[] out = temperatureDV.getValuesInUnit();
+            float[] out = temperatureFV.getValuesInUnit();
             for (int index = 0; index < value.length; index++)
             {
                 assertEquals("Value should match", value[index], out[index], 0.001);
@@ -526,14 +526,14 @@ public class FloatVectorDenseTest
             MutableFloatVector.Rel<TemperatureUnit> mdv =
                     new MutableFloatVector.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
-            FloatVector.Rel<TemperatureUnit> temperature2DV = new FloatVector.Rel<TemperatureUnit>(temperatureDV.getValuesSI(),
+            FloatVector.Rel<TemperatureUnit> temperature2FV = new FloatVector.Rel<TemperatureUnit>(temperatureFV.getValuesSI(),
                     TemperatureUnit.KELVIN, StorageType.DENSE);
-            assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
-            assertTrue("Value is Relative", temperatureDV.isRelative());
-            assertFalse("Value is not Absolute", temperatureDV.isAbsolute());
-            temperatureDV = new FloatVector.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
-            checkContentsAndType(temperatureDV, value, 0.001, TemperatureUnit.KELVIN, false);
-            out = temperatureDV.getValuesSI();
+            assertTrue("temperature2DV should be equal to temperatureDV", temperature2FV.equals(temperatureFV));
+            assertTrue("Value is Relative", temperatureFV.isRelative());
+            assertFalse("Value is not Absolute", temperatureFV.isAbsolute());
+            temperatureFV = new FloatVector.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
+            checkContentsAndType(temperatureFV, value, 0.001, TemperatureUnit.KELVIN, false);
+            out = temperatureFV.getValuesSI();
             for (int index = 0; index < value.length; index++)
             {
                 assertEquals("Value should match", value[index], out[index], 0.001);
@@ -543,15 +543,15 @@ public class FloatVectorDenseTest
             {
                 scalar[index] = new FloatScalar.Rel<TemperatureUnit>(value[index], TemperatureUnit.DEGREE_CELSIUS);
             }
-            temperatureDV = new FloatVector.Rel<TemperatureUnit>(scalar, StorageType.DENSE);
-            checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
-            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV.cardinality());
+            temperatureFV = new FloatVector.Rel<TemperatureUnit>(scalar, StorageType.DENSE);
+            checkContentsAndType(temperatureFV, value, 0.001, tempUnit, false);
+            assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureFV.cardinality());
             float sum = 0;
             for (int index = 0; index < value.length; index++)
             {
-                sum += temperatureDV.getSI(index);
+                sum += temperatureFV.getSI(index);
             }
-            assertEquals("zSum should be sum of all values", sum, temperatureDV.zSum(), 0.001);
+            assertEquals("zSum should be sum of all values", sum, temperatureFV.zSum(), 0.001);
         }
         catch (ValueException ve)
         {

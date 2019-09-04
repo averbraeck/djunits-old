@@ -141,13 +141,13 @@ public class FloatMatrixDenseTest
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.DEGREE_CELSIUS;
             float[][] value = data(3, 5, false, 38.0f);
-            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperatureDM =
+            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperatureFM =
                     new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            checkContentsAndType(temperatureDM, value, 0.001, tempUnit, true);
-            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDM.getSI(0, 0), 0.05);
-            assertEquals("Value in Fahrenheit", 100.4, temperatureDM.getInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
+            checkContentsAndType(temperatureFM, value, 0.001, tempUnit, true);
+            assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureFM.getSI(0, 0), 0.05);
+            assertEquals("Value in Fahrenheit", 100.4, temperatureFM.getInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
                     0.1);
-            float[][] out = temperatureDM.getValuesInUnit();
+            float[][] out = temperatureFM.getValuesInUnit();
             for (int row = 0; row < value.length; row++)
             {
                 for (int column = 0; column < value[row].length; column++)
@@ -155,26 +155,26 @@ public class FloatMatrixDenseTest
                     assertEquals("Value should match", value[row][column], out[row][column], 0.001);
                 }
             }
-            MutableFloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> mdm =
+            MutableFloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> mfm =
                     new MutableFloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            checkContentsAndType(mdm, value, 0.001, tempUnit, true);
-            mdm.setSI(0, 0, 73);
+            checkContentsAndType(mfm, value, 0.001, tempUnit, true);
+            mfm.setSI(0, 0, 73);
             float safe = value[0][0];
             value[0][0] = -200; // Approximate Celsius equivalent of 73 Kelvin
-            checkContentsAndType(mdm, value, 1, tempUnit, true);
+            checkContentsAndType(mfm, value, 1, tempUnit, true);
             value[0][0] = safe; // Restore
-            mdm.set(0, 0, temperatureDM.get(0, 0));
-            checkContentsAndType(mdm, value, 0.001, tempUnit, true);
-            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperature2DM =
-                    new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(temperatureDM.getValuesSI(),
+            mfm.set(0, 0, temperatureFM.get(0, 0));
+            checkContentsAndType(mfm, value, 0.001, tempUnit, true);
+            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperature2FM =
+                    new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(temperatureFM.getValuesSI(),
                             AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
-            assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
-            assertTrue("Value is Absolute", temperatureDM.isAbsolute());
-            assertFalse("Value is not Relative", temperatureDM.isRelative());
-            temperatureDM = new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, AbsoluteTemperatureUnit.KELVIN,
+            assertTrue("temperature2DM should be equal to temperatureDM", temperature2FM.equals(temperatureFM));
+            assertTrue("Value is Absolute", temperatureFM.isAbsolute());
+            assertFalse("Value is not Relative", temperatureFM.isRelative());
+            temperatureFM = new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, AbsoluteTemperatureUnit.KELVIN,
                     StorageType.DENSE);
-            checkContentsAndType(temperatureDM, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
-            out = temperatureDM.getValuesSI();
+            checkContentsAndType(temperatureFM, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
+            out = temperatureFM.getValuesSI();
             for (int row = 0; row < value.length; row++)
             {
                 for (int column = 0; column < value[row].length; column++)
@@ -192,20 +192,20 @@ public class FloatMatrixDenseTest
                             AbsoluteTemperatureUnit.DEGREE_CELSIUS);
                 }
             }
-            temperatureDM = new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(scalar, StorageType.DENSE);
-            checkContentsAndType(temperatureDM, value, 0.001, tempUnit, true);
+            temperatureFM = new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(scalar, StorageType.DENSE);
+            checkContentsAndType(temperatureFM, value, 0.001, tempUnit, true);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
-                    temperatureDM.cardinality());
+                    temperatureFM.cardinality());
             float sum = 0;
             for (int row = 0; row < value.length; row++)
             {
                 scalar[row] = new FloatScalar.Abs[value[row].length];
                 for (int column = 0; column < value[row].length; column++)
                 {
-                    sum += temperatureDM.getSI(row, column);
+                    sum += temperatureFM.getSI(row, column);
                 }
             }
-            assertEquals("zSum should be sum of all values", sum, temperatureDM.zSum(), 0.001);
+            assertEquals("zSum should be sum of all values", sum, temperatureFM.zSum(), 0.001);
         }
         catch (ValueException ve)
         {
@@ -635,13 +635,13 @@ public class FloatMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             float[][] value = data(3, 5, false, 38.0f);
-            FloatMatrix.Rel<TemperatureUnit> temperatureDM =
+            FloatMatrix.Rel<TemperatureUnit> temperatureFM =
                     new FloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
-            assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDM.getSI(0, 0), 0.05);
+            checkContentsAndType(temperatureFM, value, 0.001, tempUnit, false);
+            assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureFM.getSI(0, 0), 0.05);
             assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0,
-                    temperatureDM.getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
-            float[][] out = temperatureDM.getValuesInUnit();
+                    temperatureFM.getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
+            float[][] out = temperatureFM.getValuesInUnit();
             for (int row = 0; row < value.length; row++)
             {
                 for (int column = 0; column < value[row].length; column++)
@@ -652,14 +652,14 @@ public class FloatMatrixDenseTest
             MutableFloatMatrix.Rel<TemperatureUnit> mdm =
                     new MutableFloatMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
-            FloatMatrix.Rel<TemperatureUnit> temperature2DM = new FloatMatrix.Rel<TemperatureUnit>(temperatureDM.getValuesSI(),
+            FloatMatrix.Rel<TemperatureUnit> temperature2FM = new FloatMatrix.Rel<TemperatureUnit>(temperatureFM.getValuesSI(),
                     TemperatureUnit.KELVIN, StorageType.DENSE);
-            assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
-            assertTrue("Value is Relative", temperatureDM.isRelative());
-            assertFalse("Value is not Absolute", temperatureDM.isAbsolute());
-            temperatureDM = new FloatMatrix.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
-            checkContentsAndType(temperatureDM, value, 0.001, TemperatureUnit.KELVIN, false);
-            out = temperatureDM.getValuesSI();
+            assertTrue("temperature2DM should be equal to temperatureFM", temperature2FM.equals(temperatureFM));
+            assertTrue("Value is Relative", temperatureFM.isRelative());
+            assertFalse("Value is not Absolute", temperatureFM.isAbsolute());
+            temperatureFM = new FloatMatrix.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
+            checkContentsAndType(temperatureFM, value, 0.001, TemperatureUnit.KELVIN, false);
+            out = temperatureFM.getValuesSI();
             for (int row = 0; row < value.length; row++)
             {
                 for (int column = 0; column < value[row].length; column++)
@@ -677,20 +677,20 @@ public class FloatMatrixDenseTest
                             new FloatScalar.Rel<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
                 }
             }
-            temperatureDM = new FloatMatrix.Rel<TemperatureUnit>(scalar, StorageType.DENSE);
-            checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
+            temperatureFM = new FloatMatrix.Rel<TemperatureUnit>(scalar, StorageType.DENSE);
+            checkContentsAndType(temperatureFM, value, 0.001, tempUnit, false);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
-                    temperatureDM.cardinality());
+                    temperatureFM.cardinality());
             float sum = 0;
             for (int row = 0; row < value.length; row++)
             {
                 scalar[row] = new FloatScalar.Rel[value[row].length];
                 for (int column = 0; column < value[row].length; column++)
                 {
-                    sum += temperatureDM.getSI(row, column);
+                    sum += temperatureFM.getSI(row, column);
                 }
             }
-            assertEquals("zSum should be sum of all values", sum, temperatureDM.zSum(), 0.001);
+            assertEquals("zSum should be sum of all values", sum, temperatureFM.zSum(), 0.001);
         }
         catch (ValueException ve)
         {
