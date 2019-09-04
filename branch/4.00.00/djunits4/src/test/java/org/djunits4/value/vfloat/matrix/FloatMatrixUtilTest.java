@@ -25,7 +25,7 @@ import org.junit.Test;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
  */
-public class FloaTMatrixUtilTest
+public class FloatMatrixUtilTest
 {
     /**
      * Test the instantiation utility function of classes.
