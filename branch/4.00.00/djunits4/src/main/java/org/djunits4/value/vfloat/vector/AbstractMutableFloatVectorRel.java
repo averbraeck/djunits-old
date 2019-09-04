@@ -297,9 +297,9 @@ abstract class AbstractMutableFloatVectorRel<U extends Unit<U>, R extends Abstra
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings({"checkstyle:designforextension", "unchecked"})
-    public MR divideBy(final float factor)
+    public MR divideBy(final float divisor)
     {
-        this.data.divideBy(factor);
+        this.data.divideBy(divisor);
         return (MR) this;
     }
 

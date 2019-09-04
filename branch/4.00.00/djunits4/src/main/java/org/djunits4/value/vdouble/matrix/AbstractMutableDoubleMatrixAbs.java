@@ -209,9 +209,9 @@ abstract class AbstractMutableDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, 
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings({"checkstyle:designforextension", "unchecked"})
-    public MA divideBy(final double factor)
+    public MA divideBy(final double divisor)
     {
-        this.data.divideBy(factor);
+        this.data.divideBy(divisor);
         return (MA) this;
     }
 

@@ -264,9 +264,9 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings({"checkstyle:designforextension", "unchecked"})
-    public MA divideBy(final float factor)
+    public MA divideBy(final float divisor)
     {
-        this.data.divideBy(factor);
+        this.data.divideBy(divisor);
         return (MA) this;
     }
 

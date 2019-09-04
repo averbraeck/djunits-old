@@ -297,20 +297,20 @@ abstract class AbstractMutableDoubleVectorRel<U extends Unit<U>, R extends Abstr
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings({"checkstyle:designforextension", "unchecked"})
-    public MR divideBy(final double factor)
+    public MR divideBy(final double divisor)
     {
-        this.data.divideBy(factor);
+        this.data.divideBy(divisor);
         return (MR) this;
     }
 
     /**
      * Divide the values in the vector by the supplied value and return the changed vector.
-     * @param factor S; amount by which the values in the vector are divided
+     * @param divisor S; amount by which the values in the vector are divided
      * @return the changed MutableDoubleVector.Rel&lt;U&gt;
      */
-    public final MR divideBy(final S factor)
+    public final MR divideBy(final S divisor)
     {
-        return divideBy(factor.getSI());
+        return divideBy(divisor.getSI());
     }
 
     /**********************************************************************************/
